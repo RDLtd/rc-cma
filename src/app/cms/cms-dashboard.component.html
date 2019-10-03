@@ -1,0 +1,318 @@
+<div class="mdc-layout-grid">
+
+  <!-- Core data -->
+  <mat-card
+    class="rc-cms-card-core mdc-layout-grid__cell mdc-layout-grid__cell--span-5 mdc-layout-grid__cell--span-12-tablet">
+
+    <div class="rc-card-title-img-wrapper">
+      <img *ngIf="img_src" mat-card-image [src]="img_src">
+    </div>
+
+
+    <mat-card-title>{{ restaurant?.restaurant_name }}</mat-card-title>
+    <mat-card-subtitle>{{ restaurant?.restaurant_group_name }}</mat-card-subtitle>
+    <mat-card-content>
+
+      <div class="rc-card-help">
+        <button
+          mat-icon-button
+          (click)="help.dspHelp('cms-dashboard-core')">
+          <mat-icon>help</mat-icon>
+        </button>
+      </div>
+
+      <dl>
+
+        <dt>{{ 'CMS-Dashboard.FoodStyle' | translate }}</dt>
+        <dd>
+          {{ restaurant?.restaurant_cuisine_1 }}
+          <span *ngIf="restaurant?.restaurant_cuisine_2"> – {{ restaurant?.restaurant_cuisine_2 }}</span>
+          <span *ngIf="restaurant?.restaurant_cuisine_3"> – {{ restaurant?.restaurant_cuisine_3 }}</span>
+        </dd>
+
+        <dt>{{ 'CMS-Dashboard.Address' | translate }}</dt>
+        <dd>
+          <span>{{ restaurant?.restaurant_address_1 }}</span>
+          <span>{{ restaurant?.restaurant_address_2 }}</span>
+          <span *ngIf="restaurant?.restaurant_address_3">{{ restaurant?.restaurant_address_3 }}</span>
+          <span>{{ restaurant?.restaurant_post_code }}</span>
+        </dd>
+        <dt>{{ 'CMS-Dashboard.Telephone' | translate }}</dt>
+        <dd>
+          <a href="tel:{{ restaurant?.restaurant_telephone }}">{{ restaurant?.restaurant_telephone }}</a>
+        </dd>
+        <dt>{{ 'CMS-Dashboard.Email' | translate }}</dt>
+        <dd>
+          <a href="mailto:{{ restaurant?.restaurant_email }}">{{ restaurant?.restaurant_email }}</a>
+        </dd>
+        <dt>{{ 'CMS-Dashboard.Website' | translate }}</dt>
+        <dd>
+          <a
+            [href]="restaurant?.restaurant_website"
+            target="_blank">
+            {{ restaurant?.restaurant_website }}
+          </a>
+        </dd>
+        <dt>{{ 'CMS-Dashboard.Social' | translate }}</dt>
+        <dd>
+          <ul class="rc-cms-social">
+            <li [class.rc-disable]="!restaurant?.restaurant_facebook">
+              <a
+                (click)="openSocialLink(restaurant?.restaurant_facebook)"
+                target="_blank">
+                <img src="../../assets/images/icons/Facebook-color.svg">
+              </a>
+            </li>
+            <li
+              [class.rc-disable]="!restaurant?.restaurant_twitter">
+              <a
+                (click)="openSocialLink(restaurant?.restaurant_twitter)"
+                target="_blank">
+                <img src="../../assets/images/icons/Twitter-color.svg">
+              </a>
+            </li>
+            <li
+              [class.rc-disable]="!restaurant?.restaurant_instagram">
+              <a
+                (click)="openSocialLink(restaurant?.restaurant_instagram)"
+                target="_blank">
+                <img src="../../assets/images/icons/Instagram-color.svg">
+              </a>
+            </li>
+          </ul>
+        </dd>
+
+      </dl>
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <button mat-button (click)="reqDirectoryDataChange()">{{ 'CMS-Dashboard.ChangeCaps' | translate }}</button>
+    </mat-card-actions>
+  </mat-card>
+
+  <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-7 rc-no-grid-gutter">
+    <div class="mdc-layout-grid">
+
+      <mat-card
+        *ngIf="offerInBox"
+        class="rc-cms-dash-info mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--align-top">
+        <mat-card-header>
+          <mat-card-title><strong>{{ 'CMS-Dashboard.NewAffOffs' | translate }}</strong> {{ 'CMS-Dashboard.Available' | translate }}</mat-card-title>
+          <span class="rc-spacefill"></span>
+          <mat-icon class="rc-success">redeem</mat-icon>
+        </mat-card-header>
+        <mat-card-content *ngIf="offerInBox === 1">
+          {{ 'CMS-Dashboard.NewOffer' | translate }}<br>
+        </mat-card-content>
+        <mat-card-content *ngIf="offerInBox > 1">
+          {{ 'CMS-Dashboard.ThereAre' | translate }} {{ offerInBox }} {{ 'CMS-Dashboard.NewOffers' | translate }}<br>
+        </mat-card-content>
+        <mat-card-actions align="end">
+          <button
+            (click)="navTo('affiliates')"
+            mat-button>{{ 'CMS-Dashboard.ViewAll' | translate }} {{ offerCount }} {{ 'CMS-Dashboard.Offers' | translate }}</button>
+        </mat-card-actions>
+      </mat-card>
+
+      <!-- Loader panel -->
+      <mat-card
+        *ngIf="isPreviewing"
+        class="rc-cms-dash-info mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--align-top">
+        <mat-card-header>
+          <mat-card-title>{{ 'CMS-Dashboard.Analysing' | translate }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <rc-loader></rc-loader>
+        </mat-card-content>
+        <mat-card-actions></mat-card-actions>
+      </mat-card>
+
+      <!-- PUBLISHED -->
+      <mat-card
+        *ngIf="!cmsChanged && cmsHasSufficientData && !isPreviewing"
+        class="rc-cms-dash-info mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--align-top">
+        <mat-card-header *ngIf="!isPreviewing">
+          <mat-card-title>{{ 'CMS-Dashboard.VerifiedOn' | translate }} {{ publishDate | date: 'fullDate' }}
+            {{ 'CMS-Dashboard.By' | translate }} {{ restaurant.restaurant_verified_by }}</mat-card-title>
+          <span class="rc-spacefill"></span>
+          <mat-icon class="rc-success">cloud_done</mat-icon>
+        </mat-card-header>
+
+        <mat-card-content *ngIf="!isPreviewing">
+          {{ 'CMS-Dashboard.Your' | translate }} <strong>
+          {{ 'CMS-Dashboard.SPW' | translate }}</strong>
+          {{ 'CMS-Dashboard.HasBeenPublished' | translate }}
+        </mat-card-content>
+
+        <mat-card-actions align="end" *ngIf="!isPreviewing">
+          <button
+            mat-button
+            ngxClipboard [cbContent]="productionUrl"
+            (click)="copied()"
+            color="secondary"
+            [disabled]="isPreviewing">{{ 'CMS-Dashboard.CopyLink' | translate }}</button>
+          <a
+            [disabled]="isPreviewing"
+            href="{{ productionUrl }}"
+            target="_blank"
+            mat-button color="primary">{{ 'CMS-Dashboard.ViewLivePage' | translate }}</a>
+        </mat-card-actions>
+      </mat-card>
+
+      <!-- CHANGE NOTIFICATION -->
+      <mat-card
+        *ngIf="cmsChanged && !isPreviewing"
+        class="rc-cms-dash-info mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--align-top">
+
+        <mat-card-header *ngIf="!isPreviewing && cmsHasSufficientData">
+          <mat-card-title>{{ 'CMS-Dashboard.HaveUnpublished' | translate }}</mat-card-title>
+          <span class="rc-spacefill"></span>
+          <mat-icon class="rc-warn">cloud_off</mat-icon>
+        </mat-card-header>
+
+        <mat-card-header *ngIf="!isPreviewing && !cmsHasSufficientData">
+          <mat-card-title>{{ 'CMS-Dashboard.NeedMoreContent' | translate }}</mat-card-title>
+          <span class="rc-spacefill"></span>
+          <mat-icon class="rc-warn">cloud_off</mat-icon>
+        </mat-card-header>
+
+        <mat-card-content  *ngIf="!isPreviewing && cmsHasSufficientData">
+          {{ 'CMS-Dashboard.NotPublished' | translate }}
+          <strong>{{ 'CMS-Dashboard.Preview' | translate }}</strong> {{ 'CMS-Dashboard.Your' | translate }} <strong>
+          {{ 'CMS-Dashboard.SPW' | translate }}</strong> {{ 'CMS-Dashboard.IfCorrect' | translate }}
+        </mat-card-content>
+
+        <mat-card-content  *ngIf="!isPreviewing && !cmsHasSufficientData">
+          {{ 'CMS-Dashboard.GoodWork' | translate }}
+          <strong>{{ 'CMS-Dashboard.Preview' | translate }}</strong> {{ 'CMS-Dashboard.And' | translate }} <strong>
+          {{ 'CMS-Dashboard.Publish' | translate }}</strong> {{ 'CMS-Dashboard.Distribute' | translate }}
+        </mat-card-content>
+
+        <mat-card-actions align="end"  *ngIf="!isPreviewing">
+          <button
+            mat-button
+            color="secondary"
+            [disabled]="isPreviewing"
+            (click)="getPreview()">{{ 'CMS-Dashboard.Preview' | translate }}</button>
+          <button
+            mat-button
+            color="primary"
+            [disabled]="!cmsHasSufficientData"
+            (click)="publishSPW()">{{ 'CMS-Dashboard.Publish' | translate }}</button>
+        </mat-card-actions>
+      </mat-card>
+
+
+      <!-- CMS Summary -->
+      <mat-card
+        class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--span-12-tablet">
+        <div class="rc-card-help">
+          <button
+            mat-icon-button
+            (click)="help.dspHelp('cms-dashboard-summary')">
+            <mat-icon>help_outline</mat-icon>
+          </button>
+        </div>
+        <mat-card-content>
+
+          <mat-list class="rc-content-status">
+            <!-- Membership -->
+            <mat-list-item
+              [class.rc-content-status-complete]="memberStatus == 100"
+              [class.rc-content-status-partial]="memberStatus == 50"
+              (click)="viewMemberStatus()">
+              <mat-icon matListIcon>{{ memberIcon }}</mat-icon>
+              <h3 matLine>{{ 'CMS-Dashboard.Status' | translate }}</h3>
+              <p matLine>{{ memberType | uppercase }}</p>
+              <mat-progress-bar
+                matLine mode="determinate"
+                value="{{ memberStatus }}"></mat-progress-bar>
+              <p matLine><span>{{ 'CMS-Dashboard.Activated' | translate }} {{ memberJoinDate | date }}</span></p>
+            </mat-list-item>
+
+            <!-- Hours -->
+            <mat-list-item
+              [class.rc-content-status-complete]="hours_status > 99"
+              [class.rc-content-status-partial]="hours_status < 100 && hours_status > 0"
+              (click)="navTo('opening-times')">
+              <mat-icon matListIcon>watch_later</mat-icon>
+              <h3 matLine>{{ 'CMS-Dashboard.OpeningHours' | translate }}</h3>
+              <p matLine>{{ 'CMS-Dashboard.LastUpdated' | translate }} {{ core_date | date }}</p>
+              <mat-progress-bar  matLine mode="determinate" value="{{ hours_status }}"></mat-progress-bar>
+              <p matLine><span>{{ hours_status_text }}</span></p>
+            </mat-list-item>
+
+            <!-- Features -->
+            <mat-list-item
+              [class.rc-content-status-complete]="desc_status > 99"
+              [class.rc-content-status-partial]="desc_status < 100 && desc_status > 0"
+              (click)="navTo('features')">
+              <mat-icon matListIcon>check_box</mat-icon>
+              <h3 matLine>{{ 'CMS-Dashboard.Descriptions' | translate }}</h3>
+              <p matLine>{{ 'CMS-Dashboard.LastUpdated' | translate }} {{ desc_date | date }}</p>
+              <mat-progress-bar  matLine mode="determinate" value="{{ desc_status }}"></mat-progress-bar>
+              <p matLine><span>{{ desc_status_text }}</span></p>
+            </mat-list-item>
+
+            <!-- Images -->
+            <mat-list-item
+              [class.rc-content-status-complete]="img_status > 99"
+              [class.rc-content-status-partial]="img_status < 100 && img_status > 0"
+              (click)="navTo('images')">
+              <mat-icon matListIcon>image</mat-icon>
+              <h3 matLine>{{ 'CMS-Dashboard.ActiveImagesCaps' | translate }}</h3>
+              <p matLine>{{ 'CMS-Dashboard.LastUpdated' | translate }} {{ img_date | date }}</p>
+              <mat-progress-bar  matLine mode="determinate" value="{{ img_status }}"></mat-progress-bar>
+              <p matLine><span>{{ img_status_text }}</span></p>
+            </mat-list-item>
+
+            <!-- Menus -->
+            <mat-list-item
+              [class.rc-content-status-complete]="mnu_status > 99"
+              [class.rc-content-status-partial]="mnu_status < 100 && mnu_status > 0"
+              (click)="navTo('menus')">
+              <mat-icon matListIcon>restaurant</mat-icon>
+              <h3 matLine>{{ 'CMS-Dashboard.ActiveMenus' | translate }}</h3>
+              <p matLine>{{ 'CMS-Dashboard.LastUpdated' | translate }} {{ mnu_date | date }}</p>
+              <mat-progress-bar  matLine mode="determinate" value="{{ mnu_status }}"></mat-progress-bar>
+              <p matLine><span>{{ mnu_status_text }}</span></p>
+            </mat-list-item>
+
+            <!-- Booking info -->
+            <mat-list-item
+              [class.rc-content-status-complete]="bkg_status > 99"
+              [class.rc-content-status-partial]="bkg_status < 100 && bkg_status > 0"
+              (click)="navTo('reservations')">
+              <mat-icon matListIcon>event</mat-icon>
+              <h3 matLine>{{ 'CMS-Dashboard.OnlineBookings' | translate }}</h3>
+              <p matLine>{{ 'CMS-Dashboard.LastUpdated' | translate }} {{ bkg_date | date }}</p>
+              <mat-progress-bar  matLine mode="determinate" value="{{ bkg_status }}"></mat-progress-bar>
+              <p matLine><span>{{ bkg_status_text }}</span></p>
+            </mat-list-item>
+
+            <!-- Location -->
+            <mat-list-item
+              [class.rc-content-status-complete]="loc_status > 99"
+              [class.rc-content-status-partial]="loc_status < 100 && loc_status > 0"
+              (click)="navTo('location')">
+              <mat-icon matListIcon>place</mat-icon>
+              <h3 matLine>{{ 'CMS-Dashboard.LocInfo' | translate }}</h3>
+              <p matLine>{{ 'CMS-Dashboard.LastUpdated' | translate }} {{ loc_date | date }}</p>
+              <mat-progress-bar  matLine mode="determinate" color="primary" value="{{ loc_status }}"></mat-progress-bar>
+              <p matLine><span>{{ loc_status_text }}</span></p>
+            </mat-list-item>
+          </mat-list>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+
+</div>
+
+<hr>
+
+<!--<pre>-->
+
+<!--{{ restaurant | json }}-->
+
+<!--</pre>-->
+

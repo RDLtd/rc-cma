@@ -1,0 +1,203 @@
+<div class="mdc-layout-grid">
+  <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+    <mat-toolbar class="rc-cms-toolbar">
+      <span class="rc-toolbar-title">{{ 'CMS-Features.StyleFeatures' | translate }}</span>
+      <span class="rc-spacefill"></span>
+      <span class="rc-section-toolbar-actions">
+
+        <button
+          mat-icon-button
+          (click)="help.dspHelp('cms-features')">
+            <mat-icon>help_outline</mat-icon>
+        </button>
+
+        <button
+          mat-icon-button
+          [disabled]="!dataChanged"
+          (click)="resetData()"
+          [matTooltip]="'CMS-Features.UndoChanges' | translate">
+          <mat-icon>undo</mat-icon>
+        </button>
+
+        <button
+          mat-icon-button
+          [disabled]="!dataChanged"
+          (click)="updateData()"
+          [matTooltip]="'CMS-Features.SaveChanges' | translate">
+          <mat-icon>check</mat-icon>
+        </button>
+      </span>
+    </mat-toolbar>
+  </div>
+
+  <rc-loader class="mdc-layout-grid__cell--span-12" *ngIf="showLoader"></rc-loader>
+
+    <mat-card class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-12-tablet">
+
+      <mat-card-title>
+        <div class="rc-cms-card-nav">
+
+          <!--<button-->
+            <!--mat-icon-button-->
+            <!--[disabled]="!dataChanged"-->
+            <!--(click)="resetData()"-->
+            <!--[matTooltip]="'CMS-Features.UndoChanges' | translate">-->
+            <!--<mat-icon>undo</mat-icon>-->
+          <!--</button>-->
+          <button
+            mat-icon-button
+            [disabled]="!dataChanged"
+            (click)="updateData()"
+            [matTooltip]="'CMS-Features.SaveChanges' | translate">
+            <mat-icon>check</mat-icon>
+          </button>
+        </div>
+
+        <h2>{{ 'CMS-Features.Descriptions' | translate }}</h2>
+      </mat-card-title>
+
+      <mat-card-content>
+
+        <h4>{{ 'CMS-Features.Strapline' | translate }}</h4>
+
+        <mat-form-field
+          class="rc-full-width"
+          floatPlaceholder="never">
+          <textarea
+            #strapline
+            matInput
+            matTextareaAutosize
+            matAutosizeMinRows="1"
+            matAutosizeMaxRows="2"
+            name="cms_description_strap_line"
+            maxlength="{{ descStraplineTotal }}"
+            placeholder="{{ 'CMS-Features.StraplinePlace' | translate }}{{ descStraplineTotal }}{{ 'CMS-Features.Chars' | translate }})"
+            (keyup)="setChanged()"
+            [(ngModel)]="descriptions.cms_description_strap_line">
+          </textarea>
+          <mat-hint align="end">{{ strapline.value.length }}/{{ descStraplineTotal }}</mat-hint>
+        </mat-form-field>
+
+        <h4>{{ 'CMS-Features.OneSent' | translate }}</h4>
+
+        <mat-form-field
+          class="rc-full-width"
+          floatPlaceholder="never">
+          <textarea
+            #sentence
+            matInput
+            matTextareaAutosize
+            matAutosizeMinRows="1"
+            matAutosizeMaxRows="2"
+            name="cms_description_one_sentence"
+            maxlength="{{ descSentenceTotal }}"
+            placeholder="{{ 'CMS-Features.OneSentPlace' | translate }}{{ descSentenceTotal }}{{ 'CMS-Features.Chars' | translate }})"
+            (keyup)="setChanged()"
+            [(ngModel)]="descriptions.cms_description_one_sentence">
+          </textarea>
+          <mat-hint align="end">{{ sentence.value.length }}/{{ descSentenceTotal }}</mat-hint>
+        </mat-form-field>
+
+        <h4>{{ 'CMS-Features.OnePara' | translate }}</h4>
+
+        <mat-form-field
+          class="rc-full-width" floatPlaceholder="never">
+          <textarea
+            #paragraph
+            matInput
+            matTextareaAutosize
+            matAutosizeMinRows="1"
+            matAutosizeMaxRows="4"
+            name="cms_description_one_paragraph"
+            maxlength="{{ descParagraphTotal }}"
+            placeholder="{{ 'CMS-Features.OneParaPlace' | translate }}{{ descParagraphTotal }}{{ 'CMS-Features.Chars' | translate }})"
+            (keyup)="setChanged()"
+            [(ngModel)]="descriptions.cms_description_one_paragraph">
+          </textarea>
+          <mat-hint align="end">{{ paragraph.value.length }}/{{ descParagraphTotal }}</mat-hint>
+        </mat-form-field>
+
+        <h4>{{ 'CMS-Features.Full' | translate }}</h4>
+
+        <mat-form-field class="rc-full-width" floatPlaceholder="never">
+          <textarea
+            #full
+            matInput
+            name="cms_description_long"
+            matTextareaAutosize
+            matAutosizeMinRows="3"
+            matAutosizeMaxRows="10"
+            maxlength="{{ descFullTotal }}"
+            placeholder="{{ 'CMS-Features.FullPlace' | translate }}{{ descFullTotal }}{{ 'CMS-Features.Chars' | translate }})"
+            (keydown)="setChanged()"
+            [(ngModel)]="descriptions.cms_description_long">
+          </textarea>
+          <mat-hint align="end">{{ full.value.length }}/{{ descFullTotal }}</mat-hint>
+        </mat-form-field>
+
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-12-tablet">
+      <mat-card-title>
+
+        <div class="rc-cms-card-nav">
+          <!--<button-->
+            <!--mat-icon-button-->
+            <!--[disabled]="!dataChanged"-->
+            <!--(click)="resetData()"-->
+            <!--[matTooltip]="'CMS-Features.UndoChanges' | translate">-->
+            <!--<mat-icon>undo</mat-icon>-->
+          <!--</button>-->
+          <button
+            mat-icon-button
+            [disabled]="!dataChanged"
+            (click)="updateData()"
+            [matTooltip]="'CMS-Features.SaveChanges' | translate">
+            <mat-icon>check</mat-icon>
+          </button>
+        </div>
+
+        <h2>{{ 'CMS-Features.Features' | translate }}</h2>
+      </mat-card-title>
+      <mat-card-content>
+
+        <div *ngFor="let feature of features; let iatt = index">
+          <mat-checkbox
+            name="att{{ iatt }}"
+            value="feature.status"
+            [(ngModel)]="feature.status"
+            (change)="setChanged()">
+            {{ feature.text }}
+          </mat-checkbox>
+        </div>
+
+      </mat-card-content>
+
+
+      <h2>{{ 'CMS-Features.AddFeatures' | translate }}</h2>
+
+      <mat-card-content>
+        <mat-form-field class="rc-full-width" floatPlaceholder="always">
+          <mat-chip-list #chipList>
+            <mat-chip
+              class="rc-accent"
+              *ngFor="let k of keywords"
+              removable="true"
+              (remove)="remove(k)">
+              {{ k | uppercase }}
+              <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+            </mat-chip>
+            <input [placeholder]="'CMS-Features.AddFeaturesPlace' | translate"
+                   [matChipInputFor]="chipList"
+                   [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                   [matChipInputAddOnBlur]="true"
+                   (matChipInputTokenEnd)="add($event)" />
+          </mat-chip-list>
+        </mat-form-field>
+      </mat-card-content>
+
+    </mat-card>
+
+</div>
+

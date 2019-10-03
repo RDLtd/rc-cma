@@ -1,0 +1,9 @@
+
+<iframe *ngIf="urlLoaded"
+  [src]="spwUrl | safe"
+  class="rc-spw-preview">
+</iframe>
+<div  *ngIf="!urlLoaded"  style="position: absolute; top: 50%; left: 50%; margin-top: -44px; margin-left:-25px">
+  <rc-loader></rc-loader>
+</div>
+

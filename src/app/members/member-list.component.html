@@ -1,0 +1,115 @@
+<div id="rcMemberCards" class="mdc-layout-grid">
+
+  <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+
+    <mat-toolbar class="rc-section-toolbar">
+      <span class="rc-toolbar-title">{{ 'Member-List.Members' | translate }} - {{ cardFilter | uppercase }}</span>
+      <span class="rc-spacefill"></span>
+      <span class="rc-section-toolbar-actions">
+
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon>filter_list</mat-icon>
+        </button>
+
+        <button mat-icon-button (click)="addNewMember()">
+          <mat-icon>add_circle_outline</mat-icon>
+        </button>
+
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="filterBy('all')">
+            <mat-icon>people</mat-icon>
+            <span>All Members</span>
+          </button>
+          <button mat-menu-item (click)="filterBy('prospective')">
+            <mat-icon>perm_contact_calendar</mat-icon>
+            <span>Prospects</span>
+          </button>
+          <button mat-menu-item  (click)="filterBy('invited')">
+            <mat-icon>mail</mat-icon>
+            <span>Outstanding Invites</span>
+          </button>
+          <button mat-menu-item (click)="filterBy('accepted')">
+            <mat-icon>check</mat-icon>
+            <span>Accepted Invites</span>
+          </button>
+          <button mat-menu-item (click)="filterBy('verified')">
+            <mat-icon>verified_user</mat-icon>
+            <span>Verified</span>
+          </button>
+          <button mat-menu-item (click)="filterBy('founder')">
+            <mat-icon>star</mat-icon>
+            <span>Founder Members</span>
+          </button>
+          <button mat-menu-item (click)="filterBy('administrator')">
+            <mat-icon>build</mat-icon>
+            <span>Administrators</span>
+          </button>
+
+        </mat-menu>
+      </span>
+    </mat-toolbar>
+  </div>
+
+
+
+  <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4"
+       *ngFor="let member of members; let i = index">
+
+    <div
+      #card id="{{ i }}"
+      class="rc-card"
+      (mouseover)="rcToggleClass(card)"
+      (click)="openMemberCard($event, 'edit', card)"
+      (mouseout)="rcToggleClass(card)">
+
+      <div class="rc-card-img">
+        <mat-icon
+          class="rc-user-verified"
+          *ngIf='member.member_authenticated'>
+          verified_user
+        </mat-icon>
+        <div class="rc-avatar-wrap">
+          <img
+            class="rc-avatar" [src]=member.member_image_path
+            title="{{ member.member_first_name }} {{ member.member_last_name }}">
+        </div>
+
+      </div>
+
+      <div class="rc-card-content">
+        <mat-chip-list>
+          <mat-chip
+            selected="true"
+            [ngClass]="getStatusClass(member)">{{ member.restaurant_count }}
+          </mat-chip>
+        </mat-chip-list>
+
+        <h2>
+          <span>{{ member.member_first_name }}</span>{{ member.member_last_name }}
+        </h2>
+
+        <span>{{ member.member_job }} / {{ member.member_restaurant_group }}</span>
+
+        <div class="rc-card-actions">
+          <a
+            (click)="openMemberCard($event, 'tel', card)"
+            mat-icon-button
+            href="tel:{{ member.member_telephone }}">
+            <mat-icon>phone</mat-icon>
+          </a>
+          <a
+            (click)="openMemberCard($event, 'email', card)"
+            mat-icon-button
+            href="mailto:{{ member.member_email }}">
+            <mat-icon>mail</mat-icon>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+

@@ -1,0 +1,133 @@
+<div *ngIf="!showLoader" class="mdc-layout-grid">
+
+  <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+    <mat-toolbar class="rc-cms-toolbar">
+      <!--<mat-icon>list</mat-icon>-->
+      <span class="rc-toolbar-title">{{ 'CMS-Directory.DirectoryCaps' | translate }}</span>
+      <span class="rc-spacefill"></span>
+
+
+      <span *ngIf="!verification_due" class="rc-media-small-hide">{{ restaurant.restaurant_verified_on | date: 'dd MMM yyyy' }}</span>
+      <span class="rc-media-small-hide" *ngIf="restaurant.restaurant_verified_by === ''">{{ 'CMS-Directory.Awaiting' | translate }}</span>
+
+      <span class="rc-section-toolbar-actions">
+
+        <button *ngIf="verification_due"
+                mat-icon-button
+                (click)="verifyDirectoryData()"
+                [matTooltip]="'CMS-Directory.SelectVerify' | translate">
+          <mat-icon>verified_user</mat-icon>
+        </button>
+
+        <button *ngIf="!verification_due"
+                style="color: darkgreen"
+                mat-icon-button
+                (click)="verifyDirectoryData()"
+                matTooltip="{{'CMS-Directory.VerifiedBy' | translate }} {{ restaurant.restaurant_verified_by }}">
+                <!--Needs attention here to get the name into the tooltip-->
+                <!--matTooltip="Verified by {{ restaurant.restaurant_verified_by }}">-->
+            <mat-icon>verified_user</mat-icon>
+        </button>
+
+      </span>
+
+    </mat-toolbar>
+  </div>
+
+  <mat-card *ngIf="verification_due" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+    <mat-card-title>{{ 'CMS-Directory.Action' | translate }}</mat-card-title>
+    <mat-card-content style="font-size: 16px;">
+      <!--Your information was last verified by <strong>{{ restaurant.restaurant_verified_by }}</strong> on <strong>{{-->
+      <!--restaurant.restaurant_verified_on | date }}</strong>. Please review your directory listing below and VERIFY that-->
+      <!--the listing information and contact details are still correct. If any of the information has changed, or is-->
+      <!--incomplete, please send us a EDIT REQUEST with your updates.-->
+      {{ 'CMS-Directory.LastVerified' | translate }}
+      <strong>{{ restaurant.restaurant_verified_by }}</strong>
+      {{ 'CMS-Directory.On' | translate }}
+      <strong>{{restaurant.restaurant_verified_on | date }}</strong>.
+      {{ 'CMS-Directory.Review' | translate }}
+    </mat-card-content>
+      <mat-card-actions align="end">
+        <button mat-button (click)="verifyDirectoryData()">{{ 'CMS-Directory.VerifyCaps' | translate }}</button>
+        <button mat-button (click)="reqDirectoryDataChange()">{{ 'CMS-Directory.ChangeCaps' | translate }}</button>
+      </mat-card-actions>
+    </mat-card>
+
+    <mat-card class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+
+      <mat-card-title>
+        <h2 style="font-size: 56px;margin:0;">{{ restaurant?.restaurant_name }}</h2>
+      </mat-card-title>
+
+      <mat-card-content>
+
+        <div class="mdc-layout-grid rc-cms-base">
+
+          <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 ">
+
+            <dt>{{ 'CMS-Directory.AddressCaps' | translate }}</dt>
+            <dd>
+              <span>{{ restaurant?.restaurant_address_1 }}</span>
+              <span>{{ restaurant?.restaurant_address_2 }}</span>
+              <span *ngIf="restaurant.restaurant_address_3">{{ restaurant?.restaurant_address_3 }}</span>
+              <span>{{ restaurant?.restaurant_post_code }}</span>
+            </dd>
+
+            <dt>{{ 'CMS-Directory.GroupCaps' | translate }}</dt>
+            <dd>{{ restaurant?.restaurant_group_name }}</dd>
+
+          </div>
+
+          <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6">
+
+            <dt>{{ 'CMS-Directory.Tel' | translate }}</dt>
+            <dd>
+              {{ restaurant.restaurant_telephone }}
+            </dd>
+
+            <dt>{{ 'CMS-Directory.Email' | translate }}</dt>
+            <dd>{{ restaurant.restaurant_email }}</dd>
+
+            <dt>{{ 'CMS-Directory.URL' | translate }}</dt>
+            <dd><a target="_blank" (click)="openUrl(restaurant.restaurant_website)">{{ restaurant.restaurant_website }}</a>
+          </div>
+
+          <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-7">
+            <dt>{{ 'CMS-Directory.Social' | translate }}</dt>
+            <dd>
+              <ul class="rc-cms-social">
+
+                <li *ngIf="restaurant.restaurant_facebook">
+                  <a href="{{ restaurant.restaurant_facebook }}" target="_blank">
+                    <img src="../../assets/images/icons/Facebook-color.svg">
+                  </a>
+                </li>
+                <li *ngIf="restaurant.restaurant_twitter"><a href="{{ restaurant.restaurant_twitter }}"
+                                                             target="_blank"><img
+                  src="../../assets/images/icons/Twitter-color.svg"></a></li>
+                <li *ngIf="restaurant.restaurant_instagram"><a href="{{ restaurant.restaurant_instagram }}"
+                                                               target="_blank"><img
+                  src="../../assets/images/icons/Instagram-color.svg"></a></li>
+                <!--<li *ngIf="restaurant.restaurant_google_plus"><a href="{{ restaurant.restaurant_google_plus }}"-->
+                                                                 <!--target="_blank"><img-->
+                  <!--src="../../assets/images/icons/GooglePlus-color.svg"></a></li>-->
+              </ul>
+
+            </dd>
+          </div>
+
+        </div>
+
+      </mat-card-content>
+      <mat-card-actions align="end">
+        <button mat-button (click)="reqDirectoryDataChange()">{{ 'CMS-Directory.ChangeCaps' | translate }}</button>
+      </mat-card-actions>
+    </mat-card>
+
+  </div>
+
+  <rc-loader *ngIf="showLoader"></rc-loader>
+
+  <!--<hr>-->
+<!--<pre>{{ restaurant | json}}</pre>-->
+

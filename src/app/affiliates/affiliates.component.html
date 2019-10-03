@@ -1,0 +1,54 @@
+<div class="mdc-layout-grid">
+
+  <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+    <mat-toolbar class="rc-cms-toolbar">
+      <span class="rc-toolbar-title">{{ 'Affiliates.Offers' | translate }}</span>
+      <span class="rc-spacefill"></span>
+      <span class="rc-section-toolbar-actions">
+
+        <button
+          mat-icon-button
+          (click)="help.dspHelp('cms-affiliates')">
+          <mat-icon>help_outline</mat-icon>
+        </button>
+
+      </span>
+    </mat-toolbar>
+  </div>
+
+  <mat-card
+    *ngFor="let affiliate of affiliates; let i = index"
+    class="rc-cms-card-core mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-12-tablet rc-affiliate-offer-card">
+
+    <img mat-card-image [src]=affiliate.offer_img>
+    <mat-card-title>{{ affiliate.offer_tag }}</mat-card-title>
+
+    <mat-card-content>
+
+      <dl>
+        <dt>{{ 'Affiliates.Affiliate' | translate }}</dt>
+        <dd>
+          {{ affiliate.partner_name }}
+        </dd>
+        <dd>
+          <markdown>{{ affiliate.partner_desc }}</markdown>
+        </dd>
+        <dt>{{ 'Affiliates.MemberOffer' | translate }}</dt>
+        <dd>
+          <markdown>{{ affiliate.offer_desc }}</markdown>
+          <a href={{ affiliate.offer_url }} target="_blank" (click)="viewMarketing(i)">{{ 'Affiliates.FindOutMore' |
+            translate }}</a>
+        </dd>
+
+      </dl>
+
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <button
+        (click)="redeemOffer(i)"
+        mat-raised-button
+        color="primary"
+        class="rc-btn-offer">{{ affiliate.offer_cta | uppercase }}</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

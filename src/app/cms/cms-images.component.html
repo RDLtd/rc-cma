@@ -1,0 +1,93 @@
+<div class="mdc-layout-grid">
+  <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+    <mat-toolbar class="rc-cms-toolbar">
+      <!--<mat-icon>image</mat-icon>-->
+      <span class="rc-toolbar-title">{{ 'CMS-Images.RImages' | translate }}</span>
+      <span class="rc-spacefill"></span>
+      <span class="rc-section-toolbar-actions">
+
+        <button
+          mat-icon-button
+          (click)="help.dspHelp('cms-images')">
+            <mat-icon>help_outline</mat-icon>
+        </button>
+
+        <button mat-icon-button (click)="addImage()"
+                matTooltip="{{ 'CMS-Images.UploadImage' | translate }}">
+          <mat-icon>add_circle_outline</mat-icon>
+        </button>
+      </span>
+    </mat-toolbar>
+
+  </div>
+
+  <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 rc-add-content" *ngIf="showLoader">
+
+    <rc-loader></rc-loader>
+
+  </div>
+
+  <div
+    class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4"
+    *ngFor="let image of cmsImages">
+    <div
+      #card
+      class="rc-image-card"
+      (mouseover)="rcToggleClass(card)"
+      (mouseout)="rcToggleClass(card)"
+      (click)="viewImage(image)">
+      <mat-chip-list class="rc-element-default">
+        <mat-chip
+          selected="true"
+          *ngIf="image.cms_element_default">
+          {{ 'CMS-Images.DefaultTag' | translate }}
+        </mat-chip>
+        <mat-chip
+          class="rc-online"
+          selected="true"
+          *ngIf="image.cms_element_active">
+          {{ 'CMS-Images.Available' | translate }}
+        </mat-chip>
+        <mat-chip
+          selected="false"
+          *ngIf="!image.cms_element_active">
+          {{ 'CMS-Images.Offline' | translate }}
+        </mat-chip>
+      </mat-chip-list>
+      <div class="rc-img-wrapper">
+      <img [src]="image.cms_element_image_path">
+      </div>
+
+      <div class="rc-card-actions">
+        {{ image.cms_element_id }}
+        <span class="rc-spacefill"></span>
+        <span (click)="stopBubbling($event)">
+         <button
+             mat-icon-button
+             title="{{ 'CMS-Images.Delete' | translate }} {{ image?.cms_element_title }}"
+             [disabled]="image.cms_element_default == 'Y' || image.cms_element_default == true"
+             (click)="deleteImage(image)">
+            <mat-icon>delete</mat-icon>
+          </button>
+          <mat-checkbox
+            labelPosition="before"
+            title="{{ 'CMS-Images.ChangeStatus' | translate }}"
+            (change)="updateImageStatus(image)"
+            [checked]="image.cms_element_active"
+            [disabled]="image.cms_element_default == 1"
+            color="accent">
+          </mat-checkbox>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 rc-add-content" (click)="addImage()" *ngIf="!showLoader">
+
+    <mat-icon>add_circle_outline</mat-icon>
+    <span class="rc-add-content-label">{{ 'CMS-Images.AddImage' | translate }}</span>
+
+  </div>
+
+</div>
+

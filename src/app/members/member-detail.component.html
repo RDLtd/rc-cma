@@ -1,0 +1,245 @@
+<div class="rc-member-dialog">
+
+  <header mat-dialog-title>
+    <h1 *ngIf="member.member_id">{{ member_full_name }}</h1>
+    <h1 *ngIf="!member.member_id">Add New Member</h1>
+    <span class="rc-spacefill"></span>
+    <mat-icon
+      class="rc-member-badge"
+      *ngIf="member.member_membership_type==='Founder'"
+      color="primary">
+      star
+    </mat-icon>
+    <mat-icon
+      class="rc-member-badge"
+      *ngIf="member.member_authenticated"
+      color="primary">
+      verified_user
+    </mat-icon>
+  </header>
+
+
+  <form #memberForm="ngForm" class="rc-card-member">
+
+    <mat-dialog-content>
+
+      <section #sectionContacts>
+        <header (click)="toggleSection(sectionContacts)">
+          <mat-icon>chevron_right</mat-icon>
+          <h2>Contact details</h2>
+        </header>
+
+        <div class="rc-card-section-content">
+
+          <mat-form-field floatPlaceholder="always" class="rc-full-width">
+            <input
+              #firstName="ngModel"
+              name="member_fullname"
+              type="text"
+              placeholder="Full Name"
+              matInput
+              [(ngModel)]="member_full_name"
+              required>
+          </mat-form-field>
+
+          <mat-form-field floatPlaceholder="always" class="rc-full-width">
+            <input
+              name="member_email"
+              type="text"
+              placeholder="Email"
+              matInput
+              #email="ngModel"
+              [(ngModel)]="member.member_email"
+              required
+              email>
+            <mat-hint *ngIf="!email.valid && email.touched">Invalid email address</mat-hint>
+          </mat-form-field>
+
+          <mat-form-field floatPlaceholder="always" class="rc-full-width">
+            <input
+              name="member_job"
+              type="text"
+              placeholder="Job Title"
+              matInput
+              ngModel
+              [(ngModel)]="member.member_job"
+              required>
+          </mat-form-field>
+
+          <mat-form-field floatPlaceholder="always" class="rc-full-width">
+            <input
+              name="member_restaurant_group"
+              type="text"
+              placeholder="Restaurant Group"
+              matInput
+              ngModel
+              [(ngModel)]="member.member_restaurant_group"
+              required>
+          </mat-form-field>
+
+          <mat-form-field floatPlaceholder="always" class="rc-full-width">
+            <input
+              name="member_telephone"
+              type="text"
+              placeholder="Telephone"
+              matInput
+              #tel="ngModel"
+              [(ngModel)]="member.member_telephone"
+              required>
+            <mat-hint *ngIf="!tel.valid && tel.touched">Invalid telephone</mat-hint>
+          </mat-form-field>
+        </div>
+      </section>
+
+      <section #sectionProfile>
+
+        <header (click)="toggleSection(sectionProfile)">
+          <mat-icon>chevron_right</mat-icon>
+          <h2>Member Profile </h2>
+          <span class="rc-spacefill"></span>
+          <span>{{ member.member_membership_number }}</span>
+        </header>
+
+        <div class="rc-card-section-content">
+        <div>
+          <div class="rc-img-upload">
+            <!--<image-upload-->
+              <!--*ngIf="!member.member_image_path"-->
+              <!--[max]="1"-->
+              <!--[maxFileSize]="500000"-->
+              <!--[url]="'http://localhost:4000/members/imgs'"-->
+              <!--[headers]="[{-->
+                <!--header: 'Authorization',-->
+                <!--value: 'MyToken'-->
+              <!--}]"-->
+              <!--[buttonCaption]="'SELECT IMAGE'"-->
+              <!--[dropBoxMessage]="'Select a profile image to upload your membership account'"-->
+              <!--(onFileUploadFinish)="imageUploaded($event)"-->
+              <!--(onRemove)="imageRemoved($event)"-->
+              <!--(isPending)="disableSendButton($event)"-->
+            <!--&gt;</image-upload>-->
+            <img
+              *ngIf="member.member_image_path"
+              [src]="member.member_image_path">
+          </div>
+        </div>
+          <mat-form-field floatPlaceholder="always" class="rc-full-width">
+        <textarea
+          name="member_profile"
+          matInput
+          rows="5"
+          placeholder="MEMBER PROFILE / BACKGROUND"
+          [(ngModel)]="member.member_profile">
+        </textarea>
+          </mat-form-field>
+
+          <mat-radio-group name="member_role" [(ngModel)]="member.member_role">
+            <mat-radio-button value="Owner">Owner</mat-radio-button>
+            <mat-radio-button value="Administrator">Administrator</mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </section>
+
+      <section #sectionRestaurants *ngIf="member.member_associated_restaurants">
+        <header (click)="toggleSection(sectionAudit)">
+          <mat-icon>chevron_right</mat-icon>
+          <h2>Associated Restaurants</h2>
+          <span class="rc-spacefill"></span>
+          <span>{{ associated_restaurants.length }}</span>
+        </header>
+        <div class="rc-card-section-content">
+          <h3 *ngFor="let restaurant of associated_restaurants">{{ restaurant.restaurant_name }}</h3>
+        </div>
+      </section>
+
+      <section #sectionAudit class="rc-card-section-content-open">
+        <header (click)="toggleSection(sectionAudit)">
+          <mat-icon>chevron_right</mat-icon>
+          <h2>Status</h2>
+          <span class="rc-spacefill"></span>
+          <span>Joined {{ member.member_signedup | date }}</span>
+        </header>
+        <div class="rc-card-section-content">
+
+          <mat-form-field floatPlaceholder="always" class="rc-full-width">
+            <textarea
+              name="member_notes"
+              matInput
+              mdTextareaAutosize
+              placeholder="Notes"
+              [(ngModel)]="member.member_notes">
+            </textarea>
+          </mat-form-field>
+          <div class="rc-checkboxes-stacked">
+            <mat-checkbox
+              name="member_invited"
+              value="invited"
+              [(ngModel)]="member.member_invited_boolean"
+              (change)="doInvited()">
+              Invited - {{ member.member_invited | date }}
+            </mat-checkbox>
+
+            <!--<mat-checkbox-->
+              <!--name="member_signedup"-->
+              <!--value="signedup"-->
+              <!--[(ngModel)]="member.member_signedup_boolean"-->
+              <!--(change)="doSignedUp()">-->
+              <!--Signed up ({{ member.member_signedup | date }})-->
+            <!--</mat-checkbox>-->
+
+            <mat-checkbox
+              name="member_verified"
+              value="invited"
+              [(ngModel)]="member.member_authenticated_boolean"
+              (change)="doAuthenticated()">
+              Verified - {{ member.member_authenticated | date }}
+            </mat-checkbox>
+          </div>
+
+        </div>
+      </section>
+    </mat-dialog-content>
+
+    <mat-dialog-actions align="end" *ngIf="member.member_id">
+
+      <button
+        *ngIf="authService.isAuthLevel(3)"
+        (click)="deleteMember(member.member_id)"
+        mat-button>
+        DELETE
+      </button>
+
+      <button
+        mat-button
+        mat-dialog-close
+        color="secondary">
+        OK
+      </button>
+
+    </mat-dialog-actions>
+
+    <div mat-dialog-actions align="end" *ngIf="!member.member_id">
+
+      <button
+        mat-dialog-close
+        mat-button>
+        CANCEL
+      </button>
+
+      <button
+        (click)="addNewMember()"
+        mat-button
+        color="primary">
+        ADD MEMBER
+      </button>
+
+    </div>
+
+  </form>
+</div>
+
+
+
+
+
+

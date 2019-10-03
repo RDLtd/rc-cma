@@ -1,0 +1,166 @@
+
+<div class="rc-dialog">
+
+  <h1 mat-dialog-title>{{ restaurant.restaurant_name }} - {{ 'Benchmark.Benchmarks' | translate }} ({{ 'Benchmark.YouHave' | translate }} {{ financialslength }} {{ 'Benchmark.Years' | translate }})</h1>
+
+  <div mat-dialog-content>
+    <div class="mdc-layout-grid">
+      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
+
+        <div>
+          <p><br />  </p>
+        </div>
+
+        <div>
+          <mat-form-field class="rc-full-width">
+            <mat-select
+              name="financial_area_selector"
+              [placeholder]="'Benchmark.AreaSelector' | translate"
+              [(ngModel)]="areaDataSelection"
+              (ngModelChange)="setAreaData($event)">
+              <mat-option *ngFor= "let areaoption of areaDataOptions"
+                         [value] = "areaoption">{{ areaoption.label }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div>
+          <p><br />  </p>
+        </div>
+
+        <div>
+          <mat-form-field class="rc-full-width">
+            <mat-select
+              name="financial_cuisine_selector"
+              [placeholder]="'Benchmark.CuisineSelector' | translate"
+              [(ngModel)]="cuisineDataSelection"
+              (ngModelChange)="setCuisineData($event)">
+              <mat-option *ngFor= "let cuisineoption of cuisineDataOptions"
+                         [value] = "cuisineoption">{{ cuisineoption.label }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div>
+          <p><br />  </p>
+        </div>
+
+        <div>
+          <mat-form-field class="rc-full-width">
+            <mat-select
+              name="financial_booking_selector"
+              [placeholder]="'Benchmark.BookingSelector' | translate"
+              [(ngModel)]="bookingDataSelection"
+              (ngModelChange)="setBookingData($event)">
+              <mat-option *ngFor= "let bookingoption of bookingDataOptions"
+                          [value] = "bookingoption">{{ bookingoption.label }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div>
+          <p><br />  </p>
+        </div>
+
+        <div>
+        <mat-checkbox
+          name="include_me"
+          value="signedup"
+          [(ngModel)]="includeMe"
+          (ngModelChange)="doBenchmarking()">
+          Include data from {{ restaurant.restaurant_name }}?
+        </mat-checkbox>
+        </div>
+
+        <div>
+          <p><br />  </p>
+        </div>
+
+        <!--<button-->
+          <!--mat-raised-button-->
+          <!--(click)="doBenchmarking()"-->
+          <!--color="secondary">-->
+          <!--Get Records and Plot Data-->
+        <!--</button>-->
+
+        <div>
+          <h4><br /> {{ benchmarkslength }} benchmarking records from {{ benchmarksrestaurantcount }} restaurants found that match selection criteria</h4>
+        </div>
+
+      </div>
+
+      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8">
+
+        <div>
+          <p><br />  </p>
+        </div>
+        <mat-form-field class="rc-full-width">
+          <mat-select
+            name="financial_graph_selector"
+            [placeholder]="'Benchmark.GraphSelector' | translate"
+            [(ngModel)]="graphDataSelection"
+            (ngModelChange)="doBenchmarking()">
+              <!--<mat-select-header>-->
+                <!--<span> Database Fields </span>-->
+              <!--</mat-select-header>-->
+              <mat-option *ngFor= "let graphoption of graphDataOptions"
+                         [value] = "graphoption">{{ graphoption.label }}
+              </mat-option>
+            <!--<mat-select-header>-->
+            <!--<span> Database Fields </span>-->
+            <!--</mat-select-header>-->
+              <mat-option *ngFor= "let calculatedoption of calculatedDataOptions"
+                         [value] = "calculatedoption">{{ calculatedoption.label }}
+              </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-card>
+          <span class="rc-card-label">{{ line_ChartHeading }}</span>
+          <div
+            id="benchmark_chart"
+            [chartData]="line_ChartData"
+            [chartOptions] = "line_ChartOptions"
+            chartType = "LineChart"
+            GoogleChart
+            class="rc-chart">
+            <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+          </div>
+        </mat-card>
+        <mat-card>
+          <span class="rc-card-label">Annual Ranking for {{ line_ChartHeading }}</span>
+          <div>
+            <p><br />  </p>
+          </div>
+          <div
+            id="g_chart"
+            [chartData]="g_ChartData"
+            [chartOptions] = "g_ChartOptions"
+            chartType = "Gauge"
+            GoogleChart
+            class="rc-chart">
+            <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+          </div>
+        </mat-card>
+
+      </div>
+    </div>
+  </div>
+
+  <div mat-dialog-actions align="end">
+
+    <button
+      mat-raised-button
+      mat-dialog-close
+      color="secondary"
+      [matTooltip]="'Benchmark.CLOSEtip' | translate"
+      matTooltipPosition="above">
+      {{ 'Benchmark.DONE' | translate }}
+    </button>
+
+  </div>
+
+</div>

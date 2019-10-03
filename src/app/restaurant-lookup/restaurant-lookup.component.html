@@ -1,0 +1,123 @@
+<form #restListing="ngForm">
+
+  <h1 mat-dialog-title>
+    {{ 'Restaurant-Lookup.Search' | translate }}
+  </h1>
+
+  <mat-dialog-content>
+
+    <section>
+      <mat-form-field
+        floatPlaceholder="always"
+        class="rc-full-width">
+        <input
+          #searchInput
+          name="search"
+          type="text"
+          matInput
+          placeholder="{{ 'Restaurant-Lookup.EnterName' | translate | uppercase }}"
+          (keyup)="findRestaurants(searchInput.value)"
+          autocomplete="off">
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+    </section>
+
+    <section>
+      <span [hidden]="!noSearchResults">{{ 'Restaurant-Lookup.Sorry' | translate }}</span>
+      <ul class="rc-lookup-results">
+        <li *ngFor="let restaurant of restaurants">
+          <a (click)="associateRestaurant(restaurant)">
+            <span>{{ restaurant.restaurant_name }} – {{ restaurant.restaurant_post_code }}</span>
+            <span class="rc-spacefill"></span>
+            <span>{{ 'Restaurant-Lookup.Add' | translate }}</span>
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <section
+      *ngIf="noSearchResults || dspNewListingForm"
+      class="rc-lookup-request">
+
+      <h2 mat-dialog-title>New Restaurant</h2>
+      <mat-form-field
+        floatPlaceholder="always"
+        class="rc-full-width">
+        <input
+        #newRestInput
+        id="newRestInput"
+        matInput
+        name="newRestaurantName"
+        placeholder="{{ 'Restaurant-Lookup.Name' | translate }}"
+        [ngModel]="searchInput.value"
+        type="text"
+        required
+        autofocus
+        autocomplete="off">
+      </mat-form-field>
+
+      <mat-form-field
+        floatPlaceholder="always"
+        class="rc-half-width">
+        <input
+          style="text-transform: uppercase"
+          matInput
+          name="newRestaurantPostcode"
+          placeholder="{{ 'Restaurant-Lookup.PostCode' | translate }}"
+          ngModel
+          type="text"
+          minlength="6"
+          autocomplete="off"
+          required>
+        <mat-error>{{ 'Restaurant-Lookup.ValidPostcode' | translate }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field
+        floatPlaceholder="always"
+        class="rc-half-width">
+        <input
+          matInput
+          name="newRestaurantTel"
+          placeholder="TEL"
+          ngModel
+          type="text"
+          autocomplete="off"
+          pattern="[0-9][0-9]*|0"
+          minlength="10"
+          required>
+        <mat-error>{{ 'Restaurant-Lookup.ValidNumber' | translate }}</mat-error>
+      </mat-form-field>
+
+      <div class="rc-lookup-actions">
+        <button
+          mat-button
+          mat-dialog-close="">{{ 'Restaurant-Lookup.Cancel' | translate }}
+        </button>
+        <button
+          mat-raised-button
+          color="accent"
+          [disabled]="!restListing.form.valid"
+          (click)="sendNewRequest(restListing.form.value)">{{ 'Restaurant-Lookup.Send' | translate }}</button>
+      </div>
+
+    </section>
+
+  </mat-dialog-content>
+  <mat-dialog-actions align="end" *ngIf="!dspNewListingForm && !noSearchResults">
+    <button
+      mat-button
+      mat-dialog-close="">{{ 'Restaurant-Lookup.Cancel' | translate }}
+    </button>
+    <button
+      *ngIf="searchInput.value"
+      mat-button
+      (click)="showRequestForm(searchInput)">{{ 'Restaurant-Lookup.NotListed' | translate }}</button>
+  </mat-dialog-actions>
+
+
+</form>
+
+
+
+
+

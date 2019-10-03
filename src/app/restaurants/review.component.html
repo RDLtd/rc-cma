@@ -1,0 +1,211 @@
+<div class="mdc-layout-grid">
+
+  <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8">
+
+    <div>
+      <p></p>
+    </div>
+
+    <mat-form-field class="rc-full-width">
+    <mat-select
+      name="financial_graph_selector"
+      [placeholder]="'Benchmark.GraphSelector' | translate"
+      [(ngModel)]="graphDataSelection"
+      (ngModelChange)="setGraphData(graphDataSelection.index)">
+      <mat-option *ngFor="let graphoption of graphDataOptions;"
+                 [value]="graphoption">{{ graphoption.label }}
+      </mat-option>
+      <!--<mat-option *ngFor= "let calculatedoption of calculatedDataOptions"-->
+      <!--[value] = "calculatedoption">{{ calculatedoption.label }}-->
+      <!--</mat-option>-->
+    </mat-select>
+    </mat-form-field>
+
+    <mat-card>
+      <span class="rc-card-label">{{ line_ChartHeading }}</span>
+      <div
+        id="benchmark_chart"
+        [chartData]="line_ChartData"
+        [chartOptions]="line_ChartOptions"
+        chartType="LineChart"
+        GoogleChart
+        class="rc-chart">
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+      </div>
+      <button
+        mat-icon-button
+        (click)="printGraph()"
+        matTooltip="Print Graph"
+        matTooltipPosition="above">
+        <mat-icon>print</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        (click)="saveGraph()"
+        matTooltip="Save Graph"
+        matTooltipPosition="above">
+        <mat-icon>save</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        (click)="addSnapshot()"
+        matTooltip="Add to Snapshots"
+        matTooltipPosition="above">
+        <mat-icon>add_a_photo</mat-icon>
+      </button>
+    </mat-card>
+  </div>
+  <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-1">
+  </div>
+  <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3">
+    <h2>Restaurants</h2>
+    <div *ngFor="let rest of restaurants; let irest = index">
+      <mat-checkbox
+        name="rest{{ irest }}"
+        value="rest.plot_candidate"
+        [(ngModel)]="rest.plot_candidate"
+        (change)="plotChanged()"
+        [disabled]="!rest.financial_data">
+        {{ rest.restaurant_name }}
+      </mat-checkbox>
+      <mat-icon
+        *ngIf="!rest.financial_data"
+        (click)="addData(irest)">
+        add_circle
+      </mat-icon>
+      <mat-icon
+        *ngIf="rest.financial_data"
+        (click)="editData(irest)">
+        mode_edit
+      </mat-icon>
+    </div>
+    <div>
+      <p></p>
+    </div>
+    <div>
+      <mat-form-field class="rc-full-width">
+      <mat-select
+        name="financial_area_selector"
+        [placeholder]="'Benchmark.AreaSelector' | translate"
+        [(ngModel)]="areaDataSelection">
+        <mat-option *ngFor= "let areaoption of areaDataOptions"
+                   [value] = "areaoption">{{ areaoption.label }}
+        </mat-option>
+      </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
+    <mat-card>
+      <div
+        id="sub_chart_1"
+        [chartData]="line_ChartData"
+        [chartOptions]="line_sub_ChartOptions"
+        chartType="LineChart"
+        GoogleChart
+        class="rc-sub-chart">
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+      </div>
+    </mat-card>
+  </div>
+  <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
+    <mat-card>
+      <div
+        id="sub_chart_2"
+        [chartData]="line_ChartData"
+        [chartOptions]="line_sub_ChartOptions"
+        chartType="LineChart"
+        GoogleChart
+        class="rc-sub-chart">
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+      </div>
+    </mat-card>
+  </div>
+  <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
+    <mat-card>
+      <div
+        id="sub_chart_3"
+        [chartData]="line_ChartData"
+        [chartOptions]="line_sub_ChartOptions"
+        chartType="LineChart"
+        GoogleChart
+        (click)="switchGraph(3)"
+        class="rc-sub-chart">
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+      </div>
+    </mat-card>
+  </div>
+
+  <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+    <mat-toolbar class="rc-section-toolbar">
+
+      <span></span>
+      <span class="rc-toolbar-title rc-link-like">SNAPSHOTS</span>
+      <span class="rc-spacefill"></span>
+
+      <span class="rc-section-toolbar-actions">
+         <button
+           mat-icon-button
+           (click)="deleteSnapshot()"
+           matTooltip="Delete Last Snapshot"
+           matTooltipPosition="above">
+           <mat-icon>delete_forever</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          (click)="printSnapshots()"
+          matTooltip="Print Snapshots"
+          matTooltipPosition="above">
+          <mat-icon>print</mat-icon>
+        </button>
+          <button
+            mat-icon-button
+            (click)="saveSnapshots()"
+            matTooltip="Save Snapshots"
+            matTooltipPosition="above">
+          <mat-icon>save</mat-icon>
+        </button>
+          <button
+            mat-icon-button
+            (click)="addSnapshot()"
+            matTooltip="Add to Snapshots"
+            matTooltipPosition="above">
+            <mat-icon>add_a_photo</mat-icon>
+          </button>
+        </span>
+
+    </mat-toolbar>
+  </div>
+
+  <!--<div class="mdc-layout-grid__cell mdc-layout-grid__cell&#45;&#45;span-2">-->
+  <!--<h2>Snapshots</h2>-->
+  <!--</div>-->
+  <!--<div class="mdc-layout-grid__cell mdc-layout-grid__cell&#45;&#45;span-2">-->
+  <!--<button-->
+  <!--mat-icon-button-->
+  <!--(click)="deleteSnapshot()"-->
+  <!--matTooltip="Delete Last Snapshot"-->
+  <!--matTooltipPosition="above">-->
+  <!--<mat-icon>delete_forever</mat-icon>-->
+  <!--</button>-->
+  <!--<button-->
+  <!--mat-icon-button-->
+  <!--(click)="printSnapshots()"-->
+  <!--matTooltip="Print Snapshots"-->
+  <!--matTooltipPosition="above">-->
+  <!--<mat-icon>print</mat-icon>-->
+  <!--</button>-->
+  <!--</div>-->
+
+  <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+    <div class="mdc-layout-grid">
+      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4"
+           *ngFor="let snapshot of snapshots; let isnap = index">
+        <img
+          style="width:100%;max-width: 100%; height:auto;border:1px solid black;"
+          src="{{ snapshot }}"/>
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,60 @@
+
+<div class="rc-dialog">
+
+  <h1 mat-dialog-title>Review and Benchmarking</h1>
+
+  <h4>Review allows members to analyse the financial and statistical data associated with their restaurants.
+      Benchmarking allows members to compare those data with data from
+      other restaurants in their portfolio, or with sets of restaurants that have similar characteristics
+      (for example, might be in the same area, have the same primary cuisine, etc.)</h4>
+  <h4>The database currently holds financial and statistical data for 15 out of a total of 716 restaurants</h4>
+  <div mat-dialog-content>
+    <div class="mdc-layout-grid">
+      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+        <div>
+          <p></p>
+        </div>
+        {{ primary_text }}
+        <div>
+          <p></p>
+        </div>
+        <!--<tr *ngFor="let rad of radio_options">-->
+          <!--<td>-->
+            <!--<input type="radio" name="radiogroup"-->
+                   <!--[value]="rad.id"-->
+                   <!--(change)="onSelectionChange(rad.id)">-->
+          <!--</td>-->
+          <!--<td>{{ rad.description }}</td>-->
+          <!--<p></p>-->
+        <!--</tr>-->
+      </div>
+    </div>
+    <div>
+      <p><br />  </p>
+    </div>
+  </div>
+  <h4>To enter financial and statistical data, select the € icon on the the restaurant card</h4>
+
+  <div mat-dialog-actions align="end">
+    <!--<button-->
+      <!--mat-raised-button-->
+      <!--mat-dialog-close-->
+      <!--color="secondary"-->
+      <!--matTooltip='Cancel this Window'-->
+      <!--matTooltipPosition="above">-->
+      <!--CANCEL-->
+    <!--</button>-->
+    <button
+      mat-raised-button
+      mat-dialog-close
+      color="primary">
+      <!--(click)="benchmark()"-->
+      <!--[disabled]="!choice_made"-->
+      <!--matTooltip='Proceed to Benchmarking'-->
+      <!--matTooltipPosition="above">-->
+      DONE
+    </button>
+
+  </div>
+
+</div>

@@ -1,0 +1,155 @@
+<header>
+
+  <mat-toolbar class="rc-section-toolbar rc-section-toolbar-fixed">
+
+    <span class="rc-toolbar-title rc-link-like"
+          [matMenuTriggerFor]="cmsRestaurants"
+          [matTooltip]="'CMS-Component.ManagedByYou' | translate">
+          My Restaurants
+    </span>
+    <button
+      *ngIf="restaurants?.length > 0"
+      mat-icon-button
+      [matMenuTriggerFor]="cmsRestaurants">
+      <mat-icon>arrow_drop_down</mat-icon>
+    </button>
+
+    <mat-menu #cmsRestaurants="matMenu">
+<!--      <span class="menu-title">{{ 'CMS-Component.YourRestaurants' | translate }}</span>-->
+      <button
+        *ngFor="let restaurant of restaurants"
+        mat-menu-item
+        [routerLink]="['/restaurants', restaurant.restaurant_id, 'cms', 'dashboard']">
+        <mat-icon>home</mat-icon>
+        <span>{{ restaurant.restaurant_name }}</span>
+      </button>
+      <mat-divider></mat-divider>
+      <button
+        mat-menu-item
+        [routerLink]="['/profile']">
+        <mat-icon>add_circle</mat-icon>
+        <span>Add Restaurant</span>
+      </button>
+    </mat-menu>
+
+    <span class="rc-spacefill"></span>
+
+    <span class="rc-section-toolbar-actions rc-media-small-hide">
+
+          <button mat-icon-button
+             [matTooltip]="'CMS-Component.RDashboard' | translate"
+             [routerLink]="['dashboard']"
+             [routerLinkActive]="['rc-link-active']">
+            <mat-icon>apps</mat-icon>
+          </button>
+
+           <button mat-icon-button
+              [matTooltip]="'CMS-Component.ROpeningTimes' | translate"
+              [routerLink]="['opening-times']"
+              [routerLinkActive]="['rc-link-active']">
+            <mat-icon>watch_later</mat-icon>
+          </button>
+          <button mat-icon-button
+             [matTooltip]="'CMS-Component.RFeatures' | translate"
+             [routerLink]="['features']"
+             [routerLinkActive]="['rc-link-active']">
+            <mat-icon>check_box</mat-icon>
+          </button>
+          <button mat-icon-button
+             [matTooltip]="'CMS-Component.RImages' | translate"
+             [routerLink]="['images']"
+             [routerLinkActive]="['rc-link-active']">
+            <mat-icon>image</mat-icon>
+          </button>
+          <button mat-icon-button
+             [matTooltip]="'CMS-Component.RMenus' | translate"
+             [routerLink]="['menus']"
+             [routerLinkActive]="['rc-link-active']">
+            <mat-icon>restaurant</mat-icon>
+          </button>
+          <button mat-icon-button
+             [matTooltip]="'CMS-Component.RReservations' | translate"
+             [routerLink]="['reservations']"
+             [routerLinkActive]="['rc-link-active']">
+            <mat-icon>event</mat-icon>
+          </button>
+          <button mat-icon-button
+             [matTooltip]="'CMS-Component.RLocation' | translate"
+             [routerLink]="['location']"
+             [routerLinkActive]="['rc-link-active']">
+            <mat-icon>place</mat-icon>
+          </button>
+          <button
+              mat-icon-button
+             [matTooltip]="'CMS-Component.RPreview' | translate"
+             (click)="getPreview()">
+            <mat-icon>personal_video</mat-icon>
+          </button>
+          <button
+            mat-icon-button
+            [matTooltip]="'CMS-Component.AffiliateOffers' | translate"
+            [routerLink]="['affiliates']"
+            [routerLinkActive]="['rc-link-active']">
+            <mat-icon>redeem</mat-icon>
+            <span
+              *ngIf="offerInBox"
+              class="rc-counter">{{ offerInBox }}</span>
+          </button>
+        </span>
+
+    <span class="rc-section-toolbar-actions rc-media-med">
+
+          <button mat-icon-button [matMenuTriggerFor]="cmsMenu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+
+      </span>
+
+  </mat-toolbar>
+
+  <mat-menu #cmsMenu="matMenu">
+
+    <a mat-menu-item [routerLink]="['dashboard']">
+      <mat-icon>apps</mat-icon>
+      <span>{{ 'CMS-Component.Dashboard' | translate }}</span>
+    </a>
+    <a mat-menu-item [routerLink]="['opening-times']">
+      <mat-icon>watch_later</mat-icon>
+      <span>{{ 'CMS-Component.Times' | translate }}</span>
+    </a>
+    <a mat-menu-item [routerLink]="['features']">
+      <mat-icon>check_box</mat-icon>
+      <span>{{ 'CMS-Component.Features' | translate }}</span>
+    </a>
+    <a mat-menu-item [routerLink]="['menus']">
+      <mat-icon>restaurant</mat-icon>
+      <span>{{ 'CMS-Component.Menus' | translate }}</span>
+    </a>
+    <a mat-menu-item [routerLink]="['reservations']">
+      <mat-icon>event</mat-icon>
+      <span>{{ 'CMS-Component.Reservations' | translate }}</span>
+    </a>
+    <a mat-menu-item [routerLink]="['images']">
+      <mat-icon>image</mat-icon>
+      <span>{{ 'CMS-Component.Images' | translate }}</span>
+    </a>
+    <a mat-menu-item [routerLink]="['location']">
+      <mat-icon>place</mat-icon>
+      <span>{{ 'CMS-Component.Location' | translate }}</span>
+    </a>
+    <a mat-menu-item [routerLink]="['affiliates']">
+      <mat-icon>redeem</mat-icon>
+      <span>{{ offerCount }} {{ 'CMS-Component.AffiliateOffers' | translate }}</span>
+      <span
+        *ngIf="offerInBox"
+        class="rc-counter">{{ offerInBox }}</span>
+    </a>
+
+  </mat-menu>
+
+</header>
+
+<div
+  class="rc-cms" style="padding-top:56px;">
+  <router-outlet (deactivate)="onDeactivate()"></router-outlet>
+</div>

@@ -1,0 +1,84 @@
+<h1 *ngIf="data.mode === 'add'" class="mat-dialog-title">{{ 'CMS-Menu-Dish.AddDish' | translate }}</h1>
+
+<form #formDish="ngForm">
+
+  <section>
+    <mat-form-field>
+      <mat-select [ngModel]="data.dish.cms_dish_section_id"
+                  name="cms_dish_section_id"
+                  placeholder="{{ 'CMS-Menu-Dish.Section' | translate }}"
+                  required>
+        <mat-option *ngFor="let section of data.sections" [value]="section.id">
+          {{ section.label | uppercase }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </section>
+
+  <input type="hidden" name="cms_dish_id" [ngModel]="data.dish.cms_dish_id">
+
+  <div style="display: flex;">
+    <mat-form-field style="flex: 3; margin-right: 4px;">
+      <input name="cms_dish_name"
+             matInput
+             placeholder="{{ 'CMS-Menu-Dish.DishName' | translate }}"
+             [ngModel]="data.dish.cms_dish_name"
+             required>
+    </mat-form-field>
+
+    <mat-form-field  style="flex: 1;">
+      <span matPrefix>{{ data.currencySymbol }} &nbsp;</span>
+      <input name="cms_dish_price"
+             matInput
+             placeholder="{{ 'CMS-Menu-Dish.Price' | translate }}"
+             [ngModel]="data.dish.cms_dish_price"
+             required>
+    </mat-form-field>
+  </div>
+
+  <mat-form-field class="rc-full-width">
+    <textarea matInput
+              name="cms_dish_desc"
+              placeholder="{{ 'CMS-Menu-Dish.OptDesc' | translate }}"
+              [ngModel]="data.dish.cms_dish_desc"></textarea>
+  </mat-form-field>
+
+  <section style="display: flex; flex-direction: column">
+    <mat-checkbox name="cms_dish_vegetarian"
+                  [ngModel]="data.dish.cms_dish_vegetarian">
+                  {{ 'CMS-Menu-Dish.Vegetarian' | translate }}
+    </mat-checkbox>
+    <mat-checkbox name="cms_dish_glutenfree"
+                  [ngModel]="data.dish.cms_dish_glutenfree">
+                  {{ 'CMS-Menu-Dish.GlutenFree' | translate }}
+    </mat-checkbox>
+  </section>
+
+  <mat-dialog-actions *ngIf="data.mode === 'edit'" align="end">
+    <button
+      type="button"
+      mat-button
+      mat-dialog-close>{{ 'CMS-Menu-Dish.Cancel' | translate }}</button>
+    <button
+      type="button"
+      mat-raised-button
+      [mat-dialog-close]="formDish"
+      color="primary"
+      [disabled]="!formDish.dirty || !formDish.valid">{{ 'CMS-Menu-Dish.Update' | translate }}</button>
+  </mat-dialog-actions>
+
+  <mat-dialog-actions *ngIf="data.mode === 'add'" align="end">
+    <button
+      type="button"
+      mat-button
+      mat-dialog-close>{{ 'CMS-Menu-Dish.Cancel' | translate }}</button>
+    <button
+      type="button"
+      mat-raised-button
+      color="primary"
+      [mat-dialog-close]="formDish"
+      [disabled]="!formDish.valid">{{ 'CMS-Menu-Dish.Save' | translate }}
+    </button>
+  </mat-dialog-actions>
+
+</form>

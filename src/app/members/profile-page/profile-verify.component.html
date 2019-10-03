@@ -1,0 +1,62 @@
+<div class="rc-dialog rc-dialog-small">
+
+  <form
+    novalidate
+    #profileVerifyForm="ngForm"
+    (ngSubmit)="profileVerifyForm.form.valid && onProfileVerifySubmit(profileVerifyForm.form.value)">
+
+    <h1 mat-dialog-title>
+      {{ 'Profile-Verify.Verifying' | translate }}
+    </h1>
+
+    <h4>
+      {{ 'Profile-Verify.Before' | translate }}
+    </h4>
+
+    <mat-dialog-content>
+
+      <mat-form-field
+        floatPlaceholder="always"
+        class="rc-full-width">
+        <input
+          #codeInput
+          name="profile_verify"
+          type="password"
+          placeholder="{{ 'Profile-Verify.Code' | translate }}"
+          matInput
+          ngModel
+          minlength="10"
+          required>
+        <mat-error align="end">{{ 'Profile-Verify.TenDigit' | translate }}</mat-error>
+
+      </mat-form-field>
+
+    </mat-dialog-content>
+
+    <mat-dialog-actions align="end">
+
+      <button
+        type="button"
+        (click)="reqVerificationCode()"
+        mat-button>
+        {{ 'Profile-Verify.Request' | translate }}
+      </button>
+
+      <button
+        type="button"
+        mat-dialog-close
+        mat-button (click)="profileVerifyDialog.close({ confirmed: false })">
+        {{ 'Profile-Verify.Cancel' | translate }}
+      </button>
+
+      <button
+        mat-raised-button
+        color="primary"
+        [disabled]="isSubmitting || !profileVerifyForm.form.valid">
+        {{ 'Profile-Verify.Submit' | translate }}
+      </button>
+
+    </mat-dialog-actions>
+
+  </form>
+</div>

@@ -1,0 +1,36 @@
+﻿export class Member {
+  // V2
+  member_id: string;
+  member_membership_number: string;
+  member_first_name: string;
+  member_last_name: string;
+  member_email: string;
+  member_password: string;
+  member_telephone: string;
+  member_address_1: string;
+  member_address_2: string;
+  member_address_3: string;
+  member_post_code: string;
+  member_profile: string;
+  member_image_path: string;
+  member_restaurant_group: string;
+  member_job: string;
+  member_preferred_language: string;
+  member_notes: string;
+  member_access_id: string;
+  member_access_level: string;
+  member_membership_type: string;
+  member_role: string;
+  member_invited: string;
+  member_signedup: string;
+  member_authenticated: string;
+  member_how_acquired: string;
+  member_contract_accepted: string;
+  member_active: string;
+  member_created: string;
+  member_last_update: string;
+  member_last_logged_in: string;
+  restaurant_count: string;
+  member_messages_seen: string;
+  member_launch_number: number;
+}

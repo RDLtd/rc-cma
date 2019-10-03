@@ -1,0 +1,261 @@
+
+<div class="rc-dialog-rc-dialog-med">
+
+  <h1 *ngIf="!fromCMS" mat-dialog-title>{{ restaurant.restaurant_name }}</h1>
+  <h1 *ngIf="fromCMS" mat-dialog-title>Amend any fields that need correction, then press UPDATE</h1>
+
+  <div mat-dialog-content>
+
+    <form (ngSubmit)="restForm.form.valid" #restForm="ngForm">
+
+      <div class="mdc-layout-grid">
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6">
+
+          <mat-form-field  floatPlaceholder="always" class="rc-full-width">
+            <input
+              name="restaurant_name"
+              type="text"
+              placeholder="Restaurant Name"
+              matInput
+              #restaurant_name="ngModel"
+              [(ngModel)]="restaurant.restaurant_name"
+              required
+              [disabled]="!editMode">
+            <mat-hint align="end" *ngIf="restaurant.restaurant_group_name">Group: {{ restaurant.restaurant_group_name }}</mat-hint>
+          </mat-form-field>
+
+          <mat-form-field  floatPlaceholder="always" class="rc-full-width">
+            <input
+              class="rc-full-width"
+              name="restaurant_address_1"
+              type="text"
+              placeholder="Address"
+              matInput
+              #restaurant_address_1="ngModel"
+              [(ngModel)]="restaurant.restaurant_address_1"
+              required
+              [disabled]="!editMode">
+          </mat-form-field>
+
+          <mat-form-field  floatPlaceholder="always" class="rc-full-width">
+            <input
+              class="rc-full-width"
+              name="restaurant_address_2"
+              type="text"
+              placeholder=""
+              matInput
+              #restaurant_address_2="ngModel"
+              [(ngModel)]="restaurant.restaurant_address_2"
+              [disabled]="!editMode">
+          </mat-form-field>
+
+          <mat-form-field  floatPlaceholder="always" class="rc-full-width">
+            <input
+              class="rc-full-width"
+              name="restaurant_address_3"
+              type="text"
+              placeholder=""
+              matInput
+              #restaurant_address_3="ngModel"
+              [(ngModel)]="restaurant.restaurant_address_3"
+              [disabled]="!editMode">
+          </mat-form-field>
+
+          <mat-form-field  floatPlaceholder="always" class="rc-full-width">
+            <input
+              class="rc-full-width"
+              name="restaurant_post_code"
+              type="text"
+              placeholder="Postcode"
+              matInput
+              #restaurant_post_code="ngModel"
+              [(ngModel)]="restaurant.restaurant_post_code"
+              [disabled]="!editMode">
+            <mat-hint align="end">{{ restaurant.restaurant_region }} // {{ restaurant.restaurant_lat }} // {{ restaurant.restaurant_lng }}</mat-hint>
+          </mat-form-field>
+
+          <mat-form-field  floatPlaceholder="always" class="rc-full-width">
+            <input
+              class="rc-full-width"
+              name="restaurant_group_name"
+              type="text"
+              placeholder="Restaurant Group"
+              matInput
+              #restaurant_group_name="ngModel"
+              [(ngModel)]="restaurant.restaurant_group_name"
+              [disabled]="!editMode">
+          </mat-form-field>
+
+          <div class="rc-card-vspacer"></div>
+
+
+
+            <!--<mat-form-field class="rc-full-width">-->
+          <!--<mat-select-->
+            <!--name="restaurant_cuisine_1"-->
+            <!--placeholder="Primary Cuisine"-->
+            <!--[(ngModel)]="restaurant.restaurant_cuisine_1">-->
+            <!--<mat-option-->
+              <!--*ngFor= "let cuisineoption of cuisineOptions"-->
+              <!--[value] = "cuisineoption.label">-->
+              <!--{{ cuisineoption.label }}-->
+            <!--</mat-option>-->
+          <!--</mat-select>-->
+
+          <!--</mat-form-field>-->
+
+          <mat-form-field class="rc-full-width">
+            <mat-select
+              name="restaurant_cuisine_1"
+              [placeholder]="'Curation.PrimCuis' | translate"
+              (change)="changeCuisine()"
+              [(ngModel)]="restaurant.restaurant_cuisine_1">
+              <mat-option
+                *ngFor= "let cuisine of cuisines"
+                [value] = "cuisine.cuisine_description">
+                {{ cuisine.cuisine_description }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="rc-full-width">
+            <mat-select
+              name="restaurant_cuisine_2"
+              (change)="checkModifier()"
+              [placeholder]="'Curation.SecCuis' | translate"
+              [(ngModel)]="restaurant.restaurant_cuisine_2">
+              <mat-option
+                *ngFor= "let cuisine of cuisine_modifiers"
+                [value] = "cuisine.cuisine_description">
+                {{ cuisine.cuisine_description }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+        </div>
+
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6">
+          <mat-form-field  floatPlaceholder="always" class="rc-full-width">
+            <input
+              name="restaurant_telephone"
+              type="text"
+              placeholder="Telephone"
+              matInput
+              #restaurant_name="ngModel"
+              [(ngModel)]="restaurant.restaurant_telephone"
+              required
+              [disabled]="!editMode">
+          </mat-form-field>
+
+          <mat-form-field  floatPlaceholder="always" class="rc-full-width">
+            <input
+              name="restaurant_email"
+              type="text"
+              placeholder="Email"
+              matInput
+              #restaurant_name="ngModel"
+              [(ngModel)]="restaurant.restaurant_email"
+              required
+              [disabled]="!editMode">
+          </mat-form-field>
+
+          <mat-form-field  floatPlaceholder="always" class="rc-full-width">
+            <input
+              name="restaurant_website"
+              type="text"
+              placeholder="Website"
+              matInput
+              #restaurant_name="ngModel"
+              [(ngModel)]="restaurant.restaurant_website"
+              required
+              [disabled]="!editMode">
+          </mat-form-field>
+
+          <mat-form-field  floatPlaceholder="always" class="rc-full-width">
+          <input
+            name="restaurant_facebook"
+            type="text"
+            placeholder="Facebook"
+            matInput
+            #restaurant_name="ngModel"
+            [(ngModel)]="restaurant.restaurant_facebook"
+            [disabled]="!editMode">
+          </mat-form-field>
+
+          <mat-form-field  floatPlaceholder="always" class="rc-full-width">
+          <input
+            name="restaurant_twitter"
+            type="text"
+            placeholder="Twitter"
+            matInput
+            #restaurant_name="ngModel"
+            [(ngModel)]="restaurant.restaurant_twitter"
+            [disabled]="!editMode">
+          </mat-form-field>
+
+          <mat-form-field  floatPlaceholder="always" class="rc-full-width">
+          <input
+            name="restaurant_instagram"
+            type="text"
+            placeholder="Instagram"
+            matInput
+            #restaurant_name="ngModel"
+            [(ngModel)]="restaurant.restaurant_instagram"
+            [disabled]="!editMode">
+          </mat-form-field>
+
+          <div class="rc-card-vspacer"></div>
+
+
+          <mat-checkbox
+            name="ra_member"
+            value="signedup"
+            [(ngModel)]="restaurant.restaurant_signedup">
+            Restaurant Association Member
+          </mat-checkbox>
+
+        </div>
+
+      </div>
+    </form>
+
+  </div>
+
+  <div *ngIf="!fromCMS" mat-dialog-actions align="end">
+    <mat-button-toggle (click)="toggleEditMode($event)">
+      EDIT
+    </mat-button-toggle>
+    <button
+      mat-button
+      mat-dialog-close
+      color="secondary"
+      matTooltip="Save & close"
+      matTooltipPosition="above">
+      DONE
+    </button>
+  </div>
+
+  <div *ngIf="fromCMS" mat-dialog-actions align="end">
+    <button
+      mat-button
+      mat-dialog-close
+      (click)="setCancel(true)"
+      color="secondary"
+      matTooltip="Cancel & close"
+      matTooltipPosition="above">
+      CANCEL
+    </button>
+    <button
+      mat-button
+      mat-dialog-close
+      (click)="setCancel(false)"
+      color="primary"
+      matTooltip="Update & close"
+      matTooltipPosition="above">
+      UPDATE
+    </button>
+  </div>
+
+  <!--<button mat-button (click)="getFinancials(restaurant.restaurant_id)">Get Financial Data</button>-->
+
+</div>

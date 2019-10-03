@@ -1,0 +1,33 @@
+<div class="rc-dialog rc-dialog-med">
+
+<mat-toolbar class="rc-cms-toolbar">
+  <span class="rc-toolbar-title">RESTAURANT COLLECTIVE SUPPORT</span>
+  <span class="rc-spacefill"></span>
+  <span class="rc-section-toolbar-actions">
+  <button mat-icon-button mat-dialog-close><mat-icon>close</mat-icon></button>
+</span>
+</mat-toolbar>
+
+<mat-dialog-content>
+
+    <div *ngFor="let message of data.messages" Markdown>
+        {{ message.message_text }}
+    </div>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button
+    mat-button
+    [mat-dialog-close]="true">
+    DON'T SHOW ME THIS AGAIN
+  </button>
+</mat-dialog-actions>
+</div>
+
+
+
+
+
+
+

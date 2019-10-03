@@ -1,0 +1,115 @@
+<div class="mdc-layout-grid">
+
+  <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+    <mat-toolbar class="rc-cms-toolbar">
+      <span class="rc-toolbar-title">{{ 'CMS-Hours.OpeningTimes' | translate }}</span>
+      <span class="rc-spacefill"></span>
+      <span class="rc-section-toolbar-actions">
+
+        <button
+          mat-icon-button
+          (click)="help.dspHelp('cms-hours')">
+            <mat-icon>help_outline</mat-icon>
+        </button>
+
+        <button
+          mat-icon-button
+          [disabled]="!dataChanged"
+          (click)="resetData()"
+          [matTooltip]="'CMS-Hours.UndoChanges' | translate">
+          <mat-icon>undo</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          [disabled]="!dataChanged"
+          (click)="updateData()"
+          [matTooltip]="'CMS-Hours.SaveChanges' | translate"
+          color="accent">
+          <mat-icon>check</mat-icon>
+        </button>
+      </span>
+    </mat-toolbar>
+
+  </div>
+
+  <rc-loader class="mdc-layout-grid__cell--span-12" *ngIf="showLoader"></rc-loader>
+
+  <mat-card
+    class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 rc-cms-times"
+    *ngFor="let cmstime of openingTimes; let i = index">
+
+      <mat-card-title>
+        <mat-checkbox
+          [class.rc-day-closed]="cmstime.closed"
+          [(ngModel)]="cmstime.checked"
+          (click)="toggleSession(i)"
+          #cb>
+          {{ cmstime.cms_time_day_of_week | uppercase }}
+        </mat-checkbox>
+      </mat-card-title>
+
+    <mat-card-content>
+
+      <div *ngFor="let session of cmstime.sessions; let j = index">
+        <h4 *ngIf="!cmstime.closed">{{ 'CMS-Hours.Session' | translate }} {{ j + 1 }}</h4>
+        <h4 *ngIf="cmstime.closed">{{ 'CMS-Hours.Closed' | translate }}</h4>
+        <div class="rc-session">
+          <mat-form-field>
+            <input
+              matInput type="time"
+              [placeholder]="'CMS-Hours.Start' | translate"
+              step="900"
+              (change)="setChanged()"
+              [(ngModel)]="session.open"
+              [disabled]="cmstime.closed">
+          </mat-form-field>
+          <mat-form-field>
+            <input
+              matInput type="time"
+              [placeholder]="'CMS-Hours.End' | translate"
+              step="900"
+              (change)="setChanged()"
+              [(ngModel)]="session.close"
+              [disabled]="cmstime.closed">
+          </mat-form-field>
+          <a mat-icon-button
+             color="warn"
+             [disabled]="!!cmstime.closed"
+             class="rc-del-session"
+             (click)="removeSession(i,j)">
+            <mat-icon>cancel</mat-icon>
+          </a>
+        </div>
+
+      </div>
+
+      <mat-form-field class="rc-full-width">
+        <textarea
+          matInput
+          [placeholder]="'CMS-Hours.Notes' | translate"
+          matTextareaAutosize
+          matAutosizeMinRows="1"
+          matAutosizeMaxRows="5"
+          [disabled]="cmstime.closed"
+          (change)="setChanged()"
+          (keydown)="setChanged()"
+          [(ngModel)]="cmstime.cms_time_tag"></textarea>
+      </mat-form-field>
+
+    </mat-card-content>
+
+    <mat-card-actions align="end" *ngIf="!cmstime.closed">
+      <button
+        mat-button
+        (click)="addSession(i)"
+        [disabled]="cmstime.sessions.length >= maxSessions">
+        {{ 'CMS-Hours.AddSession' | translate }}
+      </button>
+    </mat-card-actions>
+
+  </mat-card>
+
+</div>
+
+<!--<hr>-->
+<!--<pre>{{ openingTimes | json }}</pre>-->

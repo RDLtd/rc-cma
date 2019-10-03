@@ -1,0 +1,228 @@
+<div class="mdc-layout-grid">
+
+  <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+    <mat-toolbar class="rc-cms-toolbar">
+      <span class="rc-toolbar-title">{{ 'CMS-Reservations.ResInfo' | translate }}</span>
+      <span class="rc-spacefill"></span>
+      <span class="rc-section-toolbar-actions">
+
+        <button
+          mat-icon-button
+          (click)="help.dspHelp('cms-reservations')">
+          <mat-icon>help_outline</mat-icon>
+        </button>
+
+      </span>
+    </mat-toolbar>
+  </div>
+
+  <!-- General -->
+  <mat-card
+    class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-4-tablet">
+
+    <mat-card-title>
+      <div class="rc-cms-card-nav">
+        <button
+          mat-icon-button
+          [disabled]="!dataChanged"
+          [matTooltip]="'CMS-Reservations.SaveChanges' | translate"
+          (click)="updateData()">
+          <mat-icon>check</mat-icon>
+        </button>
+      </div>
+      <h2>{{ 'CMS-Reservations.General' | translate }}</h2>
+    </mat-card-title>
+
+    <mat-card-content>
+      <mat-form-field
+        class="rc-full-width"
+        floatPlaceholder="never">
+        <mat-placeholder>{{ 'CMS-Reservations.GeneralDesc' | translate }} {{ resGeneralMaxLength }})"</mat-placeholder>
+          <textarea
+            #bkgsGeneral
+            matInput
+            matTextareaAutosize
+            matAutosizeMinRows="5"
+            matAutosizeMaxRows="5"
+            name="cms_description_reservation_info"
+            maxlength="{{ resGeneralMaxLength }}"
+            (keyup)="setChanged(bkgsGeneral)"
+            [(ngModel)]="descriptions.cms_description_reservation_info">
+          </textarea>
+        <mat-hint align="end">{{ bkgsGeneral.value.length }}/{{ resGeneralMaxLength }}</mat-hint>
+      </mat-form-field>
+    </mat-card-content>
+
+  </mat-card>
+
+  <!-- online bookings -->
+  <mat-card class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-4-tablet">
+    <form #frmBooking="ngForm">
+
+      <mat-card-title>
+        <div class="rc-cms-card-nav">
+          <button
+            mat-icon-button
+            [disabled]="!frmBooking.dirty"
+            (click)="updateData()"
+            [matTooltip]="'CMS-Reservations.SaveChanges' | translate">
+            <mat-icon>check</mat-icon>
+          </button>
+        </div>
+        <h2>{{ 'CMS-Reservations.OnlineBookings' | translate }}</h2>
+      </mat-card-title>
+
+      <mat-card-content>
+
+        <div style="display: flex; justify-content: space-between;">
+
+          <mat-form-field>
+            <mat-placeholder>Maximum Party Size</mat-placeholder>
+            <input
+              matInput
+              type="number"
+              name="bkg_max_covers"
+              min="2" max="12"
+              [(ngModel)]="selected_bkg_provider.max_covers">
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-placeholder>Maximum Days in Advance</mat-placeholder>
+            <input
+              matInput type="number"
+              name="bkg_max_days"
+              min="7"
+              max="90"
+              [(ngModel)]="selected_bkg_provider.max_days">
+          </mat-form-field>
+
+        </div>
+
+        <!--placeholder="{{ 'CMS-Reservations.Provider' | translate }}"-->
+        <mat-form-field class="rc-full-width">
+          <mat-placeholder>Online Booking Service</mat-placeholder>
+          <mat-select
+            name="bkg_provider"
+            [(ngModel)]="selected_bkg_provider.id"
+            (change)="updateConfigForm(frmBooking)">
+            <!--<mat-option value="null">{{ 'CMS-Reservations.None' | translate }}</mat-option>-->
+            <mat-option
+              *ngFor="let provider of bkg_providers; let idx = index"
+              [value]="idx">
+              {{ provider["label"] }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <div style="display: flex; justify-content: space-between;">
+
+          <mat-form-field class="rc-full-width">
+            <mat-placeholder>{{ bkg_providers[selected_bkg_provider.id].rid_label }}</mat-placeholder>
+            <input
+              #provider_id
+              matInput
+              name="bkg_provider_id"
+              [(ngModel)]="selected_bkg_provider.rid">
+            <a
+              *ngIf="selected_bkg_provider.rid"
+              matSuffix
+              mat-icon-button
+              (click)="testBkgLink()">
+              <mat-icon>arrow_forward</mat-icon>
+            </a>
+            <mat-error><strong>A valid email address is required</strong></mat-error>
+          </mat-form-field>
+
+        </div>
+
+
+      </mat-card-content>
+
+    </form>
+  </mat-card>
+
+  <!-- Groups -->
+  <mat-card
+    class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-4-tablet">
+
+    <mat-card-title>
+      <div class="rc-cms-card-nav">
+
+        <button
+          mat-icon-button
+          [disabled]="!dataChanged"
+          (click)="updateData()"
+          [matTooltip]="'CMS-Reservations.SaveChanges' | translate">
+          <mat-icon>check</mat-icon>
+        </button>
+      </div>
+
+      <h2>{{ 'CMS-Reservations.GroupBookings' | translate }}</h2></mat-card-title>
+    <mat-card-content>
+      <mat-form-field
+        class="rc-full-width"
+        floatPlaceholder="never">
+          <textarea
+            #bkgsGroup
+            matInput
+            matTextareaAutosize
+            matAutosizeMinRows="3"
+            matAutosizeMaxRows="5"
+            name="cms_descriptions_group"
+            maxlength="{{ resGroupMaxLength }}"
+            placeholder="{{ 'CMS-Reservations.GroupPolicy' | translate }} {{ resGroupMaxLength }})"
+            (keyup)="setChanged(bkgsGroup)"
+            [(ngModel)]="descriptions.cms_description_group">
+          </textarea>
+        <mat-hint align="end">{{ bkgsGroup.value.length }}/{{ resGroupMaxLength }}</mat-hint>
+      </mat-form-field>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Private -->
+  <mat-card
+    class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-4-tablet">
+
+    <mat-card-title>
+      <div class="rc-cms-card-nav">
+        <button
+          mat-icon-button
+          [disabled]="!dataChanged"
+          (click)="updateData()"
+          [matTooltip]="'CMS-Reservations.SaveChanges' | translate">
+          <mat-icon>check</mat-icon>
+        </button>
+      </div>
+      <h2>{{ 'CMS-Reservations.PrivateDining' | translate }}</h2></mat-card-title>
+    <mat-card-content>
+      <mat-form-field
+        class="rc-full-width"
+        floatPlaceholder="never">
+        <textarea
+          #bkgsPrivate
+          matInput
+          matTextareaAutosize
+          matAutosizeMinRows="3"
+          matAutosizeMaxRows="5"
+          name="cms_descriptions_private"
+          maxlength="{{ resPrivateMaxLength }}"
+          placeholder="{{ 'CMS-Reservations.PrivateInfo' | translate }} {{ resPrivateMaxLength }})"
+          (keyup)="setChanged(bkgsPrivate)"
+          [(ngModel)]="descriptions.cms_description_private">
+        </textarea>
+        <mat-hint align="end">{{ bkgsPrivate.value.length }}/{{ resPrivateMaxLength }}</mat-hint>
+      </mat-form-field>
+    </mat-card-content>
+
+  </mat-card>
+
+
+</div>
+
+<!--<hr>-->
+
+<!--<pre>-->
+
+<!--{{ descriptions | json }}-->
+
+<!--</pre>-->

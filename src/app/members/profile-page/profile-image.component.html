@@ -1,0 +1,75 @@
+<div class="rc-dialog rc-dialog-image">
+
+  <header mat-dialog-title>
+    <h1>
+      Profile Image
+    </h1>
+    <span class="rc-spacefill"></span>
+    <mat-icon
+      class="rc-member-badge"
+      *ngIf="member.member_membership_type==='Founder'"
+      color="primary">
+      star
+    </mat-icon>
+    <mat-icon
+      class="rc-member-badge"
+      *ngIf="member.member_authenticated"
+      color="primary">
+      verified_user
+    </mat-icon>
+  </header>
+
+
+  <mat-dialog-content>
+
+    <div>
+
+      <form>
+        <label class="rc-fileSelect-label" for="imgUpload">
+          <div class="rc-dialog-img">
+            <img id="imgPreview" [src]="imgPreviewSrc">
+          </div>
+          <h4  *ngIf="!inProgress" class="rc-centre">{{ 'Profile-Image.SelectImage' | translate }}</h4>
+          <h4 *ngIf="inProgress" class="rc-centre">{{ 'Profile-Image.LoadingImage' | translate }}</h4>
+        </label>
+
+        <input
+          type="file"
+          id="imgUpload"
+          class="rc-hide"
+          #fileInput
+          ng2FileSelect
+          [uploader]="uploader"
+          (change)="inProgress = true"
+          multiple />
+      </form>
+
+      <mat-progress-bar *ngIf="inProgress" color="primary" [value]="uploader?.progress"></mat-progress-bar>
+    </div>
+
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="center">
+    <button
+      mat-button
+      mat-dialog-close>
+      {{ 'Profile-Image.Cancel' | translate }}
+    </button>
+    <button
+      mat-button
+      color="warn"
+      (click)="deleteImage()"
+      [disabled]="inProgress">
+      {{ 'Profile-Image.Delete' | translate }}
+    </button>
+    <button
+      mat-raised-button
+      mat-dialog-close
+      (click)="updateImage()"
+      color="primary"
+      [disabled]="!imgPrimed">
+      {{ 'Profile-Image.Update' | translate }}
+    </button>
+  </mat-dialog-actions>
+
+</div>

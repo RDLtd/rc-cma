@@ -1,0 +1,122 @@
+
+
+<div class="rc-dialog rc-dialog-profile rc-dialog-med">
+
+  <form #formProfile="ngForm" (ngSubmit)="formProfile.valid && onProfileUpdate(formProfile.value)">
+
+    <header mat-dialog-title>
+      <h1>{{ 'Profile-Detail.UpdateProfile' | translate }}</h1>
+      <span class="rc-spacefill"></span>
+      <mat-icon
+        class="rc-member-badge"
+        *ngIf="member.member_membership_type==='Founder'"
+        color="primary">
+        star
+      </mat-icon>
+      <mat-icon
+        class="rc-member-badge"
+        *ngIf="member.member_authenticated"
+        color="primary">
+        verified_user
+      </mat-icon>
+
+    </header>
+
+    <mat-dialog-content>
+
+      <section #sectionContacts class="rc-card-section-content-open">
+
+        <div class="rc-card-section-content">
+
+          <mat-form-field floatPlaceholder="always" class="rc-full-width">
+            <input
+              #firstName="ngModel"
+              name="member_fullname"
+              placeholder="{{ 'Profile-Detail.FullName' | translate }}"
+              matInput
+              [(ngModel)]="member_full_name"
+              required>
+            <mat-hint align="end">{{ 'Profile-Detail.Names' | translate }}</mat-hint>
+
+            <mat-error align="end">{{ 'Profile-Detail.Required' | translate }}</mat-error>
+          </mat-form-field>
+
+
+          <mat-form-field floatPlaceholder="always" class="rc-full-width">
+            <input
+              name="member_email"
+              placeholder="{{ 'Profile-Detail.Email' | translate }}"
+              matInput
+              #email="ngModel"
+              [(ngModel)]="member.member_email"
+              required
+              email>
+            <mat-error align="end">{{ 'Profile-Detail.ValidEmail' | translate }}</mat-error>
+          </mat-form-field>
+
+          <mat-form-field floatPlaceholder="always" class="rc-full-width">
+            <input
+              name="member_job"
+              placeholder="{{ 'Profile-Detail.JobTitle' | translate }}"
+              matInput
+              ngModel
+              [(ngModel)]="member.member_job"
+              required>
+            <mat-hint align="end">{{ 'Profile-Detail.Job' | translate }}</mat-hint>
+            <mat-error align="end">{{ 'Profile-Detail.Required' | translate }}</mat-error>
+          </mat-form-field>
+
+          <mat-form-field floatPlaceholder="always" class="rc-full-width">
+            <input
+              name="member_restaurant_group"
+              placeholder="{{ 'Profile-Detail.Group' | translate }}"
+              matInput
+              ngModel
+              [(ngModel)]="member.member_restaurant_group"
+              required>
+            <mat-hint align="end">{{ 'Profile-Detail.Company' | translate }}</mat-hint>
+            <mat-error align="end">{{ 'Profile-Detail.Required' | translate }}</mat-error>
+          </mat-form-field>
+
+          <mat-form-field floatPlaceholder="always" class="rc-full-width">
+            <input
+              name="member_telephone"
+              type="text"
+              placeholder="{{ 'Profile-Detail.Mobile' | translate }}r"
+              matInput
+              #tel="ngModel"
+              [(ngModel)]="member.member_telephone"
+              minlength="11"
+              pattern="^[0-9 ]+$"
+              required>
+            <mat-error align="end">{{ 'Profile-Detail.InvalidMobile' | translate }}</mat-error>
+          </mat-form-field>
+
+        </div>
+      </section>
+
+    </mat-dialog-content>
+
+    <mat-dialog-actions align="end">
+
+      <button
+        type="button"
+        mat-dialog-close
+        mat-button
+        [disabled]="isSubmitting">
+        {{ 'Profile-Detail.Cancel' | translate }}
+      </button>
+
+      <button
+        mat-raised-button
+        color="primary"
+        [disabled]="isSubmitting || !formProfile.form.valid">
+        {{ 'Profile-Detail.Update' | translate }}
+      </button>
+
+    </mat-dialog-actions>
+
+  </form>
+
+</div>
+
