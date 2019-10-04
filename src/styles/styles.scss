@@ -179,6 +179,9 @@ a.rc-btn-lg {
 .rc-media-med {
   display: block !important;
 }
+.agm-map {
+  height: 300px;
+}
 
 @media screen and ( min-width : 600px ){
   .rc-media-small-hide {
@@ -240,8 +243,7 @@ textarea.mat-input-element {
   }
 }
 .mat-radio-label, .mat-checkbox-label { font-size: 16px;}
-.mat-form-field,
-.mat-chip {
+.mat-form-field > .mat-chip {
   background-color: $rc-theme-secondary;
   margin: 0 4px 4px 0 !important;
 }

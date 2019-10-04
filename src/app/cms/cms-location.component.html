@@ -1,17 +1,14 @@
 <div class="mdc-layout-grid">
   <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
     <mat-toolbar class="rc-cms-toolbar">
-      <!--<mat-icon>place</mat-icon>-->
       <span class="rc-toolbar-title">{{ 'CMS-Location.LocInfo' | translate }}</span>
       <span class="rc-spacefill"></span>
       <span class="rc-section-toolbar-actions">
-
         <button
           mat-icon-button
           (click)="help.dspHelp('cms-location-transport')">
           <mat-icon>help_outline</mat-icon>
         </button>
-
       </span>
     </mat-toolbar>
   </div>
@@ -129,24 +126,24 @@
         {{ restaurant?.restaurant_post_code }}</h3>
 
 
-      <sebm-google-map
-        [latitude]="maplat"
-        [longitude]="maplng"
-        [zoom]="zoom">
+<!--      <agm-map-->
+<!--        [latitude]="mapLat"-->
+<!--        [longitude]="mapLng"-->
+<!--        [zoom]="zoom">-->
 
-        <sebm-google-map-marker
-          [latitude]="restaurant?.restaurant_lat"
-          [longitude]="restaurant?.restaurant_lng"
-          [title]="restaurant?.restaurant_name"
-          [markerDraggable]="allowMarkerDrag"
-          (dragEnd)="getMarkerPosition($event)"
-          [iconUrl]="restaurant?.restaurant_icon">
-          <sebm-google-map-info-window [disableAutoPan]="true">
-            {{ restaurant?.restaurant_name }}, {{ restaurant?.restaurant_post_code }}, {{
-            restaurant?.restaurant_website }}
-          </sebm-google-map-info-window>
-        </sebm-google-map-marker>
-      </sebm-google-map>
+<!--        <agm-marker-->
+<!--          [latitude]="restaurant?.restaurant_lat"-->
+<!--          [longitude]="restaurant?.restaurant_lng"-->
+<!--          [title]="restaurant?.restaurant_name"-->
+<!--          [markerDraggable]="allowMarkerDrag"-->
+<!--          (dragEnd)="getMarkerPosition($event)"-->
+<!--          [iconUrl]="restaurant?.restaurant_icon">-->
+<!--          <agm-info-window [disableAutoPan]="true">-->
+<!--            {{ restaurant?.restaurant_name }}, {{ restaurant?.restaurant_post_code }}, {{-->
+<!--            restaurant?.restaurant_website }}-->
+<!--          </agm-info-window>-->
+<!--        </agm-marker>-->
+<!--      </agm-map>-->
 
     </mat-card-content>
     <mat-card-actions align="end">

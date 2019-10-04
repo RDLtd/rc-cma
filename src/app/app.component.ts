@@ -30,7 +30,6 @@ export class AppComponent implements OnInit {
     private config: AppConfig,
     public authService: AuthenticationService) {
 
-
       this.router.events.subscribe(event => {
         if (event instanceof NavigationEnd) {
           (<any>window).ga('set', 'page', event.urlAfterRedirects);

@@ -4,7 +4,7 @@ import { CMSService, HelpService } from '../_services';
 import { CmsFileUploadComponent } from './cms-file-upload.component';
 import { MatDialog } from '@angular/material';
 import { CMSDescription } from '../_models';
-import { TranslateService } from '@ngx-translate/core';;
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'rc-cms-location',
@@ -13,8 +13,8 @@ import { TranslateService } from '@ngx-translate/core';;
 })
 export class CmsLocationComponent implements OnInit {
 
-  maplat: number;
-  maplng: number;
+  mapLat: number;
+  mapLng: number;
   zoom: number;
   restaurant: any;
   directions: any;
@@ -51,8 +51,8 @@ export class CmsLocationComponent implements OnInit {
         if (data.restaurant_id) {
 
           this.restaurant = data;
-          this.maplat = this.latMarker = Number(data.restaurant_lat);
-          this.maplng = this.lngMarker = Number(data.restaurant_lng);
+          this.mapLat = this.latMarker = Number(data.restaurant_lat);
+          this.mapLng = this.lngMarker = Number(data.restaurant_lng);
           // console.log(this.maplat, this.maplng);
           this.zoom = 16;
           this.getDirectionFile();

@@ -34,7 +34,8 @@ import {
   BenchmarkComponent,
   BenchmarkWizardComponent,
   ReviewComponent,
-  MapDetailComponent, RestaurantListComponent
+  MapDetailComponent,
+  RestaurantListComponent
 } from './restaurants';
 
 import {
@@ -91,7 +92,7 @@ import { GoogleChartComponent } from './google-chart/google-chart.component';
 // packages
 import { ImageUploadModule } from 'angular2-image-upload';
 import { Ng2PageScrollModule } from 'ng2-page-scroll';
-import { AgmCoreModule } from 'angular2-google-maps/core';
+import { AgmCoreModule } from '@agm/core';
 import {
   TranslateModule,
   TranslateLoader
@@ -107,7 +108,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
-  return new TranslateHttpLoader(httpClient, './assets/i18n', '.json');
+  return new TranslateHttpLoader(httpClient, './assets/i18n/', '.json');
 }
 
 @NgModule({
@@ -215,6 +216,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     ReviewComponent,
     BenchmarkWizardComponent,
     RestaurantLookupComponent,
+    RestaurantDetailComponent,
     ConfirmCancelComponent,
     MessageComponent,
     PasswordComponent,
