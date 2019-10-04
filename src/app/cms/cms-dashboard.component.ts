@@ -7,7 +7,7 @@ import { CmsPreviewComponent } from './cms-preview.component';
 import { Router } from '@angular/router';
 import { RestaurantDetailComponent } from '../restaurants';
 import { NgForm } from '@angular/forms';
-import { TranslateService } from 'ng2-translate';
+import { TranslateService } from '@ngx-translate/core';;
 import { PaymentComponent } from '../payment/payment.component';
 import { AnalyticsService } from '../_services/analytics.service';
 import { MessageComponent } from '../messages/message.component';

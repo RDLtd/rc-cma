@@ -240,7 +240,7 @@ textarea.mat-input-element {
   }
 }
 .mat-radio-label, .mat-checkbox-label { font-size: 16px;}
-.mat-form-field
+.mat-form-field,
 .mat-chip {
   background-color: $rc-theme-secondary;
   margin: 0 4px 4px 0 !important;
@@ -627,7 +627,7 @@ image-upload {
 
     display: block;
     cursor: pointer;
-    margin: 0px auto;
+    margin: 0 auto;
     background-color: $rc-theme-grey;
     border-radius: 50%;
     width: 56px;
@@ -747,7 +747,7 @@ image-upload {
     a {
       display: block;
       cursor: pointer;
-      margin: 0px auto;
+      margin: 0 auto;
       background-color: $rc-theme-grey;
       border-radius: 50%;
       width: 56px;
@@ -918,7 +918,7 @@ image-upload {
       background: rgba($rc-theme-secondary, .25);
     }
     &.mat-list {
-      padding-top: 0px;
+      padding-top: 0;
     }
   }
 }
@@ -1802,7 +1802,7 @@ button.rc-member-assc {
 }
 .rc-add-card {
   position: absolute;
-  rigth: 0;
+  right: 0;
   top: 0;
   z-index: 100;
 }
@@ -2533,12 +2533,11 @@ mat-toolbar.cms-menu-section {
   align-content: flex-start;
 
   h3 {
-    margin:0;
+    margin: 0 auto 0 0;
     padding: 0;
     font-size: 1rem;
     line-height: 1.25;
     flex: 70%;
-    margin-right: auto;
     color: inherit;
   }
   // menu item price

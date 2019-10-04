@@ -6,7 +6,7 @@ import { MatDialog } from '@angular/material';
 import { CmsImageDialogComponent } from './cms-image-dialog.component';
 import { CmsFileUploadComponent } from './cms-file-upload.component';
 import { ConfirmCancelComponent } from '../confirm-cancel/confirm-cancel.component';
-import { TranslateService } from 'ng2-translate';
+import { TranslateService } from '@ngx-translate/core';;
 
 
 @Component({

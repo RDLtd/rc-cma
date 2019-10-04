@@ -2,7 +2,7 @@ import { Directive, ElementRef, Component, ViewChild, OnInit } from '@angular/co
 import { NgForm } from '@angular/forms';
 import { FinancialService } from '../_services/financial.service';
 import { MatSnackBar, MatDialog } from '@angular/material';
-import { TranslateService } from 'ng2-translate';
+import { TranslateService } from '@ngx-translate/core';;
 
 
 declare var google: any;

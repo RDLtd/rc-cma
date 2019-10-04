@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { RestaurantService, FinancialService, CMSService } from '../_services';
 import { Restaurant } from '../_models';
-import { TranslateService } from 'ng2-translate';
+import { TranslateService } from '@ngx-translate/core';;
 import { MapDetailComponent } from './map-detail.component';
 import { FinancialViewComponent } from './financial-view.component';
 import { MatSnackBar, MatDialog } from '@angular/material';

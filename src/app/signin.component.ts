@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthenticationService, MemberService } from './_services';
 import { MatSnackBar } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
-import { TranslateService } from 'ng2-translate';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'rc-signin',

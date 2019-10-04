@@ -5,7 +5,7 @@ import { AppConfig } from '../app.config';
 import { ProfileVerifyComponent } from '../members/profile-page/profile-verify.component';
 import { MAT_DIALOG_DATA, MatDialog, MatSnackBar } from '@angular/material';
 import { Http } from '@angular/http';
-import { TranslateService } from 'ng2-translate';
+import { TranslateService } from '@ngx-translate/core';;
 import { HelpService } from '../_services';
 
 @Component({

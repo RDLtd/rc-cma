@@ -4,7 +4,7 @@ import { CMSService, HelpService } from '../_services';
 import { CmsFileUploadComponent } from './cms-file-upload.component';
 import { MatDialog } from '@angular/material';
 import { CMSDescription } from '../_models';
-import { TranslateService } from 'ng2-translate';
+import { TranslateService } from '@ngx-translate/core';;
 
 @Component({
   selector: 'rc-cms-location',

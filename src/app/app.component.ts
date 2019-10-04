@@ -1,5 +1,5 @@
 import { Component, ViewChild, OnInit, ViewEncapsulation } from '@angular/core';
-import { TranslateService } from 'ng2-translate';
+import { TranslateService } from '@ngx-translate/core';;
 import { MatSidenav } from '@angular/material';
 import { AuthenticationService } from './_services';
 import { PageScrollConfig } from 'ng2-page-scroll';

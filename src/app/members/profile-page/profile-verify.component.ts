@@ -3,7 +3,7 @@ import { NgForm } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material';
 import { CMSService } from '../../_services';
 import { CmsLocalService } from '../../cms/cms-local.service';
-import { TranslateService } from 'ng2-translate';
+import { TranslateService } from '@ngx-translate/core';;
 
 @Component({
   selector: 'rc-profile-verify',

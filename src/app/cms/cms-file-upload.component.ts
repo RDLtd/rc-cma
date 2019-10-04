@@ -5,7 +5,7 @@ import { FileUploader, FileUploaderOptions, ParsedResponseHeaders } from 'ng2-fi
 import { AppConfig } from '../app.config';
 import { CMSElement } from '../_models';
 import { CMSService } from '../_services';
-import { TranslateService } from 'ng2-translate';
+import { TranslateService } from '@ngx-translate/core';;
 
 @Component({
   selector: 'rc-cms-file-upload',

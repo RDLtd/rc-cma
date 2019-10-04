@@ -2,7 +2,7 @@ import { Component, ViewChild, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { FinancialService } from '../_services/financial.service';
 import { MatSnackBar } from '@angular/material';
-import { TranslateService } from 'ng2-translate';
+import { TranslateService } from '@ngx-translate/core';;
 import { Financial } from '../_models/financial';
 
 @Component({

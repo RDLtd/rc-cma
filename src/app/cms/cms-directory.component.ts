@@ -9,7 +9,7 @@ import { RestaurantDetailComponent } from '../restaurants/restaurant-detail.comp
 import { NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { AppConfig } from '../app.config';
-import { TranslateService } from 'ng2-translate';
+import { TranslateService } from '@ngx-translate/core';;
 
 @Component({
   selector: 'rc-cms-directory',

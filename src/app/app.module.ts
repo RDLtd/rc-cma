@@ -2,7 +2,7 @@ import 'hammerjs';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpModule, Http } from '@angular/http';
+
 import { RouterModule } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -94,20 +94,21 @@ import { Ng2PageScrollModule } from 'ng2-page-scroll';
 import { AgmCoreModule } from 'angular2-google-maps/core';
 import {
   TranslateModule,
-  TranslateStaticLoader,
   TranslateLoader
-} from 'ng2-translate';
+} from '@ngx-translate/core';
+import { TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { FileUploadModule } from 'ng2-file-upload';
 import { MarkdownModule } from 'angular2-markdown';
 import { ClipboardModule } from 'ngx-clipboard/dist';
 import { AngularMaterialModule } from './angular-material.module';
 import { SigninComponent } from './signin.component';
 import { AffiliatesComponent } from './affiliates/affiliates.component';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
-export function createTranslateLoader(http: Http) {
-  return new TranslateStaticLoader(http, './assets/i18n', '.json');
+// AoT requires an exported function for factories
+export function HttpLoaderFactory(httpClient: HttpClient) {
+  return new TranslateHttpLoader(httpClient, './assets/i18n', '.json');
 }
-
 
 @NgModule({
   declarations: [
@@ -170,16 +171,18 @@ export function createTranslateLoader(http: Http) {
     FormsModule,
     RouterModule,
     ReactiveFormsModule,
-    HttpModule,
+    HttpClientModule,
     FlexLayoutModule,
     routing,
     FileUploadModule,
     ClipboardModule,
     ImageUploadModule.forRoot(),
     TranslateModule.forRoot({
-      provide: TranslateLoader,
-      useFactory: (createTranslateLoader),
-      deps: [Http]
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
     }),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyCji4lOA-nPgICQjFO_4rVyuWKW1jP1Lkc'

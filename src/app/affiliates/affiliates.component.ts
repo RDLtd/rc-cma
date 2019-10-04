@@ -3,7 +3,7 @@ import { HelpService, RestaurantService } from '../_services';
 import {CmsComponent, CmsLocalService} from '../cms';
 import { MatDialog } from '@angular/material';
 import { PaymentComponent } from '../payment/payment.component';
-import { TranslateService } from 'ng2-translate';
+import { TranslateService } from '@ngx-translate/core';;
 
 @Component({
   selector: 'rc-affiliates',

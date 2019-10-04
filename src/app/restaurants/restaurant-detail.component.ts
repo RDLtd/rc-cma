@@ -3,7 +3,7 @@ import { NgForm } from '@angular/forms';
 import { FinancialService } from '../_services';
 import { MatSnackBar } from '@angular/material';
 import { RestaurantService } from '../_services';
-import { TranslateService } from 'ng2-translate';
+import { TranslateService } from '@ngx-translate/core';;
 
 @Component({
   selector: 'rc-restaurant-detail',

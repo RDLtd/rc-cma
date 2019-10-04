@@ -6,7 +6,7 @@ import { AnalyticsService, MemberService } from '../../_services';
 import { MatSnackBar } from '@angular/material';
 import { FileUploader, FileUploaderOptions, ParsedResponseHeaders } from 'ng2-file-upload';
 import { AppConfig } from '../../app.config';
-import { TranslateService } from 'ng2-translate';
+import { TranslateService } from '@ngx-translate/core';;
 
 
 @Component({

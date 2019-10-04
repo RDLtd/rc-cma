@@ -3,7 +3,7 @@ import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/map';
 import { AppConfig } from '../app.config';
-import { TranslateService } from 'ng2-translate';
+import { TranslateService } from '@ngx-translate/core';;
 import { Member } from '../_models';
 import { RestaurantService } from './restaurant.service';
 import { MatSnackBar } from '@angular/material';

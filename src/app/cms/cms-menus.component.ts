@@ -6,7 +6,7 @@ import { CmsFileUploadComponent } from './cms-file-upload.component';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { ConfirmCancelComponent } from '../confirm-cancel/confirm-cancel.component';
 import { CmsMenuDishComponent } from './cms-menu-dish.component';
-import { TranslateService } from 'ng2-translate';
+import { TranslateService } from '@ngx-translate/core';;
 
 @Component({
   selector: 'rc-cms-menus',

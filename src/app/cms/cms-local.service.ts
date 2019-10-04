@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { MatDialog, MatDialogConfig, MatSnackBar } from '@angular/material';
 import { ConfirmCancelComponent } from '../confirm-cancel/confirm-cancel.component';
-import { TranslateService } from 'ng2-translate';
+import { TranslateService } from '@ngx-translate/core';;
 import { AuthenticationService } from '../_services';
 
 @Injectable()

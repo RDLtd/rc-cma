@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CMSService } from '../_services';
 import { CmsLocalService } from './cms-local.service';
-import { TranslateService } from 'ng2-translate';
+import { TranslateService } from '@ngx-translate/core';;
 
 @Component({
   selector: 'rc-cms-image-dialog',

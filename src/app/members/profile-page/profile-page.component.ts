@@ -17,7 +17,7 @@ import { RestaurantLookupComponent, BenchmarkWizardComponent } from '../../resta
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { ConfirmCancelComponent } from '../../confirm-cancel/confirm-cancel.component';
-import { TranslateService } from 'ng2-translate';
+import { TranslateService } from '@ngx-translate/core';;
 
 
 @Component({

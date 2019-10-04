@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { TranslateService } from 'ng2-translate';
+import { TranslateService } from '@ngx-translate/core';;
 import { RestaurantService, MemberService } from '../_services';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
