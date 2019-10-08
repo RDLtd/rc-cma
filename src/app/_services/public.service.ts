@@ -4,6 +4,7 @@ import { AppConfig } from '../app.config';
 import { CMSElement, CMSTime, CMSAttribute, CMSMeal } from '../_models/cms';
 import { Restaurant } from '../_models/restaurant';
 import { SQLParameters } from '../_models/sqlparameters';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 
@@ -15,20 +16,20 @@ export class PublicService {
   getPublicAPIInfo(user_code, api_key) {
     return this.http.post(this.config.apiUrl + '/public/api_info',
       { user_code: user_code, api_key: api_key })
-      .map((response: Response) => response.json());
+      .pipe(map((response: any) => response.json()));
   }
 
   getPublicAPIData(user_code, api_key, start, stop) {
     return this.http.post(this.config.apiUrl + '/public/api_data',
       { user_code: user_code, api_key: api_key, start: start, stop: stop })
-      .map((response: Response) => response.json());
+      .pipe(map((response: any) => response.json()));
   }
 
   // Restaurants
   getPublicRestaurants(user_code, api_key, sql_parameters: SQLParameters) {
     return this.http.post(this.config.apiUrl + '/public/restaurants',
       { user_code: user_code, api_key: api_key, sql_parameters: sql_parameters })
-      .map((response: Response) => response.json());
+      .pipe(map((response: any) => response.json()));
   }
 
   // CMS
@@ -36,37 +37,37 @@ export class PublicService {
     return this.http.post(this.config.apiUrl + '/public/cms/elements',
       { user_code: user_code, api_key: api_key, restaurant_id: restaurant_id,
         cms_element_class: cms_element_class, quality: quality })
-      .map((response: Response) => response.json());
+      .pipe(map((response: any) => response.json()));
   }
 
   getPublicTimes(user_code, api_key, restaurant_id: string) {
     return this.http.post(this.config.apiUrl + '/public/cms/times',
       { user_code: user_code, api_key: api_key, restaurant_id: restaurant_id })
-      .map((response: Response) => response.json());
+      .pipe(map((response: any) => response.json()));
   }
 
   getPublicAttributeTexts(user_code, api_key) {
     return this.http.post(this.config.apiUrl + '/public/cms/attributetexts',
       { user_code: user_code, api_key: api_key })
-      .map((response: Response) => response.json());
+      .pipe(map((response: any) => response.json()));
   }
 
   getPublicAttributes(user_code, api_key, restaurant_id: string) {
     return this.http.post(this.config.apiUrl + '/public/cms/attributes',
       { user_code: user_code, api_key: api_key, restaurant_id: restaurant_id })
-      .map((response: Response) => response.json());
+      .pipe(map((response: any) => response.json()));
   }
 
   getPublicMeals(user_code, api_key, restaurant_id: string) {
     return this.http.post(this.config.apiUrl + '/public/cms/meals',
       { user_code: user_code, api_key: api_key, restaurant_id: restaurant_id })
-      .map((response: Response) => response.json());
+      .pipe(map((response: any) => response.json()));
   }
 
   getPublicDescriptions(user_code, api_key, restaurant_id: string) {
     return this.http.post(this.config.apiUrl + '/public/cms/descriptions',
       { user_code: user_code, api_key: api_key, restaurant_id: restaurant_id })
-      .map((response: Response) => response.json());
+      .pipe(map((response: any) => response.json()));
   }
 
   setPublicCreateUser(user_code, api_key, user_name, user_role, user_telephone, user_email,
@@ -97,13 +98,13 @@ export class PublicService {
         user_activation_email: user_activation_email,
         user_language: user_language
       })
-      .map((response: Response) => response.json());
+      .pipe(map((response: any) => response.json()));
   }
 
   setPublicRegisterAssociate(user_code, api_key, restaurant_number: string) {
     return this.http.post(this.config.apiUrl + '/public/register_associate',
       { user_code: user_code, api_key: api_key, restaurant_number: restaurant_number })
-      .map((response: Response) => response.json());
+      .pipe(map((response: any) => response.json()));
   }
 
 }

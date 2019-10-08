@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
-import { PageScrollInstance, PageScrollService } from 'ng2-page-scroll';
+//import { PageScrollInstance, PageScrollService } from 'ng2-page-scroll';
 import { DOCUMENT } from '@angular/common';
 import { FsLocalService } from '../fs-local.service';
 import { FinancialService } from '../../_services';
@@ -37,7 +37,7 @@ export class FsInputComponent implements OnInit {
   constructor(
     private fsLocalService: FsLocalService,
     private financialService: FinancialService,
-    private pageScrollService: PageScrollService,
+    //private pageScrollService: PageScrollService,
     @Inject(DOCUMENT) private document: any
   ) { }
 
@@ -146,8 +146,8 @@ export class FsInputComponent implements OnInit {
   }
 
   scrollTo(id): void {
-    const pageScrollInstance: PageScrollInstance = PageScrollInstance.simpleInstance(this.document, id);
-    this.pageScrollService.start(pageScrollInstance);
+    //const pageScrollInstance: PageScrollInstance = PageScrollInstance.simpleInstance(this.document, id);
+    //this.pageScrollService.start(pageScrollInstance);
   }
 
 }

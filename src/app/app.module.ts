@@ -90,8 +90,12 @@ import { PwdMatchValidator } from './pwdMatch.validator';
 import { GoogleChartComponent } from './google-chart/google-chart.component';
 
 // packages
-import { ImageUploadModule } from 'angular2-image-upload';
-import { Ng2PageScrollModule } from 'ng2-page-scroll';
+//import { ImageUploadModule } from 'angular2-image-upload';
+//import { Ng2PageScrollModule } from 'ng2-page-scroll';
+
+
+
+
 import { AgmCoreModule } from '@agm/core';
 import {
   TranslateModule,
@@ -105,6 +109,7 @@ import { AngularMaterialModule } from './angular-material.module';
 import { SigninComponent } from './signin.component';
 import { AffiliatesComponent } from './affiliates/affiliates.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+//import { FileSelectDirective } from 'ng2-file-upload';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -177,7 +182,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     routing,
     FileUploadModule,
     ClipboardModule,
-    ImageUploadModule.forRoot(),
+    //ImageUploadModule.forRoot(),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -188,7 +193,6 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyCji4lOA-nPgICQjFO_4rVyuWKW1jP1Lkc'
     }),
-    Ng2PageScrollModule.forRoot(),
     MarkdownModule.forRoot()
   ],
   providers: [

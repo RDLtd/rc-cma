@@ -7,6 +7,7 @@ import { MAT_DIALOG_DATA, MatDialog, MatSnackBar } from '@angular/material';
 import { Http } from '@angular/http';
 import { TranslateService } from '@ngx-translate/core';;
 import { HelpService } from '../_services';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'rc-restaurant-lookup',
@@ -62,7 +63,7 @@ export class RestaurantLookupComponent implements OnInit {
   }
 
   GetCountry () {
-    return this.http.get('https://ipinfo.io').map(res => res.json());
+    return this.http.get('https://ipinfo.io').pipe(map((res: any) => res.json()));
   }
 
   findRestaurants(str) {

@@ -2,7 +2,7 @@ import { Component, ViewChild, OnInit, ViewEncapsulation } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';;
 import { MatSidenav } from '@angular/material';
 import { AuthenticationService } from './_services';
-import { PageScrollConfig } from 'ng2-page-scroll';
+//import { PageScrollConfig } from 'ng2-page-scroll';
 import { Http } from '@angular/http';
 import { AppConfig } from './app.config';
 import { NavigationEnd, Router } from '@angular/router';
@@ -80,16 +80,16 @@ export class AppComponent implements OnInit {
     this.setCompany(this.language);
     this.title = localStorage.getItem('rd_company_name');
 
-    PageScrollConfig.defaultScrollOffset = 64;
-    PageScrollConfig.defaultEasingLogic = {
-      ease: (t: number, b: number, c: number, d: number): number => {
-        // easeInOutExpo easing
-        if (t === 0) return b;
-        if (t === d) return b + c;
-        if ((t /= d / 2) < 1) return c / 2 * Math.pow(2, 10 * (t - 1)) + b;
-        return c / 2 * (-Math.pow(2, -10 * --t) + 2) + b;
-      }
-    };
+    // PageScrollConfig.defaultScrollOffset = 64;
+    // PageScrollConfig.defaultEasingLogic = {
+    //   ease: (t: number, b: number, c: number, d: number): number => {
+    //     // easeInOutExpo easing
+    //     if (t === 0) return b;
+    //     if (t === d) return b + c;
+    //     if ((t /= d / 2) < 1) return c / 2 * Math.pow(2, 10 * (t - 1)) + b;
+    //     return c / 2 * (-Math.pow(2, -10 * --t) + 2) + b;
+    //   }
+    // };
   }
 
   setCompany (country_code) {
