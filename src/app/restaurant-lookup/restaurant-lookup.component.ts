@@ -4,7 +4,7 @@ import { RestaurantService } from '../_services/restaurant.service';
 import { AppConfig } from '../app.config';
 import { ProfileVerifyComponent } from '../members/profile-page/profile-verify.component';
 import { MAT_DIALOG_DATA, MatDialog, MatSnackBar } from '@angular/material';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { TranslateService } from '@ngx-translate/core';;
 import { HelpService } from '../_services';
 import { map } from 'rxjs/operators';
@@ -31,7 +31,7 @@ export class RestaurantLookupComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private   translate: TranslateService,
     private   snackBar: MatSnackBar,
-    private   http: Http
+    private   http: HttpClient
   ) { }
 
   ngOnInit() {
@@ -88,7 +88,7 @@ export class RestaurantLookupComponent implements OnInit {
         .subscribe(
           data => {
             // console.log({data});
-            this.restaurants = data.restaurants;
+            this.restaurants = data['restaurants'];
             if (this.restaurants.length < 1) {
               this.noSearchResults = true;
             } else {

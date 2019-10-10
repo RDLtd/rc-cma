@@ -75,8 +75,8 @@ export class CmsReservationsComponent implements OnInit {
             }
             this.restaurantService.getBookings(country_code, '').subscribe(
               booking_data => {
-                if (booking_data.count > 0) {
-                  this.booking_options = booking_data.booking_options;
+                if (booking_data['count'] > 0) {
+                  this.booking_options = booking_data['booking_options'];
                   console.log(this.booking_options);
                 } else {
                   console.log('No booking option records found in database');
@@ -117,7 +117,7 @@ export class CmsReservationsComponent implements OnInit {
     this.cms.getDescriptions(this.restaurant.restaurant_id)
       .subscribe(
         data => {
-          this.descriptions = data.descriptions[0];
+          this.descriptions = data['descriptions'][0];
           // update 041118 - fudge to fix back end returning (or something returning) 'undefined'
           if (this.descriptions.cms_description_reservation_info === 'undefined') {
             this.descriptions.cms_description_reservation_info = '';

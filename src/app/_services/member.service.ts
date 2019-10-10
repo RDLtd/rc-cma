@@ -1,24 +1,22 @@
 ﻿import { Injectable } from '@angular/core';
-import { Http, Headers, RequestOptions, Response } from '@angular/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { AppConfig } from '../app.config';
-import { Member } from '../_models/index';
-import { map } from 'rxjs/operators';
+import { Member } from '../_models';
 
 @Injectable()
 
 export class MemberService {
 
   constructor(
-    private http: Http,
-    private config: AppConfig) { }
-
+    private http: HttpClient,
+    private config: AppConfig) {}
 
   getAll() {
     return this.http.post(this.config.apiUrl + '/members',
       {
         userCode: this.config.userAPICode,
         token: this.jwt()
-      }).pipe(map((response: any) => response.json()));
+      });
   }
 
   getByAccessID(access_id: string) {
@@ -27,7 +25,7 @@ export class MemberService {
         access_id: access_id,
         userCode: this.config.userAPICode,
         token: this.jwt()
-      }).pipe(map((response: any) => response.json()));
+      });
   }
 
   getById(member_id: string) {
@@ -36,7 +34,7 @@ export class MemberService {
         member_id: member_id,
         userCode: this.config.userAPICode,
         token: this.jwt()
-      }).pipe(map((response: any) => response.json()));
+      });
   }
 
   getDashboardData() {
@@ -44,7 +42,7 @@ export class MemberService {
       {
         userCode: this.config.userAPICode,
         token: this.jwt()
-      }).pipe(map((response: any) => response.json()));
+      });
   }
 
   create(member: Member) {
@@ -53,7 +51,7 @@ export class MemberService {
         member: member,
         userCode: this.config.userAPICode,
         token: this.jwt()
-      }).pipe(map((response: any) => response.json()));
+      });
   }
 
   createAdministrator(administrator: any) {
@@ -62,7 +60,7 @@ export class MemberService {
         administrator: administrator,
         userCode: this.config.userAPICode,
         token: this.jwt()
-      }).pipe(map((response: any) => response.json()));
+      });
   }
 
   update(member: Member) {
@@ -71,8 +69,7 @@ export class MemberService {
         member: member,
         userCode: this.config.userAPICode,
         token: this.jwt()
-      })
-      .pipe(map((response: any) => response.json()));
+      });
   }
 
   updateAdministrator(administrator: any) {
@@ -81,8 +78,7 @@ export class MemberService {
         administrator: administrator,
         userCode: this.config.userAPICode,
         token: this.jwt()
-      })
-      .pipe(map((response: any) => response.json()));
+      });
   }
 
   delete(member_id: string) {
@@ -91,7 +87,7 @@ export class MemberService {
         member_id: member_id,
         userCode: this.config.userAPICode,
         token: this.jwt()
-      }).pipe(map((response: any) => response.json()));
+      });
   }
 
   sendemail(emailAddress, emailSubject, emailBody) {
@@ -102,7 +98,7 @@ export class MemberService {
         emailBody: emailBody,
         userCode: this.config.userAPICode,
         token: this.jwt()
-      }).pipe(map((response: any) => response.json()));
+      });
   }
 
   sendwelcomeemail(member_id, restaurant_name, restaurant_number) {
@@ -113,7 +109,7 @@ export class MemberService {
         restaurant_number: restaurant_number,
         userCode: this.config.userAPICode,
         token: this.jwt()
-      }).pipe(map((response: any) => response.json()));
+      });
   }
 
   sendwelcomersvpemail(member_id, restaurant_name, restaurant_number, member_class) {
@@ -125,7 +121,7 @@ export class MemberService {
         member_class: member_class,
         userCode: this.config.userAPICode,
         token: this.jwt()
-      }).pipe(map((response: any) => response.json()));
+      });
   }
 
   sendrequestemail(member_id, restaurant_name, restaurant_number) {
@@ -136,7 +132,7 @@ export class MemberService {
         restaurant_number: restaurant_number,
         userCode: this.config.userAPICode,
         token: this.jwt()
-      }).pipe(map((response: any) => response.json()));
+      });
   }
 
   sendInfoEmail(member_id, restaurant_name, restaurant_number, agent_fullname) {
@@ -148,7 +144,7 @@ export class MemberService {
         agent_fullname: agent_fullname,
         userCode: this.config.userAPICode,
         token: this.jwt()
-      }).pipe(map((response: any) => response.json()));
+      });
   }
 
   sendrecoveryemail(member_email) {
@@ -157,7 +153,7 @@ export class MemberService {
         member_email: member_email,
         userCode: this.config.userAPICode,
         token: this.jwt()
-      }).pipe(map((response: any) => response.json()));
+      });
   }
 
   sendIntroEmail(restaurant_name: string, restaurant_email: string, restaurant_activation_code: string) {
@@ -168,7 +164,7 @@ export class MemberService {
         restaurant_activation_code: restaurant_activation_code,
         userCode: this.config.userAPICode,
         token: this.jwt()
-      }).pipe(map((response: any) => response.json()));
+      });
   }
 
   login(memberemail: string, memberpassword: string) {
@@ -178,7 +174,7 @@ export class MemberService {
         password: memberpassword,
         userCode: this.config.userAPICode,
         token: this.jwt()
-      }).pipe(map((response: any) => response.json()));
+      });
   }
 
   password(memberid: string, memberpassword: string) {
@@ -188,7 +184,7 @@ export class MemberService {
         member_password: memberpassword,
         userCode: this.config.userAPICode,
         token: this.jwt()
-      }).pipe(map((response: any) => response.json()));
+      });
   }
 
   recordlogin(memberid: string) {
@@ -197,7 +193,7 @@ export class MemberService {
         member_id: memberid,
         userCode: this.config.userAPICode,
         token: this.jwt()
-      }).pipe(map((response: any) => response.json()));
+      });
   }
 
   messagesseen(memberid: string) {
@@ -206,7 +202,7 @@ export class MemberService {
         member_id: memberid,
         userCode: this.config.userAPICode,
         token: this.jwt()
-      }).pipe(map((response: any) => response.json()));
+      });
   }
 
   messages(memberaccesslevel: string, membermessageseen: string) {
@@ -216,7 +212,7 @@ export class MemberService {
         member_messages_seen: membermessageseen,
         userCode: this.config.userAPICode,
         token: this.jwt()
-      }).pipe(map((response: any) => response.json()));
+      });
   }
 
   loggedin() {
@@ -224,7 +220,7 @@ export class MemberService {
       {
         userCode: this.config.userAPICode,
         token: this.jwt()
-      }).pipe(map((response: any) => response.json()));
+      });
   }
 
   setverified(memberid: string, membertoken: string) {
@@ -234,7 +230,7 @@ export class MemberService {
         member_token: membertoken,
         userCode: this.config.userAPICode,
         token: this.jwt()
-      }).pipe(map((response: any) => response.json()));
+      });
   }
 
   getTransactions() {
@@ -242,7 +238,7 @@ export class MemberService {
       {
         userCode: this.config.userAPICode,
         token: this.jwt()
-      }).pipe(map((response: any) => response.json()));
+      });
   }
   //
   // readAvatar(memberid: string) {
@@ -271,7 +267,7 @@ export class MemberService {
         member_image_path: imageURL,
         userCode: this.config.userAPICode,
         token: this.jwt()
-      }).pipe(map((response: any) => response.json()));
+      });
   }
 
   deleteAvatar(memberid: string) {
@@ -280,28 +276,26 @@ export class MemberService {
         member_id: memberid,
         userCode: this.config.userAPICode,
         token: this.jwt()
-      }).pipe(map((response: any) => response.json()));
+      });
   }
 
-  // generate token
+  // Generate Token
   private jwt() {
     // create authorization header with jwt token
-    const token = localStorage.getItem('rd_token');
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
-    if (token) {
-      const headers = new Headers({
-        'Authorization': 'Bearer ' + token ,
-        'apiCategory': 'Member'
-      });
-      return new RequestOptions({ headers: headers });
+    const requestOptions = {
+      params: new HttpParams()
+    };
+    requestOptions.params.set('foo', 'bar');
+    requestOptions.params.set('apiCategory', 'Financial');
+
+    if (currentUser && currentUser.token) {
+      requestOptions.params.set('Authorization', 'Bearer ' + currentUser.token);
     } else {
-      // if there is no user, then we must invent a token
-      const headers = new Headers({
-        'Authorization': 'Bearer ' + '234242423wdfsdvdsfsdrfg34tdfverge' ,
-        'apiCategory': 'Member'
-      });
-      return new RequestOptions({ headers: headers });
+      requestOptions.params.set('Authorization', 'Bearer ' + '234242423wdfsdvdsfsdrfg34tdfverge');
     }
+    return requestOptions;
   }
 
   dbconfig() {
@@ -309,7 +303,7 @@ export class MemberService {
       {
         userCode: this.config.userAPICode,
         token: this.jwt()
-      }).pipe(map((response: any) => response.json()));
+      });
   }
 
   getMailChimpInfo(listID: string) {
@@ -318,7 +312,7 @@ export class MemberService {
         listID: listID,
         userCode: this.config.userAPICode,
         token: this.jwt()
-      }).pipe(map((response: any) => response.json()));
+      });
   }
 
   addMailChimpMember(listID: string, memberinfo) {
@@ -328,7 +322,7 @@ export class MemberService {
         memberinfo: memberinfo,
         userCode: this.config.userAPICode,
         token: this.jwt()
-      }).pipe(map((response: any) => response.json()));
+      });
   }
 
   deleteMailChimpMember(listID: string, memberID: string) {
@@ -338,7 +332,7 @@ export class MemberService {
         memberID: memberID,
         userCode: this.config.userAPICode,
         token: this.jwt()
-      }).pipe(map((response: any) => response.json()));
+      });
   }
 
   getMailChimpListMembers(listID: string) {
@@ -347,7 +341,7 @@ export class MemberService {
         listID: listID,
         userCode: this.config.userAPICode,
         token: this.jwt()
-      }).pipe(map((response: any) => response.json()));
+      });
   }
 
   getMailChimpMemberActivity(listID: string, memberID: string) {
@@ -357,7 +351,7 @@ export class MemberService {
         memberID: memberID,
         userCode: this.config.userAPICode,
         token: this.jwt()
-      }).pipe(map((response: any) => response.json()));
+      });
   }
 
   getHistory(restaurant_number: string) {
@@ -366,7 +360,7 @@ export class MemberService {
         restaurant_number: restaurant_number,
         userCode: this.config.userAPICode,
         token: this.jwt()
-      }).pipe(map((response: any) => response.json()));
+      });
   }
 
   addHistory(restaurant_number: string, activity: string, title: string, timestamp: string) {
@@ -378,7 +372,7 @@ export class MemberService {
         timestamp: timestamp,
         userCode: this.config.userAPICode,
         token: this.jwt()
-      }).pipe(map((response: any) => response.json()));
+      });
   }
 
   getCountry(country_locale: string) {
@@ -387,18 +381,16 @@ export class MemberService {
         country_locale: country_locale,
         userCode: this.config.userAPICode,
         token: this.jwt()
-      }).pipe(map((response: any) => response.json()));
+      });
   }
 
   getCountryByIP () {
-    return this.http.get('https://ipinfo.io?token=b3a0582a14c7a4')
-      .pipe(map((response: any) => response.json()));;
+    return this.http.get('https://ipinfo.io?token=b3a0582a14c7a4');
   }
 
   getLoginEmail(login_email: string) {
     return this.http.post(this.config.apiUrl + '/members/getloginemail',
-      { login_email: login_email, userCode: this.config.userAPICode, token: this.jwt() })
-      .pipe(map((response: any) => response.json()));
+      { login_email: login_email, userCode: this.config.userAPICode, token: this.jwt()});
   }
 
 }

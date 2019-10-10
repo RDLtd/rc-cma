@@ -167,7 +167,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
         // console.log('Check CMS status', res);
 
         // Set up content info panel
-        switch (res.status) {
+        switch (res['status']) {
           // No preview available
           case 'INSUFFICIENT_DATA': {
             this.cmsChanged = true;
@@ -179,16 +179,16 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
           case 'OUT_OF_DATE': {
             this.cmsChanged = true;
             this.cmsHasSufficientData = true;
-            this.publishDate = new Date(res.published);
-            this.productionUrl = res.url;
+            this.publishDate = new Date(res['published']);
+            this.productionUrl = res['url'];
             break;
           }
           // Show published version
           default: {
             this.cmsHasSufficientData = true;
             this.cmsChanged = false;
-            this.publishDate = new Date(res.published);
-            this.productionUrl = res.url;
+            this.publishDate = new Date(res['published']);
+            this.productionUrl = res['url'];
           }
         }
         this.isPreviewing = false;
@@ -213,9 +213,9 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
     this.cms.getTimes(this.restaurant.restaurant_id)
       .subscribe(data => {
         // console.log('DATA', data);
-        let i = data.times.length;
+        let i = data['times'].length;
         while (i--) {
-          if (!data.times[i].closed) {
+          if (!data['times'][i].closed) {
             this.hours_count += 1;
           }
         }
@@ -238,7 +238,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
     this.cms.getDescriptions(this.restaurant.restaurant_id)
       .subscribe(
         data => {
-          this.descriptions = data.descriptions[0];
+          this.descriptions = data['descriptions'][0];
           console.log('Descriptions loaded:', data);
           this.setCoreStatus();
           this.checkFeatures();
@@ -291,9 +291,9 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
           // reset counts
           this.img_status = 0;
           this.img_count = 0;
-          let i = data.elements.length, elem, imgsrc;
+          let i = data['elements'].length, elem, imgsrc;
           while (i--) {
-            elem = data.elements[i];
+            elem = data['elements'][i];
             if (elem.cms_element_active) { this.img_count += 1; }
             // Store default image path for restaurant card
             if (elem.cms_element_default) {
@@ -314,8 +314,8 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
 
           // TODO: no image specific updated date
 
-          if (data.elements.length) {
-            new Date(data.elements[data.elements.length - 1].cms_element_last_update);
+          if (data['elements'].length) {
+            new Date(data['elements'][data['elements'].length - 1].cms_element_last_update);
           }
         },
         error => console.log(error + ' R ' + this.restaurant.restaurant_id));
@@ -328,9 +328,9 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
     this.cms.getDishes(Number(this.restaurant.restaurant_id)).subscribe(
       data => {
         // console.log('Dishes', data);
-        if (data.count) {
+        if (data['count']) {
           this.mnu_status += 33.5;
-          this.mnu_dish_count = data.count;
+          this.mnu_dish_count = data['count'];
         }
         this.checkPdfMenus();
       },
@@ -346,10 +346,10 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
         // console.log('pdfs', menuData);
         // reset status
         this.mnu_count = 0;
-        let i = menuData.count;
+        let i = menuData['count'];
 
         while (i--) {
-          if (menuData.elements[i].cms_element_active) {
+          if (menuData['elements'][i].cms_element_active) {
             this.mnu_count += 1;
           }
         }
@@ -364,8 +364,8 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
         }
         // get the last update date of last array element
 
-        if (menuData.elements.length) {
-          this.mnu_date = new Date(menuData.elements[menuData.count - 1].cms_element_last_update);
+        if (menuData['elements'].length) {
+          this.mnu_date = new Date(menuData['elements'][menuData['count'] - 1].cms_element_last_update);
         }
 
         // set status text
@@ -447,7 +447,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
         res => {
           // console.log('Offers ', res);
 
-          this.offerCount = res.offers.length;
+          this.offerCount = res['offers'].length;
 
           if (this.offerCount > 0) {
 
@@ -458,14 +458,14 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
               .subscribe(
                 data => {
 
-                  if (data.latestaccess[0].max) {
+                  if (data['latestaccess'][0].max) {
                     // Only count offers that are more
                     // recent than the latest view access time
 
                     this.offerInBox = 0;
 
                     for (let i = 0; i < this.offerCount; i++) {
-                      if (res.offers[i].offer_marketing_date > data.latestaccess[0].max) {
+                      if (res['offers'][i].offer_marketing_date > data['latestaccess'][0].max) {
                         this.offerInBox += 1;
                       }
                     }
@@ -524,11 +524,11 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
         this.isPreviewing = true;
         this.cms.previewSPW(this.restaurant.restaurant_id, this.restaurant.restaurant_number, true, false)
           .subscribe(res => {
-              if (res.status === 'OK') {
+              if (res['status'] === 'OK') {
                 // console.log('Publish success:', res);
-                this.productionUrl = res.url;
+                this.productionUrl = res['url'];
                 this.cmsChanged = false;
-                this.publishDate = new Date(res.published);
+                this.publishDate = new Date(res['published']);
                 this.verifyData();
                 this.isPreviewing = false;
                 // record event
@@ -679,7 +679,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
   dspUnreadMessages() {
 
     this.memberService.messages(this.user.member_access_level, this.user.member_messages_seen)
-      .subscribe(msgs => {
+      .subscribe((msgs: any) => {
 
         console.log('MSGS:', msgs);
 

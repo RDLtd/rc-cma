@@ -66,7 +66,7 @@ export class CmsMenusComponent implements OnInit {
     this.cms.getDescriptions(id)
       .subscribe(
         data => {
-          this.descriptions = data.descriptions[0];
+          this.descriptions = data['descriptions'][0];
         },
         error => {
           console.log(error);
@@ -106,8 +106,8 @@ export class CmsMenusComponent implements OnInit {
       .subscribe(data => {
         // console.log('Sections Data:', data);
 
-        if (data.count > 0) {
-          let ds = data.sectionrecord[0];
+        if (data['count'] > 0) {
+          let ds = data['sectionrecord'][0];
           this.htmlMenu.section_id = ds.cms_section_id;
           this.htmlMenu.sections = [
               { id: 1, label: ds.cms_section_desc_1 },
@@ -137,7 +137,7 @@ export class CmsMenusComponent implements OnInit {
           this.cms.createSection(cmssection).subscribe(
             data => {
               console.log('create cms section', data);
-              this.htmlMenu.section_id = data.cms_section_id;
+              this.htmlMenu.section_id = data['cms_section_id'];
               // console.log('section data updated in database');
             },
             error => {
@@ -179,8 +179,8 @@ export class CmsMenusComponent implements OnInit {
     this.cms.getDishes(id).subscribe(
       data => {
         // console.log('Dishes', data);
-        if (data.count) {
-          this.htmlMenu.dishes = data.dishes;
+        if (data['count']) {
+          this.htmlMenu.dishes = data['dishes'];
           // console.log('Loaded Dishes', this.htmlMenu.dishes);
           this.setDishReference();
         } else {
@@ -319,7 +319,7 @@ export class CmsMenusComponent implements OnInit {
             // console.log('Pushed', this.htmlMenu.dishes);
 
             // Add returned id to new dish in local array
-            this.htmlMenu.dishes[len - 1]['cms_dish_id'] = res.cms_dish_id;
+            this.htmlMenu.dishes[len - 1]['cms_dish_id'] = res['cms_dish_id'];
             this.cmsLocalService.dpsSnackbar(this.htmlMenu.dishes[len - 1].name + this.t_data.Added, null, 3);
           },
           error => {
@@ -371,7 +371,7 @@ export class CmsMenusComponent implements OnInit {
     this.cms.getElementClass(this.restaurant.restaurant_id, 'Menu', 'N').subscribe(
       data => {
         this.showLoader = false;
-        this.menus = data.elements;
+        this.menus = data['elements'];
       },
       error => {
         console.log(error);

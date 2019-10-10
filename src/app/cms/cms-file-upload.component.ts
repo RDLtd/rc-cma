@@ -1,5 +1,5 @@
 import { Component, Inject, NgZone, OnInit, ViewChild } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { FileUploader, FileUploaderOptions, ParsedResponseHeaders } from 'ng2-file-upload';
 import { AppConfig } from '../app.config';
@@ -34,7 +34,7 @@ export class CmsFileUploadComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private config: AppConfig,
     private zone: NgZone,
-    private http: Http,
+    private http: HttpClient,
     private translate: TranslateService,
     private cms: CMSService
   ) {}
@@ -203,7 +203,7 @@ export class CmsFileUploadComponent implements OnInit {
 
     this.cms.createElement(e).subscribe(
       data => {
-        e.cms_element_id = data.cms_element_id;
+        e.cms_element_id = data['cms_element_id'];
         this.data.tgtObject.push(e);
 
         // if user wants to make it their default image

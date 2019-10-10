@@ -74,12 +74,13 @@ export class MemberDetailComponent implements OnInit {
       .subscribe(
         data => {
 
-          if (data.restaurants.length > 0) {
+          if (data['restaurants'].length > 0) {
 
-            this.associated_restaurants = data.restaurants;
+            this.associated_restaurants = data['restaurants'];
 
             this.openSnackBar(
-              `${data.restaurants.length} restaurants found for ${this.member.member_first_name} ${this.member.member_last_name}`, '');
+              `${data['restaurants'].length} restaurants found for ${this.member.member_first_name}' +
+              ' ${this.member.member_last_name}`, '');
 
 
             //

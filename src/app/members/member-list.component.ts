@@ -33,7 +33,7 @@ export class MemberListComponent implements OnInit {
 
   private loadAllMembers() {
     this.memberService.getAll().subscribe(data => {
-      this.members = data.members;
+      this.members = data['members'];
       // save a full copy so that we can simply use this array from which to filter (don't need to read the database again)
       this.allMembers = this.members.slice();
       // console.log(JSON.stringify(data));
@@ -42,7 +42,7 @@ export class MemberListComponent implements OnInit {
 
   private loadSomeMembers(access_id) {
     this.memberService.getByAccessID(access_id).subscribe(data => {
-      this.members = data.members;
+      this.members = data['members'];
     });
   }
 

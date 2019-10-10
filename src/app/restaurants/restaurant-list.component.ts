@@ -63,7 +63,7 @@ export class RestaurantListComponent implements OnInit {
     this.restaurantService.getSubset(this.sql_parameters)
       .subscribe(
         data => {
-          this.restaurants = data.restaurants;
+          this.restaurants = data['restaurants'];
         },
         error => {
           this.openSnackBar('There was an error trying to access the restaurant database', '');
@@ -118,10 +118,10 @@ export class RestaurantListComponent implements OnInit {
           // console.log(JSON.stringify(data), data.restaurants.length);
           // TODO now need to decide what to do with the data...
 
-          this.restaurants = data.restaurants;
+          this.restaurants = data['restaurants'];
 
-          if (data.restaurants.length > 0) {
-            this.openSnackBar(data.restaurants.length + ' restaurants found - first is ' + data.restaurants[0].restaurant_name, '');
+          if (this.restaurants.length > 0) {
+            this.openSnackBar(this.restaurants.length + ' restaurants found - first is ' + this.restaurants[0].restaurant_name, '');
           } else {
             this.openSnackBar('No restaurants found', '');
           }

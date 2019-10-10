@@ -72,11 +72,11 @@ export class SigninComponent implements OnInit {
 
           this.isSubmitting = false;
 
-          this.authService.setMember(authResult.member);
+          this.authService.setMember(authResult['member']);
 
-          if (authResult && authResult.token) {
+          if (authResult && authResult['token']) {
             // console.log('Auth OK');
-            this.authService.setAuthSession(authResult.member, authResult.token, this.dbOffline);
+            this.authService.setAuthSession(authResult['member'], authResult['token'], this.dbOffline);
           } else {
             // console.log('Auth Failed');
           }
@@ -100,7 +100,7 @@ export class SigninComponent implements OnInit {
     this.memberService.sendrecoveryemail(formValue.email).subscribe(
       data => {
         console.log(data);
-        if (data.status === 'OK') {
+        if (data['status'] === 'OK') {
           this.openSnackBar(this.t_data.NewPassword);
           this.pwdReset = false;
         } else {

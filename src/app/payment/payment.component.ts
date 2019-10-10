@@ -142,7 +142,7 @@ export class PaymentComponent implements OnInit  {
                 //      payment_reference
                 //      card_type
                 //      card_last4
-                this.createInvoice(restaurant_id, data.invoice_number, this.p_amount_no_vat / 100,
+                this.createInvoice(restaurant_id, data['invoice_number'], this.p_amount_no_vat / 100,
                   'GBP', this.p_description, token);
                 // send a welcome if this was triggered by an agent
                 if (this.agent) {

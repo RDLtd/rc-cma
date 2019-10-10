@@ -145,7 +145,7 @@ export class FsGraphComponent implements OnInit {
               .subscribe(
                 fdata => {
                   // console.log(JSON.stringify(fdata), fdata.financials.length);
-                  if (fdata.financials.length > 0) {
+                  if (fdata['financials'].length > 0) {
                     have_financial_data = true;
                     // set a field in the restaurant record for convenience
                     this.restaurants[i].financial_data = true;
@@ -276,26 +276,26 @@ export class FsGraphComponent implements OnInit {
       .subscribe(
         data => {
           // console.log(JSON.stringify(data), data.financials.length);
-          if (data.financials.length > 0) {
-            this.benchmarks = data.financials;
-            // make another copy so we don't need to re-read the database
-            this.fullbenchmarks = this.benchmarks.slice();
-            // console.log(this.fullbenchmarks.length);
-            // might need to remove this restaurant from the list
-            if (!this.include_restaurant) {
-              this.benchmarks.length = 0;
-              for (let j = 1; j < this.fullbenchmarks.length; j++) {
-                if (this.fullbenchmarks[j].restaurant_id !== this.restaurants[this.benchmark_index].restaurant_id) {
-                  this.benchmarks.push(this.fullbenchmarks[j]);
-                }
-              }
-            }
-            this.benchmarks_length = this.benchmarks.length;
-            this.countRestaurants();
-            this.showData();
-          } else {
-            this.benchmarks.length = 0;
-          }
+          // if (data.financials.length > 0) {
+          //   this.benchmarks = data.financials;
+          //   // make another copy so we don't need to re-read the database
+          //   this.fullbenchmarks = this.benchmarks.slice();
+          //   // console.log(this.fullbenchmarks.length);
+          //   // might need to remove this restaurant from the list
+          //   if (!this.include_restaurant) {
+          //     this.benchmarks.length = 0;
+          //     for (let j = 1; j < this.fullbenchmarks.length; j++) {
+          //       if (this.fullbenchmarks[j].restaurant_id !== this.restaurants[this.benchmark_index].restaurant_id) {
+          //         this.benchmarks.push(this.fullbenchmarks[j]);
+          //       }
+          //     }
+          //   }
+          //   this.benchmarks_length = this.benchmarks.length;
+          //   this.countRestaurants();
+          //   this.showData();
+          // } else {
+          //   this.benchmarks.length = 0;
+          // }
         },
         error => {
           this.translate.get('Financial.Error').subscribe(
@@ -641,11 +641,11 @@ export class FsGraphComponent implements OnInit {
         this.financialService.getForRestaurant(this.plotRestaurants[i].restaurant_id)
           .subscribe(
             data => {
-              if (data.financials.length > 0) {
-                for (let j = 0; j < data.financials.length; j++) {
+              if (data['financials'].length > 0) {
+                for (let j = 0; j < data['financials'].length; j++) {
                   this.financials.push( {
                     'name': this.plotRestaurants[i].restaurant_name,
-                    'data': data.financials[j] });
+                    'data': data['financials'][j] });
                 }
                 if (i === this.plotRestaurants.length - 1) {
                   // have all the data now, so can proceed to assemble plot

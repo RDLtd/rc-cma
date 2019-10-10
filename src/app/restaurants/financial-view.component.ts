@@ -3,7 +3,7 @@ import { NgForm } from '@angular/forms';
 import { FinancialService } from '../_services/financial.service';
 import { MatSnackBar, MatDialog } from '@angular/material';
 import { TranslateService } from '@ngx-translate/core';;
-import { Financial } from '../_models/financial';
+//import { Financial } from '../_models/financial';
 import { FinancialDetailComponent } from './financial-detail.component';
 import { BenchmarkComponent } from './benchmark.component';
 
@@ -158,10 +158,10 @@ export class FinancialViewComponent implements OnInit {
       .subscribe(
         data => {
           // console.log(JSON.stringify(data), data.financials.length);
-          if (data.financials.length > 0) {
+          if (data['financials'].length > 0) {
             this.translate.get('Financial.RecordsFoundFor').subscribe(
               value => { this.t_string = value; });
-            this.financials = data.financials;
+            this.financials = data['financials'];
             this.financialslength = this.financials.length;
             this.setGraphData('B');
             // this.openSnackBar(data.financials.length + ' ' + this.t_string + ' ' + this.restaurant.restaurant_name, '');

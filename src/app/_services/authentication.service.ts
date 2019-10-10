@@ -1,7 +1,6 @@
 ﻿import { Injectable } from '@angular/core';
-import { Http, Headers, RequestOptions, Response } from '@angular/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Subject } from 'rxjs/Subject';
-import 'rxjs/add/operator/map';
 import { AppConfig } from '../app.config';
 import { TranslateService } from '@ngx-translate/core';;
 import { Member } from '../_models';
@@ -26,7 +25,7 @@ export class AuthenticationService {
     private restaurantService: RestaurantService,
     public snackBar: MatSnackBar,
     private router: Router,
-    private http: Http,
+    private http: HttpClient,
     private translate: TranslateService,
     private config: AppConfig) {
 
@@ -41,8 +40,7 @@ export class AuthenticationService {
         userCode: 'RDL-dev',
         token: this.jwt()
 
-      })
-      .map((response: Response) => response.json());
+      });
   }
 
   public setMember(member: Member) {
@@ -99,9 +97,9 @@ export class AuthenticationService {
           this.restaurantService.getCurationZoneSet(member.member_id)
             .subscribe(
               data => {
-                this.curation_zone_set = data.curation_zone_set;
+                this.curation_zone_set = data['curation_zone_set'];
                 // need to check that there are actually some data!
-                if (data.curation_zone_set.length > 0) {
+                if (data['curation_zone_set'].length > 0) {
                   // default is to take the first item on the list - should never be more than 1
                   // but this does not really matter, since the others will be loaded into the dropdown
                   localStorage.setItem('rd_home', '/curationzone/' + this.curation_zone_set[0].curation_id);
@@ -130,8 +128,8 @@ export class AuthenticationService {
           this.restaurantService.getMemberRestaurants(member.member_id)
             .subscribe(
               data => {
-                if (data.count > 0) {
-                  localStorage.setItem('rd_home', `restaurants/${data.restaurants[0].restaurant_id}/cms/dashboard`);
+                if (data['count'] > 0) {
+                  localStorage.setItem('rd_home', `restaurants/${data['restaurants'][0].restaurant_id}/cms/dashboard`);
                 } else {
                   localStorage.setItem('rd_home', '/profile');
                 }
@@ -308,23 +306,52 @@ export class AuthenticationService {
   }
 
   // generate token
-  private jwt(): RequestOptions {
+  private jwt(): any {
     // create authorization header with jwt token
-    const token = localStorage.getItem('rd_token');
-    if (token) {
-      const headers = new Headers({
-        'Authorization': 'Bearer ' + token ,
-        'apiCategory': 'Authenticate'
-      });
-      return new RequestOptions({ headers: headers });
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+
+    const requestOptions = {
+      params: new HttpParams()
+    };
+    requestOptions.params.set('foo', 'bar');
+    requestOptions.params.set('apiCategory', 'Financial');
+
+    //this.http.get(environment.api+ '.feed.json', requestOptions );
+
+    if (currentUser && currentUser.token) {
+      // const headers = new Headers({
+      //   'Authorization': 'Bearer ' + currentUser.token,
+      //   'apiCategory': 'Financial'
+      // });
+      // return new RequestOptions({ headers: headers });
+      requestOptions.params.set('Authorization', 'Bearer ' + currentUser.token);
     } else {
       // if there is no user, then we must invent a token
-      const headers = new Headers({
-        'Authorization': 'Bearer ' + '234242423wdfsdvdsfsdrfg34tdfverge' ,
-        'apiCategory': 'Authenticate'
-      });
-      return new RequestOptions({ headers: headers });
+      // const headers = new Headers({
+      //   'Authorization': 'Bearer ' + '234242423wdfsdvdsfsdrfg34tdfverge',
+      //   'apiCategory': 'Financial'
+      // });
+      // return new RequestOptions({ headers: headers });
+      requestOptions.params.set('Authorization', 'Bearer ' + '234242423wdfsdvdsfsdrfg34tdfverge');
     }
+    return requestOptions;
+
+    // // create authorization header with jwt token
+    // const token = localStorage.getItem('rd_token');
+    // if (token) {
+    //   const headers = new Headers({
+    //     'Authorization': 'Bearer ' + token ,
+    //     'apiCategory': 'Authenticate'
+    //   });
+    //   return new RequestOptions({ headers: headers });
+    // } else {
+    //   // if there is no user, then we must invent a token
+    //   const headers = new Headers({
+    //     'Authorization': 'Bearer ' + '234242423wdfsdvdsfsdrfg34tdfverge' ,
+    //     'apiCategory': 'Authenticate'
+    //   });
+    //   return new RequestOptions({ headers: headers });
+    //}
   }
 
   openSnackBar(message: string, action: string) {

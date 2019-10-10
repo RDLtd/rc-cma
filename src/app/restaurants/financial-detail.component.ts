@@ -3,7 +3,7 @@ import { NgForm } from '@angular/forms';
 import { FinancialService } from '../_services/financial.service';
 import { MatSnackBar } from '@angular/material';
 import { TranslateService } from '@ngx-translate/core';;
-import { Financial } from '../_models/financial';
+//import { Financial } from '../_models/financial';
 
 @Component({
   selector: 'rc-financial-detail',

@@ -65,11 +65,11 @@ export class CmsFeaturesComponent implements OnInit {
   getFeatures(): void {
     this.cms.getAttributes(this.restaurant.restaurant_id)
       .subscribe(data => {
-        this.features = data.attributes;
+        this.features = data['attributes'];
         // need to check for null before checking length
-        if (data.additional) {
-          if (data.additional.length) {
-            this.keywords = data.additional.split(',');
+        if (data['additional']) {
+          if (data['additional'].length) {
+            this.keywords = data['additional'].split(',');
           }
         }
       },
@@ -82,7 +82,7 @@ export class CmsFeaturesComponent implements OnInit {
     this.cms.getDescriptions(this.restaurant.restaurant_id)
       .subscribe(
       data => {
-        this.descriptions = data.descriptions[0];
+        this.descriptions = data['descriptions'][0];
         // console.log('Descriptions loaded:', this.descriptions);
       },
       error => {

@@ -94,8 +94,6 @@ import { GoogleChartComponent } from './google-chart/google-chart.component';
 //import { Ng2PageScrollModule } from 'ng2-page-scroll';
 
 
-
-
 import { AgmCoreModule } from '@agm/core';
 import {
   TranslateModule,
@@ -108,8 +106,7 @@ import { ClipboardModule } from 'ngx-clipboard/dist';
 import { AngularMaterialModule } from './angular-material.module';
 import { SigninComponent } from './signin.component';
 import { AffiliatesComponent } from './affiliates/affiliates.component';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-//import { FileSelectDirective } from 'ng2-file-upload';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {

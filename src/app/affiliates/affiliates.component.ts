@@ -62,11 +62,11 @@ export class AffiliatesComponent implements OnInit, OnDestroy {
     this.restaurantService.getPartners()
       .subscribe(
         partners => {
-          let len = partners.partners.length, p, i;
+          let len = partners['partners'].length, p, i;
           for (i = 0; i < len; i++) {
             // only load partners for which there is an offer
             // down the road might want to only load one that is valid?
-            p = partners.partners[i];
+            p = partners['partners'][i];
             if (p.offer_partner_id) {
               this.affiliates.push(p);
             }

@@ -55,7 +55,7 @@ export class CmsHoursComponent implements OnInit {
     this.cms.getTimes(this.restaurant.restaurant_id).subscribe(
       data => {
         console.log('DATA', data);
-        this.openingTimes = data.times;
+        this.openingTimes = data['times'];
 
         let t = this.openingTimes.length;
 

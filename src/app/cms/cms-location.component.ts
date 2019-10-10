@@ -67,7 +67,7 @@ export class CmsLocationComponent implements OnInit {
     this.cms.getDescriptions(restaurant_id)
       .subscribe(
         data => {
-          this.directions_copy = this.descriptions = data.descriptions[0];
+          this.directions_copy = this.descriptions = data['descriptions'][0];
           // update 041118 - fudge to fix back end returning (or something returning) 'undefined'
           if (this.descriptions.cms_description_car_parking === 'undefined') {
             this.descriptions.cms_description_car_parking = '';
@@ -131,8 +131,8 @@ export class CmsLocationComponent implements OnInit {
     this.cms.getElementClass(this.restaurant.restaurant_id, 'Directions', 'Y')
       .subscribe(
       data => {
-        if (data.elements.length > 0) {
-          this.directions = data.elements[0];
+        if (data['elements'].length > 0) {
+          this.directions = data['elements'][0];
           this.fileLoaded = true;
         } else {
           this.fileLoaded = false;

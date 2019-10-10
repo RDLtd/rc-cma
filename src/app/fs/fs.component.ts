@@ -154,8 +154,8 @@ export class FsComponent implements OnInit {
     this.restaurantService.getMemberRestaurants(id)
       .subscribe(
         data => {
-          console.log('Restaurants', data.restaurants);
-          this.fsLocalService.setRestaurants(data.restaurants);
+          console.log('Restaurants', data['restaurants']);
+          this.fsLocalService.setRestaurants(data['restaurants']);
         },
         error => {
           console.log(error);

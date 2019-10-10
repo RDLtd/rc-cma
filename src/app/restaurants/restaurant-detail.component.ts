@@ -42,8 +42,8 @@ export class RestaurantDetailComponent implements OnInit {
     }
     this.restaurantService.getCuisines(my_country_code, '').subscribe(
       data2 => {
-        if (data2.count > 0) {
-          this.cuisines = data2.cuisines;
+        if (data2['count'] > 0) {
+          this.cuisines = data2['cuisines'];
           if (this.restaurant.restaurant_cuisine_2 === '') {
             this.loadCuisineModifiers();
           }
@@ -117,9 +117,9 @@ export class RestaurantDetailComponent implements OnInit {
     this.financialService.getForRestaurant(restaurant_id)
       .subscribe(
         data => {
-          // console.log(JSON.stringify(data), data.financials.length);
-          if (data.financials.length > 0) {
-            this.openSnackBar(data.financials.length + ' financial records found for ' +
+          // console.log(JSON.stringify(data), data['financials'].length);
+          if (data['financials'].length > 0) {
+            this.openSnackBar(data['financials'].length + ' financial records found for ' +
               this.restaurant.restaurant_name, '');
           } else {
             this.openSnackBar('No financial records found for ' +

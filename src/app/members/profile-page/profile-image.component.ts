@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, NgZone } from '@angular/core';
-// import { Http, Headers, RequestOptions, Response } from '@angular/http';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { Member } from '../../_models';
 import { AnalyticsService, MemberService } from '../../_services';
 import { MatSnackBar } from '@angular/material';
@@ -36,7 +35,7 @@ export class ProfileImageComponent implements OnInit {
     private ga: AnalyticsService,
     private config: AppConfig,
     private zone: NgZone,
-    private http: Http,
+    private http: HttpClient,
     private translate: TranslateService,
     private snackBar: MatSnackBar
   ) {

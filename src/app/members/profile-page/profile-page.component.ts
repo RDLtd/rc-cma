@@ -75,7 +75,8 @@ export class ProfilePageComponent implements OnInit {
     this.memberService.getById(id)
       .subscribe(
         data => {
-          this.member = data.member[0];
+          console.log('Data', data);
+          this.member = data['member'][0];
           this.getAssociatedRestaurants(id);
           // console.log(this.member);
         },
@@ -90,7 +91,7 @@ export class ProfilePageComponent implements OnInit {
       .subscribe(
         data => {
           this.showLoader = false;
-          this.restaurants = data.restaurants;
+          this.restaurants = data['restaurants'];
           //this.dspUnreadMessages();
           // console.log('Restaurants', this.restaurants);
           this.getDefaultImages();
@@ -147,8 +148,8 @@ export class ProfilePageComponent implements OnInit {
       this.cms.getElementClass(this.restaurants[i].restaurant_id, 'Image', 'Y')
         .subscribe(
         data => {
-          if (data.count > 0) {
-            this.defaultImages[i] = data.elements[0].cms_element_image_path;
+          if (data['count'] > 0) {
+            this.defaultImages[i] = data['elements'][0].cms_element_image_path;
           } else {
             this.defaultImages.push(null);
           }
@@ -247,7 +248,7 @@ export class ProfilePageComponent implements OnInit {
         .subscribe(
           data => {
             // console.log(JSON.stringify(data), data.financials.length);
-            if (data.financials.length > 0) {
+            if (data['financials'].length > 0) {
               have_financial_data = true;
               // set a field in the restaurant record for convenience
               this.restaurants[i].financial_data = true;

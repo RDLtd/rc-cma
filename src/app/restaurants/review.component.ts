@@ -146,7 +146,7 @@ export class ReviewComponent implements OnInit {
             for (let i = 0; i < this.restaurants.length; i++) {
               this.financialService.getForRestaurant(this.restaurants[i].restaurant_id)
                 .subscribe(
-                  fdata => {
+                  (fdata: any) => {
                     // console.log(JSON.stringify(data), data.financials.length);
                     if (fdata.financials.length > 0) {
                       have_financial_data = true;
@@ -300,11 +300,11 @@ export class ReviewComponent implements OnInit {
         this.financialService.getForRestaurant(this.plotRestaurants[i].restaurant_id)
           .subscribe(
             data => {
-              if (data.financials.length > 0) {
-                for (let j = 0; j < data.financials.length; j++) {
+              if (data['financials'].length > 0) {
+                for (let j = 0; j < data['financials'].length; j++) {
                   this.financials.push( {
                     'name': this.plotRestaurants[i].restaurant_name,
-                    'data': data.financials[j] });
+                    'data': data['financials'][j] });
                 }
               }
               if (i === this.plotRestaurants.length - 1) {

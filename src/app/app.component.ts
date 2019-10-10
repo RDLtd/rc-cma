@@ -3,7 +3,7 @@ import { TranslateService } from '@ngx-translate/core';;
 import { MatSidenav } from '@angular/material';
 import { AuthenticationService } from './_services';
 //import { PageScrollConfig } from 'ng2-page-scroll';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { AppConfig } from './app.config';
 import { NavigationEnd, Router } from '@angular/router';
 
@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
   constructor(
     private router: Router,
     private translate: TranslateService,
-    private http: Http,
+    private http: HttpClient,
     private config: AppConfig,
     public authService: AuthenticationService) {
 
@@ -62,7 +62,7 @@ export class AppComponent implements OnInit {
     if (this.config.use_ip_location) {
       this.getCountry().subscribe(
         data => {
-          if (data.country === 'FR') {
+          if (data['country'] === 'FR') {
             this.language = 'fr';
           } else {
             this.language = 'en';
@@ -111,7 +111,7 @@ export class AppComponent implements OnInit {
   }
 
   getCountry () {
-    return this.http.get('https://ipinfo.io?token=b3a0582a14c7a4').map(res => res.json());
+    return this.http.get('https://ipinfo.io?token=b3a0582a14c7a4');
   }
 
   onDeactivate() {

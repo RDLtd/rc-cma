@@ -12,6 +12,7 @@ declare var google: any;
   templateUrl: './benchmark.component.html'
 })
 
+
 export class BenchmarkComponent implements OnInit {
 
   @ViewChild('benchmarkView') benchmarkView: NgForm;
@@ -405,17 +406,17 @@ export class BenchmarkComponent implements OnInit {
       .subscribe(
         data => {
           // console.log(JSON.stringify(data), data.financials.length);
-          if (data.financials.length > 0) {
-            this.benchmarks = data.financials;
-            // make another copy so we don't need to re-read the database
-            this.fullbenchmarks = this.benchmarks.slice();
-            console.log(this.fullbenchmarks.length);
-            this.benchmarkslength = this.benchmarks.length;
-            this.countRestaurants();
-            this.setGraphData(code);
-          } else {
-            this.benchmarks.length = 0;
-          }
+          // if (data.financials.length > 0) {
+          //   this.benchmarks = data.financials;
+          //   // make another copy so we don't need to re-read the database
+          //   this.fullbenchmarks = this.benchmarks.slice();
+          //   console.log(this.fullbenchmarks.length);
+          //   this.benchmarkslength = this.benchmarks.length;
+          //   this.countRestaurants();
+          //   this.setGraphData(code);
+          // } else {
+          //   this.benchmarks.length = 0;
+          // }
         },
         error => {
           this.translate.get('Financial.Error').subscribe(

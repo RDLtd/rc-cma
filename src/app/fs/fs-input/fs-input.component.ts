@@ -67,7 +67,7 @@ export class FsInputComponent implements OnInit {
       .subscribe(
         data => {
           // console.log(data);
-          this.fsDataSet = data.financials;
+          this.fsDataSet = data['financials'];
           this.dspFsData(this.selectedYear);
           this.dataChanged = false;
         },

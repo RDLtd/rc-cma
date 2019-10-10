@@ -47,7 +47,7 @@ export class CmsComponent implements OnInit {
       .switchMap((params: Params) => this.restaurantService.getById(params.id))
         .subscribe( data => {
             // console.log('get Restaurant using url params', data.restaurant[0].restaurant_id);
-            this.restaurant = data.restaurant[0];
+            this.restaurant = data['restaurant'][0];
             this.cmsLocalService.setRestaurant(this.restaurant);
 
             // // we can now look to see what actions this member has performed to date
@@ -99,7 +99,7 @@ export class CmsComponent implements OnInit {
     this.restaurantService.getMemberRestaurants(this.member.member_id)
       .subscribe( data => {
           // console.log('CMS.ts get list of assc. restaurants using member_id', this.member.member_id);
-          this.restaurants = data.restaurants;
+          this.restaurants = data['restaurants'];
           // console.log('Length', this.restaurants.length);
         },
         error => console.log(error)
