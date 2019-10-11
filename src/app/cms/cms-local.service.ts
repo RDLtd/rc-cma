@@ -1,3 +1,4 @@
+import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Member, Restaurant } from '../_models';
 import { Observable, Subject, BehaviorSubject } from 'rxjs'
@@ -67,8 +68,8 @@ export class CmsLocalService {
       };
     });
     const dialogRef = this.dialog.open(ConfirmCancelComponent, this.dialogConfig );
-    return dialogRef.afterClosed().map(result => {
+    return dialogRef.afterClosed().pipe(map(result => {
       return result.confirmed;
-    });
+    }));
   }
 }

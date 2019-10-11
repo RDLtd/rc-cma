@@ -1,9 +1,11 @@
+
+import { switchMap } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Restaurant } from '../_models';
 import { RestaurantService, CMSService, HelpService, AnalyticsService } from '../_services';
 import { CmsLocalService } from './cms-local.service';
-import 'rxjs/add/operator/switchMap';
+
 import { MatDialog } from '@angular/material';
 import { CmsPreviewComponent } from './cms-preview.component';
 import { fadeAnimation } from '../animations';
@@ -43,8 +45,8 @@ export class CmsComponent implements OnInit {
         this.offerInBox = count;
       });
 
-    this.route.params
-      .switchMap((params: Params) => this.restaurantService.getById(params.id))
+    this.route.params.pipe(
+      switchMap((params: Params) => this.restaurantService.getById(params.id)))
         .subscribe( data => {
             // console.log('get Restaurant using url params', data.restaurant[0].restaurant_id);
             this.restaurant = data['restaurant'][0];

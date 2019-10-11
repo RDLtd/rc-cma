@@ -17,6 +17,7 @@
     "typeRoots": [
       "../node_modules/@types"
     ],
-    "alwaysStrict": true
+    "alwaysStrict": true,
+    "strictPropertyInitialization": false
   }
 }
