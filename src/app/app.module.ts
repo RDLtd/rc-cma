@@ -101,7 +101,7 @@ import {
 import { TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { FileUploadModule } from 'ng2-file-upload';
 import { MarkdownModule } from 'ngx-markdown';
-import { ClipboardModule } from 'ngx-clipboard/dist';
+import { ClipboardModule } from 'ngx-clipboard';
 import { AngularMaterialModule } from './angular-material.module';
 import { SigninComponent } from './signin.component';
 import { AffiliatesComponent } from './affiliates/affiliates.component';
