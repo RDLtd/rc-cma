@@ -9,7 +9,9 @@ import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'rc-cms-location',
   templateUrl: './cms-location.component.html',
-  styleUrls: ['cms-location.component.scss']
+  styles: [
+    `agm-map { height: 400px; width: 100%; }`
+  ],
 })
 export class CmsLocationComponent implements OnInit {
 

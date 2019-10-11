@@ -29,15 +29,15 @@ import {
   CmsDashboardComponent
 } from './cms';
 
-// import {
-//   StaffComponent,
-//   PropertyComponent,
-//   TurnoverComponent,
-//   FsInputComponent,
-//   FsComponent,
-//   ProfitComponent,
-//   BalanceComponent
-// } from './fs';
+import {
+  StaffComponent,
+  PropertyComponent,
+  TurnoverComponent,
+  FsInputComponent,
+  FsComponent,
+  ProfitComponent,
+  BalanceComponent
+} from './fs';
 
 import {
   SigninComponent
@@ -100,15 +100,15 @@ const APP_ROUTES: Routes = [
     { path: '**', component: CmsDirectoryComponent, canActivate: [AuthGuard] }
   ]},
 
-  // { path: 'fs', component: FsComponent, canActivate: [AuthGuard], children: [
-  //   { path: 'profit', component: ProfitComponent, canActivate: [AuthGuard] },
-  //   { path: 'balance', component: BalanceComponent, canActivate: [AuthGuard] },
-  //   { path: 'staff', component: StaffComponent, canActivate: [AuthGuard] },
-  //   { path: 'property', component: PropertyComponent, canActivate: [AuthGuard] },
-  //   { path: 'turnover', component: TurnoverComponent, canActivate: [AuthGuard] },
-  //   { path: 'edit', component: FsInputComponent, canActivate: [AuthGuard] },
-  //   { path: '**', component: ReviewComponent, canActivate: [AuthGuard] }
-  // ]},
+  { path: 'fs', component: FsComponent, canActivate: [AuthGuard], children: [
+    { path: 'profit', component: ProfitComponent, canActivate: [AuthGuard] },
+    { path: 'balance', component: BalanceComponent, canActivate: [AuthGuard] },
+    { path: 'staff', component: StaffComponent, canActivate: [AuthGuard] },
+    { path: 'property', component: PropertyComponent, canActivate: [AuthGuard] },
+    { path: 'turnover', component: TurnoverComponent, canActivate: [AuthGuard] },
+    { path: 'edit', component: FsInputComponent, canActivate: [AuthGuard] },
+    { path: '**', component: ReviewComponent, canActivate: [AuthGuard] }
+  ]},
 
   { path: '**', redirectTo: '/profile' }
 
