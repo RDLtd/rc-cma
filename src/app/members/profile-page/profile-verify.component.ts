@@ -12,8 +12,8 @@ import { TranslateService } from '@ngx-translate/core';;
 
 export class ProfileVerifyComponent implements OnInit {
 
-  @ViewChild('profileVerifyForm') profileVerifyForm: NgForm;
-  @ViewChild('codeInput') codeInput: ElementRef;
+  @ViewChild('profileVerifyForm', {static: true}) profileVerifyForm: NgForm;
+  @ViewChild('codeInput', {static: true}) codeInput: ElementRef;
   isSubmitting: boolean = false;
 
   // translation variables

@@ -27,7 +27,7 @@ export class RestaurantListComponent implements OnInit {
   restaurants: Restaurant[] = [];
   sql_parameters: any = this.config.sql_defaults;
   selectedOption: string;
-  @ViewChild('card') card;
+  @ViewChild('card', {static: true}) card;
 
   constructor(
     private restaurantService: RestaurantService,

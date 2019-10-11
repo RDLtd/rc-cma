@@ -1,6 +1,6 @@
 import { Directive, ElementRef, Component, ViewChild, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { FinancialService } from '../_services/financial.service';
+import { FinancialService } from '../_services';
 import { MatSnackBar, MatDialog } from '@angular/material';
 import { TranslateService } from '@ngx-translate/core';;
 
@@ -15,7 +15,7 @@ declare var google: any;
 
 export class BenchmarkComponent implements OnInit {
 
-  @ViewChild('benchmarkView') benchmarkView: NgForm;
+  @ViewChild('benchmarkView', {static: true}) benchmarkView: NgForm;
   restaurant: any;
   financials: any[] = [];
   financialslength: number;

@@ -12,7 +12,7 @@ import { TranslateService } from '@ngx-translate/core';;
 
 export class RestaurantDetailComponent implements OnInit {
 
-  @ViewChild('restForm') restForm: NgForm;
+  @ViewChild('restForm', {static: true}) restForm: NgForm;
   editMode: Boolean;
   restaurant: any;
   member: any;

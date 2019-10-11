@@ -27,7 +27,7 @@ import { TranslateService } from '@ngx-translate/core';;
 
 export class ProfilePageComponent implements OnInit {
 
-  @ViewChild('card') card;
+  @ViewChild('card', {static: true}) card;
   restaurants: Array<Restaurant>;
   restaurant: Restaurant;
   member: Member = new Member();

@@ -10,7 +10,7 @@ import { ConfirmCancelComponent } from '../confirm-cancel/confirm-cancel.compone
 
 export class MemberDetailComponent implements OnInit {
 
-  @ViewChild('memberForm') memberForm;
+  @ViewChild('memberForm', {static: true}) memberForm;
   member: any;
   allMembers: any;
   member_full_name: string;

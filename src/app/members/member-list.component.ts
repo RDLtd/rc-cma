@@ -16,8 +16,8 @@ export class MemberListComponent implements OnInit {
   members: Member[] = [];
   allMembers: any[] = [];
   cardFilter: string = 'all'
-  @ViewChild('card') card;
-  @ViewChild('memberForm') memberForm: NgForm;
+  @ViewChild('card', {static: true}) card;
+  @ViewChild('memberForm', {static: true}) memberForm: NgForm;
 
   constructor(
     private memberService: MemberService,

@@ -16,7 +16,7 @@ declare const google: any;
 
 export class ReviewComponent implements OnInit {
 
-  @ViewChild('reviewView') reviewView: NgForm;
+  @ViewChild('reviewView', {static: true}) reviewView: NgForm;
   restaurants: any[] = [];
   restaurantCount: Number;
   plotRestaurants: any[] = [];

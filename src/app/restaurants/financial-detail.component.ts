@@ -12,7 +12,7 @@ import { TranslateService } from '@ngx-translate/core';;
 
 export class FinancialDetailComponent implements OnInit {
 
-  @ViewChild('financialForm') financialForm: NgForm;
+  @ViewChild('financialForm', {static: true}) financialForm: NgForm;
   editMode: Boolean;
   restaurant: any;
   financial: any;

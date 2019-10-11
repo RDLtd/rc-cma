@@ -12,7 +12,7 @@ import { BenchmarkComponent } from '../restaurants/benchmark.component';
 
 export class BenchmarkWizardComponent implements OnInit {
 
-  @ViewChild('benchmarkWizardView') benchmarkWizardView: NgForm;
+  @ViewChild('benchmarkWizardView', {static: true}) benchmarkWizardView: NgForm;
   associatedRestaurants: any[] = [];
   financials: any[] = [];
   finance_index = 0;

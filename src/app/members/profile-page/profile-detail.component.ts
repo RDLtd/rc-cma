@@ -10,7 +10,7 @@ import { TranslateService } from '@ngx-translate/core';;
 })
 export class ProfileDetailComponent implements OnInit {
 
-  @ViewChild('formProfile') formProfile;
+  @ViewChild('formProfile', {static: true}) formProfile;
   member: Member;
   member_full_name: string;
   isSubmitting: boolean = false;

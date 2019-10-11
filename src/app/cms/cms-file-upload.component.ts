@@ -21,8 +21,8 @@ export class CmsFileUploadComponent implements OnInit {
   fileUrl: string;
   uploader: FileUploader;
   responses: Array<any> = [];
-  @ViewChild('imgUploadForm') imgForm;
-  @ViewChild('menuUploadForm') menuForm;
+  @ViewChild('imgUploadForm', {static: true}) imgForm;
+  @ViewChild('menuUploadForm', {static: true}) menuForm;
 
   // translation variables
   t_data: any;

@@ -10,7 +10,7 @@ import { TranslateService } from '@ngx-translate/core';;
 })
 export class CmsReservationsComponent implements OnInit {
 
-  @ViewChild('provider_id') private provider_id_input: ElementRef;
+  @ViewChild('provider_id', {static: true}) private provider_id_input: ElementRef;
 
   // translation variables
   t_data: any;

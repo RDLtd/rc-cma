@@ -15,7 +15,7 @@ declare const google: any;
 
 export class FsGraphComponent implements OnInit {
 
-  @ViewChild('reviewView') reviewView: NgForm;
+  @ViewChild('reviewView', {static: true}) reviewView: NgForm;
   fsViewLabel = 'review';
 
   restaurants: any[] = [];

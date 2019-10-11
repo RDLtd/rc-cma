@@ -16,7 +16,7 @@ declare var google: any;
 
 export class FinancialViewComponent implements OnInit {
 
-  @ViewChild('financialView') financialView: NgForm;
+  @ViewChild('financialView', {static: true}) financialView: NgForm;
   editMode: Boolean;
   restaurant: any;
   financials: any[] = [];

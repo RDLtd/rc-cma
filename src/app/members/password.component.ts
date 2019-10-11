@@ -10,7 +10,7 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class PasswordComponent implements OnInit {
 
-  @ViewChild('pwdUpdateForm') loginForm: NgForm;
+  @ViewChild('pwdUpdateForm', {static: true}) loginForm: NgForm;
   isSubmitting: boolean = false;
   member: any;
   dialog: any;

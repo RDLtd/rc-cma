@@ -13,8 +13,8 @@ export class FsInputComponent implements OnInit {
 
   public dataChanged:boolean = false;
 
-  @ViewChild('fsMonths') fsMonths;
-  @ViewChild('fsInputForm') fsInputForm;
+  @ViewChild('fsMonths', {static: true}) fsMonths;
+  @ViewChild('fsInputForm', {static: true}) fsInputForm;
 
   selectedYear: string = (new Date().getFullYear() - 1).toString();
 
