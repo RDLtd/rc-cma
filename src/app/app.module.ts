@@ -100,7 +100,7 @@ import {
 } from '@ngx-translate/core';
 import { TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { FileUploadModule } from 'ng2-file-upload';
-import { MarkdownModule } from 'angular2-markdown';
+import { MarkdownModule } from 'ngx-markdown';
 import { ClipboardModule } from 'ngx-clipboard/dist';
 import { AngularMaterialModule } from './angular-material.module';
 import { SigninComponent } from './signin.component';
