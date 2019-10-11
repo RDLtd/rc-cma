@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
   member: any;
   language;
 
-  @ViewChild('MdSidenav')
+  @ViewChild('MdSidenav', {static: true})
 
   private sidenav: MatSidenav;
 
