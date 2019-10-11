@@ -1,8 +1,7 @@
 import { Component, ViewChild, OnInit, ViewEncapsulation } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';;
+import { TranslateService } from '@ngx-translate/core';
 import { MatSidenav } from '@angular/material';
 import { AuthenticationService } from './_services';
-//import { PageScrollConfig } from 'ng2-page-scroll';
 import { HttpClient } from '@angular/common/http';
 import { AppConfig } from './app.config';
 import { NavigationEnd, Router } from '@angular/router';
