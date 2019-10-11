@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Member, Restaurant } from '../_models';
-import { Subject } from 'rxjs/Subject';
-import { Observable } from 'rxjs/Observable';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Observable, Subject, BehaviorSubject } from 'rxjs'
 import { MatDialog, MatDialogConfig, MatSnackBar } from '@angular/material';
 import { ConfirmCancelComponent } from '../confirm-cancel/confirm-cancel.component';
 import { TranslateService } from '@ngx-translate/core';;

@@ -93,7 +93,6 @@ import { GoogleChartComponent } from './google-chart/google-chart.component';
 //import { ImageUploadModule } from 'angular2-image-upload';
 //import { Ng2PageScrollModule } from 'ng2-page-scroll';
 
-
 import { AgmCoreModule } from '@agm/core';
 import {
   TranslateModule,
