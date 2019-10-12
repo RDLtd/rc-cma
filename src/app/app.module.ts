@@ -90,8 +90,6 @@ import { PwdMatchValidator } from './pwdMatch.validator';
 import { GoogleChartComponent } from './google-chart/google-chart.component';
 
 // packages
-//import { ImageUploadModule } from 'angular2-image-upload';
-
 import { AgmCoreModule } from '@agm/core';
 import {
   TranslateModule,
@@ -177,7 +175,6 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     routing,
     FileUploadModule,
     ClipboardModule,
-    //ImageUploadModule.forRoot(),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

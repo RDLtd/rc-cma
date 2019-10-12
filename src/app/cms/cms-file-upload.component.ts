@@ -1,17 +1,18 @@
-import { Component, Inject, NgZone, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Inject, NgZone, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { FileUploader, FileUploaderOptions, ParsedResponseHeaders } from 'ng2-file-upload';
 import { AppConfig } from '../app.config';
 import { CMSElement } from '../_models';
 import { CMSService } from '../_services';
-import { TranslateService } from '@ngx-translate/core';;
+import { TranslateService } from '@ngx-translate/core';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'rc-cms-file-upload',
   templateUrl: './cms-file-upload.component.html'
 })
-export class CmsFileUploadComponent implements OnInit {
+export class CmsFileUploadComponent implements OnInit, AfterViewInit {
 
   dialog: any;
   uploadLabel: string;
@@ -21,8 +22,8 @@ export class CmsFileUploadComponent implements OnInit {
   fileUrl: string;
   uploader: FileUploader;
   responses: Array<any> = [];
-  @ViewChild('imgUploadForm', {static: true}) imgForm;
-  @ViewChild('menuUploadForm', {static: true}) menuForm;
+  @ViewChild('imgUploadForm', {static: false}) imgForm: NgForm;
+  @ViewChild('menuUploadForm', {static: false}) menuForm: NgForm;
 
   // translation variables
   t_data: any;
@@ -38,6 +39,10 @@ export class CmsFileUploadComponent implements OnInit {
     private translate: TranslateService,
     private cms: CMSService
   ) {}
+
+  ngAfterViewInit() {
+
+  }
 
   ngOnInit() {
 
@@ -180,10 +185,12 @@ export class CmsFileUploadComponent implements OnInit {
 
 
     if (this.data.type === 'image') {
+      console.log('IMAGE FILE');
       e.cms_element_title = this.imgForm.form.controls.imgClass.value || 'restaurant';
       e.cms_element_caption = this.imgForm.form.controls.imgCaption.value || '';
       e.cms_element_class = 'Image';
     } else {
+      console.log('Menu', this.menuForm.form);
       e.cms_element_title = this.menuForm.form.controls.menuClass.value || 'Menu';
       e.cms_element_caption = this.menuForm.form.controls.menuCaption.value || '';
       e.cms_element_class = 'Menu';
@@ -199,16 +206,20 @@ export class CmsFileUploadComponent implements OnInit {
     e.cms_element_approved_by = localStorage.getItem('rd_user');
     e.cms_element_original_filename = this.uploadLabel;
 
-    // console.log(e);
+    console.log('FORM',this.imgForm);
 
     this.cms.createElement(e).subscribe(
       data => {
         e.cms_element_id = data['cms_element_id'];
         this.data.tgtObject.push(e);
 
-        // if user wants to make it their default image
-        if (this.imgForm.form.controls.imgDefault.value) {
-          this.setDefaultImage(e);
+        console.log('FORM',this.imgForm);
+
+        //if user wants to make it their default image
+        if (this.data.type === 'image') {
+          if (this.imgForm.form.controls.imgDefault.value) {
+            this.setDefaultImage(e);
+          }
         }
       },
       error => {
