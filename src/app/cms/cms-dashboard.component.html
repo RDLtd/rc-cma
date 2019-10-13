@@ -1,5 +1,7 @@
 <div class="mdc-layout-grid">
 
+
+
   <!-- Core data -->
   <mat-card
     class="rc-cms-card-core mdc-layout-grid__cell mdc-layout-grid__cell--span-5 mdc-layout-grid__cell--span-12-tablet">
@@ -97,7 +99,7 @@
         class="rc-cms-dash-info mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--align-top">
         <mat-card-header>
           <mat-card-title><strong>{{ 'CMS-Dashboard.NewAffOffs' | translate }}</strong> {{ 'CMS-Dashboard.Available' | translate }}</mat-card-title>
-          <span class="rc-spacefill"></span>
+          <span class="rc-space-filler"></span>
           <mat-icon class="rc-success">redeem</mat-icon>
         </mat-card-header>
         <mat-card-content *ngIf="offerInBox === 1">
@@ -133,7 +135,7 @@
         <mat-card-header *ngIf="!isPreviewing">
           <mat-card-title>{{ 'CMS-Dashboard.VerifiedOn' | translate }} {{ publishDate | date: 'fullDate' }}
             {{ 'CMS-Dashboard.By' | translate }} {{ restaurant.restaurant_verified_by }}</mat-card-title>
-          <span class="rc-spacefill"></span>
+          <span class="rc-space-filler"></span>
           <mat-icon class="rc-success">cloud_done</mat-icon>
         </mat-card-header>
 
@@ -165,13 +167,13 @@
 
         <mat-card-header *ngIf="!isPreviewing && cmsHasSufficientData">
           <mat-card-title>{{ 'CMS-Dashboard.HaveUnpublished' | translate }}</mat-card-title>
-          <span class="rc-spacefill"></span>
+          <span class="rc-space-filler"></span>
           <mat-icon class="rc-warn">cloud_off</mat-icon>
         </mat-card-header>
 
         <mat-card-header *ngIf="!isPreviewing && !cmsHasSufficientData">
           <mat-card-title>{{ 'CMS-Dashboard.NeedMoreContent' | translate }}</mat-card-title>
-          <span class="rc-spacefill"></span>
+          <span class="rc-space-filler"></span>
           <mat-icon class="rc-warn">cloud_off</mat-icon>
         </mat-card-header>
 
@@ -308,7 +310,7 @@
 
 </div>
 
-<hr>
+<!--<hr>-->
 
 <!--<pre>-->
 

@@ -1,19 +1,47 @@
+
+/**
+*** Import MDC components, as required
+*** ----------------------------------
+**/
+
+/*
+@import "~material-components-web/material-components-web";
+@import "~@material/animation/mdc-animation";
+@import "~@material/button/mdc-button";
+@import "~@material/card/mdc-card";
+@import "~@material/checkbox/mdc-checkbox";
+@import "~@material/drawer/mdc-drawer";
+@import "~@material/fab/mdc-fab";
+@import "~@material/form-field/mdc-form-field";
+@import "~@material/icon-toggle/mdc-icon-toggle";
+@import "~@material/list/mdc-list";
+@import "~@material/menu/mdc-menu";
+@import "~@material/radio/mdc-radio";
+@import "~@material/ripple/mdc-ripple";
+@import "~@material/select/mdc-select";
+@import "~@material/snackbar/mdc-snackbar";
+@import "~@material/switch/mdc-switch";
+@import "~@material/textfield/mdc-textfield";
+@import "~@material/theme/mdc-theme";
+*/
+@import "../../node_modules/@material/elevation/mdc-elevation";
+@import "../../node_modules/@material/layout-grid/mdc-layout-grid";
+@import "../../node_modules/@material/toolbar/mdc-toolbar";
+@import "../../node_modules/@material/typography/mdc-typography";
+
 @import "mat-themes";
-@import "mat-components";
 @import "vars";
 
 
-
-// ------------------------------------------------------------------------------------
 // Util classes
-// ------------------------------------------------------------------------------------
+// ------------
 //router-outlet ~ * {
 //  position: absolute;
 //  height: 100%;
 //  width: 100%;
 //}
 
-hr { margin: 3em 0;}
+hr { margin: 3em 0; }
 .rc-loader {
   display: flex;
   justify-content: center;
@@ -24,7 +52,7 @@ hr { margin: 3em 0;}
 .rc-hide { display: none; }
 .rc-accent { background-color: $rc-theme-secondary }
 .rc-centre { text-align: center; }
-.rc-spacefill { flex: 1 1 auto; }
+.rc-space-filler { flex: 1 1 auto; }
 .rc-invisible { visibility: hidden; }
 .rc-txt-right { text-align: right; }
 .rc-txt-leading { font-size: 20px; }
@@ -36,11 +64,11 @@ hr { margin: 3em 0;}
   filter: saturate(0%);
   opacity: 0.5;
 }
-.rc-smallcaps {
+.rc-small-caps {
   font-size: 10px;
   text-transform: uppercase;
 }
-.rc-nospinner {
+.rc-no-spinner {
   &::-webkit-inner-spin-button,
   &::-webkit-outer-spin-button {
     -webkit-appearance: none;
@@ -477,6 +505,7 @@ image-upload {
 .rc-section-toolbar-fixed {
   position: fixed;
   z-index: 100;
+  margin:-8px;
 }
 .rc-cms-toolbar {
 
@@ -588,7 +617,8 @@ image-upload {
     }
   }
 
-  input, textarea { font-size: 16px; }
+  input,
+  textarea { font-size: 16px; }
   .rc-img-upload {
     margin-top: 8px;
     padding: 24px;
@@ -1756,15 +1786,11 @@ mat-tab-group { position: relative; }
 
 .rc-cms {
 
-  .rc-cms-base{
-    dd {
-      font-size: 24px;
-    }
+  .rc-cms-base {
+    dd { font-size: 24px; }
   }
 
-  .rc-card {
-    padding: 16px;
-  }
+  .rc-card { padding: 16px; }
 
   dl {
 

@@ -1,17 +1,22 @@
-// --------------------------------------------------------------------------
-// GLOBAL DEFAULTS
-// --------------------------------------------------------------------------
-
 @import "vars";
-html, body {
+
+/*
+** ----------------
+** GLOBAL DEFAULTS
+** ----------------
+*/
+ */
+
+html,
+body {
   margin: 0;
   height: 100%;
 }
-main { min-height: 600px; }
+main { min-height: 600px;}
 h1,h2,h3,h4 { font-weight: $rc-default-font-weight;}
 h1,
 h2 {
-  font-family: 'Roboto', sans-serif;
+  font-family: $rc-default-font;
   font-weight: $rc-default-font-weight;
   color: $rc-theme-accent;
 }

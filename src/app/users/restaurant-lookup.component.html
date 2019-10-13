@@ -28,7 +28,7 @@
         <li *ngFor="let restaurant of restaurants">
           <a (click)="associateRestaurant(restaurant)">
             <span>{{ restaurant.restaurant_name }} – {{ restaurant.restaurant_post_code }}</span>
-            <span class="rc-spacefill"></span>
+            <span class="rc-space-filler"></span>
             <span>{{ 'Restaurant-Lookup.Add' | translate }}</span>
           </a>
         </li>
