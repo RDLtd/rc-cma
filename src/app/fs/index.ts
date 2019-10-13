@@ -7,3 +7,4 @@ export * from './turnover.component';
 export * from './fs-graph/fs-graph.component';
 export * from './fs-input/fs-input.component';
 export * from './fs-local.service';
+export * from './review.component';

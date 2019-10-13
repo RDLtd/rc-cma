@@ -1,0 +1,29 @@
+
+// --------------------------------------------------------------------------
+// THEMING
+// --------------------------------------------------------------------------
+
+@import '../../node_modules/@angular/material/theming';
+
+// Plus imports for other components in your app.
+
+// Include the base styles for Angular Material core.
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue.
+
+$rc-app-primary: mat-palette($mat-deep-orange, A400);
+$rc-app-accent:  mat-palette($mat-grey, 900, A700, 900);
+
+// The warn palette is optional (defaults to red).
+$rc-app-warn:    mat-palette($mat-deep-orange, 900);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$rc-app-theme: mat-light-theme($rc-app-primary, $rc-app-accent, $rc-app-warn);
+
+// Add MDC-Web styles where needed
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($rc-app-theme);

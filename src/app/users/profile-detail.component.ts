@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Member } from '../../_models';
+import { Member } from '../_models';
 import { MatSnackBar } from '@angular/material';
-import { MemberService } from '../../_services';
-import { TranslateService } from '@ngx-translate/core';;
+import { MemberService } from '../_services';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'rc-profile-detail',

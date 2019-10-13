@@ -1,117 +1,8 @@
+@import "mat-themes";
+@import "mat-components";
+@import "vars";
 
-// --------------------------------------------------------------------------
-// THEMING
-// --------------------------------------------------------------------------
-//@import '~@angular/material/core/theming/all-theme';
-@import '../../node_modules/@angular/material/theming';
 
-// Plus imports for other components in your app.
-
-// Include the base styles for Angular Material core.
-@include mat-core();
-
-// Define the palettes for your theme using the Material Design palettes available in palette.scss
-// (imported above). For each palette, you can optionally specify a default, lighter, and darker
-// hue.
-
-$rc-app-primary: mat-palette($mat-deep-orange, A400);
-$rc-app-accent:  mat-palette($mat-grey, 900, A700, 900);
-
-// The warn palette is optional (defaults to red).
-$rc-app-warn:    mat-palette($mat-deep-orange, 900);
-
-// Create the theme object (a Sass map containing all of the palettes).
-$rc-app-theme: mat-light-theme($rc-app-primary, $rc-app-accent, $rc-app-warn);
-
-// Add MDC-Web styles where needed
-// Alternatively, you can import and @include the theme mixins for each component
-// that you are using.
-@include angular-material-theme($rc-app-theme);
-
-// --------------------------------------------------------------------------
-// MDC-WEB COMPONENT STYLES - AS REQUIRED
-// --------------------------------------------------------------------------
-//@import "~material-components-web/material-components-web";
-//@import "~@material/animation/mdc-animation";
-//@import "~@material/button/mdc-button";
-//@import "~@material/card/mdc-card";
-//@import "~@material/checkbox/mdc-checkbox";
-//@import "~@material/drawer/mdc-drawer";
-@import "../../node_modules/@material/elevation/mdc-elevation";
-//@import "~@material/fab/mdc-fab";
-//@import "~@material/form-field/mdc-form-field";
-//@import "~@material/icon-toggle/mdc-icon-toggle";
-@import "../../node_modules/@material/layout-grid/mdc-layout-grid";
-//@import "~@material/list/mdc-list";
-//@import "~@material/menu/mdc-menu";
-//@import "~@material/radio/mdc-radio";
-//@import "~@material/ripple/mdc-ripple";
-//@import "~@material/select/mdc-select";
-//@import "~@material/snackbar/mdc-snackbar";
-//@import "~@material/switch/mdc-switch";
-//@import "~@material/textfield/mdc-textfield";
-//@import "~@material/theme/mdc-theme";
-@import "../../node_modules/@material/toolbar/mdc-toolbar";
-@import "../../node_modules/@material/typography/mdc-typography";
-
-// --------------------------------------------------------------------------
-// RC Vars
-// --------------------------------------------------------------------------
-
-$rc-theme-primary:        #FF3D00;
-$rc-theme-accent:         #1c1b1b;
-$rc-theme-secondary:      #4DD0E1;
-$rc-theme-tertiary:       #ffc213;
-$rc-theme-success:        #5dbd3d; //#8BC34A; //#50d56d;
-$rc-theme-warn:           #c53100;
-$rc-theme-bgd:            #efefef; //#EFF1F5;
-$rc-display-font:         'Roboto', sans-serif;
-$rc-display-font-weight:  700;
-$rc-default-font:         'Roboto', sans-serif;
-$rc-default-font-weight:  400;
-$rc-theme-black:          #1c1b1b;//#20232a;//#212121;
-$rc-theme-grey:           #ddd;
-$rc-theme-text:           #666;
-$rc-media-small:          400px;
-$rc-max-width:            1060px; //976px;
-
-// --------------------------------------------------------------------------
-// GLOBAL DEFAULTS
-// --------------------------------------------------------------------------
-html, body {
-  margin: 0;
-  height: 100%;
-}
-main { min-height: 600px; }
-h1,h2,h3,h4 { font-weight: $rc-default-font-weight;}
-h1,
-h2 {
-  font-family: 'Roboto', sans-serif;
-  font-weight: $rc-default-font-weight;
-  color: $rc-theme-accent;
-}
-.mat-card-content h4 {
-  margin-bottom: 0;
-}
-p, li {
-  color: $rc-theme-text;
-  font-weight: $rc-default-font-weight;
-}
-a {
-  cursor: pointer;
-  color: $rc-theme-primary;
-  text-decoration: none;
-  &:hover {
-    text-decoration: underline;
-  }
-}
-ol {
-  margin: 0;
-  padding: 0 0 0 1em;
-  li {
-    margin: 0 0 8px;
-  }
-}
 
 // ------------------------------------------------------------------------------------
 // Util classes
@@ -209,11 +100,8 @@ a.rc-btn-lg {
 .mat-sidenav {
   width: auto;
 }
-.mat-sidenav-container.mat-sidenav-container { background: $rc-theme-bgd; };
-.mat-sidenav-content {
-  min-height: calc(100vh - 160px);
-}
-  //.mat-input-infix { font-size: 14px; }
+.mat-sidenav-container.mat-sidenav-container { background: $rc-theme-bgd; }
+.mat-sidenav-content { min-height: calc(100vh - 160px); }
 .mat-hint,
 .mat-input-underline {
   color: $rc-theme-black;
@@ -224,14 +112,8 @@ a.rc-btn-lg {
 .mat-checkbox-label {
   font-size: 16px;
 }
-.mat-form-field-placeholder-wrapper {
-  //line-height: 1.4;
-}
 .mat-form-field-prefix {
   margin-right: 8px;
-}
-textarea.mat-input-element {
-  //line-height: 1.4;
 }
 .mat-card-content {
   font-size: 16px;
@@ -260,7 +142,6 @@ textarea.mat-input-element {
   padding: 0;
   border-radius: 0;
 }
-
 .cdk-overlay-backdrop.cdk-overlay-backdrop-showing.preview-backdrop {
   background-color: #000; //$rc-theme-primary;
   opacity: 0.7;
@@ -268,6 +149,7 @@ textarea.mat-input-element {
 .mat-card-header-text {
   margin: 0 !important;
 }
+.mat-card-content h4 { margin-bottom: 0; }
 .mat-menu-content {
   .menu-title {
     line-height: 48px;
@@ -276,33 +158,7 @@ textarea.mat-input-element {
     font-weight: $rc-display-font-weight;
   }
 }
-
-// MDC Grids
-// ---------
-//$mdc-layout-grid-max-width: 1160px;
-//$mdc-layout-grid-default-margin: 24px;
-//$mdc-layout-grid-default-gutter: 16px;
-
-  .mdc-layout-grid {
-    max-width: $rc-max-width;
-    //--mdc-layout-grid-margin: 24px;
-    //--mdc-layout-grid-gutter: 16px;
-    //// Remove margin when nested
-    //.mdc-layout-grid {
-    //  --mdc-layout-grid-margin: 0;
-    //}
-  }
-
-
-@media screen and ( max-width : 400px ) {
-  //.mdc-layout-grid {
-  //  --mdc-layout-grid-margin: 8px;
-  //  --mdc-layout-grid-gutter: 16px;
-  //  .mdc-layout-grid {
-  //    --mdc-layout-grid-margin: 0;
-  //  }
-  //}
-}
+.mdc-layout-grid { max-width: $rc-max-width; }
 
 // -------------------------------------------------------------------------
 // RC COMPONENTS
@@ -313,7 +169,6 @@ textarea.mat-input-element {
 image-upload {
   display: flex;
   .upload-button {
-    //--active-color: $rc-theme-black;
     font-family: $rc-display-font;
     font-size: 16px !important;
   }
@@ -339,43 +194,6 @@ image-upload {
   bottom: 0;
   z-index: 1000;
 }
-
-// -----------------------------------------------------------------------
-/*
-
-
-.rc-head-img {
-  position: absolute;
-  top:0;
-  right: 0;
-  width: 25%;
-  height: auto;
-  opacity: .25;
-  z-index: 1000;
-}
-
-.rc-content-main {
-  width: 1156px;
-  margin: 0 auto;
-  padding: 80px 0 0;
-  background-color: #ccc;
-}
-.rc-btn-sidenav {
-  background: none;
-  border: none;
-  width: 24px;
-  height: 24px;
-  padding: 0;
-  margin: 0 8px 0 0;
-  color: #FFF;
-  box-sizing: border-box;
-  cursor: pointer;
-  outline: none;
-}
- */
-// -----------------------------------------------------------------------
-
-
 
 // -------------------------------------------------------------------------
 // RC LAYOUT
@@ -574,11 +392,7 @@ image-upload {
 // -------------------------------------------------------------------------
 .rc-content-section {
 
-  .mdc-layout-grid {
-
-    max-width: 800px;
-
-  }
+  .mdc-layout-grid { max-width: 800px; }
 
   .rc-aims {
     list-style: none;
@@ -607,22 +421,6 @@ image-upload {
   }
 }
 
-//.rc-header-panel {
-//  position: relative;
-//  height: 230px;
-//  background: $rc-theme-primary url('');
-//  //background-size: 40%;
-//  padding: 16px;
-//
-//  .rc-brand-logo img {
-//    position: absolute;
-//    top: 50%;
-//    left: 50%;
-//    transform: translate(-50%, -50%);
-//    width: 320px;
-//
-//  }
-//}
 .rc-next {
   margin-top: 3rem;
   a {
@@ -766,14 +564,7 @@ image-upload {
       }
     }
   }
-  .mdc-layout-grid {
-    max-width: 480px;
-    //--mdc-layout-grid-margin: 8px;
-    //--mdc-layout-grid-gutter: 16px;
-    //.mdc-layout-grid {
-    //  --mdc-layout-grid-margin: 0;
-    //}
-  }
+  .mdc-layout-grid { max-width: 480px; }
 }
 
 // ------------------------------------------------------------------------------------
@@ -799,8 +590,6 @@ image-upload {
 
   input, textarea { font-size: 16px; }
   .rc-img-upload {
-    //display: flex;
-   // justify-content: center;
     margin-top: 8px;
     padding: 24px;
     img {
@@ -1013,12 +802,8 @@ image-upload {
   position: relative;
 
 
-  .rc-btn-active{color: $rc-theme-primary;}
-  //.mdc-layout-grid { max-width: 100%; }
-  .mat-form-field-placeholder {
-    text-transform: uppercase;
-    //font-size: 1px;
-  }
+  .rc-btn-active{ color: $rc-theme-primary; }
+  .mat-form-field-placeholder { text-transform: uppercase; }
   .mat-card-actions { border-top: 1px solid grey; }
   .noresult {
     display: flex;
@@ -1102,9 +887,7 @@ image-upload {
     font-size: 18px;
     border-bottom: 1px dotted $rc-theme-black;
     padding: 8px 4px;
-    mat-icon {
-      margin-right: 8px;
-    }
+    mat-icon { margin-right: 8px; }
   }
 
   h1, h2, h3 { margin: 0; }
@@ -1443,12 +1226,6 @@ button.rc-member-assc {
   width: 96px;
   height: auto;
 }
-
-//.rc-members {
-//  display: flex;
-//  flex-flow: row wrap;
-//  justify-content: space-between;
-//}
 
 // SECTION > RESTAURANTS > LIST
 // --------------------------------------------------------------------

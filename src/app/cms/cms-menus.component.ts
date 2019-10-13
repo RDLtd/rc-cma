@@ -4,9 +4,9 @@ import { CmsLocalService } from './cms-local.service';
 import { CMSService, HelpService } from '../_services';
 import { CmsFileUploadComponent } from './cms-file-upload.component';
 import { MatDialog, MatDialogConfig } from '@angular/material';
-import { ConfirmCancelComponent } from '../confirm-cancel/confirm-cancel.component';
+import { ConfirmCancelComponent } from '../common/confirm-cancel/confirm-cancel.component';
 import { CmsMenuDishComponent } from './cms-menu-dish.component';
-import { TranslateService } from '@ngx-translate/core';;
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'rc-cms-menus',

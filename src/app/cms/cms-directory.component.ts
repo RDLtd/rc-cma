@@ -4,7 +4,7 @@ import { CMSService } from '../_services/cms.service';
 import { RestaurantService } from '../_services/restaurant.service';
 import { CmsLocalService } from './cms-local.service';
 import { MatDialog } from '@angular/material';
-import { ConfirmCancelComponent } from '../confirm-cancel/confirm-cancel.component';
+import { ConfirmCancelComponent } from '../common/confirm-cancel/confirm-cancel.component';
 import { RestaurantDetailComponent } from '../restaurants/restaurant-detail.component';
 import { NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';

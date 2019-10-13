@@ -1,9 +1,9 @@
 import { Component, ViewChild, OnInit, Inject, ElementRef } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material';
-import { CMSService } from '../../_services';
-import { CmsLocalService } from '../../cms/cms-local.service';
-import { TranslateService } from '@ngx-translate/core';;
+import { CMSService } from '../_services';
+import { CmsLocalService } from '../cms';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'rc-profile-verify',

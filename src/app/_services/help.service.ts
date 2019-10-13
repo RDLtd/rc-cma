@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HelpComponent } from '../help/help.component';
+import { HelpComponent } from '../common/help/help.component';
 import { MatDialog } from '@angular/material';
 import { AnalyticsService } from './analytics.service';
 

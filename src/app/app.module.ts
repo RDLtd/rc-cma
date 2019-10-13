@@ -27,26 +27,25 @@ import {
 } from './_services';
 
 import {
-  RestaurantLookupComponent,
   RestaurantDetailComponent,
-  FinancialDetailComponent,
-  FinancialViewComponent,
+  //FinancialDetailComponent,
+  //FinancialViewComponent,
   BenchmarkComponent,
   BenchmarkWizardComponent,
-  ReviewComponent,
-  MapDetailComponent,
-  RestaurantListComponent
+  //MapDetailComponent,
+  //RestaurantListComponent
 } from './restaurants';
 
 import {
-  MemberListComponent,
+  RestaurantLookupComponent,
+ // MemberListComponent,
   ProfilePageComponent,
   ProfileVerifyComponent,
   PasswordComponent,
   ProfileDetailComponent,
   ProfileImageComponent,
-  MemberDetailComponent
-} from './members';
+  //MemberDetailComponent
+} from './users';
 
 import {
   CmsImagesComponent,
@@ -73,21 +72,22 @@ import {
   PropertyComponent,
   TurnoverComponent,
   FsGraphComponent,
-  FsInputComponent
+  FsInputComponent,
+  ReviewComponent
 } from './fs';
 
 import { HeaderComponent } from './header.component';
 import { FooterComponent } from './footer.component';
 
-import { LoaderComponent } from './loader/loader.component';
-import { PaymentComponent } from './payment/payment.component';
-import { HelpComponent } from './help/help.component';
+import { LoaderComponent } from './common/loader/loader.component';
+import { PaymentComponent } from './common/payment/payment.component';
+import { HelpComponent } from './common/help/help.component';
 
 import { AboutComponent } from './about.component';
-import { ConfirmCancelComponent } from './confirm-cancel/confirm-cancel.component';
-import { MessageComponent } from './messages/message.component';
+import { ConfirmCancelComponent } from './common/confirm-cancel/confirm-cancel.component';
+import { MessageComponent } from './common/messages/message.component';
 import { PwdMatchValidator } from './pwdMatch.validator';
-import { GoogleChartComponent } from './google-chart/google-chart.component';
+import { GoogleChartComponent } from './common/google-chart/google-chart.component';
 
 // packages
 import { AgmCoreModule } from '@agm/core';
@@ -101,7 +101,7 @@ import { MarkdownModule } from 'ngx-markdown';
 import { ClipboardModule } from 'ngx-clipboard';
 import { AngularMaterialModule } from './angular-material.module';
 import { SigninComponent } from './signin.component';
-import { AffiliatesComponent } from './affiliates/affiliates.component';
+import { AffiliatesComponent } from './cms/affiliates.component';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 // AoT requires an exported function for factories
@@ -115,18 +115,18 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     HeaderComponent,
     FooterComponent,
     PasswordComponent,
-    MemberListComponent,
+   // MemberListComponent,
     GoogleChartComponent,
-    MemberDetailComponent,
-    MapDetailComponent,
-    FinancialDetailComponent,
-    FinancialViewComponent,
+   // MemberDetailComponent,
+    //MapDetailComponent,
+    //FinancialDetailComponent,
+    //FinancialViewComponent,
     BenchmarkComponent,
     ReviewComponent,
     BenchmarkWizardComponent,
     RestaurantLookupComponent,
     RestaurantDetailComponent,
-    RestaurantListComponent,
+    //RestaurantListComponent,
     ProfilePageComponent,
     ProfileVerifyComponent,
     ConfirmCancelComponent,
@@ -205,9 +205,9 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     ConfirmCancelComponent
   ],
   entryComponents: [
-    MapDetailComponent,
-    FinancialDetailComponent,
-    FinancialViewComponent,
+    //MapDetailComponent,
+    //FinancialDetailComponent,
+    //FinancialViewComponent,
     BenchmarkComponent,
     ReviewComponent,
     BenchmarkWizardComponent,

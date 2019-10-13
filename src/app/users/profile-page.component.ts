@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Restaurant, Member } from '../../_models';
+import { Restaurant, Member } from '../_models';
 import {
   RestaurantService,
   MemberService,
@@ -7,17 +7,17 @@ import {
   CMSService,
   FinancialService,
   HelpService, AnalyticsService
-} from '../../_services';
+} from '../_services';
 import { MatDialog } from '@angular/material';
-import { MessageComponent } from '../../messages/message.component';
-import { PasswordComponent } from '../password.component';
+//import { MessageComponent } from '../messages/message.component';
+import { PasswordComponent } from './password.component';
 import { ProfileDetailComponent } from './profile-detail.component';
 import { ProfileImageComponent } from './profile-image.component';
-import { RestaurantLookupComponent, BenchmarkWizardComponent } from '../../restaurants';
+import { RestaurantLookupComponent } from './restaurant-lookup.component';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
-import { ConfirmCancelComponent } from '../../confirm-cancel/confirm-cancel.component';
-import { TranslateService } from '@ngx-translate/core';;
+import { ConfirmCancelComponent } from '../common/confirm-cancel/confirm-cancel.component';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -231,46 +231,46 @@ export class ProfilePageComponent implements OnInit {
     }
   }
 
-  benchmarking() {
-    // set up the benchmarking options for this member
-    // first check to see if there are any associated restaurants
-    if (this.restaurants.length === 0) {
-      // this.openSnackBar('You must have at least one associated restaurant!', '');
-      const dialogRef = this.dialog.open(BenchmarkWizardComponent);
-      dialogRef.componentInstance.associatedRestaurants = this.restaurants;
-      dialogRef.componentInstance.primary_text = this.t_data.BenchmarkingAssociated;
-      return;
-    }
-    // now check to see if any of the associated restaurants have financial data
-    let have_financial_data = false;
-    for (let i = 0; i < this.restaurants.length; i++) {
-      this.financialService.getForRestaurant(this.restaurants[i].restaurant_id)
-        .subscribe(
-          data => {
-            // console.log(JSON.stringify(data), data.financials.length);
-            if (data['financials'].length > 0) {
-              have_financial_data = true;
-              // set a field in the restaurant record for convenience
-              this.restaurants[i].financial_data = true;
-            } else {
-              this.restaurants[i].financial_data = false;
-            }
-            // on the last pass check to see if we need to exit
-            if (i === this.restaurants.length - 1) {
-              if (!have_financial_data) {
-                const dialogRef = this.dialog.open(BenchmarkWizardComponent);
-                dialogRef.componentInstance.associatedRestaurants = this.restaurants;
-                dialogRef.componentInstance.primary_text = this.t_data.NoFinancial + this.t_data.Compare;
-                return;
-              }
-              // have some data so we can move directly to benchmarking
-              this.router.navigate(['/fs/profit']);
-            }
-          });
-    }
-  }
-
-  reviewFinancial(index) {
-    console.log(index);
-  }
+  // benchmarking() {
+  //   // set up the benchmarking options for this member
+  //   // first check to see if there are any associated restaurants
+  //   if (this.restaurants.length === 0) {
+  //     // this.openSnackBar('You must have at least one associated restaurant!', '');
+  //     const dialogRef = this.dialog.open(BenchmarkWizardComponent);
+  //     dialogRef.componentInstance.associatedRestaurants = this.restaurants;
+  //     dialogRef.componentInstance.primary_text = this.t_data.BenchmarkingAssociated;
+  //     return;
+  //   }
+  //   // now check to see if any of the associated restaurants have financial data
+  //   let have_financial_data = false;
+  //   for (let i = 0; i < this.restaurants.length; i++) {
+  //     this.financialService.getForRestaurant(this.restaurants[i].restaurant_id)
+  //       .subscribe(
+  //         data => {
+  //           // console.log(JSON.stringify(data), data.financials.length);
+  //           if (data['financials'].length > 0) {
+  //             have_financial_data = true;
+  //             // set a field in the restaurant record for convenience
+  //             this.restaurants[i].financial_data = true;
+  //           } else {
+  //             this.restaurants[i].financial_data = false;
+  //           }
+  //           // on the last pass check to see if we need to exit
+  //           if (i === this.restaurants.length - 1) {
+  //             if (!have_financial_data) {
+  //               const dialogRef = this.dialog.open(BenchmarkWizardComponent);
+  //               dialogRef.componentInstance.associatedRestaurants = this.restaurants;
+  //               dialogRef.componentInstance.primary_text = this.t_data.NoFinancial + this.t_data.Compare;
+  //               return;
+  //             }
+  //             // have some data so we can move directly to benchmarking
+  //             this.router.navigate(['/fs/profit']);
+  //           }
+  //         });
+  //   }
+  // }
+  //
+  // reviewFinancial(index) {
+  //   console.log(index);
+  // }
 }

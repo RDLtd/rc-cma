@@ -5,11 +5,7 @@ import {
 
 import {
   ProfilePageComponent
-} from './members';
-
-import {
-  ReviewComponent
-} from './restaurants';
+} from './users';
 
 import {
   AuthGuard,
@@ -36,7 +32,8 @@ import {
   FsInputComponent,
   FsComponent,
   ProfitComponent,
-  BalanceComponent
+  BalanceComponent,
+  ReviewComponent
 } from './fs';
 
 import {
@@ -45,7 +42,7 @@ import {
 
 import {
   AffiliatesComponent
-} from './affiliates/affiliates.component';
+} from './cms/affiliates.component';
 
 
 const APP_ROUTES: Routes = [

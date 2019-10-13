@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Member, Restaurant } from '../_models';
 import { Observable, Subject, BehaviorSubject } from 'rxjs'
 import { MatDialog, MatDialogConfig, MatSnackBar } from '@angular/material';
-import { ConfirmCancelComponent } from '../confirm-cancel/confirm-cancel.component';
+import { ConfirmCancelComponent } from '../common/confirm-cancel/confirm-cancel.component';
 import { TranslateService } from '@ngx-translate/core';;
 import { AuthenticationService } from '../_services';
 

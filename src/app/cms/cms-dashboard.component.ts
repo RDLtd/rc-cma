@@ -5,12 +5,12 @@ import { AuthenticationService, CMSService, HelpService, MemberService, Restaura
 import { MatDialog } from '@angular/material';
 import { CmsPreviewComponent } from './cms-preview.component';
 import { Router } from '@angular/router';
-import { RestaurantDetailComponent } from '../restaurants';
+import { RestaurantDetailComponent } from '../restaurants/restaurant-detail.component';
 import { NgForm } from '@angular/forms';
-import { TranslateService } from '@ngx-translate/core';;
-import { PaymentComponent } from '../payment/payment.component';
+import { TranslateService } from '@ngx-translate/core';
+import { PaymentComponent } from '../common/payment/payment.component';
 import { AnalyticsService } from '../_services/analytics.service';
-import { MessageComponent } from '../messages/message.component';
+import { MessageComponent } from '../common/messages/message.component';
 
 @Component({
   selector: 'app-cms-dashboard',

@@ -5,7 +5,6 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { Restaurant } from '../_models';
 import { RestaurantService, CMSService, HelpService, AnalyticsService } from '../_services';
 import { CmsLocalService } from './cms-local.service';
-
 import { MatDialog } from '@angular/material';
 import { CmsPreviewComponent } from './cms-preview.component';
 import { fadeAnimation } from '../animations';

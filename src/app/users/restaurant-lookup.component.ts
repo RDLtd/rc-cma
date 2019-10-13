@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { Restaurant } from '../_models/restaurant';
 import { RestaurantService } from '../_services/restaurant.service';
 import { AppConfig } from '../app.config';
-import { ProfileVerifyComponent } from '../members/profile-page/profile-verify.component';
+import { ProfileVerifyComponent } from './profile-verify.component';
 import { MAT_DIALOG_DATA, MatDialog, MatSnackBar } from '@angular/material';
 import { HttpClient } from '@angular/common/http';
 import { TranslateService } from '@ngx-translate/core';;
