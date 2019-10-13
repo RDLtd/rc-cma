@@ -51,7 +51,7 @@ export class PasswordComponent implements OnInit {
 
           },
           error => {
-            // console.log(error);
+            console.log(error);
             // console.log('Failed to update password for member ' + this.member.member_id);
             let t1;
             this.translate.get('Password.Failed').subscribe(value => t1 = value);
@@ -61,7 +61,7 @@ export class PasswordComponent implements OnInit {
 
       },
       error => {
-        // console.log(error);
+        console.log(error);
         // console.log('Member ' + this.member.member_id + ' failed authorisation');
         let t1;
         this.translate.get('Password.Invalid').subscribe(value => t1 = value);

@@ -46,6 +46,7 @@ export class ProfileDetailComponent implements OnInit {
           this.dialog.close();
         },
         error => {
+          console.log(error);
           this.dspSnackBar(this.t_data.ErrorUpdating);
       });
 

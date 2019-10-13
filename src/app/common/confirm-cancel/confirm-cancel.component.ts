@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { TranslateService } from '@ngx-translate/core';;
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'rc-confirm-cancel',

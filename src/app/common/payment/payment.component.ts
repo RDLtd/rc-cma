@@ -104,7 +104,8 @@ export class PaymentComponent implements OnInit  {
       const handler = (<any>window).StripeCheckout.configure({
         // pk_test_3UC3P4HUDtjPewUWjzpP0GHs
         // pk_live_aC07Pi3YT3GGv7QYujVxWvPt
-        // I think it is OK to have this key here, since payments can only be processed using the sk on the server side
+        // I think it is OK to have this key here,
+        // since payments can only be processed using the sk on the server side
         key: 'pk_live_aC07Pi3YT3GGv7QYujVxWvPt',
         locale: 'auto',
         token: (token: any) => {

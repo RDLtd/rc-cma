@@ -2,7 +2,7 @@ import { ElementRef, Component, ViewChild, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { FinancialService } from '../../_services';
 import { MatSnackBar, MatDialog } from '@angular/material';
-import { TranslateService } from '@ngx-translate/core';;
+import { TranslateService } from '@ngx-translate/core';
 import { FsLocalService } from '../fs-local.service';
 import { BenchmarkWizardComponent } from '../../restaurants';
 
@@ -23,7 +23,7 @@ export class FsGraphComponent implements OnInit {
   plotRestaurants: any[] = [];
   financials: any[] = [];
   benchmarks: any[] = [];
-  fullbenchmarks: any[] = [];
+  fullBenchmarks: any[] = [];
   benchmarks_length: number;
   benchmarks_restaurant_count: number;
   benchmarks_text;
@@ -186,11 +186,7 @@ export class FsGraphComponent implements OnInit {
                       }
                       // console.log(this.restaurants[j].benchmark_candidate);
                     }
-                    if (this.plotRestaurants.length > 2) {
-                      this.view_group_enabled = true;
-                    } else {
-                      this.view_group_enabled = false;
-                    }
+                    this.view_group_enabled = this.plotRestaurants.length > 2;
                     this.review_text = 'Review';
                     this.review = true;
                     this.showData();
@@ -459,13 +455,13 @@ export class FsGraphComponent implements OnInit {
     // note that we do not need to re-read the database since this.fullbenchmarks has the complete set
     this.benchmarks.length = 0;
     // console.log('checking ' + this.fullbenchmarks.length);
-    for (let j = 0; j < this.fullbenchmarks.length; j++) {
+    for (let j = 0; j < this.fullBenchmarks.length; j++) {
       let included = true;
       // these options are inclusive (so AND) hence we do not need to check if 'all' has been selected
       switch (this.areaDataSelection.index) {
         case 1: { // Post Code
-          if (this.fullbenchmarks[j].restaurant_post_code.substring(0,
-              this.fullbenchmarks[j].restaurant_post_code.indexOf(' ')) !==
+          if (this.fullBenchmarks[j].restaurant_post_code.substring(0,
+              this.fullBenchmarks[j].restaurant_post_code.indexOf(' ')) !==
             this.restaurants[this.benchmark_index].restaurant_post_code.substring(0,
               this.restaurants[this.benchmark_index].restaurant_post_code.indexOf(' '))) {
             included = false;
@@ -473,15 +469,15 @@ export class FsGraphComponent implements OnInit {
           break;
         }
         case 2: { // Region
-          if (this.fullbenchmarks[j].restaurant_region !==
+          if (this.fullBenchmarks[j].restaurant_region !==
             this.restaurants[this.benchmark_index].restaurant_region) {
             included = false;
           }
           break;
         }
         case 3: { // Distance 2km
-          if (!this.restaurantInLimit(this.fullbenchmarks[j].restaurant_lat,
-              this.fullbenchmarks[j].restaurant_lng,
+          if (!this.restaurantInLimit(this.fullBenchmarks[j].restaurant_lat,
+              this.fullBenchmarks[j].restaurant_lng,
               this.restaurants[this.benchmark_index].restaurant_lat,
               this.restaurants[this.benchmark_index].restaurant_lng, 2)) {
             included = false;
@@ -489,8 +485,8 @@ export class FsGraphComponent implements OnInit {
           break;
         }
         case 4: { // Distance 5km
-          if (!this.restaurantInLimit(this.fullbenchmarks[j].restaurant_lat,
-              this.fullbenchmarks[j].restaurant_lng,
+          if (!this.restaurantInLimit(this.fullBenchmarks[j].restaurant_lat,
+              this.fullBenchmarks[j].restaurant_lng,
               this.restaurants[this.benchmark_index].restaurant_lat,
               this.restaurants[this.benchmark_index].restaurant_lng, 5)) {
             included = false;
@@ -498,8 +494,8 @@ export class FsGraphComponent implements OnInit {
           break;
         }
         case 5: { // Distance 10km
-          if (!this.restaurantInLimit(this.fullbenchmarks[j].restaurant_lat,
-              this.fullbenchmarks[j].restaurant_lng,
+          if (!this.restaurantInLimit(this.fullBenchmarks[j].restaurant_lat,
+              this.fullBenchmarks[j].restaurant_lng,
               this.restaurants[this.benchmark_index].restaurant_lat,
               this.restaurants[this.benchmark_index].restaurant_lng, 10)) {
             included = false;
@@ -507,8 +503,8 @@ export class FsGraphComponent implements OnInit {
           break;
         }
         case 6: { // Distance 20km
-          if (!this.restaurantInLimit(this.fullbenchmarks[j].restaurant_lat,
-              this.fullbenchmarks[j].restaurant_lng,
+          if (!this.restaurantInLimit(this.fullBenchmarks[j].restaurant_lat,
+              this.fullBenchmarks[j].restaurant_lng,
               this.restaurants[this.benchmark_index].restaurant_lat,
               this.restaurants[this.benchmark_index].restaurant_lng, 20)) {
             included = false;
@@ -519,7 +515,7 @@ export class FsGraphComponent implements OnInit {
       if (included) {
         switch (this.cuisineDataSelection.index) {
           case 1: { // Cuisine
-            if (this.fullbenchmarks[j].restaurant_cuisine_1 !==
+            if (this.fullBenchmarks[j].restaurant_cuisine_1 !==
               this.restaurants[this.benchmark_index].restaurant_cuisine_1) {
               included = false;
             }
@@ -530,7 +526,7 @@ export class FsGraphComponent implements OnInit {
       if (included) {
         switch (this.groupDataSelection.index) {
           case 1: { // Cuisine
-            if (this.fullbenchmarks[j].restaurant_group_name !==
+            if (this.fullBenchmarks[j].restaurant_group_name !==
               this.restaurants[this.benchmark_index].restaurant_group_name) {
               included = false;
             }
@@ -541,12 +537,12 @@ export class FsGraphComponent implements OnInit {
       // add this one to the set, checking to see whether we should exclude the current one
       if (this.include_restaurant) {
         if (included) {
-          this.benchmarks.push(this.fullbenchmarks[j]);
+          this.benchmarks.push(this.fullBenchmarks[j]);
         }
       } else {
         if (included && this.restaurants[this.benchmark_index].restaurant_id !==
-          this.fullbenchmarks[j].restaurant_id) {
-          this.benchmarks.push(this.fullbenchmarks[j]);
+          this.fullBenchmarks[j].restaurant_id) {
+          this.benchmarks.push(this.fullBenchmarks[j]);
         }
       }
 
@@ -688,13 +684,13 @@ export class FsGraphComponent implements OnInit {
     // note that fullbenchmarks also has the data for the restaurant being benchmarked
     let year_start = 3000;
     let year_end = 1000;
-    for (let i = 0; i < this.fullbenchmarks.length; i++) {
-      if (this.fullbenchmarks[i].restaurant_id === this.restaurants[this.benchmark_index].restaurant_id) {
-        if (Number(this.fullbenchmarks[i].financial_year_end) < year_start) {
-          year_start = Number(this.fullbenchmarks[i].financial_year_end);
+    for (let i = 0; i < this.fullBenchmarks.length; i++) {
+      if (this.fullBenchmarks[i].restaurant_id === this.restaurants[this.benchmark_index].restaurant_id) {
+        if (Number(this.fullBenchmarks[i].financial_year_end) < year_start) {
+          year_start = Number(this.fullBenchmarks[i].financial_year_end);
         }
-        if (Number(this.fullbenchmarks[i].financial_year_end) > year_end) {
-          year_end = Number(this.fullbenchmarks[i].financial_year_end);
+        if (Number(this.fullBenchmarks[i].financial_year_end) > year_end) {
+          year_end = Number(this.fullBenchmarks[i].financial_year_end);
         }
       }
     }
@@ -730,17 +726,17 @@ export class FsGraphComponent implements OnInit {
       year_counter.push(0);
       rank_text.push('');
       // find the value for this restaurant
-      for (let j = 0; j < this.fullbenchmarks.length; j++) {
-        if (i === Number(this.fullbenchmarks[j].financial_year_end) &&
-          this.fullbenchmarks[j].restaurant_id === this.restaurants[this.benchmark_index].restaurant_id) {
+      for (let j = 0; j < this.fullBenchmarks.length; j++) {
+        if (i === Number(this.fullBenchmarks[j].financial_year_end) &&
+          this.fullBenchmarks[j].restaurant_id === this.restaurants[this.benchmark_index].restaurant_id) {
           if (this.graphDataOptions[this.master_plot_index].dataSource2 === '') {
             year_val[my_index] =
-              Number(this.fullbenchmarks[j][this.graphDataOptions[this.master_plot_index].dataSource1]);
-            year_text[my_index] = this.fullbenchmarks[j][this.graphDataOptions[this.master_plot_index].dataSource1];
+              Number(this.fullBenchmarks[j][this.graphDataOptions[this.master_plot_index].dataSource1]);
+            year_text[my_index] = this.fullBenchmarks[j][this.graphDataOptions[this.master_plot_index].dataSource1];
           } else {
             year_val[my_index] =
-              (Number(this.fullbenchmarks[j][this.graphDataOptions[this.master_plot_index].dataSource1]) /
-                Number(this.fullbenchmarks[j][this.graphDataOptions[this.master_plot_index].dataSource2]) * 100);
+              (Number(this.fullBenchmarks[j][this.graphDataOptions[this.master_plot_index].dataSource1]) /
+                Number(this.fullBenchmarks[j][this.graphDataOptions[this.master_plot_index].dataSource2]) * 100);
             year_text[my_index] = year_val[my_index].toFixed(2);
 
           }
@@ -901,13 +897,13 @@ export class FsGraphComponent implements OnInit {
     // note that fullbenchmarks also has the data for the restaurant being benchmarked
     let year_start = 3000;
     let year_end = 1000;
-    for (let i = 0; i < this.fullbenchmarks.length; i++) {
-      if (this.fullbenchmarks[i].restaurant_id === this.restaurants[this.benchmark_index].restaurant_id) {
-        if (Number(this.fullbenchmarks[i].financial_year_end) < year_start) {
-          year_start = Number(this.fullbenchmarks[i].financial_year_end);
+    for (let i = 0; i < this.fullBenchmarks.length; i++) {
+      if (this.fullBenchmarks[i].restaurant_id === this.restaurants[this.benchmark_index].restaurant_id) {
+        if (Number(this.fullBenchmarks[i].financial_year_end) < year_start) {
+          year_start = Number(this.fullBenchmarks[i].financial_year_end);
         }
-        if (Number(this.fullbenchmarks[i].financial_year_end) > year_end) {
-          year_end = Number(this.fullbenchmarks[i].financial_year_end);
+        if (Number(this.fullBenchmarks[i].financial_year_end) > year_end) {
+          year_end = Number(this.fullBenchmarks[i].financial_year_end);
         }
       }
     }
