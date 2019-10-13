@@ -1,16 +1,29 @@
 import 'hammerjs';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import {
+  FormsModule,
+  ReactiveFormsModule
+} from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AngularMaterialModule } from './angular-material.module';
+import {
+  HttpClientModule,
+  HttpClient
+} from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { routing } from './app.routing';
 import { AppConfig } from './app.config';
 import { SafePipe } from './app.safe';
+
+import { HeaderComponent } from './header.component';
+import { FooterComponent } from './footer.component';
+import { SigninComponent } from './signin.component';
+import { AboutComponent } from './about.component';
+import { PwdMatchValidator } from './pwdMatch.validator';
 
 import {
   AuthGuard,
@@ -28,23 +41,17 @@ import {
 
 import {
   RestaurantDetailComponent,
-  //FinancialDetailComponent,
-  //FinancialViewComponent,
   BenchmarkComponent,
   BenchmarkWizardComponent,
-  //MapDetailComponent,
-  //RestaurantListComponent
 } from './restaurants';
 
 import {
   RestaurantLookupComponent,
- // MemberListComponent,
   ProfilePageComponent,
   ProfileVerifyComponent,
   PasswordComponent,
   ProfileDetailComponent,
-  ProfileImageComponent,
-  //MemberDetailComponent
+  ProfileImageComponent
 } from './users';
 
 import {
@@ -61,7 +68,8 @@ import {
   CmsLocalService,
   CmsMenuDishComponent,
   CmsReservationsComponent,
-  CmsDashboardComponent
+  CmsDashboardComponent,
+  AffiliatesComponent
 } from './cms';
 
 import {
@@ -76,20 +84,16 @@ import {
   ReviewComponent
 } from './fs';
 
-import { HeaderComponent } from './header.component';
-import { FooterComponent } from './footer.component';
+import {
+  LoaderComponent,
+  PaymentComponent,
+  HelpComponent,
+  ConfirmCancelComponent,
+  MessageComponent,
+  GoogleChartComponent
+} from './common';
 
-import { LoaderComponent } from './common/loader/loader.component';
-import { PaymentComponent } from './common/payment/payment.component';
-import { HelpComponent } from './common/help/help.component';
-
-import { AboutComponent } from './about.component';
-import { ConfirmCancelComponent } from './common/confirm-cancel/confirm-cancel.component';
-import { MessageComponent } from './common/messages/message.component';
-import { PwdMatchValidator } from './pwdMatch.validator';
-import { GoogleChartComponent } from './common/google-chart/google-chart.component';
-
-// packages
+// 3rd party packages
 import { AgmCoreModule } from '@agm/core';
 import {
   TranslateModule,
@@ -99,10 +103,6 @@ import { TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { FileUploadModule } from 'ng2-file-upload';
 import { MarkdownModule } from 'ngx-markdown';
 import { ClipboardModule } from 'ngx-clipboard';
-import { AngularMaterialModule } from './angular-material.module';
-import { SigninComponent } from './signin.component';
-import { AffiliatesComponent } from './cms/affiliates.component';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -115,18 +115,12 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     HeaderComponent,
     FooterComponent,
     PasswordComponent,
-   // MemberListComponent,
     GoogleChartComponent,
-   // MemberDetailComponent,
-    //MapDetailComponent,
-    //FinancialDetailComponent,
-    //FinancialViewComponent,
     BenchmarkComponent,
     ReviewComponent,
     BenchmarkWizardComponent,
     RestaurantLookupComponent,
     RestaurantDetailComponent,
-    //RestaurantListComponent,
     ProfilePageComponent,
     ProfileVerifyComponent,
     ConfirmCancelComponent,
@@ -205,9 +199,6 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     ConfirmCancelComponent
   ],
   entryComponents: [
-    //MapDetailComponent,
-    //FinancialDetailComponent,
-    //FinancialViewComponent,
     BenchmarkComponent,
     ReviewComponent,
     BenchmarkWizardComponent,
@@ -228,5 +219,4 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
   ],
   bootstrap: [AppComponent]
 })
-
 export class AppModule { }

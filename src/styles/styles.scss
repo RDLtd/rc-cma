@@ -23,11 +23,12 @@
 @import "~@material/switch/mdc-switch";
 @import "~@material/textfield/mdc-textfield";
 @import "~@material/theme/mdc-theme";
+@import "@material/layout-grid/mdc-layout-grid";
 */
-@import "../../node_modules/@material/elevation/mdc-elevation";
-@import "../../node_modules/@material/layout-grid/mdc-layout-grid";
-@import "../../node_modules/@material/toolbar/mdc-toolbar";
-@import "../../node_modules/@material/typography/mdc-typography";
+@import "@material/layout-grid/mdc-layout-grid";
+@import "@material/elevation/mdc-elevation";
+@import "@material/toolbar/mdc-toolbar";
+@import "@material/typography/mdc-typography";
 
 @import "mat-themes";
 @import "vars";
@@ -116,12 +117,14 @@ a.rc-btn-lg {
   and (max-device-width: 1024px)
   and (orientation: landscape)
   and (-webkit-min-device-pixel-ratio: 1) {
-
 }
 
-// -------------------------------------------------------------------------
-// MDC Overrides
-// -------------------------------------------------------------------------
+/*
+** ------------------------------
+** MDC Overrides
+** ------------------------------
+*/
+
 .mdc-toolbar--fixed {
   z-index: 10;
 }
@@ -164,7 +167,7 @@ a.rc-btn-lg {
   //max-height: 80vh !important;
 }
 .mat-dialog-actions {
-  border-top: 1px solid $rc-theme-grey !important;
+  //border-top: 1px solid $rc-theme-grey !important;
 }
 .preview-dialog-container .mat-dialog-container {
   padding: 0;
@@ -1204,6 +1207,35 @@ button.rc-member-assc {
   }
 }
 
+/*
+** -------------------------------
+** Maintain aspect ratio of images
+** -------------------------------
+*/
+[style*="--aspect-ratio"] > :first-child {
+  width: 100%;
+}
+[style*="--aspect-ratio"] > img {
+  height: auto;
+}
+@supports (--custom:property) {
+  [style*="--aspect-ratio"] {
+    position: relative;
+  }
+  [style*="--aspect-ratio"]::before {
+    content: "";
+    display: block;
+    padding-bottom: calc(100% / (var(--aspect-ratio)));
+  }
+  [style*="--aspect-ratio"] > :first-child {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+  }
+}
+
+
 .rc-card-restaurant {
 
   padding: 0 16px 16px;
@@ -1215,10 +1247,11 @@ button.rc-member-assc {
     margin: 4px -16px;
     display: flex;
   }
+  .rc-card-img-wrapper {
+  }
   img {
-    width: calc(100% + 32px);
-    max-height: 160px;
-    margin: 0 -16px;
+    width: calc(100% + 64px);
+    height: auto;
     cursor: pointer;
     &:focus {
       outline: none;

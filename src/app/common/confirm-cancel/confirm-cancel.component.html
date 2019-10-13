@@ -10,7 +10,7 @@
       {{ data.no || defaultCancel }}
     </button>
     <button
-      mat-button (click)="confirmCancelDialog.close({ confirmed: true })">
+      mat-stroked-button (click)="confirmCancelDialog.close({ confirmed: true })">
       {{ data.yes || defaultContinue }}
     </button>
   </mat-dialog-actions>

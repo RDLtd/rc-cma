@@ -6,8 +6,8 @@
   <mat-card
     class="rc-cms-card-core mdc-layout-grid__cell mdc-layout-grid__cell--span-5 mdc-layout-grid__cell--span-12-tablet">
 
-    <div class="rc-card-title-img-wrapper">
-      <img *ngIf="img_src" mat-card-image [src]="img_src">
+    <div class="rc-card-title-img-wrapper" style="--aspect-ratio:16/9; margin-right: -32px;">
+      <img *ngIf="img_src" mat-card-image [src]="img_src" style="width: 100%;">
     </div>
 
 

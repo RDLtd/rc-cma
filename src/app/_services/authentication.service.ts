@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Subject } from 'rxjs';
 import { AppConfig } from '../app.config';
-import { TranslateService } from '@ngx-translate/core';;
+import { TranslateService } from '@ngx-translate/core';
 import { Member } from '../_models';
 import { RestaurantService } from './restaurant.service';
 import { MatSnackBar } from '@angular/material';
@@ -78,11 +78,8 @@ export class AuthenticationService {
 
     } else {
 
-
-
       // console.log('Access level ' + member.member_access_level);
       switch (member.member_access_level) {
-
 
         case '0': { // 3rd party agent
           localStorage.setItem('rd_home', '/agent');
@@ -253,7 +250,7 @@ export class AuthenticationService {
 
       // Start listening for activity
       if (!this.checkingActivity) {
-        console.log(`Less than ${ this.config.session_countdown } mins to go, check for activity`)
+        console.log(`Less than ${ this.config.session_countdown } mins to go, check for activity`);
         this.checkUserActivity();
       }
 
@@ -319,39 +316,11 @@ export class AuthenticationService {
     //this.http.get(environment.api+ '.feed.json', requestOptions );
 
     if (currentUser && currentUser.token) {
-      // const headers = new Headers({
-      //   'Authorization': 'Bearer ' + currentUser.token,
-      //   'apiCategory': 'Financial'
-      // });
-      // return new RequestOptions({ headers: headers });
       requestOptions.params.set('Authorization', 'Bearer ' + currentUser.token);
     } else {
-      // if there is no user, then we must invent a token
-      // const headers = new Headers({
-      //   'Authorization': 'Bearer ' + '234242423wdfsdvdsfsdrfg34tdfverge',
-      //   'apiCategory': 'Financial'
-      // });
-      // return new RequestOptions({ headers: headers });
       requestOptions.params.set('Authorization', 'Bearer ' + '234242423wdfsdvdsfsdrfg34tdfverge');
     }
     return requestOptions;
-
-    // // create authorization header with jwt token
-    // const token = localStorage.getItem('rd_token');
-    // if (token) {
-    //   const headers = new Headers({
-    //     'Authorization': 'Bearer ' + token ,
-    //     'apiCategory': 'Authenticate'
-    //   });
-    //   return new RequestOptions({ headers: headers });
-    // } else {
-    //   // if there is no user, then we must invent a token
-    //   const headers = new Headers({
-    //     'Authorization': 'Bearer ' + '234242423wdfsdvdsfsdrfg34tdfverge' ,
-    //     'apiCategory': 'Authenticate'
-    //   });
-    //   return new RequestOptions({ headers: headers });
-    //}
   }
 
   openSnackBar(message: string, action: string) {
@@ -359,5 +328,4 @@ export class AuthenticationService {
       duration: 5000
     });
   }
-
 }

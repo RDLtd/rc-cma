@@ -176,9 +176,13 @@
         <mat-icon>people</mat-icon>
       </button>
 
-      <img
-        [routerLink]="['/restaurants', restaurant.restaurant_id, 'cms', 'dashboard']"
-        [src]="defaultImages[idx] || placeholderImage">
+      <div style="--aspect-ratio:16/9; margin: 0 -16px;">
+        <img
+          [routerLink]="['/restaurants', restaurant.restaurant_id, 'cms', 'dashboard']"
+          [src]="defaultImages[idx] || placeholderImage">
+      </div>
+
+
 
       <div
         [routerLink]="['/restaurants', restaurant.restaurant_id, 'cms', 'dashboard']"

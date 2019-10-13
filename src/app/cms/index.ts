@@ -12,3 +12,4 @@ export * from './cms-local.service';
 export * from './cms-menu-dish.component';
 export * from './cms-reservations.component';
 export * from './cms-dashboard.component';
+export * from './affiliates.component';
