@@ -140,8 +140,9 @@ a.rc-btn-lg {
 ** MDC/Material Overrides
 ** ------------------------------
 */
-
+.mdc-toolbar-fixed-adjust { margin-top: $rc-toolbar-height-std;}
 .mdc-toolbar--fixed { z-index: 100; }
+.mat-toolbar-row, .mat-toolbar-single-row { height: $rc-toolbar-height-std !important;}
 .mat-sidenav { width: auto; }
 .mat-sidenav-container.mat-sidenav-container { background: $rc-theme-bgd; }
 .mat-sidenav-content { min-height: calc(100vh - 160px); }
@@ -154,6 +155,7 @@ a.rc-btn-lg {
 .mat-radio-label,
 .mat-checkbox-label { font-size: 16px; }
 .mat-form-field-prefix { margin-right: 8px; }
+.mat-form-field { line-height: 1.4; }
 .mat-card-content { font-size: 16px; }
 .mat-card-title {
   h2 {
@@ -161,7 +163,8 @@ a.rc-btn-lg {
     margin-top:0;
   }
 }
-.mat-radio-label, .mat-checkbox-label { font-size: 16px;}
+.mat-radio-label,
+.mat-checkbox-label { font-size: 16px;}
 .mat-form-field > .mat-chip {
   background-color: $rc-theme-secondary;
   margin: 0 4px 4px 0 !important;
@@ -180,7 +183,13 @@ a.rc-btn-lg {
   opacity: 0.7;
 }
 .mat-card-header-text { margin: 0 !important; }
-.mat-card-content h4 { margin-bottom: 0; }
+.mat-card-content h4 {
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  background-color: $rc-theme-grey;
+  padding: 4px 8px;
+}
 .mat-menu-content {
   .menu-title {
     line-height: 48px;
@@ -190,6 +199,7 @@ a.rc-btn-lg {
   }
 }
 .mdc-layout-grid { max-width: $rc-max-width; }
+
 
 /*
 ** MAIN LAYOUTS
@@ -416,9 +426,9 @@ a.rc-btn-lg {
   background-color: $rc-theme-black;
   color: white;
   height:56px;
-  &.mat-toolbar { min-height: 56px; }
+  &.mat-toolbar { min-height: $rc-toolbar-height-std; }
   .rc-toolbar-expand-icon { transition: all .3s ease-in-out; }
-  mat-toolbar-row { height: 56px; }
+  mat-toolbar-row { height: $rc-toolbar-height-std; }
   .rc-section-toolbar-title { transition: all .3s ease-in-out; }
   .rc-section-toolbar-actions {
     display: flex;
@@ -430,7 +440,7 @@ a.rc-btn-lg {
   z-index: 10;
 }
 .rc-cms-toolbar {
-  $toolbar-height: 48px;
+  $toolbar-height: 40px;
   margin-top:8px;
   background-color: $rc-theme-secondary;
   height:$toolbar-height;
@@ -445,7 +455,7 @@ a.rc-btn-lg {
   .mat-icon-button,
   .mat-icon,
   .mat-icon-button i {
-    line-height: 32px;
+    //line-height: 32px;
   }
   mat-icon {
     font-size: 32px;
@@ -743,7 +753,8 @@ button.rc-member-assc {
   .rc-card-actions {
     display: flex;
     flex-direction: row;
-    padding:0 12px 8px 12px;
+    align-items: center;
+    padding:4px 12px 8px 12px;
   }
 }
 .rc-element-default {
@@ -1089,6 +1100,7 @@ ul.rc-lookup-results {
 
 .rc-cms {
 
+  padding-top: 48px;
   .rc-cms-base {
     dd { font-size: 24px; }
   }
@@ -1152,7 +1164,7 @@ ul.rc-lookup-results {
   margin: 0;
   padding: 0;
   li {
-    margin: 8px 0 0 0;
+    margin: 8px 8px 0 0;
     padding: 0;
     display: inline-block;
     img { width: 36px; }
@@ -1181,10 +1193,15 @@ ul.rc-lookup-results {
 
   mat-card-content {
     h4 { margin: 0 0 8px; }
-    mat-form-field { margin-right: 16px; }
+    .rc-session-time {
+      margin-right: 2%;
+      width: 45%;
+    }
     .rc-session {
       display: flex;
+      justify-content: space-between;
       align-items: center;
+      a { width: 6%; text-align: right;}
     }
     a.rc-del-session { cursor: pointer; }
   }

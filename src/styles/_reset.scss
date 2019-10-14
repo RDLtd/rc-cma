@@ -23,6 +23,7 @@ p, li {
   color: $rc-theme-text;
   font-weight: $rc-default-font-weight;
 }
+textarea { line-height: 1.4; }
 a {
   cursor: pointer;
   color: $rc-theme-primary;

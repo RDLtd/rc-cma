@@ -54,18 +54,20 @@
         <h4 *ngIf="!cmstime.closed">{{ 'CMS-Hours.Session' | translate }} {{ j + 1 }}</h4>
         <h4 *ngIf="cmstime.closed">{{ 'CMS-Hours.Closed' | translate }}</h4>
         <div class="rc-session">
-          <mat-form-field>
+          <mat-form-field class="rc-session-time">
             <input
-              matInput type="time"
+              matInput
+              type="time"
               [placeholder]="'CMS-Hours.Start' | translate"
               step="900"
               (change)="setChanged()"
               [(ngModel)]="session.open"
               [disabled]="cmstime.closed">
           </mat-form-field>
-          <mat-form-field>
+          <mat-form-field class="rc-session-time">
             <input
-              matInput type="time"
+              matInput
+              type="time"
               [placeholder]="'CMS-Hours.End' | translate"
               step="900"
               (change)="setChanged()"
