@@ -1,5 +1,3 @@
-
-
 <div class="rc-dialog rc-dialog-profile rc-dialog-med">
 
   <form #formProfile="ngForm" (ngSubmit)="formProfile.valid && onProfileUpdate(formProfile.value)">
@@ -24,13 +22,12 @@
 
     <mat-dialog-content>
 
-      <section #sectionContacts class="rc-card-section-content-open">
+      <section #sectionContacts>
 
-        <div class="rc-card-section-content">
+        <div>
 
           <mat-form-field floatPlaceholder="always" class="rc-full-width">
             <input
-              #firstName="ngModel"
               name="member_fullname"
               placeholder="{{ 'Profile-Detail.FullName' | translate }}"
               matInput
@@ -47,7 +44,6 @@
               name="member_email"
               placeholder="{{ 'Profile-Detail.Email' | translate }}"
               matInput
-              #email="ngModel"
               [(ngModel)]="member.member_email"
               required
               email>

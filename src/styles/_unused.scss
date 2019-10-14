@@ -659,3 +659,54 @@ mat-tab-group { position: relative; }
 .rc-dialog-restaurant {
   max-width: 600px;
 }
+section.rc-card-section-content-open {
+  //mat-icon { transform: rotate(90deg); }
+  //.rc-card-section-content { max-height: 1000px; }
+}
+
+//section:last-child { margin-bottom: 24px; }
+
+section {
+  .rc-card-section-content {
+    transition: max-height .5s ease-in-out;
+    max-height: 0;
+    overflow: hidden;
+    mat-icon { transition: all .5s ease; }
+  }
+
+  header {
+    display: flex;
+    background: $rc-theme-black;
+    color: white;
+    padding: 4px 8px;
+    margin: 16px 0;
+    cursor: pointer;
+    a.material-icons { transition: rotation .3s ease-out; }
+
+    h2 {
+      color: inherit;
+      font-size: 16px;
+      text-transform: uppercase;
+      padding: 0;
+      margin: 0 0 0 4px;
+    }
+  }
+}
+.rc-avatar-wrap {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+}
+.rc-avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.cu-card-over {
+  @include mat-elevation(8);
+
+  .cu-card-content {
+    color: $rc-theme-primary;
+    transition: color .3s ease-out;
+  }
+}

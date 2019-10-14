@@ -26,6 +26,7 @@
 @import "@material/layout-grid/mdc-layout-grid";
 @import "@material/elevation/mdc-elevation";
 */
+
 @import "@material/layout-grid/mdc-layout-grid";
 @import "@material/toolbar/mdc-toolbar";
 @import "@material/typography/mdc-typography";
@@ -104,9 +105,8 @@ a.rc-btn-lg {
 .agm-map { height: 300px; }
 
 /*
-*
-* Maintain aspect ratio of images
-* -------------------------------
+** Maintain aspect ratio of images
+** -------------------------------
 */
 [style*="--aspect-ratio"] > :first-child { width: 100%; }
 [style*="--aspect-ratio"] > img { height: auto; }
@@ -137,7 +137,6 @@ a.rc-btn-lg {
   and (-webkit-min-device-pixel-ratio: 1) {}
 
 /*
-**
 ** MDC/Material Overrides
 ** ------------------------------
 */
@@ -193,9 +192,8 @@ a.rc-btn-lg {
 .mdc-layout-grid { max-width: $rc-max-width; }
 
 /*
-** --------------------------------
-** APP LAYOUT
-** --------------------------------
+** MAIN LAYOUTS
+** ------------------------------
 */
 
 .rc-nav-global {}
@@ -294,7 +292,7 @@ a.rc-btn-lg {
 
 /*
 ** SIGN-IN
-** --------------------------------
+** ------------------------------
 */
 
 .rc-signin-page {
@@ -402,8 +400,9 @@ a.rc-btn-lg {
 
 /*
 ** SPW PREVIEW
-** --------------------------------
+** ------------------------------
 */
+
 .rc-spw-preview {
     border: 0;
     padding: 0;
@@ -443,7 +442,7 @@ a.rc-btn-lg {
     &:disabled { opacity: inherit; }
   }
 
-  .mat-icon-button
+  .mat-icon-button,
   .mat-icon,
   .mat-icon-button i {
     line-height: 32px;
@@ -458,9 +457,8 @@ a.rc-btn-lg {
 }
 
 /*
-* ------------------------------------------------------------------------------------
-* CMS Dashboard
-* ------------------------------------------------------------------------------------
+** CMS DASHBOARD
+** ------------------------------
 */
 
 .rc-dialog-member {
@@ -655,9 +653,8 @@ button.rc-member-assc {
 }
 
 /*
-* ---------------------------------------------------------------
-* RC CARDS
-* ---------------------------------------------------------------
+** RC CARDS
+** ------------------------------
 */
 
 .rc-card {
@@ -705,16 +702,7 @@ button.rc-member-assc {
       color: $rc-theme-primary;
     }
   }
-  .rc-avatar-wrap {
-    width: 64px;
-    height: 64px;
-    border-radius: 50%;
-  }
-  .rc-avatar {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
+
   .rc-card-actions {
     display: flex;
     flex-direction: row;
@@ -784,17 +772,6 @@ button.rc-member-assc {
     transition: color .3s ease-out;
   }
 }
-.cu-card-over {
-  @include mat-elevation(8);
-
-  .cu-card-content {
-    color: $rc-theme-primary;
-    transition: color .3s ease-out;
-  }
-}
-
-
-
 
 .rc-card-restaurant {
 
@@ -807,8 +784,7 @@ button.rc-member-assc {
     margin: 4px -16px;
     display: flex;
   }
-  .rc-card-img-wrapper {
-  }
+  .rc-card-img-wrapper {}
   img {
     width: calc(100% + 64px);
     height: auto;
@@ -820,16 +796,10 @@ button.rc-member-assc {
   .rc-card-restaurant-content {
     cursor: pointer;
     margin-bottom: 32px;
-    &:focus {
-      outline: none;
-    }
-    h2 {
-      margin: 8px 0 0;
-    }
+    &:focus { outline: none; }
+    h2 { margin: 8px 0 0; }
     span {
-      &:after {
-        content: ', ';
-      }
+      &:after { content: ', '; }
     }
   }
   .rc-card-restaurant-actions {
@@ -840,15 +810,16 @@ button.rc-member-assc {
   }
 }
 
-// ---------------------------------------------------------------
-// MODAL/DIALOGS
-// ---------------------------------------------------------------
+/*
+** MODAL/DIALOGS
+** ---------------------------------------------------------------
+*/
+
 .rc-dialog-profile,
 .rc-dialog-image {
-  mat-dialog-content {
-    padding-top: 24px;
-  }
+  mat-dialog-content { padding-top: 24px; }
 }
+
 .rc-dialog {
   padding:0;
   position: relative;
@@ -866,9 +837,7 @@ button.rc-member-assc {
     max-width: 240px;
     max-height: 360px;
     background: #eee;
-    header {
-      border: none;
-    }
+    header { border: none; }
     img {
       width: 100%;
       height: auto;
@@ -897,43 +866,7 @@ button.rc-member-assc {
   mat-dialog-actions {
     margin-top: 16px;
     padding-top: 8px;
-    button {
-      margin-left: 8px;
-    }
-  }
-
-  section.rc-card-section-content-open {
-    mat-icon { transform: rotate(90deg); }
-    .rc-card-section-content { max-height: 1000px; }
-  }
-
-  section:last-child { margin-bottom: 24px; }
-
-  section {
-    .rc-card-section-content {
-      transition: max-height .5s ease-in-out;
-      max-height: 0;
-      overflow: hidden;
-      mat-icon { transition: all .5s ease; }
-    }
-
-    header {
-      display: flex;
-      background: $rc-theme-black;
-      color: white;
-      padding: 4px 8px;
-      margin: 16px 0;
-      cursor: pointer;
-      a.material-icons { transition: rotation .3s ease-out; }
-
-      h2 {
-        color: inherit;
-        font-size: 16px;
-        text-transform: uppercase;
-        padding: 0;
-        margin: 0 0 0 4px;
-      }
-    }
+    button { margin-left: 8px; }
   }
 
   .mdc-layout-grid { max-width: 800px; }
@@ -946,9 +879,7 @@ button.rc-member-assc {
   .rc-form-group {
     padding: 8px 0;
     border-bottom: 1px solid #ddd ;
-    mat-radio-button, mat-checkbox {
-      margin-right: 16px;
-    }
+    mat-radio-button, mat-checkbox { margin-right: 16px; }
   }
   mat-tab-body { padding-top: 1em; }
   .mat-input-element:disabled {
@@ -974,9 +905,6 @@ button.rc-member-assc {
   height: 84vh;
 }
 
-
-
-
 .rc-dialog-alert {
   padding-bottom: 16px;
   max-width: 480px;
@@ -986,7 +914,6 @@ button.rc-member-assc {
     border-bottom: 1px solid #212121;
   }
 }
-
 
 .rc-card-vspacer { height: 16px; }
 .rc-card-vspacer-lg { height: 32px; }
@@ -1016,9 +943,7 @@ button.rc-member-assc {
   min-height: 200px;
   text-align: center;
   overflow: hidden;
-  rc-loader.loader-container {
-    height: 100%;
-  }
+  rc-loader.loader-container { height: 100%; }
 }
 .rc-sub-chart {
   width: 100%;
@@ -1031,7 +956,6 @@ button.rc-member-assc {
   top: 0;
   z-index: 100;
 }
-
 
 /*
 * Restaurant Look-Up
@@ -1053,13 +977,9 @@ ul.rc-lookup-results {
       &:hover {
         color: $rc-theme-primary;
         background-color: #eee;
-        span:last-child {
-          opacity: 1;
-        }
+        span:last-child { opacity: 1; }
       }
-      span:last-child {
-        opacity: 0;
-      }
+      span:last-child { opacity: 0; }
     }
   }
 }
@@ -1077,9 +997,7 @@ ul.rc-lookup-results {
       transform: translate(0, -50%);
     }
     &:hover {
-      mat-icon {
-        display: inline-block;
-      }
+      mat-icon { display: inline-block; }
     }
   }
 }
@@ -1088,28 +1006,19 @@ ul.rc-lookup-results {
   margin: 1rem 0 0;
   padding: 16px;
   background-color: #eee;
-  h2 {
-    margin: 0 0 1rem;
-  }
+  h2 { margin: 0 0 1rem; }
 }
 .rc-lookup-actions {
   margin-top: 1rem;
   display: flex;
   justify-content: flex-end;
-  button {
-    margin-left: 4px;
-  }
+  button { margin-left: 4px; }
 }
 
 /*
-* ------------------------------------------------
-*  CMS
-* ------------------------------------------------
+** CMS Dashboard
+** ------------------------------------------------
 */
-
-
-/* CMS Dashboard
-** --------------------------------- */
 
 .rc-cms-dash-info {
   transition: all .3s ease-out;
@@ -1255,8 +1164,10 @@ ul.rc-lookup-results {
   }
 }
 
-/* CMS Opening Times
-** --------------------------------- */
+/*
+** CMS Opening Times
+** ---------------------------------
+*/
 
 .rc-cms-times {
 
@@ -1265,9 +1176,7 @@ ul.rc-lookup-results {
     color: $rc-theme-black;
   }
   .rc-day-closed {
-    .mat-checkbox-label {
-      color: grey;
-    }
+    .mat-checkbox-label { color: grey; }
   }
 
   mat-card-content {
@@ -1347,8 +1256,8 @@ ul.rc-lookup-results {
 }
 
 /*
-** Menus
-** --------------------------------
+** CMS Menus
+** ---------------------------------
 */
 
 .rc-card.rc-dish {
@@ -1375,10 +1284,7 @@ mat-toolbar.cms-menu-section {
   background-color: transparent;
   font-size: 18px;
   margin: 16px 0;
-  //@include mat-elevation(1);
-  mat-form-field {
-    //width: 300px;
-  }
+  //mat-form-field { width: 300px; }
   input { text-transform: uppercase; }
 }
 .rc-blue {color: #2d7dff;}
@@ -1458,13 +1364,11 @@ mat-toolbar.cms-menu-section {
     width: 100%;
     font-size: 18px;
   }
-
 }
 
 /*
-** --------------------------------
-** F&S
-** --------------------------------
+** Financial & Statistical
+** ---------------------------------
 */
 
 .rc-fs-input {
@@ -1499,9 +1403,7 @@ mat-toolbar.cms-menu-section {
       mat-icon { margin-right: 8px; }
     }
     .mat-button-toggle-group,
-    .mat-button-toggle-standalone {
-      box-shadow: none;
-    }
+    .mat-button-toggle-standalone { box-shadow: none; }
   }
 
   section {
@@ -1530,9 +1432,7 @@ mat-toolbar.cms-menu-section {
   padding-left: 0;
   margin-bottom: 16px;
   .mat-button-toggle-group,
-  .mat-button-toggle-standalone {
-    box-shadow: none;
-  }
+  .mat-button-toggle-standalone { box-shadow: none; }
 }
 
 .rc-fs-graphlet {
