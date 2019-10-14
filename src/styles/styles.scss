@@ -141,7 +141,7 @@ a.rc-btn-lg {
 ** ------------------------------
 */
 
-.mdc-toolbar--fixed { z-index: 10; }
+.mdc-toolbar--fixed { z-index: 100; }
 .mat-sidenav { width: auto; }
 .mat-sidenav-container.mat-sidenav-container { background: $rc-theme-bgd; }
 .mat-sidenav-content { min-height: calc(100vh - 160px); }
@@ -427,7 +427,7 @@ a.rc-btn-lg {
 }
 .rc-section-toolbar-fixed {
   position: fixed;
-  z-index: 100;
+  z-index: 10;
 }
 .rc-cms-toolbar {
   $toolbar-height: 48px;
