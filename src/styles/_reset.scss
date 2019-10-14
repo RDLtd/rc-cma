@@ -1,11 +1,10 @@
 @import "vars";
 
 /*
-** ----------------
-** GLOBAL DEFAULTS
-** ----------------
+*
+* Set global defaults
+* -------------------
 */
- */
 
 html,
 body {
@@ -39,3 +38,4 @@ ol {
     margin: 0 0 8px;
   }
 }
+hr { margin: 3em 0; }

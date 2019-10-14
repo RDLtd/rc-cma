@@ -8,7 +8,6 @@ import {
 import { RouterModule } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AngularMaterialModule } from './angular-material.module';
 import {
   HttpClientModule,
   HttpClient
@@ -18,12 +17,12 @@ import { AppComponent } from './app.component';
 import { routing } from './app.routing';
 import { AppConfig } from './app.config';
 import { SafePipe } from './app.safe';
-
 import { HeaderComponent } from './header.component';
 import { FooterComponent } from './footer.component';
 import { SigninComponent } from './signin.component';
 import { AboutComponent } from './about.component';
 import { PwdMatchValidator } from './pwdMatch.validator';
+import { AngularMaterialModule } from './angular-material.module';
 
 import {
   AuthGuard,

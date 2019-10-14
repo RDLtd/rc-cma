@@ -1,8 +1,8 @@
 
-/**
-*** Import MDC components, as required
-*** ----------------------------------
-**/
+/*
+* Import MDC components, as required
+* ----------------------------------
+*/
 
 /*
 @import "~material-components-web/material-components-web";
@@ -24,25 +24,32 @@
 @import "~@material/textfield/mdc-textfield";
 @import "~@material/theme/mdc-theme";
 @import "@material/layout-grid/mdc-layout-grid";
+@import "@material/elevation/mdc-elevation";
 */
 @import "@material/layout-grid/mdc-layout-grid";
-@import "@material/elevation/mdc-elevation";
 @import "@material/toolbar/mdc-toolbar";
 @import "@material/typography/mdc-typography";
 
 @import "mat-themes";
 @import "vars";
 
+/*
+* Removed styles
+* ------------------------ */
+// @import "unused"
 
-// Util classes
-// ------------
+
+/*
+* Utility classes
+* ----------------------------------
+*/
+
 //router-outlet ~ * {
 //  position: absolute;
 //  height: 100%;
 //  width: 100%;
 //}
 
-hr { margin: 3em 0; }
 .rc-loader {
   display: flex;
   justify-content: center;
@@ -78,9 +85,7 @@ hr { margin: 3em 0; }
 }
 .rc-active {
   cursor: pointer;
-  &:hover {
-    background: #eee;
-  }
+  &:hover { background: #eee; }
 }
 .rc-success { color: $rc-theme-success !important; }
 .rc-warn { color: $rc-theme-warn; }
@@ -93,44 +98,51 @@ a.rc-btn-lg {
   padding: 8px 16px;
   font-size: 18px;
 }
-.rc-media-small-hide {
-  display: none !important;
-}
-.rc-media-med {
-  display: block !important;
-}
-.agm-map {
-  height: 300px;
+.rc-media-small-hide { display: none !important; }
+.rc-media-med { display: block !important; }
+.agm-map { height: 300px; }
+
+/*
+*
+* Maintain aspect ratio of images
+* -------------------------------
+*/
+[style*="--aspect-ratio"] > :first-child { width: 100%; }
+[style*="--aspect-ratio"] > img { height: auto; }
+@supports (--custom:property) {
+  [style*="--aspect-ratio"] { position: relative; }
+  [style*="--aspect-ratio"]::before {
+    content: "";
+    display: block;
+    padding-bottom: calc(100% / (var(--aspect-ratio)));
+  }
+  [style*="--aspect-ratio"] > :first-child {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+  }
 }
 
 @media screen and ( min-width : 600px ){
-  .rc-media-small-hide {
-    display: block !important;
-  }
-  .rc-media-med {
-    display: none !important;
-  }
+  .rc-media-small-hide { display: block !important; }
+  .rc-media-med { display: none !important; }
 }
 
 @media only screen
   and (min-device-width: 768px)
   and (max-device-width: 1024px)
   and (orientation: landscape)
-  and (-webkit-min-device-pixel-ratio: 1) {
-}
+  and (-webkit-min-device-pixel-ratio: 1) {}
 
 /*
-** ------------------------------
-** MDC Overrides
+**
+** MDC/Material Overrides
 ** ------------------------------
 */
 
-.mdc-toolbar--fixed {
-  z-index: 10;
-}
-.mat-sidenav {
-  width: auto;
-}
+.mdc-toolbar--fixed { z-index: 10; }
+.mat-sidenav { width: auto; }
 .mat-sidenav-container.mat-sidenav-container { background: $rc-theme-bgd; }
 .mat-sidenav-content { min-height: calc(100vh - 160px); }
 .mat-hint,
@@ -140,15 +152,9 @@ a.rc-btn-lg {
   border-color: $rc-theme-black;
 }
 .mat-radio-label,
-.mat-checkbox-label {
-  font-size: 16px;
-}
-.mat-form-field-prefix {
-  margin-right: 8px;
-}
-.mat-card-content {
-  font-size: 16px;
-}
+.mat-checkbox-label { font-size: 16px; }
+.mat-form-field-prefix { margin-right: 8px; }
+.mat-card-content { font-size: 16px; }
 .mat-card-title {
   h2 {
     font-size: 24px;
@@ -160,26 +166,20 @@ a.rc-btn-lg {
   background-color: $rc-theme-secondary;
   margin: 0 4px 4px 0 !important;
 }
-
 .mat-dialog-container {
   max-width: 95vw !important;
   border-radius: 8px !important;
   //max-height: 80vh !important;
-}
-.mat-dialog-actions {
-  //border-top: 1px solid $rc-theme-grey !important;
 }
 .preview-dialog-container .mat-dialog-container {
   padding: 0;
   border-radius: 0;
 }
 .cdk-overlay-backdrop.cdk-overlay-backdrop-showing.preview-backdrop {
-  background-color: #000; //$rc-theme-primary;
+  background-color: #000;
   opacity: 0.7;
 }
-.mat-card-header-text {
-  margin: 0 !important;
-}
+.mat-card-header-text { margin: 0 !important; }
 .mat-card-content h4 { margin-bottom: 0; }
 .mat-menu-content {
   .menu-title {
@@ -191,44 +191,11 @@ a.rc-btn-lg {
 }
 .mdc-layout-grid { max-width: $rc-max-width; }
 
-// -------------------------------------------------------------------------
-// RC COMPONENTS
-// -------------------------------------------------------------------------
-
-// IMAGE UPLOAD
-// -------------------------------------------------------------------------
-image-upload {
-  display: flex;
-  .upload-button {
-    font-family: $rc-display-font;
-    font-size: 16px !important;
-  }
-  .drag-box-message {
-    font-family: $rc-default-font;
-    font-weight: $rc-default-font-weight !important;
-    margin-left: 0 !important;
-  }
-  .file-upload {
-    display: flex;
-    flex-direction: column;
-    height: 160px;
-    width: 160px;
-    justify-content: flex-end;
-    text-align: center;
-  }
-
-}
-
-.rc-top {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  z-index: 1000;
-}
-
-// -------------------------------------------------------------------------
-// RC LAYOUT
-// -------------------------------------------------------------------------
+/*
+** --------------------------------
+** APP LAYOUT
+** --------------------------------
+*/
 
 .rc-nav-global {}
 
@@ -240,8 +207,31 @@ image-upload {
   font-family: $rc-display-font;
   text-transform: uppercase;
 }
-// Footer
-// --------------------------------
+.rc-about {
+  display: flex;
+  flex-direction: column;
+  max-width: 270px;
+  position: relative;
+  .rc-close {
+    position: absolute;
+    top: -8px; right: -8px;
+    z-index: 100;
+  }
+  img {
+    width:120px;
+    height: auto;
+  }
+  h3 {
+    text-align: center;
+    font-size: 12px;
+    padding-bottom:0;
+    margin-bottom: 0;
+  }
+  a {
+    color: inherit;
+  }
+}
+
 .rc-footer {
   margin-top: 0;
   padding: 24px 0 24px 0;
@@ -301,10 +291,11 @@ image-upload {
   }
 }
 
-// -------------------------------------------------------------------------
-// CONTENT SECTIONS
-// -------------------------------------------------------------------------
-// Sign In
+/*
+** SIGN-IN
+** --------------------------------
+*/
+
 .rc-signin-page {
   background: $rc-theme-primary;
   min-height: 100vh;
@@ -312,9 +303,7 @@ image-upload {
   a {
     color: $rc-theme-primary;
     text-decoration: none;
-    &:hover {
-      text-decoration: underline;
-    }
+    &:hover { text-decoration: underline; }
   }
 
   .rc-main {
@@ -325,17 +314,13 @@ image-upload {
     color: white;
     min-height: 100vh;
 
-    header {
-      display: block;
-    }
+    header { display: block; }
     p {
       max-width: 640px;
       color: white;
       font-size: 24px;
     }
-    .rc-brand-logo {
-      height: 120px;
-    }
+    .rc-brand-logo { height: 120px; }
   }
   .rc-signin {
 
@@ -355,9 +340,7 @@ image-upload {
         font-weight: $rc-default-font-weight;
         margin-bottom: 0;
       }
-      span {
-        font-size: 16px;
-      }
+      span { font-size: 16px; }
     }
     .rc-brand-logo {
       height: 64px;
@@ -369,12 +352,8 @@ image-upload {
     border-radius: 2px;
     background-color: white;
     margin: 0 0 2rem;
-    .mat-form-field {
-      line-height: 1.4;
-    }
-    input {
-      font-size: 24px;
-    }
+    .mat-form-field { line-height: 1.4; }
+    input { font-size: 24px; }
     button {
       height: 56px;
       font-size: 16px;
@@ -384,22 +363,23 @@ image-upload {
       margin: 0 0 1rem;
     }
   }
-
 }
 
 @media screen and ( max-width : 768px ){
+
   .rc-signin-page {
     padding: 16px;
     display: block;
     height: auto;
+
     .rc-signin {
       box-sizing: border-box;
       position: relative;
       width: 100%;
-      //height: auto;
       margin: 0;
       padding: 24px;
     }
+
     .rc-main {
       display: block;
       margin: 0;
@@ -419,67 +399,10 @@ image-upload {
   }
 }
 
-// Home
-// -------------------------------------------------------------------------
-.rc-content-section {
-
-  .mdc-layout-grid { max-width: 800px; }
-
-  .rc-aims {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    li {
-      list-style: none;
-      margin: 0 0 24px 0;
-      font-size: 20px;
-      border-left: solid 4px $rc-theme-primary;
-      padding: 0 12px 0;
-    }
-  }
-}
-.rc-section-home {
-
-  background-color: white;
-  padding-bottom:48px;
-
-}
-.rc-content-img {
-  padding: 24px 0;
-  img {
-    width: 100%;
-    height: 100%;
-  }
-}
-
-.rc-next {
-  margin-top: 3rem;
-  a {
-
-    display: block;
-    cursor: pointer;
-    margin: 0 auto;
-    background-color: $rc-theme-grey;
-    border-radius: 50%;
-    width: 56px;
-    height: 56px;
-    padding: 4px;
-    text-align: center;
-    font-size: 56px;
-    font-weight: $rc-display-font-weight;
-    color: #fff;
-    transition: .3s color ease-out;
-    text-decoration: none;
-    &:hover {
-      color: #111;
-    }
-  }
-
-}
-
-// ------------------------------------------------------------------------------------
-// App content toolbar
-// ------------------------------------------------------------------------------------
+/*
+** SPW PREVIEW
+** --------------------------------
+*/
 .rc-spw-preview {
     border: 0;
     padding: 0;
@@ -488,14 +411,11 @@ image-upload {
     height: 80vh;
 }
 .rc-section-profile { padding-top: 8px; }
-
 .rc-pad-r { margin-right: 8px;}
-
-.rc-section-toolbar, rc-cms-toolbar {
+.rc-section-toolbar {
   background-color: $rc-theme-black;
   color: white;
   height:56px;
-
   &.mat-toolbar { min-height: 56px; }
   .rc-toolbar-expand-icon { transition: all .3s ease-in-out; }
   mat-toolbar-row { height: 56px; }
@@ -511,7 +431,6 @@ image-upload {
   margin:-8px;
 }
 .rc-cms-toolbar {
-
   $toolbar-height: 48px;
   margin-top:8px;
   background-color: $rc-theme-secondary;
@@ -520,15 +439,13 @@ image-upload {
   mat-toolbar-row { height: $toolbar-height; }
   .mat-icon-button {
     opacity: .75;
-    &:hover {
-      opacity: 1;
-    }
-    &:disabled {
-      opacity: inherit;
-    }
+    &:hover { opacity: 1; }
+    &:disabled { opacity: inherit; }
   }
 
-  .mat-icon-button .mat-icon, .mat-icon-button i {
+  .mat-icon-button
+  .mat-icon,
+  .mat-icon-button i {
     line-height: 32px;
   }
   mat-icon {
@@ -537,156 +454,19 @@ image-upload {
     height: 32px;
 
   }
-  .rc-toolbar-title {
-    text-transform: uppercase;
-    //margin-left: 8px;
-
-  }
+  .rc-toolbar-title { text-transform: uppercase; }
 }
 
-// -------------------------------------------------------------------------------------------
-// Self-Sign up Form
-// -------------------------------------------------------------------------------------------
+/*
+* ------------------------------------------------------------------------------------
+* CMS Dashboard
+* ------------------------------------------------------------------------------------
+*/
 
-.rc-form-join {
-
-  background-color: white;
-  .rc-check {
-    margin-top: 24px;
-    .mat-checkbox-label { font-size: 14px;}
-  }
-  .mat-input-element { padding: 8px 0; }
-  mat-form-field { margin: 0 auto 24px; }
-  .mat-placeholder-required { visibility: hidden; }
-  label { text-transform: uppercase; }
-
-  .rc-form-section {
-    h2 {
-      margin:0;
-      font-weight: $rc-default-font-weight;
-      font-size: 48px;
-    }
-  }
-
-  .rc-next-section {
-    margin: 40px auto 180px;
-    text-align: right;
-    button {
-      padding: 8px 16px;
-      font-size: 16px;
-    }
-
-    a {
-      display: block;
-      cursor: pointer;
-      margin: 0 auto;
-      background-color: $rc-theme-grey;
-      border-radius: 50%;
-      width: 56px;
-      height: 56px;
-      padding: 4px;
-      text-align: center;
-      font-size: 56px;
-      font-weight: $rc-display-font-weight;
-      color: #fff;
-      transition: .3s color ease-out;
-      text-decoration: none;
-      &:hover {
-        color: #111;
-      }
-    }
-  }
-  .mdc-layout-grid { max-width: 480px; }
-}
-
-// ------------------------------------------------------------------------------------
-// MEMBER CARD / FORM
-// ------------------------------------------------------------------------------------
-.rc-member-dialog {
-
-  header[mat-dialog-title] {
-    display: flex;
-    padding-bottom: 16px;
-    border-bottom: 1px dotted $rc-theme-black;
-    margin-bottom: 0;
-    mat-icon {
-      font-size: 24px;
-      line-height: 1.5;
-      margin-right: 8px;
-    }
-    h1 {
-      font-size: 24px;
-      margin: 0;
-    }
-  }
-
-  input,
-  textarea { font-size: 16px; }
-  .rc-img-upload {
-    margin-top: 8px;
-    padding: 24px;
-    img {
-      width: 240px;
-      height: auto;
-    }
-  }
-  label.mat-input-placeholder { text-transform: none; }
-  mat-radio-group {
-    display: flex;
-    flex-direction: column;
-    margin: 16px 0 0;
-  }
-  .rc-checkboxes-stacked {
-    display: flex;
-    flex-direction: column;
-    margin: 16px 0 0;
-  }
-
-  section.rc-card-section-content-open {
-    mat-icon { transform: rotate(90deg); }
-    .rc-card-section-content { max-height: 500px; }
-  }
-
-  section:last-child { margin-bottom: 24px; }
-
-  section {
-    .rc-card-section-content {
-      transition: max-height .5s ease-in-out;
-      max-height: 0;
-      overflow: hidden;
-      mat-icon { transition: all .5s ease; }
-    }
-
-    header {
-
-      display: flex;
-      background: $rc-theme-black;
-      color: white;
-      padding: 4px 8px;
-      margin: 16px 0;
-      cursor: pointer;
-
-      a.material-icons { transition: rotation .3s ease-out; }
-
-      h2 {
-        color: inherit;
-        font-size: 16px;
-        text-transform: uppercase;
-        padding: 0;
-        margin: 0 0 0 4px;
-      }
-    }
-  }
-}
-
-// DASHBOARD
-// ---------------------------------------------------------------
 .rc-dialog-member {
   position: relative;
   max-width: 560px;
-  .mat-dialog-container {
-    padding: 0;
-  }
+  .mat-dialog-container { padding: 0; }
   .rc-close {
     position: absolute;
     top: 0; right: 0;
@@ -713,9 +493,7 @@ image-upload {
 
 .rc-member-status {
   position: relative;
-  p {
-   margin: 16px auto 0;
-  }
+  p { margin: 16px auto 0; }
   header {
     display: flex;
     flex-direction: row;
@@ -727,10 +505,7 @@ image-upload {
       border-radius: 50%;
       background-color: $rc-theme-success;
     }
-    .mat-icon.assc-member {
-      background-color: $rc-theme-tertiary;
-    }
-
+    .mat-icon.assc-member { background-color: $rc-theme-tertiary; }
   }
 }
 .rc-member-assc,
@@ -738,12 +513,8 @@ image-upload {
   border-radius: 2px;
   border: 2px solid $rc-theme-secondary;
   .rc-benefits {
-    .mat-list-item:nth-child(odd) {
-      background: rgba($rc-theme-secondary, .25);
-    }
-    &.mat-list {
-      padding-top: 0;
-    }
+    .mat-list-item:nth-child(odd) { background: rgba($rc-theme-secondary, .25); }
+    &.mat-list { padding-top: 0; }
   }
 }
 
@@ -758,7 +529,6 @@ image-upload {
       color: white;
       border-radius: 50%;
       background-color: $rc-theme-success;
-
     }
   }
 }
@@ -770,139 +540,6 @@ image-upload {
   }
 }
 
-.rc-section-dashboard {
-  position: relative;
-  .mdc-layout-grid { max-width: 100%; }
-  .mat-card {
-    &:first-of-type { padding-bottom: 48px;}
-    min-height: 220px;
-    border-radius: 8px;
-  }
-  .btn-refresh {
-    position: absolute;
-    bottom: 12px; right: 12px;
-    .mat-icon {
-      margin: auto;
-    }
-  }
-  .rc-audit {
-    position: absolute;
-    bottom: 24px; left: 16px;
-    font-size: 10px;
-  }
-  .rc-dashboard-summary {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    padding: 4px 0;
-
-    &:first-of-type {
-      margin-top:16px;
-    }
-    .rc-stat-primary {
-      flex: 2;
-      span {
-        display: block;
-        font-size: 60px;
-        color: $rc-theme-primary;
-        line-height: 1;
-      }
-      label {
-        text-transform: uppercase;
-        display: block;
-        font-size: 10px;
-      }
-    }
-    .rc-stat-secondary {
-      flex: 1;
-      span {
-        display: block;
-        font-size: 24px;
-        color: $rc-theme-primary;
-
-      }
-      label {
-        text-transform: uppercase;
-        display: block;
-        font-size: 10px;
-      }
-    }
-  }
-}
-
-.rc-tertiary {color: $rc-theme-tertiary !important;}
-.rc-section-agent {
-  position: relative;
-
-
-  .rc-btn-active{ color: $rc-theme-primary; }
-  .mat-form-field-placeholder { text-transform: uppercase; }
-  .mat-card-actions { border-top: 1px solid grey; }
-  .noresult {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 400px;
-    padding: 0 15%;
-  }
-  form {
-    margin: 0;
-    padding: 0;
-  }
-  .mat-toolbar {
-    background-color: $rc-theme-grey;
-    .mat-toolbar-row { height: 64px; }
-    form {
-      display: flex;
-      padding: 0;
-      margin: 0;
-      input {
-        &:-webkit-autofill,
-        &:-webkit-autofill:hover,
-        &:-webkit-autofill:focus,
-        &:-webkit-autofill:active { -webkit-box-shadow: 0 0 0 30px #ddd inset !important; }
-      }
-      .mat-form-field-wrapper { padding-bottom: 1.1em; }
-      .mat-form-field-subscript-wrapper {
-        font-size: 11px;
-        margin-top: -0.45em;
-      }
-    }
-  }
-  address { font-style: normal; }
-  dl {
-    dt {
-      margin:1rem 0 0;
-      padding:0;
-      font-size:10px;
-      text-transform: uppercase;
-    }
-    dd {
-      //font-size: 18px;
-      margin:0;
-      padding:0;
-    }
-  }
-
-  .rc-search {
-    border: none;
-    background-color: transparent;
-    font-size: 24px;
-    text-transform: uppercase;
-    &:focus, &:active {
-      outline: none;
-      border: none;
-      background-color: transparent;
-    }
-    &:-webkit-autofill,
-    &:-webkit-autofill:hover,
-    &:-webkit-autofill:focus,
-    &:-webkit-autofill:active  { -webkit-box-shadow: 0 0 0 30px $rc-theme-secondary inset !important; }
-  }
-}
-// PROFILE
-// ---------------------------------------------------------------
 .rc-member-profile {
   box-sizing: border-box;
   background: white;
@@ -911,7 +548,6 @@ image-upload {
   img {
     width: 100%;
     height: auto;
-
   }
 
   span {
@@ -931,25 +567,7 @@ image-upload {
   }
 }
 
-// SECTION > HEADER
-// ------------------
-.rc-section-expandable {
-  overflow: hidden;
-  transition: max-height 1s ease-in-out;
-  max-height: 0;
-  cursor: pointer;
-}
 
-.rc-section-expanded {
-  .rc-section-expandable {
-    overflow: visible;
-    max-height: 2000px;
-  }
-  mat-toolbar mat-icon.rc-toolbar-expand-icon { transform: rotate(90deg); }
-}
-
-// SECTION > PROFILE > MEMBER RESTAURANTS
-// --------------------
 .rc-add-content {
 
   display: flex;
@@ -957,13 +575,13 @@ image-upload {
   justify-content: center;
   flex-direction: column;
   background: #fff;
-  @include mdc-elevation(1);
+  @include mat-elevation(1);
   cursor: pointer;
   color: #999;
   padding: 48px;
   transition: all .3s ease-in-out;
   &:hover {
-    @include mdc-elevation(5);
+    @include mat-elevation(5);
   }
   mat-icon {
     height: 48px;
@@ -984,7 +602,7 @@ image-upload {
   position: relative;
   background: white;
   transition: all .3s ease-in-out;
-  @include mdc-elevation(1);
+  @include mat-elevation(1);
   header {
     display: flex;
     margin:0;
@@ -1036,9 +654,12 @@ button.rc-member-assc {
   color: white;
 }
 
+/*
+* ---------------------------------------------------------------
+* RC CARDS
+* ---------------------------------------------------------------
+*/
 
-// GENERIC RC CARDS
-// ---------------------------------------------------------------
 .rc-card {
   position: relative;
   box-sizing: border-box;
@@ -1046,7 +667,7 @@ button.rc-member-assc {
   padding: 12px;
   width: 100%;
   transition: all .3s ease-out;
-  @include mdc-elevation(1);
+  @include mat-elevation(1);
   mat-chip-list {
     position: absolute;
     top:8px;
@@ -1072,25 +693,7 @@ button.rc-member-assc {
       text-transform: uppercase;
     }
   }
-  .cu-card-content {
-    h3 {
-      margin: 8px 0 0 0;
-      font-family: $rc-display-font;
-      line-height: 1;
-      color: $rc-theme-black;
-      letter-spacing: 0;
-      span {
-        display: block;
-        font-size: 14px;
-        letter-spacing: 0;
-      }
-    }
-    span {
-      font-size: 14px;
-      margin: 0;
-    }
 
-  }
   .rc-card-img {
     position: relative;
     float: left;
@@ -1113,15 +716,10 @@ button.rc-member-assc {
     object-fit: cover;
   }
   .rc-card-actions {
-    //position: relative;
-    //clear: both;
     display: flex;
     flex-direction: row;
-    //border-top: 1px dotted #ddd;
     margin-top:8px;
     padding-top:8px;
-    //text-align: right;
-
     mat-chip-list {
       position: relative;
       padding-left: 8px;
@@ -1141,11 +739,9 @@ button.rc-member-assc {
   position: relative;
   box-sizing: border-box;
   background: white;
-  //padding: 12px;
   width: 100%;
-
   transition: all .3s ease-out;
-  @include mdc-elevation(1);
+  @include mat-elevation(1);
   .rc-img-wrapper {
     width: 100%;
     height: 200px;
@@ -1166,32 +762,22 @@ button.rc-member-assc {
   position: absolute;
   top: 16px;
   left: 16px;
-  //color: $rc-theme-primary;
-  //font-size: 32px;
- // color: yellow;
-
 }
-.rc-dialog-cms-image-wrap {
-  position: relative;
-}
+.rc-dialog-cms-image-wrap { position: relative; }
 .rc-dialog-cms-image {
-  header {
-    display: flex;
-  }
+  header { display: flex; }
   img {
     width: 100%;
     height: auto;
   }
 }
-.rc-online {
-  background-color: $rc-theme-success !important;
-}
+.rc-online { background-color: $rc-theme-success !important; }
 .rc-action-left {
   text-align: left;
   float: left;
 }
 .rc-card-over {
-  @include mdc-elevation(8);
+  @include mat-elevation(8);
 
   .rc-card-content h2 {
     color: $rc-theme-primary;
@@ -1199,7 +785,7 @@ button.rc-member-assc {
   }
 }
 .cu-card-over {
-  @include mdc-elevation(8);
+  @include mat-elevation(8);
 
   .cu-card-content {
     color: $rc-theme-primary;
@@ -1207,33 +793,7 @@ button.rc-member-assc {
   }
 }
 
-/*
-** -------------------------------
-** Maintain aspect ratio of images
-** -------------------------------
-*/
-[style*="--aspect-ratio"] > :first-child {
-  width: 100%;
-}
-[style*="--aspect-ratio"] > img {
-  height: auto;
-}
-@supports (--custom:property) {
-  [style*="--aspect-ratio"] {
-    position: relative;
-  }
-  [style*="--aspect-ratio"]::before {
-    content: "";
-    display: block;
-    padding-bottom: calc(100% / (var(--aspect-ratio)));
-  }
-  [style*="--aspect-ratio"] > :first-child {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-  }
-}
+
 
 
 .rc-card-restaurant {
@@ -1279,115 +839,6 @@ button.rc-member-assc {
     margin: 16px 4px 4px !important;
   }
 }
-
-
-// SECTION - HOME
-// ---------------------------------------------------------------
-
-.rc-avatar {
-  border-radius: 50%;
-  width: 96px;
-  height: auto;
-}
-
-// SECTION > RESTAURANTS > LIST
-// --------------------------------------------------------------------
-.rc-search-list-container {
-  box-sizing: border-box;
-  position: relative;
-  background: #fff;
-  width: 100%;
-
-  input.rc-list-search {
-    box-sizing: border-box;
-    position: relative;
-    font-size: 24px;
-    padding: 16px 8px 16px 48px;
-    border: 0;
-    width: 100%;
-    outline: none;
-    display: inline-block;
-    &:focus {
-     @include mdc-elevation(4);
-    }
-  }
-  .mat-icon {
-    position: absolute;
-    top:0;
-    left:0;
-    color: #ccc;
-    z-index: 2;
-    font-size: 32px;
-    padding:16px 8px;
-  }
-}
-.cu-search-list-container {
-  box-sizing: border-box;
-  position: relative;
-  background: #fff;
-  width: 100%;
-
-  input.rc-list-search {
-    box-sizing: border-box;
-    position: relative;
-    font-size: 20px;
-    padding: 16px 8px 16px 48px;
-    border: 0;
-    width: 100%;
-    outline: none;
-    display: inline-block;
-    &:focus {
-      @include mdc-elevation(4);
-    }
-  }
-  .mat-icon {
-    position: absolute;
-    top:0;
-    left:0;
-    color: #ccc;
-    z-index: 2;
-    font-size: 32px;
-    padding:16px 8px;
-  }
-}
-
-
-//.rc-map-legend {
-//  mat-list-item .mat-list-item-content {
-//    padding: 0 !important;
-//  }
-//  img {
-//    margin-right: 16px;
-//  }
-//}
-// ---------------------------------------------------------------
-// messages
-// ---------------------------------------------------------------
-.rc-messages {
-  padding: 0 0 8px 0;
-  .rc-message {
-    position: relative;
-    border: 1px solid $rc-theme-success;
-    background: rgba($rc-theme-success, .1);
-    border-radius: 4px;
-    padding: 8px;
-    margin: 0 0 8px 0;
-
-    h2 {
-      font-size: 16px;
-      font-weight: $rc-display-font-weight;
-      margin: 0;
-      padding: 0;
-    }
-    p {
-      margin:0 0 4px 0;
-      font-size: 16px;
-      padding: 0;
-      color: $rc-theme-black;
-    }
-  }
-}
-
 
 // ---------------------------------------------------------------
 // MODAL/DIALOGS
@@ -1485,14 +936,7 @@ button.rc-member-assc {
     }
   }
 
-  .mdc-layout-grid {
-    max-width: 800px;
-    //--mdc-layout-grid-margin: 8px;
-    //--mdc-layout-grid-gutter: 16px;
-    //.mdc-layout-grid {
-    //  --mdc-layout-grid-margin: 0;
-    //}
-  }
+  .mdc-layout-grid { max-width: 800px; }
   .rc-member-badge {
     position: absolute;
     top: 0;
@@ -1507,13 +951,11 @@ button.rc-member-assc {
     }
   }
   mat-tab-body { padding-top: 1em; }
-  //label { text-transform: uppercase; }
   .mat-input-element:disabled {
     color: inherit;
     opacity: .6;
   }
   div[mat-dialog-actions] {
-    //border-top: 1px solid $rc-theme-black;
     button { margin-left: 8px; }
   }
   .rc-file {
@@ -1533,35 +975,7 @@ button.rc-member-assc {
 }
 
 
-.rc-card-member {
-  .rc-dialog-card-panel-top {}
-  .rc-dialog-card-panel-bottom {
-    border-bottom: 1px solid $rc-theme-black;
-    min-height: 240px;
-  }
-  .mdc-layout-grid {
-    max-width: 1000px;
-    //--mdc-layout-grid-margin: 0;
-    //--mdc-layout-grid-gutter: 8px;
-  }
-  .rc-dialog-card-img {
-    margin: 0 auto;
-    background: url("https://placehold.it/160x160") #666 no-repeat center;
-    width: 128px;
-    height: 128px;
-    border-radius: 50%;
-    overflow: hidden;
-  }
-  span.rc-id {
-    display: block;
-    text-align: center;
-    text-transform: uppercase;
-  }
-  img {
-    width: 100%;
-    height: 100%;
-  }
-}
+
 
 .rc-dialog-alert {
   padding-bottom: 16px;
@@ -1573,37 +987,6 @@ button.rc-member-assc {
   }
 }
 
-.rc-modal-login {
-  width:400px;
-  input {
-    font-size: 24px;
-  }
-  .mat-dialog-actions {
-    button {
-      margin-left: 8px;
-    }
-  }
-
-}
-.rc-login-msg {
-  background: $rc-theme-grey;
-  margin-top: 16px;
-  padding:8px;
-  text-align: center;
-}
-.rc-sb-warn {
-  background: red;
-}
-.mat-simple-snackbar-action {
-  color: white;
-}
-
-.rc-associate {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  color: $rc-theme-primary;
-}
 
 .rc-card-vspacer { height: 16px; }
 .rc-card-vspacer-lg { height: 32px; }
@@ -1648,45 +1031,12 @@ button.rc-member-assc {
   top: 0;
   z-index: 100;
 }
-.rc-form-group {
-  padding: 8px 0;
-  border-bottom: 1px solid #ddd ;
-  margin-bottom: 8px;
-  mat-radio-button, mat-checkbox { padding: 0 16px 0 0; }
-}
 
-.rc-display-column {
-  display: inline-flex;
-  flex-direction: column;
-  mat-checkbox { margin: 4px 0; }
-}
-.rc-img-upload {
-  label { cursor: pointer; }
-  .rc-file {
-    width: 0.1px;
-    height: 0.1px;
-    opacity: 0;
-    overflow: hidden;
-    position: absolute;
-    z-index: -1;
-  }
-}
-.rc-add-member {
-  position: relative;
-  .mdc-layout-grid {
-    max-width: 1160px;
-    //--mdc-layout-grid-margin: 8px;
-    //--mdc-layout-grid-gutter: 16px;
-    //.mdc-layout-grid {
-    //  --mdc-layout-grid-margin: 0;
-    //}
-  }
-  .rc-add-item {
-    display: inline-block;
-    line-height: 24px;
-    cursor: pointer;
-  }
-}
+
+/*
+* Restaurant Look-Up
+* ------------------
+*/
 ul.rc-lookup-results {
   margin: 0 0 0;
   padding:0;
@@ -1750,108 +1100,108 @@ ul.rc-lookup-results {
     margin-left: 4px;
   }
 }
-a.rc-add-item {
-  line-height: 48px;
-  cursor: pointer;
-  text-align: right;
-  color: $rc-theme-primary;
-  &:hover { text-decoration: underline; }
-}
-.rc-rest-list {
-  margin: 16px 0;
-  padding: 0;
-  list-style: none;
 
-  li {
-    margin:0;
-    line-height: 32px;
-    list-style: none;
+/*
+* ------------------------------------------------
+*  CMS
+* ------------------------------------------------
+*/
+
+
+/* CMS Dashboard
+** --------------------------------- */
+
+.rc-cms-dash-info {
+  transition: all .3s ease-out;
+
+  .mat-card-title {
+    margin-bottom: 8px;
+    font-size: 16px;
+  }
+  .mat-card-content { margin-bottom: 8px; }
+}
+
+.rc-content-status {
+
+  padding-bottom: 24px;
+  mat-list-item {
+    cursor: pointer;
+    h3 { transition: color .3s ease; }
+    &:hover {
+      h3 { color: $rc-theme-primary; }
+    }
+  }
+  mat-icon { background-color: black; }
+  .mat-progress-bar-fill {
+    &:after { background-color:  $rc-theme-tertiary; }
+  }
+  .mat-progress-bar-fill {
+    &:after { background-color: $rc-theme-success; }
+  }
+  .rc-content-status-complete {
+    mat-icon { background-color: $rc-theme-success; }
+    .mat-progress-bar-fill {
+      &:after { background-color: $rc-theme-success; }
+    }
+  }
+
+  .rc-content-status-partial {
+    mat-icon { background-color: $rc-theme-tertiary; }
+    .mat-progress-bar-fill {
+      &:after { background-color:  $rc-theme-tertiary; }
+    }
+  }
+
+  .rc-content-status-missing {
+    mat-icon { background-color: black; }
+    .mat-progress-bar-fill {
+      &:after { background-color:  $rc-theme-tertiary; }
+    }
+  }
+
+  mat-icon {
+    padding: 8px !important;
+    color: white;
+    background-color: black;
+  }
+  .mat-progress-bar {
+    height: 6px;
+    margin-top: 6px !important;
+  }
+
+  .mat-progress-bar-buffer { background-color: #ddd; }
+  p[matLine] > span {
+    margin-top: 4px;
+    font-size: 11px;
+    text-transform: uppercase;
+    text-align: right;
   }
 }
-mat-tab-group { position: relative; }
-.rc-list-filters {
-  position: absolute;
-  top:16px;
-  right: 48px;
-  z-index: 1000;
-}
-.rc-verified-data {
-  position: absolute;
-  top: 12px;
-  right: 48px;
-  z-index: 2000;
-  mat-icon { color: $rc-theme-primary; }
-}
-.rc-card-icon {
-  position: absolute;
-  top:24px;
-  right:24px;
-}
-.rc-profile-img { text-align: right; }
-
-.rc-card-img { float: right; }
-.rc-contactme {
-  text-align: center;
-  a {
-    //width: 38%;
-    //padding: 8px;
-    //font-size: 16px;
-  }
-}
-
-.rc-content-section {
-  &.rc-content-aims {
-    margin: 3rem 0;
-    //background-color: $rc-theme-primary;
-    min-height: 600px;
-  }
-}
-.rc-btn-top {
-  position: fixed;
-  z-index: 1000;
-  bottom: 48px;
-  right: 48px;
-}
-
-// ------------------------------------------------
-// CMS
-// ------------------------------------------------
 
 .rc-cms {
 
   .rc-cms-base {
     dd { font-size: 24px; }
   }
-
   .rc-card { padding: 16px; }
 
-  dl {
-
-    margin: 24px 0 0 0;
-  }
+  dl { margin: 24px 0 0 0; }
   dt {
     text-transform: uppercase;
     font-size: 12px;
     color: $rc-theme-primary;
-    &:after {
-      content: ":";
-    }
+    &:after { content: ":"; }
   }
   dd {
     margin: 0 0 8px 0;
     padding: 0 0 8px 0;
     font-size: 18px;
-    //border-bottom: 1px dotted #666;
     a {
       color: inherit;
-      &:hover {
-        color: $rc-theme-primary;
-      }
+      &:hover { color: $rc-theme-primary; }
     }
   }
-  span {
-    display: block;
-  }
+  span { display: block; }
   .rc-cms-info {
     background: rgba($rc-theme-secondary, .25);
     padding: 16px;
@@ -1874,13 +1224,9 @@ mat-tab-group { position: relative; }
     }
   }
   .rc-cms-info-actions {
-    button {
-      text-transform: uppercase;
-      //width: 100%;
-    }
+    button { text-transform: uppercase; }
   }
 }
-
 
 .rc-cms-card-nav {
   position: absolute !important;
@@ -1900,19 +1246,17 @@ mat-tab-group { position: relative; }
     margin: 8px 0 0 0;
     padding: 0;
     display: inline-block;
-    img {
-      width: 36px;
-      //transform: scale(.50);
-    }
+    img { width: 36px; }
     a {
       opacity: 0.8;
       transition: opacity ease-in-out .3s;
-      &:hover {
-        opacity: 1;
-      }
+      &:hover { opacity: 1; }
     }
   }
 }
+
+/* CMS Opening Times
+** --------------------------------- */
 
 .rc-cms-times {
 
@@ -1924,48 +1268,40 @@ mat-tab-group { position: relative; }
     .mat-checkbox-label {
       color: grey;
     }
-
   }
 
   mat-card-content {
-
-    h4 {
-      margin: 0 0 8px;
-    }
-    mat-form-field {
-      margin-right: 16px;
-    }
+    h4 { margin: 0 0 8px; }
+    mat-form-field { margin-right: 16px; }
     .rc-session {
       display: flex;
       align-items: center;
     }
-    a.rc-del-session {
-      cursor: pointer;
+    a.rc-del-session { cursor: pointer; }
+  }
+}
+.rc-day {
+  border: 1px solid $rc-theme-secondary;
+  background: $rc-theme-secondary;
+
+  .rc-sessions {
+    background: white;
+    padding: 8px;
+    h3 {
+      padding: 0;
+      margin: 0;
+      display: block;
+      line-height: 1;
     }
   }
-
-
-
-}
-.rc-opening-times {
-  table {
-    border-collapse: collapse;
-  }
-  td:first-child {
-    font-weight: $rc-display-font-weight;
-    font-size: 24px;
-  }
-  tr {
-    border:1px solid lightgrey;
-  }
+  .rc-session {}
 }
 
+/* CMS Image/Menu Upload
+** --------------------------------- */
 
 .rc-dialog-cms-image-upload {
-  header[mat-dialog-title] {
-    margin-bottom: 16px;
-  }
-
+  header[mat-dialog-title] { margin-bottom: 16px; }
   label {
     text-transform: capitalize;
     font-size: 16px;
@@ -2000,338 +1336,21 @@ mat-tab-group { position: relative; }
   color: white;
   display: flex;
   line-height: 1.5;
-
   padding: 8px 24px;
   font-size: 24px;
-
   border-radius: 2px;
   transition: all .3s ease-out;
   text-align: center;
   @include mat-elevation(4);
-  mat-icon {
-    margin-right: 8px;
-  }
-  &:hover {
-    @include mat-elevation(0);
-  }
+  mat-icon { margin-right: 8px; }
+  &:hover { @include mat-elevation(0); }
 }
 
-.rc-cms-dash-info {
-  transition: all .3s ease-out;
-  .mat-card-title {
-    margin-bottom: 8px;
-    font-size: 16px;
-  }
-  .mat-card-content {
-    margin-bottom: 8px;
-  }
-}
+/*
+** Menus
+** --------------------------------
+*/
 
-.rc-day {
-  border: 1px solid $rc-theme-secondary;
-  background: $rc-theme-secondary;
-
-  .rc-sessions {
-    background: white;
-    padding: 8px;
-    h3 {
-      padding: 0;
-      margin: 0;
-      display: block;
-      line-height: 1;
-    }
-  }
-  .rc-session {
-
-  }
-}
-
-.rc-dialog-restaurant {
-  max-width: 600px;
-}
-
-.rc-about {
-  display: flex;
-  flex-direction: column;
-  max-width: 270px;
-  position: relative;
-  .rc-close {
-    position: absolute;
-    top: -8px; right: -8px;
-    z-index: 100;
-  }
-  img {
-    width:120px;
-    height: auto;
-  }
-  h3 {
-    text-align: center;
-    font-size: 12px;
-    padding-bottom:0;
-    margin-bottom: 0;
-  }
-  a {
-    color: inherit;
-  }
-}
-.rc-content-status {
-
-  padding-bottom: 24px;
-  mat-list-item {
-    cursor: pointer;
-    h3 {
-      transition: color .3s ease;
-    }
-    &:hover {
-      h3 {
-        color: $rc-theme-primary;
-      }
-    }
-  }
-  mat-icon {
-    background-color: black;
-  }
-  .mat-progress-bar-fill {
-    &:after {
-      background-color:  $rc-theme-tertiary;
-    }
-  }
-  .mat-progress-bar-fill {
-    &:after {
-      background-color: $rc-theme-success;
-    }
-  }
-  .rc-content-status-complete {
-    mat-icon {
-      background-color: $rc-theme-success;
-    }
-    .mat-progress-bar-fill {
-      &:after {
-        background-color: $rc-theme-success;
-      }
-    }
-  }
-
-  .rc-content-status-partial {
-    mat-icon {
-      background-color: $rc-theme-tertiary;
-    }
-    .mat-progress-bar-fill {
-      &:after {
-        background-color:  $rc-theme-tertiary;
-      }
-    }
-  }
-
-  .rc-content-status-missing {
-    mat-icon {
-      background-color: black;
-    }
-    .mat-progress-bar-fill {
-      &:after {
-        background-color:  $rc-theme-tertiary;
-      }
-    }
-  }
-
-  mat-icon {
-    padding: 8px !important;
-    color: white;
-    background-color: black;
-  }
-  .mat-progress-bar {
-    height: 6px;
-    margin-top: 6px !important;
-  }
-
-  .mat-progress-bar-buffer {
-    background-color: #ddd;
-   //opacity: .25;
-  }
-  p[matLine] > span {
-    margin-top: 4px;
-    font-size: 11px;
-    text-transform: uppercase;
-    text-align: right;
-  }
-
-}
-.rc-affiliate-offer-card {
-  position: relative;
-
-  .mat-card-actions {
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    bottom: 32px;
-    left:32px;
-    width: calc(100% - 32px);
-  }
-  .mat-card-image {}
-  .mat-card-title {
-    font-size: 36px;
-    line-height: 1;
-  }
-
-  p {
-    margin: 4px 0;
-    //color: red;
-  }
-
-  dl {
-    padding-bottom: 48px;
-    dt {
-      color: $rc-theme-black;
-    }
-    dd {
-      font-size: 16px;
-      a {
-        color: $rc-theme-primary;
-        &:hover {
-          text-decoration: underline;
-        }
-      }
-    }
-    dd:first-of-type {
-      font-size: 24px;
-      margin-bottom: 0;
-    }
-  }
-  .rc-btn-offer {
-    height: 56px;
-    width: 100%;
-    font-size: 18px;
-  }
-
-}
-
-// ----------------
-// F & S
-// ----------------
-.rc-fs-input {
-
-  form {
-    input[type=number]::-webkit-inner-spin-button,
-    input[type=number]::-webkit-outer-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
-    }
-    input {
-      font-size: 24px;
-    }
-    span {
-      font-size: inherit;
-    }
-    label {
-      text-transform: uppercase;
-    }
-    dl {
-      margin: 8px 0 8px 24px;
-    }
-    dt {
-    }
-    dd {
-      margin: 0;
-      padding: 0 0 8px 0;
-      font-size: 12px;
-    }
-    .mat-input-subscript-wrapper {
-      font-size: 11px !important;
-      margin-top: 0 !important;
-    }
-  }
-
-  header {
-    margin-top: 24px;
-    padding: 24px 0 12px;
-    background: white;
-    mat-toolbar {
-      background-color: #fff;
-      mat-icon {
-        margin-right: 8px;
-      }
-      .mat-select-trigger {
-        //font-size: 24px;
-      }
-    }
-    .mat-button-toggle-group, .mat-button-toggle-standalone {
-      box-shadow: none;
-    }
-  }
-
-  section {
-    background: #fff;
-    margin-top: 24px;
-    padding: 16px;
-    @include mat-elevation(2);
-
-    &:last-child {
-      margin-bottom: 48px;
-    }
-  }
-  .rc-toolbar-fs {
-    $toolbar-height: 48px;
-    height:$toolbar-height;
-    background-color: $rc-theme-black;
-    color: #fff;
-    &.mat-toolbar { min-height: $toolbar-height; }
-    mat-toolbar-row { height: $toolbar-height; }
-    margin-bottom: 16px;
-    mat-icon {
-      margin-right: 16px;
-    }
-    .mat-select-trigger {
-      font-size: 24px;
-    }
-  }
-
-
-
-  .mdc-layout-grid {
-    max-width: 640px;
-    //--mdc-layout-grid-margin: 8px;
-    //--mdc-layout-grid-gutter: 16px;
-    //.mdc-layout-grid {
-    //  --mdc-layout-grid-margin: 0;
-    //}
-  }
-}
-
-.rc-fs-graph-toolbar {
-  background-color: white;
-  padding-left: 0;
-  margin-bottom: 16px;
-  .mat-button-toggle-group, .mat-button-toggle-standalone {
-    box-shadow: none;
-  }
-}
-.rc-fs-graphlet {
-  cursor: pointer;
-  transition: all .3s ease-out;
-  &:hover {
-    @include mat-elevation(4);
-  }
-}
-.rc-fs-graph-card.mat-card-title {
-    display: flex !important;
-
-}
-.rc-dg-graph-card.mat-card-title {
-  display: flex !important;
-  font-size: 20px;
-}
-.rc-card-toggle {
-  font-size: 12px;
-  text-transform: uppercase;
-  .mat-button-toggle-checked {
-    background-color: $rc-theme-primary;
-    color: white;
-  }
-}
-
-/**
-  * Menus
- */
 .rc-card.rc-dish {
 
   cursor: pointer;
@@ -2356,7 +1375,7 @@ mat-toolbar.cms-menu-section {
   background-color: transparent;
   font-size: 18px;
   margin: 16px 0;
-  //@include mdc-elevation(1);
+  //@include mat-elevation(1);
   mat-form-field {
     //width: 300px;
   }
@@ -2397,6 +1416,140 @@ mat-toolbar.cms-menu-section {
     color: $rc-theme-text;
     padding-top: .2rem;
     text-transform: none;
+  }
+}
 
+.rc-affiliate-offer-card {
+  position: relative;
+
+  .mat-card-actions {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    bottom: 32px;
+    left:32px;
+    width: calc(100% - 32px);
+  }
+  .mat-card-image {}
+  .mat-card-title {
+    font-size: 36px;
+    line-height: 1;
+  }
+
+  p { margin: 4px 0; }
+
+  dl {
+    padding-bottom: 48px;
+    dt { color: $rc-theme-black; }
+    dd {
+      font-size: 16px;
+      a {
+        color: $rc-theme-primary;
+        &:hover { text-decoration: underline; }
+      }
+    }
+    dd:first-of-type {
+      font-size: 24px;
+      margin-bottom: 0;
+    }
+  }
+  .rc-btn-offer {
+    height: 56px;
+    width: 100%;
+    font-size: 18px;
+  }
+
+}
+
+/*
+** --------------------------------
+** F&S
+** --------------------------------
+*/
+
+.rc-fs-input {
+  form {
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    input { font-size: 24px; }
+    span { font-size: inherit; }
+    label { text-transform: uppercase; }
+    dl { margin: 8px 0 8px 24px; }
+    dt { }
+    dd {
+      margin: 0;
+      padding: 0 0 8px 0;
+      font-size: 12px;
+    }
+    .mat-input-subscript-wrapper {
+      font-size: 11px !important;
+      margin-top: 0 !important;
+    }
+  }
+
+  header {
+    margin-top: 24px;
+    padding: 24px 0 12px;
+    background: white;
+    mat-toolbar {
+      background-color: #fff;
+      mat-icon { margin-right: 8px; }
+    }
+    .mat-button-toggle-group,
+    .mat-button-toggle-standalone {
+      box-shadow: none;
+    }
+  }
+
+  section {
+    background: #fff;
+    margin-top: 24px;
+    padding: 16px;
+    @include mat-elevation(2);
+    &:last-child { margin-bottom: 48px; }
+  }
+  .rc-toolbar-fs {
+    $toolbar-height: 48px;
+    height:$toolbar-height;
+    background-color: $rc-theme-black;
+    color: #fff;
+    &.mat-toolbar { min-height: $toolbar-height; }
+    mat-toolbar-row { height: $toolbar-height; }
+    margin-bottom: 16px;
+    mat-icon { margin-right: 16px; }
+    .mat-select-trigger { font-size: 24px; }
+  }
+  .mdc-layout-grid { max-width: 640px; }
+}
+
+.rc-fs-graph-toolbar {
+  background-color: white;
+  padding-left: 0;
+  margin-bottom: 16px;
+  .mat-button-toggle-group,
+  .mat-button-toggle-standalone {
+    box-shadow: none;
+  }
+}
+
+.rc-fs-graphlet {
+  cursor: pointer;
+  transition: all .3s ease-out;
+  &:hover { @include mat-elevation(4); }
+}
+.rc-fs-graph-card.mat-card-title { display: flex !important; }
+.rc-dg-graph-card.mat-card-title {
+  display: flex !important;
+  font-size: 20px;
+}
+.rc-card-toggle {
+  font-size: 12px;
+  text-transform: uppercase;
+  .mat-button-toggle-checked {
+    background-color: $rc-theme-primary;
+    color: white;
   }
 }

@@ -2,17 +2,19 @@
 
   <mat-toolbar class="rc-section-toolbar rc-section-toolbar-fixed">
 
-    <span class="rc-toolbar-title rc-link-like"
-          [matMenuTriggerFor]="cmsRestaurants"
-          [matTooltip]="'CMS-Component.ManagedByYou' | translate">
-          My Restaurants
-    </span>
     <button
       *ngIf="restaurants?.length > 0"
       mat-icon-button
       [matMenuTriggerFor]="cmsRestaurants">
       <mat-icon>arrow_drop_down</mat-icon>
     </button>
+
+    <span class="rc-toolbar-title rc-link-like"
+          [matMenuTriggerFor]="cmsRestaurants"
+          [matTooltip]="'CMS-Component.ManagedByYou' | translate">
+          {{ restaurant?.restaurant_name }}
+    </span>
+
 
     <mat-menu #cmsRestaurants="matMenu">
       <button
@@ -143,9 +145,7 @@
         *ngIf="offerInBox"
         class="rc-counter">{{ offerInBox }}</span>
     </a>
-
   </mat-menu>
-
 </header>
 
 <div
