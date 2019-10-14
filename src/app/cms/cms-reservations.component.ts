@@ -2,7 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CmsLocalService } from './cms-local.service';
 import { CMSService, RestaurantService, HelpService } from '../_services';
 import { Restaurant, CMSDescription } from '../_models';
-import { TranslateService } from '@ngx-translate/core';;
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'rc-cms-reservations',
@@ -18,32 +18,21 @@ export class CmsReservationsComponent implements OnInit {
   // data objs
   restaurant: Restaurant;
   descriptions: CMSDescription = new CMSDescription();
-  dataChanged: boolean = false;
+  dataChanged = false;
+
   resGeneralMaxLength: Number = 500;
   resGroupMaxLength: Number = 500;
   resPrivateMaxLength: Number = 500;
-  booking_options: any;
 
-  selected_bkg_provider: any = {
-    max_covers: 8,
-    max_days: 30,
-    id: 0,
-    rid: undefined
-  };
+  booking_providers: any;
+  selected_booking_provider;
+  selected_booking_provider_index = 0;
+  // Todo: need a standard id to test for 'no online bookings'
+  selected_booking_provider_id = null;
 
-
-  bkg_providers: any = [
-    { id: 'email', label: 'Email Request Only', rid_prefix: 'Email: ', rid_label: 'Reservations Email Address'},
-    { id: 'simpleerb', label: 'SimpleERB Lite', rid_prefix: 'ID: ', rid_label: 'SimpleERB Account No.'},
-    { id: 'opentable', label: 'OpenTable Connect', rid_prefix: 'ID: ', rid_label: 'OpenTable Account ID' +
-        ' ',  url: 'https://www.opentable.co.uk/restref/client/?rid='},
-    { id: 'bookatable', label: 'Bookatable', rid_prefix: 'ID: ', rid_label: 'Bookatable Account ID'}
-  ];
-
-  bkg_config: any = {
-    max_covers: 8,
-    max_days: 30,
-  };
+  // defaults
+  booking_provider_reference = '';
+  booking_provider_rid_label = '';
 
   constructor(
     private cms: CMSService,
@@ -51,14 +40,18 @@ export class CmsReservationsComponent implements OnInit {
     private translate: TranslateService,
     private restaurantService: RestaurantService,
     public help: HelpService
-  ) { }
+  ) {
+      // detect language changes... need to check for change in texts
+      translate.onLangChange.subscribe(lang => {
+        this.translate.get('CMS-Reservations').subscribe(data => {this.t_data = data; });
+    });
+  }
 
   ngOnInit() {
 
-    this.translate.get('CMS-Directory').subscribe(data => {
+    this.translate.get('CMS-Reservations').subscribe(data => {
       this.t_data = data;
     });
-
     // Subscribe to service
     this.cmsLocalService.getRestaurant()
       .subscribe(data => {
@@ -66,25 +59,6 @@ export class CmsReservationsComponent implements OnInit {
             this.restaurant = data;
             // console.log(this.restaurant);
             this.getCmsData();
-            // Load booking info
-            let country_code;
-            if (this.restaurant.restaurant_number.substr(0, 2) === 'FR') {
-              country_code = 'FR';
-            } else {
-              country_code = 'EN';
-            }
-            this.restaurantService.getBookings(country_code, '').subscribe(
-              booking_data => {
-                if (booking_data['count'] > 0) {
-                  this.booking_options = booking_data['booking_options'];
-                  console.log(this.booking_options);
-                } else {
-                  console.log('No booking option records found in database');
-                }
-              },
-              error => {
-                console.log(error);
-              });
           }
         },
         error => {
@@ -93,15 +67,122 @@ export class CmsReservationsComponent implements OnInit {
     this.dataChanged = false;
   }
 
-  updateConfigForm(frm){
-    console.log(frm);
-    setTimeout(() => this.provider_id_input.nativeElement.focus(), 0);
+  getCmsData() {
+    this.cms.getDescriptions(this.restaurant.restaurant_id)
+      .subscribe(
+        data => {
+          this.descriptions = data['descriptions'][0];
+          // update 041118 - fudge to fix back end returning (or something returning) 'undefined'
+          if (this.descriptions.cms_description_reservation_info === 'undefined' ||
+            this.descriptions.cms_description_reservation_info === 'null') {
+            this.descriptions.cms_description_reservation_info = '';
+          }
+          if (this.descriptions.cms_description_group === 'undefined' ||
+            this.descriptions.cms_description_group === 'null') {
+            this.descriptions.cms_description_group = '';
+          }
+          if (this.descriptions.cms_description_private === 'undefined' ||
+            this.descriptions.cms_description_private === 'null') {
+            this.descriptions.cms_description_private = '';
+          }
+          if (this.descriptions.cms_description_booking_rest_id === 'undefined' ||
+            this.descriptions.cms_description_booking_rest_id === 'null') {
+            this.descriptions.cms_description_booking_rest_id = '';
+          } else {
+            this.booking_provider_reference = this.descriptions.cms_description_booking_rest_id;
+          }
+          // console.log(this.descriptions);
+          this.dataChanged = false;
 
+          // load booking providers and set the selected one... default is email, which is 0
+          this.restaurantService.getBookingProviders(this.restaurant.restaurant_number).subscribe(
+            data_providers => {
+              if (data_providers['count'] > 0) {
+                console.log(data_providers['booking_providers']);
+                this.booking_providers = data_providers['booking_providers'];
+                let bp = this.descriptions.cms_description_booking_provider;
+                if (bp) {
+                  for (let i = 0; i < bp.length; i++) {
+                    if (bp === this.booking_providers[i].booking_provider_service) {
+                      this.selected_booking_provider_index = i;
+                    }
+                  }
+                }
+                this.selected_booking_provider = bp[this.selected_booking_provider_index];
+                this.booking_provider_rid_label = this.selected_booking_provider.booking_provider_rid_label;
+              } else {
+                console.log('No Booking providers found');
+              }
+            },
+            error => {
+              console.log(JSON.stringify(error));
+            });
+        },
+        error => {
+          console.log(error);
+        });
   }
+
+  changeOption(elem) {
+    this.selected_booking_provider_id = this.booking_providers[this.selected_booking_provider_index].booking_provider_id
+    this.selected_booking_provider = this.booking_providers[this.selected_booking_provider_index];
+    this.booking_provider_rid_label = this.selected_booking_provider.booking_provider_rid_label;
+    this.booking_provider_reference = this.selected_booking_provider.booking_provider_reference;
+    this.setChanged(elem);
+  }
+
+  updateConfigForm(frm) {
+    // console.log('Bkg Provider', frm);
+    this.updateData();
+    setTimeout( () => this.provider_id_input.nativeElement.focus(), 0);
+  }
+
   testBkgLink() {
-    let provider_config = this.bkg_providers[this.selected_bkg_provider.id];
-    //console.log(provider_config);
-    window.open(provider_config.url + this.selected_bkg_provider.rid)
+    // console.log(this.selected_booking_provider_index, this.booking_provider_reference);
+    if (this.booking_providers[this.selected_booking_provider_index].booking_provider_url) {
+      window.open(this.booking_providers[this.selected_booking_provider_index].booking_provider_url +
+        this.booking_provider_reference);
+    } else {
+      this.cmsLocalService.dspSnackbar(`${this.t_data.NoTest}`, null, 3);
+    }
+  }
+
+  setChanged(elem): void {
+    if (!this.dataChanged) {
+      this.dataChanged = true;
+      console.log('Change', elem);
+    }
+  }
+
+  updateData(): void {
+
+    // Check for required fields
+    if (this.selected_booking_provider_id > 1 && this.selected_booking_provider_id != 5) {
+      if(!this.booking_provider_reference) {
+        this.cmsLocalService.dspSnackbar(`Please enter your ${this.selected_booking_provider.booking_provider_rid_label}`, null, 3);
+        return;
+      }
+    }
+
+    // call API
+    this.descriptions.cms_description_booking_provider = this.selected_booking_provider.booking_provider_service;
+    this.descriptions.cms_description_booking_rest_id = this.booking_provider_reference;
+
+    // console.log(this.descriptions.cms_booking_max_covers,
+    //   this.descriptions.cms_booking_max_advance_days,
+    //   this.descriptions.cms_description_booking_provider,
+    //   this.descriptions.cms_description_booking_rest_id
+    //   );
+    this.cms.updateDescription(this.descriptions).subscribe(
+      data => {
+        // console.log('RES', data);
+        this.dataChanged = false;
+        this.cmsLocalService.dspSnackbar(`${this.restaurant.restaurant_name} ${this.t_data.ResInfoUpdate}`, null, 5);
+      },
+      error => {
+        console.log('Error', error);
+        this.cmsLocalService.dspSnackbar(this.t_data.UpdateFailed, null, 3);
+      });
   }
 
   // Deactivation guard
@@ -111,55 +192,6 @@ export class CmsReservationsComponent implements OnInit {
     } else {
       return true;
     }
-  }
-
-  getCmsData() {
-    this.cms.getDescriptions(this.restaurant.restaurant_id)
-      .subscribe(
-        data => {
-          this.descriptions = data['descriptions'][0];
-          // update 041118 - fudge to fix back end returning (or something returning) 'undefined'
-          if (this.descriptions.cms_description_reservation_info === 'undefined') {
-            this.descriptions.cms_description_reservation_info = '';
-          }
-          if (this.descriptions.cms_description_group === 'undefined') {
-            this.descriptions.cms_description_group = '';
-          }
-          if (this.descriptions.cms_description_private === 'undefined') {
-            this.descriptions.cms_description_private = '';
-          }
-          if (this.descriptions.cms_description_booking_rest_id === 'undefined') {
-            this.descriptions.cms_description_booking_rest_id = '';
-          }
-          // console.log(this.descriptions);
-          this.dataChanged = false;
-        },
-        error => {
-          console.log(error);
-        });
-  }
-
-  setChanged(elem): void {
-    if (!this.dataChanged) {
-      this.dataChanged = true;
-      console.log('Change', elem.name);
-    }
-  }
-
-  updateData(): void {
-
-
-    // call API
-    this.cms.updateDescription(this.descriptions).subscribe(
-      data => {
-        // console.log('RES', data);
-        this.dataChanged = false;
-        this.cmsLocalService.dpsSnackbar(`${this.restaurant.restaurant_name} ${this.t_data.ResInfoUpdate}`, null, 5);
-      },
-      error => {
-        console.log('Error', error);
-        this.cmsLocalService.dpsSnackbar(this.t_data.UpdateFailed, null, 3);
-      });
   }
 
   resetData(): void {

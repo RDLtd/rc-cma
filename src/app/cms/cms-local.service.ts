@@ -48,7 +48,7 @@ export class CmsLocalService {
     return this.subject.asObservable();
   }
 
-  dpsSnackbar(msg: string, actn: string = '', dur: number = 3): void {
+  dspSnackbar(msg: string, actn: string = '', dur: number = 3): void {
     this.snackBar.open(msg, actn, {
       duration: dur * 1000
     });

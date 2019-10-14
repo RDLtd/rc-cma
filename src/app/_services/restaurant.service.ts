@@ -332,9 +332,9 @@ export class RestaurantService {
       { curation_request_id: curation_request_id, userCode: this.config.userAPICode, token: this.jwt() });
   }
 
-  getPartners() {
+  getPartners(country_code: string) {
     return this.http.post(this.config.apiUrl + '/restaurants/partners',
-      { userCode: this.config.userAPICode, token: this.jwt() });
+      { country_code: country_code, userCode: this.config.userAPICode, token: this.jwt() });
   }
 
   getOffers() {
@@ -417,8 +417,80 @@ export class RestaurantService {
       { restaurant_id: restaurant_id, userCode: this.config.userAPICode, token: this.jwt() });
   }
 
+  getBookingProviders(restaurant_number: string) {
+    return this.http.post(this.config.apiUrl + '/restaurants/getbookingproviders',
+      { restaurant_number: restaurant_number, userCode: this.config.userAPICode, token: this.jwt() });
+  }
 
-  // Generate Token
+  getBookingParams(restaurant_id: number) {
+    return this.http.post(this.config.apiUrl + '/restaurants/getbookingparams',
+      { restaurant_id: restaurant_id, userCode: this.config.userAPICode, token: this.jwt() });
+  }
+
+  createBookingParams(restaurant_id: number, email_option: string, simpleERB_option: string, opentable_option: string,
+                      bookatable_option: string, selection: string) {
+    return this.http.post(this.config.apiUrl + '/restaurants/createbookingparams',
+      { restaurant_id: restaurant_id,
+        email_option: email_option,
+        simpleERB_option: simpleERB_option,
+        opentable_option: opentable_option,
+        bookatable_option: bookatable_option,
+        selection: selection,
+        userCode: this.config.userAPICode, token: this.jwt() });
+  }
+
+  updateBookingParams(restaurant_id: number, email_option: string, simpleERB_option: string, opentable_option: string,
+                      bookatable_option: string, selection: string) {
+    return this.http.post(this.config.apiUrl + '/restaurants/updatebookingparams',
+      { restaurant_id: restaurant_id,
+        email_option: email_option,
+        simpleERB_option: simpleERB_option,
+        opentable_option: opentable_option,
+        bookatable_option: bookatable_option,
+        selection: selection,
+        userCode: this.config.userAPICode, token: this.jwt() });
+  }
+
+  getRnumHash(restaurant_id: number) {
+    return this.http.post(this.config.apiUrl + '/restaurants/getrnumhash',
+      { restaurant_id: restaurant_id, userCode: this.config.userAPICode, token: this.jwt() });
+  }
+
+  solveRnumHash(restaurant_hash: string) {
+    return this.http.post(this.config.apiUrl + '/restaurants/solvernumhash',
+      { restaurant_hash: restaurant_hash, userCode: this.config.userAPICode, token: this.jwt() });
+  }
+
+
+
+  //      restaurant_name
+  //      restaurant_email
+  //      booking_covers
+  //      booking_time
+  //      booking_date
+  //      booking_name
+  //      booking_email
+  //      email_language
+  //      company_name
+  sendBookingEmail(restaurant_name: string, restaurant_email: string, booking_covers: number, booking_time: string,
+                   booking_date: string, booking_name: string, booking_email: string, email_language: string,
+                   company_name: string) {
+    return this.http.post(this.config.apiUrl + '/restaurants/sendbookingemail',
+      { restaurant_name: restaurant_name,
+        restaurant_email: restaurant_email,
+        booking_covers: booking_covers,
+        booking_time: booking_time,
+        booking_date: booking_date,
+        booking_name: booking_name,
+        booking_email: booking_email,
+        email_language: email_language,
+        company_name: company_name,
+        userCode: this.config.userAPICode, token: this.jwt() });
+  }
+
+
+
+  // generate token
   private jwt() {
     // create authorization header with jwt token
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -436,27 +508,5 @@ export class RestaurantService {
     }
     return requestOptions;
   }
-
-
-
-  // generate token
-  // private jwt() {
-  //   // create authorization header with jwt token
-  //   const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-  //   if (currentUser && currentUser.token) {
-  //     const headers = new Headers({
-  //       'Authorization': 'Bearer ' + currentUser.token,
-  //       'apiCategory': 'Restaurant'
-  //     });
-  //     return new RequestOptions({ headers: headers });
-  //   } else {
-  //     // if there is no user, then we must invent a token
-  //     const headers = new Headers({
-  //       'Authorization': 'Bearer ' + '234242423wdfsdvdsfsdrfg34tdfverge' ,
-  //       'apiCategory': 'Restaurant'
-  //     });
-  //     return new RequestOptions({ headers: headers });
-  //   }
-  // }
 }
 

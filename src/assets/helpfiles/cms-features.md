@@ -5,12 +5,12 @@
 #### Strapline (optional)
 
 This strapline or subtitle in an optional piece of text that will be used when displaying the restaurant logo, or 
-restaurant name as a logo *e.g. Restaurant and Bar or Finest Italian Cuisine*
+restaurant name as a logo *e.g. Restaurant and Bar* or *Finest Italian Cuisine*
 
 #### One line description
 
 This single sentence description will be used as a summary of your restaurant where display space is limited. 
-*e.g. in a search listing*
+e.g. *in a search listing*
 
 #### One paragraph description
 

@@ -4,13 +4,13 @@
       <span class="rc-toolbar-title">{{ 'CMS-Features.StyleFeatures' | translate }}</span>
       <span class="rc-space-filler"></span>
       <span class="rc-section-toolbar-actions">
-
+        <!-- HELP -->
         <button
           mat-icon-button
-          (click)="help.dspHelp('cms-features')">
+          (click)="help.dspHelp('cms-features', restaurant)">
             <mat-icon>help_outline</mat-icon>
         </button>
-
+        <!-- UNDO CHANGES -->
         <button
           mat-icon-button
           [disabled]="!dataChanged"
@@ -18,7 +18,7 @@
           [matTooltip]="'CMS-Features.UndoChanges' | translate">
           <mat-icon>undo</mat-icon>
         </button>
-
+        <!-- SAVE CHANGES -->
         <button
           mat-icon-button
           [disabled]="!dataChanged"
@@ -35,23 +35,12 @@
     <mat-card class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-12-tablet">
 
       <mat-card-title>
-        <div class="rc-cms-card-nav">
-          <button
-            mat-icon-button
-            [disabled]="!dataChanged"
-            (click)="updateData()"
-            [matTooltip]="'CMS-Features.SaveChanges' | translate">
-            <mat-icon>check</mat-icon>
-          </button>
-        </div>
-
         <h2>{{ 'CMS-Features.Descriptions' | translate }}</h2>
       </mat-card-title>
 
       <mat-card-content>
-
+        <!-- STRAPLINE -->
         <h4>{{ 'CMS-Features.Strapline' | translate }}</h4>
-
         <mat-form-field
           class="rc-full-width"
           floatPlaceholder="never">
@@ -69,9 +58,9 @@
           </textarea>
           <mat-hint align="end">{{ strapline.value.length }}/{{ descStraplineTotal }}</mat-hint>
         </mat-form-field>
-
+        <!-- ONE SENTENCE DESC. -->
         <h4>{{ 'CMS-Features.OneSent' | translate }}</h4>
-
+        <!-- ONE PARAGRAPH DESC. -->
         <mat-form-field
           class="rc-full-width"
           floatPlaceholder="never">
@@ -89,9 +78,7 @@
           </textarea>
           <mat-hint align="end">{{ sentence.value.length }}/{{ descSentenceTotal }}</mat-hint>
         </mat-form-field>
-
         <h4>{{ 'CMS-Features.OnePara' | translate }}</h4>
-
         <mat-form-field
           class="rc-full-width" floatPlaceholder="never">
           <textarea
@@ -108,9 +95,8 @@
           </textarea>
           <mat-hint align="end">{{ paragraph.value.length }}/{{ descParagraphTotal }}</mat-hint>
         </mat-form-field>
-
+        <!-- LONG DESC. -->
         <h4>{{ 'CMS-Features.Full' | translate }}</h4>
-
         <mat-form-field class="rc-full-width" floatPlaceholder="never">
           <textarea
             #full
@@ -132,28 +118,10 @@
 
     <mat-card class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-12-tablet">
       <mat-card-title>
-
-        <div class="rc-cms-card-nav">
-          <!--<button-->
-            <!--mat-icon-button-->
-            <!--[disabled]="!dataChanged"-->
-            <!--(click)="resetData()"-->
-            <!--[matTooltip]="'CMS-Features.UndoChanges' | translate">-->
-            <!--<mat-icon>undo</mat-icon>-->
-          <!--</button>-->
-          <button
-            mat-icon-button
-            [disabled]="!dataChanged"
-            (click)="updateData()"
-            [matTooltip]="'CMS-Features.SaveChanges' | translate">
-            <mat-icon>check</mat-icon>
-          </button>
-        </div>
-
+        <!-- FEATURES -->
         <h2>{{ 'CMS-Features.Features' | translate }}</h2>
       </mat-card-title>
       <mat-card-content>
-
         <div *ngFor="let feature of features; let iatt = index">
           <mat-checkbox
             name="att{{ iatt }}"
@@ -163,12 +131,9 @@
             {{ feature.text }}
           </mat-checkbox>
         </div>
-
       </mat-card-content>
-
-
+      <!-- ADDITIONAL FEATURES -->
       <h2>{{ 'CMS-Features.AddFeatures' | translate }}</h2>
-
       <mat-card-content>
         <mat-form-field class="rc-full-width" floatPlaceholder="always">
           <mat-chip-list #chipList>
@@ -188,8 +153,6 @@
           </mat-chip-list>
         </mat-form-field>
       </mat-card-content>
-
     </mat-card>
 
 </div>
-

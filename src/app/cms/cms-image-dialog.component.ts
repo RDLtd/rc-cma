@@ -44,11 +44,11 @@ export class CmsImageDialogComponent implements OnInit {
 
     this.cms.updateElement(img).subscribe(
       data => {
-        this.cmsLocalService.dpsSnackbar(`Image ${ img.cms_element_id } ${ msg }`, null, 3);
+        this.cmsLocalService.dspSnackbar(`Image ${ img.cms_element_id } ${ msg }`, null, 3);
 
       },
       error => {
-        this.cmsLocalService.dpsSnackbar(this.t_data.UpdateFailed, null, 3);
+        this.cmsLocalService.dspSnackbar(this.t_data.UpdateFailed, null, 3);
         console.log(error);
       });
   }
@@ -79,7 +79,7 @@ export class CmsImageDialogComponent implements OnInit {
     this.cms.defaultElement(img.cms_element_id, true).subscribe(
       data => {
         img.cms_element_default = 1;
-        this.cmsLocalService.dpsSnackbar(this.t_data.DefaultUpdated, null, 3)
+        this.cmsLocalService.dspSnackbar(this.t_data.DefaultUpdated, null, 3)
       },
       error => {
         console.log(JSON.stringify(error));

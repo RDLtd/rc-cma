@@ -45,7 +45,7 @@ export class ProfileVerifyComponent implements OnInit {
     } else {
       // set failed
       // console.log('onProfileVerifySubmit Failed');
-      this.cmsLocalService.dpsSnackbar(this.t_data.Again, 'OK', 10);
+      this.cmsLocalService.dspSnackbar(this.t_data.Again, 'OK', 10);
       this.codeInput.nativeElement.focus();
 
     }
@@ -58,7 +58,7 @@ export class ProfileVerifyComponent implements OnInit {
         // console.log('reqVerificationCode', data);
         // update KS 270918 keep window open
         // this.dialog.closeAll();
-        this.cmsLocalService.dpsSnackbar(this.t_data.CodeSent + this.data.rest_email, 'OK', 10);
+        this.cmsLocalService.dspSnackbar(this.t_data.CodeSent + this.data.rest_email, 'OK', 10);
       },
       error => {
         console.log(error);

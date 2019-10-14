@@ -81,9 +81,9 @@ export class CMSService {
       { cms_time: cms_time, userCode: this.config.userAPICode, token: this.jwt() });
   }
 
-  updateTimes(cms_times: [CMSTime]) {
+  updateTimes(cms_times: [CMSTime], cms_notes: string) {
     return this.http.post(this.config.apiUrl + '/cms/timesupdate',
-      { cms_times: cms_times, userCode: this.config.userAPICode, token: this.jwt() });
+      { cms_times: cms_times, cms_notes: cms_notes, userCode: this.config.userAPICode, token: this.jwt() });
   }
 
   deleteTime(cms_time_id: string) {

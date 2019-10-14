@@ -83,7 +83,7 @@ export class CmsMenusComponent implements OnInit {
       data => {
         console.log('RES', data);
         this.dataChanged = false;
-        this.cmsLocalService.dpsSnackbar(this.restaurant.restaurant_name + this.t_data.OverviewUpdate, null, 5);
+        this.cmsLocalService.dspSnackbar(this.restaurant.restaurant_name + this.t_data.OverviewUpdate, null, 5);
       },
       error => {
         console.log('Error', error);
@@ -165,7 +165,7 @@ export class CmsMenusComponent implements OnInit {
     this.cms.updateSection(sect).subscribe(
       data => {
         console.log('cms.updateSection', data);
-        this.cmsLocalService.dpsSnackbar(this.t_data.SectionUpdate, null, 3);
+        this.cmsLocalService.dspSnackbar(this.t_data.SectionUpdate, null, 3);
         this.dataChanged = false;
       },
       error => {
@@ -264,7 +264,7 @@ export class CmsMenusComponent implements OnInit {
             // replace idx reference in case user edits again before page reload
             this.htmlMenu.dishes[dish.cms_dish_idx].cms_dish_idx = dish.cms_dish_idx;
 
-            this.cmsLocalService.dpsSnackbar(d.cms_dish_name + this.t_data.Updated, null, 3);
+            this.cmsLocalService.dspSnackbar(d.cms_dish_name + this.t_data.Updated, null, 3);
           },
           error => { console.log(error);
           });
@@ -320,7 +320,7 @@ export class CmsMenusComponent implements OnInit {
 
             // Add returned id to new dish in local array
             this.htmlMenu.dishes[len - 1]['cms_dish_id'] = res['cms_dish_id'];
-            this.cmsLocalService.dpsSnackbar(this.htmlMenu.dishes[len - 1].name + this.t_data.Added, null, 3);
+            this.cmsLocalService.dspSnackbar(this.htmlMenu.dishes[len - 1].name + this.t_data.Added, null, 3);
           },
           error => {
             console.log(error);
@@ -348,7 +348,7 @@ export class CmsMenusComponent implements OnInit {
         this.cms.deleteDish(dish.cms_dish_id).subscribe(
           data => {
             console.log('cms.deleteDish', data);
-            this.cmsLocalService.dpsSnackbar({ deletedDishName } + this.t_data.Removed, null, 3);
+            this.cmsLocalService.dspSnackbar({ deletedDishName } + this.t_data.Removed, null, 3);
 
           },
           error => {
@@ -390,10 +390,10 @@ export class CmsMenusComponent implements OnInit {
     this.cms.updateElement(menu).subscribe(
       data => {
         console.log('cms.updateElement(menu)', data);
-        this.cmsLocalService.dpsSnackbar(`${ menu.cms_element_title } ${ msg }`, null, 3);
+        this.cmsLocalService.dspSnackbar(`${ menu.cms_element_title } ${ msg }`, null, 3);
       },
       error => {
-        this.cmsLocalService.dpsSnackbar(this.t_data.UpdateFailed, null, 3);
+        this.cmsLocalService.dspSnackbar(this.t_data.UpdateFailed, null, 3);
         console.log(error);
       });
   }
@@ -431,12 +431,12 @@ export class CmsMenusComponent implements OnInit {
                   this.menus.splice(i, 1);
                 }
               }
-              this.cmsLocalService.dpsSnackbar(menu.cms_element_title + this.t_data.Deleted, null, 3);
+              this.cmsLocalService.dspSnackbar(menu.cms_element_title + this.t_data.Deleted, null, 3);
               dialogRef.close();
             },
             error => {
               console.log(error);
-              this.cmsLocalService.dpsSnackbar(this.t_data.UpdateFailed, null, 3);
+              this.cmsLocalService.dspSnackbar(this.t_data.UpdateFailed, null, 3);
             }
           );
       }

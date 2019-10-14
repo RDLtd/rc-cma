@@ -5,9 +5,8 @@ import { CMSService, HelpService } from '../_services';
 import { MatDialog } from '@angular/material';
 import { CmsImageDialogComponent } from './cms-image-dialog.component';
 import { CmsFileUploadComponent } from './cms-file-upload.component';
-import { ConfirmCancelComponent } from '../common/confirm-cancel/confirm-cancel.component';
-import { TranslateService } from '@ngx-translate/core';;
-
+import { ConfirmCancelComponent } from '../common';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'rc-cms-images',
@@ -71,14 +70,13 @@ export class CmsImagesComponent implements OnInit {
     img.cms_element_active = !img.cms_element_active;
     img.cms_element_active ? msg = this.t_data.IsActive : msg = this.t_data.IsOffline;
 
-
     this.cms.updateElement(img).subscribe(
       data => {
-        this.cmsLocalService.dpsSnackbar(`Image ${ img.cms_element_id } ${ msg }`, null, 3);
+        this.cmsLocalService.dspSnackbar(`Image ${ img.cms_element_id } ${ msg }`, null, 3);
 
       },
       error => {
-        this.cmsLocalService.dpsSnackbar(this.t_data.UpdateFailed, null, 3);
+        this.cmsLocalService.dspSnackbar(this.t_data.UpdateFailed, null, 3);
         console.log(error);
       });
   }
@@ -127,12 +125,12 @@ export class CmsImagesComponent implements OnInit {
                   this.cmsImages.splice(i, 1);
                 }
               }
-              this.cmsLocalService.dpsSnackbar('Image ' + img.cms_element_id + this.t_data.Deleted, null, 3);
+              this.cmsLocalService.dspSnackbar('Image ' + img.cms_element_id + this.t_data.Deleted, null, 3);
               dialogRef.close();
           },
             error => {
             console.log(error);
-            this.cmsLocalService.dpsSnackbar(this.t_data.UpdateFailed, null, 3);
+            this.cmsLocalService.dspSnackbar(this.t_data.UpdateFailed, null, 3);
             }
           );
       }

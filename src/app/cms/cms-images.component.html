@@ -8,8 +8,7 @@
 
         <button
           mat-icon-button
-          (click)="help.dspHelp('cms-images')"
-          matTooltip="Help">
+          (click)="help.dspHelp('cms-images', restaurant)">
             <mat-icon>help_outline</mat-icon>
         </button>
 
@@ -55,8 +54,7 @@
           {{ 'CMS-Images.Offline' | translate }}
         </mat-chip>
       </mat-chip-list>
-      <div
-        class="rc-img-wrapper">
+      <div class="rc-img-wrapper">
       <img [src]="image.cms_element_image_path">
       </div>
 
@@ -64,9 +62,16 @@
         {{ image.cms_element_id }}
         <span class="rc-space-filler"></span>
         <span (click)="stopBubbling($event)">
+          <a
+            mat-icon-button
+            [href]="image.cms_element_image_path"
+            target="_blank"
+            title="{{ 'CMS-Images.Download' | translate }}">
+            <mat-icon>cloud_download</mat-icon>
+          </a>
          <button
              mat-icon-button
-             title="{{ 'CMS-Images.Delete' | translate }} {{ image?.cms_element_title }}"
+             title="{{ 'CMS-Images.Delete' | translate }}"
              [disabled]="image.cms_element_default == 'Y' || image.cms_element_default == true"
              (click)="deleteImage(image)">
             <mat-icon>delete</mat-icon>

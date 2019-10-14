@@ -22,8 +22,9 @@ export class CmsFileUploadComponent implements OnInit, AfterViewInit {
   fileUrl: string;
   uploader: FileUploader;
   responses: Array<any> = [];
-  @ViewChild('imgUploadForm', {static: false}) imgForm: NgForm;
-  @ViewChild('menuUploadForm', {static: false}) menuForm: NgForm;
+
+  @ViewChild('imgUploadForm', { static: false }) imgForm: NgForm;
+  @ViewChild('menuUploadForm', { static: false }) menuForm: NgForm;
 
   // translation variables
   t_data: any;

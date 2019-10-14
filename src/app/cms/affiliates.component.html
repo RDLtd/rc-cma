@@ -8,7 +8,7 @@
 
         <button
           mat-icon-button
-          (click)="help.dspHelp('cms-affiliates')">
+          (click)="help.dspHelp('cms-affiliates', restaurant)">
           <mat-icon>help_outline</mat-icon>
         </button>
 
@@ -36,8 +36,7 @@
         <dt>{{ 'Affiliates.MemberOffer' | translate }}</dt>
         <dd>
           <markdown>{{ affiliate.offer_desc }}</markdown>
-          <a href={{ affiliate.offer_url }} target="_blank" (click)="viewMarketing(i)">{{ 'Affiliates.FindOutMore' |
-            translate }}</a>
+          <a href={{affiliate.offer_url}} target="_blank" (click)="viewMarketing(i)">{{ 'Affiliates.FindOutMore' | translate }}</a>
         </dd>
 
       </dl>

@@ -1,11 +1,11 @@
 # Menus téléchargeables
 
-Si vous avez vos menus disponibles en format PDF, vous pouvez les télécharger ici et ils seront disponibles pour votre
-clients à télécharger.
+Si vous avez vos menus disponibles en format PDF, vous pouvez les joindre 
+ici pour que vos clients puissent les télécharger.
 
-## Actif
+## Actifs
 
-Seuls les menus marqués d'un *actif* seront à la disposition de vos invités.
+Seuls les menus marqués *En Ligne* seront disponible sur votre Site Internet.
 
 
 

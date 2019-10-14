@@ -94,6 +94,10 @@ export class CmsLocationComponent implements OnInit {
   }
 
   resetData(): void {
+    this.getCmsData(this.restaurant.restaurant_id);
+  }
+
+  resetMapData(): void {
     this.restaurant.restaurant_lat = this.latMarker;
     this.restaurant.restaurant_lng = this.lngMarker;
     this.directions = this.directions_copy;
@@ -116,21 +120,21 @@ export class CmsLocationComponent implements OnInit {
       data => {
         // console.log(JSON.stringify(data));
         // console.log('Coordinates updated');
-        this.cmsLocalService.dpsSnackbar(this.t_data.NewGeo + this.restaurant.restaurant_lat + ', ' +
+        this.cmsLocalService.dspSnackbar(this.t_data.NewGeo + this.restaurant.restaurant_lat + ', ' +
           this.restaurant.restaurant_lng, null, 3);
         this.dataChanged = false;
       },
       error => {
         console.log(JSON.stringify(error));
-        this.cmsLocalService.dpsSnackbar(this.t_data.UpdateFailed, null, 3);
-        this.resetData();
+        this.cmsLocalService.dspSnackbar(this.t_data.UpdateFailed, null, 3);
+        this.resetMapData();
         this.dataChanged = false;
       });
 
   }
 
   getDirectionFile(): void {
-    this.cms.getElementClass(this.restaurant.restaurant_id, 'Directions', 'Y')
+    this.cms.getElementClass(this.restaurant.restaurant_id, 'Directions', 'N')
       .subscribe(
       data => {
         if (data['elements'].length > 0) {
@@ -152,11 +156,12 @@ export class CmsLocationComponent implements OnInit {
   uploadDirections() {
     let dialogRef = this.dialog.open(CmsFileUploadComponent, {
       data: {
-        type: 'directions file',
+        type: 'direction',
         tgtObject: this.directions,
-        dialog: this.dialog
+        restaurant: this.restaurant
       }
     });
+    dialogRef.componentInstance.dialog = dialogRef;
   }
 
   updateTransport(): void {
@@ -165,7 +170,7 @@ export class CmsLocationComponent implements OnInit {
       res => {
         // console.log('RES', res);
         this.dataChanged = false;
-        this.cmsLocalService.dpsSnackbar(this.restaurant.restaurant_name + this.t_data.TransportUpdate, null, 5);
+        this.cmsLocalService.dspSnackbar(this.restaurant.restaurant_name + this.t_data.TransportUpdate, null, 5);
       },
       error => {
         console.log('Error', error);

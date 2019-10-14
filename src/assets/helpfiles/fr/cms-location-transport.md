@@ -1,14 +1,16 @@
 
 ## Aider les clients à vous trouver
 
-Vos clients apprécieront toute information qui les aidera à visiter le restaurant.
+Vos clients apprécieront toute information qui les aidera à visiter votre restaurant.
 
 ### Transport public
-Quelle est la gare la plus proche? Quels sont les meilleurs itinéraires de bus?
+Quelle est la station de métro/tramway la plus proche? 
+Quels sont les meilleurs itinéraires de bus?
 
 
 ### Parking
-Pouvez-vous vous garer près du restaurant? C'est gratuit? Y a-t-il des restrictions de temps?
+Peut-on se garer près du restaurant? Est-ce gratuit? 
+Y a-t-il des restrictions de temps?
 
  
 

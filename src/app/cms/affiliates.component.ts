@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { HelpService, RestaurantService } from '../_services';
-import { CmsLocalService} from './cms-local.service';
+import { CmsLocalService } from './cms-local.service';
 import { MatDialog } from '@angular/material';
 import { PaymentComponent } from '../common';
-import { TranslateService } from '@ngx-translate/core';;
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'rc-affiliates',
@@ -59,7 +59,12 @@ export class AffiliatesComponent implements OnInit, OnDestroy {
 
   getPartnerOffers(): void {
 
-    this.restaurantService.getPartners()
+    // select the correct partners by country
+    let company_code = 'RC';
+    if (localStorage.getItem('rd_company_name') === 'Restaurateurs Indépendants') {
+      company_code = 'RI';
+    }
+    this.restaurantService.getPartners(company_code)
       .subscribe(
         partners => {
           let len = partners['partners'].length, p, i;
@@ -129,7 +134,7 @@ export class AffiliatesComponent implements OnInit, OnDestroy {
             console.log('Could not update access record');
           });
       //
-      this.cmsLocalService.dpsSnackbar(this.affiliates[index].partner_name + this.t_data.Message, 'OK', 30);
+      this.cmsLocalService.dspSnackbar(this.affiliates[index].partner_name + this.t_data.Message, 'OK', 30);
     }
   }
 

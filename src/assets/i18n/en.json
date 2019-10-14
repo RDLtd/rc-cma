@@ -2,7 +2,9 @@
   "Header": {
     "MyProfile": "My Profile",
     "Logout": "Logout",
-    "Login": "Login"
+    "Login": "Login",
+    "Settings": "User Settings",
+    "About": "About RD.CMS"
   },
 
   "Footer": {
@@ -16,16 +18,19 @@
     "Members": "Members",
     "Restaurants": "Restaurants",
     "Profile": "Profile",
-    "FS": "F & S Data",
+    "FS": "F&S Data",
     "Experimental": "Experimental",
-    "Curation": "Curation"
+    "Curation": "Curation",
+    "Designed": "This application is designed, built and maintained by ",
+    "Copyright": "Copyright"
   },
 
   "ConfirmCancel": {
     "Title": "PLEASE CONFIRM",
     "Message": "This action cannot be reversed, are you sure that you want to continue?",
     "Cancel": "NO, CANCEL",
-    "Continue": "YES, CONTINUE"
+    "Continue": "YES, CONTINUE",
+    "DontShow": "Don't show me this again"
   },
 
   "Home": {
@@ -149,14 +154,22 @@
   },
 
   "Restaurant-List": {
-    "Map": "MAP",
-    "Analysis": "ANALYSIS",
-    "Restaurants": "RESTAURANTS",
-    "Overview": "OVERVIEW",
-    "Search": "Search"
+    "Name": "Name",
+    "RGroup": "Group",
+    "PostCode": "Post Code",
+    "More": "More than ",
+    "Found": " restaurants found - first is ",
+    "None": "No restaurants found",
+    "Error": "There was an error trying to access the restaurant database",
+    "Search": "Search",
+    "Find": "Find restaurants by",
+    "Number": "Number",
+    "Status": "Member Status"
   },
 
   "Map": {
+    "Map": "Map",
+    "Analysis": "Analysis",
     "DisplayBy": "Show",
     "FilterBy": "FILTER BY",
     "DatabaseCoding": "Database Coding",
@@ -167,7 +180,7 @@
     "AllInZoom": "All in Current Zoom View",
     "TelephoneOnly": "Telephone Only",
     "Other": "Other",
-    "Records": "records retrieved from Restaurant database",
+    "Records": "records retrieved from the database",
     "Distribution": "Distribution",
     "UK": "United Kingdom",
     "FR": "France",
@@ -196,7 +209,21 @@
     "DeleteSnap": "Delete Last Snapshot",
     "SaveSnaps": "Save Snapshots",
     "PrintGraph": "Print Graph",
-    "SaveGraph": "Save Graph"
+    "SaveGraph": "Save Graph",
+    "Snaps": "SNAPSHOTS",
+    "Group": "Group",
+    "Index": "Index",
+    "Telephone": "Telephone",
+    "Email": "Email",
+    "Website": "Website",
+    "Facebook": "Facebook",
+    "Twitter": "Twitter",
+    "Instagram": "Instagram",
+    "RAcaps": "RA",
+    "RCcaps": "RC",
+    "Both": "Both",
+    "Neither": "Neither",
+    "Verified": "Verified"
   },
 
   "Analysis": {
@@ -281,7 +308,9 @@
     "Reservations": "Reservations",
     "Images": "Images",
     "Location": "Location",
-    "AffiliateOffers": "Affiliate Offers"
+    "AffiliateOffers": "Affiliate Offers",
+    "MyRestaurants": "My Restaurants",
+    "AddRestaurant": "Add Restaurant"
   },
 
   "CMS-Dashboard": {
@@ -321,7 +350,7 @@
     "Descriptions": "DESCRIPTIONS & FEATURES",
     "ActiveImagesCaps": "ACTIVE IMAGES",
     "ActiveMenus": "ACTIVE MENUS",
-    "OnlineBookings": "ONLINE BOOKINGS",
+    "OnlineBookings": "BOOKINGS",
     "LocInfo": "LOCATION INFORMATION",
     "LastUpdated": "Last updated:",
     "VerifiedBy": "Verified by ",
@@ -331,7 +360,7 @@
     "Complete": "Complete",
     "MissingSome": "Missing Some Data",
     "ActiveImages": " active images",
-    "ActivePDFs": " active pdf menus / ",
+    "ActivePDFs": " active pdf menus ",
     "SampleDishes": " sample dishes",
     "DataVnP": "DATA VERIFIED & PUBLISHED!",
     "RequestChange": "Request change for ",
@@ -341,7 +370,11 @@
     "Status": "MEMBERSHIP STATUS",
     "Activated": "ACTIVATED",
     "FullMember": "Full Member",
-    "AssMember": "Associate Member"
+    "AssMember": "Associate Member",
+    "DataChange": "Thank you.\r\nWe have received your change request and this will be reviewed by the curation\nteam and updated accordingly.\r\nPlease be aware that you may not see any changes for upto 24 hours.",
+    "YouCan": "You can ",
+    "View": "view a demo restaurant version",
+    "ToSee": " to see what the SPW will look like with full content added."
   },
 
   "CMS-Directory": {
@@ -393,11 +426,15 @@
   "CMS-File-Upload": {
     "RestExt": "Restaurant Exterior",
     "RestInt": "Restaurant Interior",
-    "Food": "Food",
     "HeadChef": "Head Chef",
+    "Dishes": "Dishes",
+    "Service": "Service",
+    "Cocktails": "Cocktails",
+    "Life": "Restaurant Life",
+    "Team": "Team",
     "Choose": "Choose ",
     "ToUpload": " to upload",
-    "New": "New",
+    "New": "a New",
     "Upload": "Upload",
     "MenuName": "Menu Name",
     "MenuCaption": "Menu Caption",
@@ -405,7 +442,10 @@
     "ImageTitle": "Image Title",
     "Default": "Make this my default image",
     "CancelCap": "CANCEL",
-    "UploadCap": "UPLOAD NOW"
+    "UploadCap": "UPLOAD NOW",
+    "Image": "image",
+    "Menu": "menu",
+    "Directions": "directions file"
   },
 
   "CMS-Hours": {
@@ -418,21 +458,23 @@
     "UpdateFailed": "Updates failed!",
     "Start": "START",
     "End": "END",
-    "Notes": "NOTES",
-    "AddSession": "ADD SESSION"
+    "Notes": "OPTIONAL NOTES",
+    "AddSession": "ADD SESSION",
+    "General": "General information"
   },
 
   "CMS-Image-Dialog": {
-    "Deactivate": "Deactivate this image",
-    "Activate": "Activate this image",
-    "Default": "Make this my default image",
+    "Deactivate": "Deactivate",
+    "Activate": "Activate",
+    "Default": "Make this my default",
     "DefaultTag": "Default",
     "Available": "Available",
     "Offline": "Offline",
     "IsActive": "is now ACTIVE",
     "IsOffline": "is now OFFLINE",
     "UpdateFailed": "Updates failed!",
-    "DefaultUpdated": "Default image updated"
+    "DefaultUpdated": "Default image updated",
+    "Download": "Download this image"
   },
 
   "CMS-Images": {
@@ -441,7 +483,8 @@
     "DefaultTag": "Default",
     "Available": "Available",
     "Offline": "Offline",
-    "Delete": "Delete ",
+    "Delete": "Delete this image",
+    "Download": "Download this image",
     "ChangeStatus": "Change status",
     "AddImage": "ADD AN IMAGE",
     "IsActive": "is now ACTIVE",
@@ -460,14 +503,16 @@
     "CarParking": "Car Parking",
     "WhatParking": "What are the car parking facilities? (max.",
     "PublicTransport": "Public Transport",
-    "Transport": "Is the restaurant close to any bus or train routes? (max.",
+    "Transport": "Restaurant close to bus or train routes? (max.",
     "MapPos": "Map Position",
     "UndoChanges": "Undo changes",
-    "UploadDirections": "UPLOAD DIRECTIONS",
-    "ViewDirections": "VIEW DIRECTIONS",
+    "Directions": "Downloads",
+    "UploadDirections": "ADD",
+    "ViewDirections": "View Current",
     "UpdateFailed": "Updates failed!",
     "TransportUpdate": " transport information updated!",
-    "NewGeo": "New geo-coordinates: (lat, lng) "
+    "NewGeo": "New geo-coordinates: (lat, lng) ",
+    "PDF": "If you have a PDF map, or directions then you can make it available to your customers by uploading a copy here."
   },
 
   "CMS-Menu-Dish": {
@@ -484,7 +529,7 @@
   },
 
   "CMS-Menus": {
-    "MenuInfo": "MENU INFORMATION",
+    "MenuInfo": "MENU AND DISH INFORMATION",
     "MenuGenInfo": "Add general information about the menus (max.",
     "SampleDishes": "Sample Dishes",
     "AddDish": "Add New Dish",
@@ -521,7 +566,8 @@
     "YesDelete": "Yes, delete",
     "NoCancel": "No, cancel",
     "Deleted": " Deleted",
-    "AddMenu": "ADD A MENU"
+    "AddMenu": "ADD A MENU",
+    "On": "on"
   },
 
   "CMS-Reservations": {
@@ -534,13 +580,32 @@
     "PrivateDining": "Private Dining",
     "PrivateInfo": "Private Dining information, if applicable. (max.",
     "OnlineBookings": "Online Bookings",
-    "Provider": "Online Bookings Provider",
+    "Provider": "Online Booking Service",
     "None": "None",
     "RestID": "Assigned Restaurant ID",
     "MaxCovers": "Maximum Covers per Booking",
-    "MaxDays": "Maximum Advanced Booking Days",
+    "MaxDays": "Maximum Advance Booking Days",
     "ResInfoUpdate": " reservation information updated!",
-    "UpdateFailed": "Updates failed!"
+    "UpdateFailed": "Updates failed!",
+    "ValidEmail": "A valid email address is required",
+    "NoTest": "This service does not require testing - it does not have an associated URL",
+    "TestLink": "Test Link"
+  },
+
+  "Restaurant-Detail": {
+    "Amend": "Amend any fields that need correction, then press UPDATE",
+    "RName": "Restaurant Name",
+    "Postcode": "Postcode",
+    "Group": "Restaurant Group",
+    "Address": "Address",
+    "Tel": "Telephone",
+    "WebSite": "Website",
+    "Save": "SAVE",
+    "Save&Close": "Save & Close",
+    "Cancel": "CANCEL",
+    "Cancel&Close": "Cancel & Close",
+    "Update": "UPDATE",
+    "Update&Close": "Update & Close"
   },
 
   "FS": {
@@ -632,7 +697,9 @@
     "Area": "Area",
     "Attribute": "Attribute",
     "Y": "Y",
-    "N": "N"
+    "N": "N",
+    "Percentage": "Percentage",
+    "Website": "WEBSITE"
   },
 
   "Curation": {
@@ -758,12 +825,20 @@
     "DOW-Thursday": "Thursday",
     "DOW-Friday": "Friday",
     "DOW-Saturday": "Saturday",
+    "DOW-Dimanche": "Sunday",
+    "DOW-Lundi": "Monday",
+    "DOW-Mardi": "Tuesday",
+    "DOW-Mercredi": "Wednesday",
+    "DOW-Jeudi": "Thursday",
+    "DOW-Vendredi": "Friday",
+    "DOW-Samedi": "Saturday",
     "STAT-AL": "All",
     "STAT-IC": "In Curation",
     "STAT-CC": "Curation Complete",
     "STAT-VO": "Verified By Owner",
     "STAT-FL": "Flagged",
-    "STAT-RE": "Rejected"
+    "STAT-RE": "Rejected",
+    "Support": "Contact our Support Team"
   },
 
   "CurationGPS": {
@@ -803,7 +878,9 @@
     "DemoAdd": "You are logged in as the Demo Member - you cannot add a restaurant",
     "BenchmarkingAssociated": "In order to do benchmarking, you must have at least one associated restaurant!",
     "NoFinancial": "None of your associated restaurants have any financial data recorded!",
-    "Compare": " In order to compare your restaurant with others you must provide appropriate data."
+    "Compare": " In order to compare your restaurant with others you must provide appropriate data.",
+    "IsAssociate": "is an Associate Member of",
+    "IsFull": "is a Full Member of"
   },
 
   "Profile-Image": {
@@ -892,6 +969,7 @@
     "Terms": "Terms of Service",
     "And": " and ",
     "Privacy": "Privacy Policy",
+    "Of": "of ",
     "SignCaps": "SIGN IN",
     "Forgotten": "Forgotten your password?",
     "NewPassword": "A new password has been sent to your email address",
@@ -902,8 +980,7 @@
     "For": "For",
     "Per": "per month",
     "Upgrade": "can upgrade their membership and enjoy privileged access to a range of ",
-    "Services": "specialist services and supplier discounts worth hundreds of",
-    "EachYear": "s each year!",
+    "Services": "specialist services and supplier discounts worth hundreds of pounds each year!",
     "As": "As a",
     "Full": "Full Member",
     "Of": "of",
@@ -949,7 +1026,7 @@
     "NotTrading": "Restaurant no longer trading",
     "PartGroup": "Part of group, Head Office needs to make decision",
     "Search": "Restaurant Search",
-    "EgNumber": "Please enter a valid 10 character restaurant number in the field above to search e.g. EN00701234",
+    "EgNumber": "Please enter a valid 10 character restaurant number in the field above to search e.g. EN03304783",
     "InvalidNumber": "Invalid number or access clearance",
     "InvalidReason": "Either you have entered an invalid restaurant number, or you do not have access to that restaurant's information",
     "FlaggedCuration": " has been flagged for curation",
@@ -959,31 +1036,82 @@
     "DupFlagError": "Error in updating duplicate flag for ",
     "AdminCreated": "Administrator created for ",
     "AdminUpdated": "Administrator updated for ",
-    "SendReq": "Sending request email to ",
-    "Await": "Request email sent successfully, awaiting response from ",
+    "MemEmail": "Membership email sent successfully, awaiting login from ",
     "InfoSent": "Information sent to ",
-    "AdminReq": "Administrator details required",
+    "AdminReq": "Administrator details have changed, please update",
     "Open7": "Open 7 days",
     "EntRest": "Enter restaurant no.",
     "InvalidRest": "Invalid Restaurant Code",
+    "Mark": "Mark this record for attention",
     "UpdateAdmin": "Update the content administrator details",
     "ContentAdmin": "Content Administrator",
     "FullName": "Full Name",
     "FullReq": "A full name required",
     "Job": "Job Role",
-    "ValisEmail": "Valid email required",
+    "ValidEmail": "Valid email required",
     "SendInfo": "SEND INFORMATION",
     "CreateAss": "CREATE ASSOCIATE MEMBER",
     "CreateFull": "CREATE FULL MEMBER",
+    "Curation": "Curation Notification",
     "NotifyCuration": "To notify our curation team about ",
     "SelectOption": ", please select the most appropriate reason from the options below.",
     "Reason": "Reason",
     "Cancel": "CANCEL",
     "SendNotify": "SEND NOTIFICATION",
     "ManyTx": "Many thanks.",
-    "CheckedDetails": "I have checked the contact details.",
-    "Invite": "INVITE",
+    "SendInfoLower": "Send Information",
+    "CreateAssLower": "Create Associate Member",
+    "CreatFullLower": "Create Full Member",
+    "Confirm": "Please confirm that this restaurant understands that they are becoming a free ",
+    "AssMem": "Associate Member",
+    "Of": " of ",
+    "Agree": " and agrees to receive all necessary email communications.",
+    "FullMem": "Full Member",
+    "ConfirmContact": "Confirm Admin contact details",
+    "Terms": "Membership terms confirmed.",
+    "Activate": "ACTIVATE MEMBERSHIP",
     "Send": "SEND",
-    "TakePayment": "TAKE PAYMENT"
+    "TakePayment": "TAKE PAYMENT",
+    "ClosedDays": "Closed Days",
+    "Tel": "Telephone",
+    "Add": "Address",
+    "Contact": "Contact name:",
+    "Launch": "Launch Number:"
+  },
+
+  "Graph": {
+    "PenMembers": "Pending Members",
+    "AssMembers": "Associate Members",
+    "FulMembers": "Full Members",
+    "Pending": "Pending",
+    "Associate": "Associate",
+    "Full": "Full",
+    "Number": "Number",
+    "Name": "Name",
+    "Location": "Location",
+    "Joined": "Joined",
+    "Last": "Last Login",
+    "DONE": "DONE",
+    "Groups": "GROUPS",
+    "Indep": "INDEPENDENTS",
+    "LastUp": "Last Update",
+    "MenuF": "Menu Features",
+    "AvFood": "Avg. Food Spend per guest",
+    "Media": "Media Channels"
+  },
+
+  "Benchmark-Wizard": {
+    "Header": "Review and Benchmarking",
+    "SubH1": "Review allows members to analyse the financial and statistical data associated with their restaurants. Benchmarking allows members to compare those data with data from other restaurants in their portfolio, or with sets of restaurants that have similar characteristics. (for example, might be in the same area, have the same primary cuisine, etc.)",
+    "SubH2": "The database currently holds financial and statistical data for 15 out of a total of 716 restaurants",
+    "Enter": "To enter financial and statistical data, select the € icon on the the restaurant card.",
+    "InOrder": "In order to do benchmarking, you must have at least one associated restaurant!",
+    "None": "None of your associated restaurants have any financial data recorded! In order to compare your restaurant with others you must provide appropriate data",
+    "Done": "DONE"
+  },
+
+  "Messages": {
+    "DontShow": "DON'T SHOW ME THIS AGAIN"
   }
+
 }

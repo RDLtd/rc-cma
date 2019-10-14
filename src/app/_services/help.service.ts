@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+// Don't use shortcut format as it will create a circular ref.
 import { HelpComponent } from '../common/help/help.component';
 import { MatDialog } from '@angular/material';
 import { AnalyticsService } from './analytics.service';
@@ -6,20 +7,20 @@ import { AnalyticsService } from './analytics.service';
 @Injectable()
 export class HelpService {
 
-  demourl: string = 'https://rdltd.github.io/RD.Pages/';
+  //demourl: string = 'https://rdltd.github.io/RD.Pages/';
 
   constructor(
     private dialog: MatDialog,
     private ga: AnalyticsService
   ) { }
 
-  dspHelp(id) {
+  dspHelp(id, restaurant = null) {
     //console.log(id);
     // determine language in order to access correct help files
     const lang = localStorage.getItem('rd_country');
     let header;
     let help_root;
-    let dspFooter: boolean = id.indexOf('cms-dashboard') >= 0;
+    let dspFooter: boolean = true; // id.indexOf('cms-dashboard') >= 0;
     let btnDemoLabel: string;
 
     console.log(dspFooter, id);
@@ -32,7 +33,7 @@ export class HelpService {
           // specific translation here, no need to call the translate module
           header = 'Aide';
           help_root = '/assets/helpfiles/fr/';
-          btnDemoLabel = 'Voir la page de démonstration';
+          btnDemoLabel = 'Voir la Page Internet de démonstration';
           break;
         }
 
@@ -55,16 +56,34 @@ export class HelpService {
         header: header,
         path: help_root + id + '.md',
         footer: dspFooter,
-        btnLabel: btnDemoLabel
+        btnLabel: btnDemoLabel,
+        restaurant: restaurant
       }
     });
 
     // record event
     this.ga.sendEvent('Help', id, 'Open Help Dialog');
 
-    dialogRef.afterClosed().subscribe(demo => {
-      if (demo) {
-        window.open(this.demourl, '_blank');
+    dialogRef.afterClosed().subscribe(email => {
+
+      // Email support request
+      if (email) {
+        let sbj = `Help Enquiry [${id}]`;
+        // Are we in the CMS?
+        if (restaurant) {
+          sbj = `Re: ${restaurant.restaurant_name} [${restaurant.restaurant_number}]`;
+        }
+        switch (lang) {
+          // allow for specific countries, and make the default whatever is in the root help folder
+          case 'fr': {
+            window.open('mailto:support@restaurateurs-independants.fr?subject=' + sbj, '_blank');
+            break;
+          }
+          default: {
+            // assume default is RC
+            window.open('mailto:support@restaurantcollective.uk?subject=' + sbj, '_blank');
+          }
+        }
       }
       this.dialog.closeAll();
     });

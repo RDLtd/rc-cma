@@ -4,28 +4,36 @@
       <span class="rc-toolbar-title">{{ 'CMS-Location.LocInfo' | translate }}</span>
       <span class="rc-space-filler"></span>
       <span class="rc-section-toolbar-actions">
+        <!-- HELP -->
         <button
           mat-icon-button
-          (click)="help.dspHelp('cms-location-transport')">
+          (click)="help.dspHelp('cms-location-transport', restaurant)">
           <mat-icon>help_outline</mat-icon>
         </button>
-      </span>
-    </mat-toolbar>
-  </div>
-
-  <mat-card class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-4-tablet">
-
-    <mat-card-title>
-      <div class="rc-cms-card-nav">
-
+        <!-- UNDO CHANGES -->
         <button
           mat-icon-button
           [disabled]="!dataChanged"
-          [matTooltip]="'CMS-Location.SaveChanges' | translate"
-          (click)="updateTransport()">
+          (click)="resetData()"
+          [matTooltip]="'CMS-Features.UndoChanges' | translate">
+          <mat-icon>undo</mat-icon>
+        </button>
+        <!-- SAVE CHANGES -->
+        <button
+          mat-icon-button
+          [disabled]="!dataChanged"
+          (click)="updateTransport()"
+          [matTooltip]="'CMS-Features.SaveChanges' | translate">
           <mat-icon>check</mat-icon>
         </button>
+
+      </span>
+    </mat-toolbar>
       </div>
+
+  <mat-card class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--span-8-tablet">
+
+    <mat-card-title>
       <h2>{{ 'CMS-Location.CarParking' | translate }}</h2></mat-card-title>
     <mat-card-content>
       <mat-form-field
@@ -49,19 +57,9 @@
 
   </mat-card>
 
-  <mat-card class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-4-tablet">
+  <mat-card class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--span-8-tablet">
 
     <mat-card-title>
-      <div class="rc-cms-card-nav">
-
-        <button
-          mat-icon-button
-          [disabled]="!dataChanged"
-          [matTooltip]="'CMS-Location.SaveChanges' | translate"
-          (click)="updateTransport()">
-          <mat-icon>check</mat-icon>
-        </button>
-      </div>
       <h2>{{ 'CMS-Location.PublicTransport' | translate }}</h2></mat-card-title>
     <mat-card-content>
       <mat-form-field
@@ -85,6 +83,33 @@
 
   </mat-card>
 
+  <mat-card class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--span-8-tablet">
+
+    <mat-card-title>
+      <div class="rc-cms-card-nav"></div>
+      <h2>{{ 'CMS-Location.Directions' | translate }}</h2></mat-card-title>
+    <mat-card-content>
+      {{ 'CMS-Location.PDF' | translate }}
+    </mat-card-content>
+    <mat-card-actions align="end">
+
+      <button
+        mat-button
+        (click)="uploadDirections()">
+        {{ 'CMS-Location.UploadDirections' | translate | uppercase }}
+      </button>
+
+      <button
+        *ngIf="directions"
+        mat-button
+        [disabled]="!fileLoaded"
+        (click)="viewDirections()">
+        {{ 'CMS-Location.ViewDirections' | translate | uppercase }}
+      </button>
+    </mat-card-actions>
+
+  </mat-card>
+
   <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
     <mat-toolbar class="rc-cms-toolbar">
       <!--<mat-icon>place</mat-icon>-->
@@ -94,14 +119,14 @@
 
         <button
           mat-icon-button
-          (click)="help.dspHelp('cms-location-map')">
+          (click)="help.dspHelp('cms-location-map', restaurant)">
           <mat-icon>help_outline</mat-icon>
         </button>
 
         <button
           mat-icon-button
           [disabled]="!dataChanged"
-          (click)="resetData()"
+          (click)="resetMapData()"
           [matTooltip]="'CMS-Location.UndoChanges' | translate">
           <mat-icon>undo</mat-icon>
         </button>
@@ -146,23 +171,13 @@
       </agm-map>
 
     </mat-card-content>
-    <mat-card-actions align="end">
-
-      <button
-        mat-button
-        (click)="uploadDirections()">
-        {{ 'CMS-Location.UploadDirections' | translate }}
-      </button>
-      <button
-        *ngIf="directions"
-        mat-button
-        [disabled]="!fileLoaded"
-        (click)="viewDirections()">
-        {{ 'CMS-Location.ViewDirections' | translate }}
-      </button>
-    </mat-card-actions>
 
   </mat-card>
 
 </div>
+
+<!--<hr>-->
+<!--<pre>-->
+<!--{{ restaurant | json }}-->
+<!--</pre>-->
 

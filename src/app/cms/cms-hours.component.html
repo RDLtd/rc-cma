@@ -8,7 +8,7 @@
 
         <button
           mat-icon-button
-          (click)="help.dspHelp('cms-hours')">
+          (click)="help.dspHelp('cms-hours', restaurant)">
             <mat-icon>help_outline</mat-icon>
         </button>
 
@@ -32,10 +32,30 @@
 
   </div>
 
-  <rc-loader class="mdc-layout-grid__cell--span-12" *ngIf="showLoader"></rc-loader>
+  <rc-loader class="mdc-layout-grid__cell--span-8" *ngIf="showLoader"></rc-loader>
 
   <mat-card
-    class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 rc-cms-times"
+    class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+    <mat-card-title>{{ 'CMS-Hours.Notes' | translate }}</mat-card-title>
+
+            <mat-form-field class="rc-full-width">
+              <textarea
+                matInput
+                placeholder="{{ 'CMS-Hours.General' | translate }} (max 1000 {{ 'CMS-Features.Chars' | translate }})"
+                matTextareaAutosize
+                matAutosizeMinRows="1"
+                matAutosizeMaxRows="7"
+                maxlength=1000
+                (change)="setChanged()"
+                (keydown)="setChanged()"
+                [(ngModel)]="openingTimesNotes">
+              </textarea>
+            </mat-form-field>
+
+  </mat-card>
+
+  <mat-card
+    class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-12-phone"
     *ngFor="let cmstime of openingTimes; let i = index">
 
       <mat-card-title>
@@ -44,7 +64,7 @@
           [(ngModel)]="cmstime.checked"
           (click)="toggleSession(i)"
           #cb>
-          {{ cmstime.cms_time_day_of_week | uppercase }}
+          {{ display_dow[i] | uppercase }}
         </mat-checkbox>
       </mat-card-title>
 
@@ -84,19 +104,6 @@
         </div>
 
       </div>
-
-      <mat-form-field class="rc-full-width">
-        <textarea
-          matInput
-          [placeholder]="'CMS-Hours.Notes' | translate"
-          matTextareaAutosize
-          matAutosizeMinRows="1"
-          matAutosizeMaxRows="5"
-          [disabled]="cmstime.closed"
-          (change)="setChanged()"
-          (keydown)="setChanged()"
-          [(ngModel)]="cmstime.cms_time_tag"></textarea>
-      </mat-form-field>
 
     </mat-card-content>
 

@@ -24,6 +24,11 @@ activate/deactivate and image check/uncheck the image card.
 
 An image can be removed by selecting the **TRASH** icon.
 
+### Download image
+
+If you need to retreive an image from the repository, you ca
+download it by selecting the **CLOUD** icon.
+
   
   
 
