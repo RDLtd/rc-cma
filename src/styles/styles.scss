@@ -32,6 +32,7 @@
 
 @import "mat-themes";
 @import "vars";
+@import "reset";
 
 /*
 * Removed styles
@@ -428,7 +429,6 @@ a.rc-btn-lg {
 .rc-section-toolbar-fixed {
   position: fixed;
   z-index: 100;
-  margin:-8px;
 }
 .rc-cms-toolbar {
   $toolbar-height: 48px;
