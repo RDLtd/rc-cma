@@ -8,16 +8,19 @@
 
   <mat-dialog-content>
 
+      <!-- IMAGE PREVIEW-->
       <div *ngIf="data.type === 'image' && filePrimed" class="rc-img-wrapper">
-        <img [src]="filePreview">
+        <img [src]="filePreview" [alt]="">
       </div>
 
+      <!-- FILE SELECT BUTTON -->
       <div class="rc-fileinput-wrapper">
 
         <label class="rc-fileinput-label rc-centre" for="fileUpload">
           <mat-icon>cloud_upload</mat-icon>
           <span>{{ uploadLabel | titlecase }} <span *ngIf="inProgress">({{ uploader?.progress }}%)</span></span>
         </label>
+
         <input
           type="file"
           id="fileUpload"
@@ -29,20 +32,24 @@
 
       </div>
 
+    <!-- UPLOAD FORMS -->
     <div>
 
+      <!-- MENU UPLOAD FORM -->
       <form *ngIf="data.type === 'menu'" #menuUploadForm="ngForm">
 
         <section>
 
+          <!-- MENU CATEGORY -->
         <mat-form-field class="rc-full-width">
-          <input matInput
-                 ngModel
-                 name="menuClass"
-                 [placeholder]="'CMS-File-Upload.MenuName' | translate"
-                 required>
+          <input
+            matInput
+            ngModel
+            name="menuClass"
+            [placeholder]="'CMS-File-Upload.MenuName' | translate"
+            required>
         </mat-form-field>
-
+          <!-- MENU DESC/CAPTION -->
         <mat-form-field class="rc-full-width">
           <input matInput
                  ngModel
@@ -54,35 +61,34 @@
 
       </form>
 
-      <!-- Image upload -->
+      <!-- IMAGE UPLOAD FORM -->
 
       <form *ngIf="data.type === 'image'" #imgUploadForm="ngForm">
 
+        <!-- CATEGORY -->
         <section>
-          <mat-form-field>
-            <mat-select ngModel
-                        [placeholder]="'CMS-File-Upload.ImageCat' | translate"
-                        name="imgClass"
-                        class="rc-full-width">
-              <mat-option *ngFor="let imgClass of imgClasses" [value]="imgClass.value">
+          <mat-form-field class="rc-full-width">
+            <mat-select
+              required
+              ngModel
+              [placeholder]="'CMS-File-Upload.ImageCat' | translate"
+              name="imgClass"
+              class="rc-full-width">
+                <mat-option
+                  *ngFor="let imgClass of imgClasses"
+                  [value]="imgClass.value">
                 {{ imgClass.lbl }}
               </mat-option>
             </mat-select>
           </mat-form-field>
         </section>
 
+        <!-- DEFAULT IMAGE? -->
         <section>
-          <mat-form-field class="rc-full-width">
-            <input matInput
-                   ngModel
-                   name="imgCaption"
-                   [placeholder]="'CMS-File-Upload.ImageTitle' | translate">
-          </mat-form-field>
-        </section>
-
-        <section>
-          <mat-checkbox ngModel name="imgDefault">
-            <span style="font-size: 16px;">{{ 'CMS-File-Upload.Default' | translate }}</span>
+          <mat-checkbox
+              ngModel
+            name="imgDefault">
+            <span>{{ 'CMS-File-Upload.Default' | translate }}</span>
           </mat-checkbox>
         </section>
 
@@ -95,20 +101,21 @@
   <mat-progress-bar *ngIf="inProgress" color="primary" [value]="uploader?.progress"></mat-progress-bar>
 
   <mat-dialog-actions align="center">
-
+    <!-- Cancel upload -->
     <button
       mat-button
       mat-dialog-close>
       {{ 'CMS-File-Upload.CancelCap' | translate }}
     </button>
-
+    <!-- Start ulpoad -->
     <button
-      mat-raised-button
+      mat-flat-button
       (click)="upload()"
       color="primary"
       [disabled]="!filePrimed || !validForm()">
       {{ 'CMS-File-Upload.UploadCap' | translate }}
     </button>
+
   </mat-dialog-actions>
 
 </div>

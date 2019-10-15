@@ -141,7 +141,7 @@
               class="rc-accent"
               *ngFor="let k of keywords"
               removable="true"
-              (remove)="remove(k)">
+              (removed)="remove(k)">
               {{ k | uppercase }}
               <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
             </mat-chip>

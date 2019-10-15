@@ -1,11 +1,10 @@
 import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import { Member, Restaurant } from '../_models';
+import { Restaurant } from '../_models';
 import { Observable, Subject, BehaviorSubject } from 'rxjs'
 import { MatDialog, MatDialogConfig, MatSnackBar } from '@angular/material';
-import { ConfirmCancelComponent } from '../common/confirm-cancel/confirm-cancel.component';
-import { TranslateService } from '@ngx-translate/core';;
-import { AuthenticationService } from '../_services';
+import { ConfirmCancelComponent } from '../common';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable()
 
@@ -23,8 +22,7 @@ export class CmsLocalService {
   constructor(
     private snackBar: MatSnackBar,
     private translate: TranslateService,
-    private dialog: MatDialog,
-    private authService: AuthenticationService
+    private dialog: MatDialog
   ) { }
 
   // Update & send

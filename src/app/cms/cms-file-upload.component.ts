@@ -12,7 +12,7 @@ import { NgForm } from '@angular/forms';
   selector: 'rc-cms-file-upload',
   templateUrl: './cms-file-upload.component.html'
 })
-export class CmsFileUploadComponent implements OnInit, AfterViewInit {
+export class CmsFileUploadComponent implements OnInit {
 
   dialog: any;
   uploadLabel: string;
@@ -28,6 +28,7 @@ export class CmsFileUploadComponent implements OnInit, AfterViewInit {
 
   // translation variables
   t_data: any;
+  t_data_type;
 
   imgClasses = [];
 
@@ -39,24 +40,57 @@ export class CmsFileUploadComponent implements OnInit, AfterViewInit {
     private http: HttpClient,
     private translate: TranslateService,
     private cms: CMSService
-  ) {}
+  ) {
+    // detect language changes... need to check for change in texts
+    translate.onLangChange.subscribe(lang => {
+      this.translate.get('CMS-File-Upload').subscribe(data => {this.t_data = data; });
+      this.imgClasses.push( {lbl: this.t_data.RestExt, value: 'exterior'});
+      this.imgClasses.push( {lbl: this.t_data.RestInt, value: 'interior'});
+      this.imgClasses.push( {lbl: this.t_data.HeadChef, value: 'chef'});
+      this.imgClasses.push( {lbl: this.t_data.Dishes, value: 'dishes'});
+      this.imgClasses.push( {lbl: this.t_data.Service, value: 'service'});
+      this.imgClasses.push( {lbl: this.t_data.Cocktails, value: 'cocktails'});
+      this.imgClasses.push( {lbl: this.t_data.Life, value: 'life'});
+      this.imgClasses.push( {lbl: this.t_data.Team, value: 'team'});
 
-  ngAfterViewInit() {
-
+      if (this.data.type === 'image') {
+        this.uploadLabel = this.t_data.Choose + ' ' + this.t_data.Image + ' ' + this.t_data.ToUpload;
+        this.t_data_type = this.t_data.Image;
+      } else {
+        this.uploadLabel = this.t_data.Choose + ' ' + this.t_data.Menu + ' ' + this.t_data.ToUpload;
+        this.t_data_type = this.t_data.Menu;
+      }
+    });
   }
 
   ngOnInit() {
 
     this.translate.get('CMS-File-Upload').subscribe(data => {
       this.t_data = data;
+      let i = this.imgClasses;
+      i.push( {lbl: this.t_data.RestExt, value: 'exterior'});
+      i.push( {lbl: this.t_data.RestInt, value: 'interior'});
+      i.push( {lbl: this.t_data.HeadChef, value: 'chef'});
+      i.push( {lbl: this.t_data.Dishes, value: 'dishes'});
+      i.push( {lbl: this.t_data.Service, value: 'service'});
+      i.push( {lbl: this.t_data.Cocktails, value: 'cocktails'});
+      i.push( {lbl: this.t_data.Life, value: 'life'});
+      i.push( {lbl: this.t_data.Team, value: 'team'});
+
+      if (this.data.type === 'image') {
+        this.uploadLabel = this.t_data.Choose + ' ' + this.t_data.Image + ' ' + this.t_data.ToUpload;
+        this.t_data_type = this.t_data.Image;
+      } else {
+        if (this.data.type === 'menu') {
+          this.uploadLabel = this.t_data.Choose + ' ' + this.t_data.Menu + ' ' + this.t_data.ToUpload;
+          this.t_data_type = this.t_data.Menu;
+        } else {
+          this.uploadLabel = this.t_data.Choose + ' ' + this.t_data.Directions + ' ' + this.t_data.ToUpload;
+          this.t_data_type = this.t_data.Directions;
+        }
+      }
     });
 
-    this.imgClasses.push( {lbl: this.t_data.RestExt, value: 'exterior'});
-    this.imgClasses.push( {lbl: this.t_data.RestInt, value: 'interior'});
-    this.imgClasses.push( {lbl: this.t_data.Food, value: 'food'});
-    this.imgClasses.push( {lbl: this.t_data.HeadChef, value: 'chef'});
-
-    this.uploadLabel = this.t_data.Choose + this.data.type + this.t_data.ToUpload;
     this.filePreview = '';
 
     const uploaderOptions: FileUploaderOptions = {
@@ -77,7 +111,7 @@ export class CmsFileUploadComponent implements OnInit, AfterViewInit {
 
     this.uploader.onBuildItemForm = (fileItem: any, form: FormData): any => {
       form.append('upload_preset', this.config.upload_preset);
-      form.append('folder', `${this.data.type}s`);
+      form.append('folder', `restaurants/${this.data.restaurant.restaurant_number}`);
       form.append('file', fileItem);
       fileItem.withCredentials = false;
 
@@ -186,38 +220,38 @@ export class CmsFileUploadComponent implements OnInit, AfterViewInit {
 
 
     if (this.data.type === 'image') {
-      console.log('IMAGE FILE');
       e.cms_element_title = this.imgForm.form.controls.imgClass.value || 'restaurant';
-      e.cms_element_caption = this.imgForm.form.controls.imgCaption.value || '';
+      e.cms_element_caption = null;
       e.cms_element_class = 'Image';
-    } else {
-      console.log('Menu', this.menuForm.form);
+    } else if(this.data.type === 'menu'){
       e.cms_element_title = this.menuForm.form.controls.menuClass.value || 'Menu';
       e.cms_element_caption = this.menuForm.form.controls.menuCaption.value || '';
       e.cms_element_class = 'Menu';
+    } else if (this.data.type === 'direction') {
+      e.cms_element_title = 'Directions';
+      e.cms_element_caption = null;
+      e.cms_element_class = 'Directions';
     }
 
     e.cms_element_image_path = this.fileUrl;
     e.cms_element_active = true;
     e.cms_element_default = false;
     e.cms_element_live_from = now;
-    e.cms_element_live_to = '2018-06-30 00:00:00+00';
+    e.cms_element_live_to = '2100-06-30 00:00:00+00';
     e.cms_element_created_by = localStorage.getItem('rd_user');
     e.cms_element_approved_on = now;
     e.cms_element_approved_by = localStorage.getItem('rd_user');
     e.cms_element_original_filename = this.uploadLabel;
 
-    console.log('FORM',this.imgForm);
+    // console.log(e);
 
     this.cms.createElement(e).subscribe(
       data => {
         e.cms_element_id = data['cms_element_id'];
+        //console.log(e);
         this.data.tgtObject.push(e);
-
-        console.log('FORM',this.imgForm);
-
-        //if user wants to make it their default image
         if (this.data.type === 'image') {
+          // if user wants to make it their default image
           if (this.imgForm.form.controls.imgDefault.value) {
             this.setDefaultImage(e);
           }
@@ -228,17 +262,13 @@ export class CmsFileUploadComponent implements OnInit, AfterViewInit {
         console.log(error);
       });
   }
-
   setDefaultImage(img) {
     let imgs = this.data.tgtObject;
     let len = imgs.length;
     // reset current default
     for (let i = 0; i < len; i++) {
-
-      if (imgs[i].cms_element_default = true || imgs[i].cms_element_default === 1) {
-
+      if (imgs[i].cms_element_default === true || imgs[i].cms_element_default === 1) {
         imgs[i].cms_element_default = false;
-
         this.cms.defaultElement(imgs[i].cms_element_id, false).subscribe(
           data => {
             console.log(data);

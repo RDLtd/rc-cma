@@ -4,10 +4,11 @@
 
   <section>
     <mat-form-field>
-      <mat-select [ngModel]="data.dish.cms_dish_section_id"
-                  name="cms_dish_section_id"
-                  placeholder="{{ 'CMS-Menu-Dish.Section' | translate }}"
-                  required>
+      <mat-select
+        [ngModel]="data.dish.cms_dish_section_id"
+        name="cms_dish_section_id"
+        placeholder="{{ 'CMS-Menu-Dish.Section' | translate }}"
+        required>
         <mat-option *ngFor="let section of data.sections" [value]="section.id">
           {{ section.label | uppercase }}
         </mat-option>
@@ -19,20 +20,22 @@
 
   <div style="display: flex;">
     <mat-form-field style="flex: 3; margin-right: 4px;">
-      <input name="cms_dish_name"
-             matInput
-             placeholder="{{ 'CMS-Menu-Dish.DishName' | translate }}"
-             [ngModel]="data.dish.cms_dish_name"
-             required>
+      <input
+        name="cms_dish_name"
+        matInput
+        placeholder="{{ 'CMS-Menu-Dish.DishName' | translate }}"
+        [ngModel]="data.dish.cms_dish_name"
+        required>
     </mat-form-field>
 
     <mat-form-field  style="flex: 1;">
       <span matPrefix>{{ data.currencySymbol }} &nbsp;</span>
-      <input name="cms_dish_price"
-             matInput
-             placeholder="{{ 'CMS-Menu-Dish.Price' | translate }}"
-             [ngModel]="data.dish.cms_dish_price"
-             required>
+      <input
+        name="cms_dish_price"
+        matInput
+        placeholder="{{ 'CMS-Menu-Dish.Price' | translate }}"
+        [ngModel]="data.dish.cms_dish_price"
+        required>
     </mat-form-field>
   </div>
 
@@ -58,26 +61,26 @@
     <button
       type="button"
       mat-button
-      mat-dialog-close>{{ 'CMS-Menu-Dish.Cancel' | translate }}</button>
+      mat-dialog-close>{{ 'CMS-Menu-Dish.Cancel' | translate | uppercase }}</button>
     <button
       type="button"
-      mat-raised-button
+      mat-flat-button
       [mat-dialog-close]="formDish"
       color="primary"
-      [disabled]="!formDish.dirty || !formDish.valid">{{ 'CMS-Menu-Dish.Update' | translate }}</button>
+      [disabled]="!formDish.dirty || !formDish.valid">{{ 'CMS-Menu-Dish.Update' | translate | uppercase }}</button>
   </mat-dialog-actions>
 
   <mat-dialog-actions *ngIf="data.mode === 'add'" align="end">
     <button
       type="button"
       mat-button
-      mat-dialog-close>{{ 'CMS-Menu-Dish.Cancel' | translate }}</button>
+      mat-dialog-close>{{ 'CMS-Menu-Dish.Cancel' | translate | uppercase }}</button>
     <button
       type="button"
-      mat-raised-button
+      mat-flat-button
       color="primary"
       [mat-dialog-close]="formDish"
-      [disabled]="!formDish.valid">{{ 'CMS-Menu-Dish.Save' | translate }}
+      [disabled]="!formDish.valid">{{ 'CMS-Menu-Dish.Save' | translate | uppercase }}
     </button>
   </mat-dialog-actions>
 

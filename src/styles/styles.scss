@@ -60,7 +60,7 @@
 }
 .rc-no-grid-gutter { margin: -16px;}
 .rc-hide { display: none; }
-.rc-accent { background-color: $rc-theme-secondary }
+.rc-accent { background-color: $rc-theme-secondary !important;}
 .rc-centre { text-align: center; }
 .rc-space-filler { flex: 1 1 auto; }
 .rc-invisible { visibility: hidden; }
@@ -169,6 +169,7 @@ a.rc-btn-lg {
   background-color: $rc-theme-secondary;
   margin: 0 4px 4px 0 !important;
 }
+
 .mat-dialog-container {
   max-width: 95vw !important;
   border-radius: 8px !important;
@@ -199,7 +200,7 @@ a.rc-btn-lg {
   }
 }
 .mdc-layout-grid { max-width: $rc-max-width; }
-
+.mat-simple-snackbar-action { color: white; }
 
 /*
 ** MAIN LAYOUTS
@@ -1182,7 +1183,6 @@ ul.rc-lookup-results {
 */
 
 .rc-cms-times {
-
   .mat-checkbox-label {
     font-size: 24px;
     color: $rc-theme-black;
@@ -1190,37 +1190,18 @@ ul.rc-lookup-results {
   .rc-day-closed {
     .mat-checkbox-label { color: grey; }
   }
-
-  mat-card-content {
-    h4 { margin: 0 0 8px; }
+  .rc-session {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     .rc-session-time {
-      margin-right: 2%;
-      width: 45%;
+      width: 40%;
     }
-    .rc-session {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      a { width: 6%; text-align: right;}
-    }
-    a.rc-del-session { cursor: pointer; }
-  }
-}
-.rc-day {
-  border: 1px solid $rc-theme-secondary;
-  background: $rc-theme-secondary;
-
-  .rc-sessions {
-    background: white;
-    padding: 8px;
-    h3 {
-      padding: 0;
-      margin: 0;
-      display: block;
-      line-height: 1;
+    a.rc-del-session {
+      width: 5%;
+      text-align: right;
     }
   }
-  .rc-session {}
 }
 
 /* CMS Image/Menu Upload
@@ -1258,18 +1239,22 @@ ul.rc-lookup-results {
 }
 .rc-fileinput-label {
   cursor: pointer;
-  background: $rc-theme-black;
-  color: white;
+  //background: $rc-theme-black;
+  color: $rc-theme-text;
   display: flex;
   line-height: 1.5;
   padding: 8px 24px;
   font-size: 24px;
-  border-radius: 2px;
+  border-radius: 6px;
+  border: 2px solid $rc-theme-grey;
   transition: all .3s ease-out;
   text-align: center;
-  @include mat-elevation(4);
+  text-transform: uppercase;
   mat-icon { margin-right: 8px; }
-  &:hover { @include mat-elevation(0); }
+  &:hover {
+    border-color: $rc-theme-black;
+    color: $rc-theme-black;
+  }
 }
 
 /*
@@ -1349,8 +1334,8 @@ mat-toolbar.cms-menu-section {
     position: absolute;
     display: flex;
     justify-content: center;
-    bottom: 32px;
-    left:32px;
+    bottom: 24px;
+    left:24px;
     width: calc(100% - 32px);
   }
   .mat-card-image {}
