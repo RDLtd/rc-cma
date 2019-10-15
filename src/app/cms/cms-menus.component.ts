@@ -23,6 +23,7 @@ export class CmsMenusComponent implements OnInit {
   showLoader: boolean = false;
   dataChanged: boolean = false;
   htmlMenu: any = {};
+  currencyCode: string = "GBP";
 
   // translation obj
   t_data: any;

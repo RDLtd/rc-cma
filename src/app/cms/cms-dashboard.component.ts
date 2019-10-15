@@ -227,11 +227,20 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
           this.hours_status_text = this.t_data.NoData;
           this.hours_status = 0;
         }
+
+        if (data['times'].length) {
+          // ToDo update this to check through the array of times. Using zero since that also reflects message
+          this.hours_date = new Date(data['times[0]'].cms_time_last_update);
+        }
+
       },
       error => {
         console.log('Error fetching times', error);
       });
+
   }
+
+
 
   checkDescriptions(): void {
     console.log('checkDescriptions');

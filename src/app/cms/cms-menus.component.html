@@ -116,7 +116,7 @@
           <h2>{{ section.label }}</h2>
           <div class="rc-dish-content">
             <h3>{{ dish.cms_dish_name | uppercase }}</h3>
-            <span>£ {{ dish.cms_dish_price }}</span>
+            <span>{{ dish.cms_dish_price | currency }}</span>
             <span>{{ dish.cms_dish_desc }}</span>
           </div>
         </div>
