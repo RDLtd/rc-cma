@@ -98,17 +98,17 @@ export class CmsReservationsComponent implements OnInit {
           this.restaurantService.getBookingProviders(this.restaurant.restaurant_number).subscribe(
             data_providers => {
               if (data_providers['count'] > 0) {
-                console.log(data_providers['booking_providers']);
+                console.log('BPs', data_providers['booking_providers']);
                 this.booking_providers = data_providers['booking_providers'];
-                let bp = this.descriptions.cms_description_booking_provider;
-                if (bp) {
-                  for (let i = 0; i < bp.length; i++) {
-                    if (bp === this.booking_providers[i].booking_provider_service) {
+                let selectedProvider = this.descriptions.cms_description_booking_provider;
+                if (selectedProvider) {
+                  for (let i = 0; i < this.booking_providers.length; i++) {
+                    if (selectedProvider === this.booking_providers[i].booking_provider_service) {
                       this.selected_booking_provider_index = i;
                     }
                   }
                 }
-                this.selected_booking_provider = bp[this.selected_booking_provider_index];
+                this.selected_booking_provider = this.booking_providers[this.selected_booking_provider_index];
                 this.booking_provider_rid_label = this.selected_booking_provider.booking_provider_rid_label;
               } else {
                 console.log('No Booking providers found');

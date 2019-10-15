@@ -37,21 +37,19 @@
   <mat-card
     class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
     <mat-card-title>{{ 'CMS-Hours.Notes' | translate }}</mat-card-title>
-
-            <mat-form-field class="rc-full-width">
-              <textarea
-                matInput
-                placeholder="{{ 'CMS-Hours.General' | translate }} (max 1000 {{ 'CMS-Features.Chars' | translate }})"
-                matTextareaAutosize
-                matAutosizeMinRows="1"
-                matAutosizeMaxRows="7"
-                maxlength=1000
-                (change)="setChanged()"
-                (keydown)="setChanged()"
-                [(ngModel)]="openingTimesNotes">
-              </textarea>
-            </mat-form-field>
-
+      <mat-form-field class="rc-full-width">
+        <textarea
+          matInput
+          placeholder="{{ 'CMS-Hours.General' | translate }} (max 1000 {{ 'CMS-Features.Chars' | translate }})"
+          matTextareaAutosize
+          matAutosizeMinRows="1"
+          matAutosizeMaxRows="7"
+          maxlength=1000
+          (change)="setChanged()"
+          (keydown)="setChanged()"
+          [(ngModel)]="openingTimesNotes">
+        </textarea>
+      </mat-form-field>
   </mat-card>
 
   <mat-card

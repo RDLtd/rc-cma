@@ -63,6 +63,10 @@
 .rc-accent { background-color: $rc-theme-secondary !important;}
 .rc-centre { text-align: center; }
 .rc-space-filler { flex: 1 1 auto; }
+.rc-flex-spaced {
+  display: flex;
+  justify-content: space-between;
+}
 .rc-invisible { visibility: hidden; }
 .rc-txt-right { text-align: right; }
 .rc-txt-leading { font-size: 20px; }
@@ -1204,8 +1208,10 @@ ul.rc-lookup-results {
   }
 }
 
-/* CMS Image/Menu Upload
-** --------------------------------- */
+/*
+** CMS menu/Image upload
+** ------------------------------------------------
+*/
 
 .rc-dialog-cms-image-upload {
   header[mat-dialog-title] { margin-bottom: 16px; }
@@ -1263,7 +1269,6 @@ ul.rc-lookup-results {
 */
 
 .rc-card.rc-dish {
-
   cursor: pointer;
   h2 {
     font-size: 12px;
@@ -1327,6 +1332,17 @@ mat-toolbar.cms-menu-section {
   }
 }
 
+/*
+** CMS Reservations
+** ------------------------------------------------
+*/
+.rc-cms-res {}
+.rc-cms-res-online {}
+
+/*
+** CMS Affiliates
+** ------------------------------------------------
+*/
 .rc-affiliate-offer-card {
   position: relative;
 
