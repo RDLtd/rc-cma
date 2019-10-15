@@ -1,6 +1,6 @@
 {
   "name": "RD.CMS",
-  "version": "8.0.0_beta1",
+  "version": "8.0.0",
   "license": "MIT",
   "angular-cli": {},
   "scripts": {
