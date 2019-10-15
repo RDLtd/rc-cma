@@ -517,35 +517,32 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
     // For now assume that there are only two states. Or at least that Associate means you cannot do it,
     // This means we could have other more elevated stets (e.g. Premium) that still allow publish
     // In theory we should never get here if there is no status defined, but just in case...
-    if (this.restaurant.restaurant_rc_member_status) {
-      if (this.restaurant.restaurant_rc_member_status !== 'Full') {
-        this.help.dspHelp('cms-dashboard-associate');
-      } else {
-        this.isPreviewing = true;
-        this.cms.previewSPW(this.restaurant.restaurant_id, this.restaurant.restaurant_number, true, false)
-          .subscribe(res => {
-              if (res['status'] === 'OK') {
-                // console.log('Publish success:', res);
-                this.productionUrl = res['url'];
-                this.cmsChanged = false;
-                this.publishDate = new Date(res['published']);
-                this.verifyData();
-                this.isPreviewing = false;
-                // record event
-                this.ga.sendEvent('CMS-Dashboard', 'SPW', 'Published');
-              } else {
-                console.log('Publish failed', res);
-                this.isPreviewing = false;
-              }
-            },
-            error => {
-              console.log('Publish error', error);
-              this.isPreviewing = false;
-            });
-      }
+    if (this.restaurant.restaurant_rc_member_status !== 'Full') {
+      this.help.dspHelp('cms-dashboard-associate');
     } else {
-      // no status defined, must be something odd going on...
+      this.isPreviewing = true;
+      this.cms.previewSPW(this.restaurant.restaurant_id, this.restaurant.restaurant_number, true, false)
+        .subscribe(res => {
+            if (res['status'] === 'OK') {
+              // console.log('Publish success:', res);
+              this.productionUrl = res['url'];
+              this.cmsChanged = false;
+              this.publishDate = new Date(res['published']);
+              this.verifyData();
+              this.isPreviewing = false;
+              // record event
+              this.ga.sendEvent('CMS-Dashboard', 'SPW', 'Published');
+            } else {
+              console.log('Publish failed', res);
+              this.isPreviewing = false;
+            }
+          },
+          error => {
+            console.log('Publish error', error);
+            this.isPreviewing = false;
+          });
     }
+
   }
 
   openSocialLink(url) {
