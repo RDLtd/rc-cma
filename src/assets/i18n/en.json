@@ -1010,7 +1010,9 @@
     "UpgradeLower": "Upgrade to Full Membership (",
     "Tax": "+ Tax)",
     "Success": "Your payment was successful, you will receive an invoice by email",
-    "Error": "There was an ERROR in sending your payment for processing"
+    "Error": "There was an ERROR in sending your payment for processing",
+    "Membership": "Membership",
+    "TaxNoBracket": "+ Tax"
   },
 
   "Agent": {

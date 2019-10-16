@@ -174,8 +174,10 @@ export class PaymentComponent implements OnInit  {
       handler.open({
         image: 'https://res.cloudinary.com/rdl/image/upload/v1534065778/RC-logo-NoText_b7oecp.jpg',
         name: this.company_name,
-        description: this.t_data.MembershipFor +  ' ' + this.restaurant.restaurant_name + ' (' + this.company_currency_symbol +
-          this.company_annual_fee + ' ' + this.t_data.Tax,
+        description: this.t_data.Membership + ' ' + this.company_currency_symbol +
+          this.company_annual_fee + ' ' + this.t_data.TaxNoBracket,
+        // description: this.t_data.MembershipFor +  ' ' + this.restaurant.restaurant_name + ' (' + this.company_currency_symbol +
+        //   this.company_annual_fee + ' ' + this.t_data.Tax,
         currency: this.company_currency_code,
         amount: this.p_amount,
         email: this.restaurant.restaurant_email,
