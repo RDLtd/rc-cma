@@ -53,8 +53,6 @@ export class AppComponent implements OnInit {
           (<any>window).ga('send', 'pageview');
         }
       });
-
-
   }
 
   ngOnInit() {

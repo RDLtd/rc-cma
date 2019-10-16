@@ -230,7 +230,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
 
         if (data['times'].length) {
           // ToDo update this to check through the array of times. Using zero since that also reflects message
-          this.hours_date = new Date(data['times[0]'].cms_time_last_update);
+          this.hours_date = new Date(data['times'][0].cms_time_last_update);
         }
 
       },
@@ -321,10 +321,8 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
             this.img_status_text = this.img_count + this.t_data.ActiveImages;
           }
 
-          // TODO: no image specific updated date
-
           if (data['elements'].length) {
-            new Date(data['elements'][data['elements'].length - 1].cms_element_last_update);
+            this.img_date = new Date(data['elements'][data['elements'].length - 1].cms_element_last_update);
           }
         },
         error => console.log(error + ' R ' + this.restaurant.restaurant_id));
