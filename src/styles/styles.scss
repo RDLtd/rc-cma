@@ -89,6 +89,24 @@
     margin: 0;
   }
 }
+.rc-mat-snack-warn,
+.rc-mat-snack-info{
+  color: black;
+  background-color: $rc-theme-primary;
+  .mat-simple-snackbar,
+  .mat-simple-snackbar-action {
+    color: black;
+    font-size: 18px;
+    line-height: 24px;
+    button {
+      font-size: 18px;
+    }
+  }
+}
+.rc-mat-snack-info {
+  background-color: $rc-theme-secondary;
+}
+
 .rc-active {
   cursor: pointer;
   &:hover { background: #eee; }

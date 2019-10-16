@@ -44,7 +44,11 @@ export class AppComponent implements OnInit {
         } else {
           this.connectionStatus = "You are currently OFFLINE, please check your internet connection.";
         }
-        let snackBarRef = snackBar.open(this.connectionStatus, 'OK');
+        let snackBarRef = snackBar.open(this.connectionStatus, 'OK', {
+          verticalPosition: 'top',
+          panelClass: ['rc-mat-snack-info']
+        });
+
       });
 
       this.router.events.subscribe(event => {
