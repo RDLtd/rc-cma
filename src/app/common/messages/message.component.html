@@ -10,8 +10,8 @@
 
 <mat-dialog-content>
 
-    <div *ngFor="let message of data.messages" Markdown>
-        {{ message.message_text }}
+    <div *ngFor="let message of data['messages']" markdown>
+        {{ message['message_text'] }}
     </div>
 
 </mat-dialog-content>

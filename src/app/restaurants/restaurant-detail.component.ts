@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { FinancialService } from '../_services';
+//import { FinancialService } from '../_services';
 import { MatSnackBar } from '@angular/material';
 import { RestaurantService } from '../_services';
-import { TranslateService } from '@ngx-translate/core';;
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'rc-restaurant-detail',
@@ -26,7 +26,7 @@ export class RestaurantDetailComponent implements OnInit {
 
   constructor(
     public snackBar: MatSnackBar,
-    public financialService: FinancialService,
+    //public financialService: FinancialService,
     private translate: TranslateService,
     private restaurantService: RestaurantService
   ) {}
@@ -57,21 +57,28 @@ export class RestaurantDetailComponent implements OnInit {
     // get the index of the selected primary cuisine and then load the modifiers
     //
     // ToDo - fix this horrible code!
+
     for (let i = 0; i < this.cuisines.length; i++) {
+
       if (this.cuisines[i].cuisine_description === this.restaurant.restaurant_cuisine_1) {
         this.cuisine_modifiers = [];
+
         if (this.cuisines[i].cuisine_modifier_1) {
           this.cuisine_modifiers.push({'cuisine_description': this.cuisines[i].cuisine_modifier_1});
         }
+
         if (this.cuisines[i].cuisine_modifier_2) {
           this.cuisine_modifiers.push({'cuisine_description': this.cuisines[i].cuisine_modifier_2});
         }
+
         if (this.cuisines[i].cuisine_modifier_3) {
           this.cuisine_modifiers.push({'cuisine_description': this.cuisines[i].cuisine_modifier_3});
         }
+
         if (this.cuisines[i].cuisine_modifier_4) {
           this.cuisine_modifiers.push({'cuisine_description': this.cuisines[i].cuisine_modifier_4});
         }
+
         if (this.cuisines[i].cuisine_modifier_5) {
           this.cuisine_modifiers.push({'cuisine_description': this.cuisines[i].cuisine_modifier_5});
         }
@@ -113,21 +120,21 @@ export class RestaurantDetailComponent implements OnInit {
     this.cancelSetting = setting;
   }
 
-  getFinancials(restaurant_id) {
-    this.financialService.getForRestaurant(restaurant_id)
-      .subscribe(
-        data => {
-          // console.log(JSON.stringify(data), data['financials'].length);
-          if (data['financials'].length > 0) {
-            this.openSnackBar(data['financials'].length + ' financial records found for ' +
-              this.restaurant.restaurant_name, '');
-          } else {
-            this.openSnackBar('No financial records found for ' +
-              this.restaurant.restaurant_name, '');
-          }
-        },
-        error => {
-          this.openSnackBar('There was an error trying to access the financial database', '');
-        });
-  }
+  // getFinancials(restaurant_id) {
+  //   this.financialService.getForRestaurant(restaurant_id)
+  //     .subscribe(
+  //       data => {
+  //         // console.log(JSON.stringify(data), data['financials'].length);
+  //         if (data['financials'].length > 0) {
+  //           this.openSnackBar(data['financials'].length + ' financial records found for ' +
+  //             this.restaurant.restaurant_name, '');
+  //         } else {
+  //           this.openSnackBar('No financial records found for ' +
+  //             this.restaurant.restaurant_name, '');
+  //         }
+  //       },
+  //       error => {
+  //         this.openSnackBar('There was an error trying to access the financial database', '');
+  //       });
+  // }
 }

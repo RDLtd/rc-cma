@@ -8,11 +8,10 @@
 </mat-toolbar>
 
 <mat-dialog-content>
-  <div markdown [src]="data.path"></div>
+  <div markdown [src]="data['path']"></div>
 </mat-dialog-content>
 
-<mat-dialog-actions align="center" *ngIf="data.footer">
-  <button mat-button [mat-dialog-close]="true">{{ data.btnLabel }}</button>
-  <!--<button mat-button mat-dialog-close>GOT IT</button>-->
+<mat-dialog-actions align="center" *ngIf="data['footer']">
+  <button mat-button [mat-dialog-close]="true">{{ data['btnLabel'] }}</button>
 </mat-dialog-actions>
 
