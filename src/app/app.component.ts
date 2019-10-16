@@ -5,6 +5,8 @@ import { AuthenticationService } from './_services';
 import { HttpClient } from '@angular/common/http';
 import { AppConfig } from './app.config';
 import { NavigationEnd, Router } from '@angular/router';
+import { ConnectionService } from 'ng-connection-service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'rc-root',
@@ -18,16 +20,32 @@ export class AppComponent implements OnInit {
   member: any;
   language;
 
+  connectionStatus = 'ONLINE'; //initializing as online by default
+  isConnected = true;
+
   @ViewChild('MdSidenav', {static: true})
 
   private sidenav: MatSidenav;
 
   constructor(
+    private connectionService:ConnectionService,
+    private snackBar: MatSnackBar,
     private router: Router,
     private translate: TranslateService,
     private http: HttpClient,
     private config: AppConfig,
     public authService: AuthenticationService) {
+
+      // Check browser connection
+      this.connectionService.monitor().subscribe(isConnected => {
+        this.isConnected = isConnected;
+        if(this.isConnected){
+          this.connectionStatus = "You are now ONLINE."
+        } else {
+          this.connectionStatus = "You are currently OFFLINE, please check your internet connection.";
+        }
+        let snackBarRef = snackBar.open(this.connectionStatus, 'OK');
+      });
 
       this.router.events.subscribe(event => {
         if (event instanceof NavigationEnd) {
