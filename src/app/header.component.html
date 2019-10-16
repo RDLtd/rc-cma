@@ -47,7 +47,7 @@
       *ngIf="authService.isAuthLevel(1)"
       [routerLink]="['/profile']">
       <mat-icon>account_circle</mat-icon>
-      <span>User Settings</span>
+      <span>{{ 'Header.Settings' | translate }}</span>
     </button>
     <mat-divider></mat-divider>
     <button
@@ -55,14 +55,14 @@
       *ngIf="authService.isAuth()"
       (click)="logout()">
       <mat-icon>exit_to_app</mat-icon>
-      <span>Logout</span>
+      <span>{{ 'Header.Logout' | translate }}</span>
     </button>
     <mat-divider></mat-divider>
     <button
       mat-menu-item
       (click)="about()" >
       <mat-icon>help</mat-icon>
-      <span>About RD.CMS</span>
+      <span>{{ 'Header.About' | translate }}</span>
     </button>
   </mat-menu>
 

@@ -25,7 +25,7 @@ export class PaymentComponent implements OnInit  {
   company_annual_fee;
   company_currency_symbol;
   company_currency_code;
-  company_annual_annual_fee_with_vat;
+  company_annual_fee_with_vat;
 
   t_data;
   lblWait;
@@ -53,18 +53,20 @@ export class PaymentComponent implements OnInit  {
     this.agent = this.data.agent;
 
     // NB temp fix for RSVP launch!
-    this.company_name = 'Restaurant Collective';
-    this.company_monthly_fee = '3.50';
-    this.company_annual_fee = '42.00';
-    this.company_currency_symbol = '£';
-    this.company_currency_code = 'GBP';
-    this.company_annual_annual_fee_with_vat = '50.40';
+    // this.company_name = 'Restaurant Collective';
+    // this.company_monthly_fee = '3.50';
+    // this.company_annual_fee = '42.00';
+    // this.company_currency_symbol = '£';
+    // this.company_currency_code = 'GBP';
+    this.company_annual_fee_with_vat = '50.40';
 
-    // this.company_name = localStorage.getItem('rd_company_name');
-    // this.company_monthly_fee = localStorage.getItem('rd_company_monthly_fee');
-    // this.company_annual_fee = localStorage.getItem('rd_company_annual_fee');
-    // this.company_currency_symbol = localStorage.getItem('rd_company_currency_symbol');
-    // this.company_currency_code = localStorage.getItem('rd_company_currency_code');
+    this.company_name = localStorage.getItem('rd_company_name');
+    this.company_monthly_fee = localStorage.getItem('rd_company_monthly_fee');
+    this.company_annual_fee = localStorage.getItem('rd_company_annual_fee');
+    this.company_currency_symbol = localStorage.getItem('rd_company_currency_symbol');
+    this.company_currency_code = localStorage.getItem('rd_company_currency_code');
+    this.company_annual_fee_with_vat = localStorage.getItem('rd_company_annual_fee_with_vat');
+    console.log(this.company_annual_fee_with_vat);
 
     this.translate.get('Payment').subscribe(data => {
       this.t_data = data;
@@ -96,7 +98,7 @@ export class PaymentComponent implements OnInit  {
       // NB this needs to be updated for France
       // this.p_amount_no_vat = 4200; // NB reset to 4200 for UK
       this.p_amount_no_vat = this.company_annual_fee * 100; // NB reset to 4200 for UK
-      this.p_amount = this.company_annual_annual_fee_with_vat * 100;
+      this.p_amount = this.company_annual_fee_with_vat * 100;
       this.p_currency = this.company_currency_code;
       this.invoice_number = 'to come'; // create a placeholder which will then be updated
       const first_self = this;
@@ -104,9 +106,8 @@ export class PaymentComponent implements OnInit  {
       const handler = (<any>window).StripeCheckout.configure({
         // pk_test_3UC3P4HUDtjPewUWjzpP0GHs
         // pk_live_aC07Pi3YT3GGv7QYujVxWvPt
-        // I think it is OK to have this key here,
-        // since payments can only be processed using the sk on the server side
-        key: 'pk_live_aC07Pi3YT3GGv7QYujVxWvPt',
+        // I think it is OK to have this key here, since payments can only be processed using the sk on the server side
+        key: 'pk_test_3UC3P4HUDtjPewUWjzpP0GHs',
         locale: 'auto',
         token: (token: any) => {
           // Note 'fat arrow' for scope...
@@ -144,9 +145,11 @@ export class PaymentComponent implements OnInit  {
                 //      card_type
                 //      card_last4
                 this.createInvoice(restaurant_id, data['invoice_number'], this.p_amount_no_vat / 100,
-                  'GBP', this.p_description, token);
+                  this.company_currency_code, this.p_description, token);
                 // send a welcome if this was triggered by an agent
                 if (this.agent) {
+                  // TODO: Need to set up an association here, but what if it has already been set up?
+                  // TODO: Could it be that the agent might be upselling AFTER having set as associate?
                   // if the payment was successful, send the welcome email
                   this.memberService.sendwelcomersvpemail(this.restaurant.restaurant_member_id,
                     this.restaurant.restaurant_name,
