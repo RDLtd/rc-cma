@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';;
+import { TranslateService } from '@ngx-translate/core';
 import {  MemberService } from './_services';
 
 @Component({
@@ -16,10 +16,6 @@ export class FooterComponent implements OnInit {
   constructor(
     private translate: TranslateService,
     private memberService: MemberService,) {
-
-    // translate.onLangChange.subscribe(lang => {
-    //   this.ngOnInit();
-    // });
   }
 
   ngOnInit() {
@@ -32,5 +28,4 @@ export class FooterComponent implements OnInit {
     this.translate.use(lang);
     localStorage.setItem('rd_country', lang);
   }
-
 }
