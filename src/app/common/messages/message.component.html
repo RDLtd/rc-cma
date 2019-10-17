@@ -1,8 +1,8 @@
 <div class="rc-dialog rc-dialog-med">
 
 <mat-toolbar class="rc-cms-toolbar">
-  <span class="rc-toolbar-title">RESTAURANT COLLECTIVE SUPPORT</span>
-  <span class="rc-space-filler"></span>
+  <span class="rc-toolbar-title">{{ company_name }} Support</span>
+  <span class="rc-spacefill"></span>
   <span class="rc-section-toolbar-actions">
   <button mat-icon-button mat-dialog-close><mat-icon>close</mat-icon></button>
 </span>
@@ -20,7 +20,7 @@
   <button
     mat-button
     [mat-dialog-close]="true">
-    DON'T SHOW ME THIS AGAIN
+    {{ 'Messages.DontShow' | translate }}
   </button>
 </mat-dialog-actions>
 </div>
