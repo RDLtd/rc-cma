@@ -40,7 +40,7 @@ export class AppComponent implements OnInit {
       this.connectionService.monitor().subscribe(isConnected => {
         this.isConnected = isConnected;
         if(this.isConnected){
-          this.connectionStatus = "You are now ONLINE."
+          this.connectionStatus = "You are ONLINE."
         } else {
           this.connectionStatus = "You are currently OFFLINE, please check your internet connection.";
         }
