@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import {  MemberService } from './_services';
 
 @Component({
   selector: 'rc-footer',
@@ -13,10 +12,7 @@ export class FooterComponent implements OnInit {
   company_logo_root;
   company_url;
 
-  constructor(
-    private translate: TranslateService,
-    private memberService: MemberService,) {
-  }
+  constructor( private translate: TranslateService) {}
 
   ngOnInit() {
     this.company_name = localStorage.getItem('rd_company_name');

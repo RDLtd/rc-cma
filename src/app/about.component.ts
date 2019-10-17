@@ -10,11 +10,10 @@ export class AboutComponent implements OnInit {
   build: any;
   os_text;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
     // show the OS and browser versions
     this.os_text = navigator.appVersion;
   }
-
 }
