@@ -23,7 +23,6 @@ export class CmsMenusComponent implements OnInit {
   showLoader: boolean = false;
   dataChanged: boolean = false;
   htmlMenu: any = {};
-  box1Width = '50%';
 
   // translation obj
   t_data: any;
