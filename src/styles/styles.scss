@@ -1,45 +1,18 @@
 
-/*
-* Import MDC components, as required
-* ----------------------------------
-*/
-
-/*
-@import "~material-components-web/material-components-web";
-@import "~@material/animation/mdc-animation";
-@import "~@material/button/mdc-button";
-@import "~@material/card/mdc-card";
-@import "~@material/checkbox/mdc-checkbox";
-@import "~@material/drawer/mdc-drawer";
-@import "~@material/fab/mdc-fab";
-@import "~@material/form-field/mdc-form-field";
-@import "~@material/icon-toggle/mdc-icon-toggle";
-@import "~@material/list/mdc-list";
-@import "~@material/menu/mdc-menu";
-@import "~@material/radio/mdc-radio";
-@import "~@material/ripple/mdc-ripple";
-@import "~@material/select/mdc-select";
-@import "~@material/snackbar/mdc-snackbar";
-@import "~@material/switch/mdc-switch";
-@import "~@material/textfield/mdc-textfield";
-@import "~@material/theme/mdc-theme";
+// Material Web Component
 @import "@material/layout-grid/mdc-layout-grid";
-@import "@material/elevation/mdc-elevation";
-*/
-
-@import "@material/layout-grid/mdc-layout-grid";
-@import "@material/toolbar/mdc-toolbar";
-@import "@material/typography/mdc-typography";
 
 @import "mat-themes";
 @import "vars";
 @import "reset";
 
+// Create a config with the default MAT typography levels.
+$config: mat-typography-config();
+
 /*
-* Removed styles
+* Removed RC styles
 * ------------------------ */
 // @import "unused"
-
 
 /*
 * Utility classes
@@ -68,8 +41,6 @@
   justify-content: space-between;
 }
 .rc-invisible { visibility: hidden; }
-.rc-txt-right { text-align: right; }
-.rc-txt-leading { font-size: 20px; }
 .rc-full-width { width: 100%; }
 .rc-half-width { width: calc(50% - 2px);}
 .rc-link-active { color: $rc-theme-primary !important; }
@@ -77,17 +48,6 @@
 .rc-disable {
   filter: saturate(0%);
   opacity: 0.5;
-}
-.rc-small-caps {
-  font-size: 10px;
-  text-transform: uppercase;
-}
-.rc-no-spinner {
-  &::-webkit-inner-spin-button,
-  &::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
 }
 .rc-mat-snack-warn,
 .rc-mat-snack-info{
@@ -103,25 +63,14 @@
     }
   }
 }
-.rc-mat-snack-info {
-  background-color: $rc-theme-secondary;
-}
-
+.rc-mat-snack-info { background-color: $rc-theme-secondary; }
 .rc-active {
   cursor: pointer;
   &:hover { background: #eee; }
 }
 .rc-success { color: $rc-theme-success !important; }
 .rc-warn { color: $rc-theme-warn; }
-.rc-full-width-restaurant {
-  width: 100%;
-  height: 64px;
-}
 
-a.rc-btn-lg {
-  padding: 8px 16px;
-  font-size: 18px;
-}
 .rc-media-small-hide { display: none !important; }
 .rc-media-med { display: block !important; }
 .agm-map { height: 300px; }
@@ -146,12 +95,10 @@ a.rc-btn-lg {
     height: 100%;
   }
 }
-
 @media screen and ( min-width : 600px ){
   .rc-media-small-hide { display: block !important; }
   .rc-media-med { display: none !important; }
 }
-
 @media only screen
   and (min-device-width: 768px)
   and (max-device-width: 1024px)
@@ -162,12 +109,17 @@ a.rc-btn-lg {
 ** MDC/Material Overrides
 ** ------------------------------
 */
-.mdc-toolbar-fixed-adjust { margin-top: $rc-toolbar-height-std;}
-.mdc-toolbar--fixed { z-index: 100; }
-.mat-toolbar-row, .mat-toolbar-single-row { height: $rc-toolbar-height-std !important;}
+
+.mdc-layout-grid { max-width: $rc-max-width; }
+
 .mat-sidenav { width: auto; }
 .mat-sidenav-container.mat-sidenav-container { background: $rc-theme-bgd; }
 .mat-sidenav-content { min-height: calc(100vh - 160px); }
+
+.mat-toolbar-fixed-adjust { margin-top: $rc-toolbar-height-std;}
+.mat-toolbar-row,
+.mat-toolbar-single-row { height: $rc-toolbar-height-std !important;}
+.mat-tooltip { font-size: 12px; line-height: 16px}
 .mat-hint,
 .mat-input-underline {
   color: $rc-theme-black;
@@ -175,36 +127,24 @@ a.rc-btn-lg {
   border-color: $rc-theme-black;
 }
 .mat-radio-label,
-.mat-checkbox-label { font-size: 16px; }
 .mat-form-field-prefix { margin-right: 8px; }
 .mat-form-field { line-height: 1.4; }
-.mat-card-content { font-size: 16px; }
-.mat-card-title {
-  h2 {
-    font-size: 24px;
-    margin-top:0;
-  }
-}
-.mat-radio-label,
-.mat-checkbox-label { font-size: 16px;}
-.mat-form-field > .mat-chip {
-  background-color: $rc-theme-secondary;
-  margin: 0 4px 4px 0 !important;
-}
+.mat-card-title { font-size: 24px; }
+.mat-form-field > .mat-chip { background-color: $rc-theme-secondary; }
 
 .mat-dialog-container {
-  max-width: 95vw !important;
+  //max-width: 95vw !important;
   border-radius: 8px !important;
-  //max-height: 80vh !important;
 }
-.preview-dialog-container .mat-dialog-container {
+.rc-preview-dialog-container .mat-dialog-container {
   padding: 0;
   border-radius: 0;
 }
-.cdk-overlay-backdrop.cdk-overlay-backdrop-showing.preview-backdrop {
+.cdk-overlay-backdrop.cdk-overlay-backdrop-showing.rc-preview-backdrop {
   background-color: #000;
   opacity: 0.7;
 }
+
 .mat-card-header-text { margin: 0 !important; }
 .mat-card-content h4 {
   font-weight: bold;
@@ -213,15 +153,7 @@ a.rc-btn-lg {
   background-color: $rc-theme-grey;
   padding: 4px 8px;
 }
-.mat-menu-content {
-  .menu-title {
-    line-height: 48px;
-    height: 48px;
-    padding: 0 16px;
-    font-weight: $rc-display-font-weight;
-  }
-}
-.mdc-layout-grid { max-width: $rc-max-width; }
+
 .mat-simple-snackbar-action { color: white; }
 
 /*
@@ -229,10 +161,14 @@ a.rc-btn-lg {
 ** ------------------------------
 */
 
-.rc-nav-global {}
-
+.rc-nav-global {
+  position: fixed;
+  top:0;
+  z-index: 100;
+  .rc-section-toolbar-title { font-weight: mat-font-weight($config, headline) }
+}
 .rc-sidenav-menu {
-  mat-icon {
+  .mat-icon {
     margin-right: 8px;
     color: $rc-theme-primary;
   }
@@ -242,28 +178,25 @@ a.rc-btn-lg {
 .rc-about {
   display: flex;
   flex-direction: column;
-  max-width: 270px;
+  max-width: 320px;
   position: relative;
+
   .rc-close {
     position: absolute;
     top: -8px; right: -8px;
     z-index: 100;
   }
   img {
-    width:120px;
+    width:96px;
     height: auto;
   }
   h3 {
     text-align: center;
-    font-size: 12px;
-    padding-bottom:0;
-    margin-bottom: 0;
+    font-size: 16px;
+    margin: 0 auto 8px;
   }
-  a {
-    color: inherit;
-  }
+  a { font-weight: bold; color: inherit; }
 }
-
 .rc-footer {
   margin-top: 0;
   padding: 24px 0 24px 0;
@@ -273,14 +206,13 @@ a.rc-btn-lg {
   a {
     opacity: 1;
     transition: opacity .3s ease-out;
-    &:hover {
-      opacity: .75;
-    }
+    &:hover { opacity: .75; }
   }
   img {
     height: 80px;
     margin: 0 24px;
   }
+
   .mdc-layout-grid__cell { text-align: center; }
 
   .rc-navlist {
@@ -323,6 +255,8 @@ a.rc-btn-lg {
   }
 }
 
+.rc-toolbar {}
+
 /*
 ** SIGN-IN
 ** ------------------------------
@@ -332,12 +266,6 @@ a.rc-btn-lg {
   background: $rc-theme-primary;
   min-height: 100vh;
   padding: 0 calc(100%/3 + 64px) 0 16px;
-  a {
-    color: $rc-theme-primary;
-    text-decoration: none;
-    &:hover { text-decoration: underline; }
-  }
-
   .rc-main {
     display: flex;
     flex-direction: column;
@@ -346,16 +274,14 @@ a.rc-btn-lg {
     color: white;
     min-height: 100vh;
 
-    header { display: block; }
+    header { display: block; margin-bottom: 16px;}
     p {
       max-width: 640px;
       color: white;
-      font-size: 24px;
     }
     .rc-brand-logo { height: 120px; }
   }
   .rc-signin {
-
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -366,29 +292,27 @@ a.rc-btn-lg {
     padding: 48px;
     header {
       position: relative;
-      margin-bottom: 2rem;
       h1 {
-        font-size: 36px;
+        font-size: 40px;
         font-weight: $rc-default-font-weight;
-        margin-bottom: 0;
+        margin: 0;
       }
-      span { font-size: 16px; }
     }
     .rc-brand-logo {
       height: 64px;
       display: block;
+      margin-bottom: 24px;
     }
   }
-
   form {
     border-radius: 2px;
     background-color: white;
-    margin: 0 0 2rem;
+    margin: 1rem 0 2rem;
     .mat-form-field { line-height: 1.4; }
     input { font-size: 24px; }
     button {
       height: 56px;
-      font-size: 16px;
+      font-size: mat-font-size($config, body-1);
     }
     .terms {
       font-size: 16px;
@@ -443,16 +367,14 @@ a.rc-btn-lg {
     width: 80vw;
     height: 80vh;
 }
-.rc-section-profile { padding-top: 8px; }
 .rc-pad-r { margin-right: 8px;}
 .rc-section-toolbar {
   background-color: $rc-theme-black;
   color: white;
   height:56px;
+  font-weight: $rc-default-font-weight;
   &.mat-toolbar { min-height: $rc-toolbar-height-std; }
-  .rc-toolbar-expand-icon { transition: all .3s ease-in-out; }
-  mat-toolbar-row { height: $rc-toolbar-height-std; }
-  .rc-section-toolbar-title { transition: all .3s ease-in-out; }
+  .rc-section-toolbar-title { transition: all .3s ease-in-out;}
   .rc-section-toolbar-actions {
     display: flex;
     flex-direction: row;
@@ -462,32 +384,6 @@ a.rc-btn-lg {
   position: fixed;
   z-index: 10;
 }
-.rc-cms-toolbar {
-  $toolbar-height: 40px;
-  margin-top:8px;
-  background-color: $rc-theme-secondary;
-  height:$toolbar-height;
-  &.mat-toolbar { min-height: $toolbar-height; }
-  mat-toolbar-row { height: $toolbar-height; }
-  .mat-icon-button {
-    opacity: .75;
-    &:hover { opacity: 1; }
-    &:disabled { opacity: inherit; }
-  }
-
-  .mat-icon-button,
-  .mat-icon,
-  .mat-icon-button i {
-    //line-height: 32px;
-  }
-  mat-icon {
-    font-size: 32px;
-    width: 32px;
-    height: 32px;
-
-  }
-  .rc-toolbar-title { text-transform: uppercase; }
-}
 
 /*
 ** CMS DASHBOARD
@@ -496,7 +392,7 @@ a.rc-btn-lg {
 
 .rc-dialog-member {
   position: relative;
-  max-width: 560px;
+  max-width: 480px;
   .mat-dialog-container { padding: 0; }
   .rc-close {
     position: absolute;
@@ -548,7 +444,6 @@ a.rc-btn-lg {
     &.mat-list { padding-top: 0; }
   }
 }
-
 .rc-member-full {
   header {
     padding: 16px;
@@ -597,23 +492,18 @@ a.rc-btn-lg {
     padding: 0;
   }
 }
-
-
 .rc-add-content {
-
+  margin-right:0;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   background: #fff;
-  @include mat-elevation(1);
   cursor: pointer;
   color: #999;
   padding: 48px;
   transition: all .3s ease-in-out;
-  &:hover {
-    @include mat-elevation(5);
-  }
+  &:hover { @include mat-elevation(6); }
   mat-icon {
     height: 48px;
     width: 48px;
@@ -633,7 +523,9 @@ a.rc-btn-lg {
   position: relative;
   background: white;
   transition: all .3s ease-in-out;
-  @include mat-elevation(1);
+  &:hover {
+    @include mat-elevation(6);
+  }
   header {
     display: flex;
     margin:0;
@@ -671,6 +563,7 @@ a.rc-btn-lg {
   }
 }
 
+// TODO: why are these buttons?
 button.rc-member-full,
 button.rc-member-assc {
   position: absolute !important;
@@ -689,72 +582,12 @@ button.rc-member-assc {
 ** RC CARDS
 ** ------------------------------
 */
-
-.rc-card {
-  position: relative;
-  box-sizing: border-box;
-  background: white;
-  padding: 12px;
-  width: 100%;
-  transition: all .3s ease-out;
-  @include mat-elevation(1);
-  mat-chip-list {
-    position: absolute;
-    top:8px;
-    right: 8px;
-  }
-  .rc-card-content {
-    h2 {
-      margin: 8px 0 0 0;
-      font-family: $rc-display-font;
-      line-height: 1;
-      text-transform: uppercase;
-      color: $rc-theme-black;
-      letter-spacing: -1px;
-      span {
-        display: block;
-        font-size: 11px;
-        letter-spacing: 0;
-      }
-    }
-    span {
-      font-size: 12px;
-      margin: 0;
-      text-transform: uppercase;
-    }
-  }
-
-  .rc-card-img {
-    position: relative;
-    float: left;
-    margin:0 8px 0 0;
-    .rc-user-verified {
-      position: absolute;
-      top: -4px;
-      left:-4px;
-      color: $rc-theme-primary;
-    }
-  }
-
-  .rc-card-actions {
-    display: flex;
-    flex-direction: row;
-    margin-top:8px;
-    padding-top:8px;
-    mat-chip-list {
-      position: relative;
-      padding-left: 8px;
-      display: inline-block;
-    }
-  }
-}
-.rc-card-help,
-.rc-card-membership {
+.rc-card {}
+.rc-card-help {
   position: absolute;
   top: 16px; right: 16px;
-  z-index: 100;
+  z-index: 10;
 }
-.rc-card-membership { left: 16px; right: auto;}
 
 .rc-image-card {
   position: relative;
@@ -762,7 +595,9 @@ button.rc-member-assc {
   background: white;
   width: 100%;
   transition: all .3s ease-out;
-  @include mat-elevation(1);
+  &:hover {
+    @include mat-elevation(6);
+  }
   .rc-img-wrapper {
     width: 100%;
     height: 200px;
@@ -785,14 +620,7 @@ button.rc-member-assc {
   top: 16px;
   left: 16px;
 }
-.rc-dialog-cms-image-wrap { position: relative; }
-.rc-dialog-cms-image {
-  header { display: flex; }
-  img {
-    width: 100%;
-    height: auto;
-  }
-}
+
 .rc-online { background-color: $rc-theme-success !important; }
 .rc-action-left {
   text-align: left;
@@ -800,17 +628,13 @@ button.rc-member-assc {
 }
 .rc-card-over {
   @include mat-elevation(8);
-
   .rc-card-content h2 {
     color: $rc-theme-primary;
     transition: color .3s ease-out;
   }
 }
-
 .rc-card-restaurant {
-
   padding: 0 16px 16px;
-
   .rc-card-restaurant-nav {
     position: absolute;
     bottom: 0;
@@ -848,12 +672,10 @@ button.rc-member-assc {
 ** MODAL/DIALOGS
 ** ---------------------------------------------------------------
 */
-
 .rc-dialog-profile,
 .rc-dialog-image {
-  mat-dialog-content { padding-top: 24px; }
+  .mat-dialog-content { padding-top: 24px; }
 }
-
 .rc-dialog {
   padding:0;
   position: relative;
@@ -933,12 +755,10 @@ button.rc-member-assc {
   }
   .rc-img-loader { cursor: pointer; }
 }
-
 .rc-dialog-cms {
   width: 84vw;
   height: 84vh;
 }
-
 .rc-dialog-alert {
   padding-bottom: 16px;
   max-width: 480px;
@@ -946,15 +766,24 @@ button.rc-member-assc {
     text-transform: uppercase;
     padding-bottom: 8px;
     border-bottom: 1px solid #212121;
+    font-size: 24px;
   }
 }
-
+.rc-dialog-cms-image-wrap { position: relative; }
+.rc-dialog-cms-image {
+  header { display: flex; }
+  img {
+    width: 100%;
+    height: auto;
+  }
+}
 .rc-card-vspacer { height: 16px; }
 .rc-card-vspacer-lg { height: 32px; }
 .rc-form-btns { text-align: center; }
 .rc-member { background-color: $rc-theme-success !important; }
 .rc-invited { background-color: $rc-theme-black !important; }
 .rc-prospect { background-color: $rc-theme-grey !important; }
+
 .rc-card-keystat {
   display: block;
   font-size: 60px;
@@ -1017,7 +846,6 @@ ul.rc-lookup-results {
     }
   }
 }
-
 .mat-nav-list.rc-lookup {
   font-size: 14px;
   a {
@@ -1035,7 +863,6 @@ ul.rc-lookup-results {
     }
   }
 }
-
 .rc-lookup-request{
   margin: 1rem 0 0;
   padding: 16px;
@@ -1056,16 +883,13 @@ ul.rc-lookup-results {
 
 .rc-cms-dash-info {
   transition: all .3s ease-out;
-
   .mat-card-title {
     margin-bottom: 8px;
     font-size: 16px;
   }
   .mat-card-content { margin-bottom: 8px; }
 }
-
 .rc-content-status {
-
   padding-bottom: 24px;
   mat-list-item {
     cursor: pointer;
@@ -1087,14 +911,12 @@ ul.rc-lookup-results {
       &:after { background-color: $rc-theme-success; }
     }
   }
-
   .rc-content-status-partial {
     mat-icon { background-color: $rc-theme-tertiary; }
     .mat-progress-bar-fill {
       &:after { background-color:  $rc-theme-tertiary; }
     }
   }
-
   .rc-content-status-missing {
     mat-icon { background-color: black; }
     .mat-progress-bar-fill {
@@ -1127,13 +949,11 @@ ul.rc-lookup-results {
 */
 
 .rc-cms {
-
-  padding-top: 48px;
+  padding-top: ($rc-toolbar-height-std);
   .rc-cms-base {
     dd { font-size: 24px; }
   }
   .rc-card { padding: 16px; }
-
   dl { margin: 24px 0 0 0; }
   dt {
     text-transform: uppercase;
@@ -1176,18 +996,30 @@ ul.rc-lookup-results {
     button { text-transform: uppercase; }
   }
 }
-
+.rc-cms-toolbar {
+  margin-top: 8px;
+  background-color: $rc-theme-secondary;
+  height: $rc-toolbar-height-std;
+  &.mat-toolbar { min-height: $rc-toolbar-height-std; }
+  .mat-toolbar-single-row { height: $rc-toolbar-height-std; }
+  .rc-toolbar-title { text-transform: uppercase; }
+  .mat-icon {
+    font-size: 32px;
+    width: 32px;
+    height: 32px;
+    line-height: 32px !important;
+  }
+  .mat-icon-button {
+    opacity: .75;
+    &:hover { opacity: 1; }
+    &:disabled { opacity: inherit; }
+  }
+}
 .rc-cms-card-nav {
   position: absolute !important;
   top: 20px;
   right: 8px;
 }
-.rc-cms-card-save {
-  position: absolute !important;
-  top: 16px;
-  right: 8px;
-}
-
 .rc-cms-social {
   margin: 0;
   padding: 0;
@@ -1290,16 +1122,58 @@ ul.rc-lookup-results {
 ** CMS Menus
 ** ---------------------------------
 */
-
-.rc-card.rc-dish {
+.rc-content-panel {
+  padding: 16px;
+  background-color: white;
+}
+.rc-cms-menu-info {}
+.rc-cms-menu-section {
+  margin: 16px 0;
+  padding: 8px 16px 0;
+  background-color: $rc-theme-grey;
+}
+.rc-cms-menu-download {
+  background-color: white;
   cursor: pointer;
+  margin: 0 16px 16px 0;
+  padding: 16px !important;
+  transition: all .3s ease-out;
+  &:hover {
+    @include mat-elevation(6);
+  }
   h2 {
-    font-size: 12px;
+    margin: 0 auto 0 0;
+    padding: 0;
+    font-size: 1rem;
+    line-height: 1.25;
+    color: inherit;
+  }
+  p {
+    font-size: .9rem;
+    line-height: 1.25;
+    color: $rc-theme-text;
+    padding-top: .2rem;
+  }
+
+}
+.rc-card.rc-cms-menu-dish {
+  cursor: pointer;
+  margin: 0 16px 16px 0;
+  padding: 16px !important;
+  background-color: white;
+  transition: all .3s ease-out;
+  &:hover {
+    @include mat-elevation(6);
+  }
+
+  h2 {
+    font-size: .7rem;
+    font-weight: 500;
     text-transform: uppercase;
-    font-weight: $rc-default-font-weight;
     margin: 0 0 8px;
     padding: 0 0 4px;
     letter-spacing: 1px;
+    color: $rc-theme-text;
   }
   .rc-card-actions {
     display: flex;
@@ -1309,14 +1183,6 @@ ul.rc-lookup-results {
   }
 }
 
-mat-toolbar.cms-menu-section {
-  min-height: 40px;
-  background-color: transparent;
-  font-size: 18px;
-  margin: 16px 0;
-  //mat-form-field { width: 300px; }
-  input { text-transform: uppercase; }
-}
 .rc-blue {color: #2d7dff;}
 .rc-green {color: #B0B440;}
 .rc-dish-content {
@@ -1331,7 +1197,7 @@ mat-toolbar.cms-menu-section {
     font-size: 1rem;
     line-height: 1.25;
     flex: 70%;
-    color: inherit;
+    color: black;
   }
   // menu item price
   span:nth-child(2) {
@@ -1342,12 +1208,13 @@ mat-toolbar.cms-menu-section {
     flex: 30%;
     align-content: start;
     text-align: right;
-    color: inherit;
+    color: black;
 
   }
   // menu item desc
   span:nth-child(3) {
-    font-size: .8rem;
+    font-size: .9rem;
+    line-height: 1.25;
     flex: 100%;
     color: $rc-theme-text;
     padding-top: .2rem;
@@ -1368,7 +1235,6 @@ mat-toolbar.cms-menu-section {
 */
 .rc-affiliate-offer-card {
   position: relative;
-
   .mat-card-actions {
     position: absolute;
     display: flex;
@@ -1382,9 +1248,7 @@ mat-toolbar.cms-menu-section {
     font-size: 36px;
     line-height: 1;
   }
-
   p { margin: 4px 0; }
-
   dl {
     padding-bottom: 48px;
     dt { color: $rc-theme-black; }
@@ -1434,7 +1298,6 @@ mat-toolbar.cms-menu-section {
       margin-top: 0 !important;
     }
   }
-
   header {
     margin-top: 24px;
     padding: 24px 0 12px;
@@ -1446,7 +1309,6 @@ mat-toolbar.cms-menu-section {
     .mat-button-toggle-group,
     .mat-button-toggle-standalone { box-shadow: none; }
   }
-
   section {
     background: #fff;
     margin-top: 24px;
@@ -1467,7 +1329,6 @@ mat-toolbar.cms-menu-section {
   }
   .mdc-layout-grid { max-width: 640px; }
 }
-
 .rc-fs-graph-toolbar {
   background-color: white;
   padding-left: 0;
@@ -1475,7 +1336,6 @@ mat-toolbar.cms-menu-section {
   .mat-button-toggle-group,
   .mat-button-toggle-standalone { box-shadow: none; }
 }
-
 .rc-fs-graphlet {
   cursor: pointer;
   transition: all .3s ease-out;

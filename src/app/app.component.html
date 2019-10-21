@@ -1,40 +1,40 @@
 <rc-header *ngIf="authService.isAuth()" (navtoggled)="sidenav.toggle()"></rc-header>
 
-<mat-sidenav-container>
+<!--<mat-sidenav-container>-->
 
-  <!-- SIDE MENU -->
-  <mat-sidenav #sidenav mode="over" opened="false" class="mdc-toolbar-fixed-adjust">
+<!--  &lt;!&ndash; SIDE MENU &ndash;&gt;-->
+<!--  <mat-sidenav #sidenav mode="over" opened="false" class="mdc-toolbar-fixed-adjust">-->
 
-    <mat-nav-list class="rc-sidenav-menu" (click) = sidenav.close()>
+<!--    <mat-nav-list class="rc-sidenav-menu" (click) = sidenav.close()>-->
 
-      <mat-list-item [routerLink]="['/demographics']" *ngIf="authService.isAuthLevel(3)">
-        <mat-icon>show_chart</mat-icon> {{ 'App.Demographics' | translate }}
-      </mat-list-item >
-      <mat-divider></mat-divider>
-
-      <mat-list-item [routerLink]="['/profile']" *ngIf="authService.isAuthLevel(2)">
-        <mat-icon>face</mat-icon> {{ 'App.Profile' | translate }}
-      </mat-list-item >
-      <mat-divider *ngIf="authService.isAuthLevel(2)"></mat-divider>
-
-<!--      <mat-list-item [routerLink]="['/fs/profit']" *ngIf="authService.isAuthLevel(3)">-->
-<!--        <mat-icon>equalizer</mat-icon> {{ 'App.FS' | translate }}-->
+<!--      <mat-list-item [routerLink]="['/demographics']" *ngIf="authService.isAuthLevel(3)">-->
+<!--        <mat-icon>show_chart</mat-icon> {{ 'App.Demographics' | translate }}-->
 <!--      </mat-list-item >-->
 <!--      <mat-divider></mat-divider>-->
 
-    </mat-nav-list>
+<!--      <mat-list-item [routerLink]="['/profile']" *ngIf="authService.isAuthLevel(2)">-->
+<!--        <mat-icon>face</mat-icon> {{ 'App.Profile' | translate }}-->
+<!--      </mat-list-item >-->
+<!--      <mat-divider *ngIf="authService.isAuthLevel(2)"></mat-divider>-->
 
-  </mat-sidenav>
+<!--&lt;!&ndash;      <mat-list-item [routerLink]="['/fs/profit']" *ngIf="authService.isAuthLevel(3)">&ndash;&gt;-->
+<!--&lt;!&ndash;        <mat-icon>equalizer</mat-icon> {{ 'App.FS' | translate }}&ndash;&gt;-->
+<!--&lt;!&ndash;      </mat-list-item >&ndash;&gt;-->
+<!--&lt;!&ndash;      <mat-divider></mat-divider>&ndash;&gt;-->
+
+<!--    </mat-nav-list>-->
+
+<!--  </mat-sidenav>-->
 
   <!-- MAIN CONTENT AREA -->
   <main
-    [class.mdc-toolbar-fixed-adjust]="authService.isAuth()">
+    [class.mat-toolbar-fixed-adjust]="authService.isAuth()">
     <router-outlet
       #o="outlet"
       (deactivate)="onDeactivate()"></router-outlet>
   </main>
 
-</mat-sidenav-container>
+<!--</mat-sidenav-container>-->
 
 <rc-footer *ngIf="authService.isAuth()"></rc-footer>
 

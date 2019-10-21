@@ -100,8 +100,9 @@
 
           </div>
 
-          <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2 rc-active" (click)="updateImage()">
-            <img [src]="member.member_image_path">
+          <div
+               class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2 rc-active" (click)="updateImage()">
+            <img style="--aspect-ratio:1/1;" [src]="member.member_image_path">
           </div>
 
         </div>
@@ -154,7 +155,6 @@
     <div
       class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 rc-restaurant-card rc-card-restaurant"
       *ngFor="let restaurant of restaurants; let idx = index">
-
 
       <!-- membership -->
 

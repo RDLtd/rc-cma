@@ -14,9 +14,7 @@
       #frmReset="ngForm"
       (ngSubmit)="frmReset.form.valid && resetPwd(frmReset.value)"
       novalidate>
-
       <span>{{ 'SignIn.EnterEmail' | translate }}</span>
-
       <mat-form-field class="rc-full-width">
         <input
           matInput
@@ -27,7 +25,6 @@
           email
           required>
       </mat-form-field>
-
       <button
         mat-raised-button
         class="rc-full-width"
@@ -38,7 +35,6 @@
   </section>
 
   <section class="rc-main">
-
       <header>
         <img class="rc-brand-logo" src="../assets/images/{{ company_logo_root }}-trans-white.svg">
       </header>
@@ -85,7 +81,7 @@
           [placeholder]="'SignIn.UserPassword' | translate"
           required>
       </mat-form-field>
-      <p class="terms">{{ 'SignIn.Subject' | translate }}<a
+      <p class="mat-small">{{ 'SignIn.Subject' | translate }}<a
         href="{{ company_url }}/terms/" target="_blank">{{ 'SignIn.Terms' | translate }}</a>
         {{ 'SignIn.And' | translate }}
         <a href="{{ company_url }}/privacy/" target="_blank">{{ 'SignIn.Privacy' | translate }}</a></p>

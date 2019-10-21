@@ -1,4 +1,4 @@
-<div class="mdc-layout-grid" style="margin-top: 8px;">
+<div class="mdc-layout-grid">
 
   <!-- Core data -->
   <mat-card
@@ -11,13 +11,12 @@
 
     <mat-card-title>{{ restaurant?.restaurant_name }}</mat-card-title>
     <mat-card-subtitle>{{ restaurant?.restaurant_group_name }}</mat-card-subtitle>
-
     <mat-card-content>
 
       <div class="rc-card-help">
         <button
           mat-icon-button
-          (click)="help.dspHelp('cms-dashboard-core')">
+          (click)="help.dspHelp('cms-dashboard-core', restaurant)">
           <mat-icon>help</mat-icon>
         </button>
       </div>
@@ -85,9 +84,8 @@
 
       </dl>
     </mat-card-content>
-    <mat-card-actions align="center">
-      <button mat-flat-button
-               (click)="reqDirectoryDataChange()">{{ 'CMS-Dashboard.ChangeCaps' | translate }}</button>
+    <mat-card-actions align="end">
+      <button mat-button (click)="reqDirectoryDataChange()">{{ 'CMS-Dashboard.ChangeCaps' | translate }}</button>
     </mat-card-actions>
   </mat-card>
 
@@ -165,29 +163,35 @@
         *ngIf="cmsChanged && !isPreviewing"
         class="rc-cms-dash-info mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--align-top">
 
+        <!-- PREVIEW AVAILABLE -->
         <mat-card-header *ngIf="!isPreviewing && cmsHasSufficientData">
           <mat-card-title>{{ 'CMS-Dashboard.HaveUnpublished' | translate }}</mat-card-title>
           <span class="rc-space-filler"></span>
           <mat-icon class="rc-warn">cloud_off</mat-icon>
         </mat-card-header>
 
+        <!-- MORE CONTENT REQUIRED -->
         <mat-card-header *ngIf="!isPreviewing && !cmsHasSufficientData">
           <mat-card-title>{{ 'CMS-Dashboard.NeedMoreContent' | translate }}</mat-card-title>
           <span class="rc-space-filler"></span>
           <mat-icon class="rc-warn">cloud_off</mat-icon>
         </mat-card-header>
 
+        <!-- PREVIEW AVAILABLE -->
         <mat-card-content  *ngIf="!isPreviewing && cmsHasSufficientData">
           {{ 'CMS-Dashboard.NotPublished' | translate }}
-          <strong>{{ 'CMS-Dashboard.Preview' | translate }}</strong> {{ 'CMS-Dashboard.IfCorrect' | translate }}
-          <strong>{{ 'CMS-Dashboard.Publish' | translate }}</strong> {{ 'CMS-Dashboard.Sync' | translate }}
+          <strong>{{ 'CMS-Dashboard.Preview' | translate }}</strong> {{ 'CMS-Dashboard.Your' | translate }} <strong>
+          {{ 'CMS-Dashboard.SPW' | translate }}</strong> {{ 'CMS-Dashboard.IfCorrect' | translate }}
         </mat-card-content>
 
+        <!-- MORE CONTENT REQUIRED -->
         <mat-card-content  *ngIf="!isPreviewing && !cmsHasSufficientData">
           {{ 'CMS-Dashboard.GoodWork' | translate }}
           <strong>{{ 'CMS-Dashboard.Preview' | translate }}</strong> {{ 'CMS-Dashboard.And' | translate }} <strong>
           {{ 'CMS-Dashboard.Publish' | translate }}</strong> {{ 'CMS-Dashboard.Distribute' | translate }}
+          <p>{{ 'CMS-Dashboard.YouCan' | translate }}<a href="https://rdltd.github.io/RD.Pages/" target="_blank">{{ 'CMS-Dashboard.View' | translate }}</a>{{ 'CMS-Dashboard.ToSee' | translate }}</p>
         </mat-card-content>
+
 
         <mat-card-actions align="end"  *ngIf="!isPreviewing">
           <button
@@ -210,7 +214,7 @@
         <div class="rc-card-help">
           <button
             mat-icon-button
-            (click)="help.dspHelp('cms-dashboard-summary')">
+            (click)="help.dspHelp('cms-dashboard-summary', restaurant)">
             <mat-icon>help_outline</mat-icon>
           </button>
         </div>

@@ -190,9 +190,9 @@ export class ProfilePageComponent implements OnInit {
     }
   }
 
-  rcToggleClass(card) {
-    card.classList.toggle('rc-card-over');
-  }
+  // rcToggleClass(card) {
+  //   card.classList.toggle('rc-card-over');
+  // }
 
   // dspUnreadMessages() {
   //   this.memberService.messages(this.member.member_access_level, this.member.member_messages_seen)

@@ -26,15 +26,13 @@
     <rc-loader></rc-loader>
 
   </div>
-
+  <!-- Image cards -->
   <div
     class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4"
     *ngFor="let image of cmsImages">
     <div
       #card
       class="rc-image-card"
-      (mouseover)="rcToggleClass(card)"
-      (mouseout)="rcToggleClass(card)"
       (click)="viewImage(image)">
       <mat-chip-list class="rc-element-default">
         <mat-chip
@@ -88,10 +86,10 @@
       </div>
     </div>
   </div>
+  <!-- Add image option -->
   <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 rc-add-content" (click)="addImage()" *ngIf="!showLoader">
-
     <mat-icon>add_circle_outline</mat-icon>
     <span class="rc-add-content-label">{{ 'CMS-Images.AddImage' | translate }}</span>
-
   </div>
+
 </div>

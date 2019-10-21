@@ -58,7 +58,7 @@ export class HeaderComponent implements OnInit {
             this.displayName = this.lblMemberLogin;
             // this.login(true);
             // new login page
-            this.router.navigate(['/signin']);
+            this.router.navigate(['/']);
 
             break;
           }

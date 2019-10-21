@@ -25,15 +25,13 @@ export class HelpService {
 
     console.log(dspFooter, id);
 
-
-
       switch (lang) {
         // allow for specific countries, and make the default whatever is in the root help folder
         case 'fr': {
           // specific translation here, no need to call the translate module
           header = 'Aide';
           help_root = '/assets/helpfiles/fr/';
-          btnDemoLabel = 'Voir la Page Internet de démonstration';
+          btnDemoLabel = 'CONTACTER L\'ASSISTANCE RI';
           break;
         }
 
@@ -41,13 +39,9 @@ export class HelpService {
           // assume default is English
           header = 'Help';
           help_root = '/assets/helpfiles/';
-          btnDemoLabel = 'VIEW DEMO TEST RESTAURANT SPW';
+          btnDemoLabel = 'CONTACT RC SUPPORT';
         }
       }
-
-
-
-
 
     console.log('path', help_root + id + '.md');
     let dialogRef = this.dialog.open(HelpComponent, {

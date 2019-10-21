@@ -349,7 +349,7 @@
     "CoreData": "CŒUR DES DONNÉES",
     "OpeningHours": "HORAIRES D'OUVERTURE",
     "Descriptions": "DESCRIPTIONS ET CARACTÉRISTIQUES",
-    "ActiveImagesCaps": "PHOTGRAPHIES ACTIVES",
+    "ActiveImagesCaps": "PHOTOGRAPHIES ACTIVES",
     "ActiveMenus": "MENUS ACTIFS",
     "OnlineBookings": "RÉSERVATIONS",
     "LocInfo": "INFORMATION DE LOCALISATION",
@@ -891,7 +891,8 @@
     "Delete": "EFFACER",
     "Update": "METTRE À JOUR",
     "ImageUpdated": "l’image de votre profil a été mise à jour",
-    "ImageDeleted": "Image du profil supprimée"
+    "ImageDeleted": "Image du profil supprimée",
+    "ProfileImage": "Image du Profil"
   },
 
   "Profile-Verify": {
@@ -1114,7 +1115,7 @@
   },
 
   "Messages": {
-    "DontShow": "NE ME MONTRE PAS CECI ENCORE"
+    "DontShow": "NE PLUS ME MONTRER CE MESSAGE"
   }
 
 }

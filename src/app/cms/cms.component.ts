@@ -110,8 +110,8 @@ export class CmsComponent implements OnInit {
   getPreview() {
 
     const dialogRef = this.dialog.open(CmsPreviewComponent, {
-      panelClass: 'preview-dialog-container',
-      backdropClass: 'preview-backdrop',
+      panelClass: 'rc-preview-dialog-container',
+      backdropClass: 'rc-preview-backdrop',
       data: {
         id: this.restaurant.restaurant_id,
         number: this.restaurant.restaurant_number

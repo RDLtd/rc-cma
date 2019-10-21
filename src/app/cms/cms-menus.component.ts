@@ -4,7 +4,7 @@ import { CmsLocalService } from './cms-local.service';
 import { CMSService, HelpService } from '../_services';
 import { CmsFileUploadComponent } from './cms-file-upload.component';
 import { MatDialog, MatDialogConfig } from '@angular/material';
-import { ConfirmCancelComponent } from '../common/confirm-cancel/confirm-cancel.component';
+import { ConfirmCancelComponent } from '../common';
 import { CmsMenuDishComponent } from './cms-menu-dish.component';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -23,7 +23,7 @@ export class CmsMenusComponent implements OnInit {
   showLoader: boolean = false;
   dataChanged: boolean = false;
   htmlMenu: any = {};
-  currencyCode: string = "GBP";
+  box1Width = '50%';
 
   // translation obj
   t_data: any;
@@ -91,10 +91,10 @@ export class CmsMenusComponent implements OnInit {
       });
   }
 
-  // Utils
-  rcToggleClass(card) {
-    card.classList.toggle('rc-card-over');
-  }
+  // // Utils
+  // rcToggleClass(card) {
+  //   card.classList.toggle('rc-card-over');
+  // }
 
   // Stop checkbox events from bubbling up the DOM
   stopBubbling(e) {
@@ -298,6 +298,7 @@ export class CmsMenusComponent implements OnInit {
       // console.log('Form values:', formDish.value);
 
       if (formDish.dirty && formDish.valid) {
+
         const d = new CMSDish();
         d.cms_dish_idx = this.htmlMenu.dishes.length;
         d.cms_dish_restaurant_id = Number(this.restaurant.restaurant_id);
@@ -312,12 +313,12 @@ export class CmsMenusComponent implements OnInit {
 
         this.cms.createDish(d).subscribe(
           res => {
-            // console.log('Dish Added:', res);
+            console.log('Dish Added:', res);
 
             // pushing to the local array also returns the new length
             // which we can use for reference
             let len = this.htmlMenu.dishes.push(d);
-            // console.log('Pushed', this.htmlMenu.dishes);
+            console.log('Pushed', this.htmlMenu.dishes);
 
             // Add returned id to new dish in local array
             this.htmlMenu.dishes[len - 1]['cms_dish_id'] = res['cms_dish_id'];

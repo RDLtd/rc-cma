@@ -26,7 +26,8 @@ export class CmsPreviewComponent implements OnInit {
           console.log('PREVIEW:', res);
           if (res['status'] == 'OK') {
 
-            this.spwUrl = res['url'];
+            let ts = new Date().getTime();
+            this.spwUrl = `${res['url']}?ts=${ts}`;
             this.urlLoaded = true;
 
           } else {

@@ -35,7 +35,7 @@ export class AppConfig {
   public readonly restaurant_verification_days = 30;
   public readonly session_timeout = 60; // minutes
   public readonly session_countdown = 5; // minutes
-  public readonly use_ip_location = false;
+  public readonly use_ip_location = true;
 
   public readonly geocoding_api = 'AIzaSyBN6LkgNpX8E8lpbHdlkJZ6SU5LILVHwMY';
 

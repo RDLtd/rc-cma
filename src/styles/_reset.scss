@@ -10,20 +10,10 @@ html,
 body {
   margin: 0;
   height: 100%;
-}
-main { min-height: 600px; }
-h1,h2,h3,h4 { font-weight: $rc-default-font-weight;}
-h1,
-h2 {
-  font-family: $rc-default-font;
-  font-weight: $rc-default-font-weight;
-  color: $rc-theme-accent;
-}
-p, li {
   color: $rc-theme-text;
-  font-weight: $rc-default-font-weight;
 }
-textarea { line-height: 1.4; }
+main { min-height: 80vh; }
+
 a {
   cursor: pointer;
   color: $rc-theme-primary;
@@ -35,8 +25,6 @@ a {
 ol {
   margin: 0;
   padding: 0 0 0 1em;
-  li {
-    margin: 0 0 8px;
-  }
+  li { margin: 0 0 8px; }
 }
 hr { margin: 3em 0; }

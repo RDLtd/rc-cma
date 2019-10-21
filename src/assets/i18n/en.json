@@ -891,7 +891,8 @@
     "Delete": "DELETE",
     "Update": "UPDATE",
     "ImageUpdated": "Your profile image has been updated",
-    "ImageDeleted": "Profile image deleted"
+    "ImageDeleted": "Profile image deleted",
+    "ProfileImage": "Profile Image"
   },
 
   "Profile-Verify": {

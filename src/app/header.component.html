@@ -1,13 +1,13 @@
 
 <mat-toolbar
   color="primary"
-  class="rc-nav-global mdc-toolbar--fixed">
-  <button
-    *ngIf="authService.isAuthLevel(4)"
-    mat-icon-button
-    (click)="rcNavToggle()" >
-    <mat-icon>menu</mat-icon>
-  </button>
+  class="rc-nav-global mat-toolbar">
+<!--  <button-->
+<!--    *ngIf="authService.isAuthLevel(4)"-->
+<!--    mat-icon-button-->
+<!--    (click)="rcNavToggle()" >-->
+<!--    <mat-icon>menu</mat-icon>-->
+<!--  </button>-->
 
   <span class="rc-section-toolbar-title">{{ company_name }}</span>
 
@@ -16,21 +16,21 @@
   <span
     *ngIf="!authService.isAuth(); else loggedIn"
     (click)="login()"
-    class="rc-media-small-hide rc-link-like">
+    class="rc-media-small-hide rc-link-like rc-section-toolbar-title">
     Login
   </span>
 
   <ng-template #loggedIn>
     <span
       [matMenuTriggerFor]="menu"
-      class="rc-media-small-hide rc-link-like">
+      class="rc-media-small-hide rc-link-like rc-section-toolbar-title">
     {{ displayName }}
   </span>
 
   <button
     [matMenuTriggerFor]="menu"
     mat-icon-button>
-    <mat-icon>arrow_drop_down</mat-icon>
+    <mat-icon>menu</mat-icon>
   </button>
   </ng-template>
 
