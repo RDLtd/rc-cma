@@ -111,14 +111,18 @@ $config: mat-typography-config();
 */
 
 .mdc-layout-grid { max-width: $rc-max-width; }
-
 .mat-sidenav { width: auto; }
 .mat-sidenav-container.mat-sidenav-container { background: $rc-theme-bgd; }
 .mat-sidenav-content { min-height: calc(100vh - 160px); }
 
-.mat-toolbar-fixed-adjust { margin-top: $rc-toolbar-height-std;}
+.mat-toolbar,
 .mat-toolbar-row,
-.mat-toolbar-single-row { height: $rc-toolbar-height-std !important;}
+.mat-toolbar-single-row {
+  height: $rc-toolbar-height-std !important;
+  font: 500 18px/24px $rc-default-font;
+}
+.mat-toolbar-fixed-adjust { margin-top: $rc-toolbar-height-std;}
+
 .mat-tooltip { font-size: 12px; line-height: 16px}
 .mat-hint,
 .mat-input-underline {
@@ -254,8 +258,31 @@ $config: mat-typography-config();
     font-size: 12px;
   }
 }
-
-.rc-toolbar {}
+.mat-toolbar {
+  background-color: $rc-theme-primary;
+  color: white;
+  .rc-toolbar-actions {
+    .mat-icon {
+      font-size: 28px;
+      width: 29px;
+      height: 29px;
+      line-height: 28px !important;
+    }
+  }
+  &.rc-toolbar-nav {
+    background-color: $rc-theme-accent;
+  }
+  &.rc-toolbar-section {
+    background-color: $rc-theme-secondary;
+    color: black;
+    text-transform: uppercase;
+  }
+  &.rc-toolbar-fixed {
+    position: fixed;
+    top: 0; left: 0;
+    z-index: 100;
+  }
+}
 
 /*
 ** SIGN-IN
@@ -777,12 +804,16 @@ button.rc-member-assc {
     height: auto;
   }
 }
+.rc-dialog-help > .mat-dialog-content { margin-top: 16px;}
+
+
 .rc-card-vspacer { height: 16px; }
 .rc-card-vspacer-lg { height: 32px; }
 .rc-form-btns { text-align: center; }
 .rc-member { background-color: $rc-theme-success !important; }
 .rc-invited { background-color: $rc-theme-black !important; }
 .rc-prospect { background-color: $rc-theme-grey !important; }
+
 
 .rc-card-keystat {
   display: block;
@@ -891,8 +922,10 @@ ul.rc-lookup-results {
 }
 .rc-content-status {
   padding-bottom: 24px;
+
   mat-list-item {
     cursor: pointer;
+    .mat-list-item-content { padding: 4px 0 !important;}
     h3 { transition: color .3s ease; }
     &:hover {
       h3 { color: $rc-theme-primary; }
@@ -996,25 +1029,7 @@ ul.rc-lookup-results {
     button { text-transform: uppercase; }
   }
 }
-.rc-cms-toolbar {
-  margin-top: 8px;
-  background-color: $rc-theme-secondary;
-  height: $rc-toolbar-height-std;
-  &.mat-toolbar { min-height: $rc-toolbar-height-std; }
-  .mat-toolbar-single-row { height: $rc-toolbar-height-std; }
-  .rc-toolbar-title { text-transform: uppercase; }
-  .mat-icon {
-    font-size: 32px;
-    width: 32px;
-    height: 32px;
-    line-height: 32px !important;
-  }
-  .mat-icon-button {
-    opacity: .75;
-    &:hover { opacity: 1; }
-    &:disabled { opacity: inherit; }
-  }
-}
+
 .rc-cms-card-nav {
   position: absolute !important;
   top: 20px;
@@ -1128,9 +1143,9 @@ ul.rc-lookup-results {
 }
 .rc-cms-menu-info {}
 .rc-cms-menu-section {
-  margin: 16px 0;
-  padding: 8px 16px 0;
+  padding: 16px 16px 24px;
   background-color: $rc-theme-grey;
+  margin-bottom: 16px;
 }
 .rc-cms-menu-download {
   background-color: white;
@@ -1221,13 +1236,6 @@ ul.rc-lookup-results {
     text-transform: none;
   }
 }
-
-/*
-** CMS Reservations
-** ------------------------------------------------
-*/
-.rc-cms-res {}
-.rc-cms-res-online {}
 
 /*
 ** CMS Affiliates

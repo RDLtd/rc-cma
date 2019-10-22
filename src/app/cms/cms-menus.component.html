@@ -3,13 +3,13 @@
   style="margin:16px;"
   fxLayout="column"
   fxLayoutAlign="center"
-  fxLayoutGap="8px"
+  fxLayoutGap="16px"
   fxLayoutGap.xs="0">
   <div fxFlex>
-    <mat-toolbar class="rc-cms-toolbar">
-      <span class="rc-toolbar-title">{{ 'CMS-Menus.MenuInfo' | translate }}</span>
+    <mat-toolbar class="rc-toolbar rc-toolbar-section">
+      <span>{{ 'CMS-Menus.MenuInfo' | translate }}</span>
       <span class="rc-space-filler"></span>
-      <span class="rc-section-toolbar-actions">
+      <span class="rc-toolbar-actions">
         <button
           mat-icon-button
           (click)="help.dspHelp('cms-menus-general')">
@@ -49,10 +49,10 @@
 
   <!-- SAMPLE MENU TOOLBAR -->
   <div fxFlex>
-    <mat-toolbar class="rc-cms-toolbar">
-      <span class="rc-toolbar-title">{{ 'CMS-Menus.SampleDishes' | translate }}</span>
+    <mat-toolbar class="rc-toolbar rc-toolbar-section">
+      <span>{{ 'CMS-Menus.SampleDishes' | translate }}</span>
       <span class="rc-space-filler"></span>
-      <span class="rc-section-toolbar-actions">
+      <span class="rc-toolbar-actions">
         <button
           mat-icon-button
           (click)="help.dspHelp('cms-menus-html')">
@@ -87,16 +87,22 @@
   </div>
 
   <!-- SAMPLE MENU SECTION -->
-  <div fxFlex *ngFor="let section of htmlMenu.sections" style="">
+  <div fxFlex *ngFor="let section of htmlMenu.sections">
     <div class="rc-cms-menu-section">
-      <mat-form-field floatPlaceholder="never" class="rc-half-width">
+      <mat-form-field floatPlaceholder="never" class="rc-full-width">
         <input
           [(ngModel)]="section.label"
           name="menuSection{{section.id}}"
-          type="text" matInput
+          type="text"
+          matInput
           (keyup)="setChanged()"
           placeholder="{{ 'CMS-Menus.AddSection' | translate }}">
+        <button mat-button *ngIf="section.label" matSuffix mat-icon-button aria-label="Clear" (click)="section.label=''">
+          <mat-icon>close</mat-icon>
+        </button>
+        <mat-hint>Antipasti, Starters, Main Courses etc.</mat-hint>
       </mat-form-field>
+
     </div>
     <!-- Dishes -->
     <div fxLayout="row wrap" fxLayoutGap="16px grid">
@@ -132,10 +138,10 @@
 
   <!-- DOWNLOAD MENUS -->
   <div fxFlex>
-    <mat-toolbar class="rc-cms-toolbar">
-      <span class="rc-toolbar-title">{{ 'CMS-Menus.DownloadableMenus' | translate }}</span>
+    <mat-toolbar class="rc-toolbar rc-toolbar-section">
+      <span>{{ 'CMS-Menus.DownloadableMenus' | translate }}</span>
       <span class="rc-space-filler"></span>
-      <span class="rc-section-toolbar-actions">
+      <span class="rc-toolbar-actions">
         <button
           mat-icon-button
           (click)="help.dspHelp('cms-menus-pdf')">

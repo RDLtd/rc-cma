@@ -102,6 +102,26 @@ a.rc-btn-lg {
   }
 }
 
+.rc-cms-toolbar {
+  margin-top: 8px;
+  background-color: $rc-theme-secondary;
+  height: $rc-toolbar-height-std;
+  &.mat-toolbar { min-height: $rc-toolbar-height-std; }
+  .mat-toolbar-single-row { height: $rc-toolbar-height-std; }
+  .rc-toolbar-title { text-transform: uppercase; }
+  .mat-icon {
+    font-size: 32px;
+    width: 32px;
+    height: 32px;
+    line-height: 32px !important;
+  }
+  .mat-icon-button {
+    opacity: .75;
+    &:hover { opacity: 1; }
+    &:disabled { opacity: inherit; }
+  }
+}
+
 .rc-form-join {
   background-color: white;
 
