@@ -1,28 +1,19 @@
 
-<mat-toolbar
-  class="rc-toolbar rc-toolbar-fixed">
-<!--  <button-->
-<!--    *ngIf="authService.isAuthLevel(4)"-->
-<!--    mat-icon-button-->
-<!--    (click)="rcNavToggle()" >-->
-<!--    <mat-icon>menu</mat-icon>-->
-<!--  </button>-->
+<mat-toolbar class="rc-toolbar rc-toolbar-fixed">
 
   <span>{{ company_name }}</span>
-
   <span class="rc-space-filler"></span>
-
   <span
     *ngIf="!authService.isAuth(); else loggedIn"
     (click)="login()"
-    class="rc-media-small-hide rc-link-like rc-section-toolbar-title">
+    class="rc-media-small-hide rc-link-like">
     Login
   </span>
 
   <ng-template #loggedIn>
     <span
       [matMenuTriggerFor]="menu"
-      class="rc-media-small-hide rc-link-like rc-section-toolbar-title">
+      class="rc-media-small-hide rc-link-like">
     {{ displayName }}
   </span>
 
@@ -32,13 +23,6 @@
     <mat-icon>menu</mat-icon>
   </button>
   </ng-template>
-
-  <!--<button-->
-    <!--*ngIf="!authService.isAuth()"-->
-    <!--mat-icon-button-->
-    <!--(click)="login()" >-->
-    <!--<mat-icon>account_circle</mat-icon>-->
-  <!--</button>-->
 
   <mat-menu #menu="matMenu">
     <button
