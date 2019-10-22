@@ -70,7 +70,6 @@ $config: mat-typography-config();
 }
 .rc-success { color: $rc-theme-success !important; }
 .rc-warn { color: $rc-theme-warn; }
-
 .rc-media-small-hide { display: none !important; }
 .rc-media-med { display: block !important; }
 .agm-map { height: 300px; }
@@ -111,10 +110,6 @@ $config: mat-typography-config();
 */
 
 .mdc-layout-grid { max-width: $rc-max-width; }
-.mat-sidenav { width: auto; }
-.mat-sidenav-container.mat-sidenav-container { background: $rc-theme-bgd; }
-.mat-sidenav-content { min-height: calc(100vh - 160px); }
-
 .mat-toolbar,
 .mat-toolbar-row,
 .mat-toolbar-single-row {
@@ -122,8 +117,7 @@ $config: mat-typography-config();
   font: 400 18px/24px $rc-default-font;
 }
 .mat-toolbar-fixed-adjust { margin-top: $rc-toolbar-height-std;}
-
-.mat-tooltip { font-size: 12px; line-height: 16px}
+.mat-tooltip { font: $rc-default-font-weight 12px/16px $rc-default-font; }
 .mat-hint,
 .mat-input-underline {
   color: $rc-theme-black;
@@ -135,11 +129,7 @@ $config: mat-typography-config();
 .mat-form-field { line-height: 1.4; }
 .mat-card-title { font-size: 24px; }
 .mat-form-field > .mat-chip { background-color: $rc-theme-secondary; }
-
-.mat-dialog-container {
-  //max-width: 95vw !important;
-  border-radius: 8px !important;
-}
+.mat-dialog-container { border-radius: 8px !important; }
 .rc-preview-dialog-container .mat-dialog-container {
   padding: 0;
   border-radius: 0;
@@ -165,20 +155,6 @@ $config: mat-typography-config();
 ** ------------------------------
 */
 
-.rc-nav-global {
-  position: fixed;
-  top:0;
-  z-index: 100;
-  .rc-section-toolbar-title { font-weight: mat-font-weight($config, headline) }
-}
-.rc-sidenav-menu {
-  .mat-icon {
-    margin-right: 8px;
-    color: $rc-theme-primary;
-  }
-  font-family: $rc-display-font;
-  text-transform: uppercase;
-}
 .rc-about {
   display: flex;
   flex-direction: column;
@@ -362,22 +338,15 @@ $config: mat-typography-config();
       margin: 0;
       padding: 24px;
     }
-
     .rc-main {
       display: block;
       margin: 0;
       padding: 0;
       height: auto;
       min-height: 0;
-      p {
-        display: none;
-      }
-      header {
-        display: none;
-      }
-      .rc-brand-logo {
-        height: 64px;
-      }
+      p { display: none; }
+      header { display: none; }
+      .rc-brand-logo { height: 64px; }
     }
   }
 }
@@ -492,7 +461,6 @@ $config: mat-typography-config();
     font-size: 16px;
   }
 }
-
 .rc-member-profile {
   box-sizing: border-box;
   background: white;
@@ -598,7 +566,6 @@ button.rc-member-assc {
   z-index: 100;
   background-color: $rc-theme-success;
   color: white;
-  //border: 3px solid white;
 }
 button.rc-member-assc {
   background-color: $rc-theme-tertiary;
@@ -622,9 +589,7 @@ button.rc-member-assc {
   background: white;
   width: 100%;
   transition: all .3s ease-out;
-  &:hover {
-    @include mat-elevation(6);
-  }
+  &:hover { @include mat-elevation(6); }
   .rc-img-wrapper {
     width: 100%;
     height: 200px;

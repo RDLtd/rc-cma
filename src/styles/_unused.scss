@@ -93,6 +93,24 @@ a.rc-btn-lg {
   right: 8px;
 }
 
+.rc-nav-global {
+  position: fixed;
+  top:0;
+  z-index: 100;
+  .rc-section-toolbar-title { font-weight: mat-font-weight($config, headline) }
+}
+.rc-sidenav-menu {
+  .mat-icon {
+    margin-right: 8px;
+    color: $rc-theme-primary;
+  }
+  font-family: $rc-display-font;
+  text-transform: uppercase;
+}
+.mat-sidenav { width: auto; }
+.mat-sidenav-container.mat-sidenav-container { background: $rc-theme-bgd; }
+.mat-sidenav-content { min-height: calc(100vh - 160px); }
+
 .mat-menu-content {
   .menu-title {
     line-height: 48px;

@@ -42,6 +42,7 @@ export class CmsFeaturesComponent implements OnInit {
     this.cmsLocalService.getRestaurant()
       .subscribe(data => {
           if(data.restaurant_id){
+            console.log('GetFeatures', data)
             this.restaurant = data;
             this.getFeatures();
             this.getDesc();
@@ -63,7 +64,8 @@ export class CmsFeaturesComponent implements OnInit {
   }
 
   getFeatures(): void {
-    this.cms.getAttributes(this.restaurant.restaurant_id)
+    //console.log(this.restaurant.restaurant_id, this.restaurant.restaurant_number.substr(0,2));
+    this.cms.getAttributes(this.restaurant.restaurant_id, this.restaurant.restaurant_number.substr(0,2))
       .subscribe(data => {
         this.features = data['attributes'];
         // need to check for null before checking length

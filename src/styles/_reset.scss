@@ -8,9 +8,9 @@
 
 html,
 body {
-  margin: 0;
-  height: 100%;
-  color: $rc-theme-text;
+  margin:   0;
+  height:   100%;
+  color:    $rc-theme-text;
 }
 main { min-height: 80vh; }
 
@@ -18,9 +18,7 @@ a {
   cursor: pointer;
   color: $rc-theme-primary;
   text-decoration: none;
-  &:hover {
-    text-decoration: underline;
-  }
+  &:hover { text-decoration: underline; }
 }
 ol {
   margin: 0;
