@@ -568,7 +568,9 @@
     "NoCancel": "Non, annuler",
     "Deleted": " Supprimé",
     "AddMenu": "AJOUTER UN MENU",
-    "On": "le"
+    "On": "le",
+    "VGF": "Ajoutez une sélection de vos plats les plus populaires. Nous vous recommandons de choisir une section de votre prix gamme et plats qui reflètent le mieux votre style de nourriture. Vous pouvez afficher les plats comme ![Végétarien](../assets/images/icons/vegetarian.svg) **Végétarien** ou ![Sans gluten](../assets/images/icons/gluten-free.svg) **Sans gluten** lorsque vous les ajoutez.",
+    "SectionHint": "Antipasti, entrées, plats, etc."
   },
 
   "CMS-Reservations": {

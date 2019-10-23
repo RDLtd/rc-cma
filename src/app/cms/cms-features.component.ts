@@ -41,8 +41,8 @@ export class CmsFeaturesComponent implements OnInit {
     // Subscribe to service
     this.cmsLocalService.getRestaurant()
       .subscribe(data => {
-          if(data.restaurant_id){
-            console.log('GetFeatures', data)
+          if (data.restaurant_id) {
+            // console.log('GetFeatures', data);
             this.restaurant = data;
             this.getFeatures();
             this.getDesc();
@@ -58,14 +58,14 @@ export class CmsFeaturesComponent implements OnInit {
   confirmNavigation() {
     if (this.dataChanged) {
       return this.cmsLocalService.confirmNavigation();
-    }else {
+    } else {
       return true;
     }
   }
 
   getFeatures(): void {
-    //console.log(this.restaurant.restaurant_id, this.restaurant.restaurant_number.substr(0,2));
-    this.cms.getAttributes(this.restaurant.restaurant_id, this.restaurant.restaurant_number.substr(0,2))
+    // console.log(this.restaurant.restaurant_id, this.restaurant.restaurant_number.substr(0, 2));
+    this.cms.getAttributes(this.restaurant.restaurant_id, this.restaurant.restaurant_number.substr(0, 2))
       .subscribe(data => {
         this.features = data['attributes'];
         // need to check for null before checking length

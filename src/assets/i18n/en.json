@@ -568,7 +568,9 @@
     "NoCancel": "No, cancel",
     "Deleted": " Deleted",
     "AddMenu": "ADD A MENU",
-    "On": "on"
+    "On": "on",
+    "VGF": "Add a selection of your most popular dishes. We would recommend that you choose a cross-section of your price range and dishes that best reflect your style of food. You can display the dishes as ![Vegetarian](../assets/images/icons/vegetarian.svg) **Vegetarian** or ![Gluten Free](../assets/images/icons/gluten-free.svg) **Gluten Free** when you add them.",
+    "SectionHint": "Antipasti, Starters, Main Courses etc."
   },
 
   "CMS-Reservations": {

@@ -104,7 +104,7 @@ export class CMSService {
 
   getAttributes(restaurant_id: string, country_code: string) {
     return this.http.post(this.config.apiUrl + '/cms/attributeget',
-      { restaurant_id: restaurant_id, userCode: this.config.userAPICode, token: this.jwt() });
+      { restaurant_id: restaurant_id, country_code: country_code, userCode: this.config.userAPICode, token: this.jwt() });
   }
 
   createAttribute(cms_attribute: CMSAttribute) {
