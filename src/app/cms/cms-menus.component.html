@@ -72,18 +72,21 @@
       </span>
     </mat-toolbar>
   </div>
-  <div fxFlex class="rc-content-panel">
-    <p>
-      {{ 'CMS-Menus.MenuHelp' | translate }}
-      <strong class="rc-cms-menu-dish-vegan">
-        {{ 'CMS-Menus.Vegetarian' | translate }}
-      </strong>
-      {{ 'CMS-Menus.Or' | translate }}
-      <strong class="rc-blue">
-        {{ 'CMS-Menus.GlutenFree' | translate }}
-      </strong>
-      {{ 'CMS-Menus.WhenAdd' | translate }}
-    </p>
+  <div fxFlex class="rc-content-panel" markdown>
+    Add a selection of your most popular dishes. We would recommend that you choose a cross-section of your price
+    range and dishes that best reflect your style of food. You can display the dishes as **Vegetarian** (green) or
+    **Gluten Free** (blue)) when you add them.
+<!--    <p>-->
+<!--      {{ 'CMS-Menus.MenuHelp' | translate }}-->
+<!--      <strong class="rc-cms-menu-dish-vegan">-->
+<!--        {{ 'CMS-Menus.Vegetarian' | translate }}-->
+<!--      </strong>-->
+<!--      {{ 'CMS-Menus.Or' | translate }}-->
+<!--      <strong class="rc-blue">-->
+<!--        {{ 'CMS-Menus.GlutenFree' | translate }}-->
+<!--      </strong>-->
+<!--      {{ 'CMS-Menus.WhenAdd' | translate }}-->
+<!--    </p>-->
   </div>
 
   <!-- SAMPLE MENU SECTION -->
@@ -92,7 +95,7 @@
       <mat-form-field floatPlaceholder="never" class="rc-full-width">
         <input
           [(ngModel)]="section.label"
-          name="menuSection{{section.id}}"
+          name="menuSection{{ section.id }}"
           type="text"
           matInput
           (keyup)="setChanged()"
@@ -100,6 +103,7 @@
         <button mat-button *ngIf="section.label" matSuffix mat-icon-button aria-label="Clear" (click)="section.label=''">
           <mat-icon>close</mat-icon>
         </button>
+<!-- Todo: Translation Required -->
         <mat-hint>Antipasti, Starters, Main Courses etc.</mat-hint>
       </mat-form-field>
 

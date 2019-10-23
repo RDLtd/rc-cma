@@ -3,7 +3,9 @@
 
   <section class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 rc-member-status">
 
-    <button mat-icon-button mat-dialog-close class="rc-close"><mat-icon>close</mat-icon></button>
+    <button mat-icon-button mat-dialog-close class="rc-close">
+      <mat-icon>close</mat-icon>
+    </button>
 
     <!-- Assc.-->
     <div *ngIf="restaurant.restaurant_rc_member_status !== 'Full'">
@@ -31,8 +33,9 @@
 
   </section>
 
-  <section *ngIf="restaurant.restaurant_rc_member_status !== 'Full'"
-           class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 rc-member-full">
+  <section
+    *ngIf="restaurant.restaurant_rc_member_status !== 'Full'"
+    class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 rc-member-full">
 
     <mat-list class="rc-benefits">
       <mat-list-item>
@@ -80,7 +83,7 @@
     class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 rc-member-actns">
     <button
       [disabled]="isLoading"
-      mat-raised-button
+      mat-flat-button
       (click)="openCheckout('Full', restaurant.restaurant_id)"
       class="rc-full-width">
       <span>{{ btnLabel }}</span>
@@ -96,7 +99,7 @@
       mat-raised-button
       (click)="goto('affiliates')"
       class="rc-full-width">{{ 'Payment.FullBenefits' | translate }}</button>
-      <p class="rc-terms">{{ 'Payment.Due' | translate }} {{ renewal_date }}.
+      <p class="mat-small">{{ 'Payment.Due' | translate }} {{ renewal_date }}.
         {{ 'Payment.Reason' | translate }} {{ restaurant.restaurant_name | uppercase }} {{ 'Payment.DoesNot' | translate }}
         <a href="mailto:support@restaurantcollective.io">{{ company_name }} {{ 'Payment.Support' | translate }}</a>.</p>
   </section>

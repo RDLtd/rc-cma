@@ -1,22 +1,20 @@
 <div class="rc-dialog rc-dialog-cms-image-upload">
 
-  <header mat-dialog-title>
-    <h1>
-      {{ 'CMS-File-Upload.New' | translate }} {{ data.type | titlecase }} {{ 'CMS-File-Upload.Upload' | translate }}
-    </h1>
-  </header>
+  <h1 mat-dialog-title>
+    {{ 'CMS-File-Upload.New' | translate }} {{ data.type | titlecase }} {{ 'CMS-File-Upload.Upload' | translate }}
+  </h1>
 
   <mat-dialog-content>
 
       <!-- IMAGE PREVIEW-->
-      <div *ngIf="data.type === 'image' && filePrimed" class="rc-img-wrapper">
+      <div *ngIf="data.type === 'image'" style="--aspect-ratio: 16/9">
         <img [src]="filePreview" [alt]="">
       </div>
 
       <!-- FILE SELECT BUTTON -->
-      <div class="rc-fileinput-wrapper">
+      <div class="rc-file-input-wrapper">
 
-        <label class="rc-fileinput-label rc-centre" for="fileUpload">
+        <label class="rc-file-input-label rc-centre" for="fileUpload">
           <mat-icon>cloud_upload</mat-icon>
           <span>{{ uploadLabel | titlecase }} <span *ngIf="inProgress">({{ uploader?.progress }}%)</span></span>
         </label>
@@ -24,7 +22,7 @@
         <input
           type="file"
           id="fileUpload"
-          class="rc-fileinput-hide"
+          class="rc-file-input-hide"
           #fileInput
           ng2FileSelect
           [uploader]="uploader"

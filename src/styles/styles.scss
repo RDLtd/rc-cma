@@ -19,12 +19,6 @@ $config: mat-typography-config();
 * ----------------------------------
 */
 
-//router-outlet ~ * {
-//  position: absolute;
-//  height: 100%;
-//  width: 100%;
-//}
-
 .rc-loader {
   display: flex;
   justify-content: center;
@@ -74,6 +68,16 @@ $config: mat-typography-config();
 .rc-media-med { display: block !important; }
 .agm-map { height: 300px; }
 
+@media screen and ( min-width : 600px ){
+  .rc-media-small-hide { display: block !important; }
+  .rc-media-med { display: none !important; }
+}
+@media only screen
+and (min-device-width: 768px)
+and (max-device-width: 1024px)
+and (orientation: landscape)
+and (-webkit-min-device-pixel-ratio: 1) {}
+
 /*
 ** Maintain aspect ratio of images
 ** -------------------------------
@@ -94,15 +98,6 @@ $config: mat-typography-config();
     height: 100%;
   }
 }
-@media screen and ( min-width : 600px ){
-  .rc-media-small-hide { display: block !important; }
-  .rc-media-med { display: none !important; }
-}
-@media only screen
-  and (min-device-width: 768px)
-  and (max-device-width: 1024px)
-  and (orientation: landscape)
-  and (-webkit-min-device-pixel-ratio: 1) {}
 
 /*
 ** MDC/Material Overrides
@@ -138,7 +133,6 @@ $config: mat-typography-config();
   background-color: #000;
   opacity: 0.7;
 }
-
 .mat-card-header-text { margin: 0 !important; }
 .mat-card-content h4 {
   font-weight: bold;
@@ -147,8 +141,8 @@ $config: mat-typography-config();
   background-color: $rc-theme-grey;
   padding: 4px 8px;
 }
-
 .mat-simple-snackbar-action { color: white; }
+a.mat-menu-item {text-decoration: none;}
 
 /*
 ** MAIN LAYOUTS
@@ -234,37 +228,6 @@ $config: mat-typography-config();
     font-size: 12px;
   }
 }
-.mat-toolbar {
-  background-color: $rc-theme-primary;
-  color: white;
-  .rc-toolbar-actions {
-    .mat-icon {
-      font-size: 28px;
-      width: 29px;
-      height: 29px;
-      line-height: 28px !important;
-    }
-  }
-  &.rc-toolbar-nav {
-    background-color: $rc-theme-accent;
-  }
-  &.rc-toolbar-section {
-    background-color: $rc-theme-secondary;
-    color: black;
-    text-transform: uppercase;
-  }
-  &.rc-toolbar-fixed {
-    position: fixed;
-    top: 0; left: 0;
-    z-index: 100;
-  }
-}
-
-/*
-** SIGN-IN
-** ------------------------------
-*/
-
 .rc-signin-page {
   background: $rc-theme-primary;
   min-height: 100vh;
@@ -321,6 +284,32 @@ $config: mat-typography-config();
       font-size: 16px;
       margin: 0 0 1rem;
     }
+  }
+}
+
+.mat-toolbar {
+  background-color: $rc-theme-primary;
+  color: white;
+  .rc-toolbar-actions {
+    .mat-icon {
+      font-size: 28px;
+      width: 29px;
+      height: 29px;
+      line-height: 28px !important;
+    }
+  }
+  &.rc-toolbar-nav {
+    background-color: $rc-theme-accent;
+  }
+  &.rc-toolbar-section {
+    background-color: $rc-theme-secondary;
+    color: black;
+    text-transform: uppercase;
+  }
+  &.rc-toolbar-fixed {
+    position: fixed;
+    top: 0; left: 0;
+    z-index: 100;
   }
 }
 
@@ -386,16 +375,7 @@ $config: mat-typography-config();
 ** ------------------------------
 */
 
-.rc-dialog-member {
-  position: relative;
-  max-width: 480px;
-  .mat-dialog-container { padding: 0; }
-  .rc-close {
-    position: absolute;
-    top: 0; right: 0;
-    z-index: 500;
-  }
-}
+
 
 .rc-counter {
   display: flex;
@@ -433,7 +413,7 @@ $config: mat-typography-config();
 }
 .rc-member-assc,
 .rc-member-full {
-  border-radius: 2px;
+  border-radius: 4px;
   border: 2px solid $rc-theme-secondary;
   .rc-benefits {
     .mat-list-item:nth-child(odd) { background: rgba($rc-theme-secondary, .25); }
@@ -445,7 +425,10 @@ $config: mat-typography-config();
     padding: 16px;
     display: flex;
     flex-direction: row;
-    h1 { margin: 8px; }
+    h1 {
+      font: 500 24px/24px $rc-default-font-weight;
+      margin: 8px;
+    }
     .mat-icon.assc-member {
       padding: 12px !important;
       color: white;
@@ -499,7 +482,7 @@ $config: mat-typography-config();
   padding: 48px;
   transition: all .3s ease-in-out;
   &:hover { @include mat-elevation(6); }
-  mat-icon {
+  .mat-icon {
     height: 48px;
     width: 48px;
     font-size: 48px;
@@ -576,7 +559,24 @@ button.rc-member-assc {
 ** RC CARDS
 ** ------------------------------
 */
-.rc-card {}
+.rc-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  .rc-card-help {
+    position: absolute;
+    top:16px; right: 16px;
+  }
+  .rc-card-img {
+    width: calc(100% + 32px);
+    margin: 0 0 0 -16px;
+    height: auto;
+    overflow: hidden;
+  }
+  .mat-card-title {}
+  .mat-card-content {}
+}
 .rc-card-help {
   position: absolute;
   top: 16px; right: 16px;
@@ -590,16 +590,12 @@ button.rc-member-assc {
   width: 100%;
   transition: all .3s ease-out;
   &:hover { @include mat-elevation(6); }
-  .rc-img-wrapper {
+  img {
     width: 100%;
-    height: 200px;
-    overflow: hidden;
-    img {
-      width: 100%;
-      height: auto;
-      cursor: pointer;
-    }
+    height: auto;
+    cursor: pointer;
   }
+
   .rc-card-actions {
     display: flex;
     flex-direction: row;
@@ -664,113 +660,146 @@ button.rc-member-assc {
 ** MODAL/DIALOGS
 ** ---------------------------------------------------------------
 */
-.rc-dialog-profile,
-.rc-dialog-image {
-  .mat-dialog-content { padding-top: 24px; }
-}
+//.rc-dialog-profile,
+//.rc-dialog-image {
+//  .mat-dialog-content { padding-top: 24px; }
+//}
+
 .rc-dialog {
-  padding:0;
   position: relative;
-  max-width: $rc-max-width;
+  padding: 0;
+  max-width: 960px;
 
-  &.rc-dialog-med { max-width: 480px; }
+  .mat-dialog-title {
+    font: 500 24px/36px $rc-default-font;
+  }
 
-  &.rc-dialog-small { max-width: 400px; }
+  &.rc-dialog-med {
+    max-width: 600px;
+  }
 
-  .rc-fileSelect-label { cursor: pointer; }
-
-  .rc-dialog-img {
+  &.rc-dialog-small {
+    max-width: 400px;
+  }
+}
+.rc-dialog-image-upload {
+  max-width: 400px;
+  label.image-select {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    padding-top: 8px;
+    .image-select-label {
+      position: absolute;
+      bottom:0;
+      z-index: 10;
+      width: calc(100% - 16px);
+      background-color: rgba(0,0,0,.5);
+      color: white;
+      padding: 8px;
+      text-align: center;
+      font: 500 12px/16px $rc-default-font;
+    }
+  }
+  .image-container {
+    position: relative;
     margin: 0 auto;
-    min-height: 240px;
-    max-width: 240px;
-    max-height: 360px;
+    width: 100%;
+    overflow: hidden;
     background: #eee;
-    header { border: none; }
     img {
       width: 100%;
       height: auto;
       vertical-align: middle;
+      text-align: center;
     }
   }
-
-  .rc-dialog-header { border-bottom: 1px solid $rc-theme-black; }
-
-  header[mat-dialog-title] {
-    display: flex;
-    padding-bottom: 8px;
-    border-bottom: 1px dotted $rc-theme-black;
-    margin-bottom: 0;
-    mat-icon {
-      font-size: 24px;
-      line-height: 1.5;
-      margin-left: 8px;
-    }
-    h1 {
-      font-size: 24px;
-      margin: 0;
-    }
-  }
-
-  mat-dialog-actions {
-    margin-top: 16px;
-    padding-top: 8px;
-    button { margin-left: 8px; }
-  }
-
-  .mdc-layout-grid { max-width: 800px; }
-  .rc-member-badge {
-    position: absolute;
-    top: 0;
-    right: 0;
-    z-index: 10;
-  }
-  .rc-form-group {
-    padding: 8px 0;
-    border-bottom: 1px solid #ddd ;
-    mat-radio-button, mat-checkbox { margin-right: 16px; }
-  }
-  mat-tab-body { padding-top: 1em; }
-  .mat-input-element:disabled {
-    color: inherit;
-    opacity: .6;
-  }
-  div[mat-dialog-actions] {
-    button { margin-left: 8px; }
-  }
-  .rc-file {
-    width: 0.1px;
-    height: 0.1px;
-    opacity: 0;
-    overflow: hidden;
-    position: absolute;
-    z-index: -1;
-  }
-  .rc-img-loader { cursor: pointer; }
 }
-.rc-dialog-cms {
-  width: 84vw;
-  height: 84vh;
+.rc-dialog-help {
+  .mat-dialog-content {
+    margin-top: 16px;
+  }
 }
 .rc-dialog-alert {
-  padding-bottom: 16px;
+  padding-bottom: 8px;
   max-width: 480px;
   h1 {
     text-transform: uppercase;
-    padding-bottom: 8px;
+    padding: 0 0 8px;
     border-bottom: 1px solid #212121;
-    font-size: 24px;
+    font: 500 20px/24px $rc-default-font;
+  }
+  .mat-stroked-button {
+    border-color: $rc-theme-success;
   }
 }
-.rc-dialog-cms-image-wrap { position: relative; }
+.rc-dialog-member {
+  position: relative;
+  max-width: 800px !important;
+  .mat-dialog-container { padding: 0; }
+  .rc-close {
+    position: absolute;
+    top: 0; right: 0;
+    z-index: 500;
+  }
+}
 .rc-dialog-cms-image {
   header { display: flex; }
+  .image-wrapper { position: relative;}
   img {
     width: 100%;
     height: auto;
   }
 }
-.rc-dialog-help > .mat-dialog-content { margin-top: 16px;}
-
+.rc-dialog-cms-image-upload {
+  //header[mat-dialog-title] { margin-bottom: 16px; }
+  label {
+    text-transform: capitalize;
+    font-size: 16px;
+  }
+  .image-wrapper {
+    height: 240px;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+  img {
+    height:100%;
+    width:100%;
+    object-fit: contain;
+  }
+}
+.rc-file-input-hide {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+.rc-file-input-wrapper {
+  display: flex;
+  justify-content: center;
+  margin:8px auto;
+}
+.rc-file-input-label {
+  cursor: pointer;
+  //background: $rc-theme-black;
+  color: $rc-theme-text;
+  display: flex;
+  line-height: 1.5;
+  padding: 8px 24px;
+  font-size: 24px;
+  border-radius: 6px;
+  border: 2px solid $rc-theme-grey;
+  transition: all .3s ease-out;
+  text-align: center;
+  text-transform: uppercase;
+  mat-icon { margin-right: 8px; }
+  &:hover {
+    border-color: $rc-theme-black;
+    color: $rc-theme-black;
+  }
+}
 
 .rc-card-vspacer { height: 16px; }
 .rc-card-vspacer-lg { height: 32px; }
@@ -1048,55 +1077,7 @@ ul.rc-lookup-results {
 ** ------------------------------------------------
 */
 
-.rc-dialog-cms-image-upload {
-  header[mat-dialog-title] { margin-bottom: 16px; }
-  label {
-    text-transform: capitalize;
-    font-size: 16px;
-  }
-  .rc-img-wrapper {
-    height: 240px;
-    max-width: 320px;
-    margin: 0 auto;
-  }
-  img {
-    height:100%;
-    width:100%;
-    object-fit: contain;
-  }
-}
-.rc-fileinput-hide {
-  width: 0.1px;
-  height: 0.1px;
-  opacity: 0;
-  overflow: hidden;
-  position: absolute;
-  z-index: -1;
-}
-.rc-fileinput-wrapper {
-  display: flex;
-  justify-content: center;
-  margin:8px auto;
-}
-.rc-fileinput-label {
-  cursor: pointer;
-  //background: $rc-theme-black;
-  color: $rc-theme-text;
-  display: flex;
-  line-height: 1.5;
-  padding: 8px 24px;
-  font-size: 24px;
-  border-radius: 6px;
-  border: 2px solid $rc-theme-grey;
-  transition: all .3s ease-out;
-  text-align: center;
-  text-transform: uppercase;
-  mat-icon { margin-right: 8px; }
-  &:hover {
-    border-color: $rc-theme-black;
-    color: $rc-theme-black;
-  }
-}
+
 
 /*
 ** CMS Menus
@@ -1111,6 +1092,12 @@ ul.rc-lookup-results {
   padding: 16px 16px 24px;
   background-color: $rc-theme-grey;
   margin-bottom: 16px;
+  input.mat-input-element {
+    font-size: 20px;
+    color: black;
+    text-transform: uppercase;
+  }
+
 }
 .rc-cms-menu-download {
   background-color: white;

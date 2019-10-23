@@ -1,5 +1,5 @@
 
-<div class="rc-dialog-rc-dialog-med">
+<div class="rc-dialog">
 
   <h1 *ngIf="!fromCMS" mat-dialog-title>{{ restaurant.restaurant_name }}</h1>
   <h1 *ngIf="fromCMS" mat-dialog-title>Amend any fields that need correction, then press UPDATE</h1>
@@ -8,7 +8,7 @@
 
     <form (ngSubmit)="restForm.form.valid" #restForm="ngForm">
 
-      <div class="mdc-layout-grid">
+      <div class="mdc-layout-grid rc-no-grid-gutter">
         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6">
 
           <mat-form-field  floatPlaceholder="always" class="rc-full-width">
@@ -246,7 +246,7 @@
       CANCEL
     </button>
     <button
-      mat-button
+      mat-flat-button
       mat-dialog-close
       (click)="setCancel(false)"
       color="primary"

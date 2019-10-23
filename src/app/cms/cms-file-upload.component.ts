@@ -18,7 +18,7 @@ export class CmsFileUploadComponent implements OnInit {
   uploadLabel: string;
   inProgress: boolean = false;
   filePrimed: boolean = false;
-  filePreview: any;
+  filePreview: any = '';
   fileUrl: string;
   uploader: FileUploader;
   responses: Array<any> = [];

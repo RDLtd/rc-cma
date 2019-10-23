@@ -37,7 +37,10 @@ export class CmsMenusComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.translate.get('CMS-Menus').subscribe(data => this.t_data = data);
+    this.translate.get('CMS-Menus').subscribe(data => {
+      this.t_data = data;
+      console.log(this.t_data);
+    });
 
     // Subscribe to service
     this.cmsLocalService.getRestaurant()
@@ -156,11 +159,11 @@ export class CmsMenusComponent implements OnInit {
 
     sect.cms_section_restaurant_id = Number(this.restaurant.restaurant_id);
     sect.cms_section_id = this.htmlMenu.section_id;
-    sect.cms_section_desc_1 = this.htmlMenu.sections[0].label;
-    sect.cms_section_desc_2 = this.htmlMenu.sections[1].label;
-    sect.cms_section_desc_3 = this.htmlMenu.sections[2].label;
+    sect.cms_section_desc_1 = this.htmlMenu.sections[0].label.toUpperCase();
+    sect.cms_section_desc_2 = this.htmlMenu.sections[1].label.toUpperCase();
+    sect.cms_section_desc_3 = this.htmlMenu.sections[2].label.toUpperCase();
 
-    // console.log('Sect:', sect)
+    console.log('Trans:', this.t_data)
 
     this.cms.updateSection(sect).subscribe(
       data => {
