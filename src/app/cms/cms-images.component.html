@@ -17,13 +17,10 @@
         </button>
       </span>
     </mat-toolbar>
-
   </div>
-
+  <!-- content load animation -->
   <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 rc-add-content" *ngIf="showLoader">
-
     <rc-loader></rc-loader>
-
   </div>
   <!-- Image cards -->
   <div
@@ -33,7 +30,7 @@
       #card
       class="rc-image-card"
       (click)="viewImage(image)">
-      <mat-chip-list class="rc-element-default">
+      <mat-chip-list class="rc-element-tag">
         <mat-chip
           selected="true"
           *ngIf="image.cms_element_default">

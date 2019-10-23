@@ -39,7 +39,7 @@ export class CmsMenusComponent implements OnInit {
   ngOnInit() {
     this.translate.get('CMS-Menus').subscribe(data => {
       this.t_data = data;
-      console.log(this.t_data);
+      //console.log(this.t_data);
     });
 
     // Subscribe to service

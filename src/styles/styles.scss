@@ -375,8 +375,6 @@ a.mat-menu-item {text-decoration: none;}
 ** ------------------------------
 */
 
-
-
 .rc-counter {
   display: flex;
   justify-content: center;
@@ -393,7 +391,6 @@ a.mat-menu-item {text-decoration: none;}
   width:18px;
   height: 18px;
 }
-
 .rc-member-status {
   position: relative;
   p { margin: 16px auto 0; }
@@ -603,18 +600,18 @@ button.rc-member-assc {
     padding:4px 12px 8px 12px;
   }
 }
-.rc-element-default {
-  position: absolute;
-  top: 16px;
-  left: 16px;
-}
 
+.rc-element-tag {
+  position: absolute;
+  z-index: 5;
+  top: 24px;
+  left: 24px;
+}
 .rc-online { background-color: $rc-theme-success !important; }
 .rc-action-left {
   text-align: left;
   float: left;
 }
-
 .rc-card-restaurant {
   padding: 0 16px 16px;
   .rc-card-restaurant-nav {
@@ -739,7 +736,9 @@ button.rc-member-assc {
 }
 .rc-dialog-cms-image {
   header { display: flex; }
-  .image-wrapper { position: relative;}
+  .image-wrapper {
+    position: relative;
+    padding: 0 16px 16px;}
   img {
     width: 100%;
     height: auto;
@@ -843,6 +842,7 @@ button.rc-member-assc {
 ** Restaurant Lookup
 ** ------------------------------------------------
 */
+
 ul.rc-lookup-results {
   margin: 0 0 0;
   padding:0;
@@ -1067,13 +1067,6 @@ ul.rc-lookup-results {
 }
 
 /*
-** CMS menu/Image upload
-** ------------------------------------------------
-*/
-
-
-
-/*
 ** CMS Menus
 ** ---------------------------------
 */
@@ -1123,6 +1116,13 @@ ul.rc-lookup-results {
   padding: 16px !important;
   background-color: white;
   transition: all .3s ease-out;
+  h3 {
+    display: inline;
+    span {
+      display: inline;
+      margin-left: 4px;
+    }
+  }
   &:hover {
     @include mat-elevation(6);
     h3 {
@@ -1144,22 +1144,7 @@ ul.rc-lookup-results {
     align-items: flex-end;
     margin-top: 0;
   }
-  .rc-blue h3 {
-    //color: #2d7dff;
-    &:after {
-      margin-left:4px;
-      content: url("../assets/images/icons/gluten-free.svg");
-    }
-  }
-  .rc-green h3 {
-    //color: #B0B440;
-    &:after {
-      margin-left:4px;
-      content: url("../assets/images/icons/vegetarian.svg");
-    }
-  }
 }
-
 
 .rc-dish-content {
   display: flex;
