@@ -614,13 +614,7 @@ button.rc-member-assc {
   text-align: left;
   float: left;
 }
-.rc-card-over {
-  @include mat-elevation(8);
-  .rc-card-content h2 {
-    color: $rc-theme-primary;
-    transition: color .3s ease-out;
-  }
-}
+
 .rc-card-restaurant {
   padding: 0 16px 16px;
   .rc-card-restaurant-nav {
@@ -1131,8 +1125,10 @@ ul.rc-lookup-results {
   transition: all .3s ease-out;
   &:hover {
     @include mat-elevation(6);
+    h3 {
+      color: $rc-theme-primary;
+    }
   }
-
   h2 {
     font-size: .7rem;
     font-weight: 500;
@@ -1148,10 +1144,23 @@ ul.rc-lookup-results {
     align-items: flex-end;
     margin-top: 0;
   }
+  .rc-blue h3 {
+    //color: #2d7dff;
+    &:after {
+      margin-left:4px;
+      content: url("../assets/images/icons/gluten-free.svg");
+    }
+  }
+  .rc-green h3 {
+    //color: #B0B440;
+    &:after {
+      margin-left:4px;
+      content: url("../assets/images/icons/vegetarian.svg");
+    }
+  }
 }
 
-.rc-blue {color: #2d7dff;}
-.rc-green {color: #B0B440;}
+
 .rc-dish-content {
   display: flex;
   width: 100%;
