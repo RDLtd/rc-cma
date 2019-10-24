@@ -1042,9 +1042,9 @@ button.rc-member-assc {
 }
 
 .rc-cms-menu-download {
-  background-color: white;
-  cursor: pointer;
-  margin: 0 16px 16px 0;
+
+
+
   padding: 16px !important;
   transition: all .3s ease-out;
   &:hover { @include mat-elevation(6); }
@@ -1074,12 +1074,18 @@ button.rc-member-assc {
   }
 
 }
-.rc-card.rc-cms-menu-dish {
+.rc-cms-menu-download,
+.rc-cms-menu-dish {
+  background-color: white;
   cursor: pointer;
   margin: 0 16px 16px 0;
   padding: 16px !important;
-  background-color: white;
+
   transition: all .3s ease-out;
+}
+.rc-cms-menu-dish {
+
+
   h3 {
     display: inline;
     span {
