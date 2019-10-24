@@ -1,10 +1,9 @@
 @import "vars";
 
-/*
-*
+/**
 * Set global defaults
 * -------------------
-*/
+**/
 
 html,
 body {
@@ -12,17 +11,21 @@ body {
   height:   100%;
   color:    $rc-theme-text;
 }
+// Maintain structure when little content
 main { min-height: 80vh; }
 
+// Default inline links
 a {
   cursor: pointer;
   color: $rc-theme-primary;
   text-decoration: none;
   &:hover { text-decoration: underline; }
 }
+// Default lists
 ol {
   margin: 0;
   padding: 0 0 0 1em;
   li { margin: 0 0 8px; }
 }
+
 hr { margin: 3em 0; }

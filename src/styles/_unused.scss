@@ -9,6 +9,15 @@
 
 @import "vars";
 
+.rc-section-toolbar-fixed {
+  position: fixed;
+  z-index: 10;
+}
+.rc-dialog-profile,
+.rc-dialog-image {
+  .mat-dialog-content { padding-top: 24px; }
+}
+
 .mat-dialog-actions {
   margin-top: 16px;
   padding-top: 8px;
