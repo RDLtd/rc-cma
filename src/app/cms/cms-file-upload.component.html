@@ -7,14 +7,14 @@
   <mat-dialog-content>
 
       <!-- IMAGE PREVIEW-->
-      <div *ngIf="data.type === 'image'" style="--aspect-ratio: 16/9">
-        <img [src]="filePreview" [alt]="">
+      <div *ngIf="data.type === 'image'" style="--aspect-ratio: 16/9; background-color: #eee;">
+        <img *ngIf="filePreview" [src]="filePreview" [alt]="">
       </div>
 
       <!-- FILE SELECT BUTTON -->
       <div class="rc-file-input-wrapper">
 
-        <label class="rc-file-input-label rc-centre" for="fileUpload">
+        <label class="rc-file-input-label rc-centre rc-full-width" for="fileUpload">
           <mat-icon>cloud_upload</mat-icon>
           <span>{{ uploadLabel | titlecase }} <span *ngIf="inProgress">({{ uploader?.progress }}%)</span></span>
         </label>
