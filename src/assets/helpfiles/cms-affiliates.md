@@ -8,7 +8,7 @@ You can view these offers here, but you need to sign up to become a **Full
 Member** of Restaurant Collective in order to take advantage of them.
 
 We are adding new Affiliates on a regular basis, please revisit this
-page to check for updates.
+page or our website to check for updates.
 
   
   

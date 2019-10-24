@@ -8,7 +8,7 @@ Vous pouvez voir ces offres ici, mais vous devez vous inscrire pour
 devenir un **Membre à part Entière** de Restaurateurs Indépendants pour en profiter.
 
 Nous ajoutons régulièrement de nouveaux affiliés. Veuillez revoir cette
-page pour vérifier les mises à jour.
+page ou notre Site Internet pour vérifier les mises à jour.
 
   
   
