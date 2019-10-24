@@ -42,13 +42,13 @@ import {
 
 import {
   AffiliatesComponent
-} from './cms/affiliates.component';
-
+} from './cms';
 
 const APP_ROUTES: Routes = [
   { path: '', component: SigninComponent },
   { path: 'login', component: SigninComponent },
   { path: 'signin', component: SigninComponent },
+  { path: 'referral', component: SigninComponent },
   { path: 'profile', component: ProfilePageComponent, canActivate: [AuthGuard]},
   { path: 'restaurants/:id/cms', component: CmsComponent,  canActivate: [AuthGuard], children: [
 
