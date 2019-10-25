@@ -326,7 +326,8 @@
     "NeedMoreContent": "WE NEED A BIT MORE CONTENT",
     "NotPublished": "The latest changes that you have made have not yet been published. Please ",
     "Preview": "PREVIEW",
-    "IfCorrect": "(Single Page Website) to verify your content. If everything is correct then press PUBLISH to synchronise all Restaurant Collective subscribers.",
+    "IfCorrect": "(Single Page Website) to verify your content. If everything is correct then press",
+    "Sync": " to synchronise with all Restaurant Collective subscribers.",
     "GoodWork": "Good work so far but we need a bit more information to generate your Single Page Website (SPW). The summary below should indicate which sections still need additional content. Once you've added enough data, the",
     "And": "and",
     "Publish": "PUBLISH",
@@ -445,7 +446,10 @@
     "UploadCap": "UPLOAD NOW",
     "Image": "image",
     "Menu": "menu",
-    "Directions": "directions file"
+    "Directions": "directions file",
+    "NewImage": "Upload a New Image",
+    "NewMenu": "Upload a New Menu",
+    "NewDirection": "Upload a New Directions File"
   },
 
   "CMS-Hours": {
@@ -538,7 +542,7 @@
     "Or": " or ",
     "GlutenFree": "Gluten Free",
     "WhenAdd": " when you add them.",
-    "AddSection": "Add Section Name",
+    "AddSection": "Menu Section Name (optional)",
     "DownloadableMenus": "Downloadable Menus",
     "UploadNewMenu": "Upload a new menu",
     "UploadedOn": "Uploaded on",
@@ -567,7 +571,9 @@
     "NoCancel": "No, cancel",
     "Deleted": " Deleted",
     "AddMenu": "ADD A MENU",
-    "On": "on"
+    "On": "on",
+    "VGF": "Add a selection of your most popular dishes. We would recommend that you choose a cross-section of your price range and dishes that best reflect your style of food. You can display the dishes as ![Vegetarian](../assets/images/icons/vegetarian.svg) **Vegetarian** or ![Gluten Free](../assets/images/icons/gluten-free.svg) **Gluten Free** when you add them.",
+    "SectionHint": "Antipasti, Starters, Main Courses etc."
   },
 
   "CMS-Reservations": {
@@ -890,7 +896,8 @@
     "Delete": "DELETE",
     "Update": "UPDATE",
     "ImageUpdated": "Your profile image has been updated",
-    "ImageDeleted": "Profile image deleted"
+    "ImageDeleted": "Profile image deleted",
+    "ProfileImage": "Profile Image"
   },
 
   "Profile-Verify": {
@@ -1010,7 +1017,9 @@
     "UpgradeLower": "Upgrade to Full Membership (",
     "Tax": "+ Tax)",
     "Success": "Your payment was successful, you will receive an invoice by email",
-    "Error": "There was an ERROR in sending your payment for processing"
+    "Error": "There was an ERROR in sending your payment for processing",
+    "Membership": "Membership",
+    "TaxNoBracket": "+ Tax"
   },
 
   "Agent": {

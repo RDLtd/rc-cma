@@ -1,20 +1,20 @@
 
-<div class="mdc-layout-grid">
-
-  <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
-
-    <mat-toolbar class="rc-cms-toolbar">
-
-      <span class="rc-toolbar-title">{{ 'CMS-Menus.MenuInfo' | translate }}</span>
+<div
+  style="margin:16px;"
+  fxLayout="column"
+  fxLayoutAlign="center"
+  fxLayoutGap="16px"
+  fxLayoutGap.xs="0">
+  <div fxFlex>
+    <mat-toolbar class="rc-toolbar rc-toolbar-section">
+      <span>{{ 'CMS-Menus.MenuInfo' | translate }}</span>
       <span class="rc-space-filler"></span>
-      <span class="rc-section-toolbar-actions">
-
+      <span class="rc-toolbar-actions">
         <button
           mat-icon-button
           (click)="help.dspHelp('cms-menus-general')">
           <mat-icon>help_outline</mat-icon>
         </button>
-
         <button
           mat-icon-button [disabled]="!dataChanged"
           (click)="updateDescription(overview)">
@@ -24,7 +24,10 @@
     </mat-toolbar>
   </div>
 
-  <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+  <!--  MENU INFO -->
+  <div
+    fxFlex
+    class="rc-content-panel">
     <mat-form-field
       class="rc-full-width"
       floatPlaceholder="never">
@@ -44,14 +47,12 @@
     </mat-form-field>
   </div>
 
-  <!-- SAMPLE MENU -->
-  <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
-
-    <mat-toolbar class="rc-cms-toolbar">
-      <!--<mat-icon>restaurant</mat-icon>-->
-      <span class="rc-toolbar-title">{{ 'CMS-Menus.SampleDishes' | translate }}</span>
+  <!-- SAMPLE MENU TOOLBAR -->
+  <div fxFlex>
+    <mat-toolbar class="rc-toolbar rc-toolbar-section">
+      <span>{{ 'CMS-Menus.SampleDishes' | translate }}</span>
       <span class="rc-space-filler"></span>
-      <span class="rc-section-toolbar-actions">
+      <span class="rc-toolbar-actions">
         <button
           mat-icon-button
           (click)="help.dspHelp('cms-menus-html')">
@@ -70,53 +71,57 @@
         </button>
       </span>
     </mat-toolbar>
+  </div>
+  <div fxFlex class="rc-content-panel" markdown [data]="'CMS-Menus.VGF' | translate"></div>
 
-    <!--<p>Add a selection of your most popular dishes. We would recommend that you choose a cross-section of your price-->
-    <!--range and dishes that best reflect your style of food. You can flag dishes as <strong class="rc-green">VEGETARIAN</strong> or <strong class="rc-blue">GLUTEN-FREE</strong> when you add them.</p>-->
-    <p>
-      {{ 'CMS-Menus.MenuHelp' | translate }}
-      <strong class="rc-green">
-        {{ 'CMS-Menus.Vegetarian' | translate }}
-      </strong>
-      {{ 'CMS-Menus.Or' | translate }}
-      <strong class="rc-blue">
-        {{ 'CMS-Menus.GlutenFree' | translate }}
-      </strong>
-      {{ 'CMS-Menus.WhenAdd' | translate }}
-    </p>
-  <div
-    *ngFor="let section of htmlMenu.sections"
-    class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
-
-    <mat-toolbar class="cms-menu-section">
+  <!-- SAMPLE MENU SECTION -->
+  <div fxFlex *ngFor="let section of htmlMenu.sections">
+    <div class="rc-cms-menu-section">
       <mat-form-field floatPlaceholder="never" class="rc-full-width">
         <input
           [(ngModel)]="section.label"
-          name="menuSection{{section.id}}"
-          type="text" matInput
+          name="menuSection{{ section.id }}"
+          type="text"
+          matInput
           (keyup)="setChanged()"
           placeholder="{{ 'CMS-Menus.AddSection' | translate }}">
+        <button mat-button *ngIf="section.label" matSuffix mat-icon-button aria-label="Clear" (click)="section.label=''">
+          <mat-icon>close</mat-icon>
+        </button>
+        <mat-hint>{{ 'CMS-Menus.SectionHint' | translate }}</mat-hint>
       </mat-form-field>
-    </mat-toolbar>
 
-    <div class="mdc-layout-grid">
-
+    </div>
+    <!-- Dishes and -->
+    <div fxLayout="row wrap" fxLayoutGap="16px grid">
       <div
-        draggable="true"
+        fxFlex="0 1 calc(33.33% - 16px)"
+        fxFlex.lt-md="0 1 calc(50% - 16px)"
+        fxFlex.lt-sm="0 1 calc(100%)"
         #menuDish
         *ngFor="let dish of getDishesBySection(section.id)"
-        class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 rc-card rc-dish"
-        (drag)="rcToggleClass(menuDish)">
+        class="rc-card rc-cms-menu-dish">
         <div
-          [ngClass]="{'rc-green': dish.cms_dish_vegetarian, 'rc-blue': dish.cms_dish_glutenfree}"
           class="rc-card-content"
-          (mouseover)="rcToggleClass(menuDish)"
-          (mouseout)="rcToggleClass(menuDish)"
           (click)="editDish(dish)">
           <h2>{{ section.label }}</h2>
           <div class="rc-dish-content">
-            <h3>{{ dish.cms_dish_name | uppercase }}</h3>
-            <span>{{ dish.cms_dish_price | currency }}</span>
+            <h3>
+              {{ dish.cms_dish_name | uppercase }}
+              <span *ngIf="dish.cms_dish_vegetarian">
+                <svg  xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14">
+                  <path fill="#8BC349" fill-rule="evenodd" d="M7,14 C3.13400675,14 0,10.8659932 0,7 C0,3.13400675 3.13400675,0 7,0 C10.8659932,0 14,3.13400675 14,7 C14,10.8659932 10.8659932,14 7,14 Z M8.65675781,4.14320312 L7.1553125,9.34480469 L5.6678125,4.14320312 L4.13847656,4.14320312 L6.45339844,10.995 L7.80609375,10.995 L10.1442578,4.14320312 L8.65675781,4.14320312 Z"/>
+                </svg>
+              </span>
+              <span *ngIf="dish.cms_dish_glutenfree">
+                <svg  xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                       viewBox="0 0 14 14">
+                <path fill="#4A90E2" fill-rule="evenodd" d="M7,14 C3.13400675,14 0,10.8659932 0,7 C0,3.13400675 3.13400675,0 7,0 C10.8659932,0 14,3.13400675 14,7 C14,10.8659932 10.8659932,14 7,14 Z M4.70367188,4.05234375 C4.01569969,4.05234375 3.48423365,4.30877999 3.10925781,4.82166016 C2.73428198,5.33454032 2.54679688,5.96749623 2.54679688,6.72054688 C2.54679688,7.50148828 2.74125457,8.12049902 3.13017578,8.57759766 C3.519097,9.0346963 4.03894206,9.26324219 4.68972656,9.26324219 C5.111187,9.26324219 5.45361847,9.16252705 5.71703125,8.96109375 C5.86268302,8.85262967 5.99903582,8.68993598 6.12609375,8.47300781 L6.12609375,8.79839844 C6.12609375,9.28183835 6.07341199,9.62581929 5.96804688,9.83035156 C5.80690024,10.1495459 5.48771072,10.3091406 5.01046875,10.3091406 C4.6726806,10.3091406 4.43251373,10.2487115 4.28996094,10.1278516 C4.20628864,10.0596741 4.14585956,9.94811275 4.10867188,9.79316406 L2.66765625,9.79316406 C2.71104188,10.2982968 2.93726358,10.6779154 3.34632813,10.9320313 C3.75539267,11.1861471 4.28375978,11.3132031 4.93144531,11.3132031 C6.00369026,11.3132031 6.72883926,11.0281018 7.10691406,10.4578906 C7.3269412,10.1263004 7.43695313,9.63357098 7.43695313,8.9796875 L7.43695313,4.17320313 L6.14933594,4.17320313 L6.14933594,4.90300781 C5.95100161,4.54662582 5.69069172,4.30181056 5.36839844,4.16855469 C5.17936103,4.09108034 4.95778773,4.05234375 4.70367188,4.05234375 Z M5.03371094,8.15226563 C4.56886486,8.15226563 4.24657642,7.93843964 4.06683594,7.51078125 C3.96766878,7.28145719 3.91808594,7.01959783 3.91808594,6.72519531 C3.91808594,6.38430819 3.96456985,6.09765741 4.05753906,5.86523438 C4.23418057,5.42827907 4.55491955,5.20980469 5.01976562,5.20980469 C5.36065275,5.20980469 5.63258362,5.33531124 5.83556641,5.58632812 C6.03854919,5.83734501 6.14003906,6.20301843 6.14003906,6.68335938 C6.14003906,7.19469006 6.03312607,7.56733607 5.81929688,7.80130859 C5.60546768,8.03528112 5.34360832,8.15226563 5.03371094,8.15226563 Z M10.5421094,2.31847656 C9.80765258,2.31847656 9.34436294,2.470324 9.15222656,2.77402344 C8.96938711,2.97855571 8.87796875,3.35197646 8.87796875,3.89429687 L8.87796875,4.2196875 L8.1528125,4.2196875 L8.1528125,5.15402344 L8.89191406,5.15402344 L8.89191406,9.24 L10.2120703,9.24 L10.2120703,5.15402344 L11.0813281,5.15402344 L11.0813281,4.2196875 L10.2120703,4.2196875 L10.2120703,3.79203125 C10.2120703,3.69286409 10.2453838,3.60222046 10.3120117,3.52009766 C10.3786397,3.43797485 10.4994978,3.39923826 10.6745898,3.40388672 C10.8496819,3.40853518 10.9744137,3.41550777 11.0487891,3.42480469 L11.0487891,2.34636719 C10.9310281,2.33707027 10.8380602,2.33009768 10.7698828,2.32544922 C10.7017054,2.32080076 10.6257817,2.31847656 10.5421094,2.31847656 Z"/>
+              </svg>
+              </span>
+
+            </h3>
+            <span>{{ currencySymbol }} {{ dish.cms_dish_price}}</span>
             <span>{{ dish.cms_dish_desc }}</span>
           </div>
         </div>
@@ -129,110 +134,104 @@
           </button>
         </div>
       </div>
-
     </div>
   </div>
-  </div>
-</div>
 
-<div class="mdc-layout-grid">
-  <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
-    <mat-toolbar class="rc-cms-toolbar">
-      <!--<mat-icon>restaurant</mat-icon>-->
-      <span class="rc-toolbar-title">{{ 'CMS-Menus.DownloadableMenus' | translate }}</span>
+  <!-- DOWNLOAD MENUS -->
+  <div fxFlex>
+    <mat-toolbar class="rc-toolbar rc-toolbar-section">
+      <span>{{ 'CMS-Menus.DownloadableMenus' | translate }}</span>
       <span class="rc-space-filler"></span>
-      <span class="rc-section-toolbar-actions">
-      <!--<button mat-icon-button [matMenuTriggerFor]="menu">-->
-        <!--<mat-icon>filter_list</mat-icon>-->
-      <!--</button>-->
+      <span class="rc-toolbar-actions">
         <button
           mat-icon-button
           (click)="help.dspHelp('cms-menus-pdf')">
           <mat-icon>help_outline</mat-icon>
         </button>
-      <button mat-icon-button
-              (click)="addPdfMenu()"
-              matTooltip="{{ 'CMS-Menus.UploadNewMenu' | translate }}">
-        <mat-icon>add_circle_outline</mat-icon>
-      </button>
-  </span>
-    </mat-toolbar>
-
-  </div>
-
-  <div
-    class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 rc-add-content"
-    (click)="addPdfMenu()"
-    *ngIf="showLoader">
-
-    <rc-loader></rc-loader>
-
-  </div>
-
-  <div
-       *ngFor="let menu of menus; let i of index"
-       #card id="{{ i }}"
-       class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 rc-card"
-       (mouseover)="rcToggleClass(card)"
-       (mouseout)="rcToggleClass(card)"
-       (click)="viewPdfMenu(menu)">
-
-    <div class="rc-card-content">
-      <h2 mat-card-title>{{ menu.cms_element_title }}</h2>
-      <span>{{ menu.cms_element_caption }}</span>
-      <!--<p>{{ menu.cms_element_live_from | date }} - {{ menu.cms_element_live_to | date }}</p>-->
-      <p>{{ 'CMS-Menus.UploadedOn' | translate }} {{ menu.cms_element_created_on | date }} {{ 'CMS-Menus.By' | translate }} {{ menu.cms_element_created_by }}</p>
-    </div>
-
-    <div class="rc-card-actions">
-      <span>
-        <mat-chip-list>
-          <mat-chip
-            class="rc-online"
-            selected="true"
-            *ngIf="menu.cms_element_active">
-            {{ 'CMS-Menus.Available' | translate }}
-          </mat-chip>
-          <mat-chip
-            selected="false"
-            *ngIf="!menu.cms_element_active">
-            {{ 'CMS-Menus.Offline' | translate }}
-          </mat-chip>
-        </mat-chip-list>
-      </span>
-      <span class="rc-space-filler"></span>
-      <span (click)="stopBubbling($event)">
         <button
           mat-icon-button
-          title="{{ 'CMS-Menus.Delete' | translate }} {{ menu.cms_element_title }}"
-          (click)="deletePdfMenu(menu)">
-          <mat-icon>delete</mat-icon>
+          (click)="addPdfMenu()"
+          matTooltip="{{ 'CMS-Menus.UploadNewMenu' | translate }}">
+          <mat-icon>add_circle_outline</mat-icon>
         </button>
-        <!--<button-->
-          <!--mat-icon-button-->
-          <!--title="Download {{ menu.cms_element_title }}">-->
-          <!--<mat-icon>file_download</mat-icon>-->
-        <!--</button>-->
-        <mat-checkbox
-          labelPosition="before"
-          color="accent"
-          [checked]="menu.cms_element_active"
-          (change)="togglePdfMenuStatus(menu)">
-        </mat-checkbox>
       </span>
-    </div>
+    </mat-toolbar>
   </div>
 
-  <div
-    class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 rc-add-content"
-    (click)="addPdfMenu()"
-    *ngIf="!showLoader">
-    <mat-icon>add_circle_outline</mat-icon>
-    <span class="rc-add-content-label">{{ 'CMS-Menus.AddMenu' | translate }}</span>
+  <div fxFlex>
+    <div
+      fxLayout="row wrap"
+      fxLayout.xs="column"
+      fxLayoutGap="16px grid"
+      fxLayoutGap.xs="16px">
+      <div
+        fxFlex="0 1 calc(33.3% - 16px)"
+        fxFlex.lt-md="0 1 calc(50% - 16px)"
+        fxFlex.lt-sm="0 1 calc(100%)"
+        *ngFor="let menu of menus; let i of index"
+        #card id="{{ i }}"
+        class="rc-card rc-cms-menu-download"
+        (click)="viewPdfMenu(menu)">
+        <div class="rc-card-content">
+          <h2 mat-card-title>{{ menu.cms_element_title }}</h2>
+          <span>{{ menu.cms_element_caption }}</span>
+          <!--<p>{{ menu.cms_element_live_from | date }} - {{ menu.cms_element_live_to | date }}</p>-->
+          <p>{{ 'CMS-Menus.UploadedOn' | translate }} {{ menu.cms_element_created_on | date }} {{ 'CMS-Menus.By' | translate }} {{ menu.cms_element_created_by }}</p>
+        </div>
+        <div class="rc-card-actions">
+          <span>
+            <mat-chip-list>
+              <mat-chip
+                class="rc-online"
+                selected="true"
+                *ngIf="menu.cms_element_active">
+                {{ 'CMS-Menus.Available' | translate }}
+              </mat-chip>
+              <mat-chip
+                selected="false"
+                *ngIf="!menu.cms_element_active">
+                {{ 'CMS-Menus.Offline' | translate }}
+              </mat-chip>
+            </mat-chip-list>
+          </span>
+          <span class="rc-space-filler"></span>
+          <span (click)="stopBubbling($event)">
+            <button
+              mat-icon-button
+              title="{{ 'CMS-Menus.Delete' | translate }} {{ menu.cms_element_title }}"
+              (click)="deletePdfMenu(menu)">
+              <mat-icon>delete</mat-icon>
+            </button>
+            <mat-checkbox
+              labelPosition="before"
+              color="accent"
+              [checked]="menu.cms_element_active"
+              (change)="togglePdfMenuStatus(menu)">
+            </mat-checkbox>
+          </span>
+        </div>
+      </div>
+
+      <div
+        fxFlex
+        class="rc-add-content rc-cms-menu-download"
+        *ngIf="showLoader">
+        <rc-loader></rc-loader>
+      </div>
+      <div
+        fxFlex
+        class="rc-add-content rc-cms-menu-download"
+        (click)="addPdfMenu()"
+        *ngIf="!showLoader">
+        <mat-icon>add_circle_outline</mat-icon>
+        <span class="rc-add-content-label">{{ 'CMS-Menus.AddMenu' | translate }}</span>
+      </div>
+
+    </div>
+
   </div>
 
 </div>
-
 
 <!--<hr>-->
 <!--<pre>{{ descriptions | json }}</pre>-->

@@ -1,36 +1,34 @@
-<div class="mdc-layout-grid" style="margin-top: 8px;">
+<div class="mdc-layout-grid">
 
   <!-- Core data -->
   <mat-card
     class="rc-cms-card-core mdc-layout-grid__cell mdc-layout-grid__cell--span-5 mdc-layout-grid__cell--span-12-tablet">
 
-    <div class="rc-card-title-img-wrapper" style="--aspect-ratio:16/9; margin-right: -32px;">
+    <div
+      class="rc-card-title-img-wrapper"
+      style="--aspect-ratio:16/9; margin-right: -32px;">
       <img *ngIf="img_src" mat-card-image [src]="img_src" style="width: 100%;">
     </div>
 
-
     <mat-card-title>{{ restaurant?.restaurant_name }}</mat-card-title>
     <mat-card-subtitle>{{ restaurant?.restaurant_group_name }}</mat-card-subtitle>
-
     <mat-card-content>
 
       <div class="rc-card-help">
         <button
           mat-icon-button
-          (click)="help.dspHelp('cms-dashboard-core')">
+          (click)="help.dspHelp('cms-dashboard-core', restaurant)">
           <mat-icon>help</mat-icon>
         </button>
       </div>
 
       <dl>
-
         <dt>{{ 'CMS-Dashboard.FoodStyle' | translate }}</dt>
         <dd>
           {{ restaurant?.restaurant_cuisine_1 }}
           <span *ngIf="restaurant?.restaurant_cuisine_2"> – {{ restaurant?.restaurant_cuisine_2 }}</span>
           <span *ngIf="restaurant?.restaurant_cuisine_3"> – {{ restaurant?.restaurant_cuisine_3 }}</span>
         </dd>
-
         <dt>{{ 'CMS-Dashboard.Address' | translate }}</dt>
         <dd>
           <span>{{ restaurant?.restaurant_address_1 }}</span>
@@ -82,18 +80,18 @@
             </li>
           </ul>
         </dd>
-
       </dl>
+
     </mat-card-content>
-    <mat-card-actions align="center">
-      <button mat-flat-button
-               (click)="reqDirectoryDataChange()">{{ 'CMS-Dashboard.ChangeCaps' | translate }}</button>
+    <mat-card-actions align="end">
+      <button mat-button (click)="reqDirectoryDataChange()">{{ 'CMS-Dashboard.ChangeCaps' | translate }}</button>
     </mat-card-actions>
   </mat-card>
 
   <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-7 rc-no-grid-gutter">
     <div class="mdc-layout-grid">
 
+      <!-- Dashboard messages -->
       <mat-card
         *ngIf="offerInBox"
         class="rc-cms-dash-info mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--align-top">
@@ -128,7 +126,7 @@
         <mat-card-actions></mat-card-actions>
       </mat-card>
 
-      <!-- PUBLISHED -->
+      <!-- SPW Status/preview panel -->
       <mat-card
         *ngIf="!cmsChanged && cmsHasSufficientData && !isPreviewing"
         class="rc-cms-dash-info mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--align-top">
@@ -138,13 +136,11 @@
           <span class="rc-space-filler"></span>
           <mat-icon class="rc-success">cloud_done</mat-icon>
         </mat-card-header>
-
         <mat-card-content *ngIf="!isPreviewing">
           {{ 'CMS-Dashboard.Your' | translate }} <strong>
           {{ 'CMS-Dashboard.SPW' | translate }}</strong>
           {{ 'CMS-Dashboard.HasBeenPublished' | translate }}
         </mat-card-content>
-
         <mat-card-actions align="end" *ngIf="!isPreviewing">
           <button
             mat-button
@@ -160,17 +156,19 @@
         </mat-card-actions>
       </mat-card>
 
-      <!-- CHANGE NOTIFICATION -->
+      <!-- Change notification -->
       <mat-card
         *ngIf="cmsChanged && !isPreviewing"
         class="rc-cms-dash-info mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--align-top">
 
+        <!-- Unpublished changes -->
         <mat-card-header *ngIf="!isPreviewing && cmsHasSufficientData">
           <mat-card-title>{{ 'CMS-Dashboard.HaveUnpublished' | translate }}</mat-card-title>
           <span class="rc-space-filler"></span>
           <mat-icon class="rc-warn">cloud_off</mat-icon>
         </mat-card-header>
 
+        <!-- More content required -->
         <mat-card-header *ngIf="!isPreviewing && !cmsHasSufficientData">
           <mat-card-title>{{ 'CMS-Dashboard.NeedMoreContent' | translate }}</mat-card-title>
           <span class="rc-space-filler"></span>
@@ -179,17 +177,22 @@
 
         <mat-card-content  *ngIf="!isPreviewing && cmsHasSufficientData">
           {{ 'CMS-Dashboard.NotPublished' | translate }}
-          <strong>{{ 'CMS-Dashboard.Preview' | translate }}</strong> {{ 'CMS-Dashboard.Your' | translate }} <strong>
-          {{ 'CMS-Dashboard.SPW' | translate }}</strong> {{ 'CMS-Dashboard.IfCorrect' | translate }}
+          <strong> {{ 'CMS-Dashboard.Preview' | translate }}</strong> {{ 'CMS-Dashboard.IfCorrect' | translate }}
+          <strong> {{ 'CMS-Dashboard.Publish' | translate }}</strong> {{ 'CMS-Dashboard.Sync' | translate }}
         </mat-card-content>
 
+        <!-- More content required -->
         <mat-card-content  *ngIf="!isPreviewing && !cmsHasSufficientData">
           {{ 'CMS-Dashboard.GoodWork' | translate }}
           <strong>{{ 'CMS-Dashboard.Preview' | translate }}</strong> {{ 'CMS-Dashboard.And' | translate }} <strong>
           {{ 'CMS-Dashboard.Publish' | translate }}</strong> {{ 'CMS-Dashboard.Distribute' | translate }}
+          <p>{{ 'CMS-Dashboard.YouCan' | translate }}<a href="https://rdltd.github.io/RD.Pages/" target="_blank">{{ 'CMS-Dashboard.View' | translate }}</a>{{ 'CMS-Dashboard.ToSee' | translate }}</p>
         </mat-card-content>
 
-        <mat-card-actions align="end"  *ngIf="!isPreviewing">
+        <!-- card actions -->
+        <mat-card-actions
+          align="end"
+          *ngIf="!isPreviewing">
           <button
             mat-button
             color="secondary"
@@ -203,14 +206,13 @@
         </mat-card-actions>
       </mat-card>
 
-
       <!-- CMS Summary -->
       <mat-card
         class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--span-12-tablet">
         <div class="rc-card-help">
           <button
             mat-icon-button
-            (click)="help.dspHelp('cms-dashboard-summary')">
+            (click)="help.dspHelp('cms-dashboard-summary', restaurant)">
             <mat-icon>help_outline</mat-icon>
           </button>
         </div>

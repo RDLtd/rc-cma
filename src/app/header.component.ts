@@ -1,7 +1,7 @@
 import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { AuthenticationService } from './_services';
 import { Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';;
+import { TranslateService } from '@ngx-translate/core';
 import { MatDialog } from '@angular/material';
 import { AppConfig } from './app.config';
 import { AboutComponent } from './about.component';
@@ -58,7 +58,7 @@ export class HeaderComponent implements OnInit {
             this.displayName = this.lblMemberLogin;
             // this.login(true);
             // new login page
-            this.router.navigate(['/signin']);
+            this.router.navigate(['/']);
 
             break;
           }
@@ -78,26 +78,11 @@ export class HeaderComponent implements OnInit {
   };
 
   login(): void {
-
     this.router.navigate(['/']);
-    // this.dialogRef = this.dialog.open(LoginComponent);
-    // // Self reference
-    // this.dialogRef.componentInstance.thisDialog = this.dialogRef;
-    // // Due to expired session
-    // if(extSession){
-    //   this.dialogRef.componentInstance.errorMsg = 'Session Expired';
-    //   this.dialogRef.componentInstance.tgtRoute = this.router.url;
-    // }
   };
 
   about(): void {
     const dialogRef = this.dialog.open(AboutComponent);
     dialogRef.componentInstance.build = this.config.build;
   }
-
-  setLanguage(lang) {
-    this.translate.use(lang);
-    localStorage.setItem('rd_country', lang);
-  }
-
 }

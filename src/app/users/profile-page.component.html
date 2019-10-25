@@ -6,7 +6,6 @@
 
       <mat-toolbar class="rc-section-toolbar">
 
-        <!--<mat-icon class="rc-pad-r">account_circle</mat-icon>-->
         <span class="rc-toolbar-title">{{ member.member_first_name | uppercase }} {{ member.member_last_name | uppercase }}</span>
         <span class="rc-space-filler"></span>
         <span class="rc-section-toolbar-actions rc-media-small-hide">
@@ -100,8 +99,9 @@
 
           </div>
 
-          <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2 rc-active" (click)="updateImage()">
-            <img [src]="member.member_image_path">
+          <div
+               class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2 rc-active" (click)="updateImage()">
+            <img style="--aspect-ratio:1/1;" [src]="member.member_image_path">
           </div>
 
         </div>
@@ -115,7 +115,6 @@
 
     <mat-toolbar
       class="rc-section-toolbar mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
-      <!--<mat-icon class="rc-pad-r">store</mat-icon>-->
       <span class="rc-toolbar-title">
         {{ 'Profile-Page.AssociatedRestaurants' | translate }}
       </span>
@@ -155,7 +154,6 @@
       class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 rc-restaurant-card rc-card-restaurant"
       *ngFor="let restaurant of restaurants; let idx = index">
 
-
       <!-- membership -->
 
       <button
@@ -163,7 +161,7 @@
         class="rc-member-assc"
         mat-mini-fab
         color=""
-        matTooltip="{{ restaurant.restaurant_name }} is an Associate Member of {{ company_name }}">
+        matTooltip="{{ restaurant.restaurant_name }} {{ 'Profile-Page.IsAssociate' | translate }} {{ company_name }}">
         <mat-icon>people_outline</mat-icon>
       </button>
 
@@ -172,7 +170,7 @@
         class="rc-member-full"
         mat-mini-fab
         color=""
-        matTooltip="{{ restaurant.restaurant_name }} is a Full Member of {{ company_name }}">
+        matTooltip="{{ restaurant.restaurant_name }} {{ 'Profile-Page.IsFull' | translate }} {{ company_name }}">
         <mat-icon>people</mat-icon>
       </button>
 
@@ -206,13 +204,14 @@
 
         <span class="rc-space-filler"></span>
 
-        <button
-          [disabled]="!authService.isAuthLevel(2)"
-          mat-icon-button
-          [routerLink]="['/fs/profit']"
-          matTooltip="{{ 'Profile-Page.ManageFnS' | translate }} {{ restaurant.restaurant_name }}">
-          <mat-icon>equalizer</mat-icon>
-        </button>
+
+<!--        <button-->
+<!--          [disabled]="!authService.isAuthLevel(2)"-->
+<!--          mat-icon-button-->
+<!--          [routerLink]="['/fs/profit']"-->
+<!--          matTooltip="{{ 'Profile-Page.ManageFnS' | translate }} {{ restaurant.restaurant_name }}">-->
+<!--          <mat-icon>equalizer</mat-icon>-->
+<!--        </button>-->
 
         <button
           mat-icon-button

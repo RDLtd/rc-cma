@@ -1,10 +1,9 @@
 <div class="mdc-layout-grid">
   <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
-    <mat-toolbar class="rc-cms-toolbar">
-      <!--<mat-icon>image</mat-icon>-->
-      <span class="rc-toolbar-title">{{ 'CMS-Images.RImages' | translate }}</span>
+    <mat-toolbar class="rc-toolbar-section">
+      <span>{{ 'CMS-Images.RImages' | translate }}</span>
       <span class="rc-space-filler"></span>
-      <span class="rc-section-toolbar-actions">
+      <span class="rc-toolbar-actions">
 
         <button
           mat-icon-button
@@ -18,25 +17,20 @@
         </button>
       </span>
     </mat-toolbar>
-
   </div>
-
+  <!-- content load animation -->
   <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 rc-add-content" *ngIf="showLoader">
-
     <rc-loader></rc-loader>
-
   </div>
-
+  <!-- Image cards -->
   <div
     class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4"
     *ngFor="let image of cmsImages">
     <div
       #card
       class="rc-image-card"
-      (mouseover)="rcToggleClass(card)"
-      (mouseout)="rcToggleClass(card)"
       (click)="viewImage(image)">
-      <mat-chip-list class="rc-element-default">
+      <mat-chip-list class="rc-element-tag">
         <mat-chip
           selected="true"
           *ngIf="image.cms_element_default">
@@ -54,7 +48,7 @@
           {{ 'CMS-Images.Offline' | translate }}
         </mat-chip>
       </mat-chip-list>
-      <div class="rc-img-wrapper">
+      <div style="--aspect-ratio:16/9;">
       <img [src]="image.cms_element_image_path">
       </div>
 
@@ -88,10 +82,10 @@
       </div>
     </div>
   </div>
+  <!-- Add image option -->
   <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 rc-add-content" (click)="addImage()" *ngIf="!showLoader">
-
     <mat-icon>add_circle_outline</mat-icon>
     <span class="rc-add-content-label">{{ 'CMS-Images.AddImage' | translate }}</span>
-
   </div>
+
 </div>

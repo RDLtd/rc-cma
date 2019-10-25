@@ -1,6 +1,6 @@
 <header>
 
-  <mat-toolbar class="rc-section-toolbar rc-section-toolbar-fixed">
+  <mat-toolbar class="mat-toolbar-fixed-adjust rc-toolbar rc-toolbar-nav rc-toolbar-fixed">
 
     <button
       *ngIf="restaurants?.length > 0"
@@ -9,7 +9,7 @@
       <mat-icon>arrow_drop_down</mat-icon>
     </button>
 
-    <span class="rc-toolbar-title rc-link-like"
+    <span class="rc-link-like"
           [matMenuTriggerFor]="cmsRestaurants"
           [matTooltip]="'CMS-Component.ManagedByYou' | translate">
           {{ restaurant?.restaurant_name }}
@@ -29,7 +29,7 @@
         mat-menu-item
         [routerLink]="['/profile']">
         <mat-icon>add_circle</mat-icon>
-        <span>Add Restaurant</span>
+        <span>{{ 'CMS-Component.AddRestaurant' | translate }}</span>
       </button>
     </mat-menu>
 

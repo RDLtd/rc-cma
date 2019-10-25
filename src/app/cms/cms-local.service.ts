@@ -46,20 +46,26 @@ export class CmsLocalService {
     return this.subject.asObservable();
   }
 
-  dspSnackbar(msg: string, actn: string = '', dur: number = 3): void {
+  dspSnackbar(msg: string, actn: string = '', d: number = 3, style: any = 'info'): void {
+
+    // this.snackBar.openFromComponent(HelpComponent, {
+    //   duration: 500,
+    // });
+
     this.snackBar.open(msg, actn, {
-      duration: dur * 1000
+      duration: d * 1000,
+      panelClass: [`rc-mat-snack-${style}`]
     });
   }
 
   confirmNavigation() {
     // load translations
-    this.translate.get('CMS').subscribe(t => {
+    this.translate.get('ConfirmCancel').subscribe(t => {
       this.dialogConfig = {
         data: {
           title: t.Sure,
           msg: t.SaveContinue,
-          no: t.GoBack,
+          no: t.Cancel,
           yes: t.ContinueCaps,
           showCheckbox: false
         }

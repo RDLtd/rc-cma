@@ -102,9 +102,9 @@ export class CMSService {
     }
   }
 
-  getAttributes(restaurant_id: string) {
+  getAttributes(restaurant_id: string, country_code: string) {
     return this.http.post(this.config.apiUrl + '/cms/attributeget',
-      { restaurant_id: restaurant_id, userCode: this.config.userAPICode, token: this.jwt() });
+      { restaurant_id: restaurant_id, country_code: country_code, userCode: this.config.userAPICode, token: this.jwt() });
   }
 
   createAttribute(cms_attribute: CMSAttribute) {
@@ -178,7 +178,7 @@ export class CMSService {
 
   createDish(cms_dish: CMSDish) {
     return this.http.post(this.config.apiUrl + '/cms/dishcreate',
-      { cms_dish: cms_dish, userCode: this.config.userAPICode, token: this.jwt() });
+      { cms_dish: cms_dish, userCode: this.config.userAPICode, token: this.jwt()});
   }
 
   updateDish(cms_dish: CMSDish) {
@@ -254,7 +254,6 @@ export class CMSService {
     const requestOptions = {
       params: new HttpParams()
     };
-    requestOptions.params.set('foo', 'bar');
     requestOptions.params.set('apiCategory', 'Financial');
 
     if (currentUser && currentUser.token) {

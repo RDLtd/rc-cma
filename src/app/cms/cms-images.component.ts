@@ -138,9 +138,4 @@ export class CmsImagesComponent implements OnInit {
       error => console.log(error));
   }
 
-  filterBy(type) {}
-
-  rcToggleClass(card) {
-    card.classList.toggle('rc-card-over');
-  }
 }

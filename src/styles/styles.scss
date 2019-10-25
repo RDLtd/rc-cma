@@ -1,56 +1,21 @@
 
-/*
-* Import MDC components, as required
-* ----------------------------------
-*/
-
-/*
-@import "~material-components-web/material-components-web";
-@import "~@material/animation/mdc-animation";
-@import "~@material/button/mdc-button";
-@import "~@material/card/mdc-card";
-@import "~@material/checkbox/mdc-checkbox";
-@import "~@material/drawer/mdc-drawer";
-@import "~@material/fab/mdc-fab";
-@import "~@material/form-field/mdc-form-field";
-@import "~@material/icon-toggle/mdc-icon-toggle";
-@import "~@material/list/mdc-list";
-@import "~@material/menu/mdc-menu";
-@import "~@material/radio/mdc-radio";
-@import "~@material/ripple/mdc-ripple";
-@import "~@material/select/mdc-select";
-@import "~@material/snackbar/mdc-snackbar";
-@import "~@material/switch/mdc-switch";
-@import "~@material/textfield/mdc-textfield";
-@import "~@material/theme/mdc-theme";
+// Material Web Component
 @import "@material/layout-grid/mdc-layout-grid";
-@import "@material/elevation/mdc-elevation";
-*/
-
-@import "@material/layout-grid/mdc-layout-grid";
-@import "@material/toolbar/mdc-toolbar";
-@import "@material/typography/mdc-typography";
 
 @import "mat-themes";
 @import "vars";
 @import "reset";
 
-/*
-* Removed styles
-* ------------------------ */
+// Create a config with the default MAT typography levels.
+$config: mat-typography-config();
+
+// Uncomment to check for missing styles
 // @import "unused"
 
-
-/*
+/**
 * Utility classes
 * ----------------------------------
-*/
-
-//router-outlet ~ * {
-//  position: absolute;
-//  height: 100%;
-//  width: 100%;
-//}
+**/
 
 .rc-loader {
   display: flex;
@@ -68,8 +33,6 @@
   justify-content: space-between;
 }
 .rc-invisible { visibility: hidden; }
-.rc-txt-right { text-align: right; }
-.rc-txt-leading { font-size: 20px; }
 .rc-full-width { width: 100%; }
 .rc-half-width { width: calc(50% - 2px);}
 .rc-link-active { color: $rc-theme-primary !important; }
@@ -78,40 +41,45 @@
   filter: saturate(0%);
   opacity: 0.5;
 }
-.rc-small-caps {
-  font-size: 10px;
-  text-transform: uppercase;
-}
-.rc-no-spinner {
-  &::-webkit-inner-spin-button,
-  &::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+.rc-mat-snack-warn,
+.rc-mat-snack-info{
+  color: black;
+  background-color: $rc-theme-primary;
+  .mat-simple-snackbar,
+  .mat-simple-snackbar-action {
+    color: black;
+    font-size: 16px;
+    line-height: 22px;
+    button {
+      font-size: 16px;
+    }
   }
 }
+.rc-mat-snack-info { background-color: $rc-theme-secondary; }
 .rc-active {
   cursor: pointer;
   &:hover { background: #eee; }
 }
 .rc-success { color: $rc-theme-success !important; }
 .rc-warn { color: $rc-theme-warn; }
-.rc-full-width-restaurant {
-  width: 100%;
-  height: 64px;
-}
-
-a.rc-btn-lg {
-  padding: 8px 16px;
-  font-size: 18px;
-}
 .rc-media-small-hide { display: none !important; }
 .rc-media-med { display: block !important; }
 .agm-map { height: 300px; }
 
-/*
-** Maintain aspect ratio of images
-** -------------------------------
-*/
+@media screen and ( min-width : 600px ){
+  .rc-media-small-hide { display: block !important; }
+  .rc-media-med { display: none !important; }
+}
+@media only screen
+and (min-device-width: 768px)
+and (max-device-width: 1024px)
+and (orientation: landscape)
+and (-webkit-min-device-pixel-ratio: 1) {}
+
+/**
+* Maintain aspect ratio of images
+* -------------------------------
+**/
 [style*="--aspect-ratio"] > :first-child { width: 100%; }
 [style*="--aspect-ratio"] > img { height: auto; }
 @supports (--custom:property) {
@@ -129,27 +97,20 @@ a.rc-btn-lg {
   }
 }
 
-@media screen and ( min-width : 600px ){
-  .rc-media-small-hide { display: block !important; }
-  .rc-media-med { display: none !important; }
+/**
+* MAT Overrides
+* -------------------------------
+**/
+
+.mdc-layout-grid { max-width: $rc-max-width; }
+.mat-toolbar,
+.mat-toolbar-row,
+.mat-toolbar-single-row {
+  height: $rc-toolbar-height-std !important;
+  font: 400 18px/24px $rc-default-font;
 }
-
-@media only screen
-  and (min-device-width: 768px)
-  and (max-device-width: 1024px)
-  and (orientation: landscape)
-  and (-webkit-min-device-pixel-ratio: 1) {}
-
-/*
-** MDC/Material Overrides
-** ------------------------------
-*/
-.mdc-toolbar-fixed-adjust { margin-top: $rc-toolbar-height-std;}
-.mdc-toolbar--fixed { z-index: 100; }
-.mat-toolbar-row, .mat-toolbar-single-row { height: $rc-toolbar-height-std !important;}
-.mat-sidenav { width: auto; }
-.mat-sidenav-container.mat-sidenav-container { background: $rc-theme-bgd; }
-.mat-sidenav-content { min-height: calc(100vh - 160px); }
+.mat-toolbar-fixed-adjust { margin-top: $rc-toolbar-height-std;}
+.mat-tooltip { font: $rc-default-font-weight 12px/16px $rc-default-font; }
 .mat-hint,
 .mat-input-underline {
   color: $rc-theme-black;
@@ -157,33 +118,16 @@ a.rc-btn-lg {
   border-color: $rc-theme-black;
 }
 .mat-radio-label,
-.mat-checkbox-label { font-size: 16px; }
 .mat-form-field-prefix { margin-right: 8px; }
 .mat-form-field { line-height: 1.4; }
-.mat-card-content { font-size: 16px; }
-.mat-card-title {
-  h2 {
-    font-size: 24px;
-    margin-top:0;
-  }
-}
-.mat-radio-label,
-.mat-checkbox-label { font-size: 16px;}
-.mat-form-field > .mat-chip {
-  background-color: $rc-theme-secondary;
-  margin: 0 4px 4px 0 !important;
-}
-
-.mat-dialog-container {
-  max-width: 95vw !important;
-  border-radius: 8px !important;
-  //max-height: 80vh !important;
-}
-.preview-dialog-container .mat-dialog-container {
+.mat-card-title { font-size: 20px; }
+.mat-form-field > .mat-chip { background-color: $rc-theme-secondary; }
+.mat-dialog-container { border-radius: 8px !important; }
+.rc-preview-dialog-container .mat-dialog-container {
   padding: 0;
   border-radius: 0;
 }
-.cdk-overlay-backdrop.cdk-overlay-backdrop-showing.preview-backdrop {
+.cdk-overlay-backdrop.cdk-overlay-backdrop-showing.rc-preview-backdrop {
   background-color: #000;
   opacity: 0.7;
 }
@@ -191,61 +135,41 @@ a.rc-btn-lg {
 .mat-card-content h4 {
   font-weight: bold;
   text-transform: uppercase;
-  margin-bottom: 8px;
+  margin: 12px 0 8px;
   background-color: $rc-theme-grey;
   padding: 4px 8px;
+  font-size: 12px;
 }
-.mat-menu-content {
-  .menu-title {
-    line-height: 48px;
-    height: 48px;
-    padding: 0 16px;
-    font-weight: $rc-display-font-weight;
-  }
-}
-.mdc-layout-grid { max-width: $rc-max-width; }
 .mat-simple-snackbar-action { color: white; }
+a.mat-menu-item {text-decoration: none;}
 
-/*
-** MAIN LAYOUTS
-** ------------------------------
-*/
+/**
+* RC layouts
+* -------------------------------
+**/
 
-.rc-nav-global {}
-
-.rc-sidenav-menu {
-  mat-icon {
-    margin-right: 8px;
-    color: $rc-theme-primary;
-  }
-  font-family: $rc-display-font;
-  text-transform: uppercase;
-}
 .rc-about {
   display: flex;
   flex-direction: column;
-  max-width: 270px;
+  max-width: 320px;
   position: relative;
+
   .rc-close {
     position: absolute;
     top: -8px; right: -8px;
     z-index: 100;
   }
   img {
-    width:120px;
+    width:96px;
     height: auto;
   }
   h3 {
     text-align: center;
-    font-size: 12px;
-    padding-bottom:0;
-    margin-bottom: 0;
+    font-size: 16px;
+    margin: 0 auto 8px;
   }
-  a {
-    color: inherit;
-  }
+  a { font-weight: bold; color: inherit; }
 }
-
 .rc-footer {
   margin-top: 0;
   padding: 24px 0 24px 0;
@@ -255,14 +179,13 @@ a.rc-btn-lg {
   a {
     opacity: 1;
     transition: opacity .3s ease-out;
-    &:hover {
-      opacity: .75;
-    }
+    &:hover { opacity: .75; }
   }
   img {
     height: 80px;
     margin: 0 24px;
   }
+
   .mdc-layout-grid__cell { text-align: center; }
 
   .rc-navlist {
@@ -304,22 +227,10 @@ a.rc-btn-lg {
     font-size: 12px;
   }
 }
-
-/*
-** SIGN-IN
-** ------------------------------
-*/
-
 .rc-signin-page {
   background: $rc-theme-primary;
   min-height: 100vh;
   padding: 0 calc(100%/3 + 64px) 0 16px;
-  a {
-    color: $rc-theme-primary;
-    text-decoration: none;
-    &:hover { text-decoration: underline; }
-  }
-
   .rc-main {
     display: flex;
     flex-direction: column;
@@ -328,16 +239,14 @@ a.rc-btn-lg {
     color: white;
     min-height: 100vh;
 
-    header { display: block; }
+    header { display: block; margin-bottom: 16px;}
     p {
       max-width: 640px;
       color: white;
-      font-size: 24px;
     }
     .rc-brand-logo { height: 120px; }
   }
   .rc-signin {
-
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -348,34 +257,70 @@ a.rc-btn-lg {
     padding: 48px;
     header {
       position: relative;
-      margin-bottom: 2rem;
       h1 {
-        font-size: 36px;
+        font-size: 40px;
         font-weight: $rc-default-font-weight;
-        margin-bottom: 0;
+        margin: 0;
       }
-      span { font-size: 16px; }
     }
     .rc-brand-logo {
       height: 64px;
       display: block;
+      margin-bottom: 24px;
     }
   }
-
   form {
     border-radius: 2px;
     background-color: white;
-    margin: 0 0 2rem;
+    margin: 1rem 0 2rem;
     .mat-form-field { line-height: 1.4; }
     input { font-size: 24px; }
     button {
       height: 56px;
-      font-size: 16px;
+      font-size: mat-font-size($config, body-1);
     }
     .terms {
       font-size: 16px;
       margin: 0 0 1rem;
     }
+  }
+}
+
+.mat-toolbar {
+  background-color: $rc-theme-primary;
+  color: white;
+  .rc-toolbar-actions {
+    .mat-icon {
+      font-size: 28px;
+      width: 29px;
+      height: 29px;
+      line-height: 28px !important;
+    }
+  }
+  &.rc-toolbar-nav {
+    background-color: $rc-theme-accent;
+  }
+  &.rc-toolbar-section {
+    background-color: $rc-theme-secondary;
+    color: black;
+    text-transform: uppercase;
+  }
+  &.rc-toolbar-fixed {
+    position: fixed;
+    top: 0; left: 0;
+    z-index: 100;
+  }
+}
+.rc-section-toolbar {
+  background-color: $rc-theme-black;
+  color: white;
+  height:56px;
+  font-weight: $rc-default-font-weight;
+  &.mat-toolbar { min-height: $rc-toolbar-height-std; }
+  .rc-section-toolbar-title { transition: all .3s ease-in-out;}
+  .rc-section-toolbar-actions {
+    display: flex;
+    flex-direction: row;
   }
 }
 
@@ -393,92 +338,187 @@ a.rc-btn-lg {
       margin: 0;
       padding: 24px;
     }
-
     .rc-main {
       display: block;
       margin: 0;
       padding: 0;
       height: auto;
       min-height: 0;
-      p {
-        display: none;
-      }
-      header {
-        display: none;
-      }
-      .rc-brand-logo {
-        height: 64px;
-      }
+      p { display: none; }
+      header { display: none; }
+      .rc-brand-logo { height: 64px; }
     }
   }
 }
 
-/*
-** SPW PREVIEW
-** ------------------------------
-*/
+/**
+* RC Cards
+* -------------------------------
+**/
 
-.rc-spw-preview {
-    border: 0;
-    padding: 0;
-    margin: 0;
-    width: 80vw;
-    height: 80vh;
-}
-.rc-section-profile { padding-top: 8px; }
-.rc-pad-r { margin-right: 8px;}
-.rc-section-toolbar {
-  background-color: $rc-theme-black;
-  color: white;
-  height:56px;
-  &.mat-toolbar { min-height: $rc-toolbar-height-std; }
-  .rc-toolbar-expand-icon { transition: all .3s ease-in-out; }
-  mat-toolbar-row { height: $rc-toolbar-height-std; }
-  .rc-section-toolbar-title { transition: all .3s ease-in-out; }
-  .rc-section-toolbar-actions {
-    display: flex;
-    flex-direction: row;
+.rc-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  .rc-card-help {
+    position: absolute;
+    top:16px; right: 16px;
+  }
+  .rc-card-img {
+    width: calc(100% + 32px);
+    margin: 0 0 0 -16px;
+    height: auto;
+    overflow: hidden;
   }
 }
-.rc-section-toolbar-fixed {
-  position: fixed;
+.rc-card-help {
+  position: absolute;
+  top: 16px; right: 16px;
   z-index: 10;
 }
-.rc-cms-toolbar {
-  $toolbar-height: 40px;
-  margin-top:8px;
-  background-color: $rc-theme-secondary;
-  height:$toolbar-height;
-  &.mat-toolbar { min-height: $toolbar-height; }
-  mat-toolbar-row { height: $toolbar-height; }
-  .mat-icon-button {
-    opacity: .75;
-    &:hover { opacity: 1; }
-    &:disabled { opacity: inherit; }
+.rc-image-card {
+  position: relative;
+  box-sizing: border-box;
+  background: white;
+  width: 100%;
+  transition: all .3s ease-out;
+  &:hover { @include mat-elevation(6); }
+  img {
+    width: 100%;
+    height: auto;
+    cursor: pointer;
   }
 
-  .mat-icon-button,
-  .mat-icon,
-  .mat-icon-button i {
-    //line-height: 32px;
+  .rc-card-actions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding:4px 12px 8px 12px;
   }
-  mat-icon {
-    font-size: 32px;
-    width: 32px;
-    height: 32px;
-
+}
+.rc-element-tag {
+  position: absolute;
+  z-index: 5;
+  top: 24px;
+  left: 24px;
+}
+.rc-online { background-color: $rc-theme-success !important; }
+.rc-action-left {
+  text-align: left;
+  float: left;
+}
+.rc-card-restaurant {
+  padding: 0 16px 16px;
+  .rc-card-restaurant-nav {
+    position: absolute;
+    bottom: 0;
+    width: calc(100%);
+    margin: 4px -16px;
+    display: flex;
   }
-  .rc-toolbar-title { text-transform: uppercase; }
+  .rc-card-img-wrapper {}
+  img {
+    width: calc(100% + 64px);
+    height: auto;
+    cursor: pointer;
+    &:focus {
+      outline: none;
+    }
+  }
+  .rc-card-restaurant-content {
+    cursor: pointer;
+    margin-bottom: 32px;
+    &:focus { outline: none; }
+    h2 { margin: 8px 0 0; }
+    span {
+      &:after { content: ', '; }
+    }
+  }
+  .rc-card-restaurant-actions {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 16px 4px 4px !important;
+  }
 }
 
-/*
-** CMS DASHBOARD
-** ------------------------------
-*/
+/**
+* RC Modals & Dialogs
+* -------------------------------
+**/
 
+.rc-dialog {
+  position: relative;
+  padding: 0;
+  max-width: 960px;
+
+  .mat-dialog-title {
+    font: 500 24px/36px $rc-default-font;
+  }
+
+  &.rc-dialog-med {
+    max-width: 600px;
+  }
+
+  &.rc-dialog-small {
+    max-width: 400px;
+  }
+}
+.rc-dialog-image-upload {
+  max-width: 400px;
+  label.image-select {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    //padding-top: 8px;
+    .image-select-label {
+      position: absolute;
+      bottom:0;
+      z-index: 10;
+      width: calc(100% - 16px);
+      background-color: rgba(0,0,0,.5);
+      color: white;
+      padding: 8px;
+      text-align: center;
+      font: 500 12px/16px $rc-default-font;
+    }
+  }
+  .image-container {
+    position: relative;
+    margin: 0 auto;
+    width: 100%;
+    overflow: hidden;
+    background: #eee;
+    img {
+      width: 100%;
+      height: auto;
+      vertical-align: middle;
+      text-align: center;
+    }
+  }
+}
+.rc-dialog-help {
+  .mat-dialog-content {
+    padding-top: 16px;
+  }
+}
+.rc-dialog-alert {
+  padding-bottom: 8px;
+  max-width: 480px;
+  h1 {
+    text-transform: uppercase;
+    padding: 0 0 8px;
+    border-bottom: 1px solid #212121;
+    font: 500 20px/24px $rc-default-font;
+  }
+  .mat-stroked-button {
+    border-color: $rc-theme-success;
+  }
+}
 .rc-dialog-member {
   position: relative;
-  max-width: 560px;
+  max-width: 800px !important;
   .mat-dialog-container { padding: 0; }
   .rc-close {
     position: absolute;
@@ -486,7 +526,240 @@ a.rc-btn-lg {
     z-index: 500;
   }
 }
+.rc-dialog-cms-image {
+  header { display: flex; }
+  .image-wrapper {
+    position: relative;
+    padding: 0 16px 16px;}
+  img {
+    width: 100%;
+    height: auto;
+  }
+}
+.rc-dialog-cms-image-upload {
+  label {
+    text-transform: capitalize;
+    font-size: 16px;
+  }
+  .image-wrapper {
+    height: 240px;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+  img {
+    height:100%;
+    width:100%;
+    object-fit: contain;
+  }
+}
+.rc-dialog-spw-preview {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  width: 80vw;
+  height: 80vh;
+}
 
+.rc-file-input-hide {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+.rc-file-input-wrapper {
+  display: flex;
+  justify-content: center;
+  margin:8px auto;
+}
+.rc-file-input-label {
+  cursor: pointer;
+  //background: $rc-theme-black;
+  color: $rc-theme-text;
+  display: flex;
+  line-height: 1.5;
+  padding: 8px 24px;
+  font-size: 24px;
+  border-radius: 6px;
+  border: 2px solid $rc-theme-grey;
+  transition: all .3s ease-out;
+  text-align: center;
+  text-transform: uppercase;
+  mat-icon { margin-right: 8px; }
+  &:hover {
+    border-color: $rc-theme-black;
+    color: $rc-theme-black;
+  }
+}
+
+.rc-card-vspacer { height: 16px; }
+.rc-card-vspacer-lg { height: 32px; }
+.rc-form-btns { text-align: center; }
+.rc-member { background-color: $rc-theme-success !important; }
+.rc-invited { background-color: $rc-theme-black !important; }
+.rc-prospect { background-color: $rc-theme-grey !important; }
+
+.rc-card-keystat {
+  display: block;
+  font-size: 60px;
+  color: $rc-theme-primary;
+  text-align: center;
+  line-height: 1;
+}
+.rc-card-label {
+  display: block;
+  text-transform: uppercase;
+  font-weight: $rc-default-font-weight;
+  letter-spacing: .1em;
+  font-size: 11px;
+  //color: $rc-theme-primary;
+}
+.rc-card-stat { mat-icon { margin-right: 16px; } }
+.rc-chart {
+  transition: height .3s ease-out;
+  width: 100%;
+  min-height: 200px;
+  text-align: center;
+  overflow: hidden;
+  rc-loader.loader-container { height: 100%; }
+}
+.rc-sub-chart {
+  width: 100%;
+  min-height: 160px;
+  text-align: center;
+}
+.rc-add-card {
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 100;
+}
+
+ul.rc-lookup-results {
+  margin: 0 0 0;
+  padding:0;
+  li {
+    list-style: none;
+    margin: 0;
+    a {
+      display: flex;
+      line-height: 48px;
+      padding:0 16px;
+      transition: all .3s ease-out;
+      color: $rc-theme-black;
+      text-decoration: none;
+      &:hover {
+        color: $rc-theme-primary;
+        background-color: #eee;
+        span:last-child { opacity: 1; }
+      }
+      span:last-child { opacity: 0; }
+    }
+  }
+}
+.mat-nav-list.rc-lookup {
+  font-size: 14px;
+  a {
+    position: relative;
+    padding: 4px 0;
+    mat-icon {
+      display: none;
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translate(0, -50%);
+    }
+    &:hover {
+      mat-icon { display: inline-block; }
+    }
+  }
+}
+.rc-lookup-request{
+  margin: 1rem 0 0;
+  padding: 16px;
+  background-color: #eee;
+  h2 { margin: 0 0 1rem; }
+}
+.rc-lookup-actions {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: flex-end;
+  button { margin-left: 4px; }
+}
+
+/**
+* CMS
+* -------------------------------
+**/
+.rc-cms {
+  padding-top: ($rc-toolbar-height-std);
+  .rc-cms-base {
+    dd { font-size: 24px; }
+  }
+  .rc-card { padding: 16px; }
+  dl { margin: 24px 0 0 0; }
+  dt {
+    text-transform: uppercase;
+    font-size: 12px;
+    color: $rc-theme-primary;
+    &:after { content: ":"; }
+  }
+  dd {
+    margin: 0 0 8px 0;
+    padding: 0 0 8px 0;
+    font-size: 18px;
+    a {
+      color: inherit;
+      &:hover { color: $rc-theme-primary; }
+    }
+  }
+  span { display: block; }
+  .rc-cms-info {
+    background: rgba($rc-theme-secondary, .25);
+    padding: 16px;
+    transition: all 300ms ease-in-out;
+    max-height: 1000px;
+    header {
+      display: flex;
+      h2 {
+        color: inherit;
+        font-size: 24px;
+        font-weight: $rc-default-font-weight;
+        padding: 0;
+        margin: 0;
+      }
+      .rc-cms-close {}
+    }
+    p {
+      margin:8px 0;
+      color: inherit;
+    }
+  }
+  .rc-cms-info-actions {
+    button { text-transform: uppercase; }
+  }
+}
+.rc-cms-card-nav {
+  position: absolute !important;
+  top: 20px;
+  right: 8px;
+}
+.rc-cms-social {
+  margin: 0;
+  padding: 0;
+  li {
+    margin: 8px 8px 0 0;
+    padding: 0;
+    display: inline-block;
+    img { width: 36px; }
+    a {
+      opacity: 0.8;
+      transition: opacity ease-in-out .3s;
+      &:hover { opacity: 1; }
+    }
+  }
+}
 .rc-counter {
   display: flex;
   justify-content: center;
@@ -503,7 +776,6 @@ a.rc-btn-lg {
   width:18px;
   height: 18px;
 }
-
 .rc-member-status {
   position: relative;
   p { margin: 16px auto 0; }
@@ -523,20 +795,22 @@ a.rc-btn-lg {
 }
 .rc-member-assc,
 .rc-member-full {
-  border-radius: 2px;
+  border-radius: 4px;
   border: 2px solid $rc-theme-secondary;
   .rc-benefits {
     .mat-list-item:nth-child(odd) { background: rgba($rc-theme-secondary, .25); }
     &.mat-list { padding-top: 0; }
   }
 }
-
 .rc-member-full {
   header {
     padding: 16px;
     display: flex;
     flex-direction: row;
-    h1 { margin: 8px; }
+    h1 {
+      font: 500 24px/24px $rc-default-font-weight;
+      margin: 8px;
+    }
     .mat-icon.assc-member {
       padding: 12px !important;
       color: white;
@@ -552,7 +826,6 @@ a.rc-btn-lg {
     font-size: 16px;
   }
 }
-
 .rc-member-profile {
   box-sizing: border-box;
   background: white;
@@ -579,24 +852,19 @@ a.rc-btn-lg {
     padding: 0;
   }
 }
-
-
 .rc-add-content {
-
+  margin-right:0;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   background: #fff;
-  @include mat-elevation(1);
   cursor: pointer;
   color: #999;
   padding: 48px;
   transition: all .3s ease-in-out;
-  &:hover {
-    @include mat-elevation(5);
-  }
-  mat-icon {
+  &:hover { @include mat-elevation(6); }
+  .mat-icon {
     height: 48px;
     width: 48px;
     font-size: 48px;
@@ -615,7 +883,9 @@ a.rc-btn-lg {
   position: relative;
   background: white;
   transition: all .3s ease-in-out;
-  @include mat-elevation(1);
+  &:hover {
+    @include mat-elevation(6);
+  }
   header {
     display: flex;
     margin:0;
@@ -660,397 +930,26 @@ button.rc-member-assc {
   z-index: 100;
   background-color: $rc-theme-success;
   color: white;
-  //border: 3px solid white;
 }
 button.rc-member-assc {
   background-color: $rc-theme-tertiary;
   color: white;
 }
 
-/*
-** RC CARDS
-** ------------------------------
-*/
-
-.rc-card {
-  position: relative;
-  box-sizing: border-box;
-  background: white;
-  padding: 12px;
-  width: 100%;
-  transition: all .3s ease-out;
-  @include mat-elevation(1);
-  mat-chip-list {
-    position: absolute;
-    top:8px;
-    right: 8px;
-  }
-  .rc-card-content {
-    h2 {
-      margin: 8px 0 0 0;
-      font-family: $rc-display-font;
-      line-height: 1;
-      text-transform: uppercase;
-      color: $rc-theme-black;
-      letter-spacing: -1px;
-      span {
-        display: block;
-        font-size: 11px;
-        letter-spacing: 0;
-      }
-    }
-    span {
-      font-size: 12px;
-      margin: 0;
-      text-transform: uppercase;
-    }
-  }
-
-  .rc-card-img {
-    position: relative;
-    float: left;
-    margin:0 8px 0 0;
-    .rc-user-verified {
-      position: absolute;
-      top: -4px;
-      left:-4px;
-      color: $rc-theme-primary;
-    }
-  }
-
-  .rc-card-actions {
-    display: flex;
-    flex-direction: row;
-    margin-top:8px;
-    padding-top:8px;
-    mat-chip-list {
-      position: relative;
-      padding-left: 8px;
-      display: inline-block;
-    }
-  }
-}
-.rc-card-help,
-.rc-card-membership {
-  position: absolute;
-  top: 16px; right: 16px;
-  z-index: 100;
-}
-.rc-card-membership { left: 16px; right: auto;}
-
-.rc-image-card {
-  position: relative;
-  box-sizing: border-box;
-  background: white;
-  width: 100%;
-  transition: all .3s ease-out;
-  @include mat-elevation(1);
-  .rc-img-wrapper {
-    width: 100%;
-    height: 200px;
-    overflow: hidden;
-    img {
-      width: 100%;
-      height: auto;
-      cursor: pointer;
-    }
-  }
-  .rc-card-actions {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding:4px 12px 8px 12px;
-  }
-}
-.rc-element-default {
-  position: absolute;
-  top: 16px;
-  left: 16px;
-}
-.rc-dialog-cms-image-wrap { position: relative; }
-.rc-dialog-cms-image {
-  header { display: flex; }
-  img {
-    width: 100%;
-    height: auto;
-  }
-}
-.rc-online { background-color: $rc-theme-success !important; }
-.rc-action-left {
-  text-align: left;
-  float: left;
-}
-.rc-card-over {
-  @include mat-elevation(8);
-
-  .rc-card-content h2 {
-    color: $rc-theme-primary;
-    transition: color .3s ease-out;
-  }
-}
-
-.rc-card-restaurant {
-
-  padding: 0 16px 16px;
-
-  .rc-card-restaurant-nav {
-    position: absolute;
-    bottom: 0;
-    width: calc(100%);
-    margin: 4px -16px;
-    display: flex;
-  }
-  .rc-card-img-wrapper {}
-  img {
-    width: calc(100% + 64px);
-    height: auto;
-    cursor: pointer;
-    &:focus {
-      outline: none;
-    }
-  }
-  .rc-card-restaurant-content {
-    cursor: pointer;
-    margin-bottom: 32px;
-    &:focus { outline: none; }
-    h2 { margin: 8px 0 0; }
-    span {
-      &:after { content: ', '; }
-    }
-  }
-  .rc-card-restaurant-actions {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    margin: 16px 4px 4px !important;
-  }
-}
-
-/*
-** MODAL/DIALOGS
-** ---------------------------------------------------------------
-*/
-
-.rc-dialog-profile,
-.rc-dialog-image {
-  mat-dialog-content { padding-top: 24px; }
-}
-
-.rc-dialog {
-  padding:0;
-  position: relative;
-  max-width: $rc-max-width;
-
-  &.rc-dialog-med { max-width: 480px; }
-
-  &.rc-dialog-small { max-width: 400px; }
-
-  .rc-fileSelect-label { cursor: pointer; }
-
-  .rc-dialog-img {
-    margin: 0 auto;
-    min-height: 240px;
-    max-width: 240px;
-    max-height: 360px;
-    background: #eee;
-    header { border: none; }
-    img {
-      width: 100%;
-      height: auto;
-      vertical-align: middle;
-    }
-  }
-
-  .rc-dialog-header { border-bottom: 1px solid $rc-theme-black; }
-
-  header[mat-dialog-title] {
-    display: flex;
-    padding-bottom: 8px;
-    border-bottom: 1px dotted $rc-theme-black;
-    margin-bottom: 0;
-    mat-icon {
-      font-size: 24px;
-      line-height: 1.5;
-      margin-left: 8px;
-    }
-    h1 {
-      font-size: 24px;
-      margin: 0;
-    }
-  }
-
-  mat-dialog-actions {
-    margin-top: 16px;
-    padding-top: 8px;
-    button { margin-left: 8px; }
-  }
-
-  .mdc-layout-grid { max-width: 800px; }
-  .rc-member-badge {
-    position: absolute;
-    top: 0;
-    right: 0;
-    z-index: 10;
-  }
-  .rc-form-group {
-    padding: 8px 0;
-    border-bottom: 1px solid #ddd ;
-    mat-radio-button, mat-checkbox { margin-right: 16px; }
-  }
-  mat-tab-body { padding-top: 1em; }
-  .mat-input-element:disabled {
-    color: inherit;
-    opacity: .6;
-  }
-  div[mat-dialog-actions] {
-    button { margin-left: 8px; }
-  }
-  .rc-file {
-    width: 0.1px;
-    height: 0.1px;
-    opacity: 0;
-    overflow: hidden;
-    position: absolute;
-    z-index: -1;
-  }
-  .rc-img-loader { cursor: pointer; }
-}
-
-.rc-dialog-cms {
-  width: 84vw;
-  height: 84vh;
-}
-
-.rc-dialog-alert {
-  padding-bottom: 16px;
-  max-width: 480px;
-  h1 {
-    text-transform: uppercase;
-    padding-bottom: 8px;
-    border-bottom: 1px solid #212121;
-  }
-}
-
-.rc-card-vspacer { height: 16px; }
-.rc-card-vspacer-lg { height: 32px; }
-.rc-form-btns { text-align: center; }
-.rc-member { background-color: $rc-theme-success !important; }
-.rc-invited { background-color: $rc-theme-black !important; }
-.rc-prospect { background-color: $rc-theme-grey !important; }
-.rc-card-keystat {
-  display: block;
-  font-size: 60px;
-  color: $rc-theme-primary;
-  text-align: center;
-  line-height: 1;
-}
-.rc-card-label {
-  display: block;
-  text-transform: uppercase;
-  font-weight: $rc-default-font-weight;
-  letter-spacing: .1em;
-  font-size: 11px;
-  //color: $rc-theme-primary;
-}
-.rc-card-stat { mat-icon { margin-right: 16px; } }
-.rc-chart {
-  transition: height .3s ease-out;
-  width: 100%;
-  min-height: 200px;
-  text-align: center;
-  overflow: hidden;
-  rc-loader.loader-container { height: 100%; }
-}
-.rc-sub-chart {
-  width: 100%;
-  min-height: 160px;
-  text-align: center;
-}
-.rc-add-card {
-  position: absolute;
-  right: 0;
-  top: 0;
-  z-index: 100;
-}
-
-/*
-* Restaurant Look-Up
-* ------------------
-*/
-ul.rc-lookup-results {
-  margin: 0 0 0;
-  padding:0;
-  li {
-    list-style: none;
-    margin: 0;
-    a {
-      display: flex;
-      line-height: 48px;
-      padding:0 16px;
-      transition: all .3s ease-out;
-      color: $rc-theme-black;
-      text-decoration: none;
-      &:hover {
-        color: $rc-theme-primary;
-        background-color: #eee;
-        span:last-child { opacity: 1; }
-      }
-      span:last-child { opacity: 0; }
-    }
-  }
-}
-
-.mat-nav-list.rc-lookup {
-  font-size: 14px;
-  a {
-    position: relative;
-    padding: 4px 0;
-    mat-icon {
-      display: none;
-      position: absolute;
-      right: 16px;
-      top: 50%;
-      transform: translate(0, -50%);
-    }
-    &:hover {
-      mat-icon { display: inline-block; }
-    }
-  }
-}
-
-.rc-lookup-request{
-  margin: 1rem 0 0;
-  padding: 16px;
-  background-color: #eee;
-  h2 { margin: 0 0 1rem; }
-}
-.rc-lookup-actions {
-  margin-top: 1rem;
-  display: flex;
-  justify-content: flex-end;
-  button { margin-left: 4px; }
-}
-
-/*
-** CMS Dashboard
-** ------------------------------------------------
-*/
-
 .rc-cms-dash-info {
   transition: all .3s ease-out;
-
   .mat-card-title {
     margin-bottom: 8px;
     font-size: 16px;
   }
   .mat-card-content { margin-bottom: 8px; }
 }
-
 .rc-content-status {
-
   padding-bottom: 24px;
+
   mat-list-item {
     cursor: pointer;
+    .mat-list-item-content { padding: 4px 0 !important;}
     h3 { transition: color .3s ease; }
     &:hover {
       h3 { color: $rc-theme-primary; }
@@ -1069,14 +968,12 @@ ul.rc-lookup-results {
       &:after { background-color: $rc-theme-success; }
     }
   }
-
   .rc-content-status-partial {
     mat-icon { background-color: $rc-theme-tertiary; }
     .mat-progress-bar-fill {
       &:after { background-color:  $rc-theme-tertiary; }
     }
   }
-
   .rc-content-status-missing {
     mat-icon { background-color: black; }
     .mat-progress-bar-fill {
@@ -1103,92 +1000,9 @@ ul.rc-lookup-results {
   }
 }
 
-.rc-cms {
-
-  padding-top: 48px;
-  .rc-cms-base {
-    dd { font-size: 24px; }
-  }
-  .rc-card { padding: 16px; }
-
-  dl { margin: 24px 0 0 0; }
-  dt {
-    text-transform: uppercase;
-    font-size: 12px;
-    color: $rc-theme-primary;
-    &:after { content: ":"; }
-  }
-  dd {
-    margin: 0 0 8px 0;
-    padding: 0 0 8px 0;
-    font-size: 18px;
-    a {
-      color: inherit;
-      &:hover { color: $rc-theme-primary; }
-    }
-  }
-  span { display: block; }
-  .rc-cms-info {
-    background: rgba($rc-theme-secondary, .25);
-    padding: 16px;
-    transition: all 300ms ease-in-out;
-    max-height: 1000px;
-    header {
-      display: flex;
-      h2 {
-        color: inherit;
-        font-size: 24px;
-        font-weight: $rc-default-font-weight;
-        padding: 0;
-        margin: 0;
-      }
-      .rc-cms-close {}
-    }
-    p {
-      margin:8px 0;
-      color: inherit;
-    }
-  }
-  .rc-cms-info-actions {
-    button { text-transform: uppercase; }
-  }
-}
-
-.rc-cms-card-nav {
-  position: absolute !important;
-  top: 20px;
-  right: 8px;
-}
-.rc-cms-card-save {
-  position: absolute !important;
-  top: 16px;
-  right: 8px;
-}
-
-.rc-cms-social {
-  margin: 0;
-  padding: 0;
-  li {
-    margin: 8px 8px 0 0;
-    padding: 0;
-    display: inline-block;
-    img { width: 36px; }
-    a {
-      opacity: 0.8;
-      transition: opacity ease-in-out .3s;
-      &:hover { opacity: 1; }
-    }
-  }
-}
-
-/*
-** CMS Opening Times
-** ---------------------------------
-*/
-
 .rc-cms-times {
   .mat-checkbox-label {
-    font-size: 24px;
+    font-size: 16px;
     color: $rc-theme-black;
   }
   .rc-day-closed {
@@ -1208,75 +1022,90 @@ ul.rc-lookup-results {
   }
 }
 
-/*
-** CMS menu/Image upload
-** ------------------------------------------------
-*/
-
-.rc-dialog-cms-image-upload {
-  header[mat-dialog-title] { margin-bottom: 16px; }
-  label {
-    text-transform: capitalize;
-    font-size: 16px;
-  }
-  .rc-img-wrapper {
-    height: 240px;
-    max-width: 320px;
-    margin: 0 auto;
-  }
-  img {
-    height:100%;
-    width:100%;
-    object-fit: contain;
-  }
+// CMS Menus
+.rc-content-panel {
+  padding: 16px;
+  background-color: white;
 }
-.rc-fileinput-hide {
-  width: 0.1px;
-  height: 0.1px;
-  opacity: 0;
-  overflow: hidden;
-  position: absolute;
-  z-index: -1;
-}
-.rc-fileinput-wrapper {
-  display: flex;
-  justify-content: center;
-  margin:8px auto;
-}
-.rc-fileinput-label {
-  cursor: pointer;
-  //background: $rc-theme-black;
-  color: $rc-theme-text;
-  display: flex;
-  line-height: 1.5;
-  padding: 8px 24px;
-  font-size: 24px;
-  border-radius: 6px;
-  border: 2px solid $rc-theme-grey;
-  transition: all .3s ease-out;
-  text-align: center;
-  text-transform: uppercase;
-  mat-icon { margin-right: 8px; }
-  &:hover {
-    border-color: $rc-theme-black;
-    color: $rc-theme-black;
-  }
-}
-
-/*
-** CMS Menus
-** ---------------------------------
-*/
-
-.rc-card.rc-dish {
-  cursor: pointer;
-  h2 {
-    font-size: 12px;
+.rc-cms-menu-info {}
+.rc-cms-menu-section {
+  padding: 16px 16px 24px;
+  background-color: $rc-theme-grey;
+  margin-bottom: 16px;
+  input.mat-input-element {
+    font-size: 20px;
+    color: black;
     text-transform: uppercase;
-    font-weight: $rc-default-font-weight;
+  }
+
+}
+
+.rc-cms-menu-download {
+
+
+
+  padding: 16px !important;
+  transition: all .3s ease-out;
+  &:hover { @include mat-elevation(6); }
+  h2 {
+    margin: 0 auto 0 0;
+    padding: 0;
+    font: 400 16px/24px $rc-default-font;
+    text-transform: uppercase;
+    line-height: 1.25;
+    color: black;
+  }
+  p {
+    font-size: .9rem;
+    line-height: 1.25;
+    color: $rc-theme-text;
+    padding-top: .2rem;
+  }
+  .rc-card-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 0;
+    .mat-checkbox {
+      // adjusty positioning to align with button
+      margin: 0 14px 0 0;
+    }
+  }
+
+}
+.rc-cms-menu-download,
+.rc-cms-menu-dish {
+  background-color: white;
+  cursor: pointer;
+  margin: 0 16px 16px 0;
+  padding: 16px !important;
+
+  transition: all .3s ease-out;
+}
+.rc-cms-menu-dish {
+
+
+  h3 {
+    display: inline;
+    span {
+      display: inline;
+      margin-left: 4px;
+    }
+  }
+  &:hover {
+    @include mat-elevation(6);
+    h3 {
+      color: $rc-theme-primary;
+    }
+  }
+  h2 {
+    font-size: .7rem;
+    font-weight: 500;
+    text-transform: uppercase;
     margin: 0 0 8px;
     padding: 0 0 4px;
     letter-spacing: 1px;
+    color: $rc-theme-text;
   }
   .rc-card-actions {
     display: flex;
@@ -1285,17 +1114,6 @@ ul.rc-lookup-results {
     margin-top: 0;
   }
 }
-
-mat-toolbar.cms-menu-section {
-  min-height: 40px;
-  background-color: transparent;
-  font-size: 18px;
-  margin: 16px 0;
-  //mat-form-field { width: 300px; }
-  input { text-transform: uppercase; }
-}
-.rc-blue {color: #2d7dff;}
-.rc-green {color: #B0B440;}
 .rc-dish-content {
   display: flex;
   width: 100%;
@@ -1308,7 +1126,7 @@ mat-toolbar.cms-menu-section {
     font-size: 1rem;
     line-height: 1.25;
     flex: 70%;
-    color: inherit;
+    color: black;
   }
   // menu item price
   span:nth-child(2) {
@@ -1319,32 +1137,22 @@ mat-toolbar.cms-menu-section {
     flex: 30%;
     align-content: start;
     text-align: right;
-    color: inherit;
+    color: black;
 
   }
   // menu item desc
   span:nth-child(3) {
-    font-size: .8rem;
+    font-size: .9rem;
+    line-height: 1.25;
     flex: 100%;
     color: $rc-theme-text;
     padding-top: .2rem;
     text-transform: none;
   }
 }
-/*
-** CMS Reservations
-** ------------------------------------------------
-*/
-.rc-cms-res {}
-.rc-cms-res-online {}
 
-/*
-** CMS Affiliates
-** ------------------------------------------------
-*/
 .rc-affiliate-offer-card {
   position: relative;
-
   .mat-card-actions {
     position: absolute;
     display: flex;
@@ -1358,9 +1166,7 @@ mat-toolbar.cms-menu-section {
     font-size: 36px;
     line-height: 1;
   }
-
   p { margin: 4px 0; }
-
   dl {
     padding-bottom: 48px;
     dt { color: $rc-theme-black; }
@@ -1410,7 +1216,6 @@ mat-toolbar.cms-menu-section {
       margin-top: 0 !important;
     }
   }
-
   header {
     margin-top: 24px;
     padding: 24px 0 12px;
@@ -1422,7 +1227,6 @@ mat-toolbar.cms-menu-section {
     .mat-button-toggle-group,
     .mat-button-toggle-standalone { box-shadow: none; }
   }
-
   section {
     background: #fff;
     margin-top: 24px;
@@ -1443,7 +1247,6 @@ mat-toolbar.cms-menu-section {
   }
   .mdc-layout-grid { max-width: 640px; }
 }
-
 .rc-fs-graph-toolbar {
   background-color: white;
   padding-left: 0;
@@ -1451,7 +1254,6 @@ mat-toolbar.cms-menu-section {
   .mat-button-toggle-group,
   .mat-button-toggle-standalone { box-shadow: none; }
 }
-
 .rc-fs-graphlet {
   cursor: pointer;
   transition: all .3s ease-out;

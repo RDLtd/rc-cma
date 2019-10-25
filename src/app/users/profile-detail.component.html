@@ -1,31 +1,11 @@
-<div class="rc-dialog rc-dialog-profile rc-dialog-med">
+<div class="rc-dialog rc-dialog-med">
+
+  <h1 mat-dialog-title>{{ 'Profile-Detail.UpdateProfile' | translate }}</h1>
 
   <form #formProfile="ngForm" (ngSubmit)="formProfile.valid && onProfileUpdate(formProfile.value)">
-
-    <header mat-dialog-title>
-      <h1>{{ 'Profile-Detail.UpdateProfile' | translate }}</h1>
-      <span class="rc-space-filler"></span>
-      <mat-icon
-        class="rc-member-badge"
-        *ngIf="member.member_membership_type==='Founder'"
-        color="primary">
-        star
-      </mat-icon>
-      <mat-icon
-        class="rc-member-badge"
-        *ngIf="member.member_authenticated"
-        color="primary">
-        verified_user
-      </mat-icon>
-
-    </header>
-
     <mat-dialog-content>
-
       <section #sectionContacts>
-
         <div>
-
           <mat-form-field floatPlaceholder="always" class="rc-full-width">
             <input
               name="member_fullname"
@@ -34,10 +14,8 @@
               [(ngModel)]="member_full_name"
               required>
             <mat-hint align="end">{{ 'Profile-Detail.Names' | translate }}</mat-hint>
-
             <mat-error align="end">{{ 'Profile-Detail.Required' | translate }}</mat-error>
           </mat-form-field>
-
 
           <mat-form-field floatPlaceholder="always" class="rc-full-width">
             <input
@@ -68,8 +46,7 @@
               placeholder="{{ 'Profile-Detail.Group' | translate }}"
               matInput
               ngModel
-              [(ngModel)]="member.member_restaurant_group"
-              required>
+              [(ngModel)]="member.member_restaurant_group">
             <mat-hint align="end">{{ 'Profile-Detail.Company' | translate }}</mat-hint>
             <mat-error align="end">{{ 'Profile-Detail.Required' | translate }}</mat-error>
           </mat-form-field>
@@ -78,7 +55,7 @@
             <input
               name="member_telephone"
               type="text"
-              placeholder="{{ 'Profile-Detail.Mobile' | translate }}r"
+              placeholder="{{ 'Profile-Detail.Mobile' | translate }}"
               matInput
               #tel="ngModel"
               [(ngModel)]="member.member_telephone"
@@ -104,7 +81,7 @@
       </button>
 
       <button
-        mat-raised-button
+        mat-flat-button
         color="primary"
         [disabled]="isSubmitting || !formProfile.form.valid">
         {{ 'Profile-Detail.Update' | translate }}

@@ -1,18 +1,8 @@
 
-<mat-toolbar
-  color="primary"
-  class="rc-nav-global mdc-toolbar--fixed">
-  <button
-    *ngIf="authService.isAuthLevel(4)"
-    mat-icon-button
-    (click)="rcNavToggle()" >
-    <mat-icon>menu</mat-icon>
-  </button>
+<mat-toolbar class="rc-toolbar rc-toolbar-fixed">
 
-  <span class="rc-section-toolbar-title">{{ company_name }}</span>
-
+  <span>{{ company_name }}</span>
   <span class="rc-space-filler"></span>
-
   <span
     *ngIf="!authService.isAuth(); else loggedIn"
     (click)="login()"
@@ -30,18 +20,9 @@
   <button
     [matMenuTriggerFor]="menu"
     mat-icon-button>
-    <mat-icon>arrow_drop_down</mat-icon>
+    <mat-icon>menu</mat-icon>
   </button>
   </ng-template>
-
-
-
-  <!--<button-->
-    <!--*ngIf="!authService.isAuth()"-->
-    <!--mat-icon-button-->
-    <!--(click)="login()" >-->
-    <!--<mat-icon>account_circle</mat-icon>-->
-  <!--</button>-->
 
   <mat-menu #menu="matMenu">
     <button
@@ -49,7 +30,7 @@
       *ngIf="authService.isAuthLevel(1)"
       [routerLink]="['/profile']">
       <mat-icon>account_circle</mat-icon>
-      <span>User Settings</span>
+      <span>{{ 'Header.Settings' | translate }}</span>
     </button>
     <mat-divider></mat-divider>
     <button
@@ -57,14 +38,14 @@
       *ngIf="authService.isAuth()"
       (click)="logout()">
       <mat-icon>exit_to_app</mat-icon>
-      <span>Logout</span>
+      <span>{{ 'Header.Logout' | translate }}</span>
     </button>
     <mat-divider></mat-divider>
     <button
       mat-menu-item
       (click)="about()" >
       <mat-icon>help</mat-icon>
-      <span>About RD.CMS</span>
+      <span>{{ 'Header.About' | translate }}</span>
     </button>
   </mat-menu>
 

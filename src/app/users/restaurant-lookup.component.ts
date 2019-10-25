@@ -39,17 +39,15 @@ export class RestaurantLookupComponent implements OnInit {
       .subscribe(data => this.t_data = data);
     this.GetCountry().subscribe(
       data => {
-        // console.log(data);
-        // console.log('You are in ' + data.country);
-        //
+        // console.log('You are in ' + data['country']);
         // expect GB for United Kingdom, FR for France, DE for Germany, ZA for South Africa
-        switch (data.country) {
+        switch (data['country']) {
           case 'FR': {
             this.country = 'FR';
             break;
           }
           case 'ZA': {
-            this.country = 'UK';
+            this.country = 'FR';
             break;
           }
           default: {
@@ -63,7 +61,8 @@ export class RestaurantLookupComponent implements OnInit {
   }
 
   GetCountry () {
-    return this.http.get('https://ipinfo.io').pipe(map((res: any) => res.json()));
+    // return this.http.get('https://ipinfo.io').pipe(map((res: any) => res.json()));
+    return this.http.get('https://ipinfo.io?token=b3a0582a14c7a4');
   }
 
   findRestaurants(str) {
@@ -156,7 +155,7 @@ export class RestaurantLookupComponent implements OnInit {
     });
   }
 
-  showRequestForm(searchInput){
+  showRequestForm(searchInput) {
     // reset search field
     searchInput.value = '';
     // reset results list

@@ -2,7 +2,7 @@
 <div class="rc-dialog rc-dialog-cms-image">
 
   <header>
-    <h1 mat-dialog-title>{{ image.cms_element_title }}: {{ image.cms_element_caption }}</h1>
+    <h1 mat-dialog-title>{{ image.cms_element_title | uppercase }}</h1>
     <span class="rc-space-filler"></span>
     <button
       mat-icon-button
@@ -29,16 +29,20 @@
       <span>{{ 'CMS-Image-Dialog.Default' | translate }}</span>
     </button>
 
+    <a [href]="image.cms_element_image_path" target="_blank" mat-menu-item>
+      <mat-icon>cloud_download</mat-icon>
+      <span>{{ 'CMS-Image-Dialog.Download' | translate }}</span>
+    </a>
+
+
   </mat-menu>
 
-  <mat-dialog-content>
-    <div class="rc-dialog-cms-image-wrap">
-    <mat-chip-list class="rc-element-default">
+  <mat-dialog-content class="image-wrapper">
+    <mat-chip-list class="rc-element-tag">
       <mat-chip selected="true" *ngIf="image.cms_element_default">{{ 'CMS-Image-Dialog.DefaultTag' | translate }}</mat-chip>
       <mat-chip selected="true" class="rc-online" *ngIf="image.cms_element_active">{{ 'CMS-Image-Dialog.Available' | translate }}</mat-chip>
       <mat-chip selected="false" *ngIf="!image.cms_element_active">{{ 'CMS-Image-Dialog.Offline' | translate }}</mat-chip>
     </mat-chip-list>
     <img [src]="image.cms_element_image_path">
-    </div>
   </mat-dialog-content>
 </div>

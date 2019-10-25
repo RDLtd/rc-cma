@@ -15,7 +15,7 @@ règles spéciales?
 ## Salle à manger privée
 
 Votre restaurant dispose-t-il d'une salle de réception privée et/ou peut-il 
-être privatisé pour une fête ou une réception? Qui contacter? Quels sont les contacts détails? 
+être privatisé pour une fête ou une réception? Qui contacter?
 
  
 

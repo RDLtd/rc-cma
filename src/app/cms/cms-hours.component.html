@@ -1,10 +1,10 @@
 <div class="mdc-layout-grid rc-cms-times">
 
   <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
-    <mat-toolbar class="rc-cms-toolbar">
-      <span class="rc-toolbar-title">{{ 'CMS-Hours.OpeningTimes' | translate }}</span>
+    <mat-toolbar class="rc-toolbar rc-toolbar-section">
+      <span>{{ 'CMS-Hours.OpeningTimes' | translate }}</span>
       <span class="rc-space-filler"></span>
-      <span class="rc-section-toolbar-actions">
+      <span class="rc-toolbar-actions">
 
         <button
           mat-icon-button
@@ -53,7 +53,7 @@
   </mat-card>
 
   <mat-card
-    class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-12-phone"
+    class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3 mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-12-phone"
     *ngFor="let cmstime of openingTimes; let i = index">
 
       <mat-card-title>

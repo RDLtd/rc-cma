@@ -326,7 +326,8 @@
     "NeedMoreContent": "NOUS AVONS BESOIN D’UN PEU PLUS DE CONTENU",
     "NotPublished": "Les dernières modifications effectuées n'ont pas encore été publiées. Veuillez cliquer sur ",
     "Preview": "APERÇU",
-    "IfCorrect": " afin de vérifier le contenu de votre Page Internet. Si vous validez les informations qui figurent sur votre page Internet, sélectionnez PUBLIER afin d’activer la synchronisation sur tous les Sites abonnés aux Restaurateurs Indépendants.",
+    "IfCorrect": " afin de vérifier le contenu de votre Page Internet. Si vous validez les informations qui figurent sur votre page Internet, sélectionnez",
+    "Sync": " afin d’activer la synchronisation sur tous les Sites abonnés aux Restaurateurs Indépendants.",
     "GoodWork": "Bon travail! Cependant nous avons besoin de davantage d'informations afin de générer la page Internet de votre Site. Le résumé ci-dessous indique quelles sections ont besoin de contenu supplémentaire. Une fois que vous aurez ajouté suffisamment de données, le",
     "And": "et",
     "Publish": "PUBLIER",
@@ -348,7 +349,7 @@
     "CoreData": "CŒUR DES DONNÉES",
     "OpeningHours": "HORAIRES D'OUVERTURE",
     "Descriptions": "DESCRIPTIONS ET CARACTÉRISTIQUES",
-    "ActiveImagesCaps": "PHOTGRAPHIES ACTIVES",
+    "ActiveImagesCaps": "PHOTOGRAPHIES ACTIVES",
     "ActiveMenus": "MENUS ACTIFS",
     "OnlineBookings": "RÉSERVATIONS",
     "LocInfo": "INFORMATION DE LOCALISATION",
@@ -434,18 +435,21 @@
     "Team": "Equipe",
     "Choose": "Choisir ",
     "ToUpload": " à télécharger",
-    "New": "une Nouveau ",
+    "New": "une Nouvelle ",
     "Upload": " Téléchargez",
     "MenuName": "Nom du menu",
     "MenuCaption": "Légende du menu",
     "ImageCat": "Catégorie",
     "ImageTitle": "Titre",
-    "Default": "Faites-en mon photographie par défaut",
+    "Default": "Faites-en ma photographie par défaut",
     "CancelCap": "ANNULER",
     "UploadCap": "TÉLÉCHARGER MAINTENANT",
-    "Image": "photographie",
-    "Menu": "menu",
-    "Directions": "fichier sur les directions"
+    "Image": "la photographie",
+    "Menu": "le menu",
+    "Directions": "le fichier sur les Directions",
+    "NewImage": "Téléchargez une Nouvelle Image",
+    "NewMenu": "Téléchargez un Nouveau Menu",
+    "NewDirection": "Téléchargez un document sur les Directions"
   },
 
   "CMS-Hours": {
@@ -466,7 +470,7 @@
   "CMS-Image-Dialog": {
     "Deactivate": "Désactiver",
     "Activate": "Activer",
-    "Default": "Faites ceci mon défaut",
+    "Default": "Photo par défaut",
     "DefaultTag": "Défaut",
     "Available": "Disponible",
     "Offline": "Hors Ligne",
@@ -567,7 +571,9 @@
     "NoCancel": "Non, annuler",
     "Deleted": " Supprimé",
     "AddMenu": "AJOUTER UN MENU",
-    "On": "le"
+    "On": "le",
+    "VGF": "Ajoutez une sélection de vos plats les plus populaires. Nous vous recommandons de choisir parmi une gamme de prix et de plats qui reflètent au mieux votre style de cuisine. Vous pouvez signaler les plats ![Végétarien](../assets/images/icons/vegetarian.svg) **Végétarien** ou ![Sans gluten](../assets/images/icons/gluten-free.svg) **Sans gluten** quand vous les ajoutez.",
+    "SectionHint": "Antipasti, entrées, plats, etc."
   },
 
   "CMS-Reservations": {
@@ -879,8 +885,8 @@
     "BenchmarkingAssociated": "Pour faire une analyse comparative, vous devez avoir au moins un restaurant associé!",
     "NoFinancial": "Aucun de vos restaurants associés n'a de données financières enregistrées!",
     "Compare": " Afin de comparer votre restaurant avec d'autres, vous devez fournir des données appropriées.",
-    "IsAssociate": "est Membre associé des ",
-    "IsFull": "est Membre à part entière des "
+    "IsAssociate": "est Membre Associé des ",
+    "IsFull": "est Membre à part Entière des "
   },
 
   "Profile-Image": {
@@ -890,7 +896,8 @@
     "Delete": "EFFACER",
     "Update": "METTRE À JOUR",
     "ImageUpdated": "l’image de votre profil a été mise à jour",
-    "ImageDeleted": "Image du profil supprimée"
+    "ImageDeleted": "Image du profil supprimée",
+    "ProfileImage": "Image du Profil"
   },
 
   "Profile-Verify": {
@@ -991,7 +998,7 @@
     "FreeSPW": "PAGE INTERNET OPTIMISÉE GRATUITE",
     "Web": "Inclut l'hébergement par les Restaurateurs Indépendants gratuit",
     "AffiliateServices": "ACCÈS PRIVILÉGIÉ AUX APPLICATIONS AFFILIÉS",
-    "Reservations": "Gestion des réservations, EPOS, analyse comparative, HACCP, etc.",
+    "Reservations": "Gestion des réservations, EPOS, HACCP, analyse comparative, etc.",
     "Exclusive": "REMISES EXCLUSIVES",
     "F&B": "Fournisseurs de nourriture et de boissons, frais de réservation, etc.",
     "FullOf": "*Statut de Membre à part entière des",
@@ -1010,7 +1017,9 @@
     "UpgradeLower": "Passer au statut de membre à part entière (",
     "Tax": "+ TVA 20%)",
     "Success": "Votre paiement a été effectué avec succès, vous recevrez une facture par email.",
-    "Error": "Une erreur s'est produite lors de l'envoi de votre paiement pour traitement."
+    "Error": "Une erreur s'est produite lors de l'envoi de votre paiement pour traitement.",
+    "Membership": "Adhésion",
+    "TaxNoBracket": "+ TVA 20%"
   },
 
   "Agent": {
@@ -1111,7 +1120,7 @@
   },
 
   "Messages": {
-    "DontShow": "NE ME MONTRE PAS CECI ENCORE"
+    "DontShow": "NE PLUS ME MONTRER CE MESSAGE"
   }
 
 }

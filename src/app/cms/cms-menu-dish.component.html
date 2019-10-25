@@ -1,9 +1,13 @@
-<h1 *ngIf="data.mode === 'add'" class="mat-dialog-title">{{ 'CMS-Menu-Dish.AddDish' | translate }}</h1>
+<h1
+  *ngIf="data.mode === 'add'"
+  class="mat-dialog-title">
+  {{ 'CMS-Menu-Dish.AddDish' | translate }}
+</h1>
 
 <form #formDish="ngForm">
 
   <section>
-    <mat-form-field>
+    <mat-form-field class="rc-full-width">
       <mat-select
         [ngModel]="data.dish.cms_dish_section_id"
         name="cms_dish_section_id"
@@ -28,7 +32,7 @@
         required>
     </mat-form-field>
 
-    <mat-form-field  style="flex: 1;">
+    <mat-form-field  style="width: 30%; flex: 1;">
       <span matPrefix>{{ data.currencySymbol }} &nbsp;</span>
       <input
         name="cms_dish_price"
@@ -40,24 +44,29 @@
   </div>
 
   <mat-form-field class="rc-full-width">
-    <textarea matInput
-              name="cms_dish_desc"
-              placeholder="{{ 'CMS-Menu-Dish.OptDesc' | translate }}"
-              [ngModel]="data.dish.cms_dish_desc"></textarea>
+    <textarea
+      matInput
+      name="cms_dish_desc"
+      placeholder="{{ 'CMS-Menu-Dish.OptDesc' | translate }}"
+      [ngModel]="data.dish.cms_dish_desc"></textarea>
   </mat-form-field>
 
   <section style="display: flex; flex-direction: column">
-    <mat-checkbox name="cms_dish_vegetarian"
-                  [ngModel]="data.dish.cms_dish_vegetarian">
-                  {{ 'CMS-Menu-Dish.Vegetarian' | translate }}
+    <mat-checkbox
+      name="cms_dish_vegetarian"
+      [ngModel]="data.dish.cms_dish_vegetarian">
+      {{ 'CMS-Menu-Dish.Vegetarian' | translate }}
     </mat-checkbox>
-    <mat-checkbox name="cms_dish_glutenfree"
-                  [ngModel]="data.dish.cms_dish_glutenfree">
-                  {{ 'CMS-Menu-Dish.GlutenFree' | translate }}
+    <mat-checkbox
+      name="cms_dish_glutenfree"
+      [ngModel]="data.dish.cms_dish_glutenfree">
+      {{ 'CMS-Menu-Dish.GlutenFree' | translate }}
     </mat-checkbox>
   </section>
 
-  <mat-dialog-actions *ngIf="data.mode === 'edit'" align="end">
+  <mat-dialog-actions
+    *ngIf="data.mode === 'edit'"
+    align="end">
     <button
       type="button"
       mat-button

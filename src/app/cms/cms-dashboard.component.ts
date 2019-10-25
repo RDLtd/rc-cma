@@ -1,16 +1,29 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { CmsLocalService } from './cms-local.service';
-import { Restaurant, CMSDescription, Member } from '../_models';
-import { AuthenticationService, CMSService, HelpService, MemberService, RestaurantService } from '../_services';
+import {
+  Restaurant,
+  CMSDescription,
+  Member
+} from '../_models';
+import {
+  AuthenticationService,
+  CMSService,
+  HelpService,
+  MemberService,
+  RestaurantService,
+  AnalyticsService
+} from '../_services';
 import { MatDialog } from '@angular/material';
 import { CmsPreviewComponent } from './cms-preview.component';
 import { Router } from '@angular/router';
-import { RestaurantDetailComponent } from '../restaurants/restaurant-detail.component';
+import { RestaurantDetailComponent } from '../restaurants';
 import { NgForm } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
-import { PaymentComponent } from '../common/payment/payment.component';
-import { AnalyticsService } from '../_services/analytics.service';
-import { MessageComponent } from '../common/messages/message.component';
+import {
+  PaymentComponent,
+  MessageComponent
+} from '../common';
+
 
 @Component({
   selector: 'app-cms-dashboard',
@@ -95,7 +108,12 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
     private restaurantService: RestaurantService,
     private memberService: MemberService,
     private authService: AuthenticationService
-  ) { }
+  ) {
+    // detect language changes... need to check for change in texts
+    translate.onLangChange.subscribe(lang => {
+      this.translate.get('CMS-Dashboard').subscribe(data => {this.t_data = data; });
+    });
+  }
 
   ngAfterViewInit(): void {
     this.dspUnreadMessages();
@@ -104,6 +122,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
   ngOnInit() {
 
     this.user = this.authService.getLoggedInUser();
+    // ToDo The above does not work for refresh of deep link to dashboard - there is no member data
     // console.log(this.user);
 
     this.translate.get('CMS-Dashboard').subscribe(data => {
@@ -144,7 +163,8 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
   setMemberStatus(date: Date = new Date(this.restaurant.restaurant_associated_on)) {
 
     // console.log(this.restaurant);
-
+    // NB this assumes that is the member is not full then they are an associate - need to be to get here!
+    console.log('set', this.restaurant.restaurant_rc_member_status);
     if (this.restaurant.restaurant_rc_member_status === 'Full') {
       this.memberStatus = 100;
       this.memberType = this.t_data.FullMember;
@@ -230,7 +250,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
 
         if (data['times'].length) {
           // ToDo update this to check through the array of times. Using zero since that also reflects message
-          this.hours_date = new Date(data['times[0]'].cms_time_last_update);
+          this.hours_date = new Date(data['times'][0].cms_time_last_update);
         }
 
       },
@@ -321,10 +341,8 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
             this.img_status_text = this.img_count + this.t_data.ActiveImages;
           }
 
-          // TODO: no image specific updated date
-
           if (data['elements'].length) {
-            new Date(data['elements'][data['elements'].length - 1].cms_element_last_update);
+            this.img_date = new Date(data['elements'][data['elements'].length - 1].cms_element_last_update);
           }
         },
         error => console.log(error + ' R ' + this.restaurant.restaurant_id));
@@ -507,8 +525,8 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
 
     if (this.cmsHasSufficientData) {
       const dialogRef = this.dialog.open(CmsPreviewComponent, {
-        panelClass: 'preview-dialog-container',
-        backdropClass: 'preview-backdrop',
+        panelClass: 'rc-preview-dialog-container',
+        backdropClass: 'rc-preview-backdrop',
         data: {
           id: this.restaurant.restaurant_id,
           number: this.restaurant.restaurant_number
@@ -526,6 +544,8 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
     // For now assume that there are only two states. Or at least that Associate means you cannot do it,
     // This means we could have other more elevated stets (e.g. Premium) that still allow publish
     // In theory we should never get here if there is no status defined, but just in case...
+    //
+    // Updated 15/10/19 to make the assumption that no status = associate. Seems we can get here for test restaurants...
     if (this.restaurant.restaurant_rc_member_status !== 'Full') {
       this.help.dspHelp('cms-dashboard-associate');
     } else {
@@ -611,19 +631,26 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
           // console.log('Form OK, now compose an email to RDL requesting change');
           // iterate through the fields and detect which have changed...
           const changeArray = [];
+
           for (const key in this.restaurant) {
-            if (this.restaurant[key] !== this.dbRestaurant[key]) {
-              changeArray.push({ key: key.replace('restaurant_', ''),
-                was: this.dbRestaurant[key], now: this.restaurant[key] });
+            if (this.restaurant.hasOwnProperty(key)) {
+              if (this.restaurant[key] !== this.dbRestaurant[key]) {
+                changeArray.push({
+                  key: key.replace('restaurant_', ''),
+                  was: this.dbRestaurant[key], now: this.restaurant[key]
+                });
+              }
             }
           }
           // console.log(changeArray.length + ' changes detected');
+          this.cmsLocalService.dspSnackbar(this.t_data.ChangeSent, null, 1);
 
           // send information to the server so that emails can be generated
           this.cms.sendRestaurantChanges(currentMember, this.restaurant, changeArray)
             .subscribe(data => {
                 // console.log('Emails generated by server');
-                this.cmsLocalService.dspSnackbar(this.t_data.ChangeSent, 'OK', 5);
+                const msg = this.t_data.DataChange;
+                this.cmsLocalService.dspSnackbar(msg, 'OK', 20, 'info');
                 // record event
                 this.ga.sendEvent('CMS-Dashboard', 'Core Data', 'Change Request');
               },
