@@ -7,7 +7,7 @@ import { RestaurantService, CMSService, HelpService, AnalyticsService } from '..
 import { CmsLocalService } from './cms-local.service';
 import { MatDialog } from '@angular/material';
 import { CmsPreviewComponent } from './cms-preview.component';
-import { fadeAnimation } from '../animations';
+import { fadeAnimation } from '../shared/animations';
 
 @Component({
   selector: 'rc-cms',

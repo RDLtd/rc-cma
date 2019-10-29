@@ -38,7 +38,7 @@ import {
 
 import {
   SigninComponent
-} from './signin.component';
+} from './signin/signin.component';
 
 import {
   AffiliatesComponent

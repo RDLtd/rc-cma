@@ -227,11 +227,16 @@ a.mat-menu-item {text-decoration: none;}
     font-size: 12px;
   }
 }
-.rc-signin-page {
+/**
+* Sign in / Register
+* ------------------------------------------
+*/
+
+.rc-sign-in {
   background: $rc-theme-primary;
   min-height: 100vh;
   padding: 0 calc(100%/3 + 64px) 0 16px;
-  .rc-main {
+  .rc-signin-info {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -246,7 +251,7 @@ a.mat-menu-item {text-decoration: none;}
     }
     .rc-brand-logo { height: 120px; }
   }
-  .rc-signin {
+  .rc-signin-form {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -285,6 +290,8 @@ a.mat-menu-item {text-decoration: none;}
     }
   }
 }
+
+
 
 .mat-toolbar {
   background-color: $rc-theme-primary;
@@ -326,19 +333,19 @@ a.mat-menu-item {text-decoration: none;}
 
 @media screen and ( max-width : 768px ){
 
-  .rc-signin-page {
+  .rc-signin-form {
     padding: 16px;
     display: block;
     height: auto;
 
-    .rc-signin {
+    .rc-signin-form {
       box-sizing: border-box;
       position: relative;
       width: 100%;
       margin: 0;
       padding: 24px;
     }
-    .rc-main {
+    .rc-signin-info {
       display: block;
       margin: 0;
       padding: 0;

@@ -1,9 +1,9 @@
 import { Component, Output, EventEmitter, OnInit } from '@angular/core';
-import { AuthenticationService } from './_services';
+import { AuthenticationService } from '../_services';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { MatDialog } from '@angular/material';
-import { AppConfig } from './app.config';
+import { AppConfig } from '../app.config';
 import { AboutComponent } from './about.component';
 
 @Component({

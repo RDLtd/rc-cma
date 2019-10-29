@@ -1,7 +1,7 @@
 
-<div class="rc-signin-page">
+<div class="rc-sign-in">
 
-  <section class="rc-signin" *ngIf="pwdReset">
+  <section class="rc-signin-form" *ngIf="pwdReset">
 
     <span class="rc-warn" *ngIf="errorMsg">{{ errorMsg | uppercase }}!</span>
 
@@ -34,20 +34,7 @@
 
   </section>
 
-  <section class="rc-main">
-      <header>
-        <img class="rc-brand-logo" src="../assets/images/{{ company_logo_root }}-trans-white.svg">
-      </header>
-      <div>
-        <p>{{ company_name }} {{ 'SignIn.Text1' | translate }}</p>
-
-        <p>{{ 'SignIn.Text2' | translate }}</p>
-
-      </div>
-
-  </section>
-
-  <section class="rc-signin" *ngIf="!pwdReset">
+  <section class="rc-signin-form" *ngIf="!pwdReset">
 
     <span class="rc-warn" *ngIf="errorMsg">{{ errorMsg | uppercase }}!</span>
 
@@ -93,6 +80,18 @@
     </form>
 
     <a (click)="showPwdRest(true)">{{ 'SignIn.Forgotten' | translate }}</a>
+  </section>
+
+  <section class="rc-signin-info">
+      <header>
+        <img class="rc-brand-logo" src="../assets/images/{{ company_logo_root }}-trans-white.svg">
+      </header>
+      <div>
+        <p>{{ company_name }} {{ 'SignIn.Text1' | translate }}</p>
+
+        <p>{{ 'SignIn.Text2' | translate }}</p>
+
+      </div>
   </section>
 
 </div>

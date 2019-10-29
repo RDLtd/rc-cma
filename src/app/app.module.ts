@@ -16,13 +16,13 @@ import {
 import { AppComponent } from './app.component';
 import { routing } from './app.routing';
 import { AppConfig } from './app.config';
-import { SafePipe } from './app.safe';
-import { HeaderComponent } from './header.component';
-import { FooterComponent } from './footer.component';
-import { SigninComponent } from './signin.component';
-import { AboutComponent } from './about.component';
-import { PwdMatchValidator } from './pwdMatch.validator';
-import { AngularMaterialModule } from './angular-material.module';
+import { SafePipe } from './shared/app.safe';
+import { HeaderComponent } from './common/header.component';
+import { FooterComponent } from './common/footer.component';
+import { SigninComponent } from './signin/signin.component';
+import { AboutComponent } from './common/about.component';
+import { PwdMatchValidator } from './shared/pwdMatch.validator';
+import { AngularMaterialModule } from './shared/angular-material.module';
 
 import {
   AuthGuard,
