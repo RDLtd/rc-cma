@@ -102,6 +102,7 @@ import { TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { FileUploadModule } from 'ng2-file-upload';
 import { MarkdownModule } from 'ngx-markdown';
 import { ClipboardModule } from 'ngx-clipboard';
+import { JoinComponent } from './join/join.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -154,7 +155,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     PaymentComponent,
     SafePipe,
     SigninComponent,
-    AffiliatesComponent
+    AffiliatesComponent,
+    JoinComponent
   ],
   imports: [
     AngularMaterialModule,

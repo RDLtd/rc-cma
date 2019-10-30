@@ -2,9 +2,8 @@
 <div class="rc-section rc-section-profile">
 
   <div class="mdc-layout-grid">
-    <div #myprofile class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 rc-section-expanded">
-
-      <mat-toolbar class="rc-section-toolbar">
+    <div class="mdc-layout-grid__inner">
+      <div #myprofile class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12"> <mat-toolbar class="rc-section-toolbar">
 
         <span class="rc-toolbar-title">{{ member.member_first_name | uppercase }} {{ member.member_last_name | uppercase }}</span>
         <span class="rc-space-filler"></span>
@@ -50,70 +49,63 @@
         </span>
 
       </mat-toolbar>
+        <mat-menu #profileMenu="matMenu">
+          <button mat-menu-item (click)="updateProfile()">
+            <mat-icon>edit</mat-icon>
+            <span>{{ 'Profile-Page.EditProfile' | translate }}</span>
+          </button>
+          <button mat-menu-item (click)="updateImage()">
+            <mat-icon>portrait</mat-icon>
+            <span>{{ 'Profile-Page.UpdateImage' | translate }}</span>
+          </button>
+          <button mat-menu-item  (click)="updatePassword()">
+            <mat-icon>lock</mat-icon>
+            <span>{{ 'Profile-Page.UpdatePassword' | translate }}</span>
+          </button>
+        </mat-menu>
+        <section class="rc-member-profile ">
+          <div class="mdc-layout-grid rc-member-profile">
+          <div class="mdc-layout-grid__inner">
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-5">
+              <span
+                class="rc-active"
+                (click)="updateProfile()">
+                <mat-icon>person</mat-icon>
+                {{ member.member_job }}
+              </span>
 
-      <mat-menu #profileMenu="matMenu">
+              <span
+                class="rc-active"
+                (click)="updateProfile()">
+                <mat-icon>business</mat-icon>
+                {{ member.member_restaurant_group }}
+              </span>
+              <span><mat-icon>account_circle</mat-icon> ID: {{ member.member_id }}</span>
+              <span>{{ 'Profile-Page.MemberSince' | translate }} {{ member.member_signedup | date }}</span>
 
-        <button mat-menu-item (click)="updateProfile()">
-          <mat-icon>edit</mat-icon>
-          <span>{{ 'Profile-Page.EditProfile' | translate }}</span>
-        </button>
-        <button mat-menu-item (click)="updateImage()">
-          <mat-icon>portrait</mat-icon>
-          <span>{{ 'Profile-Page.UpdateImage' | translate }}</span>
-        </button>
-        <button mat-menu-item  (click)="updatePassword()">
-          <mat-icon>lock</mat-icon>
-          <span>{{ 'Profile-Page.UpdatePassword' | translate }}</span>
-        </button>
-
-      </mat-menu>
-
-      <section class="rc-member-profile ">
-        <div class="mdc-layout-grid rc-member-profile">
-
-          <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-5">
-            <span
-              class="rc-active"
-              (click)="updateProfile()">
-              <mat-icon>person</mat-icon>
-              {{ member.member_job }}
-            </span>
-
-            <span
-              class="rc-active"
-              (click)="updateProfile()">
-              <mat-icon>business</mat-icon>
-              {{ member.member_restaurant_group }}
-            </span>
-            <span><mat-icon>account_circle</mat-icon> ID: {{ member.member_id }}</span>
-            <span>{{ 'Profile-Page.MemberSince' | translate }} {{ member.member_signedup | date }}</span>
-
-          </div>
-
-          <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-5">
-            <!--<h2>CONTACT INFO:</h2>-->
-            <span class="rc-active" (click)="updateProfile()"><mat-icon>mail_outline</mat-icon> {{ member.member_email }}</span>
-            <span class="rc-active" (click)="updateProfile()"><mat-icon>smartphone</mat-icon> {{ member.member_telephone }}</span>
-            <span class="rc-active" (click)="updatePassword()"><mat-icon>vpn_key</mat-icon> ********</span>
-            <span>{{ 'Profile-Page.LastLogged' | translate }} {{ member.member_last_logged_in | date }}</span>
-
-          </div>
-
-          <div
+            </div>
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-5">
+              <!--<h2>CONTACT INFO:</h2>-->
+              <span class="rc-active" (click)="updateProfile()"><mat-icon>mail_outline</mat-icon> {{ member.member_email }}</span>
+              <span class="rc-active" (click)="updateProfile()"><mat-icon>smartphone</mat-icon> {{ member.member_telephone }}</span>
+              <span class="rc-active" (click)="updatePassword()"><mat-icon>vpn_key</mat-icon> ********</span>
+              <span>{{ 'Profile-Page.LastLogged' | translate }} {{ member.member_last_logged_in | date }}</span>
+            </div>
+            <div
                class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2 rc-active" (click)="updateImage()">
             <img style="--aspect-ratio:1/1;" [src]="member.member_image_path">
+            </div>
           </div>
 
         </div>
-      </section>
-
+        </section>
+      </div>
     </div>
   </div>
-
   <!-- Restaurants -->
   <div #myrestaurants class="mdc-layout-grid">
-
-    <mat-toolbar
+    <div class="mdc-layout-grid__inner">
+      <mat-toolbar
       class="rc-section-toolbar mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
       <span class="rc-toolbar-title">
         {{ 'Profile-Page.AssociatedRestaurants' | translate }}
@@ -143,15 +135,13 @@
 
       </span>
     </mat-toolbar>
-
-    <div
+      <div
       class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 rc-add-content"
       *ngIf="showLoader">
       <rc-loader></rc-loader>
     </div>
-
-    <div
-      class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 rc-restaurant-card rc-card-restaurant"
+      <div
+      class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 rc-card-restaurant"
       *ngFor="let restaurant of restaurants; let idx = index">
 
       <!-- membership -->
@@ -174,14 +164,11 @@
         <mat-icon>people</mat-icon>
       </button>
 
-      <div style="--aspect-ratio:16/9; margin: 0 -16px;">
+      <div style="--aspect-ratio:16/9; ">
         <img
           [routerLink]="['/restaurants', restaurant.restaurant_id, 'cms', 'dashboard']"
           [src]="defaultImages[idx] || placeholderImage">
       </div>
-
-
-
       <div
         [routerLink]="['/restaurants', restaurant.restaurant_id, 'cms', 'dashboard']"
         class="rc-card-restaurant-content">
@@ -193,7 +180,6 @@
       </div>
 
       <div class="rc-card-restaurant-nav">
-
         <button
           mat-icon-button
           color="warn"
@@ -201,7 +187,6 @@
           matTooltip="{{ 'Profile-Page.Unassociate' | translate }} {{ restaurant.restaurant_name }}">
           <mat-icon>close</mat-icon>
         </button>
-
         <span class="rc-space-filler"></span>
 
 
@@ -223,15 +208,14 @@
       </div>
 
     </div>
-
-    <div
+      <div
       class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 rc-add-content"
       (click)="addRestaurants()"
       *ngIf="!showLoader">
       <mat-icon>add_circle_outline</mat-icon>
       <div class="rc-add-content-label">{{ 'Profile-Page.AddRestaurant' | translate }}</div>
     </div>
-
+    </div>
   </div>
 </div>
 

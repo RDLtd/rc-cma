@@ -43,9 +43,11 @@ import {
 import {
   AffiliatesComponent
 } from './cms';
+import { JoinComponent } from './join/join.component';
 
 const APP_ROUTES: Routes = [
   { path: '', component: SigninComponent },
+  { path: 'join/:ref', component: JoinComponent },
   { path: 'login', component: SigninComponent },
   { path: 'signin', component: SigninComponent },
   { path: 'referral', component: SigninComponent },

@@ -4,7 +4,7 @@ import { MatSidenav } from '@angular/material';
 import { AuthenticationService } from './_services';
 import { HttpClient } from '@angular/common/http';
 import { AppConfig } from './app.config';
-import { NavigationEnd, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { ConnectionService } from 'ng-connection-service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -38,6 +38,7 @@ export class AppComponent implements OnInit {
     private translate: TranslateService,
     private http: HttpClient,
     private config: AppConfig,
+    private activeRoute: ActivatedRoute,
     public authService: AuthenticationService) {
 
       // Check browser connection

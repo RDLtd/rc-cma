@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService, MemberService } from '../_services';
 import { MatSnackBar } from '@angular/material';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'rc-signin',
@@ -10,6 +11,10 @@ import { TranslateService } from '@ngx-translate/core';
 })
 
 export class SigninComponent implements OnInit {
+
+  isReferral = false;
+  referrer: any;
+
 
   isSubmitting: boolean;
   dbOffline: boolean = false;
@@ -35,9 +40,26 @@ export class SigninComponent implements OnInit {
 
   ngOnInit() {
 
-    this.activeRoute.queryParams.subscribe(params => {
-      this.user_email = params['em'];
-    });
+    this.activeRoute.queryParamMap
+      .subscribe(params => {
+        if(params.has('ref')){
+          // validate code
+          console.log('Referral Code = ', params.get('ref'));
+        } else {
+          // signin
+          this.isReferral = false;
+        }
+        //console.log(params.getAll('rc'));
+      });
+
+    this.activeRoute.paramMap
+      .subscribe(params => {
+        console.log('Param = ', params.get('ref'));
+      });
+
+
+    // this.activeRoute.queryParams.pipe(
+    //   switchMap(params => (console.log('P3', params)));
 
     this.translate.get('SignIn').subscribe(data => {
       this.t_data = data;
