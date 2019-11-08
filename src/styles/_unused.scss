@@ -9,6 +9,51 @@
 
 @import "vars";
 
+
+.rc-restaurant-card {
+  position: relative;
+  background: white;
+  transition: all .3s ease-in-out;
+  &:hover {
+    @include mat-elevation(6);
+  }
+  header {
+    display: flex;
+    margin:0;
+    padding: 8px;
+    h3 {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      padding-right: 8px;
+      margin: 0;
+      text-transform: uppercase;
+      font-size: 24px;
+      font-weight: $rc-display-font-weight;
+    }
+    span {
+      display: flex;
+      white-space: nowrap;
+    }
+    .rc-success { color: $rc-theme-success; }
+  }
+  .rc-restaurant-card-img {
+    height: 240px;
+    img {
+      width:100%;
+      height:100%;
+      object-fit: cover;
+    }
+  }
+  .rc-restaurant-card-body {
+    padding: 0 8px;
+  }
+  .rc-restaurant-card-actions {
+    text-align: right;
+    padding: 8px;
+  }
+}
+
 .rc-section-toolbar-fixed {
   position: fixed;
   z-index: 10;

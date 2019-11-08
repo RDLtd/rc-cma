@@ -47,7 +47,8 @@ import { JoinComponent } from './join/join.component';
 
 const APP_ROUTES: Routes = [
   { path: '', component: SigninComponent },
-  { path: 'join/:ref', component: JoinComponent },
+  { path: 'join/:code', component: JoinComponent },
+  { path: 'join', component: JoinComponent },
   { path: 'login', component: SigninComponent },
   { path: 'signin', component: SigninComponent },
   { path: 'referral', component: SigninComponent },
@@ -60,7 +61,9 @@ const APP_ROUTES: Routes = [
 
     { path: 'directory',
       component: CmsDirectoryComponent,
-      canActivate: [AuthGuard] }, { path: 'images',
+      canActivate: [AuthGuard] },
+
+    { path: 'images',
       component: CmsImagesComponent,
       canActivate: [AuthGuard] },
 
@@ -112,6 +115,5 @@ const APP_ROUTES: Routes = [
   { path: '**', redirectTo: '/profile' }
 
 ];
-
 
 export const routing = RouterModule.forRoot(APP_ROUTES);

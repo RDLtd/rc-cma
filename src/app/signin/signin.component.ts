@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService, MemberService } from '../_services';
 import { MatSnackBar } from '@angular/material';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'rc-signin',
@@ -13,15 +12,11 @@ import { switchMap } from 'rxjs/operators';
 export class SigninComponent implements OnInit {
 
   isReferral = false;
-  referrer: any;
-
-
   isSubmitting: boolean;
   dbOffline: boolean = false;
   errorMsg: string;
   pwdReset: boolean = false;
   user_email: string;
-  country: any;
 
   company_name;
   company_logo_root;
@@ -113,7 +108,7 @@ export class SigninComponent implements OnInit {
         });
   }
 
-  showPwdRest(boo: boolean){
+  showPwdReset(boo: boolean){
     this.pwdReset = boo;
     this.errorMsg = '';
   }

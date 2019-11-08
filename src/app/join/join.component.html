@@ -1,0 +1,131 @@
+<div class="rc-join">
+  <div class="rc-join-info">
+    <rc-loader class="rc-loader-white" *ngIf="!loaded"></rc-loader>
+    <div *ngIf="loaded">
+      <div class="rc-join-welcome" [ngSwitch]="referrer.type">
+        <img class="rc-brand-logo" src="../../assets/images/rc-logo-trans-white.svg">
+
+        <div *ngSwitchCase="'self'">
+          <h1>Free Membership</h1>
+          <p>If you would like your restaurant to be part of the <strong>Restaurant
+            Collective</strong> and enjoy the many benefits that are available to its members, please complete the following
+            steps:</p>
+          <ol>
+            <li>Set up your user details by completing and submitting the form on this page.</li>
+            <li>Check your email. You will receive confirmation from us with a password and a SIGN IN link.</li>
+            <li>From the email, select the SIGN IN option and use your email address
+              and the password that we sent you.</li>
+          </ol>
+          <p>If you experience any problems activating your membership then do please
+            <a href="mailto:support@restaurantcollective.uk">contact our Support Team</a>.</p>
+        </div>
+
+        <div *ngSwitchCase="'member'">
+          <h1>Support the Collective</h1>
+          <p>You've been invited by <strong>{{ referrer?.name }}</strong> become part of Restaurant Collective, an
+            exciting new organisation that helps restaurants support each other and affect positive
+            change within the industry.</p>
+          <p>To activate your membership and join {{ referrer?.name }} just follow these steps:</p>
+          <ol>
+            <li>Set up your contact details by completing the form on this page.</li>
+            <li>Associate your restaurant using our quick-search.</li>
+            <li>Validate your core information and start enjoying the many benefits of being part of the collective.</li>
+          </ol>
+          <p>If you experience any problems activating your membership then do please
+            <a href="mailto:support@restaurantcollective.uk">contact our Support Team</a>.</p>
+        </div>
+
+        <div *ngSwitchDefault>
+          <h1>Free Membership</h1>
+          <p>If you would like your restaurant to be part of the <strong>Restaurant
+            Collective</strong> and enjoy the many benefits that are available to its members, please complete the following
+            steps:</p>
+          <ol>
+            <li>Set up your user details by completing and submitting the form on this page.</li>
+            <li>Check your email. You will receive confirmation from us with a password and a SIGN IN link.</li>
+            <li>From the email, select the SIGN IN option and use your email address
+              and the password that we sent you.</li>
+          </ol>
+          <p>If you experience any problems activating your membership then do please
+            <a href="mailto:support@restaurantcollective.uk">contact our Support Team</a>.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="rc-join-form">
+
+    <form #formJoin="ngForm">
+      <h1>Join Us</h1>
+      <span>or <a [routerLink]="'/signin'">Sign In</a> if you're already a member.</span>
+      <mat-form-field>
+        <mat-label>Full name</mat-label>
+        <input
+          #fullName="ngModel"
+          ngModel
+          matInput
+          type="text"
+          name="fullName"
+          placeholder="Full name"
+          autofocus
+          required>
+        <mat-hint align="end">e.g. John Smith</mat-hint>
+        <mat-error align="end" *ngIf="fullName.errors?.required">Full name is required</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Job Role</mat-label>
+        <mat-select>
+          <mat-option value="owner">Owner</mat-option>
+          <mat-option value="chef">Chef</mat-option>
+          <mat-option value="manager">Manager</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Email Address</mat-label>
+        <input
+          matInput
+          [formControl]="email"
+          type="email"
+          name="email"
+          placeholder="Email address"
+          required>
+        <mat-hint align="end">Your contact email address</mat-hint>
+        <mat-error align="end" *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Mobile</mat-label>
+        <input
+          #mobile="ngModel"
+          ngModel
+          matInput
+          type="tel"
+          name="mobile"
+          placeholder="Mobile phone"
+          required>
+        <mat-hint align="end"></mat-hint>
+        <mat-error align="end" *ngIf="mobile.errors?.required">Mobile is required</mat-error>
+      </mat-form-field>
+      <mat-form-field *ngIf="!referrer?.code">
+        <mat-label>Referral Code (optional)</mat-label>
+        <input
+          #code="ngModel"
+          ngModel
+          matInput
+          type="text"
+          name="code"
+          placeholder="Referral Code">
+        <mat-hint align="end">Invitation Code</mat-hint>
+      </mat-form-field>
+      <button
+        type="submit"
+        mat-flat-button
+        color="accent">Join the collective</button>
+      <p class="mat-small">By submitting this form you are also confirming acceptance of our <a href="#">Terms</a> and
+        <a href="#">Privacy Policy</a>
+        .</p>
+    </form>
+
+  </div>
+</div>
+
+
