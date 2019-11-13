@@ -240,89 +240,6 @@ a.mat-menu-item {text-decoration: none;}
 * ------------------------------------------
 */
 
-//.rc-sign-in {
-//  background: $rc-theme-primary;
-//  min-height: 100vh;
-//  padding: 0 calc(100%/3 + 64px) 0 16px;
-//  .rc-signin-info {
-//    display: flex;
-//    flex-direction: column;
-//    justify-content: center;
-//    align-items: center;
-//    color: white;
-//    min-height: 100vh;
-//    header { display: block; margin-bottom: 16px;}
-//    p {
-//      max-width: 640px;
-//      color: white;
-//    }
-//    .rc-brand-logo { height: 120px; }
-//  }
-//  .rc-signin-form {
-//    display: flex;
-//    flex-direction: column;
-//    justify-content: center;
-//    position: fixed;
-//    top: 0; right: 0; bottom: 0;
-//    background: white;
-//    width: calc((100% / 3) - 48px);
-//    padding: 48px;
-//    header {
-//      position: relative;
-//      h1 {
-//        font-size: 40px;
-//        font-weight: $rc-default-font-weight;
-//        margin: 0;
-//      }
-//    }
-//    .rc-brand-logo {
-//      height: 64px;
-//      display: block;
-//      margin-bottom: 24px;
-//    }
-//  }
-//  form {
-//    border-radius: 2px;
-//    background-color: white;
-//    margin: 1rem 0 2rem;
-//    .mat-form-field { line-height: 1.4; }
-//    input { font-size: 24px; }
-//    button {
-//      height: 56px;
-//      font-size: mat-font-size($config, body-1);
-//    }
-//    .terms {
-//      font-size: 16px;
-//      margin: 0 0 1rem;
-//    }
-//  }
-//}
-//@media screen and ( max-width : 768px ){
-//  .rc-signin-form {
-//    padding: 16px;
-//    display: block;
-//    height: auto;
-//
-//    .rc-signin-form {
-//      box-sizing: border-box;
-//      position: relative;
-//      width: 100%;
-//      margin: 0;
-//      padding: 24px;
-//    }
-//    .rc-signin-info {
-//      display: block;
-//      margin: 0;
-//      padding: 0;
-//      height: auto;
-//      min-height: 0;
-//      p { display: none; }
-//      header { display: none; }
-//      .rc-brand-logo { height: 64px; }
-//    }
-//  }
-//}
-
 .rc-join {
   box-sizing: border-box;
   display: flex;
@@ -345,10 +262,14 @@ a.mat-menu-item {text-decoration: none;}
       margin: 0 0 24px;
     }
   }
-
   .rc-join-info {
     background-color: #00BCD3;
     color: black;
+    font-size: 18px;
+    &.rc-bgd {
+      background-color: $rc-theme-primary;
+      color: white;
+    }
     .rc-join-welcome {
       padding: 48px;
       max-width: 600px;

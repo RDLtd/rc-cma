@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FormControl, Validators } from '@angular/forms';
+import { MemberService } from '../_services';
 
 @Component({
   selector: 'rc-join',
@@ -8,21 +8,22 @@ import { FormControl, Validators } from '@angular/forms';
 })
 export class JoinComponent implements OnInit {
 
-  loaded = true;
+  loaded = false;
   referrer = {
     type: 'self',
     code: null,
     name: null,
     restaurant: null
   };
-  email = new FormControl('', [Validators.required, Validators.email]);
 
   constructor(
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private memberService: MemberService
   ) { }
 
   ngOnInit() {
 
+    // check for referral code
     this.route.paramMap
       .subscribe(params => {
         if (params.has('code')) {
@@ -35,12 +36,11 @@ export class JoinComponent implements OnInit {
   }
 
   validateReferral():void {
-    // Call api for referrer details/validation
-    // If it's a valid referralCode
-    // then fast-track the registration
-    // Else go to default registration
-    // and generate welcome email
+
+    // Todo: invoke api call to check referral code and, if valid, return all relevant information
     console.log(`Call API and validate ${this.referrer.code}`);
+
+    // Set referral information
 
     // Member
     this.referrer.type = 'member';
@@ -49,19 +49,21 @@ export class JoinComponent implements OnInit {
     // Agent
     // this.referrer.type = 'agent';
     // this.referrer.name = 'RSVP';
+    // this referrer.restaurant = 'EN-8001'
 
     // Email
     // this.referrer.type = 'email';
     // this.referrer.name = 'RC';
+    // this referrer.restaurant = 'EN-8001'
 
-    this.loaded =true;
-
+    this.loaded = true;
   }
 
-  getErrorMessage(){
-    return this.email.hasError('required') ? 'You must enter a value' :
-      this.email.hasError('email') ? 'Not a valid email' :
-        '';
+  join(formValue):void {
+    // Todo: Create user (member/administrator?)
+    // Todo: Associate restaurant (if applicable)
+    // Todo: Signin user
+    console.log(formValue);
   }
 
 }

@@ -86,11 +86,8 @@ export class SigninComponent implements OnInit {
     this.authService.login(formValue)
       .subscribe(
         authResult => {
-
           this.isSubmitting = false;
-
           this.authService.setMember(authResult['member']);
-
           if (authResult && authResult['token']) {
             // console.log('Auth OK');
             this.authService.setAuthSession(authResult['member'], authResult['token'], this.dbOffline);
@@ -99,7 +96,6 @@ export class SigninComponent implements OnInit {
           }
           // this.router.navigate([this.tgtRoute || localStorage.getItem('rd_home')]);
         },
-
         error => {
           // translation problem here - this error is not translated... Hmmm
           this.errorMsg = error.statusText;

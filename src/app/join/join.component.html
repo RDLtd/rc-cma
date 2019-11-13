@@ -4,9 +4,9 @@
     <div *ngIf="loaded">
       <div class="rc-join-welcome" [ngSwitch]="referrer.type">
         <img class="rc-brand-logo" src="../../assets/images/rc-logo-trans-white.svg">
-
+        <!-- Self -->
         <div *ngSwitchCase="'self'">
-          <h1>Free Membership</h1>
+          <h1>It's Free to Join Us</h1>
           <p>If you would like your restaurant to be part of the <strong>Restaurant
             Collective</strong> and enjoy the many benefits that are available to its members, please complete the following
             steps:</p>
@@ -19,13 +19,13 @@
           <p>If you experience any problems activating your membership then do please
             <a href="mailto:support@restaurantcollective.uk">contact our Support Team</a>.</p>
         </div>
-
+        <!-- Member -->
         <div *ngSwitchCase="'member'">
           <h1>Support the Collective</h1>
           <p>You've been invited by <strong>{{ referrer?.name }}</strong> become part of Restaurant Collective, an
             exciting new organisation that helps restaurants support each other and affect positive
             change within the industry.</p>
-          <p>To activate your membership and join {{ referrer?.name }} just follow these steps:</p>
+          <p>To activate your free membership and join {{ referrer?.name }} just follow these steps:</p>
           <ol>
             <li>Set up your contact details by completing the form on this page.</li>
             <li>Associate your restaurant using our quick-search.</li>
@@ -34,7 +34,7 @@
           <p>If you experience any problems activating your membership then do please
             <a href="mailto:support@restaurantcollective.uk">contact our Support Team</a>.</p>
         </div>
-
+        <!-- Default -->
         <div *ngSwitchDefault>
           <h1>Free Membership</h1>
           <p>If you would like your restaurant to be part of the <strong>Restaurant
@@ -50,49 +50,52 @@
             <a href="mailto:support@restaurantcollective.uk">contact our Support Team</a>.</p>
         </div>
       </div>
-
     </div>
   </div>
   <div class="rc-join-form">
-
-    <form #formJoin="ngForm">
+    <form
+      #formJoin="ngForm"
+      (ngSubmit)="formJoin.form.valid && join(formJoin.value)"
+      novalidate>
       <h1>Join Us</h1>
       <span>or <a [routerLink]="'/signin'">Sign In</a> if you're already a member.</span>
-      <mat-form-field>
+      <mat-form-field hideRequiredMarker>
         <mat-label>Full name</mat-label>
         <input
-          #fullName="ngModel"
+          #name="ngModel"
           ngModel
           matInput
           type="text"
-          name="fullName"
+          name="name"
           placeholder="Full name"
           autofocus
           required>
-        <mat-hint align="end">e.g. John Smith</mat-hint>
-        <mat-error align="end" *ngIf="fullName.errors?.required">Full name is required</mat-error>
+        <mat-hint align="end" *ngIf="name.invalid">Your first and last names</mat-hint>
+        <mat-error align="end" *ngIf="name.errors?.required">Full name is required</mat-error>
       </mat-form-field>
-      <mat-form-field>
+      <mat-form-field hideRequiredMarker>
         <mat-label>Job Role</mat-label>
-        <mat-select>
+        <mat-select ngModel name="role">
           <mat-option value="owner">Owner</mat-option>
           <mat-option value="chef">Chef</mat-option>
           <mat-option value="manager">Manager</mat-option>
         </mat-select>
       </mat-form-field>
-      <mat-form-field>
+      <mat-form-field hideRequiredMarker>
         <mat-label>Email Address</mat-label>
         <input
+          #email="ngModel"
+          ngModel
           matInput
-          [formControl]="email"
           type="email"
           name="email"
           placeholder="Email address"
+          email
           required>
-        <mat-hint align="end">Your contact email address</mat-hint>
-        <mat-error align="end" *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+        <mat-hint align="end" *ngIf="email.invalid">Your contact email address</mat-hint>
+        <mat-error align="end" *ngIf="email?.errors">A valid email is required</mat-error>
       </mat-form-field>
-      <mat-form-field>
+      <mat-form-field hideRequiredMarker>
         <mat-label>Mobile</mat-label>
         <input
           #mobile="ngModel"
@@ -102,7 +105,6 @@
           name="mobile"
           placeholder="Mobile phone"
           required>
-        <mat-hint align="end"></mat-hint>
         <mat-error align="end" *ngIf="mobile.errors?.required">Mobile is required</mat-error>
       </mat-form-field>
       <mat-form-field *ngIf="!referrer?.code">
@@ -114,17 +116,17 @@
           type="text"
           name="code"
           placeholder="Referral Code">
-        <mat-hint align="end">Invitation Code</mat-hint>
+<!--        <mat-hint align="end">Referral Code</mat-hint>-->
       </mat-form-field>
       <button
         type="submit"
         mat-flat-button
+        [disabled]="!formJoin.valid"
         color="accent">Join the collective</button>
       <p class="mat-small">By submitting this form you are also confirming acceptance of our <a href="#">Terms</a> and
         <a href="#">Privacy Policy</a>
         .</p>
     </form>
-
   </div>
 </div>
 
