@@ -393,4 +393,22 @@ export class MemberService {
       { login_email: login_email, userCode: this.config.userAPICode, token: this.jwt()});
   }
 
+  getPromo(promo_code: string) {
+    return this.http.post(this.config.apiUrl + '/members/getpromo',
+      {
+        promo_code: promo_code,
+        userCode: this.config.userAPICode,
+        token: this.jwt()});
+  }
+
+  addPromoAction(promo_code: string, promo_action: string, promo_member_id: number) {
+    return this.http.post(this.config.apiUrl + '/members/addpromoaction',
+      {
+        promo_code: promo_code,
+        promo_action: promo_action,
+        promo_member_id: promo_member_id,
+        userCode: this.config.userAPICode,
+        token: this.jwt()});
+  }
+
 }
