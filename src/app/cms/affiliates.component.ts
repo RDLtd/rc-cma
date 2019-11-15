@@ -121,7 +121,7 @@ export class AffiliatesComponent implements OnInit, OnDestroy {
       });
 
     } else {
-      // send email to both affiliate and customer (is this the user or the restaurant!)
+      // todo send email to both affiliate and customer (is this the user or the restaurant!)
       console.log(this.restaurant.restaurant_email, this.affiliates[index].partner_email);
       // also record the access event for this restaurant
       this.restaurantService.recordAccess(Number(this.restaurant.restaurant_id),
