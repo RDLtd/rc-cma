@@ -131,7 +131,7 @@
         *ngIf="!cmsChanged && cmsHasSufficientData && !isPreviewing"
         class="rc-cms-dash-info mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--align-top">
         <mat-card-header *ngIf="!isPreviewing">
-          <mat-card-title>{{ 'CMS-Dashboard.VerifiedOn' | translate }} {{ publishDate | date: 'fullDate' }}
+          <mat-card-title>{{ 'CMS-Dashboard.VerifiedOn' | translate }} {{ d_publishDate }}
             {{ 'CMS-Dashboard.By' | translate }} {{ restaurant.restaurant_verified_by }}</mat-card-title>
           <span class="rc-space-filler"></span>
           <mat-icon class="rc-success">cloud_done</mat-icon>
@@ -230,7 +230,7 @@
               <mat-progress-bar
                 matLine mode="determinate"
                 value="{{ memberStatus }}"></mat-progress-bar>
-              <p matLine><span>{{ 'CMS-Dashboard.Activated' | translate }} {{ memberJoinDate | date }}</span></p>
+              <p matLine><span>{{ 'CMS-Dashboard.Activated' | translate }} {{ d_memberJoinDate }}</span></p>
             </mat-list-item>
 
             <!-- Hours -->
@@ -240,7 +240,7 @@
               (click)="navTo('opening-times')">
               <mat-icon matListIcon>watch_later</mat-icon>
               <h3 matLine>{{ 'CMS-Dashboard.OpeningHours' | translate }}</h3>
-              <p matLine>{{ 'CMS-Dashboard.LastUpdated' | translate }} {{ hours_date | date }}</p>
+              <p matLine>{{ 'CMS-Dashboard.LastUpdated' | translate }} {{ d_hours_date }}</p>
               <mat-progress-bar  matLine mode="determinate" value="{{ hours_status }}"></mat-progress-bar>
               <p matLine><span>{{ hours_status_text }}</span></p>
             </mat-list-item>
@@ -252,7 +252,7 @@
               (click)="navTo('features')">
               <mat-icon matListIcon>check_box</mat-icon>
               <h3 matLine>{{ 'CMS-Dashboard.Descriptions' | translate }}</h3>
-              <p matLine>{{ 'CMS-Dashboard.LastUpdated' | translate }} {{ desc_date | date }}</p>
+              <p matLine>{{ 'CMS-Dashboard.LastUpdated' | translate }} {{ d_desc_date }}</p>
               <mat-progress-bar  matLine mode="determinate" value="{{ desc_status }}"></mat-progress-bar>
               <p matLine><span>{{ desc_status_text }}</span></p>
             </mat-list-item>
@@ -264,7 +264,7 @@
               (click)="navTo('images')">
               <mat-icon matListIcon>image</mat-icon>
               <h3 matLine>{{ 'CMS-Dashboard.ActiveImagesCaps' | translate }}</h3>
-              <p matLine>{{ 'CMS-Dashboard.LastUpdated' | translate }} {{ img_date | date }}</p>
+              <p matLine>{{ 'CMS-Dashboard.LastUpdated' | translate }} {{ d_img_date }}</p>
               <mat-progress-bar  matLine mode="determinate" value="{{ img_status }}"></mat-progress-bar>
               <p matLine><span>{{ img_status_text }}</span></p>
             </mat-list-item>
@@ -276,7 +276,7 @@
               (click)="navTo('menus')">
               <mat-icon matListIcon>restaurant</mat-icon>
               <h3 matLine>{{ 'CMS-Dashboard.ActiveMenus' | translate }}</h3>
-              <p matLine>{{ 'CMS-Dashboard.LastUpdated' | translate }} {{ mnu_date | date }}</p>
+              <p matLine>{{ 'CMS-Dashboard.LastUpdated' | translate }} {{ d_mnu_date }}</p>
               <mat-progress-bar  matLine mode="determinate" value="{{ mnu_status }}"></mat-progress-bar>
               <p matLine><span>{{ mnu_status_text }}</span></p>
             </mat-list-item>
@@ -288,7 +288,7 @@
               (click)="navTo('reservations')">
               <mat-icon matListIcon>event</mat-icon>
               <h3 matLine>{{ 'CMS-Dashboard.OnlineBookings' | translate }}</h3>
-              <p matLine>{{ 'CMS-Dashboard.LastUpdated' | translate }} {{ bkg_date | date }}</p>
+              <p matLine>{{ 'CMS-Dashboard.LastUpdated' | translate }} {{ d_bkg_date }}</p>
               <mat-progress-bar  matLine mode="determinate" value="{{ bkg_status }}"></mat-progress-bar>
               <p matLine><span>{{ bkg_status_text }}</span></p>
             </mat-list-item>
@@ -300,7 +300,7 @@
               (click)="navTo('location')">
               <mat-icon matListIcon>place</mat-icon>
               <h3 matLine>{{ 'CMS-Dashboard.LocInfo' | translate }}</h3>
-              <p matLine>{{ 'CMS-Dashboard.LastUpdated' | translate }} {{ loc_date | date }}</p>
+              <p matLine>{{ 'CMS-Dashboard.LastUpdated' | translate }} {{ d_loc_date }}</p>
               <mat-progress-bar  matLine mode="determinate" color="primary" value="{{ loc_status }}"></mat-progress-bar>
               <p matLine><span>{{ loc_status_text }}</span></p>
             </mat-list-item>

@@ -315,7 +315,7 @@
 
   "CMS-Dashboard": {
     "Analysing": "ANALYSE DU CONTENU...",
-    "VerifiedOn": "VÉRIFIÉ ET PUBLIÉ sur",
+    "VerifiedOn": "VÉRIFIÉ ET PUBLIÉ le",
     "By": "par",
     "Your": "Votre",
     "SPW": "Page Internet",
@@ -353,7 +353,7 @@
     "ActiveMenus": "MENUS ACTIFS",
     "OnlineBookings": "RÉSERVATIONS",
     "LocInfo": "INFORMATION DE LOCALISATION",
-    "LastUpdated": "Dernière mise à jour:",
+    "LastUpdated": "Dernière mise à jour le",
     "VerifiedBy": "Vérifié par ",
     "Open": "Ouvert ",
     "Days": " jours",
@@ -369,7 +369,7 @@
     "LinkCopied": "Lien Page Internet copié dans le presse-papiers",
     "AwaitingImage": "EN ATTENTE+IMAGE",
     "Status": "STATUT D'ADHÉSION",
-    "Activated": "ACTIVÉ",
+    "Activated": "ACTIVÉ LE",
     "FullMember": "Membre à part entière",
     "AssMember": "Membre associé",
     "DataChange": "Merci.\r\nNous avons reçu votre demande de changement. Celle-ci sera examinée par l'équipe de curation\net mise à jour en conséquence..\r\nSachez que vous ne verrez peut-être aucun changement avant 24 heures.",

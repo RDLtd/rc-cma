@@ -23,6 +23,7 @@ import {
   PaymentComponent,
   MessageComponent
 } from '../common';
+import * as moment from 'moment';
 
 
 @Component({
@@ -43,27 +44,32 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
   isPreviewing = true;
   cmsHasSufficientData = false;
   publishDate: Date;
+  d_publishDate: string;
 
   memberStatus = 50;
   memberType = 'Associate Member';
   memberIcon = 'people';
   memberJoinDate: Date;
+  d_memberJoinDate: string;
 
   core_date: Date;
   core_by: string;
   core_status = 0;
   core_status_txt: string;
+  d_core_date: string;
 
   desc_date: Date;
   desc_by: string;
   desc_status = 0;
   desc_status_text: string;
+  d_desc_date: string;
 
   hours_date: Date;
   hours_by: string;
   hours_status = 0;
   hours_count = 0;
   hours_status_text: string;
+  d_hours_date: string;
 
   img_date: any;
   img_src: string;
@@ -71,6 +77,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
   img_count = 0;
   img_status = 0;
   img_status_text: string;
+  d_img_date: string;
 
   mnu_date: Date;
   mnu_by: string;
@@ -78,16 +85,19 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
   mnu_dish_count = 0;
   mnu_status = 0;
   mnu_status_text: string;
+  d_mnu_date: string;
 
   bkg_date: Date;
   bkg_by: string;
   bkg_status = 0;
   bkg_status_text: string;
+  d_bkg_date: string;
 
   loc_date: Date;
   loc_by: string;
   loc_status = 0;
   loc_status_text: string;
+  d_loc_date: string;
 
   offerCount = 0;
   offerInBox = 0;
@@ -112,6 +122,17 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
     // detect language changes... need to check for change in texts
     translate.onLangChange.subscribe(lang => {
       this.translate.get('CMS-Dashboard').subscribe(data => {this.t_data = data; });
+      // re-translate computed display dates
+      moment.locale(localStorage.getItem('rd_country'));
+      this.d_memberJoinDate = moment(this.memberJoinDate).format('dddd, DD MMMM YYYY');
+      this.d_publishDate = moment(this.publishDate).format('LLLL');
+      this.d_core_date = moment(this.core_date).format('dddd, DD MMMM YYYY');
+      this.d_hours_date = moment(this.hours_date).format('dddd, DD MMMM YYYY');
+      this.d_desc_date = moment(this.desc_date).format('dddd, DD MMMM YYYY');
+      this.d_img_date = moment(this.img_date).format('dddd, DD MMMM YYYY');
+      this.d_mnu_date = moment(this.mnu_date).format('dddd, DD MMMM YYYY');
+      this.d_bkg_date = moment(this.bkg_date).format('dddd, DD MMMM YYYY');
+      this.d_loc_date = moment(this.loc_date).format('dddd, DD MMMM YYYY');
     });
   }
 
@@ -127,6 +148,10 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
 
     this.translate.get('CMS-Dashboard').subscribe(data => {
       this.t_data = data;
+      console.log(this.t_data.Open, this.hours_status_text);
+
+      moment.locale(localStorage.getItem('rd_country'));
+
       this.dfImg = 'https://via.placeholder.com/350x200?text=' + this.t_data.AwaitingImage;
 
       // Observe offer count
@@ -176,6 +201,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
       this.memberType = this.t_data.AssMember;
       this.memberIcon = 'people_outline';
     }
+    this.d_memberJoinDate = moment(this.memberJoinDate).format('dddd, DD MMMM YYYY');
   }
 
   checkPublishStatus() {
@@ -212,6 +238,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
           }
         }
         this.isPreviewing = false;
+        this.d_publishDate = moment(this.publishDate).format('LLLL');
       },
       error => console.log('ERROR', error));
   }
@@ -225,6 +252,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
     this.core_by = this.restaurant.restaurant_verified_by;
     this.core_status = 100;
     this.core_status_txt = this.t_data.VerifiedBy + this.core_by;
+    this.d_core_date = moment(this.core_date).format('dddd, DD MMMM YYYY');
   }
 
   checkOpeningTimes(): void {
@@ -247,10 +275,12 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
           this.hours_status_text = this.t_data.NoData;
           this.hours_status = 0;
         }
+        console.log(this.t_data.Open, this.hours_status_text);
 
         if (data['times'].length) {
           // ToDo update this to check through the array of times. Using zero since that also reflects message
           this.hours_date = new Date(data['times'][0].cms_time_last_update);
+          this.d_hours_date = moment(this.hours_date).format('dddd, DD MMMM YYYY');
         }
 
       },
@@ -259,8 +289,6 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
       });
 
   }
-
-
 
   checkDescriptions(): void {
     console.log('checkDescriptions');
@@ -307,6 +335,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
       }
       this.desc_by = this.descriptions.cms_description_created_by;
       this.desc_date = new Date(this.descriptions.cms_description_last_updated);
+      this.d_desc_date = moment(this.desc_date).format('dddd, DD MMMM YYYY');
     } else {
       this.desc_status_text = this.t_data.NoData;
     }
@@ -342,7 +371,9 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
           }
 
           if (data['elements'].length) {
+            // todo this needs updating, also to reflect when the default image has changed
             this.img_date = new Date(data['elements'][data['elements'].length - 1].cms_element_last_update);
+            this.d_img_date = moment(this.img_date).format('dddd, DD MMMM YYYY');
           }
         },
         error => console.log(error + ' R ' + this.restaurant.restaurant_id));
@@ -393,6 +424,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
 
         if (menuData['elements'].length) {
           this.mnu_date = new Date(menuData['elements'][menuData['count'] - 1].cms_element_last_update);
+          this.d_mnu_date = moment(this.mnu_date).format('dddd, DD MMMM YYYY');
         }
 
         // set status text
@@ -428,6 +460,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
       }
       // TODO: no specific date available
       this.bkg_date = this.desc_date;
+      this.d_bkg_date = moment(this.bkg_date).format('dddd, DD MMMM YYYY');
 
       // set status text
       if (this.bkg_status === 0) {
@@ -457,6 +490,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
     }
     // TODO: no specific date
     this.loc_date = this.core_date;
+    this.d_loc_date = moment(this.loc_date).format('dddd, DD MMMM YYYY');
     // set status text
     if (this.loc_status === 0) {
       this.loc_status_text = this.t_data.NoData;

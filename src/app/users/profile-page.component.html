@@ -81,7 +81,7 @@
                 {{ member.member_restaurant_group }}
               </span>
               <span><mat-icon>account_circle</mat-icon> ID: {{ member.member_id }}</span>
-              <span>{{ 'Profile-Page.MemberSince' | translate }} {{ member.member_signedup | date }}</span>
+              <span>{{ 'Profile-Page.MemberSince' | translate }} {{ d_member_signedup }}</span>
 
             </div>
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-5">
@@ -89,7 +89,7 @@
               <span class="rc-active" (click)="updateProfile()"><mat-icon>mail_outline</mat-icon> {{ member.member_email }}</span>
               <span class="rc-active" (click)="updateProfile()"><mat-icon>smartphone</mat-icon> {{ member.member_telephone }}</span>
               <span class="rc-active" (click)="updatePassword()"><mat-icon>vpn_key</mat-icon> ********</span>
-              <span>{{ 'Profile-Page.LastLogged' | translate }} {{ member.member_last_logged_in | date }}</span>
+              <span>{{ 'Profile-Page.LastLogged' | translate }} {{ d_member_last_logged_in }}</span>
             </div>
             <div
                class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2 rc-active" (click)="updateImage()">

@@ -9,7 +9,7 @@ import {
   HelpService, AnalyticsService
 } from '../_services';
 import { MatDialog } from '@angular/material';
-//import { MessageComponent } from '../messages/message.component';
+// import { MessageComponent } from '../messages/message.component';
 import { PasswordComponent } from './password.component';
 import { ProfileDetailComponent } from './profile-detail.component';
 import { ProfileImageComponent } from './profile-image.component';
@@ -18,6 +18,7 @@ import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { ConfirmCancelComponent } from '../common/confirm-cancel/confirm-cancel.component';
 import { TranslateService } from '@ngx-translate/core';
+import * as moment from 'moment';
 
 
 @Component({
@@ -40,6 +41,8 @@ export class ProfilePageComponent implements OnInit {
   // translation variables
   t_data: any;
   company_name;
+  d_member_signedup: string;
+  d_member_last_logged_in: string;
 
   constructor(
     private restaurantService: RestaurantService,
@@ -52,13 +55,23 @@ export class ProfilePageComponent implements OnInit {
     private translate: TranslateService,
     public help: HelpService,
     public authService: AuthenticationService,
-    public dialog: MatDialog) { }
+    public dialog: MatDialog) {
+    // detect language changes... need to check for change in texts
+    translate.onLangChange.subscribe(lang => {
+      this.translate.get('Profile-Page').subscribe(data => {this.t_data = data; });
+      // re-translate computed display dates
+      moment.locale(localStorage.getItem('rd_country'));
+      this.d_member_signedup = moment(this.member.member_signedup).format('DD MMMM YYYY');
+      this.d_member_last_logged_in = moment(this.member.member_last_logged_in).format('DD MMMM YYYY');
+    });
+  }
 
   ngOnInit() {
     const profile = JSON.parse(localStorage.getItem('rd_profile'));
     this.company_name = localStorage.getItem('rd_company_name');
     this.getMember(profile.member_id);
     this.isDemoMember = (profile.member_id === 42);
+    moment.locale(localStorage.getItem('rd_country'));
     this.translate.get('Profile-Page').subscribe(data => {
       this.t_data = data;
       this.placeholderImage = 'https://via.placeholder.com/900x600?text=' + this.t_data.AwaitingImage;
@@ -77,6 +90,8 @@ export class ProfilePageComponent implements OnInit {
         data => {
           console.log('Data', data);
           this.member = data['member'][0];
+          this.d_member_signedup = moment(this.member.member_signedup).format('DD MMMM YYYY');
+          this.d_member_last_logged_in = moment(this.member.member_last_logged_in).format('DD MMMM YYYY');
           this.getAssociatedRestaurants(id);
           // console.log(this.member);
         },

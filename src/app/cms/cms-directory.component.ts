@@ -9,7 +9,8 @@ import { RestaurantDetailComponent } from '../restaurants/restaurant-detail.comp
 import { NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { AppConfig } from '../app.config';
-import { TranslateService } from '@ngx-translate/core';;
+import { TranslateService } from '@ngx-translate/core';
+import * as moment from 'moment';
 
 @Component({
   selector: 'rc-cms-directory',
@@ -22,6 +23,7 @@ export class CmsDirectoryComponent implements OnInit {
   originalrestaurant = new Restaurant;
   cancelSetting: Boolean;
   verification_due: Boolean;
+  d_restaurant_verified_on: string;
 
   // translation variables
   t_data: any;
@@ -33,11 +35,20 @@ export class CmsDirectoryComponent implements OnInit {
     private config: AppConfig,
     private translate: TranslateService,
     private restaurantService: RestaurantService,
-    private dialog: MatDialog) { }
+    private dialog: MatDialog) {
+    translate.onLangChange.subscribe(lang => {
+      this.translate.get('CMS-Directory').subscribe(data => {
+        this.t_data = data;
+      });
+      moment.locale(localStorage.getItem('rd_country'));
+      this.d_restaurant_verified_on = moment(this.restaurant.restaurant_verified_on).format('dddd, DD MMMM YYYY');
+    });
+  }
 
   ngOnInit() {
 
     this.showLoader = true;
+    moment.locale(localStorage.getItem('rd_country'));
 
     this.cmsLocalService.getRestaurant()
 
@@ -63,7 +74,7 @@ export class CmsDirectoryComponent implements OnInit {
               this.verification_due = true;
             }
           }
-
+          this.d_restaurant_verified_on = moment(this.restaurant.restaurant_verified_on).format('dddd, DD MMMM YYYY');
           this.showLoader = false;
 
         },

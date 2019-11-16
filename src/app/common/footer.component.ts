@@ -21,7 +21,7 @@ export class FooterComponent implements OnInit {
   }
 
   setLanguage(lang) {
-    this.translate.use(lang);
     localStorage.setItem('rd_country', lang);
+    this.translate.use(lang);
   }
 }
