@@ -85,53 +85,6 @@
     "Update": "UPDATE"
   },
 
-  "Join": {
-    "Welcome": "Welcome!",
-    "Text1": "Thanks for joining your colleagues and lending support to The Restaurant Collective. We're very excited about the potential of this organisation and believe that it will, in time, effect a significant change within our industry - helping all restaurants to gain ownership and proper control of their valuable digital content.",
-    "Text2": "You should have received a membership confirmation email from us with some information about our aims and objectives. Please take a few minutes to read the information, which explains how you can both contribute to, and benefit from, our organisation",
-    "Text3": "We'll be in touch soon!",
-    "MG": "Michael Gottleib - Chairman",
-    "Already": "Already registered.",
-    "Text4": "That email address and telephone number has already been registered.",
-    "Text5": "If you have forgotten your password then you can request a new one below. If you think this is a mistake and would like to speak to someone, call 07467 030572 during office hours.",
-    "StartAgain": "START AGAIN",
-    "NewPassword": "NEW PASSWORD",
-    "Empower": "Help us empower all restaurants.",
-    "Thankyou": "Thank you. Please check your email for confirmation of your new membership.",
-    "FullName": "Your full name",
-    "Email": "Your email address",
-    "EmailError": "Please provide a valid email address",
-    "Professional": "Professional",
-    "GroupCapacity": "What restaurant, restaurant group, or organisation are currently associated with and in what capacity?",
-    "Work": "Who you work for?",
-    "Group": "Restaurant group or organisation",
-    "Required": "This information is required",
-    "Do": "What you do?",
-    "Job": "Job role or responsibility",
-    "Security": "Security",
-    "Last": "Lastly, we need contact details to validate your membership and protect your personal details in the future.",
-    "Mobile": "Your mobile phone number",
-    "MobileError": "A valid phone number is required",
-    "Choose": "Choose a password",
-    "Min": "Passwords must be min of 8 characters",
-    "Terms": "I accept the terms and conditions of membership",
-    "REGISTERING...": "REGISTERING...",
-    "CANCEL": "CANCEL",
-    "JOIN": "JOIN US",
-    "REGISTERING": "REGISTERING",
-    "All": "All fields will need to be completed.",
-    "Duplicate": "Duplicate member details",
-    "Success": "Successfully registered!",
-    "PasswordEmail": "A new password has been emailed to your registered email address",
-    "EmailText": "The email ",
-    "NotRecognised": " is not recognised",
-    "Error": "Error trying to email a new password",
-    "Confirm": "Please confirm",
-    "Action": "This action will delete all the information that you have added to the form, is that what you want to do?",
-    "No": "NO, CANCEL",
-    "Yes": "YES, DO IT!"
-  },
-
   "Register": {
     "Find": "FIND",
     "FirstName": "First Name",
@@ -977,7 +930,8 @@
     "SignCaps": "SIGN IN",
     "Forgotten": "Forgotten your password?",
     "NewPassword": "A new password has been sent to your email address",
-    "Unknown": "This email address is unknown!"
+    "Unknown": "This email address is unknown!",
+    "Empowering": "Empowering Restaurants"
   },
 
   "Payment": {
@@ -1118,6 +1072,46 @@
 
   "Messages": {
     "DontShow": "DON'T SHOW ME THIS AGAIN"
-  }
+  },
 
+  "Join": {
+    "Support": "Support the Collective",
+    "Invited": "You've been invited by",
+    "Become": "to become part of",
+    "Exciting": "an exciting new organisation that has been exclusively created to support both independent and group restaurants, and affect positive change within the industry.",
+    "ToActivate": "To activate your no-cost membership and join",
+    "Follow": "just follow these steps:",
+    "Step1": "Set up your contact details by completing the form on this page, and click 'Join The Collective'.",
+    "Step2": "Adopt your restaurant using our quick-search.",
+    "Step3": "Validate the information we hold and start enjoying the many benefits and savings of being part of the collective.",
+    "Problems": "If you experience any problems activating your membership then do please",
+    "SupportTeam": "contact our Support Team",
+    "JoinUs": "Join Us",
+    "Or": "or",
+    "SignIn": "Sign In",
+    "Already": "if you're already a member",
+    "FullName": "Full Name",
+    "FirstAndLast": "Your first and last names",
+    "Job": "Job Role",
+    "Email": "Email Address",
+    "ValidEmail": "A valid email address is required",
+    "Contact": "Your contact email address",
+    "Mobile": "Mobile Phone",
+    "Join": "Join the Collective",
+    "Confirm": "By submitting this form you are also confirming acceptance of our",
+    "Terms": "Terms",
+    "And": " and ",
+    "Privacy": "Privacy Policy",
+    "Free": "It's Free to Join Us",
+    "Part": "If you would like your restaurant to be part of the",
+    "Enjoy": "and enjoy the many benefits and savings that are available to its members, please complete the following steps:",
+    "Free1": "Set up your user details by completing and submitting the form on this page, and click 'Join The Collective'.",
+    "Free2": "Check your email. You will receive confirmation from us with a password and a SIGN IN link.",
+    "Free3": "From the email, select the SIGN IN option and use your email address and the password that we sent you.",
+    "RefCode": "Referral Code (optional)",
+    "Required": "is required",
+    "Owner": "Owner",
+    "Chef": "Chef",
+    "Manager": "Manager"
+  }
 }

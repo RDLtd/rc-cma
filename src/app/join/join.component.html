@@ -3,51 +3,46 @@
     <rc-loader class="rc-loader-white" *ngIf="!loaded"></rc-loader>
     <div *ngIf="loaded">
       <div class="rc-join-welcome" [ngSwitch]="referrer.type">
-        <img class="rc-brand-logo" src="../../assets/images/rc-logo-trans-white.svg">
+        <img class="rc-brand-logo" src="../assets/images/{{ company_logo_root }}-trans-white.svg">
         <!-- Self -->
         <div *ngSwitchCase="'self'">
-          <h1>It's Free to Join Us</h1>
-          <p>If you would like your restaurant to be part of the <strong>Restaurant
-            Collective</strong> and enjoy the many benefits and savings that are available to its members,
-            please complete the following steps:</p>
+          <h1>{{ 'Join.Free' | translate }}</h1>
+          <p>{{ 'Join.Part' | translate }} <strong>{{ company_name }}</strong>
+            {{ 'Join.Enjoy' | translate }}</p>
           <ol>
-            <li>Set up your user details by completing and submitting the form on this page, and click 'Join The Collective'.</li>
-            <li>Check your email. You will receive confirmation from us with a password and a SIGN IN link.</li>
-            <li>From the email, select the SIGN IN option and use your email address
-              and the password that we sent you.</li>
+            <li>{{ 'Join.Free1' | translate }}</li>
+            <li>{{ 'Join.Free2' | translate }}</li>
+            <li>{{ 'Join.Free3' | translate }}</li>
           </ol>
-          <p>If you experience any problems activating your membership then do please
-            <a href="mailto:support@restaurantcollective.uk">contact our Support Team</a>.</p>
+          <p>{{ 'Join.Problems' | translate }}
+            <a href="mailto:support@restaurantcollective.uk">{{ 'Join.SupportTeam' | translate }}</a>.</p>
         </div>
         <!-- Member -->
         <div *ngSwitchCase="'member'">
-          <h1>Support the Collective</h1>
-          <p>You've been invited by <strong>{{ referrer?.name }}</strong> to become part of Restaurant Collective, an
-            exciting new organisation that has been exclusively created to support both independent and group restaurants,
-            and affect positive change within the industry.</p>
-          <p>To activate your no-cost membership and join {{ referrer?.name }} just follow these steps:</p>
+          <h1>{{ 'Join.Support' | translate }}</h1>
+          <p>{{ 'Join.Invited' | translate }} <strong>{{ referrer?.name }}</strong> {{ 'Join.Become' | translate }} {{ company_name }}, an
+            {{ 'Join.Exciting' | translate }}</p>
+          <p>{{ 'Join.ToActivate' | translate }} {{ referrer?.name }} {{ 'Join.Follow' | translate }}</p>
           <ol>
-            <li>Set up your contact details by completing the form on this page, and click 'Join The Collective'.</li>
-            <li>Adopt your restaurant using our quick-search.</li>
-            <li>Validate the information we hold and start enjoying the many benefits and savings of being part of the collective.</li>
+            <li>{{ 'Join.Step1' | translate }}</li>
+            <li>{{ 'Join.Step2' | translate }}</li>
+            <li>{{ 'Join.Step3' | translate }}</li>
           </ol>
-          <p>If you experience any problems activating your membership then do please
-            <a href="mailto:support@restaurantcollective.uk">contact our Support Team</a>.</p>
+          <p>{{ 'Join.Problems' | translate }}
+            <a href="mailto:support@restaurantcollective.uk">{{ 'Join.SupportTeam' | translate }}</a>.</p>
         </div>
         <!-- Default -->
         <div *ngSwitchDefault>
-          <h1>No-Cost Membership</h1>
-          <p>If you would like your restaurant to be part of the <strong>Restaurant
-            Collective</strong> and enjoy the many benefits and savings that are available to its members,
-            please complete the following steps:</p>
+          <h1>{{ 'Join.Free' | translate }}</h1>
+          <p>{{ 'Join.Part' | translate }}<strong>{{ company_name }}</strong>
+            {{ 'Join.Enjoy' | translate }}</p>
           <ol>
-            <li>Set up your user details by completing and submitting the form on this page, and click 'Join The Collective'.</li>
-            <li>Check your email. You will receive confirmation from us with a password and a SIGN IN link.</li>
-            <li>From the email, select the SIGN IN option and use your email address
-              and the password that we sent you.</li>
+            <li>{{ 'Join.Free1' | translate }}</li>
+            <li>{{ 'Join.Free2' | translate }}</li>
+            <li>{{ 'Join.Free3' | translate }}</li>
           </ol>
-          <p>If you experience any problems activating your membership then do please
-            <a href="mailto:support@restaurantcollective.uk">contact our Support Team</a>.</p>
+          <p>{{ 'Join.Problems' | translate }}
+            <a href="mailto:support@restaurantcollective.uk">{{ 'Join.SupportTeam' | translate }}</a>.</p>
         </div>
       </div>
     </div>
@@ -57,74 +52,74 @@
       #formJoin="ngForm"
       (ngSubmit)="formJoin.form.valid && join(formJoin.value)"
       novalidate>
-      <h1>Join Us</h1>
-      <span>or <a [routerLink]="'/signin'">Sign In</a> if you're already a member.</span>
+      <h1>{{ 'Join.JoinUs' | translate }}</h1>
+      <span>{{ 'Join.Or' | translate }} <a [routerLink]="'/signin'">{{ 'Join.SignIn' | translate }}</a> {{ 'Join.Already' | translate }}</span>
       <mat-form-field hideRequiredMarker>
-        <mat-label>Full name</mat-label>
+        <mat-label>{{ 'Join.FullName' | translate }}</mat-label>
         <input
           #name="ngModel"
           ngModel
           matInput
           type="text"
           name="name"
-          placeholder="Full name"
+          [placeholder]="'Join.FullName' | translate"
           autofocus
           required>
-        <mat-hint align="end" *ngIf="name.invalid">Your first and last names</mat-hint>
-        <mat-error align="end" *ngIf="name.errors?.required">Full name is required</mat-error>
+        <mat-hint align="end" *ngIf="name.invalid">{{ 'Join.FirstAndLast' | translate }}</mat-hint>
+        <mat-error align="end" *ngIf="name.errors?.required">{{ 'Join.FullName' | translate }} {{ 'Join.Required' | translate }}</mat-error>
       </mat-form-field>
       <mat-form-field hideRequiredMarker>
-        <mat-label>Job Role</mat-label>
+        <mat-label>{{ 'Join.Job' | translate }}</mat-label>
         <mat-select ngModel name="role">
-          <mat-option value="owner">Owner</mat-option>
-          <mat-option value="chef">Chef</mat-option>
-          <mat-option value="manager">Manager</mat-option>
+          <mat-option value="owner">{{ 'Join.Owner' | translate }}</mat-option>
+          <mat-option value="chef">{{ 'Join.Chef' | translate }}</mat-option>
+          <mat-option value="manager">{{ 'Join.Manager' | translate }}</mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field hideRequiredMarker>
-        <mat-label>Email Address</mat-label>
+        <mat-label>{{ 'Join.Email' | translate }}</mat-label>
         <input
           #email="ngModel"
           ngModel
           matInput
           type="email"
           name="email"
-          placeholder="Email address"
+          [placeholder]="'Join.Email' | translate"
           email
           required>
-        <mat-hint align="end" *ngIf="email.invalid">Your contact email address</mat-hint>
-        <mat-error align="end" *ngIf="email?.errors">A valid email is required</mat-error>
+        <mat-hint align="end" *ngIf="email.invalid">{{ 'Join.Contact' | translate }}</mat-hint>
+        <mat-error align="end" *ngIf="email?.errors">{{ 'Join.ValidEmail' | translate }}</mat-error>
       </mat-form-field>
       <mat-form-field hideRequiredMarker>
-        <mat-label>Mobile</mat-label>
+        <mat-label>{{ 'Join.Mobile' | translate }}</mat-label>
         <input
           #mobile="ngModel"
           ngModel
           matInput
           type="tel"
           name="mobile"
-          placeholder="Mobile phone"
+          [placeholder]="'Join.Mobile' | translate"
           required>
-        <mat-error align="end" *ngIf="mobile.errors?.required">Mobile is required</mat-error>
+        <mat-error align="end" *ngIf="mobile.errors?.required">{{ 'Join.ValidEmail' | translate }} {{ 'Join.Required' | translate }}</mat-error>
       </mat-form-field>
       <mat-form-field *ngIf="!referrer?.code">
-        <mat-label>Referral Code (optional)</mat-label>
+        <mat-label>{{ 'Join.RefCode' | translate }}</mat-label>
         <input
           #code="ngModel"
           ngModel
           matInput
           type="text"
           name="code"
-          placeholder="Referral Code">
+          [placeholder]="'Join.RefCode' | translate">
 <!--        <mat-hint align="end">Referral Code</mat-hint>-->
       </mat-form-field>
       <button
         type="submit"
         mat-flat-button
         [disabled]="!formJoin.valid"
-        color="accent">Join the collective</button>
-      <p class="mat-small">By submitting this form you are also confirming acceptance of our <a href="#">Terms</a> and
-        <a href="#">Privacy Policy</a>
+        color="accent">{{ 'Join.Join' | translate }}</button>
+      <p class="mat-small">{{ 'Join.Confirm' | translate }} <a href="#">{{ 'Join.Terms' | translate }}</a> {{ 'Join.And' | translate }}
+        <a href="#">{{ 'Join.Privacy' | translate }}</a>
         .</p>
     </form>
   </div>

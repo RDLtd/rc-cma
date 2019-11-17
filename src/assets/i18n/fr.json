@@ -85,53 +85,6 @@
     "Update": "METTRE A JOUR"
   },
 
-  "Join": {
-    "Welcome": "Bienvenue!",
-    "Text1": "Merci d’avoir choisi de rejoindre vos collègues et de soutenir Restaurateurs Independents. Nous sommes très enthousiasmés par le potentiel de cette organisation. Nous croyons qu'au moment venu, celle-ci va impulser un changement important dans notre industrie - en aidant (entre autre) tous les restaurateurs à devenir propriétaire de leurs contenus numériques et de le contrôler.",
-    "Text2": "Vous devriez avoir reçu un email de confirmation d'adhésion de notre part incluant des informations relatives à nos buts et objectifs. Veuillez prendre quelques minutes pour lire ces informations, qui expliquent comment vous pouvez conjointement contribuer et bénéficier des services de notre organisation",
-    "Text3": "Nous serons en contact très bientôt!",
-    "MG": "Michael Gottleib - Président",
-    "Already": "Déjà enregistré.",
-    "Text4": "Cette adresse email et ce numéro de téléphone ont déjà été enregistrés.",
-    "Text5": "Si vous avez oublié votre mot de passe, vous pouvez en demander un nouveau ci-dessous. Si vous pensez que c'est une erreur et souhaiteriez parler à quelqu'un, veuillez appeler le 07467 030572 pendant les heures d'ouverture de bureau.",
-    "StartAgain": "RECOMMENCER",
-    "NewPassword": "NOUVEAU MOT DE PASSE",
-    "Empower": "Aidez-nous à donner du pouvoir aux restaurateurs.",
-    "Thankyou": "Merci. Veuillez vérifier vos emails pour confirmer votre nouvelle adhésion.",
-    "FullName": "Vos nom et prénom",
-    "Email": "Votre adresse email",
-    "EmailError": "Veuillez fournir une adresse email valide",
-    "Professional": "Professionnel",
-    "GroupCapacity": "Avec quel restaurant, groupe de restauration ou organisation êtes-vous actuellement impliqué et à quelle fonction?",
-    "Work": "Pour qui travaillez-vous?",
-    "Group": "Groupe de restaurants ou organisation",
-    "Required": "Cette information est obligatoire",
-    "Do": "Quel emploi occupez-vous?",
-    "Job": "Rôle ou responsabilité",
-    "Security": "Sécurité",
-    "Last": "Finalement, nous avons besoin de vos coordonnées pour valider votre adhésion et protéger ainsi vos données personnelles à l'avenir.",
-    "Mobile": "Votre numéro de téléphone portable",
-    "MobileError": "Un numéro de téléphone valide est requis",
-    "Choose": "Choisissez un mot de passe",
-    "Min": "Les mots de passe doivent comporter au moins 8 caractères",
-    "Terms": "J'accepte les termes et conditions d'adhésion",
-    "REGISTERING...": "ENREGISTREMENT...",
-    "CANCEL": "ANNULER",
-    "JOIN": "NOUS REJOINDRE",
-    "REGISTERING": "ENREGISTREMENT",
-    "All": "Tous les champs devront être complétés.",
-    "Duplicate": "Dupliquer les informations du membre",
-    "Success": "Enregistré avec succès!",
-    "PasswordEmail": "Un nouveau mot de passe vous a été envoyé à votre adresse email enregistrée",
-    "EmailText": "L'email ",
-    "NotRecognised": " n'est pas reconnu",
-    "Error": "Erreur lors de l'envoi d'un nouveau mot de passe par email",
-    "Confirm": "Veuillez confirmer",
-    "Action": "Cette action va supprimer toutes les informations que vous avez ajoutées au formulaire, est-ce bien ce que vous voulez faire?",
-    "No": "NON, ANNULER",
-    "Yes": "OUI, SUPPRIMER!"
-  },
-
   "Register": {
     "Find": "TROUVER",
     "FirstName": "Prénom",
@@ -977,7 +930,8 @@
     "SignCaps": "SE CONNECTER",
     "Forgotten": "Mot de passe oublié?",
     "NewPassword": "Un nouveau mot de passe a été envoyé à votre adresse email.",
-    "Unknown": "Cette adresse email est inconnue!"
+    "Unknown": "Cette adresse email est inconnue!",
+    "Empowering": "Habiliter les restaurants"
   },
 
   "Payment": {
@@ -1118,7 +1072,48 @@
 
   "Messages": {
     "DontShow": "NE PLUS ME MONTRER CE MESSAGE"
-  }
+  },
 
+  "Join": {
+    "Support": "Soutenir le collectif",
+    "Invited": "Vous avez été invité par",
+    "Become": "faire partie de",
+    "Exciting": "une nouvelle organisation passionnante qui a été créée exclusivement pour soutenir à la fois les restaurants indépendants et les restaurants de groupe et pour apporter un changement positif dans l'industrie.",
+    "ToActivate": "Pour activer votre abonnement gratuit et vous inscrire",
+    "Follow": "Il suffit de suivre ces étapes:",
+    "Step1": "Configurez vos coordonnées en remplissant le formulaire sur cette page, puis cliquez sur 'Rejoindre le collectif'.",
+    "Step2": "Adoptez votre restaurant en utilisant notre recherche rapide.",
+    "Step3": "Validez les informations que nous détenons et commencez à profiter des nombreux avantages et économies liés à votre appartenance au collectif.",
+    "Problems": "Si vous rencontrez des problèmes pour activer votre abonnement, veuillez",
+    "SupportTeam": "contactez notre équipe de support",
+    "JoinUs": "Rejoignez-nous",
+    "Or": "ou",
+    "SignIn": "Se connecter",
+    "Already": "si vous êtes déjà membre",
+    "FullName": "Nom complet",
+    "FirstAndLast": "Votre prénom et nom",
+    "Job": "Rôle de l'emploi",
+    "Email": "Adresse e-mail",
+    "ValidEmail": "Une adresse email valide est exigée",
+    "Contact": "Votre adresse email de contact",
+    "Mobile": "Téléphone portable",
+    "Join": "Rejoignez le collectif",
+    "Confirm": "En soumettant ce formulaire, vous confirmez également l'acceptation de notre",
+    "Terms": "Conditions d'utilisation",
+    "And": " et ",
+    "Privacy": "Politique de confidentialité",
+    "Free": "C'est gratuit pour nous rejoindre",
+    "Part": "Si vous souhaitez que votre restaurant fasse partie de",
+    "Enjoy": "et profitez des nombreux avantages et économies disponibles pour ses membres, procédez comme suit:",
+    "Free1": "Configurez vos informations utilisateur en complétant et en soumettant le formulaire sur cette page, puis cliquez sur 'Rejoindre le collectif'.",
+    "Free2": "Vérifiez votre email. Vous recevrez une confirmation de notre part avec un mot de passe et un lien de connexion.",
+    "Free3": "À partir de l'email, sélectionnez l'option SIGN IN et utilisez votre adresse email et le mot de passe que nous vous avons envoyé.",
+    "RefCode": "Code de renvoi (facultatif)",
+    "Required": "est requis",
+    "Owner": "Propriétaire",
+    "Chef": "Chef",
+    "Manager": "Directeur / Directrice"
+  }
 }
+
 

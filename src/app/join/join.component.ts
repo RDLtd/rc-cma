@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MemberService } from '../_services';
 import { CmsLocalService } from '../cms';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'rc-join',
@@ -18,10 +19,15 @@ export class JoinComponent implements OnInit {
     restaurant: null
   };
 
+  company_name;
+  company_logo_root;
+  company_url;
+
   constructor(
     private route: ActivatedRoute,
     private memberService: MemberService,
     private cmsLocalService: CmsLocalService,
+    private translate: TranslateService
   ) { }
 
   ngOnInit() {
@@ -36,6 +42,10 @@ export class JoinComponent implements OnInit {
           this.loaded = true;
         }
       });
+
+    this.company_name = localStorage.getItem('rd_company_name');
+    this.company_logo_root = localStorage.getItem('rd_company_logo_root');
+    this.company_url = localStorage.getItem('rd_company_url');
   }
 
   validateReferral(): void {

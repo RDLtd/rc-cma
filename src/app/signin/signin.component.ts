@@ -37,14 +37,14 @@ export class SigninComponent implements OnInit {
 
     this.activeRoute.queryParamMap
       .subscribe(params => {
-        if(params.has('ref')){
+        if (params.has('ref')) {
           // validate code
           console.log('Referral Code = ', params.get('ref'));
         } else {
           // signin
           this.isReferral = false;
         }
-        //console.log(params.getAll('rc'));
+        // console.log(params.getAll('rc'));
       });
 
     this.activeRoute.paramMap
@@ -59,16 +59,6 @@ export class SigninComponent implements OnInit {
     this.translate.get('SignIn').subscribe(data => {
       this.t_data = data;
     });
-
-    // this.memberService.getCountry(localStorage.getItem('rd_country')).subscribe(
-    //   data => {
-    //     console.log(data.country[0]);
-    //     this.country = data.country[0];
-    //   },
-    //   error => {
-    //     console.log(error);
-    //   });
-
 
     this.company_name = localStorage.getItem('rd_company_name');
     this.company_logo_root = localStorage.getItem('rd_company_logo_root');
@@ -104,7 +94,7 @@ export class SigninComponent implements OnInit {
         });
   }
 
-  showPwdReset(boo: boolean){
+  showPwdReset(boo: boolean) {
     this.pwdReset = boo;
     this.errorMsg = '';
   }
