@@ -76,6 +76,17 @@ export class ProfilePageComponent implements OnInit {
       this.t_data = data;
       this.placeholderImage = 'https://via.placeholder.com/900x600?text=' + this.t_data.AwaitingImage;
     });
+
+    // TEST CODE FOR GETTING PROMO CODE FOR THIS MEMBER (Should be profile.member_id in the call)
+    this.memberService.getMemberPromoCode(18)
+      .subscribe( data => {
+          console.log('promo Code for member: ' + data['promo_code']);
+        },
+        error => {
+          console.log('No promo Code for this member');
+          // console.log(error);
+        }
+      );
   }
 
   openSnackBar(message: string, action: string) {

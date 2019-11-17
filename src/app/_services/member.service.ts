@@ -401,6 +401,14 @@ export class MemberService {
         token: this.jwt()});
   }
 
+  getMemberPromoCode(member_id: number) {
+    return this.http.post(this.config.apiUrl + '/members/getmemberpromocode',
+      {
+        member_id: member_id,
+        userCode: this.config.userAPICode,
+        token: this.jwt()});
+  }
+
   addPromoAction(promo_code: string, promo_action: string, promo_member_id: number) {
     return this.http.post(this.config.apiUrl + '/members/addpromoaction',
       {
