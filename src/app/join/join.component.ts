@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { MemberService } from '../_services';
 import { CmsLocalService } from '../cms';
 import { TranslateService } from '@ngx-translate/core';
+import * as moment from 'moment';
 
 @Component({
   selector: 'rc-join',
@@ -19,6 +20,8 @@ export class JoinComponent implements OnInit {
     restaurant: null
   };
 
+  t_data: any;
+
   company_name;
   company_logo_root;
   company_url;
@@ -28,7 +31,11 @@ export class JoinComponent implements OnInit {
     private memberService: MemberService,
     private cmsLocalService: CmsLocalService,
     private translate: TranslateService
-  ) { }
+  ) {
+    translate.onLangChange.subscribe(lang => {
+      this.translate.get('Join').subscribe(data => {this.t_data = data; });
+    });
+  }
 
   ngOnInit() {
 
@@ -46,6 +53,9 @@ export class JoinComponent implements OnInit {
     this.company_name = localStorage.getItem('rd_company_name');
     this.company_logo_root = localStorage.getItem('rd_company_logo_root');
     this.company_url = localStorage.getItem('rd_company_url');
+    this.translate.get('Join').subscribe(data => {
+      this.t_data = data;
+    });
   }
 
   validateReferral(): void {
@@ -116,12 +126,12 @@ export class JoinComponent implements OnInit {
         // Check for duplicate administrator record
         if (data['status'] === 'Duplicate') {
 
-          this.cmsLocalService.dspSnackbar('An administrator with these details is already registered in our Database!' +
+          this.cmsLocalService.dspSnackbar(this.t_data.AlreadyReg +
             '\n\n(' + data['error'] + ')', 'OK', 10);
 
         } else {
 
-          this.cmsLocalService.dspSnackbar('New Administrator record successfully registered');
+          this.cmsLocalService.dspSnackbar(this.t_data.Success);
 
           // record the usage of the code if there was one
           // Note we need the id of the new member here, that is returned by createAdministrator

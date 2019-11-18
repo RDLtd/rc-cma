@@ -1112,7 +1112,9 @@
     "Required": "est requis",
     "Owner": "Propriétaire",
     "Chef": "Chef",
-    "Manager": "Directeur / Directrice"
+    "Manager": "Directeur / Directrice",
+    "AlreadyReg": "Un administrateur avec ces informations est déjà enregistré dans notre base de données!",
+    "Success": "Nouvel enregistrement d'administrateur enregistré avec succès"
   }
 }
 

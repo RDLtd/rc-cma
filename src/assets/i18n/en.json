@@ -1112,6 +1112,8 @@
     "Required": "is required",
     "Owner": "Owner",
     "Chef": "Chef",
-    "Manager": "Manager"
+    "Manager": "Manager",
+    "AlreadyReg": "An administrator with these details is already registered in our database!",
+    "Success": "New administrator record successfully registered"
   }
 }

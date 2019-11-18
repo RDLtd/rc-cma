@@ -78,6 +78,7 @@ export class ProfilePageComponent implements OnInit {
     });
 
     // TEST CODE FOR GETTING PROMO CODE FOR THIS MEMBER (Should be profile.member_id in the call)
+    // THIS NOW OPTIONAL - member_promo_code now part of the member record
     this.memberService.getMemberPromoCode(18)
       .subscribe( data => {
           console.log('promo Code for member: ' + data['promo_code']);
@@ -118,7 +119,7 @@ export class ProfilePageComponent implements OnInit {
         data => {
           this.showLoader = false;
           this.restaurants = data['restaurants'];
-          //this.dspUnreadMessages();
+          // this.dspUnreadMessages();
           // console.log('Restaurants', this.restaurants);
           this.getDefaultImages();
         },
