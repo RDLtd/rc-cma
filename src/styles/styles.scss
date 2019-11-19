@@ -68,6 +68,11 @@ $config: mat-typography-config();
 .rc-warn { color: $rc-theme-warn; }
 .rc-media-small-hide { display: none !important; }
 .rc-media-med { display: block !important; }
+.rc-layout-table {
+  border: 0;
+  margin: 0 0 24px;
+  td:first-child { font-weight: bold; padding-right:24px;}
+}
 .agm-map { height: 300px; }
 .rc-loader-white {
   .rc-spinner div { background-color: white !important;
@@ -431,9 +436,6 @@ a.mat-menu-item {text-decoration: none;}
   text-align: left;
   float: left;
 }
-
-
-
 .rc-card-restaurant {
   position: relative;
   background-color: white;
@@ -912,7 +914,6 @@ ul.rc-lookup-results {
   }
 }
 
-// TODO: why are these buttons?
 button.rc-member-full,
 button.rc-member-assc {
   position: absolute !important;

@@ -12,7 +12,14 @@
           <button
             mat-icon-button
             (click)="help.dspHelp('profile-user')">
-          <mat-icon>help_outline</mat-icon>
+            <mat-icon>help_outline</mat-icon>
+          </button>
+
+          <button
+            mat-icon-button
+            matTooltip="Send a referral"
+            (click)="dspReferrals()">
+            <mat-icon>contact_mail</mat-icon>
           </button>
 
           <button
@@ -85,11 +92,16 @@
 
             </div>
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-5">
-              <!--<h2>CONTACT INFO:</h2>-->
               <span class="rc-active" (click)="updateProfile()"><mat-icon>mail_outline</mat-icon> {{ member.member_email }}</span>
               <span class="rc-active" (click)="updateProfile()"><mat-icon>smartphone</mat-icon> {{ member.member_telephone }}</span>
               <span class="rc-active" (click)="updatePassword()"><mat-icon>vpn_key</mat-icon> ********</span>
-              <span>{{ 'Profile-Page.LastLogged' | translate }} {{ d_member_last_logged_in }}</span>
+              <span
+                class="rc-active"
+                (click)="dspReferrals()"
+                matTooltip="Send a referral">
+                <mat-icon>contact_mail</mat-icon>
+                Referral Code:&nbsp;<a>{{ member?.member_promo_code }}</a>
+              </span>
             </div>
             <div
                class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2 rc-active" (click)="updateImage()">

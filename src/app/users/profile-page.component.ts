@@ -16,9 +16,12 @@ import { ProfileImageComponent } from './profile-image.component';
 import { RestaurantLookupComponent } from './restaurant-lookup.component';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
-import { ConfirmCancelComponent } from '../common/confirm-cancel/confirm-cancel.component';
+import { ConfirmCancelComponent } from '../common';
 import { TranslateService } from '@ngx-translate/core';
 import * as moment from 'moment';
+import { ReferralsComponent } from './referrals.component';
+import { ClipboardService } from 'ngx-clipboard';
+import { AppConfig } from '../app.config';
 
 
 @Component({
@@ -37,6 +40,9 @@ export class ProfilePageComponent implements OnInit {
   placeholderImage;
   isDemoMember = false;
   showLoader = false;
+  referrer: any;
+  joinUrl: string;
+  showRestaurantFinder = true;
 
   // translation variables
   t_data: any;
@@ -55,7 +61,10 @@ export class ProfilePageComponent implements OnInit {
     private translate: TranslateService,
     public help: HelpService,
     public authService: AuthenticationService,
+    public appConfig: AppConfig,
+    private _clipboardService: ClipboardService,
     public dialog: MatDialog) {
+
     // detect language changes... need to check for change in texts
     translate.onLangChange.subscribe(lang => {
       this.translate.get('Profile-Page').subscribe(data => {this.t_data = data; });
@@ -64,35 +73,27 @@ export class ProfilePageComponent implements OnInit {
       this.d_member_signedup = moment(this.member.member_signedup).format('DD MMMM YYYY');
       this.d_member_last_logged_in = moment(this.member.member_last_logged_in).format('DD MMMM YYYY');
     });
+
   }
 
   ngOnInit() {
+
     const profile = JSON.parse(localStorage.getItem('rd_profile'));
     this.company_name = localStorage.getItem('rd_company_name');
     this.getMember(profile.member_id);
     this.isDemoMember = (profile.member_id === 42);
+
     moment.locale(localStorage.getItem('rd_country'));
+
     this.translate.get('Profile-Page').subscribe(data => {
       this.t_data = data;
-      this.placeholderImage = 'https://via.placeholder.com/900x600?text=' + this.t_data.AwaitingImage;
+      this.placeholderImage = `https://via.placeholder.com/900x600?text=${this.t_data.AwaitingImage}`;
     });
-
-    // TEST CODE FOR GETTING PROMO CODE FOR THIS MEMBER (Should be profile.member_id in the call)
-    // THIS NOW OPTIONAL - member_promo_code now part of the member record
-    this.memberService.getMemberPromoCode(18)
-      .subscribe( data => {
-          console.log('promo Code for member: ' + data['promo_code']);
-        },
-        error => {
-          console.log('No promo Code for this member');
-          // console.log(error);
-        }
-      );
   }
 
-  openSnackBar(message: string, action: string) {
-    this.snackBar.open(message, action, {
-      duration: 5000
+  openSnackBar(msg: string, act = '', dur = 5000) {
+    this.snackBar.open(msg, act, {
+      duration: dur
     });
   }
 
@@ -105,11 +106,32 @@ export class ProfilePageComponent implements OnInit {
           this.d_member_signedup = moment(this.member.member_signedup).format('DD MMMM YYYY');
           this.d_member_last_logged_in = moment(this.member.member_last_logged_in).format('DD MMMM YYYY');
           this.getAssociatedRestaurants(id);
-          // console.log(this.member);
+          console.log('MEMBER:', this.member);
         },
         error => {
           console.log(error);
         });
+  }
+
+  getReferrerInfo() {
+    this.memberService.getPromo(this.member.member_promo_code).subscribe(
+      data => {
+        console.log('REF', data);
+        if (data['promos'].length > 0) {
+          this.referrer['type'] = 'member';
+          this.referrer['name'] = data['promos'][0].member_first_name + ' ' + data['promos'][0].member_last_name;
+        } else {
+          this.referrer['type'] = 'self';
+        }
+      },
+      error => {
+        console.log(JSON.stringify(error));
+        this.referrer.type = 'self';
+      });
+  }
+
+  getReferralLink(){
+    return `${this.appConfig.apiUrl}/join/${this.member.member_promo_code}`
   }
 
   getAssociatedRestaurants(id) {
@@ -119,9 +141,15 @@ export class ProfilePageComponent implements OnInit {
         data => {
           this.showLoader = false;
           this.restaurants = data['restaurants'];
+          if(this.restaurants.length) {
+            this.getDefaultImages();
+          } else if(this.showRestaurantFinder) {
+            this.showRestaurantFinder = false;
+            this.addRestaurants();
+          }
           // this.dspUnreadMessages();
           // console.log('Restaurants', this.restaurants);
-          this.getDefaultImages();
+
         },
         error => {
           console.log(error);
@@ -130,9 +158,8 @@ export class ProfilePageComponent implements OnInit {
 
   removeAssociation(index) {
 
-
     if (this.isDemoMember) {
-      this.openSnackBar(this.t_data.DemoAssociated, '');
+      this.openSnackBar(this.t_data.DemoAssociated);
     } else {
 
       console.log('restaurants', this.restaurants);
@@ -217,6 +244,48 @@ export class ProfilePageComponent implements OnInit {
     }
   }
 
+  dspReferrals() {
+
+    const dialogRef = this.dialog.open(ReferralsComponent, {
+      data: {
+        member: this.member,
+        joinUrl: this.getReferralLink()
+      }
+    });
+
+    dialogRef.afterClosed().subscribe( tgt => {
+
+      console.log('tgt:', tgt);
+
+      switch (tgt) {
+        case 'code': {
+          this._clipboardService.copyFromContent(this.member.member_promo_code);
+          this.openSnackBar(
+            'Copied! Now paste the code into and email SMS or social network app and send it!',
+            'OK',
+            10000
+          );
+          break;
+        }
+        case 'link': {
+          this._clipboardService.copyFromContent(this.getReferralLink());
+          this.openSnackBar(
+            'Copied! Now paste the link into and email SMS or social network app and send it!',
+            'OK',
+            10000
+          );
+          break;
+        }
+        default: {
+          break;
+        }
+      }
+
+    });
+  }
+
+
+
   // rcToggleClass(card) {
   //   card.classList.toggle('rc-card-over');
   // }
@@ -252,6 +321,7 @@ export class ProfilePageComponent implements OnInit {
 
       dialogRef.afterClosed().subscribe(result => {
         //console.log('AC', result);
+        this.showRestaurantFinder = false;
         this.getAssociatedRestaurants(this.member.member_id);
         //this.getDefaultImages();
       });

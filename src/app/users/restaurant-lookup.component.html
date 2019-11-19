@@ -1,7 +1,7 @@
 <form #restListing="ngForm">
 
   <h1 mat-dialog-title>
-    {{ 'Restaurant-Lookup.Search' | translate }}
+    {{ 'Restaurant-Lookup.Find' | translate }}
   </h1>
 
   <mat-dialog-content>
@@ -17,7 +17,8 @@
           matInput
           placeholder="{{ 'Restaurant-Lookup.EnterName' | translate | uppercase }}"
           (keyup)="findRestaurants(searchInput.value)"
-          autocomplete="off">
+          autocomplete="off"
+          autofocus>
         <mat-icon matSuffix>search</mat-icon>
       </mat-form-field>
     </section>

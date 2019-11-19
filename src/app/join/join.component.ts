@@ -9,6 +9,7 @@ import * as moment from 'moment';
   selector: 'rc-join',
   templateUrl: './join.component.html'
 })
+
 export class JoinComponent implements OnInit {
 
   loaded = false;
@@ -59,22 +60,21 @@ export class JoinComponent implements OnInit {
   }
 
   validateReferral(): void {
-
-    // Todo: invoke api call to check referral code and, if valid, return all relevant information
     console.log(`Call API and validate ${this.referrer.code}`);
     this.memberService.getPromo(this.referrer.code).subscribe(
       data => {
-        console.log(JSON.stringify(data));
+        console.log(data);
         if (data['promos'].length > 0) {
+          let ref = data['promos'][0];
           this.referrer.type = 'member';
-          this.referrer.name = data['promos'][0].member_first_name + ' ' + data['promos'][0].member_last_name;
-          this.referrer.id = data['promos'][0].member_id;
+          this.referrer.name = `${ref.member_first_name} ${ref.member_last_name}`;
+          this.referrer.id = ref.member_id;
         } else {
           this.referrer.type = 'self';
         }
       },
       error => {
-        console.log(JSON.stringify(error));
+        console.log(error);
         this.referrer.type = 'self';
       });
 

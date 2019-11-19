@@ -103,6 +103,7 @@ import { FileUploadModule } from 'ng2-file-upload';
 import { MarkdownModule } from 'ngx-markdown';
 import { ClipboardModule } from 'ngx-clipboard';
 import { JoinComponent } from './join/join.component';
+import { ReferralsComponent } from './users/referrals.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -156,7 +157,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     SafePipe,
     SigninComponent,
     AffiliatesComponent,
-    JoinComponent
+    JoinComponent,
+    ReferralsComponent
   ],
   imports: [
     AngularMaterialModule,
@@ -211,6 +213,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     ProfileDetailComponent,
     ProfileImageComponent,
     ProfileVerifyComponent,
+    ReferralsComponent,
     CmsImageDialogComponent,
     CmsFileUploadComponent,
     CmsMenuDishComponent,

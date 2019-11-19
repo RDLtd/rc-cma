@@ -9,7 +9,8 @@ export class MemberService {
 
   constructor(
     private http: HttpClient,
-    private config: AppConfig) {}
+    private config: AppConfig
+  ) {}
 
   getAll() {
     return this.http.post(this.config.apiUrl + '/members',
