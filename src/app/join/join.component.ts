@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { MemberService } from '../_services';
+import { MemberService, AuthenticationService } from '../_services';
 import { CmsLocalService } from '../cms';
 import { TranslateService } from '@ngx-translate/core';
 import * as moment from 'moment';
@@ -30,6 +30,7 @@ export class JoinComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private memberService: MemberService,
+    private authService: AuthenticationService,
     private cmsLocalService: CmsLocalService,
     private translate: TranslateService
   ) {
@@ -63,9 +64,9 @@ export class JoinComponent implements OnInit {
     console.log(`Call API and validate ${this.referrer.code}`);
     this.memberService.getPromo(this.referrer.code).subscribe(
       data => {
-        console.log(data);
+        // console.log(data);
         if (data['promos'].length > 0) {
-          let ref = data['promos'][0];
+          const ref = data['promos'][0];
           this.referrer.type = 'member';
           this.referrer.name = `${ref.member_first_name} ${ref.member_last_name}`;
           this.referrer.id = ref.member_id;
@@ -143,8 +144,20 @@ export class JoinComponent implements OnInit {
               error => {
                 console.log(JSON.stringify(error));
               });
+            // take the member directly to authentication - first need to re-read the member record to get the full object
+            this.memberService.getById(data['member_id'])
+              .subscribe(
+                memberData => {
+                  this.authService.setMember(memberData['member'][0]);
+                  // no need to check for valid result, using a temporary token for now
+                  this.authService.setAuthSession(memberData['member'][0],
+                    '$2b$10$B6yh.Y1bLzvUKKeIX3rIyefGybFCwBsQNi3Vhvys/qJfm3lDxR4pu', false);
+                },
+                error => {
+                  // should not really get here, but you never know...
+                  console.log('Failed to re-read member record', JSON.stringify(error));
+                });
           }
-          // and sign in directly to dashboard
 
         }
       },
