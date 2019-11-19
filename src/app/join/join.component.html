@@ -118,8 +118,9 @@
         mat-flat-button
         [disabled]="!formJoin.valid"
         color="accent">{{ 'Join.Join' | translate }}</button>
-      <p class="mat-small">{{ 'Join.Confirm' | translate }} <a href="#">{{ 'Join.Terms' | translate }}</a> {{ 'Join.And' | translate }}
-        <a href="#">{{ 'Join.Privacy' | translate }}</a>
+      <p class="mat-small">{{ 'Join.Confirm' | translate }} <a
+        href="{{ company_url }}/terms/" target="_blank">{{ 'Join.Terms' | translate }}</a> {{ 'Join.And' | translate }}
+        <a href="{{ company_url }}/privacy/" target="_blank">{{ 'Join.Privacy' | translate }}</a>
         .</p>
     </form>
   </div>
