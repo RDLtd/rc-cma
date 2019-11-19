@@ -64,6 +64,7 @@ export class AffiliatesComponent implements OnInit, OnDestroy {
     if (localStorage.getItem('rd_company_name') === 'Restaurateurs Indépendants') {
       company_code = 'RI';
     }
+
     this.restaurantService.getPartners(company_code)
       .subscribe(
         partners => {
@@ -133,8 +134,14 @@ export class AffiliatesComponent implements OnInit, OnDestroy {
           error => {
             console.log('Could not update access record');
           });
-      //
-      this.cmsLocalService.dspSnackbar(this.affiliates[index].partner_name + this.t_data.Message, 'OK', 30);
+      // show a special message if there is one...
+      let d_message;
+      if (this.affiliates[index].partner_contact_message) {
+        d_message = this.affiliates[index].partner_contact_message;
+      } else {
+        d_message = this.affiliates[index].partner_name + this.t_data.Message;
+      }
+      this.cmsLocalService.dspSnackbar(d_message, 'OK', 30);
     }
   }
 
