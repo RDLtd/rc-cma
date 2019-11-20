@@ -75,46 +75,25 @@ export class JoinComponent implements OnInit {
         } else {
           this.referrer.type = 'self';
         }
+        this.loaded = true;
       },
       error => {
         console.log(error);
         this.referrer.type = 'self';
-      });
-
-    // Set referral information
-
-    // Member
-    // this.referrer.type = 'member';
-    // this.referrer.name = 'Brian Turner';
-
-    // Agent
-    // this.referrer.type = 'agent';
-    // this.referrer.name = 'RSVP';
-    // this referrer.restaurant = 'EN-8001'
-
-    // Email
-    // this.referrer.type = 'email';
-    // this.referrer.name = 'RC';
-    // this referrer.restaurant = 'EN-8001'
-
         this.loaded = true;
+      });
   }
 
   join(formValue): void {
-    // Todo: Signin user
     console.log(formValue);
-    // break name into first and last (well, second actually) - assume we get at least something in the name!
-    const names = formValue['name'].split(' ');
-    if (names.length === 1) {
-      // just replicate the first field
-      names.push(names[0]);
-    }
+    // split full name
+    const names = formValue.name.split(' ');
     const newAdmin = {
       member_first_name: names[0],
-      member_last_name: names[1],
-      member_email: formValue['email'],
-      member_telephone: formValue['mobile'],
-      member_job: formValue['role'],
+      member_last_name: names.slice(1).join() || names[0], // combine any additional names
+      member_email: formValue.email,
+      member_telephone: formValue.mobile,
+      member_job: formValue.role,
       member_language: localStorage.getItem('rd_country'),
       restaurant_id: 0,
       member_id: 0
