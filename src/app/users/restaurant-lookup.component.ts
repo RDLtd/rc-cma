@@ -107,6 +107,8 @@ export class RestaurantLookupComponent implements OnInit {
   associateRestaurant(item) {
 
     const count = this.data.associatedRestaurants.length;
+    // TODO so here is the problem, via the join form we don't have this data set
+    console.log(this.data.associatedRestaurants);
 
     // Make sure it's not already been associated
     for (let i = 0; i < count; i++) {
@@ -129,8 +131,15 @@ export class RestaurantLookupComponent implements OnInit {
         data => {
           console.log(data);
           this.data.associatedRestaurants.push(item);
-          // TODO at this point all is OK with the association so we need to make this restaurant a member - don't think this is still true?
           this.dspSnackBar(item.restaurant_name + this.t_data.Added);
+          // TODO need to make this restaurant a member - now works
+          this.restaurantService.updateMemberStatus(item.restaurant_id, 'Associate').subscribe(
+            memdata => {
+              console.log(memdata);
+            },
+            error => {
+              console.log(error);
+            });
         },
         error => {
           console.log(error);
@@ -157,10 +166,16 @@ export class RestaurantLookupComponent implements OnInit {
             this.restaurantService.addAssociation(this.data.member_id, item.restaurant_id).subscribe(
               data => {
                 console.log(data);
-
                 this.data.associatedRestaurants.push(item);
-                // TODO at this point all is OK with the association so we need to make this restaurant a member
                 this.dspSnackBar(item.restaurant_name + this.t_data.Added);
+                // TODO need to make this restaurant a member - now works
+                this.restaurantService.updateMemberStatus(item.restaurant_id, 'Associate').subscribe(
+                  memdata => {
+                    console.log(memdata);
+                  },
+                  error => {
+                    console.log(error);
+                  });
               },
               error => {
                 console.log(error);

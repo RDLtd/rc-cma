@@ -52,7 +52,7 @@
         novalidate>
 
         <h1>{{ 'SignIn.SignIn' | translate }}</h1>
-        <span>or <a [routerLink]="'/join'">Join Restaurant Collective</a></span>
+        <span>{{ 'SignIn.Or' | translate }}<a [routerLink]="'/join'">{{ 'SignIn.Join' | translate }} {{ company_name }}</a></span>
         <mat-form-field class="rc-full-width">
           <mat-label>{{ 'SignIn.UserEmail' | translate }}</mat-label>
           <input

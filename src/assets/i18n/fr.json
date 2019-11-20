@@ -931,7 +931,8 @@
     "Forgotten": "Mot de passe oublié?",
     "NewPassword": "Un nouveau mot de passe a été envoyé à votre adresse email.",
     "Unknown": "Cette adresse email est inconnue!",
-    "Empowering": "Habiliter les restaurants"
+    "Empowering": "Habiliter les restaurants",
+    "Join": "Rejoindre"
   },
 
   "Payment": {
@@ -1114,7 +1115,8 @@
     "Chef": "Chef",
     "Manager": "Directeur / Directrice",
     "AlreadyReg": "Un administrateur avec ces informations est déjà enregistré dans notre base de données!",
-    "Success": "Nouvel enregistrement d'administrateur enregistré avec succès"
+    "Success": "Nouvel enregistrement d'administrateur enregistré avec succès",
+    "SupportEmail": "mailto:support@restaurateurs-independants.fr"
   }
 }
 
