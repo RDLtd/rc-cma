@@ -16,13 +16,13 @@ import {
 import { AppComponent } from './app.component';
 import { routing } from './app.routing';
 import { AppConfig } from './app.config';
-import { SafePipe } from './app.safe';
-import { HeaderComponent } from './header.component';
-import { FooterComponent } from './footer.component';
-import { SigninComponent } from './signin.component';
-import { AboutComponent } from './about.component';
-import { PwdMatchValidator } from './pwdMatch.validator';
-import { AngularMaterialModule } from './angular-material.module';
+import { SafePipe } from './shared/app.safe';
+import { HeaderComponent } from './common/header.component';
+import { FooterComponent } from './common/footer.component';
+import { SigninComponent } from './signin/signin.component';
+import { AboutComponent } from './common/about.component';
+import { PwdMatchValidator } from './shared/pwdMatch.validator';
+import { AngularMaterialModule } from './shared/angular-material.module';
 
 import {
   AuthGuard,
@@ -102,6 +102,8 @@ import { TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { FileUploadModule } from 'ng2-file-upload';
 import { MarkdownModule } from 'ngx-markdown';
 import { ClipboardModule } from 'ngx-clipboard';
+import { JoinComponent } from './join/join.component';
+import { ReferralsComponent } from './users/referrals.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -154,7 +156,9 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     PaymentComponent,
     SafePipe,
     SigninComponent,
-    AffiliatesComponent
+    AffiliatesComponent,
+    JoinComponent,
+    ReferralsComponent
   ],
   imports: [
     AngularMaterialModule,
@@ -209,6 +213,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     ProfileDetailComponent,
     ProfileImageComponent,
     ProfileVerifyComponent,
+    ReferralsComponent,
     CmsImageDialogComponent,
     CmsFileUploadComponent,
     CmsMenuDishComponent,

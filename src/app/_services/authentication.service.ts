@@ -130,8 +130,8 @@ export class AuthenticationService {
                 } else {
                   localStorage.setItem('rd_home', '/profile');
                 }
-                //console.log(data.restaurants[0].restaurant_id);
-                //localStorage.setItem('rd_home', '/profile');
+                // console.log(data.restaurants[0].restaurant_id);
+                // localStorage.setItem('rd_home', '/profile');
                 this.inSession = true;
                 this.memberSessionSubject.next('active' );
                 this.router.navigate([localStorage.getItem('rd_home')]);
@@ -164,62 +164,11 @@ export class AuthenticationService {
         }
       }
     }
-      //
-      // // RDL Admin
-      // if (member.member_access_level > 2) {
-      //
-      //   localStorage.setItem('rd_home', '/dashboard');
-      //
-      //   // RC Member
-      // } else {
-      //
-      //   if (member.member_access_level === 2) {
-      //
-      //     // regular member = 2
-      //     localStorage.setItem('rd_home', '/profile');
-      //     console.log('Profile');
-      //
-      //   } else {
-      //
-      //     if (member.member_access_level === 1) {
-      //
-      //       // curator = 1
-      //       console.log('Curator');
-      //       this.restaurantService.getCurationZoneSet(member.member_id)
-      //         .subscribe(
-      //           data => {
-      //             this.curation_zone_set = data.curation_zone_set;
-      //             // need to check that there are actually some data!
-      //             if (data.curation_zone_set.length > 0) {
-      //               // default is to take the first item on the list - should never be more than 1
-      //               // but this does not really matter, since the others will be loaded into the dropdown
-      //               localStorage.setItem('rd_home', '/curationzone/' + this.curation_zone_set[0].curation_id);
-      //             } else {
-      //               this.openSnackBar('You have not been assigned a curation zone!', '');
-      //               localStorage.setItem('rd_home', '/');
-      //             }
-      //           },
-      //           error => {
-      //             // this.openSnackBar('There was an error trying to access the curation database', '');
-      //           });
-      //     } else {
-      //
-      //       localStorage.setItem('rd_home', '/');
-      //
-      //     }
-      //   }
-      // }
-      // }
-
-    // this.inSession = true;
-
-    // Notify observers
-    // this.memberSessionSubject.next('active' );
   }
 
   logout(reason): void {
     this.member = null;
-    //localStorage.clear();
+    // localStorage.clear();
     localStorage.removeItem('rd_profile');
     localStorage.removeItem('rd_user');
     localStorage.removeItem('rd_token');
@@ -235,12 +184,12 @@ export class AuthenticationService {
   isAuth(): boolean {
 
     this.sessionExpiresAt = JSON.parse(localStorage.getItem('rd_token_expires_at'));
-    this.sessionTimeLeft = (this.sessionExpiresAt - new Date().getTime())/60000;
+    this.sessionTimeLeft = (this.sessionExpiresAt - new Date().getTime()) / 60000;
 
-    //console.log(this.sessionTimeLeft);
+    // console.log(this.sessionTimeLeft);
 
     // Time is up
-    if(this.sessionTimeLeft < 0) {
+    if (this.sessionTimeLeft < 0) {
 
       this.logout('expired');
       return false;
@@ -269,10 +218,10 @@ export class AuthenticationService {
   checkUserActivity() {
 
     // Scope reference for the listeners
-    let ths = this;
+    const ths = this;
 
     // Reset the session and clean up
-    let reset = function(){
+    let reset = function() {
       console.log('Detected activity, reset the session.');
       ths.setNewSessionExpiry();
       document.body.removeEventListener('click', reset);
@@ -295,7 +244,7 @@ export class AuthenticationService {
 
   isAuthLevel(requiredLevel): boolean {
 
-    let userLevel = localStorage.getItem('rd_access_level');
+    const userLevel = localStorage.getItem('rd_access_level');
 
     // Bump up access level if db is offline
     if (this.dbOffline) { requiredLevel = 4; }
@@ -313,7 +262,7 @@ export class AuthenticationService {
     requestOptions.params.set('foo', 'bar');
     requestOptions.params.set('apiCategory', 'Financial');
 
-    //this.http.get(environment.api+ '.feed.json', requestOptions );
+    // this.http.get(environment.api+ '.feed.json', requestOptions );
 
     if (currentUser && currentUser.token) {
       requestOptions.params.set('Authorization', 'Bearer ' + currentUser.token);

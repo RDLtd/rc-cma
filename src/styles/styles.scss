@@ -1,21 +1,25 @@
 
-// Material Web Component
+/**
+* Material Web Components
+* -----------------------
+* Edit defaults
+*/
+$mdc-layout-grid-default-gutter: ( desktop: 16px, tablet: 16px, phone: 8px);
+$mdc-layout-grid-default-margin: ( desktop: 16px, tablet: 16px, phone: 8px);
 @import "@material/layout-grid/mdc-layout-grid";
 
 @import "mat-themes";
 @import "vars";
 @import "reset";
 
+
 // Create a config with the default MAT typography levels.
 $config: mat-typography-config();
-
-// Uncomment to check for missing styles
-// @import "unused"
 
 /**
 * Utility classes
 * ----------------------------------
-**/
+*/
 
 .rc-loader {
   display: flex;
@@ -64,7 +68,16 @@ $config: mat-typography-config();
 .rc-warn { color: $rc-theme-warn; }
 .rc-media-small-hide { display: none !important; }
 .rc-media-med { display: block !important; }
+.rc-layout-table {
+  border: 0;
+  margin: 0 0 24px;
+  td:first-child { font-weight: bold; padding-right:24px;}
+}
 .agm-map { height: 300px; }
+.rc-loader-white {
+  .rc-spinner div { background-color: white !important;
+  }
+}
 
 @media screen and ( min-width : 600px ){
   .rc-media-small-hide { display: block !important; }
@@ -227,61 +240,94 @@ a.mat-menu-item {text-decoration: none;}
     font-size: 12px;
   }
 }
-.rc-signin-page {
-  background: $rc-theme-primary;
-  min-height: 100vh;
-  padding: 0 calc(100%/3 + 64px) 0 16px;
-  .rc-main {
+/**
+* Sign in / Register
+* ------------------------------------------
+*/
+
+.rc-join {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  .rc-join-info,
+  .rc-join-form {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    color: white;
-    min-height: 100vh;
-
-    header { display: block; margin-bottom: 16px;}
-    p {
-      max-width: 640px;
+    justify-content: center;
+    width: 100%;
+    min-height: 0;
+    h1 {
+      font-size: 32px;
+      font-weight: $rc-default-font-weight;
+      margin: 0 0 0;
+    }
+    h1 + span {
+      display: inline-block;
+      margin: 0 0 24px;
+    }
+  }
+  .rc-join-info {
+    background-color: #00BCD3;
+    color: black;
+    font-size: 18px;
+    &.rc-bgd {
+      background-color: $rc-theme-primary;
       color: white;
     }
-    .rc-brand-logo { height: 120px; }
-  }
-  .rc-signin {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    position: fixed;
-    top: 0; right: 0; bottom: 0;
-    background: white;
-    width: calc((100% / 3) - 48px);
-    padding: 48px;
-    header {
-      position: relative;
-      h1 {
-        font-size: 40px;
-        font-weight: $rc-default-font-weight;
-        margin: 0;
+    .rc-join-welcome {
+      padding: 48px;
+      max-width: 600px;
+      .rc-brand-logo {
+        height: 90px;
+        margin-bottom: 16px;
+      }
+      ol {
+        counter-reset: rc-counter;
+        list-style: none;
+        margin: 24px 0 16px;
+        padding-left: 8px;
+      }
+      ol li {
+        position: relative;
+        padding: 8px 0  8px 48px;
+        font: $rc-default-font-weight 16px/1.25 $rc-default-font;
+      }
+      ol li:before {
+        content: counter(rc-counter);
+        counter-increment: rc-counter;
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        font: bold 24px/1 $rc-default-font;
+        background: white;
+        border-radius: 50%;
+        height: 36px;
+        width: 36px;
+        color: #000;
+        line-height: 36px;
+        text-align: center;
       }
     }
-    .rc-brand-logo {
-      height: 64px;
-      display: block;
-      margin-bottom: 24px;
-    }
   }
-  form {
-    border-radius: 2px;
+  .rc-join-form {
     background-color: white;
-    margin: 1rem 0 2rem;
-    .mat-form-field { line-height: 1.4; }
-    input { font-size: 24px; }
-    button {
-      height: 56px;
-      font-size: mat-font-size($config, body-1);
+    form {
+      max-width: 400px;
+      padding: 48px;
     }
-    .terms {
-      font-size: 16px;
-      margin: 0 0 1rem;
+    .mat-form-field {
+      width: 100%;
+    }
+    button {
+      width: 100%;
+      margin: 24px 0 8px;
+      line-height: 64px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: $rc-default-font-weight;
     }
   }
 }
@@ -323,33 +369,15 @@ a.mat-menu-item {text-decoration: none;}
     flex-direction: row;
   }
 }
-
-@media screen and ( max-width : 768px ){
-
-  .rc-signin-page {
-    padding: 16px;
-    display: block;
-    height: auto;
-
-    .rc-signin {
-      box-sizing: border-box;
-      position: relative;
-      width: 100%;
-      margin: 0;
-      padding: 24px;
-    }
-    .rc-main {
-      display: block;
-      margin: 0;
-      padding: 0;
-      height: auto;
-      min-height: 0;
-      p { display: none; }
-      header { display: none; }
-      .rc-brand-logo { height: 64px; }
-    }
+@media screen and ( min-width : 768px ){
+  .rc-join {
+    flex-direction: row;
+    .rc-join-info, .rc-join-form { min-height: 100vh; }
+    .rc-join-info { width: 62%; }
+    .rc-join-form { width: 38%; }
   }
 }
+
 
 /**
 * RC Cards
@@ -409,17 +437,21 @@ a.mat-menu-item {text-decoration: none;}
   float: left;
 }
 .rc-card-restaurant {
-  padding: 0 16px 16px;
+  position: relative;
+  background-color: white;
+  transition: all .3s ease-in-out;
+  &:hover {
+    @include mat-elevation(6);
+  }
   .rc-card-restaurant-nav {
     position: absolute;
     bottom: 0;
+    height: 48px;
     width: calc(100%);
-    margin: 4px -16px;
     display: flex;
   }
   .rc-card-img-wrapper {}
   img {
-    width: calc(100% + 64px);
     height: auto;
     cursor: pointer;
     &:focus {
@@ -428,7 +460,8 @@ a.mat-menu-item {text-decoration: none;}
   }
   .rc-card-restaurant-content {
     cursor: pointer;
-    margin-bottom: 32px;
+    padding: 0 16px 0;
+    margin-bottom: 48px;
     &:focus { outline: none; }
     h2 { margin: 8px 0 0; }
     span {
@@ -437,8 +470,9 @@ a.mat-menu-item {text-decoration: none;}
   }
   .rc-card-restaurant-actions {
     position: absolute;
+    width: calc(100% - 32px);
     bottom: 0;
-    right: 0;
+    right: 0; left: 0;
     margin: 16px 4px 4px !important;
   }
 }
@@ -877,49 +911,6 @@ ul.rc-lookup-results {
   &:hover {
     color: $rc-theme-black;
     border-color: $rc-theme-black;
-  }
-}
-.rc-restaurant-card {
-  position: relative;
-  background: white;
-  transition: all .3s ease-in-out;
-  &:hover {
-    @include mat-elevation(6);
-  }
-  header {
-    display: flex;
-    margin:0;
-    padding: 8px;
-    h3 {
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      padding-right: 8px;
-      margin: 0;
-      text-transform: uppercase;
-      font-size: 24px;
-      font-weight: $rc-display-font-weight;
-    }
-    span {
-      display: flex;
-      white-space: nowrap;
-    }
-    .rc-success { color: $rc-theme-success; }
-  }
-  .rc-restaurant-card-img {
-    height: 240px;
-    img {
-      width:100%;
-      height:100%;
-      object-fit: cover;
-    }
-  }
-  .rc-restaurant-card-body {
-    padding: 0 8px;
-  }
-  .rc-restaurant-card-actions {
-    text-align: right;
-    padding: 8px;
   }
 }
 

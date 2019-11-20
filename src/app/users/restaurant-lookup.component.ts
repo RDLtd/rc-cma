@@ -122,37 +122,56 @@ export class RestaurantLookupComponent implements OnInit {
       return;
     }
 
-    // Before setting up an association make sure the user gets an authorisation code
-    const dialogref = this.dialog.open(ProfileVerifyComponent, {
-      data: {
-        rest_name: item.restaurant_name,
-        rest_email: item.restaurant_email,
-        rest_verification_code: item.restaurant_number
-      }
-    });
+    // If the member arrives here with a valid referral code, we are going to bypass the verification email step
+    if (sessionStorage.getItem('referrer_type') === 'member') {
+      // simply associate this restaurant
+      this.restaurantService.addAssociation(this.data.member_id, item.restaurant_id).subscribe(
+        data => {
+          console.log(data);
+          this.data.associatedRestaurants.push(item);
+          // TODO at this point all is OK with the association so we need to make this restaurant a member - don't think this is still true?
+          this.dspSnackBar(item.restaurant_name + this.t_data.Added);
+        },
+        error => {
+          console.log(error);
+        });
+      this.dialog.closeAll();
 
-    dialogref.afterClosed().subscribe(result => {
-
-      if (result) {
-        // user typed the right code
-        if (result.confirmed) {
-          this.restaurantService.addAssociation(this.data.member_id, item.restaurant_id).subscribe(
-            data => {
-              console.log(data);
-
-              this.data.associatedRestaurants.push(item);
-              // TODO at this point all is OK with the association so we need to make this restaurant a member
-              this.dspSnackBar(item.restaurant_name + this.t_data.Added);
-            },
-            error => {
-              console.log(error);
-            });
-          this.dialog.closeAll();
-        } else {
-          console.log('Invalid code');
+    } else {
+      // if the user did not pass the refer code check then they need to go through the verification phase
+      //
+      // Before setting up an association make sure the user gets an authorisation code
+      const dialogref = this.dialog.open(ProfileVerifyComponent, {
+        data: {
+          rest_name: item.restaurant_name,
+          rest_email: item.restaurant_email,
+          rest_verification_code: item.restaurant_number
         }
-      }
-    });
+      });
+
+      dialogref.afterClosed().subscribe(result => {
+
+        if (result) {
+          // user typed the right code
+          if (result.confirmed) {
+            this.restaurantService.addAssociation(this.data.member_id, item.restaurant_id).subscribe(
+              data => {
+                console.log(data);
+
+                this.data.associatedRestaurants.push(item);
+                // TODO at this point all is OK with the association so we need to make this restaurant a member
+                this.dspSnackBar(item.restaurant_name + this.t_data.Added);
+              },
+              error => {
+                console.log(error);
+              });
+            this.dialog.closeAll();
+          } else {
+            console.log('Invalid code');
+          }
+        }
+      });
+    }
   }
 
   showRequestForm(searchInput) {

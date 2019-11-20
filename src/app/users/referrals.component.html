@@ -1,0 +1,57 @@
+<div class="rc-dialog rc-dialog-small">
+
+  <h1 mat-dialog-title>
+    SEND REFERRALS
+  </h1>
+
+    <mat-dialog-content>
+
+      <table class="rc-layout-table">
+        <tr>
+          <td>CODE:</td>
+          <td>
+            <a
+              mat-dialog-close="code"
+              matTooltip="Click to copy the code">
+              {{ data.member.member_promo_code }}
+            </a>
+          </td>
+        </tr>
+        <tr>
+          <td>LINK:</td>
+          <td>
+            <a
+              mat-dialog-close="link"
+              matTooltip="Click to copy the link">
+              {{ data.joinUrl }}
+            </a>
+          </td>
+        </tr>
+      </table>
+
+      <p>This is your personal referral code which you can send to your colleagues and associates to encourage them
+        to join you in supporting Restaurant Collective.</p>
+      <p>Copy and paste the link into an <strong>email</strong>, <strong>SMS</strong>, <strong>WhatsApp
+      </strong> message or via your favourite social network!</p>
+    </mat-dialog-content>
+
+    <mat-dialog-actions align="end">
+
+      <button
+        type="button"
+        mat-dialog-close
+        mat-button>
+        {{ 'Password.Cancel' | translate }}
+      </button>
+
+      <button
+        mat-flat-button
+        mat-dialog-close="link"
+        matTooltip="Copy your referral link"
+        color="primary">
+        COPY LINK
+      </button>
+
+    </mat-dialog-actions>
+
+</div>

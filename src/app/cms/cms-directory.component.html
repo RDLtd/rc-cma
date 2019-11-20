@@ -7,7 +7,7 @@
       <span class="rc-space-filler"></span>
 
 
-      <span *ngIf="!verification_due" class="rc-media-small-hide">{{ restaurant.restaurant_verified_on | date: 'dd MMM yyyy' }}</span>
+      <span *ngIf="!verification_due" class="rc-media-small-hide">{{ d_restaurant_verified_on }}</span>
       <span class="rc-media-small-hide" *ngIf="restaurant.restaurant_verified_by === ''">{{ 'CMS-Directory.Awaiting' | translate }}</span>
 
       <span class="rc-section-toolbar-actions">
@@ -37,14 +37,10 @@
   <mat-card *ngIf="verification_due" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
     <mat-card-title>{{ 'CMS-Directory.Action' | translate }}</mat-card-title>
     <mat-card-content style="font-size: 16px;">
-      <!--Your information was last verified by <strong>{{ restaurant.restaurant_verified_by }}</strong> on <strong>{{-->
-      <!--restaurant.restaurant_verified_on | date }}</strong>. Please review your directory listing below and VERIFY that-->
-      <!--the listing information and contact details are still correct. If any of the information has changed, or is-->
-      <!--incomplete, please send us a EDIT REQUEST with your updates.-->
       {{ 'CMS-Directory.LastVerified' | translate }}
       <strong>{{ restaurant.restaurant_verified_by }}</strong>
       {{ 'CMS-Directory.On' | translate }}
-      <strong>{{restaurant.restaurant_verified_on | date }}</strong>.
+      <strong>{{ d_restaurant_verified_on }}</strong>.
       {{ 'CMS-Directory.Review' | translate }}
     </mat-card-content>
       <mat-card-actions align="end">

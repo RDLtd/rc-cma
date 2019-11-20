@@ -1,0 +1,127 @@
+<div class="rc-join">
+  <div class="rc-join-info">
+    <rc-loader class="rc-loader-white" *ngIf="!loaded"></rc-loader>
+    <div *ngIf="loaded">
+      <div class="rc-join-welcome" [ngSwitch]="referrer.type">
+        <img class="rc-brand-logo" src="../assets/images/{{ company_logo_root }}-trans-white.svg">
+        <!-- Self -->
+        <div *ngSwitchCase="'self'">
+          <h1>{{ 'Join.Free' | translate }}</h1>
+          <p>{{ 'Join.Part' | translate }} <strong>{{ company_name }}</strong>
+            {{ 'Join.Enjoy' | translate }}</p>
+          <ol>
+            <li>{{ 'Join.Free1' | translate }}</li>
+            <li>{{ 'Join.Free2' | translate }}</li>
+            <li>{{ 'Join.Free3' | translate }}</li>
+          </ol>
+          <p>{{ 'Join.Problems' | translate }}
+            <a href="mailto:support@restaurantcollective.uk">{{ 'Join.SupportTeam' | translate }}</a>.</p>
+        </div>
+        <!-- Member -->
+        <div *ngSwitchCase="'member'">
+          <h1>{{ 'Join.Support' | translate }}</h1>
+          <p>{{ 'Join.Invited' | translate }} <strong>{{ referrer?.name }}</strong> {{ 'Join.Become' | translate }} {{ company_name }},
+            {{ 'Join.Exciting' | translate }}</p>
+          <p>{{ 'Join.ToActivate' | translate }} {{ referrer?.name }} {{ 'Join.Follow' | translate }}</p>
+          <ol>
+            <li>{{ 'Join.Step1' | translate }}</li>
+            <li>{{ 'Join.Step2' | translate }}</li>
+            <li>{{ 'Join.Step3' | translate }}</li>
+          </ol>
+          <p>{{ 'Join.Problems' | translate }}
+            <a href="mailto:support@restaurantcollective.uk">{{ 'Join.SupportTeam' | translate }}</a>.</p>
+        </div>
+        <!-- Default -->
+        <div *ngSwitchDefault>
+          <h1>{{ 'Join.Free' | translate }}</h1>
+          <p>{{ 'Join.Part' | translate }}<strong>{{ company_name }}</strong>
+            {{ 'Join.Enjoy' | translate }}</p>
+          <ol>
+            <li>{{ 'Join.Free1' | translate }}</li>
+            <li>{{ 'Join.Free2' | translate }}</li>
+            <li>{{ 'Join.Free3' | translate }}</li>
+          </ol>
+          <p>{{ 'Join.Problems' | translate }}
+            <a href="mailto:support@restaurantcollective.uk">{{ 'Join.SupportTeam' | translate }}</a>.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="rc-join-form">
+    <form
+      #formJoin="ngForm"
+      (ngSubmit)="formJoin.form.valid && join(formJoin.value)"
+      novalidate>
+      <h1>{{ 'Join.JoinUs' | translate }}</h1>
+      <span>{{ 'Join.Or' | translate }} <a [routerLink]="'/signin'">{{ 'Join.SignIn' | translate }}</a> {{ 'Join.Already' | translate }}</span>
+      <mat-form-field hideRequiredMarker>
+        <mat-label>{{ 'Join.FullName' | translate }}</mat-label>
+        <input
+          #name="ngModel"
+          ngModel
+          matInput
+          type="text"
+          name="name"
+          [placeholder]="'Join.FullName' | translate"
+          autofocus
+          required>
+        <mat-hint align="end" *ngIf="name.invalid">{{ 'Join.FirstAndLast' | translate }}</mat-hint>
+        <mat-error align="end" *ngIf="name.errors?.required">{{ 'Join.FullName' | translate }} {{ 'Join.Required' | translate }}</mat-error>
+      </mat-form-field>
+      <mat-form-field hideRequiredMarker>
+        <mat-label>{{ 'Join.Job' | translate }}</mat-label>
+        <mat-select ngModel name="role">
+          <mat-option value="owner">{{ 'Join.Owner' | translate }}</mat-option>
+          <mat-option value="chef">{{ 'Join.Chef' | translate }}</mat-option>
+          <mat-option value="manager">{{ 'Join.Manager' | translate }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field hideRequiredMarker>
+        <mat-label>{{ 'Join.Email' | translate }}</mat-label>
+        <input
+          #email="ngModel"
+          ngModel
+          matInput
+          type="email"
+          name="email"
+          [placeholder]="'Join.Email' | translate"
+          email
+          required>
+        <mat-hint align="end" *ngIf="email.invalid">{{ 'Join.Contact' | translate }}</mat-hint>
+        <mat-error align="end" *ngIf="email?.errors">{{ 'Join.ValidEmail' | translate }}</mat-error>
+      </mat-form-field>
+      <mat-form-field hideRequiredMarker>
+        <mat-label>{{ 'Join.Mobile' | translate }}</mat-label>
+        <input
+          #mobile="ngModel"
+          ngModel
+          matInput
+          type="tel"
+          name="mobile"
+          [placeholder]="'Join.Mobile' | translate"
+          required>
+        <mat-error align="end" *ngIf="mobile.errors?.required">{{ 'Join.ValidEmail' | translate }} {{ 'Join.Required' | translate }}</mat-error>
+      </mat-form-field>
+      <mat-form-field *ngIf="!referrer?.code">
+        <mat-label>{{ 'Join.RefCode' | translate }}</mat-label>
+        <input
+          #code="ngModel"
+          ngModel
+          matInput
+          type="text"
+          name="code"
+          [placeholder]="'Join.RefCode' | translate">
+<!--        <mat-hint align="end">Referral Code</mat-hint>-->
+      </mat-form-field>
+      <button
+        type="submit"
+        mat-flat-button
+        [disabled]="!formJoin.valid"
+        color="accent">{{ 'Join.Join' | translate }}</button>
+      <p class="mat-small">{{ 'Join.Confirm' | translate }} <a
+        href="{{ company_url }}/terms/" target="_blank">{{ 'Join.Terms' | translate }}</a> {{ 'Join.And' | translate }}
+        <a href="{{ company_url }}/privacy/" target="_blank">{{ 'Join.Privacy' | translate }}</a>
+        .</p>
+    </form>
+  </div>
+</div>

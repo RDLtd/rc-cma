@@ -34,12 +34,17 @@ export class CmsMenusComponent implements OnInit {
     private dialog: MatDialog,
     private translate: TranslateService,
     public help: HelpService
-  ) { }
+  ) {
+    // detect language changes... need to check for change in texts
+    translate.onLangChange.subscribe(lang => {
+      this.translate.get('CMS-Menus').subscribe(data => {this.t_data = data; });
+    });
+  }
 
   ngOnInit() {
     this.translate.get('CMS-Menus').subscribe(data => {
       this.t_data = data;
-      //console.log(this.t_data);
+      // console.log(this.t_data);
     });
 
     // Subscribe to service

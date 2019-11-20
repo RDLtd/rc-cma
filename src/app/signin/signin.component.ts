@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationService, MemberService } from './_services';
+import { AuthenticationService, MemberService } from '../_services';
 import { MatSnackBar } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -11,12 +11,12 @@ import { TranslateService } from '@ngx-translate/core';
 
 export class SigninComponent implements OnInit {
 
+  isReferral = false;
   isSubmitting: boolean;
   dbOffline: boolean = false;
   errorMsg: string;
   pwdReset: boolean = false;
   user_email: string;
-  country: any;
 
   company_name;
   company_logo_root;
@@ -35,23 +35,30 @@ export class SigninComponent implements OnInit {
 
   ngOnInit() {
 
-    this.activeRoute.queryParams.subscribe(params => {
-      this.user_email = params['em'];
-    });
+    this.activeRoute.queryParamMap
+      .subscribe(params => {
+        if (params.has('ref')) {
+          // validate code
+          console.log('Referral Code = ', params.get('ref'));
+        } else {
+          // signin
+          this.isReferral = false;
+        }
+        // console.log(params.getAll('rc'));
+      });
+
+    this.activeRoute.paramMap
+      .subscribe(params => {
+        console.log('Param = ', params.get('ref'));
+      });
+
+
+    // this.activeRoute.queryParams.pipe(
+    //   switchMap(params => (console.log('P3', params)));
 
     this.translate.get('SignIn').subscribe(data => {
       this.t_data = data;
     });
-
-    // this.memberService.getCountry(localStorage.getItem('rd_country')).subscribe(
-    //   data => {
-    //     console.log(data.country[0]);
-    //     this.country = data.country[0];
-    //   },
-    //   error => {
-    //     console.log(error);
-    //   });
-
 
     this.company_name = localStorage.getItem('rd_company_name');
     this.company_logo_root = localStorage.getItem('rd_company_logo_root');
@@ -69,11 +76,8 @@ export class SigninComponent implements OnInit {
     this.authService.login(formValue)
       .subscribe(
         authResult => {
-
           this.isSubmitting = false;
-
           this.authService.setMember(authResult['member']);
-
           if (authResult && authResult['token']) {
             // console.log('Auth OK');
             this.authService.setAuthSession(authResult['member'], authResult['token'], this.dbOffline);
@@ -82,7 +86,6 @@ export class SigninComponent implements OnInit {
           }
           // this.router.navigate([this.tgtRoute || localStorage.getItem('rd_home')]);
         },
-
         error => {
           // translation problem here - this error is not translated... Hmmm
           this.errorMsg = error.statusText;
@@ -91,7 +94,7 @@ export class SigninComponent implements OnInit {
         });
   }
 
-  showPwdRest(boo: boolean){
+  showPwdReset(boo: boolean) {
     this.pwdReset = boo;
     this.errorMsg = '';
   }
