@@ -131,6 +131,7 @@ export class ProfilePageComponent implements OnInit {
   }
 
   getReferralLink(){
+    // TODO: Check that this works for pipeline
     return `${this.appConfig.apiUrl}/join/${this.member.member_promo_code}`
   }
 
