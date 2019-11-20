@@ -97,7 +97,7 @@ export class JoinComponent implements OnInit {
     // this.referrer.name = 'RC';
     // this referrer.restaurant = 'EN-8001'
 
-    this.loaded = true;
+        this.loaded = true;
   }
 
   join(formValue): void {
