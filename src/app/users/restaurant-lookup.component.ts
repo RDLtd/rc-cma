@@ -123,10 +123,7 @@ export class RestaurantLookupComponent implements OnInit {
     }
 
     // If the member arrives here with a valid referral code, we are going to bypass the verification email step
-    // TODO need to set this variable from the join component somehow...
-    const referred_member = true;
-
-    if (referred_member) {
+    if (sessionStorage.getItem('referrer_type') === 'member') {
       // simply associate this restaurant
       this.restaurantService.addAssociation(this.data.member_id, item.restaurant_id).subscribe(
         data => {

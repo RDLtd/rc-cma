@@ -58,6 +58,7 @@ export class JoinComponent implements OnInit {
     this.translate.get('Join').subscribe(data => {
       this.t_data = data;
     });
+    sessionStorage.setItem('referrer_type', 'self');
   }
 
   validateReferral(): void {
@@ -70,6 +71,7 @@ export class JoinComponent implements OnInit {
           this.referrer.type = 'member';
           this.referrer.name = `${ref.member_first_name} ${ref.member_last_name}`;
           this.referrer.id = ref.member_id;
+          sessionStorage.setItem('referrer_type', 'member');
         } else {
           this.referrer.type = 'self';
         }
