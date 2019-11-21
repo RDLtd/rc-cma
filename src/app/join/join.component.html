@@ -111,7 +111,6 @@
           type="text"
           name="code"
           [placeholder]="'Join.RefCode' | translate">
-<!--        <mat-hint align="end">Referral Code</mat-hint>-->
       </mat-form-field>
       <button
         type="submit"
@@ -119,9 +118,8 @@
         [disabled]="!formJoin.valid"
         color="accent">{{ 'Join.Join' | translate }}</button>
       <p class="mat-small">{{ 'Join.Confirm' | translate }} <a
-        href="{{ company_url }}/terms/" target="_blank">{{ 'Join.Terms' | translate }}</a> {{ 'Join.And' | translate }}
-        <a href="{{ company_url }}/privacy/" target="_blank">{{ 'Join.Privacy' | translate }}</a>
-        .</p>
+        href="{{ company_url }}/terms/" target="_blank">{{ 'Join.Terms' | translate }}</a> {{ 'Join.And' | translate }} <a href="{{ company_url }}/privacy/" target="_blank">{{ 'Join.Privacy' | translate }}</a>.
+      </p>
     </form>
   </div>
 </div>

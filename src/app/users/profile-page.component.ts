@@ -35,13 +35,11 @@ export class ProfilePageComponent implements OnInit {
   restaurants: Array<Restaurant>;
   restaurant: Restaurant;
   member: Member = new Member();
-  isSubmitting = false;
   defaultImages: Array<any> = [];
   placeholderImage;
   isDemoMember = false;
   showLoader = false;
   referrer: any;
-  joinUrl: string;
   showRestaurantFinder = true;
 
   // translation variables
@@ -55,12 +53,12 @@ export class ProfilePageComponent implements OnInit {
     private memberService: MemberService,
     private ga: AnalyticsService,
     private cms: CMSService,
-    public financialService: FinancialService,
+    //public financialService: FinancialService,
     public snackBar: MatSnackBar,
     private router: Router,
     private translate: TranslateService,
     public help: HelpService,
-    public authService: AuthenticationService,
+    //public authService: AuthenticationService,
     public appConfig: AppConfig,
     private _clipboardService: ClipboardService,
     public dialog: MatDialog) {
@@ -130,8 +128,7 @@ export class ProfilePageComponent implements OnInit {
       });
   }
 
-  getReferralLink(){
-    // TODO: Check that this works for pipeline
+  getReferralLink(): string{
     return `${this.appConfig.apiUrl}/join/${this.member.member_promo_code}`
   }
 
