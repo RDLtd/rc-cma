@@ -144,7 +144,6 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
 
     this.user = this.authService.getLoggedInUser();
     // ToDo The above does not work for refresh of deep link to dashboard - there is no member data
-    // console.log(this.user);
 
     this.translate.get('CMS-Dashboard').subscribe(data => {
       this.t_data = data;
