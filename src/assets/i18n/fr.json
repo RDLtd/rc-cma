@@ -836,7 +836,19 @@
     "NoFinancial": "Aucun de vos restaurants associés n'a de données financières enregistrées!",
     "Compare": " Afin de comparer votre restaurant avec d'autres, vous devez fournir des données appropriées.",
     "IsAssociate": "est Membre associé des ",
-    "IsFull": "est Membre à part entière des "
+    "IsFull": "est Membre à part entière des ",
+    "SendReferral": "Envoyer un Code de Parrainage",
+    "ReferralCode": "Code de Parrainage",
+    "Owner": "Propriétaire",
+    "Chef": "Chef",
+    "Manager": "Directeur / Directrice",
+    "Administrator": "Administrateur",
+    "Curator": "Conservateur",
+    "Affiliate": "Filiale",
+    "Chairman": "Président",
+    "Agent": "Agent",
+    "Front-of-House": "Réception",
+    "Marketing": "Commercialisation"
   },
 
   "Profile-Image": {
