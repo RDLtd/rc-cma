@@ -35,27 +35,6 @@ export class SigninComponent implements OnInit {
 
   ngOnInit() {
 
-    this.activeRoute.queryParamMap
-      .subscribe(params => {
-        if (params.has('ref')) {
-          // validate code
-          console.log('Referral Code = ', params.get('ref'));
-        } else {
-          // signin
-          this.isReferral = false;
-        }
-        // console.log(params.getAll('rc'));
-      });
-
-    this.activeRoute.paramMap
-      .subscribe(params => {
-        console.log('Param = ', params.get('ref'));
-      });
-
-
-    // this.activeRoute.queryParams.pipe(
-    //   switchMap(params => (console.log('P3', params)));
-
     this.translate.get('SignIn').subscribe(data => {
       this.t_data = data;
     });
