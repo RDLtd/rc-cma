@@ -931,7 +931,8 @@
     "Forgotten": "Forgotten your password?",
     "NewPassword": "A new password has been sent to your email address",
     "Unknown": "This email address is unknown!",
-    "Empowering": "Empowering Restaurants"
+    "Empowering": "Empowering Restaurants",
+    "Join": "Join"
   },
 
   "Payment": {
@@ -1114,6 +1115,7 @@
     "Chef": "Chef",
     "Manager": "Manager",
     "AlreadyReg": "An administrator with these details is already registered in our database!",
-    "Success": "New administrator record successfully registered"
+    "Success": "New administrator record successfully registered",
+    "SupportEmail": "mailto:support@restaurantcollective.uk"
   }
 }

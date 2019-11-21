@@ -5,8 +5,9 @@ import { AppConfig } from '../app.config';
 import { ProfileVerifyComponent } from './profile-verify.component';
 import { MAT_DIALOG_DATA, MatDialog, MatSnackBar } from '@angular/material';
 import { HttpClient } from '@angular/common/http';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateService } from '@ngx-translate/core';;
 import { HelpService } from '../_services';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'rc-restaurant-lookup',
@@ -60,6 +61,7 @@ export class RestaurantLookupComponent implements OnInit {
   }
 
   GetCountry () {
+    // return this.http.get('https://ipinfo.io').pipe(map((res: any) => res.json()));
     return this.http.get('https://ipinfo.io?token=b3a0582a14c7a4');
   }
 
@@ -105,6 +107,8 @@ export class RestaurantLookupComponent implements OnInit {
   associateRestaurant(item) {
 
     const count = this.data.associatedRestaurants.length;
+    // TODO so here is the problem, via the join form we don't have this data set
+    console.log(this.data.associatedRestaurants);
 
     // Make sure it's not already been associated
     for (let i = 0; i < count; i++) {
@@ -123,7 +127,23 @@ export class RestaurantLookupComponent implements OnInit {
     // If the member arrives here with a valid referral code, we are going to bypass the verification email step
     if (sessionStorage.getItem('referrer_type') === 'member') {
       // simply associate this restaurant
-      this.addAssociation(this.data.member_id, item.restaurant_id);
+      this.restaurantService.addAssociation(this.data.member_id, item.restaurant_id).subscribe(
+        data => {
+          console.log(data);
+          this.data.associatedRestaurants.push(item);
+          this.dspSnackBar(item.restaurant_name + this.t_data.Added);
+          // TODO need to make this restaurant a member - now works
+          this.restaurantService.updateMemberStatus(item.restaurant_id, 'Associate').subscribe(
+            memdata => {
+              console.log(memdata);
+            },
+            error => {
+              console.log(error);
+            });
+        },
+        error => {
+          console.log(error);
+        });
       this.dialog.closeAll();
 
     } else {
@@ -143,7 +163,23 @@ export class RestaurantLookupComponent implements OnInit {
         if (result) {
           // user typed the right code
           if (result.confirmed) {
-            this.addAssociation(this.data.member_id, item.restaurant_id);
+            this.restaurantService.addAssociation(this.data.member_id, item.restaurant_id).subscribe(
+              data => {
+                console.log(data);
+                this.data.associatedRestaurants.push(item);
+                this.dspSnackBar(item.restaurant_name + this.t_data.Added);
+                // TODO need to make this restaurant a member - now works
+                this.restaurantService.updateMemberStatus(item.restaurant_id, 'Associate').subscribe(
+                  memdata => {
+                    console.log(memdata);
+                  },
+                  error => {
+                    console.log(error);
+                  });
+              },
+              error => {
+                console.log(error);
+              });
             this.dialog.closeAll();
           } else {
             console.log('Invalid code');
@@ -151,19 +187,6 @@ export class RestaurantLookupComponent implements OnInit {
         }
       });
     }
-  }
-
-  addAssociation(memberId, restaurant){
-    this.restaurantService.addAssociation(memberId, restaurant.restaurant_id).subscribe(
-      data => {
-        console.log(data);
-        this.data.associatedRestaurants.push(restaurant);
-        // TODO at this point all is OK with the association so we need to make this restaurant a member
-        this.dspSnackBar(restaurant.restaurant_name + this.t_data.Added);
-      },
-      error => {
-        console.log(error);
-      });
   }
 
   showRequestForm(searchInput) {

@@ -113,7 +113,8 @@ export class JoinComponent implements OnInit {
 
         } else {
 
-          this.cmsLocalService.dspSnackbar(this.t_data.Success);
+          // TODO removed the 'success' snack bar display. Might need to consider showing it in the 'self' path?
+          // this.cmsLocalService.dspSnackbar(this.t_data.Success);
 
           // record the usage of the code if there was one
           // Note we need the id of the new member here, that is returned by createAdministrator

@@ -14,8 +14,16 @@
             <li>{{ 'Join.Free2' | translate }}</li>
             <li>{{ 'Join.Free3' | translate }}</li>
           </ol>
-          <p>{{ 'Join.Problems' | translate }}
-            <a href="mailto:support@restaurantcollective.uk">{{ 'Join.SupportTeam' | translate }}</a>.</p>
+          <div *ngIf="company_name==='Restaurant Collective'; else French">
+            <p>{{ 'Join.Problems' | translate }}
+              <a href="mailto:support@restaurantcollective.uk">{{ 'Join.SupportTeam' | translate }}</a>.
+            </p>
+          </div>
+          <ng-template #French>
+            <p>{{ 'Join.Problems' | translate }}
+              <a href="mailto:support@restaurateurs-independants.fr">{{ 'Join.SupportTeam' | translate }}</a>.
+            </p>
+          </ng-template>
         </div>
         <!-- Member -->
         <div *ngSwitchCase="'member'">
@@ -28,8 +36,16 @@
             <li>{{ 'Join.Step2' | translate }}</li>
             <li>{{ 'Join.Step3' | translate }}</li>
           </ol>
-          <p>{{ 'Join.Problems' | translate }}
-            <a href="mailto:support@restaurantcollective.uk">{{ 'Join.SupportTeam' | translate }}</a>.</p>
+          <div *ngIf="company_name==='Restaurant Collective'; else French">
+            <p>{{ 'Join.Problems' | translate }}
+              <a href="mailto:support@restaurantcollective.uk">{{ 'Join.SupportTeam' | translate }}</a>.
+            </p>
+          </div>
+          <ng-template #French>
+            <p>{{ 'Join.Problems' | translate }}
+              <a href="mailto:support@restaurateurs-independants.fr">{{ 'Join.SupportTeam' | translate }}</a>.
+            </p>
+          </ng-template>
         </div>
         <!-- Default -->
         <div *ngSwitchDefault>
@@ -41,8 +57,16 @@
             <li>{{ 'Join.Free2' | translate }}</li>
             <li>{{ 'Join.Free3' | translate }}</li>
           </ol>
-          <p>{{ 'Join.Problems' | translate }}
-            <a href="mailto:support@restaurantcollective.uk">{{ 'Join.SupportTeam' | translate }}</a>.</p>
+          <div *ngIf="company_name==='Restaurant Collective'; else French">
+            <p>{{ 'Join.Problems' | translate }}
+              <a href="mailto:support@restaurantcollective.uk">{{ 'Join.SupportTeam' | translate }}</a>.
+            </p>
+          </div>
+          <ng-template #French>
+            <p>{{ 'Join.Problems' | translate }}
+              <a href="mailto:support@restaurateurs-independants.fr">{{ 'Join.SupportTeam' | translate }}</a>.
+            </p>
+          </ng-template>
         </div>
       </div>
     </div>
