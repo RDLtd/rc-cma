@@ -17,7 +17,7 @@
 
           <button
             mat-icon-button
-            matTooltip="Send a referral"
+            matTooltip="{{ 'Profile-Page.SendReferral' | translate }}"
             (click)="dspReferrals()">
             <mat-icon>contact_mail</mat-icon>
           </button>
@@ -78,7 +78,8 @@
                 class="rc-active"
                 (click)="updateProfile()">
                 <mat-icon>person</mat-icon>
-                {{ member.member_job }}
+<!--                {{ member.member_job }}-->
+                {{ d_member_job }}
               </span>
 
               <span
@@ -98,9 +99,9 @@
               <span
                 class="rc-active"
                 (click)="dspReferrals()"
-                matTooltip="Send a referral">
+                matTooltip="{{ 'Profile-Page.SendReferral' | translate }}">
                 <mat-icon>contact_mail</mat-icon>
-                Referral Code:&nbsp;<a>{{ member?.member_promo_code }}</a>
+                {{ 'Profile-Page.ReferralCode' | translate }}:&nbsp;<a>{{ member?.member_promo_code }}</a>
               </span>
             </div>
             <div

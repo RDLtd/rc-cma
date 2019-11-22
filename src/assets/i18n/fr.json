@@ -836,7 +836,19 @@
     "NoFinancial": "Aucun de vos restaurants associés n'a de données financières enregistrées!",
     "Compare": " Afin de comparer votre restaurant avec d'autres, vous devez fournir des données appropriées.",
     "IsAssociate": "est Membre associé des ",
-    "IsFull": "est Membre à part entière des "
+    "IsFull": "est Membre à part entière des ",
+    "SendReferral": "Envoyer un Code de Parrainage",
+    "ReferralCode": "Code de Parrainage",
+    "Owner": "Propriétaire",
+    "Chef": "Chef",
+    "Manager": "Directeur / Directrice",
+    "Administrator": "Administrateur",
+    "Curator": "Conservateur",
+    "Affiliate": "Filiale",
+    "Chairman": "Président",
+    "Agent": "Agent",
+    "Front-of-House": "Réception",
+    "Marketing": "Commercialisation"
   },
 
   "Profile-Image": {
@@ -1117,6 +1129,22 @@
     "AlreadyReg": "Un administrateur avec ces informations est déjà enregistré dans notre base de données!",
     "Success": "Nouvel enregistrement d'administrateur enregistré avec succès",
     "SupportEmail": "mailto:support@restaurateurs-independants.fr"
+  },
+
+  "Referrals": {
+    "Send": "ENVOYER LE CODE PARRAINAGE",
+    "Code": "CODE:",
+    "CopyCode": "Cliquez pour copier le code",
+    "Link": "LIEN:",
+    "CopyLink": "Cliquez pour copier le lien",
+    "Text1": "Il s'agit de votre code de parrainage personnel que vous pouvez envoyer à vos collègues et associés pour les encourager à se joindre à vous pour soutenir notre collectif.",
+    "Text2": "Copier et coller le lien dans un",
+    "Email": "email",
+    "SMS": "SMS",
+    "WA": "WhatsApp",
+    "Social": ", ou via votre réseau social préféré!",
+    "RefLink": "Copier votre code parrainage",
+    "CopyLinkButton": "COPIER LIEN"
   }
 }
 
