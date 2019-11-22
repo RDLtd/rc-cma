@@ -1,38 +1,38 @@
 <div class="rc-dialog rc-dialog-small">
 
   <h1 mat-dialog-title>
-    SEND REFERRALS
+    {{ 'Referrals.Send' | translate }}
   </h1>
 
     <mat-dialog-content>
 
       <table class="rc-layout-table">
         <tr>
-          <td>CODE:</td>
+          <td>{{ 'Referrals.Code' | translate }}</td>
           <td>
             <a
               mat-dialog-close="code"
-              matTooltip="Click to copy the code">
+              matTooltip="{{ 'Referrals.CopyCode' | translate }}">
               {{ data.member.member_promo_code }}
             </a>
           </td>
         </tr>
         <tr>
-          <td>LINK:</td>
+          <td>{{ 'Referrals.Link' | translate }}</td>
           <td>
             <a
               mat-dialog-close="link"
-              matTooltip="Click to copy the link">
+              matTooltip="{{ 'Referrals.CopyLink' | translate }}">
               {{ data.joinUrl }}
             </a>
           </td>
         </tr>
       </table>
 
-      <p>This is your personal referral code which you can send to your colleagues and associates to encourage them
-        to join you in supporting Restaurant Collective.</p>
-      <p>Copy and paste the link into an <strong>email</strong>, <strong>SMS</strong>, <strong>WhatsApp
-      </strong> message or via your favourite social network!</p>
+      <p>{{ 'Referrals.Text1' | translate }}</p>
+      <p>{{ 'Referrals.Text2' | translate }} <strong>{{ 'Referrals.Email' | translate }}</strong>,
+        <strong>{{ 'Referrals.SMS' | translate }}</strong>, <strong>{{ 'Referrals.WA' | translate }}
+      </strong>{{ 'Referrals.Social' | translate }}</p>
     </mat-dialog-content>
 
     <mat-dialog-actions align="end">
@@ -47,9 +47,9 @@
       <button
         mat-flat-button
         mat-dialog-close="link"
-        matTooltip="Copy your referral link"
+        matTooltip="{{ 'Referrals.RefLink' | translate }}"
         color="primary">
-        COPY LINK
+        {{ 'Referrals.CopyLinkButton' | translate }}
       </button>
 
     </mat-dialog-actions>
