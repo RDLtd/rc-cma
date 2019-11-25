@@ -74,7 +74,7 @@
   <div class="rc-join-form">
     <form
       #formJoin="ngForm"
-      (ngSubmit)="formJoin.form.valid && join(formJoin.value)"
+      (ngSubmit)="formJoin.form.valid && submitJoinForm(formJoin.value)"
       novalidate>
       <h1>{{ 'Join.JoinUs' | translate }}</h1>
       <span>{{ 'Join.Or' | translate }} <a [routerLink]="'/signin'">{{ 'Join.SignIn' | translate }}</a> {{ 'Join.Already' | translate }}</span>
@@ -139,7 +139,7 @@
       <button
         type="submit"
         mat-flat-button
-        [disabled]="!formJoin.valid"
+        [disabled]="!formJoin.valid || isSubmitting"
         color="accent">{{ 'Join.Join' | translate }}</button>
       <p class="mat-small">{{ 'Join.Confirm' | translate }} <a
         href="{{ company_url }}/terms/" target="_blank">{{ 'Join.Terms' | translate }}</a> {{ 'Join.And' | translate }} <a href="{{ company_url }}/privacy/" target="_blank">{{ 'Join.Privacy' | translate }}</a>.

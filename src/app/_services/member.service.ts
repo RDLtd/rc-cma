@@ -394,6 +394,16 @@ export class MemberService {
       { login_email: login_email, userCode: this.config.userAPICode, token: this.jwt()});
   }
 
+  async getReferral(referralCode: string) {
+      let data = await this.http.post(this.config.apiUrl + '/members/getpromo',
+      {
+        promo_code: referralCode,
+        userCode: this.config.userAPICode,
+        token: this.jwt()
+      }).toPromise();
+      return data['promos'][0];
+  }
+
   getPromo(promo_code: string) {
     return this.http.post(this.config.apiUrl + '/members/getpromo',
       {

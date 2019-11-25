@@ -4,6 +4,8 @@ import { MemberService, AuthenticationService } from '../_services';
 import { CmsLocalService } from '../cms';
 import { TranslateService } from '@ngx-translate/core';
 import * as moment from 'moment';
+import { Member } from '../_models';
+
 
 @Component({
   selector: 'rc-join',
@@ -13,6 +15,8 @@ import * as moment from 'moment';
 export class JoinComponent implements OnInit {
 
   loaded = false;
+  isSubmitting = false;
+  isValidReferral: any;
   referrer = {
     type: 'self',
     code: null,
@@ -41,110 +45,123 @@ export class JoinComponent implements OnInit {
 
   ngOnInit() {
 
-    // check for referral code
+    // Referral code in url?
     this.route.paramMap
       .subscribe(params => {
         if (params.has('code')) {
-          this.referrer.code = params.get('code');
-          this.validateReferral();
+          let ref = this.setReferral(params.get('code'));
         } else {
-          this.loaded = true;
+          // No code supplied at this point
+          sessionStorage.setItem('referrer_type', 'self');
         }
+        this.loaded = true;
       });
-
+    // Set localisation
     this.company_name = localStorage.getItem('rd_company_name');
     this.company_logo_root = localStorage.getItem('rd_company_logo_root');
     this.company_url = localStorage.getItem('rd_company_url');
-    this.translate.get('Join').subscribe(data => {
-      this.t_data = data;
-    });
-    sessionStorage.setItem('referrer_type', 'self');
+    this.translate.get('Join').subscribe(data => this.t_data = data);
   }
 
-  validateReferral(): void {
-    console.log(`Call API and validate ${this.referrer.code}`);
-    this.memberService.getPromo(this.referrer.code).subscribe(
-      data => {
-        // console.log(data);
-        if (data['promos'].length > 0) {
-          const ref = data['promos'][0];
-          this.referrer.type = 'member';
-          this.referrer.name = `${ref.member_first_name} ${ref.member_last_name}`;
-          this.referrer.id = ref.member_id;
-          sessionStorage.setItem('referrer_type', 'member');
-        } else {
-          this.referrer.type = 'self';
-        }
-        this.loaded = true;
-      },
-      error => {
-        console.log(error);
-        this.referrer.type = 'self';
-        this.loaded = true;
-      });
+  async setReferral(code) {
+    // Check code
+    let ref = await this.memberService.getReferral(code);
+    console.log(ref);
+    // Valid code
+    if(ref) {
+      // Set referrer
+      this.referrer.code = code;
+      this.referrer.type = 'member';
+      this.referrer.name = `${ref.member_first_name} ${ref.member_last_name}`;
+      this.referrer.id = ref.member_id;
+    } else {
+      // Invalid code
+      this.referrer.type = 'self';
+    }
   }
 
-  join(formValue): void {
-    console.log(formValue);
-    // split full name
-    const names = formValue.name.split(' ');
-    const newAdmin = {
+  async submitJoinForm(applicant) {
+
+    this.isSubmitting = true;
+
+    // Validate and set code if added manually
+    if (this.referrer.type !== 'member') {
+      await this.setReferral(applicant.code.trim());
+    }
+
+    // Create new Admin & split full name
+    const names = applicant.name.split(' ');
+    const admin = {
       member_first_name: names[0],
       member_last_name: names.slice(1).join() || names[0], // combine any additional names
-      member_email: formValue.email,
-      member_telephone: formValue.mobile,
-      member_job: formValue.role,
+      member_email: applicant.email,
+      member_telephone: applicant.mobile,
+      member_job: applicant.role,
       member_language: localStorage.getItem('rd_country'),
       restaurant_id: 0,
       member_id: 0
     };
-    console.log(newAdmin);
 
+    // Register new admin
+    this.createAdministrator(admin);
+  }
+
+  createAdministrator(admin) {
     // for now assume no restaurant known, might change for different join modes
-    this.memberService.createAdministrator(newAdmin).subscribe(
+    this.memberService.createAdministrator(admin).subscribe(
       data => {
-        console.log(JSON.stringify(data));
-
+        console.log(data);
         // Check for duplicate administrator record
         if (data['status'] === 'Duplicate') {
-
-          this.cmsLocalService.dspSnackbar(this.t_data.AlreadyReg +
-            '\n\n(' + data['error'] + ')', 'OK', 10);
-
+          this.cmsLocalService.dspSnackbar(
+            `${this.t_data.AlreadyReg} (${data['error']})`,
+            'OK',
+            10);
         } else {
+          // Successful registration
+          sessionStorage.setItem('referrer_type', this.referrer.type);
 
           // TODO removed the 'success' snack bar display. Might need to consider showing it in the 'self' path?
           // this.cmsLocalService.dspSnackbar(this.t_data.Success);
 
-          // record the usage of the code if there was one
-          // Note we need the id of the new member here, that is returned by createAdministrator
-          if (this.referrer.type === 'member') {
-            this.memberService.addPromoAction(this.referrer.code, 'Used', data['member_id']).subscribe(
-              action => {
-                console.log(JSON.stringify(action));
-              },
-              error => {
-                console.log(JSON.stringify(error));
-              });
-            // take the member directly to authentication - first need to re-read the member record to get the full object
-            this.memberService.getById(data['member_id'])
-              .subscribe(
-                memberData => {
-                  this.authService.setMember(memberData['member'][0]);
-                  // no need to check for valid result, using a temporary token for now
-                  this.authService.setAuthSession(memberData['member'][0],
-                    '$2b$10$B6yh.Y1bLzvUKKeIX3rIyefGybFCwBsQNi3Vhvys/qJfm3lDxR4pu', false);
-                },
-                error => {
-                  // should not really get here, but you never know...
-                  console.log('Failed to re-read member record', JSON.stringify(error));
-                });
+          // Update code usage
+          if(this.referrer.type === 'member') {
+            this.updateReferralUsage(data['member_id']);
           }
-
         }
+        this.isSubmitting = false;
       },
       error => {
         console.log(JSON.stringify(error));
+      });
+
+  }
+
+  updateReferralUsage(member_id) {
+    // Record usage
+    this.memberService.addPromoAction(this.referrer.code, 'Used', member_id)
+      .subscribe(
+        action => {
+          console.log(action);
+        },
+        error => {
+          console.log(JSON.stringify(error));
+        });
+
+    // take the member directly to authentication - first need to re-read the member record to get the full object
+    this.memberService.getById(member_id)
+      .subscribe(
+      memberData => {
+        let newMember = memberData['member'][0];
+        this.authService.setMember(newMember);
+        // no need to check for valid result, using a temporary token for now
+        this.authService.setAuthSession(newMember,
+          '$2b$10$B6yh.Y1bLzvUKKeIX3rIyefGybFCwBsQNi3Vhvys/qJfm3lDxR4pu',
+          false);
+      },
+      error => {
+        // should not really get here, but you never know...
+        console.log('Failed to re-read member record', JSON.stringify(error));
       });
   }
 
