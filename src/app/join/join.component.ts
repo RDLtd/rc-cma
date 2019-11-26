@@ -13,10 +13,9 @@ import { Member } from '../_models';
 })
 
 export class JoinComponent implements OnInit {
-
   loaded = false;
   isSubmitting = false;
-  isValidReferral: any;
+  newRegResult: string;
   referrer = {
     type: 'self',
     code: null,
@@ -42,7 +41,6 @@ export class JoinComponent implements OnInit {
       this.translate.get('Join').subscribe(data => {this.t_data = data; });
     });
   }
-
   ngOnInit() {
 
     // Referral code in url?
@@ -50,8 +48,9 @@ export class JoinComponent implements OnInit {
       .subscribe(params => {
         if (params.has('code')) {
           let ref = this.setReferral(params.get('code'));
+          console.log('Url referral', ref);
         } else {
-          // No code supplied at this point
+          // No code supplied in url
           sessionStorage.setItem('referrer_type', 'self');
         }
         this.loaded = true;
@@ -84,12 +83,13 @@ export class JoinComponent implements OnInit {
 
     this.isSubmitting = true;
 
-    // Validate and set code if added manually
+    // Validate code if added manually
+    // Wait for response
     if (this.referrer.type !== 'member') {
       await this.setReferral(applicant.code.trim());
     }
 
-    // Create new Admin & split full name
+    // Create new Content Admin & split full name
     const names = applicant.name.split(' ');
     const admin = {
       member_first_name: names[0],
@@ -103,20 +103,17 @@ export class JoinComponent implements OnInit {
     };
 
     // Register new admin
-    this.createAdministrator(admin);
+    this.createContentAdministrator(admin);
   }
 
-  createAdministrator(admin) {
+  createContentAdministrator(admin) {
     // for now assume no restaurant known, might change for different join modes
     this.memberService.createAdministrator(admin).subscribe(
       data => {
         console.log(data);
         // Check for duplicate administrator record
         if (data['status'] === 'Duplicate') {
-          this.cmsLocalService.dspSnackbar(
-            `${this.t_data.AlreadyReg} (${data['error']})`,
-            'OK',
-            10);
+          this.dspRegistrationResult('duplicate');
         } else {
           // Successful registration
           sessionStorage.setItem('referrer_type', this.referrer.type);
@@ -124,10 +121,16 @@ export class JoinComponent implements OnInit {
           // TODO removed the 'success' snack bar display. Might need to consider showing it in the 'self' path?
           // this.cmsLocalService.dspSnackbar(this.t_data.Success);
 
-          // Update code usage
+          // If the member has been referred
+          // update the usage record and fast-track them
           if(this.referrer.type === 'member') {
             this.updateReferralUsage(data['member_id']);
+            this.autoSignIn(data['member_id']);
+          } else {
+            // Registration success
+            this.dspRegistrationResult('self-registered');
           }
+
         }
         this.isSubmitting = false;
       },
@@ -135,6 +138,24 @@ export class JoinComponent implements OnInit {
         console.log(JSON.stringify(error));
       });
 
+  }
+
+  autoSignIn(member_id){
+    // take the member directly to authentication - first need to re-read the member record to get the full object
+    this.memberService.getById(member_id)
+      .subscribe(
+        memberData => {
+          let newMember = memberData['member'][0];
+          this.authService.setMember(newMember);
+          // no need to check for valid result, using a temporary token for now
+          this.authService.setAuthSession(newMember,
+            '$2b$10$B6yh.Y1bLzvUKKeIX3rIyefGybFCwBsQNi3Vhvys/qJfm3lDxR4pu',
+            false);
+        },
+        error => {
+          // should not really get here, but you never know...
+          console.log('Failed to re-read member record', JSON.stringify(error));
+        });
   }
 
   updateReferralUsage(member_id) {
@@ -145,24 +166,30 @@ export class JoinComponent implements OnInit {
           console.log(action);
         },
         error => {
-          console.log(JSON.stringify(error));
+          console.log(error);
         });
+  }
 
-    // take the member directly to authentication - first need to re-read the member record to get the full object
-    this.memberService.getById(member_id)
-      .subscribe(
-      memberData => {
-        let newMember = memberData['member'][0];
-        this.authService.setMember(newMember);
-        // no need to check for valid result, using a temporary token for now
-        this.authService.setAuthSession(newMember,
-          '$2b$10$B6yh.Y1bLzvUKKeIX3rIyefGybFCwBsQNi3Vhvys/qJfm3lDxR4pu',
-          false);
-      },
-      error => {
-        // should not really get here, but you never know...
-        console.log('Failed to re-read member record', JSON.stringify(error));
-      });
+  dspRegistrationResult(res){
+    this.newRegResult = res;
+    switch(res) {
+      case 'duplicate': {
+        this.cmsLocalService.dspSnackbar(
+          `${this.t_data.AlreadyReg}`,
+          'OK',
+          10
+        );
+        break;
+      }
+      case 'self-registered': {
+        this.cmsLocalService.dspSnackbar(
+          `Check you email for sign in credentials`,
+          'OK',
+          10
+        );
+        break;
+      }
+    }
   }
 
 }

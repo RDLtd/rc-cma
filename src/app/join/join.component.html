@@ -71,8 +71,27 @@
       </div>
     </div>
   </div>
-  <div class="rc-join-form">
+  <div class="rc-join-form" [ngSwitch]="newRegResult">
+    <div *ngSwitchCase="'duplicate'">
+      <h1>Hello again.</h1>
+      <p>It would appear that you are already registered with Restaurant Collective.</p>
+      <p><a [routerLink]="['/signin']">Sign In, or
+        retrieve your password here</a>.</p>
+    </div>
+    <div *ngSwitchCase="'self-registered'">
+      <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 24 24">
+        <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z" fill="#5dbd3d"></path>
+      </svg>
+      <h1>Welcome.</h1>
+      <p>You've successfully registered yourself as a <strong>Content Administrator</strong>
+        and we've sent you login details and along with some further information.</p>
+      <p>Close this window and check your email.</p>
+      <p>Many thanks</p>
+      <p><strong>Restaurant Collective Curation Team</strong></p>
+
+    </div>
     <form
+      *ngSwitchDefault
       #formJoin="ngForm"
       (ngSubmit)="formJoin.form.valid && submitJoinForm(formJoin.value)"
       novalidate>
@@ -146,4 +165,7 @@
       </p>
     </form>
   </div>
+
 </div>
+
+
