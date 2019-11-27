@@ -1128,7 +1128,18 @@
     "Manager": "Manager",
     "AlreadyReg": "An administrator with these details is already registered in our database!",
     "Success": "New administrator record successfully registered",
-    "SupportEmail": "mailto:support@restaurantcollective.uk"
+    "SupportEmail": "mailto:support@restaurantcollective.uk",
+    "Hello": "Hello again.",
+    "Appear": "It would appear that you are already registered with",
+    "SignInPassword": "Sign In, or retrieve your password here",
+    "Welcome": "Welcome.",
+    "Successful": "You've successfully registered yourself as a ",
+    "ContentAdmin": "Content Administrator",
+    "SentDetails": "and we've sent you login details and along with some further information.",
+    "Close": "Close this window and check your email.",
+    "Ta": "Many thanks",
+    "Curation": "Curation Team",
+    "Check": "Check your email for sign in credentials"
   },
 
   "Referrals": {

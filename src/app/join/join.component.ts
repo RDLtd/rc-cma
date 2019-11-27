@@ -67,7 +67,7 @@ export class JoinComponent implements OnInit {
     let ref = await this.memberService.getReferral(code);
     console.log(ref);
     // Valid code
-    if(ref) {
+    if (ref) {
       // Set referrer
       this.referrer.code = code;
       this.referrer.type = 'member';
@@ -123,7 +123,7 @@ export class JoinComponent implements OnInit {
 
           // If the member has been referred
           // update the usage record and fast-track them
-          if(this.referrer.type === 'member') {
+          if (this.referrer.type === 'member') {
             this.updateReferralUsage(data['member_id']);
             this.autoSignIn(data['member_id']);
           } else {
@@ -140,7 +140,7 @@ export class JoinComponent implements OnInit {
 
   }
 
-  autoSignIn(member_id){
+  autoSignIn(member_id) {
     // take the member directly to authentication - first need to re-read the member record to get the full object
     this.memberService.getById(member_id)
       .subscribe(
@@ -170,9 +170,9 @@ export class JoinComponent implements OnInit {
         });
   }
 
-  dspRegistrationResult(res){
+  dspRegistrationResult(res) {
     this.newRegResult = res;
-    switch(res) {
+    switch (res) {
       case 'duplicate': {
         this.cmsLocalService.dspSnackbar(
           `${this.t_data.AlreadyReg}`,
@@ -183,7 +183,7 @@ export class JoinComponent implements OnInit {
       }
       case 'self-registered': {
         this.cmsLocalService.dspSnackbar(
-          `Check you email for sign in credentials`,
+          `${this.t_data.Check}`,
           'OK',
           10
         );

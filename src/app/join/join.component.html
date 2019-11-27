@@ -73,21 +73,20 @@
   </div>
   <div class="rc-join-form" [ngSwitch]="newRegResult">
     <div *ngSwitchCase="'duplicate'">
-      <h1>Hello again.</h1>
-      <p>It would appear that you are already registered with Restaurant Collective.</p>
-      <p><a [routerLink]="['/signin']">Sign In, or
-        retrieve your password here</a>.</p>
+      <h1>{{ 'Join.Hello' | translate }}</h1>
+      <p>{{ 'Join.Appear' | translate }} {{ company_name }}.</p>
+      <p><a [routerLink]="['/signin']">{{ 'Join.SignInPassword' | translate }}</a>.</p>
     </div>
     <div *ngSwitchCase="'self-registered'">
       <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 24 24">
         <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z" fill="#5dbd3d"></path>
       </svg>
-      <h1>Welcome.</h1>
-      <p>You've successfully registered yourself as a <strong>Content Administrator</strong>
-        and we've sent you login details and along with some further information.</p>
-      <p>Close this window and check your email.</p>
-      <p>Many thanks</p>
-      <p><strong>Restaurant Collective Curation Team</strong></p>
+      <h1>{{ 'Join.Welcome' | translate }}</h1>
+      <p>{{ 'Join.Successful' | translate }} <strong>{{ 'Join.ContentAdmin' | translate }}</strong>
+        {{ 'Join.SentDetails' | translate }}</p>
+      <p>{{ 'Join.Close' | translate }}</p>
+      <p>{{ 'Join.Ta' | translate }}</p>
+      <p><strong>{{ company_name }} {{ 'Join.Curation' | translate }}</strong></p>
 
     </div>
     <form
@@ -96,7 +95,8 @@
       (ngSubmit)="formJoin.form.valid && submitJoinForm(formJoin.value)"
       novalidate>
       <h1>{{ 'Join.JoinUs' | translate }}</h1>
-      <span>{{ 'Join.Or' | translate }} <a [routerLink]="'/signin'">{{ 'Join.SignIn' | translate }}</a> {{ 'Join.Already' | translate }}</span>
+      <span>{{ 'Join.Or' | translate }} <a [routerLink]="'/signin'">{{ 'Join.SignIn' | translate }}</a>
+        {{ 'Join.Already' | translate }}</span>
       <mat-form-field hideRequiredMarker>
         <mat-label>{{ 'Join.FullName' | translate }}</mat-label>
         <input
@@ -109,7 +109,8 @@
           autofocus
           required>
         <mat-hint align="end" *ngIf="name.invalid">{{ 'Join.FirstAndLast' | translate }}</mat-hint>
-        <mat-error align="end" *ngIf="name.errors?.required">{{ 'Join.FullName' | translate }} {{ 'Join.Required' | translate }}</mat-error>
+        <mat-error align="end" *ngIf="name.errors?.required">{{ 'Join.FullName' | translate }}
+          {{ 'Join.Required' | translate }}</mat-error>
       </mat-form-field>
       <mat-form-field hideRequiredMarker>
         <mat-label>{{ 'Join.Job' | translate }}</mat-label>
@@ -161,7 +162,8 @@
         [disabled]="!formJoin.valid || isSubmitting"
         color="accent">{{ 'Join.Join' | translate }}</button>
       <p class="mat-small">{{ 'Join.Confirm' | translate }} <a
-        href="{{ company_url }}/terms/" target="_blank">{{ 'Join.Terms' | translate }}</a> {{ 'Join.And' | translate }} <a href="{{ company_url }}/privacy/" target="_blank">{{ 'Join.Privacy' | translate }}</a>.
+        href="{{ company_url }}/terms/" target="_blank">{{ 'Join.Terms' | translate }}</a> {{ 'Join.And' | translate }}
+        <a href="{{ company_url }}/privacy/" target="_blank">{{ 'Join.Privacy' | translate }}</a>.
       </p>
     </form>
   </div>

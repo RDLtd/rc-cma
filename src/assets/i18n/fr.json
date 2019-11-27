@@ -1128,7 +1128,18 @@
     "Manager": "Directeur / Directrice",
     "AlreadyReg": "Un administrateur avec ces informations est déjà enregistré dans notre base de données!",
     "Success": "Nouvel enregistrement d'administrateur enregistré avec succès",
-    "SupportEmail": "mailto:support@restaurateurs-independants.fr"
+    "SupportEmail": "mailto:support@restaurateurs-independants.fr",
+    "Hello": "Bonjour encore.",
+    "Appear": "Il semblerait que vous soyez déjà inscrit à",
+    "SignInPassword": "Connectez-vous ou récupérez votre mot de passe ici",
+    "Welcome": "Bienvenu.",
+    "Successful": "Vous vous êtes enregistré avec succès en tant que ",
+    "ContentAdmin": "Administrateur de contenu",
+    "SentDetails": "et nous vous avons envoyé les informations de connexion et quelques informations supplémentaires.",
+    "Close": "Fermez cette fenêtre et vérifiez votre email.",
+    "Ta": "Merci beaucoup",
+    "Curation": "Équipe de conservation",
+    "Check": "Accéder à votre email pour les informations d'identification de connexion"
   },
 
   "Referrals": {
