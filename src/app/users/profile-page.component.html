@@ -164,7 +164,7 @@
         class="rc-member-assc"
         mat-mini-fab
         color=""
-        matTooltip="{{ restaurant.restaurant_name }} is an Associate Member of {{ company_name }}">
+        matTooltip="{{ restaurant.restaurant_name }} {{ 'Profile-Page.IsAssociate' | translate }} {{ company_name }}">
         <mat-icon>people_outline</mat-icon>
       </button>
 
@@ -173,7 +173,7 @@
         class="rc-member-full"
         mat-mini-fab
         color=""
-        matTooltip="{{ restaurant.restaurant_name }} is a Full Member of {{ company_name }}">
+        matTooltip="{{ restaurant.restaurant_name }} {{ 'Profile-Page.IsFull' | translate }} {{ company_name }}">
         <mat-icon>people</mat-icon>
       </button>
 

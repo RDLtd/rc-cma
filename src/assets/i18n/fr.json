@@ -397,9 +397,12 @@
     "Default": "Faites-en ma photographie par défaut",
     "CancelCap": "ANNULER",
     "UploadCap": "TÉLÉCHARGER MAINTENANT",
-    "Image": "photographie",
-    "Menu": "menu",
-    "Directions": "fichier sur les directions"
+    "Image": "la photographie",
+    "Menu": "le menu",
+    "Directions": "le fichier sur les Directions",
+    "NewImage": "Téléchargez une Nouvelle Image",
+    "NewMenu": "Téléchargez un Nouveau Menu",
+    "NewDirection": "Téléchargez un document sur les Directions"
   },
 
   "CMS-Hours": {
@@ -522,7 +525,7 @@
     "Deleted": " Supprimé",
     "AddMenu": "AJOUTER UN MENU",
     "On": "le",
-    "VGF": "Ajoutez une sélection de vos plats les plus populaires. Nous vous recommandons de choisir une section de votre prix gamme et plats qui reflètent le mieux votre style de nourriture. Vous pouvez afficher les plats comme ![Végétarien](../assets/images/icons/vegetarian.svg) **Végétarien** ou ![Sans gluten](../assets/images/icons/gluten-free.svg) **Sans gluten** lorsque vous les ajoutez.",
+    "VGF": "Ajoutez une sélection de vos plats les plus populaires. Nous vous recommandons de choisir parmi une gamme de prix et de plats qui reflètent au mieux votre style de cuisine. Vous pouvez signaler les plats ![Végétarien](../assets/images/icons/vegetarian.svg) **Végétarien** ou ![Sans gluten](../assets/images/icons/gluten-free.svg) **Sans gluten** quand vous les ajoutez.",
     "SectionHint": "Antipasti, entrées, plats, etc."
   },
 
@@ -835,6 +838,7 @@
     "BenchmarkingAssociated": "Pour faire une analyse comparative, vous devez avoir au moins un restaurant associé!",
     "NoFinancial": "Aucun de vos restaurants associés n'a de données financières enregistrées!",
     "Compare": " Afin de comparer votre restaurant avec d'autres, vous devez fournir des données appropriées.",
+
     "IsAssociate": "est Membre associé des ",
     "IsFull": "est Membre à part entière des ",
     "SendReferral": "Envoyer un Code de Parrainage",

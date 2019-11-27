@@ -399,7 +399,10 @@
     "UploadCap": "UPLOAD NOW",
     "Image": "image",
     "Menu": "menu",
-    "Directions": "directions file"
+    "Directions": "directions file",
+    "NewImage": "Upload a New Image",
+    "NewMenu": "Upload a New Menu",
+    "NewDirection": "Upload a New Directions File"
   },
 
   "CMS-Hours": {
