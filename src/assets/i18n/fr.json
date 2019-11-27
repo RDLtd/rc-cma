@@ -838,8 +838,21 @@
     "BenchmarkingAssociated": "Pour faire une analyse comparative, vous devez avoir au moins un restaurant associé!",
     "NoFinancial": "Aucun de vos restaurants associés n'a de données financières enregistrées!",
     "Compare": " Afin de comparer votre restaurant avec d'autres, vous devez fournir des données appropriées.",
-    "IsAssociate": "est Membre Associé des ",
-    "IsFull": "est Membre à part Entière des "
+
+    "IsAssociate": "est Membre associé des ",
+    "IsFull": "est Membre à part entière des ",
+    "SendReferral": "Envoyer un Code de Parrainage",
+    "ReferralCode": "Code de Parrainage",
+    "Owner": "Propriétaire",
+    "Chef": "Chef",
+    "Manager": "Directeur / Directrice",
+    "Administrator": "Administrateur",
+    "Curator": "Conservateur",
+    "Affiliate": "Filiale",
+    "Chairman": "Président",
+    "Agent": "Agent",
+    "Front-of-House": "Réception",
+    "Marketing": "Commercialisation"
   },
 
   "Profile-Image": {
@@ -934,7 +947,8 @@
     "Forgotten": "Mot de passe oublié?",
     "NewPassword": "Un nouveau mot de passe a été envoyé à votre adresse email.",
     "Unknown": "Cette adresse email est inconnue!",
-    "Empowering": "Habiliter les restaurants"
+    "Empowering": "Habiliter les restaurants",
+    "Join": "Rejoindre"
   },
 
   "Payment": {
@@ -1117,7 +1131,35 @@
     "Chef": "Chef",
     "Manager": "Directeur / Directrice",
     "AlreadyReg": "Un administrateur avec ces informations est déjà enregistré dans notre base de données!",
-    "Success": "Nouvel enregistrement d'administrateur enregistré avec succès"
+    "Success": "Nouvel enregistrement d'administrateur enregistré avec succès",
+    "SupportEmail": "mailto:support@restaurateurs-independants.fr",
+    "Hello": "Bonjour encore.",
+    "Appear": "Il semblerait que vous soyez déjà inscrit à",
+    "SignInPassword": "Connectez-vous ou récupérez votre mot de passe ici",
+    "Welcome": "Bienvenu.",
+    "Successful": "Vous vous êtes enregistré avec succès en tant que ",
+    "ContentAdmin": "Administrateur de contenu",
+    "SentDetails": "et nous vous avons envoyé les informations de connexion et quelques informations supplémentaires.",
+    "Close": "Fermez cette fenêtre et vérifiez votre email.",
+    "Ta": "Merci beaucoup",
+    "Curation": "Équipe de conservation",
+    "Check": "Accéder à votre email pour les informations d'identification de connexion"
+  },
+
+  "Referrals": {
+    "Send": "ENVOYER LE CODE PARRAINAGE",
+    "Code": "CODE:",
+    "CopyCode": "Cliquez pour copier le code",
+    "Link": "LIEN:",
+    "CopyLink": "Cliquez pour copier le lien",
+    "Text1": "Il s'agit de votre code de parrainage personnel que vous pouvez envoyer à vos collègues et associés pour les encourager à se joindre à vous pour soutenir notre collectif.",
+    "Text2": "Copier et coller le lien dans un",
+    "Email": "email",
+    "SMS": "SMS",
+    "WA": "WhatsApp",
+    "Social": ", ou via votre réseau social préféré!",
+    "RefLink": "Copier votre code parrainage",
+    "CopyLinkButton": "COPIER LIEN"
   }
 }
 

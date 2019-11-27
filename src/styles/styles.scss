@@ -311,9 +311,10 @@ a.mat-menu-item {text-decoration: none;}
       }
     }
   }
+
   .rc-join-form {
     background-color: white;
-    form {
+    form, > div {
       max-width: 400px;
       padding: 48px;
     }

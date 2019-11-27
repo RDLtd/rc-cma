@@ -839,7 +839,19 @@
     "NoFinancial": "None of your associated restaurants have any financial data recorded!",
     "Compare": " In order to compare your restaurant with others you must provide appropriate data.",
     "IsAssociate": "is an Associate Member of",
-    "IsFull": "is a Full Member of"
+    "IsFull": "is a Full Member of",
+    "SendReferral": "Send a referral",
+    "ReferralCode": "Referral Code",
+    "Owner": "Owner",
+    "Chef": "Chef",
+    "Manager": "Manager",
+    "Administrator": "Administrator",
+    "Curator": "Curator",
+    "Affiliate": "Affiliate",
+    "Chairman": "Chairman",
+    "Agent": "Agent",
+    "Front-of-House": "Front-of-House",
+    "Marketing": "Marketing"
   },
 
   "Profile-Image": {
@@ -934,7 +946,8 @@
     "Forgotten": "Forgotten your password?",
     "NewPassword": "A new password has been sent to your email address",
     "Unknown": "This email address is unknown!",
-    "Empowering": "Empowering Restaurants"
+    "Empowering": "Empowering Restaurants",
+    "Join": "Join"
   },
 
   "Payment": {
@@ -1117,6 +1130,34 @@
     "Chef": "Chef",
     "Manager": "Manager",
     "AlreadyReg": "An administrator with these details is already registered in our database!",
-    "Success": "New administrator record successfully registered"
+    "Success": "New administrator record successfully registered",
+    "SupportEmail": "mailto:support@restaurantcollective.uk",
+    "Hello": "Hello again.",
+    "Appear": "It would appear that you are already registered with",
+    "SignInPassword": "Sign In, or retrieve your password here",
+    "Welcome": "Welcome.",
+    "Successful": "You've successfully registered yourself as a ",
+    "ContentAdmin": "Content Administrator",
+    "SentDetails": "and we've sent you login details and along with some further information.",
+    "Close": "Close this window and check your email.",
+    "Ta": "Many thanks",
+    "Curation": "Curation Team",
+    "Check": "Check your email for sign in credentials"
+  },
+
+  "Referrals": {
+    "Send": "SEND REFERRALS",
+    "Code": "CODE:",
+    "CopyCode": "Click to copy the code",
+    "Link": "LINK:",
+    "CopyLink": "Click to copy the link",
+    "Text1": "This is your personal referral code which you can send to your colleagues and associates to encourage them to join you in supporting our collective.",
+    "Text2": "Copy and paste the link into an",
+    "Email": "email",
+    "SMS": "SMS",
+    "WA": "WhatsApp",
+    "Social": "message or via your favourite social network!",
+    "RefLink": "Copy your referral link",
+    "CopyLinkButton": "COPY LINK"
   }
 }

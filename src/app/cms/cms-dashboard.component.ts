@@ -144,7 +144,6 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
 
     this.user = this.authService.getLoggedInUser();
     // ToDo The above does not work for refresh of deep link to dashboard - there is no member data
-    // console.log(this.user);
 
     this.translate.get('CMS-Dashboard').subscribe(data => {
       this.t_data = data;
@@ -196,10 +195,11 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
       this.memberIcon = 'people';
       this.memberJoinDate = new Date(this.restaurant.restaurant_full_member_on);
     } else {
-      this.memberJoinDate = date;
+      // this.memberJoinDate = date;
       this.memberStatus = 50;
       this.memberType = this.t_data.AssMember;
       this.memberIcon = 'people_outline';
+      this.memberJoinDate = new Date(this.restaurant.restaurant_associated_on);
     }
     this.d_memberJoinDate = moment(this.memberJoinDate).format('dddd, DD MMMM YYYY');
   }

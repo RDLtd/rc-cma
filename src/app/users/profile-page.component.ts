@@ -35,13 +35,11 @@ export class ProfilePageComponent implements OnInit {
   restaurants: Array<Restaurant>;
   restaurant: Restaurant;
   member: Member = new Member();
-  isSubmitting = false;
   defaultImages: Array<any> = [];
   placeholderImage;
   isDemoMember = false;
   showLoader = false;
   referrer: any;
-  joinUrl: string;
   showRestaurantFinder = true;
 
   // translation variables
@@ -49,29 +47,35 @@ export class ProfilePageComponent implements OnInit {
   company_name;
   d_member_signedup: string;
   d_member_last_logged_in: string;
+  d_member_job: string;
 
   constructor(
     private restaurantService: RestaurantService,
     private memberService: MemberService,
     private ga: AnalyticsService,
     private cms: CMSService,
-    public financialService: FinancialService,
+    //public financialService: FinancialService,
     public snackBar: MatSnackBar,
     private router: Router,
     private translate: TranslateService,
     public help: HelpService,
-    public authService: AuthenticationService,
+    //public authService: AuthenticationService,
     public appConfig: AppConfig,
     private _clipboardService: ClipboardService,
     public dialog: MatDialog) {
 
     // detect language changes... need to check for change in texts
     translate.onLangChange.subscribe(lang => {
-      this.translate.get('Profile-Page').subscribe(data => {this.t_data = data; });
+      this.translate.get('Profile-Page').subscribe(data => {
+        this.t_data = data;
+        this.d_member_job = this.t_data[this.member.member_job];
+        this.placeholderImage = `https://via.placeholder.com/900x600?text=${this.t_data.AwaitingImage}`;
+      });
       // re-translate computed display dates
       moment.locale(localStorage.getItem('rd_country'));
       this.d_member_signedup = moment(this.member.member_signedup).format('DD MMMM YYYY');
       this.d_member_last_logged_in = moment(this.member.member_last_logged_in).format('DD MMMM YYYY');
+      this.d_member_job = this.t_data[this.member.member_job];
     });
 
   }
@@ -106,6 +110,7 @@ export class ProfilePageComponent implements OnInit {
           this.d_member_signedup = moment(this.member.member_signedup).format('DD MMMM YYYY');
           this.d_member_last_logged_in = moment(this.member.member_last_logged_in).format('DD MMMM YYYY');
           this.getAssociatedRestaurants(id);
+          this.d_member_job = this.t_data[this.member.member_job];
           console.log('MEMBER:', this.member);
         },
         error => {
@@ -130,7 +135,7 @@ export class ProfilePageComponent implements OnInit {
       });
   }
 
-  getReferralLink(){
+  getReferralLink(): string{
     return `${this.appConfig.apiUrl}/join/${this.member.member_promo_code}`
   }
 
