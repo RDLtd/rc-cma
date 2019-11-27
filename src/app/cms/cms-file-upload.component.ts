@@ -57,8 +57,13 @@ export class CmsFileUploadComponent implements OnInit {
         this.uploadLabel = this.t_data.Choose + ' ' + this.t_data.Image + ' ' + this.t_data.ToUpload;
         this.t_data_type = this.t_data.Image;
       } else {
-        this.uploadLabel = this.t_data.Choose + ' ' + this.t_data.Menu + ' ' + this.t_data.ToUpload;
-        this.t_data_type = this.t_data.Menu;
+        if (this.data.type === 'menu') {
+          this.uploadLabel = this.t_data.Choose + ' ' + this.t_data.Menu + ' ' + this.t_data.ToUpload;
+          this.t_data_type = this.t_data.Menu;
+        } else {
+          this.uploadLabel = this.t_data.Choose + ' ' + this.t_data.Directions + ' ' + this.t_data.ToUpload;
+          this.t_data_type = this.t_data.Directions;
+        }
       }
     });
   }
