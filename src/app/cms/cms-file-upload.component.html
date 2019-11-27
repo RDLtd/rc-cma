@@ -1,8 +1,23 @@
 <div class="rc-dialog rc-dialog-cms-image-upload">
 
-  <h1 mat-dialog-title>
-    {{ 'CMS-File-Upload.New' | translate }} {{ data.type | titlecase }} {{ 'CMS-File-Upload.Upload' | translate }}
-  </h1>
+  <div *ngIf="data.type === 'image'">
+    <h1 mat-dialog-title>
+      {{ 'CMS-File-Upload.NewImage' | translate }}
+    </h1>
+  </div>
+  <div *ngIf="data.type === 'menu'">
+    <h1 mat-dialog-title>
+      {{ 'CMS-File-Upload.NewMenu' | translate }}
+    </h1>
+  </div>
+  <div *ngIf="data.type === 'direction'">
+    <h1 mat-dialog-title>
+      {{ 'CMS-File-Upload.NewDirection' | translate }}
+    </h1>
+  </div>
+<!--  <h1 mat-dialog-title>-->
+<!--    {{ 'CMS-File-Upload.New' | translate }} {{ data.type | titlecase }} {{ 'CMS-File-Upload.Upload' | translate }}-->
+<!--  </h1>-->
 
   <mat-dialog-content>
 
