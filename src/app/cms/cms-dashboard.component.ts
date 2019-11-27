@@ -503,7 +503,13 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
 
   getOffers() {
 
-    this.restaurantService.getOffers()
+    // select the correct partners by country
+    let company_code = 'RC';
+    if (localStorage.getItem('rd_company_name') === 'Restaurateurs Indépendants') {
+      company_code = 'RI';
+    }
+
+    this.restaurantService.getOffers(company_code)
       .subscribe(
         res => {
           // console.log('Offers ', res);
@@ -535,6 +541,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
                     this.offerInBox = this.offerCount;
                   }
 
+                  console.log('Offers:', this.offerInBox);
                   this.cmsLocalService.setOfferCount(this.offerInBox);
                 },
                 error => {

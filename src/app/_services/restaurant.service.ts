@@ -337,9 +337,9 @@ export class RestaurantService {
       { country_code: country_code, userCode: this.config.userAPICode, token: this.jwt() });
   }
 
-  getOffers() {
+  getOffers(country_code: string) {
     return this.http.post(this.config.apiUrl + '/restaurants/offers',
-      { userCode: this.config.userAPICode, token: this.jwt() });
+      { country_code: country_code, userCode: this.config.userAPICode, token: this.jwt() });
   }
 
   addOffer(offer: Offer) {
