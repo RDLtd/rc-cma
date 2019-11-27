@@ -174,11 +174,12 @@ export class JoinComponent implements OnInit {
     this.newRegResult = res;
     switch(res) {
       case 'duplicate': {
-        this.cmsLocalService.dspSnackbar(
-          `${this.t_data.AlreadyReg}`,
-          'OK',
-          10
-        );
+        console.log('Duplicate user');
+        // this.cmsLocalService.dspSnackbar(
+        //   `${this.t_data.AlreadyReg}`,
+        //   'OK',
+        //   10
+        // );
         break;
       }
       case 'self-registered': {
@@ -191,5 +192,4 @@ export class JoinComponent implements OnInit {
       }
     }
   }
-
 }
