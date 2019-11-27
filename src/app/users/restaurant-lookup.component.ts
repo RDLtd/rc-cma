@@ -112,7 +112,11 @@ export class RestaurantLookupComponent implements OnInit {
 
     // Make sure it's not already been associated
     for (let i = 0; i < count; i++) {
-      if (this.data.associatedRestaurants[i].restaurant_post_code === item.restaurant_post_code ) {
+      // 271119 simply checking post code does not work for FR
+      // if (this.data.associatedRestaurants[i].restaurant_post_code === item.restaurant_post_code ) {
+      // now check name and address
+      if (this.data.associatedRestaurants[i].restaurant_name === item.restaurant_name &&
+        this.data.associatedRestaurants[i].restaurant_address_1 === item.restaurant_address_1) {
         // console.log('Restaurant already associated');
         this.dspSnackBar(item.restaurant_name + this.t_data.AlreadyAdded);
         return;
