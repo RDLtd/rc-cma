@@ -99,9 +99,9 @@
       mat-raised-button
       (click)="goto('affiliates')"
       class="rc-full-width">{{ 'Payment.FullBenefits' | translate }}</button>
-      <p class="mat-small">{{ 'Payment.Due' | translate }} {{ renewal_date }}.
+      <p class="mat-small">{{ 'Payment.Due' | translate }} {{ d_renewal_date }}.
         {{ 'Payment.Reason' | translate }} {{ restaurant.restaurant_name | uppercase }} {{ 'Payment.DoesNot' | translate }}
-        <a href="mailto:support@restaurantcollective.io">{{ company_name }} {{ 'Payment.Support' | translate }}</a>.</p>
+        <a href="{{ 'Payment.Support' | translate }}">{{ company_name }}</a>.</p>
   </section>
 
 </div>

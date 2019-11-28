@@ -946,7 +946,7 @@
     "Forgotten": "Forgotten your password?",
     "NewPassword": "A new password has been sent to your email address",
     "Unknown": "This email address is unknown!",
-    "Empowering": "Empowering Restaurants",
+    "Empowering": "Empowering Restaurants!",
     "Join": "Join"
   },
 
@@ -975,7 +975,7 @@
     "Due": "The membership is due for renewal on",
     "Reason": "If there is any reason why",
     "DoesNot": "does not wish to continue its membership, please email",
-    "Support": "Support",
+    "Support": "mailto:support@restaurantcollective.io",
     "MembershipFor": "Membership For",
     "Wait": "PLEASE WAIT...",
     "Updating": "UPDATING MEMBERSHIP STATUS...",
