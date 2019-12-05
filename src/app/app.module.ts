@@ -104,6 +104,7 @@ import { MarkdownModule } from 'ngx-markdown';
 import { ClipboardModule } from 'ngx-clipboard';
 import { JoinComponent } from './join/join.component';
 import { ReferralsComponent } from './users/referrals.component';
+import { LoadComponent } from './common/loader/load.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -158,7 +159,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     SigninComponent,
     AffiliatesComponent,
     JoinComponent,
-    ReferralsComponent
+    ReferralsComponent,
+    LoadComponent
   ],
   imports: [
     AngularMaterialModule,
@@ -219,7 +221,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     CmsMenuDishComponent,
     AboutComponent,
     HelpComponent,
-    PaymentComponent
+    PaymentComponent,
+    LoadComponent
   ],
   bootstrap: [AppComponent]
 })

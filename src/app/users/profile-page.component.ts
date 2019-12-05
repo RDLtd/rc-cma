@@ -320,7 +320,7 @@ export class ProfilePageComponent implements OnInit {
         position: {'top': '10vh'},
         data: {
           associatedRestaurants: this.restaurants,
-          member_id: this.member.member_id
+          member: this.member
         }
       });
 

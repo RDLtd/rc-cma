@@ -5,6 +5,8 @@ import { CmsLocalService } from '../cms';
 import { TranslateService } from '@ngx-translate/core';
 import * as moment from 'moment';
 import { Member } from '../_models';
+import { MatDialog } from '@angular/material/dialog';
+import { LoadComponent } from '../common/loader/load.component';
 
 
 @Component({
@@ -14,6 +16,7 @@ import { Member } from '../_models';
 
 export class JoinComponent implements OnInit {
   loaded = false;
+  loader: any;
   isSubmitting = false;
   newRegResult: string;
   referrer = {
@@ -35,7 +38,8 @@ export class JoinComponent implements OnInit {
     private memberService: MemberService,
     private authService: AuthenticationService,
     private cmsLocalService: CmsLocalService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private dialog: MatDialog
   ) {
     translate.onLangChange.subscribe(lang => {
       this.translate.get('Join').subscribe(data => {this.t_data = data; });
@@ -82,6 +86,12 @@ export class JoinComponent implements OnInit {
   async submitJoinForm(applicant) {
 
     this.isSubmitting = true;
+    this.loader = this.dialog.open(LoadComponent, {
+      data: {
+        message: 'Please wait'
+      },
+      disableClose: true
+    });
 
     // Validate code if added manually
     // Wait for response
@@ -132,7 +142,9 @@ export class JoinComponent implements OnInit {
           }
 
         }
+        this.loader.close();
         this.isSubmitting = false;
+
       },
       error => {
         console.log(JSON.stringify(error));

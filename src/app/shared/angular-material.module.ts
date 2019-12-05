@@ -20,7 +20,8 @@ import {
   MatToolbarModule,
   MatProgressBarModule,
   MatSidenavModule,
-  MatTabsModule
+  MatTabsModule,
+  MatProgressSpinnerModule
 } from '@angular/material';
 
 @NgModule ({
@@ -47,7 +48,8 @@ import {
     MatSnackBarModule,
     MatIconModule,
     MatListModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatProgressSpinnerModule
   ]
 })
 

@@ -66,7 +66,7 @@ export class CmsHoursComponent implements OnInit {
     // get the opening time data from the api
     this.cms.getTimes(this.restaurant.restaurant_id).subscribe(
       data => {
-        // console.log('DATA', data);
+        console.log('TIMES DATA', data);
         this.openingTimes = data['times'];
         if (data['notes'] && data['notes'] !== 'Null') {
           this.openingTimesNotes = data['notes'];

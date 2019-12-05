@@ -87,6 +87,16 @@ export class RestaurantService {
       { restaurant: restaurant, userCode: this.config.userAPICode, token: this.jwt() });
   }
 
+  updateEmail (restaurant_id: number, restaurant_email: string) {
+    return this.http.post(this.config.apiUrl + '/restaurants/updateemail',
+      {
+        restaurant_id: restaurant_id,
+        restaurant_email: restaurant_email,
+        userCode: this.config.userAPICode,
+        token: this.jwt()
+      });
+  }
+
   updateGPS(restaurant_id: string, restaurant_lat: number, restaurant_lng: number) {
     return this.http.post(this.config.apiUrl + '/restaurants/updategps',
       { restaurant_id: restaurant_id, restaurant_lat: restaurant_lat,

@@ -27,6 +27,19 @@ $config: mat-typography-config();
   align-items: center;
   flex-direction: column;
 }
+.rc-dialog-loader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: -8px;
+  span {
+    margin: 0 8px;
+    font: $rc-display-font-weight 14px/1 $rc-default-font;
+    text-transform: uppercase;
+  }
+
+}
 .rc-no-grid-gutter { margin: -16px;}
 .rc-hide { display: none; }
 .rc-accent { background-color: $rc-theme-secondary !important;}
@@ -52,14 +65,20 @@ $config: mat-typography-config();
   .mat-simple-snackbar,
   .mat-simple-snackbar-action {
     color: black;
-    font-size: 16px;
+    font-size: 14px;
     line-height: 22px;
     button {
       font-size: 16px;
     }
   }
 }
-.rc-mat-snack-info { background-color: $rc-theme-secondary; }
+.rc-mat-snack-info {
+  background-color: black;
+  .mat-simple-snackbar,
+  .mat-simple-snackbar-action {
+    color: white;
+  }
+}
 .rc-active {
   cursor: pointer;
   &:hover { background: #eee; }
