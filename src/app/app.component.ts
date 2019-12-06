@@ -7,26 +7,29 @@ import { AppConfig } from './app.config';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { ConnectionService } from 'ng-connection-service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'rc-root',
   templateUrl: './app.component.html',
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  //providers: [ AuthenticationService ]
 })
 
 export class AppComponent implements OnInit {
 
   title;
   member: any;
-  language;
+  language = 'en'; // Default language
+
 
   connectionOffline = {
     en: "You are currently OFFLINE, please check your internet connection.",
-    fr: "Vous êtes actuellement OFFLINE! Veuillez vérifier votre connexion Internet."
+    fr: "Vous êtes actuellement OFFLINE! Veuillez vérifier votre connexion Internet.",
   };
 
   isConnected = true;
-
+  inSession = false;
   @ViewChild('MdSidenav', {static: true})
 
   private sidenav: MatSidenav;
@@ -34,6 +37,7 @@ export class AppComponent implements OnInit {
   constructor(
     private connectionService:ConnectionService,
     private snackBar: MatSnackBar,
+    private _dialog: MatDialog,
     private router: Router,
     private translate: TranslateService,
     private http: HttpClient,
@@ -84,26 +88,35 @@ export class AppComponent implements OnInit {
 
     // override the language settings based on the country in which the client resides
     if (this.config.use_ip_location) {
-      console.log('using IP');
-      this.getCountry().subscribe(
-        data => {
-          if (data['country'] === 'FR' || data['country'] === 'ZA') {
-            this.language = 'fr';
-          } else {
-            this.language = 'en';
-          }
-          console.log('language is ' + this.language + ' from IP');
-          this.translate.setDefaultLang(this.language);
-          this.translate.use(this.language);
-          localStorage.setItem('rd_country', this.language);
-          this.setCompany(this.language);
-          this.title = localStorage.getItem('rd_company_name');
-        },
-        error => {
-          console.log('get country failed' + JSON.stringify(error));
-          this.language = 'en';
-        });
+      this.setCountryLanguage();
     }
+
+    this.authService.memberSessionSubject.subscribe(
+      sessionStatus => {
+        switch(sessionStatus) {
+          case 'active': {
+            this.inSession = true;
+            break;
+          }
+          case 'expired': {
+            this.inSession = false;
+            // In case any dialogs are open
+            this._dialog.closeAll();
+            let snackBarRef = this.snackBar.open(
+              'Your session has expired. To continue using the application, please Sign In again.',
+              'OK',
+              {
+              verticalPosition: 'top',
+              panelClass: ['rc-mat-snack-info']
+            });
+            break;
+          }
+          default: {
+            this.inSession = false;
+          }
+        }
+      }
+    );
 
     // PageScrollConfig.defaultScrollOffset = 64;
     // PageScrollConfig.defaultEasingLogic = {
@@ -140,9 +153,35 @@ export class AppComponent implements OnInit {
 
   }
 
-  getCountry () {
-    return this.http.get('https://ipinfo.io?token=b3a0582a14c7a4');
+  setCountryLanguage(){
+    this.http.get('https://ipinfo.io?token=b3a0582a14c7a4')
+      .subscribe(
+        data => {
+          if (data['country'] === 'FR' || data['country'] === 'ZA') {
+            this.language = 'fr';
+          } else {
+            this.language = 'en';
+          }
+          console.log('language is ' + this.language + ' from IP');
+          this.translate.setDefaultLang(this.language);
+          this.translate.use(this.language);
+          localStorage.setItem('rd_country', this.language);
+          this.setCompany(this.language);
+          this.title = localStorage.getItem('rd_company_name');
+        },
+        error => {
+        }
+      );
   }
+
+  // getCountry () {
+  //   console.log('Get Country by IP');
+  //   setTimeout (() => {
+  //     console.log('No response from IPINFO');
+  //     return null;
+  //   }, 5000);
+  //   return this.http.get('https://ipinfo.io?token=b3a0582a14c7a4');
+  // }
 
   onDeactivate() {
     // console.log('onDeactivate');

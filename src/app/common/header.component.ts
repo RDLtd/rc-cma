@@ -18,6 +18,8 @@ export class HeaderComponent implements OnInit {
   displayName: string = this.lblMemberLogin;
   dialogRef: any;
   company_name;
+  inSession = true;
+
 
   constructor(public authService: AuthenticationService,
               private translate: TranslateService,
@@ -50,6 +52,7 @@ export class HeaderComponent implements OnInit {
           case 'closed': {
             // User logged out
             this.displayName = this.lblMemberLogin;
+            this.inSession = false;
             this.router.navigate(['/']);
             break;
           }
@@ -58,6 +61,7 @@ export class HeaderComponent implements OnInit {
             this.displayName = this.lblMemberLogin;
             // this.login(true);
             // new login page
+            this.inSession = false;
             this.router.navigate(['/']);
 
             break;

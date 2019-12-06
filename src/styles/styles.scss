@@ -112,10 +112,16 @@ and (-webkit-min-device-pixel-ratio: 1) {}
 * Maintain aspect ratio of images
 * -------------------------------
 **/
-[style*="--aspect-ratio"] > :first-child { width: 100%; }
-[style*="--aspect-ratio"] > img { height: auto; }
+[style*="--aspect-ratio"] > :first-child {
+  width: 100%;
+}
+[style*="--aspect-ratio"] > img {
+  height: auto;
+}
 @supports (--custom:property) {
-  [style*="--aspect-ratio"] { position: relative; }
+  [style*="--aspect-ratio"] {
+    position: relative;
+  }
   [style*="--aspect-ratio"]::before {
     content: "";
     display: block;

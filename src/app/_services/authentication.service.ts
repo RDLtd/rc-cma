@@ -8,7 +8,9 @@ import { RestaurantService } from './restaurant.service';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 
 export class AuthenticationService {
 
@@ -167,6 +169,16 @@ export class AuthenticationService {
   }
 
   logout(reason): void {
+
+    if (this.inSession) {
+      this.inSession = false;
+      console.log(`Logout: ${reason}`);
+      if (reason === 'expired') {
+        // timed out
+      }
+      this.memberSessionSubject.next(reason);
+    }
+
     this.member = null;
     // localStorage.clear();
     localStorage.removeItem('rd_profile');
@@ -175,10 +187,7 @@ export class AuthenticationService {
     localStorage.removeItem('rd_token_expires_at');
     localStorage.removeItem('rd_access_level');
     localStorage.removeItem('rd_home');
-    if (this.inSession) {
-      this.inSession = false;
-      this.memberSessionSubject.next(reason);
-    }
+
   }
 
   isAuth(): boolean {
@@ -186,11 +195,10 @@ export class AuthenticationService {
     this.sessionExpiresAt = JSON.parse(localStorage.getItem('rd_token_expires_at'));
     this.sessionTimeLeft = (this.sessionExpiresAt - new Date().getTime()) / 60000;
 
-    // console.log(this.sessionTimeLeft);
-
     // Time is up
     if (this.sessionTimeLeft < 0) {
 
+      //this.router.navigate(['/']);
       this.logout('expired');
       return false;
 
@@ -217,12 +225,18 @@ export class AuthenticationService {
   // Listen for user activity
   checkUserActivity() {
 
+    const timer = setTimeout(() => {
+      this.logout('expired');
+      this.router.navigate(['/']);
+    }, 5000);
+
     // Scope reference for the listeners
     const ths = this;
 
     // Reset the session and clean up
-    let reset = function() {
+    const reset = function() {
       console.log('Detected activity, reset the session.');
+      clearTimeout(timer);
       ths.setNewSessionExpiry();
       document.body.removeEventListener('click', reset);
       document.body.removeEventListener('keydown', reset);
