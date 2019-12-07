@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { AppConfig } from '../app.config';
 import { TranslateService } from '@ngx-translate/core';
 import { Member } from '../_models';
@@ -14,7 +14,8 @@ import { Router } from '@angular/router';
 
 export class AuthenticationService {
 
-  public memberSessionSubject = new Subject<any>();
+  //public memberSessionSubject = new Subject<any>();
+  public memberSessionSubject = new BehaviorSubject<any>(localStorage.getItem('rd_session'));
   public member: Member = new Member();
   private dbOffline = false;
   private inSession: boolean = false;
@@ -62,6 +63,7 @@ export class AuthenticationService {
     localStorage.setItem('rd_user', `${member.member_first_name} ${member.member_last_name}`);
     localStorage.setItem('rd_access_level', `${member.member_access_level}`);
     localStorage.setItem('rd_token', token);
+    localStorage.setItem('rd_session', 'active');
 
     this.setNewSessionExpiry();
 
@@ -169,16 +171,10 @@ export class AuthenticationService {
   }
 
   logout(reason): void {
+    console.log(`Logout: ${reason}`);
 
-    if (this.inSession) {
-      this.inSession = false;
-      console.log(`Logout: ${reason}`);
-      if (reason === 'expired') {
-        // timed out
-      }
-      this.memberSessionSubject.next(reason);
-    }
-
+    this.inSession = false;
+    this.memberSessionSubject.next(reason);
     this.member = null;
     // localStorage.clear();
     localStorage.removeItem('rd_profile');
@@ -187,6 +183,7 @@ export class AuthenticationService {
     localStorage.removeItem('rd_token_expires_at');
     localStorage.removeItem('rd_access_level');
     localStorage.removeItem('rd_home');
+    localStorage.removeItem('rd_session');
 
   }
 

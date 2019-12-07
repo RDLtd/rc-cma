@@ -3,7 +3,9 @@ import { AppConfig } from '../app.config';
 import { User } from '../_models';
 import { HttpClient, HttpParams } from '@angular/common/http';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 
 export class UserService {
 

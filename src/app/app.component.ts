@@ -91,8 +91,11 @@ export class AppComponent implements OnInit {
       this.setCountryLanguage();
     }
 
+    console.log('LS session', localStorage.getItem('rd_session'));
+
     this.authService.memberSessionSubject.subscribe(
       sessionStatus => {
+        console.log('sessionStatus', sessionStatus);
         switch(sessionStatus) {
           case 'active': {
             this.inSession = true;
