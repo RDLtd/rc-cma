@@ -17,10 +17,12 @@ export class MessageComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+
     this.company_name = localStorage.getItem('rd_company_name');
     // decide which version of the message to use
     this.country = localStorage.getItem('rd_country');
-    for (let i = 0; i < this.data.messages.length; i++) {
+    const len = this.data.messages.length;
+    for (let i = 0; i < len; i++) {
       if (this.country === 'fr') {
         this.data.messages[i].message_text = this.data.messages[i].message_text_FR;
       } else {

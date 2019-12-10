@@ -43,16 +43,14 @@ export class SigninComponent implements OnInit {
     this.company_logo_root = localStorage.getItem('rd_company_logo_root');
     this.company_url = localStorage.getItem('rd_company_url');
 
-    console.log('GET LS', localStorage.getItem('rd_company_logo_root'));
+    //console.log('GET LS', localStorage.getItem('rd_company_logo_root'));
     this.authService.memberSessionSubject.next('closed');
-    console.log('LS Session', localStorage.getItem('rd_session'));
 
   }
 
   signIn(formValue) {
 
     // console.log('form', formValue);
-
     this.isSubmitting = true;
     this.authService.login(formValue)
       .subscribe(

@@ -12,13 +12,11 @@
   <div class="rc-join-form">
     <!-- Password Reset -->
     <section class="rc-signin-form" *ngIf="pwdReset">
-
-      <span class="rc-warn" *ngIf="errorMsg">{{ errorMsg | uppercase }}!</span>
-
       <form
         #frmReset="ngForm"
         (ngSubmit)="frmReset.form.valid && resetPwd(frmReset.value)"
         novalidate>
+        <span class="rc-warn" *ngIf="errorMsg">{{ errorMsg | uppercase }}!</span>
         <h1>{{ 'SignIn.ResetPassword' | translate }}</h1>
         <span>{{ 'SignIn.Or' | translate }} <a (click)="showPwdReset(false)">{{ 'SignIn.SignIn' | translate }}</a></span>
         <p>{{ 'SignIn.EnterEmail' | translate }}</p>
@@ -43,14 +41,11 @@
     </section>
     <!-- Sign in -->
     <section class="rc-signin-form" *ngIf="!pwdReset">
-
-      <span class="rc-warn" *ngIf="errorMsg">{{ errorMsg | uppercase }}!</span>
-
       <form
         #frmSignIn="ngForm"
         (ngSubmit)="frmSignIn.form.valid && signIn(frmSignIn.value)"
         novalidate>
-
+        <span class="rc-warn" *ngIf="errorMsg">{{ errorMsg | uppercase }}!</span>
         <h1>{{ 'SignIn.SignIn' | translate }}</h1>
         <span>{{ 'SignIn.Or' | translate }}<a [routerLink]="'/join'">{{ 'SignIn.Join' | translate }} {{ company_name }}</a></span>
         <mat-form-field class="rc-full-width">
@@ -87,8 +82,6 @@
           <a href="{{ company_url }}/privacy/" target="_blank">{{ 'SignIn.Privacy' | translate }}</a></p>
 
       </form>
-
-
     </section>
   </div>
 </div>

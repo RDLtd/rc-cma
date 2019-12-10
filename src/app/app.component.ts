@@ -12,8 +12,7 @@ import { MatDialog } from '@angular/material/dialog';
 @Component({
   selector: 'rc-root',
   templateUrl: './app.component.html',
-  encapsulation: ViewEncapsulation.None,
-  //providers: [ AuthenticationService ]
+  encapsulation: ViewEncapsulation.None
 })
 
 export class AppComponent implements OnInit {
@@ -78,21 +77,15 @@ export class AppComponent implements OnInit {
 
     // check for country preference in local storage
     this.translate.addLangs(['en', 'fr']);
-
-    if (localStorage.getItem('rd_country')) {
-      this.language = localStorage.getItem('rd_country');
-    } else {
-      // if no local item found, then set to English
-      this.language = 'en';
-    }
+    // Set country default to 'en' if not defined
+    this.language = localStorage.getItem('rd_country') || 'en';
 
     // override the language settings based on the country in which the client resides
     if (this.config.use_ip_location) {
       this.setCountryLanguage();
     }
 
-    console.log('LS session', localStorage.getItem('rd_session'));
-
+    // Observe the session status
     this.authService.memberSessionSubject.subscribe(
       sessionStatus => {
         console.log('sessionStatus', sessionStatus);
@@ -103,8 +96,9 @@ export class AppComponent implements OnInit {
           }
           case 'expired': {
             this.inSession = false;
-            // In case any dialogs are open
+            // In case any dialogs are open when the app times out
             this._dialog.closeAll();
+            // Tell the user what happened
             let snackBarRef = this.snackBar.open(
               'Your session has expired. To continue using the application, please Sign In again.',
               'OK',
@@ -151,7 +145,6 @@ export class AppComponent implements OnInit {
     localStorage.setItem('rd_company_annual_fee_with_vat', my_company.rd_company_annual_fee_with_vat);
     localStorage.setItem('rd_company_currency_symbol', my_company.rd_company_currency_symbol);
     localStorage.setItem('rd_company_currency_code', my_company.rd_company_currency_code);
-
     localStorage.setItem('rdCompanyConfig', '');
 
   }
