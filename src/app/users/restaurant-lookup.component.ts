@@ -109,59 +109,64 @@ export class RestaurantLookupComponent implements OnInit {
   associateRestaurant(selected) {
 
     // TODO so here is the problem, via the join form we don't have this data set
-    //console.log(this.data.associatedRestaurants);
+    // console.log(this.data.associatedRestaurants);
 
-    // Make sure it's not already been associated
-    // by comparing to current associations
-    const totalAssociatedRestaurants = this.data.associatedRestaurants.length;
-    for (let i = 0; i < totalAssociatedRestaurants; i++) {
-      let associatedRestaurant = this.data.associatedRestaurants[i];
-      if (associatedRestaurant.restaurant_name === selected.restaurant_name &&
-        associatedRestaurant.restaurant_address_1 === selected.restaurant_address_1) {
-        // console.log('Restaurant already associated');
+    // Update 12/12/19 allow anyone with auth level >=4 to associate whatever
+    if (Number(localStorage.getItem('rd_access_level')) >= 4) {
+      this.addAssociation(selected);
+    } else {
+      // Make sure it's not already been associated
+      // by comparing to current associations
+      const totalAssociatedRestaurants = this.data.associatedRestaurants.length;
+      for (let i = 0; i < totalAssociatedRestaurants; i++) {
+        const associatedRestaurant = this.data.associatedRestaurants[i];
+        if (associatedRestaurant.restaurant_name === selected.restaurant_name &&
+          associatedRestaurant.restaurant_address_1 === selected.restaurant_address_1) {
+          // console.log('Restaurant already associated');
+          this.dspSnackBar(
+            selected.restaurant_name + this.t_data.AlreadyAdded
+          );
+          return;
+        }
+      }
+
+      // Has it already been verified by owner?
+      // i.e. is there already an admin user
+      if (selected.restaurant_data_status === 'Verified By Owner') {
         this.dspSnackBar(
-          selected.restaurant_name + this.t_data.AlreadyAdded
+          selected.restaurant_name + this.t_data.AlreadyVerified
         );
         return;
       }
-    }
 
-    // Has it already been verified by owner?
-    // i.e. is there already an admin user
-    if (selected.restaurant_data_status === 'Verified By Owner') {
-      this.dspSnackBar(
-        selected.restaurant_name + this.t_data.AlreadyVerified
-      );
-      return;
-    }
+      // Do we need to check the verification code?
+      this.verificationCodeRequired = sessionStorage.getItem('referrer_type') !== 'member';
+      // Is there a contact email for the selected restaurant?
+      this.contactEmailRequired = !this.isValidEmail(selected.restaurant_email.trim());
 
-    // Do we need to check the verification code?
-    this.verificationCodeRequired = sessionStorage.getItem('referrer_type') !== 'member';
-    // Is there a contact email for the selected restaurant?
-    this.contactEmailRequired = !this.isValidEmail(selected.restaurant_email.trim());
-
-    // Verification
-    if (this.verificationCodeRequired || this.contactEmailRequired) {
-      const dialogref = this.dialog.open(ProfileVerifyComponent, {
-        data: {
-          restaurant: selected,
-          member: this.data.member,
-          verificationCodeRequired: this.verificationCodeRequired,
-          contactEmailRequired: this.contactEmailRequired
-        }
-      });
-
-      dialogref.afterClosed().subscribe(association => {
-        if (association) {
-          if (association.verified) {
-            this.addAssociation(selected);
-          } else {
-            console.log('Invalid code or cancelled operation');
+      // Verification
+      if (this.verificationCodeRequired || this.contactEmailRequired) {
+        const dialogref = this.dialog.open(ProfileVerifyComponent, {
+          data: {
+            restaurant: selected,
+            member: this.data.member,
+            verificationCodeRequired: this.verificationCodeRequired,
+            contactEmailRequired: this.contactEmailRequired
           }
-        }
-      });
-    } else {
-      this.addAssociation(selected);
+        });
+
+        dialogref.afterClosed().subscribe(association => {
+          if (association) {
+            if (association.verified) {
+              this.addAssociation(selected);
+            } else {
+              console.log('Invalid code or cancelled operation');
+            }
+          }
+        });
+      } else {
+        this.addAssociation(selected);
+      }
     }
   }
 
@@ -172,10 +177,10 @@ export class RestaurantLookupComponent implements OnInit {
   addAssociation(newRestaurant) {
     this.restaurantService.addAssociation(this.data.member.member_id, newRestaurant.restaurant_id).subscribe(
       data => {
-        //console.log(data);
+        // console.log(data);
 
         // Verify email contact details
-        if(!newRestaurant.restaurant_email.trim().length) {
+        if (!newRestaurant.restaurant_email.trim().length) {
           console.log(`No Email: ${ newRestaurant.restaurant_email}`);
         }
 
