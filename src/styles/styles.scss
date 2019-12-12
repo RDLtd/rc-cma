@@ -113,16 +113,10 @@ and (-webkit-min-device-pixel-ratio: 1) {}
 * -------------------------------
 **/
 
-[style*="--aspect-ratio"] > :first-child {
-  width: 100%;
-}
-[style*="--aspect-ratio"] > img {
-  object-fit: cover;
-}
+[style*="--aspect-ratio"] > :first-child { width: 100%; }
+[style*="--aspect-ratio"] > img { object-fit: cover; }
 @supports (--custom:property) {
-  [style*="--aspect-ratio"] {
-    position: relative;
-  }
+  [style*="--aspect-ratio"] { position: relative; }
   [style*="--aspect-ratio"]::before {
     content: "";
     display: block;
@@ -429,8 +423,9 @@ a.mat-menu-item {text-decoration: none;}
 }
 .rc-card-help {
   position: absolute;
-  top: 16px; right: 16px;
+  top: 0; right: 0;
   z-index: 10;
+  background-color: white;
 }
 .rc-image-card {
   position: relative;
