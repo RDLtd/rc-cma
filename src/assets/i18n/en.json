@@ -479,6 +479,7 @@
     "Price": "Price",
     "OptDesc": "Optional description",
     "Vegetarian": "Vegetarian",
+    "Vegan": "Vegan",
     "GlutenFree": "Gluten Free",
     "Cancel": "Cancel",
     "Update": "Update",
@@ -525,7 +526,7 @@
     "Deleted": " Deleted",
     "AddMenu": "ADD A MENU",
     "On": "on",
-    "VGF": "Add a selection of your most popular dishes. We would recommend that you choose a cross-section of your price range and dishes that best reflect your style of food. You can display the dishes as ![Vegetarian](../assets/images/icons/vegetarian.svg) **Vegetarian** or ![Gluten Free](../assets/images/icons/gluten-free.svg) **Gluten Free** when you add them.",
+    "VGF": "Add a selection of your most popular dishes. We would recommend that you choose a cross-section of your price range and dishes that best reflect your style of food. You can display the dishes as ![Vegetarian](../assets/images/icons/vegetarian.svg) **Vegetarian**, ![Vegan](../assets/images/icons/vegan.svg) **Vegan** or ![Gluten Free](../assets/images/icons/gluten-free.svg) **Gluten Free** when you add them.",
     "SectionHint": "Antipasti, Starters, Main Courses etc."
   },
 

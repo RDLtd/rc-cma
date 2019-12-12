@@ -58,6 +58,11 @@
       {{ 'CMS-Menu-Dish.Vegetarian' | translate }}
     </mat-checkbox>
     <mat-checkbox
+      name="cms_dish_vegan"
+      [ngModel]="data.dish.cms_dish_vegan">
+      {{ 'CMS-Menu-Dish.Vegan' | translate }}
+    </mat-checkbox>
+    <mat-checkbox
       name="cms_dish_glutenfree"
       [ngModel]="data.dish.cms_dish_glutenfree">
       {{ 'CMS-Menu-Dish.GlutenFree' | translate }}

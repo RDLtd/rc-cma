@@ -260,6 +260,7 @@ export class CmsMenusComponent implements OnInit {
         d.cms_dish_desc = formDish.controls.cms_dish_desc.value;
         d.cms_dish_price = formDish.controls.cms_dish_price.value;
         d.cms_dish_vegetarian = Number(formDish.controls.cms_dish_vegetarian.value);
+        d.cms_dish_vegetarian = Number(formDish.controls.cms_dish_vegan.value);
         d.cms_dish_glutenfree = Number(formDish.controls.cms_dish_glutenfree.value);
         d.cms_dish_created_by = this.user;
 

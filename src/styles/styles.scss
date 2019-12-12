@@ -112,6 +112,7 @@ and (-webkit-min-device-pixel-ratio: 1) {}
 * Maintain aspect ratio of images
 * -------------------------------
 **/
+
 [style*="--aspect-ratio"] > :first-child {
   width: 100%;
 }
@@ -1144,6 +1145,9 @@ button.rc-member-assc {
     line-height: 1.25;
     flex: 70%;
     color: black;
+    span.rc-dish-attribute {
+      margin-left: 4px;
+    }
   }
   // menu item price
   span:nth-child(2) {
