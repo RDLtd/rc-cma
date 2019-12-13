@@ -115,6 +115,7 @@ and (-webkit-min-device-pixel-ratio: 1) {}
 
 [style*="--aspect-ratio"] > :first-child { width: 100%; }
 [style*="--aspect-ratio"] > img {
+  height: auto;
   object-fit: cover;
 }
 @supports (--custom:property) {
@@ -584,13 +585,11 @@ a.mat-menu-item {text-decoration: none;}
   }
 }
 .rc-dialog-cms-image {
+  width: 68vw;
   header { display: flex; }
   .image-wrapper {
     position: relative;
-    padding: 0 16px 16px;}
-  img {
-    width: 100%;
-    height: auto;
+    padding: 0 16px 0;
   }
 }
 .rc-dialog-cms-image-upload {
@@ -600,6 +599,7 @@ a.mat-menu-item {text-decoration: none;}
     text-transform: capitalize;
     font-size: 16px;
   }
+
 }
 .rc-dialog-spw-preview {
   border: 0;
