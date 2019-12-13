@@ -72,11 +72,16 @@ export class CmsImagesComponent implements OnInit {
 
     this.cms.updateElement(img).subscribe(
       data => {
-        this.cmsLocalService.dspSnackbar(`Image ${ img.cms_element_id } ${ msg }`, null, 3);
-
+        this.cmsLocalService.dspSnackbar(
+          `Image ${ img.cms_element_id } ${ msg }`,
+          null,
+          3);
       },
       error => {
-        this.cmsLocalService.dspSnackbar(this.t_data.UpdateFailed, null, 3);
+        this.cmsLocalService.dspSnackbar(
+          `${this.t_data.UpdateFailed}`,
+          null,
+          3);
         console.log(error);
       });
   }
@@ -95,11 +100,11 @@ export class CmsImagesComponent implements OnInit {
       data: {
         type: 'image',
         tgtObject: this.cmsImages,
-        restaurant: this.restaurant
+        restaurant: this.restaurant,
+        ref: this.dialog
       }
     });
     dialogRef.componentInstance.dialog = dialogRef;
-
   }
 
   deleteImage(img) {
@@ -125,12 +130,18 @@ export class CmsImagesComponent implements OnInit {
                   this.cmsImages.splice(i, 1);
                 }
               }
-              this.cmsLocalService.dspSnackbar('Image ' + img.cms_element_id + this.t_data.Deleted, null, 3);
+              this.cmsLocalService.dspSnackbar(
+                'Image ' + img.cms_element_id + this.t_data.Deleted,
+                null,
+                3);
               dialogRef.close();
           },
             error => {
             console.log(error);
-            this.cmsLocalService.dspSnackbar(this.t_data.UpdateFailed, null, 3);
+            this.cmsLocalService.dspSnackbar(
+              this.t_data.UpdateFailed,
+              null,
+              3);
             }
           );
       }

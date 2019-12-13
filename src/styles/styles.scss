@@ -114,7 +114,9 @@ and (-webkit-min-device-pixel-ratio: 1) {}
 **/
 
 [style*="--aspect-ratio"] > :first-child { width: 100%; }
-[style*="--aspect-ratio"] > img { object-fit: cover; }
+[style*="--aspect-ratio"] > img {
+  object-fit: cover;
+}
 @supports (--custom:property) {
   [style*="--aspect-ratio"] { position: relative; }
   [style*="--aspect-ratio"]::before {
@@ -522,7 +524,6 @@ a.mat-menu-item {text-decoration: none;}
   }
 }
 .rc-dialog-image-upload {
-  max-width: 400px;
   label.image-select {
     display: block;
     position: relative;
@@ -593,19 +594,11 @@ a.mat-menu-item {text-decoration: none;}
   }
 }
 .rc-dialog-cms-image-upload {
+  width: 68vw;
+  max-width: 480px;
   label {
     text-transform: capitalize;
     font-size: 16px;
-  }
-  .image-wrapper {
-    height: 240px;
-    max-width: 320px;
-    margin: 0 auto;
-  }
-  img {
-    height:100%;
-    width:100%;
-    object-fit: contain;
   }
 }
 .rc-dialog-spw-preview {
