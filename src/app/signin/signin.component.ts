@@ -44,7 +44,7 @@ export class SigninComponent implements OnInit {
     this.company_url = localStorage.getItem('rd_company_url');
 
     //console.log('GET LS', localStorage.getItem('rd_company_logo_root'));
-    this.authService.memberSessionSubject.next('closed');
+    //this.authService.memberSessionSubject.next('null');
 
   }
 

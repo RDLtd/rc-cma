@@ -122,6 +122,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
     // detect language changes... need to check for change in texts
     translate.onLangChange.subscribe(lang => {
       this.translate.get('CMS-Dashboard').subscribe(data => {this.t_data = data; });
+
       // re-translate computed display dates
       moment.locale(localStorage.getItem('rd_country'));
       this.d_memberJoinDate = moment(this.memberJoinDate).format('dddd, DD MMMM YYYY');
@@ -728,7 +729,11 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
   copied(): void {
     this.cmsLocalService.dspSnackbar(this.t_data.LinkCopied, 'OK', 5);
     // record event
-    this.ga.sendEvent('CMS-Dashboard', 'SPW', 'Link Copied');
+    this.ga.sendEvent(
+      'CMS-Dashboard',
+      'SPW',
+      'Link Copied'
+    );
   }
 
   viewMemberStatus() {
@@ -741,45 +746,71 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
     });
 
     // record event
-    this.ga.sendEvent('CMS-Dashboard', 'Membership Status', 'Opened');
+    this.ga.sendEvent(
+      'CMS-Dashboard',
+      'Membership Status',
+      'Opened'
+    );
 
     // Update dashboard
     dialogRef.afterClosed().subscribe(result => {
       this.setMemberStatus(new Date());
     });
-
   }
 
   dspUnreadMessages() {
+    // JB Test stuff
+    // TODO: remove
+    const msgs = [
+      {
+        id: 1,
+        severity: 1,
+        heading: 'Important Message',
+        body: "Some message about scheduled maintenance of other such nonsense will go here."
+      },
+      {
+        id: 2,
+        severity: 0,
+        heading: 'Unimportant Message',
+        body: "Some other message about scheduled maintenance of other such nonsense will go here.",
+      }
+      ];
 
-    this.memberService.messages(this.user.member_access_level, this.user.member_messages_seen)
-      .subscribe((msgs: any) => {
-
-        console.log('MSGS:', msgs);
-
-        const data = {
+    if (msgs.length) {
+      const dialogref = this.dialog.open(MessageComponent, {
+        data: {
           user_id: this.user.member_id,
-          messages: msgs.messages
-        };
-
-        // display unread messages
-        if (msgs.messages.length) {
-          const dialogref = this.dialog.open(MessageComponent, { data });
-
-          dialogref.afterClosed().subscribe(msgSeen => {
-            // mark messages as READ
-            if (msgSeen) {
-              this.memberService.messagesseen(this.user.member_id).subscribe(
-                msg => {
-                 // console.log(msg);
-                },
-                error => {
-                  console.log(error);
-                  console.log('Failed to update messages_seen for member ' + this.user.member_id);
-                });
-            }
-          });
-        }
+          messages: msgs,
+        },
+        // force user to explicitly close the dialog
+        disableClose: true
       });
+    }
+
+    // // get messages
+    // this.memberService.messages(this.user.member_access_level, this.user.member_messages_seen)
+    //   .subscribe((msgs: any) => {
+    //
+    //     console.log('MSGS:', msgs);
+    //
+    //     // Any unread messages?
+    //     if (msgs.messages.length) {
+    //       const dialogref = this.dialog.open(MessageComponent, {
+    //         data: {
+    //           user_id: this.user.member_id,
+    //           messages: msgs.messages
+    //         },
+    //         disableClose: true
+    //       });
+    //
+    //       dialogref.afterClosed().subscribe(messagesSeen => {
+    //         if (messagesSeen) {
+    //           this.memberService.messagesseen(this.user.member_id).subscribe(
+    //             msg => console.log(msg),
+    //             error => console.log(`Failed to update messages_seen for member ${this.user.member_id}`, error));
+    //         }
+    //       });
+    //     }
+    //   });
   }
 }

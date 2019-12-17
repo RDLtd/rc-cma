@@ -402,7 +402,6 @@ a.mat-menu-item {text-decoration: none;}
   }
 }
 
-
 /**
 * RC Cards
 * -------------------------------
@@ -522,6 +521,32 @@ a.mat-menu-item {text-decoration: none;}
 
   &.rc-dialog-small {
     max-width: 400px;
+  }
+
+  /** Dashboard messages **/
+  .rc-message {
+    margin: 8px 0 4px;
+    padding: 0 8px 8px;
+    border-bottom: 1px solid $rc-theme-grey;
+    &:first-child { margin-top: 16px; }
+    h2, h3 {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin: 0px;
+      padding:0;
+      .mat-icon { margin-right: 4px; }
+    }
+    p {
+      padding:0;
+      margin:0;
+    }
+  }
+  .rc-message-important {
+    h2, h3 {
+      color: $rc-theme-primary;
+      .mat-icon { color: $rc-theme-primary; }
+    }
   }
 }
 .rc-dialog-image-upload {

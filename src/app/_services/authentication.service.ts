@@ -149,7 +149,7 @@ export class AuthenticationService {
     }
   }
 
-  dspHomeScreen(sessionStatus = 'closed'): void {
+  dspHomeScreen(sessionStatus): void {
     sessionStatus === 'active'? this.inSession = true : this.inSession = false;
     this.memberSessionSubject.next(sessionStatus);
     this.router.navigate([localStorage.getItem('rd_home')]);
