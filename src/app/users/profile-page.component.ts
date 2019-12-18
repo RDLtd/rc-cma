@@ -140,6 +140,7 @@ export class ProfilePageComponent implements OnInit {
   }
 
   getAssociatedRestaurants(id) {
+    console.log('getAssociatedRestaurants');
     this.showLoader = true;
     this.restaurantService.getMemberRestaurants(id)
       .subscribe(
@@ -148,6 +149,7 @@ export class ProfilePageComponent implements OnInit {
           this.restaurants = data['restaurants'];
           if(this.restaurants.length) {
             this.getDefaultImages();
+
           } else if(this.showRestaurantFinder) {
             this.showRestaurantFinder = false;
             this.addRestaurants();
@@ -203,14 +205,15 @@ export class ProfilePageComponent implements OnInit {
   }
 
   getDefaultImages() {
-    for (let i = 0; i < this.restaurants.length; i++) {
+    const numberOfRestaurants = this.restaurants.length;
+    for (let i = 0; i < numberOfRestaurants; i++) {
       this.cms.getElementClass(this.restaurants[i].restaurant_id, 'Image', 'Y')
         .subscribe(
         data => {
           if (data['count'] > 0) {
             this.defaultImages[i] = data['elements'][0].cms_element_image_path;
           } else {
-            this.defaultImages.push(null);
+            this.defaultImages[i] = null;
           }
         },
         error => {

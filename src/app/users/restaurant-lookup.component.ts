@@ -177,7 +177,7 @@ export class RestaurantLookupComponent implements OnInit {
   addAssociation(newRestaurant) {
     this.restaurantService.addAssociation(this.data.member.member_id, newRestaurant.restaurant_id).subscribe(
       data => {
-        // console.log(data);
+        //console.log(newRestaurant);
 
         // Verify email contact details
         if (!newRestaurant.restaurant_email.trim().length) {
