@@ -35,6 +35,8 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
   dbRestaurant: Restaurant = new Restaurant();
   restaurant: Restaurant;
   descriptions: CMSDescription;
+  last_updated: any;
+
   // We'll use this if there is no active default image
   dfImg: string;
 
@@ -121,19 +123,24 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
   ) {
     // detect language changes... need to check for change in texts
     translate.onLangChange.subscribe(lang => {
-      this.translate.get('CMS-Dashboard').subscribe(data => {this.t_data = data; });
+      this.translate.get('CMS-Dashboard').subscribe(data => {
+        this.t_data = data;
 
-      // re-translate computed display dates
-      moment.locale(localStorage.getItem('rd_country'));
-      this.d_memberJoinDate = moment(this.memberJoinDate).format('dddd, DD MMMM YYYY');
-      this.d_publishDate = moment(this.publishDate).format('LLLL');
-      this.d_core_date = moment(this.core_date).format('dddd, DD MMMM YYYY');
-      this.d_hours_date = moment(this.hours_date).format('dddd, DD MMMM YYYY');
-      this.d_desc_date = moment(this.desc_date).format('dddd, DD MMMM YYYY');
-      this.d_img_date = moment(this.img_date).format('dddd, DD MMMM YYYY');
-      this.d_mnu_date = moment(this.mnu_date).format('dddd, DD MMMM YYYY');
-      this.d_bkg_date = moment(this.bkg_date).format('dddd, DD MMMM YYYY');
-      this.d_loc_date = moment(this.loc_date).format('dddd, DD MMMM YYYY');
+        // Since the display texts are computed, we need to re-run these routines...
+        this.readAndCheckStatus();
+
+        // re-translate computed display dates
+        moment.locale(localStorage.getItem('rd_country'));
+        this.d_memberJoinDate = moment(this.memberJoinDate).format('dddd, DD MMMM YYYY');
+        this.d_publishDate = moment(this.publishDate).format('LLLL');
+        this.d_core_date = moment(this.core_date).format('dddd, DD MMMM YYYY');
+        this.d_hours_date = moment(this.hours_date).format('dddd, DD MMMM YYYY');
+        this.d_desc_date = moment(this.desc_date).format('dddd, DD MMMM YYYY');
+        this.d_img_date = moment(this.img_date).format('dddd, DD MMMM YYYY');
+        this.d_mnu_date = moment(this.mnu_date).format('dddd, DD MMMM YYYY');
+        this.d_bkg_date = moment(this.bkg_date).format('dddd, DD MMMM YYYY');
+        this.d_loc_date = moment(this.loc_date).format('dddd, DD MMMM YYYY');
+      });
     });
   }
 
@@ -148,7 +155,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
 
     this.translate.get('CMS-Dashboard').subscribe(data => {
       this.t_data = data;
-      console.log(this.t_data.Open, this.hours_status_text);
+      // console.log(this.t_data.Open, this.hours_status_text);
 
       moment.locale(localStorage.getItem('rd_country'));
 
@@ -164,12 +171,14 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
         .subscribe(rest => {
             if (rest.restaurant_id) {
               this.restaurant = rest;
-              this.setMemberStatus();
-              this.checkPublishStatus();
-              this.checkOpeningTimes();
-              this.checkDescriptions();
-              this.checkImages();
-              this.getOffers();
+              // moved to getLastUpdated
+              // this.setMemberStatus();
+              // this.checkPublishStatus();
+              // this.checkOpeningTimes();
+              // this.checkDescriptions();
+              // this.checkImages();
+              // this.getOffers();
+              this.getLastUpdated();
             }
             // duplicate the loaded restaurant
             // so that we can use it to compare changes
@@ -183,31 +192,40 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
     });
   }
 
+  readAndCheckStatus () {
+    this.setMemberStatus();
+    this.checkPublishStatus();
+    this.checkOpeningTimes();
+    this.checkDescriptions();
+    this.checkImages();
+    this.getOffers();
+  }
 
 
   setMemberStatus(date: Date = new Date(this.restaurant.restaurant_associated_on)) {
 
     // console.log(this.restaurant);
     // NB this assumes that is the member is not full then they are an associate - need to be to get here!
-    console.log('set', this.restaurant.restaurant_rc_member_status);
+    // console.log('set', this.restaurant.restaurant_rc_member_status);
     if (this.restaurant.restaurant_rc_member_status === 'Full') {
       this.memberStatus = 100;
       this.memberType = this.t_data.FullMember;
       this.memberIcon = 'people';
-      this.memberJoinDate = new Date(this.restaurant.restaurant_full_member_on);
+      // this.memberJoinDate = new Date(this.restaurant.restaurant_full_member_on);
     } else {
       // this.memberJoinDate = date;
       this.memberStatus = 50;
       this.memberType = this.t_data.AssMember;
       this.memberIcon = 'people_outline';
-      this.memberJoinDate = new Date(this.restaurant.restaurant_associated_on);
+      // this.memberJoinDate = new Date(this.restaurant.restaurant_associated_on);
     }
-    this.d_memberJoinDate = moment(this.memberJoinDate).format('dddd, DD MMMM YYYY');
+    // this.d_memberJoinDate = moment(this.memberJoinDate).format('dddd, DD MMMM YYYY');
+    this.d_memberJoinDate = moment(this.last_updated.last_updated_status).format('dddd, DD MMMM YYYY');
   }
 
   checkPublishStatus() {
 
-    console.log('checkPublishStatus', this.restaurant.restaurant_id, this.restaurant.restaurant_number);
+    // console.log('checkPublishStatus', this.restaurant.restaurant_id, this.restaurant.restaurant_number);
     this.cms.previewSPW(this.restaurant.restaurant_id, this.restaurant.restaurant_number, true, true)
       .subscribe(res => {
 
@@ -262,6 +280,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
     this.cms.getTimes(this.restaurant.restaurant_id)
       .subscribe(data => {
         // console.log('DATA', data);
+        this.hours_count = 0;
         let i = data['times'].length;
         while (i--) {
           if (!data['times'][i].closed) {
@@ -276,13 +295,13 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
           this.hours_status_text = this.t_data.NoData;
           this.hours_status = 0;
         }
-        console.log(this.t_data.Open, this.hours_status_text);
 
-        if (data['times'].length) {
-          // ToDo update this to check through the array of times. Using zero since that also reflects message
-          this.hours_date = new Date(data['times'][0].cms_time_last_update);
-          this.d_hours_date = moment(this.hours_date).format('dddd, DD MMMM YYYY');
-        }
+        // if (data['times'].length) {
+        //   this.hours_date = new Date(data['times'][0].cms_time_last_update);
+        //   this.d_hours_date = moment(this.hours_date).format('dddd, DD MMMM YYYY');
+        // }
+        this.hours_date = new Date(this.last_updated.last_updated_hours);
+        this.d_hours_date = moment(this.hours_date).format('dddd, DD MMMM YYYY');
 
       },
       error => {
@@ -297,7 +316,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
       .subscribe(
         data => {
           this.descriptions = data['descriptions'][0];
-          console.log('Descriptions loaded:', data);
+          // console.log('Descriptions loaded:', data);
           this.setCoreStatus();
           this.checkFeatures();
           this.checkBookingInfo();
@@ -335,7 +354,8 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
         this.desc_status_text = this.t_data.MissingSome;
       }
       this.desc_by = this.descriptions.cms_description_created_by;
-      this.desc_date = new Date(this.descriptions.cms_description_last_updated);
+      // this.desc_date = new Date(this.descriptions.cms_description_last_updated);
+      this.desc_date = new Date(this.last_updated.last_updated_descriptions);
       this.d_desc_date = moment(this.desc_date).format('dddd, DD MMMM YYYY');
     } else {
       this.desc_status_text = this.t_data.NoData;
@@ -371,11 +391,12 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
             this.img_status_text = this.img_count + this.t_data.ActiveImages;
           }
 
-          if (data['elements'].length) {
-            // todo this needs updating, also to reflect when the default image has changed
-            this.img_date = new Date(data['elements'][data['elements'].length - 1].cms_element_last_update);
-            this.d_img_date = moment(this.img_date).format('dddd, DD MMMM YYYY');
-          }
+          // if (data['elements'].length) {
+          //   this.img_date = new Date(data['elements'][data['elements'].length - 1].cms_element_last_update);
+          //   this.d_img_date = moment(this.img_date).format('dddd, DD MMMM YYYY');
+          // }
+          this.img_date = new Date(this.last_updated.last_updated_images);
+          this.d_img_date = moment(this.img_date).format('dddd, DD MMMM YYYY');
         },
         error => console.log(error + ' R ' + this.restaurant.restaurant_id));
   }
@@ -421,12 +442,13 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
             this.mnu_status += 33.3;
           }
         }
-        // get the last update date of last array element
 
-        if (menuData['elements'].length) {
-          this.mnu_date = new Date(menuData['elements'][menuData['count'] - 1].cms_element_last_update);
-          this.d_mnu_date = moment(this.mnu_date).format('dddd, DD MMMM YYYY');
-        }
+        // if (menuData['elements'].length) {
+        //   this.mnu_date = new Date(menuData['elements'][menuData['count'] - 1].cms_element_last_update);
+        //   this.d_mnu_date = moment(this.mnu_date).format('dddd, DD MMMM YYYY');
+        // }
+        this.mnu_date = new Date(this.last_updated.last_updated_menus);
+        this.d_mnu_date = moment(this.mnu_date).format('dddd, DD MMMM YYYY');
 
         // set status text
         if (this.mnu_status === 0) {
@@ -459,8 +481,9 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
         this.descriptions.cms_description_booking_provider !== 'null') {
         this.bkg_status += 25;
       }
-      // TODO: no specific date available
-      this.bkg_date = this.desc_date;
+
+      // this.bkg_date = this.desc_date;
+      this.bkg_date = new Date(this.last_updated.last_updated_booking);
       this.d_bkg_date = moment(this.bkg_date).format('dddd, DD MMMM YYYY');
 
       // set status text
@@ -489,8 +512,8 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
         this.loc_status += 25;
       }
     }
-    // TODO: no specific date
-    this.loc_date = this.core_date;
+    // this.loc_date = this.core_date;
+    this.loc_date = new Date(this.last_updated.last_updated_location);
     this.d_loc_date = moment(this.loc_date).format('dddd, DD MMMM YYYY');
     // set status text
     if (this.loc_status === 0) {
@@ -759,58 +782,82 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
   }
 
   dspUnreadMessages() {
-    // JB Test stuff
-    // TODO: remove
-    const msgs = [
-      {
-        id: 1,
-        severity: 1,
-        heading: 'Important Message',
-        body: "Some message about scheduled maintenance of other such nonsense will go here."
-      },
-      {
-        id: 2,
-        severity: 0,
-        heading: 'Unimportant Message',
-        body: "Some other message about scheduled maintenance of other such nonsense will go here.",
-      }
-      ];
 
-    if (msgs.length) {
-      const dialogref = this.dialog.open(MessageComponent, {
-        data: {
-          user_id: this.user.member_id,
-          messages: msgs,
-        },
-        // force user to explicitly close the dialog
-        disableClose: true
-      });
+    let company_code = 'rc';
+    if (localStorage.getItem('rd_company_name') === 'Restaurateurs Indépendants') {
+      company_code = 'ri';
     }
+    // console.log(this.user.member_id, this.user.member_access_level, this.user.member_messages_seen);
+    this.memberService.messages(company_code, this.user.member_id, this.user.member_access_level, this.user.member_messages_seen)
+      .subscribe(msgs => {
 
-    // // get messages
-    // this.memberService.messages(this.user.member_access_level, this.user.member_messages_seen)
-    //   .subscribe((msgs: any) => {
-    //
-    //     console.log('MSGS:', msgs);
-    //
-    //     // Any unread messages?
-    //     if (msgs.messages.length) {
-    //       const dialogref = this.dialog.open(MessageComponent, {
-    //         data: {
-    //           user_id: this.user.member_id,
-    //           messages: msgs.messages
-    //         },
-    //         disableClose: true
-    //       });
-    //
-    //       dialogref.afterClosed().subscribe(messagesSeen => {
-    //         if (messagesSeen) {
-    //           this.memberService.messagesseen(this.user.member_id).subscribe(
-    //             msg => console.log(msg),
-    //             error => console.log(`Failed to update messages_seen for member ${this.user.member_id}`, error));
-    //         }
-    //       });
-    //     }
-    //   });
+        console.log('MSGS:', msgs);
+        if (msgs['count'] > 0) {
+          const dialogref = this.dialog.open(MessageComponent, {
+            data: {
+              user_id: this.user.member_id,
+              messages: msgs['messages'],
+            },
+            // force user to explicitly close the dialog
+            disableClose: true
+          });
+
+          dialogref.afterClosed().subscribe(msgSeen => {
+            if (msgSeen) {
+              console.log('Message Seen');
+              // so set them all to seen...
+              for (let i = 0; i < msgs['messages'].length; i++) {
+                // console.log('SEEN: ', this.user.member_id, msgs.messages[i].message_id);
+                this.memberService.messagesseen(Number(this.user.member_id), msgs['messages[i]'].message_id).subscribe(
+                  result => {
+                    // console.log(result);
+                  },
+                  error => {
+                    console.log(error);
+                    console.log('Failed to update messages_seen for member ' + this.user.member_id);
+                  });
+              }
+            } else {
+              console.log('Message NOT Seen');
+            }
+          });
+
+        } else {
+          console.log('No messages');
+        }
+      });
+
+  }
+
+  getLastUpdated() {
+    this.cms.getLastUpdatedRecord(Number(this.restaurant.restaurant_id)).subscribe(
+      data => {
+        if (data['count'] === 0) {
+          // no record found, so this must be the first time - create one...
+          this.cms.createLastUpdatedRecord(Number(this.restaurant.restaurant_id)).subscribe(
+            created => {
+              // now read it back!
+              this.cms.getLastUpdatedRecord(Number(this.restaurant.restaurant_id)).subscribe(
+                reread => {
+                  // console.log('createlastupdatedrecord', reread);
+                  this.last_updated = reread['lastupdated'][0];
+                  this.readAndCheckStatus();
+                },
+                error => {
+                  console.log('getlastupdatedrecord', error);
+                });
+            },
+            error => {
+              console.log('createlastupdatedrecord', error);
+            });
+        } else {
+          // console.log(data);
+          this.last_updated = data['lastupdated'][0];
+          this.readAndCheckStatus();
+        }
+      },
+      error => {
+        console.log('getlastupdatedrecord', error);
+      });
   }
 }

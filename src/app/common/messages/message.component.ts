@@ -9,7 +9,6 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 export class MessageComponent implements OnInit {
 
   company_name;
-  country;
 
   constructor(
     public messageDialog: MatDialogRef<MessageComponent>,
@@ -18,17 +17,18 @@ export class MessageComponent implements OnInit {
 
   ngOnInit() {
     this.company_name = localStorage.getItem('rd_company_name');
-    // decide which version of the message to use
-    this.country = localStorage.getItem('rd_country');
-    console.log('Msgs:', this.data.messages);
-    //const len = this.data.messages.length;
-    // for (let i = 0; i < len; i++) {
-    //   if (this.country === 'fr') {
-    //     this.data.messages[i].message_text = this.data.messages[i].message_text_FR;
-    //   } else {
-    //     this.data.messages[i].message_text = this.data.messages[i].message_text_EN;
-    //   }
-    // }
+    // select the correct language...
+    if (localStorage.getItem('rd_country') === 'fr') {
+      for (let i = 0; i < this.data.messages.length; i++) {
+        this.data.messages[i].body = this.data.messages[i].message_text_FR;
+        this.data.messages[i].heading = this.data.messages[i].message_subject_FR;
+      }
+    } else {
+      for (let i = 0; i < this.data.messages.length; i++) {
+        this.data.messages[i].body = this.data.messages[i].message_text_EN;
+        this.data.messages[i].heading = this.data.messages[i].message_subject_EN;
+      }
+    }
   }
 
 }

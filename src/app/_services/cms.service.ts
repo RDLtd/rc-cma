@@ -246,6 +246,22 @@ export class CMSService {
         userCode: this.config.userAPICode, token: this.jwt() });
   }
 
+  getLastUpdatedRecord(restaurant_id: number) {
+    return this.http.post(this.config.apiUrl + '/cms/getlastupdatedrecord',
+      { restaurant_id: restaurant_id, userCode: this.config.userAPICode, token: this.jwt() });
+  }
+
+  createLastUpdatedRecord(restaurant_id: number) {
+    return this.http.post(this.config.apiUrl + '/cms/createlastupdatedrecord',
+      { restaurant_id: restaurant_id, userCode: this.config.userAPICode, token: this.jwt() });
+  }
+
+  updateLastCreatedField(restaurant_id: number, last_updated_field: string) {
+    return this.http.post(this.config.apiUrl + '/cms/updatelastupdatedfield',
+      { restaurant_id: restaurant_id, last_updated_field: last_updated_field,
+        userCode: this.config.userAPICode, token: this.jwt() });
+  }
+
   // Generate Token
   private jwt() {
     // create authorization header with jwt token
