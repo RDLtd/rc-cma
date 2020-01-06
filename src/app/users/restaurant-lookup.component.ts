@@ -78,7 +78,7 @@ export class RestaurantLookupComponent implements OnInit {
       sort_direction: 'ASC',
       limit_number: 20,
       limit_index: '0',
-      restaurant_status: 'Curation Complete',
+      //restaurant_status: 'Curation Complete',
       country: this.country
     };
 
