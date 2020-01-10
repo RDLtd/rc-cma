@@ -97,6 +97,11 @@ export class CmsMenusComponent implements OnInit {
       error => {
         console.log('Error', error);
       });
+
+    this.cms.updateLastCreatedField(Number(this.restaurant.restaurant_id), 'menus').subscribe(
+      error => {
+        console.log('error in updatelastupdatedfield for menus', error);
+      });
   }
 
   // // Utils
@@ -152,6 +157,11 @@ export class CmsMenusComponent implements OnInit {
             error => {
               console.log(JSON.stringify(error));
             });
+
+          this.cms.updateLastCreatedField(Number(this.restaurant.restaurant_id), 'menus').subscribe(
+            error => {
+              console.log('error in updatelastupdatedfield for menus', error);
+            });
         }
         // console.log('Html Sections:', this.htmlMenu.sections);
       },
@@ -179,6 +189,11 @@ export class CmsMenusComponent implements OnInit {
       },
       error => {
         console.log(JSON.stringify(error));
+      });
+
+    this.cms.updateLastCreatedField(Number(this.restaurant.restaurant_id), 'menus').subscribe(
+      error => {
+        console.log('error in updatelastupdatedfield for menus', error);
       });
   }
 
@@ -278,6 +293,11 @@ export class CmsMenusComponent implements OnInit {
           },
           error => { console.log(error);
           });
+
+        this.cms.updateLastCreatedField(Number(this.restaurant.restaurant_id), 'menus').subscribe(
+          error => {
+            console.log('error in updatelastupdatedfield for menus', error);
+          });
       }
     });
   }
@@ -328,6 +348,11 @@ export class CmsMenusComponent implements OnInit {
           error => {
             console.log(error);
           });
+
+        this.cms.updateLastCreatedField(Number(this.restaurant.restaurant_id), 'menus').subscribe(
+          error => {
+            console.log('error in updatelastupdatedfield for menus', error);
+          });
       }
     });
   }
@@ -356,6 +381,11 @@ export class CmsMenusComponent implements OnInit {
           },
           error => {
             console.log(error);
+          });
+
+        this.cms.updateLastCreatedField(Number(this.restaurant.restaurant_id), 'menus').subscribe(
+          error => {
+            console.log('error in updatelastupdatedfield for menus', error);
           });
 
         this.htmlMenu.dishes.splice(dish.cms_dish_idx, 1);
@@ -399,6 +429,11 @@ export class CmsMenusComponent implements OnInit {
         this.cmsLocalService.dspSnackbar(this.t_data.UpdateFailed, null, 3);
         console.log(error);
       });
+
+    this.cms.updateLastCreatedField(Number(this.restaurant.restaurant_id), 'menus').subscribe(
+      error => {
+        console.log('error in updatelastupdatedfield for menus', error);
+      });
   }
 
   // Upload pdf
@@ -410,6 +445,11 @@ export class CmsMenusComponent implements OnInit {
         restaurant: this.restaurant
       }
     });
+
+    this.cms.updateLastCreatedField(Number(this.restaurant.restaurant_id), 'menus').subscribe(
+      error => {
+        console.log('error in updatelastupdatedfield for menus', error);
+      });
     dialogRef.componentInstance.dialog = dialogRef;
   }
 
@@ -442,6 +482,11 @@ export class CmsMenusComponent implements OnInit {
               this.cmsLocalService.dspSnackbar(this.t_data.UpdateFailed, null, 3);
             }
           );
+
+        this.cms.updateLastCreatedField(Number(this.restaurant.restaurant_id), 'menus').subscribe(
+          error => {
+            console.log('error in updatelastupdatedfield for menus', error);
+          });
       }
     });
   }

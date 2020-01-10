@@ -84,6 +84,11 @@ export class CmsImagesComponent implements OnInit {
           3);
         console.log(error);
       });
+
+    this.cms.updateLastCreatedField(Number(this.restaurant.restaurant_id), 'images').subscribe(
+      error => {
+        console.log('error in updatelastupdatedfield for images', error);
+      });
   }
 
   viewImage(img): void {
@@ -104,6 +109,12 @@ export class CmsImagesComponent implements OnInit {
         ref: this.dialog
       }
     });
+
+    this.cms.updateLastCreatedField(Number(this.restaurant.restaurant_id), 'images').subscribe(
+      error => {
+        console.log('error in updatelastupdatedfield for images', error);
+      });
+
     dialogRef.componentInstance.dialog = dialogRef;
   }
 
@@ -130,6 +141,12 @@ export class CmsImagesComponent implements OnInit {
                   this.cmsImages.splice(i, 1);
                 }
               }
+
+              this.cms.updateLastCreatedField(Number(this.restaurant.restaurant_id), 'images').subscribe(
+                error => {
+                  console.log('error in updatelastupdatedfield for images', error);
+                });
+
               this.cmsLocalService.dspSnackbar(
                 'Image ' + img.cms_element_id + this.t_data.Deleted,
                 null,

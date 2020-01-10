@@ -51,6 +51,11 @@ export class CmsImageDialogComponent implements OnInit {
         this.cmsLocalService.dspSnackbar(this.t_data.UpdateFailed, null, 3);
         console.log(error);
       });
+
+    this.cms.updateLastCreatedField(Number(this.restaurant.restaurant_id), 'images').subscribe(
+      error => {
+        console.log('error in updatelastupdatedfield for images', error);
+      });
   }
 
 
@@ -83,6 +88,11 @@ export class CmsImageDialogComponent implements OnInit {
       },
       error => {
         console.log(JSON.stringify(error));
+      });
+
+    this.cms.updateLastCreatedField(Number(this.restaurant.restaurant_id), 'images').subscribe(
+      error => {
+        console.log('error in updatelastupdatedfield for images', error);
       });
   }
 }

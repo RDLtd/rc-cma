@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { HelpService, RestaurantService } from '../_services';
+import { HelpService, RestaurantService, CMSService } from '../_services';
 import { CmsLocalService } from './cms-local.service';
 import { MatDialog } from '@angular/material';
 import { PaymentComponent } from '../common';
@@ -22,6 +22,7 @@ export class AffiliatesComponent implements OnInit, OnDestroy {
     public help: HelpService,
     private cmsLocalService: CmsLocalService,
     private restaurantService: RestaurantService,
+    private cmsService: CMSService,
     private translate: TranslateService,
     private dialog: MatDialog
   ) { }
@@ -122,26 +123,81 @@ export class AffiliatesComponent implements OnInit, OnDestroy {
       });
 
     } else {
-      // todo send email to both affiliate and customer (is this the user or the restaurant!)
+
       console.log(this.restaurant.restaurant_email, this.affiliates[index].partner_email);
-      // also record the access event for this restaurant
+
+
+
+      // Send offer request to affiliate
+      //   affiliate_email: string,
+      //   affiliate_name: string,
+      //   restaurant_name: string,
+      //   restaurant_address: string,
+      //   restaurant_telephone: string,
+      //   restaurant_email: string,
+      //   admin_fullname: string,
+      //   restaurant_number: string,
+      //   email_language: string
+      this.cmsService.sendOfferRequestToAffiliateEmail(
+          this.affiliates[index].partner_email,
+          this.affiliates[index].partner_name,
+          this.restaurant.restaurant_name,
+          this.restaurant.restaurant_address_1 + ', ' + this.restaurant.restaurant_address_2 + ', '
+            + this.restaurant.restaurant_address_3,
+          this.restaurant.restaurant_telephone,
+          this.restaurant.restaurant_email,
+          'Ken Stratford',
+          this.restaurant.restaurant_number,
+          localStorage.getItem('rd_country'))
+        .subscribe(
+          access_data => {
+            console.log('Email sent to ' + this.affiliates[index].partner_name + ' from ' +
+              this.restaurant.restaurant_name);
+          },
+          error => {
+            console.log('Could not send email to ' + this.affiliates[index].partner_name + ' from ' +
+              this.restaurant.restaurant_name);
+          });
+
+      // and send the offer confirmation to the restaurant
+      //   affiliate_name: string,
+      //   affiliate_contact_message: string
+      //   restaurant_name: string
+      //   restaurant_email: string
+      //   restaurant_number: string
+      //   email_language: string
+      this.cmsService.sendOfferConfirmation(
+          this.affiliates[index].partner_name,
+          this.affiliates[index].partner_contact_message,
+          this.restaurant.restaurant_name,
+          this.restaurant.restaurant_email,
+          this.restaurant.restaurant_number,
+          localStorage.getItem('rd_country'))
+        .subscribe(
+          access_data => {
+            console.log('Offer confirmation from ' + this.affiliates[index].partner_name + ' sent to ' +
+              this.restaurant.restaurant_name);
+          },
+          error => {
+            console.log('Could not send offer confirmation from ' + this.affiliates[index].partner_name + ' to ' +
+              this.restaurant.restaurant_name);
+          });
+
+      // finally record the access event for this restaurant
       this.restaurantService.recordAccess(Number(this.restaurant.restaurant_id),
         this.affiliates[index].partner_id, 'Clicked Through')
         .subscribe(
           access_data => {
-            console.log('Access record updated - Clicked Through');
+            console.log('Access record updated - ' + this.restaurant.restaurant_name + ' clicked through ' +
+              this.affiliates[index].partner_name);
           },
           error => {
             console.log('Could not update access record');
           });
-      // show a special message if there is one...
-      let d_message;
-      if (this.affiliates[index].partner_contact_message) {
-        d_message = this.affiliates[index].partner_contact_message;
-      } else {
-        d_message = this.affiliates[index].partner_name + this.t_data.Message;
-      }
-      this.cmsLocalService.dspSnackbar(d_message, 'OK', 30);
+
+      // show a generic message - the partner specific message is sent by email
+      this.cmsLocalService.dspSnackbar(this.affiliates[index].partner_name + this.t_data.Message +
+        this.restaurant.restaurant_email, 'OK', 30);
     }
   }
 
