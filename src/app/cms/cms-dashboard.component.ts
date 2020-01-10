@@ -210,8 +210,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
   }
 
 
-  setMemberStatus(date: Date = new Date(this.restaurant.restaurant_associated_on)) {
-
+  setMemberStatus() {
     // console.log(this.restaurant);
     // NB this assumes that is the member is not full then they are an associate - need to be to get here!
     // console.log('set', this.restaurant.restaurant_rc_member_status);
@@ -788,7 +787,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
 
     // Update dashboard
     dialogRef.afterClosed().subscribe(result => {
-      this.setMemberStatus(new Date());
+      this.setMemberStatus();
     });
   }
 
@@ -873,7 +872,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
   }
 
   isToday (someDate) {
-    const today = new Date()
+    const today = new Date();
     return someDate.getDate() === today.getDate() &&
       someDate.getMonth() === today.getMonth() &&
       someDate.getFullYear() === today.getFullYear();
