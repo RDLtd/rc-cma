@@ -131,17 +131,25 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
 
         // re-translate computed display dates
         moment.locale(localStorage.getItem('rd_country'));
-        this.d_memberJoinDate = moment(this.memberJoinDate).format('dddd, DD MMMM YYYY');
+        this.d_memberJoinDate = this.setDateRes(this.memberJoinDate);
         this.d_publishDate = moment(this.publishDate).format('LLLL');
-        this.d_core_date = moment(this.core_date).format('dddd, DD MMMM YYYY');
-        this.d_hours_date = moment(this.hours_date).format('dddd, DD MMMM YYYY');
-        this.d_desc_date = moment(this.desc_date).format('dddd, DD MMMM YYYY');
-        this.d_img_date = moment(this.img_date).format('dddd, DD MMMM YYYY');
-        this.d_mnu_date = moment(this.mnu_date).format('dddd, DD MMMM YYYY');
-        this.d_bkg_date = moment(this.bkg_date).format('dddd, DD MMMM YYYY');
-        this.d_loc_date = moment(this.loc_date).format('dddd, DD MMMM YYYY');
+        this.d_core_date = this.setDateRes(this.core_date);
+        this.d_hours_date = this.setDateRes(this.hours_date);
+        this.d_desc_date = this.setDateRes(this.desc_date);
+        this.d_img_date = this.setDateRes(this.img_date);
+        this.d_mnu_date = this.setDateRes(this.mnu_date);
+        this.d_bkg_date = this.setDateRes(this.bkg_date);
+        this.d_loc_date = this.setDateRes(this.loc_date);
       });
     });
+  }
+
+  setDateRes(theDate) {
+    if (this.isToday(theDate)) {
+      return moment(theDate).format('HH:mm');
+    } else {
+      return moment(theDate).format('dddd, DD MMMM YYYY');
+    }
   }
 
   ngAfterViewInit(): void {
@@ -220,7 +228,8 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
       // this.memberJoinDate = new Date(this.restaurant.restaurant_associated_on);
     }
     // this.d_memberJoinDate = moment(this.memberJoinDate).format('dddd, DD MMMM YYYY');
-    this.d_memberJoinDate = moment(this.last_updated.last_updated_status).format('dddd, DD MMMM YYYY');
+    this.memberJoinDate = new Date(this.last_updated.last_updated_status);
+    this.d_memberJoinDate = this.setDateRes(this.memberJoinDate);
   }
 
   checkPublishStatus() {
@@ -271,7 +280,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
     this.core_by = this.restaurant.restaurant_verified_by;
     this.core_status = 100;
     this.core_status_txt = this.t_data.VerifiedBy + this.core_by;
-    this.d_core_date = moment(this.core_date).format('dddd, DD MMMM YYYY');
+    this.d_core_date = this.setDateRes(this.core_date);
   }
 
   checkOpeningTimes(): void {
@@ -301,7 +310,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
         //   this.d_hours_date = moment(this.hours_date).format('dddd, DD MMMM YYYY');
         // }
         this.hours_date = new Date(this.last_updated.last_updated_hours);
-        this.d_hours_date = moment(this.hours_date).format('dddd, DD MMMM YYYY');
+        this.d_hours_date = this.setDateRes(this.hours_date);
 
       },
       error => {
@@ -356,7 +365,8 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
       this.desc_by = this.descriptions.cms_description_created_by;
       // this.desc_date = new Date(this.descriptions.cms_description_last_updated);
       this.desc_date = new Date(this.last_updated.last_updated_descriptions);
-      this.d_desc_date = moment(this.desc_date).format('dddd, DD MMMM YYYY');
+      this.d_desc_date = this.setDateRes(this.desc_date);
+
     } else {
       this.desc_status_text = this.t_data.NoData;
     }
@@ -396,7 +406,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
           //   this.d_img_date = moment(this.img_date).format('dddd, DD MMMM YYYY');
           // }
           this.img_date = new Date(this.last_updated.last_updated_images);
-          this.d_img_date = moment(this.img_date).format('dddd, DD MMMM YYYY');
+          this.d_img_date = this.setDateRes(this.img_date);
         },
         error => console.log(error + ' R ' + this.restaurant.restaurant_id));
   }
@@ -448,7 +458,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
         //   this.d_mnu_date = moment(this.mnu_date).format('dddd, DD MMMM YYYY');
         // }
         this.mnu_date = new Date(this.last_updated.last_updated_menus);
-        this.d_mnu_date = moment(this.mnu_date).format('dddd, DD MMMM YYYY');
+        this.d_mnu_date = this.setDateRes(this.mnu_date);
 
         // set status text
         if (this.mnu_status === 0) {
@@ -484,7 +494,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
 
       // this.bkg_date = this.desc_date;
       this.bkg_date = new Date(this.last_updated.last_updated_booking);
-      this.d_bkg_date = moment(this.bkg_date).format('dddd, DD MMMM YYYY');
+      this.d_bkg_date = this.setDateRes(this.bkg_date);
 
       // set status text
       if (this.bkg_status === 0) {
@@ -514,7 +524,8 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
     }
     // this.loc_date = this.core_date;
     this.loc_date = new Date(this.last_updated.last_updated_location);
-    this.d_loc_date = moment(this.loc_date).format('dddd, DD MMMM YYYY');
+    this.d_loc_date = this.setDateRes(this.loc_date);
+
     // set status text
     if (this.loc_status === 0) {
       this.loc_status_text = this.t_data.NoData;
@@ -859,5 +870,12 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
       error => {
         console.log('getlastupdatedrecord', error);
       });
+  }
+
+  isToday (someDate) {
+    const today = new Date()
+    return someDate.getDate() === today.getDate() &&
+      someDate.getMonth() === today.getMonth() &&
+      someDate.getFullYear() === today.getFullYear();
   }
 }

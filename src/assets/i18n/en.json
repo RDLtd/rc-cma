@@ -27,7 +27,7 @@
 
   "ConfirmCancel": {
     "Title": "PLEASE CONFIRM",
-    "Message": "This action cannot be reversed, are you sure that you want to continue?",
+    "Message": "The changes you have made have not yet been saved, are you sure that you want to continue?",
     "Cancel": "NO, CANCEL",
     "Continue": "YES, CONTINUE",
     "DontShow": "Don't show me this again"

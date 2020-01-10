@@ -146,7 +146,7 @@ export class AffiliatesComponent implements OnInit, OnDestroy {
             + this.restaurant.restaurant_address_3,
           this.restaurant.restaurant_telephone,
           this.restaurant.restaurant_email,
-          'Ken Stratford',
+          localStorage.getItem('rd_user'),
           this.restaurant.restaurant_number,
           localStorage.getItem('rd_country'))
         .subscribe(
