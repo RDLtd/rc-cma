@@ -16,6 +16,7 @@ export class MessageComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    console.log('message data: ', this.data);
     this.company_name = localStorage.getItem('rd_company_name');
     // select the correct language...
     if (localStorage.getItem('rd_country') === 'fr') {

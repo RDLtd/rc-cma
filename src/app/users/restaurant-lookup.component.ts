@@ -5,7 +5,7 @@ import { AppConfig } from '../app.config';
 import { ProfileVerifyComponent } from './profile-verify.component';
 import { MAT_DIALOG_DATA, MatDialog, MatSnackBar } from '@angular/material';
 import { HttpClient } from '@angular/common/http';
-import { TranslateService } from '@ngx-translate/core';;
+import { TranslateService } from '@ngx-translate/core';
 import { HelpService } from '../_services';
 
 @Component({
@@ -78,7 +78,7 @@ export class RestaurantLookupComponent implements OnInit {
       sort_direction: 'ASC',
       limit_number: 20,
       limit_index: '0',
-      //restaurant_status: 'Curation Complete',
+      // restaurant_status: 'Curation Complete',
       country: this.country
     };
 
@@ -177,7 +177,7 @@ export class RestaurantLookupComponent implements OnInit {
   addAssociation(newRestaurant) {
     this.restaurantService.addAssociation(this.data.member.member_id, newRestaurant.restaurant_id).subscribe(
       data => {
-        //console.log(newRestaurant);
+        // console.log(newRestaurant);
 
         // Verify email contact details
         if (!newRestaurant.restaurant_email.trim().length) {
@@ -186,10 +186,10 @@ export class RestaurantLookupComponent implements OnInit {
 
         this.data.associatedRestaurants.push(newRestaurant);
         this.dspSnackBar(newRestaurant.restaurant_name + this.t_data.Added);
-        // TODO need to make this restaurant a member - now works
+        // Done - need to make this restaurant a member - now works
         this.restaurantService.updateMemberStatus(newRestaurant.restaurant_id, 'Associate').subscribe(
           memdata => {
-            console.log(memdata);
+            // console.log(memdata);
           },
           error => {
             console.log(error);
