@@ -4,23 +4,23 @@
   <span>{{ company_name }}</span>
   <span class="rc-space-filler"></span>
   <span class="rc-toolbar-actions">
-  <button mat-icon-button mat-dialog-close>
-    <mat-icon>close</mat-icon>
-  </button>
-</span>
+    <button mat-icon-button mat-dialog-close>
+      <mat-icon>close</mat-icon>
+    </button>
+  </span>
 </mat-toolbar>
 
 <mat-dialog-content>
-
-    <div *ngFor="let message of data['messages']" markdown>
-        {{ message['message_text'] }}
+    <div class="rc-message" *ngFor="let message of data['messages']" [class.rc-message-important]="message['severity']">
+      <h3><mat-icon>message</mat-icon>{{ message['heading'] | uppercase }}</h3>
+      <div markdown [data]="message['body']"></div>
     </div>
-
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
   <button
-    mat-button
+    color="secondary"
+    mat-flat-button
     [mat-dialog-close]="true">
     {{ 'Messages.DontShow' | translate }}
   </button>

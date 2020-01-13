@@ -246,6 +246,50 @@ export class CMSService {
         userCode: this.config.userAPICode, token: this.jwt() });
   }
 
+  sendOfferRequestToAffiliateEmail(affiliate_email: string,
+                                   affiliate_name: string,
+                                   restaurant_name: string,
+                                   restaurant_address: string,
+                                   restaurant_telephone: string,
+                                   restaurant_email: string,
+                                   admin_fullname: string,
+                                   restaurant_number: string,
+                                   email_language: string) {
+    return this.http.post(this.config.apiUrl + '/cms/sendofferrequesttoaffiliate',
+      { affiliate_email: affiliate_email, affiliate_name: affiliate_name, restaurant_name: restaurant_name,
+        restaurant_address: restaurant_address, restaurant_telephone: restaurant_telephone, restaurant_email: restaurant_email,
+        admin_fullname: admin_fullname, restaurant_number: restaurant_number, email_language: email_language,
+        userCode: this.config.userAPICode, token: this.jwt() });
+  }
+
+  sendOfferConfirmation(affiliate_name: string,
+                       affiliate_contact_message: string,
+                       restaurant_name: string,
+                       restaurant_email: string,
+                       restaurant_number: string,
+                       email_language: string) {
+    return this.http.post(this.config.apiUrl + '/cms/sendofferconfirmation',
+      { affiliate_name: affiliate_name, affiliate_contact_message: affiliate_contact_message, restaurant_name: restaurant_name,
+        restaurant_email: restaurant_email, restaurant_number: restaurant_number, email_language: email_language,
+        userCode: this.config.userAPICode, token: this.jwt() });
+  }
+
+  getLastUpdatedRecord(restaurant_id: number) {
+    return this.http.post(this.config.apiUrl + '/cms/getlastupdatedrecord',
+      { restaurant_id: restaurant_id, userCode: this.config.userAPICode, token: this.jwt() });
+  }
+
+  createLastUpdatedRecord(restaurant_id: number) {
+    return this.http.post(this.config.apiUrl + '/cms/createlastupdatedrecord',
+      { restaurant_id: restaurant_id, userCode: this.config.userAPICode, token: this.jwt() });
+  }
+
+  updateLastCreatedField(restaurant_id: number, last_updated_field: string) {
+    return this.http.post(this.config.apiUrl + '/cms/updatelastupdatedfield',
+      { restaurant_id: restaurant_id, last_updated_field: last_updated_field,
+        userCode: this.config.userAPICode, token: this.jwt() });
+  }
+
   // Generate Token
   private jwt() {
     // create authorization header with jwt token

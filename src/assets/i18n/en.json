@@ -27,7 +27,7 @@
 
   "ConfirmCancel": {
     "Title": "PLEASE CONFIRM",
-    "Message": "This action cannot be reversed, are you sure that you want to continue?",
+    "Message": "The changes you have made have not yet been saved, are you sure that you want to continue?",
     "Cancel": "NO, CANCEL",
     "Continue": "YES, CONTINUE",
     "DontShow": "Don't show me this again"
@@ -479,6 +479,7 @@
     "Price": "Price",
     "OptDesc": "Optional description",
     "Vegetarian": "Vegetarian",
+    "Vegan": "Vegan",
     "GlutenFree": "Gluten Free",
     "Cancel": "Cancel",
     "Update": "Update",
@@ -525,7 +526,7 @@
     "Deleted": " Deleted",
     "AddMenu": "ADD A MENU",
     "On": "on",
-    "VGF": "Add a selection of your most popular dishes. We would recommend that you choose a cross-section of your price range and dishes that best reflect your style of food. You can display the dishes as ![Vegetarian](../assets/images/icons/vegetarian.svg) **Vegetarian** or ![Gluten Free](../assets/images/icons/gluten-free.svg) **Gluten Free** when you add them.",
+    "VGF": "Add a selection of your most popular dishes. We would recommend that you choose a cross-section of your price range and dishes that best reflect your style of food. You can display the dishes as ![Vegetarian](../assets/images/icons/vegetarian.svg) **Vegetarian**, ![Vegan](../assets/images/icons/vegan.svg) **Vegan** or ![Gluten Free](../assets/images/icons/gluten-free.svg) **Gluten Free** when you add them.",
     "SectionHint": "Antipasti, Starters, Main Courses etc."
   },
 
@@ -923,7 +924,7 @@
     "Affiliate": "Affiliate",
     "MemberOffer": "Member Offer",
     "FindOutMore": "Find out more...",
-    "Message": " has been notified of your request and will be in contact with you in the next few days. You have also been sent email confirmation"
+    "Message": " has been notified of your request and will be in contact with you in the next 48 hours. We have also sent their contact details to you by email to "
   },
 
   "SignIn": {
@@ -946,7 +947,7 @@
     "Forgotten": "Forgotten your password?",
     "NewPassword": "A new password has been sent to your email address",
     "Unknown": "This email address is unknown!",
-    "Empowering": "Empowering Restaurants",
+    "Empowering": "Empowering Restaurants!",
     "Join": "Join"
   },
 
@@ -975,7 +976,7 @@
     "Due": "The membership is due for renewal on",
     "Reason": "If there is any reason why",
     "DoesNot": "does not wish to continue its membership, please email",
-    "Support": "Support",
+    "Support": "mailto:support@restaurantcollective.io",
     "MembershipFor": "Membership For",
     "Wait": "PLEASE WAIT...",
     "Updating": "UPDATING MEMBERSHIP STATUS...",

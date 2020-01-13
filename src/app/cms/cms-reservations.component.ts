@@ -183,6 +183,11 @@ export class CmsReservationsComponent implements OnInit {
         console.log('Error', error);
         this.cmsLocalService.dspSnackbar(this.t_data.UpdateFailed, null, 3);
       });
+
+    this.cms.updateLastCreatedField(Number(this.restaurant.restaurant_id), 'booking').subscribe(
+      error => {
+        console.log('error in updatelastupdatedfield for booking', error);
+      });
   }
 
   // Deactivation guard

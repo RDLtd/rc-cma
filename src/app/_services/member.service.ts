@@ -197,18 +197,21 @@ export class MemberService {
       });
   }
 
-  messagesseen(memberid: string) {
+  messagesseen(member_id: number, message_id: number) {
     return this.http.post(this.config.apiUrl + '/members/messagesseen',
       {
-        member_id: memberid,
+        member_id: member_id,
+        message_id: message_id,
         userCode: this.config.userAPICode,
         token: this.jwt()
       });
   }
 
-  messages(memberaccesslevel: string, membermessageseen: string) {
+  messages(company_code: string, memberid: string, memberaccesslevel: string, membermessageseen: string) {
     return this.http.post(this.config.apiUrl + '/members/messages',
       {
+        company_code: company_code,
+        member_id: memberid,
         member_access_level: memberaccesslevel,
         member_messages_seen: membermessageseen,
         userCode: this.config.userAPICode,

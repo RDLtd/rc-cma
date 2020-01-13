@@ -27,6 +27,19 @@ $config: mat-typography-config();
   align-items: center;
   flex-direction: column;
 }
+.rc-dialog-loader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: -8px;
+  span {
+    margin: 0 8px;
+    font: $rc-display-font-weight 14px/1 $rc-default-font;
+    text-transform: uppercase;
+  }
+
+}
 .rc-no-grid-gutter { margin: -16px;}
 .rc-hide { display: none; }
 .rc-accent { background-color: $rc-theme-secondary !important;}
@@ -52,14 +65,20 @@ $config: mat-typography-config();
   .mat-simple-snackbar,
   .mat-simple-snackbar-action {
     color: black;
-    font-size: 16px;
+    font-size: 14px;
     line-height: 22px;
     button {
       font-size: 16px;
     }
   }
 }
-.rc-mat-snack-info { background-color: $rc-theme-secondary; }
+.rc-mat-snack-info {
+  background-color: black;
+  .mat-simple-snackbar,
+  .mat-simple-snackbar-action {
+    color: white;
+  }
+}
 .rc-active {
   cursor: pointer;
   &:hover { background: #eee; }
@@ -93,8 +112,12 @@ and (-webkit-min-device-pixel-ratio: 1) {}
 * Maintain aspect ratio of images
 * -------------------------------
 **/
+
 [style*="--aspect-ratio"] > :first-child { width: 100%; }
-[style*="--aspect-ratio"] > img { height: auto; }
+[style*="--aspect-ratio"] > img {
+  height: auto;
+  object-fit: cover;
+}
 @supports (--custom:property) {
   [style*="--aspect-ratio"] { position: relative; }
   [style*="--aspect-ratio"]::before {
@@ -379,7 +402,6 @@ a.mat-menu-item {text-decoration: none;}
   }
 }
 
-
 /**
 * RC Cards
 * -------------------------------
@@ -403,8 +425,9 @@ a.mat-menu-item {text-decoration: none;}
 }
 .rc-card-help {
   position: absolute;
-  top: 16px; right: 16px;
+  top: 0; right: 0;
   z-index: 10;
+  background-color: white;
 }
 .rc-image-card {
   position: relative;
@@ -499,9 +522,34 @@ a.mat-menu-item {text-decoration: none;}
   &.rc-dialog-small {
     max-width: 400px;
   }
+
+  /** Dashboard messages **/
+  .rc-message {
+    margin: 8px 0 4px;
+    padding: 0 8px 8px;
+    border-bottom: 1px solid $rc-theme-grey;
+    &:first-child { margin-top: 16px; }
+    h2, h3 {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin: 0px;
+      padding:0;
+      .mat-icon { margin-right: 4px; }
+    }
+    p {
+      padding:0;
+      margin:0;
+    }
+  }
+  .rc-message-important {
+    h2, h3 {
+      color: $rc-theme-primary;
+      .mat-icon { color: $rc-theme-primary; }
+    }
+  }
 }
 .rc-dialog-image-upload {
-  max-width: 400px;
   label.image-select {
     display: block;
     position: relative;
@@ -562,30 +610,21 @@ a.mat-menu-item {text-decoration: none;}
   }
 }
 .rc-dialog-cms-image {
+  width: 68vw;
   header { display: flex; }
   .image-wrapper {
     position: relative;
-    padding: 0 16px 16px;}
-  img {
-    width: 100%;
-    height: auto;
+    padding: 0 16px 0;
   }
 }
 .rc-dialog-cms-image-upload {
+  width: 68vw;
+  max-width: 480px;
   label {
     text-transform: capitalize;
     font-size: 16px;
   }
-  .image-wrapper {
-    height: 240px;
-    max-width: 320px;
-    margin: 0 auto;
-  }
-  img {
-    height:100%;
-    width:100%;
-    object-fit: contain;
-  }
+
 }
 .rc-dialog-spw-preview {
   border: 0;
@@ -1119,6 +1158,9 @@ button.rc-member-assc {
     line-height: 1.25;
     flex: 70%;
     color: black;
+    span.rc-dish-attribute {
+      margin-left: 4px;
+    }
   }
   // menu item price
   span:nth-child(2) {

@@ -78,9 +78,12 @@
       <p><a [routerLink]="['/signin']">{{ 'Join.SignInPassword' | translate }}</a>.</p>
     </div>
     <div *ngSwitchCase="'self-registered'">
-      <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 24 24">
-        <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z" fill="#5dbd3d"></path>
-      </svg>
+      <div class="rc-centre">
+        <img src="../../assets/images/icons/checkmark.gif" height="128" width="128"/></div>
+<!--      <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 24 24">-->
+<!--        <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z" fill="#5dbd3d"></path>-->
+<!--      </svg>-->
+
       <h1>{{ 'Join.Welcome' | translate }}</h1>
       <p>{{ 'Join.Successful' | translate }} <strong>{{ 'Join.ContentAdmin' | translate }}</strong>
         {{ 'Join.SentDetails' | translate }}</p>

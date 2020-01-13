@@ -306,7 +306,7 @@
     "ActiveMenus": "MENUS ACTIFS",
     "OnlineBookings": "RÉSERVATIONS",
     "LocInfo": "INFORMATION DE LOCALISATION",
-    "LastUpdated": "Dernière mise à jour le",
+    "LastUpdated": "Dernière mise à jour:",
     "VerifiedBy": "Vérifié par ",
     "Open": "Ouvert ",
     "Days": " jours",
@@ -841,8 +841,8 @@
 
     "IsAssociate": "est Membre associé des ",
     "IsFull": "est Membre à part entière des ",
-    "SendReferral": "Envoyer un Code de Parrainage",
-    "ReferralCode": "Code de Parrainage",
+    "SendReferral": "Envoyer un Code Parrainage",
+    "ReferralCode": "Code Parrainage",
     "Owner": "Propriétaire",
     "Chef": "Chef",
     "Manager": "Directeur / Directrice",
@@ -924,7 +924,7 @@
     "Affiliate": "Partenaire Affilié",
     "MemberOffer": "Offre pour les membres",
     "FindOutMore": "En savoir plus...",
-    "Message": " a été informé de votre demande et sera en contact avec vous dans les prochains jours. Vous avez également reçu un email de confirmation"
+    "Message": " a été informé de votre demande et qui vous contactera dans un délai de 48 heures. Nous vous avons envoyé leurs coordonnées par e-mail à "
   },
 
   "SignIn": {
@@ -947,7 +947,7 @@
     "Forgotten": "Mot de passe oublié?",
     "NewPassword": "Un nouveau mot de passe a été envoyé à votre adresse email.",
     "Unknown": "Cette adresse email est inconnue!",
-    "Empowering": "Habiliter les restaurants",
+    "Empowering": "La Force Collective de Restaurateurs Indépendants!",
     "Join": "Rejoindre"
   },
 
@@ -976,7 +976,7 @@
     "Due": "L'adhésion devra être renouvelée le",
     "Reason": "Si ",
     "DoesNot": "ne souhaite pas la renouveler, veuillez contacter l'Assistance des ",
-    "Support": "Support",
+    "Support": "mailto:support@restauratuers-independeants.fr",
     "MembershipFor": "Adhésion pour",
     "Wait": "S'IL VOUS PLAÎT, ATTENDEZ...",
     "Updating": "MISE A JOUR DU STATUT DES MEMBRES...",

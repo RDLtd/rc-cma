@@ -122,6 +122,12 @@ export class CmsFeaturesComponent implements OnInit {
       error => {
         console.log('Error', error);
       });
+
+    this.cms.updateLastCreatedField(Number(this.restaurant.restaurant_id), 'descriptions').subscribe(
+      error => {
+        console.log('error in updatelastupdatedfield for descriptions', error);
+      });
+
     this.dataChanged = false;
   }
 

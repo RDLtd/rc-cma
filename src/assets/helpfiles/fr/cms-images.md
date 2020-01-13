@@ -32,7 +32,7 @@ Une image peut être supprimée en sélectionnant l'icône **POUBELLE**.
 
 ### Télécharger la photographie
 
-Si vous avez besoin de récupérer une image de la librairie, vous pouvez
+Si vous avez besoin de récupérer une image de la librairie, vous pouvez la
 téléchargez en sélectionnant l'icône **CLOUD**.
 
 

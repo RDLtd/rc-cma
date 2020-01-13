@@ -1,7 +1,6 @@
-import { Component, ViewChild, OnInit, Inject, ElementRef } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { Component, OnInit, Inject, ViewChild, ElementRef } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material';
-import { CMSService } from '../_services';
+import { CMSService, RestaurantService } from '../_services';
 import { CmsLocalService } from '../cms';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -12,16 +11,16 @@ import { TranslateService } from '@ngx-translate/core';
 
 export class ProfileVerifyComponent implements OnInit {
 
-  @ViewChild('profileVerifyForm', {static: true}) profileVerifyForm: NgForm;
-  @ViewChild('codeInput', {static: true}) codeInput: ElementRef;
-  isSubmitting: boolean = false;
+  @ViewChild('verifyCode', {static: true}) verifyCode: ElementRef;
 
+  isSubmitting: boolean = false;
   // translation variables
   t_data: any;
 
   constructor(
     private cmsService: CMSService,
     public cmsLocalService: CmsLocalService,
+    public restaurantService: RestaurantService,
     private dialog: MatDialog,
     private translate: TranslateService,
     public profileVerifyDialog: MatDialogRef<ProfileVerifyComponent>,
@@ -35,30 +34,79 @@ export class ProfileVerifyComponent implements OnInit {
     // console.log('Data', this.data);
   }
 
+
   onProfileVerifySubmit(f) {
 
-    // console.log(f.profile_verify + ':' + this.data.rest_verification_code);
-    if (f.profile_verify === this.data.rest_verification_code) {
-      // set OK
-      // console.log('onProfileVerifySubmit OK', f.profile_verify.value);
-      this.profileVerifyDialog.close({ confirmed: true });
-    } else {
-      // set failed
-      // console.log('onProfileVerifySubmit Failed');
-      this.cmsLocalService.dspSnackbar(this.t_data.Again, 'OK', 10);
-      this.codeInput.nativeElement.focus();
+    if (this.data.contactEmailRequired && f.controls.restaurant_email.dirty) {
+      //console.log(this.data.restaurant.restaurant_id, this.data.restaurant.restaurant_email);
+      // Update restaurant record first
+      this.restaurantService.updateEmail(this.data.restaurant.restaurant_id, this.data.restaurant.restaurant_email)
+        .subscribe(result => {
+          //console.log(result);
+          // then check verification code
+          if (this.validateVerificationCode(f.controls.profile_verify)) {
+            this.profileVerifyDialog.close(
+              {
+                emailUpdated: true,
+                verified: true
+              });
+          } else {
+            // Invalid code
+            this.verifyCode.nativeElement.focus();
+          }
 
+        });
+
+    } else {
+
+      if (this.validateVerificationCode(f.controls.profile_verify)) {
+        this.profileVerifyDialog.close(
+          {
+            emailUpdated: false,
+            verified: true
+          });
+      } else {
+        // Invalid code
+        this.verifyCode.nativeElement.focus();
+      }
+    }
+  }
+
+  validateVerificationCode(profile_verify) {
+    if (this.data.verificationCodeRequired) {
+      if (profile_verify.value === this.data.restaurant.restaurant_number) {
+        return true;
+      } else {
+        // Invalid
+        this.cmsLocalService.dspSnackbar(
+          this.t_data.Again,
+          'OK',
+          10);
+        //console.log(this.codeInput);
+        // profile_verify.nativeElement.focus();
+        return false;
+      }
+    } else {
+      // no code required
+      return true;
     }
   }
 
   reqVerificationCode(){
 
-    this.cmsService.sendVerificationEmail(this.data.rest_name, this.data.rest_verification_code, this.data.rest_email).subscribe(
+    this.cmsService.sendVerificationEmail(
+      this.data.restaurant.restaurant_name,
+      this.data.restaurant.restaurant_number,
+      this.data.restaurant.restaurant_email)
+      .subscribe(
       data => {
         // console.log('reqVerificationCode', data);
         // update KS 270918 keep window open
         // this.dialog.closeAll();
-        this.cmsLocalService.dspSnackbar(this.t_data.CodeSent + this.data.rest_email, 'OK', 10);
+        this.cmsLocalService.dspSnackbar(
+          this.t_data.CodeSent + this.data.restaurant.restaurant_email,
+          'OK',
+          10);
       },
       error => {
         console.log(error);

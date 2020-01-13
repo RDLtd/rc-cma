@@ -98,6 +98,7 @@ export class CMSDish {
   cms_dish_desc: string;
   cms_dish_price: string;
   cms_dish_vegetarian: number;
+  cms_dish_vegan: number;
   cms_dish_glutenfree: number;
   cms_dish_created_on: string;
   cms_dish_created_by: string;

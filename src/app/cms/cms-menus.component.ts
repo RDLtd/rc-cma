@@ -37,6 +37,7 @@ export class CmsMenusComponent implements OnInit {
   ) {
     // detect language changes... need to check for change in texts
     translate.onLangChange.subscribe(lang => {
+      console.log(`Language switched to ${lang}`);
       this.translate.get('CMS-Menus').subscribe(data => {this.t_data = data; });
     });
   }
@@ -96,6 +97,11 @@ export class CmsMenusComponent implements OnInit {
       error => {
         console.log('Error', error);
       });
+
+    this.cms.updateLastCreatedField(Number(this.restaurant.restaurant_id), 'menus').subscribe(
+      error => {
+        console.log('error in updatelastupdatedfield for menus', error);
+      });
   }
 
   // // Utils
@@ -151,6 +157,11 @@ export class CmsMenusComponent implements OnInit {
             error => {
               console.log(JSON.stringify(error));
             });
+
+          this.cms.updateLastCreatedField(Number(this.restaurant.restaurant_id), 'menus').subscribe(
+            error => {
+              console.log('error in updatelastupdatedfield for menus', error);
+            });
         }
         // console.log('Html Sections:', this.htmlMenu.sections);
       },
@@ -168,7 +179,7 @@ export class CmsMenusComponent implements OnInit {
     sect.cms_section_desc_2 = this.htmlMenu.sections[1].label.toUpperCase();
     sect.cms_section_desc_3 = this.htmlMenu.sections[2].label.toUpperCase();
 
-    console.log('Trans:', this.t_data)
+    console.log('Trans:', this.t_data);
 
     this.cms.updateSection(sect).subscribe(
       data => {
@@ -178,6 +189,11 @@ export class CmsMenusComponent implements OnInit {
       },
       error => {
         console.log(JSON.stringify(error));
+      });
+
+    this.cms.updateLastCreatedField(Number(this.restaurant.restaurant_id), 'menus').subscribe(
+      error => {
+        console.log('error in updatelastupdatedfield for menus', error);
       });
   }
 
@@ -227,6 +243,21 @@ export class CmsMenusComponent implements OnInit {
 
   }
 
+  createNewDish(src) {
+    const newDish = new CMSDish();
+    newDish.cms_dish_restaurant_id = Number(this.restaurant.restaurant_id);
+    newDish.cms_dish_id = src.controls.cms_dish_id.value;
+    newDish.cms_dish_section_id = src.controls.cms_dish_section_id.value;
+    newDish.cms_dish_name = src.controls.cms_dish_name.value;
+    newDish.cms_dish_desc = src.controls.cms_dish_desc.value;
+    newDish.cms_dish_price = src.controls.cms_dish_price.value;
+    newDish.cms_dish_vegetarian = Number(src.controls.cms_dish_vegetarian.value);
+    newDish.cms_dish_vegan = Number(src.controls.cms_dish_vegan.value);
+    newDish.cms_dish_glutenfree = Number(src.controls.cms_dish_glutenfree.value);
+    newDish.cms_dish_created_by = this.user;
+    return newDish;
+  }
+
   editDish(dish) {
 
     const dialogConfig = new MatDialogConfig();
@@ -243,38 +274,29 @@ export class CmsMenusComponent implements OnInit {
     let dialogRef = this.dialog.open(CmsMenuDishComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(formDish => {
-      // console.log('Dialog closed:', formDish.value);
 
       // If something has changes,
       // overwrite the dish in the original array
       if (formDish.dirty) {
 
         // console.log('Form Values:', formDish.value);
+        const newDish = this.createNewDish(formDish);
 
-        let d = new CMSDish();
-
-        d.cms_dish_restaurant_id = Number(this.restaurant.restaurant_id);
-        d.cms_dish_id = formDish.controls.cms_dish_id.value;
-        d.cms_dish_section_id = formDish.controls.cms_dish_section_id.value;
-        d.cms_dish_name = formDish.controls.cms_dish_name.value;
-        d.cms_dish_desc = formDish.controls.cms_dish_desc.value;
-        d.cms_dish_price = formDish.controls.cms_dish_price.value;
-        d.cms_dish_vegetarian = Number(formDish.controls.cms_dish_vegetarian.value);
-        d.cms_dish_glutenfree = Number(formDish.controls.cms_dish_glutenfree.value);
-        d.cms_dish_created_by = this.user;
-
-        // console.log('CMSDish:', d);
-
-        this.cms.updateDish(d).subscribe(
+        this.cms.updateDish(newDish).subscribe(
           data => {
             console.log('cms.updateDish', data);
-            this.htmlMenu.dishes[dish.cms_dish_idx] = d;
+            this.htmlMenu.dishes[dish.cms_dish_idx] = newDish;
             // replace idx reference in case user edits again before page reload
             this.htmlMenu.dishes[dish.cms_dish_idx].cms_dish_idx = dish.cms_dish_idx;
 
-            this.cmsLocalService.dspSnackbar(d.cms_dish_name + this.t_data.Updated, null, 3);
+            this.cmsLocalService.dspSnackbar(newDish.cms_dish_name + this.t_data.Updated, null, 3);
           },
           error => { console.log(error);
+          });
+
+        this.cms.updateLastCreatedField(Number(this.restaurant.restaurant_id), 'menus').subscribe(
+          error => {
+            console.log('error in updatelastupdatedfield for menus', error);
           });
       }
     });
@@ -294,6 +316,7 @@ export class CmsMenusComponent implements OnInit {
         cms_dish_desc: '',
         cms_dish_price: '',
         cms_dish_vegetarian: 0,
+        cms_dish_vegan: 0,
         cms_dish_glutenfree: 0
       },
       sections: this.htmlMenu.sections
@@ -306,25 +329,16 @@ export class CmsMenusComponent implements OnInit {
 
       if (formDish.dirty && formDish.valid) {
 
-        const d = new CMSDish();
-        d.cms_dish_idx = this.htmlMenu.dishes.length;
-        d.cms_dish_restaurant_id = Number(this.restaurant.restaurant_id);
-        d.cms_dish_section_id = formDish.controls.cms_dish_section_id.value;
-        d.cms_dish_name = formDish.controls.cms_dish_name.value;
-        d.cms_dish_desc = formDish.controls.cms_dish_desc.value;
-        d.cms_dish_price = formDish.controls.cms_dish_price.value;
-        d.cms_dish_vegetarian = Number(formDish.controls.cms_dish_vegetarian.value) || 0;
-        d.cms_dish_glutenfree = Number(formDish.controls.cms_dish_glutenfree.value) || 0;
-        d.cms_dish_created_by = this.user;
-        console.log('CMSDish:', d);
+        const newDish = this.createNewDish(formDish);
+        console.log('New CMSDish:', newDish);
 
-        this.cms.createDish(d).subscribe(
+        this.cms.createDish(newDish).subscribe(
           res => {
             console.log('Dish Added:', res);
 
             // pushing to the local array also returns the new length
             // which we can use for reference
-            let len = this.htmlMenu.dishes.push(d);
+            let len = this.htmlMenu.dishes.push(newDish);
             console.log('Pushed', this.htmlMenu.dishes);
 
             // Add returned id to new dish in local array
@@ -333,6 +347,11 @@ export class CmsMenusComponent implements OnInit {
           },
           error => {
             console.log(error);
+          });
+
+        this.cms.updateLastCreatedField(Number(this.restaurant.restaurant_id), 'menus').subscribe(
+          error => {
+            console.log('error in updatelastupdatedfield for menus', error);
           });
       }
     });
@@ -362,6 +381,11 @@ export class CmsMenusComponent implements OnInit {
           },
           error => {
             console.log(error);
+          });
+
+        this.cms.updateLastCreatedField(Number(this.restaurant.restaurant_id), 'menus').subscribe(
+          error => {
+            console.log('error in updatelastupdatedfield for menus', error);
           });
 
         this.htmlMenu.dishes.splice(dish.cms_dish_idx, 1);
@@ -405,6 +429,11 @@ export class CmsMenusComponent implements OnInit {
         this.cmsLocalService.dspSnackbar(this.t_data.UpdateFailed, null, 3);
         console.log(error);
       });
+
+    this.cms.updateLastCreatedField(Number(this.restaurant.restaurant_id), 'menus').subscribe(
+      error => {
+        console.log('error in updatelastupdatedfield for menus', error);
+      });
   }
 
   // Upload pdf
@@ -416,6 +445,11 @@ export class CmsMenusComponent implements OnInit {
         restaurant: this.restaurant
       }
     });
+
+    this.cms.updateLastCreatedField(Number(this.restaurant.restaurant_id), 'menus').subscribe(
+      error => {
+        console.log('error in updatelastupdatedfield for menus', error);
+      });
     dialogRef.componentInstance.dialog = dialogRef;
   }
 
@@ -448,6 +482,11 @@ export class CmsMenusComponent implements OnInit {
               this.cmsLocalService.dspSnackbar(this.t_data.UpdateFailed, null, 3);
             }
           );
+
+        this.cms.updateLastCreatedField(Number(this.restaurant.restaurant_id), 'menus').subscribe(
+          error => {
+            console.log('error in updatelastupdatedfield for menus', error);
+          });
       }
     });
   }

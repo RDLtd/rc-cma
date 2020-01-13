@@ -5,9 +5,8 @@ import { AppConfig } from '../app.config';
 import { ProfileVerifyComponent } from './profile-verify.component';
 import { MAT_DIALOG_DATA, MatDialog, MatSnackBar } from '@angular/material';
 import { HttpClient } from '@angular/common/http';
-import { TranslateService } from '@ngx-translate/core';;
+import { TranslateService } from '@ngx-translate/core';
 import { HelpService } from '../_services';
-import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'rc-restaurant-lookup',
@@ -15,8 +14,10 @@ import { map } from 'rxjs/operators';
 })
 
 export class RestaurantLookupComponent implements OnInit {
-  noSearchResults: boolean = false;
-  dspNewListingForm: boolean = false;
+  noSearchResults = false;
+  dspNewListingForm = false;
+  verificationCodeRequired = true;
+  contactEmailRequired = false;
   restaurants: Restaurant[] = [];
   sql_parameters: any = this.config.sql_defaults;
   country: string;
@@ -37,6 +38,7 @@ export class RestaurantLookupComponent implements OnInit {
   ngOnInit() {
     this.translate.get('Restaurant-Lookup')
       .subscribe(data => this.t_data = data);
+
     this.GetCountry().subscribe(
       data => {
         // console.log('You are in ' + data['country']);
@@ -71,24 +73,24 @@ export class RestaurantLookupComponent implements OnInit {
     this.sql_parameters = {
       where_field: 'restaurant_name',
       where_string: str,
-      where_any_position: 'Y',
+      where_any_position: 'N',
       sort_field: 'restaurant_name',
       sort_direction: 'ASC',
       limit_number: 20,
       limit_index: '0',
-      restaurant_status: 'Curation Complete',
+      // restaurant_status: 'Curation Complete',
       country: this.country
     };
 
     // If user has input something
-    if (str) {
+    if (str.trim()) {
 
       this.restaurantService.getSubset(this.sql_parameters)
         .subscribe(
           data => {
             // console.log({data});
             this.restaurants = data['restaurants'];
-            if (this.restaurants.length < 1) {
+            if (!this.restaurants.length) {
               this.noSearchResults = true;
             } else {
               this.noSearchResults = false;
@@ -104,89 +106,99 @@ export class RestaurantLookupComponent implements OnInit {
     }
   }
 
-  associateRestaurant(item) {
+  associateRestaurant(selected) {
 
-    const count = this.data.associatedRestaurants.length;
     // TODO so here is the problem, via the join form we don't have this data set
-    console.log(this.data.associatedRestaurants);
+    // console.log(this.data.associatedRestaurants);
 
-    // Make sure it's not already been associated
-    for (let i = 0; i < count; i++) {
-      if (this.data.associatedRestaurants[i].restaurant_post_code === item.restaurant_post_code ) {
-        // console.log('Restaurant already associated');
-        this.dspSnackBar(item.restaurant_name + this.t_data.AlreadyAdded);
+    // Update 12/12/19 allow anyone with auth level >=4 to associate whatever
+    if (Number(localStorage.getItem('rd_access_level')) >= 4) {
+      this.addAssociation(selected);
+    } else {
+      // Make sure it's not already been associated
+      // by comparing to current associations
+      const totalAssociatedRestaurants = this.data.associatedRestaurants.length;
+      for (let i = 0; i < totalAssociatedRestaurants; i++) {
+        const associatedRestaurant = this.data.associatedRestaurants[i];
+        if (associatedRestaurant.restaurant_name === selected.restaurant_name &&
+          associatedRestaurant.restaurant_address_1 === selected.restaurant_address_1) {
+          // console.log('Restaurant already associated');
+          this.dspSnackBar(
+            selected.restaurant_name + this.t_data.AlreadyAdded
+          );
+          return;
+        }
+      }
+
+      // Has it already been verified by owner?
+      // i.e. is there already an admin user
+      if (selected.restaurant_data_status === 'Verified By Owner') {
+        this.dspSnackBar(
+          selected.restaurant_name + this.t_data.AlreadyVerified
+        );
         return;
       }
-    }
-    // And also make sure it's not already been verified by owner, in which case there is already an admin user
-    if (item.restaurant_data_status === 'Verified By Owner') {
-      this.dspSnackBar(item.restaurant_name + this.t_data.AlreadyVerified);
-      return;
-    }
 
-    // If the member arrives here with a valid referral code, we are going to bypass the verification email step
-    if (sessionStorage.getItem('referrer_type') === 'member') {
-      // simply associate this restaurant
-      this.restaurantService.addAssociation(this.data.member_id, item.restaurant_id).subscribe(
-        data => {
-          console.log(data);
-          this.data.associatedRestaurants.push(item);
-          this.dspSnackBar(item.restaurant_name + this.t_data.Added);
-          // TODO need to make this restaurant a member - now works
-          this.restaurantService.updateMemberStatus(item.restaurant_id, 'Associate').subscribe(
-            memdata => {
-              console.log(memdata);
-            },
-            error => {
-              console.log(error);
-            });
-        },
-        error => {
-          console.log(error);
-        });
-      this.dialog.closeAll();
+      // Do we need to check the verification code?
+      this.verificationCodeRequired = sessionStorage.getItem('referrer_type') !== 'member';
+      // Is there a contact email for the selected restaurant?
+      this.contactEmailRequired = !this.isValidEmail(selected.restaurant_email.trim());
 
-    } else {
-      // if the user did not pass the refer code check then they need to go through the verification phase
-      //
-      // Before setting up an association make sure the user gets an authorisation code
-      const dialogref = this.dialog.open(ProfileVerifyComponent, {
-        data: {
-          rest_name: item.restaurant_name,
-          rest_email: item.restaurant_email,
-          rest_verification_code: item.restaurant_number
-        }
-      });
-
-      dialogref.afterClosed().subscribe(result => {
-
-        if (result) {
-          // user typed the right code
-          if (result.confirmed) {
-            this.restaurantService.addAssociation(this.data.member_id, item.restaurant_id).subscribe(
-              data => {
-                console.log(data);
-                this.data.associatedRestaurants.push(item);
-                this.dspSnackBar(item.restaurant_name + this.t_data.Added);
-                // TODO need to make this restaurant a member - now works
-                this.restaurantService.updateMemberStatus(item.restaurant_id, 'Associate').subscribe(
-                  memdata => {
-                    console.log(memdata);
-                  },
-                  error => {
-                    console.log(error);
-                  });
-              },
-              error => {
-                console.log(error);
-              });
-            this.dialog.closeAll();
-          } else {
-            console.log('Invalid code');
+      // Verification
+      if (this.verificationCodeRequired || this.contactEmailRequired) {
+        const dialogref = this.dialog.open(ProfileVerifyComponent, {
+          data: {
+            restaurant: selected,
+            member: this.data.member,
+            verificationCodeRequired: this.verificationCodeRequired,
+            contactEmailRequired: this.contactEmailRequired
           }
-        }
-      });
+        });
+
+        dialogref.afterClosed().subscribe(association => {
+          if (association) {
+            if (association.verified) {
+              this.addAssociation(selected);
+            } else {
+              console.log('Invalid code or cancelled operation');
+            }
+          }
+        });
+      } else {
+        this.addAssociation(selected);
+      }
     }
+  }
+
+  isValidEmail(emailAddress): boolean {
+    return /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/.test(emailAddress);
+  }
+
+  addAssociation(newRestaurant) {
+    this.restaurantService.addAssociation(this.data.member.member_id, newRestaurant.restaurant_id).subscribe(
+      data => {
+        // console.log(newRestaurant);
+
+        // Verify email contact details
+        if (!newRestaurant.restaurant_email.trim().length) {
+          console.log(`No Email: ${ newRestaurant.restaurant_email}`);
+        }
+
+        this.data.associatedRestaurants.push(newRestaurant);
+        this.dspSnackBar(newRestaurant.restaurant_name + this.t_data.Added);
+        // Done - need to make this restaurant a member - now works
+        this.restaurantService.updateMemberStatus(newRestaurant.restaurant_id, 'Associate').subscribe(
+          memdata => {
+            // console.log(memdata);
+          },
+          error => {
+            console.log(error);
+          });
+      },
+      error => {
+        console.log(error);
+      });
+    this.dialog.closeAll();
   }
 
   showRequestForm(searchInput) {

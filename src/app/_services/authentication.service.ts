@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Subject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { AppConfig } from '../app.config';
 import { TranslateService } from '@ngx-translate/core';
 import { Member } from '../_models';
@@ -8,11 +8,13 @@ import { RestaurantService } from './restaurant.service';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 
 export class AuthenticationService {
 
-  public memberSessionSubject = new Subject<any>();
+  public memberSessionSubject = new BehaviorSubject<any>(localStorage.getItem('rd_session'));
   public member: Member = new Member();
   private dbOffline = false;
   private inSession: boolean = false;
@@ -28,23 +30,20 @@ export class AuthenticationService {
     private http: HttpClient,
     private translate: TranslateService,
     private config: AppConfig) {
-
   }
 
   login(form) {
     return this.http.post(this.config.apiUrl + '/members/authenticate',
-
       {
         email: form.email,
         password: form.pwd,
         userCode: 'RDL-dev',
         token: this.jwt()
-
       });
   }
 
   public setMember(member: Member) {
-    console.log('setMember', member);
+    //console.log('setMember', member);
     this.member = member;
   }
 
@@ -60,37 +59,32 @@ export class AuthenticationService {
     localStorage.setItem('rd_user', `${member.member_first_name} ${member.member_last_name}`);
     localStorage.setItem('rd_access_level', `${member.member_access_level}`);
     localStorage.setItem('rd_token', token);
+    localStorage.setItem('rd_session', 'active');
 
     this.setNewSessionExpiry();
 
     this.translate.use(member.member_preferred_language);
     localStorage.setItem('rd_country', member.member_preferred_language);
 
-    console.log('AL: ', member.member_access_level);
+    //console.log('AL: ', member.member_access_level);
 
     // Set members landing page based on access level
     if (this.dbOffline && member.member_access_level < 4) {
-
       // Not Super Admin
       localStorage.setItem('rd_home', '/');
-      this.inSession = true;
-      this.memberSessionSubject.next('active' );
-
+      this.dspHomeScreen('active');
     } else {
-
       // console.log('Access level ' + member.member_access_level);
       switch (member.member_access_level) {
-
-        case '0': { // 3rd party agent
+        // 3rd pat agent
+        case '0': {
           localStorage.setItem('rd_home', '/agent');
           localStorage.setItem('rd_launch_number', member.member_launch_number);
-          this.inSession = true;
-          this.memberSessionSubject.next('active' );
-          this.router.navigate([localStorage.getItem('rd_home')]);
+          this.dspHomeScreen('active');
           break;
         }
-
-        case '1': { // Curator
+        // Curator
+        case '1': {
           this.restaurantService.getCurationZoneSet(member.member_id)
             .subscribe(
               data => {
@@ -100,28 +94,22 @@ export class AuthenticationService {
                   // default is to take the first item on the list - should never be more than 1
                   // but this does not really matter, since the others will be loaded into the dropdown
                   localStorage.setItem('rd_home', '/curationzone/' + this.curation_zone_set[0].curation_id);
-                  this.inSession = true;
-                  this.memberSessionSubject.next('active' );
-                  this.router.navigate([localStorage.getItem('rd_home')]);
+                  this.dspHomeScreen('active');
                 } else {
                   this.openSnackBar('You have not been assigned a curation zone!', '');
                   localStorage.setItem('rd_home', '/');
-                  this.inSession = false;
-                  this.memberSessionSubject.next('closed' );
-                  this.router.navigate([localStorage.getItem('rd_home')]);
+                  this.dspHomeScreen('closed');
                 }
               },
               error => {
                 this.openSnackBar('There was an error trying to access the curation database', '');
                 localStorage.setItem('rd_home', '/');
-                this.inSession = false;
-                this.memberSessionSubject.next('closed' );
-                this.router.navigate([localStorage.getItem('rd_home')]);
+                this.dspHomeScreen('closed');
               });
           break;
         }
-        case '2': { // Member
-
+        // Restaurant / Content Administrator
+        case '2': {
           this.restaurantService.getMemberRestaurants(member.member_id)
             .subscribe(
               data => {
@@ -130,11 +118,9 @@ export class AuthenticationService {
                 } else {
                   localStorage.setItem('rd_home', '/profile');
                 }
+                this.dspHomeScreen('active');
                 // console.log(data.restaurants[0].restaurant_id);
                 // localStorage.setItem('rd_home', '/profile');
-                this.inSession = true;
-                this.memberSessionSubject.next('active' );
-                this.router.navigate([localStorage.getItem('rd_home')]);
               },
               error => {
                 console.log(error);
@@ -142,31 +128,37 @@ export class AuthenticationService {
 
           break;
         }
-        case '3': { // RDL Admin
+        // RDL Admin
+        case '3': {
           localStorage.setItem('rd_home', '/dashboard');
-          this.inSession = true;
-          this.memberSessionSubject.next('active' );
-          this.router.navigate([localStorage.getItem('rd_home')]);
+          this.dspHomeScreen('active');
           break;
         }
-        case '4': { // RDL Developer
+        // RDL Developer
+        case '4': {
           localStorage.setItem('rd_home', '/dashboard');
-          this.inSession = true;
-          this.memberSessionSubject.next('active' );
-          this.router.navigate([localStorage.getItem('rd_home')]);
+          this.dspHomeScreen('active');
           break;
         }
         default: { // undefined
           localStorage.setItem('rd_home', '/profile');
-          this.memberSessionSubject.next('closed' );
-          this.router.navigate([localStorage.getItem('rd_home')]);
+          this.dspHomeScreen('closed')
           break;
         }
       }
     }
   }
 
+  dspHomeScreen(sessionStatus): void {
+    sessionStatus === 'active'? this.inSession = true : this.inSession = false;
+    this.memberSessionSubject.next(sessionStatus);
+    this.router.navigate([localStorage.getItem('rd_home')]);
+  }
+
   logout(reason): void {
+    console.log(`Logout: ${reason}`);
+    this.inSession = false;
+    this.memberSessionSubject.next(reason);
     this.member = null;
     // localStorage.clear();
     localStorage.removeItem('rd_profile');
@@ -175,60 +167,48 @@ export class AuthenticationService {
     localStorage.removeItem('rd_token_expires_at');
     localStorage.removeItem('rd_access_level');
     localStorage.removeItem('rd_home');
-    if (this.inSession) {
-      this.inSession = false;
-      this.memberSessionSubject.next(reason);
-    }
+    localStorage.removeItem('rd_session');
   }
 
   isAuth(): boolean {
-
     this.sessionExpiresAt = JSON.parse(localStorage.getItem('rd_token_expires_at'));
     this.sessionTimeLeft = (this.sessionExpiresAt - new Date().getTime()) / 60000;
-
-    // console.log(this.sessionTimeLeft);
-
     // Time is up
     if (this.sessionTimeLeft < 0) {
-
+      //this.router.navigate(['/']);
       this.logout('expired');
       return false;
-
     // Time is running out is anyone using the app?
     } else if (this.sessionTimeLeft < this.config.session_countdown) {
-
       // Start listening for activity
       if (!this.checkingActivity) {
         console.log(`Less than ${ this.config.session_countdown } mins to go, check for activity`);
         this.checkUserActivity();
       }
-
       return true;
-
     // Plenty of time left
     } else {
-
       return true;
-
     }
-
   }
 
   // Listen for user activity
   checkUserActivity() {
-
+    const timer = setTimeout(() => {
+      this.logout('expired');
+      this.router.navigate(['/']);
+    }, 5000);
     // Scope reference for the listeners
     const ths = this;
-
     // Reset the session and clean up
-    let reset = function() {
+    const reset = function() {
       console.log('Detected activity, reset the session.');
+      clearTimeout(timer);
       ths.setNewSessionExpiry();
       document.body.removeEventListener('click', reset);
       document.body.removeEventListener('keydown', reset);
       ths.checkingActivity = false;
     };
-
     // Listen for user activity
     this.checkingActivity = true;
     document.body.addEventListener('click', reset);
@@ -236,16 +216,12 @@ export class AuthenticationService {
   }
 
   setNewSessionExpiry() {
-
     this.sessionExpiresAt = JSON.stringify(new Date().getTime() + (this.config.session_timeout * (60 * 1000)));
     localStorage.setItem('rd_token_expires_at', this.sessionExpiresAt);
-
   }
 
   isAuthLevel(requiredLevel): boolean {
-
     const userLevel = localStorage.getItem('rd_access_level');
-
     // Bump up access level if db is offline
     if (this.dbOffline) { requiredLevel = 4; }
     return (this.isAuth() && (userLevel >= requiredLevel));
@@ -261,9 +237,7 @@ export class AuthenticationService {
     };
     requestOptions.params.set('foo', 'bar');
     requestOptions.params.set('apiCategory', 'Financial');
-
     // this.http.get(environment.api+ '.feed.json', requestOptions );
-
     if (currentUser && currentUser.token) {
       requestOptions.params.set('Authorization', 'Bearer ' + currentUser.token);
     } else {

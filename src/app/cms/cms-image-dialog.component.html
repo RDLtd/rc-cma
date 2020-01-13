@@ -43,6 +43,8 @@
       <mat-chip selected="true" class="rc-online" *ngIf="image.cms_element_active">{{ 'CMS-Image-Dialog.Available' | translate }}</mat-chip>
       <mat-chip selected="false" *ngIf="!image.cms_element_active">{{ 'CMS-Image-Dialog.Offline' | translate }}</mat-chip>
     </mat-chip-list>
-    <img [src]="image.cms_element_image_path">
+    <div style="--aspect-ratio: 16/9;">
+      <img [src]="image.cms_element_image_path">
+    </div>
   </mat-dialog-content>
 </div>

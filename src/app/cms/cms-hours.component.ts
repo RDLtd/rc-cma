@@ -66,7 +66,7 @@ export class CmsHoursComponent implements OnInit {
     // get the opening time data from the api
     this.cms.getTimes(this.restaurant.restaurant_id).subscribe(
       data => {
-        // console.log('DATA', data);
+        console.log('TIMES DATA', data);
         this.openingTimes = data['times'];
         if (data['notes'] && data['notes'] !== 'Null') {
           this.openingTimesNotes = data['notes'];
@@ -154,6 +154,10 @@ export class CmsHoursComponent implements OnInit {
       t.sessions.push({ open: ls.close, close: ls.close });
 
     }
+    this.cms.updateLastCreatedField(Number(this.restaurant.restaurant_id), 'hours').subscribe(
+      error => {
+        console.log('error in updatelastupdatedfield for hours', error);
+      });
     this.dataChanged = true;
 
     // record event
@@ -175,6 +179,10 @@ export class CmsHoursComponent implements OnInit {
       // otherwise remove the session indexed
       t.sessions.splice(jndex, 1);
     }
+    this.cms.updateLastCreatedField(Number(this.restaurant.restaurant_id), 'hours').subscribe(
+      error => {
+        console.log('error in updatelastupdatedfield for hours', error);
+      });
     this.dataChanged = true;
     // record event
     this.ga.sendEvent('CMS-Hours', 'Edit', 'Session Removed');
@@ -203,6 +211,10 @@ export class CmsHoursComponent implements OnInit {
       error => {
         console.log(JSON.stringify(error));
         this.cmsLocalService.dspSnackbar(this.t_data.UpdateFailed, null, 3);
+      });
+    this.cms.updateLastCreatedField(Number(this.restaurant.restaurant_id), 'hours').subscribe(
+      error => {
+        console.log('error in updatelastupdatedfield for hours', error);
       });
   }
 

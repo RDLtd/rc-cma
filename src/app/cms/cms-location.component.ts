@@ -131,6 +131,11 @@ export class CmsLocationComponent implements OnInit {
         this.dataChanged = false;
       });
 
+    this.cms.updateLastCreatedField(Number(this.restaurant.restaurant_id), 'location').subscribe(
+      error => {
+        console.log('error in updatelastupdatedfield for location', error);
+      });
+
   }
 
   getDirectionFile(): void {
@@ -161,6 +166,12 @@ export class CmsLocationComponent implements OnInit {
         restaurant: this.restaurant
       }
     });
+
+    this.cms.updateLastCreatedField(Number(this.restaurant.restaurant_id), 'location').subscribe(
+      error => {
+        console.log('error in updatelastupdatedfield for location', error);
+      });
+
     dialogRef.componentInstance.dialog = dialogRef;
   }
 
@@ -174,6 +185,11 @@ export class CmsLocationComponent implements OnInit {
       },
       error => {
         console.log('Error', error);
+      });
+
+    this.cms.updateLastCreatedField(Number(this.restaurant.restaurant_id), 'location').subscribe(
+      error => {
+        console.log('error in updatelastupdatedfield for location', error);
       });
   }
 

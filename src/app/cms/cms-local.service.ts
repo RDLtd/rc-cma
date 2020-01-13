@@ -1,7 +1,7 @@
 import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Restaurant } from '../_models';
-import { Observable, Subject, BehaviorSubject } from 'rxjs'
+import { Observable, Subject, BehaviorSubject } from 'rxjs';
 import { MatDialog, MatDialogConfig, MatSnackBar } from '@angular/material';
 import { ConfirmCancelComponent } from '../common';
 import { TranslateService } from '@ngx-translate/core';

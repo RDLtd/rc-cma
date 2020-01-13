@@ -4,6 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { RestaurantService, MemberService } from '../../_services';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
+import * as moment from 'moment';
 
 @Component({
   selector: 'rc-payment',
@@ -19,6 +20,7 @@ export class PaymentComponent implements OnInit  {
   p_currency;
   invoice_number;
   renewal_date;
+  d_renewal_date;
 
   company_name;
   company_monthly_fee;
@@ -66,7 +68,7 @@ export class PaymentComponent implements OnInit  {
     this.company_currency_symbol = localStorage.getItem('rd_company_currency_symbol');
     this.company_currency_code = localStorage.getItem('rd_company_currency_code');
     this.company_annual_fee_with_vat = localStorage.getItem('rd_company_annual_fee_with_vat');
-    console.log(this.company_annual_fee_with_vat);
+    // console.log(this.company_annual_fee_with_vat);
 
     this.translate.get('Payment').subscribe(data => {
       this.t_data = data;
@@ -83,6 +85,8 @@ export class PaymentComponent implements OnInit  {
       reg_date.setFullYear(reg_date.getFullYear() + 1);
       const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
       this.renewal_date = reg_date.toLocaleDateString('en-US', options);
+      moment.locale(localStorage.getItem('rd_country'));
+      this.d_renewal_date = moment(reg_date).format('dddd, DD MMMM YYYY');
     }
   }
 
