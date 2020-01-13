@@ -16,7 +16,7 @@ export class MessageComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    console.log('message data: ', this.data);
+    console.log('message data 1: ', this.data);
     this.company_name = localStorage.getItem('rd_company_name');
     // select the correct language...
     if (localStorage.getItem('rd_country') === 'fr') {
@@ -30,6 +30,7 @@ export class MessageComponent implements OnInit {
         this.data.messages[i].heading = this.data.messages[i].message_subject_EN;
       }
     }
+    console.log('message data 2: ', this.data);
   }
 
 }
