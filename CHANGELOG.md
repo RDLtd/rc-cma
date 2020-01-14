@@ -24,7 +24,7 @@ All notable changes to this project will be documented in this file.
  
 
 
-## [8.0.2] - 2020-01-13
+## [Mingus 8.0.2] - 2020-01-13
 
 ### Changed
 ### Deprecated
