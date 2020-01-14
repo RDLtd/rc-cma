@@ -17,10 +17,10 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 - Invoice address and VAT number details
-- Menu > Vegan tag & display icon
-- Graceful Application timeout handling and messaging
-- Level 4+ users unlimited associations, including multi-associations
-- 'Find Restaurants'
+- CMA Menus vegan option & display icon
+- Application timeout graceful handling and messaging
+- Restaurant associations for level 4+ users is now unlimited and unrestricted by existing associations
+- Find Restaurants search improved search logic
  
 
 
@@ -31,6 +31,6 @@ All notable changes to this project will be documented in this file.
 ### Removed
 
 [Unreleased - Awaiting QA]: https://rc-app-cma-staging.herokuapp.com/
-[8.0.2]: https://github.com/olivierlacan/keep-a-changelog/compare/v1.0.0...v1.1.0
+[Mingus 8.0.2]: https://github.com/RDLtd/rc-app-cma/compare/master...Mingus
 
 
