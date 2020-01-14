@@ -30,7 +30,7 @@ All notable changes to this project will be documented in this file.
 ### Deprecated
 ### Removed
 
-[Unreleased - Awaiting QA]: https://github.com/olivierlacan/keep-a-changelog/compare/v1.1.0...HEAD
+[Unreleased - Awaiting QA]: https://rc-app-cma-staging.herokuapp.com/
 [8.0.2]: https://github.com/olivierlacan/keep-a-changelog/compare/v1.0.0...v1.1.0
 
 
