@@ -20,12 +20,15 @@ All notable changes to this project will be documented in this file.
 - CMA Menus vegan option & display icon
 - Application timeout graceful handling and messaging
 - Restaurant associations for level 4+ users is now unlimited and unrestricted by existing associations
-- Find Restaurants search improved search logic
- 
+
+### Changed
+- 'Find Restaurants' search has improved results logic
+- CMA messaging dialog displayes messages as a list with priority options
 
 
 ## [Mingus 8.0.2] - 2020-01-13
-
+### Fixed
+### Added
 ### Changed
 ### Deprecated
 ### Removed
