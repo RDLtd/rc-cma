@@ -1,7 +1,7 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## [Awaiting QA]
+## [Unreleased - Awaiting QA]
 
 ### Fixed 
 - Email translation corrections
@@ -24,16 +24,13 @@ All notable changes to this project will be documented in this file.
  
 
 
-## [8.0.0] - 2020-01-13
-### Fixed
-- Something fixed
-### Added
-- New visual identity by [@tylerfortune8](https://github.com/tylerfortune8).
+## [8.0.2] - 2020-01-13
+
 ### Changed
 ### Deprecated
 ### Removed
 
-[unreleased]: https://github.com/olivierlacan/keep-a-changelog/compare/v1.1.0...HEAD
+[Unreleased - Awaiting QA]: https://github.com/olivierlacan/keep-a-changelog/compare/v1.1.0...HEAD
 [8.0.2]: https://github.com/olivierlacan/keep-a-changelog/compare/v1.0.0...v1.1.0
 
 
