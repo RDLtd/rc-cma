@@ -1,7 +1,7 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## [Unreleased]
+## [Awaiting QA]
 
 ### Fixed 
 - Email translation corrections
@@ -20,7 +20,7 @@ All notable changes to this project will be documented in this file.
 - Menu > Vegan tag & display icon
 - Graceful Application timeout handling and messaging
 - Level 4+ users unlimited associations, including multi-associations
-- 
+- 'Find Restaurants'
  
 
 
@@ -34,6 +34,6 @@ All notable changes to this project will be documented in this file.
 ### Removed
 
 [unreleased]: https://github.com/olivierlacan/keep-a-changelog/compare/v1.1.0...HEAD
-[1.1.0]: https://github.com/olivierlacan/keep-a-changelog/compare/v1.0.0...v1.1.0
+[8.0.2]: https://github.com/olivierlacan/keep-a-changelog/compare/v1.0.0...v1.1.0
 
 
