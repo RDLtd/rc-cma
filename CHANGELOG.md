@@ -1,7 +1,7 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## [Unreleased - Awaiting QA]
+## [Staged/QA]
 
 ### Fixed 
 - Email translation corrections
@@ -33,7 +33,7 @@ All notable changes to this project will be documented in this file.
 ### Deprecated
 ### Removed
 
-[Unreleased - Awaiting QA]: https://rc-app-cma-staging.herokuapp.com/
+[Staged/QA]: https://rc-app-cma-staging.herokuapp.com/
 [Mingus 8.0.2]: https://github.com/RDLtd/rc-app-cma/compare/master...Mingus
 
 
