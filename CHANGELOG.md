@@ -12,4 +12,7 @@ All notable changes to this project will be documented in this file.
 ### Deprecated
 ### Removed
 
+[unreleased]: https://github.com/olivierlacan/keep-a-changelog/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/olivierlacan/keep-a-changelog/compare/v1.0.0...v1.1.0
+
 
