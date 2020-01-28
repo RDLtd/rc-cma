@@ -1,11 +1,11 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { Restaurant } from '../_models/restaurant';
-import { RestaurantService } from '../_services/restaurant.service';
+import { Restaurant } from '../_models';
+import { RestaurantService } from '../_services';
 import { AppConfig } from '../app.config';
 import { ProfileVerifyComponent } from './profile-verify.component';
 import { MAT_DIALOG_DATA, MatDialog, MatSnackBar } from '@angular/material';
 import { HttpClient } from '@angular/common/http';
-import { TranslateService } from '@ngx-translate/core';;
+import { TranslateService } from '@ngx-translate/core';
 import { CMSService, HelpService } from '../_services';
 import { ConfirmCancelComponent } from '../common';
 
@@ -179,19 +179,13 @@ export class RestaurantLookupComponent implements OnInit {
   addAssociation(newRestaurant) {
     let curationComplete = (newRestaurant.restaurant_data_status === "Curation Complete");
     this.restaurantService.addAssociation(this.data.member.member_id, newRestaurant.restaurant_id).subscribe(
-      data => {
-
+      () => {
         console.log('New Restaurant', newRestaurant);
-
         // Verify email contact details
         if (!newRestaurant.restaurant_email.trim().length) {
           console.log(`No Email: ${ newRestaurant.restaurant_email}`);
         }
-
         this.data.associatedRestaurants.push(newRestaurant);
-
-
-
 
         // TODO need to make this restaurant a member - now works
         this.restaurantService.updateMemberStatus(newRestaurant.restaurant_id, 'Associate').subscribe(
@@ -239,7 +233,7 @@ export class RestaurantLookupComponent implements OnInit {
           ];
 
           this.cms.sendRestaurantChanges(this.data.member, newRestaurant, req)
-            .subscribe(data => {
+            .subscribe(() => {
               console.log('Flagged for immediate curation');
               },
               error => console.log(error));
