@@ -190,7 +190,7 @@ export class RestaurantLookupComponent implements OnInit {
         // TODO need to make this restaurant a member - now works
         this.restaurantService.updateMemberStatus(newRestaurant.restaurant_id, 'Associate').subscribe(
           memdata => {
-            console.log(memdata);
+            // console.log(memdata);
           },
           error => {
             console.log(error);
