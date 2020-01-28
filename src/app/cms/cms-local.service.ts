@@ -47,11 +47,6 @@ export class CmsLocalService {
   }
 
   dspSnackbar(msg: string, actn: string = '', d: number = 3, style: any = 'info'): void {
-
-    // this.snackBar.openFromComponent(HelpComponent, {
-    //   duration: 500,
-    // });
-
     this.snackBar.open(msg, actn, {
       duration: d * 1000,
       panelClass: [`rc-mat-snack-${style}`]

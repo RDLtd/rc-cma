@@ -6,7 +6,8 @@ import { ProfileVerifyComponent } from './profile-verify.component';
 import { MAT_DIALOG_DATA, MatDialog, MatSnackBar } from '@angular/material';
 import { HttpClient } from '@angular/common/http';
 import { TranslateService } from '@ngx-translate/core';;
-import { HelpService } from '../_services';
+import { CMSService, HelpService } from '../_services';
+import { ConfirmCancelComponent } from '../common';
 
 @Component({
   selector: 'rc-restaurant-lookup',
@@ -26,6 +27,7 @@ export class RestaurantLookupComponent implements OnInit {
 
   constructor(
     private   restaurantService: RestaurantService,
+    private   cms: CMSService,
     private   config: AppConfig,
     public    dialog: MatDialog,
     public    help: HelpService,
@@ -175,9 +177,11 @@ export class RestaurantLookupComponent implements OnInit {
   }
 
   addAssociation(newRestaurant) {
+    let curationComplete = (newRestaurant.restaurant_data_status === "Curation Complete");
     this.restaurantService.addAssociation(this.data.member.member_id, newRestaurant.restaurant_id).subscribe(
       data => {
-        //console.log(newRestaurant);
+
+        console.log('New Restaurant', newRestaurant);
 
         // Verify email contact details
         if (!newRestaurant.restaurant_email.trim().length) {
@@ -185,7 +189,10 @@ export class RestaurantLookupComponent implements OnInit {
         }
 
         this.data.associatedRestaurants.push(newRestaurant);
-        this.dspSnackBar(newRestaurant.restaurant_name + this.t_data.Added);
+
+
+
+
         // TODO need to make this restaurant a member - now works
         this.restaurantService.updateMemberStatus(newRestaurant.restaurant_id, 'Associate').subscribe(
           memdata => {
@@ -198,7 +205,48 @@ export class RestaurantLookupComponent implements OnInit {
       error => {
         console.log(error);
       });
-    this.dialog.closeAll();
+
+    if (curationComplete) {
+
+      this.dialog.closeAll();
+      this.dspSnackBar(newRestaurant.restaurant_name + this.t_data.Added);
+
+    } else {
+      // Todo: translations
+      const confirmDialog = this.dialog.open(ConfirmCancelComponent, {
+        data: {
+          title: 'PLEASE NOTE',
+          msg: `**${newRestaurant.restaurant_name}** has not yet been curated. However, the team has now been notified and curation will take place within the next 48 hours.&nbsp;
+          In the meantime, please tell us if any of the current information is incorrect by sending a **Change Request**.`,
+          yes: 'OK',
+          no: null
+        }
+      });
+      confirmDialog.afterClosed().subscribe(ok => {
+        if (ok) {
+          // Todo: could do with a custom email really
+          // Notify curation team
+          let req = [
+            `Administrator: ${this.data.member.member_first_name} ${this.data.member.member_last_name}  `,
+            `Email: ${this.data.member.member_email}---`,
+            `  ----------  `,
+            `Restaurant: ${newRestaurant.restaurant_name}---`,
+            `Restaurant No: ${newRestaurant.restaurant_number}---`,
+            `Street: ${newRestaurant.restaurant_address_1}---`,
+            `Postcode: ${newRestaurant.restaurant_post_code}---`,
+            `  ----------  `,
+            `This restaurant requires immediate curation. Please notify the content administrator when it has been completed. Thank you.`
+          ];
+
+          this.cms.sendRestaurantChanges(this.data.member, newRestaurant, req)
+            .subscribe(data => {
+              console.log('Flagged for immediate curation');
+              },
+              error => console.log(error));
+          this.dialog.closeAll();
+        }
+      });
+    }
   }
 
   showRequestForm(searchInput) {
@@ -216,9 +264,14 @@ export class RestaurantLookupComponent implements OnInit {
     this.dspSnackBar(this.t_data.RequestSent);
   }
 
-  dspSnackBar(msg: string) {
-    this.snackBar.open( msg, null, {
-      duration: 3000
+  dspSnackBar(msg: string, action = null, d = 3, style = 'info') {
+    // this.snackBar.open( msg, null, {
+    //   duration: 3000
+    // });
+
+    this.snackBar.open(msg, action, {
+      duration: d * 1000,
+      panelClass: [`rc-mat-snack-${style}`]
     });
   }
 
