@@ -221,15 +221,15 @@ export class RestaurantLookupComponent implements OnInit {
           // Todo: could do with a custom email really
           // Notify curation team
           let req = [
-            `Administrator: ${this.data.member.member_first_name} ${this.data.member.member_last_name}  `,
-            `Email: ${this.data.member.member_email}---`,
-            `  ----------  `,
-            `Restaurant: ${newRestaurant.restaurant_name}---`,
-            `Restaurant No: ${newRestaurant.restaurant_number}---`,
-            `Street: ${newRestaurant.restaurant_address_1}---`,
-            `Postcode: ${newRestaurant.restaurant_post_code}---`,
-            `  ----------  `,
-            `This restaurant requires immediate curation. Please notify the content administrator when it has been completed. Thank you.`
+            ` Administrator: ${this.data.member.member_first_name} ${this.data.member.member_last_name}`,
+            ` Email: ${this.data.member.member_email}`,
+            ` ***`,
+            ` Restaurant: ${newRestaurant.restaurant_name}`,
+            ` Restaurant No: ${newRestaurant.restaurant_number}`,
+            ` Street: ${newRestaurant.restaurant_address_1}`,
+            ` Postcode: ${newRestaurant.restaurant_post_code}`,
+            `***`,
+            ` This restaurant requires immediate curation. Please notify the content administrator when it has been completed. Thank you.`
           ];
 
           this.cms.sendRestaurantChanges(this.data.member, newRestaurant, req)
