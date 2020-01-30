@@ -218,8 +218,14 @@ export class CMSService {
 
   sendRestaurantChanges(member: Member, restaurant: Restaurant, changes: any) {
     return this.http.post(this.config.apiUrl + '/cms/sendrestaurantchanges',
-      { member: member, restaurant: restaurant, changes: changes,
-        userCode: this.config.userAPICode, token: this.jwt() });
+      {
+        email_language: localStorage.getItem('rd_country'),
+        member: member,
+        restaurant: restaurant,
+        changes: changes,
+        userCode: this.config.userAPICode,
+        token: this.jwt()
+      });
   }
 
   getSPWTemplate(restaurant_id: string) {
