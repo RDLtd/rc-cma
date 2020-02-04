@@ -27,6 +27,11 @@ export class AppComponent implements OnInit {
     fr: "Vous êtes actuellement OFFLINE! Veuillez vérifier votre connexion Internet.",
   };
 
+  sessionExpired = {
+    en: "Your session has expired. To continue using the application, please Sign In again.",
+    fr: "Votre session a expiré. Pour continuer à utiliser l’application, veuillez vous connecter à nouveau.",
+  };
+
   isConnected = true;
   inSession = false;
   @ViewChild('MdSidenav', {static: true})
@@ -50,7 +55,7 @@ export class AppComponent implements OnInit {
         if(this.isConnected){
           snackBar.dismiss();
         } else {
-          let snackBarRef = snackBar.open(this.connectionOffline[this.language], 'OK', {
+          const snackBarRef = snackBar.open(this.connectionOffline[this.language], 'OK', {
             verticalPosition: 'top',
             panelClass: ['rc-mat-snack-info']
           });
@@ -99,8 +104,8 @@ export class AppComponent implements OnInit {
             // In case any dialogs are open when the app times out
             this._dialog.closeAll();
             // Tell the user what happened
-            let snackBarRef = this.snackBar.open(
-              'Your session has expired. To continue using the application, please Sign In again.',
+            const snackBarRef = this.snackBar.open(
+              this.sessionExpired[this.language],
               'OK',
               {
               verticalPosition: 'top',

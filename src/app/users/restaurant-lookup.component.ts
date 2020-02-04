@@ -75,7 +75,7 @@ export class RestaurantLookupComponent implements OnInit {
     this.sql_parameters = {
       where_field: 'restaurant_name',
       where_string: str,
-      where_any_position: 'N',
+      where_any_position: 'Y',
       sort_field: 'restaurant_name',
       sort_direction: 'ASC',
       limit_number: 20,
@@ -90,7 +90,7 @@ export class RestaurantLookupComponent implements OnInit {
       this.restaurantService.getSubset(this.sql_parameters)
         .subscribe(
           data => {
-            // console.log({data});
+            console.log({data});
             this.restaurants = data['restaurants'];
             if (!this.restaurants.length) {
               this.noSearchResults = true;

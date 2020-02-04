@@ -924,7 +924,8 @@
     "Affiliate": "Affiliate",
     "MemberOffer": "Member Offer",
     "FindOutMore": "Find out more...",
-    "Message": " has been notified of your request and will be in contact with you in the next 48 hours. We have also sent their contact details to you by email to "
+    "Message": " has been notified of your request and will be in contact with you in the next 48 hours. We have also sent their contact details to you by email to ",
+    "Contact": " if you want to contact them now."
   },
 
   "SignIn": {
