@@ -2,8 +2,8 @@
 
 
 Cette partie affiche les données principales du restaurant. Il est essentiel que ces informations soient 
-correctes car elles fournissent aux consommateurs 
-avec toutes les informations commerciales primordiales de votre établissement. 
+correctes car elles fournissent aux consommateurs toutes 
+les informations commerciales primordiales sur votre établissement.  
 Chaque fois qu'une mise à jour du contenu sera effectuée, nous vous demanderons que ces DONNÉES ESSENTIELLES 
 soient vérifiées pour en assurer leur exactitude.
 

@@ -924,7 +924,8 @@
     "Affiliate": "Partenaire Affilié",
     "MemberOffer": "Offre pour les membres",
     "FindOutMore": "En savoir plus...",
-    "Message": " a été informé de votre demande et qui vous contactera dans un délai de 48 heures. Nous vous avons envoyé leurs coordonnées par e-mail à "
+    "Message": " est informé de votre demande et vous contactera dans un délais de 48 heures. Nous vous avons aussi envoyé leurs coordonnées par email à ",
+    "Contact": " si vous souhaitez les contacter dès maintenant."
   },
 
   "SignIn": {
@@ -933,7 +934,7 @@
     "SignIn": "Se connecter",
     "EnterEmail": "Entrez votre adresse e-mail enregistrée pour réinitialiser votre mot de passe. Vous devrez peut-être vérifier votre dossier de courrier indésirable.",
     "ResetCaps": "RÉINITIALISER LE MOT DE PASSE",
-    "Text1": " est un organisme à but non lucratif formé par des restaurateurs et des figures de emblématiques dans le but de fournir un réel soutien au quotidien à ses membres. Vous devrez peut-être vérifier votre dossier des indésirables pour lire votre email de bienvenue.",
+    "Text1": " est un organisme à but non lucratif formé par des restaurateurs et des figures emblématiques dans le but de fournir un réel soutien au quotidien à ses membres. Pour lire votre email de bienvenue, peut-être devrez-vous vérifier que celui-ci ne se trouve pas dans votre dossier des indésirables.",
     "Text2": "C’est gratuit pour devenir membre associé, ce qui inclut l’accès à notre application de gestion de contenu spécialement conçue pour gérer et distribuer le contenu d’un restaurant.",
     "Register": "S'inscrire en tant qu'utilisateur",
     "UserEmail": "ADRESSE EMAIL",
@@ -947,7 +948,7 @@
     "Forgotten": "Mot de passe oublié?",
     "NewPassword": "Un nouveau mot de passe a été envoyé à votre adresse email.",
     "Unknown": "Cette adresse email est inconnue!",
-    "Empowering": "La Force Collective de Restaurateurs Indépendants!",
+    "Empowering": "La Force Collective des Restaurateurs Indépendants!",
     "Join": "Rejoindre"
   },
 
@@ -976,7 +977,7 @@
     "Due": "L'adhésion devra être renouvelée le",
     "Reason": "Si ",
     "DoesNot": "ne souhaite pas la renouveler, veuillez contacter l'Assistance des ",
-    "Support": "mailto:support@restauratuers-independeants.fr",
+    "Support": "mailto:support@restauratuers-independants.fr",
     "MembershipFor": "Adhésion pour",
     "Wait": "S'IL VOUS PLAÎT, ATTENDEZ...",
     "Updating": "MISE A JOUR DU STATUT DES MEMBRES...",
@@ -1119,7 +1120,7 @@
     "Terms": "Conditions d'utilisation",
     "And": " et ",
     "Privacy": "Politique de confidentialité",
-    "Free": "C'est gratuit pour nous rejoindre",
+    "Free": "Pour nous rejoindre, c’est gratuit !",
     "Part": "Si vous souhaitez que votre restaurant fasse partie des",
     "Enjoy": "et profiter des nombreux avantages et des économies disponibles pour ses membres, il suffit de suivre ces étapes:",
     "Free1": "Fournissez vos coordonnées en remplissant le formulaire sur cette page, puis cliquez sur 'Rejoindre le collectif'.",
