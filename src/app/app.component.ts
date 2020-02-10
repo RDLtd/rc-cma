@@ -143,6 +143,7 @@ export class AppComponent implements OnInit {
     console.log('LS', my_company.rd_company_name);
 
     localStorage.setItem('rd_company_name', my_company.rd_company_name);
+    localStorage.setItem('rd_company_prefix', my_company.rd_company_prefix);
     localStorage.setItem('rd_company_logo_root', my_company.rd_company_logo_root);
     localStorage.setItem('rd_company_url', my_company.rd_company_url);
     localStorage.setItem('rd_company_monthly_fee', my_company.rd_company_monthly_fee);

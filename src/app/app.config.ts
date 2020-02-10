@@ -44,6 +44,7 @@ export class AppConfig {
 
   public readonly en_company = {
     rd_company_name: 'Restaurant Collective',
+    rd_company_prefix: 'rc',
     rd_company_logo_root: 'rc-logo',
     rd_company_url: 'https://restaurantcollective.uk',
     rd_company_monthly_fee: '3.50',
@@ -54,6 +55,7 @@ export class AppConfig {
 
   public readonly fr_company = {
     rd_company_name: 'Restaurateurs Indépendants',
+    rd_company_prefix: 'ri',
     rd_company_logo_root: 'ri-logo',
     rd_company_url: 'https://restaurateurs-independants.fr',
     rd_company_monthly_fee: '4.00',

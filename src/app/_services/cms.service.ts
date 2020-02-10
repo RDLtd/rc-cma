@@ -218,7 +218,8 @@ export class CMSService {
 
   sendRestaurantChanges(member: Member, restaurant: Restaurant, changes: any) {
     return this.http.post(this.config.apiUrl + '/cms/sendrestaurantchanges',
-      { member: member, restaurant: restaurant, changes: changes,
+      { company_prefix: localStorage.getItem('rd_company_prefix'),
+        member: member, restaurant: restaurant, changes: changes,
         userCode: this.config.userAPICode, token: this.jwt() });
   }
 
@@ -242,7 +243,8 @@ export class CMSService {
 
   sendVerificationEmail(restaurantname: string, restaurantcode: string, restaurantemail: string) {
     return this.http.post(this.config.apiUrl + '/cms/sendverificationemail',
-      { restaurantname: restaurantname, restaurantcode: restaurantcode, restaurantemail: restaurantemail,
+      { company_prefix: localStorage.getItem('rd_company_prefix'),
+        restaurantname: restaurantname, restaurantcode: restaurantcode, restaurantemail: restaurantemail,
         userCode: this.config.userAPICode, token: this.jwt() });
   }
 
@@ -256,7 +258,8 @@ export class CMSService {
                                    restaurant_number: string,
                                    email_language: string) {
     return this.http.post(this.config.apiUrl + '/cms/sendofferrequesttoaffiliate',
-      { affiliate_email: affiliate_email, affiliate_name: affiliate_name, restaurant_name: restaurant_name,
+      { company_prefix: localStorage.getItem('rd_company_prefix'),
+        affiliate_email: affiliate_email, affiliate_name: affiliate_name, restaurant_name: restaurant_name,
         restaurant_address: restaurant_address, restaurant_telephone: restaurant_telephone, restaurant_email: restaurant_email,
         admin_fullname: admin_fullname, restaurant_number: restaurant_number, email_language: email_language,
         userCode: this.config.userAPICode, token: this.jwt() });
@@ -269,7 +272,8 @@ export class CMSService {
                        restaurant_number: string,
                        email_language: string) {
     return this.http.post(this.config.apiUrl + '/cms/sendofferconfirmation',
-      { affiliate_name: affiliate_name, affiliate_contact_message: affiliate_contact_message, restaurant_name: restaurant_name,
+      { company_prefix: localStorage.getItem('rd_company_prefix'),
+        affiliate_name: affiliate_name, affiliate_contact_message: affiliate_contact_message, restaurant_name: restaurant_name,
         restaurant_email: restaurant_email, restaurant_number: restaurant_number, email_language: email_language,
         userCode: this.config.userAPICode, token: this.jwt() });
   }
