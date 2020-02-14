@@ -57,7 +57,7 @@ export class MemberService {
 
   createAdministrator(administrator: any) {
     return this.http.post(this.config.apiUrl + '/members/createadministrator',
-      {
+      { company_prefix: localStorage.getItem('rd_company_prefix'),
         administrator: administrator,
         userCode: this.config.userAPICode,
         token: this.jwt()
@@ -93,7 +93,7 @@ export class MemberService {
 
   sendemail(emailAddress, emailSubject, emailBody) {
     return this.http.post(this.config.apiUrl + '/members/sendemail',
-      {
+      { company_prefix: localStorage.getItem('rd_company_prefix'),
         emailAddress: emailAddress,
         emailSubject: emailSubject,
         emailBody: emailBody,
@@ -104,7 +104,7 @@ export class MemberService {
 
   sendwelcomeemail(member_id, restaurant_name, restaurant_number) {
     return this.http.post(this.config.apiUrl + '/members/sendwelcomeemail',
-      {
+      { company_prefix: localStorage.getItem('rd_company_prefix'),
         member_id: member_id,
         restaurant_name: restaurant_name,
         restaurant_number: restaurant_number,
@@ -115,7 +115,7 @@ export class MemberService {
 
   sendwelcomersvpemail(member_id, restaurant_name, restaurant_number, member_class) {
     return this.http.post(this.config.apiUrl + '/members/sendwelcomersvpemail',
-      {
+      { company_prefix: localStorage.getItem('rd_company_prefix'),
         member_id: member_id,
         restaurant_name: restaurant_name,
         restaurant_number: restaurant_number,
@@ -127,7 +127,7 @@ export class MemberService {
 
   sendrequestemail(member_id, restaurant_name, restaurant_number) {
     return this.http.post(this.config.apiUrl + '/members/sendrequestemail',
-      {
+      { company_prefix: localStorage.getItem('rd_company_prefix'),
         member_id: member_id,
         restaurant_name: restaurant_name,
         restaurant_number: restaurant_number,
@@ -138,7 +138,7 @@ export class MemberService {
 
   sendInfoEmail(member_id, restaurant_name, restaurant_number, agent_fullname) {
     return this.http.post(this.config.apiUrl + '/members/sendinfoemail',
-      {
+      { company_prefix: localStorage.getItem('rd_company_prefix'),
         member_id: member_id,
         restaurant_name: restaurant_name,
         restaurant_number: restaurant_number,
@@ -150,7 +150,7 @@ export class MemberService {
 
   sendrecoveryemail(member_email) {
     return this.http.post(this.config.apiUrl + '/members/sendrecoveryemail',
-      {
+      { company_prefix: localStorage.getItem('rd_company_prefix'),
         member_email: member_email,
         userCode: this.config.userAPICode,
         token: this.jwt()
@@ -159,7 +159,7 @@ export class MemberService {
 
   sendIntroEmail(restaurant_name: string, restaurant_email: string, restaurant_activation_code: string) {
     return this.http.post(this.config.apiUrl + '/members/send_intro_email',
-      {
+      { company_prefix: localStorage.getItem('rd_company_prefix'),
         restaurant_name: restaurant_name,
         restaurant_email: restaurant_email,
         restaurant_activation_code: restaurant_activation_code,
