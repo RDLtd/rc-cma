@@ -224,7 +224,8 @@ export class CMSService {
         restaurant: restaurant,
         changes: changes,
         userCode: this.config.userAPICode,
-        token: this.jwt() });
+        token: this.jwt()
+      });
   }
 
   getSPWTemplate(restaurant_id: string) {

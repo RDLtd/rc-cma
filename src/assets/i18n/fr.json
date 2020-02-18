@@ -328,7 +328,8 @@
     "DataChange": "Merci.\r\nNous avons reçu votre demande de changement. Celle-ci sera examinée par l'équipe de curation\net mise à jour en conséquence..\r\nSachez que vous ne verrez peut-être aucun changement avant 24 heures.",
     "YouCan": "Vous pouvez ",
     "View": "voir une version de restaurant de démonstration",
-    "ToSee": " pour voir à quoi ressemblera le SPW avec tout le contenu ajouté."
+    "ToSee": " pour voir à quoi ressemblera le SPW avec tout le contenu ajouté.",
+    "ViewDemo": "Bon travail! Cependant nous avons besoin de davantage d'informations afin de générer la page Internet de votre Site. Le résumé ci-dessous indique quelles sections ont besoin de contenu supplémentaire. Une fois que vous aurez ajouté suffisamment de données, le **APERÇU** et **PUBLIER** les options seront activées; nous pourrons créer votre Page Internet et distribuer votre contenu à nos partenaires.  \n\nVous pouvez [voir une version de restaurant de démonstration]({{ demoUrl }}) pour voir à quoi ressemblera le **SPW** avec tout le contenu ajouté."
   },
 
   "CMS-Directory": {
