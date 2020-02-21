@@ -1,17 +1,17 @@
 <div class="rc-dialog rc-dialog-alert">
   <h1 mat-dialog-title>
-    {{ data.title || defaultTitle }}
+    {{ data['title'] || defaultTitle }}
   </h1>
-  <mat-dialog-content>
-    {{ data.msg || defaultMsg }}
+  <mat-dialog-content markdown>
+    {{ data['msg'] || defaultMsg }}
   </mat-dialog-content>
   <mat-dialog-actions align="end">
     <button *ngIf="data.no" mat-button (click)="confirmCancelDialog.close({ confirmed: false })">
-      {{ data.no || defaultCancel }}
+      {{ data['no'] || defaultCancel }}
     </button>
     <button
       mat-stroked-button (click)="confirmCancelDialog.close({ confirmed: true })">
-      {{ data.yes || defaultContinue }}
+      {{ data['yes'] || defaultContinue }}
     </button>
   </mat-dialog-actions>
   <mat-checkbox *ngIf="data.showCheckbox">Don't show me this again</mat-checkbox>

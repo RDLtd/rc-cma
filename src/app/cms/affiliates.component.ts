@@ -197,7 +197,7 @@ export class AffiliatesComponent implements OnInit, OnDestroy {
 
       // show a generic message - the partner specific message is sent by email
       this.cmsLocalService.dspSnackbar(this.affiliates[index].partner_name + this.t_data.Message +
-        this.restaurant.restaurant_email, 'OK', 30);
+        this.restaurant.restaurant_email + this.t_data.Contact, 'OK', 30);
     }
   }
 

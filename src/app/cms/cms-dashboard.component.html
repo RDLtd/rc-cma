@@ -1,9 +1,9 @@
 <div class="mdc-layout-grid">
   <div class="mdc-layout-grid__inner">
-  <!-- Core data -->
+
+  <!-- CORE DATA -->
   <mat-card
     class="rc-cms-card-core mdc-layout-grid__cell mdc-layout-grid__cell--span-5 mdc-layout-grid__cell--span-12-tablet">
-
     <div
       class="rc-card-title-img-wrapper"
       style="--aspect-ratio:16/9; margin-right: -32px;">
@@ -13,7 +13,6 @@
     <mat-card-title>{{ restaurant?.restaurant_name }}</mat-card-title>
     <mat-card-subtitle>{{ restaurant?.restaurant_group_name }}</mat-card-subtitle>
     <mat-card-content>
-
       <div class="rc-card-help">
         <button
           mat-icon-button
@@ -21,9 +20,6 @@
           <mat-icon>help_outline</mat-icon>
         </button>
       </div>
-
-
-
       <dl>
         <dt>{{ 'CMS-Dashboard.FoodStyle' | translate }}</dt>
         <dd>
@@ -83,7 +79,6 @@
           </ul>
         </dd>
       </dl>
-
     </mat-card-content>
     <mat-card-actions align="end">
       <button mat-button (click)="reqDirectoryDataChange()">{{ 'CMS-Dashboard.ChangeCaps' | translate }}</button>
@@ -185,10 +180,7 @@
 
         <!-- More content required -->
         <mat-card-content  *ngIf="!isPreviewing && !cmsHasSufficientData">
-          {{ 'CMS-Dashboard.GoodWork' | translate }}
-          <strong>{{ 'CMS-Dashboard.Preview' | translate }}</strong> {{ 'CMS-Dashboard.And' | translate }} <strong>
-          {{ 'CMS-Dashboard.Publish' | translate }}</strong> {{ 'CMS-Dashboard.Distribute' | translate }}
-          <p>{{ 'CMS-Dashboard.YouCan' | translate }}<a href="https://rdltd.github.io/RD.Pages/" target="_blank">{{ 'CMS-Dashboard.View' | translate }}</a>{{ 'CMS-Dashboard.ToSee' | translate }}</p>
+          <p markdown [data]="'CMS-Dashboard.ViewDemo' | translate:locals[lang]"></p>
         </mat-card-content>
 
         <!-- card actions -->

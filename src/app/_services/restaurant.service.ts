@@ -386,7 +386,8 @@ export class RestaurantService {
   sendInvoice(restaurant_id: number, restaurant_member_id: number, invoice_number: string, payment_amount: number,
               payment_currency: string, payment_description: string, payment_token: any) {
     return this.http.post(this.config.apiUrl + '/restaurants/sendinvoice',
-      { restaurant_id: restaurant_id, restaurant_member_id: restaurant_member_id,
+      { company_prefix: localStorage.getItem('rd_company_prefix'),
+        restaurant_id: restaurant_id, restaurant_member_id: restaurant_member_id,
         invoice_number: invoice_number, payment_amount: payment_amount,
         payment_currency: payment_currency, payment_description: payment_description, payment_token: payment_token,
         userCode: this.config.userAPICode, token: this.jwt() });
@@ -486,7 +487,8 @@ export class RestaurantService {
                    booking_date: string, booking_name: string, booking_email: string, email_language: string,
                    company_name: string) {
     return this.http.post(this.config.apiUrl + '/restaurants/sendbookingemail',
-      { restaurant_name: restaurant_name,
+      { company_prefix: localStorage.getItem('rd_company_prefix'),
+        restaurant_name: restaurant_name,
         restaurant_email: restaurant_email,
         booking_covers: booking_covers,
         booking_time: booking_time,

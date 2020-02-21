@@ -105,6 +105,16 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
   offerInBox = 0;
 
   user: Member;
+  lang;
+
+  // This object is passed to the translate pipe in the html file
+  // to allow handlebars style variable access.
+  //
+  locals = {
+    en: { demoUrl: 'http://demo.restaurantcollective.uk/' },
+    fr: { demoUrl: 'http://demo.restaurateurs-independants.fr/' }
+  };
+
 
   // translation variables
   t_data: any;
@@ -123,9 +133,11 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
   ) {
     // detect language changes... need to check for change in texts
     translate.onLangChange.subscribe(lang => {
+
+      this.lang = localStorage.getItem('rd_country');
+
       this.translate.get('CMS-Dashboard').subscribe(data => {
         this.t_data = data;
-
         // Since the display texts are computed, we need to re-run these routines...
         this.readAndCheckStatus();
 
@@ -157,6 +169,8 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+
+    this.lang = localStorage.getItem('rd_country');
 
     this.user = this.authService.getLoggedInUser();
     // ToDo The above does not work for refresh of deep link to dashboard - there is no member data
@@ -416,8 +430,8 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
 
     this.cms.getDishes(Number(this.restaurant.restaurant_id)).subscribe(
       data => {
-        // console.log('Dishes', data);
-        if (data['count']) {
+        console.log('Dishes', data);
+        if (data['count'] > 0) {
           this.mnu_status += 33.5;
           this.mnu_dish_count = data['count'];
         }
@@ -429,10 +443,11 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
   }
 
   checkPdfMenus(): void {
+
     this.cms.getElementClass(this.restaurant.restaurant_id, 'Menu', 'N')
       .subscribe(
       menuData => {
-        // console.log('pdfs', menuData);
+        //console.log('pdfs', menuData);
         // reset status
         this.mnu_count = 0;
         let i = menuData['count'];
@@ -442,10 +457,12 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
             this.mnu_count += 1;
           }
         }
+        console.log('Mnu', this.mnu_count);
         // active menus
         if (this.mnu_count > 0) {
           this.mnu_status += 33.3;
         }
+        console.log('desc', this.descriptions);
         if (this.descriptions) {
           if (this.descriptions.cms_description_menus_overview) {
             this.mnu_status += 33.3;
@@ -487,7 +504,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
       }
       if (
         this.descriptions.cms_description_booking_provider &&
-        this.descriptions.cms_description_booking_provider !== 'null') {
+        this.descriptions.cms_description_booking_provider !== 'none') {
         this.bkg_status += 25;
       }
 
@@ -514,10 +531,10 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
 
     if (this.restaurant.restaurant_lat && this.restaurant.restaurant_lng) { this.loc_status += 50; }
     if (this.descriptions) {
-      if (this.descriptions.cms_description_car_parking) {
+      if (this.descriptions.cms_description_car_parking !== 'undefined') {
         this.loc_status += 25;
       }
-      if (this.descriptions.cms_description_public_transport) {
+      if (this.descriptions.cms_description_public_transport !== 'undefined') {
         this.loc_status += 25;
       }
     }

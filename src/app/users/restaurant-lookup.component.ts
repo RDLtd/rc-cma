@@ -1,12 +1,13 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { Restaurant } from '../_models/restaurant';
-import { RestaurantService } from '../_services/restaurant.service';
+import { Restaurant } from '../_models';
+import { RestaurantService } from '../_services';
 import { AppConfig } from '../app.config';
 import { ProfileVerifyComponent } from './profile-verify.component';
 import { MAT_DIALOG_DATA, MatDialog, MatSnackBar } from '@angular/material';
 import { HttpClient } from '@angular/common/http';
 import { TranslateService } from '@ngx-translate/core';
-import { HelpService } from '../_services';
+import { CMSService, HelpService } from '../_services';
+import { ConfirmCancelComponent } from '../common';
 
 @Component({
   selector: 'rc-restaurant-lookup',
@@ -26,6 +27,7 @@ export class RestaurantLookupComponent implements OnInit {
 
   constructor(
     private   restaurantService: RestaurantService,
+    private   cms: CMSService,
     private   config: AppConfig,
     public    dialog: MatDialog,
     public    help: HelpService,
@@ -73,12 +75,12 @@ export class RestaurantLookupComponent implements OnInit {
     this.sql_parameters = {
       where_field: 'restaurant_name',
       where_string: str,
-      where_any_position: 'N',
+      where_any_position: 'Y',
       sort_field: 'restaurant_name',
       sort_direction: 'ASC',
       limit_number: 20,
       limit_index: '0',
-      // restaurant_status: 'Curation Complete',
+      //restaurant_status: 'Curation Complete',
       country: this.country
     };
 
@@ -88,7 +90,7 @@ export class RestaurantLookupComponent implements OnInit {
       this.restaurantService.getSubset(this.sql_parameters)
         .subscribe(
           data => {
-            // console.log({data});
+            console.log({data});
             this.restaurants = data['restaurants'];
             if (!this.restaurants.length) {
               this.noSearchResults = true;
@@ -175,18 +177,17 @@ export class RestaurantLookupComponent implements OnInit {
   }
 
   addAssociation(newRestaurant) {
+    let curationComplete = (newRestaurant.restaurant_data_status === "Curation Complete");
     this.restaurantService.addAssociation(this.data.member.member_id, newRestaurant.restaurant_id).subscribe(
-      data => {
-        // console.log(newRestaurant);
-
+      () => {
+        console.log('New Restaurant', newRestaurant);
         // Verify email contact details
         if (!newRestaurant.restaurant_email.trim().length) {
           console.log(`No Email: ${ newRestaurant.restaurant_email}`);
         }
-
         this.data.associatedRestaurants.push(newRestaurant);
-        this.dspSnackBar(newRestaurant.restaurant_name + this.t_data.Added);
-        // Done - need to make this restaurant a member - now works
+
+        // TODO need to make this restaurant a member - now works
         this.restaurantService.updateMemberStatus(newRestaurant.restaurant_id, 'Associate').subscribe(
           memdata => {
             // console.log(memdata);
@@ -198,7 +199,48 @@ export class RestaurantLookupComponent implements OnInit {
       error => {
         console.log(error);
       });
-    this.dialog.closeAll();
+
+    if (curationComplete) {
+
+      this.dialog.closeAll();
+      this.dspSnackBar(newRestaurant.restaurant_name + this.t_data.Added);
+
+    } else {
+      // Todo: translations
+      const confirmDialog = this.dialog.open(ConfirmCancelComponent, {
+        data: {
+          title: 'PLEASE NOTE',
+          msg: `**${newRestaurant.restaurant_name}** has not yet been curated. However, the team has now been notified and curation will take place within the next 48 hours.&nbsp;
+          In the meantime, please tell us if any of the current information is incorrect by sending a **Change Request**.`,
+          yes: 'OK',
+          no: null
+        }
+      });
+      confirmDialog.afterClosed().subscribe(ok => {
+        if (ok) {
+          // Todo: could do with a custom email really
+          // Notify curation team
+          let req = [
+            ` Administrator: ${this.data.member.member_first_name} ${this.data.member.member_last_name}`,
+            ` Email: ${this.data.member.member_email}`,
+            ` ***`,
+            ` Restaurant: ${newRestaurant.restaurant_name}`,
+            ` Restaurant No: ${newRestaurant.restaurant_number}`,
+            ` Street: ${newRestaurant.restaurant_address_1}`,
+            ` Postcode: ${newRestaurant.restaurant_post_code}`,
+            `***`,
+            ` This restaurant requires immediate curation. Please notify the content administrator when it has been completed. Thank you.`
+          ];
+
+          this.cms.sendRestaurantChanges(this.data.member, newRestaurant, req)
+            .subscribe(() => {
+              console.log('Flagged for immediate curation');
+              },
+              error => console.log(error));
+          this.dialog.closeAll();
+        }
+      });
+    }
   }
 
   showRequestForm(searchInput) {
@@ -216,9 +258,14 @@ export class RestaurantLookupComponent implements OnInit {
     this.dspSnackBar(this.t_data.RequestSent);
   }
 
-  dspSnackBar(msg: string) {
-    this.snackBar.open( msg, null, {
-      duration: 3000
+  dspSnackBar(msg: string, action = null, d = 3, style = 'info') {
+    // this.snackBar.open( msg, null, {
+    //   duration: 3000
+    // });
+
+    this.snackBar.open(msg, action, {
+      duration: d * 1000,
+      panelClass: [`rc-mat-snack-${style}`]
     });
   }
 
