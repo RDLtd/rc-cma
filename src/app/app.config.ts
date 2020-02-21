@@ -49,6 +49,7 @@ export class AppConfig {
     rd_company_url: 'https://restaurantcollective.uk',
     rd_company_monthly_fee: '3.50',
     rd_company_annual_fee: '42.00',
+    rd_company_annual_fee_with_vat: '50.40',
     rd_company_currency_symbol: '£',
     rd_company_currency_code: 'GBP'
   };
@@ -60,6 +61,7 @@ export class AppConfig {
     rd_company_url: 'https://restaurateurs-independants.fr',
     rd_company_monthly_fee: '4.00',
     rd_company_annual_fee: '48.00',
+    rd_company_annual_fee_with_vat: '57.60',
     rd_company_currency_symbol: '€',
     rd_company_currency_code: 'EUR'
   };
