@@ -494,6 +494,7 @@
     "AddDish": "Add New Dish",
     "MenuHelp": "Add a selection of your most popular dishes. We would recommend that you choose a cross-section of your price range and dishes that best reflect your style of food. You can flag dishes as ",
     "Vegetarian": "Vegetarian",
+    "Vegan": "Vegan",
     "Or": " or ",
     "GlutenFree": "Gluten Free",
     "WhenAdd": " when you add them.",
@@ -550,7 +551,8 @@
     "UpdateFailed": "Updates failed!",
     "ValidEmail": "A valid email address is required",
     "NoTest": "This service does not require testing - it does not have an associated URL",
-    "TestLink": "Test Link"
+    "TestLink": "Test Link",
+    "PleaseEnter": "Please enter your"
   },
 
   "Restaurant-Detail": {

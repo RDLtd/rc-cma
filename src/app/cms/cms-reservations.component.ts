@@ -157,9 +157,10 @@ export class CmsReservationsComponent implements OnInit {
   updateData(): void {
 
     // Check for required fields
-    if (this.selected_booking_provider_id > 1 && this.selected_booking_provider_id != 5) {
-      if(!this.booking_provider_reference) {
-        this.cmsLocalService.dspSnackbar(`Please enter your ${this.selected_booking_provider.booking_provider_rid_label}`, null, 3);
+    if (this.selected_booking_provider_id > 1 && this.selected_booking_provider_id !== 5) {
+      if (!this.booking_provider_reference) {
+        this.cmsLocalService.dspSnackbar(`${this.t_data.PleaseEnter} ${this.selected_booking_provider.booking_provider_rid_label}`,
+          null, 3);
         return;
       }
     }
