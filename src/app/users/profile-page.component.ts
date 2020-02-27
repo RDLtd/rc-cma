@@ -8,13 +8,13 @@ import {
   FinancialService,
   HelpService, AnalyticsService
 } from '../_services';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 // import { MessageComponent } from '../messages/message.component';
 import { PasswordComponent } from './password.component';
 import { ProfileDetailComponent } from './profile-detail.component';
 import { ProfileImageComponent } from './profile-image.component';
 import { RestaurantLookupComponent } from './restaurant-lookup.component';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { ConfirmCancelComponent } from '../common';
 import { TranslateService } from '@ngx-translate/core';

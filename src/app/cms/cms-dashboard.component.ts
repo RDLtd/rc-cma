@@ -13,7 +13,7 @@ import {
   RestaurantService,
   AnalyticsService
 } from '../_services';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { CmsPreviewComponent } from './cms-preview.component';
 import { Router } from '@angular/router';
 import { RestaurantDetailComponent } from '../restaurants';

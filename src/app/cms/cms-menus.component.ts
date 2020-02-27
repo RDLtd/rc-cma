@@ -3,7 +3,7 @@ import { Restaurant, CMSDish, CMSSection } from '../_models';
 import { CmsLocalService } from './cms-local.service';
 import { CMSService, HelpService } from '../_services';
 import { CmsFileUploadComponent } from './cms-file-upload.component';
-import { MatDialog, MatDialogConfig } from '@angular/material';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ConfirmCancelComponent } from '../common';
 import { CmsMenuDishComponent } from './cms-menu-dish.component';
 import { TranslateService } from '@ngx-translate/core';

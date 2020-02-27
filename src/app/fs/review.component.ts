@@ -1,7 +1,8 @@
 import { ElementRef, Component, ViewChild, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { FinancialService } from '../_services/financial.service';
-import { MatSnackBar, MatDialog } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';
 import { FsLocalService } from './fs-local.service';
 import { BenchmarkWizardComponent } from '../restaurants/benchmarkwizard.component';

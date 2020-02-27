@@ -203,27 +203,6 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     CmsPreviewComponent,
     ConfirmCancelComponent
   ],
-  entryComponents: [
-    BenchmarkComponent,
-    ReviewComponent,
-    BenchmarkWizardComponent,
-    RestaurantLookupComponent,
-    RestaurantDetailComponent,
-    ConfirmCancelComponent,
-    MessageComponent,
-    PasswordComponent,
-    ProfileDetailComponent,
-    ProfileImageComponent,
-    ProfileVerifyComponent,
-    ReferralsComponent,
-    CmsImageDialogComponent,
-    CmsFileUploadComponent,
-    CmsMenuDishComponent,
-    AboutComponent,
-    HelpComponent,
-    PaymentComponent,
-    LoadComponent
-  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
