@@ -480,6 +480,7 @@
     "Price": "Prix",
     "OptDesc": "Description facultative",
     "Vegetarian": "Végétarien",
+    "Vegan": "Végétalien",
     "GlutenFree": "Sans gluten",
     "Cancel": "Annuler",
     "Update": "Mettre à jour",
@@ -493,6 +494,7 @@
     "AddDish": "Ajouter un nouveau plat",
     "MenuHelp": "Ajoutez une sélection de vos plats les plus populaires. Nous vous recommandons de choisir parmi une gamme de prix et de plats qui reflètent au mieux votre style de cuisine. Vous pouvez signaler les plats ",
     "Vegetarian": "Végétarien",
+    "Vegan": "Végétalien",
     "Or": " et/ou ",
     "GlutenFree": "Sans gluten",
     "WhenAdd": " quand vous les ajoutez.",
@@ -526,7 +528,7 @@
     "Deleted": " Supprimé",
     "AddMenu": "AJOUTER UN MENU",
     "On": "le",
-    "VGF": "Ajoutez une sélection de vos plats les plus populaires. Nous vous recommandons de choisir parmi une gamme de prix et de plats qui reflètent au mieux votre style de cuisine. Vous pouvez signaler les plats ![Végétarien](../assets/images/icons/vegetarian.svg) **Végétarien** ou ![Sans gluten](../assets/images/icons/gluten-free.svg) **Sans gluten** quand vous les ajoutez.",
+    "VGF": "Ajoutez une sélection de vos plats les plus populaires. Nous vous recommandons de choisir parmi une gamme de prix et de plats qui reflètent au mieux votre style de cuisine. Vous pouvez signaler les plats ![Végétarien](../assets/images/icons/vegetarian.svg) **Végétarien**, ![Vegan](../assets/images/icons/vegan.svg) **Végétalien** ou ![Sans gluten](../assets/images/icons/gluten-free.svg) **Sans gluten** quand vous les ajoutez.",
     "SectionHint": "Antipasti, entrées, plats, etc."
   },
 
@@ -549,7 +551,8 @@
     "UpdateFailed": "Les mises à jour ont échoué!",
     "ValidEmail": "Une adresse email valide est exigée",
     "NoTest": "Ce service ne nécessite pas de test - il n'a pas d'URL associée",
-    "TestLink": "Lien de test"
+    "TestLink": "Lien de test",
+    "PleaseEnter": "S'il vous plait entrez votre"
   },
 
   "Restaurant-Detail": {
