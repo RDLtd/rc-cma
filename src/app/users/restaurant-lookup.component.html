@@ -42,8 +42,9 @@
 
       <h2 mat-dialog-title>{{ 'Restaurant-Lookup.New' | translate }}</h2>
       <mat-form-field
-        floatPlaceholder="always"
+        floatLabel="always"
         class="rc-full-width">
+        <mat-label>{{ 'Restaurant-Lookup.Name' | translate }}</mat-label>
         <input
         #newRestInput
         id="newRestInput"
@@ -58,8 +59,9 @@
       </mat-form-field>
 
       <mat-form-field
-        floatPlaceholder="always"
+        floatLabel="always"
         class="rc-half-width">
+        <mat-label>{{ 'Restaurant-Lookup.PostCode' | translate }}</mat-label>
         <input
           style="text-transform: uppercase"
           matInput
@@ -67,15 +69,16 @@
           placeholder="{{ 'Restaurant-Lookup.PostCode' | translate }}"
           ngModel
           type="text"
-          minlength="6"
+          minlength="5"
           autocomplete="off"
           required>
         <mat-error>{{ 'Restaurant-Lookup.ValidPostcode' | translate }}</mat-error>
       </mat-form-field>
 
       <mat-form-field
-        floatPlaceholder="always"
+        floatLabel="always"
         class="rc-half-width">
+        <mat-label>Telephone</mat-label>
         <input
           matInput
           name="newRestaurantTel"
