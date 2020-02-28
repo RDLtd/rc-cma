@@ -79,7 +79,9 @@ const APP_ROUTES: Routes = [
 
     { path: 'menus',
       component: CmsMenusComponent,
-      canActivate: [AuthGuard] },
+      canActivate: [AuthGuard],
+      canDeactivate: [CanDeactivateGuard]
+    },
 
     { path: 'reservations',
       component: CmsReservationsComponent,

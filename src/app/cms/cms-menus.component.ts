@@ -218,8 +218,17 @@ export class CmsMenusComponent implements OnInit {
 
   // flag changes
   setChanged(): void {
+    console.log('DATA CHANGE');
     if (!this.dataChanged) {
       this.dataChanged = true;
+    }
+  }
+
+  confirmNavigation() {
+    if (this.dataChanged) {
+      return this.cmsLocalService.confirmNavigation();
+    } else {
+      return true;
     }
   }
 
@@ -284,11 +293,10 @@ export class CmsMenusComponent implements OnInit {
 
         this.cms.updateDish(newDish).subscribe(
           data => {
-            console.log('cms.updateDish', data);
+            // console.log('cms.updateDish', data);
             this.htmlMenu.dishes[dish.cms_dish_idx] = newDish;
             // replace idx reference in case user edits again before page reload
             this.htmlMenu.dishes[dish.cms_dish_idx].cms_dish_idx = dish.cms_dish_idx;
-
             this.cmsLocalService.dspSnackbar(newDish.cms_dish_name + this.t_data.Updated, null, 3);
           },
           error => { console.log(error);
