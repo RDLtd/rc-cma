@@ -8,14 +8,14 @@
 
     <section>
       <mat-form-field
-        floatPlaceholder="always"
+        floatLabel="always"
         class="rc-full-width">
+        <mat-label>{{ 'Restaurant-Lookup.EnterName' | translate | uppercase }}</mat-label>
         <input
           #searchInput
           name="search"
           type="text"
           matInput
-          placeholder="{{ 'Restaurant-Lookup.EnterName' | translate | uppercase }}"
           (keyup)="findRestaurants(searchInput.value)"
           autocomplete="off"
           autofocus>
@@ -39,7 +39,6 @@
     <section
       *ngIf="noSearchResults || dspNewListingForm"
       class="rc-lookup-request">
-
       <h2 mat-dialog-title>{{ 'Restaurant-Lookup.New' | translate }}</h2>
       <mat-form-field
         floatLabel="always"
@@ -118,7 +117,6 @@
       mat-button
       (click)="showRequestForm(searchInput)">{{ 'Restaurant-Lookup.NotListed' | translate }}</button>
   </mat-dialog-actions>
-
 
 </form>
 
