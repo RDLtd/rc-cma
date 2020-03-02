@@ -4,7 +4,7 @@ import { CmsLocalService } from './cms-local.service';
 import { Restaurant, CMSDescription } from '../_models';
 import { ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
-import { TranslateService } from '@ngx-translate/core';;
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'rc-cms-features',
