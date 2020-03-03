@@ -333,7 +333,8 @@ export class CmsMenusComponent implements OnInit {
     let dialogRef = this.dialog.open(CmsMenuDishComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(formDish => {
-      // console.log('Form values:', formDish.value);
+
+      console.log('formDish values:', formDish.value);
 
       if (formDish.dirty && formDish.valid) {
 
