@@ -19,8 +19,5 @@
     ],
     "alwaysStrict": true,
     "strictPropertyInitialization": false
-  },
-  "angularCompilerOptions": {
-    "enableIvy": false
   }
 }
