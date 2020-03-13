@@ -13,8 +13,11 @@ const compression = require('compression');
 //   res.sendFile(path.join(__dirname + '/dist/index.html'));
 // });
 
-app.use(express.static(path.join(__dirname, 'dist','app_name')));
-res.sendFile(path.join(__dirname,'dist','app_name','index.html'));
+// app.use(express.static(path.join(__dirname, 'dist','app_name')));
+// res.sendFile(path.join(__dirname,'dist','app_name','index.html'));
+
+app.use(express.static(path.join(__dirname, 'app_name')));
+res.sendFile(path.join(__dirname, 'app_name','index.html'));
 
 // Start the app by listening on the default
 // Heroku port
