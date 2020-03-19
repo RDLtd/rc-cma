@@ -6,6 +6,7 @@
     class="rc-cms-card-core mdc-layout-grid__cell mdc-layout-grid__cell--span-5 mdc-layout-grid__cell--span-12-tablet">
     <div class="rc-card-title-img-wrapper">
       <cl-image
+        *ngIf="img_src"
         [public-id]="img_src"
         class="mat-card-image"
         dpr="auto"

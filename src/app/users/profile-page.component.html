@@ -111,11 +111,15 @@
                 (click)="updateImage()">
 
                 <cl-image
-                [public-id]="memberAvatar"
-                width="300"
-                height="300"
-                crop="fill"
-                gravity="face">
+                *ngIf="memberAvatar"
+                [public-id]="memberAvatar">
+                  <cl-transformation
+                    width="400"
+                    height="400"
+                    radius="max"
+                    crop="fill"
+                    gravity="face">
+                  </cl-transformation>
                 </cl-image>
 
               </div>

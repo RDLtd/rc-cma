@@ -35,7 +35,7 @@ export class ProfilePageComponent implements OnInit {
   restaurants: Array<Restaurant>;
   restaurant: Restaurant;
   member: Member = new Member();
-  memberAvatar;
+  memberAvatar: string;
   defaultImages: Array<any> = [];
   placeholderImage;
   isDemoMember = false;
@@ -249,8 +249,14 @@ export class ProfilePageComponent implements OnInit {
     if (this.isDemoMember) {
       this.openSnackBar(this.t_data.DemoImage, '');
     } else {
-      const dialogRef = this.dialog.open(ProfileImageComponent);
-      dialogRef.componentInstance.member = this.member;
+      const dialogRef = this.dialog.open(ProfileImageComponent,{
+        data: {
+          member: this.member,
+          avatar: this.memberAvatar
+        }
+      });
+      //dialogRef.componentInstance.avatar = this.memberAvatar
+      //dialogRef.componentInstance.member = this.member;
       dialogRef.componentInstance.dialog = dialogRef;
     }
   }

@@ -1,8 +1,9 @@
-import { Component, OnInit, Input, NgZone } from '@angular/core';
+import { Component, OnInit, Input, NgZone, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Member } from '../_models';
 import { AnalyticsService, MemberService } from '../_services';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FileUploader, FileUploaderOptions, ParsedResponseHeaders } from 'ng2-file-upload';
 import { AppConfig } from '../app.config';
 import { TranslateService } from '@ngx-translate/core';
@@ -37,15 +38,16 @@ export class ProfileImageComponent implements OnInit {
     private zone: NgZone,
     private http: HttpClient,
     private translate: TranslateService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    @Inject(MAT_DIALOG_DATA) public data: any,
   ) {
     this.responses = [];
   }
 
   ngOnInit() {
-    this.imgPreviewSrc = this.member.member_image_path;
-    // console.log(this.member.member_image_path);
-    // this.getMemberAvatar(this.member.member_id);
+
+    this.imgPreviewSrc = this.data.member.member_image_path;
+
     this.translate.get('Profile-Image').subscribe(data => this.t_data = data);
 
     const uploaderOptions: FileUploaderOptions = {
@@ -64,7 +66,6 @@ export class ProfileImageComponent implements OnInit {
 
     this.uploader.onBuildItemForm = (fileItem: any, form: FormData): any => {
       form.append('upload_preset', this.config.upload_preset);
-      // form.append('public_id', this.member.member_first_name + '-' + this.member.member_last_name);
       form.append('folder', 'avatars');
       form.append('file', fileItem);
       fileItem.withCredentials = false;
@@ -144,11 +145,13 @@ export class ProfileImageComponent implements OnInit {
 
     this.inProgress = true;
     // update db and local member
-    this.memberService.updateAvatar(this.member.member_id, this.imgURL).subscribe(
+    console.log('M', this.data.member.member_id);
+
+    this.memberService.updateAvatar(this.data.member.member_id, this.imgURL).subscribe(
       data => {
-        // console.log(JSON.stringify(data));
-        // console.log('Avatar for member ' + this.member.member_id + ' updated to ' + this.imgURL);
-        this.member.member_image_path = this.imgPreviewSrc;
+        this.data.member.member_image_path = this.imgPreviewSrc;
+        let iArr = this.imgPreviewSrc.split('/');
+        this.data.avatar = iArr.splice(iArr.length).join('/');
         this.dspSnackBar(this.t_data.ImageUpdated);
         this.inProgress = false;
         // record event
@@ -162,10 +165,10 @@ export class ProfileImageComponent implements OnInit {
 
   deleteImage() {
 
-    this.memberService.deleteAvatar(this.member.member_id).subscribe(
+    this.memberService.deleteAvatar(this.data.member_id).subscribe(
       data => {
         // console.log(data);
-        this.member.member_image_path = this.placeholderImage;
+        this.data.member_image_path = this.placeholderImage;
         this.dialog.close();
         this.dspSnackBar(this.t_data.ImageDeleted);
       },
