@@ -49,8 +49,9 @@
           {{ 'CMS-Images.Offline' | translate }}
         </mat-chip>
       </mat-chip-list>
-      <div>
+      <div style="min-height:240px;">
         <cl-image
+          *ngIf="image['cms_element_image_ref']"
           [public-id]="image['cms_element_image_ref']"
           secure="true"
           loading="lazy"

@@ -70,7 +70,7 @@ export class ProfilePageComponent implements OnInit {
       this.translate.get('Profile-Page').subscribe(data => {
         this.t_data = data;
         this.d_member_job = this.t_data[this.member.member_job];
-        this.placeholderImage = `https://via.placeholder.com/900x600?text=${this.t_data.AwaitingImage}`;
+        this.placeholderImage = `https://via.placeholder.com/800x450?text=${this.t_data.AwaitingImage}`;
       });
       // re-translate computed display dates
       moment.locale(localStorage.getItem('rd_country'));
@@ -92,7 +92,7 @@ export class ProfilePageComponent implements OnInit {
 
     this.translate.get('Profile-Page').subscribe(data => {
       this.t_data = data;
-      this.placeholderImage = `https://via.placeholder.com/900x600?text=${this.t_data.AwaitingImage}`;
+      this.placeholderImage = `https://via.placeholder.com/800x450?text=${this.t_data.AwaitingImage}`;
     });
   }
 
@@ -222,6 +222,15 @@ export class ProfilePageComponent implements OnInit {
         error => {
           console.log(error);
         });
+    }
+  }
+
+  getClPublicId(idx) {
+    if (this.defaultImages[idx]) {
+      let a = this.defaultImages[idx].split('/');
+      return a.splice(a.length - 3).join('/');
+    } else {
+      return this.placeholderImage;
     }
   }
 

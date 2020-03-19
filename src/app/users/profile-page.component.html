@@ -193,11 +193,20 @@
           <mat-icon>people</mat-icon>
         </button>
         <!-- image -->
-        <div style="--aspect-ratio:16/9; ">
-        <img
-            [routerLink]="['/restaurants', restaurant.restaurant_id, 'cms', 'dashboard']"
-            [src]="defaultImages[idx] || placeholderImage">
+        <div [routerLink]="['/restaurants', restaurant.restaurant_id, 'cms', 'dashboard']">
+         <cl-image
+            [public-id]="getClPublicId(idx)"
+            width="400"
+            height="225">
+           <cl-transformation
+             width="400"
+             height="225"
+             crop="fill"
+             quality="auto">
+           </cl-transformation>
+         </cl-image>
         </div>
+
         <div
           [routerLink]="['/restaurants', restaurant.restaurant_id, 'cms', 'dashboard']"
           class="rc-card-restaurant-content">
