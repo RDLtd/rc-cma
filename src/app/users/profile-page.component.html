@@ -2,7 +2,6 @@
   <div class="mdc-layout-grid">
     <div class="mdc-layout-grid__inner">
       <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
-
         <mat-toolbar class="rc-section-toolbar">
           <span
             class="rc-toolbar-title">{{ member.member_first_name | uppercase }} {{ member.member_last_name | uppercase }}</span>
@@ -106,9 +105,19 @@
                   {{ 'Profile-Page.ReferralCode' | translate }}:&nbsp;<a>{{ member?.member_promo_code }}</a>
               </span>
               </div>
+              <!-- Profile Image -->
               <div
-                class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2 rc-active" (click)="updateImage()">
-                <img style="--aspect-ratio:1/1;" [src]="member.member_image_path">
+                class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2 rc-active"
+                (click)="updateImage()">
+
+                <cl-image
+                [public-id]="memberAvatar"
+                width="300"
+                height="300"
+                crop="fill"
+                gravity="face">
+                </cl-image>
+
               </div>
             </div>
           </div>
@@ -181,7 +190,7 @@
         </button>
         <!-- image -->
         <div style="--aspect-ratio:16/9; ">
-          <img
+        <img
             [routerLink]="['/restaurants', restaurant.restaurant_id, 'cms', 'dashboard']"
             [src]="defaultImages[idx] || placeholderImage">
         </div>

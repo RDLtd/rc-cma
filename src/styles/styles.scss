@@ -477,6 +477,8 @@ a.mat-menu-item {text-decoration: none;}
   .rc-card-img-wrapper {}
   img {
     height: auto;
+    width: 100%;
+    overflow: hidden;
     cursor: pointer;
     &:focus {
       outline: none;
@@ -818,6 +820,11 @@ ul.rc-lookup-results {
   position: absolute !important;
   top: 20px;
   right: 8px;
+}
+.rc-cms-card-core {
+  .mat-card-image {
+    margin: 0 0 16px -8px;
+  }
 }
 .rc-cms-social {
   margin: 0;

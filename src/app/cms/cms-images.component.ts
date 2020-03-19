@@ -8,6 +8,8 @@ import { CmsFileUploadComponent } from './cms-file-upload.component';
 import { ConfirmCancelComponent } from '../common';
 import { TranslateService } from '@ngx-translate/core';
 
+
+
 @Component({
   selector: 'rc-cms-images',
   templateUrl: './cms-images.component.html'
@@ -94,6 +96,7 @@ export class CmsImagesComponent implements OnInit {
   viewImage(img): void {
     let dialogRef = this.dialog.open(CmsImageDialogComponent);
     dialogRef.componentInstance.image = img;
+    dialogRef.componentInstance.clImgPath = img.cms_element_image_ref
     dialogRef.componentInstance.cmsImages = this.cmsImages;
     dialogRef.componentInstance.dialog = dialogRef;
     dialogRef.componentInstance.restaurant = this.restaurant;

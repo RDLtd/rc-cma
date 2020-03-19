@@ -399,10 +399,12 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
             if (elem.cms_element_active) { this.img_count += 1; }
             // Store default image path for restaurant card
             if (elem.cms_element_default) {
-              imgsrc = elem.cms_element_image_path;
+              imgsrc = elem.cms_element_image_ref;
             }
           }
+          console.log('Img', imgsrc);
           this.img_src = imgsrc || this.dfImg;
+
 
           // set status bar
           this.img_status = this.img_count * 25;

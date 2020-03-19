@@ -35,6 +35,7 @@ export class ProfilePageComponent implements OnInit {
   restaurants: Array<Restaurant>;
   restaurant: Restaurant;
   member: Member = new Member();
+  memberAvatar;
   defaultImages: Array<any> = [];
   placeholderImage;
   isDemoMember = false;
@@ -105,13 +106,15 @@ export class ProfilePageComponent implements OnInit {
     this.memberService.getById(id)
       .subscribe(
         data => {
-          console.log('Data', data);
           this.member = data['member'][0];
           this.d_member_signedup = moment(this.member.member_signedup).format('DD MMMM YYYY');
           this.d_member_last_logged_in = moment(this.member.member_last_logged_in).format('DD MMMM YYYY');
           this.getAssociatedRestaurants(id);
           this.d_member_job = this.t_data[this.member.member_job];
-          console.log('MEMBER:', this.member);
+          // Create array from url
+          const imgPath = this.member.member_image_path.split('/');
+          // Select the last 3 elements as a new ref
+          this.memberAvatar = imgPath.slice(imgPath.length - 3).join('/');
         },
         error => {
           console.log(error);

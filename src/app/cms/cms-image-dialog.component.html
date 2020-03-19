@@ -38,13 +38,27 @@
   </mat-menu>
 
   <mat-dialog-content class="image-wrapper">
+
     <mat-chip-list class="rc-element-tag">
       <mat-chip selected="true" *ngIf="image.cms_element_default">{{ 'CMS-Image-Dialog.DefaultTag' | translate }}</mat-chip>
       <mat-chip selected="true" class="rc-online" *ngIf="image.cms_element_active">{{ 'CMS-Image-Dialog.Available' | translate }}</mat-chip>
       <mat-chip selected="false" *ngIf="!image.cms_element_active">{{ 'CMS-Image-Dialog.Offline' | translate }}</mat-chip>
     </mat-chip-list>
-    <div style="--aspect-ratio: 16/9;">
-      <img [src]="image.cms_element_image_path">
-    </div>
+
+    <cl-image
+      [public-id]="clImgPath"
+      secure="true"
+      quality="auto"
+      height="auto"
+      width="100%">
+      <cl-placeholder type="blur"></cl-placeholder>
+      <cl-transformation
+        height="900"
+        width="1600"
+        crop="fill"
+        gravity="face">
+      </cl-transformation>
+    </cl-image>
+
   </mat-dialog-content>
 </div>

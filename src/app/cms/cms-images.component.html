@@ -49,8 +49,20 @@
           {{ 'CMS-Images.Offline' | translate }}
         </mat-chip>
       </mat-chip-list>
-      <div style="--aspect-ratio:16/9;">
-      <img [src]="image.cms_element_image_path">
+      <div>
+        <cl-image
+          [public-id]="image['cms_element_image_ref']"
+          secure="true"
+          loading="lazy"
+          height="180"
+          width="320">
+          <cl-transformation
+            height="450"
+            width="800"
+            crop="fill"
+            gravity="auto">
+          </cl-transformation>
+        </cl-image>
       </div>
 
       <div class="rc-card-actions">
@@ -90,3 +102,5 @@
     </div>
   </div>
 </div>
+
+

@@ -109,7 +109,7 @@ export class CmsFileUploadComponent implements OnInit {
         }
       );
       // console.log(JSON.parse(response).original_filename);
-      // console.log(JSON.parse(response).url);
+      console.log(JSON.parse(response));
       // console.log(status);
 
       if (status === 200) {
@@ -220,7 +220,12 @@ export class CmsFileUploadComponent implements OnInit {
       e.cms_element_class = 'Directions';
     }
 
+    // Cloudinary public-id
+    let clArr = this.fileUrl.split('/');
+    e['cms_element_image_ref'] = clArr.splice(clArr.length - 3).join('/');
+
     e.cms_element_image_path = this.fileUrl;
+
     e.cms_element_active = true;
     e.cms_element_default = false;
     e.cms_element_live_from = now;

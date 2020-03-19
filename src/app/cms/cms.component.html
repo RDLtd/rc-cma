@@ -14,8 +14,6 @@
           [matTooltip]="'CMS-Component.ManagedByYou' | translate">
           {{ restaurant?.restaurant_name }}
     </span>
-
-
     <mat-menu #cmsRestaurants="matMenu">
       <button
         *ngFor="let restaurant of restaurants"

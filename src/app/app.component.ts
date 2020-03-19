@@ -159,8 +159,8 @@ export class AppComponent implements OnInit {
     this.http.get('https://ipinfo.io?token=b3a0582a14c7a4')
       .subscribe(
         data => {
-          if (data['country'] === 'FR' || data['country'] === 'ZA') {
-            this.language = 'fr';
+            if (data['country'] === 'FR' || data['country'] === 'ZA') {
+              this.language = 'fr';
           } else {
             this.language = 'en';
           }

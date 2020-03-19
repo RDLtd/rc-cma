@@ -23,6 +23,8 @@ import { SigninComponent } from './signin/signin.component';
 import { AboutComponent } from './common/about.component';
 import { PwdMatchValidator } from './shared/pwdMatch.validator';
 import { AngularMaterialModule } from './shared/angular-material.module';
+import { CloudinaryModule } from '@cloudinary/angular-5.x';
+import * as  Cloudinary from 'cloudinary-core';
 
 import {
   AuthGuard,
@@ -184,7 +186,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyCji4lOA-nPgICQjFO_4rVyuWKW1jP1Lkc'
     }),
-    MarkdownModule.forRoot()
+    MarkdownModule.forRoot(),
+    CloudinaryModule.forRoot(Cloudinary, { cloud_name: 'rdl'}),
   ],
   providers: [
     AppConfig,
