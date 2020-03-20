@@ -76,6 +76,6 @@ export class CmsLocalService {
   // Extract Cloudinary Public-Id from full url
   getCloudinaryPublicId(url) {
     let urlArr = url.split('/');
-    return urlArr.splice(urlArr.length - 3).join('/');
+    return urlArr.slice(urlArr.length - 3).join('/');
   }
 }

@@ -222,7 +222,7 @@ export class CmsFileUploadComponent implements OnInit {
 
     // Cloudinary public-id
     let clArr = this.fileUrl.split('/');
-    e['cms_element_image_ref'] = clArr.splice(clArr.length - 3).join('/');
+    e['cms_element_image_ref'] = clArr.slice(clArr.length - 3).join('/');
 
     e.cms_element_image_path = this.fileUrl;
 
