@@ -339,20 +339,13 @@ export class CmsMenusComponent implements OnInit {
       if (formDish.dirty && formDish.valid) {
 
         const newDish = this.createNewDish(formDish);
-        console.log('New CMSDish:', newDish);
 
         this.cms.createDish(newDish).subscribe(
           res => {
-            console.log('Dish Added:', res);
-
-            // pushing to the local array also returns the new length
-            // which we can use for reference
-            let len = this.htmlMenu.dishes.push(newDish);
-            console.log('Pushed', this.htmlMenu.dishes);
-
-            // Add returned id to new dish in local array
-            this.htmlMenu.dishes[len - 1]['cms_dish_id'] = res['cms_dish_id'];
-            this.cmsLocalService.dspSnackbar(this.htmlMenu.dishes[len - 1].name + this.t_data.Added, null, 3);
+            //console.log('Dish Added:', res);
+            // Reload dishes
+            this.getHtmlMenuDishes(this.restaurant.restaurant_id);
+            this.cmsLocalService.dspSnackbar(newDish.cms_dish_name + this.t_data.Added, null, 3);
           },
           error => {
             console.log(error);
@@ -385,8 +378,7 @@ export class CmsMenusComponent implements OnInit {
         this.cms.deleteDish(dish.cms_dish_id).subscribe(
           data => {
             console.log('cms.deleteDish', data);
-            this.cmsLocalService.dspSnackbar({ deletedDishName } + this.t_data.Removed, null, 3);
-
+            this.cmsLocalService.dspSnackbar(`${deletedDishName} ${this.t_data.Removed}`, null, 3);
           },
           error => {
             console.log(error);
