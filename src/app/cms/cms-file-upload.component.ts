@@ -205,7 +205,6 @@ export class CmsFileUploadComponent implements OnInit {
 
     e.cms_element_restaurant_id = this.data.restaurant.restaurant_id;
 
-
     if (this.data.type === 'image') {
       e.cms_element_title = this.imgForm.form.controls.imgClass.value || 'restaurant';
       e.cms_element_caption = null;
@@ -220,12 +219,11 @@ export class CmsFileUploadComponent implements OnInit {
       e.cms_element_class = 'Directions';
     }
 
-    // Cloudinary public-id
+    // Add Cloudinary public-id to element
     let clArr = this.fileUrl.split('/');
     e['cms_element_image_ref'] = clArr.slice(clArr.length - 3).join('/');
 
     e.cms_element_image_path = this.fileUrl;
-
     e.cms_element_active = true;
     e.cms_element_default = false;
     e.cms_element_live_from = now;
@@ -254,6 +252,7 @@ export class CmsFileUploadComponent implements OnInit {
         console.log(error);
       });
   }
+
   setDefaultImage(img) {
     let len = this.data.tgtObject.length;
     // find & reset current default

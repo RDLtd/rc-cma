@@ -95,7 +95,7 @@ export class CmsImagesComponent implements OnInit {
   viewImage(img): void {
     let dialogRef = this.dialog.open(CmsImageDialogComponent);
     dialogRef.componentInstance.image = img;
-    dialogRef.componentInstance.clImgPath = img.cms_element_image_ref
+    dialogRef.componentInstance.clImgPath = img.cms_element_image_ref;
     dialogRef.componentInstance.cmsImages = this.cmsImages;
     dialogRef.componentInstance.dialog = dialogRef;
     dialogRef.componentInstance.restaurant = this.restaurant;
