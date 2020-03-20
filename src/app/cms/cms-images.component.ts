@@ -59,7 +59,7 @@ export class CmsImagesComponent implements OnInit {
     this.cms.getElementClass(this.restaurant.restaurant_id, 'Image', 'N')
       .subscribe(data => {
           this.cmsImages = data['elements'];
-          console.log(data['elements']);
+          console.log('Images', data['elements']);
           this.showLoader = false;
         },
         error => console.log(error));

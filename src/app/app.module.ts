@@ -187,7 +187,11 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
       apiKey: 'AIzaSyCji4lOA-nPgICQjFO_4rVyuWKW1jP1Lkc'
     }),
     MarkdownModule.forRoot(),
-    CloudinaryModule.forRoot(Cloudinary, { cloud_name: 'rdl'}),
+    CloudinaryModule.forRoot(Cloudinary, {
+      cloud_name: 'rdl',
+      api_key: '713165672947878',
+      api_secret: 'EhLM0NhD7HvJDjX5IvF90u6guq8'
+    }),
   ],
   providers: [
     AppConfig,
