@@ -55,7 +55,6 @@ export class CmsImagesComponent implements OnInit {
   }
 
   getImages() {
-    console.log('cms-images.getImages()', this.restaurant.restaurant_id);
     this.showLoader = true;
     this.cms.getElementClass(this.restaurant.restaurant_id, 'Image', 'N')
       .subscribe(data => {

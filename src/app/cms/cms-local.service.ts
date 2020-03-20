@@ -72,4 +72,10 @@ export class CmsLocalService {
       return result.confirmed;
     }));
   }
+
+  // Extract Cloudinary Public-Id from full url
+  getCloudinaryPublicId(url) {
+    let urlArr = url.split('/');
+    return urlArr.splice(urlArr.length - 3).join('/');
+  }
 }
