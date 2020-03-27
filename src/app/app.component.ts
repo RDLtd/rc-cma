@@ -1,6 +1,6 @@
 import { Component, ViewChild, OnInit, ViewEncapsulation } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { MatSidenav } from '@angular/material';
+import { MatSidenav } from '@angular/material/sidenav';
 import { AuthenticationService } from './_services';
 import { HttpClient } from '@angular/common/http';
 import { AppConfig } from './app.config';
@@ -159,8 +159,8 @@ export class AppComponent implements OnInit {
     this.http.get('https://ipinfo.io?token=b3a0582a14c7a4')
       .subscribe(
         data => {
-          if (data['country'] === 'FR' || data['country'] === 'ZA') {
-            this.language = 'fr';
+          if (data && (data['country'] === 'FR' || data['country'] === 'ZA')) {
+              this.language = 'fr';
           } else {
             this.language = 'en';
           }

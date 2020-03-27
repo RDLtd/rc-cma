@@ -22,7 +22,9 @@
     *ngFor="let affiliate of affiliates; let i = index"
     class="rc-cms-card-core mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--span-12-tablet rc-affiliate-offer-card">
 
-    <img mat-card-image [src]=affiliate.offer_img>
+    <img mat-card-image [clSrc]=affiliate.offer_img style="margin:-16px 0 16px -16px;">
+
+
     <mat-card-title>{{ affiliate.offer_tag }}</mat-card-title>
 
     <mat-card-content>

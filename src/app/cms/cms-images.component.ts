@@ -2,11 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { Restaurant } from '../_models';
 import { CmsLocalService } from './cms-local.service';
 import { CMSService, HelpService } from '../_services';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { CmsImageDialogComponent } from './cms-image-dialog.component';
 import { CmsFileUploadComponent } from './cms-file-upload.component';
 import { ConfirmCancelComponent } from '../common';
 import { TranslateService } from '@ngx-translate/core';
+
+
 
 @Component({
   selector: 'rc-cms-images',
@@ -53,12 +55,11 @@ export class CmsImagesComponent implements OnInit {
   }
 
   getImages() {
-    console.log('cms-images.getImages()', this.restaurant.restaurant_id);
     this.showLoader = true;
     this.cms.getElementClass(this.restaurant.restaurant_id, 'Image', 'N')
       .subscribe(data => {
           this.cmsImages = data['elements'];
-          console.log(data['elements']);
+          console.log('Images', data['elements']);
           this.showLoader = false;
         },
         error => console.log(error));
@@ -94,6 +95,7 @@ export class CmsImagesComponent implements OnInit {
   viewImage(img): void {
     let dialogRef = this.dialog.open(CmsImageDialogComponent);
     dialogRef.componentInstance.image = img;
+    dialogRef.componentInstance.clImgPath = img.cms_element_image_ref;
     dialogRef.componentInstance.cmsImages = this.cmsImages;
     dialogRef.componentInstance.dialog = dialogRef;
     dialogRef.componentInstance.restaurant = this.restaurant;

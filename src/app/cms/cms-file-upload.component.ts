@@ -1,6 +1,6 @@
 import { Component, Inject, NgZone, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { MAT_DIALOG_DATA } from '@angular/material';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FileUploader, FileUploaderOptions, ParsedResponseHeaders } from 'ng2-file-upload';
 import { AppConfig } from '../app.config';
 import { CMSElement } from '../_models';
@@ -109,7 +109,7 @@ export class CmsFileUploadComponent implements OnInit {
         }
       );
       // console.log(JSON.parse(response).original_filename);
-      // console.log(JSON.parse(response).url);
+      console.log(JSON.parse(response));
       // console.log(status);
 
       if (status === 200) {
@@ -205,7 +205,6 @@ export class CmsFileUploadComponent implements OnInit {
 
     e.cms_element_restaurant_id = this.data.restaurant.restaurant_id;
 
-
     if (this.data.type === 'image') {
       e.cms_element_title = this.imgForm.form.controls.imgClass.value || 'restaurant';
       e.cms_element_caption = null;
@@ -219,6 +218,10 @@ export class CmsFileUploadComponent implements OnInit {
       e.cms_element_caption = null;
       e.cms_element_class = 'Directions';
     }
+
+    // Add Cloudinary public-id to element
+    let clArr = this.fileUrl.split('/');
+    e['cms_element_image_ref'] = clArr.slice(clArr.length - 3).join('/');
 
     e.cms_element_image_path = this.fileUrl;
     e.cms_element_active = true;
@@ -249,6 +252,7 @@ export class CmsFileUploadComponent implements OnInit {
         console.log(error);
       });
   }
+
   setDefaultImage(img) {
     let len = this.data.tgtObject.length;
     // find & reset current default

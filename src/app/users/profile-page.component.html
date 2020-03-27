@@ -2,7 +2,6 @@
   <div class="mdc-layout-grid">
     <div class="mdc-layout-grid__inner">
       <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
-
         <mat-toolbar class="rc-section-toolbar">
           <span
             class="rc-toolbar-title">{{ member.member_first_name | uppercase }} {{ member.member_last_name | uppercase }}</span>
@@ -106,9 +105,24 @@
                   {{ 'Profile-Page.ReferralCode' | translate }}:&nbsp;<a>{{ member?.member_promo_code }}</a>
               </span>
               </div>
+
+              <!-- Profile Image -->
               <div
-                class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2 rc-active" (click)="updateImage()">
-                <img style="--aspect-ratio:1/1;" [src]="member.member_image_path">
+                class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2 rc-active"
+                (click)="updateImage()">
+
+                <cl-image
+                *ngIf="memberAvatar"
+                [public-id]="memberAvatar">
+                  <cl-transformation
+                    width="400"
+                    height="400"
+                    radius="max"
+                    crop="fill"
+                    gravity="face">
+                  </cl-transformation>
+                </cl-image>
+
               </div>
             </div>
           </div>
@@ -180,11 +194,20 @@
           <mat-icon>people</mat-icon>
         </button>
         <!-- image -->
-        <div style="--aspect-ratio:16/9; ">
-          <img
-            [routerLink]="['/restaurants', restaurant.restaurant_id, 'cms', 'dashboard']"
-            [src]="defaultImages[idx] || placeholderImage">
+        <div [routerLink]="['/restaurants', restaurant.restaurant_id, 'cms', 'dashboard']">
+         <cl-image
+            [public-id]="getClPublicId(idx)"
+            width="400"
+            height="225">
+           <cl-transformation
+             width="400"
+             height="225"
+             crop="fill"
+             quality="auto">
+           </cl-transformation>
+         </cl-image>
         </div>
+
         <div
           [routerLink]="['/restaurants', restaurant.restaurant_id, 'cms', 'dashboard']"
           class="rc-card-restaurant-content">

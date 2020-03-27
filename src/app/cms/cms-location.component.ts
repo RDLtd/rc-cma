@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CmsLocalService } from './cms-local.service';
 import { CMSService, HelpService } from '../_services';
 import { CmsFileUploadComponent } from './cms-file-upload.component';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { CMSDescription } from '../_models';
 import { TranslateService } from '@ngx-translate/core';
 

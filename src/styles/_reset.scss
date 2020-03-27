@@ -14,6 +14,8 @@ body {
 // Maintain structure when little content
 main { min-height: 80vh; }
 
+*:focus {outline:0;}
+
 // Default inline links
 a {
   cursor: pointer;

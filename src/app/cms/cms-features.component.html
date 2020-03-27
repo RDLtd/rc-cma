@@ -44,7 +44,8 @@
         <h4>{{ 'CMS-Features.Strapline' | translate }}</h4>
         <mat-form-field
           class="rc-full-width"
-          floatPlaceholder="never">
+          floatLabel="never">
+          <mat-label>{{ 'CMS-Features.StraplinePlace' | translate }}{{ descStraplineTotal }}{{ 'CMS-Features.Chars' | translate }})</mat-label>
           <textarea
             #strapline
             matInput
@@ -53,7 +54,6 @@
             matAutosizeMaxRows="2"
             name="cms_description_strap_line"
             maxlength="{{ descStraplineTotal }}"
-            placeholder="{{ 'CMS-Features.StraplinePlace' | translate }}{{ descStraplineTotal }}{{ 'CMS-Features.Chars' | translate }})"
             (keyup)="setChanged()"
             [(ngModel)]="descriptions.cms_description_strap_line">
           </textarea>
@@ -64,7 +64,8 @@
         <!-- ONE PARAGRAPH DESC. -->
         <mat-form-field
           class="rc-full-width"
-          floatPlaceholder="never">
+          floatLabel="never">
+          <mat-label>{{ 'CMS-Features.OneSentPlace' | translate }}{{ descSentenceTotal }}{{ 'CMS-Features.Chars' | translate }})</mat-label>
           <textarea
             #sentence
             matInput
@@ -73,7 +74,6 @@
             matAutosizeMaxRows="2"
             name="cms_description_one_sentence"
             maxlength="{{ descSentenceTotal }}"
-            placeholder="{{ 'CMS-Features.OneSentPlace' | translate }}{{ descSentenceTotal }}{{ 'CMS-Features.Chars' | translate }})"
             (keyup)="setChanged()"
             [(ngModel)]="descriptions.cms_description_one_sentence">
           </textarea>
@@ -81,7 +81,8 @@
         </mat-form-field>
         <h4>{{ 'CMS-Features.OnePara' | translate }}</h4>
         <mat-form-field
-          class="rc-full-width" floatPlaceholder="never">
+          class="rc-full-width" floatLabel="never">
+          <mat-label>{{ 'CMS-Features.OneParaPlace' | translate }}{{ descParagraphTotal }}{{ 'CMS-Features.Chars' | translate }})</mat-label>
           <textarea
             #paragraph
             matInput
@@ -90,7 +91,6 @@
             matAutosizeMaxRows="4"
             name="cms_description_one_paragraph"
             maxlength="{{ descParagraphTotal }}"
-            placeholder="{{ 'CMS-Features.OneParaPlace' | translate }}{{ descParagraphTotal }}{{ 'CMS-Features.Chars' | translate }})"
             (keyup)="setChanged()"
             [(ngModel)]="descriptions.cms_description_one_paragraph">
           </textarea>
@@ -98,7 +98,8 @@
         </mat-form-field>
         <!-- LONG DESC. -->
         <h4>{{ 'CMS-Features.Full' | translate }}</h4>
-        <mat-form-field class="rc-full-width" floatPlaceholder="never">
+        <mat-form-field class="rc-full-width" floatLabel="never">
+          <mat-label>{{ 'CMS-Features.FullPlace' | translate }}{{ descFullTotal }}{{ 'CMS-Features.Chars' | translate }})</mat-label>
           <textarea
             #full
             matInput
@@ -107,7 +108,6 @@
             matAutosizeMinRows="3"
             matAutosizeMaxRows="10"
             maxlength="{{ descFullTotal }}"
-            placeholder="{{ 'CMS-Features.FullPlace' | translate }}{{ descFullTotal }}{{ 'CMS-Features.Chars' | translate }})"
             (keydown)="setChanged()"
             [(ngModel)]="descriptions.cms_description_long">
           </textarea>
@@ -136,7 +136,7 @@
       <!-- ADDITIONAL FEATURES -->
       <h2>{{ 'CMS-Features.AddFeatures' | translate }}</h2>
       <mat-card-content>
-        <mat-form-field class="rc-full-width" floatPlaceholder="always">
+        <mat-form-field class="rc-full-width" floatLabel="always">
           <mat-chip-list #chipList>
             <mat-chip
               class="rc-accent"

@@ -2,7 +2,8 @@ import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Restaurant } from '../_models';
 import { Observable, Subject, BehaviorSubject } from 'rxjs';
-import { MatDialog, MatDialogConfig, MatSnackBar } from '@angular/material';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ConfirmCancelComponent } from '../common';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -70,5 +71,11 @@ export class CmsLocalService {
     return dialogRef.afterClosed().pipe(map(result => {
       return result.confirmed;
     }));
+  }
+
+  // Extract Cloudinary Public-Id from full url
+  getCloudinaryPublicId(url) {
+    let urlArr = url.split('/');
+    return urlArr.slice(urlArr.length - 3).join('/');
   }
 }

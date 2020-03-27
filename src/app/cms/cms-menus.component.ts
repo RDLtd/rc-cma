@@ -3,7 +3,7 @@ import { Restaurant, CMSDish, CMSSection } from '../_models';
 import { CmsLocalService } from './cms-local.service';
 import { CMSService, HelpService } from '../_services';
 import { CmsFileUploadComponent } from './cms-file-upload.component';
-import { MatDialog, MatDialogConfig } from '@angular/material';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ConfirmCancelComponent } from '../common';
 import { CmsMenuDishComponent } from './cms-menu-dish.component';
 import { TranslateService } from '@ngx-translate/core';
@@ -218,8 +218,17 @@ export class CmsMenusComponent implements OnInit {
 
   // flag changes
   setChanged(): void {
+    console.log('DATA CHANGE');
     if (!this.dataChanged) {
       this.dataChanged = true;
+    }
+  }
+
+  confirmNavigation() {
+    if (this.dataChanged) {
+      return this.cmsLocalService.confirmNavigation();
+    } else {
+      return true;
     }
   }
 
@@ -284,11 +293,10 @@ export class CmsMenusComponent implements OnInit {
 
         this.cms.updateDish(newDish).subscribe(
           data => {
-            console.log('cms.updateDish', data);
+            // console.log('cms.updateDish', data);
             this.htmlMenu.dishes[dish.cms_dish_idx] = newDish;
             // replace idx reference in case user edits again before page reload
             this.htmlMenu.dishes[dish.cms_dish_idx].cms_dish_idx = dish.cms_dish_idx;
-
             this.cmsLocalService.dspSnackbar(newDish.cms_dish_name + this.t_data.Updated, null, 3);
           },
           error => { console.log(error);
@@ -325,25 +333,19 @@ export class CmsMenusComponent implements OnInit {
     let dialogRef = this.dialog.open(CmsMenuDishComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(formDish => {
-      // console.log('Form values:', formDish.value);
+
+      console.log('formDish values:', formDish.value);
 
       if (formDish.dirty && formDish.valid) {
 
         const newDish = this.createNewDish(formDish);
-        console.log('New CMSDish:', newDish);
 
         this.cms.createDish(newDish).subscribe(
           res => {
-            console.log('Dish Added:', res);
-
-            // pushing to the local array also returns the new length
-            // which we can use for reference
-            let len = this.htmlMenu.dishes.push(newDish);
-            console.log('Pushed', this.htmlMenu.dishes);
-
-            // Add returned id to new dish in local array
-            this.htmlMenu.dishes[len - 1]['cms_dish_id'] = res['cms_dish_id'];
-            this.cmsLocalService.dspSnackbar(this.htmlMenu.dishes[len - 1].name + this.t_data.Added, null, 3);
+            //console.log('Dish Added:', res);
+            // Reload dishes
+            this.getHtmlMenuDishes(this.restaurant.restaurant_id);
+            this.cmsLocalService.dspSnackbar(newDish.cms_dish_name + this.t_data.Added, null, 3);
           },
           error => {
             console.log(error);
@@ -376,8 +378,7 @@ export class CmsMenusComponent implements OnInit {
         this.cms.deleteDish(dish.cms_dish_id).subscribe(
           data => {
             console.log('cms.deleteDish', data);
-            this.cmsLocalService.dspSnackbar({ deletedDishName } + this.t_data.Removed, null, 3);
-
+            this.cmsLocalService.dspSnackbar(`${deletedDishName} ${this.t_data.Removed}`, null, 3);
           },
           error => {
             console.log(error);

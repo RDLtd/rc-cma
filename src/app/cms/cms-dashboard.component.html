@@ -4,10 +4,22 @@
   <!-- CORE DATA -->
   <mat-card
     class="rc-cms-card-core mdc-layout-grid__cell mdc-layout-grid__cell--span-5 mdc-layout-grid__cell--span-12-tablet">
-    <div
-      class="rc-card-title-img-wrapper"
-      style="--aspect-ratio:16/9; margin-right: -32px;">
-      <img *ngIf="img_src" mat-card-image [src]="img_src" style="width: 100%;">
+    <div class="rc-card-title-img-wrapper">
+      <cl-image
+        *ngIf="img_src"
+        [public-id]="img_src"
+        class="mat-card-image"
+        dpr="auto"
+        responsive
+        width="auto"
+        secure="true"
+        height="280"
+        crop="fill">
+        <cl-transformation
+          gravity="auto">
+        </cl-transformation>
+      </cl-image>
+
     </div>
 
     <mat-card-title>{{ restaurant?.restaurant_name }}</mat-card-title>
@@ -304,7 +316,6 @@
       </div>
     </div>
   </div>
-
 </div>
 
 <!--<hr>-->

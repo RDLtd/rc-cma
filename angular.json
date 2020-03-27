@@ -29,7 +29,6 @@
               "src/styles/styles.scss"
             ],
             "scripts": [
-              "node_modules/material-components-web/dist/material-components-web.js",
               "node_modules/marked/lib/marked.js"
             ]
           },

@@ -1,8 +1,9 @@
 import { Directive, ElementRef, Component, ViewChild, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { FinancialService } from '../_services';
-import { MatSnackBar, MatDialog } from '@angular/material';
-import { TranslateService } from '@ngx-translate/core';;
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { TranslateService } from '@ngx-translate/core';
 
 
 declare var google: any;

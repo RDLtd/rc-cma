@@ -28,38 +28,50 @@
       class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4"
       *ngFor="let image of cmsImages">
       <div
-      #card
-      class="rc-image-card"
-      (click)="viewImage(image)">
+        class="rc-image-card"
+        (click)="viewImage(image)">
       <mat-chip-list class="rc-element-tag">
         <mat-chip
           selected="true"
-          *ngIf="image.cms_element_default">
+          *ngIf="image['cms_element_default']">
           {{ 'CMS-Images.DefaultTag' | translate }}
         </mat-chip>
         <mat-chip
           class="rc-online"
           selected="true"
-          *ngIf="image.cms_element_active">
+          *ngIf="image['cms_element_active']">
           {{ 'CMS-Images.Available' | translate }}
         </mat-chip>
         <mat-chip
           selected="false"
-          *ngIf="!image.cms_element_active">
+          *ngIf="!image['cms_element_active']">
           {{ 'CMS-Images.Offline' | translate }}
         </mat-chip>
       </mat-chip-list>
-      <div style="--aspect-ratio:16/9;">
-      <img [src]="image.cms_element_image_path">
+      <div style="min-height:240px;">
+        <cl-image
+          *ngIf="image['cms_element_image_ref']"
+          [public-id]="image['cms_element_image_ref']"
+          secure="true"
+          loading="lazy"
+          height="180"
+          width="320">
+          <cl-transformation
+            height="450"
+            width="800"
+            crop="fill"
+            gravity="auto">
+          </cl-transformation>
+        </cl-image>
       </div>
 
       <div class="rc-card-actions">
-        {{ image.cms_element_id }}
+        {{ image['cms_element_id'] }}
         <span class="rc-space-filler"></span>
         <span (click)="stopBubbling($event)">
           <a
             mat-icon-button
-            [href]="image.cms_element_image_path"
+            [href]="image['cms_element_image_path']"
             target="_blank"
             title="{{ 'CMS-Images.Download' | translate }}">
             <mat-icon>cloud_download</mat-icon>
@@ -67,7 +79,7 @@
          <button
              mat-icon-button
              title="{{ 'CMS-Images.Delete' | translate }}"
-             [disabled]="image.cms_element_default == 'Y' || image.cms_element_default == true"
+             [disabled]="image['cms_element_default'] == 'Y' || image['cms_element_default'] == true"
              (click)="deleteImage(image)">
             <mat-icon>delete</mat-icon>
           </button>
@@ -75,8 +87,8 @@
             labelPosition="before"
             title="{{ 'CMS-Images.ChangeStatus' | translate }}"
             (change)="updateImageStatus(image)"
-            [checked]="image.cms_element_active"
-            [disabled]="image.cms_element_default == 1"
+            [checked]="image['cms_element_active']"
+            [disabled]="image['cms_element_default'] == 1"
             color="accent">
           </mat-checkbox>
         </span>
@@ -90,3 +102,5 @@
     </div>
   </div>
 </div>
+
+

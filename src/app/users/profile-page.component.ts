@@ -8,13 +8,13 @@ import {
   FinancialService,
   HelpService, AnalyticsService
 } from '../_services';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 // import { MessageComponent } from '../messages/message.component';
 import { PasswordComponent } from './password.component';
 import { ProfileDetailComponent } from './profile-detail.component';
 import { ProfileImageComponent } from './profile-image.component';
 import { RestaurantLookupComponent } from './restaurant-lookup.component';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { ConfirmCancelComponent } from '../common';
 import { TranslateService } from '@ngx-translate/core';
@@ -35,6 +35,7 @@ export class ProfilePageComponent implements OnInit {
   restaurants: Array<Restaurant>;
   restaurant: Restaurant;
   member: Member = new Member();
+  memberAvatar: string;
   defaultImages: Array<any> = [];
   placeholderImage;
   isDemoMember = false;
@@ -69,7 +70,7 @@ export class ProfilePageComponent implements OnInit {
       this.translate.get('Profile-Page').subscribe(data => {
         this.t_data = data;
         this.d_member_job = this.t_data[this.member.member_job];
-        this.placeholderImage = `https://via.placeholder.com/900x600?text=${this.t_data.AwaitingImage}`;
+        this.placeholderImage = `https://via.placeholder.com/800x450?text=${this.t_data.AwaitingImage}`;
       });
       // re-translate computed display dates
       moment.locale(localStorage.getItem('rd_country'));
@@ -91,7 +92,7 @@ export class ProfilePageComponent implements OnInit {
 
     this.translate.get('Profile-Page').subscribe(data => {
       this.t_data = data;
-      this.placeholderImage = `https://via.placeholder.com/900x600?text=${this.t_data.AwaitingImage}`;
+      this.placeholderImage = `https://via.placeholder.com/800x450?text=${this.t_data.AwaitingImage}`;
     });
   }
 
@@ -105,13 +106,15 @@ export class ProfilePageComponent implements OnInit {
     this.memberService.getById(id)
       .subscribe(
         data => {
-          console.log('Data', data);
           this.member = data['member'][0];
           this.d_member_signedup = moment(this.member.member_signedup).format('DD MMMM YYYY');
           this.d_member_last_logged_in = moment(this.member.member_last_logged_in).format('DD MMMM YYYY');
           this.getAssociatedRestaurants(id);
           this.d_member_job = this.t_data[this.member.member_job];
-          console.log('MEMBER:', this.member);
+          // Create array from url
+          const imgPath = this.member.member_image_path.split('/');
+          // Select the last 3 elements as a new ref
+          this.memberAvatar = imgPath.slice(imgPath.length - 3).join('/');
         },
         error => {
           console.log(error);
@@ -222,6 +225,15 @@ export class ProfilePageComponent implements OnInit {
     }
   }
 
+  getClPublicId(idx) {
+    if (this.defaultImages[idx]) {
+      let a = this.defaultImages[idx].split('/');
+      return a.splice(a.length - 3).join('/');
+    } else {
+      return this.placeholderImage;
+    }
+  }
+
   updateProfile() {
     if (this.isDemoMember) {
       this.openSnackBar(this.t_data.DemoProfile, '');
@@ -246,8 +258,14 @@ export class ProfilePageComponent implements OnInit {
     if (this.isDemoMember) {
       this.openSnackBar(this.t_data.DemoImage, '');
     } else {
-      const dialogRef = this.dialog.open(ProfileImageComponent);
-      dialogRef.componentInstance.member = this.member;
+      const dialogRef = this.dialog.open(ProfileImageComponent,{
+        data: {
+          member: this.member,
+          avatar: this.memberAvatar
+        }
+      });
+      //dialogRef.componentInstance.avatar = this.memberAvatar
+      //dialogRef.componentInstance.member = this.member;
       dialogRef.componentInstance.dialog = dialogRef;
     }
   }

@@ -13,7 +13,7 @@ import {
   RestaurantService,
   AnalyticsService
 } from '../_services';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { CmsPreviewComponent } from './cms-preview.component';
 import { Router } from '@angular/router';
 import { RestaurantDetailComponent } from '../restaurants';
@@ -133,9 +133,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
   ) {
     // detect language changes... need to check for change in texts
     translate.onLangChange.subscribe(lang => {
-
       this.lang = localStorage.getItem('rd_country');
-
       this.translate.get('CMS-Dashboard').subscribe(data => {
         this.t_data = data;
         // Since the display texts are computed, we need to re-run these routines...
@@ -178,7 +176,6 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
     this.translate.get('CMS-Dashboard').subscribe(data => {
       this.t_data = data;
       // console.log(this.t_data.Open, this.hours_status_text);
-
       moment.locale(localStorage.getItem('rd_country'));
 
       this.dfImg = 'https://via.placeholder.com/350x200?text=' + this.t_data.AwaitingImage;
@@ -193,13 +190,6 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
         .subscribe(rest => {
             if (rest.restaurant_id) {
               this.restaurant = rest;
-              // moved to getLastUpdated
-              // this.setMemberStatus();
-              // this.checkPublishStatus();
-              // this.checkOpeningTimes();
-              // this.checkDescriptions();
-              // this.checkImages();
-              // this.getOffers();
               this.getLastUpdated();
             }
             // duplicate the loaded restaurant
@@ -222,7 +212,6 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
     this.checkImages();
     this.getOffers();
   }
-
 
   setMemberStatus() {
     // console.log(this.restaurant);
@@ -389,7 +378,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
 
     this.cms.getElementClass(this.restaurant.restaurant_id, 'Image', 'N')
       .subscribe(data => {
-          // console.log('Imgs', data.elements);
+          console.log('Imgs', data['elements']);
           // reset counts
           this.img_status = 0;
           this.img_count = 0;
@@ -399,10 +388,12 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
             if (elem.cms_element_active) { this.img_count += 1; }
             // Store default image path for restaurant card
             if (elem.cms_element_default) {
-              imgsrc = elem.cms_element_image_path;
+              imgsrc = this.cmsLocalService.getCloudinaryPublicId(elem.cms_element_image_path);
             }
           }
+          console.log('Img', imgsrc);
           this.img_src = imgsrc || this.dfImg;
+
 
           // set status bar
           this.img_status = this.img_count * 25;
