@@ -919,7 +919,10 @@
     "Send": "SEND REQUEST",
     "NotListed": "MY RESTAURANT IS NOT LISTED",
     "PostCode": "POSTCODE",
-    "Name": "RESTAURANT NAME"
+    "Name": "RESTAURANT NAME",
+    "PleaseNote":"PLEASE NOTE",
+    "NotYetCurated": "** has not yet been curated. However, the team has now been notified and curation will take place within the next 48 hours.&nbsp;\n In the meantime, please tell us if any of the current information is incorrect by sending a **Change Request**.",
+    "Immediate": " This restaurant requires immediate curation. Please notify the content administrator when it has been completed. Thank you."
   },
 
   "Affiliates": {
