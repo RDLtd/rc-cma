@@ -22,8 +22,8 @@
   <mat-dialog-content>
 
       <!-- IMAGE PREVIEW-->
-      <div *ngIf="data.type === 'image'" style="--aspect-ratio: 16/9; background-color: #eee;">
-        <img *ngIf="filePreview" [src]="filePreview" [alt]="">
+      <div *ngIf="data.type === 'image'" style="height: 300px; background-color: #eee; overflow: hidden;">
+        <img *ngIf="filePreview" [src]="filePreview" [alt]="" style="height: 100%; width: auto;">
       </div>
 
       <!-- FILE SELECT BUTTON -->
