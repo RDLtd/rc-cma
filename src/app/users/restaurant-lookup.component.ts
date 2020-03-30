@@ -114,24 +114,25 @@ export class RestaurantLookupComponent implements OnInit {
     // TODO so here is the problem, via the join form we don't have this data set
     // console.log(this.data.associatedRestaurants);
 
+    // Make sure it's not already been associated
+    // by comparing to current associations
+    const totalAssociatedRestaurants = this.data.associatedRestaurants.length;
+    for (let i = 0; i < totalAssociatedRestaurants; i++) {
+      let associatedRestaurant = this.data.associatedRestaurants[i];
+      if (associatedRestaurant.restaurant_name === selected.restaurant_name &&
+        associatedRestaurant.restaurant_address_1 === selected.restaurant_address_1) {
+        // console.log('Restaurant already associated');
+        this.dspSnackBar(
+          selected.restaurant_name + this.t_data.AlreadyAdded
+        );
+        return;
+      }
+    }
+
     // Update 12/12/19 allow anyone with auth level >=4 to associate whatever
     if (Number(localStorage.getItem('rd_access_level')) >= 4) {
       this.addAssociation(selected);
     } else {
-      // Make sure it's not already been associated
-      // by comparing to current associations
-      const totalAssociatedRestaurants = this.data.associatedRestaurants.length;
-      for (let i = 0; i < totalAssociatedRestaurants; i++) {
-        const associatedRestaurant = this.data.associatedRestaurants[i];
-        if (associatedRestaurant.restaurant_name === selected.restaurant_name &&
-          associatedRestaurant.restaurant_address_1 === selected.restaurant_address_1) {
-          // console.log('Restaurant already associated');
-          this.dspSnackBar(
-            selected.restaurant_name + this.t_data.AlreadyAdded
-          );
-          return;
-        }
-      }
 
       // Has it already been verified by owner?
       // i.e. is there already an admin user
