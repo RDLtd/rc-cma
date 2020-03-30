@@ -81,7 +81,7 @@ export class RestaurantLookupComponent implements OnInit {
       sort_direction: 'ASC',
       limit_number: 20,
       limit_index: '0',
-      //restaurant_status: 'Curation Complete',
+      // restaurant_status: 'Curation Complete',
       country: this.country
     };
 
@@ -179,7 +179,7 @@ export class RestaurantLookupComponent implements OnInit {
   }
 
   addAssociation(newRestaurant) {
-    let curationComplete = (newRestaurant.restaurant_data_status === "Curation Complete");
+    const curationComplete = (newRestaurant.restaurant_data_status === 'Curation Complete');
     this.restaurantService.addAssociation(this.data.member.member_id, newRestaurant.restaurant_id).subscribe(
       () => {
         console.log('New Restaurant', newRestaurant);
@@ -208,12 +208,10 @@ export class RestaurantLookupComponent implements OnInit {
       this.dspSnackBar(newRestaurant.restaurant_name + this.t_data.Added);
 
     } else {
-      // Todo: translations
       const confirmDialog = this.dialog.open(ConfirmCancelComponent, {
         data: {
-          title: 'PLEASE NOTE',
-          msg: `**${newRestaurant.restaurant_name}** has not yet been curated. However, the team has now been notified and curation will take place within the next 48 hours.&nbsp;
-          In the meantime, please tell us if any of the current information is incorrect by sending a **Change Request**.`,
+          title: this.t_data.PleaseNote,
+          msg: '**' + newRestaurant.restaurant_name + this.t_data.NotYetCurated,
           yes: 'OK',
           no: null
         }
@@ -222,7 +220,7 @@ export class RestaurantLookupComponent implements OnInit {
         if (ok) {
           // Todo: could do with a custom email really
           // Notify curation team
-          let req = [
+          const req = [
             ` Administrator: ${this.data.member.member_first_name} ${this.data.member.member_last_name}`,
             ` Email: ${this.data.member.member_email}`,
             ` ***`,
@@ -231,8 +229,10 @@ export class RestaurantLookupComponent implements OnInit {
             ` Street: ${newRestaurant.restaurant_address_1}`,
             ` Postcode: ${newRestaurant.restaurant_post_code}`,
             `***`,
-            ` This restaurant requires immediate curation. Please notify the content administrator when it has been completed. Thank you.`
+            `${this.t_data.Immediate}`
           ];
+
+          console.log(req);
 
           this.cms.sendRestaurantChanges(this.data.member, newRestaurant, req)
             .subscribe(() => {

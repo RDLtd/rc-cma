@@ -920,7 +920,10 @@
     "Send": "ENVOYER LA DEMANDE",
     "NotListed": "MON RESTAURANT N'EST PAS LISTÉ",
     "PostCode": "CODE POSTAL",
-    "Name": "NOM DU RESTAURANT"
+    "Name": "NOM DU RESTAURANT",
+    "PleaseNote":"NOTEZ S'IL VOUS PLAÎT",
+    "NotYetCurated": "** n'a pas encore été organisé. Cependant, l'équipe a maintenant été informée et la conservation aura lieu dans les prochaines 48 heures.&nbsp;\n En attendant, s'il vous plaît nous dire si l'une des informations actuelles est incorrecte en envoyant une **Demande de Changement**.",
+    "Immediate": " Ce restaurant nécessite une conservation immédiate. Veuillez informer l'administrateur du contenu une fois qu'il est terminé. Nous te remercions."
   },
 
   "Affiliates": {
