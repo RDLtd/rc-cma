@@ -34,7 +34,6 @@
 
     </section>
 
-
     <section
       *ngIf="restaurant.restaurant_rc_member_status !== 'Full'"
       class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 rc-member-actns">
@@ -63,6 +62,7 @@
           {{ 'Payment.Reason' | translate }} {{ restaurant.restaurant_name | uppercase }} {{ 'Payment.DoesNot' | translate }}
           <a href="{{ 'Payment.Support' | translate }}">{{ company_name }}</a>.</p>
     </section>
+
   </div>
 </div>
 
