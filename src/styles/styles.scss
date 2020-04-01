@@ -606,7 +606,7 @@ a.mat-menu-item {text-decoration: none;}
 }
 .rc-dialog-member {
   position: relative;
-  max-width: 800px !important;
+  max-width: 400px !important;
   .mat-dialog-container { padding: 0; }
   .rc-close {
     position: absolute;
@@ -866,7 +866,8 @@ ul.rc-lookup-results {
   header {
     display: flex;
     flex-direction: row;
-    h1 { margin: 8px; }
+    align-items: center;
+    h1 { margin: 8px; font-size: 24px;}
     .mat-icon.assc-member,
     .mat-icon.full-member{
       padding: 12px !important;

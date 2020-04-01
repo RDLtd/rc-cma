@@ -58,6 +58,7 @@ export class RestaurantDetailComponent implements OnInit {
     //
     // ToDo - fix this horrible code!
 
+
     for (let i = 0; i < this.cuisines.length; i++) {
 
       if (this.cuisines[i].cuisine_description === this.restaurant.restaurant_cuisine_1) {

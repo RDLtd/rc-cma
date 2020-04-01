@@ -272,3 +272,4 @@ export class RestaurantLookupComponent implements OnInit {
   }
 
 }
+
