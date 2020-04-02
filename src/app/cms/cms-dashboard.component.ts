@@ -826,7 +826,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
               // so set them all to seen...
               for (let i = 0; i < msgs['messages'].length; i++) {
                 // console.log('SEEN: ', this.user.member_id, msgs.messages[i].message_id);
-                this.memberService.messagesseen(Number(this.user.member_id), msgs['messages[i]'].message_id).subscribe(
+                this.memberService.messagesseen(Number(this.user.member_id), msgs['messages'][i].message_id).subscribe(
                   result => {
                     // console.log(result);
                   },
