@@ -552,7 +552,8 @@
     "ValidEmail": "A valid email address is required",
     "NoTest": "This service does not require testing - it does not have an associated URL",
     "TestLink": "Test Link",
-    "PleaseEnter": "Please enter your"
+    "PleaseEnter": "Please enter your",
+    "NoOnlineBookingsMessage": "Please ensure that you complete the **General** information section, giving details of how customers can  book in advance, outlining your policy regarding reservations and including any special telephone numbers etc."
   },
 
   "Restaurant-Detail": {
