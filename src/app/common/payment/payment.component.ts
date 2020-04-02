@@ -111,7 +111,8 @@ export class PaymentComponent implements OnInit  {
         // pk_test_3UC3P4HUDtjPewUWjzpP0GHs
         // pk_live_aC07Pi3YT3GGv7QYujVxWvPt
         // I think it is OK to have this key here, since payments can only be processed using the sk on the server side
-        key: 'pk_live_aC07Pi3YT3GGv7QYujVxWvPt',
+        // TODO: Switch to LIVE key
+        key: 'pk_test_3UC3P4HUDtjPewUWjzpP0GHs',
         locale: 'auto',
         token: (token: any) => {
           // Note 'fat arrow' for scope...
@@ -170,7 +171,12 @@ export class PaymentComponent implements OnInit  {
               },
               error => {
                 console.log('Error in payment method API ' + error);
-                this.openSnackBar(this.t_data.Error, '');
+                this.snackBar.open(this.t_data.Error, 'OK', {
+                  duration: 20000,
+                  verticalPosition: 'top'
+                });
+                this.data.dialog.closeAll();
+
               });
         }
       });

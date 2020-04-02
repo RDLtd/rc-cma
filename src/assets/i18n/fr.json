@@ -994,7 +994,7 @@
     "UpgradeLower": "Passer au statut de membre à part entière (",
     "Tax": "+ TVA 20%)",
     "Success": "Votre paiement a été effectué avec succès, vous recevrez une facture par email.",
-    "Error": "Une erreur s'est produite lors de l'envoi de votre paiement pour traitement.",
+    "Error": "Malheureusement, nous ne sommes pas en mesure de traiter votre paiement pour le moment. Notre équipe de conservation a été avertie et vous contactera sous peu.\n\nVOTRE CARTE N'A PAS ÉTÉ CHARGÉE.",
     "Membership": "Adhésion",
     "TaxNoBracket": "+ TVA 20%"
   },

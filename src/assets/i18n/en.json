@@ -993,7 +993,7 @@
     "UpgradeLower": "Upgrade to Full Membership (",
     "Tax": "+ Tax)",
     "Success": "Your payment was successful, you will receive an invoice by email",
-    "Error": "There was an ERROR in sending your payment for processing",
+    "Error": "Unfortunately we are unable to process your payment at this time. Our curation team has been notified and will be in contact shortly.\n\n YOUR CARD HAS NOT BEEN CHARGED.",
     "Membership": "Membership",
     "TaxNoBracket": "+ Tax"
   },
