@@ -846,7 +846,7 @@
 
     "IsAssociate": "est Membre associé des ",
     "IsFull": "est Membre à part entière des ",
-    "SendReferral": "Envoyer un Code Parrainage",
+    "SendReferral": "Invitez un ami ou un collègue à rejoindre le collectif (désactivé en version bêta)",
     "ReferralCode": "Code Parrainage",
     "Owner": "Propriétaire",
     "Chef": "Chef",
