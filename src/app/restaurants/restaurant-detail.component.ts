@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-//import { FinancialService } from '../_services';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { RestaurantService } from '../_services';
 import { TranslateService } from '@ngx-translate/core';
@@ -17,7 +16,7 @@ export class RestaurantDetailComponent implements OnInit {
   restaurant: any;
   member: any;
   cuisines: any;
-  cuisine_modifiers:any;
+  cuisine_modifiers: any;
   cancelSetting: Boolean = true;
   clear_mod_text;
 
@@ -26,7 +25,6 @@ export class RestaurantDetailComponent implements OnInit {
 
   constructor(
     public snackBar: MatSnackBar,
-    //public financialService: FinancialService,
     private translate: TranslateService,
     private restaurantService: RestaurantService
   ) {}
@@ -43,10 +41,9 @@ export class RestaurantDetailComponent implements OnInit {
     this.restaurantService.getCuisines(my_country_code, '').subscribe(
       data2 => {
         if (data2['count'] > 0) {
+          console.log(data2);
           this.cuisines = data2['cuisines'];
-          if (this.restaurant.restaurant_cuisine_2 === '') {
-            this.loadCuisineModifiers();
-          }
+          this.loadCuisineModifiers();
         } else {
           console.log('No cuisine records found in database');
         }
@@ -57,12 +54,14 @@ export class RestaurantDetailComponent implements OnInit {
     // get the index of the selected primary cuisine and then load the modifiers
     //
     // ToDo - fix this horrible code!
-
-
     for (let i = 0; i < this.cuisines.length; i++) {
 
       if (this.cuisines[i].cuisine_description === this.restaurant.restaurant_cuisine_1) {
         this.cuisine_modifiers = [];
+
+        if (this.restaurant.restaurant_cuisine_2 === '') {
+          this.cuisine_modifiers.push({'cuisine_description': ''});
+        }
 
         if (this.cuisines[i].cuisine_modifier_1) {
           this.cuisine_modifiers.push({'cuisine_description': this.cuisines[i].cuisine_modifier_1});
@@ -106,7 +105,7 @@ export class RestaurantDetailComponent implements OnInit {
   toggleEditMode($event) {
 
     console.log(this.restaurant);
-    let toggle = $event.target;
+    const toggle = $event.target;
     this.editMode = !this.editMode;
     // toggle.checked = this.editMode;
   }

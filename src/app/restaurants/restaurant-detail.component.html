@@ -92,7 +92,7 @@
             <mat-select
               name="restaurant_cuisine_1"
               [placeholder]="'Curation.PrimCuis' | translate"
-              (change)="changeCuisine()"
+              (selectionChange)="changeCuisine()"
               [(ngModel)]="restaurant.restaurant_cuisine_1">
               <mat-option
                 *ngFor= "let cuisine of cuisines"
@@ -105,7 +105,7 @@
           <mat-form-field class="rc-full-width">
             <mat-select
               name="restaurant_cuisine_2"
-              (change)="checkModifier()"
+              (selectionChange)="checkModifier()"
               [placeholder]="'Curation.SecCuis' | translate"
               [(ngModel)]="restaurant.restaurant_cuisine_2">
               <mat-option
