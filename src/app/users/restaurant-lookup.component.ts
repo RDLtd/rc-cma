@@ -3,7 +3,7 @@ import { Restaurant } from '../_models';
 import { RestaurantService } from '../_services';
 import { AppConfig } from '../app.config';
 import { ProfileVerifyComponent } from './profile-verify.component';
-import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpClient } from '@angular/common/http';
 import { TranslateService } from '@ngx-translate/core';
@@ -35,7 +35,8 @@ export class RestaurantLookupComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private   translate: TranslateService,
     private   snackBar: MatSnackBar,
-    private   http: HttpClient
+    private   http: HttpClient,
+    public dialogRef: MatDialogRef<RestaurantLookupComponent>
   ) { }
 
   ngOnInit() {
@@ -256,7 +257,8 @@ export class RestaurantLookupComponent implements OnInit {
   sendNewRequest(f) {
     console.log(f.newRestaurantName);
     // API call to add listing
-    this.dialog.closeAll();
+    this.dialogRef.close(f);
+    //this.dialog.closeAll();
     this.dspSnackBar(this.t_data.RequestSent);
   }
 
@@ -272,3 +274,4 @@ export class RestaurantLookupComponent implements OnInit {
   }
 
 }
+

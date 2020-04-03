@@ -552,7 +552,8 @@
     "ValidEmail": "A valid email address is required",
     "NoTest": "This service does not require testing - it does not have an associated URL",
     "TestLink": "Test Link",
-    "PleaseEnter": "Please enter your"
+    "PleaseEnter": "Please enter your",
+    "NoOnlineBookingsMessage": "Please ensure that you complete the **General** information section, giving details of how customers can  book in advance, outlining your policy regarding reservations and including any special telephone numbers etc."
   },
 
   "Restaurant-Detail": {
@@ -844,8 +845,8 @@
     "Compare": " In order to compare your restaurant with others you must provide appropriate data.",
     "IsAssociate": "is an Associate Member of",
     "IsFull": "is a Full Member of",
-    "SendReferral": "Send a referral",
-    "ReferralCode": "Referral Code",
+    "SendReferral": "Invite a friend or colleague to join the collective (disabled in beta version)",
+    "ReferralCode": "Personal Referral Code",
     "Owner": "Owner",
     "Chef": "Chef",
     "Manager": "Manager",
@@ -992,9 +993,10 @@
     "UpgradeLower": "Upgrade to Full Membership (",
     "Tax": "+ Tax)",
     "Success": "Your payment was successful, you will receive an invoice by email",
-    "Error": "There was an ERROR in sending your payment for processing",
+    "Error": "Unfortunately we are unable to process your payment at this time. Our curation team has been notified and will be in contact shortly.\n\n YOUR CARD HAS NOT BEEN CHARGED.",
     "Membership": "Membership",
-    "TaxNoBracket": "+ Tax"
+    "TaxNoBracket": "+ Tax",
+    "View": "View all current Affiliate Offers"
   },
 
   "Agent": {

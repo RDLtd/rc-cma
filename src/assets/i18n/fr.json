@@ -552,7 +552,8 @@
     "ValidEmail": "Une adresse email valide est exigée",
     "NoTest": "Ce service ne nécessite pas de test - il n'a pas d'URL associée",
     "TestLink": "Lien de test",
-    "PleaseEnter": "S'il vous plait entrez votre"
+    "PleaseEnter": "S'il vous plait entrez votre",
+    "NoOnlineBookingsMessage": "Veuillez vous assurer de remplir la section Informations **générales**, en donnant des détails sur la façon dont les clients peuvent réserver à l'avance, en décrivant votre politique concernant les réservations et en incluant tout numéro de téléphone spécial, etc."
   },
 
   "Restaurant-Detail": {
@@ -845,7 +846,7 @@
 
     "IsAssociate": "est Membre associé des ",
     "IsFull": "est Membre à part entière des ",
-    "SendReferral": "Envoyer un Code Parrainage",
+    "SendReferral": "Invitez un ami ou un collègue à rejoindre le collectif (désactivé en version bêta)",
     "ReferralCode": "Code Parrainage",
     "Owner": "Propriétaire",
     "Chef": "Chef",
@@ -993,9 +994,10 @@
     "UpgradeLower": "Passer au statut de membre à part entière (",
     "Tax": "+ TVA 20%)",
     "Success": "Votre paiement a été effectué avec succès, vous recevrez une facture par email.",
-    "Error": "Une erreur s'est produite lors de l'envoi de votre paiement pour traitement.",
+    "Error": "Malheureusement, nous ne sommes pas en mesure de traiter votre paiement pour le moment. Notre équipe de conservation a été avertie et vous contactera sous peu.\n\nVOTRE CARTE N'A PAS ÉTÉ CHARGÉE.",
     "Membership": "Adhésion",
-    "TaxNoBracket": "+ TVA 20%"
+    "TaxNoBracket": "+ TVA 20%",
+    "View": "Voir toutes les offres d'affiliation actuelles"
   },
 
   "Agent": {

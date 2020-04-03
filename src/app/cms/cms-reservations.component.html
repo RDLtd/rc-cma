@@ -62,13 +62,16 @@
     <mat-card
       class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-4-tablet rc-cms-res-online">
       <form #frmBooking="ngForm">
+
         <mat-card-title>
           <h2>{{ 'CMS-Reservations.OnlineBookings' | translate }}</h2>
         </mat-card-title>
+
         <mat-card-content>
+
           <!-- PROVIDER -->
           <mat-form-field class="rc-full-width">
-            <mat-placeholder>{{ 'CMS-Reservations.Provider' | translate }}</mat-placeholder>
+            <mat-label>{{ 'CMS-Reservations.Provider' | translate }}</mat-label>
             <mat-select
               #bkgProvider
               name="bkg_provider"
@@ -81,10 +84,11 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
-          <!-- PROVIDER ID -->
-          <div *ngIf="selected_booking_provider_id != 5" class="rc-flex-spaced">
+
+          <!-- PROVIDER ID ( Has online booking provider )-->
+          <div *ngIf="selected_booking_provider_id !== 5" class="rc-flex-spaced">
             <mat-form-field class="rc-full-width">
-              <mat-placeholder>{{ booking_provider_rid_label }}</mat-placeholder>
+              <mat-label>{{ booking_provider_rid_label }}</mat-label>
               <input
                 #bkgProviderId
                 matInput
@@ -103,35 +107,39 @@
             </mat-form-field>
 
           </div>
-          <!-- MIN/MAX COVERS -->
+
+          <!-- MIN/MAX COVERS ( Email ) -->
           <div *ngIf="selected_booking_provider_index < 1" class="rc-flex-spaced">
-
-          <mat-form-field style="width: 48%;">
-            <mat-placeholder>{{ 'CMS-Reservations.MaxCovers' | translate }}</mat-placeholder>
-            <input
-              #bkgMaxCovers
-              matInput
-              type="number"
-              name="bkg_max_covers"
-              min="2" max="12"
-              (keyup)="setChanged(bkgMaxCovers)"
-              [(ngModel)]="descriptions.cms_booking_max_covers">
-          </mat-form-field>
-
-          <mat-form-field style="width: 48%;">
-            <mat-placeholder>{{ 'CMS-Reservations.MaxDays' | translate }}</mat-placeholder>
-            <input
-              #bkgAdvDays
-              matInput
-              type="number"
-              name="bkg_max_advance_days"
-              min="0"
-              max="90"
-              (keyup)="setChanged(bkgAdvDays)"
-              [(ngModel)]="descriptions.cms_booking_max_advance_days">
+            <mat-form-field style="width: 48%;">
+              <mat-label>{{ 'CMS-Reservations.MaxCovers' | translate }}</mat-label>
+              <input
+                #bkgMaxCovers
+                matInput
+                type="number"
+                name="bkg_max_covers"
+                min="2" max="12"
+                (keyup)="setChanged(bkgMaxCovers)"
+                [(ngModel)]="descriptions.cms_booking_max_covers">
             </mat-form-field>
-
+            <mat-form-field style="width: 48%;">
+              <mat-label>{{ 'CMS-Reservations.MaxDays' | translate }}</mat-label>
+              <input
+                #bkgAdvDays
+                matInput
+                type="number"
+                name="bkg_max_advance_days"
+                min="0"
+                max="90"
+                (keyup)="setChanged(bkgAdvDays)"
+                [(ngModel)]="descriptions.cms_booking_max_advance_days">
+            </mat-form-field>
           </div>
+
+          <!-- NO ONLINE BOOKINGS -->
+          <div *ngIf="selected_booking_provider_index === 4" class="rc-flex-spaced" markdown>
+            {{ 'CMS-Reservations.NoOnlineBookingsMessage' | translate }}
+          </div>
+
         </mat-card-content>
       </form>
     </mat-card>

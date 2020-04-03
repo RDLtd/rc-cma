@@ -1,108 +1,69 @@
 
 <div class="mdc-layout-grid">
+  <div class="mdc-layout-grid__inner">
+    <section class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 rc-member-status">
 
-  <section class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 rc-member-status">
+      <button mat-icon-button mat-dialog-close class="rc-close">
+        <mat-icon>close</mat-icon>
+      </button>
 
-    <button mat-icon-button mat-dialog-close class="rc-close">
-      <mat-icon>close</mat-icon>
-    </button>
+      <!-- Assc.-->
+      <div *ngIf="restaurant.restaurant_rc_member_status !== 'Full'">
+        <header>
+          <mat-icon class="assc-member">people_outline</mat-icon>
+          <h1>{{ restaurant.restaurant_name | uppercase }}</h1>
+        </header>
+        <p>{{ 'Payment.For' | translate }} <strong>{{ company_currency_symbol }}{{ company_monthly_fee }}
+          {{ 'Payment.Per' | translate }}</strong>* {{ restaurant.restaurant_name }}
+          {{ 'Payment.Upgrade' | translate }} <strong>{{ 'Payment.Services' | translate }}</strong>
+        </p>
+      </div>
 
-    <!-- Assc.-->
-    <div *ngIf="restaurant.restaurant_rc_member_status !== 'Full'">
-      <header>
-        <mat-icon class="assc-member">people_outline</mat-icon>
-        <h1>{{ restaurant.restaurant_name | uppercase }}</h1>
-      </header>
+      <!-- Member -->
+      <div *ngIf="restaurant.restaurant_rc_member_status === 'Full'">
+        <header>
+          <mat-icon class="full-member">people</mat-icon>
+          <h1>{{ restaurant.restaurant_name | uppercase }}</h1>
+        </header>
+        <p>{{ 'Payment.As' | translate }} <strong>{{ 'Payment.Full' | translate }}</strong> {{ 'Payment.Of' | translate }}
+          {{ company_name }}, {{ restaurant.restaurant_name }} {{ 'Payment.Privileged' | translate }}</p>
+        <p>{{ 'Payment.Review' | translate }}</p>
+      </div>
 
-      <p>{{ 'Payment.For' | translate }} <strong>{{ company_currency_symbol }}{{ company_monthly_fee }}
-        {{ 'Payment.Per' | translate }}</strong>* {{ restaurant.restaurant_name }}
-        {{ 'Payment.Upgrade' | translate }} <strong>{{ 'Payment.Services' | translate }}</strong>
-      </p>
-    </div>
+      <p class="rc-centre"><a (click)="goto('affiliates')">{{ 'Payment.View' | translate }}</a></p>
 
-    <!-- Member -->
-    <div *ngIf="restaurant.restaurant_rc_member_status === 'Full'">
-      <header>
-        <mat-icon class="full-member">people</mat-icon>
-        <h1>{{ restaurant.restaurant_name | uppercase }}</h1>
-      </header>
-      <p>{{ 'Payment.As' | translate }} <strong>{{ 'Payment.Full' | translate }}</strong> {{ 'Payment.Of' | translate }}
-        {{ company_name }}, {{ restaurant.restaurant_name }} {{ 'Payment.Privileged' | translate }}</p>
-      <p>{{ 'Payment.Review' | translate }}</p>
-    </div>
+    </section>
 
-  </section>
+    <section
+      *ngIf="restaurant.restaurant_rc_member_status !== 'Full'"
+      class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 rc-member-actns">
 
-  <section
-    *ngIf="restaurant.restaurant_rc_member_status !== 'Full'"
-    class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 rc-member-full">
+      <button
+        [disabled]="isLoading"
+        mat-flat-button
+        (click)="openCheckout('Full', restaurant.restaurant_id)"
+        class="rc-full-width">
+        <span>{{ btnLabel }}</span>
+      </button>
 
-    <mat-list class="rc-benefits">
-      <mat-list-item>
-        <mat-icon matListIcon>edit</mat-icon>
-        <h3 matLine>{{ 'Payment.FreeContent' | translate }}</h3>
-        <p matLine>{{ 'Payment.Control' | translate }}</p>
-        <a
-          mat-icon-button
-          (click)="goto('affiliates')">
-          <mat-icon>arrow_forward</mat-icon></a>
-      </mat-list-item>
-      <mat-list-item>
-        <mat-icon matListIcon>web</mat-icon>
-        <h3 matLine>{{ 'Payment.FreeSPW' | translate }}</h3>
-        <p matLine>{{ 'Payment.Web' | translate }}</p>
-        <a
-          mat-icon-button
-          (click)="goto('affiliates')">
-          <mat-icon>arrow_forward</mat-icon></a>
-      </mat-list-item>
-      <mat-list-item>
-        <mat-icon matListIcon>extension</mat-icon>
-        <h3 matLine>{{ 'Payment.AffiliateServices' | translate }}</h3>
-        <p matLine>{{ 'Payment.Reservations' | translate }}</p>
-        <a
-          mat-icon-button
-          (click)="goto('affiliates')">
-          <mat-icon>arrow_forward</mat-icon></a>
-      </mat-list-item>
-      <mat-list-item>
-        <mat-icon matListIcon>card_giftcard</mat-icon>
-        <h3 matLine>{{ 'Payment.Exclusive' | translate }}</h3>
-        <p matLine>{{ 'Payment.F&B' | translate }}</p>
-        <a
-          mat-icon-button
-          (click)="goto('affiliates')">
-          <mat-icon>arrow_forward</mat-icon></a>
-      </mat-list-item>
-    </mat-list>
+      <p style="font-size: 14px; margin-top:8px;">{{ 'Payment.FullOf' | translate }} {{ company_name }} {{
+        'Payment.Is' | translate }}
+        {{ company_currency_symbol }}{{ company_annual_fee }} {{ 'Payment.TaxYearly' | translate }}</p>
+    </section>
 
-  </section>
+    <section
+      *ngIf="restaurant.restaurant_rc_member_status === 'Full'"
+      class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 rc-member-actns">
+      <button
+        mat-raised-button
+        (click)="goto('affiliates')"
+        class="rc-full-width">{{ 'Payment.FullBenefits' | translate }}
+      </button>
+      <p style="font-size: 14px; margin-top:8px;">{{ 'Payment.Due' | translate }} {{ d_renewal_date }}.
+          {{ 'Payment.Reason' | translate }} {{ restaurant.restaurant_name | uppercase }} {{ 'Payment.DoesNot' | translate }}
+          <a href="{{ 'Payment.Support' | translate }}">{{ company_name }}</a>.</p>
+    </section>
 
-  <section
-    *ngIf="restaurant.restaurant_rc_member_status !== 'Full'"
-    class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 rc-member-actns">
-    <button
-      [disabled]="isLoading"
-      mat-flat-button
-      (click)="openCheckout('Full', restaurant.restaurant_id)"
-      class="rc-full-width">
-      <span>{{ btnLabel }}</span>
-    </button>
-    <p style="font-size: 14px;">{{ 'Payment.FullOf' | translate }} {{ company_name }} {{ 'Payment.Is' | translate }}
-      {{ company_currency_symbol }}{{ company_annual_fee }} {{ 'Payment.TaxYearly' | translate }}</p>
-  </section>
-
-  <section
-    *ngIf="restaurant.restaurant_rc_member_status === 'Full'"
-    class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 rc-member-actns">
-    <button
-      mat-raised-button
-      (click)="goto('affiliates')"
-      class="rc-full-width">{{ 'Payment.FullBenefits' | translate }}</button>
-      <p class="mat-small">{{ 'Payment.Due' | translate }} {{ d_renewal_date }}.
-        {{ 'Payment.Reason' | translate }} {{ restaurant.restaurant_name | uppercase }} {{ 'Payment.DoesNot' | translate }}
-        <a href="{{ 'Payment.Support' | translate }}">{{ company_name }}</a>.</p>
-  </section>
-
+  </div>
 </div>
 

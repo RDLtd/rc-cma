@@ -1,9 +1,10 @@
 
 ## Réseaux sociaux
 
-Pour ajouter vos liens de réseau social, sélectionnez l'option CHANGER DEMANDE au bas de la carte CORE DATA du restaurant.
+Pour ajouter vos liens aux réseaux sociaux, sélectionnez l'option DEMANDE DE CHANGEMENT au bas de la partie concernant le CONTENU ESSENTIEL du restaurant.
 
 Les liens actifs seront affichés en couleur.
+
 
  
 
