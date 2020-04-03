@@ -996,7 +996,8 @@
     "Success": "Votre paiement a été effectué avec succès, vous recevrez une facture par email.",
     "Error": "Malheureusement, nous ne sommes pas en mesure de traiter votre paiement pour le moment. Notre équipe de conservation a été avertie et vous contactera sous peu.\n\nVOTRE CARTE N'A PAS ÉTÉ CHARGÉE.",
     "Membership": "Adhésion",
-    "TaxNoBracket": "+ TVA 20%"
+    "TaxNoBracket": "+ TVA 20%",
+    "View": "Voir toutes les offres d'affiliation actuelles"
   },
 
   "Agent": {

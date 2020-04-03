@@ -995,7 +995,8 @@
     "Success": "Your payment was successful, you will receive an invoice by email",
     "Error": "Unfortunately we are unable to process your payment at this time. Our curation team has been notified and will be in contact shortly.\n\n YOUR CARD HAS NOT BEEN CHARGED.",
     "Membership": "Membership",
-    "TaxNoBracket": "+ Tax"
+    "TaxNoBracket": "+ Tax",
+    "View": "View all current Affiliate Offers"
   },
 
   "Agent": {
