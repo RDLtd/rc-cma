@@ -546,7 +546,7 @@
     "None": "Aucun",
     "RestID": "Numéro attribué au restaurant",
     "MaxCovers": "Max couverts par réservation",
-    "MaxDays": "Max jours avant la réservation",
+    "MaxDays": "Combien de jours à l'avance est-il possible de réserver?",
     "ResInfoUpdate": " informations relatives aux réservations mises à jour!",
     "UpdateFailed": "Les mises à jour ont échoué!",
     "ValidEmail": "Une adresse email valide est exigée",
