@@ -553,7 +553,7 @@
     "NoTest": "Ce service ne nécessite pas de test - il n'a pas d'URL associée",
     "TestLink": "Lien de test",
     "PleaseEnter": "S'il vous plait entrez votre",
-    "NoOnlineBookingsMessage": "Veuillez vous assurer de remplir la section Informations **générales**, en donnant des détails sur la façon dont les clients peuvent réserver à l'avance, en décrivant votre politique concernant les réservations et en incluant tout numéro de téléphone spécial, etc."
+    "NoOnlineBookingsMessage": "Veuillez vous assurer de renseigner les informations **générales en matière de réservations**, en donnant les détails sur la façon dont les clients peuvent réserver à l'avance votre établissement ou pas, en décrivant votre politique concernant les réservations individuelles et de groupes en incluant votre numéro de téléphone et autres moyens de contact si nécessaire. "
   },
 
   "Restaurant-Detail": {
@@ -857,7 +857,9 @@
     "Chairman": "Président",
     "Agent": "Agent",
     "Front-of-House": "Réception",
-    "Marketing": "Commercialisation"
+    "Marketing": "Commercialisation",
+    "Copied": "Copié! Maintenant, collez le code dans et envoyez un SMS ou une application de réseau social et envoyez-le!",
+    "NewRequest": "NOUVELLE DEMANDE REÇUE"
   },
 
   "Profile-Image": {
@@ -991,10 +993,10 @@
     "Updating": "MISE A JOUR DU STATUT DES MEMBRES...",
     "UpgradeUpper": "AMELIORER MON ADHÉSION",
     "CancelledUpper": "PAIEMENT ANNULÉ",
-    "UpgradeLower": "Passer au statut de membre à part entière (",
+    "UpgradeLower": "Passage au statut de membre à part entière (",
     "Tax": "+ TVA 20%)",
     "Success": "Votre paiement a été effectué avec succès, vous recevrez une facture par email.",
-    "Error": "Malheureusement, nous ne sommes pas en mesure de traiter votre paiement pour le moment. Notre équipe de conservation a été avertie et vous contactera sous peu.\n\nVOTRE CARTE N'A PAS ÉTÉ CHARGÉE.",
+    "Error": "Malheureusement, nous ne sommes pas en mesure de traiter votre paiement pour le moment. Notre équipe d’assistance a été avertie et vous contactera sous peu.\n\nVOTRE CARTE N'A PAS ÉTÉ DÉBITÉE.",
     "Membership": "Adhésion",
     "TaxNoBracket": "+ TVA 20%",
     "View": "Voir toutes les offres d'affiliation actuelles"

@@ -856,7 +856,9 @@
     "Chairman": "Chairman",
     "Agent": "Agent",
     "Front-of-House": "Front-of-House",
-    "Marketing": "Marketing"
+    "Marketing": "Marketing",
+    "Copied": "Copied! Now paste the code into and email SMS or social network app and send it!",
+    "NewRequest": "NEW REQUEST RECEIVED"
   },
 
   "Profile-Image": {
