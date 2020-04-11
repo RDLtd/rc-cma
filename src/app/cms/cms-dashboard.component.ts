@@ -629,9 +629,11 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
     // In theory we should never get here if there is no status defined, but just in case...
     //
     // Updated 15/10/19 to make the assumption that no status = associate. Seems we can get here for test restaurants...
-    if (this.restaurant.restaurant_rc_member_status !== 'Full') {
-      this.help.dspHelp('cms-dashboard-associate');
-    } else {
+    // 04.04.2020 JB
+    // Allowing Assc. members to also publish
+    // if (this.restaurant.restaurant_rc_member_status !== 'Full') {
+    //   this.help.dspHelp('cms-dashboard-associate');
+    // } else {
       this.isPreviewing = true;
       this.cms.previewSPW(this.restaurant.restaurant_id, this.restaurant.restaurant_number, true, false)
         .subscribe(res => {
@@ -653,7 +655,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
             console.log('Publish error', error);
             this.isPreviewing = false;
           });
-    }
+    //}
 
   }
 
