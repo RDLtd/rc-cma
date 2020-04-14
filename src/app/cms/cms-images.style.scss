@@ -1,0 +1,37 @@
+.rc-drag-gallery {
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+.rd-drag-gallery-item {
+  width: 100%;
+  margin: 4px;
+  cursor: move;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+.rd-drag-gallery-item:active { opacity: .6; }
+.cdk-drop-list {
+  display: flex;
+  align-items: flex-end;
+}
+.cdk-drag-preview {}
+.cdk-drag-placeholder { opacity: .3; }
+.cdk-drag-animating { transition: transform 250ms cubic-bezier(0, 0, 0.2, 1); }
+.cdk-drop-list { width: calc(100%/3 - 3px); }
+
+@media screen and ( max-width : 768px ) {
+  .cdk-drop-list {
+    width: calc(100%/2 - 2px);
+  }
+}
+@media screen and ( max-width : 400px ) {
+  .cdk-drop-list {
+    width: 100%;
+  }
+}

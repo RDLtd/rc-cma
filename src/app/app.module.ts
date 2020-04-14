@@ -5,6 +5,7 @@ import {
   FormsModule,
   ReactiveFormsModule
 } from '@angular/forms';
+
 import { RouterModule } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -107,6 +108,7 @@ import { ClipboardModule } from 'ngx-clipboard';
 import { JoinComponent } from './join/join.component';
 import { ReferralsComponent } from './users/referrals.component';
 import { LoadComponent } from './common/loader/load.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -166,6 +168,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
   ],
   imports: [
     AngularMaterialModule,
+    DragDropModule,
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
