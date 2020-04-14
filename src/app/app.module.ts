@@ -111,6 +111,7 @@ import { LoadService } from './common/loader/load.service';
 import { CmsSpwLinksComponent } from './cms/cms-spw-links.component';
 import { QRCodeModule } from 'angularx-qrcode';
 
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -171,6 +172,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
   ],
   imports: [
     AngularMaterialModule,
+    DragDropModule,
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
