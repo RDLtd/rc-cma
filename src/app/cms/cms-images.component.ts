@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { Restaurant } from '../_models';
 import { CmsLocalService } from './cms-local.service';
 import { CMSService, HelpService } from '../_services';
@@ -7,15 +7,26 @@ import { CmsImageDialogComponent } from './cms-image-dialog.component';
 import { CmsFileUploadComponent } from './cms-file-upload.component';
 import { ConfirmCancelComponent } from '../common';
 import { TranslateService } from '@ngx-translate/core';
-
-
+import {
+  CdkDrag,
+  CdkDragDrop, CdkDropList, CdkDropListGroup,
+  moveItemInArray
+} from "@angular/cdk/drag-drop";
 
 @Component({
   selector: 'rc-cms-images',
   templateUrl: './cms-images.component.html'
 })
 
-export class CmsImagesComponent implements OnInit {
+export class CmsImagesComponent implements OnInit, AfterViewInit {
+
+  @ViewChild(CdkDropListGroup) listGroup: CdkDropListGroup<CdkDropList>;
+  @ViewChild(CdkDropList) placeholder: CdkDropList;
+
+  public target: CdkDropList;
+  public targetIndex: number;
+  public source: CdkDropList;
+  public sourceIndex: number;
 
   restaurant: Restaurant;
   cmsImages: any;
@@ -30,7 +41,16 @@ export class CmsImagesComponent implements OnInit {
     private translate: TranslateService,
     private dialog: MatDialog,
     public help: HelpService
-  ) {}
+  ) {
+    this.target = null;
+    this.source = null;
+  }
+
+  ngAfterViewInit() {
+    let phElement = this.placeholder.element.nativeElement;
+    phElement.style.display = 'none';
+    phElement.parentNode.removeChild(phElement);
+  }
 
   ngOnInit() {
 
@@ -168,4 +188,59 @@ export class CmsImagesComponent implements OnInit {
       error => console.log(error));
   }
 
+  // Drag and drop
+  drop() {
+    if (!this.target) { return; }
+
+    let phElement = this.placeholder.element.nativeElement;
+    let parent = phElement.parentNode;
+
+    phElement.style.display = 'none';
+
+    parent.removeChild(phElement);
+    parent.appendChild(phElement);
+    parent.insertBefore(this.source.element.nativeElement, parent.children[this.sourceIndex]);
+
+    this.target = null;
+    this.source = null;
+
+    if (this.sourceIndex != this.targetIndex) {
+      moveItemInArray(this.cmsImages, this.sourceIndex, this.targetIndex);
+      // Todo: save new order of images
+    }
+  }
+
+  enter = (drag: CdkDrag, drop: CdkDropList) => {
+    if (drop == this.placeholder) { return true; }
+    let phElement = this.placeholder.element.nativeElement;
+    let dropElement = drop.element.nativeElement;
+    let dragIndex = __indexOf(dropElement.parentNode.children, drag.dropContainer.element.nativeElement);
+    let dropIndex = __indexOf(dropElement.parentNode.children, dropElement);
+
+    if (!this.source) {
+      this.sourceIndex = dragIndex;
+      this.source = drag.dropContainer;
+
+      let sourceElement = this.source.element.nativeElement;
+      phElement.style.width = sourceElement.clientWidth + 'px';
+      phElement.style.height = sourceElement.clientHeight + 'px';
+      sourceElement.parentNode.removeChild(sourceElement);
+    }
+
+    this.targetIndex = dropIndex;
+    this.target = drop;
+
+    phElement.style.display = '';
+    dropElement.parentNode.insertBefore(phElement, (dragIndex < dropIndex)
+      ? dropElement.nextSibling : dropElement);
+
+    this.source.start();
+    this.placeholder.enter(drag, drag.element.nativeElement.offsetLeft, drag.element.nativeElement.offsetTop);
+
+    return false;
+  }
+
 }
+function __indexOf(collection, node) {
+  return Array.prototype.indexOf.call(collection, node);
+};
