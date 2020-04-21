@@ -270,7 +270,11 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
         this.isPreviewing = false;
         this.d_publishDate = moment(this.publishDate).format('LLLL');
       },
-      error => console.log('ERROR', error));
+      error => {
+        console.log('ERROR', error);
+        this.isPreviewing = false;
+        this.cmsLocalService.dspSnackbar('!SPW Failed to build, please try again', null, 5);
+      });
   }
 
   // Core data card

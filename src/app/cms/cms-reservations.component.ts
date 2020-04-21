@@ -150,7 +150,7 @@ export class CmsReservationsComponent implements OnInit {
   setChanged(elem): void {
     if (!this.dataChanged) {
       this.dataChanged = true;
-      console.log('Change', elem);
+     //console.log('Change', elem);
     }
   }
 

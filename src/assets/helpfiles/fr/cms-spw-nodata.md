@@ -1,9 +1,12 @@
 
-## Aperçu d'une seule page non disponible
+## Aperçu de la Page Internet non disponible
 
-Afin de prévisualiser votre page Web de l'application collective Restaurant, vous devrez d'abord ajouter un peu plus de contenu.
+Afin d’apercevoir ce que pourrait être votre Page Web produite par l’application des Restaurateurs Indépendants, 
+vous devez d'abord ajouter un peu plus de contenu.
 
-Cela nécessite un petit investissement en temps, mais en ayant une bonne qualité, un contenu mis à jour disponible numériquement pour votre
-les clients sont essentiels pour générer des affaires pour votre restaurant.
+Cela nécessite un peu d’investissement en temps, mais en ayant un contenu de qualité, mis à jour régulièrement et 
+disponible numériquement, vos clients apprécieront d’y avoir accès et les affaires de votre restaurant s’en 
+porteront d’autant mieux.
+
 
 

@@ -13,7 +13,7 @@ export class CmsHoursComponent implements OnInit {
 
   restaurant: Restaurant;
   openingTimes: any = [];
-  openingTimesNotes: string = "";
+  openingTimesNotes: string = '';
   display_dow: any = [];
   dataChanged = false;
   sessionNull = { open: '00:00', close: '00:00' };
