@@ -867,10 +867,17 @@ ul.rc-lookup-results {
     display: flex;
     flex-direction: row;
     align-items: center;
-    h1 { margin: 8px; font-size: 24px;}
+    h1 {
+      margin: 8px 36px 8px 8px;
+      font-size: 20px;
+      line-height: 1;
+      //white-space: nowrap;
+      //overflow: hidden;
+      //text-overflow: ellipsis;
+    }
     .mat-icon.assc-member,
     .mat-icon.full-member{
-      padding: 12px !important;
+      padding: 8px !important;
       color: white;
       border-radius: 50%;
       background-color: $rc-theme-success;

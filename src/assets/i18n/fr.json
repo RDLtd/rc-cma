@@ -35,8 +35,8 @@
 
   "Home": {
     "WhoAreWe": "Qui Sommes-nous?",
-    "Text1": "Restaurateurs Independents est une structure constituée de leaders de la restauration et de figures emblématiques du secteur. Notre objectif est d'offrir un véritable soutien quotidien aux membres et de participer activement aux enjeux environnementaux du secteur de la restauration.",
-    "Text2": "Restaurateurs Independents est une organisation coopérative, détenue à 100% par ses membres.",
+    "Text1": "Restaurateurs Indépendents est une structure constituée de leaders de la restauration et de figures emblématiques du secteur. Notre objectif est d'offrir un véritable soutien quotidien aux membres et de participer activement aux enjeux environnementaux du secteur de la restauration.",
+    "Text2": "Restaurateurs Indépendents est une organisation coopérative, détenue à 100% par ses membres.",
     "OurAims": "Nos objectifs sont déterminés et pragmatiques",
     "Text3": "Nous sommes convaincus que chaque restaurant devrait être maître du contenu de son image numérique ; lequel contenu devrait être facile à mettre à jour et accessible gratuitement par l’ensemble des tierces parties autorisées. Il s’agit là d’un principe fondamental.",
     "Text4": "Nous pensons que les restaurateurs devraient s’entraider, en s'unissant autour d'objectifs communs convenus, et utiliser leur force collective afin d’aborder des problèmes clés tels que l'inégalité face aux frais de réservation.",
@@ -44,7 +44,7 @@
     "Text6": "Nous comprenons l'importance des entreprises locales et aiderons les membres à mettre en avant leur profil au sein de la société avec des solutions qui abordent des problèmes sociétaux tels que la durabilité, l'alimentation saine et la gestion des déchets.",
     "Support": "Tout ce dont nous avons besoin maintenant c'est de votre soutien",
     "Text7": "Sans frais et sans obligations.",
-    "Text8": "Restaurateurs Independents offre aux professionnels de la restauration une opportunité unique d'opérer un véritable changement dans leur marché. Rejoignez-nous en inscrivant vos coordonnées ci-dessous. Nous vous tiendrons informés de nos avancées.",
+    "Text8": "Restaurateurs Indépendents offre aux professionnels de la restauration une opportunité unique d'opérer un véritable changement dans leur marché. Rejoignez-nous en inscrivant vos coordonnées ci-dessous. Nous vous tiendrons informés de nos avancées.",
     "JoinUs": "Rejoignez-nous"
   },
 
@@ -272,7 +272,7 @@
     "By": "par",
     "Your": "Votre",
     "SPW": "Page Internet",
-    "HasBeenPublished": "a été publiée avec succès et synchronisée avec tous les Sites Partenaires abonnés au contenu des Restaurateurs Indépendents. Vous pouvez afficher votre page Web ou copier l'URL (lien) en utilisant les options ci-dessous.",
+    "HasBeenPublished": "a été publiée avec succès et synchronisée avec tous les Sites Partenaires abonnés au contenu des Restaurateurs Indépendants. Vous pouvez afficher votre page Web ou copier l'URL (lien) en utilisant les options ci-dessous.",
     "CopyLink": "COPIER LE LIEN DE LA PAGE",
     "ViewLivePage": "VOIR LA PAGE PUBLIÉE",
     "HaveUnpublished": "VOUS AVEZ DES MISES A JOUR NON PUBLIÉES",
@@ -710,7 +710,7 @@
     "GooglePlus": "Google Plus",
     "Instagram": "Instagram",
     "RA": "Membre UMIH",
-    "RC": "Membre Restaurateurs Independents",
+    "RC": "Membre Restaurateurs Indépendants",
     "CMS": "Données du CMS",
     "Description": "Description",
     "Owner": "Description par le propriétaire (3000 caractères maximum, actuellement ",

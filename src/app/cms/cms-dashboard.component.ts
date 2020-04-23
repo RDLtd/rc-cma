@@ -240,7 +240,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
     this.cms.previewSPW(this.restaurant.restaurant_id, this.restaurant.restaurant_number, true, true)
       .subscribe(res => {
 
-        // console.log('Check CMS status', res);
+        console.log('Check CMS status', res);
 
         // Set up content info panel
         switch (res['status']) {
@@ -641,11 +641,14 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
       this.isPreviewing = true;
       this.cms.previewSPW(this.restaurant.restaurant_id, this.restaurant.restaurant_number, true, false)
         .subscribe(res => {
+          console.log('New publish res', res);
             if (res['status'] === 'OK') {
               // console.log('Publish success:', res);
               this.productionUrl = res['url'];
               this.cmsChanged = false;
-              this.publishDate = new Date(res['published']);
+              this.d_publishDate = moment(new Date(res['published'])).format('LLLL');
+              //this.publishDate = new Date(res['published']);
+
               this.verifyData();
               this.isPreviewing = false;
               // record event
