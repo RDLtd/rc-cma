@@ -30,7 +30,8 @@
         <p>{{ 'Payment.Review' | translate }}</p>
       </div>
 
-      <p class="rc-centre"><a (click)="goto('affiliates')">{{ 'Payment.View' | translate }}</a></p>
+      <p *ngIf="restaurant.restaurant_rc_member_status !== 'Full'" class="rc-centre"><a
+        (click)="goto('affiliates')">{{ 'Payment.View' | translate }}</a></p>
 
     </section>
 
