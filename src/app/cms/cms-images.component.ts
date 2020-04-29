@@ -67,6 +67,7 @@ export class CmsImagesComponent implements OnInit {
 
   updateLastUpdated(contentType) {
     this.cms.updateLastCreatedField(Number(this.restaurant.restaurant_id), contentType).subscribe(
+      data => {},
       error => {
         console.log('error in updatelastupdatedfield for images', error);
       });
