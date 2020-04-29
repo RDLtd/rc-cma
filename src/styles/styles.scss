@@ -976,7 +976,7 @@ button.rc-member-full,
 button.rc-member-assc {
   position: absolute !important;
   top: 16px; left: 16px;
-  z-index: 100;
+  z-index: 10;
   background-color: $rc-theme-success;
   color: white;
 }
