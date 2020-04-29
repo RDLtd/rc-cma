@@ -621,12 +621,12 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
       });
       // record event
       this.ga.sendEvent('CMS-Dashboard', 'SPW', 'Previewed');
-      // reset data changed attribute
-      this.cms.resetLastUpdatedField(Number(this.restaurant.restaurant_id)).subscribe(
-        data => {},
-        error => {
-          console.log('unable to reset data changed attribute', error);
-        });
+      // // reset data changed attribute
+      // this.cms.resetLastUpdatedField(Number(this.restaurant.restaurant_id)).subscribe(
+      //   data => {},
+      //   error => {
+      //     console.log('unable to reset data changed attribute', error);
+      //   });
     } else {
       this.help.dspHelp('cms-spw-nodata');
     }
