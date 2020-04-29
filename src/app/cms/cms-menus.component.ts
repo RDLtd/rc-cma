@@ -205,7 +205,7 @@ export class CmsMenusComponent implements OnInit {
         // console.log('Dishes', data);
         if (data['count']) {
           this.htmlMenu.dishes = data['dishes'];
-          // console.log('Loaded Dishes', this.htmlMenu.dishes);
+          console.log('Loaded Dishes', this.htmlMenu.dishes);
           this.setDishReference();
         } else {
           // console.log('No dish records found');
@@ -252,6 +252,11 @@ export class CmsMenusComponent implements OnInit {
 
   }
 
+  // Convert number to currency style
+  toCurrencyFormat(value, decimals = 2) {
+    return Number(Math.round(Number(value +'e'+ decimals)) +'e-'+ decimals).toFixed(decimals);
+  }
+
   createNewDish(src) {
     const newDish = new CMSDish();
     newDish.cms_dish_restaurant_id = Number(this.restaurant.restaurant_id);
@@ -259,7 +264,7 @@ export class CmsMenusComponent implements OnInit {
     newDish.cms_dish_section_id = src.controls.cms_dish_section_id.value;
     newDish.cms_dish_name = src.controls.cms_dish_name.value;
     newDish.cms_dish_desc = src.controls.cms_dish_desc.value;
-    newDish.cms_dish_price = src.controls.cms_dish_price.value;
+    newDish.cms_dish_price = this.toCurrencyFormat(src.controls.cms_dish_price.value);
     newDish.cms_dish_vegetarian = Number(src.controls.cms_dish_vegetarian.value);
     newDish.cms_dish_vegan = Number(src.controls.cms_dish_vegan.value);
     newDish.cms_dish_glutenfree = Number(src.controls.cms_dish_glutenfree.value);
@@ -290,6 +295,7 @@ export class CmsMenusComponent implements OnInit {
 
         // console.log('Form Values:', formDish.value);
         const newDish = this.createNewDish(formDish);
+        formDish.cms_dish_price = this.toCurrencyFormat(formDish.cms_dish_price);
 
         this.cms.updateDish(newDish).subscribe(
           data => {
@@ -339,6 +345,7 @@ export class CmsMenusComponent implements OnInit {
       if (formDish.dirty && formDish.valid) {
 
         const newDish = this.createNewDish(formDish);
+
 
         this.cms.createDish(newDish).subscribe(
           res => {

@@ -37,6 +37,8 @@
       <span matPrefix>{{ data.currencySymbol }} &nbsp;</span>
       <input
         name="cms_dish_price"
+        type="number"
+        step="0.01"
         matInput
         placeholder="{{ 'CMS-Menu-Dish.Price' | translate }}"
         [ngModel]="data.dish.cms_dish_price"

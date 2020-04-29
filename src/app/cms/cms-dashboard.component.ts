@@ -621,6 +621,12 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
       });
       // record event
       this.ga.sendEvent('CMS-Dashboard', 'SPW', 'Previewed');
+      // // reset data changed attribute
+      // this.cms.resetLastUpdatedField(Number(this.restaurant.restaurant_id)).subscribe(
+      //   data => {},
+      //   error => {
+      //     console.log('unable to reset data changed attribute', error);
+      //   });
     } else {
       this.help.dspHelp('cms-spw-nodata');
     }
@@ -647,12 +653,18 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
               this.productionUrl = res['url'];
               this.cmsChanged = false;
               this.d_publishDate = moment(new Date(res['published'])).format('LLLL');
-              //this.publishDate = new Date(res['published']);
+              // this.publishDate = new Date(res['published']);
 
               this.verifyData();
               this.isPreviewing = false;
               // record event
               this.ga.sendEvent('CMS-Dashboard', 'SPW', 'Published');
+              // reset data changed attribute
+              this.cms.resetLastUpdatedField(Number(this.restaurant.restaurant_id)).subscribe(
+                data => {},
+                error => {
+                  console.log('unable to reset data changed attribute', error);
+                });
             } else {
               console.log('Publish failed', res);
               this.isPreviewing = false;
@@ -662,7 +674,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
             console.log('Publish error', error);
             this.isPreviewing = false;
           });
-    //}
+    // }
 
   }
 

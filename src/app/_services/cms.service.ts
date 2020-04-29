@@ -299,6 +299,12 @@ export class CMSService {
         userCode: this.config.userAPICode, token: this.jwt() });
   }
 
+  resetLastUpdatedField(restaurant_id: number) {
+    return this.http.post(this.config.apiUrl + '/cms/resetlastupdatedfield',
+      { restaurant_id: restaurant_id,
+        userCode: this.config.userAPICode, token: this.jwt() });
+  }
+
   // Generate Token
   private jwt() {
     // create authorization header with jwt token
