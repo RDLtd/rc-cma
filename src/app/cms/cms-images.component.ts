@@ -65,6 +65,13 @@ export class CmsImagesComponent implements OnInit {
         error => console.log(error));
   }
 
+  updateLastUpdated(contentType) {
+    this.cms.updateLastCreatedField(Number(this.restaurant.restaurant_id), contentType).subscribe(
+      error => {
+        console.log('error in updatelastupdatedfield for images', error);
+      });
+  }
+
   updateImageStatus(img): void {
 
     let msg: string;
@@ -73,6 +80,7 @@ export class CmsImagesComponent implements OnInit {
 
     this.cms.updateElement(img).subscribe(
       data => {
+        this.updateLastUpdated('images');
         this.cmsLocalService.dspSnackbar(
           `Image ${ img.cms_element_id } ${ msg }`,
           null,
@@ -84,11 +92,6 @@ export class CmsImagesComponent implements OnInit {
           null,
           3);
         console.log(error);
-      });
-
-    this.cms.updateLastCreatedField(Number(this.restaurant.restaurant_id), 'images').subscribe(
-      error => {
-        console.log('error in updatelastupdatedfield for images', error);
       });
   }
 
@@ -112,10 +115,9 @@ export class CmsImagesComponent implements OnInit {
       }
     });
 
-    this.cms.updateLastCreatedField(Number(this.restaurant.restaurant_id), 'images').subscribe(
-      error => {
-        console.log('error in updatelastupdatedfield for images', error);
-      });
+    // Todo: this is a bit premature as we have not yet
+    //  successfully uploaded the image
+    this.updateLastUpdated('images');
 
     dialogRef.componentInstance.dialog = dialogRef;
   }
@@ -144,10 +146,7 @@ export class CmsImagesComponent implements OnInit {
                 }
               }
 
-              this.cms.updateLastCreatedField(Number(this.restaurant.restaurant_id), 'images').subscribe(
-                error => {
-                  console.log('error in updatelastupdatedfield for images', error);
-                });
+              this.updateLastUpdated('images');
 
               this.cmsLocalService.dspSnackbar(
                 'Image ' + img.cms_element_id + this.t_data.Deleted,
