@@ -34,14 +34,13 @@ export class ProfileVerifyComponent implements OnInit {
     // console.log('Data', this.data);
   }
 
-
   onProfileVerifySubmit(f) {
 
     if (this.data.contactEmailRequired && f.controls.restaurant_email.dirty) {
       //console.log(this.data.restaurant.restaurant_id, this.data.restaurant.restaurant_email);
       // Update restaurant record first
       this.restaurantService.updateEmail(this.data.restaurant.restaurant_id, this.data.restaurant.restaurant_email)
-        .subscribe(result => {
+        .subscribe(() => {
           //console.log(result);
           // then check verification code
           if (this.validateVerificationCode(f.controls.profile_verify)) {
@@ -99,7 +98,7 @@ export class ProfileVerifyComponent implements OnInit {
       this.data.restaurant.restaurant_number,
       this.data.restaurant.restaurant_email)
       .subscribe(
-      data => {
+      () => {
         // console.log('reqVerificationCode', data);
         // update KS 270918 keep window open
         // this.dialog.closeAll();
