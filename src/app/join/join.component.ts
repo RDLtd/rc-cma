@@ -3,8 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { MemberService, AuthenticationService } from '../_services';
 import { CmsLocalService } from '../cms';
 import { TranslateService } from '@ngx-translate/core';
-import * as moment from 'moment';
-import { Member } from '../_models';
 import { MatDialog } from '@angular/material/dialog';
 import { LoadComponent } from '../common/loader/load.component';
 
@@ -19,6 +17,8 @@ export class JoinComponent implements OnInit {
   loader: any;
   isSubmitting = false;
   newRegResult: string;
+  duplicateField: string;
+  currentApplicant: any;
   referrer = {
     type: 'self',
     code: null,
@@ -41,7 +41,7 @@ export class JoinComponent implements OnInit {
     private translate: TranslateService,
     private dialog: MatDialog
   ) {
-    translate.onLangChange.subscribe(lang => {
+    translate.onLangChange.subscribe(() => {
       this.translate.get('Join').subscribe(data => {this.t_data = data; });
     });
   }
@@ -84,7 +84,7 @@ export class JoinComponent implements OnInit {
   }
 
   async submitJoinForm(applicant) {
-
+    this.currentApplicant = applicant;
     this.isSubmitting = true;
     this.loader = this.dialog.open(LoadComponent, {
       data: {
@@ -117,13 +117,14 @@ export class JoinComponent implements OnInit {
   }
 
   createContentAdministrator(admin) {
+    this.duplicateField = '';
     // for now assume no restaurant known, might change for different join modes
     this.memberService.createAdministrator(admin).subscribe(
       data => {
         console.log(data);
         // Check for duplicate administrator record
         if (data['status'] === 'Duplicate') {
-          this.dspRegistrationResult('duplicate');
+          this.dspRegistrationResult('duplicate', data['error']);
         } else {
           // Successful registration
           sessionStorage.setItem('referrer_type', this.referrer.type);
@@ -182,16 +183,18 @@ export class JoinComponent implements OnInit {
         });
   }
 
-  dspRegistrationResult(res) {
-    this.newRegResult = res;
-    switch (res) {
+  dspRegistrationResult(resultType, errorType = null) {
+    this.newRegResult = resultType;
+    switch (resultType) {
       case 'duplicate': {
-        console.log('Duplicate user');
-        // this.cmsLocalService.dspSnackbar(
-        //   `${this.t_data.AlreadyReg}`,
-        //   'OK',
-        //   10
-        // );
+        console.log('Duplicate user:', errorType);
+        if (errorType.indexOf('telephone') > 1 && errorType.indexOf('email') > 1) {
+          this.duplicateField = 'both'
+        } else if (errorType.indexOf('telephone') > 1) {
+          this.duplicateField = 'tel';
+        } else if (errorType.indexOf('email') > 1) {
+          this.duplicateField = 'email';
+        }
         break;
       }
       case 'self-registered': {
@@ -203,5 +206,24 @@ export class JoinComponent implements OnInit {
         break;
       }
     }
+  }
+
+  curationRequest() {
+    console.log(this.currentApplicant);
+    const msg = `## Registration Help Required\n\n` +
+      `Someone has attempted to register with a mobile number, or email address, that was already registered.\n\n` +
+      `They have requested help, please contact them a.s.a.p:\n` +
+      ` - **Name**: ${this.currentApplicant.name}\n` +
+      ` - **Mobile**: ${this.currentApplicant.mobile}\n` +
+      ` - **Email**: ${this.currentApplicant.email}\n` +
+      ` - **Role**: ${this.currentApplicant.role}\n`;
+
+    this.memberService.sendemail('jmbarnard@gmail.com', 'Registration Problem', msg).subscribe(data => {
+        console.log(data);
+        this.newRegResult = 'support-request-sent';
+    },
+      error => {
+        console.log(error);
+      });
   }
 }
