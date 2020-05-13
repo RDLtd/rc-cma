@@ -11,7 +11,10 @@ import { TranslateService } from '@ngx-translate/core';
 
 export class ProfileVerifyComponent implements OnInit {
 
-  @ViewChild('verifyCode', {static: true}) verifyCode: ElementRef;
+  @ViewChild('verifyCode') verifyCode: ElementRef;
+  @ViewChild('email') email: ElementRef;
+  editable = false;
+  originalEmail: string;
 
   isSubmitting: boolean = false;
   // translation variables
@@ -32,6 +35,7 @@ export class ProfileVerifyComponent implements OnInit {
     // send email with verification code to restaurant email
     this.translate.get('Profile-Verify').subscribe(data => this.t_data = data);
     // console.log('Data', this.data);
+    this.editable = this.data.contactEmailRequired;
   }
 
 
@@ -111,5 +115,16 @@ export class ProfileVerifyComponent implements OnInit {
       error => {
         console.log(error);
       });
+  }
+  editEmail() {
+    this.editable = true;
+    this.originalEmail = this.data.restaurant.restaurant_email
+    this.data.contactEmailRequired = true;
+    // inject a slight delay so that we can
+    // successfully select the email field/content
+    setTimeout(() => {
+      this.email.nativeElement.select();
+    }, 100)
+
   }
 }

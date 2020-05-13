@@ -205,7 +205,7 @@ export class JoinComponent implements OnInit {
 
   curationRequest() {
     this.load.open('Sending Curation Request...');
-    //console.log(this.currentApplicant);
+    // Format as markdown
     const msg = `## Registration Help Required\n\n` +
       `Someone has attempted to register with a mobile number, or email address, that was already registered.\n\n` +
       `They have requested help, please contact them a.s.a.p:\n` +

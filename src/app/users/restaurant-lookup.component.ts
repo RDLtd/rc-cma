@@ -146,6 +146,7 @@ export class RestaurantLookupComponent implements OnInit {
 
       // Do we need to check the verification code?
       this.verificationCodeRequired = sessionStorage.getItem('referrer_type') !== 'member';
+
       // Is there a contact email for the selected restaurant?
       this.contactEmailRequired = !this.isValidEmail(selected.restaurant_email.trim());
 
