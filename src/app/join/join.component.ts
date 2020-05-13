@@ -4,7 +4,7 @@ import { MemberService, AuthenticationService } from '../_services';
 import { CmsLocalService } from '../cms';
 import { TranslateService } from '@ngx-translate/core';
 import { MatDialog } from '@angular/material/dialog';
-import { LoadComponent } from '../common/loader/load.component';
+import { LoadService } from '../common/loader/load.service';
 
 
 @Component({
@@ -13,8 +13,7 @@ import { LoadComponent } from '../common/loader/load.component';
 })
 
 export class JoinComponent implements OnInit {
-  loaded = false;
-  loader: any;
+
   isSubmitting = false;
   newRegResult: string;
   duplicateField: string;
@@ -39,14 +38,15 @@ export class JoinComponent implements OnInit {
     private authService: AuthenticationService,
     private cmsLocalService: CmsLocalService,
     private translate: TranslateService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private load: LoadService
   ) {
     translate.onLangChange.subscribe(() => {
       this.translate.get('Join').subscribe(data => {this.t_data = data; });
     });
   }
   ngOnInit() {
-
+    this.load.open();
     // Referral code in url?
     this.route.paramMap
       .subscribe(params => {
@@ -57,7 +57,7 @@ export class JoinComponent implements OnInit {
           // No code supplied in url
           sessionStorage.setItem('referrer_type', 'self');
         }
-        this.loaded = true;
+        this.load.close();
       });
     // Set localisation
     this.company_name = localStorage.getItem('rd_company_name');
@@ -86,12 +86,7 @@ export class JoinComponent implements OnInit {
   async submitJoinForm(applicant) {
     this.currentApplicant = applicant;
     this.isSubmitting = true;
-    this.loader = this.dialog.open(LoadComponent, {
-      data: {
-        message: 'Please wait'
-      },
-      disableClose: true
-    });
+    this.load.open('Request in progress');
 
     // Validate code if added manually
     // Wait for response
@@ -117,7 +112,7 @@ export class JoinComponent implements OnInit {
   }
 
   createContentAdministrator(admin) {
-    this.duplicateField = '';
+
     // for now assume no restaurant known, might change for different join modes
     this.memberService.createAdministrator(admin).subscribe(
       data => {
@@ -143,12 +138,13 @@ export class JoinComponent implements OnInit {
           }
 
         }
-        this.loader.close();
+        this.load.close();
         this.isSubmitting = false;
 
       },
       error => {
         console.log(JSON.stringify(error));
+        this.load.close();
       });
 
   }
@@ -209,7 +205,8 @@ export class JoinComponent implements OnInit {
   }
 
   curationRequest() {
-    console.log(this.currentApplicant);
+    this.load.open('Sending Curation Request...');
+    //console.log(this.currentApplicant);
     const msg = `## Registration Help Required\n\n` +
       `Someone has attempted to register with a mobile number, or email address, that was already registered.\n\n` +
       `They have requested help, please contact them a.s.a.p:\n` +
@@ -221,9 +218,11 @@ export class JoinComponent implements OnInit {
     this.memberService.sendemail('jmbarnard@gmail.com', 'Registration Problem', msg).subscribe(data => {
         console.log(data);
         this.newRegResult = 'support-request-sent';
+        this.load.close()
     },
       error => {
         console.log(error);
+        this.load.close();
       });
   }
 }

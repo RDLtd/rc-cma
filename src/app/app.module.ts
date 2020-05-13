@@ -107,6 +107,7 @@ import { ClipboardModule } from 'ngx-clipboard';
 import { JoinComponent } from './join/join.component';
 import { ReferralsComponent } from './users/referrals.component';
 import { LoadComponent } from './common/loader/load.component';
+import { LoadService } from './common/loader/load.service';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -208,7 +209,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     AnalyticsService,
     PublicService,
     CmsPreviewComponent,
-    ConfirmCancelComponent
+    ConfirmCancelComponent,
+    LoadService
   ],
   bootstrap: [AppComponent]
 })

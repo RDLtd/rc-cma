@@ -1,7 +1,6 @@
 <div class="rc-join">
   <div class="rc-join-info">
-    <rc-loader class="rc-loader-white" *ngIf="!loaded"></rc-loader>
-    <div *ngIf="loaded">
+    <div>
       <div class="rc-join-welcome" [ngSwitch]="referrer.type">
         <img class="rc-brand-logo" src="../assets/images/{{ company_logo_root }}-trans-white.svg" alt="Logo">
 
