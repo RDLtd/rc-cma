@@ -87,6 +87,7 @@ $config: mat-typography-config();
   &:hover { background: #eee; }
 }
 .rc-success { color: $rc-theme-success !important; }
+.rc-highlight { color: $rc-theme-primary }
 .rc-warn { color: $rc-theme-warn; }
 .rc-media-small-hide { display: none !important; }
 .rc-media-med { display: block !important; }

@@ -46,7 +46,7 @@ export class JoinComponent implements OnInit {
     });
   }
   ngOnInit() {
-    this.load.open();
+
     // Referral code in url?
     this.route.paramMap
       .subscribe(params => {
@@ -57,7 +57,6 @@ export class JoinComponent implements OnInit {
           // No code supplied in url
           sessionStorage.setItem('referrer_type', 'self');
         }
-        this.load.close();
       });
     // Set localisation
     this.company_name = localStorage.getItem('rd_company_name');
@@ -215,7 +214,7 @@ export class JoinComponent implements OnInit {
       ` - **Email**: ${this.currentApplicant.email}\n` +
       ` - **Role**: ${this.currentApplicant.role}\n`;
 
-    this.memberService.sendemail('jmbarnard@gmail.com', 'Registration Problem', msg).subscribe(data => {
+    this.memberService.sendEmailRequest('curation', 'support','Registration Problem', msg).subscribe(data => {
         console.log(data);
         this.newRegResult = 'support-request-sent';
         this.load.close()

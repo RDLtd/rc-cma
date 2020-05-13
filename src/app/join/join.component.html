@@ -105,20 +105,24 @@
       novalidate>
 
       <div *ngIf="duplicateField === 'tel'">
-        <h1>Already registered!</h1>
-        <p>This mobile number is already registered <a [routerLink]="['/signin']">{{ 'Join.SignInPassword' |
-          translate }}</a>. If you need help, request contact from <a (click)="curationRequest()">Curation & Customer Support</a> team.</p>
+        <h1 class="rc-highlight">Already registered!</h1>
+        <p>This mobile number is already registered <a [routerLink]="['/signin']">{{ 'Join.SignInPassword' | translate }}</a>.</p>
+        <p>If you need some assistance <a
+          (click)="curationRequest()">request a callback from our Customer Support Team</a> and someone will be in contact you.</p>
       </div>
       <div *ngIf="duplicateField === 'email'">
-        <h1>Already registered!</h1>
+        <h1 class="rc-highlight">Already registered!</h1>
         <p>This email is already registered. <a
-          [routerLink]="['/signin']">{{ 'Join.SignInPassword' | translate }}</a>. If you need further assistance then <a (click)="curationRequest()">ask our Curation Team to help</a>.</p>
+          [routerLink]="['/signin']">{{ 'Join.SignInPassword' | translate }}</a>.</p>
+        <p>If you need some assistance <a
+          (click)="curationRequest()">request a callback from our Customer Support Team</a> and someone will be in contact you.</p>
       </div>
       <div *ngIf="duplicateField === 'both'">
-        <h1>Already registered!</h1>
-        <p>This telephone number and email address are already registered <a [routerLink]="['/signin']">{{
-          'Join.SignInPassword' | translate }}</a>. For further assistance, please
-          contact our <a (click)="curationRequest()">Curation & Customer Support</a> team.</p>
+        <h1 class="rc-highlight">Already registered!</h1>
+        <p>This telephone number and email address have already been registered <a [routerLink]="['/signin']">{{
+          'Join.SignInPassword' | translate }}</a>.</p>
+        <p>If you need some assistance <a
+          (click)="curationRequest()">request a callback from our Customer Support Team</a> and someone will be in contact you.</p>
       </div>
 
       <div *ngIf="!duplicateField">
