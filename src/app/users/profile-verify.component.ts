@@ -40,8 +40,8 @@ export class ProfileVerifyComponent implements OnInit {
 
 
   onProfileVerifySubmit(f) {
-
-    if (this.data.contactEmailRequired && f.controls.restaurant_email.dirty) {
+    // New or edited email address
+    if (f.controls.restaurant_email.dirty) {
       //console.log(this.data.restaurant.restaurant_id, this.data.restaurant.restaurant_email);
       // Update restaurant record first
       this.restaurantService.updateEmail(this.data.restaurant.restaurant_id, this.data.restaurant.restaurant_email)
