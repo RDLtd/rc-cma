@@ -92,7 +92,7 @@ export class RestaurantLookupComponent implements OnInit {
       this.restaurantService.getSubset(this.sql_parameters)
         .subscribe(
           data => {
-            console.log({data});
+            //console.log({data});
             this.restaurants = data['restaurants'];
             if (!this.restaurants.length) {
               this.noSearchResults = true;

@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject, ViewChild, ElementRef } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { CMSService, RestaurantService } from '../_services';
+import { CMSService, MemberService, RestaurantService } from '../_services';
 import { CmsLocalService } from '../cms';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -24,6 +24,7 @@ export class ProfileVerifyComponent implements OnInit {
     private cmsService: CMSService,
     public cmsLocalService: CmsLocalService,
     public restaurantService: RestaurantService,
+    private memberService: MemberService,
     private dialog: MatDialog,
     private translate: TranslateService,
     public profileVerifyDialog: MatDialogRef<ProfileVerifyComponent>,
@@ -40,26 +41,41 @@ export class ProfileVerifyComponent implements OnInit {
 
 
   onProfileVerifySubmit(f) {
-    // New or edited email address
+    // console.log('Email dirty', f.controls.restaurant_email.dirty);
+    // console.log('Email required', this.data.contactEmailRequired);
+    // console.log('Valid code', this.validateVerificationCode(f.controls.profile_verify));
+    // Email changed
     if (f.controls.restaurant_email.dirty) {
-      //console.log(this.data.restaurant.restaurant_id, this.data.restaurant.restaurant_email);
-      // Update restaurant record first
-      this.restaurantService.updateEmail(this.data.restaurant.restaurant_id, this.data.restaurant.restaurant_email)
-        .subscribe(result => {
-          //console.log(result);
-          // then check verification code
-          if (this.validateVerificationCode(f.controls.profile_verify)) {
-            this.profileVerifyDialog.close(
-              {
-                emailUpdated: true,
-                verified: true
-              });
-          } else {
-            // Invalid code
-            this.verifyCode.nativeElement.focus();
-          }
+      // If we don't have one
+      if (this.data.contactEmailRequired) {
+        this.updateRestaurantEmail(false);
+        // Then validate the code
+        if (this.validateVerificationCode(f.controls.profile_verify)) {
+          this.profileVerifyDialog.close(
+            {
+              emailUpdated: true,
+              verified: true
+            });
+        } else {
+          // Invalid code
+          this.verifyCode.nativeElement.focus();
+        }
+      } else {
 
-        });
+        // It's being changed so only do it
+        // if we have a good verification code
+        if (this.validateVerificationCode(f.controls.profile_verify)) {
+          this.profileVerifyDialog.close(
+            {
+              emailUpdated: true,
+              verified: true
+            });
+          this.updateRestaurantEmail(true);
+        } else {
+          // Invalid code
+          this.verifyCode.nativeElement.focus();
+        }
+      }
 
     } else {
 
@@ -74,6 +90,18 @@ export class ProfileVerifyComponent implements OnInit {
         this.verifyCode.nativeElement.focus();
       }
     }
+  }
+
+  updateRestaurantEmail(notify: boolean) {
+    // Update restaurant record first
+    this.restaurantService.updateEmail(this.data.restaurant.restaurant_id, this.data.restaurant.restaurant_email)
+      .subscribe(res => {
+          console.log('Email updated', res);
+          if (notify) { this.notifyCuration(); }
+        },
+        error => {
+          console.log(error);
+        });
   }
 
   validateVerificationCode(profile_verify) {
@@ -103,10 +131,7 @@ export class ProfileVerifyComponent implements OnInit {
       this.data.restaurant.restaurant_number,
       this.data.restaurant.restaurant_email)
       .subscribe(
-      data => {
-        // console.log('reqVerificationCode', data);
-        // update KS 270918 keep window open
-        // this.dialog.closeAll();
+      () => {
         this.cmsLocalService.dspSnackbar(
           this.t_data.CodeSent + this.data.restaurant.restaurant_email,
           'OK',
@@ -120,12 +145,24 @@ export class ProfileVerifyComponent implements OnInit {
   editEmail() {
     this.editable = true;
     this.originalEmail = this.data.restaurant.restaurant_email;
-    this.data.contactEmailRequired = true;
     // inject a slight delay so that we can
     // successfully select the email field/content
     setTimeout(() => {
       this.email.nativeElement.select();
     }, 100);
 
+  }
+
+  notifyCuration() {
+    const msg =
+      `# Change Review\n\n` +
+      `The following restaurant has just been associated to a user and the email address was updated at the same time.\n\n` +
+      ` - **User**: ${this.data.member.member_first_name} ${this.data.member.member_last_name}(${this.data.member.member_id})\n` +
+      ` - **Restaurant**: ${this.data.restaurant.restaurant_name} (${this.data.restaurant.restaurant_id})\n` +
+      ` - **Original Email Address**: ${this.originalEmail}\n` +
+      ` - **New Email Address**: ${this.data.restaurant.restaurant_email}\n\n` +
+      `## Please review these changes a.s.a.p.`;
+
+    this.memberService.sendEmailRequest( 'curation', 'support', 'CHANGE REVIEW', msg).subscribe(res => console.log(res));
   }
 }

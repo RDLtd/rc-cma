@@ -95,11 +95,13 @@ export class MemberService {
   sendEmailRequest(to, from, subject, content) {
     // Which company are we?
     const company = this.config[localStorage.getItem('rd_country') + '_company'];
+    // Is it a custom emailTo address or std?
+    const emailTo = (to !== 'curation' && to !== 'support')? to : company['rd_company_email_' + to];
     return this.http.post(this.config.apiUrl + '/members/sendemail',
       {
         companyName: company.rd_company_name,
         companyPrefix: company.rd_company_prefix,
-        emailTo: company['rd_company_email_' + to],
+        emailTo: emailTo,
         emailFrom: company['rd_company_email_' + from],
         emailSubject: subject,
         emailBody: content,
