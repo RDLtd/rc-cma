@@ -42,11 +42,11 @@ export class ProfileVerifyComponent implements OnInit {
   onProfileVerifySubmit(f) {
 
     if (this.data.contactEmailRequired && f.controls.restaurant_email.dirty) {
-      //console.log(this.data.restaurant.restaurant_id, this.data.restaurant.restaurant_email);
+      // console.log(this.data.restaurant.restaurant_id, this.data.restaurant.restaurant_email);
       // Update restaurant record first
       this.restaurantService.updateEmail(this.data.restaurant.restaurant_id, this.data.restaurant.restaurant_email)
         .subscribe(result => {
-          //console.log(result);
+          // console.log(result);
           // then check verification code
           if (this.validateVerificationCode(f.controls.profile_verify)) {
             this.profileVerifyDialog.close(
@@ -86,7 +86,7 @@ export class ProfileVerifyComponent implements OnInit {
           this.t_data.Again,
           'OK',
           10);
-        //console.log(this.codeInput);
+        // console.log(this.codeInput);
         // profile_verify.nativeElement.focus();
         return false;
       }
@@ -96,7 +96,7 @@ export class ProfileVerifyComponent implements OnInit {
     }
   }
 
-  reqVerificationCode(){
+  reqVerificationCode() {
 
     this.cmsService.sendVerificationEmail(
       this.data.restaurant.restaurant_name,
@@ -116,15 +116,16 @@ export class ProfileVerifyComponent implements OnInit {
         console.log(error);
       });
   }
+
   editEmail() {
     this.editable = true;
-    this.originalEmail = this.data.restaurant.restaurant_email
+    this.originalEmail = this.data.restaurant.restaurant_email;
     this.data.contactEmailRequired = true;
     // inject a slight delay so that we can
     // successfully select the email field/content
     setTimeout(() => {
       this.email.nativeElement.select();
-    }, 100)
+    }, 100);
 
   }
 }
