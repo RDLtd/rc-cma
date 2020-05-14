@@ -882,7 +882,18 @@
     "TenDigit": "Code à 10 chiffres obligatoire",
     "Request": "DEMANDE DU CODE",
     "Cancel": "ANNULER",
-    "Submit": "SOUMETTRE"
+    "Submit": "SOUMETTRE",
+    "Main": "Veuillez fournir l'adresse e-mail principale de ",
+    "Used": "Ces informations seront utilisées pour confirmer l'adhésion et pour toute correspondance future.",
+    "VerifyEmail": "Veuillez vérifier l'adresse e-mail principale de ",
+    "Add": "et ajoutez votre ",
+    "Below": " en dessous:",
+    "NoCode": "Si vous n'avez pas de code, assurez-vous que nous avons le bon e-mail, puis utilisez ",
+    "RequestCode": "Demandez le code",
+    "Option": " option.",
+    "Check": "Avant de demander un code de vérification, veuillez vérifier que l'e-mail affiché ci-dessous est correct. Pour modifier cette adresse, sélectionnez l'icône MODIFIER.",
+    "Valid": "Une adresse e-mail valide ",
+    "Required": "est requis"
   },
 
   "Profile-Detail": {
@@ -1156,7 +1167,18 @@
     "Close": "Fermez cette fenêtre et vérifiez votre email.",
     "Ta": "Merci beaucoup",
     "Curation": "Équipe de conservation",
-    "Check": "Accéder à votre email pour les informations d'identification de connexion"
+    "Check": "Accéder à votre email pour les informations d'identification de connexion",
+    "OK": "OK merci!",
+    "Team": "Un membre de notre équipe Support & Curation vous contactera sous peu.",
+    "AlreadyRegHeader": "Déjà enregistré!",
+    "MobileReg": "Ce numéro de mobile est déjà enregistré. ",
+    "If": "Si vous avez besoin d'aide ",
+    "Callback": "demander un rappel à notre équipe de support client",
+    "Someone": " et quelqu'un sera en contact avec vous.",
+    "EmailReg": "Cet e-mail est déjà enregistré. ",
+    "BothReg": "Ce numéro de téléphone et cette adresse e-mail ont déjà été enregistrés ",
+    "Sending": "Envoyer la requete...",
+    "Problem": "Problème d'enregistrement"
   },
 
   "Referrals": {

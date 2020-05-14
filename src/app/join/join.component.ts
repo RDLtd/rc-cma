@@ -51,7 +51,7 @@ export class JoinComponent implements OnInit {
     this.route.paramMap
       .subscribe(params => {
         if (params.has('code')) {
-          let ref = this.setReferral(params.get('code'));
+          const ref = this.setReferral(params.get('code'));
           console.log('Url referral', ref);
         } else {
           // No code supplied in url
@@ -67,7 +67,7 @@ export class JoinComponent implements OnInit {
 
   async setReferral(code) {
     // Check code
-    let ref = await this.memberService.getReferral(code);
+    const ref = await this.memberService.getReferral(code);
     console.log(ref);
     // Valid code
     if (ref) {
@@ -153,7 +153,7 @@ export class JoinComponent implements OnInit {
     this.memberService.getById(member_id)
       .subscribe(
         memberData => {
-          let newMember = memberData['member'][0];
+          const newMember = memberData['member'][0];
           this.authService.setMember(newMember);
           // no need to check for valid result, using a temporary token for now
           this.authService.setAuthSession(newMember,
@@ -184,7 +184,7 @@ export class JoinComponent implements OnInit {
       case 'duplicate': {
         console.log('Duplicate user:', errorType);
         if (errorType.indexOf('telephone') > 1 && errorType.indexOf('email') > 1) {
-          this.duplicateField = 'both'
+          this.duplicateField = 'both';
         } else if (errorType.indexOf('telephone') > 1) {
           this.duplicateField = 'tel';
         } else if (errorType.indexOf('email') > 1) {
@@ -204,7 +204,7 @@ export class JoinComponent implements OnInit {
   }
 
   curationRequest() {
-    this.load.open('Sending Curation Request...');
+    this.load.open(this.t_data.Sending);
     // Format as markdown
     const msg = `## Registration Help Required\n\n` +
       `Someone has attempted to register with a mobile number, or email address, that was already registered.\n\n` +
@@ -214,10 +214,10 @@ export class JoinComponent implements OnInit {
       ` - **Email**: ${this.currentApplicant.email}\n` +
       ` - **Role**: ${this.currentApplicant.role}\n`;
 
-    this.memberService.sendEmailRequest('curation', 'support','Registration Problem', msg).subscribe(data => {
+    this.memberService.sendEmailRequest('curation', 'support', this.t_data.Problem, msg).subscribe(data => {
         console.log(data);
         this.newRegResult = 'support-request-sent';
-        this.load.close()
+        this.load.close();
     },
       error => {
         console.log(error);

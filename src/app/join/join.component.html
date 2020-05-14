@@ -79,8 +79,8 @@
     <div *ngSwitchCase="'support-request-sent'">
       <div class="rc-centre">
         <img src="../../assets/images/icons/checkmark.gif" height="128" width="128" alt="Success"/></div>
-      <h1>OK Thanks!</h1>
-      <p>A member of our Support & Curation Team will be in contact with you shortly.</p>
+      <h1>{{ 'Join.OK' | translate }}</h1>
+      <p>{{ 'Join.Team' | translate }}</p>
       <p><strong>{{ company_name }} {{ 'Join.Curation' | translate }}</strong></p>
       <p><a [routerLink]="'/signin'">{{ 'Join.SignIn' | translate }}</a></p>
     </div>
@@ -105,24 +105,24 @@
       novalidate>
 
       <div *ngIf="duplicateField === 'tel'">
-        <h1 class="rc-highlight">Already registered!</h1>
-        <p>This mobile number is already registered <a [routerLink]="['/signin']">{{ 'Join.SignInPassword' | translate }}</a>.</p>
-        <p>If you need some assistance <a
-          (click)="curationRequest()">request a callback from our Customer Support Team</a> and someone will be in contact you.</p>
+        <h1 class="rc-highlight">{{ 'Join.AlreadyRegHeader' | translate }}</h1>
+        <p>{{ 'Join.MobileReg' | translate }}<a [routerLink]="['/signin']">{{ 'Join.SignInPassword' | translate }}</a>.</p>
+        <p>{{ 'Join.If' | translate }}<a
+          (click)="curationRequest()">{{ 'Join.Callback' | translate }}</a>{{ 'Join.Someone' | translate }}</p>
       </div>
       <div *ngIf="duplicateField === 'email'">
-        <h1 class="rc-highlight">Already registered!</h1>
-        <p>This email is already registered. <a
+        <h1 class="rc-highlight">{{ 'Join.AlreadyRegHeader' | translate }}</h1>
+        <p>{{ 'Join.EmailReg' | translate }}<a
           [routerLink]="['/signin']">{{ 'Join.SignInPassword' | translate }}</a>.</p>
-        <p>If you need some assistance <a
-          (click)="curationRequest()">request a callback from our Customer Support Team</a> and someone will be in contact you.</p>
+        <p>{{ 'Join.If' | translate }}<a
+          (click)="curationRequest()">{{ 'Join.Callback' | translate }}</a>{{ 'Join.Someone' | translate }}</p>
       </div>
       <div *ngIf="duplicateField === 'both'">
-        <h1 class="rc-highlight">Already registered!</h1>
-        <p>This telephone number and email address have already been registered <a [routerLink]="['/signin']">{{
+        <h1 class="rc-highlight">{{ 'Join.AlreadyRegHeader' | translate }}</h1>
+        <p>{{ 'Join.BothReg' | translate }}<a [routerLink]="['/signin']">{{
           'Join.SignInPassword' | translate }}</a>.</p>
-        <p>If you need some assistance <a
-          (click)="curationRequest()">request a callback from our Customer Support Team</a> and someone will be in contact you.</p>
+        <p>{{ 'Join.If' | translate }}<a
+          (click)="curationRequest()">{{ 'Join.Callback' | translate }}</a>{{ 'Join.Someone' | translate }}</p>
       </div>
 
       <div *ngIf="!duplicateField">
