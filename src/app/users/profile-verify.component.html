@@ -21,7 +21,7 @@
           <strong>Request Code</strong> option.</p>
       </div>
 
-<!--      &lt;!&ndash; Just need code &ndash;&gt;-->
+      <!-- Just need code -->
 <!--      <div *ngIf="data.verificationCodeRequired && !data.contactEmailRequired">-->
 <!--        <p>{{ 'Profile-Verify.Before' | translate }}</p>-->
 <!--        <p>The verification code will be sent to the the following registered email address. If this address is -->
@@ -29,8 +29,7 @@
 <!--      </div>  -->
 
       <div *ngIf="!data?.contactEmailRequired">
-        <p>If this email address is wrong, please <a (click)="editEmail()">UPDATE THE EMAIL ADDRESS</a> before
-          requesting a <strong>Verification Code</strong>.</p>
+        <p>Before requesting a Verification Code, please check that the email displayed below is correct. To make changes to this address, select the EDIT icon.</p>
       </div>
 
       <mat-form-field
@@ -48,6 +47,14 @@
           pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$"
           [disabled]="!editable"
           required>
+        <button
+          *ngIf="!editable"
+          mat-icon-button
+          color="primary"
+          matSuffix
+          (click)="editEmail()">
+          <mat-icon style="padding-bottom: 0.15em;">edit</mat-icon>
+        </button>
         <mat-error align="end">A valid email address <strong>required</strong></mat-error>
       </mat-form-field>
 
