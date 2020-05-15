@@ -843,7 +843,6 @@
     "BenchmarkingAssociated": "Pour faire une analyse comparative, vous devez avoir au moins un restaurant associé!",
     "NoFinancial": "Aucun de vos restaurants associés n'a de données financières enregistrées!",
     "Compare": " Afin de comparer votre restaurant avec d'autres, vous devez fournir des données appropriées.",
-
     "IsAssociate": "est Membre associé des ",
     "IsFull": "est Membre à part entière des ",
     "SendReferral": "Invitez un ami ou un collègue à rejoindre le collectif (désactivé en version bêta)",
@@ -859,7 +858,18 @@
     "Front-of-House": "Réception",
     "Marketing": "Commercialisation",
     "Copied": "Copié! Maintenant, collez le code dans et envoyez un SMS ou une application de réseau social et envoyez-le!",
-    "NewRequest": "NOUVELLE DEMANDE REÇUE"
+    "NewRequest": "NOUVELLE DEMANDE REÇUE",
+    "NewRest": "Nouveau restaurant",
+    "NewReq": "Demande d'ajout d'un nouveau restaurant",
+    "PleaseCreate": "Veuillez créer une nouvelle entrée et conserver les données pour le restaurant suivant:",
+    "Clarification": "Contactez directement l'utilisateur si des clarifications sont nécessaires.",
+    "Ta": "Merci.",
+    "Rname": "Nom du Restaurant",
+    "Rcode": "Code Postal",
+    "Rtel": "Téléphone",
+    "Uname": "Nom de l'Utilisateur",
+    "Uid": "Nom de l'Utilisateur",
+    "Uemail": "Email de l'Utilisateur"
   },
 
   "Profile-Image": {
@@ -895,7 +905,12 @@
     "Valid": "Une adresse e-mail valide ",
     "Required": "est requis",
     "JustCode": "Code",
-    "Change": "MODIFICATION POUR RÉVISION"
+    "Change": "MODIFICATION POUR RÉVISION",
+    "Just": "Le restaurant suivant vient d'être associé à un utilisateur et l'adresse email du restaurant a en même temps été mise à jour.",
+    "User": "Utilisateur",
+    "Oemail": "Adresse e-mail initiale",
+    "Nemail": "Nouvelle adresse e-mail",
+    "ASAP": "Veuillez revoir ces modifications dans les plus brefs délais."
   },
 
   "Profile-Detail": {
@@ -940,7 +955,10 @@
     "PleaseNote":"VEUILLEZ NOTER",
     "Info": "Les informations concernant ",
     "NotYetCurated": "** ne sont pas encore actualisées. L’équipe est maintenant informée et procédera à des vérifications et modifications dans les prochaines 48 heures. Cependant si vous notez des données essentielles incorrectes, veuillez nous le signaler en envoyant une  **Demande de Changement**.",
-    "Immediate": " Ce restaurant nécessite une conservation immédiate. Veuillez informer l'administrateur du contenu une fois qu'il est terminé. Nous te remercions."
+    "Immediate": " Ce restaurant nécessite une conservation immédiate. Veuillez informer l'administrateur du contenu une fois qu'il est terminé. Nous te remercions.",
+    "Admin": "Administrateur",
+    "Street": "Rue",
+    "PostCodeLower": "Code Postal"
   },
 
   "Affiliates": {
@@ -1079,7 +1097,10 @@
     "Tel": "Téléphone",
     "Add": "Adresse",
     "Contact": "Nom du contact:",
-    "Launch": "Numéro de lancement:"
+    "Launch": "Numéro de lancement:",
+    "Help": "Aide à l'inscription requise",
+    "Attempt": "Quelqu'un a tenté de s'inscrire avec une adresse email ou un numéro de téléphone portable déjà utilisé.",
+    "ASAP": "Veuillez le contacter dans les plus brefs délais afin de l'aider."
   },
 
   "Graph": {

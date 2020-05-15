@@ -356,21 +356,21 @@ export class ProfilePageComponent implements OnInit {
           console.log('AC', result);
           // Form markdown message
           const bodyContent =
-            `# New Restaurant Request\n\n` +
-            `Please create a new listing, and curate the data, for the following restaurant:\n\n` +
-            ` - **Restaurant Name**: ${result.newRestaurantName}\n` +
-            ` - **Postcode**: ${result.newRestaurantPostcode}\n` +
-            ` - **Telephone**: ${result.newRestaurantTel}\n` +
-            ` - **User Name**: ${this.member.member_first_name} ${this.member.member_last_name}\n` +
-            ` - **User ID**: ${this.member.member_id}\n` +
-            ` - **User Email**: ${this.member.member_email}\n\n` +
-            `Contact the user directly if any clarification is required.\n\n` +
-            `Thanks.`;
+            `# ${this.t_data.NewReq}\n\n` +
+            `${this.t_data.PleaseCreate}\n\n` +
+            ` - **${this.t_data.Rname}**: ${result.newRestaurantName}\n` +
+            ` - **${this.t_data.Rcode}**: ${result.newRestaurantPostcode}\n` +
+            ` - **${this.t_data.Rtel}**: ${result.newRestaurantTel}\n` +
+            ` - **${this.t_data.Uname}**: ${this.member.member_first_name} ${this.member.member_last_name}\n` +
+            ` - **${this.t_data.Uid}**: ${this.member.member_id}\n` +
+            ` - **${this.t_data.Uemail}**: ${this.member.member_email}\n\n` +
+            `${this.t_data.Clarification}\n\n` +
+            `${this.t_data.Ta}`;
 
           this.memberService.sendEmailRequest(
             'curation',
             'support',
-            'New Restaurant',
+            this.t_data.NewRest,
              bodyContent)
             .subscribe( () => {
               this.cmsLocalService.dspSnackbar(this.t_data.NewRequest, 'OK', 20, 'info');

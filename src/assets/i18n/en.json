@@ -858,7 +858,18 @@
     "Front-of-House": "Front-of-House",
     "Marketing": "Marketing",
     "Copied": "Copied! Now paste the code into and email SMS or social network app and send it!",
-    "NewRequest": "NEW REQUEST RECEIVED"
+    "NewRequest": "NEW REQUEST RECEIVED",
+    "NewRest": "New Restaurant",
+    "NewReq": "New Restaurant Request",
+    "PleaseCreate": "Please create a new listing, and curate the data, for the following restaurant:",
+    "Clarification": "Contact the user directly if any clarification is required.",
+    "Ta": "Thanks.",
+    "Rname": "Restaurant Name",
+    "Rcode": "Post Code",
+    "Rtel": "Telephone",
+    "Uname": "User Name",
+    "Uid": "User ID",
+    "Uemail": "User Email"
   },
 
   "Profile-Image": {
@@ -894,7 +905,12 @@
     "Valid": "A valid email address ",
     "Required": "is required",
     "JustCode": "Code",
-    "Change": "CHANGE REVIEW"
+    "Change": "CHANGE REVIEW",
+    "Just": "The following restaurant has just been associated to a user and the email address was updated at the same time.",
+    "User": "User",
+    "Oemail": "Original Email Address",
+    "Nemail": "New Email Address",
+    "ASAP": "Please review these changes a.s.a.p."
   },
 
   "Profile-Detail": {
@@ -939,7 +955,10 @@
     "PleaseNote":"PLEASE NOTE",
     "Info": "",
     "NotYetCurated": "** has not yet been curated. However, the team has now been notified and curation will take place within the next 48 hours.&nbsp;\n In the meantime, please tell us if any of the current information is incorrect by sending a **Change Request**.",
-    "Immediate": " This restaurant requires immediate curation. Please notify the content administrator when it has been completed. Thank you."
+    "Immediate": " This restaurant requires immediate curation. Please notify the content administrator when it has been completed. Thank you.",
+    "Admin": "Administrator",
+    "Street": "Street",
+    "PostCodeLower": "Postcode"
   },
 
   "Affiliates": {
@@ -1179,7 +1198,10 @@
     "EmailReg": "This email is already registered. ",
     "BothReg": "This telephone number and email address have already been registered ",
     "Sending": "Sending Curation Request...",
-    "Problem": "Registration Problem"
+    "Problem": "Registration Problem",
+    "Help": "Registration Help Required",
+    "Attempt": "Someone has attempted to register with a mobile number, or email address, that was already registered.",
+    "ASAP": "They have requested help, please contact them a.s.a.p:"
   },
 
   "Referrals": {

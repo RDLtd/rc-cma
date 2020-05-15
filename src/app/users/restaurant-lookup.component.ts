@@ -223,13 +223,13 @@ export class RestaurantLookupComponent implements OnInit {
           // Todo: could do with a custom email really
           // Notify curation team
           const req = [
-            ` Administrator: ${this.data.member.member_first_name} ${this.data.member.member_last_name}`,
+            ` ${this.t_data.Admin}: ${this.data.member.member_first_name} ${this.data.member.member_last_name}`,
             ` Email: ${this.data.member.member_email}`,
             ` ***`,
             ` Restaurant: ${newRestaurant.restaurant_name}`,
-            ` Restaurant No: ${newRestaurant.restaurant_number}`,
-            ` Street: ${newRestaurant.restaurant_address_1}`,
-            ` Postcode: ${newRestaurant.restaurant_post_code}`,
+            ` Restaurant #: ${newRestaurant.restaurant_number}`,
+            ` ${this.t_data.Street}: ${newRestaurant.restaurant_address_1}`,
+            ` ${this.t_data.PostCodeLower}: ${newRestaurant.restaurant_post_code}`,
             `***`,
             `${this.t_data.Immediate}`
           ];

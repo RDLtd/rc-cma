@@ -155,13 +155,13 @@ export class ProfileVerifyComponent implements OnInit {
 
   notifyCuration() {
     const msg =
-      `# Change Review\n\n` +
-      `The following restaurant has just been associated to a user and the email address was updated at the same time.\n\n` +
-      ` - **User**: ${this.data.member.member_first_name} ${this.data.member.member_last_name}(${this.data.member.member_id})\n` +
+      `# ${this.t_data.Change}\n\n` +
+      `${this.t_data.Just}.\n\n` +
+      ` - **${this.t_data.User}**: ${this.data.member.member_first_name} ${this.data.member.member_last_name}(${this.data.member.member_id})\n` +
       ` - **Restaurant**: ${this.data.restaurant.restaurant_name} (${this.data.restaurant.restaurant_id})\n` +
-      ` - **Original Email Address**: ${this.originalEmail}\n` +
-      ` - **New Email Address**: ${this.data.restaurant.restaurant_email}\n\n` +
-      `## Please review these changes a.s.a.p.`;
+      ` - **${this.t_data.Oemail}**: ${this.originalEmail}\n` +
+      ` - **${this.t_data.Nemail}**: ${this.data.restaurant.restaurant_email}\n\n` +
+      `## ${this.t_data.ASAP}`;
 
     this.memberService.sendEmailRequest( 'curation', 'support', this.t_data.Change, msg).subscribe(res => console.log(res));
   }

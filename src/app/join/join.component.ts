@@ -206,13 +206,13 @@ export class JoinComponent implements OnInit {
   curationRequest() {
     this.load.open(this.t_data.Sending);
     // Format as markdown
-    const msg = `## Registration Help Required\n\n` +
-      `Someone has attempted to register with a mobile number, or email address, that was already registered.\n\n` +
-      `They have requested help, please contact them a.s.a.p:\n` +
-      ` - **Name**: ${this.currentApplicant.name}\n` +
-      ` - **Mobile**: ${this.currentApplicant.mobile}\n` +
-      ` - **Email**: ${this.currentApplicant.email}\n` +
-      ` - **Role**: ${this.currentApplicant.role}\n`;
+    const msg = `## ${this.t_data.Help}\n\n` +
+      `${this.t_data.Attempt}\n\n` +
+      `${this.t_data.ASAP}\n` +
+      ` - **${this.t_data.FullName}**: ${this.currentApplicant.name}\n` +
+      ` - **${this.t_data.Mobile}**: ${this.currentApplicant.mobile}\n` +
+      ` - **${this.t_data.Email}**: ${this.currentApplicant.email}\n` +
+      ` - **${this.t_data.Job}**: ${this.currentApplicant.role}\n`;
 
     this.memberService.sendEmailRequest('curation', 'support', this.t_data.Problem, msg).subscribe(data => {
         console.log(data);
