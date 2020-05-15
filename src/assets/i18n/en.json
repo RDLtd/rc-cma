@@ -892,7 +892,9 @@
     "Option": " option.",
     "Check": "Before requesting a Verification Code, please check that the email displayed below is correct. To make changes to this address, select the EDIT icon.",
     "Valid": "A valid email address ",
-    "Required": "is required"
+    "Required": "is required",
+    "JustCode": "Code",
+    "Change": "CHANGE REVIEW"
   },
 
   "Profile-Detail": {

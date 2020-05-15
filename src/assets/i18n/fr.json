@@ -893,7 +893,9 @@
     "Option": " option.",
     "Check": "Avant de demander un code de vérification, veuillez vérifier que l'e-mail affiché ci-dessous est correct. Pour modifier cette adresse, sélectionnez l'icône MODIFIER.",
     "Valid": "Une adresse e-mail valide ",
-    "Required": "est requis"
+    "Required": "est requis",
+    "JustCode": "Code",
+    "Change": "MODIFICATION POUR RÉVISION"
   },
 
   "Profile-Detail": {

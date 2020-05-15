@@ -163,6 +163,6 @@ export class ProfileVerifyComponent implements OnInit {
       ` - **New Email Address**: ${this.data.restaurant.restaurant_email}\n\n` +
       `## Please review these changes a.s.a.p.`;
 
-    this.memberService.sendEmailRequest( 'curation', 'support', 'CHANGE REVIEW', msg).subscribe(res => console.log(res));
+    this.memberService.sendEmailRequest( 'curation', 'support', this.t_data.Change, msg).subscribe(res => console.log(res));
   }
 }

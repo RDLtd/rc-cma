@@ -66,11 +66,11 @@
       <mat-form-field
         [hidden]="!data?.verificationCodeRequired"
         class="rc-full-width">
-        <mat-label>{{ 'Profile-Verify.RequestCode' | translate }}:</mat-label>
+        <mat-label>{{ 'Profile-Verify.JustCode' | translate }}:</mat-label>
         <input
           #verifyCode
           name="profile_verify"
-          placeholder="{{ 'Profile-Verify.Code' | translate }}"
+          placeholder="{{ 'Profile-Verify.JustCode' | translate }}"
           matInput
           ngModel
           autocomplete="off"
