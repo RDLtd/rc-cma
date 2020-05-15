@@ -158,9 +158,14 @@
             mat-button
             ngxClipboard
             [cbContent]="productionUrl"
-            (click)="copied()"
+            (click)="copyToClipboard()"
             color="secondary"
             [disabled]="isPreviewing">{{ 'CMS-Dashboard.CopyLink' | translate }}</button>
+          <button
+            mat-button
+            (click)="dspSPWLinks()"
+            color="secondary"
+            [disabled]="isPreviewing">WEB LINKS</button>
           <a
             [disabled]="isPreviewing"
             [href]="getSpwUrl()"
@@ -208,7 +213,7 @@
             mat-button
             color="secondary"
             [disabled]="isPreviewing"
-            (click)="getPreview()">{{ 'CMS-Dashboard.Preview' | translate }}</button>
+            (click)="previewSPW()">{{ 'CMS-Dashboard.Preview' | translate }}</button>
           <button
             mat-button
             color="primary"

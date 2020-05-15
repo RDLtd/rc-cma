@@ -24,6 +24,7 @@ import {
   MessageComponent
 } from '../common';
 import * as moment from 'moment';
+import { CmsSpwLinksComponent } from './cms-spw-links.component';
 
 
 @Component({
@@ -109,7 +110,6 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
 
   // This object is passed to the translate pipe in the html file
   // to allow handlebars style variable access.
-  //
   locals = {
     en: { demoUrl: 'http://demo.restaurantcollective.uk/' },
     fr: { demoUrl: 'http://demo.restaurateurs-independants.fr/' }
@@ -618,7 +618,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
     this.router.navigate(['restaurants', this.restaurant.restaurant_id, 'cms', tgt]);
   }
 
-  getPreview() {
+  previewSPW() {
 
     if (this.cmsHasSufficientData) {
       const dialogRef = this.dialog.open(CmsPreviewComponent, {
@@ -643,12 +643,6 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
   }
 
   publishSPW(): void {
-    // members can only publish their SPW if they are FULL members, not just associates
-    // For now assume that there are only two states. Or at least that Associate means you cannot do it,
-    // This means we could have other more elevated stets (e.g. Premium) that still allow publish
-    // In theory we should never get here if there is no status defined, but just in case...
-    //
-    // Updated 15/10/19 to make the assumption that no status = associate. Seems we can get here for test restaurants...
     // 04.04.2020 JB
     // Allowing Assc. members to also publish
     // if (this.restaurant.restaurant_rc_member_status !== 'Full') {
@@ -686,6 +680,16 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
           });
     // }
 
+  }
+
+  dspSPWLinks(): void {
+    let dialogRef = this.dialog.open(CmsSpwLinksComponent,
+      {
+        data: {
+          spwUrl: this.getSpwUrl(),
+          spwMenus: `${this.getSpwUrl()}#menus`
+        }
+      });
   }
 
   openSocialLink(url) {
@@ -797,7 +801,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
     });
   }
 
-  copied(): void {
+  copyToClipboard(): void {
     console.log('spw', this.getSpwUrl());
     this.cmsLocalService.dspSnackbar(this.t_data.LinkCopied, 'OK', 5);
     // record event

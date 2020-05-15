@@ -52,6 +52,17 @@ $config: mat-typography-config();
   display: flex;
   justify-content: space-between;
 }
+.rc-codes {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-bottom: 2rem;
+  span {
+    display: block;
+    text-align: center !important;
+  }
+}
 .rc-invisible { visibility: hidden; }
 .rc-full-width { width: 100%; }
 .rc-half-width { width: calc(50% - 2px);}
@@ -105,6 +116,7 @@ $config: mat-typography-config();
 @media screen and ( min-width : 600px ){
   .rc-media-small-hide { display: block !important; }
   .rc-media-med { display: none !important; }
+  .rc-codes { flex-direction: row;}
 }
 @media only screen
 and (min-device-width: 768px)
