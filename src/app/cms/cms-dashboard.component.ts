@@ -687,7 +687,8 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
       {
         data: {
           spwUrl: this.getSpwUrl(),
-          spwMenus: `${this.getSpwUrl()}#menus`
+          spwMenus: `${this.getSpwUrl()}#menus`,
+          restaurant: this.restaurant
         }
       });
   }
@@ -801,16 +802,16 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
     });
   }
 
-  copyToClipboard(): void {
-    console.log('spw', this.getSpwUrl());
-    this.cmsLocalService.dspSnackbar(this.t_data.LinkCopied, 'OK', 5);
-    // record event
-    this.ga.sendEvent(
-      'CMS-Dashboard',
-      'SPW',
-      'Link Copied'
-    );
-  }
+  // copyToClipboard(): void {
+  //   console.log('spw', this.getSpwUrl());
+  //   this.cmsLocalService.dspSnackbar(this.t_data.LinkCopied, 'OK', 5);
+  //   // record event
+  //   this.ga.sendEvent(
+  //     'CMS-Dashboard',
+  //     'SPW',
+  //     'Link Copied'
+  //   );
+  // }
 
   viewMemberStatus() {
     const dialogRef = this.dialog.open(PaymentComponent, {
