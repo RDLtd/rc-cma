@@ -122,7 +122,7 @@
         </mat-card-actions>
       </mat-card>
 
-      <!-- Loader panel -->
+      <!-- Spw: loading -->
       <mat-card
         *ngIf="isPreviewing"
         class="rc-cms-dash-info mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--align-top">
@@ -134,52 +134,52 @@
         </mat-card-content>
         <mat-card-actions></mat-card-actions>
       </mat-card>
-
-      <!-- SPW Status/preview panel -->
+      <!-- Spw: no changes -->
       <mat-card
         *ngIf="!cmsChanged && cmsHasSufficientData && !isPreviewing"
         class="rc-cms-dash-info mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--align-top">
-
+        <!-- HEADER -->
+        <!-- Verified by/data -->
         <mat-card-header *ngIf="!isPreviewing">
           <mat-card-title>{{ 'CMS-Dashboard.VerifiedOn' | translate }} {{ d_publishDate }}
             {{ 'CMS-Dashboard.By' | translate }} {{ restaurant.restaurant_verified_by }}</mat-card-title>
           <span class="rc-space-filler"></span>
           <mat-icon class="rc-success">cloud_done</mat-icon>
         </mat-card-header>
-
+        <!-- CONTENT -->
         <mat-card-content *ngIf="!isPreviewing">
           {{ 'CMS-Dashboard.Your' | translate }} <strong>
           {{ 'CMS-Dashboard.SPW' | translate }}</strong>
           {{ 'CMS-Dashboard.HasBeenPublished' | translate }}
         </mat-card-content>
-
+        <!-- ACTIONS -->
         <mat-card-actions align="end" *ngIf="!isPreviewing">
           <button
             mat-button
-            ngxClipboard [cbContent]="productionUrl"
+            ngxClipboard
+            [cbContent]="productionUrl"
             (click)="copied()"
             color="secondary"
             [disabled]="isPreviewing">{{ 'CMS-Dashboard.CopyLink' | translate }}</button>
           <a
             [disabled]="isPreviewing"
-            href="{{ productionUrl }}"
+            [href]="getSpwUrl()"
             target="_blank"
             mat-button color="primary">{{ 'CMS-Dashboard.ViewLivePage' | translate }}</a>
         </mat-card-actions>
       </mat-card>
-
-      <!-- Change notification -->
+      <!-- Spw: has changes -->
       <mat-card
         *ngIf="cmsChanged && !isPreviewing"
         class="rc-cms-dash-info mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--align-top">
 
+        <!-- HEADER -->
         <!-- Unpublished changes -->
         <mat-card-header *ngIf="!isPreviewing && cmsHasSufficientData">
           <mat-card-title>{{ 'CMS-Dashboard.HaveUnpublished' | translate }}</mat-card-title>
           <span class="rc-space-filler"></span>
           <mat-icon class="rc-warn">cloud_off</mat-icon>
         </mat-card-header>
-
         <!-- More content required -->
         <mat-card-header *ngIf="!isPreviewing && !cmsHasSufficientData">
           <mat-card-title>{{ 'CMS-Dashboard.NeedMoreContent' | translate }}</mat-card-title>
@@ -187,17 +187,19 @@
           <mat-icon class="rc-warn">cloud_off</mat-icon>
         </mat-card-header>
 
+        <!-- CONTENT -->
+        <!-- Unpublished changes -->
         <mat-card-content  *ngIf="!isPreviewing && cmsHasSufficientData">
           {{ 'CMS-Dashboard.NotPublished' | translate }}
           <strong> {{ 'CMS-Dashboard.Preview' | translate }}</strong> {{ 'CMS-Dashboard.IfCorrect' | translate }}
           <strong> {{ 'CMS-Dashboard.Publish' | translate }}</strong> {{ 'CMS-Dashboard.Sync' | translate }}
         </mat-card-content>
-
         <!-- More content required -->
         <mat-card-content  *ngIf="!isPreviewing && !cmsHasSufficientData">
           <p markdown [data]="'CMS-Dashboard.ViewDemo' | translate:locals[lang]"></p>
         </mat-card-content>
 
+        <!-- ACTIONS -->
         <!-- card actions -->
         <mat-card-actions
           align="end"
@@ -215,7 +217,7 @@
         </mat-card-actions>
       </mat-card>
 
-      <!-- CMS Summary -->
+      <!-- CONTENT Summary -->
       <mat-card
         class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--span-12-tablet">
         <div class="rc-card-help">
