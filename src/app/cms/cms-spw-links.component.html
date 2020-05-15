@@ -1,14 +1,14 @@
 <div class="rc-dialog">
   <h2 mat-dialog-title>SPW Marketing Links</h2>
   <div mat-dialog-content>
-    <p class="rc-centre"><a [href]="data['spwUrl']" target="_blank">{{ data.spwUrl }}</a></p>
+    <p class="rc-centre"><a [href]="data.spwUrl" target="_blank">{{ data.spwUrl }}</a></p>
     <p>This is a the website link (URL) to the Single Page Website (SPW) that's been created for
-      {{ data['restaurant.restaurant_name'] }}. This
+      <strong>{{ data.restaurant.restaurant_name }}</strong>. This
       is a
       permanent link and can be distributed to your customers or partners. All published changes that you make to the
       content, using the Restaurant Collective application, will be instantly synchronised. [<a ngxClipboard
                                                                                                 matTooltip="Copy the SPW link to your clipbaord"
-                                                                                                [cbContent]="data['spwUrl']">copy link</a>]
+                                                                                                [cbContent]="data.spwUrl">copy link</a>]
     </p>
 
     <h2>Custom Domain Name</h2>
@@ -18,13 +18,13 @@
     <h2>QR Codes</h2>
     <div class="rc-codes">
       <div>
-        <qrcode [qrdata]="data['spwUrl']" [width]="180" [errorCorrectionLevel]="'M'"
-                matTooltip="QR Code for {{ data['restaurant.restaurant_name'] }} website"></qrcode>
+        <qrcode [qrdata]="data.spwUrl" [width]="180" [errorCorrectionLevel]="'M'"
+                matTooltip="QR Code for {{ data.restaurant.restaurant_name }} website"></qrcode>
         <span>WEBSITE MAIN</span>
       </div>
       <div>
-        <qrcode [qrdata]="data['spwMenus']" [width]="180" [errorCorrectionLevel]="'M'"
-                matTooltip="QR code for {{ data['restaurant.restaurant_name'] }} menus"></qrcode>
+        <qrcode [qrdata]="data.spwMenus" [width]="180" [errorCorrectionLevel]="'M'"
+                matTooltip="QR code for {{ data.restaurant.restaurant_name }} menus"></qrcode>
         <span>MENU SECTION</span>
       </div>
     </div>
