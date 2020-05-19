@@ -165,13 +165,13 @@
             mat-button
             (click)="dspSPWLinks()"
             color="secondary"
-            matTooltip="Download your website links and QR codes"
-            [disabled]="isPreviewing">MARKETING LINKS</button>
+            matTooltip="{{ 'CMS-Dashboard.Download' | translate }}"
+            [disabled]="isPreviewing">{{ 'CMS-Dashboard.Marketing' | translate }}</button>
           <a
             [disabled]="isPreviewing"
             [href]="getSpwUrl()"
             target="_blank"
-            matTooltip="Open the live SPW for {{ restaurant.restaurant_name }}"
+            matTooltip="{{ 'CMS-Dashboard.OpenLive' | translate }}{{ restaurant.restaurant_name }}"
             mat-button color="primary">{{ 'CMS-Dashboard.ViewLivePage' | translate }}</a>
         </mat-card-actions>
       </mat-card>

@@ -329,7 +329,10 @@
     "YouCan": "Pour voir à quoi ressemblera votre Site Web avec tout le contenu ajouté, veuillez-vous ",
     "View": "reporter à la version suivante d’un restaurant servant de démonstration.",
     "ToSee": "",
-    "ViewDemo": "Bon travail! Cependant nous avons besoin de davantage d'informations afin de générer la page Internet de votre Site. Le résumé ci-dessous indique quelles sections ont besoin de contenu supplémentaire. Une fois que vous aurez ajouté suffisamment de données, le **APERÇU** et **PUBLIER** les options seront activées; nous pourrons créer votre Page Internet et distribuer votre contenu à nos partenaires.  \n\nVous pouvez [voir une version de restaurant de démonstration]({{ demoUrl }}) pour voir à quoi ressemblera le **SPW** avec tout le contenu ajouté."
+    "ViewDemo": "Bon travail! Cependant nous avons besoin de davantage d'informations afin de générer la page Internet de votre Site. Le résumé ci-dessous indique quelles sections ont besoin de contenu supplémentaire. Une fois que vous aurez ajouté suffisamment de données, le **APERÇU** et **PUBLIER** les options seront activées; nous pourrons créer votre Page Internet et distribuer votre contenu à nos partenaires.  \n\nVous pouvez [voir une version de restaurant de démonstration]({{ demoUrl }}) pour voir à quoi ressemblera le **SPW** avec tout le contenu ajouté.",
+    "Marketing": "LIENS MARKETING",
+    "Download": "Téléchargez votre Site Web et Code QR",
+    "OpenLive": "Ouvrez le SPW en direct pour "
   },
 
   "CMS-Directory": {
@@ -554,6 +557,27 @@
     "TestLink": "Lien de test",
     "PleaseEnter": "S'il vous plait entrez votre",
     "NoOnlineBookingsMessage": "Veuillez vous assurer de renseigner les informations **générales en matière de réservations**, en donnant les détails sur la façon dont les clients peuvent réserver à l'avance votre établissement ou pas, en décrivant votre politique concernant les réservations individuelles et de groupes en incluant votre numéro de téléphone et autres moyens de contact si nécessaire. "
+  },
+
+  "CMS-SPW-Links": {
+    "Marketing": "Liens Marketing vers la Page Web",
+    "Copy": "Copiez le lien de votre Page Web dans votre Presse-Papiers",
+    "OnlineLinks": "Liens En Ligne",
+    "Open": "Ouvrir le SPW publié dans une nouvelle fenêtre",
+    "LinkInfo": "Le lien vers le Site Web, ou URL, ci-dessus est un lien permanent vers la Page Web générée automatiquement par Restaurateurs Indépendants. Ce lien peut être partagé avec des clients ou des partenaires depusi n’importe quel support numérique.",
+    "OfflineLinks": "Liens pas En Ligne – Code QR.",
+    "QRInfo": "Un code QR est une image spéciale contenant des informations sur l’emplacement d’un Site Web. La plupart des smartphones ou tablettes modernes reconnaitront et décoderont ces images, depuis leur application appareil photo, et permettront de visiter directement la Page Web correspondante..",
+    "QRCode": "Code QR pour ",
+    "Website": " site web",
+    "Main": "SITE WEB",
+    "Menus": " menus",
+    "Section": "MENUS",
+    "Usage": "Utilisez ces liens dans le cas de situation « Hors Ligne » pour permettre à vos clients d’accéder à votre Site Web ou à vos menus sur leur Smartphone et/ou Tablette.",
+    "Custom": "NOMS DE DOMAINE PERSONALISES",
+    "SPWInfo": "La Page Internet peut aussi être configurée pour fonctionner sur un nom de domaine personnalisé (par exemple www.votre-domaine.fr). Il peut s’agir d’un nom de domaine existant ou nous pouvons enregistrer avec vous un nom de domaine approprié. ",
+    "Contact": "Contactez notre équipe d’assistance",
+    "Further": "  pour plus d’information.",
+    "Mail": "mailto:curation@restaurateurs-independants.fr"
   },
 
   "Restaurant-Detail": {
