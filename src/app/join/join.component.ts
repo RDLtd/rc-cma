@@ -3,10 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { MemberService, AuthenticationService } from '../_services';
 import { CmsLocalService } from '../cms';
 import { TranslateService } from '@ngx-translate/core';
-import * as moment from 'moment';
-import { Member } from '../_models';
 import { MatDialog } from '@angular/material/dialog';
-import { LoadComponent } from '../common/loader/load.component';
+import { LoadService } from '../common/loader/load.service';
 
 
 @Component({
@@ -15,10 +13,11 @@ import { LoadComponent } from '../common/loader/load.component';
 })
 
 export class JoinComponent implements OnInit {
-  loaded = false;
-  loader: any;
+
   isSubmitting = false;
   newRegResult: string;
+  duplicateField: string;
+  currentApplicant: any;
   referrer = {
     type: 'self',
     code: null,
@@ -39,9 +38,10 @@ export class JoinComponent implements OnInit {
     private authService: AuthenticationService,
     private cmsLocalService: CmsLocalService,
     private translate: TranslateService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private load: LoadService
   ) {
-    translate.onLangChange.subscribe(lang => {
+    translate.onLangChange.subscribe(() => {
       this.translate.get('Join').subscribe(data => {this.t_data = data; });
     });
   }
@@ -51,13 +51,12 @@ export class JoinComponent implements OnInit {
     this.route.paramMap
       .subscribe(params => {
         if (params.has('code')) {
-          let ref = this.setReferral(params.get('code'));
+          const ref = this.setReferral(params.get('code'));
           console.log('Url referral', ref);
         } else {
           // No code supplied in url
           sessionStorage.setItem('referrer_type', 'self');
         }
-        this.loaded = true;
       });
     // Set localisation
     this.company_name = localStorage.getItem('rd_company_name');
@@ -68,7 +67,7 @@ export class JoinComponent implements OnInit {
 
   async setReferral(code) {
     // Check code
-    let ref = await this.memberService.getReferral(code);
+    const ref = await this.memberService.getReferral(code);
     console.log(ref);
     // Valid code
     if (ref) {
@@ -84,14 +83,9 @@ export class JoinComponent implements OnInit {
   }
 
   async submitJoinForm(applicant) {
-
+    this.currentApplicant = applicant;
     this.isSubmitting = true;
-    this.loader = this.dialog.open(LoadComponent, {
-      data: {
-        message: 'Please wait'
-      },
-      disableClose: true
-    });
+    this.load.open('Request in progress');
 
     // Validate code if added manually
     // Wait for response
@@ -117,13 +111,14 @@ export class JoinComponent implements OnInit {
   }
 
   createContentAdministrator(admin) {
+
     // for now assume no restaurant known, might change for different join modes
     this.memberService.createAdministrator(admin).subscribe(
       data => {
         console.log(data);
         // Check for duplicate administrator record
         if (data['status'] === 'Duplicate') {
-          this.dspRegistrationResult('duplicate');
+          this.dspRegistrationResult('duplicate', data['error']);
         } else {
           // Successful registration
           sessionStorage.setItem('referrer_type', this.referrer.type);
@@ -142,12 +137,13 @@ export class JoinComponent implements OnInit {
           }
 
         }
-        this.loader.close();
+        this.load.close();
         this.isSubmitting = false;
 
       },
       error => {
         console.log(JSON.stringify(error));
+        this.load.close();
       });
 
   }
@@ -157,7 +153,7 @@ export class JoinComponent implements OnInit {
     this.memberService.getById(member_id)
       .subscribe(
         memberData => {
-          let newMember = memberData['member'][0];
+          const newMember = memberData['member'][0];
           this.authService.setMember(newMember);
           // no need to check for valid result, using a temporary token for now
           this.authService.setAuthSession(newMember,
@@ -182,16 +178,18 @@ export class JoinComponent implements OnInit {
         });
   }
 
-  dspRegistrationResult(res) {
-    this.newRegResult = res;
-    switch (res) {
+  dspRegistrationResult(resultType, errorType = null) {
+    this.newRegResult = resultType;
+    switch (resultType) {
       case 'duplicate': {
-        console.log('Duplicate user');
-        // this.cmsLocalService.dspSnackbar(
-        //   `${this.t_data.AlreadyReg}`,
-        //   'OK',
-        //   10
-        // );
+        console.log('Duplicate user:', errorType);
+        if (errorType.indexOf('telephone') > 1 && errorType.indexOf('email') > 1) {
+          this.duplicateField = 'both';
+        } else if (errorType.indexOf('telephone') > 1) {
+          this.duplicateField = 'tel';
+        } else if (errorType.indexOf('email') > 1) {
+          this.duplicateField = 'email';
+        }
         break;
       }
       case 'self-registered': {
@@ -203,5 +201,27 @@ export class JoinComponent implements OnInit {
         break;
       }
     }
+  }
+
+  curationRequest() {
+    this.load.open(this.t_data.Sending);
+    // Format as markdown
+    const msg = `## ${this.t_data.Help}\n\n` +
+      `${this.t_data.Attempt}\n\n` +
+      `${this.t_data.ASAP}\n` +
+      ` - **${this.t_data.FullName}**: ${this.currentApplicant.name}\n` +
+      ` - **${this.t_data.Mobile}**: ${this.currentApplicant.mobile}\n` +
+      ` - **${this.t_data.Email}**: ${this.currentApplicant.email}\n` +
+      ` - **${this.t_data.Job}**: ${this.currentApplicant.role}\n`;
+
+    this.memberService.sendEmailRequest('curation', 'support', this.t_data.Problem, msg).subscribe(data => {
+        console.log(data);
+        this.newRegResult = 'support-request-sent';
+        this.load.close();
+    },
+      error => {
+        console.log(error);
+        this.load.close();
+      });
   }
 }

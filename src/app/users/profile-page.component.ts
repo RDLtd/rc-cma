@@ -3,9 +3,9 @@ import { Restaurant, Member } from '../_models';
 import {
   RestaurantService,
   MemberService,
-  AuthenticationService,
+  //AuthenticationService,
   CMSService,
-  FinancialService,
+  //FinancialService,
   HelpService, AnalyticsService
 } from '../_services';
 import { MatDialog } from '@angular/material/dialog';
@@ -23,6 +23,7 @@ import { ReferralsComponent } from './referrals.component';
 import { ClipboardService } from 'ngx-clipboard';
 import { AppConfig } from '../app.config';
 import { CmsLocalService } from '../cms';
+import { LoadService } from '../common/loader/load.service';
 
 
 @Component({
@@ -65,10 +66,13 @@ export class ProfilePageComponent implements OnInit {
     // public authService: AuthenticationService,
     public appConfig: AppConfig,
     private _clipboardService: ClipboardService,
+    private loadService: LoadService,
     public dialog: MatDialog) {
 
+    this.loadService.open('Loading associated restaurants');
+
     // detect language changes... need to check for change in texts
-    translate.onLangChange.subscribe(lang => {
+    translate.onLangChange.subscribe(() => {
       this.translate.get('Profile-Page').subscribe(data => {
         this.t_data = data;
         this.d_member_job = this.t_data[this.member.member_job];
@@ -80,7 +84,6 @@ export class ProfilePageComponent implements OnInit {
       this.d_member_last_logged_in = moment(this.member.member_last_logged_in).format('DD MMMM YYYY');
       this.d_member_job = this.t_data[this.member.member_job];
     });
-
   }
 
   ngOnInit() {
@@ -146,25 +149,26 @@ export class ProfilePageComponent implements OnInit {
 
   getAssociatedRestaurants(id) {
     console.log('getAssociatedRestaurants');
-    this.showLoader = true;
+    //this.showLoader = true;
     this.restaurantService.getMemberRestaurants(id)
       .subscribe(
         data => {
-          this.showLoader = false;
+          //showLoader = false;
           this.restaurants = data['restaurants'];
           if (this.restaurants.length) {
             this.getDefaultImages();
-
           } else if (this.showRestaurantFinder) {
             this.showRestaurantFinder = false;
             this.addRestaurants();
           }
+          this.loadService.close();
           // this.dspUnreadMessages();
           // console.log('Restaurants', this.restaurants);
 
         },
         error => {
           console.log(error);
+          this.loadService.close();
         });
   }
 
@@ -193,7 +197,7 @@ export class ProfilePageComponent implements OnInit {
 
           this.restaurantService.removeAssociation(rest['association_id'])
             .subscribe(
-              data => {
+              () => {
                 // console.log(data);
                 this.restaurants.splice(index, 1);
                 this.defaultImages.splice(index, 1);
@@ -350,38 +354,36 @@ export class ProfilePageComponent implements OnInit {
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
           console.log('AC', result);
-          const changeArray = [
-            {
-              Request: 'UNLISTED RESTAURANT'
+          // Form markdown message
+          const bodyContent =
+            `# ${this.t_data.NewReq}\n\n` +
+            `${this.t_data.PleaseCreate}\n\n` +
+            ` - **${this.t_data.Rname}**: ${result.newRestaurantName}\n` +
+            ` - **${this.t_data.Rcode}**: ${result.newRestaurantPostcode}\n` +
+            ` - **${this.t_data.Rtel}**: ${result.newRestaurantTel}\n` +
+            ` - **${this.t_data.Uname}**: ${this.member.member_first_name} ${this.member.member_last_name}\n` +
+            ` - **${this.t_data.Uid}**: ${this.member.member_id}\n` +
+            ` - **${this.t_data.Uemail}**: ${this.member.member_email}\n\n` +
+            `${this.t_data.Clarification}\n\n` +
+            `${this.t_data.Ta}`;
+
+          this.memberService.sendEmailRequest(
+            'curation',
+            'support',
+            this.t_data.NewRest,
+             bodyContent)
+            .subscribe( () => {
+              this.cmsLocalService.dspSnackbar(this.t_data.NewRequest, 'OK', 20, 'info');
+              this.showRestaurantFinder = false;
             },
-            {
-              Restaurant: result.newRestaurantName,
-              Postcode: result.newRestaurantPostcode,
-              Telephone: result.newRestaurantTel,
-              MemberName: `${this.member.member_first_name} ${this.member.member_last_name}`,
-              MemberID: this.member.member_id,
-              MemberEmail: this.member.member_email
+              error => {
+              console.log(error);
+              this.showRestaurantFinder = false;
             }
-          ];
-
-          // Create empty Restaurant Model to fulfil API call
-          // Use member name so that email Subject works OK
-          const tmpRest = new Restaurant();
-          tmpRest.restaurant_name = `${this.member.member_first_name} ${this.member.member_last_name}`;
-
-          // send information to the server so that emails can be generated
-          this.cms.sendRestaurantChanges(this.member, tmpRest, changeArray)
-            .subscribe(data => {
-                // console.log('Emails generated by server');
-                this.cmsLocalService.dspSnackbar(this.t_data.NewRequest, 'OK', 20, 'info');
-              },
-              error => console.log(error));
-
-          this.showRestaurantFinder = false;
+          )
         } else {
           this.showRestaurantFinder = false;
           this.getAssociatedRestaurants(this.member.member_id);
-          // this.getDefaultImages();
         }
         this.dialog.closeAll();
       });

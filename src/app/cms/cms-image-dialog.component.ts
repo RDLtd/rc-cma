@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CMSService } from '../_services';
 import { CmsLocalService } from './cms-local.service';
-import { TranslateService } from '@ngx-translate/core';;
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'rc-cms-image-dialog',
@@ -44,7 +44,7 @@ export class CmsImageDialogComponent implements OnInit {
     img.cms_element_active ? msg = this.t_data.IsActive : msg = this.t_data.IsOffline;
 
     this.cms.updateElement(img).subscribe(
-      data => {
+      () => {
         this.cmsLocalService.dspSnackbar(`Image ${ img.cms_element_id } ${ msg }`, null, 3);
 
       },
@@ -83,7 +83,7 @@ export class CmsImageDialogComponent implements OnInit {
     }
 
     this.cms.defaultElement(img.cms_element_id, true).subscribe(
-      data => {
+      () => {
         img.cms_element_default = 1;
         this.cmsLocalService.dspSnackbar(this.t_data.DefaultUpdated, null, 3)
       },

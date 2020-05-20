@@ -1,0 +1,53 @@
+<div class="rc-dialog rc-dialog-med">
+
+  <div mat-dialog-title>
+    <mat-toolbar class="rc-toolbar rc-toolbar-nav">
+      <span>{{ 'CMS-SPW-Links.Marketing' | translate }}</span>
+      <span class="rc-space-filler"></span>
+      <span class="rc-toolbar-actions">
+        <button mat-icon-button ngxClipboard matTooltip="{{ 'CMS-SPW-Links.Copy' | translate }}"
+                [cbContent]="data['spwUrl']"><mat-icon>link</mat-icon></button>
+        <button mat-icon-button><mat-icon>print</mat-icon></button>
+        <button mat-icon-button mat-dialog-close>
+        <mat-icon>close</mat-icon>
+      </button>
+    </span>
+    </mat-toolbar>
+  </div>
+
+  <div mat-dialog-content>
+
+    <h2>{{ 'CMS-SPW-Links.OnlineLinks' | translate }}</h2>
+    <p><a [href]="data['spwUrl']" target="_blank"
+          matTooltip="{{ 'CMS-SPW-Links.Open' | translate }}">{{ data['spwUrl'] }}</a></p>
+    <p>{{ 'CMS-SPW-Links.LinkInfo' | translate }}</p>
+
+    <h2>{{ 'CMS-SPW-Links.OfflineLinks' | translate }}</h2>
+    <p>{{ 'CMS-SPW-Links.QRInfo' | translate }}</p>
+
+    <div class="rc-codes">
+      <div>
+        <qrcode [qrdata]="data['spwUrl']" [width]="180" [errorCorrectionLevel]="'M'"
+                matTooltip="{{ 'CMS-SPW-Links.QRCode' | translate }}{{ data['restaurant']['restaurant_name'] }}
+                {{ 'CMS-SPW-Links.Website' | translate }}"></qrcode>
+        <span>{{ 'CMS-SPW-Links.Main' | translate }}</span>
+      </div>
+      <div>
+        <qrcode [qrdata]="data['spwMenus']" [width]="180" [errorCorrectionLevel]="'M'"
+                matTooltip="{{ 'CMS-SPW-Links.QRCode' | translate }}{{ data['restaurant']['restaurant_name'] }}
+                {{ 'CMS-SPW-Links.Menus' | translate }}"></qrcode>
+        <span>{{ 'CMS-SPW-Links.Section' | translate }}</span>
+      </div>
+    </div>
+
+    <p>{{ 'CMS-SPW-Links.Usage' | translate }}</p>
+
+    <h2>{{ 'CMS-SPW-Links.Custom' | translate }}</h2>
+
+    <p>{{ 'CMS-SPW-Links.SPWInfo' | translate }}<a
+        href="{{ 'CMS-SPW-Links.Mail' | translate }}">{{ 'CMS-SPW-Links.Contact' | translate }}</a>
+        {{ 'CMS-SPW-Links.Further' | translate }}</p>
+
+  </div>
+
+</div>

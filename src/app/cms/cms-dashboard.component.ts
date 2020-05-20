@@ -24,6 +24,7 @@ import {
   MessageComponent
 } from '../common';
 import * as moment from 'moment';
+import { CmsSpwLinksComponent } from './cms-spw-links.component';
 
 
 @Component({
@@ -109,7 +110,6 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
 
   // This object is passed to the translate pipe in the html file
   // to allow handlebars style variable access.
-  //
   locals = {
     en: { demoUrl: 'http://demo.restaurantcollective.uk/' },
     fr: { demoUrl: 'http://demo.restaurateurs-independants.fr/' }
@@ -132,7 +132,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
     private authService: AuthenticationService
   ) {
     // detect language changes... need to check for change in texts
-    translate.onLangChange.subscribe(lang => {
+    translate.onLangChange.subscribe(() => {
       this.lang = localStorage.getItem('rd_country');
       this.translate.get('CMS-Dashboard').subscribe(data => {
         this.t_data = data;
@@ -244,6 +244,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
 
         // Set up content info panel
         switch (res['status']) {
+
           // No preview available
           case 'INSUFFICIENT_DATA': {
             this.cmsChanged = true;
@@ -275,6 +276,15 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
         this.isPreviewing = false;
         this.cmsLocalService.dspSnackbar('!SPW Failed to build, please try again', null, 5);
       });
+  }
+
+  getSpwUrl(): string {
+    let arr = this.productionUrl.split('/');
+    const idx = arr.indexOf('s3.eu-west-2.amazonaws.com', 0);
+    if (idx > -1) {
+      arr.splice(idx, 1);
+    }
+    return arr.join('/');
   }
 
   // Core data card
@@ -590,7 +600,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
                   console.log('Offers:', this.offerInBox);
                   this.cmsLocalService.setOfferCount(this.offerInBox);
                 },
-                error => {
+                () => {
                   console.log('No access records found for restaurant');
                   // this restaurant has not seen any offers yet
                   this.offerInBox = this.offerCount;
@@ -598,7 +608,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
                 });
           }
         },
-        error => {
+        () => {
           console.log('No offer records found');
         });
   }
@@ -608,7 +618,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
     this.router.navigate(['restaurants', this.restaurant.restaurant_id, 'cms', tgt]);
   }
 
-  getPreview() {
+  previewSPW() {
 
     if (this.cmsHasSufficientData) {
       const dialogRef = this.dialog.open(CmsPreviewComponent, {
@@ -633,12 +643,6 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
   }
 
   publishSPW(): void {
-    // members can only publish their SPW if they are FULL members, not just associates
-    // For now assume that there are only two states. Or at least that Associate means you cannot do it,
-    // This means we could have other more elevated stets (e.g. Premium) that still allow publish
-    // In theory we should never get here if there is no status defined, but just in case...
-    //
-    // Updated 15/10/19 to make the assumption that no status = associate. Seems we can get here for test restaurants...
     // 04.04.2020 JB
     // Allowing Assc. members to also publish
     // if (this.restaurant.restaurant_rc_member_status !== 'Full') {
@@ -661,7 +665,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
               this.ga.sendEvent('CMS-Dashboard', 'SPW', 'Published');
               // reset data changed attribute
               this.cms.resetLastUpdatedField(Number(this.restaurant.restaurant_id)).subscribe(
-                data => {},
+                () => {},
                 error => {
                   console.log('unable to reset data changed attribute', error);
                 });
@@ -676,6 +680,17 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
           });
     // }
 
+  }
+
+  dspSPWLinks(): void {
+    let dialogRef = this.dialog.open(CmsSpwLinksComponent,
+      {
+        data: {
+          spwUrl: this.getSpwUrl(),
+          spwMenus: `${this.getSpwUrl()}#menus`,
+          restaurant: this.restaurant
+        }
+      });
   }
 
   openSocialLink(url) {
@@ -697,8 +712,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
     const currentMember = JSON.parse(localStorage.getItem('rd_profile'));
     this.restaurantService.verify(this.restaurant.restaurant_id,
       currentMember.member_first_name + ' ' + currentMember.member_last_name )
-      .subscribe(data => {
-        // console.log(data);
+      .subscribe(() => {
         this.cmsLocalService.dspSnackbar(this.t_data.DataVnP, 'OK', 5);
         this.restaurant.restaurant_verified_by = currentMember.member_first_name +
           ' ' + currentMember.member_last_name;
@@ -725,7 +739,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
     dialogRef.componentInstance.cancelSetting = true; // this so we can detect clicks outside the box
 
     // Whenever the dialog is closed
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe(() => {
       // Create a hook into the dialog form
       const f: NgForm = dialogRef.componentInstance.restForm;
 
@@ -751,7 +765,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
 
           // send information to the server so that emails can be generated
           this.cms.sendRestaurantChanges(currentMember, this.restaurant, changeArray)
-            .subscribe(data => {
+            .subscribe(() => {
                 // console.log('Emails generated by server');
                 const msg = this.t_data.DataChange;
                 this.cmsLocalService.dspSnackbar(msg, 'OK', 20, 'info');
@@ -788,15 +802,16 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
     });
   }
 
-  copied(): void {
-    this.cmsLocalService.dspSnackbar(this.t_data.LinkCopied, 'OK', 5);
-    // record event
-    this.ga.sendEvent(
-      'CMS-Dashboard',
-      'SPW',
-      'Link Copied'
-    );
-  }
+  // copyToClipboard(): void {
+  //   console.log('spw', this.getSpwUrl());
+  //   this.cmsLocalService.dspSnackbar(this.t_data.LinkCopied, 'OK', 5);
+  //   // record event
+  //   this.ga.sendEvent(
+  //     'CMS-Dashboard',
+  //     'SPW',
+  //     'Link Copied'
+  //   );
+  // }
 
   viewMemberStatus() {
     const dialogRef = this.dialog.open(PaymentComponent, {
@@ -815,7 +830,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
     );
 
     // Update dashboard
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe(() => {
       this.setMemberStatus();
     });
   }
@@ -874,7 +889,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
         if (data['count'] === 0) {
           // no record found, so this must be the first time - create one...
           this.cms.createLastUpdatedRecord(Number(this.restaurant.restaurant_id)).subscribe(
-            created => {
+            () => {
               // now read it back!
               this.cms.getLastUpdatedRecord(Number(this.restaurant.restaurant_id)).subscribe(
                 reread => {

@@ -107,6 +107,10 @@ import { ClipboardModule } from 'ngx-clipboard';
 import { JoinComponent } from './join/join.component';
 import { ReferralsComponent } from './users/referrals.component';
 import { LoadComponent } from './common/loader/load.component';
+import { LoadService } from './common/loader/load.service';
+import { CmsSpwLinksComponent } from './cms/cms-spw-links.component';
+import { QRCodeModule } from 'angularx-qrcode';
+
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -162,7 +166,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     AffiliatesComponent,
     JoinComponent,
     ReferralsComponent,
-    LoadComponent
+    LoadComponent,
+    CmsSpwLinksComponent
   ],
   imports: [
     AngularMaterialModule,
@@ -192,6 +197,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
       api_key: '713165672947878',
       api_secret: 'EhLM0NhD7HvJDjX5IvF90u6guq8'
     }),
+    QRCodeModule
   ],
   providers: [
     AppConfig,
@@ -208,7 +214,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     AnalyticsService,
     PublicService,
     CmsPreviewComponent,
-    ConfirmCancelComponent
+    ConfirmCancelComponent,
+    LoadService
   ],
   bootstrap: [AppComponent]
 })

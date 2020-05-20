@@ -1,9 +1,9 @@
 <div class="rc-join">
   <div class="rc-join-info">
-    <rc-loader class="rc-loader-white" *ngIf="!loaded"></rc-loader>
-    <div *ngIf="loaded">
+    <div>
       <div class="rc-join-welcome" [ngSwitch]="referrer.type">
-        <img class="rc-brand-logo" src="../assets/images/{{ company_logo_root }}-trans-white.svg">
+        <img class="rc-brand-logo" src="../assets/images/{{ company_logo_root }}-trans-white.svg" alt="Logo">
+
         <!-- Self -->
         <div *ngSwitchCase="'self'">
           <h1>{{ 'Join.Free' | translate }}</h1>
@@ -47,6 +47,7 @@
             </p>
           </ng-template>
         </div>
+
         <!-- Default -->
         <div *ngSwitchDefault>
           <h1>{{ 'Join.Free' | translate }}</h1>
@@ -71,35 +72,65 @@
       </div>
     </div>
   </div>
+
   <div class="rc-join-form" [ngSwitch]="newRegResult">
-    <div *ngSwitchCase="'duplicate'">
-      <h1>{{ 'Join.Hello' | translate }}</h1>
-      <p>{{ 'Join.Appear' | translate }} {{ company_name }}.</p>
-      <p><a [routerLink]="['/signin']">{{ 'Join.SignInPassword' | translate }}</a>.</p>
+
+    <!-- Support Request sent -->
+    <div *ngSwitchCase="'support-request-sent'">
+      <div class="rc-centre">
+        <img src="../../assets/images/icons/checkmark.gif" height="128" width="128" alt="Success"/></div>
+      <h1>{{ 'Join.OK' | translate }}</h1>
+      <p>{{ 'Join.Team' | translate }}</p>
+      <p><strong>{{ company_name }} {{ 'Join.Curation' | translate }}</strong></p>
+      <p><a [routerLink]="'/signin'">{{ 'Join.SignIn' | translate }}</a></p>
     </div>
+
+    <!-- Self Register -->
     <div *ngSwitchCase="'self-registered'">
       <div class="rc-centre">
-        <img src="../../assets/images/icons/checkmark.gif" height="128" width="128"/></div>
-<!--      <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 24 24">-->
-<!--        <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z" fill="#5dbd3d"></path>-->
-<!--      </svg>-->
-
+        <img src="../../assets/images/icons/checkmark.gif" height="128" width="128" alt="Success"/></div>
       <h1>{{ 'Join.Welcome' | translate }}</h1>
       <p>{{ 'Join.Successful' | translate }} <strong>{{ 'Join.ContentAdmin' | translate }}</strong>
         {{ 'Join.SentDetails' | translate }}</p>
       <p>{{ 'Join.Close' | translate }}</p>
       <p>{{ 'Join.Ta' | translate }}</p>
       <p><strong>{{ company_name }} {{ 'Join.Curation' | translate }}</strong></p>
-
     </div>
+
     <form
+      style="transition: all .2s ease-out"
       *ngSwitchDefault
       #formJoin="ngForm"
       (ngSubmit)="formJoin.form.valid && submitJoinForm(formJoin.value)"
       novalidate>
+
+      <div *ngIf="duplicateField === 'tel'">
+        <h1 class="rc-highlight">{{ 'Join.AlreadyRegHeader' | translate }}</h1>
+        <p>{{ 'Join.MobileReg' | translate }}<a [routerLink]="['/signin']">{{ 'Join.SignInPassword' | translate }}</a>.</p>
+        <p>{{ 'Join.If' | translate }}<a
+          (click)="curationRequest()">{{ 'Join.Callback' | translate }}</a>{{ 'Join.Someone' | translate }}</p>
+      </div>
+      <div *ngIf="duplicateField === 'email'">
+        <h1 class="rc-highlight">{{ 'Join.AlreadyRegHeader' | translate }}</h1>
+        <p>{{ 'Join.EmailReg' | translate }}<a
+          [routerLink]="['/signin']">{{ 'Join.SignInPassword' | translate }}</a>.</p>
+        <p>{{ 'Join.If' | translate }}<a
+          (click)="curationRequest()">{{ 'Join.Callback' | translate }}</a>{{ 'Join.Someone' | translate }}</p>
+      </div>
+      <div *ngIf="duplicateField === 'both'">
+        <h1 class="rc-highlight">{{ 'Join.AlreadyRegHeader' | translate }}</h1>
+        <p>{{ 'Join.BothReg' | translate }}<a [routerLink]="['/signin']">{{
+          'Join.SignInPassword' | translate }}</a>.</p>
+        <p>{{ 'Join.If' | translate }}<a
+          (click)="curationRequest()">{{ 'Join.Callback' | translate }}</a>{{ 'Join.Someone' | translate }}</p>
+      </div>
+
+      <div *ngIf="!duplicateField">
       <h1>{{ 'Join.JoinUs' | translate }}</h1>
       <span>{{ 'Join.Or' | translate }} <a [routerLink]="'/signin'">{{ 'Join.SignIn' | translate }}</a>
         {{ 'Join.Already' | translate }}</span>
+      </div>
+
       <mat-form-field hideRequiredMarker>
         <mat-label>{{ 'Join.FullName' | translate }}</mat-label>
         <input

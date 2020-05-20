@@ -46,7 +46,7 @@ export class AppComponent implements OnInit {
     private translate: TranslateService,
     private http: HttpClient,
     private config: AppConfig,
-    private activeRoute: ActivatedRoute,
+    //private activeRoute: ActivatedRoute,
     public authService: AuthenticationService) {
 
       // Check browser connection
@@ -135,11 +135,8 @@ export class AppComponent implements OnInit {
   setCompany (country_code) {
     // sets the company up according to the country code, data are configured in app.config
     let my_company;
-    if (country_code === 'en') {
-      my_company = this.config.en_company;
-    } else {
-      my_company = this.config.fr_company;
-    }
+    country_code === 'en'? my_company = this.config.en_company : my_company = this.config.fr_company;
+
     console.log('LS', my_company.rd_company_name);
 
     localStorage.setItem('rd_company_name', my_company.rd_company_name);
@@ -151,7 +148,12 @@ export class AppComponent implements OnInit {
     localStorage.setItem('rd_company_annual_fee_with_vat', my_company.rd_company_annual_fee_with_vat);
     localStorage.setItem('rd_company_currency_symbol', my_company.rd_company_currency_symbol);
     localStorage.setItem('rd_company_currency_code', my_company.rd_company_currency_code);
-    localStorage.setItem('rdCompanyConfig', '');
+
+    // Todo: Do we need to store this stuff
+    // If we do then this would be neater
+    // localStorage.setItem('comp', JSON.stringify(my_company));
+    // To retrieve it
+    // console.log('Company:', JSON.parse(localStorage.getItem('comp')));
 
   }
 
@@ -171,7 +173,7 @@ export class AppComponent implements OnInit {
           this.setCompany(this.language);
           this.title = localStorage.getItem('rd_company_name');
         },
-        error => {
+        error => { console.log(error)
         }
       );
   }

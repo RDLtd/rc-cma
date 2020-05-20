@@ -91,12 +91,23 @@ export class MemberService {
       });
   }
 
-  sendemail(emailAddress, emailSubject, emailBody) {
+  // Set emailTo/emailFrom 'curation' or 'support
+  sendEmailRequest(to, from, subject, content) {
+
+    // Which company are we?
+    const company = this.config[localStorage.getItem('rd_country') + '_company'];
+
+    // Allow a custom 'to' email to be passed for testing purposes
+    const emailTo = (to !== 'curation' && to !== 'support')? to : company['rd_company_email_' + to];
+
     return this.http.post(this.config.apiUrl + '/members/sendemail',
-      { company_prefix: localStorage.getItem('rd_company_prefix'),
-        emailAddress: emailAddress,
-        emailSubject: emailSubject,
-        emailBody: emailBody,
+      {
+        companyName: company.rd_company_name,
+        companyPrefix: company.rd_company_prefix,
+        emailTo: emailTo,
+        emailFrom: company['rd_company_email_' + from],
+        emailSubject: subject,
+        emailBody: content,
         userCode: this.config.userAPICode,
         token: this.jwt()
       });

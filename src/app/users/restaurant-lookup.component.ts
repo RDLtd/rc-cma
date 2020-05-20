@@ -92,7 +92,7 @@ export class RestaurantLookupComponent implements OnInit {
       this.restaurantService.getSubset(this.sql_parameters)
         .subscribe(
           data => {
-            console.log({data});
+            //console.log({data});
             this.restaurants = data['restaurants'];
             if (!this.restaurants.length) {
               this.noSearchResults = true;
@@ -146,6 +146,7 @@ export class RestaurantLookupComponent implements OnInit {
 
       // Do we need to check the verification code?
       this.verificationCodeRequired = sessionStorage.getItem('referrer_type') !== 'member';
+
       // Is there a contact email for the selected restaurant?
       this.contactEmailRequired = !this.isValidEmail(selected.restaurant_email.trim());
 
@@ -222,13 +223,13 @@ export class RestaurantLookupComponent implements OnInit {
           // Todo: could do with a custom email really
           // Notify curation team
           const req = [
-            ` Administrator: ${this.data.member.member_first_name} ${this.data.member.member_last_name}`,
+            ` ${this.t_data.Admin}: ${this.data.member.member_first_name} ${this.data.member.member_last_name}`,
             ` Email: ${this.data.member.member_email}`,
             ` ***`,
             ` Restaurant: ${newRestaurant.restaurant_name}`,
-            ` Restaurant No: ${newRestaurant.restaurant_number}`,
-            ` Street: ${newRestaurant.restaurant_address_1}`,
-            ` Postcode: ${newRestaurant.restaurant_post_code}`,
+            ` Restaurant #: ${newRestaurant.restaurant_number}`,
+            ` ${this.t_data.Street}: ${newRestaurant.restaurant_address_1}`,
+            ` ${this.t_data.PostCodeLower}: ${newRestaurant.restaurant_post_code}`,
             `***`,
             `${this.t_data.Immediate}`
           ];

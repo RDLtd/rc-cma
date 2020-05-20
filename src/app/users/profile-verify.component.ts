@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject, ViewChild, ElementRef } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { CMSService, RestaurantService } from '../_services';
+import { CMSService, MemberService, RestaurantService } from '../_services';
 import { CmsLocalService } from '../cms';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -11,7 +11,10 @@ import { TranslateService } from '@ngx-translate/core';
 
 export class ProfileVerifyComponent implements OnInit {
 
-  @ViewChild('verifyCode', {static: true}) verifyCode: ElementRef;
+  @ViewChild('verifyCode') verifyCode: ElementRef;
+  @ViewChild('email') email: ElementRef;
+  editable = false;
+  originalEmail: string;
 
   isSubmitting: boolean = false;
   // translation variables
@@ -21,6 +24,7 @@ export class ProfileVerifyComponent implements OnInit {
     private cmsService: CMSService,
     public cmsLocalService: CmsLocalService,
     public restaurantService: RestaurantService,
+    private memberService: MemberService,
     private dialog: MatDialog,
     private translate: TranslateService,
     public profileVerifyDialog: MatDialogRef<ProfileVerifyComponent>,
@@ -32,30 +36,46 @@ export class ProfileVerifyComponent implements OnInit {
     // send email with verification code to restaurant email
     this.translate.get('Profile-Verify').subscribe(data => this.t_data = data);
     // console.log('Data', this.data);
+    this.editable = this.data.contactEmailRequired;
   }
 
 
   onProfileVerifySubmit(f) {
+    // console.log('Email dirty', f.controls.restaurant_email.dirty);
+    // console.log('Email required', this.data.contactEmailRequired);
+    // console.log('Valid code', this.validateVerificationCode(f.controls.profile_verify));
+    // Email changed
+    if (f.controls.restaurant_email.dirty) {
+      // If we don't have one
+      if (this.data.contactEmailRequired) {
+        this.updateRestaurantEmail(false);
+        // Then validate the code
+        if (this.validateVerificationCode(f.controls.profile_verify)) {
+          this.profileVerifyDialog.close(
+            {
+              emailUpdated: true,
+              verified: true
+            });
+        } else {
+          // Invalid code
+          this.verifyCode.nativeElement.focus();
+        }
+      } else {
 
-    if (this.data.contactEmailRequired && f.controls.restaurant_email.dirty) {
-      //console.log(this.data.restaurant.restaurant_id, this.data.restaurant.restaurant_email);
-      // Update restaurant record first
-      this.restaurantService.updateEmail(this.data.restaurant.restaurant_id, this.data.restaurant.restaurant_email)
-        .subscribe(result => {
-          //console.log(result);
-          // then check verification code
-          if (this.validateVerificationCode(f.controls.profile_verify)) {
-            this.profileVerifyDialog.close(
-              {
-                emailUpdated: true,
-                verified: true
-              });
-          } else {
-            // Invalid code
-            this.verifyCode.nativeElement.focus();
-          }
-
-        });
+        // It's being changed so only do it
+        // if we have a good verification code
+        if (this.validateVerificationCode(f.controls.profile_verify)) {
+          this.profileVerifyDialog.close(
+            {
+              emailUpdated: true,
+              verified: true
+            });
+          this.updateRestaurantEmail(true);
+        } else {
+          // Invalid code
+          this.verifyCode.nativeElement.focus();
+        }
+      }
 
     } else {
 
@@ -72,6 +92,18 @@ export class ProfileVerifyComponent implements OnInit {
     }
   }
 
+  updateRestaurantEmail(notify: boolean) {
+    // Update restaurant record first
+    this.restaurantService.updateEmail(this.data.restaurant.restaurant_id, this.data.restaurant.restaurant_email)
+      .subscribe(res => {
+          console.log('Email updated', res);
+          if (notify) { this.notifyCuration(); }
+        },
+        error => {
+          console.log(error);
+        });
+  }
+
   validateVerificationCode(profile_verify) {
     if (this.data.verificationCodeRequired) {
       if (profile_verify.value === this.data.restaurant.restaurant_number) {
@@ -82,7 +114,7 @@ export class ProfileVerifyComponent implements OnInit {
           this.t_data.Again,
           'OK',
           10);
-        //console.log(this.codeInput);
+        // console.log(this.codeInput);
         // profile_verify.nativeElement.focus();
         return false;
       }
@@ -92,17 +124,14 @@ export class ProfileVerifyComponent implements OnInit {
     }
   }
 
-  reqVerificationCode(){
+  reqVerificationCode() {
 
     this.cmsService.sendVerificationEmail(
       this.data.restaurant.restaurant_name,
       this.data.restaurant.restaurant_number,
       this.data.restaurant.restaurant_email)
       .subscribe(
-      data => {
-        // console.log('reqVerificationCode', data);
-        // update KS 270918 keep window open
-        // this.dialog.closeAll();
+      () => {
         this.cmsLocalService.dspSnackbar(
           this.t_data.CodeSent + this.data.restaurant.restaurant_email,
           'OK',
@@ -111,5 +140,29 @@ export class ProfileVerifyComponent implements OnInit {
       error => {
         console.log(error);
       });
+  }
+
+  editEmail() {
+    this.editable = true;
+    this.originalEmail = this.data.restaurant.restaurant_email;
+    // inject a slight delay so that we can
+    // successfully select the email field/content
+    setTimeout(() => {
+      this.email.nativeElement.select();
+    }, 100);
+
+  }
+
+  notifyCuration() {
+    const msg =
+      `# ${this.t_data.Change}\n\n` +
+      `${this.t_data.Just}.\n\n` +
+      ` - **${this.t_data.User}**: ${this.data.member.member_first_name} ${this.data.member.member_last_name}(${this.data.member.member_id})\n` +
+      ` - **Restaurant**: ${this.data.restaurant.restaurant_name} (${this.data.restaurant.restaurant_id})\n` +
+      ` - **${this.t_data.Oemail}**: ${this.originalEmail}\n` +
+      ` - **${this.t_data.Nemail}**: ${this.data.restaurant.restaurant_email}\n\n` +
+      `## ${this.t_data.ASAP}`;
+
+    this.memberService.sendEmailRequest( 'curation', 'support', this.t_data.Change, msg).subscribe(res => console.log(res));
   }
 }

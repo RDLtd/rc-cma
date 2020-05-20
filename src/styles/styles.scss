@@ -33,12 +33,15 @@ $config: mat-typography-config();
   justify-content: space-between;
   align-items: center;
   margin: -8px;
+  transition: all 300ms ease-out;
   span {
     margin: 0 8px;
     font: $rc-display-font-weight 14px/1 $rc-default-font;
     text-transform: uppercase;
   }
-
+}
+.rc-dialog-backdrop {
+  background-color: rgba($rc-theme-black, 0.75);
 }
 .rc-no-grid-gutter { margin: -16px;}
 .rc-hide { display: none; }
@@ -48,6 +51,17 @@ $config: mat-typography-config();
 .rc-flex-spaced {
   display: flex;
   justify-content: space-between;
+}
+.rc-codes {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-bottom: 2rem;
+  span {
+    display: block;
+    text-align: center !important;
+  }
 }
 .rc-invisible { visibility: hidden; }
 .rc-full-width { width: 100%; }
@@ -84,6 +98,7 @@ $config: mat-typography-config();
   &:hover { background: #eee; }
 }
 .rc-success { color: $rc-theme-success !important; }
+.rc-highlight { color: $rc-theme-primary }
 .rc-warn { color: $rc-theme-warn; }
 .rc-media-small-hide { display: none !important; }
 .rc-media-med { display: block !important; }
@@ -101,6 +116,7 @@ $config: mat-typography-config();
 @media screen and ( min-width : 600px ){
   .rc-media-small-hide { display: block !important; }
   .rc-media-med { display: none !important; }
+  .rc-codes { flex-direction: row;}
 }
 @media only screen
 and (min-device-width: 768px)
@@ -538,7 +554,7 @@ a.mat-menu-item {text-decoration: none;}
       display: flex;
       flex-direction: row;
       align-items: center;
-      margin: 0px;
+      margin: 0;
       padding:0;
       .mat-icon { margin-right: 4px; }
     }
