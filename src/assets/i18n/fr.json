@@ -553,6 +553,7 @@
     "ResInfoUpdate": " informations relatives aux réservations mises à jour!",
     "UpdateFailed": "Les mises à jour ont échoué!",
     "ValidEmail": "Une adresse email valide est requis",
+    "ValidTelephone": "Une Numéro de téléphone valide est requis",
     "NoTest": "Ce service ne nécessite pas de test - il n'a pas d'URL associée",
     "TestLink": "Lien de test",
     "PleaseEnter": "S'il vous plait entrez votre",
@@ -572,7 +573,7 @@
     "Main": "SITE WEB",
     "Menus": " menus",
     "Section": "MENUS",
-    "Usage": "Utilisez ces liens dans le cas ou vos clients souhaiteraient accéder à votre Site Web ou à vos menus depuis leur Smartphone et/ou Tablette.",
+    "Usage": "Utilisez ces liens dans le cas ou vos clients souhaiteraient accéder à votre Site Web ou à vos menus depuis leur Smartphone et/ou Tablette. Vous pouvez copier le code QR sur votre ordinateur en cliquant avec le bouton droit ou en appuyant longuement sur l'image.",
     "Custom": "NOMS DE DOMAINE PERSONNALISÉS",
     "SPWInfo": "La Page Internet peut aussi être configurée pour fonctionner sur un nom de domaine personnalisé (par exemple www.votre-domaine.fr). Il peut s’agir d’un nom de domaine existant ou bien nous pouvons enregistrer avec vous un nom de domaine approprié. Contactez notre équipe d’assistance pour plus d’information. ",
     "Contact": "Contactez notre équipe d’assistance",
@@ -1015,7 +1016,8 @@
     "NewPassword": "Un nouveau mot de passe a été envoyé à votre adresse email.",
     "Unknown": "Cette adresse email est inconnue!",
     "Empowering": "La Force Collective des Restaurateurs Indépendants!",
-    "Join": "Rejoindre"
+    "Join": "Rejoindre",
+    "Unauth": "Connexion non autorisée - veuillez vérifier vos coordonnées"
   },
 
   "Payment": {
@@ -1182,7 +1184,8 @@
     "FirstAndLast": "Votre prénom et nom",
     "Job": "Votre rôle / poste",
     "Email": "Adresse e-mail",
-    "ValidEmail": "Une adresse email valide est exigée",
+    "ValidEmail": "Une adresse email valide est requis",
+    "ValidTelephone": "Une Numéro de téléphone valide est requis",
     "Contact": "Votre adresse email de contact",
     "Mobile": "Numéro de téléphone portable",
     "Join": "Rejoindre le collectif",
@@ -1225,7 +1228,11 @@
     "EmailReg": "Cette addresse email est déjà enregistré. ",
     "BothReg": "Ce numéro de téléphone et cette adresse email ont déjà été enregistrés ",
     "Sending": "Envoyer la requete...",
-    "Problem": "Problème d'enregistrement"
+    "Problem": "Problème d'enregistrement",
+    "Help": "Aide à l'inscription requise",
+    "Attempt": "Quelqu'un a tenté de s'inscrire avec une adresse email ou un numéro de téléphone portable déjà utilisé.",
+    "ASAP": "Veuillez le contacter dans les plus brefs délais afin de l'aider.",
+    "InProgress": "Demande en cours"
   },
 
   "Referrals": {

@@ -178,7 +178,7 @@
           name="mobile"
           [placeholder]="'Join.Mobile' | translate"
           required>
-        <mat-error align="end" *ngIf="mobile.errors?.required">{{ 'Join.ValidEmail' | translate }} {{ 'Join.Required' | translate }}</mat-error>
+        <mat-error align="end" *ngIf="mobile.errors?.required">{{ 'Join.ValidTelephone' | translate }}</mat-error>
       </mat-form-field>
       <mat-form-field *ngIf="!referrer?.code">
         <mat-label>{{ 'Join.RefCode' | translate }}</mat-label>

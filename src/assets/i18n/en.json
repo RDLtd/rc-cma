@@ -553,6 +553,7 @@
     "ResInfoUpdate": " reservation information updated!",
     "UpdateFailed": "Updates failed!",
     "ValidEmail": "A valid email address is required",
+    "ValidTelephone": "A valid telephone number is required",
     "NoTest": "This service does not require testing - it does not have an associated URL",
     "TestLink": "Test Link",
     "PleaseEnter": "Please enter your",
@@ -572,7 +573,7 @@
     "Main": "MAIN WEBSITE",
     "Menus": " menus",
     "Section": "MENU SECTION",
-    "Usage": "Use these links in any 'offline' situation to provide an easy way for your customers to access the website, or menus, on their smartphone or tablet.",
+    "Usage": "Use these links in any 'offline' situation to provide an easy way for your customers to access the website, or menus, on their smartphone or tablet. You can copy the QR code to your computer using right-click or long-press on the image.",
     "Custom": "CUSTOM DOMAIN NAMES",
     "SPWInfo": "The SPW can also be set up to work on a custom domain (e.g. www.your-domain.com). It can be an existing domain name, or we can register a suitable domain name for you. ",
     "Contact": "Contact the Curation Team",
@@ -1015,7 +1016,8 @@
     "NewPassword": "A new password has been sent to your email address",
     "Unknown": "This email address is unknown!",
     "Empowering": "Empowering Restaurants!",
-    "Join": "Join"
+    "Join": "Join",
+    "Unauth": "Unauthorised login attempt - please check your details"
   },
 
   "Payment": {
@@ -1121,7 +1123,10 @@
     "Tel": "Telephone",
     "Add": "Address",
     "Contact": "Contact name:",
-    "Launch": "Launch Number:"
+    "Launch": "Launch Number:",
+    "Help": "Help required!",
+    "Attempt": "Email or Telephine number already in use!",
+    "ASAP": "Please contact ASAP."
   },
 
   "Graph": {
@@ -1180,6 +1185,7 @@
     "Job": "Job Role",
     "Email": "Email Address",
     "ValidEmail": "A valid email address is required",
+    "ValidTelephone": "A valid telephone number is required",
     "Contact": "Your contact email address",
     "Mobile": "Mobile Phone",
     "Join": "Join the Collective",
@@ -1225,7 +1231,8 @@
     "Problem": "Registration Problem",
     "Help": "Registration Help Required",
     "Attempt": "Someone has attempted to register with a mobile number, or email address, that was already registered.",
-    "ASAP": "They have requested help, please contact them a.s.a.p:"
+    "ASAP": "They have requested help, please contact them a.s.a.p:",
+    "InProgress": "Request in progress"
   },
 
   "Referrals": {
