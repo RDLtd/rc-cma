@@ -29,6 +29,6 @@ export class LoadService {
   update(msg: string): void {
     this.dialogRef.componentInstance.data = {
       message: msg
-    }
+    };
   }
 }

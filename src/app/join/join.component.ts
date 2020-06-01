@@ -85,7 +85,7 @@ export class JoinComponent implements OnInit {
   async submitJoinForm(applicant) {
     this.currentApplicant = applicant;
     this.isSubmitting = true;
-    this.load.open('Request in progress');
+    this.load.open(this.t_data.InProgress);
 
     // Validate code if added manually
     // Wait for response
@@ -112,6 +112,7 @@ export class JoinComponent implements OnInit {
 
   createContentAdministrator(admin) {
 
+    // console.log(localStorage.getItem('rd_country'), localStorage.getItem('rd_company_prefix'));
     // for now assume no restaurant known, might change for different join modes
     this.memberService.createAdministrator(admin).subscribe(
       data => {

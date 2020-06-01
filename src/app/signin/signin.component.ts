@@ -37,18 +37,24 @@ export class SigninComponent implements OnInit {
 
     this.translate.get('SignIn').subscribe(data => {
       this.t_data = data;
+      console.log(this.t_data);
     });
 
     this.company_name = localStorage.getItem('rd_company_name');
     this.company_logo_root = localStorage.getItem('rd_company_logo_root');
     this.company_url = localStorage.getItem('rd_company_url');
 
-    //console.log('GET LS', localStorage.getItem('rd_company_logo_root'));
-    //this.authService.memberSessionSubject.next('null');
+    // console.log('GET LS', localStorage.getItem('rd_company_logo_root'));
+    // this.authService.memberSessionSubject.next('null');
 
   }
 
   signIn(formValue) {
+
+    // need this in here since the NgInit here executes too soon!
+    this.translate.get('SignIn').subscribe(data => {
+      this.t_data = data;
+    });
 
     // console.log('form', formValue);
     this.isSubmitting = true;
@@ -67,8 +73,9 @@ export class SigninComponent implements OnInit {
         },
         error => {
           // translation problem here - this error is not translated... Hmmm
-          this.errorMsg = error.statusText;
-          this.openSnackBar(this.errorMsg);
+          // Indeed, the returned 401 gives the unauthorised, we need to deal with this through translation
+          // this.errorMsg = error.statusText;
+          this.openSnackBar(this.t_data.Unauth);
           this.isSubmitting = false;
         });
   }
