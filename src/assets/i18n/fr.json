@@ -573,9 +573,9 @@
     "Main": "SITE WEB",
     "Menus": " menus",
     "Section": "MENUS",
-    "Usage": "Utilisez ces liens dans le cas ou vos clients souhaiteraient accéder à votre Site Web ou à vos menus depuis leur Smartphone et/ou Tablette. Vous pouvez copier le code QR sur votre ordinateur en cliquant avec le bouton droit ou en appuyant longuement sur l'image.",
+    "Usage": "Utilisez ces liens dans le cas ou vos clients souhaiteraient accéder à votre Site Web ou à vos menus depuis leur Smartphone et/ou Tablette. Vous pouvez copier le code QR en cliquant sur le bouton de droite de la souris ou de votre pad.",
     "Custom": "NOMS DE DOMAINE PERSONNALISÉS",
-    "SPWInfo": "La Page Internet peut aussi être configurée pour fonctionner sur un nom de domaine personnalisé (par exemple www.votre-domaine.fr). Il peut s’agir d’un nom de domaine existant ou bien nous pouvons enregistrer avec vous un nom de domaine approprié. Contactez notre équipe d’assistance pour plus d’information. ",
+    "SPWInfo": "La Page Internet peut aussi être configurée pour fonctionner sur un nom de domaine personnalisé (par exemple www.votre-domaine.fr). Il peut s’agir d’un nom de domaine existant ou bien nous pouvons enregistrer avec vous un nom de domaine approprié. ",
     "Contact": "Contactez notre équipe d’assistance",
     "Further": "  pour plus d’information.",
     "Mail": "mailto:curation@restaurateurs-independants.fr"
@@ -894,7 +894,8 @@
     "Rtel": "Téléphone",
     "Uname": "Nom de l'Utilisateur",
     "Uid": "Nom de l'Utilisateur",
-    "Uemail": "Email de l'Utilisateur"
+    "Uemail": "Email de l'Utilisateur",
+    "Loading": "Chargement des restaurants associés"
   },
 
   "Profile-Image": {

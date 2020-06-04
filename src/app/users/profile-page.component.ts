@@ -69,6 +69,7 @@ export class ProfilePageComponent implements OnInit {
     private loadService: LoadService,
     public dialog: MatDialog) {
 
+    // TODO - this text needs to come from this.t_data.Loading - but that can only happen after the translate load...
     this.loadService.open('Loading associated restaurants');
 
     // detect language changes... need to check for change in texts
