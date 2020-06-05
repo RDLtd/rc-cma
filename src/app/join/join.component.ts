@@ -85,7 +85,8 @@ export class JoinComponent implements OnInit {
   async submitJoinForm(applicant) {
     this.currentApplicant = applicant;
     this.isSubmitting = true;
-    this.load.open(this.t_data.InProgress);
+
+    this.load.open();
 
     // Validate code if added manually
     // Wait for response

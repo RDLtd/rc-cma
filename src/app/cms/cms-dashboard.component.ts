@@ -837,10 +837,14 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
 
   dspUnreadMessages() {
 
-    let company_code = 'rc';
-    if (localStorage.getItem('rd_company_name') === 'Restaurateurs Indépendants') {
-      company_code = 'ri';
-    }
+    // let company_code = 'rc';
+    // if (localStorage.getItem('rd_company_name') === 'Restaurateurs Indépendants') {
+    //   company_code = 'ri';
+    // }
+
+    // update 01/06/20 - this can be recalled directly from local storage
+    const company_code = localStorage.getItem('rd_company_prefix');
+
     // console.log(this.user.member_id, this.user.member_access_level, this.user.member_messages_seen);
     this.memberService.messages(company_code, this.user.member_id, this.user.member_access_level, this.user.member_messages_seen)
       .subscribe(msgs => {

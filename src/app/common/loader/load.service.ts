@@ -14,7 +14,7 @@ export class LoadService {
     private dialog: MatDialog
   ) { }
 
-  open(msg= 'Loading') {
+  open(msg= '') {
     this.dialogRef = this.dialog.open(LoadComponent, {
       backdropClass: 'rc-dialog-backdrop',
       data: { message: msg },

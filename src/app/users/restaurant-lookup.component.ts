@@ -220,7 +220,7 @@ export class RestaurantLookupComponent implements OnInit {
       });
       confirmDialog.afterClosed().subscribe(ok => {
         if (ok) {
-          // Todo: could do with a custom email really
+          // Custom email now set up
           // Notify curation team
           const req = [
             ` ${this.t_data.Admin}: ${this.data.member.member_first_name} ${this.data.member.member_last_name}`,
@@ -236,7 +236,7 @@ export class RestaurantLookupComponent implements OnInit {
 
           console.log(req);
 
-          this.cms.sendRestaurantChanges(this.data.member, newRestaurant, req)
+          this.cms.sendRestaurantValidation(this.data.member, newRestaurant, req)
             .subscribe(() => {
               console.log('Flagged for immediate curation');
               },
