@@ -10,6 +10,14 @@
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 
   <script>
+    (function(){
+      const nvg = navigator.language || 'en-GB';
+      localStorage.setItem('rd_language', nvg.substr(0, 2));
+      localStorage.setItem('rd_brand', nvg.substr(3).toLowerCase() === 'fr' ? 'ri' : 'rc');
+    }());
+  </script>
+
+  <script>
     (function (b, o, i, l, e, r) {
       b.GoogleAnalyticsObject = l;
       b[l] || (b[l] =
