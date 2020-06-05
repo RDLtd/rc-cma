@@ -26,18 +26,32 @@
     <p>{{ 'CMS-SPW-Links.QRInfo' | translate }}</p>
 
     <div class="rc-codes">
-      <div>
-        <qrcode [qrdata]="data['spwUrl']" [width]="180" [errorCorrectionLevel]="'M'"
-                matTooltip="{{ 'CMS-SPW-Links.QRCode' | translate }}{{ data['restaurant']['restaurant_name'] }}
+      <a
+        download="QR-Code-Website"
+        href="{{ base64main }}"
+        matTooltip="Click to Download">
+        <qrcode
+          [qrdata]="data['spwUrl']"
+          [elementType]="'img'"
+          [width]="256"
+          [errorCorrectionLevel]="'M'"
+          matTooltip="{{ 'CMS-SPW-Links.QRCode' | translate }}{{ data['restaurant']['restaurant_name'] }}
                 {{ 'CMS-SPW-Links.Website' | translate }}"></qrcode>
         <span>{{ 'CMS-SPW-Links.Main' | translate }}</span>
-      </div>
-      <div>
-        <qrcode [qrdata]="data['spwMenus']" [width]="180" [errorCorrectionLevel]="'M'"
-                matTooltip="{{ 'CMS-SPW-Links.QRCode' | translate }}{{ data['restaurant']['restaurant_name'] }}
+      </a>
+      <a
+        download="QR-Code-Menu"
+        href="{{ base64menu }}"
+        matTooltip="Click to Download">
+        <qrcode
+          [qrdata]="data['spwMenus']"
+          [elementType]="'img'"
+          [width]="256"
+          [errorCorrectionLevel]="'M'"
+          matTooltip="{{ 'CMS-SPW-Links.QRCode' | translate }}{{ data['restaurant']['restaurant_name'] }}
                 {{ 'CMS-SPW-Links.Menus' | translate }}"></qrcode>
         <span>{{ 'CMS-SPW-Links.Section' | translate }}</span>
-      </div>
+      </a>
     </div>
 
     <p>{{ 'CMS-SPW-Links.Usage' | translate }}</p>

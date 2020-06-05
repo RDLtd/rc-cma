@@ -86,8 +86,7 @@ export class JoinComponent implements OnInit {
     this.currentApplicant = applicant;
     this.isSubmitting = true;
 
-    // TODO - For some reason this shows in English? Yet the rest of the form is OK in French
-    this.load.open(this.t_data.InProgress);
+    this.load.open();
 
     // Validate code if added manually
     // Wait for response
