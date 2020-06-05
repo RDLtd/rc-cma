@@ -228,6 +228,18 @@ export class CMSService {
       });
   }
 
+  sendRestaurantValidation(member: Member, restaurant: Restaurant, changes: any) {
+    return this.http.post(this.config.apiUrl + '/cms/sendrestaurantvalidation',
+      {
+        company_prefix: localStorage.getItem('rd_company_prefix'),
+        member: member,
+        restaurant: restaurant,
+        changes: changes,
+        userCode: this.config.userAPICode,
+        token: this.jwt()
+      });
+  }
+
   getSPWTemplate(restaurant_id: string) {
     console.log('ID', restaurant_id);
     return this.http.post(this.config.apiUrl + '/cms/setspwtemplate',
@@ -246,10 +258,10 @@ export class CMSService {
         userCode: this.config.userAPICode, token: this.jwt() });
   }
 
-  sendVerificationEmail(restaurantname: string, restaurantcode: string, restaurantemail: string) {
+  sendVerificationEmail(restaurantname: string, restaurantcode: string, restaurantemail: string, memberfullname: string) {
     return this.http.post(this.config.apiUrl + '/cms/sendverificationemail',
       { company_prefix: localStorage.getItem('rd_company_prefix'),
-        restaurantname: restaurantname, restaurantcode: restaurantcode, restaurantemail: restaurantemail,
+        restaurantname: restaurantname, restaurantcode: restaurantcode, restaurantemail: restaurantemail, memberfullname: memberfullname,
         userCode: this.config.userAPICode, token: this.jwt() });
   }
 

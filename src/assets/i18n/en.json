@@ -578,7 +578,8 @@
     "SPWInfo": "The SPW can also be set up to work on a custom domain (e.g. www.your-domain.com). It can be an existing domain name, or we can register a suitable domain name for you. ",
     "Contact": "Contact the Curation Team",
     "Further": " for further details.",
-    "Mail": "mailto:curation@restaurantcollective.uk"
+    "Mail": "mailto:curation@restaurantcollective.uk",
+    "Click": "Click to download"
   },
 
   "Restaurant-Detail": {

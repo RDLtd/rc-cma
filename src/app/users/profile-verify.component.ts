@@ -126,10 +126,12 @@ export class ProfileVerifyComponent implements OnInit {
 
   reqVerificationCode() {
 
+    const member_full_name = this.data.member.member_first_name + ' ' + this.data.member.member_last_name;
     this.cmsService.sendVerificationEmail(
       this.data.restaurant.restaurant_name,
       this.data.restaurant.restaurant_number,
-      this.data.restaurant.restaurant_email)
+      this.data.restaurant.restaurant_email,
+      member_full_name)
       .subscribe(
       () => {
         this.cmsLocalService.dspSnackbar(

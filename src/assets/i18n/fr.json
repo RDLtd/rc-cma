@@ -578,7 +578,8 @@
     "SPWInfo": "La Page Internet peut aussi être configurée pour fonctionner sur un nom de domaine personnalisé (par exemple www.votre-domaine.fr). Il peut s’agir d’un nom de domaine existant ou bien nous pouvons enregistrer avec vous un nom de domaine approprié. ",
     "Contact": "Contactez notre équipe d’assistance",
     "Further": "  pour plus d’information.",
-    "Mail": "mailto:curation@restaurateurs-independants.fr"
+    "Mail": "mailto:curation@restaurateurs-independants.fr",
+    "Click": "Cliquer pour télécharger"
   },
 
   "Restaurant-Detail": {
@@ -981,7 +982,7 @@
     "PleaseNote":"VEUILLEZ NOTER",
     "Info": "Les informations concernant ",
     "NotYetCurated": "** ne sont pas encore actualisées. L’équipe est maintenant informée et procédera à des vérifications et modifications dans les prochaines 48 heures. Cependant si vous notez des données essentielles incorrectes, veuillez nous le signaler en envoyant une  **Demande de Changement**.",
-    "Immediate": " Ce restaurant nécessite une conservation immédiate. Veuillez informer l'administrateur du contenu une fois qu'il est terminé. Nous te remercions.",
+    "Immediate": " Puis veuillez informer l'administrateur du contenu une fois que la vérification aura été réalisée à son adresse email. Nous vous en remercions.",
     "Admin": "Administrateur",
     "Street": "Rue",
     "PostCodeLower": "Code Postal"

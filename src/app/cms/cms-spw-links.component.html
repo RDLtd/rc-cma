@@ -29,7 +29,7 @@
       <a
         download="QR-Code-Website"
         href="{{ base64main }}"
-        matTooltip="Click to Download">
+        matTooltip="{{ 'CMS-SPW-Links.Click' | translate }}">
         <qrcode
           [qrdata]="data['spwUrl']"
           [elementType]="'img'"
@@ -42,7 +42,7 @@
       <a
         download="QR-Code-Menu"
         href="{{ base64menu }}"
-        matTooltip="Click to Download">
+        matTooltip="{{ 'CMS-SPW-Links.Click' | translate }}">
         <qrcode
           [qrdata]="data['spwMenus']"
           [elementType]="'img'"
