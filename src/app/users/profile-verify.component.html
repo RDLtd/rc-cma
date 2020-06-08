@@ -40,7 +40,7 @@
       <mat-form-field
         hideRequiredMarker
         class="rc-full-width">
-        <mat-label>Restaurant Email:</mat-label>
+        <mat-label>{{ 'Profile-Verify.RestEmail' | translate }}:</mat-label>
         <input
           #email
           [(ngModel)]="data.restaurant.restaurant_email"
@@ -60,7 +60,7 @@
           (click)="editEmail()">
           <mat-icon style="padding-bottom: 0.15em;">edit</mat-icon>
         </button>
-        <mat-error align="end">A valid email address <strong>required</strong></mat-error>
+        <mat-error align="end">{{ 'Profile-Verify.Valid' | translate }} <strong>{{ 'Profile-Verify.Required' | translate }}</strong></mat-error>
       </mat-form-field>
 
       <mat-form-field

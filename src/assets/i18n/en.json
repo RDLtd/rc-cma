@@ -937,7 +937,8 @@
     "User": "User",
     "Oemail": "Original Email Address",
     "Nemail": "New Email Address",
-    "ASAP": "Please review these changes a.s.a.p."
+    "ASAP": "Please review these changes a.s.a.p.",
+    "RestEmail" : "Restaurant email"
   },
 
   "Profile-Detail": {

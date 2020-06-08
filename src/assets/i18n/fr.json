@@ -912,7 +912,7 @@
 
   "Profile-Verify": {
     "CodeSent": "Code de vérification envoyé à ",
-    "Verifying": "Vérification de l'identification",
+    "Verifying": "Identification",
     "Before": "Avant de pouvoir accéder aux informations relatives à ce restaurant, vous allez devoir confirmer votre identification en entrant un code qui vous sera envoyé à l'adresse e-mail enregistrée pour ce restaurant",
     "Code": "Code de vérification",
     "Again": "Code d'activation invalide, veuillez le saisir à nouveau",
@@ -922,12 +922,12 @@
     "Submit": "SOUMETTRE",
     "Main": "Veuillez fournir l'adresse e-mail principale de ",
     "Used": "Ces informations seront utilisées pour confirmer l'adhésion et pour toute correspondance future.",
-    "VerifyEmail": "Veuillez vérifier l'adresse e-mail principale de ",
-    "Add": "et ajoutez votre ",
+    "VerifyEmail": "Veuillez vérifier l'adresse e-mail ci-dessous de ",
+    "Add": "où vous recevrez le code après en avoir fait la demande, puis ajoutez ce ",
     "Below": " en dessous:",
-    "NoCode": "Si vous n'avez pas de code, assurez-vous que nous avons le bon e-mail, puis utilisez ",
-    "RequestCode": "Demandez le code",
-    "Option": " option.",
+    "NoCode": "Si vous n'avez pas reçu de code, assurez-vous que la bonne adresse email soit renseignée puis utilisez ",
+    "RequestCode": "'Demande du code'",
+    "Option": "",
     "Check": "Avant de demander un code de vérification, veuillez vérifier que l'e-mail affiché ci-dessous est correct. Pour modifier cette adresse, sélectionnez l'icône MODIFIER.",
     "Valid": "Une adresse e-mail valide ",
     "Required": "est requis",
@@ -937,7 +937,8 @@
     "User": "Utilisateur",
     "Oemail": "Adresse e-mail initiale",
     "Nemail": "Nouvelle adresse e-mail",
-    "ASAP": "Veuillez revoir ces modifications dans les plus brefs délais."
+    "ASAP": "Veuillez revoir ces modifications dans les plus brefs délais.",
+    "RestEmail" : "Email du restaurant"
   },
 
   "Profile-Detail": {
