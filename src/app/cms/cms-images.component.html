@@ -5,7 +5,6 @@
       <span>{{ 'CMS-Images.RImages' | translate }}</span>
       <span class="rc-space-filler"></span>
       <span class="rc-toolbar-actions">
-
         <button
           mat-icon-button
           (click)="help.dspHelp('cms-images', restaurant)">
@@ -18,10 +17,6 @@
         </button>
       </span>
     </mat-toolbar>
-  </div>
-    <!-- content load animation -->
-    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 rc-add-content" *ngIf="showLoader">
-    <rc-loader></rc-loader>
   </div>
     <!-- Image cards -->
     <div
