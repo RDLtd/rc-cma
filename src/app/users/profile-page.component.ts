@@ -3,7 +3,7 @@ import { Restaurant, Member } from '../_models';
 import {
   RestaurantService,
   MemberService,
-  //AuthenticationService,
+  AuthenticationService,
   CMSService,
   //FinancialService,
   HelpService, AnalyticsService
@@ -36,8 +36,8 @@ export class ProfilePageComponent implements OnInit {
   @ViewChild('card', {static: true}) card;
   restaurants: Array<Restaurant>;
   restaurant: Restaurant;
-  member: Member = new Member();
-  memberAvatar: string;
+  member: Member;
+  clPublicId: string = null;
   defaultImages: Array<any> = [];
   placeholderImage;
   isDemoMember = false;
@@ -47,7 +47,7 @@ export class ProfilePageComponent implements OnInit {
 
   // translation variables
   t_data: any;
-  company_name;
+  brand: any;
   d_member_signedup: string;
   d_member_last_logged_in: string;
   d_member_job: string;
@@ -63,7 +63,7 @@ export class ProfilePageComponent implements OnInit {
     private router: Router,
     private translate: TranslateService,
     public help: HelpService,
-    // public authService: AuthenticationService,
+    public authService: AuthenticationService,
     public appConfig: AppConfig,
     private _clipboardService: ClipboardService,
     private loadService: LoadService,
@@ -79,7 +79,7 @@ export class ProfilePageComponent implements OnInit {
         this.placeholderImage = `https://via.placeholder.com/800x450?text=${this.t_data.AwaitingImage}`;
       });
       // re-translate computed display dates
-      moment.locale(localStorage.getItem('rd_country'));
+      moment.locale(localStorage.getItem('rd_locale'));
       this.d_member_signedup = moment(this.member.member_signedup).format('DD MMMM YYYY');
       this.d_member_last_logged_in = moment(this.member.member_last_logged_in).format('DD MMMM YYYY');
       this.d_member_job = this.t_data[this.member.member_job];
@@ -88,17 +88,17 @@ export class ProfilePageComponent implements OnInit {
 
   ngOnInit() {
 
-    const profile = JSON.parse(localStorage.getItem('rd_profile'));
-    this.company_name = localStorage.getItem('rd_company_name');
-    this.getMember(profile.member_id);
-    this.isDemoMember = (profile.member_id === 42);
+    this.brand = this.appConfig.brand;
+    this.member = JSON.parse(localStorage.getItem('rd_profile'));
+    moment.locale(localStorage.getItem('rd_locale'));
 
-    moment.locale(localStorage.getItem('rd_country'));
+    this.setMember();
 
     this.translate.get('Profile-Page').subscribe(data => {
       this.t_data = data;
       this.placeholderImage = `https://via.placeholder.com/800x450?text=${this.t_data.AwaitingImage}`;
-    });
+    },
+      error => console.log('No t_data', error));
   }
 
   openSnackBar(msg: string, act = '', dur = 5000) {
@@ -107,23 +107,18 @@ export class ProfilePageComponent implements OnInit {
     });
   }
 
-  getMember(id) {
-    this.memberService.getById(id)
-      .subscribe(
-        data => {
-          this.member = data['member'][0];
-          this.d_member_signedup = moment(this.member.member_signedup).format('DD MMMM YYYY');
-          this.d_member_last_logged_in = moment(this.member.member_last_logged_in).format('DD MMMM YYYY');
-          this.getAssociatedRestaurants(id);
-          this.d_member_job = this.t_data[this.member.member_job];
-          // Create array from url
-          const imgPath = this.member.member_image_path.split('/');
-          // Select the last 3 elements as a new ref
-          this.memberAvatar = imgPath.slice(imgPath.length - 3).join('/');
-        },
-        error => {
-          console.log(error);
-        });
+  setMember() {
+    this.isDemoMember = (this.member.member_id === '42');
+    this.d_member_signedup = moment(this.member.member_signedup).format('DD MMMM YYYY');
+    this.d_member_last_logged_in = moment(this.member.member_last_logged_in).format('DD MMMM YYYY');
+    const imgPath = this.member.member_image_path.split('/');
+    // Select the last 3 elements as a new Cloudinary ref
+    this.clPublicId = imgPath.slice(imgPath.length - 3).join('/');
+    this.getAssociatedRestaurants(this.member.member_id);
+    // Make sure we've loaded the translations first
+    if(!!this.t_data) {
+      this.d_member_job = this.t_data[this.member.member_job];
+    }
   }
 
   getReferrerInfo() {
@@ -148,12 +143,10 @@ export class ProfilePageComponent implements OnInit {
   }
 
   getAssociatedRestaurants(id) {
-    console.log('getAssociatedRestaurants');
-    //this.showLoader = true;
+
     this.restaurantService.getMemberRestaurants(id)
       .subscribe(
         data => {
-          //showLoader = false;
           this.restaurants = data['restaurants'];
           if (this.restaurants.length) {
             this.getDefaultImages();
@@ -162,9 +155,6 @@ export class ProfilePageComponent implements OnInit {
             this.addRestaurants();
           }
           this.loadService.close();
-          // this.dspUnreadMessages();
-          // console.log('Restaurants', this.restaurants);
-
         },
         error => {
           console.log(error);
@@ -267,7 +257,7 @@ export class ProfilePageComponent implements OnInit {
       const dialogRef = this.dialog.open(ProfileImageComponent, {
         data: {
           member: this.member,
-          avatar: this.memberAvatar
+          avatar: this.clPublicId
         }
       });
       // dialogRef.componentInstance.avatar = this.memberAvatar

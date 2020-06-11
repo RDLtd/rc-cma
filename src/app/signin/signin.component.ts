@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService, MemberService } from '../_services';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { AppConfig } from '../app.config';
 
 @Component({
   selector: 'rc-signin',
@@ -11,16 +12,11 @@ import { TranslateService } from '@ngx-translate/core';
 
 export class SigninComponent implements OnInit {
 
-  isReferral = false;
   isSubmitting: boolean;
   dbOffline: boolean = false;
   errorMsg: string;
   pwdReset: boolean = false;
-  user_email: string;
-
-  company_name;
-  company_logo_root;
-  company_url;
+  brand: string;
 
   // translation variables
   t_data: any;
@@ -30,22 +26,25 @@ export class SigninComponent implements OnInit {
     private memberService: MemberService,
     public snackBar: MatSnackBar,
     private translate: TranslateService,
-    private activeRoute: ActivatedRoute
+    private activeRoute: ActivatedRoute,
+    private config: AppConfig,
+    private router: Router
   ) {  }
 
   ngOnInit() {
 
+    this.brand = this.config.brand;
+
+    // If the user is already signed in
+    // redirect to their 'home' page
+    if (this.authService.isAuth()) {
+      this.router.navigate([localStorage.getItem('rd_home') || '']);
+    }
+
     this.translate.get('SignIn').subscribe(data => {
       this.t_data = data;
-      console.log(this.t_data);
+      //console.log(this.t_data);
     });
-
-    this.company_name = localStorage.getItem('rd_company_name');
-    this.company_logo_root = localStorage.getItem('rd_company_logo_root');
-    this.company_url = localStorage.getItem('rd_company_url');
-
-    // console.log('GET LS', localStorage.getItem('rd_company_logo_root'));
-    // this.authService.memberSessionSubject.next('null');
 
   }
 
@@ -62,19 +61,17 @@ export class SigninComponent implements OnInit {
       .subscribe(
         authResult => {
           this.isSubmitting = false;
-          this.authService.setMember(authResult['member']);
           if (authResult && authResult['token']) {
-            // console.log('Auth OK');
             this.authService.setAuthSession(authResult['member'], authResult['token'], this.dbOffline);
           } else {
-            // console.log('Auth Failed');
+            console.log('Auth Failed');
           }
-          // this.router.navigate([this.tgtRoute || localStorage.getItem('rd_home')]);
         },
         error => {
           // translation problem here - this error is not translated... Hmmm
           // Indeed, the returned 401 gives the unauthorised, we need to deal with this through translation
           // this.errorMsg = error.statusText;
+          console.log(`Auth Error: ${error}`);
           this.openSnackBar(this.t_data.Unauth);
           this.isSubmitting = false;
         });

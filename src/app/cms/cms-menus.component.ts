@@ -14,7 +14,7 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class CmsMenusComponent implements OnInit {
 
-  user = localStorage.getItem('rd_user');
+  user = localStorage.getItem('rd_username');
   restaurant: Restaurant;
   menus: any;
   descriptions: any;
@@ -298,8 +298,7 @@ export class CmsMenusComponent implements OnInit {
         formDish.cms_dish_price = this.toCurrencyFormat(formDish.cms_dish_price);
 
         this.cms.updateDish(newDish).subscribe(
-          data => {
-            // console.log('cms.updateDish', data);
+          () => {
             this.htmlMenu.dishes[dish.cms_dish_idx] = newDish;
             // replace idx reference in case user edits again before page reload
             this.htmlMenu.dishes[dish.cms_dish_idx].cms_dish_idx = dish.cms_dish_idx;
@@ -348,8 +347,7 @@ export class CmsMenusComponent implements OnInit {
 
 
         this.cms.createDish(newDish).subscribe(
-          res => {
-            //console.log('Dish Added:', res);
+          () => {
             // Reload dishes
             this.getHtmlMenuDishes(this.restaurant.restaurant_id);
             this.cmsLocalService.dspSnackbar(newDish.cms_dish_name + this.t_data.Added, null, 3);

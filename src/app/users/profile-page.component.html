@@ -4,7 +4,8 @@
       <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
         <mat-toolbar class="rc-section-toolbar">
           <span
-            class="rc-toolbar-title">{{ member.member_first_name | uppercase }} {{ member.member_last_name | uppercase }}</span>
+            class="rc-toolbar-title">{{ member?.member_first_name | uppercase }} {{ member?.member_last_name |
+            uppercase }}</span>
           <span class="rc-space-filler"></span>
           <span class="rc-section-toolbar-actions rc-media-small-hide">
 
@@ -112,8 +113,8 @@
                 (click)="updateImage()">
 
                 <cl-image
-                *ngIf="memberAvatar"
-                [public-id]="memberAvatar">
+                *ngIf="clPublicId"
+                [public-id]="clPublicId">
                   <cl-transformation
                     width="400"
                     height="400"
@@ -182,7 +183,7 @@
           class="rc-member-assc"
           mat-mini-fab
           color=""
-          matTooltip="{{ restaurant.restaurant_name }} {{ 'Profile-Page.IsAssociate' | translate }} {{ company_name }}">
+          matTooltip="{{ restaurant.restaurant_name }} {{ 'Profile-Page.IsAssociate' | translate }} {{ brand.name }}">
           <mat-icon>people_outline</mat-icon>
         </button>
         <button
@@ -190,7 +191,7 @@
           class="rc-member-full"
           mat-mini-fab
           color=""
-          matTooltip="{{ restaurant.restaurant_name }} {{ 'Profile-Page.IsFull' | translate }} {{ company_name }}">
+          matTooltip="{{ restaurant.restaurant_name }} {{ 'Profile-Page.IsFull' | translate }} {{ brand.name }}">
           <mat-icon>people</mat-icon>
         </button>
         <!-- image -->

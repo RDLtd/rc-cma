@@ -5,6 +5,7 @@ import { CmsLocalService } from '../cms';
 import { TranslateService } from '@ngx-translate/core';
 import { MatDialog } from '@angular/material/dialog';
 import { LoadService } from '../common/loader/load.service';
+import { AppConfig } from '../app.config';
 
 
 @Component({
@@ -18,6 +19,7 @@ export class JoinComponent implements OnInit {
   newRegResult: string;
   duplicateField: string;
   currentApplicant: any;
+  brand: any;
   referrer = {
     type: 'self',
     code: null,
@@ -25,12 +27,7 @@ export class JoinComponent implements OnInit {
     id: 0,
     restaurant: null
   };
-
   t_data: any;
-
-  company_name;
-  company_logo_root;
-  company_url;
 
   constructor(
     private route: ActivatedRoute,
@@ -39,7 +36,8 @@ export class JoinComponent implements OnInit {
     private cmsLocalService: CmsLocalService,
     private translate: TranslateService,
     private dialog: MatDialog,
-    private load: LoadService
+    private load: LoadService,
+    private config: AppConfig
   ) {
     translate.onLangChange.subscribe(() => {
       this.translate.get('Join').subscribe(data => {this.t_data = data; });
@@ -58,10 +56,8 @@ export class JoinComponent implements OnInit {
           sessionStorage.setItem('referrer_type', 'self');
         }
       });
-    // Set localisation
-    this.company_name = localStorage.getItem('rd_company_name');
-    this.company_logo_root = localStorage.getItem('rd_company_logo_root');
-    this.company_url = localStorage.getItem('rd_company_url');
+    // Set brand
+    this.brand = this.config.brand;
     this.translate.get('Join').subscribe(data => this.t_data = data);
   }
 

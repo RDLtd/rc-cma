@@ -1,6 +1,6 @@
-import { Component, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../_services';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AppConfig } from '../app.config';
@@ -12,8 +12,6 @@ import { AboutComponent } from './about.component';
 })
 
 export class HeaderComponent implements OnInit {
-
-  @Output() navtoggled = new EventEmitter();
   lblMemberLogin: string = 'User Login';
   displayName: string = this.lblMemberLogin;
   dialogRef: any;
@@ -21,32 +19,28 @@ export class HeaderComponent implements OnInit {
   inSession = true;
 
 
-  constructor(public authService: AuthenticationService,
-              private translate: TranslateService,
-              private dialog: MatDialog,
-              private router: Router,
-              private config: AppConfig ) { }
+  constructor(
+    public authService: AuthenticationService,
+    private translate: TranslateService,
+    private dialog: MatDialog,
+    private router: Router,
+    private route: ActivatedRoute,
+    private config: AppConfig ) { }
 
   ngOnInit() {
 
-    this.company_name = localStorage.getItem('rd_company_name');
+    this.company_name = this.config.brand.name;
+    // If page refreshed
+    this.displayName = (this.authService.isAuth() ? localStorage.getItem('rd_username') : this.lblMemberLogin);
 
-    // If app is refreshed
-    if (this.authService.isAuth()) {
-      this.displayName = localStorage.getItem('rd_user');
-    } else {
-      this.displayName = this.lblMemberLogin;
-    }
     // Get notified anytime the login status changes
     this.authService.memberSessionSubject.subscribe(
       sessionStatus => {
-
-        // console.log(sessionStatus);
-
+        //console.log('Header', sessionStatus);
         switch (sessionStatus) {
           case 'active': {
             // Successful login
-            this.displayName = localStorage.getItem('rd_user');
+            this.displayName = localStorage.getItem('rd_username');
             break;
           }
           case 'closed': {
@@ -59,11 +53,9 @@ export class HeaderComponent implements OnInit {
           case 'expired': {
             // Session expired
             this.displayName = this.lblMemberLogin;
-            // this.login(true);
             // new login page
             this.inSession = false;
             this.router.navigate(['/']);
-
             break;
           }
         }
@@ -72,14 +64,8 @@ export class HeaderComponent implements OnInit {
     );
   }
 
-  rcNavToggle(): void {
-    this.navtoggled.emit();
-  };
-
   logout(): void {
     this.authService.logout('closed');
-    console.log('Header: Logout');
-    this.router.navigate(['/']);
   };
 
   login(): void {

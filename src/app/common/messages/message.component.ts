@@ -12,7 +12,7 @@ export class MessageComponent implements OnInit {
 
   constructor(
     public messageDialog: MatDialogRef<MessageComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA) public data: any,
   ) {}
 
   ngOnInit() {

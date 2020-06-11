@@ -49,12 +49,12 @@ export class AffiliatesComponent implements OnInit, OnDestroy {
     // Record the access event for this restaurant
     this.restaurantService.recordAccess(Number(this.restaurant.restaurant_id), 0, 'Viewed Offers')
       .subscribe(
-        access_data => {
+        () => {
           console.log('Access record updated - Viewed Offers');
           this.cmsLocalService.setOfferCount(0);
         },
         error => {
-          console.log('Could not update access record');
+          console.log('Could not update access record' + error);
         });
   }
 
@@ -101,11 +101,11 @@ export class AffiliatesComponent implements OnInit, OnDestroy {
       this.restaurantService.recordAccess(Number(this.restaurant.restaurant_id),
         this.affiliates[index].partner_id, 'Viewed Marketing')
         .subscribe(
-          access_data => {
+          () => {
             console.log('Access record updated - Viewed Marketing');
           },
           error => {
-            console.log('Could not update access record');
+            console.log('Could not update access record' + error);
           });
       //
     }
@@ -146,17 +146,17 @@ export class AffiliatesComponent implements OnInit, OnDestroy {
             + this.restaurant.restaurant_address_3,
           this.restaurant.restaurant_telephone,
           this.restaurant.restaurant_email,
-          localStorage.getItem('rd_user'),
+          localStorage.getItem('rd_username'),
           this.restaurant.restaurant_number,
           localStorage.getItem('rd_country'))
         .subscribe(
-          access_data => {
+          () => {
             console.log('Email sent to ' + this.affiliates[index].partner_name + ' from ' +
               this.restaurant.restaurant_name);
           },
           error => {
             console.log('Could not send email to ' + this.affiliates[index].partner_name + ' from ' +
-              this.restaurant.restaurant_name);
+              this.restaurant.restaurant_name, error);
           });
 
       // and send the offer confirmation to the restaurant
@@ -174,25 +174,25 @@ export class AffiliatesComponent implements OnInit, OnDestroy {
           this.restaurant.restaurant_number,
           localStorage.getItem('rd_country'))
         .subscribe(
-          access_data => {
+          () => {
             console.log('Offer confirmation from ' + this.affiliates[index].partner_name + ' sent to ' +
               this.restaurant.restaurant_name);
           },
           error => {
             console.log('Could not send offer confirmation from ' + this.affiliates[index].partner_name + ' to ' +
-              this.restaurant.restaurant_name);
+              this.restaurant.restaurant_name, error);
           });
 
       // finally record the access event for this restaurant
       this.restaurantService.recordAccess(Number(this.restaurant.restaurant_id),
         this.affiliates[index].partner_id, 'Clicked Through')
         .subscribe(
-          access_data => {
+          () => {
             console.log('Access record updated - ' + this.restaurant.restaurant_name + ' clicked through ' +
               this.affiliates[index].partner_name);
           },
           error => {
-            console.log('Could not update access record');
+            console.log('Could not update access record', error);
           });
 
       // show a generic message - the partner specific message is sent by email

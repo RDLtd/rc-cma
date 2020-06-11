@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { AppConfig } from '../app.config';
 
 @Component({
   selector: 'rc-footer',
@@ -12,16 +13,22 @@ export class FooterComponent implements OnInit {
   company_logo_root;
   company_url;
 
-  constructor( private translate: TranslateService) {}
+
+  constructor(
+    private translate: TranslateService,
+    private appConfig: AppConfig
+  ) {}
 
   ngOnInit() {
-    this.company_name = localStorage.getItem('rd_company_name');
-    this.company_logo_root = localStorage.getItem('rd_company_logo_root');
-    this.company_url = localStorage.getItem('rd_company_url');
+
+    this.company_name = this.appConfig.brand.company_name;
+    this.company_logo_root = this.appConfig.brand.logo;
+    this.company_url = this.appConfig.brand.url;
+
   }
 
   setLanguage(lang) {
-    localStorage.setItem('rd_country', lang);
+    localStorage.setItem('rd_language', lang);
     this.translate.use(lang);
   }
 }

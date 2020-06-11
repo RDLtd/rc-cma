@@ -13,15 +13,16 @@ import { Router } from '@angular/router';
 })
 
 export class AuthenticationService {
-
   public memberSessionSubject = new BehaviorSubject<any>(localStorage.getItem('rd_session'));
   public member: Member = new Member();
   private dbOffline = false;
   private inSession: boolean = false;
-  curation_zone_set: any[] = [];
+  private curation_zone_set: any[] = [];
   private sessionExpiresAt: any;
   private sessionTimeLeft: any;
   private checkingActivity: boolean = false;
+  private authToken = new BehaviorSubject(new HttpParams().set('Authorization', 'Bearer' +
+    ' 234242423wdfsdvdsfsdrfg34tdfverge'));
 
   constructor(
     private restaurantService: RestaurantService,
@@ -29,22 +30,16 @@ export class AuthenticationService {
     private router: Router,
     private http: HttpClient,
     private translate: TranslateService,
-    private config: AppConfig) {
-  }
+    private config: AppConfig) { }
 
-  login(form) {
+  public login(form) {
     return this.http.post(this.config.apiUrl + '/members/authenticate',
       {
         email: form.email,
         password: form.pwd,
         userCode: 'RDL-dev',
-        token: this.jwt()
+        token: this.authToken
       });
-  }
-
-  public setMember(member: Member) {
-    //console.log('setMember', member);
-    this.member = member;
   }
 
   public getLoggedInUser(): Member {
@@ -54,9 +49,11 @@ export class AuthenticationService {
   public setAuthSession(member, token, offline): void {
 
     this.dbOffline = offline;
+    this.member = member;
 
+    // Set session variables
     localStorage.setItem('rd_profile', JSON.stringify(member));
-    localStorage.setItem('rd_user', `${member.member_first_name} ${member.member_last_name}`);
+    localStorage.setItem('rd_username', `${member.member_first_name} ${member.member_last_name}`);
     localStorage.setItem('rd_access_level', `${member.member_access_level}`);
     localStorage.setItem('rd_token', token);
     localStorage.setItem('rd_session', 'active');
@@ -64,7 +61,7 @@ export class AuthenticationService {
     this.setNewSessionExpiry();
 
     this.translate.use(member.member_preferred_language);
-    localStorage.setItem('rd_country', member.member_preferred_language);
+    //localStorage.setItem('rd_country', member.member_preferred_language);
 
     //console.log('AL: ', member.member_access_level);
 
@@ -101,7 +98,7 @@ export class AuthenticationService {
                   this.dspHomeScreen('closed');
                 }
               },
-              error => {
+              () => {
                 this.openSnackBar('There was an error trying to access the curation database', '');
                 localStorage.setItem('rd_home', '/');
                 this.dspHomeScreen('closed');
@@ -160,9 +157,10 @@ export class AuthenticationService {
     this.inSession = false;
     this.memberSessionSubject.next(reason);
     this.member = null;
-    // localStorage.clear();
+
+    // Clear session variables
     localStorage.removeItem('rd_profile');
-    localStorage.removeItem('rd_user');
+    localStorage.removeItem('rd_username');
     localStorage.removeItem('rd_token');
     localStorage.removeItem('rd_token_expires_at');
     localStorage.removeItem('rd_access_level');
@@ -170,12 +168,12 @@ export class AuthenticationService {
     localStorage.removeItem('rd_session');
   }
 
+
   isAuth(): boolean {
     this.sessionExpiresAt = JSON.parse(localStorage.getItem('rd_token_expires_at'));
     this.sessionTimeLeft = (this.sessionExpiresAt - new Date().getTime()) / 60000;
     // Time is up
-    if (this.sessionTimeLeft < 0) {
-      //this.router.navigate(['/']);
+    if (!!this.sessionExpiresAt && this.sessionTimeLeft < 0) {
       this.logout('expired');
       return false;
     // Time is running out is anyone using the app?
@@ -225,25 +223,6 @@ export class AuthenticationService {
     // Bump up access level if db is offline
     if (this.dbOffline) { requiredLevel = 4; }
     return (this.isAuth() && (userLevel >= requiredLevel));
-  }
-
-  // generate token
-  private jwt(): any {
-    // create authorization header with jwt token
-    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-
-    const requestOptions = {
-      params: new HttpParams()
-    };
-    requestOptions.params.set('foo', 'bar');
-    requestOptions.params.set('apiCategory', 'Financial');
-    // this.http.get(environment.api+ '.feed.json', requestOptions );
-    if (currentUser && currentUser.token) {
-      requestOptions.params.set('Authorization', 'Bearer ' + currentUser.token);
-    } else {
-      requestOptions.params.set('Authorization', 'Bearer ' + '234242423wdfsdvdsfsdrfg34tdfverge');
-    }
-    return requestOptions;
   }
 
   openSnackBar(message: string, action: string) {

@@ -4,6 +4,7 @@ declare const require: any;
 
 export class AppConfig {
 
+
   public readonly build = {
     version: require('../../package.json').version,
     name: require('../../package.json').name
@@ -34,7 +35,7 @@ export class AppConfig {
   public readonly upload_preset = 'nozxac7z';
   public readonly restaurant_verification_days = 30;
   public readonly session_timeout = 60; // 60 minutes
-  public readonly session_countdown = 5; // 5 minutes check activity
+  public readonly session_countdown = 1; // 5 minutes check activity
   public readonly use_ip_location = true;
 
   public readonly geocoding_api = 'AIzaSyBN6LkgNpX8E8lpbHdlkJZ6SU5LILVHwMY';
@@ -70,4 +71,45 @@ export class AppConfig {
     rd_company_currency_code: 'EUR'
   };
 
+  private brands = {
+    rc: {
+      name: 'Restaurant Collective',
+      prefix: 'rc',
+      logo: 'rc-logo',
+      url: 'https://restaurantcollective.uk',
+      email: {
+        support: 'support@restaurantcollective.uk',
+        curation: 'curation@restaurantcollective.uk'
+      },
+      fee: {
+        month: '3.50',
+        year: '42.00',
+        yearIncVat: '50.40'
+      },
+      currency: {
+        symbol: '£',
+        code: 'GBP'
+      }
+    },
+    ri: {
+      name: 'Restaurateurs Indépendants',
+      prefix: 'ri',
+      logo: 'ri-logo',
+      url: 'https://restaurateurs-independants.fr',
+      email: {
+        support: 'support@restaurateurs-independants.fr',
+        curation: 'curation@restaurateurs-independants.fr'
+      },
+      fee: {
+        month: '4.00',
+        year: '48.00',
+        yearIncVat: '57.60'
+      },
+      currency: {
+        symbol: '€',
+        code: 'EUR'
+      }
+    }
+  };
+  public readonly brand = this.brands[localStorage.getItem('rd_brand')];
 }
