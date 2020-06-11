@@ -345,7 +345,6 @@ export class CmsMenusComponent implements OnInit {
 
         const newDish = this.createNewDish(formDish);
 
-
         this.cms.createDish(newDish).subscribe(
           () => {
             // Reload dishes
