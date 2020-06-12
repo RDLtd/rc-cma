@@ -10,8 +10,8 @@
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 
   <script>
-    const rd_brand = (function(){
-      const ref = document.referrer;
+      const rd_brand = (function(){
+      const ref = document.URL;
       const nvg = navigator.language || 'en-GB';
       const lang = nvg.substr(0, 2);
       const loc = nvg.toLowerCase();
@@ -22,6 +22,7 @@
         localStorage.setItem('rd_language', lang);
       }
       localStorage.setItem('rd_locale', loc);
+
       if (ref.includes('.fr') || loc.substr(3) === 'fr') {
         localStorage.setItem('rd_brand', 'ri');
         return 'ri';
