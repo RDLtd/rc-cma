@@ -46,6 +46,11 @@ export class AuthenticationService {
     return this.member;
   }
 
+  public setMember(member: Member) {
+    //console.log('setMember', member);
+    this.member = member;
+  }
+
   public setAuthSession(member, token, offline): void {
 
     this.dbOffline = offline;

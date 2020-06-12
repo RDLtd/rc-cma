@@ -23,8 +23,8 @@ export class CmsFileUploadComponent implements OnInit {
   uploader: FileUploader;
   responses: Array<any> = [];
 
-  @ViewChild('imgUploadForm', { static: false }) imgForm: NgForm;
-  @ViewChild('menuUploadForm', { static: false }) menuForm: NgForm;
+  @ViewChild('imgUploadForm') imgForm: NgForm;
+  @ViewChild('menuUploadForm') menuForm: NgForm;
 
   // translation variables
   t_data: any;
@@ -76,10 +76,6 @@ export class CmsFileUploadComponent implements OnInit {
       form.append('folder', `restaurants/${this.data.restaurant.restaurant_number}`);
       form.append('file', fileItem);
       fileItem.withCredentials = false;
-
-      // console.log('File item', fileItem );
-      // console.log('Form built');
-
       return {fileItem, form};
     };
 
@@ -109,7 +105,7 @@ export class CmsFileUploadComponent implements OnInit {
         }
       );
       // console.log(JSON.parse(response).original_filename);
-      console.log(JSON.parse(response));
+      // console.log(JSON.parse(response));
       // console.log(status);
 
       if (status === 200) {

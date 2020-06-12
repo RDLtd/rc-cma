@@ -5,6 +5,7 @@ import { RestaurantService, MemberService } from '../../_services';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
+import { AppService } from '../../_services/app.service';
 
 @Component({
   selector: 'rc-payment',
@@ -41,6 +42,7 @@ export class PaymentComponent implements OnInit  {
   agent;
 
   constructor(
+    private appConfig: AppService,
     public snackBar: MatSnackBar,
     private router: Router,
     private restaurantService: RestaurantService,
@@ -85,7 +87,7 @@ export class PaymentComponent implements OnInit  {
       reg_date.setFullYear(reg_date.getFullYear() + 1);
       const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
       this.renewal_date = reg_date.toLocaleDateString('en-US', options);
-      moment.locale(localStorage.getItem('rd_country'));
+      moment.locale(localStorage.getItem('rd_language'));
       this.d_renewal_date = moment(reg_date).format('dddd, DD MMMM YYYY');
     }
   }
@@ -211,7 +213,7 @@ export class PaymentComponent implements OnInit  {
     this.restaurantService.sendInvoice(restaurant_id, this.restaurant.restaurant_member_id,
       invoice_number, amount, currency, description, token)
       .subscribe(
-        data => {
+        () => {
           console.log('Invoice sent');
         },
         error => {

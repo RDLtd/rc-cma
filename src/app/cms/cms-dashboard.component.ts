@@ -137,7 +137,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
         // Since the display texts are computed, we need to re-run these routines...
         this.readAndCheckStatus();
         // re-translate computed display dates
-        moment.locale(localStorage.getItem('rd_locale'));
+        moment.locale(localStorage.getItem('rd_language'));
         this.d_memberJoinDate = this.setDateRes(this.memberJoinDate);
         this.d_publishDate = moment(this.publishDate).format('LLLL');
         this.d_core_date = this.setDateRes(this.core_date);
@@ -171,7 +171,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
 
     this.translate.get('CMS-Dashboard').subscribe(data => {
       this.t_data = data;
-      moment.locale(localStorage.getItem('rd_locale'));
+      moment.locale(localStorage.getItem('rd_language'));
       this.dfImg = 'https://via.placeholder.com/350x200?text=' + this.t_data.AwaitingImage;
 
       // Observe offer count
@@ -585,7 +585,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
   previewSPW() {
 
     if (this.cmsHasSufficientData) {
-      const dialogRef = this.dialog.open(CmsPreviewComponent, {
+      this.dialog.open(CmsPreviewComponent, {
         panelClass: 'rc-preview-dialog-container',
         backdropClass: 'rc-preview-backdrop',
         data: {
@@ -641,7 +641,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
   }
 
   dspSPWLinks(): void {
-    let dialogRef = this.dialog.open(CmsSpwLinksComponent,
+    this.dialog.open(CmsSpwLinksComponent,
       {
         data: {
           spwUrl: this.getSpwUrl(),
