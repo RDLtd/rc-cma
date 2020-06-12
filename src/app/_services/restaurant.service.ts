@@ -19,32 +19,54 @@ export class RestaurantService {
 
   getAll() {
     return this.http.post(this.config.apiUrl + '/restaurants',
-      { userCode: this.config.userAPICode, token: this.authToken });
+      {
+        userCode: this.config.userAPICode,
+        token: this.authToken
+      });
   }
 
   countAll() {
     return this.http.post(this.config.apiUrl + '/restaurants/count',
-      { userCode: this.config.userAPICode, token: this.authToken });
+      {
+        userCode: this.config.userAPICode,
+        token: this.authToken
+      });
   }
 
   getById(restaurant_id: string) {
     return this.http.post(this.config.apiUrl + '/restaurants/current',
-      { restaurant_id: restaurant_id, userCode: this.config.userAPICode, token: this.authToken});
+      {
+        restaurant_id: restaurant_id,
+        userCode: this.config.userAPICode,
+        token: this.authToken
+      });
   }
 
   getForCuration(restaurant_id: string) {
     return this.http.post(this.config.apiUrl + '/restaurants/getforcuration',
-      { restaurant_id: restaurant_id, userCode: this.config.userAPICode, token: this.authToken });
+      {
+        restaurant_id: restaurant_id,
+        userCode: this.config.userAPICode,
+        token: this.authToken
+      });
   }
 
   getSubset(sql_parameters: SQLParameters) {
     return this.http.post(this.config.apiUrl + '/restaurants/subset',
-      { sql_parameters: sql_parameters, userCode: this.config.userAPICode, token: this.authToken });
+      {
+        sql_parameters: sql_parameters,
+        userCode: this.config.userAPICode,
+        token: this.authToken
+      });
   }
 
   getLaunch(launch_parameters: LaunchParameters) {
     return this.http.post(this.config.apiUrl + '/restaurants/getlaunch',
-      { launch_parameters: launch_parameters, userCode: this.config.userAPICode, token: this.authToken });
+      {
+        launch_parameters: launch_parameters,
+        userCode: this.config.userAPICode,
+        token: this.authToken
+      });
   }
 
   getRegionRestaurants(region: string) {
@@ -85,12 +107,20 @@ export class RestaurantService {
 
   create(restaurant: Restaurant) {
     return this.http.post(this.config.apiUrl + '/restaurants/create',
-      { restaurant: restaurant, userCode: this.config.userAPICode, token: this.authToken });
+      {
+        restaurant: restaurant,
+        userCode: this.config.userAPICode,
+        token: this.authToken
+      });
   }
 
   update(restaurant: Restaurant) {
     return this.http.post(this.config.apiUrl + '/restaurants/update',
-      { restaurant: restaurant, userCode: this.config.userAPICode, token: this.authToken });
+      {
+        restaurant: restaurant,
+        userCode: this.config.userAPICode,
+        token: this.authToken
+      });
   }
 
   updateEmail (restaurant_id: number, restaurant_email: string) {
@@ -123,22 +153,38 @@ export class RestaurantService {
 
   delete(restaurant_id: string) {
     return this.http.post(this.config.apiUrl + '/restaurants/delete',
-      { restaurant_id: restaurant_id, userCode: this.config.userAPICode, token: this.authToken });
+      {
+        restaurant_id: restaurant_id,
+        userCode: this.config.userAPICode,
+        token: this.authToken
+      });
   }
 
   verify(restaurant_id: string, verified_by: string) {
     return this.http.post(this.config.apiUrl + '/restaurants/verify',
-      { restaurant_id: restaurant_id, verified_by: verified_by,
-        userCode: this.config.userAPICode, token: this.authToken });
+      {
+        restaurant_id: restaurant_id,
+        verified_by: verified_by,
+        userCode: this.config.userAPICode,
+        token: this.authToken
+      });
   }
 
   getCuisines(country_code, restaurant_region: string) {
     if (country_code === 'FR') {
       return this.http.post(this.config.apiUrl + '/restaurants/frenchcuisine',
-        {restaurant_region: restaurant_region, userCode: this.config.userAPICode, token: this.authToken});
+        {
+          restaurant_region: restaurant_region,
+          userCode: this.config.userAPICode,
+          token: this.authToken
+        });
     } else {
       return this.http.post(this.config.apiUrl + '/restaurants/cuisine',
-        {restaurant_region: restaurant_region, userCode: this.config.userAPICode, token: this.authToken});
+        {
+          restaurant_region: restaurant_region,
+          userCode: this.config.userAPICode,
+          token: this.authToken
+        });
     }
   }
 
@@ -196,7 +242,11 @@ export class RestaurantService {
 
   getCurationZoneSet(curator_id: number) {
     return this.http.post(this.config.apiUrl + '/restaurants/curationzoneset',
-      { curator_id: curator_id, userCode: this.config.userAPICode, token: this.authToken });
+      {
+        curator_id: curator_id,
+        userCode: this.config.userAPICode,
+        token: this.authToken
+      });
   }
 
   updateCurationZoneCurator(curation_id: number, assigned_curator_id: number) {
@@ -267,12 +317,21 @@ export class RestaurantService {
 
   addAssociation(member_id: string, restaurant_id: string) {
     return this.http.post(this.config.apiUrl + '/restaurants/addassociation',
-      { member_id: member_id, restaurant_id: restaurant_id, userCode: this.config.userAPICode, token: this.authToken });
+      {
+        member_id: member_id,
+        restaurant_id: restaurant_id,
+        userCode: this.config.userAPICode,
+        token: this.authToken
+      });
   }
 
   removeAssociation(association_id: string) {
     return this.http.post(this.config.apiUrl + '/restaurants/removeassociation',
-      { association_id: association_id, userCode: this.config.userAPICode, token: this.authToken });
+      {
+        association_id: association_id,
+        userCode: this.config.userAPICode,
+        token: this.authToken
+      });
   }
 
   checkAssociation(restaurant_id: string) {
@@ -282,7 +341,11 @@ export class RestaurantService {
 
   getMemberRestaurants(member_id: string) {
     return this.http.post(this.config.apiUrl + '/restaurants/memberrestaurants',
-      { member_id: member_id, userCode: this.config.userAPICode, token: this.authToken });
+      {
+        member_id: member_id,
+        userCode: this.config.userAPICode,
+        token: this.authToken
+      });
   }
 
   getMemberRestaurantNames(member_id: string) {
@@ -350,7 +413,11 @@ export class RestaurantService {
 
   getPartners(country_code: string) {
     return this.http.post(this.config.apiUrl + '/restaurants/partners',
-      { country_code: country_code, userCode: this.config.userAPICode, token: this.authToken });
+      {
+        country_code: country_code,
+        userCode: this.config.userAPICode,
+        token: this.authToken
+      });
   }
 
   getOffers() {
@@ -374,33 +441,56 @@ export class RestaurantService {
 
   getLatestAccess(restaurant_id: number, access_function: string) {
     return this.http.post(this.config.apiUrl + '/restaurants/latestaccess',
-      { restaurant_id: restaurant_id, access_function: access_function,
-        userCode: this.config.userAPICode, token: this.authToken });
+      {
+        restaurant_id: restaurant_id,
+        access_function: access_function,
+        userCode: this.config.userAPICode,
+        token: this.authToken
+      });
   }
 
 
   recordAccess(restaurant_id: number, partner_id: number, access_function: string) {
     return this.http.post(this.config.apiUrl + '/restaurants/recordaccess',
-      { restaurant_id: restaurant_id, partner_id: partner_id,
-        access_function: access_function, userCode: this.config.userAPICode, token: this.authToken });
+      {
+        restaurant_id: restaurant_id,
+        partner_id: partner_id,
+        access_function: access_function,
+        userCode: this.config.userAPICode,
+        token: this.authToken
+      });
   }
 
   sendPayment(payment_token: any, restaurant_id: number, payment_amount: number,
               payment_currency: string, payment_description: string, payment_invoice_number: string) {
     return this.http.post(this.config.apiUrl + '/restaurants/sendpayment',
-      { payment_token: payment_token, restaurant_id: restaurant_id, payment_amount: payment_amount,
-        payment_currency: payment_currency, payment_description: payment_description, payment_invoice_number: payment_invoice_number,
-        userCode: this.config.userAPICode, token: this.authToken });
+      {
+        payment_token: payment_token,
+        restaurant_id: restaurant_id,
+        payment_amount: payment_amount,
+        payment_currency: payment_currency,
+        payment_description: payment_description,
+        payment_invoice_number: payment_invoice_number,
+        userCode: this.config.userAPICode,
+        token: this.authToken
+      });
   }
 
   sendInvoice(restaurant_id: number, restaurant_member_id: number, invoice_number: string, payment_amount: number,
               payment_currency: string, payment_description: string, payment_token: any) {
     return this.http.post(this.config.apiUrl + '/restaurants/sendinvoice',
-      { company_prefix: localStorage.getItem('rd_company_prefix'),
-        restaurant_id: restaurant_id, restaurant_member_id: restaurant_member_id,
-        invoice_number: invoice_number, payment_amount: payment_amount,
-        payment_currency: payment_currency, payment_description: payment_description, payment_token: payment_token,
-        userCode: this.config.userAPICode, token: this.authToken });
+      {
+        company_prefix: localStorage.getItem('rd_company_prefix'),
+        restaurant_id: restaurant_id,
+        restaurant_member_id: restaurant_member_id,
+        invoice_number: invoice_number,
+        payment_amount: payment_amount,
+        payment_currency: payment_currency,
+        payment_description: payment_description,
+        payment_token: payment_token,
+        userCode: this.config.userAPICode,
+        token: this.authToken
+      });
   }
 
   getPayments(restaurant_id: number) {
@@ -410,7 +500,12 @@ export class RestaurantService {
 
   updateMemberStatus(restaurant_id: number, status: string) {
     return this.http.post(this.config.apiUrl + '/restaurants/updatememberstatus',
-      { restaurant_id: restaurant_id, status: status, userCode: this.config.userAPICode, token: this.authToken });
+      {
+        restaurant_id: restaurant_id,
+        status: status,
+        userCode: this.config.userAPICode,
+        token: this.authToken
+      });
   }
 
   setRCMember(restaurant_id: number, state: string) {
@@ -440,7 +535,11 @@ export class RestaurantService {
 
   getBookingProviders(restaurant_number: string) {
     return this.http.post(this.config.apiUrl + '/restaurants/getbookingproviders',
-      { restaurant_number: restaurant_number, userCode: this.config.userAPICode, token: this.authToken });
+      {
+        restaurant_number: restaurant_number,
+        userCode: this.config.userAPICode,
+        token: this.authToken
+      });
   }
 
   getBookingParams(restaurant_id: number) {

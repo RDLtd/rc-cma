@@ -7,55 +7,92 @@ import { SQLParameters } from '../_models';
 
 export class PublicService {
 
-  constructor(private http: HttpClient, private config: AppConfig) { }
+  constructor(
+    private http: HttpClient,
+    private config: AppConfig) { }
 
   // Administration
   getPublicAPIInfo(user_code, api_key) {
     return this.http.post(this.config.apiUrl + '/public/api_info',
-      { user_code: user_code, api_key: api_key });
+      {
+        user_code: user_code,
+        api_key: api_key
+      });
   }
 
   getPublicAPIData(user_code, api_key, start, stop) {
     return this.http.post(this.config.apiUrl + '/public/api_data',
-      { user_code: user_code, api_key: api_key, start: start, stop: stop });
+      {
+        user_code: user_code,
+        api_key: api_key,
+        start: start,
+        stop: stop });
   }
 
   // Restaurants
   getPublicRestaurants(user_code, api_key, sql_parameters: SQLParameters) {
     return this.http.post(this.config.apiUrl + '/public/restaurants',
-      { user_code: user_code, api_key: api_key, sql_parameters: sql_parameters });
+      {
+        user_code: user_code,
+        api_key: api_key,
+        sql_parameters: sql_parameters
+      });
   }
 
   // CMS
   getPublicElements(user_code, api_key, restaurant_id, cms_element_class: string, quality: string) {
     return this.http.post(this.config.apiUrl + '/public/cms/elements',
-      { user_code: user_code, api_key: api_key, restaurant_id: restaurant_id,
-        cms_element_class: cms_element_class, quality: quality });
+      {
+        user_code: user_code,
+        api_key: api_key,
+        restaurant_id: restaurant_id,
+        cms_element_class: cms_element_class,
+        quality: quality
+      });
   }
 
   getPublicTimes(user_code, api_key, restaurant_id: string) {
     return this.http.post(this.config.apiUrl + '/public/cms/times',
-      { user_code: user_code, api_key: api_key, restaurant_id: restaurant_id });
+      {
+        user_code: user_code,
+        api_key: api_key,
+        restaurant_id: restaurant_id
+      });
   }
 
   getPublicAttributeTexts(user_code, api_key) {
     return this.http.post(this.config.apiUrl + '/public/cms/attributetexts',
-      { user_code: user_code, api_key: api_key });
+      {
+        user_code: user_code,
+        api_key: api_key
+      });
   }
 
   getPublicAttributes(user_code, api_key, restaurant_id: string) {
     return this.http.post(this.config.apiUrl + '/public/cms/attributes',
-      { user_code: user_code, api_key: api_key, restaurant_id: restaurant_id });
+      {
+        user_code: user_code,
+        api_key: api_key,
+        restaurant_id: restaurant_id
+      });
   }
 
   getPublicMeals(user_code, api_key, restaurant_id: string) {
     return this.http.post(this.config.apiUrl + '/public/cms/meals',
-      { user_code: user_code, api_key: api_key, restaurant_id: restaurant_id });
+      {
+        user_code: user_code,
+        api_key: api_key,
+        restaurant_id: restaurant_id
+      });
   }
 
   getPublicDescriptions(user_code, api_key, restaurant_id: string) {
     return this.http.post(this.config.apiUrl + '/public/cms/descriptions',
-      { user_code: user_code, api_key: api_key, restaurant_id: restaurant_id });
+      {
+        user_code: user_code,
+        api_key: api_key,
+        restaurant_id: restaurant_id
+      });
   }
 
   setPublicCreateUser(user_code, api_key, user_name, user_role, user_telephone, user_email,
@@ -90,7 +127,11 @@ export class PublicService {
 
   setPublicRegisterAssociate(user_code, api_key, restaurant_number: string) {
     return this.http.post(this.config.apiUrl + '/public/register_associate',
-      { user_code: user_code, api_key: api_key, restaurant_number: restaurant_number });
+      {
+        user_code: user_code,
+        api_key: api_key,
+        restaurant_number: restaurant_number
+      });
   }
 
 }

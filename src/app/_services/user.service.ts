@@ -16,14 +16,15 @@ export class UserService {
     private http: HttpClient,
     private appService: AppService,
     private config: AppConfig) {
-
     this.appService.authToken.subscribe(token => this.authToken = token);
-
   }
 
   getAll() {
     return this.http.post(this.config.apiUrl + '/users',
-      {userCode: this.config.userAPICode, token: this.authToken});
+      {
+        userCode: this.config.userAPICode,
+        token: this.authToken
+      });
   }
 
   getById(user_id: string) {
@@ -37,18 +38,30 @@ export class UserService {
 
   create(user: User) {
     return this.http.post(this.config.apiUrl + '/users/register',
-      {user: user, userCode: this.config.userAPICode, token: this.authToken});
+      {
+        user: user,
+        userCode: this.config.userAPICode,
+        token: this.authToken
+      });
   }
 
   update(user: User) {
     console.log(user);
     return this.http.post(this.config.apiUrl + '/users/update',
-      {user: user, userCode: this.config.userAPICode, token: this.authToken});
+      {
+        user: user,
+        userCode: this.config.userAPICode,
+        token: this.authToken
+      });
   }
 
   deleteuser(user: User) {
     return this.http.post(this.config.apiUrl + '/users/delete',
-      {user: user, userCode: this.config.userAPICode, token: this.authToken});
+      {
+        user: user,
+        userCode: this.config.userAPICode,
+        token: this.authToken
+      });
   }
 
   backup(message: string) {
