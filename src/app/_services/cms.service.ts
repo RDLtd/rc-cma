@@ -275,34 +275,36 @@ export class CMSService {
         userCode: this.config.userAPICode, token: this.authToken });
   }
 
-  sendOfferRequestToAffiliateEmail(affiliate_email: string,
-                                   affiliate_name: string,
-                                   restaurant_name: string,
-                                   restaurant_address: string,
-                                   restaurant_telephone: string,
-                                   restaurant_email: string,
-                                   admin_fullname: string,
-                                   restaurant_number: string,
-                                   email_language: string) {
+  sendOfferRequestToAffiliateEmail(obj: any) {
     return this.http.post(this.config.apiUrl + '/cms/sendofferrequesttoaffiliate',
-      { company_prefix: localStorage.getItem('rd_company_prefix'),
-        affiliate_email: affiliate_email, affiliate_name: affiliate_name, restaurant_name: restaurant_name,
-        restaurant_address: restaurant_address, restaurant_telephone: restaurant_telephone, restaurant_email: restaurant_email,
-        admin_fullname: admin_fullname, restaurant_number: restaurant_number, email_language: email_language,
-        userCode: this.config.userAPICode, token: this.authToken });
+      {
+        company_prefix: obj.company_prefix,
+        affiliate_email: obj.affiliate_email,
+        affiliate_name: obj.affiliate_name,
+        restaurant_name: obj.restaurant_name,
+        restaurant_address: obj.restaurant_address,
+        restaurant_telephone: obj.restaurant_telephone,
+        restaurant_email: obj.restaurant_email,
+        admin_fullname: obj.admin_fullname,
+        restaurant_number: obj.restaurant_number,
+        email_language: obj.email_language,
+        userCode: this.config.userAPICode,
+        token: this.authToken
+      });
   }
 
-  sendOfferConfirmation(affiliate_name: string,
-                       affiliate_contact_message: string,
-                       restaurant_name: string,
-                       restaurant_email: string,
-                       restaurant_number: string,
-                       email_language: string) {
+  sendOfferConfirmation(obj: any) {
     return this.http.post(this.config.apiUrl + '/cms/sendofferconfirmation',
-      { company_prefix: localStorage.getItem('rd_company_prefix'),
-        affiliate_name: affiliate_name, affiliate_contact_message: affiliate_contact_message, restaurant_name: restaurant_name,
-        restaurant_email: restaurant_email, restaurant_number: restaurant_number, email_language: email_language,
-        userCode: this.config.userAPICode, token: this.authToken });
+      {
+        company_prefix: obj.company_prefix,
+        affiliate_name: obj.affiliate_name,
+        affiliate_contact_message: obj.affiliate_contact_message,
+        restaurant_name: obj.restaurant_name,
+        restaurant_email: obj.restaurant_email,
+        restaurant_number: obj.restaurant_number,
+        email_language: obj.email_language,
+        userCode: this.config.userAPICode,
+        token: this.authToken });
   }
 
   getLastUpdatedRecord(restaurant_id: number) {

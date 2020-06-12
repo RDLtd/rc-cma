@@ -532,7 +532,6 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
     }
   }
 
-
   getOffers() {
 
     this.restaurantService.getOffers()

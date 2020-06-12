@@ -4,6 +4,8 @@ import { CmsLocalService } from './cms-local.service';
 import { MatDialog } from '@angular/material/dialog';
 import { PaymentComponent } from '../common';
 import { TranslateService } from '@ngx-translate/core';
+import { Restaurant } from '../_models';
+import { AppConfig } from '../app.config';
 
 @Component({
   selector: 'rc-affiliates',
@@ -12,8 +14,9 @@ import { TranslateService } from '@ngx-translate/core';
 
 export class AffiliatesComponent implements OnInit, OnDestroy {
 
-  restaurant: any;
+  restaurant: Restaurant;
   affiliates: any[] = [];
+  brand: any;
 
   // translation variables
   t_data: any;
@@ -24,14 +27,16 @@ export class AffiliatesComponent implements OnInit, OnDestroy {
     private restaurantService: RestaurantService,
     private cmsService: CMSService,
     private translate: TranslateService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private config: AppConfig
   ) { }
 
   ngOnInit() {
+
     // Subscribe to observable
     this.cmsLocalService.getRestaurant()
       .subscribe(data => {
-          if (data.restaurant_id) {
+          if (!!data.restaurant_id) {
             this.restaurant = data;
           }
         },
@@ -60,13 +65,7 @@ export class AffiliatesComponent implements OnInit, OnDestroy {
 
   getPartnerOffers(): void {
 
-    // select the correct partners by country
-    let company_code = 'RC';
-    if (localStorage.getItem('rd_company_name') === 'Restaurateurs Indépendants') {
-      company_code = 'RI';
-    }
-
-    this.restaurantService.getPartners(company_code)
+    this.restaurantService.getPartners(this.config.brand.prefix.toUpperCase())
       .subscribe(
         partners => {
           let len = partners['partners'].length, p, i;
@@ -87,7 +86,7 @@ export class AffiliatesComponent implements OnInit, OnDestroy {
   viewMarketing(index) {
 
     if (this.restaurant.restaurant_rc_member_status !== 'Full') {
-      const dialogRef = this.dialog.open(PaymentComponent, {
+      this.dialog.open(PaymentComponent, {
         panelClass: 'rc-dialog-member',
         data: {
           restaurant: this.restaurant,
@@ -104,8 +103,8 @@ export class AffiliatesComponent implements OnInit, OnDestroy {
           () => {
             console.log('Access record updated - Viewed Marketing');
           },
-          error => {
-            console.log('Could not update access record' + error);
+          () => {
+            console.log('Could not update access record');
           });
       //
     }
@@ -114,7 +113,7 @@ export class AffiliatesComponent implements OnInit, OnDestroy {
   redeemOffer(index) {
 
     if (this.restaurant.restaurant_rc_member_status !== 'Full') {
-      const dialogRef = this.dialog.open(PaymentComponent, {
+      this.dialog.open(PaymentComponent, {
         panelClass: 'rc-dialog-member',
         data: {
           restaurant: this.restaurant,
@@ -124,80 +123,63 @@ export class AffiliatesComponent implements OnInit, OnDestroy {
 
     } else {
 
-      console.log(this.restaurant.restaurant_email, this.affiliates[index].partner_email);
+      const aff = this.affiliates[index];
+      const rst = this.restaurant;
 
-
-
-      // Send offer request to affiliate
-      //   affiliate_email: string,
-      //   affiliate_name: string,
-      //   restaurant_name: string,
-      //   restaurant_address: string,
-      //   restaurant_telephone: string,
-      //   restaurant_email: string,
-      //   admin_fullname: string,
-      //   restaurant_number: string,
-      //   email_language: string
-      this.cmsService.sendOfferRequestToAffiliateEmail(
-          this.affiliates[index].partner_email,
-          this.affiliates[index].partner_name,
-          this.restaurant.restaurant_name,
-          this.restaurant.restaurant_address_1 + ', ' + this.restaurant.restaurant_address_2 + ', '
-            + this.restaurant.restaurant_address_3,
-          this.restaurant.restaurant_telephone,
-          this.restaurant.restaurant_email,
-          localStorage.getItem('rd_username'),
-          this.restaurant.restaurant_number,
-          localStorage.getItem('rd_country'))
-        .subscribe(
+      this.cmsService.sendOfferRequestToAffiliateEmail({
+        affiliate_email: aff.partner_email,
+        affiliate_name: aff.partner_name,
+        restaurant_name:  rst.restaurant_name,
+        restaurant_address: rst.restaurant_address_1 + ', ' + rst.restaurant_address_2 + ', '
+          + rst.restaurant_address_3,
+        restaurant_telephone: rst.restaurant_telephone,
+        restaurant_email: rst.restaurant_email,
+        admin_fullname: localStorage.getItem('rd_username'),
+        restaurant_number: rst.restaurant_number,
+        email_language: localStorage.getItem('rd_language')
+      }).subscribe(
           () => {
-            console.log('Email sent to ' + this.affiliates[index].partner_name + ' from ' +
-              this.restaurant.restaurant_name);
+            console.log('Email sent to ' + aff.partner_name + ' from ' +
+              rst.restaurant_name);
           },
           error => {
-            console.log('Could not send email to ' + this.affiliates[index].partner_name + ' from ' +
-              this.restaurant.restaurant_name, error);
+            console.log('Could not send email to ' + aff.partner_name + ' from ' +
+              rst.restaurant_name, error);
           });
 
-      // and send the offer confirmation to the restaurant
-      //   affiliate_name: string,
-      //   affiliate_contact_message: string
-      //   restaurant_name: string
-      //   restaurant_email: string
-      //   restaurant_number: string
-      //   email_language: string
-      this.cmsService.sendOfferConfirmation(
-          this.affiliates[index].partner_name,
-          this.affiliates[index].partner_contact_message,
-          this.restaurant.restaurant_name,
-          this.restaurant.restaurant_email,
-          this.restaurant.restaurant_number,
-          localStorage.getItem('rd_country'))
-        .subscribe(
+
+      this.cmsService.sendOfferConfirmation({
+        affiliate_name: aff.partner_name,
+        affiliate_contact_message: aff.partner_contact_message,
+        restaurant_name: rst.restaurant_name,
+        restaurant_email: rst.restaurant_email,
+        restaurant_number: rst.restaurant_number,
+        email_language: localStorage.getItem('rd_language')
+      }).subscribe(
           () => {
-            console.log('Offer confirmation from ' + this.affiliates[index].partner_name + ' sent to ' +
-              this.restaurant.restaurant_name);
+            console.log('Offer confirmation from ' + aff.partner_name + ' sent to ' +
+              rst.restaurant_name);
           },
           error => {
-            console.log('Could not send offer confirmation from ' + this.affiliates[index].partner_name + ' to ' +
-              this.restaurant.restaurant_name, error);
+            console.log('Could not send offer confirmation from ' + aff.partner_name + ' to ' +
+              rst.restaurant_name, error);
           });
 
       // finally record the access event for this restaurant
-      this.restaurantService.recordAccess(Number(this.restaurant.restaurant_id),
-        this.affiliates[index].partner_id, 'Clicked Through')
+      this.restaurantService.recordAccess(Number(rst.restaurant_id),
+        aff.partner_id, 'Clicked Through')
         .subscribe(
           () => {
-            console.log('Access record updated - ' + this.restaurant.restaurant_name + ' clicked through ' +
-              this.affiliates[index].partner_name);
+            console.log('Access record updated - ' + rst.restaurant_name + ' clicked through ' +
+              aff.partner_name);
           },
-          error => {
-            console.log('Could not update access record', error);
+          () => {
+            console.log('Could not update access record');
           });
 
       // show a generic message - the partner specific message is sent by email
-      this.cmsLocalService.dspSnackbar(this.affiliates[index].partner_name + this.t_data.Message +
-        this.restaurant.restaurant_email + this.t_data.Contact, 'OK', 30);
+      this.cmsLocalService.dspSnackbar(aff.partner_name + this.t_data.Message +
+        rst.restaurant_email + this.t_data.Contact, 'OK', 30);
     }
   }
 
