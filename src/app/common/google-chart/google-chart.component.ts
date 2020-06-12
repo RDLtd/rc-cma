@@ -19,15 +19,7 @@ export class GoogleChartComponent implements OnInit {
   }
 
   ngOnInit() {
-    // setTimeout(() => {
-    //     google.charts.load('current', { 'packages': ['corechart'] });
-    //     setTimeout(() => {
-    //       // this.drawGraph(this.chartOptions, this.chartType, this.chartData, this._element);
-    //       google.charts.load('current', { packages:['calendar'] });
-    //       google.charts.setOnLoadCallback(this.drawGraph(this.chartOptions, this.chartType, this.chartData, this._element));
-    //     }, 5000);
-    //   }, 500
-    // );
+
     setTimeout(() => {
         google.charts.load('current', { 'packages': ['corechart'] });
         // this.drawGraph(this.chartOptions, this.chartType, this.chartData, this._element);
