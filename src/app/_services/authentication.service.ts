@@ -63,22 +63,20 @@ export class AuthenticationService {
     localStorage.setItem('rd_token', token);
     localStorage.setItem('rd_session', 'active');
 
+    this.translate.use(localStorage.getItem('rd_language'));
     this.setNewSessionExpiry();
 
-    this.translate.use(member.member_preferred_language);
-    //localStorage.setItem('rd_country', member.member_preferred_language);
-
-    //console.log('AL: ', member.member_access_level);
-
-    // Set members landing page based on access level
+    // Set members 'homepage' based on access their level
     if (this.dbOffline && member.member_access_level < 4) {
+
       // Not Super Admin
       localStorage.setItem('rd_home', '/');
       this.dspHomeScreen('active');
+
     } else {
-      // console.log('Access level ' + member.member_access_level);
+
       switch (member.member_access_level) {
-        // 3rd pat agent
+        // 3rd party agent
         case '0': {
           localStorage.setItem('rd_home', '/agent');
           localStorage.setItem('rd_launch_number', member.member_launch_number);
@@ -121,8 +119,6 @@ export class AuthenticationService {
                   localStorage.setItem('rd_home', '/profile');
                 }
                 this.dspHomeScreen('active');
-                // console.log(data.restaurants[0].restaurant_id);
-                // localStorage.setItem('rd_home', '/profile');
               },
               error => {
                 console.log(error);
@@ -142,7 +138,7 @@ export class AuthenticationService {
           this.dspHomeScreen('active');
           break;
         }
-        default: { // undefined
+        default: {
           localStorage.setItem('rd_home', '/profile');
           this.dspHomeScreen('closed')
           break;
@@ -152,7 +148,7 @@ export class AuthenticationService {
   }
 
   dspHomeScreen(sessionStatus): void {
-    sessionStatus === 'active'? this.inSession = true : this.inSession = false;
+    this.inSession = sessionStatus === 'active';
     this.memberSessionSubject.next(sessionStatus);
     this.router.navigate([localStorage.getItem('rd_home')]);
   }

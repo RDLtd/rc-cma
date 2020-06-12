@@ -93,22 +93,18 @@ export class CmsDirectoryComponent implements OnInit {
     };
 
     const dialogRef = this.dialog.open(ConfirmCancelComponent, { data });
+
     dialogRef.afterClosed().subscribe(result => {
       if (result.confirmed) {
-        const currentMember = JSON.parse(localStorage.getItem('rd_profile'));
-        const displayDate = new Date().toLocaleDateString();
-        console.log(`Data for ${this.restaurant.restaurant_name} verified by ` +
-          currentMember.member_first_name + ' ' + currentMember.member_last_name + ' on ' + displayDate);
-        this.restaurantService.verify(this.restaurant.restaurant_id,
-          currentMember.member_first_name + ' ' + currentMember.member_last_name )
+        const userName = localStorage.getItem('rd_username');
+        const newDate = new Date().toLocaleDateString();
+        this.restaurantService.verify(this.restaurant.restaurant_id, userName)
           .subscribe(() => {
               this.openSnackBar(this.t_data.Verified, '');
-              this.restaurant.restaurant_verified_by = currentMember.member_first_name +
-                ' ' + currentMember.member_last_name;
-              this.restaurant.restaurant_verified_on = Date().toLocaleString();
-              this.originalrestaurant.restaurant_verified_by = currentMember.member_first_name +
-                ' ' + currentMember.member_last_name;
-              this.originalrestaurant.restaurant_verified_on = Date().toLocaleString();
+              this.restaurant.restaurant_verified_by = userName;
+              this.restaurant.restaurant_verified_on = newDate;
+              this.originalrestaurant.restaurant_verified_by = userName;
+              this.originalrestaurant.restaurant_verified_on = newDate;
               this.verification_due = false;
             },
             error => console.log(error));

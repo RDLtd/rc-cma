@@ -39,11 +39,7 @@ export class ProfileVerifyComponent implements OnInit {
     this.editable = this.data.contactEmailRequired;
   }
 
-
   onProfileVerifySubmit(f) {
-    // console.log('Email dirty', f.controls.restaurant_email.dirty);
-    // console.log('Email required', this.data.contactEmailRequired);
-    // console.log('Valid code', this.validateVerificationCode(f.controls.profile_verify));
     // Email changed
     if (f.controls.restaurant_email.dirty) {
       // If we don't have one
@@ -61,7 +57,6 @@ export class ProfileVerifyComponent implements OnInit {
           this.verifyCode.nativeElement.focus();
         }
       } else {
-
         // It's being changed so only do it
         // if we have a good verification code
         if (this.validateVerificationCode(f.controls.profile_verify)) {
@@ -125,17 +120,17 @@ export class ProfileVerifyComponent implements OnInit {
   }
 
   reqVerificationCode() {
-
-    const member_full_name = this.data.member.member_first_name + ' ' + this.data.member.member_last_name;
+    const userName = localStorage.getItem('rd_username');
+    const r = this.data.restaurant;
     this.cmsService.sendVerificationEmail(
-      this.data.restaurant.restaurant_name,
-      this.data.restaurant.restaurant_number,
-      this.data.restaurant.restaurant_email,
-      member_full_name)
+      r.restaurant_name,
+      r.restaurant_number,
+      r.restaurant_email,
+      userName)
       .subscribe(
       () => {
         this.cmsLocalService.dspSnackbar(
-          this.t_data.CodeSent + this.data.restaurant.restaurant_email,
+          this.t_data.CodeSent + r.restaurant_email,
           'OK',
           10);
       },
@@ -156,13 +151,14 @@ export class ProfileVerifyComponent implements OnInit {
   }
 
   notifyCuration() {
+    const d = this.data;
     const msg =
       `# ${this.t_data.Change}\n\n` +
       `${this.t_data.Just}.\n\n` +
-      ` - **${this.t_data.User}**: ${this.data.member.member_first_name} ${this.data.member.member_last_name}(${this.data.member.member_id})\n` +
-      ` - **Restaurant**: ${this.data.restaurant.restaurant_name} (${this.data.restaurant.restaurant_id})\n` +
+      ` - **${this.t_data.User}**: ${localStorage.get('rd_username')}(${d.member.member_id})\n` +
+      ` - **Restaurant**: ${d.restaurant.restaurant_name} (${d.restaurant.restaurant_id})\n` +
       ` - **${this.t_data.Oemail}**: ${this.originalEmail}\n` +
-      ` - **${this.t_data.Nemail}**: ${this.data.restaurant.restaurant_email}\n\n` +
+      ` - **${this.t_data.Nemail}**: ${d.restaurant.restaurant_email}\n\n` +
       `## ${this.t_data.ASAP}`;
 
     this.memberService.sendEmailRequest( 'curation', 'support', this.t_data.Change, msg).subscribe(res => console.log(res));
