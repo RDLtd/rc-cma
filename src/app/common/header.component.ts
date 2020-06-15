@@ -36,7 +36,6 @@ export class HeaderComponent implements OnInit {
     // Get notified anytime the login status changes
     this.authService.memberSessionSubject.subscribe(
       sessionStatus => {
-        //console.log('Header', sessionStatus);
         switch (sessionStatus) {
           case 'active': {
             // Successful login

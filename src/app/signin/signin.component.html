@@ -55,7 +55,6 @@
           color="accent"
           [disabled]="isSubmitting || !frmReset.form.valid">{{ 'SignIn.ResetCaps' | translate }}</button>
       </form>
-
     </section>
     <!-- Sign in -->
     <section class="rc-signin-form" *ngIf="!pwdReset">
@@ -74,7 +73,6 @@
             ngModel
             type="email"
             name="email"
-            [placeholder]="'SignIn.UserEmail' | translate"
             email
             required
             autofocus>
@@ -86,7 +84,6 @@
             name="pwd"
             ngModel
             type="password"
-            [placeholder]="'SignIn.UserPassword' | translate"
             required>
         </mat-form-field>
         <a (click)="showPwdReset(true)">{{ 'SignIn.Forgotten' | translate }}</a>
