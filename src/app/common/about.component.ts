@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AppConfig } from '../app.config';
 
 @Component({
   selector: 'rc-about',
@@ -11,11 +12,13 @@ export class AboutComponent implements OnInit {
   os_text;
   company_logo_root;
 
-  constructor() {}
+  constructor(
+    private config: AppConfig
+  ) {}
 
   ngOnInit() {
     // show the OS and browser versions
     this.os_text = navigator.appVersion;
-    this.company_logo_root = localStorage.getItem('rd_company_logo_root');
+    this.company_logo_root = this.config.brand.logo;
   }
 }

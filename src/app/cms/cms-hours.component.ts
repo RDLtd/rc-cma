@@ -3,6 +3,7 @@ import { CmsLocalService } from './cms-local.service';
 import { Restaurant } from '../_models';
 import { AnalyticsService, CMSService, HelpService } from '../_services';
 import { TranslateService } from '@ngx-translate/core';
+import { LoadService } from '../common/loader/load.service';
 
 @Component({
   selector: 'rc-cms-hours',
@@ -30,10 +31,12 @@ export class CmsHoursComponent implements OnInit {
     private cms: CMSService,
     private ga: AnalyticsService,
     private translate: TranslateService,
-    public help: HelpService
+    public help: HelpService,
+    private loadService: LoadService
   ) {
+    this.loadService.open();
     // detect language changes... need to check for change in texts
-    translate.onLangChange.subscribe(lang => {
+    translate.onLangChange.subscribe(() => {
       this.translate.get('CMS-Hours').subscribe(data => { this.t_data = data; });
       const t = this.openingTimes.length;
       for (let i = 0; i < t; i++) {
@@ -53,7 +56,6 @@ export class CmsHoursComponent implements OnInit {
           }
         },
         error => console.log(error));
-
     this.translate.get('CMS-Hours').subscribe(data => {
       this.t_data = data;
     });
@@ -61,12 +63,9 @@ export class CmsHoursComponent implements OnInit {
 
   getOpeningTimes(): void {
 
-    this.showLoader = true;
-
     // get the opening time data from the api
     this.cms.getTimes(this.restaurant.restaurant_id).subscribe(
       data => {
-        console.log('TIMES DATA', data);
         this.openingTimes = data['times'];
         if (data['notes'] && data['notes'] !== 'Null') {
           this.openingTimesNotes = data['notes'];
@@ -92,7 +91,7 @@ export class CmsHoursComponent implements OnInit {
           this.translate.get('Global.DOW-' + this.openingTimes[i].cms_time_day_of_week).
             subscribe(value => { this.display_dow[i] = value; });
         }
-        this.showLoader = false;
+        this.loadService.close();
         this.dataChanged = false;
       },
       error => {
@@ -155,8 +154,8 @@ export class CmsHoursComponent implements OnInit {
 
     }
     this.cms.updateLastCreatedField(Number(this.restaurant.restaurant_id), 'hours').subscribe(
-      error => {
-        console.log('error in updatelastupdatedfield for hours', error);
+      () => {
+        console.log('error in updatelastupdatedfield for hours');
       });
     this.dataChanged = true;
 
@@ -197,24 +196,22 @@ export class CmsHoursComponent implements OnInit {
 
 
   updateData(): void {
-    console.log('OT: ', this.openingTimes, this.openingTimesNotes);
+    //console.log('OT: ', this.openingTimes, this.openingTimesNotes);
     this.cms.updateTimes(this.openingTimes, this.openingTimesNotes).subscribe(
-      data => {
-        // console.log(JSON.stringify(data));
-        console.log('Data for CMS Times updated');
+      () => {
         this.cmsLocalService.dspSnackbar(this.restaurant.restaurant_name + this.t_data.TimesUpdated, null, 3);
         this.dataChanged = false;
-
         // record event
         this.ga.sendEvent('CMS-Hours', 'Edit', 'Changes Saved');
       },
       error => {
-        console.log(JSON.stringify(error));
+        console.log(error);
         this.cmsLocalService.dspSnackbar(this.t_data.UpdateFailed, null, 3);
       });
     this.cms.updateLastCreatedField(Number(this.restaurant.restaurant_id), 'hours').subscribe(
-      error => {
-        console.log('error in updatelastupdatedfield for hours', error);
+      () => {},
+      () => {
+        console.log('error in updatelastupdatedfield for hours');
       });
   }
 

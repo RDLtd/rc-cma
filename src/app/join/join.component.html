@@ -2,19 +2,19 @@
   <div class="rc-join-info">
     <div>
       <div class="rc-join-welcome" [ngSwitch]="referrer.type">
-        <img class="rc-brand-logo" src="../assets/images/{{ company_logo_root }}-trans-white.svg" alt="Logo">
+        <img class="rc-brand-logo" src="../assets/images/{{ brand.logo }}-trans-white.svg" alt="Logo">
 
         <!-- Self -->
         <div *ngSwitchCase="'self'">
           <h1>{{ 'Join.Free' | translate }}</h1>
-          <p>{{ 'Join.Part' | translate }} <strong>{{ company_name }}</strong>
+          <p>{{ 'Join.Part' | translate }} <strong>{{ brand.name }}</strong>
             {{ 'Join.Enjoy' | translate }}</p>
           <ol>
             <li>{{ 'Join.Free1' | translate }}</li>
             <li>{{ 'Join.Free2' | translate }}</li>
             <li>{{ 'Join.Free3' | translate }}</li>
           </ol>
-          <div *ngIf="company_name==='Restaurant Collective'; else French">
+          <div *ngIf="brand.name === 'Restaurant Collective'; else French">
             <p>{{ 'Join.Problems' | translate }}
               <a href="mailto:support@restaurantcollective.uk">{{ 'Join.SupportTeam' | translate }}</a>.
             </p>
@@ -28,7 +28,8 @@
         <!-- Member -->
         <div *ngSwitchCase="'member'">
           <h1>{{ 'Join.Support' | translate }}</h1>
-          <p>{{ 'Join.Invited' | translate }} <strong>{{ referrer?.name }}</strong> {{ 'Join.Become' | translate }} {{ company_name }},
+          <p>{{ 'Join.Invited' | translate }} <strong>{{ referrer?.name }}</strong> {{ 'Join.Become' | translate }}
+            {{ brand.name }},
             {{ 'Join.Exciting' | translate }}</p>
           <p>{{ 'Join.ToActivate' | translate }} {{ referrer?.name }} {{ 'Join.Follow' | translate }}</p>
           <ol>
@@ -36,38 +37,30 @@
             <li>{{ 'Join.Step2' | translate }}</li>
             <li>{{ 'Join.Step3' | translate }}</li>
           </ol>
-          <div *ngIf="company_name==='Restaurant Collective'; else French">
+
+          <div>
             <p>{{ 'Join.Problems' | translate }}
-              <a href="mailto:support@restaurantcollective.uk">{{ 'Join.SupportTeam' | translate }}</a>.
+              <a [href]="brand['email']['support']">{{ 'Join.SupportTeam' | translate }}</a>.
             </p>
           </div>
-          <ng-template #French>
-            <p>{{ 'Join.Problems' | translate }}
-              <a href="mailto:support@restaurateurs-independants.fr">{{ 'Join.SupportTeam' | translate }}</a>.
-            </p>
-          </ng-template>
+
         </div>
 
         <!-- Default -->
         <div *ngSwitchDefault>
           <h1>{{ 'Join.Free' | translate }}</h1>
-          <p>{{ 'Join.Part' | translate }}<strong>{{ company_name }}</strong>
+          <p>{{ 'Join.Part' | translate }}<strong>{{ brand.name }}</strong>
             {{ 'Join.Enjoy' | translate }}</p>
           <ol>
             <li>{{ 'Join.Free1' | translate }}</li>
             <li>{{ 'Join.Free2' | translate }}</li>
             <li>{{ 'Join.Free3' | translate }}</li>
           </ol>
-          <div *ngIf="company_name==='Restaurant Collective'; else French">
+          <div>
             <p>{{ 'Join.Problems' | translate }}
-              <a href="mailto:support@restaurantcollective.uk">{{ 'Join.SupportTeam' | translate }}</a>.
+              <a [href]="brand['email']['support']">{{ 'Join.SupportTeam' | translate }}</a>.
             </p>
           </div>
-          <ng-template #French>
-            <p>{{ 'Join.Problems' | translate }}
-              <a href="mailto:support@restaurateurs-independants.fr">{{ 'Join.SupportTeam' | translate }}</a>.
-            </p>
-          </ng-template>
         </div>
       </div>
     </div>
@@ -81,7 +74,7 @@
         <img src="../../assets/images/icons/checkmark.gif" height="128" width="128" alt="Success"/></div>
       <h1>{{ 'Join.OK' | translate }}</h1>
       <p>{{ 'Join.Team' | translate }}</p>
-      <p><strong>{{ company_name }} {{ 'Join.Curation' | translate }}</strong></p>
+      <p><strong>{{ brand.name }} {{ 'Join.Curation' | translate }}</strong></p>
       <p><a [routerLink]="'/signin'">{{ 'Join.SignIn' | translate }}</a></p>
     </div>
 
@@ -94,7 +87,7 @@
         {{ 'Join.SentDetails' | translate }}</p>
       <p>{{ 'Join.Close' | translate }}</p>
       <p>{{ 'Join.Ta' | translate }}</p>
-      <p><strong>{{ company_name }} {{ 'Join.Curation' | translate }}</strong></p>
+      <p><strong>{{ brand.name }} {{ 'Join.Curation' | translate }}</strong></p>
     </div>
 
     <form
@@ -196,8 +189,8 @@
         [disabled]="!formJoin.valid || isSubmitting"
         color="accent">{{ 'Join.Join' | translate }}</button>
       <p class="mat-small">{{ 'Join.Confirm' | translate }} <a
-        href="{{ company_url }}/terms/" target="_blank">{{ 'Join.Terms' | translate }}</a> {{ 'Join.And' | translate }}
-        <a href="{{ company_url }}/privacy/" target="_blank">{{ 'Join.Privacy' | translate }}</a>.
+        href="{{ brand.url }}/terms/" target="_blank">{{ 'Join.Terms' | translate }}</a> {{ 'Join.And' | translate }}
+        <a href="{{ brand.url }}/privacy/" target="_blank">{{ 'Join.Privacy' | translate }}</a>.
       </p>
     </form>
   </div>

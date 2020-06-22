@@ -51,11 +51,9 @@ export class CmsLocationComponent implements OnInit {
     this.cmsLocalService.getRestaurant()
       .subscribe(data => {
         if (data.restaurant_id) {
-
           this.restaurant = data;
           this.mapLat = this.latMarker = Number(data.restaurant_lat);
           this.mapLng = this.lngMarker = Number(data.restaurant_lng);
-          // console.log(this.maplat, this.maplng);
           this.zoom = 16;
           this.getDirectionFile();
           this.getCmsData(this.restaurant.restaurant_id);
@@ -117,9 +115,7 @@ export class CmsLocationComponent implements OnInit {
 
     this.cms.updateCoordinates(this.restaurant.restaurant_id, this.restaurant.restaurant_lat,
       this.restaurant.restaurant_lng).subscribe(
-      data => {
-        // console.log(JSON.stringify(data));
-        // console.log('Coordinates updated');
+      () => {
         this.cmsLocalService.dspSnackbar(this.t_data.NewGeo + this.restaurant.restaurant_lat + ', ' +
           this.restaurant.restaurant_lng, null, 3);
         this.dataChanged = false;
@@ -132,6 +128,7 @@ export class CmsLocationComponent implements OnInit {
       });
 
     this.cms.updateLastCreatedField(Number(this.restaurant.restaurant_id), 'location').subscribe(
+      () => {},
       error => {
         console.log('error in updatelastupdatedfield for location', error);
       });
@@ -168,8 +165,9 @@ export class CmsLocationComponent implements OnInit {
     });
 
     this.cms.updateLastCreatedField(Number(this.restaurant.restaurant_id), 'location').subscribe(
-      error => {
-        console.log('error in updatelastupdatedfield for location', error);
+      () => {},
+      () => {
+        console.log('error in updatelastupdatedfield for location');
       });
 
     dialogRef.componentInstance.dialog = dialogRef;
@@ -178,8 +176,7 @@ export class CmsLocationComponent implements OnInit {
   updateTransport(): void {
     // call API
     this.cms.updateDescription(this.descriptions).subscribe(
-      res => {
-        // console.log('RES', res);
+      () => {
         this.dataChanged = false;
         this.cmsLocalService.dspSnackbar(this.restaurant.restaurant_name + this.t_data.TransportUpdate, null, 5);
       },
@@ -188,8 +185,9 @@ export class CmsLocationComponent implements OnInit {
       });
 
     this.cms.updateLastCreatedField(Number(this.restaurant.restaurant_id), 'location').subscribe(
-      error => {
-        console.log('error in updatelastupdatedfield for location', error);
+      () => {},
+      () => {
+        console.log('error in updatelastupdatedfield for location');
       });
   }
 

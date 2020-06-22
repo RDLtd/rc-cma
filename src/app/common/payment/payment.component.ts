@@ -1,19 +1,24 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';
 import { RestaurantService, MemberService } from '../../_services';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
+import { AppService } from '../../_services/app.service';
+import { Restaurant } from '../../_models';
+import { AppConfig } from '../../app.config';
 
 @Component({
   selector: 'rc-payment',
-  templateUrl: './membership.component.html'
+  templateUrl: './payment.component.html'
 })
 
 export class PaymentComponent implements OnInit  {
 
-  restaurant;
+  restaurant: Restaurant;
+  brand: any;
+
   p_description;
   p_amount;
   p_amount_no_vat;
@@ -21,13 +26,6 @@ export class PaymentComponent implements OnInit  {
   invoice_number;
   renewal_date;
   d_renewal_date;
-
-  company_name;
-  company_monthly_fee;
-  company_annual_fee;
-  company_currency_symbol;
-  company_currency_code;
-  company_annual_fee_with_vat;
 
   t_data;
   lblWait;
@@ -41,6 +39,8 @@ export class PaymentComponent implements OnInit  {
   agent;
 
   constructor(
+    private appService: AppService,
+    private appConfig: AppConfig,
     public snackBar: MatSnackBar,
     private router: Router,
     private restaurantService: RestaurantService,
@@ -49,26 +49,10 @@ export class PaymentComponent implements OnInit  {
     private translate: TranslateService) { }
 
   ngOnInit() {
-    // console.log('Data', this.data);
     // get local storage and translation variables
     this.restaurant = this.data.restaurant;
     this.agent = this.data.agent;
-
-    // NB temp fix for RSVP launch!
-    // this.company_name = 'Restaurant Collective';
-    // this.company_monthly_fee = '3.50';
-    // this.company_annual_fee = '42.00';
-    // this.company_currency_symbol = '£';
-    // this.company_currency_code = 'GBP';
-    // this.company_annual_fee_with_vat = '50.40';
-
-    this.company_name = localStorage.getItem('rd_company_name');
-    this.company_monthly_fee = localStorage.getItem('rd_company_monthly_fee');
-    this.company_annual_fee = localStorage.getItem('rd_company_annual_fee');
-    this.company_currency_symbol = localStorage.getItem('rd_company_currency_symbol');
-    this.company_currency_code = localStorage.getItem('rd_company_currency_code');
-    this.company_annual_fee_with_vat = localStorage.getItem('rd_company_annual_fee_with_vat');
-    // console.log(this.company_annual_fee_with_vat);
+    this.brand = this.appConfig.brand;
 
     this.translate.get('Payment').subscribe(data => {
       this.t_data = data;
@@ -83,9 +67,14 @@ export class PaymentComponent implements OnInit  {
     if (this.restaurant.restaurant_full_member_on) {
       let reg_date = new Date(this.restaurant.restaurant_full_member_on);
       reg_date.setFullYear(reg_date.getFullYear() + 1);
-      const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+      const options = {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      };
       this.renewal_date = reg_date.toLocaleDateString('en-US', options);
-      moment.locale(localStorage.getItem('rd_country'));
+      moment.locale(localStorage.getItem('rd_language'));
       this.d_renewal_date = moment(reg_date).format('dddd, DD MMMM YYYY');
     }
   }
@@ -97,13 +86,13 @@ export class PaymentComponent implements OnInit  {
 
     if (level === 'Full') {
 
-      this.p_description = this.t_data.UpgradeLower + this.company_currency_symbol +
-        this.company_annual_fee + ' ' + this.t_data.Tax;
+      this.p_description = this.t_data.UpgradeLower + this.brand.currency.symbol +
+        this.brand.fee.year + ' ' + this.t_data.Tax;
       // NB this needs to be updated for France
       // this.p_amount_no_vat = 4200; // NB reset to 4200 for UK
-      this.p_amount_no_vat = Math.trunc(this.company_annual_fee * 100); // NB reset to 4200 for UK
-      this.p_amount = Math.trunc(this.company_annual_fee_with_vat * 100);
-      this.p_currency = this.company_currency_code;
+      this.p_amount_no_vat = Math.trunc(this.brand.fee.year * 100); // NB reset to 4200 for UK
+      this.p_amount = Math.trunc(this.brand.fee.yearIncVat * 100);
+      this.p_currency = this.brand.currency.code;
       this.invoice_number = 'to come'; // create a placeholder which will then be updated
       const first_self = this;
 
@@ -150,7 +139,7 @@ export class PaymentComponent implements OnInit  {
                 //      card_type
                 //      card_last4
                 this.createInvoice(restaurant_id, data['invoice_number'], this.p_amount_no_vat / 100,
-                  this.company_currency_code, this.p_description, token);
+                  this.brand.currency.code, this.p_description, token);
                 // send a welcome if this was triggered by an agent
                 if (this.agent) {
                   // TODO: Need to set up an association here, but what if it has already been set up?
@@ -183,12 +172,12 @@ export class PaymentComponent implements OnInit  {
 
       handler.open({
         image: 'https://res.cloudinary.com/rdl/image/upload/v1534065778/RC-logo-NoText_b7oecp.jpg',
-        name: this.company_name,
-        description: this.t_data.Membership + ' ' + this.company_currency_symbol +
-          this.company_annual_fee + ' ' + this.t_data.TaxNoBracket,
+        name: this.brand.name,
+        description: this.t_data.Membership + ' ' + this.brand.currency.symbol +
+          this.brand.fee.year + ' ' + this.t_data.TaxNoBracket,
         // description: this.t_data.MembershipFor +  ' ' + this.restaurant.restaurant_name + ' (' + this.company_currency_symbol +
         //   this.company_annual_fee + ' ' + this.t_data.Tax,
-        currency: this.company_currency_code,
+        currency: this.brand.currency.code,
         amount: this.p_amount,
         email: this.restaurant.restaurant_email,
         billingAddress: false,
@@ -208,10 +197,10 @@ export class PaymentComponent implements OnInit  {
   }
 
   createInvoice(restaurant_id, invoice_number, amount, currency, description, token) {
-    this.restaurantService.sendInvoice(restaurant_id, this.restaurant.restaurant_member_id,
+    this.restaurantService.sendInvoice(restaurant_id, Number(this.restaurant.restaurant_member_id),
       invoice_number, amount, currency, description, token)
       .subscribe(
-        data => {
+        () => {
           console.log('Invoice sent');
         },
         error => {

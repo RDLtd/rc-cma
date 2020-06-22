@@ -6,12 +6,16 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
   templateUrl: './cms-menu-dish.component.html'
 })
 export class CmsMenuDishComponent implements OnInit {
-
+  dish: any;
+  currencySymbol: string;
   constructor(
     public dialogRef: MatDialogRef<CmsMenuDishComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any ) { }
 
   ngOnInit() {
-    console.log(this.data);
+    //console.log(this.data);
+    this.dish = this.data.dish;
+    this.currencySymbol = this.data.currencySymbol;
+
   }
 }

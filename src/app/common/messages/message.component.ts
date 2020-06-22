@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { AppConfig } from '../../app.config';
 
 @Component({
   selector: 'rc-message',
@@ -8,29 +9,23 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 export class MessageComponent implements OnInit {
 
-  company_name;
+  brandName: string;
 
   constructor(
+    private config: AppConfig,
     public messageDialog: MatDialogRef<MessageComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA) public data: any,
   ) {}
 
   ngOnInit() {
-    // console.log('message data 1: ', this.data);
-    this.company_name = localStorage.getItem('rd_company_name');
-    // select the correct language...
-    if (localStorage.getItem('rd_country') === 'fr') {
-      for (let i = 0; i < this.data.messages.length; i++) {
-        this.data.messages[i].body = this.data.messages[i].message_text_fr;
-        this.data.messages[i].heading = this.data.messages[i].message_subject_fr;
-      }
-    } else {
-      for (let i = 0; i < this.data.messages.length; i++) {
-        this.data.messages[i].body = this.data.messages[i].message_text_en;
-        this.data.messages[i].heading = this.data.messages[i].message_subject_en;
-      }
+    this.brandName = this.config.brand.name;
+    const len = this.data.messages.length;
+    const lang = localStorage.getItem('rd_language');
+    for (let i = 0; i < len; i++) {
+      let dm = this.data.messages[i];
+      dm.body = dm[`message_text_${lang}`];
+      dm.heading = dm[`message_subject_${lang}`];
     }
-    // console.log('message data 2: ', this.data);
   }
 
 }

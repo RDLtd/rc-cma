@@ -5,7 +5,6 @@ import { AppConfig } from '../app.config';
 import { ProfileVerifyComponent } from './profile-verify.component';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { HttpClient } from '@angular/common/http';
 import { TranslateService } from '@ngx-translate/core';
 import { CMSService, HelpService } from '../_services';
 import { ConfirmCancelComponent } from '../common';
@@ -22,7 +21,6 @@ export class RestaurantLookupComponent implements OnInit {
   contactEmailRequired = false;
   restaurants: Restaurant[] = [];
   sql_parameters: any = this.config.sql_defaults;
-  country: string;
   // translation variables
   t_data: any;
 
@@ -35,40 +33,23 @@ export class RestaurantLookupComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private   translate: TranslateService,
     private   snackBar: MatSnackBar,
-    private   http: HttpClient,
     public dialogRef: MatDialogRef<RestaurantLookupComponent>
   ) { }
 
   ngOnInit() {
     this.translate.get('Restaurant-Lookup')
       .subscribe(data => this.t_data = data);
-
-    this.GetCountry().subscribe(
-      data => {
-        // console.log('You are in ' + data['country']);
-        // expect GB for United Kingdom, FR for France, DE for Germany, ZA for South Africa
-        switch (data['country']) {
-          case 'FR': {
-            this.country = 'FR';
-            break;
-          }
-          case 'ZA': {
-            this.country = 'FR';
-            break;
-          }
-          default: {
-            this.country = 'UK';
-          }
-        }
-      },
-      error => {
-        console.log(JSON.stringify(error));
-      });
   }
 
-  GetCountry () {
-    // return this.http.get('https://ipinfo.io').pipe(map((res: any) => res.json()));
-    return this.http.get('https://ipinfo.io?token=b3a0582a14c7a4');
+  getRestaurantMarket() {
+    switch (localStorage.getItem('rd_locale').substr(3)) {
+      case 'fr': {
+        return 'FR';
+      }
+      default: {
+        return 'UK'
+      }
+    }
   }
 
   findRestaurants(str) {
@@ -83,7 +64,7 @@ export class RestaurantLookupComponent implements OnInit {
       limit_number: 20,
       limit_index: '0',
       // restaurant_status: 'Curation Complete',
-      country: this.country
+      country: this.getRestaurantMarket()
     };
 
     // If user has input something
@@ -190,11 +171,9 @@ export class RestaurantLookupComponent implements OnInit {
           console.log(`No Email: ${ newRestaurant.restaurant_email}`);
         }
         this.data.associatedRestaurants.push(newRestaurant);
-
-        // TODO need to make this restaurant a member - now works
         this.restaurantService.updateMemberStatus(newRestaurant.restaurant_id, 'Associate').subscribe(
-          memdata => {
-            // console.log(memdata);
+          data => {
+            console.log(data);
           },
           error => {
             console.log(error);
@@ -223,7 +202,7 @@ export class RestaurantLookupComponent implements OnInit {
           // Custom email now set up
           // Notify curation team
           const req = [
-            ` ${this.t_data.Admin}: ${this.data.member.member_first_name} ${this.data.member.member_last_name}`,
+            ` ${this.t_data.Admin}: ${localStorage.getItem('rd_username')}`,
             ` Email: ${this.data.member.member_email}`,
             ` ***`,
             ` Restaurant: ${newRestaurant.restaurant_name}`,
@@ -259,15 +238,10 @@ export class RestaurantLookupComponent implements OnInit {
     console.log(f.newRestaurantName);
     // API call to add listing
     this.dialogRef.close(f);
-    //this.dialog.closeAll();
     this.dspSnackBar(this.t_data.RequestSent);
   }
 
   dspSnackBar(msg: string, action = null, d = 3, style = 'info') {
-    // this.snackBar.open( msg, null, {
-    //   duration: 3000
-    // });
-
     this.snackBar.open(msg, action, {
       duration: d * 1000,
       panelClass: [`rc-mat-snack-${style}`]

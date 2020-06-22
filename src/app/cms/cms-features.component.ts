@@ -5,6 +5,7 @@ import { Restaurant, CMSDescription } from '../_models';
 import { ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { TranslateService } from '@ngx-translate/core';
+import { LoadService } from '../common/loader/load.service';
 
 @Component({
   selector: 'rc-cms-features',
@@ -23,7 +24,6 @@ export class CmsFeaturesComponent implements OnInit {
   descSentenceTotal = 100;
   descParagraphTotal = 200;
   descFullTotal = 5000;
-  showLoader: boolean = false;
   separatorKeysCodes = [ENTER, 188];
   removable: boolean = true;
 
@@ -34,10 +34,13 @@ export class CmsFeaturesComponent implements OnInit {
     private cmsLocalService: CmsLocalService,
     private cms: CMSService,
     private translate: TranslateService,
-    public help: HelpService
+    public help: HelpService,
+    private loader: LoadService
   ) { }
 
   ngOnInit() {
+
+    this.loader.open();
     // Subscribe to service
     this.cmsLocalService.getRestaurant()
       .subscribe(data => {
@@ -74,6 +77,7 @@ export class CmsFeaturesComponent implements OnInit {
             this.keywords = data['additional'].split(',');
           }
         }
+        this.loader.close();
       },
       error => {
         console.log(JSON.stringify(error));
@@ -107,7 +111,7 @@ export class CmsFeaturesComponent implements OnInit {
 
     this.cms.updateAttributes(this.restaurant.restaurant_id, this.features, this.keywords.join(','))
       .subscribe(
-      data => {
+      () => {
         this.cmsLocalService.dspSnackbar(this.restaurant.restaurant_name + this.t_data.FeaturesUpdated, null, 5);
       },
       error => {
@@ -115,7 +119,7 @@ export class CmsFeaturesComponent implements OnInit {
       });
 
     this.cms.updateDescription(this.descriptions).subscribe(
-      data => {
+      () => {
         // console.log('Desc updated', data);
         this.cmsLocalService.dspSnackbar(this.restaurant.restaurant_name + this.t_data.DescriptionsUpdated, null, 5);
       },

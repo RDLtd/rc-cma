@@ -41,7 +41,9 @@ export class ProfileDetailComponent implements OnInit {
 
     this.memberService.update(this.member).
       subscribe(
-        data => {
+        () => {
+          localStorage.setItem('rd_profile', JSON.stringify(this.member));
+          localStorage.setItem('rd_username', `${this.member.member_first_name} ${this.member.member_last_name}`);
           this.dspSnackBar(this.t_data.ProfileUpdated);
           this.dialog.close();
         },
@@ -64,7 +66,4 @@ export class ProfileDetailComponent implements OnInit {
       duration: 5000
     });
   }
-
-
-
 }

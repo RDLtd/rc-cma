@@ -1,13 +1,11 @@
 import { Injectable } from '@angular/core';
 // Don't use shortcut format as it will create a circular ref.
-import { HelpComponent } from '../common/help/help.component';
+import { HelpComponent } from '../common';
 import { MatDialog } from '@angular/material/dialog';
 import { AnalyticsService } from './analytics.service';
 
 @Injectable()
 export class HelpService {
-
-  //demourl: string = 'https://rdltd.github.io/RD.Pages/';
 
   constructor(
     private dialog: MatDialog,
@@ -15,15 +13,13 @@ export class HelpService {
   ) { }
 
   dspHelp(id, restaurant = null) {
-    //console.log(id);
+    // console.log(id);
     // determine language in order to access correct help files
-    const lang = localStorage.getItem('rd_country');
+    const lang = localStorage.getItem('rd_language');
     let header;
     let help_root;
     let dspFooter: boolean = true; // id.indexOf('cms-dashboard') >= 0;
     let btnDemoLabel: string;
-
-    console.log(dspFooter, id);
 
       switch (lang) {
         // allow for specific countries, and make the default whatever is in the root help folder
@@ -34,7 +30,6 @@ export class HelpService {
           btnDemoLabel = 'CONTACTER L\'ASSISTANCE RI';
           break;
         }
-
         default: {
           // assume default is English
           header = 'Help';
@@ -42,8 +37,6 @@ export class HelpService {
           btnDemoLabel = 'CONTACT RC SUPPORT';
         }
       }
-
-    console.log('path', help_root + id + '.md');
     let dialogRef = this.dialog.open(HelpComponent, {
       width: '480px',
       data: {
@@ -82,5 +75,4 @@ export class HelpService {
       this.dialog.closeAll();
     });
   }
-
 }

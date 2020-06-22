@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Restaurant } from '../_models/restaurant';
-import { CMSService } from '../_services/cms.service';
-import { RestaurantService } from '../_services/restaurant.service';
+import { Restaurant } from '../_models';
+import { CMSService } from '../_services';
+import { RestaurantService } from '../_services';
 import { CmsLocalService } from './cms-local.service';
 import { MatDialog } from '@angular/material/dialog';
-import { ConfirmCancelComponent } from '../common/confirm-cancel/confirm-cancel.component';
-import { RestaurantDetailComponent } from '../restaurants/restaurant-detail.component';
+import { ConfirmCancelComponent } from '../common';
+import { RestaurantDetailComponent } from '../restaurants';
 import { NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AppConfig } from '../app.config';
@@ -36,11 +36,11 @@ export class CmsDirectoryComponent implements OnInit {
     private translate: TranslateService,
     private restaurantService: RestaurantService,
     private dialog: MatDialog) {
-    translate.onLangChange.subscribe(lang => {
+    translate.onLangChange.subscribe(() => {
       this.translate.get('CMS-Directory').subscribe(data => {
         this.t_data = data;
       });
-      moment.locale(localStorage.getItem('rd_country'));
+      moment.locale(localStorage.getItem('rd_language'));
       this.d_restaurant_verified_on = moment(this.restaurant.restaurant_verified_on).format('dddd, DD MMMM YYYY');
     });
   }
@@ -48,7 +48,7 @@ export class CmsDirectoryComponent implements OnInit {
   ngOnInit() {
 
     this.showLoader = true;
-    moment.locale(localStorage.getItem('rd_country'));
+    moment.locale(localStorage.getItem('rd_language'));
 
     this.cmsLocalService.getRestaurant()
 
@@ -57,7 +57,9 @@ export class CmsDirectoryComponent implements OnInit {
 
           // make a copy of the original so we can compare later
           for (let key in this.restaurant) {
-            this.originalrestaurant[key] = this.restaurant[key];
+            if (this.restaurant.hasOwnProperty(key)) {
+              this.originalrestaurant[key] = this.restaurant[key];
+            }
           }
 
           // check to see if we need to remind the member to verify
@@ -68,11 +70,7 @@ export class CmsDirectoryComponent implements OnInit {
             const duration = now.valueOf() - verified_date.valueOf();
             const diffDays = Math.ceil(duration / (1000 * 3600 * 24));
 
-            if (diffDays < this.config.restaurant_verification_days) {
-              this.verification_due = false;
-            } else {
-              this.verification_due = true;
-            }
+            this.verification_due = diffDays >= this.config.restaurant_verification_days;
           }
           this.d_restaurant_verified_on = moment(this.restaurant.restaurant_verified_on).format('dddd, DD MMMM YYYY');
           this.showLoader = false;
@@ -95,23 +93,18 @@ export class CmsDirectoryComponent implements OnInit {
     };
 
     const dialogRef = this.dialog.open(ConfirmCancelComponent, { data });
+
     dialogRef.afterClosed().subscribe(result => {
       if (result.confirmed) {
-        const currentMember = JSON.parse(localStorage.getItem('rd_profile'));
-        const displayDate = new Date().toLocaleDateString();
-        console.log(`Data for ${this.restaurant.restaurant_name} verified by ` +
-          currentMember.member_first_name + ' ' + currentMember.member_last_name + ' on ' + displayDate);
-        this.restaurantService.verify(this.restaurant.restaurant_id,
-          currentMember.member_first_name + ' ' + currentMember.member_last_name )
-          .subscribe(data => {
-              // console.log(data);
+        const userName = localStorage.getItem('rd_username');
+        const newDate = new Date().toLocaleDateString();
+        this.restaurantService.verify(this.restaurant.restaurant_id, userName)
+          .subscribe(() => {
               this.openSnackBar(this.t_data.Verified, '');
-              this.restaurant.restaurant_verified_by = currentMember.member_first_name +
-                ' ' + currentMember.member_last_name;
-              this.restaurant.restaurant_verified_on = Date().toLocaleString();
-              this.originalrestaurant.restaurant_verified_by = currentMember.member_first_name +
-                ' ' + currentMember.member_last_name;
-              this.originalrestaurant.restaurant_verified_on = Date().toLocaleString();
+              this.restaurant.restaurant_verified_by = userName;
+              this.restaurant.restaurant_verified_on = newDate;
+              this.originalrestaurant.restaurant_verified_by = userName;
+              this.originalrestaurant.restaurant_verified_on = newDate;
               this.verification_due = false;
             },
             error => console.log(error));
@@ -133,7 +126,7 @@ export class CmsDirectoryComponent implements OnInit {
     dialogRef.componentInstance.cancelSetting = true; // this so we can detect clicks outside the box
 
     // Whenever the dialog is closed
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe(() => {
       // Create a hook into the dialog form
       const f: NgForm = dialogRef.componentInstance.restForm;
 
@@ -144,9 +137,11 @@ export class CmsDirectoryComponent implements OnInit {
           // iterate through the fields and detect which have changed...
           let changeArray = [];
           for (let key in this.restaurant) {
-            if (this.restaurant[key] !== this.originalrestaurant[key]) {
-              changeArray.push({ key: key.replace('restaurant_', ''),
-                was: this.originalrestaurant[key], now: this.restaurant[key] });
+            if (this.restaurant.hasOwnProperty(key)) {
+              if (this.restaurant[key] !== this.originalrestaurant[key]) {
+                changeArray.push({ key: key.replace('restaurant_', ''),
+                  was: this.originalrestaurant[key], now: this.restaurant[key] });
+              }
             }
           }
           console.log(changeArray.length + ' changes detected');
@@ -160,20 +155,26 @@ export class CmsDirectoryComponent implements OnInit {
               error => console.log(error));
           // now need to revert the data since this was ONLY A REQUEST
           for (let key in this.restaurant) {
-            this.restaurant[key] = this.originalrestaurant[key];
+            if (this.restaurant.hasOwnProperty(key)) {
+              this.restaurant[key] = this.originalrestaurant[key];
+            }
           }
         } else {
           console.log('Form invalid, return message');
           // now need to revert the data since this was ONLY A REQUEST
           for (let key in this.restaurant) {
-            this.restaurant[key] = this.originalrestaurant[key];
+            if (this.restaurant.hasOwnProperty(key)) {
+              this.restaurant[key] = this.originalrestaurant[key];
+            }
           }
         }
       } else {
         console.log('As you were, nothing changed');
         // now need to revert the data since this was ONLY A REQUEST
         for (let key in this.restaurant) {
-          this.restaurant[key] = this.originalrestaurant[key];
+          if (this.restaurant.hasOwnProperty(key)) {
+            this.restaurant[key] = this.originalrestaurant[key];
+          }
         }
       }
     });

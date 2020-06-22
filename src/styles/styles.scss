@@ -29,13 +29,14 @@ $config: mat-typography-config();
 }
 .rc-dialog-loader {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  margin: -8px;
+  margin: -12px;
   transition: all 300ms ease-out;
   span {
-    margin: 0 8px;
+    display: inline-block;
+    padding-top: 8px;
     font: $rc-display-font-weight 14px/1 $rc-default-font;
     text-transform: uppercase;
   }

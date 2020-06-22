@@ -4,12 +4,12 @@
 
   <form #formProfile="ngForm" (ngSubmit)="formProfile.valid && onProfileUpdate(formProfile.value)">
     <mat-dialog-content>
-      <section #sectionContacts>
+      <section>
         <div>
-          <mat-form-field floatPlaceholder="always" class="rc-full-width">
+          <mat-form-field hideRequiredMarker class="rc-full-width">
+            <mat-label>{{ 'Profile-Detail.FullName' | translate }}</mat-label>
             <input
               name="member_fullname"
-              placeholder="{{ 'Profile-Detail.FullName' | translate }}"
               matInput
               [(ngModel)]="member_full_name"
               required>
@@ -17,10 +17,10 @@
             <mat-error align="end">{{ 'Profile-Detail.Required' | translate }}</mat-error>
           </mat-form-field>
 
-          <mat-form-field floatPlaceholder="always" class="rc-full-width">
+          <mat-form-field hideRequiredMarker class="rc-full-width">
+            <mat-label>{{ 'Profile-Detail.Email' | translate }}</mat-label>
             <input
               name="member_email"
-              placeholder="{{ 'Profile-Detail.Email' | translate }}"
               matInput
               [(ngModel)]="member.member_email"
               required
@@ -28,10 +28,10 @@
             <mat-error align="end">{{ 'Profile-Detail.ValidEmail' | translate }}</mat-error>
           </mat-form-field>
 
-          <mat-form-field floatPlaceholder="always" class="rc-full-width">
+          <mat-form-field hideRequiredMarker class="rc-full-width">
+            <mat-label>{{ 'Profile-Detail.JobTitle' | translate }}</mat-label>
             <input
               name="member_job"
-              placeholder="{{ 'Profile-Detail.JobTitle' | translate }}"
               matInput
               ngModel
               [(ngModel)]="member.member_job"
@@ -40,10 +40,10 @@
             <mat-error align="end">{{ 'Profile-Detail.Required' | translate }}</mat-error>
           </mat-form-field>
 
-          <mat-form-field floatPlaceholder="always" class="rc-full-width">
+          <mat-form-field hideRequiredMarker class="rc-full-width">
+            <mat-label>{{ 'Profile-Detail.Group' | translate }}</mat-label>
             <input
               name="member_restaurant_group"
-              placeholder="{{ 'Profile-Detail.Group' | translate }}"
               matInput
               ngModel
               [(ngModel)]="member.member_restaurant_group">
@@ -51,11 +51,11 @@
             <mat-error align="end">{{ 'Profile-Detail.Required' | translate }}</mat-error>
           </mat-form-field>
 
-          <mat-form-field floatPlaceholder="always" class="rc-full-width">
+          <mat-form-field hideRequiredMarker class="rc-full-width">
+            <mat-label>{{ 'Profile-Detail.Mobile' | translate }}</mat-label>
             <input
               name="member_telephone"
               type="text"
-              placeholder="{{ 'Profile-Detail.Mobile' | translate }}"
               matInput
               #tel="ngModel"
               [(ngModel)]="member.member_telephone"

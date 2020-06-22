@@ -1,5 +1,5 @@
 <h1
-  *ngIf="data.mode === 'add'"
+  *ngIf="data['mode'] === 'add'"
   class="mat-dialog-title">
   {{ 'CMS-Menu-Dish.AddDish' | translate }}
 </h1>
@@ -9,18 +9,18 @@
   <section>
     <mat-form-field class="rc-full-width">
       <mat-select
-        [ngModel]="data.dish.cms_dish_section_id"
+        [ngModel]="data['dish']['cms_dish_section_id']"
         name="cms_dish_section_id"
         placeholder="{{ 'CMS-Menu-Dish.Section' | translate }}"
         required>
-        <mat-option *ngFor="let section of data.sections" [value]="section.id">
+        <mat-option *ngFor="let section of data['sections']" [value]="section.id">
           {{ section.label | uppercase }}
         </mat-option>
       </mat-select>
     </mat-form-field>
   </section>
 
-  <input type="hidden" name="cms_dish_id" [ngModel]="data.dish.cms_dish_id">
+  <input type="hidden" name="cms_dish_id" [ngModel]="data['dish']['cms_dish_id']">
 
   <div style="display: flex;">
     <mat-form-field style="flex: 3; margin-right: 4px;">
@@ -29,19 +29,19 @@
         matInput
         maxlength=50
         placeholder="{{ 'CMS-Menu-Dish.DishName' | translate }}"
-        [ngModel]="data.dish.cms_dish_name"
+        [ngModel]="data['dish']['cms_dish_name']"
         required>
     </mat-form-field>
 
     <mat-form-field  style="width: 30%; flex: 1;">
-      <span matPrefix>{{ data.currencySymbol }} &nbsp;</span>
+      <span matPrefix>{{ data['currencySymbol'] }} &nbsp;</span>
       <input
         name="cms_dish_price"
         type="number"
         step="0.01"
         matInput
         placeholder="{{ 'CMS-Menu-Dish.Price' | translate }}"
-        [ngModel]="data.dish.cms_dish_price"
+        [ngModel]="data['dish']['cms_dish_price']"
         required>
     </mat-form-field>
   </div>
@@ -51,7 +51,7 @@
       matInput
       name="cms_dish_desc"
       placeholder="{{ 'CMS-Menu-Dish.OptDesc' | translate }}"
-      [ngModel]="data.dish.cms_dish_desc"></textarea>
+      [ngModel]="data['dish']['cms_dish_desc']"></textarea>
   </mat-form-field>
 
   <section style="display: flex; flex-direction: column">
@@ -62,12 +62,12 @@
     </mat-checkbox>
     <mat-checkbox
       name="cms_dish_vegan"
-      [ngModel]="data.dish.cms_dish_vegan">
+      [ngModel]="data['dish']['cms_dish_vegan']">
       {{ 'CMS-Menu-Dish.Vegan' | translate }}
     </mat-checkbox>
     <mat-checkbox
       name="cms_dish_glutenfree"
-      [ngModel]="data.dish.cms_dish_glutenfree">
+      [ngModel]="data['dish']['cms_dish_glutenfree']">
       {{ 'CMS-Menu-Dish.GlutenFree' | translate }}
     </mat-checkbox>
   </section>

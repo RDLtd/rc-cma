@@ -8,9 +8,9 @@ import { Validator, AbstractControl, NG_VALIDATORS } from '@angular/forms';
 })
 
 export class PwdMatchValidator implements Validator {
-  constructor(@Attribute('pwdMatch') public pwdMatch: string,
-              @Attribute('reverse') public reverse: string) {
-  }
+  constructor(
+    @Attribute('pwdMatch') public pwdMatch: string,
+    @Attribute('reverse') public reverse: string) { }
 
   private get isReverse() {
     if (!this.reverse) return false;

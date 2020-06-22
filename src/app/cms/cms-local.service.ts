@@ -12,7 +12,7 @@ import { TranslateService } from '@ngx-translate/core';
 export class CmsLocalService {
 
   private restaurant: Restaurant = new Restaurant();
-  private subject: Subject<Restaurant> = new BehaviorSubject<Restaurant>(this.restaurant);
+  private restaurantSubject: Subject<Restaurant> = new BehaviorSubject<Restaurant>(this.restaurant);
 
   // Observable offers
   private offerCount: number = 0;
@@ -39,12 +39,12 @@ export class CmsLocalService {
   setRestaurant(restaurant: Restaurant): void {
     // console.log('cmsLocalService.setRestaurant()', restaurant);
     this.restaurant = restaurant;
-    this.subject.next(this.restaurant);
+    this.restaurantSubject.next(this.restaurant);
   }
 
   getRestaurant(): Observable<Restaurant> {
     // console.log('cmsLocalService.getRestaurant()', this.subject);
-    return this.subject.asObservable();
+    return this.restaurantSubject.asObservable();
   }
 
   dspSnackbar(msg: string, actn: string = '', d: number = 3, style: any = 'info'): void {

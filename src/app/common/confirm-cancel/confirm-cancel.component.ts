@@ -19,7 +19,6 @@ export class ConfirmCancelComponent implements OnInit  {
       @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit() {
-    console.log('Data', this.data);
     this.translate.get('ConfirmCancel.Title').subscribe(value => this.defaultTitle = value);
     this.translate.get('ConfirmCancel.Message').subscribe(value => this.defaultMsg = value);
     this.translate.get('ConfirmCancel.Cancel').subscribe(value => this.defaultCancel = value);

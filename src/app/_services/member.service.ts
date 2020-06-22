@@ -1,22 +1,32 @@
 ﻿import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { AppConfig } from '../app.config';
 import { Member } from '../_models';
+import { AppService } from './app.service';
 
 @Injectable()
 
 export class MemberService {
 
+  authToken;
+  brand;
+
   constructor(
     private http: HttpClient,
-    private config: AppConfig
-  ) {}
+    private config: AppConfig,
+    private appService: AppService
+  ) {
+    this.appService.authToken.subscribe(token => {
+      this.authToken = token;
+    });
+    this.brand = this.config.brand;
+  }
 
   getAll() {
     return this.http.post(this.config.apiUrl + '/members',
       {
         userCode: this.config.userAPICode,
-        token: this.jwt()
+        token: this.authToken
       });
   }
 
@@ -25,7 +35,7 @@ export class MemberService {
       {
         access_id: access_id,
         userCode: this.config.userAPICode,
-        token: this.jwt()
+        token: this.authToken
       });
   }
 
@@ -34,7 +44,7 @@ export class MemberService {
       {
         member_id: member_id,
         userCode: this.config.userAPICode,
-        token: this.jwt()
+        token: this.authToken
       });
   }
 
@@ -42,7 +52,7 @@ export class MemberService {
     return this.http.post(this.config.apiUrl + '/members/dashboard',
       {
         userCode: this.config.userAPICode,
-        token: this.jwt()
+        token: this.authToken
       });
   }
 
@@ -51,7 +61,7 @@ export class MemberService {
       {
         member: member,
         userCode: this.config.userAPICode,
-        token: this.jwt()
+        token: this.authToken
       });
   }
 
@@ -60,7 +70,7 @@ export class MemberService {
       { company_prefix: localStorage.getItem('rd_company_prefix'),
         administrator: administrator,
         userCode: this.config.userAPICode,
-        token: this.jwt()
+        token: this.authToken
       });
   }
 
@@ -69,7 +79,7 @@ export class MemberService {
       {
         member: member,
         userCode: this.config.userAPICode,
-        token: this.jwt()
+        token: this.authToken
       });
   }
 
@@ -78,7 +88,7 @@ export class MemberService {
       {
         administrator: administrator,
         userCode: this.config.userAPICode,
-        token: this.jwt()
+        token: this.authToken
       });
   }
 
@@ -87,95 +97,100 @@ export class MemberService {
       {
         member_id: member_id,
         userCode: this.config.userAPICode,
-        token: this.jwt()
+        token: this.authToken
       });
   }
 
   // Set emailTo/emailFrom 'curation' or 'support
   sendEmailRequest(to, from, subject, content) {
 
-    // Which company are we?
-    const company = this.config[localStorage.getItem('rd_country') + '_company'];
+    //const company = this.config[localStorage.getItem('rd_country') + '_company'];
 
     // Allow a custom 'to' email to be passed for testing purposes
-    const emailTo = (to !== 'curation' && to !== 'support')? to : company['rd_company_email_' + to];
+    const emailTo = (to !== 'curation' && to !== 'support')? to : this.brand.email[to];
 
     return this.http.post(this.config.apiUrl + '/members/sendemail',
       {
-        companyName: company.rd_company_name,
-        companyPrefix: company.rd_company_prefix,
+        companyName: this.brand.name,
+        companyPrefix: this.brand.prefix,
         emailTo: emailTo,
-        emailFrom: company['rd_company_email_' + from],
+        emailFrom: this.brand.email[from],
         emailSubject: subject,
         emailBody: content,
         userCode: this.config.userAPICode,
-        token: this.jwt()
+        token: this.authToken
       });
   }
 
   sendwelcomeemail(member_id, restaurant_name, restaurant_number) {
     return this.http.post(this.config.apiUrl + '/members/sendwelcomeemail',
-      { company_prefix: localStorage.getItem('rd_company_prefix'),
+      {
+        company_prefix: this.brand.prefix,
         member_id: member_id,
         restaurant_name: restaurant_name,
         restaurant_number: restaurant_number,
         userCode: this.config.userAPICode,
-        token: this.jwt()
+        token: this.authToken
       });
   }
 
   sendwelcomersvpemail(member_id, restaurant_name, restaurant_number, member_class) {
     return this.http.post(this.config.apiUrl + '/members/sendwelcomersvpemail',
-      { company_prefix: localStorage.getItem('rd_company_prefix'),
+      {
+        company_prefix: this.brand.prefix,
         member_id: member_id,
         restaurant_name: restaurant_name,
         restaurant_number: restaurant_number,
         member_class: member_class,
         userCode: this.config.userAPICode,
-        token: this.jwt()
+        token: this.authToken
       });
   }
 
   sendrequestemail(member_id, restaurant_name, restaurant_number) {
     return this.http.post(this.config.apiUrl + '/members/sendrequestemail',
-      { company_prefix: localStorage.getItem('rd_company_prefix'),
+      {
+        company_prefix: this.brand.prefix,
         member_id: member_id,
         restaurant_name: restaurant_name,
         restaurant_number: restaurant_number,
         userCode: this.config.userAPICode,
-        token: this.jwt()
+        token: this.authToken
       });
   }
 
   sendInfoEmail(member_id, restaurant_name, restaurant_number, agent_fullname) {
     return this.http.post(this.config.apiUrl + '/members/sendinfoemail',
-      { company_prefix: localStorage.getItem('rd_company_prefix'),
+      {
+        company_prefix: this.brand.prefix,
         member_id: member_id,
         restaurant_name: restaurant_name,
         restaurant_number: restaurant_number,
         agent_fullname: agent_fullname,
         userCode: this.config.userAPICode,
-        token: this.jwt()
+        token: this.authToken
       });
   }
 
   sendrecoveryemail(member_email) {
     return this.http.post(this.config.apiUrl + '/members/sendrecoveryemail',
-      { company_prefix: localStorage.getItem('rd_company_prefix'),
+      {
+        company_prefix: this.brand.prefix,
         member_email: member_email,
         userCode: this.config.userAPICode,
-        token: this.jwt()
+        token: this.authToken
       });
   }
 
   sendIntroEmail(restaurant_name: string, restaurant_email: string, restaurant_activation_code: string) {
     return this.http.post(this.config.apiUrl + '/members/send_intro_email',
-      { company_prefix: localStorage.getItem('rd_company_prefix'),
+      {
+        company_prefix: this.brand.prefix,
         restaurant_name: restaurant_name,
         restaurant_email: restaurant_email,
         restaurant_activation_code: restaurant_activation_code,
         userCode: this.config.userAPICode,
-        token: this.jwt()
+        token: this.authToken
       });
   }
 
@@ -185,7 +200,7 @@ export class MemberService {
         email: memberemail,
         password: memberpassword,
         userCode: this.config.userAPICode,
-        token: this.jwt()
+        token: this.authToken
       });
   }
 
@@ -195,7 +210,7 @@ export class MemberService {
         member_id: memberid,
         member_password: memberpassword,
         userCode: this.config.userAPICode,
-        token: this.jwt()
+        token: this.authToken
       });
   }
 
@@ -204,7 +219,7 @@ export class MemberService {
       {
         member_id: memberid,
         userCode: this.config.userAPICode,
-        token: this.jwt()
+        token: this.authToken
       });
   }
 
@@ -214,19 +229,19 @@ export class MemberService {
         member_id: member_id,
         message_id: message_id,
         userCode: this.config.userAPICode,
-        token: this.jwt()
+        token: this.authToken
       });
   }
 
-  messages(company_code: string, memberid: string, memberaccesslevel: string, membermessageseen: string) {
+  messages(memberid: string, memberaccesslevel: string, membermessageseen: string) {
     return this.http.post(this.config.apiUrl + '/members/messages',
       {
-        company_code: company_code,
+        company_code: this.config.brand.prefix,
         member_id: memberid,
         member_access_level: memberaccesslevel,
         member_messages_seen: membermessageseen,
         userCode: this.config.userAPICode,
-        token: this.jwt()
+        token: this.authToken
       });
   }
 
@@ -234,7 +249,7 @@ export class MemberService {
     return this.http.post(this.config.apiUrl + '/members/loggedin',
       {
         userCode: this.config.userAPICode,
-        token: this.jwt()
+        token: this.authToken
       });
   }
 
@@ -244,7 +259,7 @@ export class MemberService {
         member_id: memberid,
         member_token: membertoken,
         userCode: this.config.userAPICode,
-        token: this.jwt()
+        token: this.authToken
       });
   }
 
@@ -252,7 +267,7 @@ export class MemberService {
     return this.http.post(this.config.apiUrl + '/members/transactions',
       {
         userCode: this.config.userAPICode,
-        token: this.jwt()
+        token: this.authToken
       });
   }
   //
@@ -261,7 +276,7 @@ export class MemberService {
   //     {
   //       member_id: memberid,
   //       userCode: this.config.userAPICode,
-  //       token: this.jwt()
+  //       token: this.authToken
   //     }).pipe(map((response: any) => response.json()));
   // }
   //
@@ -271,7 +286,7 @@ export class MemberService {
   //       member_id: memberid,
   //       imageData: imageData,
   //       userCode: this.config.userAPICode,
-  //       token: this.jwt()
+  //       token: this.authToken
   //     }).pipe(map((response: any) => response.json()));
   // }
 
@@ -281,7 +296,7 @@ export class MemberService {
         member_id: memberid,
         member_image_path: imageURL,
         userCode: this.config.userAPICode,
-        token: this.jwt()
+        token: this.authToken
       });
   }
 
@@ -290,34 +305,15 @@ export class MemberService {
       {
         member_id: memberid,
         userCode: this.config.userAPICode,
-        token: this.jwt()
+        token: this.authToken
       });
-  }
-
-  // Generate Token
-  private jwt() {
-    // create authorization header with jwt token
-    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-
-    const requestOptions = {
-      params: new HttpParams()
-    };
-    requestOptions.params.set('foo', 'bar');
-    requestOptions.params.set('apiCategory', 'Financial');
-
-    if (currentUser && currentUser.token) {
-      requestOptions.params.set('Authorization', 'Bearer ' + currentUser.token);
-    } else {
-      requestOptions.params.set('Authorization', 'Bearer ' + '234242423wdfsdvdsfsdrfg34tdfverge');
-    }
-    return requestOptions;
   }
 
   dbconfig() {
     return this.http.post(this.config.apiUrl + '/members/dbconfig',
       {
         userCode: this.config.userAPICode,
-        token: this.jwt()
+        token: this.authToken
       });
   }
 
@@ -326,7 +322,7 @@ export class MemberService {
       {
         listID: listID,
         userCode: this.config.userAPICode,
-        token: this.jwt()
+        token: this.authToken
       });
   }
 
@@ -336,7 +332,7 @@ export class MemberService {
         listID: listID,
         memberinfo: memberinfo,
         userCode: this.config.userAPICode,
-        token: this.jwt()
+        token: this.authToken
       });
   }
 
@@ -346,7 +342,7 @@ export class MemberService {
         listID: listID,
         memberID: memberID,
         userCode: this.config.userAPICode,
-        token: this.jwt()
+        token: this.authToken
       });
   }
 
@@ -355,7 +351,7 @@ export class MemberService {
       {
         listID: listID,
         userCode: this.config.userAPICode,
-        token: this.jwt()
+        token: this.authToken
       });
   }
 
@@ -365,7 +361,7 @@ export class MemberService {
         listID: listID,
         memberID: memberID,
         userCode: this.config.userAPICode,
-        token: this.jwt()
+        token: this.authToken
       });
   }
 
@@ -374,7 +370,7 @@ export class MemberService {
       {
         restaurant_number: restaurant_number,
         userCode: this.config.userAPICode,
-        token: this.jwt()
+        token: this.authToken
       });
   }
 
@@ -386,7 +382,7 @@ export class MemberService {
         title: title,
         timestamp: timestamp,
         userCode: this.config.userAPICode,
-        token: this.jwt()
+        token: this.authToken
       });
   }
 
@@ -395,7 +391,7 @@ export class MemberService {
       {
         country_locale: country_locale,
         userCode: this.config.userAPICode,
-        token: this.jwt()
+        token: this.authToken
       });
   }
 
@@ -405,7 +401,7 @@ export class MemberService {
 
   getLoginEmail(login_email: string) {
     return this.http.post(this.config.apiUrl + '/members/getloginemail',
-      { login_email: login_email, userCode: this.config.userAPICode, token: this.jwt()});
+      { login_email: login_email, userCode: this.config.userAPICode, token: this.authToken});
   }
 
   async getReferral(referralCode: string) {
@@ -413,7 +409,7 @@ export class MemberService {
       {
         promo_code: referralCode,
         userCode: this.config.userAPICode,
-        token: this.jwt()
+        token: this.authToken
       }).toPromise();
       return data['promos'][0];
   }
@@ -423,7 +419,7 @@ export class MemberService {
       {
         promo_code: promo_code,
         userCode: this.config.userAPICode,
-        token: this.jwt()});
+        token: this.authToken});
   }
 
   getMemberPromoCode(member_id: number) {
@@ -431,7 +427,7 @@ export class MemberService {
       {
         member_id: member_id,
         userCode: this.config.userAPICode,
-        token: this.jwt()});
+        token: this.authToken});
   }
 
   addPromoAction(promo_code: string, promo_action: string, promo_member_id: number) {
@@ -441,7 +437,7 @@ export class MemberService {
         promo_action: promo_action,
         promo_member_id: promo_member_id,
         userCode: this.config.userAPICode,
-        token: this.jwt()});
+        token: this.authToken});
   }
 
 }

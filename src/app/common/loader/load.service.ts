@@ -9,12 +9,17 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 export class LoadService {
 
   dialogRef: MatDialogRef<LoadComponent>;
+  loading = {
+    en: 'LOADING',
+    fr: 'CHARGEMENT'
+  }
+  defaultLoadMessage = this.loading[localStorage.getItem('rd_language')]
 
   constructor(
     private dialog: MatDialog
   ) { }
 
-  open(msg= '') {
+  open(msg=this.defaultLoadMessage) {
     this.dialogRef = this.dialog.open(LoadComponent, {
       backdropClass: 'rc-dialog-backdrop',
       data: { message: msg },

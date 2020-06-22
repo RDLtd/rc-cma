@@ -33,15 +33,13 @@
 
   </div>
 
-  <rc-loader class="mdc-layout-grid__cell--span-8" *ngIf="showLoader"></rc-loader>
-
   <mat-card
     class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
     <mat-card-title>{{ 'CMS-Hours.Notes' | translate }}</mat-card-title>
       <mat-form-field class="rc-full-width">
+        <mat-label>{{ 'CMS-Hours.General' | translate }} (max 1000 {{ 'CMS-Features.Chars' | translate }}</mat-label>
         <textarea
           matInput
-          placeholder="{{ 'CMS-Hours.General' | translate }} (max 1000 {{ 'CMS-Features.Chars' | translate }})"
           matTextareaAutosize
           matAutosizeMinRows="1"
           matAutosizeMaxRows="7"
@@ -74,20 +72,20 @@
         <h4 *ngIf="cmstime.closed">{{ 'CMS-Hours.Closed' | translate }}</h4>
         <div class="rc-session">
           <mat-form-field class="rc-session-time">
+            <mat-label>{{ 'CMS-Hours.Start' | translate }}</mat-label>
             <input
               matInput
               type="time"
-              [placeholder]="'CMS-Hours.Start' | translate"
               step="900"
               (change)="setChanged()"
               [(ngModel)]="session.open"
               [disabled]="cmstime.closed">
           </mat-form-field>
           <mat-form-field class="rc-session-time">
+            <mat-label>{{ 'CMS-Hours.End' | translate }}</mat-label>
             <input
               matInput
               type="time"
-              [placeholder]="'CMS-Hours.End' | translate"
               step="900"
               (change)="setChanged()"
               [(ngModel)]="session.close"

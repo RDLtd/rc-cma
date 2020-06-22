@@ -7,7 +7,7 @@ import { CmsImageDialogComponent } from './cms-image-dialog.component';
 import { CmsFileUploadComponent } from './cms-file-upload.component';
 import { ConfirmCancelComponent } from '../common';
 import { TranslateService } from '@ngx-translate/core';
-
+import { LoadService } from '../common/loader/load.service';
 
 
 @Component({
@@ -29,10 +29,13 @@ export class CmsImagesComponent implements OnInit {
     private cms: CMSService,
     private translate: TranslateService,
     private dialog: MatDialog,
-    public help: HelpService
+    public help: HelpService,
+    private loader: LoadService
   ) {}
 
   ngOnInit() {
+
+    this.loader.open();
 
     this.translate.get('CMS-Images').subscribe(data => {
       this.t_data = data;
@@ -55,14 +58,15 @@ export class CmsImagesComponent implements OnInit {
   }
 
   getImages() {
-    this.showLoader = true;
     this.cms.getElementClass(this.restaurant.restaurant_id, 'Image', 'N')
       .subscribe(data => {
           this.cmsImages = data['elements'];
-          console.log('Images', data['elements']);
-          this.showLoader = false;
+          this.loader.close();
         },
-        error => console.log(error));
+        error => {
+          console.log(error);
+          this.loader.close();
+        });
   }
 
   updateLastUpdated(contentType) {

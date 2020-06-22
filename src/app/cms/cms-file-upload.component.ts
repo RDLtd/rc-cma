@@ -23,8 +23,8 @@ export class CmsFileUploadComponent implements OnInit {
   uploader: FileUploader;
   responses: Array<any> = [];
 
-  @ViewChild('imgUploadForm', { static: false }) imgForm: NgForm;
-  @ViewChild('menuUploadForm', { static: false }) menuForm: NgForm;
+  @ViewChild('imgUploadForm') imgForm: NgForm;
+  @ViewChild('menuUploadForm') menuForm: NgForm;
 
   // translation variables
   t_data: any;
@@ -42,7 +42,7 @@ export class CmsFileUploadComponent implements OnInit {
   ) {
 
     // detect language changes... need to check for change in texts
-    translate.onLangChange.subscribe(lang => {
+    translate.onLangChange.subscribe(() => {
       this.translate.get('CMS-File-Upload')
         .subscribe(data => this.setImageClasses(data));
     });
@@ -76,10 +76,6 @@ export class CmsFileUploadComponent implements OnInit {
       form.append('folder', `restaurants/${this.data.restaurant.restaurant_number}`);
       form.append('file', fileItem);
       fileItem.withCredentials = false;
-
-      // console.log('File item', fileItem );
-      // console.log('Form built');
-
       return {fileItem, form};
     };
 
@@ -109,7 +105,7 @@ export class CmsFileUploadComponent implements OnInit {
         }
       );
       // console.log(JSON.parse(response).original_filename);
-      console.log(JSON.parse(response));
+      // console.log(JSON.parse(response));
       // console.log(status);
 
       if (status === 200) {
@@ -228,9 +224,9 @@ export class CmsFileUploadComponent implements OnInit {
     e.cms_element_default = false;
     e.cms_element_live_from = now;
     e.cms_element_live_to = '2100-06-30 00:00:00+00';
-    e.cms_element_created_by = localStorage.getItem('rd_user');
+    e.cms_element_created_by = localStorage.getItem('rd_username');
     e.cms_element_approved_on = now;
-    e.cms_element_approved_by = localStorage.getItem('rd_user');
+    e.cms_element_approved_by = localStorage.getItem('rd_username');
     e.cms_element_original_filename = this.uploadLabel;
 
     // console.log(e);
@@ -269,7 +265,7 @@ export class CmsFileUploadComponent implements OnInit {
     }
 
     this.cms.defaultElement(img.cms_element_id, true).subscribe(
-      data => img.cms_element_default = true,
+      () => img.cms_element_default = true,
       error => console.log(error)
     );
   }
