@@ -74,7 +74,9 @@
   <div fxFlex class="rc-content-panel" markdown [data]="'CMS-Menus.VGF' | translate"></div>
 
   <!-- SAMPLE MENU SECTION -->
-  <div fxFlex *ngFor="let section of htmlMenu.sections">
+  <div
+    fxFlex
+    *ngFor="let section of htmlMenu.sections">
     <div class="rc-cms-menu-section">
       <mat-form-field class="rc-full-width">
         <mat-label>{{ 'CMS-Menus.AddSection' | translate }}</mat-label>

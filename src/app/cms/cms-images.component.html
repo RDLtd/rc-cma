@@ -1,7 +1,7 @@
 <div class="mdc-layout-grid">
-  <div class="mdc-layout-grid__inner">
+  <div class="mdc-layout-grid__inner" [@insertAnimation]="cmsImages?.length">
     <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
-    <mat-toolbar class="rc-toolbar-section">
+      <mat-toolbar class="rc-toolbar-section">
       <span>{{ 'CMS-Images.RImages' | translate }}</span>
       <span class="rc-space-filler"></span>
       <span class="rc-toolbar-actions">
@@ -17,7 +17,7 @@
         </button>
       </span>
     </mat-toolbar>
-  </div>
+    </div>
     <!-- Image cards -->
     <div
       class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4"

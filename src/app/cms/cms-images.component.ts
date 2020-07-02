@@ -8,11 +8,14 @@ import { CmsFileUploadComponent } from './cms-file-upload.component';
 import { ConfirmCancelComponent } from '../common';
 import { TranslateService } from '@ngx-translate/core';
 import { LoadService } from '../common/loader/load.service';
+import { insertAnimation } from '../shared/animations';
+
 
 
 @Component({
   selector: 'rc-cms-images',
-  templateUrl: './cms-images.component.html'
+  templateUrl: './cms-images.component.html',
+  animations: [insertAnimation]
 })
 
 export class CmsImagesComponent implements OnInit {
@@ -71,7 +74,7 @@ export class CmsImagesComponent implements OnInit {
 
   updateLastUpdated(contentType) {
     this.cms.updateLastCreatedField(Number(this.restaurant.restaurant_id), contentType).subscribe(
-      data => {},
+      () => {},
       error => {
         console.log('error in updatelastupdatedfield for images', error);
       });
@@ -84,7 +87,7 @@ export class CmsImagesComponent implements OnInit {
     img.cms_element_active ? msg = this.t_data.IsActive : msg = this.t_data.IsOffline;
 
     this.cms.updateElement(img).subscribe(
-      data => {
+      () => {
         this.updateLastUpdated('images');
         this.cmsLocalService.dspSnackbar(
           `Image ${ img.cms_element_id } ${ msg }`,

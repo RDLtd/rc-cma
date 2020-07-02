@@ -3,8 +3,28 @@ import {
   animate,
   transition,
   style,
-  query
+  query, stagger
 } from '@angular/animations';
+
+
+export const insertAnimation = trigger('insertAnimation', [
+    transition('* <=> *', [
+      query(':enter',
+        [style({ opacity: 0 }), stagger('100ms', animate('300ms ease-out', style({ opacity: 1 })))],
+        { optional: true })
+      ])
+  ]);
+
+
+export const insertRemoveAnimation = trigger('insertRemoveAnimation', [
+  transition(':enter', [
+    style({ opacity: 0 }),
+    animate('200ms', style({ opacity: 1 })),
+  ]),
+  transition(':leave', [
+    animate('200ms', style({ opacity: 0 }))
+  ])
+]);
 
 export const fadeAnimation = trigger('fadeAnimation', [
   // The '* => *' will trigger the animation to change between any two states
