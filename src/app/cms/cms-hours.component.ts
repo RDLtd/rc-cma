@@ -4,10 +4,12 @@ import { Restaurant } from '../_models';
 import { AnalyticsService, CMSService, HelpService } from '../_services';
 import { TranslateService } from '@ngx-translate/core';
 import { LoadService } from '../common/loader/load.service';
+import { insertAnimation } from '../shared/animations';
 
 @Component({
   selector: 'rc-cms-hours',
-  templateUrl: './cms-hours.component.html'
+  templateUrl: './cms-hours.component.html',
+  animations: [insertAnimation]
 })
 
 export class CmsHoursComponent implements OnInit {

@@ -21,6 +21,7 @@ export class RestaurantLookupComponent implements OnInit {
   contactEmailRequired = false;
   restaurants: Restaurant[] = [];
   sql_parameters: any = this.config.sql_defaults;
+  sql_param_country: string;
   // translation variables
   t_data: any;
 
@@ -37,19 +38,9 @@ export class RestaurantLookupComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.sql_param_country = localStorage.getItem('rd_brand') === 'ri' ? 'FR' : 'UK'
     this.translate.get('Restaurant-Lookup')
       .subscribe(data => this.t_data = data);
-  }
-
-  getRestaurantMarket() {
-    switch (localStorage.getItem('rd_locale').substr(3)) {
-      case 'fr': {
-        return 'FR';
-      }
-      default: {
-        return 'UK'
-      }
-    }
   }
 
   findRestaurants(str) {
@@ -64,7 +55,7 @@ export class RestaurantLookupComponent implements OnInit {
       limit_number: 20,
       limit_index: '0',
       // restaurant_status: 'Curation Complete',
-      country: this.getRestaurantMarket()
+      country: this.sql_param_country
     };
 
     // If user has input something
