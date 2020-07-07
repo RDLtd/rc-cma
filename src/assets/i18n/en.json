@@ -406,7 +406,8 @@
     "Directions": "directions file",
     "NewImage": "Upload a New Image",
     "NewMenu": "Upload a New Menu",
-    "NewDirection": "Upload a New Directions File"
+    "NewDirection": "Upload a New Directions File",
+    "MaxSizeExceeded": "This file is too large to upload - **Max:** "
   },
 
   "CMS-Hours": {

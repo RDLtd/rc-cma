@@ -15,10 +15,7 @@
       {{ 'CMS-File-Upload.NewDirection' | translate }}
     </h1>
   </div>
-<!--  <h1 mat-dialog-title>-->
-<!--    {{ 'CMS-File-Upload.New' | translate }} {{ data.type | titlecase }} {{ 'CMS-File-Upload.Upload' | translate }}-->
-<!--  </h1>-->
-
+  <p class="rc-warn" markdown [data]="uploadMessage | translate"></p>
   <mat-dialog-content>
 
       <!-- IMAGE PREVIEW-->
@@ -130,5 +127,6 @@
     </button>
 
   </mat-dialog-actions>
+
 
 </div>

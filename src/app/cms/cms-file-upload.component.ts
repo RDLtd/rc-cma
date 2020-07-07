@@ -16,6 +16,10 @@ export class CmsFileUploadComponent implements OnInit {
 
   dialog: any;
   uploadLabel: string;
+  uploadFileSize: number;
+  uploadMessageTxt: string;
+  uploadMessage: string;
+  maxFileSizeMb = 10;
   inProgress: boolean = false;
   filePrimed: boolean = false;
   filePreview: any = '';
@@ -44,14 +48,19 @@ export class CmsFileUploadComponent implements OnInit {
     // detect language changes... need to check for change in texts
     translate.onLangChange.subscribe(() => {
       this.translate.get('CMS-File-Upload')
-        .subscribe(data => this.setImageClasses(data));
+        .subscribe(data => {
+          this.setImageClasses(data);
+        });
     });
   }
 
   ngOnInit() {
 
     this.translate.get('CMS-File-Upload')
-      .subscribe(data => this.setImageClasses(data));
+      .subscribe(data => {
+        this.setImageClasses(data);
+        this.uploadMessageTxt = data.MaxSizeExceeded;
+      });
 
     this.filePreview = '';
 
@@ -61,6 +70,7 @@ export class CmsFileUploadComponent implements OnInit {
       autoUpload: false,
       isHTML5: true,
       removeAfterUpload: true,
+      maxFileSize: 10000000,
       headers: [
         {
           name: 'X-Requested-With',
@@ -104,6 +114,7 @@ export class CmsFileUploadComponent implements OnInit {
           data: JSON.parse(response)
         }
       );
+
       // console.log(JSON.parse(response).original_filename);
       // console.log(JSON.parse(response));
       // console.log(status);
@@ -165,8 +176,15 @@ export class CmsFileUploadComponent implements OnInit {
   }
 
   fileSelected() {
-    this.uploadLabel = this.uploader.queue[this.uploader.queue.length - 1].file.name;
-    this.filePrimed = true;
+    const f = this.uploader.queue[this.uploader.queue.length - 1];
+    this.uploadLabel = f.file.name;
+    this.uploadFileSize = f.file.size/1000/1000;
+    if (this.uploadFileSize > this.maxFileSizeMb) {
+      this.uploadMessage = `${this.uploadMessageTxt} **${this.maxFileSizeMb} MB**`;
+    } else {
+      this.filePrimed = true;
+    }
+
     // Set image preview
     if (this.data.type === 'image') {
       const self = this;
