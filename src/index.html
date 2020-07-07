@@ -3,7 +3,7 @@
 <head>
 
   <meta charset="utf-8">
-  <title>The Restaurant Collective</title>
+  <title>Restaurant Collective</title>
   <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500|Material+Icons" rel="stylesheet">
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,6 +25,7 @@
 
       if (ref.includes('.fr') || loc.substr(3) === 'fr') {
         localStorage.setItem('rd_brand', 'ri');
+        document.title = 'Restaurateurs Indépendants';
         return 'ri';
       } else {
         localStorage.setItem('rd_brand', 'rc');
