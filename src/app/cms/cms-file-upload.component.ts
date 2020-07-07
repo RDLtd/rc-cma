@@ -81,6 +81,16 @@ export class CmsFileUploadComponent implements OnInit {
 
     this.uploader = new FileUploader(uploaderOptions);
 
+    // Clear any error messages
+    this.uploader.onAfterAddingFile = (fileItem) => {
+      this.uploadMessage = '';
+    }
+    // Check for a valid file selection
+    this.uploader.onWhenAddingFileFailed = (fileItem) => {
+      console.log("Exceeds max file size", fileItem.size.toFixed(2));
+      this.uploadMessage = `${this.uploadMessageTxt} **Max: ${this.maxFileSizeMb} MB**`;
+    }
+
     this.uploader.onBuildItemForm = (fileItem: any, form: FormData): any => {
       form.append('upload_preset', this.config.upload_preset);
       form.append('folder', `restaurants/${this.data.restaurant.restaurant_number}`);
@@ -105,6 +115,7 @@ export class CmsFileUploadComponent implements OnInit {
         }
       });
     };
+
 
     this.uploader.onCompleteItem = (item: any, response: string, status: number, headers: ParsedResponseHeaders) => {
       upsertResponse(
@@ -176,14 +187,14 @@ export class CmsFileUploadComponent implements OnInit {
   }
 
   fileSelected() {
+
     const f = this.uploader.queue[this.uploader.queue.length - 1];
+
     this.uploadLabel = f.file.name;
     this.uploadFileSize = f.file.size/1000/1000;
-    if (this.uploadFileSize > this.maxFileSizeMb) {
-      this.uploadMessage = `${this.uploadMessageTxt} **${this.maxFileSizeMb} MB**`;
-    } else {
-      this.filePrimed = true;
-    }
+    this.filePrimed = true;
+
+
 
     // Set image preview
     if (this.data.type === 'image') {

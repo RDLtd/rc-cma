@@ -407,7 +407,7 @@
     "NewImage": "Téléchargez une Nouvelle Image",
     "NewMenu": "Téléchargez un Nouveau Menu",
     "NewDirection": "Téléchargez un document sur les Directions",
-    "MaxSizeExceeded": "Ce fichier est trop volumineux pour être téléchargé. **Max:**"
+    "MaxSizeExceeded": "Ce fichier dépasse la taille maximale pouvant être téléchargée."
   },
 
   "CMS-Hours": {

@@ -407,7 +407,7 @@
     "NewImage": "Upload a New Image",
     "NewMenu": "Upload a New Menu",
     "NewDirection": "Upload a New Directions File",
-    "MaxSizeExceeded": "This file is too large to upload - **Max:** "
+    "MaxSizeExceeded": "That file exceeds the maximum size that can be uploaded."
   },
 
   "CMS-Hours": {
