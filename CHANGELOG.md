@@ -1,15 +1,17 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-## [Staged](http://staging.cma.restaurantcollective.io/)
+## [Unreleased](http://staging.cma.restaurantcollective.io/)
 
+## Enhancements
+- Platform update to Angular 10
 
-## [9.0.3](https://www.restaurantcollective.io/)
+## [v9.0.3](https://www.restaurantcollective.io/) (10-07-2020)
 
 ### Fixed 
-- Browser tab not displaying correct brand
-- 10MB Menu upload limit needs error messaging
-- Notes field in times not updating correctly
+- Browser tab not displaying correct brand [#70](https://github.com/orgs/RDLtd/projects/3#card-41417557)
+- 10MB Menu upload limit needs error messaging [#71](https://github.com/orgs/RDLtd/projects/3#card-41417579)
+- Notes field in times not updating correctly [#81](https://github.com/orgs/RDLtd/projects/3#card-32492382)
 - Restaurant search failing with some french names
 - FR days of week ordering
 - Email translation corrections
