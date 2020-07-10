@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  API_URL: 'https://rc-server-prod.herokuapp.com'
+  API_URL: 'https://dashboard.heroku.com/apps/rc-cma-production'
 };
