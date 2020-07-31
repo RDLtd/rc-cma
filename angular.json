@@ -30,6 +30,12 @@
             ],
             "scripts": [
               "node_modules/marked/lib/marked.js"
+            ],
+            "allowedCommonJsDependencies": [
+              "lodash",
+              "zone.js",
+              "cloudinary-core",
+              "qrcode"
             ]
           },
           "configurations": {
