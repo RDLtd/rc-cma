@@ -1236,7 +1236,8 @@
     "Help": "Registration Help Required",
     "Attempt": "Someone has attempted to register with a mobile number, or email address, that was already registered.",
     "ASAP": "They have requested help, please contact them a.s.a.p:",
-    "InProgress": "Request in progress"
+    "InProgress": "Request in progress",
+    "Critical": "We have detected a critical error while registering you as a new user. Our support team have been informed and we will contact you as soon as the problem is resolved."
   },
 
   "Referrals": {
