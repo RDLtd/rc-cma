@@ -1236,7 +1236,9 @@
     "Help": "Aide à l'inscription requise",
     "Attempt": "Quelqu'un a tenté de s'inscrire avec une adresse email ou un numéro de téléphone portable déjà utilisé.",
     "ASAP": "Veuillez le contacter dans les plus brefs délais afin de l'aider.",
-    "InProgress": "Demande en cours"
+    "InProgress": "Demande en cours",
+    "Critical": "Nous avons détecté une erreur critique lors de votre inscription en tant que nouvel utilisateur. Notre équipe de support a été informée et nous vous contacterons dès que le problème sera résolu."
+
   },
 
   "Referrals": {
