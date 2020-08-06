@@ -114,7 +114,7 @@ export class JoinComponent implements OnInit {
     // for now assume no restaurant known, might change for different join modes
 
     // test to break it...
-    admin.member_language = 'kkkkkkk';
+    //admin.member_language = 'kkkkkkk';
     this.memberService.createAdministrator(admin).subscribe(
       data => {
         console.log(data);
