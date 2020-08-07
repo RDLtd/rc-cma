@@ -30,6 +30,12 @@
             ],
             "scripts": [
               "node_modules/marked/lib/marked.js"
+            ],
+            "allowedCommonJsDependencies": [
+              "lodash",
+              "zone.js",
+              "cloudinary-core",
+              "qrcode"
             ]
           },
           "configurations": {
@@ -147,7 +153,7 @@
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "rc",
-      "styleext": "scss"
+      "style": "scss"
     },
     "@schematics/angular:directive": {
       "prefix": "rc"

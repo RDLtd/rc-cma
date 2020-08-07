@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { MemberService, AuthenticationService } from '../_services';
+import { MemberService, AuthenticationService, AppService } from '../_services';
 import { CmsLocalService } from '../cms';
 import { TranslateService } from '@ngx-translate/core';
 import { MatDialog } from '@angular/material/dialog';
@@ -37,7 +37,8 @@ export class JoinComponent implements OnInit {
     private translate: TranslateService,
     private dialog: MatDialog,
     private load: LoadService,
-    private config: AppConfig
+    private config: AppConfig,
+    private appService: AppService
   ) {
     translate.onLangChange.subscribe(() => {
       this.translate.get('Join').subscribe(data => {this.t_data = data; });
@@ -98,7 +99,7 @@ export class JoinComponent implements OnInit {
       member_email: applicant.email,
       member_telephone: applicant.mobile,
       member_job: applicant.role,
-      member_language: localStorage.getItem('rd_country'),
+      member_language: localStorage.getItem('rd_language'),
       restaurant_id: 0,
       member_id: 0
     };
@@ -111,6 +112,9 @@ export class JoinComponent implements OnInit {
 
     // console.log(localStorage.getItem('rd_country'), localStorage.getItem('rd_company_prefix'));
     // for now assume no restaurant known, might change for different join modes
+
+    // test to break it...
+    //admin.member_language = 'kkkkkkk';
     this.memberService.createAdministrator(admin).subscribe(
       data => {
         console.log(data);
@@ -141,7 +145,24 @@ export class JoinComponent implements OnInit {
       },
       error => {
         console.log(JSON.stringify(error));
-        this.load.close();
+        this.cmsLocalService.dspSnackbar(
+          `${this.t_data.Critical}`,
+          'OK',
+          20
+        );
+        // TODO more translations (or do we care since this is only relevant for support...)
+        this.appService.reportCriticalError('Failed to register new member!\n\n' +
+          'First Name : ' + admin.member_first_name + '\n\n' +
+          'Last Name : ' + admin.member_last_name + '\n\n' +
+          'Telephone : ' + admin.member_telephone + '\n\n' +
+          'Email : ' + admin.member_email).subscribe(emaildata => {
+            console.log(emaildata);
+            this.load.close();
+          },
+          emailerror => {
+            console.log(emailerror);
+            this.load.close();
+          });
       });
 
   }

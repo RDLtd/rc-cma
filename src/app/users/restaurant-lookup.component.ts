@@ -38,7 +38,7 @@ export class RestaurantLookupComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.sql_param_country = localStorage.getItem('rd_brand') === 'ri' ? 'FR' : 'UK'
+    this.sql_param_country = localStorage.getItem('rd_brand') === 'ri' ? 'FR' : 'UK';
     this.translate.get('Restaurant-Lookup')
       .subscribe(data => this.t_data = data);
   }
@@ -52,7 +52,7 @@ export class RestaurantLookupComponent implements OnInit {
       where_any_position: 'Y',
       sort_field: 'restaurant_name',
       sort_direction: 'ASC',
-      limit_number: 20,
+      limit_number: 100,
       limit_index: '0',
       // restaurant_status: 'Curation Complete',
       country: this.sql_param_country
@@ -64,7 +64,7 @@ export class RestaurantLookupComponent implements OnInit {
       this.restaurantService.getSubset(this.sql_parameters)
         .subscribe(
           data => {
-            //console.log({data});
+            //c onsole.log({data});
             this.restaurants = data['restaurants'];
             if (!this.restaurants.length) {
               this.noSearchResults = true;
@@ -91,7 +91,7 @@ export class RestaurantLookupComponent implements OnInit {
     // by comparing to current associations
     const totalAssociatedRestaurants = this.data.associatedRestaurants.length;
     for (let i = 0; i < totalAssociatedRestaurants; i++) {
-      let associatedRestaurant = this.data.associatedRestaurants[i];
+      const associatedRestaurant = this.data.associatedRestaurants[i];
       if (associatedRestaurant.restaurant_name === selected.restaurant_name &&
         associatedRestaurant.restaurant_address_1 === selected.restaurant_address_1) {
         // console.log('Restaurant already associated');

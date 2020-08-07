@@ -6,7 +6,7 @@
     "experimentalDecorators": true,
     "lib": ["es6", "dom"],
     "mapRoot": "./",
-    "module": "esnext",
+    "module": "es2020",
     "moduleResolution": "node",
     "outDir": "../dist/out-tsc",
     "sourceMap": true,
@@ -19,5 +19,8 @@
     ],
     "alwaysStrict": true,
     "strictPropertyInitialization": false
-  }
+  },
+  "exclude": [
+    "./environments/*.ts"
+  ]
 }

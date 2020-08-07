@@ -4,14 +4,12 @@
 * -----------------------
 * Edit defaults
 */
-$mdc-layout-grid-default-gutter: ( desktop: 16px, tablet: 16px, phone: 8px);
-$mdc-layout-grid-default-margin: ( desktop: 16px, tablet: 16px, phone: 8px);
+//$mdc-layout-grid-default-gutter: ( desktop: 16px, tablet: 16px, phone: 8px);
+//$mdc-layout-grid-default-margin: ( desktop: 16px, tablet: 16px, phone: 8px);
 @import "@material/layout-grid/mdc-layout-grid";
-
 @import "mat-themes";
 @import "vars";
 @import "reset";
-
 
 // Create a config with the default MAT typography levels.
 $config: mat-typography-config();
