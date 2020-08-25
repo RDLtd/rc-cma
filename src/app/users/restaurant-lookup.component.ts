@@ -153,22 +153,27 @@ export class RestaurantLookupComponent implements OnInit {
   }
 
   addAssociation(newRestaurant) {
+    console.log('New Restaurant:', newRestaurant);
     const curationComplete = (newRestaurant.restaurant_data_status === 'Curation Complete');
     this.restaurantService.addAssociation(this.data.member.member_id, newRestaurant.restaurant_id).subscribe(
       () => {
-        console.log('New Restaurant', newRestaurant);
         // Verify email contact details
         if (!newRestaurant.restaurant_email.trim().length) {
           console.log(`No Email: ${ newRestaurant.restaurant_email}`);
         }
         this.data.associatedRestaurants.push(newRestaurant);
-        this.restaurantService.updateMemberStatus(newRestaurant.restaurant_id, 'Associate').subscribe(
-          data => {
-            console.log(data);
-          },
-          error => {
-            console.log(error);
-          });
+
+        // If the new restaurant is not already a member
+        if (newRestaurant.restaurant_rc_member_status !== 'Full'
+          && newRestaurant.restaurant_rc_member_status !== 'Associate') {
+          this.restaurantService.updateMemberStatus(newRestaurant.restaurant_id, 'Associate').subscribe(
+            () => {
+              console.log('Member status updated to Associate');
+            },
+            error => {
+              console.log('Member status update failed (' + error + ')');
+            });
+        }
       },
       error => {
         console.log(error);
