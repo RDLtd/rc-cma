@@ -7,12 +7,12 @@ All notable changes to this project will be documented in this file.
 - Platform update to Angular 10
 
 ### Changed
-- Simplified SPW Url format for improved SEO [#76]
+- Simplified SPW Url format for improved SEO [#76](https://github.com/orgs/RDLtd/projects/3#card-42739790)
 
 ### Fixed
-- Stripe member status [#65]
-- Full membership reverting to Associate [#78]
-- Missing information in user settings [#82]
+- Stripe member status [#65](https://github.com/orgs/RDLtd/projects/3#card-40795121)
+- Full membership reverting to Associate [#78](https://github.com/orgs/RDLtd/projects/3#card-44263393)
+- Missing information in user settings [#82](https://github.com/orgs/RDLtd/projects/3#card-44838883)
 
 ## [v9.0.3](https://www.restaurantcollective.io/) (10-07-2020)
 
