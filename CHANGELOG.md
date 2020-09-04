@@ -3,8 +3,18 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased](http://staging.cma.restaurantcollective.io/)
 
+## [v10.0.3](http://staging.cma.restaurantcollective.io/)
+
 ### Enhancements
 - Platform update to Angular 10
+
+### Changed
+- Simplified SPW Url format for improved SEO [#76]
+
+### Fixed
+- Stripe member status [#65]
+- Full membership reverting to Associate [#78]
+- Missing information in user settings [#82]
 
 ## [v9.0.3](https://www.restaurantcollective.io/) (10-07-2020)
 
