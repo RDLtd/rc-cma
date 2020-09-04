@@ -3,8 +3,6 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased](http://staging.cma.restaurantcollective.io/)
 
-## [v10.0.3](http://staging.cma.restaurantcollective.io/)
-
 ### Enhancements
 - Platform update to Angular 10
 
