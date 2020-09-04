@@ -4,8 +4,7 @@
       <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
         <mat-toolbar class="rc-section-toolbar">
           <span
-            class="rc-toolbar-title">{{ member?.member_first_name | uppercase }} {{ member?.member_last_name |
-            uppercase }}</span>
+            class="rc-toolbar-title">{{ 'Header.Settings' | translate | uppercase }}</span>
           <span class="rc-space-filler"></span>
           <span class="rc-section-toolbar-actions rc-media-small-hide">
 
@@ -74,21 +73,24 @@
           <div class="mdc-layout-grid rc-member-profile">
             <div class="mdc-layout-grid__inner">
               <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-5">
-              <span
-                class="rc-active"
-                (click)="updateProfile()">
-                <mat-icon>person</mat-icon>
-                <!--                {{ member.member_job }}-->
-                {{ d_member_job }}
-              </span>
+                <!-- Job Role -->
+                <span
+                  class="rc-active"
+                  (click)="updateProfile()">
+                  <mat-icon>person</mat-icon>
+                  {{ member?.member_first_name | titlecase }} {{ member?.member_last_name |
+                  titlecase }}
+                </span>
 
                 <span
                   class="rc-active"
                   (click)="updateProfile()">
                 <mat-icon>business</mat-icon>
-                  {{ member.member_restaurant_group }}
-              </span>
+                  {{ d_member_job }}
+                </span>
+                <!-- User ID -->
                 <span><mat-icon>account_circle</mat-icon> ID: {{ member.member_id }}</span>
+                <!-- Date joined -->
                 <span>{{ 'Profile-Page.MemberSince' | translate }} {{ d_member_signedup }}</span>
 
               </div>

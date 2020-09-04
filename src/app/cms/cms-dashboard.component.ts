@@ -279,6 +279,8 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
     if (idx > -1) {
       arr.splice(idx, 1);
     }
+    // delete the default 'index.html' part, to keep the url clean
+    arr.pop();
     return arr.join('/');
   }
 
@@ -605,36 +607,37 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
     // if (this.restaurant.restaurant_rc_member_status !== 'Full') {
     //   this.help.dspHelp('cms-dashboard-associate');
     // } else {
-      this.isPreviewing = true;
-      this.cms.previewSPW(this.restaurant.restaurant_id, this.restaurant.restaurant_number, true, false)
-        .subscribe(res => {
-          console.log('New publish res', res);
-            if (res['status'] === 'OK') {
-              // console.log('Publish success:', res);
-              this.productionUrl = res['url'];
-              this.cmsChanged = false;
-              this.d_publishDate = moment(new Date(res['published'])).format('LLLL');
-              // this.publishDate = new Date(res['published']);
+    console.log('publishSPW()');
+    this.isPreviewing = true;
+    this.cms.previewSPW(this.restaurant.restaurant_id, this.restaurant.restaurant_number, true, false)
+      .subscribe(res => {
+        console.log('New publish res', res);
+          if (res['status'] === 'OK') {
+            // console.log('Publish success:', res);
+            this.productionUrl = res['url'];
+            this.cmsChanged = false;
+            this.d_publishDate = moment(new Date(res['published'])).format('LLLL');
+            // this.publishDate = new Date(res['published']);
 
-              this.verifyData();
-              this.isPreviewing = false;
-              // record event
-              this.ga.sendEvent('CMS-Dashboard', 'SPW', 'Published');
-              // reset data changed attribute
-              this.cms.resetLastUpdatedField(Number(this.restaurant.restaurant_id)).subscribe(
-                () => {},
-                error => {
-                  console.log('unable to reset data changed attribute', error);
-                });
-            } else {
-              console.log('Publish failed', res);
-              this.isPreviewing = false;
-            }
-          },
-          error => {
-            console.log('Publish error', error);
+            this.verifyData();
             this.isPreviewing = false;
-          });
+            // record event
+            this.ga.sendEvent('CMS-Dashboard', 'SPW', 'Published');
+            // reset data changed attribute
+            this.cms.resetLastUpdatedField(Number(this.restaurant.restaurant_id)).subscribe(
+              () => {},
+              error => {
+                console.log('unable to reset data changed attribute', error);
+              });
+          } else {
+            console.log('Publish failed', res);
+            this.isPreviewing = false;
+          }
+        },
+        error => {
+          console.log('Publish error', error);
+          this.isPreviewing = false;
+        });
     // }
 
   }

@@ -85,6 +85,7 @@ export class ProfilePageComponent implements OnInit {
 
     this.brand = this.appConfig.brand;
     this.member = JSON.parse(localStorage.getItem('rd_profile'));
+    console.log(this.member);
     moment.locale(localStorage.getItem('rd_language'));
     this.translate.get('Profile-Page').subscribe(data => {
       this.t_data = data;

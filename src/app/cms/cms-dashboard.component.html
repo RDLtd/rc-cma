@@ -134,6 +134,7 @@
         </mat-card-content>
         <mat-card-actions></mat-card-actions>
       </mat-card>
+
       <!-- Spw: no changes -->
       <mat-card
         *ngIf="!cmsChanged && cmsHasSufficientData && !isPreviewing"
@@ -175,6 +176,7 @@
             mat-button color="primary">{{ 'CMS-Dashboard.ViewLivePage' | translate }}</a>
         </mat-card-actions>
       </mat-card>
+
       <!-- Spw: has changes -->
       <mat-card
         *ngIf="cmsChanged && !isPreviewing"
