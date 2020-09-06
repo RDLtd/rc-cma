@@ -95,6 +95,8 @@ export class PaymentComponent implements OnInit  {
       this.p_amount = Math.trunc(this.brand.fee.yearIncVat * 100);
       this.p_currency = this.brand.currency.code;
       this.invoice_number = 'to come'; // create a placeholder which will then be updated
+      // test for amount
+      this.p_amount = 100; // cents, so £1
       const first_self = this;
 
       const handler = (<any>window).StripeCheckout.configure({
@@ -102,7 +104,7 @@ export class PaymentComponent implements OnInit  {
         // pk_live_aC07Pi3YT3GGv7QYujVxWvPt
         // I think it is OK to have this key here, since payments can only be processed using the sk on the server side
         // TODO: Switch to LIVE key
-        key: 'pk_test_3UC3P4HUDtjPewUWjzpP0GHs',
+        key: 'pk_live_aC07Pi3YT3GGv7QYujVxWvPt',
         locale: 'auto',
         token: (token: any) => {
           // Note 'fat arrow' for scope...
