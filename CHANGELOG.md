@@ -5,9 +5,11 @@ All notable changes to this project will be documented in this file.
 
 ### Enhancements
 - Platform update to Angular 10
+- Add early adopter code [#81](https://github.com/orgs/RDLtd/projects/3#card-44829728)
 
 ### Changed
 - Simplified SPW Url format for improved SEO [#76](https://github.com/orgs/RDLtd/projects/3#card-42739790)
+- Stripe payments live [#80](https://github.com/orgs/RDLtd/projects/3#card-44819252)
 
 ### Fixed
 - Stripe member status [#65](https://github.com/orgs/RDLtd/projects/3#card-40795121)
