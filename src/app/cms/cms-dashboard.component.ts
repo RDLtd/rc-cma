@@ -43,6 +43,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
   // State
   cmsChanged = false;
   productionUrl: string;
+  spwUrl: string;
   isPreviewing = true;
   cmsHasSufficientData = false;
   publishDate: Date;
@@ -253,6 +254,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
             this.cmsHasSufficientData = true;
             this.publishDate = new Date(res['published']);
             this.productionUrl = res['url'];
+            this.spwUrl = this.getSpwUrl();
             break;
           }
           // Show published version
@@ -261,6 +263,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
             this.cmsChanged = false;
             this.publishDate = new Date(res['published']);
             this.productionUrl = res['url'];
+            this.spwUrl = this.getSpwUrl();
           }
         }
         this.isPreviewing = false;
@@ -275,6 +278,9 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
 
   getSpwUrl(): string {
     let arr = this.productionUrl.split('/');
+    console.log('ARR:', arr.indexOf(''));
+    // todo: probably shouldn't rely on the S3 path to index
+    // backend should send the production spw url
     const idx = arr.indexOf('s3.eu-west-2.amazonaws.com', 0);
     if (idx > -1) {
       arr.splice(idx, 1);
@@ -615,6 +621,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
           if (res['status'] === 'OK') {
             // console.log('Publish success:', res);
             this.productionUrl = res['url'];
+            this.spwUrl = this.getSpwUrl();
             this.cmsChanged = false;
             this.d_publishDate = moment(new Date(res['published'])).format('LLLL');
             // this.publishDate = new Date(res['published']);
@@ -646,8 +653,8 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
     this.dialog.open(CmsSpwLinksComponent,
       {
         data: {
-          spwUrl: this.getSpwUrl(),
-          spwMenus: `${this.getSpwUrl()}#menus`,
+          spwUrl: this.spwUrl,
+          spwMenus: `${this.spwUrl}#menus`,
           restaurant: this.restaurant
         }
       });
