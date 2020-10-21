@@ -240,6 +240,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
     this.cms.previewSPW(this.restaurant.restaurant_id, this.restaurant.restaurant_number, true, true)
       .subscribe(res => {
         // Set up content info panel
+        console.log(res['status']);
         switch (res['status']) {
           // No preview available
           case 'INSUFFICIENT_DATA': {
@@ -277,17 +278,23 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
   }
 
   getSpwUrl(): string {
-    let arr = this.productionUrl.split('/');
-    console.log('ARR:', arr.indexOf(''));
-    // todo: probably shouldn't rely on the S3 path to index
-    // backend should send the production spw url
-    const idx = arr.indexOf('s3.eu-west-2.amazonaws.com', 0);
-    if (idx > -1) {
-      arr.splice(idx, 1);
+    if (!!this.productionUrl) {
+      let arr = this.productionUrl.split('/');
+      console.log('ARR:', arr.indexOf(''));
+      // todo: probably shouldn't rely on the S3 path to index
+      // backend should send the production spw url
+      const idx = arr.indexOf('s3.eu-west-2.amazonaws.com', 0);
+      if (idx > -1) {
+        arr.splice(idx, 1);
+      }
+      // delete the default 'index.html' part, to keep the url clean
+      arr.pop();
+      return arr.join('/');
+
+    } else {
+      // Nothing been published yet
+      return null;
     }
-    // delete the default 'index.html' part, to keep the url clean
-    arr.pop();
-    return arr.join('/');
   }
 
   // Core data card
