@@ -167,31 +167,40 @@ export class AuthenticationService {
     localStorage.removeItem('rd_access_level');
     localStorage.removeItem('rd_home');
     localStorage.removeItem('rd_session');
+
   }
 
 
   isAuth(): boolean {
-
     // Check expiry mins
     this.sessionExpiresAt = JSON.parse(localStorage.getItem('rd_token_expires_at'));
     this.sessionTimeLeft = (this.sessionExpiresAt - new Date().getTime()) / 60000;
-    console.log(`Time left: ${this.sessionTimeLeft}`);
+    console.log(`Time left = ${this.sessionTimeLeft > 0? this.sessionTimeLeft : 'none'}`);
+    // Does a session still exists?
+    if (!!this.sessionExpiresAt && !!this.sessionTimeLeft) {
+      // Is there time left?
+      if (this.sessionTimeLeft > 0) {
+        // How much time is left?
+        if (this.sessionTimeLeft < this.config.session_countdown) {
+          // Not much time left
+          // check for user activity
+          if (!this.checkingActivity) {
+            console.log(`Less than ${ this.config.session_countdown } min to go, check for activity`);
+            this.checkUserActivity();
+          }
+          // Some time left
+          return true;
+        } else {
+          // Plenty of time left
+          return true;
+        }
 
-    // Time is up
-    if (!!this.sessionExpiresAt && this.sessionTimeLeft < 0) {
-      this.logout('expired');
-      return false;
-    // Time is running out is anyone using the app?
-    } else if (this.sessionTimeLeft < this.config.session_countdown) {
-      // Start listening for activity
-      if (!this.checkingActivity) {
-        console.log(`Less than ${ this.config.session_countdown } mins to go, check for activity`);
-        this.checkUserActivity();
+      } else {
+        this.logout('expired');
+        return false;
       }
-      return true;
-    // Plenty of time left
     } else {
-      return true;
+      return false;
     }
   }
 
@@ -220,6 +229,7 @@ export class AuthenticationService {
   }
 
   setNewSessionExpiry() {
+    console.log('SE SET');
     // create session
     // now + session length
     // session length set in mins so convert to milliseconds
