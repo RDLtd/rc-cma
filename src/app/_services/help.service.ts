@@ -3,13 +3,15 @@ import { Injectable } from '@angular/core';
 import { HelpComponent } from '../common';
 import { MatDialog } from '@angular/material/dialog';
 import { AnalyticsService } from './analytics.service';
+import { AppConfig } from '../app.config';
 
 @Injectable()
 export class HelpService {
 
   constructor(
     private dialog: MatDialog,
-    private ga: AnalyticsService
+    private ga: AnalyticsService,
+    private config: AppConfig
   ) { }
 
   dspHelp(id, restaurant = null) {
@@ -60,17 +62,7 @@ export class HelpService {
         if (restaurant) {
           sbj = `Re: ${restaurant.restaurant_name} [${restaurant.restaurant_number}]`;
         }
-        switch (lang) {
-          // allow for specific countries, and make the default whatever is in the root help folder
-          case 'fr': {
-            window.open('mailto:support@restaurateurs-independants.fr?subject=' + sbj, '_blank');
-            break;
-          }
-          default: {
-            // assume default is RC
-            window.open('mailto:support@restaurantcollective.uk?subject=' + sbj, '_blank');
-          }
-        }
+        window.open(`${this.config.brand.email.support}?subject=${sbj}`, '_blank');
       }
       this.dialog.closeAll();
     });

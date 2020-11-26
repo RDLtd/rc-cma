@@ -34,8 +34,8 @@ export class AppService {
       {
         companyName: 'RDL',
         companyPrefix: 'rc',
-        emailTo: 'support@restaurantcollective.uk',
-        emailFrom: 'support@restaurantcollective.uk',
+        emailTo: this.config.brand.email.support,
+        emailFrom: this.config.brand.email.support,
         emailSubject: 'Critical Error',
         emailBody: msg,
         userCode: this.config.userAPICode,

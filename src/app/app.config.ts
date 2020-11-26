@@ -67,10 +67,10 @@ export class AppConfig {
       name: 'Restaurateurs Indépendants',
       prefix: 'ri',
       logo: 'ri-logo',
-      url: 'https://restaurateurs-independants.fr',
+      url: 'https://restaurateursindependants.com',
       email: {
-        support: 'support@restaurateurs-independants.fr',
-        curation: 'curation@restaurateurs-independants.fr'
+        support: 'support@restaurateursindependants.com',
+        curation: 'curation@restaurateursindependants.com'
       },
       fee: {
         month: '4.00',

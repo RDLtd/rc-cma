@@ -16,7 +16,7 @@
           </ol>
           <div *ngIf="brand.name === 'Restaurant Collective'; else French">
             <p>{{ 'Join.Problems' | translate }}
-              <a href="mailto:support@restaurantcollective.uk">{{ 'Join.SupportTeam' | translate }}</a>.
+              <a [href]="brand.email.support">{{ 'Join.SupportTeam' | translate }}</a>.
             </p>
           </div>
           <ng-template #French>
