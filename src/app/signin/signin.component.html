@@ -64,11 +64,12 @@
         novalidate>
         <span class="rc-warn" *ngIf="errorMsg">{{ errorMsg | uppercase }}!</span>
         <h1>{{ 'SignIn.SignIn' | translate }}</h1>
-        <span>{{ 'SignIn.Or' | translate }}<a [routerLink]="'/join'">{{ 'SignIn.Join' | translate }}
-          {{ brand['name'] }}</a></span>
+<!--        <span>{{ 'SignIn.Or' | translate }}<a [routerLink]="'/join'">{{ 'SignIn.Join' | translate }}-->
+<!--          {{ brand['name'] }}</a></span>-->
         <mat-form-field class="rc-full-width">
           <mat-label>{{ 'SignIn.UserEmail' | translate }}</mat-label>
           <input
+            #inputEmail
             matInput
             ngModel
             type="email"
@@ -76,6 +77,7 @@
             email
             required
             autofocus>
+          <mat-error *ngIf="!!inputEmail.value" align="end">Invalid email address</mat-error>
         </mat-form-field>
         <mat-form-field class="rc-full-width">
           <mat-label>{{ 'SignIn.UserPassword' | translate }}</mat-label>
@@ -93,9 +95,9 @@
           color="accent"
           [disabled]="isSubmitting">{{ 'SignIn.SignCaps' | translate }}</button>
         <p class="mat-small">{{ 'SignIn.Subject' | translate }}<a
-          href="{{ brand['url'] }}/terms/" target="_blank">{{ 'SignIn.Terms' | translate }}</a>
+          [href]="brand['downloads']['terms']" target="_blank">{{ 'SignIn.Terms' | translate }}</a>
           {{ 'SignIn.And' | translate }}
-          <a href="{{ brand['url'] }}/privacy/" target="_blank">{{ 'SignIn.Privacy' | translate }}</a></p>
+          <a [href]="brand['downloads']['privacy']" target="_blank">{{ 'SignIn.Privacy' | translate }}</a></p>
       </form>
     </section>
   </div>

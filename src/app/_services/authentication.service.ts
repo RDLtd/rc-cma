@@ -175,7 +175,7 @@ export class AuthenticationService {
     // Check expiry mins
     this.sessionExpiresAt = JSON.parse(localStorage.getItem('rd_token_expires_at'));
     this.sessionTimeLeft = (this.sessionExpiresAt - new Date().getTime()) / 60000;
-    console.log(`Time left = ${this.sessionTimeLeft > 0? this.sessionTimeLeft : 'none'}`);
+    // console.log(`Time left = ${this.sessionTimeLeft > 0? this.sessionTimeLeft : 'none'}`);
     // Does a session still exists?
     if (!!this.sessionExpiresAt && !!this.sessionTimeLeft) {
       // Is there time left?

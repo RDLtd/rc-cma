@@ -61,6 +61,10 @@ export class AppConfig {
       currency: {
         symbol: '£',
         code: 'GBP'
+      },
+      downloads: {
+        terms: 'https://restaurantcollective.uk/downloads/RC-Terms.pdf',
+        privacy: 'https://restaurantcollective.uk/downloads/RC-Privacy.pdf'
       }
     },
     ri: {
@@ -80,6 +84,10 @@ export class AppConfig {
       currency: {
         symbol: '€',
         code: 'EUR'
+      },
+      downloads: {
+        terms: 'https://restaurateursindependants.com/downloads/RI-Terms.pdf',
+        privacy: 'https://restaurateursindependants.com/downloads/RI-Privacy.pdf'
       }
     }
   };
