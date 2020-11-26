@@ -35,7 +35,7 @@ export class AppConfig {
   public readonly cloud_name = 'rdl';
   public readonly upload_preset = 'nozxac7z';
   public readonly restaurant_verification_days = 30;
-  public readonly session_timeout = 60; // 60 minutes
+  public readonly session_timeout = 1; // 60 minutes
   public readonly session_countdown = 1; // 5 minutes check activity
 
   // public readonly use_ip_location = true;

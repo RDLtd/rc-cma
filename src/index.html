@@ -23,8 +23,8 @@
         localStorage.setItem('rd_language', lang);
       }
       localStorage.setItem('rd_locale', loc);
-
-      if (ref.includes('.fr') || loc.substr(3) === 'fr') {
+      // Is this an RI domain
+      if (ref.includes('independants') || loc.substr(3) === 'fr') {
         localStorage.setItem('rd_brand', 'ri');
         document.title = 'Restaurateurs Indépendants';
         return 'ri';
