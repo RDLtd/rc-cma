@@ -66,7 +66,7 @@
         <h1>{{ 'SignIn.SignIn' | translate }}</h1>
 <!--        <span>{{ 'SignIn.Or' | translate }}<a [routerLink]="'/join'">{{ 'SignIn.Join' | translate }}-->
 <!--          {{ brand['name'] }}</a></span>-->
-        <mat-form-field class="rc-full-width">
+        <mat-form-field class="rc-full-width" hideRequiredMarker>
           <mat-label>{{ 'SignIn.UserEmail' | translate }}</mat-label>
           <input
             #inputEmail
@@ -79,7 +79,7 @@
             autofocus>
           <mat-error *ngIf="!!inputEmail.value" align="end">Invalid email address</mat-error>
         </mat-form-field>
-        <mat-form-field class="rc-full-width">
+        <mat-form-field class="rc-full-width" hideRequiredMarker>
           <mat-label>{{ 'SignIn.UserPassword' | translate }}</mat-label>
           <input
             matInput
