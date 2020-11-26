@@ -171,12 +171,12 @@ export class AuthenticationService {
 
 
   isAuth(): boolean {
-    // If the user is not in session
-    // we can ignore everything else
-    if (!this.inSession) { return false;}
+
     // Check expiry mins
     this.sessionExpiresAt = JSON.parse(localStorage.getItem('rd_token_expires_at'));
     this.sessionTimeLeft = (this.sessionExpiresAt - new Date().getTime()) / 60000;
+    console.log(`Time left: ${this.sessionTimeLeft}`);
+
     // Time is up
     if (!!this.sessionExpiresAt && this.sessionTimeLeft < 0) {
       this.logout('expired');
@@ -201,7 +201,7 @@ export class AuthenticationService {
       console.log('Logging out based on timer');
       this.logout('expired');
       this.router.navigate(['/']);
-    }, 30000);
+    }, 5000);
     // Scope reference for the listeners
     const ths = this;
     // Reset the session and clean up
@@ -220,7 +220,10 @@ export class AuthenticationService {
   }
 
   setNewSessionExpiry() {
-    this.sessionExpiresAt = JSON.stringify(new Date().getTime() + (this.config.session_timeout * (60 * 1000)));
+    // create session
+    // now + session length
+    // session length set in mins so convert to milliseconds
+    this.sessionExpiresAt = JSON.stringify(new Date().getTime() + (this.config.session_timeout * (60000)));
     localStorage.setItem('rd_token_expires_at', this.sessionExpiresAt);
   }
 

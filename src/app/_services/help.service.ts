@@ -62,7 +62,7 @@ export class HelpService {
         if (restaurant) {
           sbj = `Re: ${restaurant.restaurant_name} [${restaurant.restaurant_number}]`;
         }
-        window.open(`${this.config.brand.email.support}?subject=${sbj}`, '_blank');
+        window.open(`mailto:${this.config.brand.email.support}?subject=${sbj}`, '_blank');
       }
       this.dialog.closeAll();
     });
