@@ -196,11 +196,17 @@ export class AuthenticationService {
         }
 
       } else {
-        // Has it been expired for more than 5 mins
-        // don't bother displaying timeout warning
-        // just start up clean
-        console.log(this.sessionTimeLeft);
-        this.sessionTimeLeft > -5 ? this.logout('expired') : this.logout('closed');
+        console.log(`In session: ${this.inSession}, Time left: ${this.sessionTimeLeft}`);
+        // If session time ends while app is open
+        // or when the page has been refreshed
+        // or when has navigated away from the page but returns within 5 mins
+        // then show 'page expired' snackbar
+        if (this.inSession || this.sessionTimeLeft > -5) {
+          this.logout('expired');
+        } else {
+          // Otherwise treat as a new session/user
+          this.logout('closed');
+        }
         return false;
       }
     } else {
