@@ -196,7 +196,11 @@ export class AuthenticationService {
         }
 
       } else {
-        this.logout('expired');
+        // Has it been expired for more than 5 mins
+        // don't bother displaying timeout warning
+        // just start up clean
+        console.log(this.sessionTimeLeft);
+        this.sessionTimeLeft > -5 ? this.logout('expired') : this.logout('closed');
         return false;
       }
     } else {
@@ -210,7 +214,9 @@ export class AuthenticationService {
       console.log('Logging out based on timer');
       this.logout('expired');
       this.router.navigate(['/']);
-    }, 5000);
+      document.body.removeEventListener('click', reset);
+      document.body.removeEventListener('keydown', reset);
+    }, 60000);
     // Scope reference for the listeners
     const ths = this;
     // Reset the session and clean up

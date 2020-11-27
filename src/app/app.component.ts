@@ -69,6 +69,8 @@ export class AppComponent implements OnInit {
     console.log(`Brand: ${this.config.brand.name}`);
     console.log(`Language: ${this.language}`);
     console.log(`Locale: ${localStorage.getItem('rd_locale')}`);
+    console.log(`Session length: ${this.config.session_timeout} mins`);
+    console.log(`Session countdown from : ${this.config.session_countdown} min.`);
 
     // Translations
     this.translate.addLangs(['en', 'fr']);
