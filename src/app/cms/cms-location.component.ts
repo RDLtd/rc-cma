@@ -87,12 +87,16 @@ export class CmsLocationComponent implements OnInit {
               }
             ]
           }
-          this.markerOptions = {
-            draggable: true,
-            title: this.restaurant.restaurant_name,
-            animation: google.maps.Animation.DROP
-          }
-          this.markerPosition = { lat: this.latMarker, lng: this.lngMarker };
+          // delay the dropping map marker
+          window.setTimeout(() => {
+            this.markerPosition = { lat: this.latMarker, lng: this.lngMarker };
+            this.markerOptions = {
+              draggable: true,
+              title: this.restaurant.restaurant_name,
+              animation: google.maps.Animation.DROP,
+              position: this.markerPosition
+            }
+          }, 1000);
           this.getDirectionFile();
           this.getCmsData(this.restaurant.restaurant_id);
         }
