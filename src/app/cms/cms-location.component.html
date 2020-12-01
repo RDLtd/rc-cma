@@ -154,24 +154,18 @@
         {{ restaurant?.restaurant_post_code }}</h3>
 
 
-      <agm-map
-        [latitude]="mapLat"
-        [longitude]="mapLng"
-        [zoom]="zoom">
-
-        <agm-marker
-          [latitude]="restaurant?.restaurant_lat"
-          [longitude]="restaurant?.restaurant_lng"
-          [title]="restaurant?.restaurant_name"
-          [markerDraggable]="allowMarkerDrag"
-          (dragEnd)="getMarkerPosition($event)"
-          [iconUrl]="restaurant?.restaurant_icon">
-          <agm-info-window [disableAutoPan]="true">
-            {{ restaurant?.restaurant_name }}, {{ restaurant?.restaurant_post_code }}, {{
-            restaurant?.restaurant_website }}
-          </agm-info-window>
-        </agm-marker>
-      </agm-map>
+      <div *ngIf="mapsApiLoaded | async">
+        <google-map
+          height="400px"
+          width="100%"
+          [options]="mapOptions">
+          <map-marker
+            (mapDragend)="updateRestaurantMarker()"
+            [options]="markerOptions"
+            [position]="markerPosition">
+          </map-marker>
+        </google-map>
+      </div>
 
     </mat-card-content>
 

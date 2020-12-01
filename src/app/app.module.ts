@@ -10,7 +10,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   HttpClientModule,
-  HttpClient
+  HttpClient,
+  HttpClientJsonpModule
 } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
@@ -95,7 +96,6 @@ import {
 } from './common';
 
 // 3rd party packages
-import { AgmCoreModule } from '@agm/core';
 import {
   TranslateModule,
   TranslateLoader
@@ -110,6 +110,7 @@ import { LoadComponent } from './common/loader/load.component';
 import { LoadService } from './common/loader/load.service';
 import { CmsSpwLinksComponent } from './cms/cms-spw-links.component';
 import { QRCodeModule } from 'angularx-qrcode';
+import { GoogleMapsModule } from '@angular/google-maps';
 
 
 // AoT requires an exported function for factories
@@ -177,6 +178,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     RouterModule,
     ReactiveFormsModule,
     HttpClientModule,
+    HttpClientJsonpModule,
     FlexLayoutModule,
     routing,
     FileUploadModule,
@@ -188,16 +190,14 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
         deps: [HttpClient]
       }
     }),
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyCji4lOA-nPgICQjFO_4rVyuWKW1jP1Lkc'
-    }),
     MarkdownModule.forRoot(),
     CloudinaryModule.forRoot(Cloudinary, {
       cloud_name: 'rdl',
       api_key: '713165672947878',
       api_secret: 'EhLM0NhD7HvJDjX5IvF90u6guq8'
     }),
-    QRCodeModule
+    QRCodeModule,
+    GoogleMapsModule
   ],
   providers: [
     AppConfig,
