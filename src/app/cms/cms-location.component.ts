@@ -12,10 +12,7 @@ import { GoogleMap, MapMarker } from '@angular/google-maps';
 
 @Component({
   selector: 'rc-cms-location',
-  templateUrl: './cms-location.component.html',
-  styles: [
-    `google-map { height: 400px; width: 100%; }`
-  ],
+  templateUrl: './cms-location.component.html'
 })
 export class CmsLocationComponent implements OnInit {
 
@@ -40,6 +37,8 @@ export class CmsLocationComponent implements OnInit {
   center: any;
 
   markerLatLng;
+  mapWidth: '100%';
+  mapHeight: '480px';
   mapOptions: google.maps.MapOptions;
   markerOptions: google.maps.MarkerOptions;
   markerPosition: google.maps.LatLngLiteral;
@@ -76,6 +75,7 @@ export class CmsLocationComponent implements OnInit {
           this.mapLat = this.latMarker = Number(data.restaurant_lat);
           this.mapLng = this.lngMarker = Number(data.restaurant_lng);
           this.mapOptions = {
+            scrollwheel: false,
             center: { lat: this.mapLat, lng: this.mapLng },
             zoom: 16,
             styles: [
