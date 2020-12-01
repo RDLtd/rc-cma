@@ -26,17 +26,6 @@ import {
 } from './cms';
 
 import {
-  StaffComponent,
-  PropertyComponent,
-  TurnoverComponent,
-  FsInputComponent,
-  FsComponent,
-  ProfitComponent,
-  BalanceComponent,
-  ReviewComponent
-} from './fs';
-
-import {
   SigninComponent
 } from './signin/signin.component';
 
@@ -102,16 +91,6 @@ const APP_ROUTES: Routes = [
       canActivate: [AuthGuard] },
 
     { path: '**', component: CmsDirectoryComponent, canActivate: [AuthGuard] }
-  ]},
-
-  { path: 'fs', component: FsComponent, canActivate: [AuthGuard], children: [
-    { path: 'profit', component: ProfitComponent, canActivate: [AuthGuard] },
-    { path: 'balance', component: BalanceComponent, canActivate: [AuthGuard] },
-    { path: 'staff', component: StaffComponent, canActivate: [AuthGuard] },
-    { path: 'property', component: PropertyComponent, canActivate: [AuthGuard] },
-    { path: 'turnover', component: TurnoverComponent, canActivate: [AuthGuard] },
-    { path: 'edit', component: FsInputComponent, canActivate: [AuthGuard] },
-    { path: '**', component: ReviewComponent, canActivate: [AuthGuard] }
   ]},
 
   { path: '**', redirectTo: '/profile' }

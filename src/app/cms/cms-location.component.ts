@@ -5,9 +5,6 @@ import { CmsFileUploadComponent } from './cms-file-upload.component';
 import { MatDialog } from '@angular/material/dialog';
 import { CMSDescription } from '../_models';
 import { TranslateService } from '@ngx-translate/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
 import { GoogleMap, MapMarker } from '@angular/google-maps';
 
 @Component({
@@ -23,7 +20,6 @@ export class CmsLocationComponent implements OnInit {
   directions_copy: any;
   descriptions: CMSDescription = new CMSDescription();
   fileLoaded = false;
-  allowMarkerDrag = true;
   latMarker = null;
   lngMarker = null;
   dataChanged = false;
@@ -33,7 +29,7 @@ export class CmsLocationComponent implements OnInit {
   // translation variables
   t_data: any;
 
-  mapsApiLoaded: Observable<boolean>;
+  mapsApiLoaded = true;
   center: any;
 
   markerLatLng;
@@ -51,15 +47,8 @@ export class CmsLocationComponent implements OnInit {
     private cms: CMSService,
     private dialog: MatDialog,
     private translate: TranslateService,
-    public help: HelpService,
-    private http: HttpClient
-  ) {
-    this.mapsApiLoaded = http.jsonp('https://maps.googleapis.com/maps/api/js?key=AIzaSyCji4lOA-nPgICQjFO_4rVyuWKW1jP1Lkc', 'callback')
-      .pipe(
-        map(() => true),
-        catchError(() => of(false)),
-      );
-  }
+    public help: HelpService
+  ) {}
 
   ngOnInit() {
 
@@ -87,16 +76,13 @@ export class CmsLocationComponent implements OnInit {
               }
             ]
           }
-          // delay the dropping map marker
-          window.setTimeout(() => {
-            this.markerPosition = { lat: this.latMarker, lng: this.lngMarker };
-            this.markerOptions = {
-              draggable: true,
-              title: this.restaurant.restaurant_name,
-              animation: google.maps.Animation.DROP,
-              position: this.markerPosition
-            }
-          }, 1000);
+          this.markerPosition = { lat: this.latMarker, lng: this.lngMarker };
+          this.markerOptions = {
+            draggable: true,
+            title: this.restaurant.restaurant_name,
+            animation: google.maps.Animation.DROP,
+            position: this.markerPosition
+          }
           this.getDirectionFile();
           this.getCmsData(this.restaurant.restaurant_id);
         }

@@ -15,7 +15,7 @@ import {
 import { MatDialog } from '@angular/material/dialog';
 import { CmsPreviewComponent } from './cms-preview.component';
 import { Router } from '@angular/router';
-import { RestaurantDetailComponent } from '../restaurants';
+import { RestaurantDetailComponent } from '../restaurants/restaurant-detail.component';
 import { NgForm } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import {

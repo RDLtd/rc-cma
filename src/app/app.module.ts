@@ -10,8 +10,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   HttpClientModule,
-  HttpClient,
-  HttpClientJsonpModule
+  HttpClient
 } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
@@ -34,7 +33,6 @@ import {
   UserService,
   MemberService,
   RestaurantService,
-  FinancialService,
   CMSService,
   PublicService,
   HelpService,
@@ -43,9 +41,7 @@ import {
 
 import {
   RestaurantDetailComponent,
-  BenchmarkComponent,
-  BenchmarkWizardComponent,
-} from './restaurants';
+} from './restaurants/restaurant-detail.component';
 
 import {
   RestaurantLookupComponent,
@@ -75,24 +71,11 @@ import {
 } from './cms';
 
 import {
-  FsComponent,
-  ProfitComponent,
-  BalanceComponent,
-  StaffComponent,
-  PropertyComponent,
-  TurnoverComponent,
-  FsGraphComponent,
-  FsInputComponent,
-  ReviewComponent
-} from './fs';
-
-import {
   LoaderComponent,
   PaymentComponent,
   HelpComponent,
   ConfirmCancelComponent,
-  MessageComponent,
-  GoogleChartComponent
+  MessageComponent
 } from './common';
 
 // 3rd party packages
@@ -124,10 +107,6 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     HeaderComponent,
     FooterComponent,
     PasswordComponent,
-    GoogleChartComponent,
-    BenchmarkComponent,
-    ReviewComponent,
-    BenchmarkWizardComponent,
     RestaurantLookupComponent,
     RestaurantDetailComponent,
     ProfilePageComponent,
@@ -151,14 +130,6 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     CmsReservationsComponent,
     CmsDashboardComponent,
     AboutComponent,
-    FsComponent,
-    ProfitComponent,
-    BalanceComponent,
-    StaffComponent,
-    PropertyComponent,
-    TurnoverComponent,
-    FsGraphComponent,
-    FsInputComponent,
     LoaderComponent,
     HelpComponent,
     PaymentComponent,
@@ -178,7 +149,6 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     RouterModule,
     ReactiveFormsModule,
     HttpClientModule,
-    HttpClientJsonpModule,
     FlexLayoutModule,
     routing,
     FileUploadModule,
@@ -207,7 +177,6 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     RestaurantService,
     AuthGuard,
     CanDeactivateGuard,
-    FinancialService,
     CMSService,
     CmsLocalService,
     HelpService,
