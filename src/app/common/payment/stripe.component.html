@@ -1,0 +1,46 @@
+
+<div class="mdc-layout-grid" style="max-width: 800px">
+  <div class="mdc-layout-grid__inner">
+    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6">
+      <mat-card>
+        <h1 mat-card-title>Pay Monthly</h1>
+        <mat-card-content>
+          <p>Your card will charged  each month until you cancel</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-flat-button color="primary"  [disabled]="waiting" style="width: 100%;"
+                  (click)="checkout('membership_monthly')">£9
+            PER MONTH</button>
+        </mat-card-actions>
+
+      </mat-card>
+    </div>
+    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6">
+      <mat-card>
+        <h1 mat-card-title>Pay Yearly</h1>
+        <mat-card-content>
+          <p>Pay a year in advance and you will recieve the equivalent of 2 months free!
+        </mat-card-content>
+        <mat-card-actions>
+        <button mat-flat-button color="primary" [disabled]="waiting" style="width: 100%;"
+                (click)="checkout('membership_yearly')">£90 PER
+          YEAR</button>
+        </mat-card-actions>
+
+      </mat-card>
+    </div>
+    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6">
+      <mat-card>
+        <h1 mat-card-title>Manage My Account</h1>
+        <mat-card-content></mat-card-content>
+        <mat-card-actions>
+          <button mat-flat-button color="primary" [disabled]="!stripeSessionId || waiting" style="width: 100%;"
+                  (click)="manageSubscriptions()">MANAGE ACCOUNT</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>
+  <hr>
+  <pre>sessionId: {{ stripeSessionId | json }}</pre>
+  <pre>session-data: {{ sessionData | json }}</pre>

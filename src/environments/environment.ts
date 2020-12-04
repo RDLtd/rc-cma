@@ -7,5 +7,6 @@ import 'zone.js/dist/zone-error';
 
 export const environment = {
   production: false,
-  API_URL: 'http://localhost:4000'
+  API_URL: 'http://localhost:4000',
+  stripe_key: 'pk_test_3UC3P4HUDtjPewUWjzpP0GHs'
 };

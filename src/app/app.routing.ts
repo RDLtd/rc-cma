@@ -33,9 +33,11 @@ import {
   AffiliatesComponent
 } from './cms';
 import { JoinComponent } from './join/join.component';
+import { StripeComponent } from './common/payment/stripe.component';
 
 const APP_ROUTES: Routes = [
   { path: '', component: SigninComponent },
+  { path: 'pay', component: StripeComponent },
   { path: 'join/:code', component: JoinComponent },
   { path: 'join', component: JoinComponent },
   { path: 'login', component: SigninComponent },

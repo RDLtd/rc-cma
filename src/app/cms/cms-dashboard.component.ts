@@ -768,27 +768,27 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
     });
   }
 
-  viewMemberStatus() {
-    const dialogRef = this.dialog.open(PaymentComponent, {
-      panelClass: 'rc-dialog-member',
-      data: {
-        restaurant: this.restaurant,
-        dialog: this.dialog
-      }
-    });
-
-    // record event
-    this.ga.sendEvent(
-      'CMS-Dashboard',
-      'Membership Status',
-      'Opened'
-    );
-
-    // Update dashboard
-    dialogRef.afterClosed().subscribe(() => {
-      this.setMemberStatus();
-    });
-  }
+  // viewMemberStatus() {
+  //   const dialogRef = this.dialog.open(PaymentComponent, {
+  //     panelClass: 'rc-dialog-member',
+  //     data: {
+  //       restaurant: this.restaurant,
+  //       dialog: this.dialog
+  //     }
+  //   });
+  //
+  //   // record event
+  //   this.ga.sendEvent(
+  //     'CMS-Dashboard',
+  //     'Membership Status',
+  //     'Opened'
+  //   );
+  //
+  //   // Update dashboard
+  //   dialogRef.afterClosed().subscribe(() => {
+  //     this.setMemberStatus();
+  //   });
+  // }
 
   dspUnreadMessages() {
 
