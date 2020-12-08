@@ -25,7 +25,8 @@ export class JoinComponent implements OnInit {
     code: null,
     name: null,
     id: 0,
-    restaurant: null
+    restaurant: null,
+    promo_status: null
   };
   t_data: any;
 
@@ -73,6 +74,7 @@ export class JoinComponent implements OnInit {
       this.referrer.type = 'member';
       this.referrer.name = `${ref.member_first_name} ${ref.member_last_name}`;
       this.referrer.id = ref.member_id;
+      this.referrer.promo_status = ref.promo_status;
     } else {
       // Invalid code
       this.referrer.type = 'self';
@@ -101,7 +103,8 @@ export class JoinComponent implements OnInit {
       member_job: applicant.role,
       member_language: localStorage.getItem('rd_language'),
       restaurant_id: 0,
-      member_id: 0
+      member_id: 0,
+      member_promo_status: this.referrer.promo_status
     };
 
     // Register new admin
@@ -114,7 +117,7 @@ export class JoinComponent implements OnInit {
     // for now assume no restaurant known, might change for different join modes
 
     // test to break it...
-    //admin.member_language = 'kkkkkkk';
+    // admin.member_language = 'kkkkkkk';
     this.memberService.createAdministrator(admin).subscribe(
       data => {
         console.log(data);
