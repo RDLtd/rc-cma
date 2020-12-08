@@ -50,7 +50,7 @@ import {
   PasswordComponent,
   ProfileDetailComponent,
   ProfileImageComponent
-} from './users';
+} from './member';
 
 import {
   CmsImagesComponent,
@@ -88,7 +88,7 @@ import { FileUploadModule } from 'ng2-file-upload';
 import { MarkdownModule } from 'ngx-markdown';
 import { ClipboardModule } from 'ngx-clipboard';
 import { JoinComponent } from './join/join.component';
-import { ReferralsComponent } from './users/referrals.component';
+import { ReferralsComponent } from './member/referrals.component';
 import { LoadComponent } from './common/loader/load.component';
 import { LoadService } from './common/loader/load.service';
 import { CmsSpwLinksComponent } from './cms/cms-spw-links.component';

@@ -5,7 +5,7 @@ import {
 
 import {
   ProfilePageComponent
-} from './users';
+} from './member';
 
 import {
   AuthGuard,

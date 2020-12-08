@@ -69,7 +69,7 @@
               <a
                 (click)="openSocialLink(restaurant?.restaurant_facebook)"
                 target="_blank">
-                <img src="../../assets/images/icons/Facebook-color.svg">
+                <img src="../../assets/images/icons/Facebook-color.svg" alt="Facebook">
               </a>
             </li>
             <li
@@ -77,7 +77,7 @@
               <a
                 (click)="openSocialLink(restaurant?.restaurant_twitter)"
                 target="_blank">
-                <img src="../../assets/images/icons/Twitter-color.svg">
+                <img src="../../assets/images/icons/Twitter-color.svg" alt="Twitter">
               </a>
             </li>
             <li
@@ -85,7 +85,7 @@
               <a
                 (click)="openSocialLink(restaurant?.restaurant_instagram)"
                 target="_blank">
-                <img src="../../assets/images/icons/Instagram-color.svg">
+                <img src="../../assets/images/icons/Instagram-color.svg" alt="Instagram">
               </a>
             </li>
           </ul>
@@ -240,18 +240,18 @@
 
           <mat-list class="rc-content-status">
             <!-- Membership -->
-            <mat-list-item
-              [class.rc-content-status-complete]="memberStatus == 100"
-              [class.rc-content-status-partial]="memberStatus == 50"
-              (click)="viewMemberStatus()">
-              <mat-icon matListIcon>{{ memberIcon }}</mat-icon>
-              <h3 matLine>{{ 'CMS-Dashboard.Status' | translate }}</h3>
-              <p matLine>{{ memberType | uppercase }}</p>
-              <mat-progress-bar
-                matLine mode="determinate"
-                value="{{ memberStatus }}"></mat-progress-bar>
-              <p matLine><span>{{ 'CMS-Dashboard.Activated' | translate }} {{ d_memberJoinDate }}</span></p>
-            </mat-list-item>
+<!--            <mat-list-item-->
+<!--              [class.rc-content-status-complete]="memberStatus == 100"-->
+<!--              [class.rc-content-status-partial]="memberStatus == 50"-->
+<!--              (click)="viewMemberStatus()">-->
+<!--              <mat-icon matListIcon>{{ memberIcon }}</mat-icon>-->
+<!--              <h3 matLine>{{ 'CMS-Dashboard.Status' | translate }}</h3>-->
+<!--              <p matLine>{{ memberType | uppercase }}</p>-->
+<!--              <mat-progress-bar-->
+<!--                matLine mode="determinate"-->
+<!--                value="{{ memberStatus }}"></mat-progress-bar>-->
+<!--              <p matLine><span>{{ 'CMS-Dashboard.Activated' | translate }} {{ d_memberJoinDate }}</span></p>-->
+<!--            </mat-list-item>-->
 
             <!-- Hours -->
             <mat-list-item

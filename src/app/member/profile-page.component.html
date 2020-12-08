@@ -181,22 +181,22 @@
         *ngFor="let restaurant of restaurants; let idx = index">
 
         <!-- membership -->
-        <button
-          *ngIf="restaurant?.restaurant_rc_member_status !== 'Full'"
-          class="rc-member-assc"
-          mat-mini-fab
-          color=""
-          matTooltip="{{ restaurant.restaurant_name }} {{ 'Profile-Page.IsAssociate' | translate }} {{ brand.name }}">
-          <mat-icon>people_outline</mat-icon>
-        </button>
-        <button
-          *ngIf="restaurant?.restaurant_rc_member_status === 'Full'"
-          class="rc-member-full"
-          mat-mini-fab
-          color=""
-          matTooltip="{{ restaurant.restaurant_name }} {{ 'Profile-Page.IsFull' | translate }} {{ brand.name }}">
-          <mat-icon>people</mat-icon>
-        </button>
+<!--        <button-->
+<!--          *ngIf="restaurant?.restaurant_rc_member_status !== 'Full'"-->
+<!--          class="rc-member-assc"-->
+<!--          mat-mini-fab-->
+<!--          color=""-->
+<!--          matTooltip="{{ restaurant.restaurant_name }} {{ 'Profile-Page.IsAssociate' | translate }} {{ brand.name }}">-->
+<!--          <mat-icon>people_outline</mat-icon>-->
+<!--        </button>-->
+<!--        <button-->
+<!--          *ngIf="restaurant?.restaurant_rc_member_status === 'Full'"-->
+<!--          class="rc-member-full"-->
+<!--          mat-mini-fab-->
+<!--          color=""-->
+<!--          matTooltip="{{ restaurant.restaurant_name }} {{ 'Profile-Page.IsFull' | translate }} {{ brand.name }}">-->
+<!--          <mat-icon>people</mat-icon>-->
+<!--        </button>-->
         <!-- image -->
         <div [routerLink]="['/restaurants', restaurant.restaurant_id, 'cms', 'dashboard']">
          <cl-image
