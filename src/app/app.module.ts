@@ -93,7 +93,8 @@ import { LoadService } from './common/loader/load.service';
 import { CmsSpwLinksComponent } from './cms/cms-spw-links.component';
 import { QRCodeModule } from 'angularx-qrcode';
 import { GoogleMapsModule } from '@angular/google-maps';
-import { StripeComponent } from './common/payment/stripe.component';
+import { StripeComponent } from './join/stripe.component';
+import { MembershipComponent } from './join/membership.component';
 
 
 // AoT requires an exported function for factories
@@ -139,7 +140,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     ReferralsComponent,
     LoadComponent,
     CmsSpwLinksComponent,
-    StripeComponent
+    StripeComponent,
+    MembershipComponent
   ],
   imports: [
     AngularMaterialModule,

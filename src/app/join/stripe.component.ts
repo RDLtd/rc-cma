@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { loadStripe } from '@stripe/stripe-js/pure';
-import { environment } from '../../../environments/environment';
-import { AppConfig } from '../../app.config';
+import { environment } from '../../environments/environment';
+import { AppConfig } from '../app.config';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
@@ -13,7 +13,8 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 export class StripeComponent implements OnInit {
   stripePromise = loadStripe(environment.stripe_key);
   stripeSessionId: any;
-  sessionData: any;
+  stripeCustomerId: any = null;
+  stripeSessionData: any;
   waiting: boolean;
 
 
@@ -43,6 +44,31 @@ export class StripeComponent implements OnInit {
     this.waiting = true;
     await this.createCheckoutSession({
       priceId: this.config.brand.products[product].priceId,
+      taxId: this.config.brand.products.taxId
+    })
+      .then(data => {
+        console.log('Session', data)
+        this.stripeSessionId = data['sessionId'];
+        this.stripeCustomerId = data['customerId']
+    });
+    const stripe = await this.stripePromise;
+    const { error } = await stripe.redirectToCheckout(
+      {
+        sessionId: this.stripeSessionId
+      }
+    );
+    if (error) {
+      console.log('Error', error);
+    }
+  }
+
+  async checkoutExistingCustomer(product) {
+    // grab the customerId from somewhere
+    const customerId = 'cus_IWXpiCGTtEfq50';
+    this.waiting = true;
+    await this.createCheckoutSession({
+      customerId: customerId,
+      priceId: this.config.brand.products[product].priceId,
       taxId: this.config.brand.products.taxId,
       restaurantName: 'Jim\'s Tender Hams'
     }).then(data => {
@@ -61,7 +87,9 @@ export class StripeComponent implements OnInit {
   }
 
   manageSubscriptions() {
-    return this.http.post(`${this.config.apiUrl}/payments/customer-portal`, { sessionId: this.stripeSessionId})
+    return this.http.post(`${this.config.apiUrl}/payments/customer-portal`, {
+      sessionId: this.stripeSessionId
+    })
       .toPromise()
       .then(res => {
         console.log(res);
