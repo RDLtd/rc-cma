@@ -133,7 +133,9 @@ export class ProfilePageComponent implements OnInit {
   }
 
   getReferralLink(): string {
-    return `${this.appConfig.apiUrl}/join/${this.member.member_promo_code}`;
+    const origin = window.location.origin;
+    console.log('Host', origin);
+    return `${origin}/join/${this.member.member_promo_code}`;
   }
 
   getAssociatedRestaurants(id) {
