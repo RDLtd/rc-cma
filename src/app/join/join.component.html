@@ -16,7 +16,7 @@
           </ol>
           <div *ngIf="brand.name === 'Restaurant Collective'; else French">
             <p>{{ 'Join.Problems' | translate }}
-              <a [href]="brand.email.support">{{ 'Join.SupportTeam' | translate }}</a>.
+              <a href="mailto:{{brand.email.support}}">{{ 'Join.SupportTeam' | translate }}</a>.
             </p>
           </div>
           <ng-template #French>
@@ -40,7 +40,7 @@
 
           <div>
             <p>{{ 'Join.Problems' | translate }}
-              <a [href]="brand['email']['support']">{{ 'Join.SupportTeam' | translate }}</a>.
+              <a href="mailto:{{ brand.email.support }}">{{ 'Join.SupportTeam' | translate }}</a>.
             </p>
           </div>
 
@@ -58,7 +58,7 @@
           </ol>
           <div>
             <p>{{ 'Join.Problems' | translate }}
-              <a [href]="brand['email']['support']">{{ 'Join.SupportTeam' | translate }}</a>.
+              <a href="mailto:{{ brand.email.support }}">{{ 'Join.SupportTeam' | translate }}</a>.
             </p>
           </div>
         </div>
@@ -189,8 +189,9 @@
         [disabled]="!formJoin.valid || isSubmitting"
         color="accent">{{ 'Join.Join' | translate }}</button>
       <p class="mat-small">{{ 'Join.Confirm' | translate }} <a
-        href="{{ brand.url }}/terms/" target="_blank">{{ 'Join.Terms' | translate }}</a> {{ 'Join.And' | translate }}
-        <a href="{{ brand.url }}/privacy/" target="_blank">{{ 'Join.Privacy' | translate }}</a>.
+        [href]="brand.downloads.terms" target="_blank">{{ 'Join.Terms' | translate }}</a> {{ 'Join.And' |
+        translate }}
+        <a [href]="brand.downloads.privacy" target="_blank">{{ 'Join.Privacy' | translate }}</a>.
       </p>
     </form>
   </div>
