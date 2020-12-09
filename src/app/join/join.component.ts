@@ -64,13 +64,15 @@ export class JoinComponent implements OnInit {
   }
 
   async setReferral(code) {
+    // Force referral code to uppercase
+    const uCode = code.toUpperCase();
     // Check code
-    const ref = await this.memberService.getReferral(code.toUpperCase());
+    const ref = await this.memberService.getReferral(uCode);
     console.log(ref);
     // Valid code
     if (ref) {
       // Set referrer
-      this.referrer.code = code;
+      this.referrer.code = uCode;
       this.referrer.type = 'member';
       this.referrer.name = `${ref.member_first_name} ${ref.member_last_name}`;
       this.referrer.id = ref.member_id;
