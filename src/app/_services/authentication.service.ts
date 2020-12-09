@@ -167,36 +167,62 @@ export class AuthenticationService {
     localStorage.removeItem('rd_access_level');
     localStorage.removeItem('rd_home');
     localStorage.removeItem('rd_session');
+
   }
 
 
   isAuth(): boolean {
+    // Check expiry mins
     this.sessionExpiresAt = JSON.parse(localStorage.getItem('rd_token_expires_at'));
     this.sessionTimeLeft = (this.sessionExpiresAt - new Date().getTime()) / 60000;
-    // Time is up
-    if (!!this.sessionExpiresAt && this.sessionTimeLeft < 0) {
-      this.logout('expired');
-      return false;
-    // Time is running out is anyone using the app?
-    } else if (this.sessionTimeLeft < this.config.session_countdown) {
-      // Start listening for activity
-      if (!this.checkingActivity) {
-        console.log(`Less than ${ this.config.session_countdown } mins to go, check for activity`);
-        this.checkUserActivity();
+    // console.log(`Time left = ${this.sessionTimeLeft > 0? this.sessionTimeLeft : 'none'}`);
+    // Does a session still exists?
+    if (!!this.sessionExpiresAt && !!this.sessionTimeLeft) {
+      // Is there time left?
+      if (this.sessionTimeLeft > 0) {
+        // How much time is left?
+        if (this.sessionTimeLeft < this.config.session_countdown) {
+          // Not much time left
+          // check for user activity
+          if (!this.checkingActivity) {
+            console.log(`Less than ${ this.config.session_countdown } min to go, check for activity`);
+            this.checkUserActivity();
+          }
+          // Some time left
+          return true;
+        } else {
+          // Plenty of time left
+          return true;
+        }
+
+      } else {
+        console.log(`In session: ${this.inSession}, Time left: ${this.sessionTimeLeft}`);
+        // If session time ends while app is open
+        // or when the page has been refreshed
+        // or when has navigated away from the page but returns within 5 mins
+        // then show 'page expired' snackbar
+        if (this.inSession || this.sessionTimeLeft > -5) {
+          this.logout('expired');
+        } else {
+          // Otherwise treat as a new session/user
+          this.logout('closed');
+        }
+        return false;
       }
-      return true;
-    // Plenty of time left
     } else {
-      return true;
+      return false;
     }
   }
 
   // Listen for user activity
   checkUserActivity() {
     const timer = setTimeout(() => {
+      console.log('Logging out based on timer');
       this.logout('expired');
       this.router.navigate(['/']);
-    }, 5000);
+      document.body.removeEventListener('click', reset);
+      document.body.removeEventListener('keydown', reset);
+    }, 60000);
     // Scope reference for the listeners
     const ths = this;
     // Reset the session and clean up
@@ -215,7 +241,11 @@ export class AuthenticationService {
   }
 
   setNewSessionExpiry() {
-    this.sessionExpiresAt = JSON.stringify(new Date().getTime() + (this.config.session_timeout * (60 * 1000)));
+    console.log('SE SET');
+    // create session
+    // now + session length
+    // session length set in mins so convert to milliseconds
+    this.sessionExpiresAt = JSON.stringify(new Date().getTime() + (this.config.session_timeout * (60000)));
     localStorage.setItem('rd_token_expires_at', this.sessionExpiresAt);
   }
 

@@ -40,10 +40,9 @@
       <h2>{{ 'CMS-Location.CarParking' | translate }}</h2></mat-card-title>
     <mat-card-content>
       <mat-form-field
-        class="rc-full-width"
-        floatPlaceholder="never">
+        class="rc-full-width">
           <textarea
-            #private
+            #privateRoom
             matInput
             matTextareaAutosize
             matAutosizeMinRows="3"
@@ -51,10 +50,10 @@
             name="cms_description_car_parking"
             maxlength="{{ transportPrivateLength }}"
             placeholder="{{ 'CMS-Location.WhatParking' | translate }} {{ transportPrivateLength }})"
-            (keyup)="setChanged(private)"
+            (keyup)="setChanged(privateRoom)"
             [(ngModel)]="descriptions.cms_description_car_parking">
           </textarea>
-        <mat-hint align="end">{{ private.value.length }}/{{ transportPrivateLength }}</mat-hint>
+        <mat-hint align="end">{{ privateRoom.value.length }}/{{ transportPrivateLength }}</mat-hint>
       </mat-form-field>
     </mat-card-content>
 
@@ -66,10 +65,9 @@
       <h2>{{ 'CMS-Location.PublicTransport' | translate }}</h2></mat-card-title>
     <mat-card-content>
       <mat-form-field
-        class="rc-full-width"
-        floatPlaceholder="never">
+        class="rc-full-width">
           <textarea
-            #public
+            #publicTrans
             matInput
             matTextareaAutosize
             matAutosizeMinRows="3"
@@ -77,10 +75,10 @@
             name="cms_description_public_transport"
             maxlength="{{ transportPublicLength }}"
             placeholder="{{ 'CMS-Location.Transport' | translate }} {{ transportPublicLength }})"
-            (keyup)="setChanged(public)"
+            (keyup)="setChanged(publicTrans)"
             [(ngModel)]="descriptions.cms_description_public_transport">
           </textarea>
-        <mat-hint align="end">{{ public.value.length }}/{{ transportPublicLength }}</mat-hint>
+        <mat-hint align="end">{{ publicTrans.value.length }}/{{ transportPublicLength }}</mat-hint>
       </mat-form-field>
     </mat-card-content>
 
@@ -154,24 +152,19 @@
         {{ restaurant?.restaurant_post_code }}</h3>
 
 
-      <agm-map
-        [latitude]="mapLat"
-        [longitude]="mapLng"
-        [zoom]="zoom">
-
-        <agm-marker
-          [latitude]="restaurant?.restaurant_lat"
-          [longitude]="restaurant?.restaurant_lng"
-          [title]="restaurant?.restaurant_name"
-          [markerDraggable]="allowMarkerDrag"
-          (dragEnd)="getMarkerPosition($event)"
-          [iconUrl]="restaurant?.restaurant_icon">
-          <agm-info-window [disableAutoPan]="true">
-            {{ restaurant?.restaurant_name }}, {{ restaurant?.restaurant_post_code }}, {{
-            restaurant?.restaurant_website }}
-          </agm-info-window>
-        </agm-marker>
-      </agm-map>
+<!--      <div *ngIf="mapsApiLoaded | async">-->
+        <div>
+        <google-map
+          height="560px"
+          width="100%"
+          [options]="mapOptions">
+          <map-marker
+            (mapDragend)="updateRestaurantMarker()"
+            [options]="markerOptions"
+            [position]="markerPosition">
+          </map-marker>
+        </google-map>
+      </div>
 
     </mat-card-content>
 

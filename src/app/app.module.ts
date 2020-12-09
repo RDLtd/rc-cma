@@ -33,7 +33,6 @@ import {
   UserService,
   MemberService,
   RestaurantService,
-  FinancialService,
   CMSService,
   PublicService,
   HelpService,
@@ -42,9 +41,7 @@ import {
 
 import {
   RestaurantDetailComponent,
-  BenchmarkComponent,
-  BenchmarkWizardComponent,
-} from './restaurants';
+} from './restaurants/restaurant-detail.component';
 
 import {
   RestaurantLookupComponent,
@@ -53,7 +50,7 @@ import {
   PasswordComponent,
   ProfileDetailComponent,
   ProfileImageComponent
-} from './users';
+} from './member';
 
 import {
   CmsImagesComponent,
@@ -74,28 +71,14 @@ import {
 } from './cms';
 
 import {
-  FsComponent,
-  ProfitComponent,
-  BalanceComponent,
-  StaffComponent,
-  PropertyComponent,
-  TurnoverComponent,
-  FsGraphComponent,
-  FsInputComponent,
-  ReviewComponent
-} from './fs';
-
-import {
   LoaderComponent,
   PaymentComponent,
   HelpComponent,
   ConfirmCancelComponent,
-  MessageComponent,
-  GoogleChartComponent
+  MessageComponent
 } from './common';
 
 // 3rd party packages
-import { AgmCoreModule } from '@agm/core';
 import {
   TranslateModule,
   TranslateLoader
@@ -105,11 +88,12 @@ import { FileUploadModule } from 'ng2-file-upload';
 import { MarkdownModule } from 'ngx-markdown';
 import { ClipboardModule } from 'ngx-clipboard';
 import { JoinComponent } from './join/join.component';
-import { ReferralsComponent } from './users/referrals.component';
+import { ReferralsComponent } from './member/referrals.component';
 import { LoadComponent } from './common/loader/load.component';
 import { LoadService } from './common/loader/load.service';
 import { CmsSpwLinksComponent } from './cms/cms-spw-links.component';
 import { QRCodeModule } from 'angularx-qrcode';
+import { GoogleMapsModule } from '@angular/google-maps';
 
 
 // AoT requires an exported function for factories
@@ -123,10 +107,6 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     HeaderComponent,
     FooterComponent,
     PasswordComponent,
-    GoogleChartComponent,
-    BenchmarkComponent,
-    ReviewComponent,
-    BenchmarkWizardComponent,
     RestaurantLookupComponent,
     RestaurantDetailComponent,
     ProfilePageComponent,
@@ -150,14 +130,6 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     CmsReservationsComponent,
     CmsDashboardComponent,
     AboutComponent,
-    FsComponent,
-    ProfitComponent,
-    BalanceComponent,
-    StaffComponent,
-    PropertyComponent,
-    TurnoverComponent,
-    FsGraphComponent,
-    FsInputComponent,
     LoaderComponent,
     HelpComponent,
     PaymentComponent,
@@ -188,16 +160,14 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
         deps: [HttpClient]
       }
     }),
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyCji4lOA-nPgICQjFO_4rVyuWKW1jP1Lkc'
-    }),
     MarkdownModule.forRoot(),
     CloudinaryModule.forRoot(Cloudinary, {
       cloud_name: 'rdl',
       api_key: '713165672947878',
       api_secret: 'EhLM0NhD7HvJDjX5IvF90u6guq8'
     }),
-    QRCodeModule
+    QRCodeModule,
+    GoogleMapsModule
   ],
   providers: [
     AppConfig,
@@ -207,7 +177,6 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     RestaurantService,
     AuthGuard,
     CanDeactivateGuard,
-    FinancialService,
     CMSService,
     CmsLocalService,
     HelpService,

@@ -66,8 +66,10 @@ export class MemberService {
   }
 
   createAdministrator(administrator: any) {
-    return this.http.post(this.config.apiUrl + '/members/createadministrator',
-      { company_prefix: localStorage.getItem('rd_company_prefix'),
+    console.log('CREATE',  localStorage.getItem('rd_brand'));
+    return this.http.post(this.config.apiUrl + '/members/create_new_member',
+      {
+        company_prefix: localStorage.getItem('rd_brand'),
         administrator: administrator,
         userCode: this.config.userAPICode,
         token: this.authToken

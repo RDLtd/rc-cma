@@ -148,7 +148,7 @@ export class ProfileImageComponent implements OnInit {
     console.log('M', this.data.member.member_id);
 
     this.memberService.updateAvatar(this.data.member.member_id, this.imgURL).subscribe(
-      data => {
+      () => {
         this.data.member.member_image_path = this.imgPreviewSrc;
         let iArr = this.imgPreviewSrc.split('/');
         this.data.avatar = iArr.splice(iArr.length).join('/');
@@ -166,8 +166,7 @@ export class ProfileImageComponent implements OnInit {
   deleteImage() {
 
     this.memberService.deleteAvatar(this.data.member_id).subscribe(
-      data => {
-        // console.log(data);
+      () => {
         this.data.member_image_path = this.placeholderImage;
         this.dialog.close();
         this.dspSnackBar(this.t_data.ImageDeleted);

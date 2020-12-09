@@ -283,8 +283,29 @@ a.mat-menu-item {text-decoration: none;}
 }
 /**
 * Sign in / Register
-* ------------------------------------------
-*/
+* ------------------------------------------ */
+
+// Default logo
+.rc-svg-logo {
+  width: 260px;
+  margin: 1rem 0;
+  .rc-svg-logo-group {
+    fill: white;
+    .rc-svg-logo-circles {
+      opacity: .4;
+    }
+    .rc-svg-logo-text {}
+  }
+  &.rc-logo-footer {
+    width: 100px;
+    .rc-svg-logo-group {
+      fill: grey;
+      .rc-svg-logo-circles {
+        opacity: .5;
+      }
+    }
+  }
+}
 
 .rc-join {
   box-sizing: border-box;
