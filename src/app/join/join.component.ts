@@ -65,7 +65,7 @@ export class JoinComponent implements OnInit {
 
   async setReferral(code) {
     // Check code
-    const ref = await this.memberService.getReferral(code);
+    const ref = await this.memberService.getReferral(code.toUpperCase());
     console.log(ref);
     // Valid code
     if (ref) {
