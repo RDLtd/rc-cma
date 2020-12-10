@@ -3,7 +3,7 @@
     "MyProfile" : "My Profile",
     "Logout"    : "Logout",
     "Login"     : "Login",
-    "Settings"  : "User Profile",
+    "Settings"  : "Member Profile",
     "About"     : "About RD.CMS"
   },
 
@@ -872,7 +872,7 @@
     "Compare": " In order to compare your restaurant with others you must provide appropriate data.",
     "IsAssociate": "is an Associate Member of",
     "IsFull": "is a Full Member of",
-    "SendReferral": "Invite a friend or colleague to join the collective (disabled in beta version)",
+    "SendReferral": "Invite a friend or colleague to join the collective",
     "ReferralCode": "Personal Referral Code",
     "Owner": "Owner",
     "Chef": "Chef",
@@ -894,9 +894,9 @@
     "Rname": "Restaurant Name",
     "Rcode": "Post Code",
     "Rtel": "Telephone",
-    "Uname": "User Name",
-    "Uid": "User ID",
-    "Uemail": "User Email",
+    "Uname": "Member Name",
+    "Uid": "Member ID",
+    "Uemail": "Member Email",
     "Loading": "Loading associated restaurants"
   },
 
@@ -934,8 +934,8 @@
     "Required": "is required",
     "JustCode": "Code",
     "Change": "CHANGE REVIEW",
-    "Just": "The following restaurant has just been associated to a user and the email address was updated at the same time.",
-    "User": "User",
+    "Just": "The following restaurant has just been associated to a Member and the email address was updated at the same time.",
+    "User": "Member",
     "Oemail": "Original Email Address",
     "Nemail": "New Email Address",
     "ASAP": "Please review these changes a.s.a.p.",

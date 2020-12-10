@@ -25,7 +25,8 @@ export class JoinComponent implements OnInit {
     code: null,
     name: null,
     id: 0,
-    restaurant: null
+    restaurant: null,
+    promo_status: null
   };
   t_data: any;
 
@@ -63,16 +64,19 @@ export class JoinComponent implements OnInit {
   }
 
   async setReferral(code) {
+    // Force referral code to uppercase
+    const uCode = code.toUpperCase();
     // Check code
-    const ref = await this.memberService.getReferral(code);
+    const ref = await this.memberService.getReferral(uCode);
     console.log(ref);
     // Valid code
     if (ref) {
       // Set referrer
-      this.referrer.code = code;
+      this.referrer.code = uCode;
       this.referrer.type = 'member';
       this.referrer.name = `${ref.member_first_name} ${ref.member_last_name}`;
       this.referrer.id = ref.member_id;
+      this.referrer.promo_status = ref.promo_status;
     } else {
       // Invalid code
       this.referrer.type = 'self';
@@ -93,6 +97,10 @@ export class JoinComponent implements OnInit {
 
     // Create new Content Admin & split full name
     const names = applicant.name.split(' ');
+
+    // NB Note that for this early December version we set member_type to 'Full'
+    // Once there is a paywall we will set this to 'Payment Pending' and update once payment
+    // has been received
     const admin = {
       member_first_name: names[0],
       member_last_name: names.slice(1).join() || names[0], // combine any additional names
@@ -101,7 +109,9 @@ export class JoinComponent implements OnInit {
       member_job: applicant.role,
       member_language: localStorage.getItem('rd_language'),
       restaurant_id: 0,
-      member_id: 0
+      member_id: 0,
+      member_promo_status: this.referrer.promo_status,
+      member_type: 'Full'
     };
 
     // Register new admin
@@ -114,7 +124,7 @@ export class JoinComponent implements OnInit {
     // for now assume no restaurant known, might change for different join modes
 
     // test to break it...
-    //admin.member_language = 'kkkkkkk';
+    // admin.member_language = 'kkkkkkk';
     this.memberService.createAdministrator(admin).subscribe(
       data => {
         console.log(data);
