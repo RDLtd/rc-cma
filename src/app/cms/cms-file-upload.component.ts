@@ -215,11 +215,13 @@ export class CmsFileUploadComponent implements OnInit {
   }
 
   validForm(): boolean {
-
+    // console.log(this.data.type);
     if (this.data.type === 'image') {
       return this.imgForm.valid;
     } else if (this.data.type === 'menu') {
       return this.menuForm.valid;
+    } else {
+      return true;
     }
   }
 
