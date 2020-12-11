@@ -16,6 +16,7 @@
             "main": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
             "polyfills": "src/polyfills.ts",
+            "aot": true,
             "stylePreprocessorOptions": {
               "includePaths": [
                 "node_modules"
