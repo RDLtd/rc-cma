@@ -53,6 +53,15 @@ export class AppConfig {
         support: 'support@restaurantcollective.uk',
         curation: 'curation@restaurantcollective.uk'
       },
+      products: {
+        taxId: 'txr_1HuZYpFqzlrb81VHPM9p2XpX',
+        membership_monthly: {
+          priceId: 'price_1HuPN4Fqzlrb81VH6U5renJn'
+        },
+        membership_yearly: {
+          priceId: 'price_1HuPN4Fqzlrb81VHCj3wELKF'
+        }
+      },
       fee: {
         month: '3.50',
         year: '42.00',
@@ -75,6 +84,15 @@ export class AppConfig {
       email: {
         support: 'support@restaurateursindependants.com',
         curation: 'curation@restaurateursindependants.com'
+      },
+      products: {
+        taxId: 'txr_1HudC1Fqzlrb81VH8GYyhETf',
+        membership_monthly: {
+          priceId: 'price_1HuIiGFqzlrb81VHQsg1MWwz'
+        },
+        membership_yearly: {
+          priceId: 'price_1HuaaeFqzlrb81VHFyBJUwPs'
+        }
       },
       fee: {
         month: '4.00',

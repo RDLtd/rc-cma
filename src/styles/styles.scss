@@ -71,6 +71,23 @@ $config: mat-typography-config();
   filter: saturate(0%);
   opacity: 0.5;
 }
+a.rc-back {
+  display: inline-flex;
+  justify-content: flex-start;
+  color: #ccc;
+  font-size: 14px;
+  text-decoration: none;
+  margin-bottom: 1rem;
+  transition: all .3s ease-out;
+  &:hover {
+    color: white;
+    .mat-icon {
+      position: relative;
+      transition: all .3s ease-out;
+      transform: translateX(-8px);
+    }
+  }
+}
 .rc-mat-snack-warn,
 .rc-mat-snack-info{
   color: black;
@@ -214,7 +231,7 @@ a.mat-menu-item {text-decoration: none;}
     z-index: 100;
   }
   img {
-    width:96px;
+    width:120px;
     height: auto;
   }
   h3 {
@@ -306,12 +323,12 @@ a.mat-menu-item {text-decoration: none;}
     }
   }
 }
-
 .rc-join {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  .rc-join-info,
+
+  .rc-join-info-container,
   .rc-join-form {
     display: flex;
     flex-direction: column;
@@ -329,13 +346,35 @@ a.mat-menu-item {text-decoration: none;}
       margin: 0 0 24px;
     }
   }
-  .rc-join-info {
+  .rc-join-info-container {
+    position: relative;
     background-color: #00BCD3;
     color: black;
     font-size: 18px;
     &.rc-bgd {
       background-color: $rc-theme-primary;
       color: white;
+    }
+    &.rc-options {
+      align-items: flex-end;
+      background-color: #454550;
+      p {
+        color: #ddd;
+      }
+    }
+    .join-logo {
+
+    }
+    .rc-join-info {
+      max-width: 600px;
+      padding: 5vh 6vw;
+      span { display: block;}
+      img {
+        margin: 1rem 0;
+      }
+      h1 {
+        margin: 0 0 1rem;
+      }
     }
     .rc-join-welcome {
       padding: 48px;
@@ -376,7 +415,9 @@ a.mat-menu-item {text-decoration: none;}
 
   .rc-join-form {
     background-color: white;
-    form, > div {
+
+    form,
+    > div {
       max-width: 400px;
       padding: 48px;
     }
@@ -392,9 +433,16 @@ a.mat-menu-item {text-decoration: none;}
       letter-spacing: 2px;
       font-weight: $rc-default-font-weight;
     }
+    .rc-subscription {
+      max-width: 400px;
+      width: 100%;
+      border-radius: 8px;
+      border: 2px solid $rc-theme-grey;
+      padding: 8px 16px;
+      margin-bottom: 24px;
+    }
   }
 }
-
 .mat-toolbar {
   background-color: $rc-theme-primary;
   color: white;
@@ -435,8 +483,8 @@ a.mat-menu-item {text-decoration: none;}
 @media screen and ( min-width : 768px ){
   .rc-join {
     flex-direction: row;
-    .rc-join-info, .rc-join-form { min-height: 100vh; }
-    .rc-join-info { width: 62%; }
+    .rc-join-info-container, .rc-join-form { min-height: 100vh; }
+    .rc-join-info-container { width: 62%; }
     .rc-join-form { width: 38%; }
   }
 }
