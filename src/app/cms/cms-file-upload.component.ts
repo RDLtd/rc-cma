@@ -221,6 +221,7 @@ export class CmsFileUploadComponent implements OnInit {
     } else if (this.data.type === 'menu') {
       return this.menuForm.valid;
     } else {
+      // It's directions
       return true;
     }
   }
