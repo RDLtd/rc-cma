@@ -2,7 +2,7 @@
 
   <div class="rc-layout-split-left rc-bgd">
     <section class="rc-layout-split-content">
-
+      <!-- RC -->
       <span *ngIf="brand['prefix'] === 'rc'">
         <svg class="rc-svg-logo" xmlns="http://www.w3.org/2000/svg" width="200" viewBox="0 0 196 97">
           <title>Restaurant Collective Logo</title>
@@ -14,7 +14,7 @@
           </g>
         </svg>
       </span>
-
+      <!-- RI -->
       <span *ngIf="brand['prefix'] === 'ri'">
         <svg class="rc-svg-logo" xmlns="http://www.w3.org/2000/svg" width="250" viewBox="0 0 250 103">
             <title>Restaurateurs Indépendants</title>
@@ -26,13 +26,8 @@
             </g>
         </svg>
       </span>
-
-      <markdown ngPreserveWhitespaces [data]="t_data['WelcomeText']"></markdown>
-
-<!--      <h1>{{ 'SignIn.Empowering' | translate }}</h1>-->
-<!--      -->
-<!--      <p>{{ brand['name'] }} {{ 'SignIn.Text1' | translate }}</p>-->
-<!--      <p>{{ 'SignIn.Text2' | translate }}</p>-->
+      <!-- Welcome -->
+      <markdown ngPreserveWhitespaces [data]="t_data['Introduction']"></markdown>
     </section>
   </div>
 
@@ -63,7 +58,9 @@
           mat-flat-button
           class="rc-full-width"
           color="accent"
-          [disabled]="isSubmitting || !frmReset.form.valid">{{ 'SignIn.ResetCaps' | translate }}</button>
+          [disabled]="isSubmitting || !frmReset.form.valid">
+          {{ 'SignIn.ResetCaps' | translate }}
+        </button>
       </form>
     </section>
     <!-- Sign in -->
@@ -74,8 +71,8 @@
         novalidate>
         <span class="rc-warn" *ngIf="errorMsg">{{ errorMsg | uppercase }}!</span>
         <h1>{{ 'SignIn.SignIn' | translate }}</h1>
-<!--        <span>{{ 'SignIn.Or' | translate }}<a [routerLink]="'/join'">{{ 'SignIn.Join' | translate }}-->
-<!--          {{ brand['name'] }}</a></span>-->
+        <span>{{ 'SignIn.Or' | translate }}<a [routerLink]="'/join'">{{ 'SignIn.Join' | translate }}
+          {{ brand['name'] }}</a></span><br><br>
         <mat-form-field class="rc-full-width" hideRequiredMarker>
           <mat-label>{{ 'SignIn.UserEmail' | translate }}</mat-label>
           <input
@@ -104,9 +101,8 @@
         <button
           mat-flat-button
           class="rc-full-width"
-          color="accent"
+          color="primary"
           [disabled]="isSubmitting">{{ 'SignIn.SignCaps' | translate }}</button>
-<!--        <br><br>-->
 <!--        <p class="rc-txt-small">{{ 'SignIn.Subject' | translate }}<a-->
 <!--          [href]="brand['downloads']['terms']" target="_blank">{{ 'SignIn.Terms' | translate }}</a>-->
 <!--          {{ 'SignIn.And' | translate }}-->

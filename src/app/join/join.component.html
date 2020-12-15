@@ -28,6 +28,8 @@
 
         <!-- Member -->
         <div *ngSwitchCase="'member'">
+
+
           <h1>{{ 'Join.Support' | translate }}</h1>
           <p>{{ 'Join.Invited' | translate }} <strong>{{ referrer?.name }}</strong> {{ 'Join.Become' | translate }}
             {{ brand.name }},
@@ -107,10 +109,6 @@
             This **mobile number** is already registered, please [SIGN-IN, or
             retrieve your password here](/signin).
           </markdown>
-<!--          <p class="rc-txt-small">{{ 'Join.MobileReg' | translate }}<a-->
-<!--            [routerLink]="['/signin']">{{ 'Join.SignInPassword' | translate }}</a>.</p>-->
-<!--          <p class="rc-txt-small">{{ 'Join.If' | translate }}<a-->
-<!--            (click)="curationRequest()">{{ 'Join.Callback' | translate }}</a>{{ 'Join.Someone' | translate }}</p>-->
         </div>
 
         <!-- Duplicate Email -->
@@ -120,10 +118,6 @@
             This **email address** is already registered, please [SIGN-IN, or
             retrieve your password here](/signin).
           </markdown>
-<!--          <p class="rc-txt-small">{{ 'Join.EmailReg' | translate }}<a-->
-<!--            [routerLink]="['/signin']">{{ 'Join.SignInPassword' | translate }}</a>.</p>-->
-<!--          <p class="rc-txt-small">{{ 'Join.If' | translate }}<a-->
-<!--            (click)="curationRequest()">{{ 'Join.Callback' | translate }}</a>{{ 'Join.Someone' | translate }}</p>-->
         </div>
 
         <!-- Duplicate Telephone and Email -->
@@ -133,16 +127,10 @@
             This **mobile number** and **email address** have already been registered [Sign-in, or
             retrieve your password here](/signin).
           </markdown>
-<!--          <p class="rc-txt-small">{{ 'Join.BothReg' | translate }}<a [routerLink]="['/signin']">{{-->
-<!--            'Join.SignInPassword' | translate }}</a>.</p>-->
-<!--          <p class="rc-txt-small">{{ 'Join.If' | translate }}<a-->
-<!--            (click)="curationRequest()">{{ 'Join.Callback' | translate }}</a>{{ 'Join.Someone' | translate }}</p>-->
         </div>
 
         <div *ngIf="!duplicateField">
           <h1>Your Contact Details</h1>
-<!--          <span>{{ 'Join.Or' | translate }} <a [routerLink]="'/signin'">{{ 'Join.SignIn' | translate }}</a>-->
-<!--            {{ 'Join.Already' | translate }}</span>-->
         </div>
 
         <mat-form-field hideRequiredMarker style="width: 38%;">
@@ -173,33 +161,6 @@
           <mat-error align="end" *ngIf="lname.required">Required</mat-error>
         </mat-form-field>
 
-
-        <!-- Name -->
-<!--        <mat-form-field hideRequiredMarker>-->
-<!--          <mat-label>{{ 'Join.FullName' | translate }}</mat-label>-->
-<!--          <input-->
-<!--            #name="ngModel"-->
-<!--            ngModel-->
-<!--            matInput-->
-<!--            type="text"-->
-<!--            name="name"-->
-<!--            [placeholder]="'Join.FullName' | translate"-->
-<!--            autofocus-->
-<!--            required>-->
-<!--&lt;!&ndash;          <mat-hint align="end" *ngIf="name.invalid">{{ 'Join.FirstAndLast' | translate }}</mat-hint>&ndash;&gt;-->
-<!--          <mat-error align="end" *ngIf="name.errors?.required">{{ 'Join.FullName' | translate }}-->
-<!--            {{ 'Join.Required' | translate }}</mat-error>-->
-<!--        </mat-form-field>-->
-        <!-- Role -->
-<!--        <mat-form-field hideRequiredMarker>-->
-<!--          <mat-label>{{ 'Join.Job' | translate }}</mat-label>-->
-<!--          <mat-select ngModel #role name="role" required>-->
-<!--            <mat-option value="Owner">{{ 'Join.Owner' | translate }}</mat-option>-->
-<!--            <mat-option value="Chef">{{ 'Join.Chef' | translate }}</mat-option>-->
-<!--            <mat-option value="Manager">{{ 'Join.Manager' | translate }}</mat-option>-->
-<!--          </mat-select>-->
-<!--          <mat-error align="end" *ngIf="role.required">Please select your job title or role</mat-error>-->
-<!--        </mat-form-field>-->
         <!-- Email -->
         <mat-form-field hideRequiredMarker>
           <mat-label>{{ 'Join.Email' | translate }}</mat-label>
@@ -215,6 +176,7 @@
           <mat-hint align="end" *ngIf="email.invalid">{{ 'Join.Contact' | translate }}</mat-hint>
           <mat-error align="end" *ngIf="email?.errors">{{ 'Join.ValidEmail' | translate }}</mat-error>
         </mat-form-field>
+
         <!-- Telephone -->
         <mat-form-field hideRequiredMarker>
           <mat-label>{{ 'Join.Mobile' | translate }}</mat-label>
@@ -230,19 +192,9 @@
           <mat-error align="end" *ngIf="mobile.required">{{ 'Join.ValidTelephone' |
             translate }}</mat-error>
         </mat-form-field>
-        <!-- Referral code -->
-<!--        <mat-form-field *ngIf="!referrer?.code">-->
-<!--          <mat-label>{{ 'Join.RefCode' | translate }}</mat-label>-->
-<!--          <input-->
-<!--            #code="ngModel"-->
-<!--            ngModel-->
-<!--            matInput-->
-<!--            type="text"-->
-<!--            name="code"-->
-<!--            [placeholder]="'Join.RefCode' | translate">-->
-<!--        </mat-form-field>-->
-        <!-- Submit -->
+
         <br><br>
+
         <button
           type="submit"
           mat-flat-button
@@ -258,8 +210,6 @@
     </div>
   </div>
 </div>
-
-
 
 <!--<div class="rc-join">-->
 <!--  <div class="rc-join-info-container">-->
