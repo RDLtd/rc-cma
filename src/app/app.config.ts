@@ -11,6 +11,10 @@ export class AppConfig {
     name: require('../../package.json').name
   };
 
+  // App location
+  appUrl = window.location.origin;
+
+
   // Should only need to switch here to change from local to Heroku server
   // public readonly apiUrl = 'http://localhost:4000';
   // public readonly apiUrl = 'https://rc-server-staging.herokuapp.com';
@@ -60,7 +64,9 @@ export class AppConfig {
         },
         membership_yearly: {
           priceId: 'price_1HuPN4Fqzlrb81VHCj3wELKF'
-        }
+        },
+        success_url: `${ this.appUrl }/signin`,
+        cancel_url: `${ this.appUrl }/membership-options`,
       },
       fee: {
         month: '3.50',

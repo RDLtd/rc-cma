@@ -1,16 +1,55 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { AppConfig } from '../app.config';
+import { loadStripe } from '@stripe/stripe-js/pure';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'rc-membership',
-  templateUrl: './membership.component.html',
-  styles: [
-  ]
+  templateUrl: './membership.component.html'
 })
 export class MembershipComponent implements OnInit {
 
-  constructor() { }
+  waiting = false;
+  stripeSessionId: string;
+  stripePromise = loadStripe(environment.stripe_key);
+
+  constructor(
+    private config: AppConfig,
+    private http: HttpClient
+  ) { }
 
   ngOnInit(): void {
+    console.log(this.config.appUrl);
+  }
+
+  // Create Stripe Session
+  async createCheckoutSession(options) {
+    return this.http.post(`${this.config.apiUrl}/payments/create-session`, options).toPromise();
+  };
+
+  async checkout(product)  {
+    this.waiting = true;
+    const brandProduct = this.config.brand.products;
+    await this.createCheckoutSession({
+      priceId: brandProduct[product].priceId,
+      taxId: brandProduct.taxId,
+      successUrl: brandProduct.success_url,
+      cancelUrl: brandProduct.cancel_url
+    })
+      .then(data => {
+        console.log('Session', data)
+        this.stripeSessionId = data['sessionId'];
+      });
+    const stripe = await this.stripePromise;
+    const { error } = await stripe.redirectToCheckout(
+      {
+        sessionId: this.stripeSessionId
+      }
+    );
+    if (error) {
+      console.log('Error', error);
+    }
   }
 
 }

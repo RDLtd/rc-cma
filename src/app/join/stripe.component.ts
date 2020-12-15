@@ -35,7 +35,7 @@ export class StripeComponent implements OnInit {
     console.log(p.get('session_id'));
   }
 
-  // Api call
+  // Create Stripe Session
   async createCheckoutSession(options) {
     return this.http.post(`${this.config.apiUrl}/payments/create-session`, options).toPromise();
   };

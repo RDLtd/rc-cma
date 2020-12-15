@@ -75,9 +75,9 @@ a.rc-back {
   display: inline-flex;
   justify-content: flex-start;
   color: #ccc;
-  font-size: 14px;
+  font-size: 16px;
   text-decoration: none;
-  margin-bottom: 1rem;
+  margin: 1rem 0;
   transition: all .3s ease-out;
   &:hover {
     color: white;
@@ -88,6 +88,7 @@ a.rc-back {
     }
   }
 }
+.rc-txt-small { font-size: 14px !important; }
 .rc-mat-snack-warn,
 .rc-mat-snack-info{
   color: black;
@@ -305,7 +306,7 @@ a.mat-menu-item {text-decoration: none;}
 // Default logo
 .rc-svg-logo {
   width: 260px;
-  margin: 1rem 0;
+  margin: 0 0 1rem;
   .rc-svg-logo-group {
     fill: white;
     .rc-svg-logo-circles {
@@ -323,126 +324,280 @@ a.mat-menu-item {text-decoration: none;}
     }
   }
 }
-.rc-join {
-  box-sizing: border-box;
+
+.rc-layout-split-container {
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-
-  .rc-join-info-container,
-  .rc-join-form {
+  .rc-layout-split-left,
+  .rc-layout-split-right {
+    background-color: white;
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
     align-items: center;
-    justify-content: center;
-    width: 100%;
-    min-height: 0;
+    padding: 24px;
+  }
+  .rc-layout-split-left {
+    background-color: $rc-theme-dkgrey;
+    color: #ddd;
+  }
+  .rc-layout-split-content {
+    max-width: 420px;
+    margin: 0;
+    .rc-logo {
+      display: block;
+      margin: 0 0 2em;
+    }
     h1 {
-      font-size: 32px;
-      font-weight: $rc-default-font-weight;
-      margin: 0 0 0;
+      font-weight: 300;
+      line-height: 1.1;
     }
-    h1 + span {
-      display: inline-block;
-      margin: 0 0 24px;
+    p {
+      // text-align: justify;
+      font-weight: 300;
+      font-size: 18px;
     }
-  }
-  .rc-join-info-container {
-    position: relative;
-    background-color: #00BCD3;
-    color: black;
-    font-size: 18px;
-    &.rc-bgd {
-      background-color: $rc-theme-primary;
-      color: white;
+    .rc-form-msg {
+      margin: 0 0 1rem;
+      p { font-size: 16px; }
     }
-    &.rc-options {
-      align-items: flex-end;
-      background-color: #454550;
-      p {
-        color: #ddd;
+    // suppress the number spinners
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    .rc-subscription {
+      margin: 1rem 0;
+      border: 2px solid #ddd;
+      padding: 8px;
+      border-radius: 5px;
+      transition: all .2s ease-out;
+
+      h2 {
+        font-size: 11px;
+        font-weight: 400;
+        letter-spacing: 1px;
+        margin: 8px 0;
+        padding: 0;
+        line-height: 1;
+        color: $rc-theme-primary;
       }
-    }
-    .join-logo {
+
 
     }
-    .rc-join-info {
-      max-width: 600px;
-      padding: 5vh 6vw;
-      span { display: block;}
-      img {
-        margin: 1rem 0;
-      }
-      h1 {
-        margin: 0 0 1rem;
-      }
-    }
-    .rc-join-welcome {
-      padding: 48px;
-      max-width: 600px;
-      .rc-brand-logo {
-        height: 90px;
-        margin-bottom: 16px;
-      }
-      ol {
-        counter-reset: rc-counter;
-        list-style: none;
-        margin: 24px 0 16px;
-        padding-left: 8px;
-      }
-      ol li {
-        position: relative;
-        padding: 8px 0  8px 48px;
-        font: $rc-default-font-weight 16px/1.25 $rc-default-font;
-      }
-      ol li:before {
-        content: counter(rc-counter);
-        counter-increment: rc-counter;
-        position: absolute;
-        left: 0;
-        top: 50%;
-        transform: translateY(-50%);
-        font: bold 24px/1 $rc-default-font;
-        background: white;
-        border-radius: 50%;
-        height: 36px;
-        width: 36px;
-        color: #000;
-        line-height: 36px;
-        text-align: center;
-      }
-    }
-  }
+    .rc-join-form {
+      background-color: white;
 
-  .rc-join-form {
-    background-color: white;
+      .mat-form-field {
+        width: 100%;
+      }
 
-    form,
-    > div {
-      max-width: 400px;
-      padding: 48px;
-    }
-    .mat-form-field {
-      width: 100%;
     }
     button {
       width: 100%;
-      margin: 24px 0 8px;
-      line-height: 64px;
+      margin: 0 0;
+      line-height: 56px;
       border-radius: 4px;
       text-transform: uppercase;
       letter-spacing: 2px;
       font-weight: $rc-default-font-weight;
     }
-    .rc-subscription {
-      max-width: 400px;
-      width: 100%;
-      border-radius: 8px;
-      border: 2px solid $rc-theme-grey;
-      padding: 8px 16px;
-      margin-bottom: 24px;
-    }
+  }
+  $circle: 56px;
+  ol {
+    counter-reset: rc-counter;
+    list-style: none;
+    margin: 24px 0 16px;
+    padding-left: 8px;
+  }
+  ol li {
+    position: relative;
+    padding: 18px 0  18px $circle;
+    font: $rc-default-font-weight 18px/1.25 $rc-default-font;
+  }
+  ol li:before {
+    content: counter(rc-counter);
+    counter-increment: rc-counter;
+    position: absolute;
+    left: -12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font: 500 24px/1 $rc-default-font;
+    background: rgba(255, 255, 255, .1);
+    border-radius: 50%;
+    height: $circle;
+    width: $circle;
+    color: #fff;
+    line-height: $circle;
+    text-align: center;
   }
 }
+@media screen and ( min-width : 768px ){
+  .rc-layout-split-container {
+    flex-direction: row;
+
+    .rc-layout-split-left {
+      width: 50vw;
+      justify-content: center;
+      align-items: flex-end;
+      padding: 5%;
+    }
+    .rc-layout-split-right {
+      width: 50vw;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 5%;
+    }
+
+  }
+}
+
+//@media screen and ( min-width : 768px ){
+//  .rc-join {
+//    flex-direction: row;
+//    .rc-join-info-container, .rc-join-form {
+//      min-height: 100vh;
+//    }
+//    .rc-join-info-container {
+//      width: 50%;
+//      &.rc-options {
+//        align-items: flex-end;
+//        padding: 48px;
+//      }
+//
+//    }
+//    .rc-join-form {
+//      width: 50%;
+//      &.rc-options {
+//        align-items: flex-start;
+//        padding: 5vh;
+//      }
+//    }
+//  }
+//}
+
+//.rc-join {
+//  box-sizing: border-box;
+//  display: flex;
+//  flex-direction: column;
+//  .rc-join-info-container,
+//  .rc-join-form {
+//    display: flex;
+//    flex-direction: column;
+//    align-items: center;
+//    justify-content: center;
+//    width: 100%;
+//    min-height: 0;
+//    h1 {
+//      font-size: 32px;
+//      font-weight: $rc-default-font-weight;
+//      margin: 0 0 0;
+//    }
+//    h1 + span {
+//      display: inline-block;
+//      margin: 0 0 24px;
+//    }
+//  }
+//  .rc-join-info-container {
+//    position: relative;
+//    background-color: #00BCD3;
+//    color: black;
+//    font-size: 18px;
+//    &.rc-bgd {
+//      background-color: $rc-theme-primary;
+//      color: white;
+//    }
+//    &.rc-options {
+//
+//      background-color: #454550;
+//      p {
+//        color: #ddd;
+//      }
+//    }
+//
+//    .rc-join-info {
+//      max-width: 480px;
+//      padding: 1vh 24px 5vh;
+//      span { display: block;}
+//      img {
+//        margin: 2rem 0;
+//      }
+//      h1 {
+//        margin: 0 0 1rem;
+//        line-height: 1.1;
+//        color: white;
+//      }
+//      p {
+//        font-size: 18px;
+//        line-height: 1.3;
+//        font-weight: 300;
+//        text-align: justify;
+//      }
+//    }
+//    .rc-join-welcome {
+//      padding: 48px;
+//      max-width: 600px;
+//      .rc-brand-logo {
+//        height: 90px;
+//        margin-bottom: 16px;
+//      }
+//      ol {
+//        counter-reset: rc-counter;
+//        list-style: none;
+//        margin: 24px 0 16px;
+//        padding-left: 8px;
+//      }
+//      ol li {
+//        position: relative;
+//        padding: 8px 0  8px 48px;
+//        font: $rc-default-font-weight 16px/1.25 $rc-default-font;
+//      }
+//      ol li:before {
+//        content: counter(rc-counter);
+//        counter-increment: rc-counter;
+//        position: absolute;
+//        left: 0;
+//        top: 50%;
+//        transform: translateY(-50%);
+//        font: bold 24px/1 $rc-default-font;
+//        background: white;
+//        border-radius: 50%;
+//        height: 36px;
+//        width: 36px;
+//        color: #000;
+//        line-height: 36px;
+//        text-align: center;
+//      }
+//    }
+//  }
+//
+//  .rc-join-form {
+//    background-color: white;
+//    &.rc-options {
+//      align-items: center;
+//      padding: 24px;
+//    }
+//    form,
+//    > div {
+//      max-width: 400px;
+//      padding: 48px;
+//    }
+//    .mat-form-field {
+//      width: 100%;
+//    }
+//    button {
+//      width: 100%;
+//      margin: 24px 0 8px;
+//      line-height: 64px;
+//      border-radius: 4px;
+//      text-transform: uppercase;
+//      letter-spacing: 2px;
+//      font-weight: $rc-default-font-weight;
+//    }
+//  }
+//}
 .mat-toolbar {
   background-color: $rc-theme-primary;
   color: white;
@@ -480,14 +635,8 @@ a.mat-menu-item {text-decoration: none;}
     flex-direction: row;
   }
 }
-@media screen and ( min-width : 768px ){
-  .rc-join {
-    flex-direction: row;
-    .rc-join-info-container, .rc-join-form { min-height: 100vh; }
-    .rc-join-info-container { width: 62%; }
-    .rc-join-form { width: 38%; }
-  }
-}
+
+
 
 /**
 * RC Cards

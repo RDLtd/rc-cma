@@ -91,19 +91,21 @@ export class JoinComponent implements OnInit {
 
     // Validate code if added manually
     // Wait for response
-    if (this.referrer.type !== 'member') {
-      await this.setReferral(applicant.code.trim());
-    }
+    // if (this.referrer.type !== 'member') {
+    //   await this.setReferral(applicant.code.trim());
+    // }
 
     // Create new Content Admin & split full name
-    const names = applicant.name.split(' ');
+    // const names = applicant.name.split(' ');
 
     // NB Note that for this early December version we set member_type to 'Full'
     // Once there is a paywall we will set this to 'Payment Pending' and update once payment
     // has been received
     const admin = {
-      member_first_name: names[0],
-      member_last_name: names.slice(1).join() || names[0], // combine any additional names
+      // member_first_name: names[0],
+      // member_last_name: names.slice(1).join() || names[0], // combine any additional names
+      member_first_name: applicant.first_name,
+      member_last_name: applicant.last_name,
       member_email: applicant.email,
       member_telephone: applicant.mobile,
       member_job: applicant.role,

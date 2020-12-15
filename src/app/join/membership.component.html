@@ -1,29 +1,50 @@
-<div class="rc-join">
-  <div class="rc-join-info-container rc-options">
-    <div class="rc-join-info">
+<div class="rc-layout-split-container">
+  <div class="rc-layout-split-left">
+    <div class="rc-layout-split-content">
       <a class="rc-back"
          routerLink="/join"
          matTooltip="Back to Member contact details">
         <mat-icon>arrow_back</mat-icon>Back</a>
-      <span><img src="assets/images/rc-logo-trans-white.svg" alt="Restaurant Collective Logo"></span>
+      <span class="rc-logo">
+        <img src="assets/images/rc-logo-trans-white.svg" alt="Restaurant Collective Logo">
+      </span>
       <div markdown>
-        <h1>2: Choose Membership Options</h1>
-        <p>Please choose from monthly or yearly Restaurant Collective membership subscriptions.</p>
-        <p>You will have the opportunity to review you payment and apply any promo codes on the next and final screen.</p>
+        <h1>Membership options</h1>
+        <p>Please select your preferred subscription option.</p>
+        <p>Once you've made your choice you'll be asked to review your selection and invited to pay securely online
+          using a debit or credit card.</p>
       </div>
     </div>
   </div>
-  <div class="rc-join-form rc-options">
-    <h1>Select an option:</h1>
-    <div class="rc-subscription">
-      <h2>Monthly Subscription</h2>
-      <p>Asdfsfds</p>
-      <button mat-flat-button color="primary">MONTHLY SUBSCRIPTION</button>
+  <div class="rc-layout-split-right">
+    <div class="rc-layout-split-content">
+      <h1>Options:</h1>
+      <div class="rc-subscription">
+        <h2>MONTHLY SUBSCRIPTION</h2>
+        <p><strong>Pay just £9.99 per month</strong> for full access to all the benefits of Restaurant Collective membership.</p>
+        <button
+          mat-flat-button
+          color="primary"
+          (click)="checkout('membership_monthly')"
+          [disabled]="waiting">
+          PAY MONTHLY
+        </button>
+      </div>
+      <div class="rc-subscription">
+        <h2>ANNUAL SUBSCRIPTION</h2>
+        <p><strong>Pay £99.90 per year</strong> and you'll get the equivalent of 2 months FREE. All of the same
+          Restaurant
+          Collective benefits, just a bit cheaper!
+        </p>
+        <button
+          mat-flat-button
+          color="primary"
+          (click)="checkout('membership_yearly')"
+          [disabled]="waiting">
+          PAY YEARLY
+        </button>
+      </div>
     </div>
-    <div class="rc-subscription">
-      <h2>Monthly Subscription</h2>
-      <p>Asdfsfds</p>
-      <button mat-flat-button color="primary">ANNUAL SUBSCRIPTION</button>
-    </div>
+
   </div>
 </div>

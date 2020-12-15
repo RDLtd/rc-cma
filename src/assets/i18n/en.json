@@ -1000,6 +1000,7 @@
   },
 
   "SignIn": {
+    "WelcomeText": "# Empowering Restaurants\r\n It’s time someone levelled the playing field for independent operators like you.\n\nWelcome to the Restaurant Collective. We’re a member-owned, non-profit organisation on a mission. We want to empower and champion independent hospitality operators.",
     "ResetPassword": "Reset password",
     "Or": " or ",
     "SignIn": "Sign in",
