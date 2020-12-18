@@ -18,7 +18,14 @@ $config: mat-typography-config();
 * Utility classes
 * ----------------------------------
 */
-
+* {
+  box-sizing: border-box;
+  ul, li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+}
 .rc-loader {
   display: flex;
   justify-content: center;
@@ -88,7 +95,10 @@ a.rc-back {
     }
   }
 }
-.rc-txt-small { font-size: 14px !important; }
+.rc-txt-small {
+  font-size: 14px !important;
+  line-height: 1.3;
+}
 .rc-mat-snack-warn,
 .rc-mat-snack-info{
   color: black;
@@ -371,7 +381,7 @@ a.mat-menu-item {text-decoration: none;}
     .rc-subscription {
       margin: 1rem 0;
       border: 2px solid #ddd;
-      padding: 8px;
+      padding: 10px 8px;
       border-radius: 5px;
       transition: all .2s ease-out;
 
@@ -379,7 +389,7 @@ a.mat-menu-item {text-decoration: none;}
         font-size: 11px;
         font-weight: 400;
         letter-spacing: 1px;
-        margin: 8px 0;
+        margin: 0 0 16px;
         padding: 0;
         line-height: 1;
         color: $rc-theme-primary;

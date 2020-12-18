@@ -2,9 +2,11 @@
   <div class="rc-layout-split-left">
     <div class="rc-layout-split-content">
       <div class="rc-join-welcome" [ngSwitch]="referrer.type">
+
         <span class="rc-logo">
           <img src="assets/images/{{ brand.logo }}-trans-white.svg" alt="Restaurant Collective Logo">
         </span>
+
         <!-- Self -->
         <div *ngSwitchCase="'self'">
           <h1>Join us today</h1>
@@ -14,38 +16,25 @@
             <li>Select your subscription option</li>
             <li>Pay your subscription online</li>
           </ol>
-<!--          <div *ngIf="brand.name === 'Restaurant Collective'; else French">-->
-<!--            <p>{{ 'Join.Problems' | translate }}-->
-<!--              <a href="mailto:{{brand.email.support}}">{{ 'Join.SupportTeam' | translate }}</a>.-->
-<!--            </p>-->
-<!--          </div>-->
-          <ng-template #French>
-            <p>{{ 'Join.Problems' | translate }}
-              <a href="mailto:support@restaurateurs-independants.fr">{{ 'Join.SupportTeam' | translate }}</a>.
-            </p>
-          </ng-template>
+          <markdown [data]="t_data?.Problems">
+            <a href="mailto:{{ brand.email.support }}">{{ t_data?.SupportTeam }}</a>.
+          </markdown>
         </div>
 
         <!-- Member -->
         <div *ngSwitchCase="'member'">
-
-
-          <h1>{{ 'Join.Support' | translate }}</h1>
-          <p>{{ 'Join.Invited' | translate }} <strong>{{ referrer?.name }}</strong> {{ 'Join.Become' | translate }}
-            {{ brand.name }},
-            {{ 'Join.Exciting' | translate }}</p>
-          <p>{{ 'Join.ToActivate' | translate }} {{ referrer?.name }} {{ 'Join.Follow' | translate }}</p>
+          <h1>{{ referrer?.name }} Invitation</h1>
+          <p>Just complete the following 3 steps and you can join me in supporting this exciting new organisation
+            for our inductry:</p>
           <ol>
-            <li>{{ 'Join.Step1' | translate }}</li>
-            <li>{{ 'Join.Step2' | translate }}</li>
-            <li>{{ 'Join.Step3' | translate }}</li>
+            <li>Provide your name and contact details</li>
+            <li>Select your subscription option</li>
+            <li>Pay your subscription online</li>
           </ol>
+          <markdown [data]="t_data?.Problems">
+            <a href="mailto:{{ brand.email.support }}">{{ t_data?.SupportTeam }}</a>.
+          </markdown>
 
-          <div>
-            <p>{{ 'Join.Problems' | translate }}
-              <a href="mailto:{{ brand.email.support }}">{{ 'Join.SupportTeam' | translate }}</a>.
-            </p>
-          </div>
 
         </div>
 
@@ -99,8 +88,9 @@
         style="transition: all .2s ease-out"
         *ngSwitchDefault
         #formJoin="ngForm"
-        (ngSubmit)="formJoin.form.valid && submitJoinForm(formJoin.value)"
+        (ngSubmit)="formJoin.form.valid && preRegistrationCheck(formJoin.value)"
         novalidate>
+        <input [ngModel]="pendingMember.referral_code" type="hidden" name="referral_code">
 
         <!-- Duplicate Telephone No. -->
         <div *ngIf="duplicateField === 'tel'" class="rc-form-msg">
@@ -139,7 +129,7 @@
             #fname
             type="text"
             name="first_name"
-            ngModel
+            [(ngModel)]="pendingMember.first_name"
             matInput
             placeholder="Your first name"
             required
@@ -154,7 +144,7 @@
             #lname
             type="text"
             name="last_name"
-            ngModel
+            [(ngModel)]="pendingMember.last_name"
             matInput
             placeholder="Your last name"
             required>
@@ -166,7 +156,7 @@
           <mat-label>{{ 'Join.Email' | translate }}</mat-label>
           <input
             #email="ngModel"
-            ngModel
+            [(ngModel)]="pendingMember.email"
             matInput
             type="email"
             name="email"
@@ -182,7 +172,7 @@
           <mat-label>{{ 'Join.Mobile' | translate }}</mat-label>
           <input
             #mobile
-            ngModel
+            [(ngModel)]="pendingMember.tel"
             matInput
             type="number"
             name="mobile"

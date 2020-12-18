@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MemberService, AuthenticationService, AppService } from '../_services';
 import { CmsLocalService } from '../cms';
 import { TranslateService } from '@ngx-translate/core';
@@ -19,6 +19,9 @@ export class JoinComponent implements OnInit {
   newRegResult: string;
   duplicateField: string;
   currentApplicant: any;
+  pendingMember: any = {
+    name: ''
+  };
   brand: any;
   referrer = {
     type: 'self',
@@ -39,15 +42,17 @@ export class JoinComponent implements OnInit {
     private dialog: MatDialog,
     private load: LoadService,
     private config: AppConfig,
-    private appService: AppService
+    private appService: AppService,
+    private router: Router
   ) {
     translate.onLangChange.subscribe(() => {
       this.translate.get('Join').subscribe(data => {this.t_data = data; });
     });
+
   }
   ngOnInit() {
 
-    // Referral code in url?
+    // Check for a referral code in the url
     this.route.paramMap
       .subscribe(params => {
         if (params.has('code')) {
@@ -58,21 +63,33 @@ export class JoinComponent implements OnInit {
           sessionStorage.setItem('referrer_type', 'self');
         }
       });
+
     // Set brand
     this.brand = this.config.brand;
     this.translate.get('Join').subscribe(data => this.t_data = data);
+
+    // Check local storage for pending data
+    this.pendingMember = JSON.parse(sessionStorage.getItem('rc_member_pending')) || {};
+
+    // Listen for unload event in case
+    // user aborts process early
+    const that = this;
+    window.addEventListener("beforeunload", () => {
+      that.savePendingMemberData(that.pendingMember);
+    });
   }
 
+  // Display referrer details
   async setReferral(code) {
     // Force referral code to uppercase
     const uCode = code.toUpperCase();
     // Check code
     const ref = await this.memberService.getReferral(uCode);
-    console.log(ref);
+    //console.log(ref);
     // Valid code
     if (ref) {
       // Set referrer
-      this.referrer.code = uCode;
+      this.referrer.code = this.pendingMember.referral_code = uCode;
       this.referrer.type = 'member';
       this.referrer.name = `${ref.member_first_name} ${ref.member_last_name}`;
       this.referrer.id = ref.member_id;
@@ -81,6 +98,26 @@ export class JoinComponent implements OnInit {
       // Invalid code
       this.referrer.type = 'self';
     }
+  }
+
+  // Save pending member details
+  savePendingMemberData(data): void {
+    sessionStorage.setItem('rc_member_pending', JSON.stringify(data));
+  }
+
+  // Check for duplicate email/tel
+  async preRegistrationCheck(formData) {
+    this.isSubmitting = true;
+    this.load.open();
+    // API call to check for duplicates
+    // and anything else?
+    this.savePendingMemberData(formData);
+    // If no dupes, continue
+
+    // Todo: Do we auto-signin founders or
+    //  just discount their membership by
+    //  100% at payment stage
+    this.router.navigate(['/membership-options']).then(() => this.load.close())
   }
 
   async submitJoinForm(applicant) {
