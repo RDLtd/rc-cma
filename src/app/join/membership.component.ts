@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { AppConfig } from '../app.config';
 import { loadStripe } from '@stripe/stripe-js/pure';
 import { environment } from '../../environments/environment';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'rc-membership',
@@ -16,11 +17,16 @@ export class MembershipComponent implements OnInit {
 
   constructor(
     private config: AppConfig,
-    private http: HttpClient
+    private http: HttpClient,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
     console.log(this.config.appUrl);
+    this.route.queryParams.subscribe(params => {
+      this.stripeSessionId = params['session_id'];
+      console.log('stripeSessionId', this.stripeSessionId);
+    });
   }
 
   // Create Stripe Session

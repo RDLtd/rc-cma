@@ -105,19 +105,19 @@ export class JoinComponent implements OnInit {
     sessionStorage.setItem('rc_member_pending', JSON.stringify(data));
   }
 
-  // Check for duplicate email/tel
+  // API call to check for duplicate tel/emails
   async preRegistrationCheck(formData) {
     this.isSubmitting = true;
     this.load.open();
     // API call to check for duplicates
     // and anything else?
     this.savePendingMemberData(formData);
-    // If no dupes, continue
 
-    // Todo: Do we auto-signin founders or
-    //  just discount their membership by
-    //  100% at payment stage
+    // API pre-flight check
+    // If good, proceed
     this.router.navigate(['/membership-options']).then(() => this.load.close())
+    // Else, display message to user
+    // this.dspRegistrationResult('duplicate', '');
   }
 
   async submitJoinForm(applicant) {
