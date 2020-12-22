@@ -32,6 +32,7 @@ export class JoinComponent implements OnInit {
     promo_status: null
   };
   t_data: any;
+  patternMobile = '^([+\\d]\\d*)?\\d$';
 
   constructor(
     private route: ActivatedRoute,
@@ -70,6 +71,7 @@ export class JoinComponent implements OnInit {
 
     // Check local storage for pending data
     this.pendingMember = JSON.parse(sessionStorage.getItem('rc_member_pending')) || {};
+    console.log('Pending', this.pendingMember);
 
     // Listen for unload event in case
     // user aborts process early

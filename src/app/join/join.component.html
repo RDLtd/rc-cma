@@ -75,7 +75,8 @@
       <!-- Self Register -->
       <div *ngSwitchCase="'self-registered'">
         <div class="rc-centre">
-          <img src="../../assets/images/icons/checkmark.gif" height="128" width="128" alt="Success"/></div>
+          <img src="../../assets/images/icons/checkmark.gif" height="128" width="128" alt="Success"/>
+        </div>
         <h1>{{ 'Join.Welcome' | translate }}</h1>
         <p>{{ 'Join.Successful' | translate }} <strong>{{ 'Join.ContentAdmin' | translate }}</strong>
           {{ 'Join.SentDetails' | translate }}</p>
@@ -174,10 +175,12 @@
             #mobile
             [(ngModel)]="pendingMember.tel"
             matInput
-            type="number"
-            name="mobile"
+            type="tel"
+            name="tel"
             [placeholder]="'Join.Mobile' | translate"
-            maxlength="10"
+            [pattern]="patternMobile"
+            minlength="9"
+            maxlength="14"
             required>
           <mat-error align="end" *ngIf="mobile.required">{{ 'Join.ValidTelephone' |
             translate }}</mat-error>
@@ -189,12 +192,9 @@
           type="submit"
           mat-flat-button
           [disabled]="isSubmitting"
-          color="primary">NEXT</button>
-<!--        <p class="mat-small">{{ 'Join.Confirm' | translate }} <a-->
-<!--          [href]="brand.downloads.terms" target="_blank">{{ 'Join.Terms' | translate }}</a> {{ 'Join.And' |-->
-<!--          translate }}-->
-<!--          <a [href]="brand.downloads.privacy" target="_blank">{{ 'Join.Privacy' | translate }}</a>.-->
-<!--        </p>-->
+          color="primary">
+          NEXT
+        </button>
       </form>
     </div>
     </div>
