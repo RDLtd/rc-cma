@@ -240,8 +240,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
     this.cms.previewSPW(this.restaurant.restaurant_id, this.restaurant.restaurant_number, true, true)
       .subscribe(res => {
         // Set up content info panel
-        console.log(res['status']);
-        console.log(res['url']);
+        // console.log(res['status']);
         switch (res['status']) {
           // No preview available
           case 'INSUFFICIENT_DATA': {
@@ -280,7 +279,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
 
   getSpwUrl(): string {
     if (!!this.productionUrl) {
-
+      console.log('PROD URL', this.productionUrl);
       // Possible urls
       // https://s3.eu-west-2.amazonaws.com/spw.restaurateurs-independants.fr/9285-casa-nissa/index.html
       // https://s3.us-west-1.amazonaws.com/spw.restaurateursindependants.com/9285-casa-nissa/index.html
