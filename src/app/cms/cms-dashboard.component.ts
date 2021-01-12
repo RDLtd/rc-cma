@@ -240,7 +240,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
     this.cms.previewSPW(this.restaurant.restaurant_id, this.restaurant.restaurant_number, true, true)
       .subscribe(res => {
         // Set up content info panel
-        console.log(res['status']);
+        // console.log(res['status']);
         switch (res['status']) {
           // No preview available
           case 'INSUFFICIENT_DATA': {
@@ -279,18 +279,17 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
 
   getSpwUrl(): string {
     if (!!this.productionUrl) {
-      let arr = this.productionUrl.split('/');
-      console.log('ARR:', arr.indexOf(''));
-      // todo: probably shouldn't rely on the S3 path to index
-      // backend should send the production spw url
-      const idx = arr.indexOf('s3.eu-west-2.amazonaws.com', 0);
-      if (idx > -1) {
-        arr.splice(idx, 1);
+      console.log('PROD URL', this.productionUrl);
+      // This is just in case of any legacy published S3 bucket urls
+      // it shouldn't be necessary
+      if (this.productionUrl.indexOf('amazonaws')) {
+        // Extract the bucket name and folder name (2nd and 3rd to last elements)
+        // from the returned url and construct a production SPW url
+        let arr = this.productionUrl.split('/');
+        return `https://${arr.splice(arr.length - 3, 2).join('/')}`;
+      } else {
+        return this.productionUrl;
       }
-      // delete the default 'index.html' part, to keep the url clean
-      arr.pop();
-      return arr.join('/');
-
     } else {
       // Nothing been published yet
       return null;
