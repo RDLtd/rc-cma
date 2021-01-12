@@ -280,17 +280,16 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
   getSpwUrl(): string {
     if (!!this.productionUrl) {
       console.log('PROD URL', this.productionUrl);
-      // Possible urls
-      // https://s3.eu-west-2.amazonaws.com/spw.restaurateurs-independants.fr/9285-casa-nissa/index.html
-      // https://s3.us-west-1.amazonaws.com/spw.restaurateursindependants.com/9285-casa-nissa/index.html
-      // https://s3.eu-west-2.amazonaws.com/spw.restaurantcollective.uk/85719-sarao-2/index.html
-      //
-      // TODO: Backend should send the Cloudfront version of the url , not the S3 Bucket url
-      // For now extract the bucket name and folder name (2nd and 3rd to last elements)
-      // from the returned url and construct a production SPW url
-      let arr = this.productionUrl.split('/');
-      return `https://${arr.splice(arr.length - 3, 2).join('/')}`;
-
+      // This is just in case of any legacy published S3 bucket urls
+      // it shouldn't be necessary
+      if (this.productionUrl.indexOf('amazonaws')) {
+        // Extract the bucket name and folder name (2nd and 3rd to last elements)
+        // from the returned url and construct a production SPW url
+        let arr = this.productionUrl.split('/');
+        return `https://${arr.splice(arr.length - 3, 2).join('/')}`;
+      } else {
+        return this.productionUrl;
+      }
     } else {
       // Nothing been published yet
       return null;
