@@ -7,14 +7,14 @@ All notable changes to this project will be documented in this file.
 - RC Search Whitelabel [#9](https://github.com/RDLtd/rc-whitelabel/issues/9)
 
 ### Enhancements
-- Platform update to Angular 11 [#88]
-- Parameterise emails [#78]
+- Platform update to Angular 11 [#88](https://github.com/RDLtd/rc-cma/issues/88)
+- Parameterise emails [#78](https://github.com/RDLtd/rc-server/issues/78)
 - RC & RI Website holding pages [#2](https://github.com/RDLtd/rc-web/issues/2)
 
 ### Changed
 - SPW URLS [#97](https://github.com/RDLtd/rc-cma/issues/97)
 - SPW OPENING TIMES LOGIC [#126](https://github.com/RDLtd/rc-server/issues/126)
-- Strpe payments live [#18}(https://github.com/RDLtd/rc-cma/issues/18)
+- Strpe payments live [#18](https://github.com/RDLtd/rc-cma/issues/18)
 
 ### Fixed
 - CMA Session timeout incorrectly displayed sometimes [#85](https://github.com/RDLtd/rc-cma/issues/85)
