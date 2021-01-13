@@ -7,10 +7,22 @@ All notable changes to this project will be documented in this file.
 - 
 
 ### Changed
+- SPW URLS [#97](https://github.com/RDLtd/rc-cma/issues/97)
+
+### Fixed
+- 
+
+## [v11.0.1](https://cma.restaurantcollective.io/) (20-12-2020)
+
+### Enhancements
+- 
+
+### Changed
 - 
 
 ### Fixed
 - 
+
 
 ## [v10.0.1](https://cma.restaurantcollective.io/) (01-12-2020)
 
