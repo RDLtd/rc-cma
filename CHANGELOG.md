@@ -3,6 +3,19 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased](http://staging.cma.restaurantcollective.io/)
 
+### Enhancements
+
+
+### Changed
+- Simplify SPW Urls [#97](https://github.com/RDLtd/rc-cma/issues/97)
+- SPW opening times logic [#126](https://github.com/RDLtd/rc-server/issues/126)
+
+### Fixed
+- CMA no default image set by default
+- Removed all existing null/undefined values from db
+
+## [v11.0.1](https://cma.restaurantcollective.io/) (20-12-2020)
+
 ### New
 - RC Search Whitelabel [#9](https://github.com/RDLtd/rc-whitelabel/issues/9)
 
@@ -12,23 +25,10 @@ All notable changes to this project will be documented in this file.
 - RC & RI Website holding pages [#2](https://github.com/RDLtd/rc-web/issues/2)
 
 ### Changed
-- SPW URLS [#97](https://github.com/RDLtd/rc-cma/issues/97)
-- SPW OPENING TIMES LOGIC [#126](https://github.com/RDLtd/rc-server/issues/126)
 - Strpe payments live [#18](https://github.com/RDLtd/rc-cma/issues/18)
 
 ### Fixed
-- CMA Session timeout incorrectly displayed sometimes [#85](https://github.com/RDLtd/rc-cma/issues/85)
-
-## [v11.0.1](https://cma.restaurantcollective.io/) (20-12-2020)
-
-### Enhancements
-- 
-
-### Changed
-- 
-
-### Fixed
-- 
+- CMA Session timeout incorrectly displayed sometimes [#85](https://github.com/RDLtd/rc-cma/issues/85) 
 
 
 ## [v10.0.1](https://cma.restaurantcollective.io/) (01-12-2020)
