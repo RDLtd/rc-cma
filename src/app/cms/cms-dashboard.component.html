@@ -57,7 +57,7 @@
         <dt>{{ 'CMS-Dashboard.Website' | translate }}</dt>
         <dd>
           <a
-            [href]="restaurant?.restaurant_website"
+            (click)="openRestaurantWebsite(restaurant.restaurant_website)"
             target="_blank">
             {{ restaurant?.restaurant_website }}
           </a>

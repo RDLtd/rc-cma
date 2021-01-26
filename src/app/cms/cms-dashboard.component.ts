@@ -185,6 +185,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
         .subscribe(rest => {
             if (rest.restaurant_id) {
               this.restaurant = rest;
+              console.log(rest);
               this.getLastUpdated();
             }
             // duplicate the loaded restaurant
@@ -666,7 +667,19 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
       });
   }
 
+  openRestaurantWebsite(url) {
+      // Does it look like a web address?
+    if (!url.indexOf('.')) {
+      return false;
+      // Is there any protocol?
+    } else  if (url.indexOf('//') < 0) {
+      url = 'http://' + url;
+    }
+    window.open(url, '_blank');
+  }
+
   openSocialLink(url) {
+
     if (url) {
       // if it's missing the protocol
       if (url.indexOf('//') === -1) {

@@ -825,6 +825,10 @@ ul.rc-lookup-results {
     padding: 0 0 8px 0;
     font-size: 18px;
     a {
+      width: 100%;
+      display: inline-block;
+      overflow: hidden;
+      text-overflow: ellipsis;
       color: inherit;
       &:hover { color: $rc-theme-primary; }
     }
