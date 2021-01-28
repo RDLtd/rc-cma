@@ -1,7 +1,7 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
-# Staging
+# Quality Assurance / User Testing
 
 ## [v11.0.3](http://staging.cma.restaurantcollective.io/) (27-12-21)
 
