@@ -1,6 +1,7 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+# Staging
 
 ## [v11.0.3](http://staging.cma.restaurantcollective.io/) (27-12-21)
 
@@ -18,6 +19,8 @@ All notable changes to this project will be documented in this file.
 - CMA Long restaurant website addresses breaking layout
 - CMA no default image set by default
 - Update null/undefined values in db
+
+# Production
 
 ## [v11.0.1](https://cma.restaurantcollective.io/) (20-12-2020)
 
