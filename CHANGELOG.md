@@ -5,14 +5,26 @@ All notable changes to this project will be documented in this file.
 
 ### Enhancements
 
+### Changed
+
+### Fixed
+
+## [v11.0.3](http://staging.cma.restaurantcollective.io/)
+
+### Enhancements
+
 
 ### Changed
 - Simplify SPW Urls [#97](https://github.com/RDLtd/rc-cma/issues/97)
 - SPW opening times logic [#126](https://github.com/RDLtd/rc-server/issues/126)
 
 ### Fixed
+- CMA Search restaurants with accented characters
+- SPW changes not updating
+- CMA Some restaurant website addresses failing
+- CMA Long restaurant website addresses breaking layout
 - CMA no default image set by default
-- Removed all existing null/undefined values from db
+- Update null/undefined values in db
 
 ## [v11.0.1](https://cma.restaurantcollective.io/) (20-12-2020)
 
