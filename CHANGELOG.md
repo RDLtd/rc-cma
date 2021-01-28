@@ -9,6 +9,7 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
+
 ## [v11.0.3](http://staging.cma.restaurantcollective.io/)
 
 ### Enhancements
