@@ -3,7 +3,7 @@ All notable changes to this project will be documented in this file.
 
 # Staging
 
-## [v11.0.3](http://staging.cma.restaurantcollective.io/) (27-12-21)
+## [v11.0.3](http://staging.cma.restaurantcollective.io/) (27-01-2021)
 
 ### Enhancements
 
