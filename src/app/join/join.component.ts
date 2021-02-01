@@ -120,7 +120,6 @@ export class JoinComponent implements OnInit {
 
   createContentAdministrator(admin) {
 
-    // console.log(localStorage.getItem('rd_country'), localStorage.getItem('rd_company_prefix'));
     // for now assume no restaurant known, might change for different join modes
 
     // test to break it...
