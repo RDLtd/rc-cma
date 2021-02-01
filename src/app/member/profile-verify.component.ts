@@ -120,7 +120,6 @@ export class ProfileVerifyComponent implements OnInit {
   }
 
   reqVerificationCode() {
-    this.isSubmitting = true;
     const userName = localStorage.getItem('rd_username');
     const r = this.data.restaurant;
     console.log(r);
