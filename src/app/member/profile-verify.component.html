@@ -85,6 +85,7 @@
 
       <button
         type="button"
+        [disabled]="isSubmitting"
         (click)="reqVerificationCode()"
         mat-button>
         {{ 'Profile-Verify.Request' | translate }}
