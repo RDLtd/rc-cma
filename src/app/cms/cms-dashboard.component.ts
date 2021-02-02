@@ -201,6 +201,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
   }
 
   readAndCheckStatus () {
+    console.log('Read');
     if (!!this.restaurant) {
       this.setMemberStatus();
       this.checkPublishStatus();
@@ -241,7 +242,10 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
     this.cms.previewSPW(this.restaurant.restaurant_id, this.restaurant.restaurant_number, true, true)
       .subscribe(res => {
         // Set up content info panel
-        // console.log(res['status']);
+        console.log(res['status']);
+        console.log(this.cmsHasSufficientData);
+        console.log(this.publishDate);
+
         switch (res['status']) {
           // No preview available
           case 'INSUFFICIENT_DATA': {
@@ -250,6 +254,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
             this.publishDate = null;
             break;
           }
+
           // Show preview
           case 'OUT_OF_DATE': {
             this.cmsChanged = true;
@@ -259,6 +264,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
             this.spwUrl = this.getSpwUrl();
             break;
           }
+
           // Show published version
           default: {
             this.cmsHasSufficientData = true;
@@ -412,8 +418,8 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
           this.img_status = this.img_count * 25;
 
           // set status message
-          if (this.img_status === 0) {
-            this.img_status_text = this.t_data.Nodata;
+          if (this.img_count === 0) {
+            this.img_status_text = this.t_data.NoData;
           } else {
             this.img_status_text = this.img_count + this.t_data.ActiveImages;
           }
