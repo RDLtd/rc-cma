@@ -165,10 +165,10 @@ export class ProfileImageComponent implements OnInit {
 
   deleteImage() {
 
-    this.memberService.deleteAvatar(this.data.member_id).subscribe(
+    this.memberService.deleteAvatar(this.data.member.member_id).subscribe(
       () => {
         this.data.member_image_path = this.placeholderImage;
-        this.dialog.close();
+        this.dialog.close(this.placeholderImage);
         this.dspSnackBar(this.t_data.ImageDeleted);
       },
       error => {
