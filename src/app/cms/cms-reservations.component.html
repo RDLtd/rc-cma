@@ -40,7 +40,7 @@
       <mat-card-content>
         <mat-form-field
           class="rc-full-width"
-          floatPlaceholder="never">
+          floatLabel="never">
           <mat-placeholder>{{ 'CMS-Reservations.GeneralDesc' | translate }} {{ resGeneralMaxLength }})</mat-placeholder>
             <textarea
               #bkgsGeneral
@@ -87,7 +87,7 @@
 
           <!-- PROVIDER ID ( Has online booking provider )-->
           <div
-            *ngIf="selected_booking_provider_index !== 4"
+            *ngIf='selectedBookingService !== "none"'
             class="rc-flex-spaced">
             <mat-form-field class="rc-full-width">
               <mat-label>{{ booking_provider_rid_label }}</mat-label>
@@ -98,7 +98,7 @@
                 (keyup)="setChanged(bkgProviderId)"
                 [(ngModel)]="booking_provider_reference">
               <a
-                *ngIf="booking_provider_reference && selected_booking_provider_index != 0"
+                *ngIf="booking_provider_reference && selectedBookingService !== 'email'"
                 matSuffix
                 mat-icon-button
                 [matTooltip]="'CMS-Reservations.TestLink' | translate"
@@ -110,7 +110,7 @@
           </div>
 
           <!-- MIN/MAX COVERS ( Email ) -->
-          <div *ngIf="selected_booking_provider_index < 1" class="rc-flex-spaced">
+          <div *ngIf="selectedBookingService === 'email'" class="rc-flex-spaced">
             <mat-form-field style="width: 48%;">
               <mat-label>{{ 'CMS-Reservations.MaxCovers' | translate }}</mat-label>
               <input
@@ -137,7 +137,7 @@
           </div>
 
           <!-- NO ONLINE BOOKINGS -->
-          <div *ngIf="selected_booking_provider_index === 4" class="rc-flex-spaced" markdown>
+          <div *ngIf="selectedBookingService === 'none'" class="rc-flex-spaced" markdown>
             {{ 'CMS-Reservations.NoOnlineBookingsMessage' | translate }}
           </div>
 
@@ -153,7 +153,7 @@
       <mat-card-content>
         <mat-form-field
           class="rc-full-width"
-          floatPlaceholder="never">
+          floatLabel="never">
             <textarea
               #bkgsGroup
               matInput
@@ -179,7 +179,7 @@
       <mat-card-content>
         <mat-form-field
           class="rc-full-width"
-          floatPlaceholder="never">
+          floatLabel="never">
           <textarea
             #bkgsPrivate
             matInput

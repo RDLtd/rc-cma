@@ -27,8 +27,8 @@ export class CmsReservationsComponent implements OnInit {
   booking_providers: any;
   selected_booking_provider;
   selected_booking_provider_index = 0;
-  // Todo: need a standard id to test for 'no online bookings'
   selected_booking_provider_id = null;
+  selectedBookingService: string;
 
   // defaults
   booking_provider_reference = '';
@@ -85,7 +85,6 @@ export class CmsReservationsComponent implements OnInit {
           if (this.descriptions.cms_description_booking_rest_id !== '') {
             this.booking_provider_reference = this.descriptions.cms_description_booking_rest_id;
           }
-          // console.log(this.descriptions);
           this.dataChanged = false;
 
           // load booking providers and set the selected one... default is email, which is 0
@@ -94,9 +93,12 @@ export class CmsReservationsComponent implements OnInit {
               if (data_providers['count'] > 0) {
                 this.booking_providers = data_providers['booking_providers'];
                 let selectedProvider = this.descriptions.cms_description_booking_provider;
+                console.log('SP', selectedProvider);
                 if (selectedProvider) {
                   for (let i = 0; i < this.booking_providers.length; i++) {
                     if (selectedProvider === this.booking_providers[i].booking_provider_service) {
+                      console.log('SP2', selectedProvider);
+                      this.selectedBookingService = selectedProvider;
                       this.selected_booking_provider_index = i;
                     }
                   }
@@ -114,13 +116,16 @@ export class CmsReservationsComponent implements OnInit {
         error => {
           console.log(error);
         });
+
   }
 
   changeOption(elem) {
+
     this.selected_booking_provider_id = this.booking_providers[this.selected_booking_provider_index].booking_provider_id
     this.selected_booking_provider = this.booking_providers[this.selected_booking_provider_index];
     this.booking_provider_rid_label = this.selected_booking_provider.booking_provider_rid_label;
     this.booking_provider_reference = this.selected_booking_provider.booking_provider_reference;
+    this.selectedBookingService = this.selected_booking_provider.booking_provider_service;
     this.setChanged(elem);
   }
 

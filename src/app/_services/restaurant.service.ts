@@ -7,9 +7,9 @@ import { AppService } from './app.service';
 @Injectable()
 
 export class RestaurantService {
-  
+
   private authToken;
-  
+
   constructor(
     private http: HttpClient,
     private appService: AppService,
@@ -480,7 +480,7 @@ export class RestaurantService {
               payment_currency: string, payment_description: string, payment_token: any) {
     return this.http.post(this.config.apiUrl + '/restaurants/sendinvoice',
       {
-        company_prefix: localStorage.getItem('rd_company_prefix'),
+        company_prefix: this.config.brand.prefix,
         restaurant_id: restaurant_id,
         restaurant_member_id: restaurant_member_id,
         invoice_number: invoice_number,
@@ -596,7 +596,7 @@ export class RestaurantService {
                    booking_date: string, booking_name: string, booking_email: string, email_language: string,
                    company_name: string) {
     return this.http.post(this.config.apiUrl + '/restaurants/sendbookingemail',
-      { company_prefix: localStorage.getItem('rd_company_prefix'),
+      { company_prefix: this.config.brand.prefix,
         restaurant_name: restaurant_name,
         restaurant_email: restaurant_email,
         booking_covers: booking_covers,

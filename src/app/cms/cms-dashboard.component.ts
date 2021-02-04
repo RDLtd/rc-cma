@@ -185,6 +185,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
         .subscribe(rest => {
             if (rest.restaurant_id) {
               this.restaurant = rest;
+              console.log(rest);
               this.getLastUpdated();
             }
             // duplicate the loaded restaurant
@@ -200,6 +201,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
   }
 
   readAndCheckStatus () {
+    console.log('Read');
     if (!!this.restaurant) {
       this.setMemberStatus();
       this.checkPublishStatus();
@@ -241,6 +243,9 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
       .subscribe(res => {
         // Set up content info panel
         console.log(res['status']);
+        console.log(this.cmsHasSufficientData);
+        console.log(this.publishDate);
+
         switch (res['status']) {
           // No preview available
           case 'INSUFFICIENT_DATA': {
@@ -249,6 +254,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
             this.publishDate = null;
             break;
           }
+
           // Show preview
           case 'OUT_OF_DATE': {
             this.cmsChanged = true;
@@ -258,6 +264,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
             this.spwUrl = this.getSpwUrl();
             break;
           }
+
           // Show published version
           default: {
             this.cmsHasSufficientData = true;
@@ -279,18 +286,17 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
 
   getSpwUrl(): string {
     if (!!this.productionUrl) {
-      let arr = this.productionUrl.split('/');
-      console.log('ARR:', arr.indexOf(''));
-      // todo: probably shouldn't rely on the S3 path to index
-      // backend should send the production spw url
-      const idx = arr.indexOf('s3.eu-west-2.amazonaws.com', 0);
-      if (idx > -1) {
-        arr.splice(idx, 1);
+      console.log('PROD URL', this.productionUrl);
+      // This is just in case of any legacy published S3 bucket urls
+      // it shouldn't be necessary
+      if (this.productionUrl.indexOf('amazonaws')) {
+        // Extract the bucket name and folder name (2nd and 3rd to last elements)
+        // from the returned url and construct a production SPW url
+        let arr = this.productionUrl.split('/');
+        return `https://${arr.splice(arr.length - 3, 2).join('/')}`;
+      } else {
+        return this.productionUrl;
       }
-      // delete the default 'index.html' part, to keep the url clean
-      arr.pop();
-      return arr.join('/');
-
     } else {
       // Nothing been published yet
       return null;
@@ -412,8 +418,8 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
           this.img_status = this.img_count * 25;
 
           // set status message
-          if (this.img_status === 0) {
-            this.img_status_text = this.t_data.Nodata;
+          if (this.img_count === 0) {
+            this.img_status_text = this.t_data.NoData;
           } else {
             this.img_status_text = this.img_count + this.t_data.ActiveImages;
           }
@@ -667,7 +673,19 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
       });
   }
 
+  openRestaurantWebsite(url) {
+      // Does it look like a web address?
+    if (!url.indexOf('.')) {
+      return false;
+      // Is there any protocol?
+    } else  if (url.indexOf('//') < 0) {
+      url = 'http://' + url;
+    }
+    window.open(url, '_blank');
+  }
+
   openSocialLink(url) {
+
     if (url) {
       // if it's missing the protocol
       if (url.indexOf('//') === -1) {

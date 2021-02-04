@@ -60,11 +60,12 @@ export class SigninComponent implements OnInit {
       this.t_data = data;
     });
 
-    // console.log('form', formValue);
+    console.log('form', formValue);
     this.isSubmitting = true;
     this.authService.login(formValue)
       .subscribe(
         authResult => {
+          console.log('auth OK');
           this.isSubmitting = false;
           if (authResult && authResult['token']) {
             this.authService.setAuthSession(authResult['member'], authResult['token'], this.dbOffline);

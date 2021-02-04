@@ -20,7 +20,8 @@ export class JoinComponent implements OnInit {
   duplicateField: string;
   currentApplicant: any;
   pendingMember: any = {
-    name: ''
+    name: '',
+    role: null
   };
   brand: any;
   referrer = {
@@ -33,6 +34,30 @@ export class JoinComponent implements OnInit {
   };
   t_data: any;
   patternMobile = '^([+\\d]\\d*)?\\d$';
+
+  // Todo Needs to come form the db
+  roles = [
+    {
+      id: 'owner',
+      label: 'Owner/Manager'
+    },
+    {
+      id: 'chef',
+      label: 'Chef/Kitchen'
+    },
+    {
+      id: 'foh',
+      label: 'Front-of-house'
+    },
+    {
+      id: 'admin',
+      label: 'Admin/Marketing'
+    },
+    {
+      id: 'other',
+      label: 'Other'
+    }
+    ];
 
   constructor(
     private route: ActivatedRoute,
@@ -161,7 +186,6 @@ export class JoinComponent implements OnInit {
 
   createContentAdministrator(admin) {
 
-    // console.log(localStorage.getItem('rd_country'), localStorage.getItem('rd_company_prefix'));
     // for now assume no restaurant known, might change for different join modes
 
     // test to break it...

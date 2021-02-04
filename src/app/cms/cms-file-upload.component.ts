@@ -215,11 +215,14 @@ export class CmsFileUploadComponent implements OnInit {
   }
 
   validForm(): boolean {
-
+    // console.log(this.data.type);
     if (this.data.type === 'image') {
       return this.imgForm.valid;
     } else if (this.data.type === 'menu') {
       return this.menuForm.valid;
+    } else {
+      // It's directions
+      return true;
     }
   }
 
@@ -227,6 +230,7 @@ export class CmsFileUploadComponent implements OnInit {
 
     const now = new Date().toLocaleString();
     let e = new CMSElement();
+    let isDefaultImage = false;
 
     e.cms_element_restaurant_id = this.data.restaurant.restaurant_id;
 
@@ -234,6 +238,10 @@ export class CmsFileUploadComponent implements OnInit {
       e.cms_element_title = this.imgForm.form.controls.imgClass.value || 'restaurant';
       e.cms_element_caption = null;
       e.cms_element_class = 'Image';
+      // If it's the first image that's been u[loaded
+      // mark it as the default
+      if (!this.data.tgtObject.length) { isDefaultImage = true; }
+      console.log('Default image?', isDefaultImage);
     } else if(this.data.type === 'menu'){
       e.cms_element_title = this.menuForm.form.controls.menuClass.value || 'Menu';
       e.cms_element_caption = this.menuForm.form.controls.menuCaption.value || '';
@@ -250,7 +258,7 @@ export class CmsFileUploadComponent implements OnInit {
 
     e.cms_element_image_path = this.fileUrl;
     e.cms_element_active = true;
-    e.cms_element_default = false;
+    e.cms_element_default = isDefaultImage;
     e.cms_element_live_from = now;
     e.cms_element_live_to = '2100-06-30 00:00:00+00';
     e.cms_element_created_by = localStorage.getItem('rd_username');

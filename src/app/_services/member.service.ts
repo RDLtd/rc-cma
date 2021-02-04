@@ -106,19 +106,20 @@ export class MemberService {
   // Set emailTo/emailFrom 'curation' or 'support
   sendEmailRequest(to, from, subject, content) {
 
-    //const company = this.config[localStorage.getItem('rd_country') + '_company'];
+    //  const company = this.config[localStorage.getItem('rd_country') + '_company'];
 
     // Allow a custom 'to' email to be passed for testing purposes
-    const emailTo = (to !== 'curation' && to !== 'support')? to : this.brand.email[to];
+    const emailTo = (to !== 'curation' && to !== 'support') ? to : this.brand.email[to];
 
+    console.log(this.brand.prefix);
     return this.http.post(this.config.apiUrl + '/members/sendemail',
       {
-        companyName: this.brand.name,
-        companyPrefix: this.brand.prefix,
-        emailTo: emailTo,
-        emailFrom: this.brand.email[from],
-        emailSubject: subject,
-        emailBody: content,
+        company_name: this.brand.name,
+        company_prefix: this.brand.prefix,
+        email_to: emailTo,
+        email_from: this.brand.email[from],
+        email_subject: subject,
+        email_body: content,
         userCode: this.config.userAPICode,
         token: this.authToken
       });

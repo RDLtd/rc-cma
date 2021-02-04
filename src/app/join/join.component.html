@@ -136,7 +136,7 @@
             placeholder="Your first name"
             required
             autofocus>
-          <mat-error align="end" *ngIf="fname.required">Required</mat-error>
+          <mat-error align="end">Required</mat-error>
         </mat-form-field>
 
         <span style="display: inline-block; width: 2%;"></span>
@@ -150,7 +150,21 @@
             matInput
             placeholder="Your last name"
             required>
-          <mat-error align="end" *ngIf="lname.required">Required</mat-error>
+          <mat-error align="end">Required</mat-error>
+        </mat-form-field>
+
+        <!-- Role -->
+        <mat-form-field hideRequiredMarker>
+          <mat-label>Your job/role</mat-label>
+          <mat-select
+            [(ngModel)]="pendingMember.role"
+            name="role"
+            required>
+            <mat-option *ngFor="let role of roles" [value]="role.id">
+              {{ role.label }}
+            </mat-option>
+          </mat-select>
+          <mat-error align="end">Please select your main job or role</mat-error>
         </mat-form-field>
 
         <!-- Email -->
@@ -183,7 +197,7 @@
             minlength="9"
             maxlength="14"
             required>
-          <mat-error align="end" *ngIf="mobile.required">{{ 'Join.ValidTelephone' |
+          <mat-error align="end">{{ 'Join.ValidTelephone' |
             translate }}</mat-error>
         </mat-form-field>
 
