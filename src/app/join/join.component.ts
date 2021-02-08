@@ -24,6 +24,7 @@ export class JoinComponent implements OnInit {
     role: null
   };
   brand: any;
+  roles: any;
   referrer = {
     type: 'self',
     code: null,
@@ -34,30 +35,55 @@ export class JoinComponent implements OnInit {
   };
   t_data: any;
   patternMobile = '^([+\\d]\\d*)?\\d$';
+  lang = localStorage.getItem('rd_language');
 
   // Todo Needs to come form the db
-  roles = [
-    {
-      id: 'owner',
-      label: 'Owner/Manager'
-    },
-    {
-      id: 'chef',
-      label: 'Chef/Kitchen'
-    },
-    {
-      id: 'foh',
-      label: 'Front-of-house'
-    },
-    {
-      id: 'admin',
-      label: 'Admin/Marketing'
-    },
-    {
-      id: 'other',
-      label: 'Other'
-    }
-    ];
+  dbRoles = {
+    en: [
+      {
+        id: 'owner',
+        label: 'Owner/Manager'
+      },
+      {
+        id: 'chef',
+        label: 'Chef/Kitchen'
+      },
+      {
+        id: 'foh',
+        label: 'Front-of-house'
+      },
+      {
+        id: 'admin',
+        label: 'Admin/Marketing'
+      },
+      {
+        id: 'other',
+        label: 'Other'
+      }
+    ],
+    fr: [
+      {
+        id: 'owner',
+        label: 'Owner/Manager'
+      },
+      {
+        id: 'chef',
+        label: 'Chef/Kitchen'
+      },
+      {
+        id: 'foh',
+        label: 'Front-of-house'
+      },
+      {
+        id: 'admin',
+        label: 'Admin/Marketing'
+      },
+      {
+        id: 'other',
+        label: 'Other'
+      }
+    ]
+  };
 
   constructor(
     private route: ActivatedRoute,
@@ -71,13 +97,14 @@ export class JoinComponent implements OnInit {
     private appService: AppService,
     private router: Router
   ) {
+    // Switch language
     translate.onLangChange.subscribe(() => {
       this.translate.get('Join').subscribe(data => {this.t_data = data; });
     });
 
+
   }
   ngOnInit() {
-
     // Check for a referral code in the url
     this.route.paramMap
       .subscribe(params => {
@@ -89,17 +116,21 @@ export class JoinComponent implements OnInit {
           sessionStorage.setItem('referrer_type', 'self');
         }
       });
-
     // Set brand
     this.brand = this.config.brand;
-    this.translate.get('Join').subscribe(data => this.t_data = data);
-
-    // Check local storage for pending data
+    // Get translations
+    this.translate.get('Join').subscribe(data => {
+      this.t_data = data;
+      // Get the list of jog roles
+      // TODO: Get this from the database
+      this.roles = this.dbRoles[this.lang];
+    });
+    // Check session storage
     this.pendingMember = JSON.parse(sessionStorage.getItem('rc_member_pending')) || {};
-    console.log('Pending', this.pendingMember);
+    console.log('Pending Member', this.pendingMember);
 
-    // Listen for unload event in case
-    // user aborts process early
+    // Watch for unload event (page refresh etc.)
+    // Keep data in session storage
     const that = this;
     window.addEventListener("beforeunload", () => {
       that.savePendingMemberData(that.pendingMember);
@@ -140,6 +171,7 @@ export class JoinComponent implements OnInit {
     // and anything else?
     this.savePendingMemberData(formData);
 
+    // TODO
     // API pre-flight check
     // If good, proceed
     this.router.navigate(['/membership-options']).then(() => this.load.close())
@@ -153,21 +185,11 @@ export class JoinComponent implements OnInit {
 
     this.load.open();
 
-    // Validate code if added manually
-    // Wait for response
-    // if (this.referrer.type !== 'member') {
-    //   await this.setReferral(applicant.code.trim());
-    // }
-
-    // Create new Content Admin & split full name
-    // const names = applicant.name.split(' ');
-
+    // TODO
     // NB Note that for this early December version we set member_type to 'Full'
     // Once there is a paywall we will set this to 'Payment Pending' and update once payment
     // has been received
     const admin = {
-      // member_first_name: names[0],
-      // member_last_name: names.slice(1).join() || names[0], // combine any additional names
       member_first_name: applicant.first_name,
       member_last_name: applicant.last_name,
       member_email: applicant.email,

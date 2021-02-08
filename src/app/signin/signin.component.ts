@@ -60,7 +60,7 @@ export class SigninComponent implements OnInit {
       this.t_data = data;
     });
 
-    console.log('form', formValue);
+    // console.log('form', formValue);
     this.isSubmitting = true;
     this.authService.login(formValue)
       .subscribe(

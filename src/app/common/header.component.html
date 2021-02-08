@@ -11,17 +11,33 @@
   </span>
 
   <ng-template #loggedIn>
-    <span
-      [matMenuTriggerFor]="menu"
-      class="rc-media-small-hide rc-link-like">
-    {{ displayName }}
-  </span>
 
-  <button
-    [matMenuTriggerFor]="menu"
-    mat-icon-button>
-    <mat-icon>menu</mat-icon>
-  </button>
+
+<!--    <span-->
+<!--      [matMenuTriggerFor]="menu"-->
+<!--      class="rc-media-small-hide rc-link-like">-->
+<!--    {{ displayName }}-->
+<!--  </span>-->
+
+    <button mat-icon-button [matMenuTriggerFor]="menu" style="height: 40px;">
+      <cl-image
+        [public-id]="'avatars/twsyttnan1rlifqxiv38.png'">
+        <cl-transformation
+          width="40"
+          height="40"
+          radius="max"
+          crop="fill"
+          gravity="face">
+        </cl-transformation>
+      </cl-image>
+
+    </button>
+
+<!--  <button-->
+<!--    [matMenuTriggerFor]="menu"-->
+<!--    mat-icon-button>-->
+<!--    <mat-icon>menu</mat-icon>-->
+<!--  </button>-->
   </ng-template>
 
   <mat-menu #menu="matMenu">
