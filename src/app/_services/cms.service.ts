@@ -380,7 +380,7 @@ export class CMSService {
   sendRestaurantChanges(member: Member, restaurant: Restaurant, changes: any) {
     return this.http.post(this.config.apiUrl + '/cms/sendrestaurantchanges',
       {
-        company_prefix: localStorage.getItem('rd_company_prefix'),
+        company_prefix: this.config.brand.prefix,
         member: member,
         restaurant: restaurant,
         changes: changes,
@@ -392,7 +392,7 @@ export class CMSService {
   sendRestaurantValidation(member: Member, restaurant: Restaurant, changes: any) {
     return this.http.post(this.config.apiUrl + '/cms/sendrestaurantvalidation',
       {
-        company_prefix: localStorage.getItem('rd_company_prefix'),
+        company_prefix: this.config.brand.prefix,
         member: member,
         restaurant: restaurant,
         changes: changes,
@@ -437,11 +437,11 @@ export class CMSService {
   sendVerificationEmail(restaurantname: string, restaurantcode: string, restaurantemail: string, memberfullname: string) {
     return this.http.post(this.config.apiUrl + '/cms/sendverificationemail',
       {
-        company_prefix: localStorage.getItem('rd_company_prefix'),
-        restaurantname: restaurantname,
-        restaurantcode: restaurantcode,
-        restaurantemail: restaurantemail,
-        memberfullname: memberfullname,
+        company_prefix: this.config.brand.prefix,
+        restaurant_name: restaurantname,
+        restaurant_code: restaurantcode,
+        restaurant_email: restaurantemail,
+        member_fullname: memberfullname,
         userCode: this.config.userAPICode,
         token: this.authToken });
   }

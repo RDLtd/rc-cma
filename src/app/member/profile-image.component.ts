@@ -149,11 +149,11 @@ export class ProfileImageComponent implements OnInit {
 
     this.memberService.updateAvatar(this.data.member.member_id, this.imgURL).subscribe(
       () => {
+        console.log('Avatar', this.imgURL);
         this.data.member.member_image_path = this.imgPreviewSrc;
-        let iArr = this.imgPreviewSrc.split('/');
-        this.data.avatar = iArr.splice(iArr.length).join('/');
         this.dspSnackBar(this.t_data.ImageUpdated);
         this.inProgress = false;
+        this.dialog.close(this.imgURL);
         // record event
         this.ga.sendEvent('Profile', 'Edit', 'Update Image');
       },
@@ -165,10 +165,10 @@ export class ProfileImageComponent implements OnInit {
 
   deleteImage() {
 
-    this.memberService.deleteAvatar(this.data.member_id).subscribe(
+    this.memberService.deleteAvatar(this.data.member.member_id).subscribe(
       () => {
         this.data.member_image_path = this.placeholderImage;
-        this.dialog.close();
+        this.dialog.close(this.placeholderImage);
         this.dspSnackBar(this.t_data.ImageDeleted);
       },
       error => {

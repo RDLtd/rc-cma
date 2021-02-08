@@ -104,7 +104,11 @@ $config: mat-typography-config();
 .rc-layout-table {
   border: 0;
   margin: 0 0 24px;
-  td:first-child { font-weight: bold; padding-right:24px;}
+  width: 100%;
+  td:first-child {
+    font-weight: bold;
+    padding-right:24px;
+  }
 }
 .agm-map { height: 300px; }
 .rc-loader-white {

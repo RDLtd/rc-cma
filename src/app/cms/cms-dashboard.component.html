@@ -122,7 +122,7 @@
         </mat-card-actions>
       </mat-card>
 
-      <!-- Spw: loading -->
+      <!-- SPW: loading -->
       <mat-card
         *ngIf="isPreviewing"
         class="rc-cms-dash-info mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--align-top">
@@ -135,7 +135,7 @@
         <mat-card-actions></mat-card-actions>
       </mat-card>
 
-      <!-- Spw: no changes -->
+      <!-- SPW: no changes -->
       <mat-card
         *ngIf="!cmsChanged && cmsHasSufficientData && !isPreviewing"
         class="rc-cms-dash-info mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--align-top">
@@ -177,7 +177,7 @@
         </mat-card-actions>
       </mat-card>
 
-      <!-- Spw: has changes -->
+      <!-- SPW: has changes -->
       <mat-card
         *ngIf="cmsChanged && !isPreviewing"
         class="rc-cms-dash-info mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--align-top">
@@ -239,19 +239,6 @@
         <mat-card-content>
 
           <mat-list class="rc-content-status">
-            <!-- Membership -->
-<!--            <mat-list-item-->
-<!--              [class.rc-content-status-complete]="memberStatus == 100"-->
-<!--              [class.rc-content-status-partial]="memberStatus == 50"-->
-<!--              (click)="viewMemberStatus()">-->
-<!--              <mat-icon matListIcon>{{ memberIcon }}</mat-icon>-->
-<!--              <h3 matLine>{{ 'CMS-Dashboard.Status' | translate }}</h3>-->
-<!--              <p matLine>{{ memberType | uppercase }}</p>-->
-<!--              <mat-progress-bar-->
-<!--                matLine mode="determinate"-->
-<!--                value="{{ memberStatus }}"></mat-progress-bar>-->
-<!--              <p matLine><span>{{ 'CMS-Dashboard.Activated' | translate }} {{ d_memberJoinDate }}</span></p>-->
-<!--            </mat-list-item>-->
 
             <!-- Hours -->
             <mat-list-item

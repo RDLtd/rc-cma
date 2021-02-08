@@ -92,7 +92,7 @@ export class ProfileVerifyComponent implements OnInit {
     this.restaurantService.updateEmail(this.data.restaurant.restaurant_id, this.data.restaurant.restaurant_email)
       .subscribe(res => {
           console.log('Email updated', res);
-          if (notify) { this.notifyCuration(); }
+          this.notifyCuration();
         },
         error => {
           console.log(error);
@@ -122,6 +122,7 @@ export class ProfileVerifyComponent implements OnInit {
   reqVerificationCode() {
     const userName = localStorage.getItem('rd_username');
     const r = this.data.restaurant;
+    console.log(r);
     this.cmsService.sendVerificationEmail(
       r.restaurant_name,
       r.restaurant_number,
@@ -155,7 +156,7 @@ export class ProfileVerifyComponent implements OnInit {
     const msg =
       `# ${this.t_data.Change}\n\n` +
       `${this.t_data.Just}.\n\n` +
-      ` - **${this.t_data.User}**: ${localStorage.get('rd_username')}(${d.member.member_id})\n` +
+      ` - **${this.t_data.User}**: ${localStorage.getItem('rd_username')}(${d.member.member_id})\n` +
       ` - **Restaurant**: ${d.restaurant.restaurant_name} (${d.restaurant.restaurant_id})\n` +
       ` - **${this.t_data.Oemail}**: ${this.originalEmail}\n` +
       ` - **${this.t_data.Nemail}**: ${d.restaurant.restaurant_email}\n\n` +
