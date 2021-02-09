@@ -24,7 +24,6 @@ export class JoinComponent implements OnInit {
     role: null
   };
   brand: any;
-  roles: any;
   referrer = {
     type: 'self',
     code: null,
@@ -99,7 +98,9 @@ export class JoinComponent implements OnInit {
   ) {
     // Switch language
     translate.onLangChange.subscribe(() => {
-      this.translate.get('Join').subscribe(data => {this.t_data = data; });
+      this.translate.get('Join').subscribe(data => {
+        this.t_data = data;
+      });
     });
 
 
@@ -121,9 +122,6 @@ export class JoinComponent implements OnInit {
     // Get translations
     this.translate.get('Join').subscribe(data => {
       this.t_data = data;
-      // Get the list of jog roles
-      // TODO: Get this from the database
-      this.roles = this.dbRoles[this.lang];
     });
     // Check session storage
     this.pendingMember = JSON.parse(sessionStorage.getItem('rc_member_pending')) || {};
