@@ -13,31 +13,33 @@
   <ng-template #loggedIn>
 
 
-<!--    <span-->
-<!--      [matMenuTriggerFor]="menu"-->
-<!--      class="rc-media-small-hide rc-link-like">-->
-<!--    {{ displayName }}-->
-<!--  </span>-->
+    <span
+      [matMenuTriggerFor]="menu"
+      class="rc-media-small-hide rc-link-like">
+    {{ displayName }}
+  </span>
+<!--    <button mat-icon-button [matMenuTriggerFor]="menu" style="height: 40px; overflow: hidden">-->
+<!--      <cl-image-->
+<!--        *ngIf="avatarId"-->
+<!--        [public-id]="avatarId">-->
+<!--        <cl-transformation-->
+<!--          width="40"-->
+<!--          height="40"-->
+<!--          radius="max"-->
+<!--          crop="fill"-->
+<!--          gravity="face">-->
+<!--        </cl-transformation>-->
+<!--      </cl-image>-->
+<!--      <div *ngIf="!avatarId" style="width: 40px; height: 40px; border-radius: 20px; overflow: hidden;">-->
+<!--        <img [src]="placeholderAvatar">-->
+<!--      </div>-->
+<!--    </button>-->
 
-    <button mat-icon-button [matMenuTriggerFor]="menu" style="height: 40px;">
-      <cl-image
-        [public-id]="'avatars/twsyttnan1rlifqxiv38.png'">
-        <cl-transformation
-          width="40"
-          height="40"
-          radius="max"
-          crop="fill"
-          gravity="face">
-        </cl-transformation>
-      </cl-image>
-
-    </button>
-
-<!--  <button-->
-<!--    [matMenuTriggerFor]="menu"-->
-<!--    mat-icon-button>-->
-<!--    <mat-icon>menu</mat-icon>-->
-<!--  </button>-->
+  <button
+    [matMenuTriggerFor]="menu"
+    mat-icon-button>
+    <mat-icon>menu</mat-icon>
+  </button>
   </ng-template>
 
   <mat-menu #menu="matMenu">

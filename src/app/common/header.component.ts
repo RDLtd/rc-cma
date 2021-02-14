@@ -17,6 +17,9 @@ export class HeaderComponent implements OnInit {
   dialogRef: any;
   company_name;
   inSession = true;
+  avatarId: any;
+  placeholderAvatar = null;
+  placeholderUrl = 'https://eu.ui-avatars.com/api/?format=svg&size=40&background=fff&color=000&name='
 
 
   constructor(
@@ -32,7 +35,8 @@ export class HeaderComponent implements OnInit {
     this.company_name = this.config.brand.name;
     // If page refreshed
     this.displayName = (this.authService.isAuth() ? localStorage.getItem('rd_username') : this.lblMemberLogin);
-
+    this.avatarId = localStorage.getItem('rd_avatar');
+    this.placeholderAvatar = this.placeholderUrl + this.displayName;
     // Get notified anytime the login status changes
     this.authService.memberSessionSubject.subscribe(
       sessionStatus => {
@@ -40,6 +44,8 @@ export class HeaderComponent implements OnInit {
           case 'active': {
             // Successful login
             this.displayName = localStorage.getItem('rd_username');
+            this.avatarId = localStorage.getItem('rd_avatar');
+            this.placeholderAvatar = this.placeholderUrl + this.displayName;
             break;
           }
           case 'closed': {

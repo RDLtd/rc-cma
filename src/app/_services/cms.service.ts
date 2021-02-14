@@ -411,6 +411,15 @@ export class CMSService {
       });
   }
 
+  checkSPW(restaurant_id: string) {
+    return this.http.post(this.config.apiUrl + '/spw/checkSPW',
+      {
+        restaurant_id: restaurant_id,
+        userCode: this.config.userAPICode,
+        token: this.authToken
+      });
+  }
+
   previewSPW(restaurant_id: string, restaurant_number: string, production: Boolean, check_only: Boolean) {
     return this.http.post(this.config.apiUrl + '/cms/previewSPW',
       {

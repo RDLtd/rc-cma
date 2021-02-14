@@ -579,7 +579,7 @@
     "SPWInfo": "The SPW can also be set up to work on a custom domain (e.g. www.your-domain.com). It can be an existing domain name, or we can register a suitable domain name for you. ",
     "Contact": "Contact the Curation Team",
     "Further": " for further details.",
-    "Mail": "mailto:curation@restaurantcollective.uk",
+    "Mail": "mailto:curation@restaurantcollective.org.uk",
     "Click": "Click to download"
   },
 
@@ -1212,7 +1212,7 @@
     "Manager": "Manager",
     "AlreadyReg": "An administrator with these details is already registered in our database!",
     "Success": "New administrator record successfully registered",
-    "SupportEmail": "mailto:support@restaurantcollective.uk",
+    "SupportEmail": "mailto:support@restaurantcollective.org.uk",
     "Hello": "Hello again.",
     "Appear": "It would appear that you are already registered with",
     "SignInPassword": "Sign In, or retrieve your password here",

@@ -47,15 +47,21 @@ export class AppConfig {
   // public readonly mailchimp_listid = '941da1d48e';
   // public readonly mailchimp_listname = 'RC3';
 
+  tld = {
+    rc: 'restaurantcollective.org.uk',
+    ri: 'restaurateursindependants.fr'
+  }
+
   private brands = {
     rc: {
       name: 'Restaurant Collective',
       prefix: 'rc',
       logo: 'rc-logo',
-      url: 'https://restaurantcollective.uk',
+      url: `https://${this.tld.rc}`,
+      spwDemoUrl: `https://demo.spw.${this.tld.rc}/`,
       email: {
-        support: 'support@restaurantcollective.uk',
-        curation: 'curation@restaurantcollective.uk'
+        support: `support@${this.tld.rc}`,
+        curation: `curation@${this.tld.rc}`
       },
       products: {
         taxId: 'txr_1HuZYpFqzlrb81VHPM9p2XpX',
@@ -78,18 +84,19 @@ export class AppConfig {
         code: 'GBP'
       },
       downloads: {
-        terms: 'https://restaurantcollective.uk/downloads/RC-Terms.pdf',
-        privacy: 'https://restaurantcollective.uk/downloads/RC-Privacy.pdf'
+        terms: `https://${this.tld.rc}/downloads/RC-Terms.pdf`,
+        privacy: `https://${this.tld.rc}/downloads/RC-Privacy.pdf`
       }
     },
     ri: {
       name: 'Restaurateurs Indépendants',
       prefix: 'ri',
       logo: 'ri-logo',
-      url: 'https://restaurateursindependants.com',
+      url: `https://${this.tld.ri}`,
+      spwDemoUrl: `https://demo.spw.${this.tld.ri}/`,
       email: {
-        support: 'support@restaurateursindependants.com',
-        curation: 'curation@restaurateursindependants.com'
+        support: `support@${this.tld.ri}`,
+        curation: `curation@${this.tld.ri}`
       },
       products: {
         taxId: 'txr_1HudC1Fqzlrb81VH8GYyhETf',
@@ -110,8 +117,8 @@ export class AppConfig {
         code: 'EUR'
       },
       downloads: {
-        terms: 'https://restaurateursindependants.com/downloads/RI-Terms.pdf',
-        privacy: 'https://restaurateursindependants.com/downloads/RI-Privacy.pdf'
+        terms: `https://${this.tld.ri}/downloads/RI-Terms.pdf`,
+        privacy: `https://${this.tld.ri}/downloads/RI-Privacy.pdf`
       }
     }
   };
