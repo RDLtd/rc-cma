@@ -58,7 +58,7 @@ export class AppConfig {
       prefix: 'rc',
       logo: 'rc-logo',
       url: `https://${this.tld.rc}`,
-      spwDemoUrl: `https://demo.spw.${this.tld.rc}/`,
+      spwDemoUrl: `https://example-restaurant.com/`,
       email: {
         support: `support@${this.tld.rc}`,
         curation: `curation@${this.tld.rc}`
@@ -93,7 +93,7 @@ export class AppConfig {
       prefix: 'ri',
       logo: 'ri-logo',
       url: `https://${this.tld.ri}`,
-      spwDemoUrl: `https://demo.spw.${this.tld.ri}/`,
+      spwDemoUrl: `https://example-restaurant.com/`,
       email: {
         support: `support@${this.tld.ri}`,
         curation: `curation@${this.tld.ri}`
