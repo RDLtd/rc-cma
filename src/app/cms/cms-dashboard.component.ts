@@ -19,7 +19,6 @@ import { RestaurantDetailComponent } from '../restaurants/restaurant-detail.comp
 import { NgForm } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import {
-  PaymentComponent,
   MessageComponent
 } from '../common';
 import * as moment from 'moment';
@@ -135,7 +134,6 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
       en: { demoUrl: this.config.brand.spwDemoUrl },
       fr: { demoUrl: this.config.brand.spwDemoUrl }
     };
-
 
     // detect language changes... need to check for change in texts
     translate.onLangChange.subscribe(() => {
@@ -269,7 +267,6 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
           console.log('ERROR', error);
         });
   }
-
 
   // checkPublishStatus() {
   //
@@ -634,7 +631,6 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
   }
 
   previewSPW() {
-
     if (this.cmsHasSufficientData) {
       this.dialog.open(CmsPreviewComponent, {
         panelClass: 'rc-preview-dialog-container',
@@ -685,7 +681,6 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
           this.isPreviewing = false;
         });
     // }
-
   }
 
   dspSPWLinks(): void {
