@@ -377,12 +377,15 @@ export class CMSService {
       });
   }
 
-  sendRestaurantChanges(member: Member, restaurant: Restaurant, changes: any) {
+  sendRestaurantChanges(member_first_name: string, member_last_name: string, member_email: string,
+                        restaurant_name: string, changes: any) {
     return this.http.post(this.config.apiUrl + '/cms/sendrestaurantchanges',
       {
         company_prefix: this.config.brand.prefix,
-        member: member,
-        restaurant: restaurant,
+        member_first_name: member_first_name,
+        member_last_name: member_last_name,
+        member_email: member_email,
+        restaurant_name: restaurant_name,
         changes: changes,
         userCode: this.config.userAPICode,
         token: this.authToken
@@ -448,7 +451,7 @@ export class CMSService {
       {
         company_prefix: this.config.brand.prefix,
         restaurant_name: restaurantname,
-        restaurant_code: restaurantcode,
+        restaurant_number: restaurantcode,
         restaurant_email: restaurantemail,
         member_fullname: memberfullname,
         userCode: this.config.userAPICode,
