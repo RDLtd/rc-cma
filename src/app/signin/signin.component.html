@@ -71,8 +71,9 @@
         novalidate>
         <span class="rc-warn" *ngIf="errorMsg">{{ errorMsg | uppercase }}!</span>
         <h1>{{ 'SignIn.SignIn' | translate }}</h1>
-        <span>{{ 'SignIn.Or' | translate }}<a [routerLink]="'/join'">{{ 'SignIn.Join' | translate }}
-          {{ brand['name'] }}</a></span><br><br>
+<!--        Todo: reinstate Join link -->
+<!--        <span>{{ 'SignIn.Or' | translate }}<a [routerLink]="'/join'">{{ 'SignIn.Join' | translate }}-->
+<!--          {{ brand['name'] }}</a></span><br><br>-->
         <mat-form-field class="rc-full-width" hideRequiredMarker>
           <mat-label>{{ 'SignIn.UserEmail' | translate }}</mat-label>
           <input
