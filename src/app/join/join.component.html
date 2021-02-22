@@ -3,7 +3,7 @@
     <div class="rc-layout-split-content">
       <div class="rc-join-welcome" [ngSwitch]="referrer.type">
 
-        <span class="rc-logo" style="width: 200px">
+        <span class="rc-logo">
           <img src="assets/images/{{ brand.logo }}-trans-white.svg" alt="Restaurant Collective Logo">
         </span>
 
@@ -34,6 +34,7 @@
           <markdown [data]="t_data?.Problems">
             <a href="mailto:{{ brand.email.support }}">{{ t_data?.SupportTeam }}</a>.
           </markdown>
+
 
         </div>
 
