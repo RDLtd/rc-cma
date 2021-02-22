@@ -36,54 +36,6 @@ export class JoinComponent implements OnInit {
   patternMobile = '^([+\\d]\\d*)?\\d$';
   lang = localStorage.getItem('rd_language');
 
-  // Todo Needs to come form the db
-  dbRoles = {
-    en: [
-      {
-        id: 'owner',
-        label: 'Owner/Manager'
-      },
-      {
-        id: 'chef',
-        label: 'Chef/Kitchen'
-      },
-      {
-        id: 'foh',
-        label: 'Front-of-house'
-      },
-      {
-        id: 'admin',
-        label: 'Admin/Marketing'
-      },
-      {
-        id: 'other',
-        label: 'Other'
-      }
-    ],
-    fr: [
-      {
-        id: 'owner',
-        label: 'Owner/Manager'
-      },
-      {
-        id: 'chef',
-        label: 'Chef/Kitchen'
-      },
-      {
-        id: 'foh',
-        label: 'Front-of-house'
-      },
-      {
-        id: 'admin',
-        label: 'Admin/Marketing'
-      },
-      {
-        id: 'other',
-        label: 'Other'
-      }
-    ]
-  };
-
   constructor(
     private route: ActivatedRoute,
     private memberService: MemberService,
