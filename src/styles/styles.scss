@@ -49,6 +49,16 @@ $config: mat-typography-config();
 .rc-dialog-backdrop {
   background-color: rgba($rc-theme-black, 0.75);
 }
+.brand-logo {
+  width: 240px;
+  margin: 16px 0;
+  #cc { opacity: .38; fill: #fff;}
+  #txt-restaurant, #txt-collective { fill: #fff; }
+  &.turq-blk {
+    #cc { opacity: 1; fill: #00A69B;}
+    #txt-restaurant, #txt-collective { fill: #1c1b1b; }
+  }
+}
 .rc-no-grid-gutter { margin: -16px;}
 .rc-hide { display: none; }
 .rc-accent { background-color: $rc-theme-secondary !important;}
