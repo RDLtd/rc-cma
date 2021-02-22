@@ -16,8 +16,8 @@ export class AppConfig {
 
 
   // Should only need to switch here to change from local to Heroku server
-  public readonly apiUrl = 'http://localhost:4000';
-  // public readonly apiUrl = 'https://rc-server-staging.herokuapp.com';
+  // public readonly apiUrl = 'http://localhost:4000';
+  public readonly apiUrl = 'https://rc-server-staging.herokuapp.com';
   // public readonly apiUrl = 'https://rc-server-prod.herokuapp.com';
 
   // update 05/09/18 to read apiURL from .env file
