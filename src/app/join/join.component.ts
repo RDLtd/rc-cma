@@ -35,6 +35,7 @@ export class JoinComponent implements OnInit {
   t_data: any;
   patternMobile = '^([+\\d]\\d*)?\\d$';
   lang = localStorage.getItem('rd_language');
+  stripeSessionId: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -48,6 +49,10 @@ export class JoinComponent implements OnInit {
     private appService: AppService,
     private router: Router
   ) {
+    this.route.queryParams.subscribe(params => {
+      this.stripeSessionId = params['session_id'];
+      console.log('stripeSessionId', this.stripeSessionId);
+    });
     // Switch language
     translate.onLangChange.subscribe(() => {
       this.translate.get('Join').subscribe(data => {
