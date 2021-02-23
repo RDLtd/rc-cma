@@ -1,8 +1,8 @@
-<div class="rc-join">
+<div class="rc-layout-split-container">
 
-  <div class="rc-join-info rc-bgd">
-    <section class="rc-join-welcome">
-
+  <div class="rc-layout-split-left rc-bgd">
+    <section class="rc-layout-split-content">
+      <!-- RC -->
       <span *ngIf="brand['prefix'] === 'rc'">
         <svg class="rc-svg-logo" xmlns="http://www.w3.org/2000/svg" width="200" viewBox="0 0 196 97">
           <title>Restaurant Collective Logo</title>
@@ -14,7 +14,7 @@
           </g>
         </svg>
       </span>
-
+      <!-- RI -->
       <span *ngIf="brand['prefix'] === 'ri'">
         <svg class="rc-svg-logo" xmlns="http://www.w3.org/2000/svg" width="250" viewBox="0 0 250 103">
             <title>Restaurateurs Indépendants</title>
@@ -26,13 +26,13 @@
             </g>
         </svg>
       </span>
-      <h1>{{ 'SignIn.Empowering' | translate }}</h1>
-      <p>{{ brand['name'] }} {{ 'SignIn.Text1' | translate }}</p>
-      <p>{{ 'SignIn.Text2' | translate }}</p>
+      <!-- Welcome -->
+      <markdown ngPreserveWhitespaces [data]="t_data?.Introduction"></markdown>
     </section>
   </div>
 
-  <div class="rc-join-form">
+  <div class="rc-layout-split-right">
+    <div class="rc-layout-split-content">
     <!-- Password Reset -->
     <section class="rc-signin-form" *ngIf="pwdReset">
       <form
@@ -58,7 +58,9 @@
           mat-flat-button
           class="rc-full-width"
           color="accent"
-          [disabled]="isSubmitting || !frmReset.form.valid">{{ 'SignIn.ResetCaps' | translate }}</button>
+          [disabled]="isSubmitting || !frmReset.form.valid">
+          {{ 'SignIn.ResetCaps' | translate }}
+        </button>
       </form>
     </section>
     <!-- Sign in -->
@@ -69,8 +71,9 @@
         novalidate>
         <span class="rc-warn" *ngIf="errorMsg">{{ errorMsg | uppercase }}!</span>
         <h1>{{ 'SignIn.SignIn' | translate }}</h1>
+<!--        Todo: reinstate Join link -->
 <!--        <span>{{ 'SignIn.Or' | translate }}<a [routerLink]="'/join'">{{ 'SignIn.Join' | translate }}-->
-<!--          {{ brand['name'] }}</a></span>-->
+<!--          {{ brand['name'] }}</a></span><br><br>-->
         <mat-form-field class="rc-full-width" hideRequiredMarker>
           <mat-label>{{ 'SignIn.UserEmail' | translate }}</mat-label>
           <input
@@ -94,16 +97,19 @@
             required>
         </mat-form-field>
         <a (click)="showPwdReset(true)">{{ 'SignIn.Forgotten' | translate }}</a>
+        <br>
+        <br>
         <button
           mat-flat-button
           class="rc-full-width"
-          color="accent"
+          color="primary"
           [disabled]="isSubmitting">{{ 'SignIn.SignCaps' | translate }}</button>
-        <p class="mat-small">{{ 'SignIn.Subject' | translate }}<a
-          [href]="brand['downloads']['terms']" target="_blank">{{ 'SignIn.Terms' | translate }}</a>
-          {{ 'SignIn.And' | translate }}
-          <a [href]="brand['downloads']['privacy']" target="_blank">{{ 'SignIn.Privacy' | translate }}</a></p>
+<!--        <p class="rc-txt-small">{{ 'SignIn.Subject' | translate }}<a-->
+<!--          [href]="brand['downloads']['terms']" target="_blank">{{ 'SignIn.Terms' | translate }}</a>-->
+<!--          {{ 'SignIn.And' | translate }}-->
+<!--          <a [href]="brand['downloads']['privacy']" target="_blank">{{ 'SignIn.Privacy' | translate }}</a></p>-->
       </form>
     </section>
+  </div>
   </div>
 </div>

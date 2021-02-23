@@ -14,4 +14,5 @@ However, you must be a **Full Member** to publish your Single Page Website (SPW)
 To upgrade your membership now, just close this help screen and click on 
 **Membership Status** on your Dashboard. It will cost you
 just £42 a year (£3.50 per month) to become a **Full** member. Hopefully when you joined as an Associate
-we told you about the Restaurant Collective and the great benefits of membership but if you'd like to read more about the benefits, please visit the [Restaurant Collective website](https://www.restaurantcollective.uk/).
+we told you about the Restaurant Collective and the great benefits of membership but if you'd like to read more 
+about the benefits, please visit the [Restaurant Collective website](https://www.restaurantcollective.org.uk/).

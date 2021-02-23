@@ -83,32 +83,32 @@ export class AffiliatesComponent implements OnInit, OnDestroy {
         });
   }
 
-  viewMarketing(index) {
-
-    if (this.restaurant.restaurant_rc_member_status !== 'Full') {
-      this.dialog.open(PaymentComponent, {
-        panelClass: 'rc-dialog-member',
-        data: {
-          restaurant: this.restaurant,
-          dialog: this.dialog
-        }
-      });
-
-    } else {
-
-      // Record the access event for this restaurant
-      this.restaurantService.recordAccess(Number(this.restaurant.restaurant_id),
-        this.affiliates[index].partner_id, 'Viewed Marketing')
-        .subscribe(
-          () => {
-            console.log('Access record updated - Viewed Marketing');
-          },
-          () => {
-            console.log('Could not update access record');
-          });
-      //
-    }
-  }
+  // viewMarketing(index) {
+  //
+  //   if (this.restaurant.restaurant_rc_member_status !== 'Full') {
+  //     this.dialog.open(PaymentComponent, {
+  //       panelClass: 'rc-dialog-member',
+  //       data: {
+  //         restaurant: this.restaurant,
+  //         dialog: this.dialog
+  //       }
+  //     });
+  //
+  //   } else {
+  //
+  //     // Record the access event for this restaurant
+  //     this.restaurantService.recordAccess(Number(this.restaurant.restaurant_id),
+  //       this.affiliates[index].partner_id, 'Viewed Marketing')
+  //       .subscribe(
+  //         () => {
+  //           console.log('Access record updated - Viewed Marketing');
+  //         },
+  //         () => {
+  //           console.log('Could not update access record');
+  //         });
+  //     //
+  //   }
+  // }
 
   redeemOffer(index) {
 

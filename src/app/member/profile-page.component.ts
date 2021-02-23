@@ -256,9 +256,12 @@ export class ProfilePageComponent implements OnInit {
           // Get cloudinary reference
           let arr = url.split('/');
           this.clPublicId = arr.splice(arr.length - 3).join('/');
+
           // update member local storage
           this.member.member_image_path = url;
           localStorage.setItem('rd_profile', JSON.stringify(this.member));
+          localStorage.setItem('rd_avatar', this.clPublicId);
+
         }
       });
     }

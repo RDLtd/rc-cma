@@ -155,13 +155,6 @@
         </mat-card-content>
         <!-- ACTIONS -->
         <mat-card-actions align="end" *ngIf="!isPreviewing">
-<!--          <button-->
-<!--            mat-button-->
-<!--            ngxClipboard-->
-<!--            [cbContent]="productionUrl"-->
-<!--            (click)="copyToClipboard()"-->
-<!--            color="secondary"-->
-<!--            [disabled]="isPreviewing">{{ 'CMS-Dashboard.CopyLink' | translate }}</button>-->
           <button
             mat-button
             (click)="dspSPWLinks()"
@@ -170,7 +163,7 @@
             [disabled]="isPreviewing">{{ 'CMS-Dashboard.Marketing' | translate }}</button>
           <a
             [disabled]="isPreviewing"
-            [href]="spwUrl"
+            [href]="spwProdUrl"
             target="_blank"
             matTooltip="{{ 'CMS-Dashboard.OpenLive' | translate }}{{ restaurant.restaurant_name }}"
             mat-button color="primary">{{ 'CMS-Dashboard.ViewLivePage' | translate }}</a>
@@ -236,7 +229,10 @@
             <mat-icon>help_outline</mat-icon>
           </button>
         </div>
-        <mat-card-content>
+        <mat-card-content class="rc-cms-dash-info">
+          <mat-card-header>
+            <mat-card-title>CONTENT STATUS SUMMARY</mat-card-title>
+          </mat-card-header>
 
           <mat-list class="rc-content-status">
 

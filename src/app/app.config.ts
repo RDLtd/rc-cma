@@ -11,15 +11,21 @@ export class AppConfig {
     name: require('../../package.json').name
   };
 
+  // App location
+  appUrl = window.location.origin;
+
+
   // Should only need to switch here to change from local to Heroku server
   // public readonly apiUrl = 'http://localhost:4000';
-  // public readonly apiUrl = 'https://rc-server-staging.herokuapp.com';
-  public readonly apiUrl = 'https://rc-server-prod.herokuapp.com';
+
+  public readonly apiUrl = 'https://rc-server-staging.herokuapp.com';
+  // public readonly apiUrl = 'https://rc-server-prod.herokuapp.com';
 
   // update 05/09/18 to read apiURL from .env file
-  // This is angular's equivalent! See the 'environments' folder
+  // This is Angular's equivalent! See the 'environments' folder
   // Build process should automatically detect the correct variables
-  // public readonly apiUrl = environment.API_URL;
+
+  //public readonly apiUrl = environment.API_URL;
 
   public readonly sql_defaults = {
     where_field: 'restaurant_name',
@@ -43,15 +49,32 @@ export class AppConfig {
   // public readonly mailchimp_listid = '941da1d48e';
   // public readonly mailchimp_listname = 'RC3';
 
+  tld = {
+    rc: 'restaurantcollective.org.uk',
+    ri: 'restaurateursindependants.fr'
+  }
+
   private brands = {
     rc: {
       name: 'Restaurant Collective',
       prefix: 'rc',
       logo: 'rc-logo',
-      url: 'https://restaurantcollective.uk',
+      url: `https://${this.tld.rc}`,
+      spwDemoUrl: `https://example-restaurant.com/`,
       email: {
-        support: 'support@restaurantcollective.uk',
-        curation: 'curation@restaurantcollective.uk'
+        support: `support@${this.tld.rc}`,
+        curation: `curation@${this.tld.rc}`
+      },
+      products: {
+        taxId: 'txr_1HuZYpFqzlrb81VHPM9p2XpX',
+        membership_monthly: {
+          priceId: 'price_1I0kigFqzlrb81VHkdECs1eK'
+        },
+        membership_yearly: {
+          priceId: 'price_1HuPN4Fqzlrb81VHCj3wELKF'
+        },
+        success_url: `${ this.appUrl }/signin`,
+        cancel_url: `${ this.appUrl }/membership-options`,
       },
       fee: {
         month: '3.50',
@@ -63,18 +86,28 @@ export class AppConfig {
         code: 'GBP'
       },
       downloads: {
-        terms: 'https://restaurantcollective.uk/downloads/RC-Terms.pdf',
-        privacy: 'https://restaurantcollective.uk/downloads/RC-Privacy.pdf'
+        terms: `https://${this.tld.rc}/downloads/RC-Terms.pdf`,
+        privacy: `https://${this.tld.rc}/downloads/RC-Privacy.pdf`
       }
     },
     ri: {
       name: 'Restaurateurs Indépendants',
       prefix: 'ri',
       logo: 'ri-logo',
-      url: 'https://restaurateursindependants.com',
+      url: `https://${this.tld.ri}`,
+      spwDemoUrl: `https://example-restaurant.com/`,
       email: {
-        support: 'support@restaurateursindependants.com',
-        curation: 'curation@restaurateursindependants.com'
+        support: `support@${this.tld.ri}`,
+        curation: `curation@${this.tld.ri}`
+      },
+      products: {
+        taxId: 'txr_1HudC1Fqzlrb81VH8GYyhETf',
+        membership_monthly: {
+          priceId: 'price_1HuIiGFqzlrb81VHQsg1MWwz'
+        },
+        membership_yearly: {
+          priceId: 'price_1HuaaeFqzlrb81VHFyBJUwPs'
+        }
       },
       fee: {
         month: '4.00',
@@ -86,8 +119,8 @@ export class AppConfig {
         code: 'EUR'
       },
       downloads: {
-        terms: 'https://restaurateursindependants.com/downloads/RI-Terms.pdf',
-        privacy: 'https://restaurateursindependants.com/downloads/RI-Privacy.pdf'
+        terms: `https://${this.tld.ri}/downloads/RI-Terms.pdf`,
+        privacy: `https://${this.tld.ri}/downloads/RI-Privacy.pdf`
       }
     }
   };

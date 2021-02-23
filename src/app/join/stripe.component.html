@@ -1,0 +1,62 @@
+
+<div class="mdc-layout-grid" style="max-width: 800px">
+  <div class="mdc-layout-grid__inner">
+    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6">
+      <mat-card>
+        <h1 mat-card-title>Monthly Subscription</h1>
+        <mat-card-content>
+          <p>Your card will charged  each month until you cancel</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-flat-button color="primary"  [disabled]="waiting" style="width: 100%;"
+                  (click)="checkout('membership_monthly')">£9
+            PER MONTH</button>
+        </mat-card-actions>
+
+      </mat-card>
+    </div>
+    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6">
+      <mat-card>
+        <h1 mat-card-title>Yearly Subscription</h1>
+        <mat-card-content>
+          <p>Pay a year in advance and you will recieve the equivalent of 2 months free!
+        </mat-card-content>
+        <mat-card-actions>
+        <button mat-flat-button color="primary" [disabled]="waiting" style="width: 100%;"
+                (click)="checkout('membership_yearly')">£90 PER
+          YEAR</button>
+        </mat-card-actions>
+
+      </mat-card>
+    </div>
+    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6">
+      <mat-card>
+        <h1 mat-card-title>Account Mgt.</h1>
+        <mat-card-content>
+          <p>Use sessionId to access the customer billing history.</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-flat-button color="primary" [disabled]="!stripeSessionId || waiting" style="width: 100%;"
+                  (click)="manageSubscriptions()">ACCOUNTS</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6">
+      <mat-card>
+        <h1 mat-card-title>Buy again</h1>
+        <mat-card-content>
+          <p>Use existing an customerId (cus_IWXpiCGTtEfq50) create additional transactions.</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-flat-button color="primary" [disabled]="waiting" style="width: 100%; margin-bottom: 8px;"
+                  (click)="checkoutExistingCustomer('membership_monthly')">MORE MONTHLY</button>
+          <button mat-flat-button color="primary" [disabled]="waiting" style="width: 100%;"
+                  (click)="checkoutExistingCustomer('membership_yearly')">MORE YEARLY</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>
+  <div style="width: 62%; margin: 3rem auto 1rem; border-top: 1px dashed #333;">
+    <pre>sessionId: {{ stripeSessionId | json }}</pre>
+  </div>

@@ -22,7 +22,7 @@ export class AuthenticationService {
   private sessionTimeLeft: any;
   private checkingActivity: boolean = false;
   private authToken = new BehaviorSubject(new HttpParams().set('Authorization', 'Bearer' +
-    ' 234242423wdfsdvdsfsdrfg34tdfverge'));
+    '234242423wdfsdvdsfsdrfg34tdfverge'));
 
   constructor(
     private restaurantService: RestaurantService,
@@ -33,6 +33,7 @@ export class AuthenticationService {
     private config: AppConfig) { }
 
   public login(form) {
+    console.log('LOGIN', this.authToken);
     return this.http.post(this.config.apiUrl + '/members/authenticate',
       {
         email: form.email,

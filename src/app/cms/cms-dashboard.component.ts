@@ -19,11 +19,11 @@ import { RestaurantDetailComponent } from '../restaurants/restaurant-detail.comp
 import { NgForm } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import {
-  PaymentComponent,
   MessageComponent
 } from '../common';
 import * as moment from 'moment';
 import { CmsSpwLinksComponent } from './cms-spw-links.component';
+import { AppConfig } from '../app.config';
 
 @Component({
   selector: 'app-cms-dashboard',
@@ -42,8 +42,8 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
 
   // State
   cmsChanged = false;
-  productionUrl: string;
-  spwUrl: string;
+  spwProdUrl: string;
+  spwPreviewUrl: string;
   isPreviewing = true;
   cmsHasSufficientData = false;
   publishDate: Date;
@@ -109,15 +109,9 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
   userName: string;
   lang: string;
 
-  // This object is passed to the translate pipe in the html file
-  // to allow handlebars style variable access.
-  locals = {
-    en: { demoUrl: 'http://demo.restaurantcollective.uk/' },
-    fr: { demoUrl: 'http://demo.restaurateurs-independants.fr/' }
-  };
-
   // translation variables
   t_data: any;
+  locals: any;
 
   constructor(
     private cmsLocalService: CmsLocalService,
@@ -128,8 +122,19 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
     private translate: TranslateService,
     private router: Router,
     private restaurantService: RestaurantService,
-    private memberService: MemberService
+    private memberService: MemberService,
+    private config: AppConfig
   ) {
+
+    // This object is passed to the translate pipe in the html file
+    // to allow handlebars style variable access.
+    // Todo: Brands are now independent of language so
+    //  this is not necessary anymore
+    this.locals = {
+      en: { demoUrl: this.config.brand.spwDemoUrl },
+      fr: { demoUrl: this.config.brand.spwDemoUrl }
+    };
+
     // detect language changes... need to check for change in texts
     translate.onLangChange.subscribe(() => {
       this.lang = localStorage.getItem('rd_language');
@@ -204,7 +209,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
     console.log('Read');
     if (!!this.restaurant) {
       this.setMemberStatus();
-      this.checkPublishStatus();
+      this.checkSPW();
       this.checkOpeningTimes();
       this.checkDescriptions();
       this.checkImages();
@@ -237,71 +242,94 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
     this.d_memberJoinDate = this.setDateRes(this.memberJoinDate);
   }
 
-  checkPublishStatus() {
-
-    this.cms.previewSPW(this.restaurant.restaurant_id, this.restaurant.restaurant_number, true, true)
+  checkSPW() {
+    this.cms.checkSPW(this.restaurant.restaurant_id)
       .subscribe(res => {
-        // Set up content info panel
-        console.log(res['status']);
-        console.log(this.cmsHasSufficientData);
-        console.log(this.publishDate);
-
-        switch (res['status']) {
-          // No preview available
-          case 'INSUFFICIENT_DATA': {
-            this.cmsChanged = true;
-            this.cmsHasSufficientData = false;
+          console.log(res);
+          this.cmsHasSufficientData = res['data_status_ok'];
+          this.cmsChanged = !(res['published_status_ok']);
+          // Enough content?
+          if (this.cmsHasSufficientData) {
+            this.spwProdUrl = res['spw_url'];
+            this.spwPreviewUrl = res['preview_spw_url'];
+            // Has anything changed?
+            if (this.cmsChanged) {
+              this.publishDate = new Date(res['spw_written']);
+            }
+          } else {
+            // Need more content to preview/publish
             this.publishDate = null;
-            break;
           }
-
-          // Show preview
-          case 'OUT_OF_DATE': {
-            this.cmsChanged = true;
-            this.cmsHasSufficientData = true;
-            this.publishDate = new Date(res['published']);
-            this.productionUrl = res['url'];
-            this.spwUrl = this.getSpwUrl();
-            break;
-          }
-
-          // Show published version
-          default: {
-            this.cmsHasSufficientData = true;
-            this.cmsChanged = false;
-            this.publishDate = new Date(res['published']);
-            this.productionUrl = res['url'];
-            this.spwUrl = this.getSpwUrl();
-          }
-        }
-        this.isPreviewing = false;
-        this.d_publishDate = moment(this.publishDate).format('LLLL');
-      },
-      error => {
-        console.log('ERROR', error);
-        this.isPreviewing = false;
-        this.cmsLocalService.dspSnackbar('!SPW Failed to build, please try again', null, 5);
-      });
+          this.isPreviewing = false;
+          this.d_publishDate = moment(this.publishDate).format('LLLL');
+        },
+        error => {
+          console.log('ERROR', error);
+        });
   }
 
-  getSpwUrl(): string {
-    if (!!this.productionUrl) {
-      console.log('PROD URL', this.productionUrl);
-      // This is just in case of any legacy published S3 bucket urls
-      // it shouldn't be necessary
-      if (this.productionUrl.indexOf('amazonaws')) {
-        // Extract the bucket name and folder name (2nd and 3rd to last elements)
-        // from the returned url and construct a production SPW url
-        let arr = this.productionUrl.split('/');
-        return `https://${arr.splice(arr.length - 3, 2).join('/')}`;
-      } else {
-        return this.productionUrl;
-      }
-    } else {
-      // Nothing been published yet
-      return null;
-    }
-  }
+  // checkPublishStatus() {
+  //
+  //   this.cms.previewSPW(this.restaurant.restaurant_id, this.restaurant.restaurant_number, true, true)
+  //     .subscribe(res => {
+  //       // Set up content info panel
+  //       switch (res['status']) {
+  //         // No preview available
+  //         case 'INSUFFICIENT_DATA': {
+  //           //this.cmsChanged = true;
+  //           //this.cmsHasSufficientData = false;
+  //           //this.publishDate = null;
+  //           break;
+  //         }
+  //
+  //         // Show preview
+  //         case 'OUT_OF_DATE': {
+  //           //this.cmsChanged = true;
+  //           //this.cmsHasSufficientData = true;
+  //           this.publishDate = new Date(res['published']);
+  //           this.spwProdUrl = res['url'];
+  //           this.spwPreviewUrl = this.getSpwUrl();
+  //           break;
+  //         }
+  //
+  //         // Show published version
+  //         default: {
+  //           //this.cmsHasSufficientData = true;
+  //           //this.cmsChanged = false;
+  //           this.publishDate = new Date(res['published']);
+  //           this.spwProdUrl = res['url'];
+  //           this.spwPreviewUrl = this.getSpwUrl();
+  //         }
+  //       }
+  //       this.isPreviewing = false;
+  //       this.d_publishDate = moment(this.publishDate).format('LLLL');
+  //     },
+  //     error => {
+  //       console.log('ERROR', error);
+  //       this.isPreviewing = false;
+  //       this.cmsLocalService.dspSnackbar('!SPW Failed to build, please try again', null, 5);
+  //     });
+  // }
+
+  // getSpwUrl(): string {
+  //
+  //   if (!!this.spwProdUrl) {
+  //     console.log('PROD URL', this.spwProdUrl);
+  //     // This is just in case of any legacy published S3 bucket urls
+  //     // it shouldn't be necessary
+  //     if (this.spwProdUrl.indexOf('amazonaws')) {
+  //       // Extract the bucket name and folder name (2nd and 3rd to last elements)
+  //       // from the returned url and construct a production SPW url
+  //       let arr = this.spwProdUrl.split('/');
+  //       return `https://${arr.splice(arr.length - 3, 2).join('/')}`;
+  //     } else {
+  //       return this.spwProdUrl;
+  //     }
+  //   } else {
+  //     // Nothing been published yet
+  //     return null;
+  //   }
+  // }
 
   // Core data card
   setCoreStatus(): void {
@@ -603,7 +631,6 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
   }
 
   previewSPW() {
-
     if (this.cmsHasSufficientData) {
       this.dialog.open(CmsPreviewComponent, {
         panelClass: 'rc-preview-dialog-container',
@@ -621,20 +648,15 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
   }
 
   publishSPW(): void {
-    // 04.04.2020 JB
-    // Allowing Assc. members to also publish
-    // if (this.restaurant.restaurant_rc_member_status !== 'Full') {
-    //   this.help.dspHelp('cms-dashboard-associate');
-    // } else {
-    console.log('publishSPW()');
+    // console.log('publishSPW()');
     this.isPreviewing = true;
     this.cms.previewSPW(this.restaurant.restaurant_id, this.restaurant.restaurant_number, true, false)
       .subscribe(res => {
         console.log('New publish res', res);
           if (res['status'] === 'OK') {
             // console.log('Publish success:', res);
-            this.productionUrl = res['url'];
-            this.spwUrl = this.getSpwUrl();
+            //this.spwProdUrl = res['url'];
+            //this.spwPreviewUrl = this.getSpwUrl();
             this.cmsChanged = false;
             this.d_publishDate = moment(new Date(res['published'])).format('LLLL');
             // this.publishDate = new Date(res['published']);
@@ -659,15 +681,14 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
           this.isPreviewing = false;
         });
     // }
-
   }
 
   dspSPWLinks(): void {
     this.dialog.open(CmsSpwLinksComponent,
       {
         data: {
-          spwUrl: this.spwUrl,
-          spwMenus: `${this.spwUrl}#menus`,
+          spwUrl: this.spwProdUrl,
+          spwMenus: `${this.spwPreviewUrl}#menus`,
           restaurant: this.restaurant
         }
       });
@@ -748,7 +769,8 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
           this.cmsLocalService.dspSnackbar(this.t_data.ChangeSent, null, 1);
 
           // send information to the server so that emails can be generated
-          this.cms.sendRestaurantChanges(this.user, this.restaurant, changeArray)
+          this.cms.sendRestaurantChanges(this.user.member_first_name, this.user.member_last_name, this.user.member_email,
+            this.restaurant.restaurant_name, changeArray)
             .subscribe(() => {
                 // console.log('Emails generated by server');
                 const msg = this.t_data.DataChange;
@@ -783,28 +805,6 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
           }
         }
       }
-    });
-  }
-
-  viewMemberStatus() {
-    const dialogRef = this.dialog.open(PaymentComponent, {
-      panelClass: 'rc-dialog-member',
-      data: {
-        restaurant: this.restaurant,
-        dialog: this.dialog
-      }
-    });
-
-    // record event
-    this.ga.sendEvent(
-      'CMS-Dashboard',
-      'Membership Status',
-      'Opened'
-    );
-
-    // Update dashboard
-    dialogRef.afterClosed().subscribe(() => {
-      this.setMemberStatus();
     });
   }
 

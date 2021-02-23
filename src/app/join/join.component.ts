@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MemberService, AuthenticationService, AppService } from '../_services';
 import { CmsLocalService } from '../cms';
 import { TranslateService } from '@ngx-translate/core';
@@ -19,6 +19,10 @@ export class JoinComponent implements OnInit {
   newRegResult: string;
   duplicateField: string;
   currentApplicant: any;
+  pendingMember: any = {
+    name: '',
+    role: null
+  };
   brand: any;
   referrer = {
     type: 'self',
@@ -29,6 +33,8 @@ export class JoinComponent implements OnInit {
     promo_status: null
   };
   t_data: any;
+  patternMobile = '^([+\\d]\\d*)?\\d$';
+  lang = localStorage.getItem('rd_language');
 
   constructor(
     private route: ActivatedRoute,
@@ -39,15 +45,20 @@ export class JoinComponent implements OnInit {
     private dialog: MatDialog,
     private load: LoadService,
     private config: AppConfig,
-    private appService: AppService
+    private appService: AppService,
+    private router: Router
   ) {
+    // Switch language
     translate.onLangChange.subscribe(() => {
-      this.translate.get('Join').subscribe(data => {this.t_data = data; });
+      this.translate.get('Join').subscribe(data => {
+        this.t_data = data;
+      });
     });
+
+
   }
   ngOnInit() {
-
-    // Referral code in url?
+    // Check for a referral code in the url
     this.route.paramMap
       .subscribe(params => {
         if (params.has('code')) {
@@ -60,19 +71,33 @@ export class JoinComponent implements OnInit {
       });
     // Set brand
     this.brand = this.config.brand;
-    this.translate.get('Join').subscribe(data => this.t_data = data);
+    // Get translations
+    this.translate.get('Join').subscribe(data => {
+      this.t_data = data;
+    });
+    // Check session storage
+    this.pendingMember = JSON.parse(sessionStorage.getItem('rc_member_pending')) || {};
+    console.log('Pending Member', this.pendingMember);
+
+    // Watch for unload event (page refresh etc.)
+    // Keep data in session storage
+    const that = this;
+    window.addEventListener("beforeunload", () => {
+      that.savePendingMemberData(that.pendingMember);
+    });
   }
 
+  // Display referrer details
   async setReferral(code) {
     // Force referral code to uppercase
     const uCode = code.toUpperCase();
     // Check code
     const ref = await this.memberService.getReferral(uCode);
-    console.log(ref);
+    //console.log(ref);
     // Valid code
     if (ref) {
       // Set referrer
-      this.referrer.code = uCode;
+      this.referrer.code = this.pendingMember.referral_code = uCode;
       this.referrer.type = 'member';
       this.referrer.name = `${ref.member_first_name} ${ref.member_last_name}`;
       this.referrer.id = ref.member_id;
@@ -83,27 +108,40 @@ export class JoinComponent implements OnInit {
     }
   }
 
+  // Save pending member details
+  savePendingMemberData(data): void {
+    sessionStorage.setItem('rc_member_pending', JSON.stringify(data));
+  }
+
+  // API call to check for duplicate tel/emails
+  async preRegistrationCheck(formData) {
+    this.isSubmitting = true;
+    this.load.open();
+    // API call to check for duplicates
+    // and anything else?
+    this.savePendingMemberData(formData);
+
+    // TODO
+    // API pre-flight check
+    // If good, proceed
+    this.router.navigate(['/membership-options']).then(() => this.load.close())
+    // Else, display message to user
+    // this.dspRegistrationResult('duplicate', '');
+  }
+
   async submitJoinForm(applicant) {
     this.currentApplicant = applicant;
     this.isSubmitting = true;
 
     this.load.open();
 
-    // Validate code if added manually
-    // Wait for response
-    if (this.referrer.type !== 'member') {
-      await this.setReferral(applicant.code.trim());
-    }
-
-    // Create new Content Admin & split full name
-    const names = applicant.name.split(' ');
-
+    // TODO
     // NB Note that for this early December version we set member_type to 'Full'
     // Once there is a paywall we will set this to 'Payment Pending' and update once payment
     // has been received
     const admin = {
-      member_first_name: names[0],
-      member_last_name: names.slice(1).join() || names[0], // combine any additional names
+      member_first_name: applicant.first_name,
+      member_last_name: applicant.last_name,
       member_email: applicant.email,
       member_telephone: applicant.mobile,
       member_job: applicant.role,

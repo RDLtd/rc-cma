@@ -29,14 +29,26 @@ export class CmsLocationComponent implements OnInit {
   // translation variables
   t_data: any;
 
-  mapsApiLoaded = true;
-  center: any;
-
-  markerLatLng;
+  // Map
   mapWidth: '100%';
   mapHeight: '480px';
-  mapOptions: google.maps.MapOptions;
-  markerOptions: google.maps.MarkerOptions;
+  // defaults
+  mapOptions: google.maps.MapOptions = {
+    scrollwheel: false,
+    zoom: 15,
+    styles: [
+      {
+        "featureType": "poi",
+        "stylers": [
+          { "saturation": -100 }
+        ]
+      }
+    ]
+  };
+  markerOptions: google.maps.MarkerOptions  = {
+    draggable: true,
+    animation: google.maps.Animation.DROP
+  }
   markerPosition: google.maps.LatLngLiteral;
 
   @ViewChild(GoogleMap, { static: false }) map: GoogleMap;
@@ -63,30 +75,13 @@ export class CmsLocationComponent implements OnInit {
           this.restaurant = data;
           this.mapLat = this.latMarker = Number(data.restaurant_lat);
           this.mapLng = this.lngMarker = Number(data.restaurant_lng);
-          this.mapOptions = {
-            scrollwheel: false,
-            center: { lat: this.mapLat, lng: this.mapLng },
-            zoom: 16,
-            styles: [
-              {
-                "featureType": "poi",
-                "stylers": [
-                  { "saturation": -100 }
-                ]
-              }
-            ]
-          }
+          this.mapOptions.center = { lat: this.mapLat, lng: this.mapLng };
           this.markerPosition = { lat: this.latMarker, lng: this.lngMarker };
-          this.markerOptions = {
-            draggable: true,
-            title: this.restaurant.restaurant_name,
-            animation: google.maps.Animation.DROP,
-            position: this.markerPosition
-          }
+          this.markerOptions.title = this.restaurant.restaurant_name;
+          this.markerOptions.position = this.markerPosition;
           this.getDirectionFile();
           this.getCmsData(this.restaurant.restaurant_id);
         }
-
         },
         error => console.log(error));
   }
