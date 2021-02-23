@@ -37,7 +37,7 @@
     "@material/layout-grid": "~8.0.0",
     "@ngx-translate/core": "~13.0.0",
     "@ngx-translate/http-loader": "~6.0.0",
-    "@stripe/stripe-js": "^1.11.0",
+    "@stripe/stripe-js": "^1.13.0",
     "angularx-qrcode": "~10.0.11",
     "cloudinary-core": "~2.11.3",
     "core-js": "~2.6.12",
