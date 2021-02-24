@@ -123,15 +123,18 @@ export class JoinComponent implements OnInit {
     this.isSubmitting = true;
     this.load.open();
     // API call to check for duplicates
-    // and anything else?
-    this.savePendingMemberData(formData);
-
-    // TODO
-    // API pre-flight check
-    // If good, proceed
-    this.router.navigate(['/membership-options']).then(() => this.load.close())
-    // Else, display message to user
-    // this.dspRegistrationResult('duplicate', '');
+    await this.memberService.preFlight(formData)
+      .then(res => {
+        if (res['status'] === 'OK') {
+          this.savePendingMemberData(formData);
+          this.router.navigate(['/membership-options']).then(() => this.load.close())
+        } else {
+          // console.log(res);
+          this.dspRegistrationResult('duplicate', res['error']);
+          this.isSubmitting = false;
+          this.load.close();
+        }
+      });
   }
 
   async submitJoinForm(applicant) {

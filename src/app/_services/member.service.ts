@@ -443,4 +443,16 @@ export class MemberService {
         token: this.authToken});
   }
 
+  async preFlight(formData: any) {
+    // console.log(formData);
+    return await this.http.post(`${this.config.apiUrl}/members/preflight`, {
+      administrator: {
+        member_email: formData.email,
+        member_telephone: formData.tel
+      },
+      userCode: this.config.userAPICode,
+      token: this.authToken
+    }).toPromise();
+  }
+
 }

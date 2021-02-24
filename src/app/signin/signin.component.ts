@@ -17,6 +17,7 @@ export class SigninComponent implements OnInit {
   errorMsg: string;
   pwdReset: boolean = false;
   brand: string;
+  stripeSessionId: any;
 
   // translation variables
   t_data: any;
@@ -38,6 +39,9 @@ export class SigninComponent implements OnInit {
     // Check url params
     this.activeRoute.queryParams.subscribe(params => {
       console.log('Url params', params);
+      if (params['session_id']) {
+        this.stripeSessionId = params['session_id'];
+      }
     });
 
     // If the user is already signed in

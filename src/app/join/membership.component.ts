@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { AppConfig } from '../app.config';
 import { loadStripe } from '@stripe/stripe-js/pure';
 import { environment } from '../../environments/environment';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'rc-membership',
@@ -44,7 +44,7 @@ export class MembershipComponent implements OnInit {
       cancelUrl: brandProduct.cancel_url
     })
       .then(data => {
-        console.log('Session', data)
+        console.log('MC Session', data)
         this.stripeSessionId = data['sessionId'];
       });
     const stripe = await this.stripePromise;
