@@ -455,4 +455,31 @@ export class MemberService {
     }).toPromise();
   }
 
+  getAllPending() {
+    return this.http.post(this.config.apiUrl + '/members/get_pending',
+      {
+        userCode: this.config.userAPICode,
+        token: this.authToken
+      });
+  }
+
+  createPending(pending: any) {
+    console.log('MS', pending);
+    return this.http.post(this.config.apiUrl + '/members/create_pending',
+      {
+        pending: pending,
+        userCode: this.config.userAPICode,
+        token: this.authToken
+      });
+  }
+
+  deleteAllPending(pending: any) {
+    return this.http.post(this.config.apiUrl + '/members/delete_pending',
+      {
+        pending: pending,
+        userCode: this.config.userAPICode,
+        token: this.authToken
+      });
+  }
+
 }

@@ -116,6 +116,9 @@ export class JoinComponent implements OnInit {
   // Save pending member details
   savePendingMemberData(data): void {
     sessionStorage.setItem('rc_member_pending', JSON.stringify(data));
+    this.memberService.createPending(data)
+      .toPromise()
+      .then(res => console.log(`createPending Result = ${res}`));
   }
 
   // API call to check for duplicate tel/emails
