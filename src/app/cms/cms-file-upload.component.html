@@ -19,8 +19,8 @@
   <p class="rc-warn" markdown [data]="uploadMessage | translate"></p>
   <mat-dialog-content>
       <!-- IMAGE PREVIEW-->
-      <div *ngIf="data.type === 'image'" style="height: 300px; background-color: #eee; overflow: hidden;">
-        <img *ngIf="filePreview" [src]="filePreview" [alt]="" style="height: 100%; width: auto;">
+      <div *ngIf="data.type === 'image'" class="rc-file-upload-preview">
+        <img *ngIf="filePreview" [src]="filePreview" [alt]="">
       </div>
 
       <!-- FILE SELECT BUTTON -->

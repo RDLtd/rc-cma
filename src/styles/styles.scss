@@ -1,11 +1,4 @@
 
-/**
-* Material Web Components
-* -----------------------
-* Edit defaults
-*/
-//$mdc-layout-grid-default-gutter: ( desktop: 16px, tablet: 16px, phone: 8px);
-//$mdc-layout-grid-default-margin: ( desktop: 16px, tablet: 16px, phone: 8px);
 @import "@material/layout-grid/mdc-layout-grid";
 @import "mat-themes";
 @import "vars";
@@ -49,7 +42,7 @@ $config: mat-typography-config();
 .rc-dialog-backdrop {
   background-color: rgba($rc-theme-black, 0.75);
 }
-.rc-no-grid-gutter { margin: -16px;}
+.rc-no-grid-gutter { margin: -16px; }
 .rc-hide { display: none; }
 .rc-accent { background-color: $rc-theme-secondary !important;}
 .rc-centre { text-align: center; }
@@ -159,29 +152,29 @@ and (-webkit-min-device-pixel-ratio: 1) {}
 * Maintain aspect ratio of images
 * -------------------------------
 **/
-
-[style*="--aspect-ratio"] > :first-child {
-  width: 100%;
-}
-[style*="--aspect-ratio"] > img {
-  height: auto;
-}
-@supports (--custom:property) {
-  [style*="--aspect-ratio"] {
-    position: relative;
-  }
-  [style*="--aspect-ratio"]::before {
-    content: "";
-    display: block;
-    padding-bottom: calc(100% / (var(--aspect-ratio)));
-  }
-  [style*="--aspect-ratio"] > :first-child {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-  }
-}
+//
+//[style*="--aspect-ratio"] > :first-child {
+//  width: 100%;
+//}
+//[style*="--aspect-ratio"] > img {
+//  height: auto;
+//}
+//@supports (--custom:property) {
+//  [style*="--aspect-ratio"] {
+//    position: relative;
+//  }
+//  [style*="--aspect-ratio"]::before {
+//    content: "";
+//    display: block;
+//    padding-bottom: calc(100% / (var(--aspect-ratio)));
+//  }
+//  [style*="--aspect-ratio"] > :first-child {
+//    position: absolute;
+//    top: 0;
+//    left: 0;
+//    height: 100%;
+//  }
+//}
 
 /**
 * MAT Overrides
@@ -468,150 +461,6 @@ a.mat-menu-item {text-decoration: none;}
   }
 }
 
-//@media screen and ( min-width : 768px ){
-//  .rc-join {
-//    flex-direction: row;
-//    .rc-join-info-container, .rc-join-form {
-//      min-height: 100vh;
-//    }
-//    .rc-join-info-container {
-//      width: 50%;
-//      &.rc-options {
-//        align-items: flex-end;
-//        padding: 48px;
-//      }
-//
-//    }
-//    .rc-join-form {
-//      width: 50%;
-//      &.rc-options {
-//        align-items: flex-start;
-//        padding: 5vh;
-//      }
-//    }
-//  }
-//}
-
-//.rc-join {
-//  box-sizing: border-box;
-//  display: flex;
-//  flex-direction: column;
-//  .rc-join-info-container,
-//  .rc-join-form {
-//    display: flex;
-//    flex-direction: column;
-//    align-items: center;
-//    justify-content: center;
-//    width: 100%;
-//    min-height: 0;
-//    h1 {
-//      font-size: 32px;
-//      font-weight: $rc-default-font-weight;
-//      margin: 0 0 0;
-//    }
-//    h1 + span {
-//      display: inline-block;
-//      margin: 0 0 24px;
-//    }
-//  }
-//  .rc-join-info-container {
-//    position: relative;
-//    background-color: #00BCD3;
-//    color: black;
-//    font-size: 18px;
-//    &.rc-bgd {
-//      background-color: $rc-theme-primary;
-//      color: white;
-//    }
-//    &.rc-options {
-//
-//      background-color: #454550;
-//      p {
-//        color: #ddd;
-//      }
-//    }
-//
-//    .rc-join-info {
-//      max-width: 480px;
-//      padding: 1vh 24px 5vh;
-//      span { display: block;}
-//      img {
-//        margin: 2rem 0;
-//      }
-//      h1 {
-//        margin: 0 0 1rem;
-//        line-height: 1.1;
-//        color: white;
-//      }
-//      p {
-//        font-size: 18px;
-//        line-height: 1.3;
-//        font-weight: 300;
-//        text-align: justify;
-//      }
-//    }
-//    .rc-join-welcome {
-//      padding: 48px;
-//      max-width: 600px;
-//      .rc-brand-logo {
-//        height: 90px;
-//        margin-bottom: 16px;
-//      }
-//      ol {
-//        counter-reset: rc-counter;
-//        list-style: none;
-//        margin: 24px 0 16px;
-//        padding-left: 8px;
-//      }
-//      ol li {
-//        position: relative;
-//        padding: 8px 0  8px 48px;
-//        font: $rc-default-font-weight 16px/1.25 $rc-default-font;
-//      }
-//      ol li:before {
-//        content: counter(rc-counter);
-//        counter-increment: rc-counter;
-//        position: absolute;
-//        left: 0;
-//        top: 50%;
-//        transform: translateY(-50%);
-//        font: bold 24px/1 $rc-default-font;
-//        background: white;
-//        border-radius: 50%;
-//        height: 36px;
-//        width: 36px;
-//        color: #000;
-//        line-height: 36px;
-//        text-align: center;
-//      }
-//    }
-//  }
-//
-//  .rc-join-form {
-//    background-color: white;
-//    &.rc-options {
-//      align-items: center;
-//      padding: 24px;
-//    }
-//    form,
-//    > div {
-//      max-width: 400px;
-//      padding: 48px;
-//    }
-//    .mat-form-field {
-//      width: 100%;
-//    }
-//    button {
-//      width: 100%;
-//      margin: 24px 0 8px;
-//      line-height: 64px;
-//      border-radius: 4px;
-//      text-transform: uppercase;
-//      letter-spacing: 2px;
-//      font-weight: $rc-default-font-weight;
-//    }
-//  }
-//}
 .mat-toolbar {
   background-color: $rc-theme-primary;
   color: white;
@@ -625,6 +474,7 @@ a.mat-menu-item {text-decoration: none;}
   }
   &.rc-toolbar-nav {
     background-color: $rc-theme-accent;
+    height: $rc-toolbar-nav-height !important;
   }
   &.rc-toolbar-section {
     background-color: $rc-theme-secondary;
@@ -635,6 +485,9 @@ a.mat-menu-item {text-decoration: none;}
     position: fixed;
     top: 0; left: 0;
     z-index: 100;
+  }
+  svg {
+    height: $rc-toolbar-height-std - 24px;
   }
 }
 .rc-section-toolbar {
@@ -649,8 +502,6 @@ a.mat-menu-item {text-decoration: none;}
     flex-direction: row;
   }
 }
-
-
 
 /**
 * RC Cards
@@ -825,11 +676,14 @@ a.mat-menu-item {text-decoration: none;}
     width: 100%;
     overflow: hidden;
     background: #eee;
+    width: 300px;
+    height: 300px;
     img {
       width: 100%;
-      height: auto;
-      vertical-align: middle;
+      height: 100%;
+      //vertical-align: middle;
       text-align: center;
+      object-fit: cover;
     }
   }
 }
@@ -869,12 +723,22 @@ a.mat-menu-item {text-decoration: none;}
     padding: 0 16px 0;
   }
 }
+
 .rc-dialog-cms-image-upload {
   width: 68vw;
   max-width: 480px;
   label {
     text-transform: capitalize;
     font-size: 16px;
+  }
+  .rc-file-upload-preview {
+    height: 300px;
+    background-color: $rc-theme-grey;
+    img {
+      object-fit: cover;
+      height: 300px;
+      width: 100%;
+    }
   }
 
 }
@@ -1019,7 +883,7 @@ ul.rc-lookup-results {
 * -------------------------------
 **/
 .rc-cms {
-  padding-top: ($rc-toolbar-height-std);
+  padding-top: ($rc-toolbar-nav-height);
   .rc-cms-base {
     dd { font-size: 24px; }
   }

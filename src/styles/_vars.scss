@@ -4,11 +4,11 @@
 * ------------------------------------------------------
 **/
 
-$rc-theme-primary:        #FF5721;
-$rc-theme-accent:         #1c1b1b;
+$rc-theme-primary:        #00a69b;//#FF5721;
+$rc-theme-accent:         #454540;//#1c1b1b;
 $rc-theme-secondary:      #4DD0E1;
 $rc-theme-tertiary:       #ffc213;
-$rc-theme-success:        #5dbd3d; //#8BC34A; //#50d56d;
+$rc-theme-success:        #00a69b;//#5dbd3d; //#8BC34A; //#50d56d;
 $rc-theme-warn:           #c53100;
 $rc-theme-bgd:            #efefef; //#EFF1F5;
 $rc-display-font:         'Roboto', sans-serif;
@@ -21,5 +21,6 @@ $rc-theme-dkgrey:         #454550;
 $rc-theme-text:           #666;
 $rc-media-small:          400px;
 $rc-max-width:            1480px; //976px;
-$rc-toolbar-height-std:   56px;
+$rc-toolbar-height-std:   72px;
+$rc-toolbar-nav-height:   48px;
 

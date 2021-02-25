@@ -33,7 +33,6 @@ import {
   AffiliatesComponent
 } from './cms';
 import { JoinComponent } from './join/join.component';
-import { StripeComponent } from './join/stripe.component';
 import { MembershipComponent } from './join/membership.component';
 import { HubComponent } from './hub/hub.component';
 
@@ -42,10 +41,12 @@ const APP_ROUTES: Routes = [
   { path: 'join/:code', component: JoinComponent },
   { path: 'join', component: JoinComponent },
   { path: 'membership-options', component: MembershipComponent },
-  { path: 'pay', component: StripeComponent },
   { path: 'login', component: SigninComponent },
   { path: 'signin', component: SigninComponent },
-  { path: 'hub', component: HubComponent },
+  { path: 'hub',
+    component: HubComponent,
+    canActivate: [AuthGuard]
+  },
   { path: 'referral', component: SigninComponent },
   { path: 'profile', component: ProfilePageComponent, canActivate: [AuthGuard]},
   { path: 'restaurants/:id/cms', component: CmsComponent,  canActivate: [AuthGuard], children: [

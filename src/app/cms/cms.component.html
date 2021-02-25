@@ -19,7 +19,7 @@
         *ngFor="let restaurant of restaurants"
         mat-menu-item
         [routerLink]="['/restaurants', restaurant.restaurant_id, 'cms', 'dashboard']">
-        <mat-icon>home</mat-icon>
+        <mat-icon>store</mat-icon>
         <span>{{ restaurant.restaurant_name }}</span>
       </button>
       <mat-divider></mat-divider>
@@ -84,16 +84,16 @@
              (click)="getPreview()">
             <mat-icon>personal_video</mat-icon>
           </button>
-          <button
-            mat-icon-button
-            [matTooltip]="'CMS-Component.AffiliateOffers' | translate"
-            [routerLink]="['affiliates']"
-            [routerLinkActive]="['rc-link-active']">
-            <mat-icon>redeem</mat-icon>
-            <span
-              *ngIf="offerInBox"
-              class="rc-counter">{{ offerInBox }}</span>
-          </button>
+<!--          <button-->
+<!--            mat-icon-button-->
+<!--            [matTooltip]="'CMS-Component.AffiliateOffers' | translate"-->
+<!--            [routerLink]="['affiliates']"-->
+<!--            [routerLinkActive]="['rc-link-active']">-->
+<!--            <mat-icon>redeem</mat-icon>-->
+<!--            <span-->
+<!--              *ngIf="offerInBox"-->
+<!--              class="rc-counter">{{ offerInBox }}</span>-->
+<!--          </button>-->
         </span>
 
     <span class="rc-section-toolbar-actions rc-media-med">
@@ -105,7 +105,6 @@
       </span>
 
   </mat-toolbar>
-
   <mat-menu #cmsMenu="matMenu">
 
     <a mat-menu-item [routerLink]="['dashboard']">
@@ -136,13 +135,13 @@
       <mat-icon>place</mat-icon>
       <span>{{ 'CMS-Component.Location' | translate }}</span>
     </a>
-    <a mat-menu-item [routerLink]="['affiliates']">
-      <mat-icon>redeem</mat-icon>
-      <span>{{ offerCount }} {{ 'CMS-Component.AffiliateOffers' | translate }}</span>
-      <span
-        *ngIf="offerInBox"
-        class="rc-counter">{{ offerInBox }}</span>
-    </a>
+<!--    <a mat-menu-item [routerLink]="['affiliates']">-->
+<!--      <mat-icon>redeem</mat-icon>-->
+<!--      <span>{{ offerCount }} {{ 'CMS-Component.AffiliateOffers' | translate }}</span>-->
+<!--      <span-->
+<!--        *ngIf="offerInBox"-->
+<!--        class="rc-counter">{{ offerInBox }}</span>-->
+<!--    </a>-->
   </mat-menu>
 </header>
 

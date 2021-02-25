@@ -10,7 +10,8 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './membership.component.html'
 })
 export class MembershipComponent implements OnInit {
-
+  urlTerms = this.config.brand.downloads.terms;
+  urlPrivacy = this.config.brand.downloads.privacy;
   waiting = false;
   stripeSessionId: string;
   stripePromise = loadStripe(environment.stripe_key);
@@ -19,7 +20,9 @@ export class MembershipComponent implements OnInit {
     private config: AppConfig,
     private http: HttpClient,
     private route: ActivatedRoute
-  ) { }
+  ) {
+
+  }
 
   ngOnInit(): void {
     console.log(this.config.appUrl);

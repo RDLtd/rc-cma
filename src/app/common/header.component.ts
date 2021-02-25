@@ -16,6 +16,7 @@ export class HeaderComponent implements OnInit {
   displayName: string = this.lblMemberLogin;
   dialogRef: any;
   company_name;
+  brandPrefix;
   inSession = true;
   avatarId: any;
   placeholderAvatar = null;
@@ -33,6 +34,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
 
     this.company_name = this.config.brand.name;
+    this.brandPrefix = this.config.brand.prefix;
     // If page refreshed
     this.displayName = (this.authService.isAuth() ? localStorage.getItem('rd_username') : this.lblMemberLogin);
     this.avatarId = localStorage.getItem('rd_avatar');
