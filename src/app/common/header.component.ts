@@ -18,7 +18,7 @@ export class HeaderComponent implements OnInit {
   company_name;
   brandPrefix;
   inSession = true;
-  avatarId: any;
+  avatarId = null;
   placeholderAvatar = null;
   placeholderUrl = 'https://eu.ui-avatars.com/api/?format=svg&size=40&background=fff&color=000&name='
 

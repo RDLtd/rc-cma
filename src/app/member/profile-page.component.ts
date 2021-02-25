@@ -5,11 +5,9 @@ import {
   MemberService,
   AuthenticationService,
   CMSService,
-  //FinancialService,
   HelpService, AnalyticsService
 } from '../_services';
 import { MatDialog } from '@angular/material/dialog';
-// import { MessageComponent } from '../messages/message.component';
 import { PasswordComponent } from './password.component';
 import { ProfileDetailComponent } from './profile-detail.component';
 import { ProfileImageComponent } from './profile-image.component';
@@ -37,19 +35,22 @@ export class ProfilePageComponent implements OnInit {
   restaurants: Array<Restaurant>;
   restaurant: Restaurant;
   member: Member;
-  clPublicId: string = null;
+
   defaultImages: Array<any> = [];
-  placeholderImage;
+  imgRestPlaceholderUrl;
   isDemoMember = false;
   showLoader = false;
   referrer: any;
   showRestaurantFinder = true;
-
+  imgAvatarPlaceholderUrl: string = 'https://eu.ui-avatars.com/api/?format=svg&size=48&background=fff&color=000&name=';
+  imgUserPlaceHolderUrl = 'https://res.cloudinary.com/rdl/image/upload/v1501827164/avatars/placeholder-male.jpg';
+  clPublicId: string;
   // translation variables
   t_data: any;
   brand: any;
   d_member_signedup: string;
   d_member_job: string;
+  memberImagePath = this.imgUserPlaceHolderUrl;
 
   constructor(
     private cmsLocalService: CmsLocalService,
@@ -57,7 +58,6 @@ export class ProfilePageComponent implements OnInit {
     private memberService: MemberService,
     private ga: AnalyticsService,
     private cms: CMSService,
-    // public financialService: FinancialService,
     public snackBar: MatSnackBar,
     private router: Router,
     private translate: TranslateService,
@@ -76,7 +76,7 @@ export class ProfilePageComponent implements OnInit {
           this.t_data = data;
           this.d_member_job = this.t_data[this.member.member_job];
           this.d_member_signedup = moment(this.member.member_signedup).format('DD MMMM YYYY');
-          this.placeholderImage = `https://via.placeholder.com/800x450?text=${this.t_data.AwaitingImage}`;
+          this.imgRestPlaceholderUrl = `https://via.placeholder.com/800x450?text=${this.t_data.AwaitingImage}`;
         });
       });
   }
@@ -86,10 +86,13 @@ export class ProfilePageComponent implements OnInit {
     this.brand = this.appConfig.brand;
     this.member = JSON.parse(localStorage.getItem('rd_profile'));
     console.log(this.member);
+    // Add member name to avatar url
+    this.imgAvatarPlaceholderUrl += `${this.member.member_first_name} ${this.member.member_last_name}`;
+
     moment.locale(localStorage.getItem('rd_language'));
     this.translate.get('Profile-Page').subscribe(data => {
       this.t_data = data;
-      this.placeholderImage = `https://via.placeholder.com/800x450?text=${this.t_data.AwaitingImage}`;
+      this.imgRestPlaceholderUrl = `https://via.placeholder.com/800x450?text=${this.t_data.AwaitingImage}`;
       this.setMember();
     },
       error => console.log('No t_data', error));
@@ -104,9 +107,8 @@ export class ProfilePageComponent implements OnInit {
   setMember() {
     this.isDemoMember = (this.member.member_id === '42');
     this.d_member_signedup = moment(this.member.member_signedup).format('DD MMMM YYYY');
-    const imgPath = this.member.member_image_path.split('/');
-    // Select the last 3 elements as a new Cloudinary ref
-    this.clPublicId = imgPath.slice(imgPath.length - 3).join('/');
+    // Get Cloudinary img path
+    this.clPublicId = this.getMemberClPublicId(this.member.member_image_path);
     this.getAssociatedRestaurants(this.member.member_id);
     // Make sure we've loaded the translations before
     // trying to access
@@ -211,12 +213,17 @@ export class ProfilePageComponent implements OnInit {
   }
 
   getClPublicId(idx) {
+
     if (this.defaultImages[idx]) {
       const a = this.defaultImages[idx].split('/');
       return a.splice(a.length - 3).join('/');
     } else {
-      return this.placeholderImage;
+        return this.imgRestPlaceholderUrl;
     }
+  }
+  getMemberClPublicId(url) {
+      const a = url.split('/');
+      return a.splice(a.length - 3).join('/');
   }
 
   updateProfile() {
@@ -243,25 +250,28 @@ export class ProfilePageComponent implements OnInit {
     if (this.isDemoMember) {
       this.openSnackBar(this.t_data.DemoImage, '');
     } else {
-      console.log(this.clPublicId);
       const dialogRef = this.dialog.open(ProfileImageComponent, {
         data: {
-          member: this.member,
-          avatar: this.clPublicId
+          member: this.member
         }
       });
       dialogRef.componentInstance.dialog = dialogRef;
       dialogRef.afterClosed().subscribe(url => {
         if (!!url) {
+          console.log(url)
           // Get cloudinary reference
-          let arr = url.split('/');
-          this.clPublicId = arr.splice(arr.length - 3).join('/');
-
+          this.clPublicId = this.getMemberClPublicId(url);
+          console.log('CID',this.clPublicId);
           // update member local storage
           this.member.member_image_path = url;
           localStorage.setItem('rd_profile', JSON.stringify(this.member));
           localStorage.setItem('rd_avatar', this.clPublicId);
 
+        } else {
+          this.member.member_image_path = this.imgUserPlaceHolderUrl;
+          localStorage.setItem('rd_profile', JSON.stringify(this.member));
+          this.clPublicId = this.getMemberClPublicId(this.imgUserPlaceHolderUrl);
+          localStorage.removeItem('rd_avatar');
         }
       });
     }
@@ -305,26 +315,6 @@ export class ProfilePageComponent implements OnInit {
 
     });
   }
-
-
-
-  // rcToggleClass(card) {
-  //   card.classList.toggle('rc-card-over');
-  // }
-
-  // dspUnreadMessages() {
-  //   this.memberService.messages(this.member.member_access_level, this.member.member_messages_seen)
-  //     .subscribe(msgs => {
-  //       // console.log(msgs);
-  //       const data = {
-  //         member_id: this.member.member_id,
-  //         messages: msgs.messages
-  //       };
-  //       if (msgs.messages.length) {
-  //         const dialogref = this.dialog.open(MessageComponent, {data});
-  //       }
-  //     });
-  // }
 
   addRestaurants() {
 
@@ -380,46 +370,4 @@ export class ProfilePageComponent implements OnInit {
     }
   }
 
-  // benchmarking() {
-  //   // set up the benchmarking options for this member
-  //   // first check to see if there are any associated restaurants
-  //   if (this.restaurants.length === 0) {
-  //     // this.openSnackBar('You must have at least one associated restaurant!', '');
-  //     const dialogRef = this.dialog.open(BenchmarkWizardComponent);
-  //     dialogRef.componentInstance.associatedRestaurants = this.restaurants;
-  //     dialogRef.componentInstance.primary_text = this.t_data.BenchmarkingAssociated;
-  //     return;
-  //   }
-  //   // now check to see if any of the associated restaurants have financial data
-  //   let have_financial_data = false;
-  //   for (let i = 0; i < this.restaurants.length; i++) {
-  //     this.financialService.getForRestaurant(this.restaurants[i].restaurant_id)
-  //       .subscribe(
-  //         data => {
-  //           // console.log(JSON.stringify(data), data.financials.length);
-  //           if (data['financials'].length > 0) {
-  //             have_financial_data = true;
-  //             // set a field in the restaurant record for convenience
-  //             this.restaurants[i].financial_data = true;
-  //           } else {
-  //             this.restaurants[i].financial_data = false;
-  //           }
-  //           // on the last pass check to see if we need to exit
-  //           if (i === this.restaurants.length - 1) {
-  //             if (!have_financial_data) {
-  //               const dialogRef = this.dialog.open(BenchmarkWizardComponent);
-  //               dialogRef.componentInstance.associatedRestaurants = this.restaurants;
-  //               dialogRef.componentInstance.primary_text = this.t_data.NoFinancial + this.t_data.Compare;
-  //               return;
-  //             }
-  //             // have some data so we can move directly to benchmarking
-  //             this.router.navigate(['/fs/profit']);
-  //           }
-  //         });
-  //   }
-  // }
-  //
-  // reviewFinancial(index) {
-  //   console.log(index);
-  // }
 }

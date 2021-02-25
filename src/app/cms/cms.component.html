@@ -39,7 +39,7 @@
              [matTooltip]="'CMS-Component.RDashboard' | translate"
              [routerLink]="['dashboard']"
              [routerLinkActive]="['rc-link-active']">
-            <mat-icon>apps</mat-icon>
+            <mat-icon>dashboard</mat-icon>
           </button>
 
            <button mat-icon-button
@@ -84,16 +84,6 @@
              (click)="getPreview()">
             <mat-icon>personal_video</mat-icon>
           </button>
-<!--          <button-->
-<!--            mat-icon-button-->
-<!--            [matTooltip]="'CMS-Component.AffiliateOffers' | translate"-->
-<!--            [routerLink]="['affiliates']"-->
-<!--            [routerLinkActive]="['rc-link-active']">-->
-<!--            <mat-icon>redeem</mat-icon>-->
-<!--            <span-->
-<!--              *ngIf="offerInBox"-->
-<!--              class="rc-counter">{{ offerInBox }}</span>-->
-<!--          </button>-->
         </span>
 
     <span class="rc-section-toolbar-actions rc-media-med">
@@ -108,7 +98,7 @@
   <mat-menu #cmsMenu="matMenu">
 
     <a mat-menu-item [routerLink]="['dashboard']">
-      <mat-icon>apps</mat-icon>
+      <mat-icon>dashboard</mat-icon>
       <span>{{ 'CMS-Component.Dashboard' | translate }}</span>
     </a>
     <a mat-menu-item [routerLink]="['opening-times']">

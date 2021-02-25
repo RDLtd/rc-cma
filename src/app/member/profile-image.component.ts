@@ -28,6 +28,8 @@ export class ProfileImageComponent implements OnInit {
   imgURL: string;
   placeholderImage: string = 'https://res.cloudinary.com/rdl/image/upload/v1501827164/avatars/placeholder-male.jpg';
 
+
+
   // translation variables
   t_data: any;
 
@@ -45,7 +47,7 @@ export class ProfileImageComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    // Current avatar
     this.imgPreviewSrc = this.data.member.member_image_path;
 
     this.translate.get('Profile-Image').subscribe(data => this.t_data = data);
@@ -145,11 +147,9 @@ export class ProfileImageComponent implements OnInit {
 
     this.inProgress = true;
     // update db and local member
-    console.log('M', this.data.member.member_id);
 
     this.memberService.updateAvatar(this.data.member.member_id, this.imgURL).subscribe(
       () => {
-        console.log('Avatar', this.imgURL);
         this.data.member.member_image_path = this.imgPreviewSrc;
         this.dspSnackBar(this.t_data.ImageUpdated);
         this.inProgress = false;
@@ -168,7 +168,7 @@ export class ProfileImageComponent implements OnInit {
     this.memberService.deleteAvatar(this.data.member.member_id).subscribe(
       () => {
         this.data.member_image_path = this.placeholderImage;
-        this.dialog.close(this.placeholderImage);
+        this.dialog.close(null);
         this.dspSnackBar(this.t_data.ImageDeleted);
       },
       error => {

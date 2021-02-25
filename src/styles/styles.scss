@@ -149,34 +149,6 @@ and (orientation: landscape)
 and (-webkit-min-device-pixel-ratio: 1) {}
 
 /**
-* Maintain aspect ratio of images
-* -------------------------------
-**/
-//
-//[style*="--aspect-ratio"] > :first-child {
-//  width: 100%;
-//}
-//[style*="--aspect-ratio"] > img {
-//  height: auto;
-//}
-//@supports (--custom:property) {
-//  [style*="--aspect-ratio"] {
-//    position: relative;
-//  }
-//  [style*="--aspect-ratio"]::before {
-//    content: "";
-//    display: block;
-//    padding-bottom: calc(100% / (var(--aspect-ratio)));
-//  }
-//  [style*="--aspect-ratio"] > :first-child {
-//    position: absolute;
-//    top: 0;
-//    left: 0;
-//    height: 100%;
-//  }
-//}
-
-/**
 * MAT Overrides
 * -------------------------------
 **/
@@ -486,14 +458,32 @@ a.mat-menu-item {text-decoration: none;}
     top: 0; left: 0;
     z-index: 100;
   }
-  svg {
-    height: $rc-toolbar-height-std - 24px;
+  .rc-brand-logo {
+    height: $rc-toolbar-height-std - 22px;
+  }
+  .rc-avatar {
+    display: inline-block;
+    background-color: #fff;
+    margin-left: 16px;
+    width: 44px;
+    height: 44px;
+    border-radius: 44px;
+    overflow: hidden;
+    transition: all .1s ease-out;
+    &:hover {
+      transform: scale(1.1);
+    }
+    img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
   }
 }
 .rc-section-toolbar {
   background-color: $rc-theme-black;
   color: white;
-  height:56px;
+  height: 56px;
   font-weight: $rc-default-font-weight;
   &.mat-toolbar { min-height: $rc-toolbar-height-std; }
   .rc-section-toolbar-title { transition: all .3s ease-in-out;}
