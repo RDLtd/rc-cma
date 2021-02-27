@@ -209,7 +209,7 @@ a.mat-menu-item {text-decoration: none;}
   }
   .rc-layout-split-left {
     background-color: $rc-theme-primary;
-    color: #ddd;
+    color: white;
   }
   .rc-layout-split-content {
     max-width: 420px;
@@ -217,6 +217,7 @@ a.mat-menu-item {text-decoration: none;}
     .rc-logo {
       display: block;
       margin: 0 0 2em;
+      img { height: 120px;}
     }
     h1 {
       font-weight: 300;
@@ -253,12 +254,9 @@ a.mat-menu-item {text-decoration: none;}
         line-height: 1;
         color: $rc-theme-primary;
       }
-
-
     }
     .rc-join-form {
       background-color: white;
-
       .mat-form-field {
         width: 100%;
       }
@@ -424,14 +422,12 @@ a.mat-menu-item {text-decoration: none;}
     }
   }
 }
-
-
-
 .mat-toolbar {
   background-color: $rc-theme-primary;
   color: white;
   &.rc-header {
     height: $rc-header-height !important;
+    padding: 0 18px;
   }
   .rc-toolbar-actions {
     .mat-icon {
@@ -446,7 +442,6 @@ a.mat-menu-item {text-decoration: none;}
   }
   &.rc-toolbar-nav {
     background-color: $rc-charcoal;
-    //height: $rc-toolbar-nav-height !important;
     .rc-link-active { color: $rc-theme-primary !important; }
   }
   &.rc-toolbar-section {
