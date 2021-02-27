@@ -13,6 +13,7 @@ export class AppService {
   public authToken = this.token.asObservable();
   private currentAuthToken;
 
+
   constructor(
     private config: AppConfig,
     private http: HttpClient

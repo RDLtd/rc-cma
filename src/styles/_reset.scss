@@ -10,16 +10,17 @@ body {
   margin:   0;
   height:   100%;
   color:    $rc-theme-text;
+  background-color: #efefef;
 }
 // Maintain structure when little content
-main { min-height: 80vh; }
+main { min-height: 100vh; }
 
 *:focus {outline:0;}
 
 // Default inline links
 a {
   cursor: pointer;
-  color: $rc-theme-primary;
+  color: $rc-theme-accent;
   text-decoration: none;
   &:hover { text-decoration: underline; }
 }
@@ -31,3 +32,12 @@ ol {
 }
 
 hr { margin: 3em 0; }
+
+* {
+  box-sizing: border-box;
+  ul, li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+}

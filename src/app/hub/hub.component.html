@@ -1,11 +1,20 @@
 
 
-<div class="rc-apps">
-<div class="mdc-layout-grid">
-  <div class="mdc-layout-grid__inner">
-    <div class="mdc-layout-grid__cell">
-      <h1>Member's Hub</h1>
+<div class="rc-hub">
+  <div class="mdc-layout-grid">
+    <div class="mdc-layout-grid__inner">
+      <!-- Display apps -->
+      <div
+        *ngFor="let app of apps"
+        class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
+        <mat-card class="rc-card-app" (click)="goTo(app.route)">
+          <img src="assets/images/icons/{{app.icon}}.svg">
+          <h2>{{ app.name | uppercase }}</h2>
+          <p>{{ app.desc }}</p>
+          <span>{{ app.status }}</span>
+        </mat-card>
+      </div>
     </div>
   </div>
 </div>
-</div>
+

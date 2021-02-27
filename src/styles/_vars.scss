@@ -4,23 +4,37 @@
 * ------------------------------------------------------
 **/
 
-$rc-theme-primary:        #00a69b;//#FF5721;
-$rc-theme-accent:         #454540;//#1c1b1b;
-$rc-theme-secondary:      #4DD0E1;
+
+// rc palette
+$rc-turquoise        : #00a69b;
+$rc-sunset           : #ff5721;
+$rc-pear             : #cddc38;
+$rc-glitter          : #e5f2f3;
+$rc-charcoal         : #454540;
+$rc-warm-grey        : #9a9a9a;
+$rc-cool-grey        : #cdcdcd;
+$rc-faint-grey       : #efefef;
+
+$rc-theme-primary:        $rc-turquoise;
+$rc-theme-accent:         $rc-sunset;
+$rc-theme-secondary:      $rc-cool-grey;
 $rc-theme-tertiary:       #ffc213;
-$rc-theme-success:        #00a69b;//#5dbd3d; //#8BC34A; //#50d56d;
+$rc-theme-success:        $rc-pear;
 $rc-theme-warn:           #c53100;
-$rc-theme-bgd:            #efefef; //#EFF1F5;
+$rc-theme-bgd:            $rc-faint-grey;
+$rc-theme-black:          #1c1b1b;//#20232a;//#212121;
+$rc-theme-grey:           #ddd;
+$rc-theme-dkgrey:         #454540;
 $rc-display-font:         'Roboto', sans-serif;
 $rc-display-font-weight:  500;
 $rc-default-font:         'Roboto', sans-serif;
 $rc-default-font-weight:  300;
-$rc-theme-black:          #1c1b1b;//#20232a;//#212121;
-$rc-theme-grey:           #ddd;
-$rc-theme-dkgrey:         #454550;
+
 $rc-theme-text:           #666;
 $rc-media-small:          400px;
-$rc-max-width:            1480px; //976px;
-$rc-toolbar-height-std:   72px;
-$rc-toolbar-nav-height:   48px;
+$rc-max-width:            1400px; //976px;
+//$rc-toolbar-height-std:   48px;
+//$rc-toolbar-nav-height:   48px;
+$rc-header-height:        72px;
+$rc-toolbar-height:       48px;
 

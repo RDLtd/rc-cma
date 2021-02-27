@@ -256,22 +256,23 @@ export class ProfilePageComponent implements OnInit {
         }
       });
       dialogRef.componentInstance.dialog = dialogRef;
-      dialogRef.afterClosed().subscribe(url => {
-        if (!!url) {
-          console.log(url)
-          // Get cloudinary reference
-          this.clPublicId = this.getMemberClPublicId(url);
-          console.log('CID',this.clPublicId);
-          // update member local storage
-          this.member.member_image_path = url;
-          localStorage.setItem('rd_profile', JSON.stringify(this.member));
-          localStorage.setItem('rd_avatar', this.clPublicId);
-
-        } else {
-          this.member.member_image_path = this.imgUserPlaceHolderUrl;
-          localStorage.setItem('rd_profile', JSON.stringify(this.member));
-          this.clPublicId = this.getMemberClPublicId(this.imgUserPlaceHolderUrl);
-          localStorage.removeItem('rd_avatar');
+      dialogRef.afterClosed().subscribe(data => {
+        console.log('str', data.str);
+        if (data.str.length) {
+          if (data.str === 'delete') {
+            this.member.member_image_path = this.imgUserPlaceHolderUrl;
+            localStorage.setItem('rd_profile', JSON.stringify(this.member));
+            this.clPublicId = this.getMemberClPublicId(this.imgUserPlaceHolderUrl);
+            localStorage.removeItem('rd_avatar');
+          } else {
+            const imgUrl = data.str;
+            // Get cloudinary reference
+            this.clPublicId = this.getMemberClPublicId(imgUrl);
+            // update member local storage
+            this.member.member_image_path = imgUrl;
+            localStorage.setItem('rd_profile', JSON.stringify(this.member));
+            localStorage.setItem('rd_avatar', this.clPublicId);
+          }
         }
       });
     }

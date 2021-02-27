@@ -153,7 +153,7 @@ export class ProfileImageComponent implements OnInit {
         this.data.member.member_image_path = this.imgPreviewSrc;
         this.dspSnackBar(this.t_data.ImageUpdated);
         this.inProgress = false;
-        this.dialog.close(this.imgURL);
+        this.dialog.close({str: this.imgURL});
         // record event
         this.ga.sendEvent('Profile', 'Edit', 'Update Image');
       },
@@ -168,7 +168,7 @@ export class ProfileImageComponent implements OnInit {
     this.memberService.deleteAvatar(this.data.member.member_id).subscribe(
       () => {
         this.data.member_image_path = this.placeholderImage;
-        this.dialog.close(null);
+        this.dialog.close({str: 'delete'});
         this.dspSnackBar(this.t_data.ImageDeleted);
       },
       error => {
