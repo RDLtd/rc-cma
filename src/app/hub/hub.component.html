@@ -7,7 +7,6 @@
       <div
         *ngFor="let app of apps"
         class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 rc-hub-apps">
-
         <div
           class="rc-hub-cms"
           style="position: relative"
@@ -17,6 +16,16 @@
           <span class="rc-hub-cms-icons">
             <mat-icon *ngFor="let icon of restaurants">store</mat-icon>
           </span>
+          <mat-menu #menu="matMenu">
+            <button
+              *ngFor="let restaurant of restaurants"
+              [routerLink]="['/restaurants', restaurant.restaurant_id, 'cms', 'dashboard']"
+              mat-menu-item
+              style="width: 100%;">
+              <mat-icon>store</mat-icon>
+              <span>{{ restaurant?.restaurant_name }}</span>
+            </button>
+          </mat-menu>
 
         </div>
 
@@ -32,13 +41,5 @@
   </div>
 </div>
 
-<mat-menu #menu="matMenu">
-  <button
-    *ngFor="let restaurant of restaurants"
-    mat-menu-item
-    style="width: 100%;">
-    <mat-icon>store</mat-icon>
-    <span>{{ restaurant?.restaurant_name }}</span>
-  </button>
-</mat-menu>
+
 

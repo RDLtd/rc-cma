@@ -86,6 +86,8 @@ export class HubComponent implements AfterViewInit {
       case 'cms': {
         if (this.restaurants.length > 1) {
           this.trigger.openMenu();
+        } else {
+          this.router.navigate(['/restaurants', this.restaurants[0].restaurant_id, 'cms', 'dashboard']).then()
         }
         break;
       }
