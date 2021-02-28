@@ -71,7 +71,7 @@ export class HubComponent implements OnInit {
     this.header.updateHeaderTag('Member\'s Hub');
     this.member = JSON.parse(localStorage.getItem('rd_profile'));
     this.getRestaurants();
-    //this.dspMessages();
+    this.dspMessages();
   }
   dspMessages() {
     let dialogRef = this.dialog.open(MessageComponent);

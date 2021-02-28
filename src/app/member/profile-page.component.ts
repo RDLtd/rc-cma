@@ -269,6 +269,7 @@ export class ProfilePageComponent implements OnInit {
             localStorage.setItem('rd_profile', JSON.stringify(this.member));
             this.clPublicId = this.getMemberClPublicId(this.imgUserPlaceHolderUrl);
             localStorage.removeItem('rd_avatar');
+            this.header.updateAvatar(null);
           } else {
             const imgUrl = data.str;
             // Get cloudinary reference
@@ -277,6 +278,7 @@ export class ProfilePageComponent implements OnInit {
             this.member.member_image_path = imgUrl;
             localStorage.setItem('rd_profile', JSON.stringify(this.member));
             localStorage.setItem('rd_avatar', this.clPublicId);
+            this.header.updateAvatar(data.str);
           }
         }
       });

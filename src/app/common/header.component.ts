@@ -41,14 +41,15 @@ export class HeaderComponent implements OnInit {
     this.company_name = this.config.brand.name;
     this.brandPrefix = this.config.brand.prefix;
 
-    // Listen for updates to the header section tag
-    this.header.currentHeaderTag.subscribe(str => this.navLabel = str);
-
-
     // If page refreshed
     this.displayName = (this.authService.isAuth() ? localStorage.getItem('rd_username') : this.lblMemberLogin);
     this.avatarId = localStorage.getItem('rd_avatar');
     this.placeholderAvatar = this.placeholderUrl + this.displayName;
+
+    // Listen for updates to the header section tag
+    this.header.currentHeaderTag.subscribe(str => this.navLabel = str);
+    this.header.currentAvatar.subscribe(url => this.avatarId = url || this.placeholderAvatar);
+
     // Get notified anytime the login status changes
     this.authService.memberSessionSubject.subscribe(
       sessionStatus => {
