@@ -40,7 +40,8 @@
   <mat-dialog-content class="image-wrapper">
 
     <mat-chip-list class="rc-element-tag">
-      <mat-chip selected="true" *ngIf="image.cms_element_default">{{ 'CMS-Image-Dialog.DefaultTag' | translate }}</mat-chip>
+      <mat-chip selected="true" class="rc-default" *ngIf="image.cms_element_default">{{ 'CMS-Image-Dialog.DefaultTag'
+        | translate }}</mat-chip>
       <mat-chip selected="true" class="rc-online" *ngIf="image.cms_element_active">{{ 'CMS-Image-Dialog.Available' | translate }}</mat-chip>
       <mat-chip selected="false" *ngIf="!image.cms_element_active">{{ 'CMS-Image-Dialog.Offline' | translate }}</mat-chip>
     </mat-chip-list>

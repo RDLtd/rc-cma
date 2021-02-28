@@ -2,6 +2,9 @@ import { Component, OnInit } from "@angular/core";
 import { MatDialog, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { MessageComponent } from "../common";
 import { Router } from '@angular/router';
+import { HeaderService } from '../common/header.service';
+import { Member } from '../_models';
+import { RestaurantService } from '../_services';
 
 
 
@@ -10,21 +13,22 @@ import { Router } from '@angular/router';
   templateUrl: "./hub.component.html"
 })
 export class HubComponent implements OnInit {
-
+  member: Member;
+  restaurants: Array<any>;
   apps = [
-    {
-      name: "Community Forum",
-      icon: "app-icon-forum",
-      desc: "Visit our online community of restaurant professionals.",
-      status: "134 Members Online Now!",
-      route: "fb"
-    },
     {
       name: "Content Management",
       icon: "app-icon-cms",
       desc: "Manage your restaurant's web content and publish you Single Page Website (SPW) that will be used." ,
       status: "Last updated 28.02.2021",
       route: "cms"
+    },
+    {
+      name: "Community Forum",
+      icon: "app-icon-forum",
+      desc: "Visit our online community of restaurant professionals.",
+      status: "134 Members Online Now!",
+      route: "fb"
     },
     {
       name: "Knowledge Base",
@@ -35,21 +39,21 @@ export class HubComponent implements OnInit {
       route: "kb"
     },
     {
-      name: "Marketplace",
+      name: "Deals Marketplace",
       icon: "app-icon-market",
       desc: "A wide range of offers and services available exclusive to Restaurant Collective Members",
       status: "Average savings £1750 p.a.",
       route: "market"
     },
     {
-      name: "Member Account",
+      name: "Membership Settings",
       icon: "app-icon-profile",
       desc: "Manage your Restaurant Collective membership account and user profile.",
       status: "Member since 28 Feb 2021",
       route: "profile"
     },
     {
-      name: "Job Search",
+      name: "Job & Staff Search",
       icon: "app-icon-jobs",
       desc: "Manage your Restaurant Collective membership account and user profile.",
       status: "22 new jobs published today",
@@ -58,10 +62,15 @@ export class HubComponent implements OnInit {
   ]
 
   constructor(
+    private header: HeaderService,
+    private restaurantService: RestaurantService,
     private router: Router,
     public dialog: MatDialog) { }
 
   ngOnInit(): void {
+    this.header.updateHeaderTag('Member\'s Hub');
+    this.member = JSON.parse(localStorage.getItem('rd_profile'));
+    this.getRestaurants();
     //this.dspMessages();
   }
   dspMessages() {
@@ -89,5 +98,18 @@ export class HubComponent implements OnInit {
         break;
       }
     }
+  }
+  getRestaurants() {
+    this.restaurantService.getMemberRestaurants(this.member.member_id)
+      .subscribe(
+        data => {
+          this.restaurants = data['restaurants'];
+          if (this.restaurants.length) {
+            console.log(this.restaurants);
+          }
+        },
+        error => {
+          console.log(error);
+        });
   }
 }

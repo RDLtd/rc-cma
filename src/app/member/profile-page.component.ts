@@ -22,6 +22,7 @@ import { ClipboardService } from 'ngx-clipboard';
 import { AppConfig } from '../app.config';
 import { CmsLocalService } from '../cms';
 import { LoadService } from '../common/loader/load.service';
+import { HeaderService } from '../common/header.service';
 
 
 @Component({
@@ -53,6 +54,7 @@ export class ProfilePageComponent implements OnInit {
   memberImagePath = this.imgUserPlaceHolderUrl;
 
   constructor(
+    private header: HeaderService,
     private cmsLocalService: CmsLocalService,
     private restaurantService: RestaurantService,
     private memberService: MemberService,
@@ -85,7 +87,10 @@ export class ProfilePageComponent implements OnInit {
 
     this.brand = this.appConfig.brand;
     this.member = JSON.parse(localStorage.getItem('rd_profile'));
-    console.log(this.member);
+
+    // Updare header label
+    this.header.updateHeaderTag('Member profile');
+
     // Add member name to avatar url
     this.imgAvatarPlaceholderUrl += `${this.member.member_first_name} ${this.member.member_last_name}`;
 

@@ -8,6 +8,7 @@ import { CmsLocalService } from './cms-local.service';
 import { MatDialog } from '@angular/material/dialog';
 import { CmsPreviewComponent } from './cms-preview.component';
 import { fadeAnimation } from '../shared/animations';
+import { HeaderService } from '../common/header.service';
 
 @Component({
   selector: 'rc-cms',
@@ -25,6 +26,7 @@ export class CmsComponent implements OnInit {
   offerSubject: any;
 
   constructor(
+    private header: HeaderService,
     private route: ActivatedRoute,
     private restaurantService: RestaurantService,
     private ga: AnalyticsService,
@@ -52,6 +54,8 @@ export class CmsComponent implements OnInit {
           },
           error => console.log(error)
         );
+
+    this.header.updateHeaderTag('Content Management');
 
     this.member = JSON.parse(localStorage.getItem('rd_profile'));
 

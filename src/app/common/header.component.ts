@@ -5,6 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AppConfig } from '../app.config';
 import { AboutComponent } from './about.component';
+import { HeaderService } from './header.service';
 
 @Component({
   selector: 'rc-header',
@@ -20,7 +21,8 @@ export class HeaderComponent implements OnInit {
   inSession = true;
   avatarId = null;
   placeholderAvatar = null;
-  placeholderUrl = 'https://eu.ui-avatars.com/api/?format=svg&size=40&background=fff&color=000&name='
+  placeholderUrl = 'https://eu.ui-avatars.com/api/?format=svg&size=40&background=fff&color=000&name=';
+  navLabel: string;
 
 
   constructor(
@@ -29,12 +31,20 @@ export class HeaderComponent implements OnInit {
     private dialog: MatDialog,
     private router: Router,
     private route: ActivatedRoute,
-    private config: AppConfig ) { }
+    private header: HeaderService,
+    private config: AppConfig ) {
+
+  }
 
   ngOnInit() {
 
     this.company_name = this.config.brand.name;
     this.brandPrefix = this.config.brand.prefix;
+
+    // Listen for updates to the header section tag
+    this.header.currentHeaderTag.subscribe(str => this.navLabel = str);
+
+
     // If page refreshed
     this.displayName = (this.authService.isAuth() ? localStorage.getItem('rd_username') : this.lblMemberLogin);
     this.avatarId = localStorage.getItem('rd_avatar');

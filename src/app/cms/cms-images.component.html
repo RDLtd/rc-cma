@@ -27,6 +27,7 @@
         (click)="viewImage(image)">
       <mat-chip-list class="rc-element-tag">
         <mat-chip
+          class="rc-default"
           selected="true"
           *ngIf="image['cms_element_default']">
           {{ 'CMS-Images.DefaultTag' | translate }}
