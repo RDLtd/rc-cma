@@ -1,10 +1,11 @@
-import { Component, OnInit } from "@angular/core";
+import { AfterViewInit, Component, OnInit, ViewChild } from "@angular/core";
 import { MatDialog, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { MessageComponent } from "../common";
 import { Router } from '@angular/router';
 import { HeaderService } from '../common/header.service';
 import { Member } from '../_models';
 import { RestaurantService } from '../_services';
+import { MatMenu, MatMenuTrigger } from '@angular/material/menu';
 
 
 
@@ -12,7 +13,8 @@ import { RestaurantService } from '../_services';
   selector: "rc-hub",
   templateUrl: "./hub.component.html"
 })
-export class HubComponent implements OnInit {
+export class HubComponent implements AfterViewInit {
+  @ViewChild('menuTrigger') trigger: MatMenuTrigger;
   member: Member;
   restaurants: Array<any>;
   apps = [
@@ -67,18 +69,24 @@ export class HubComponent implements OnInit {
     private router: Router,
     public dialog: MatDialog) { }
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     this.header.updateHeaderTag('Member\'s Hub');
     this.member = JSON.parse(localStorage.getItem('rd_profile'));
     this.getRestaurants();
-    this.dspMessages();
+    // this.dspMessages();
+
+
   }
+
   dspMessages() {
     let dialogRef = this.dialog.open(MessageComponent);
   }
   goTo (route: string): void {
     switch (route) {
       case 'cms': {
+        if (this.restaurants.length > 1) {
+          this.trigger.openMenu();
+        }
         break;
       }
       case 'profile': {

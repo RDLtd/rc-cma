@@ -6,15 +6,39 @@
       <!-- Display apps -->
       <div
         *ngFor="let app of apps"
-        class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
+        class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 rc-hub-apps">
+
+        <div
+          class="rc-hub-cms"
+          style="position: relative"
+          *ngIf="app.route === 'cms' && restaurants?.length > 1"
+          #menuTrigger="matMenuTrigger"
+          [matMenuTriggerFor]="menu">
+          <span class="rc-hub-cms-icons">
+            <mat-icon *ngFor="let icon of restaurants">store</mat-icon>
+          </span>
+
+        </div>
+
         <mat-card class="rc-card-app" (click)="goTo(app.route)">
           <img src="assets/images/icons/{{app.icon}}.svg">
           <h2>{{ app.name | uppercase }}</h2>
           <p>{{ app.desc }}</p>
           <span>{{ app.status }}</span>
         </mat-card>
+
       </div>
     </div>
   </div>
 </div>
+
+<mat-menu #menu="matMenu">
+  <button
+    *ngFor="let restaurant of restaurants"
+    mat-menu-item
+    style="width: 100%;">
+    <mat-icon>store</mat-icon>
+    <span>{{ restaurant?.restaurant_name }}</span>
+  </button>
+</mat-menu>
 

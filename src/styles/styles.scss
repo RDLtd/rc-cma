@@ -579,22 +579,24 @@ a.mat-menu-item {text-decoration: none;}
   text-align: center;
   &:hover {
     @include mat-elevation(3);
+    h2 { color: $rc-theme-accent }
   }
   img { margin: 0;}
-  h2 { margin: 0; }
+  h2 { margin: 0; color: $rc-charcoal;}
   p {
     text-align: left;
     margin-bottom: 48px;
   }
   span:last-child {
     display: inline-block;
-    width: 100%;
     position: absolute;
     bottom: 16px;
     left: 16px;
-    text-align: left;
-    color: $rc-theme-primary;
-    font-weight: 500;
+    right: 16px;
+    color: $rc-theme-accent;
+    text-align: center;
+    font-size: 11px;
+    text-transform: uppercase;
   }
 }
 .rc-card-restaurant {
@@ -1386,7 +1388,22 @@ button.rc-member-assc {
 }
 
 .rc-hub {
-
+  .rc-hub-apps { }
+  .rc-hub-cms {
+    position: relative;
+    .rc-hub-cms-icons {
+      display: block;
+      position: absolute;
+      top: 12px;
+      left: 16px;
+      z-index: 100;
+    }
+    .mat-icon {
+      font-size: 24px;
+      color: $rc-sunset;
+      cursor: pointer;
+    }
+  }
 }
 
 /*
