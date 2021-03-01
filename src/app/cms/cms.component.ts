@@ -55,7 +55,7 @@ export class CmsComponent implements OnInit {
           error => console.log(error)
         );
 
-    this.header.updateHeaderTag('Content Management');
+    this.header.updateSectionName('Content Management');
 
     this.member = JSON.parse(localStorage.getItem('rd_profile'));
 

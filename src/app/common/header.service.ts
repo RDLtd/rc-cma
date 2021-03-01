@@ -7,17 +7,17 @@ import { delay } from 'rxjs/operators';
 })
 export class HeaderService {
 
-  headerTagSubject = new BehaviorSubject('Member\'s Hub');
+  sectionNameSubject = new BehaviorSubject('Member\'s Hub');
   // Add delay to avoid the 'update after change detection error'
-  currentHeaderTag = this.headerTagSubject.asObservable().pipe(delay(0));
+  sectionName = this.sectionNameSubject.asObservable().pipe(delay(0));
 
   avatarSubject = new BehaviorSubject('');
   currentAvatar = this.avatarSubject.asObservable();
 
   constructor() { }
 
-  updateHeaderTag (str: string) {
-    this.headerTagSubject.next(str)
+  updateSectionName (str: string) {
+    this.sectionNameSubject.next(str)
   }
 
   updateAvatar(url: string) {

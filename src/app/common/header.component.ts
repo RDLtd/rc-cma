@@ -47,7 +47,7 @@ export class HeaderComponent implements OnInit {
     this.placeholderAvatar = this.placeholderUrl + this.displayName;
 
     // Listen for updates to the header section tag
-    this.header.currentHeaderTag.subscribe(str => this.navLabel = str);
+    this.header.sectionName.subscribe(str => this.navLabel = str);
     this.header.currentAvatar.subscribe(url => this.avatarId = url || this.placeholderAvatar);
 
     // Get notified anytime the login status changes

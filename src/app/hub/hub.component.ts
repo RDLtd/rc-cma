@@ -71,18 +71,18 @@ export class HubComponent implements AfterViewInit {
     private router: Router,
     public dialog: MatDialog) {
 
-    this.header.updateHeaderTag('Member\'s Hub');
+    this.header.updateSectionName('Member\'s Hub');
     this.member = JSON.parse(localStorage.getItem('rd_profile'));
 
   }
 
   ngAfterViewInit(): void {
     this.getRestaurants();
-    this.dspMessages();
+    //this.dspMessages();
   }
 
   dspMessages() {
-    const messages = [];
+    const messages = null;
     let dialogRef = this.dialog.open(MessageComponent, {
       data: messages
     });
@@ -121,7 +121,7 @@ export class HubComponent implements AfterViewInit {
         data => {
           this.restaurants = data['restaurants'];
           if (this.restaurants.length) {
-            console.log(this.restaurants);
+            //console.log(this.restaurants);
           }
         },
         error => {
