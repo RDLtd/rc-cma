@@ -6,6 +6,7 @@ import { HeaderService } from '../common/header.service';
 import { Member } from '../_models';
 import { RestaurantService } from '../_services';
 import { MatMenuTrigger } from '@angular/material/menu';
+import { LoadService } from '../common/loader/load.service';
 
 
 
@@ -21,7 +22,7 @@ export class HubComponent implements AfterViewInit {
   restaurants: Array<any>;
   apps = [
     {
-      name: "Content Management",
+      name: "Web Content",
       icon: "app-icon-cms",
       desc: "Manage your restaurant's web content and publish you Single Page Website (SPW) that will be used." ,
       status: "Last updated 28.02.2021",
@@ -66,11 +67,13 @@ export class HubComponent implements AfterViewInit {
   ]
 
   constructor(
+    private loader: LoadService,
     private header: HeaderService,
     private restaurantService: RestaurantService,
     private router: Router,
     public dialog: MatDialog) {
 
+    this.loader.open();
     this.header.updateSectionName('Member\'s Hub');
     this.member = JSON.parse(localStorage.getItem('rd_profile'));
 
@@ -78,6 +81,7 @@ export class HubComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this.getRestaurants();
+    this.loader.close();
     //this.dspMessages();
   }
 

@@ -580,15 +580,19 @@ a.mat-menu-item {text-decoration: none;}
   cursor: pointer;
   text-align: center;
   border-radius: 16px !important;
+  padding: 24px !important;
   &:hover {
     @include mat-elevation(4);
     h2 { color: $rc-theme-accent }
   }
-  img { margin: 0;}
+  img {
+    margin: 0 0 -8px;
+    padding: 0;
+  }
   h2 { margin: 0; color: $rc-charcoal;}
   p {
     text-align: left;
-    margin-bottom: 48px;
+    margin-bottom: 32px;
   }
   span:last-child {
     display: inline-block;
@@ -598,7 +602,7 @@ a.mat-menu-item {text-decoration: none;}
     right: 16px;
     color: $rc-theme-accent;
     text-align: center;
-    font-size: 11px;
+    font-size: 14px;
     text-transform: uppercase;
   }
 }
@@ -1399,11 +1403,11 @@ button.rc-member-assc {
       position: absolute;
       top: 12px;
       left: 16px;
-      z-index: 100;
+      z-index: 2;
     }
     .mat-icon {
       font-size: 24px;
-      color: $rc-sunset;
+      color: $rc-charcoal;
       cursor: pointer;
     }
   }
