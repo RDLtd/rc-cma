@@ -44,7 +44,7 @@
           {{ 'CMS-Images.Offline' | translate }}
         </mat-chip>
       </mat-chip-list>
-      <div style="min-height:240px;">
+      <div>
         <cl-image
           *ngIf="image['cms_element_image_ref']"
           [public-id]="image['cms_element_image_ref']"
@@ -60,6 +60,7 @@
           </cl-transformation>
         </cl-image>
       </div>
+
 
       <div class="rc-card-actions">
         {{ image['cms_element_id'] }}

@@ -50,7 +50,9 @@ export class CmsLocalService {
   dspSnackbar(msg: string, actn: string = '', d: number = 3, style: any = 'info'): void {
     this.snackBar.open(msg, actn, {
       duration: d * 1000,
-      panelClass: [`rc-mat-snack-${style}`]
+      panelClass: [`rc-mat-snack-${style}`],
+      horizontalPosition: 'center',
+      verticalPosition: 'bottom',
     });
   }
 

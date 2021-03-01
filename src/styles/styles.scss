@@ -66,7 +66,7 @@ $config: mat-typography-config();
 a.rc-back {
   display: inline-flex;
   justify-content: flex-start;
-  color: #ccc;
+  color: #fff;
   font-size: 16px;
   text-decoration: none;
   margin: 1rem 0;
@@ -87,7 +87,7 @@ a.rc-back {
 .rc-mat-snack-warn,
 .rc-mat-snack-info{
   color: black;
-  background-color: $rc-theme-primary;
+  background-color: $rc-theme-accent;
   .mat-simple-snackbar,
   .mat-simple-snackbar-action {
     color: black;
@@ -99,7 +99,7 @@ a.rc-back {
   }
 }
 .rc-mat-snack-info {
-  background-color: black;
+  background-color: $rc-charcoal;
   .mat-simple-snackbar,
   .mat-simple-snackbar-action {
     color: white;
@@ -110,7 +110,7 @@ a.rc-back {
   &:hover { background: #eee; }
 }
 .rc-success { color: $rc-theme-success !important; }
-.rc-highlight { color: $rc-theme-primary }
+.rc-highlight { color: $rc-theme-accent }
 .rc-warn { color: $rc-theme-warn; }
 .rc-media-small-hide { display: none !important; }
 .rc-media-med { display: block !important; }

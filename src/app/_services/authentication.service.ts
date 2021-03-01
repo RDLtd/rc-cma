@@ -33,7 +33,7 @@ export class AuthenticationService {
     private config: AppConfig) { }
 
   public login(form) {
-    console.log('LOGIN', this.authToken);
+    // console.log('LOGIN', this.authToken);
     return this.http.post(this.config.apiUrl + '/members/authenticate',
       {
         email: form.email,
@@ -53,6 +53,9 @@ export class AuthenticationService {
   }
 
   public setAuthSession(member, token, offline): void {
+
+    // Todo: need to review this code in light
+    //  of the new hub landing page for all users
 
     this.dbOffline = offline;
     this.member = member;
@@ -114,11 +117,16 @@ export class AuthenticationService {
           this.restaurantService.getMemberRestaurants(member.member_id)
             .subscribe(
               data => {
-                if (data['count'] > 0) {
-                  localStorage.setItem('rd_home', `restaurants/${data['restaurants'][0].restaurant_id}/cms/dashboard`);
-                } else {
-                  localStorage.setItem('rd_home', '/profile');
-                }
+
+                // if (data['count'] > 0) {
+                //   localStorage.setItem('rd_home', `restaurants/${data['restaurants'][0].restaurant_id}/cms/dashboard`);
+                // } else {
+                //   localStorage.setItem('rd_home', '/profile');
+                // }
+
+                // Now direct all traffic to the HUB
+                localStorage.setItem('rd_home', '/hub');
+
                 this.dspHomeScreen('active');
               },
               error => {
@@ -140,7 +148,7 @@ export class AuthenticationService {
           break;
         }
         default: {
-          localStorage.setItem('rd_home', '/profile');
+          localStorage.setItem('rd_home', '/hub');
           this.dspHomeScreen('closed')
           break;
         }
@@ -151,6 +159,7 @@ export class AuthenticationService {
   dspHomeScreen(sessionStatus): void {
     this.inSession = sessionStatus === 'active';
     this.memberSessionSubject.next(sessionStatus);
+    // Default route is now the HUB
     this.router.navigate(['/hub']);
     //this.router.navigate([localStorage.getItem('rd_home')]);
   }
@@ -160,7 +169,6 @@ export class AuthenticationService {
     this.inSession = false;
     this.memberSessionSubject.next(reason);
     this.member = null;
-
     // Clear session variables
     localStorage.removeItem('rd_profile');
     localStorage.removeItem('rd_username');
@@ -169,9 +177,7 @@ export class AuthenticationService {
     localStorage.removeItem('rd_access_level');
     localStorage.removeItem('rd_home');
     localStorage.removeItem('rd_session');
-
   }
-
 
   isAuth(): boolean {
     // Check expiry mins
