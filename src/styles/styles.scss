@@ -403,7 +403,8 @@ a.mat-menu-item {text-decoration: none;}
 
 // Default logo
 .rc-svg-logo {
-  width: 260px;
+  height: 100%;
+  max-width: 360px;
   margin: 0 0 1rem;
   .rc-svg-logo-group {
     fill: white;
@@ -458,6 +459,7 @@ a.mat-menu-item {text-decoration: none;}
     display: block;
     cursor: pointer;
     transition: all .1s ease-out;
+    height: $rc-toolbar-height;
     &:hover {
     transform: scale(1.05);
     }

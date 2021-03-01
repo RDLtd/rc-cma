@@ -95,6 +95,7 @@ import { QRCodeModule } from 'angularx-qrcode';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { MembershipComponent } from './join/membership.component';
 import { HubComponent } from './hub/hub.component';
+import { LogoComponent } from './common/logo/logo.component';
 
 
 // AoT requires an exported function for factories
@@ -141,7 +142,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     LoadComponent,
     CmsSpwLinksComponent,
     MembershipComponent,
-    HubComponent
+    HubComponent,
+    LogoComponent
   ],
   imports: [
     AngularMaterialModule,
