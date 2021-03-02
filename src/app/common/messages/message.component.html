@@ -4,7 +4,7 @@
   <ng-container *ngIf="newMember">
     <rc-logo [height]="64" [class]="'primary'"></rc-logo>
     <mat-dialog-content>
-      <markdown ngPreserveWhitespaces>
+      <div markdown ngPreserveWhitespaces>
         # Welcome
 
         We're very pleased that you've chosen to join this community of like-minded people. Before you start
@@ -12,18 +12,25 @@
 
         ## Set up your restaurant
 
-        You should start by adding your restaurant to your account. You'll be able to look up your restaurant and
-        associate it to account by following the on-screen instructions.
+        Start by adding your restaurant to your account. You'll be able to look up your restaurant and
+        link it to account by following the on-screen instructions. Just slect the **START HERE** option below, when
+        you're ready.
 
         If you need any help, then open the **Knowledge Base** and see the **Getting Started** guide.
-      </markdown>
+
+        ## Next time you sign-in
+
+        Please note: a password has been sent to your registered email address and you will need that to sign-in next
+        time.
+
+      </div>
     </mat-dialog-content>
 
     <mat-dialog-actions align="end">
       <button
         mat-stroked-button
         [mat-dialog-close]="true">
-        Ok, let's get started
+        START HERE
       </button>
     </mat-dialog-actions>
 

@@ -1,5 +1,4 @@
 
-
 <div class="rc-hub">
   <div class="mdc-layout-grid">
     <div class="mdc-layout-grid__inner">
@@ -7,21 +6,24 @@
       <div
         *ngFor="let app of apps"
         class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
+
         <div
           class="rc-hub-cms"
-          style="position: relative"
-          *ngIf="app.route === 'cms' && restaurants?.length > 1"
+          *ngIf="app.route === 'cms'"
           #menuTrigger="matMenuTrigger"
           [matMenuTriggerFor]="menu">
+
+          <!-- If multiple restaurants -->
           <span class="rc-hub-cms-icons">
             <mat-icon *ngFor="let icon of restaurants">store</mat-icon>
           </span>
+
+          <!-- multi restaurant selection -->
           <mat-menu #menu="matMenu">
             <button
               *ngFor="let restaurant of restaurants"
               [routerLink]="['/restaurants', restaurant.restaurant_id, 'cms', 'dashboard']"
-              mat-menu-item
-              style="width: 100%;">
+              mat-menu-item>
               <mat-icon>store</mat-icon>
               <span>{{ restaurant?.restaurant_name }}</span>
             </button>

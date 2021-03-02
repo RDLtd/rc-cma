@@ -38,13 +38,13 @@ export class HubComponent implements AfterViewInit {
       name: "Web Content",
       icon: "app-icon-cms",
       desc: "Manage your restaurant's web content and publish you Single Page Website (SPW) that will be used." ,
-      status: "Last updated 28.02.2021",
+      status: "Last updated on 28.02.2021",
       route: "cms"
     },
     {
       name: "Community Forum",
       icon: "app-icon-forum",
-      desc: "Visit our online community of restaurant professionals.",
+      desc: "Visit our Facebook Community Group  of restaurant professionals and contribute.",
       status: "134 Members Online Now!",
       route: "fb"
     },
@@ -59,7 +59,8 @@ export class HubComponent implements AfterViewInit {
     {
       name: "Deals Marketplace",
       icon: "app-icon-market",
-      desc: "A wide range of offers and services available exclusive to Restaurant Collective Members",
+      desc: "A wide range of offers and services available exclusive to Restaurant Collective Members. New deals are" +
+        " being added every week, so check regularly..",
       status: "Average savings £1750 p.a.",
       route: "market"
     },
@@ -74,6 +75,14 @@ export class HubComponent implements AfterViewInit {
       name: "Job & Staff Search",
       icon: "app-icon-jobs",
       desc: "Manage your Restaurant Collective membership account and user profile.",
+      status: "22 new jobs published today",
+      route: "jobs"
+    },
+    {
+      name: "HELP US TO HELP YOU",
+      icon: "app-icon-feedback",
+      desc: "Take our 30 second survey and let us know what's important to you. We AIM to deliver real support" +
+        " so it's vital that we know what you need the most.",
       status: "22 new jobs published today",
       route: "jobs"
     }
@@ -105,30 +114,42 @@ export class HubComponent implements AfterViewInit {
       disableClose: true,
       data: {
         newMember: true,
+        member: this.member,
         messages: this.messages
       }
     });
 
     dialogMessages.afterClosed()
-      .subscribe(newMember => {
-        if (newMember) {
-          let dialogLookUp = this.dialog.open(RestaurantLookupComponent, {
-            width: '480px',
-            position: {'top': '10vh'},
-            data: {
-              member: this.member
-            }
-          });
+      .subscribe(isNewMember => {
+        if (isNewMember) {
+          this.openRestaurantLookup();
         }
       });
   }
+
+  openRestaurantLookup(): void {
+    let dialogLookUp = this.dialog.open(RestaurantLookupComponent, {
+      width: '480px',
+      position: {'top': '10vh'},
+      data: {
+        member: this.member
+      }
+    });
+  }
+
   goTo (route: string): void {
     switch (route) {
       case 'cms': {
-        if (this.restaurants.length > 1) {
+        const i = this.restaurants.length;
+        // Multiple
+        if (i > 1) {
           this.trigger.openMenu();
-        } else {
+        // Single
+        } else if (i === 1) {
           this.router.navigate(['/restaurants', this.restaurants[0].restaurant_id, 'cms', 'dashboard']).then()
+        // Nothing associated yet
+        } else {
+          this.openRestaurantLookup();
         }
         break;
       }
@@ -157,9 +178,6 @@ export class HubComponent implements AfterViewInit {
       .subscribe(
         data => {
           this.restaurants = data['restaurants'];
-          if (this.restaurants.length) {
-            //console.log(this.restaurants);
-          }
         },
         error => {
           console.log(error);

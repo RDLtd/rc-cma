@@ -23,7 +23,7 @@ export class MessageComponent implements OnInit {
     this.brandName = this.config.brand.name;
     this.newMember = this.data.newMember;
     const len = this.data.messages.length;
-    const lang = 'en';
+    const lang = localStorage.getItem('rd_language');
     for (let i = 0; i < len; i++) {
       let dm = this.data.messages[i];
       dm.body = dm[`message_text_${lang}`];
