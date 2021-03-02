@@ -43,6 +43,7 @@ $config: mat-typography-config();
   display: flex;
   justify-content: space-between;
 }
+
 .rc-codes {
   display: flex;
   flex-direction: column;
@@ -64,6 +65,7 @@ $config: mat-typography-config();
   opacity: 0.5;
 }
 a.rc-back {
+  width: 100%;
   display: inline-flex;
   justify-content: flex-start;
   color: #fff;
@@ -406,18 +408,38 @@ a.mat-menu-item {text-decoration: none;}
   height: 100%;
   max-width: 360px;
   margin: 0 0 1rem;
-  .rc-svg-logo-group {
+  .rc-logo-group {
     fill: white;
-    .rc-svg-logo-circles {
-      opacity: .4;
+    .rc-logo-circles { opacity: .38; }
+    .rc-logo-text {}
+  }
+  &.primary {
+    .rc-logo-group {
+      .rc-logo-circles {
+        fill: $rc-theme-primary;
+        opacity: 1;
+      }
+      .rc-logo-text {
+        fill: $rc-charcoal;
+      }
     }
-    .rc-svg-logo-text {}
+  }
+  &.accent {
+    .rc-logo-group {
+      .rc-logo-circles {
+        fill: $rc-theme-accent;
+        opacity: 1;
+      }
+      .rc-logo-text {
+        fill: $rc-charcoal;
+      }
+    }
   }
   &.rc-logo-footer {
     width: 100px;
-    .rc-svg-logo-group {
+    .rc-logo-group {
       fill: grey;
-      .rc-svg-logo-circles {
+      .rc-logo-circles {
         opacity: .5;
       }
     }
@@ -661,16 +683,8 @@ a.mat-menu-item {text-decoration: none;}
   .mat-dialog-title {
     font: 500 24px/36px $rc-default-font;
   }
-
-  &.rc-dialog-med {
-    max-width: 600px;
-  }
-
-  &.rc-dialog-small {
-    max-width: 400px;
-  }
-
-  /** Dashboard messages **/
+  &.rc-dialog-med { max-width: 600px;}
+  &.rc-dialog-small { max-width: 400px;}
   .rc-message {
     margin: 8px 0 4px;
     padding: 0 8px 8px;
@@ -691,8 +705,8 @@ a.mat-menu-item {text-decoration: none;}
   }
   .rc-message-important {
     h2, h3 {
-      color: $rc-theme-primary;
-      .mat-icon { color: $rc-theme-primary; }
+      color: $rc-theme-accent;
+      .mat-icon { color: $rc-theme-accent; }
     }
   }
 }

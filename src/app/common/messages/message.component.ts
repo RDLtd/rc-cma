@@ -10,6 +10,7 @@ import { AppConfig } from '../../app.config';
 export class MessageComponent implements OnInit {
 
   brandName: string;
+  newMember: false;
 
   constructor(
     private config: AppConfig,
@@ -18,9 +19,11 @@ export class MessageComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    // console.log(this.data.messages);
     this.brandName = this.config.brand.name;
+    this.newMember = this.data.newMember;
     const len = this.data.messages.length;
-    const lang = localStorage.getItem('rd_language');
+    const lang = 'en';
     for (let i = 0; i < len; i++) {
       let dm = this.data.messages[i];
       dm.body = dm[`message_text_${lang}`];

@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { AppConfig } from '../../app.config';
 
 @Component({
   selector: 'rc-logo',
@@ -6,14 +7,14 @@ import { Component, Input, OnInit } from '@angular/core';
   styles: [
   ]
 })
-export class LogoComponent implements OnInit {
+export class LogoComponent {
 
-  @Input('brand') brandPrefix: string;
-  @Input('height') logoHeight: string;
+  @Input('height') logoHeight: number;
+  @Input('class') logoClass: string;
+  brand: string;
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor( private appConfig: AppConfig ) {
+    this.brand = this.appConfig.brand.prefix;
   }
 
 }

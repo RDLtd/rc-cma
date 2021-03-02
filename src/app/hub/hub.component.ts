@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from "@angular/core";
+import { AfterViewInit, Component, ViewChild } from "@angular/core";
 import { MatDialog, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { MessageComponent } from "../common";
 import { Router } from '@angular/router';
@@ -7,6 +7,7 @@ import { Member } from '../_models';
 import { RestaurantService } from '../_services';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { LoadService } from '../common/loader/load.service';
+import { RestaurantLookupComponent } from '../member';
 
 
 
@@ -20,6 +21,18 @@ export class HubComponent implements AfterViewInit {
   @ViewChild('menuTrigger') trigger: MatMenuTrigger;
   member: Member;
   restaurants: Array<any>;
+  messages = [
+    {
+      severity: 1,
+      message_subject_en: 'An Important Message',
+      message_text_en: 'This a critical message and we want the member to acknowledge reading it.'
+    },
+    {
+      severity: 0,
+      message_subject_en: 'A Less Important Message',
+      message_text_en: 'This message has less importance and is just for general information..'
+    }
+  ];
   apps = [
     {
       name: "Web Content",
@@ -82,14 +95,32 @@ export class HubComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     this.getRestaurants();
     this.loader.close();
-    //this.dspMessages();
+    this.dspMessages();
   }
 
   dspMessages() {
-    const messages = null;
-    let dialogRef = this.dialog.open(MessageComponent, {
-      data: messages
+    // console.log(this.messages);
+
+    let dialogMessages = this.dialog.open(MessageComponent, {
+      disableClose: true,
+      data: {
+        newMember: true,
+        messages: this.messages
+      }
     });
+
+    dialogMessages.afterClosed()
+      .subscribe(newMember => {
+        if (newMember) {
+          let dialogLookUp = this.dialog.open(RestaurantLookupComponent, {
+            width: '480px',
+            position: {'top': '10vh'},
+            data: {
+              member: this.member
+            }
+          });
+        }
+      });
   }
   goTo (route: string): void {
     switch (route) {
@@ -106,9 +137,11 @@ export class HubComponent implements AfterViewInit {
         break;
       }
       case 'kb': {
+
         break;
       }
       case 'fb': {
+        window.open('https://www.facebook.com/restaurantcollective/', '_blank');
         break;
       }
       case 'jobs': {
