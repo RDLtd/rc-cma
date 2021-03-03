@@ -1,8 +1,8 @@
 <!-- Collective -->
 <span *ngIf="brand === 'rc'">
   <svg
-    [style.height]="logoHeight || '100%'"
-    [class]="logoClass"
+    [style.height]="height"
+    [class]="version"
     class="rc-svg-logo"
     viewBox="0 0 302 132"
     xmlns="http://www.w3.org/2000/svg">
@@ -22,8 +22,8 @@
 <!-- Independants -->
 <span *ngIf="brand === 'ri'">
   <svg
-    [style.height]="logoHeight || '100%'"
-    [class]="logoClass"
+    [style.height]="height"
+    [class]="version"
     class="rc-svg-logo"
     viewBox="0 0 367 132"
     xmlns="http://www.w3.org/2000/svg">

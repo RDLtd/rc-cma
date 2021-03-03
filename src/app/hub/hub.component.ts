@@ -71,19 +71,19 @@ export class HubComponent implements AfterViewInit {
       status: "Member since 28 Feb 2021",
       route: "profile"
     },
+    // {
+    //   name: "Job & Staff Search",
+    //   icon: "app-icon-jobs",
+    //   desc: "Manage your Restaurant Collective membership account and user profile.",
+    //   status: "22 new jobs published today",
+    //   route: "jobs"
+    // },
     {
-      name: "Job & Staff Search",
-      icon: "app-icon-jobs",
-      desc: "Manage your Restaurant Collective membership account and user profile.",
-      status: "22 new jobs published today",
-      route: "jobs"
-    },
-    {
-      name: "HELP US TO HELP YOU",
-      icon: "app-icon-feedback",
-      desc: "Take our 30 second survey and let us know what's important to you. We AIM to deliver real support" +
-        " so it's vital that we know what you need the most.",
-      status: "22 new jobs published today",
+      name: "Tell us what you need",
+      icon: "app-icon-survey",
+      desc: "We want to provide the tools and" +
+        " services that our members need the most. Help us to help you by taking 30 seconds to tell us what you want. ",
+      status: "736 RESPONSES SO FAR",
       route: "jobs"
     }
   ]
