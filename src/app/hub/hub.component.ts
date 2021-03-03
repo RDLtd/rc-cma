@@ -19,6 +19,7 @@ export class HubComponent implements AfterViewInit {
   @ViewChild('menuTrigger') trigger: MatMenuTrigger;
   member: Member;
   restaurants: Array<any>;
+
   // Mock up some messages
   messages = [
     {
@@ -102,10 +103,11 @@ export class HubComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     this.getRestaurants();
     this.loader.close();
-    this.dspMessages();
+    setTimeout(() => this.dspMessages(), 500)
   }
 
   dspMessages() {
+
     let dialogMessages = this.dialog.open(MessageComponent, {
       disableClose: true,
       data: {
