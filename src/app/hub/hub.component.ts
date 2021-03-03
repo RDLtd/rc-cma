@@ -132,6 +132,7 @@ export class HubComponent implements AfterViewInit {
       width: '480px',
       position: {'top': '10vh'},
       data: {
+        associatedRestaurants: this.restaurants,
         member: this.member
       }
     });
