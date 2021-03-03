@@ -1166,6 +1166,10 @@
   },
 
   "Messages": {
+    "Welcome": "# Welcome\n\nWe're very pleased that you've chosen to join this growing community of like-minded restaurant professionals. A password has been sent to your registered email address and next time that you sign-in, you will need to use that.\n\n## Add your restaurant\n\nBefore you start exploring the Member's Hub, please complete the initial set up by linking your restaurant to your membership account.\n\nWhen you're ready, select the **START HERE** option below.\n\nFind your restaurant and follow the on-screen instructions to verify the details and link it to your Membership.\n\nIf you need any help, then open the **Knowledge Base** and see the **Getting Started** guide.",
+    "WelcomeStart": "START HERE",
+    "WelcomeSkip": "Do it later",
+    "Read": "Ok, I've read those",
     "DontShow": "DON'T SHOW ME THIS AGAIN"
   },
 

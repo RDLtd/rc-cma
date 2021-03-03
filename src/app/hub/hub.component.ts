@@ -9,8 +9,6 @@ import { MatMenuTrigger } from '@angular/material/menu';
 import { LoadService } from '../common/loader/load.service';
 import { RestaurantLookupComponent } from '../member';
 
-
-
 @Component({
   selector: "rc-hub",
   templateUrl: "./hub.component.html"
@@ -21,6 +19,7 @@ export class HubComponent implements AfterViewInit {
   @ViewChild('menuTrigger') trigger: MatMenuTrigger;
   member: Member;
   restaurants: Array<any>;
+  // Mock up some messages
   messages = [
     {
       severity: 1,
@@ -33,50 +32,51 @@ export class HubComponent implements AfterViewInit {
       message_text_en: 'This message has less importance and is just for general information..'
     }
   ];
+  // Mock up some apps/services
   apps = [
     {
-      name: "Web Content",
-      icon: "app-icon-cms",
-      desc: "Manage your restaurant's web content and publish you Single Page Website (SPW) that will be used." ,
+      name:   "Web Content",
+      icon:   "app-icon-cms",
+      desc:   "Manage your restaurant's web content and publish you Single Page Website (SPW) that will be used." ,
       status: "Last updated on 28.02.2021",
-      route: "cms"
+      route:  "content"
     },
     {
-      name: "Community Forum",
-      icon: "app-icon-forum",
-      desc: "Visit our Facebook Community Group  of restaurant professionals and contribute.",
+      name:   "Community Forum",
+      icon:   "app-icon-forum",
+      desc:   "Visit our Facebook Community Group  of restaurant professionals and contribute.",
       status: "134 Members Online Now!",
-      route: "fb"
+      route:  "forum"
     },
     {
-      name: "Knowledge Base",
-      icon: "app-icon-knowledge",
-      desc: "Get help and information from the experts, with advice on all aspects of running a restaurant," +
-        " including help using the Member's Hub.",
+      name:   "Knowledge Base",
+      icon:   "app-icon-knowledge",
+      desc:   "Get help and information from the experts, with advice on all aspects of running a restaurant," +
+              " including help using the Member's Hub.",
       status: "8 New articles published this week",
-      route: "kb"
+      route:  "knowledge"
     },
     {
-      name: "Deals Marketplace",
-      icon: "app-icon-market",
-      desc: "A wide range of offers and services available exclusive to Restaurant Collective Members. New deals are" +
-        " being added every week, so check regularly..",
+      name:   "Deals Marketplace",
+      icon:   "app-icon-market",
+      desc:   "A wide range of offers and services available exclusive to Restaurant Collective Members. New deals are" +
+              " being added every week, so check regularly..",
       status: "Average savings £1750 p.a.",
-      route: "market"
+      route:  "marketplace"
     },
     {
-      name: "Membership Settings",
-      icon: "app-icon-profile",
-      desc: "Manage your Restaurant Collective membership account and user profile.",
+      name:   "Membership Settings",
+      icon:   "app-icon-profile",
+      desc:   "Manage your Restaurant Collective membership account and user profile.",
       status: "Member since 28 Feb 2021",
-      route: "profile"
+      route:  "membership"
     },
     // {
     //   name: "Job & Staff Search",
     //   icon: "app-icon-jobs",
     //   desc: "Manage your Restaurant Collective membership account and user profile.",
     //   status: "22 new jobs published today",
-    //   route: "jobs"
+    //   route: "job-search"
     // },
     {
       name: "Tell us what you need",
@@ -84,7 +84,7 @@ export class HubComponent implements AfterViewInit {
       desc: "We want to provide the tools and" +
         " services that our members need the most. Help us to help you by taking 30 seconds to tell us what you want. ",
       status: "736 RESPONSES SO FAR",
-      route: "jobs"
+      route: "survey"
     }
   ]
 
@@ -94,11 +94,9 @@ export class HubComponent implements AfterViewInit {
     private restaurantService: RestaurantService,
     private router: Router,
     public dialog: MatDialog) {
-
-    this.loader.open();
-    this.header.updateSectionName('Member\'s Hub');
-    this.member = JSON.parse(localStorage.getItem('rd_profile'));
-
+      this.loader.open();
+      this.header.updateSectionName('Member\'s Hub');
+      this.member = JSON.parse(localStorage.getItem('rd_profile'));
   }
 
   ngAfterViewInit(): void {
@@ -108,8 +106,6 @@ export class HubComponent implements AfterViewInit {
   }
 
   dspMessages() {
-    // console.log(this.messages);
-
     let dialogMessages = this.dialog.open(MessageComponent, {
       disableClose: true,
       data: {
@@ -137,10 +133,10 @@ export class HubComponent implements AfterViewInit {
       }
     });
   }
-
+  // Navigation
   goTo (route: string): void {
     switch (route) {
-      case 'cms': {
+      case 'content': {
         const i = this.restaurants.length;
         // Multiple
         if (i > 1) {
@@ -154,22 +150,27 @@ export class HubComponent implements AfterViewInit {
         }
         break;
       }
-      case 'profile': {
+      case 'membership': {
         this.router.navigate(['/profile']).then()
         break;
       }
-      case 'kb': {
-
+      case 'knowledge': {
         break;
       }
-      case 'fb': {
+      case 'forum': {
         window.open('https://www.facebook.com/restaurantcollective/', '_blank');
         break;
       }
       case 'jobs': {
         break;
       }
-      case 'market': {
+      case 'marketplace': {
+        break;
+      }
+      case 'survey': {
+        break;
+      }
+      default: {
         break;
       }
     }
