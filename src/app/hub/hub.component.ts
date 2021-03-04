@@ -28,6 +28,7 @@ export interface HubFeature {
 export class HubComponent implements AfterViewInit {
   // Access to the restaurant dropdown
   // for users with > 1 restaurant
+
   @ViewChild('menuTrigger') trigger: MatMenuTrigger;
 
   member: Member;
@@ -181,8 +182,10 @@ export class HubComponent implements AfterViewInit {
   }
   // Navigation
   launchFeature (feature: HubFeature): void {
+
     switch (feature.id) {
       case "cms": {
+        console.log(feature.id);
         const i = this.restaurants.length;
         // No restaurants added yet
         if (i === 0) {
@@ -211,6 +214,7 @@ export class HubComponent implements AfterViewInit {
       .subscribe(
         data => {
           this.restaurants = data['restaurants'];
+          console.log(this.restaurants);
         },
         error => {
           console.log(error);
