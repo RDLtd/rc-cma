@@ -7,6 +7,7 @@ import { Member, Restaurant } from '../_models';
 import { MemberService, RestaurantService } from '../_services';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { RestaurantLookupComponent } from '../member';
+import { TranslateService } from '@ngx-translate/core';
 
 export interface HubFeature {
   id:           string;
@@ -32,7 +33,7 @@ export class HubComponent implements AfterViewInit {
   member: Member;
   restaurants: Array<Restaurant>;
   messages: Array<Message>;
-  features: Array<HubFeature>
+  features: Array<HubFeature>;
 
   // Mock up some messages
   // messages = [
@@ -65,8 +66,8 @@ export class HubComponent implements AfterViewInit {
       icon:         "app-icon-forum",
       description:  "Visit our Facebook Community Group  of restaurant professionals and contribute.",
       status:       "134 Members Online Now!",
-      route:        "forum",
-      ext:          false
+      route:        "https://www.facebook.com/restaurantcollective/",
+      ext:          true
     },
     {
       id:           "knowledge",
@@ -75,7 +76,7 @@ export class HubComponent implements AfterViewInit {
       description:  "Get help and information from the experts, with advice on all aspects of running a restaurant," +
                     " including help using the Member's Hub.",
       status:       "8 New articles published this week",
-      route:        "knowledge",
+      route:        "https://restaurantcollective.org.uk/",
       ext:          true
     },
     {
@@ -85,7 +86,7 @@ export class HubComponent implements AfterViewInit {
       description:  "A wide range of offers and services available exclusive to Restaurant Collective Members. New" +
                     " deals are being added every week, so check regularly..",
       status:       "Average savings £1750 p.a.",
-      route:        "marketplace",
+      route:        "/hub",
       ext:          false
     },
     {
@@ -94,7 +95,7 @@ export class HubComponent implements AfterViewInit {
       icon:         "app-icon-profile",
       description:  "Manage your Restaurant Collective membership account and user profile.",
       status:       "Member since 28 Feb 2021",
-      route:        "membership",
+      route:        "/profile",
       ext:          false
     },
     // {
@@ -112,7 +113,7 @@ export class HubComponent implements AfterViewInit {
       description: "We want to provide the tools and" +
         " services that our members need the most. Help us to help you by taking 30 seconds to tell us what you want. ",
       status: "736 RESPONSES SO FAR",
-      route: "survey",
+      route: "https://restaurantcollective.org.uk/",
       ext: true
     }
   ]
@@ -122,10 +123,11 @@ export class HubComponent implements AfterViewInit {
     private header: HeaderService,
     private restaurantService: RestaurantService,
     private memberService: MemberService,
+    private translate: TranslateService,
     private router: Router,
     public dialog: MatDialog) {
       this.loader.open();
-      this.header.updateSectionName('Member\'s Hub');
+      this.header.updateSectionName('hub');
       this.member = JSON.parse(localStorage.getItem('rd_profile'));
       this.features = this.mockFeatures;
   }
@@ -192,10 +194,6 @@ export class HubComponent implements AfterViewInit {
         } else {
           this.router.navigate(['/restaurants', this.restaurants[0].restaurant_id, 'cms', 'dashboard']).then()
         }
-        break;
-      }
-      case "knowledge": {
-        window.open('https://www.facebook.com/restaurantcollective/', '_blank');
         break;
       }
       default: {
