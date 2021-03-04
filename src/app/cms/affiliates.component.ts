@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { HelpService, RestaurantService, CMSService } from '../_services';
+import { RestaurantService, CMSService } from '../_services';
 import { CmsLocalService } from './cms-local.service';
 import { MatDialog } from '@angular/material/dialog';
-import { PaymentComponent } from '../common';
+import { PaymentComponent, HelpService } from '../common';
 import { TranslateService } from '@ngx-translate/core';
 import { Restaurant } from '../_models';
 import { AppConfig } from '../app.config';

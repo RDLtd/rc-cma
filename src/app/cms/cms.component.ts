@@ -3,12 +3,13 @@ import { switchMap } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Member, Restaurant } from '../_models';
-import { RestaurantService, CMSService, HelpService, AnalyticsService } from '../_services';
+import { RestaurantService, CMSService, AnalyticsService } from '../_services';
 import { CmsLocalService } from './cms-local.service';
 import { MatDialog } from '@angular/material/dialog';
 import { CmsPreviewComponent } from './cms-preview.component';
 import { fadeAnimation } from '../shared/animations';
 import { HeaderService } from '../common/header.service';
+import { HelpService } from '../common';
 
 @Component({
   selector: 'rc-cms',

@@ -7,7 +7,6 @@ import {
 } from '../_models';
 import {
   CMSService,
-  HelpService,
   MemberService,
   RestaurantService,
   AnalyticsService
@@ -19,7 +18,8 @@ import { RestaurantDetailComponent } from '../restaurants/restaurant-detail.comp
 import { NgForm } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import {
-  MessageComponent
+  MessageComponent,
+  HelpService
 } from '../common';
 import * as moment from 'moment';
 import { CmsSpwLinksComponent } from './cms-spw-links.component';
@@ -140,8 +140,10 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
       this.lang = localStorage.getItem('rd_language');
       this.translate.get('CMS-Dashboard').subscribe(data => {
         this.t_data = data;
+
         // Since the display texts are computed, we need to re-run these routines...
         this.readAndCheckStatus();
+
         // re-translate computed display dates
         moment.locale(localStorage.getItem('rd_language'));
         this.d_memberJoinDate = this.setDateRes(this.memberJoinDate);

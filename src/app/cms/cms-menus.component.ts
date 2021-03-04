@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Restaurant, CMSDish, CMSSection } from '../_models';
 import { CmsLocalService } from './cms-local.service';
-import { CMSService, HelpService } from '../_services';
+import { CMSService } from '../_services';
 import { CmsFileUploadComponent } from './cms-file-upload.component';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { ConfirmCancelComponent } from '../common';
+import { ConfirmCancelComponent, HelpService, LoadService } from '../common';
 import { CmsMenuDishComponent } from './cms-menu-dish.component';
 import { TranslateService } from '@ngx-translate/core';
 import { AppConfig } from '../app.config';
-import { LoadService } from '../common/loader/load.service';
 
 @Component({
   selector: 'rc-cms-menus',

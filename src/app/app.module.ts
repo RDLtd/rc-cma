@@ -35,7 +35,6 @@ import {
   RestaurantService,
   CMSService,
   PublicService,
-  HelpService,
   AnalyticsService
 } from './_services';
 
@@ -74,7 +73,9 @@ import {
   LoaderComponent,
   HelpComponent,
   ConfirmCancelComponent,
-  MessageComponent
+  MessageComponent,
+  HelpService,
+  LoadService
 } from './common';
 
 // 3rd party packages
@@ -89,7 +90,6 @@ import { ClipboardModule } from 'ngx-clipboard';
 import { JoinComponent } from './join/join.component';
 import { ReferralsComponent } from './member/referrals.component';
 import { LoadComponent } from './common/loader/load.component';
-import { LoadService } from './common/loader/load.service';
 import { CmsSpwLinksComponent } from './cms/cms-spw-links.component';
 import { QRCodeModule } from 'angularx-qrcode';
 import { GoogleMapsModule } from '@angular/google-maps';

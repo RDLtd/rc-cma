@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CmsLocalService } from './cms-local.service';
 import { Restaurant } from '../_models';
-import { AnalyticsService, CMSService, HelpService } from '../_services';
+import { AnalyticsService, CMSService } from '../_services';
 import { TranslateService } from '@ngx-translate/core';
-import { LoadService } from '../common/loader/load.service';
+import { HelpService, LoadService } from '../common';
 import { insertAnimation } from '../shared/animations';
 
 @Component({

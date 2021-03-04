@@ -1,13 +1,12 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { Restaurant } from '../_models';
-import { RestaurantService } from '../_services';
+import { RestaurantService, CMSService } from '../_services';
 import { AppConfig } from '../app.config';
 import { ProfileVerifyComponent } from './profile-verify.component';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TranslateService } from '@ngx-translate/core';
-import { CMSService, HelpService } from '../_services';
-import { ConfirmCancelComponent } from '../common';
+import { ConfirmCancelComponent, HelpService } from '../common';
 
 @Component({
   selector: 'rc-restaurant-lookup',
@@ -64,7 +63,7 @@ export class RestaurantLookupComponent implements OnInit {
       this.restaurantService.getSubset(this.sql_parameters)
         .subscribe(
           data => {
-            //c onsole.log({data});
+            // console.log({data});
             this.restaurants = data['restaurants'];
             if (!this.restaurants.length) {
               this.noSearchResults = true;

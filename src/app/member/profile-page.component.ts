@@ -5,7 +5,7 @@ import {
   MemberService,
   AuthenticationService,
   CMSService,
-  HelpService, AnalyticsService
+  AnalyticsService
 } from '../_services';
 import { MatDialog } from '@angular/material/dialog';
 import { PasswordComponent } from './password.component';
@@ -14,14 +14,13 @@ import { ProfileImageComponent } from './profile-image.component';
 import { RestaurantLookupComponent } from './restaurant-lookup.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { ConfirmCancelComponent } from '../common';
 import { TranslateService } from '@ngx-translate/core';
 import * as moment from 'moment';
 import { ReferralsComponent } from './referrals.component';
 import { ClipboardService } from 'ngx-clipboard';
 import { AppConfig } from '../app.config';
 import { CmsLocalService } from '../cms';
-import { LoadService } from '../common/loader/load.service';
+import { LoadService, ConfirmCancelComponent, HelpService } from '../common';
 import { HeaderService } from '../common/header.service';
 
 

@@ -4,12 +4,12 @@
     <div class="mdc-layout-grid__inner">
       <!-- Apps/Services -->
       <div
-        *ngFor="let app of apps"
+        *ngFor="let feature of features"
         class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
 
         <div
           class="rc-hub-cms"
-          *ngIf="app.route === 'content'"
+          *ngIf="feature.route === 'content'"
           #menuTrigger="matMenuTrigger"
           [matMenuTriggerFor]="menu">
 
@@ -25,17 +25,17 @@
               [routerLink]="['/restaurants', restaurant.restaurant_id, 'cms', 'dashboard']"
               mat-menu-item>
               <mat-icon>store</mat-icon>
-              <span>{{ restaurant?.restaurant_name }}</span>
+              <span>{{ restaurant.restaurant_name }}</span>
             </button>
           </mat-menu>
 
         </div>
 
-        <mat-card class="rc-card-app" (click)="goTo(app.route)">
-          <img src="assets/images/icons/{{app.icon}}.svg">
-          <h2>{{ app.name | uppercase }}</h2>
-          <p>{{ app.desc }}</p>
-          <span>{{ app.status }}</span>
+        <mat-card class="rc-card-app" (click)="launchFeature(feature)">
+          <img src="assets/images/icons/{{feature.icon}}.svg">
+          <h2>{{ feature.name | uppercase }}</h2>
+          <p>{{ feature.description }}</p>
+          <span>{{ feature.status }}</span>
         </mat-card>
 
       </div>

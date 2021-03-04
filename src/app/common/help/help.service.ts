@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 // Don't use shortcut format as it will create a circular ref.
-import { HelpComponent } from '../common';
+import { HelpComponent } from './help.component';
 import { MatDialog } from '@angular/material/dialog';
-import { AnalyticsService } from './analytics.service';
-import { AppConfig } from '../app.config';
+import { AnalyticsService } from '../../_services';
+import { AppConfig } from '../../app.config';
 
 @Injectable()
 export class HelpService {

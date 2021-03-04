@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { CMSService, HelpService } from '../_services';
+import { CMSService } from '../_services';
 import { CmsLocalService } from './cms-local.service';
 import { Restaurant, CMSDescription } from '../_models';
 import { ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { TranslateService } from '@ngx-translate/core';
-import { LoadService } from '../common/loader/load.service';
+import { LoadService, HelpService } from '../common';
 
 @Component({
   selector: 'rc-cms-features',
