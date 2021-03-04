@@ -13,13 +13,13 @@ export class LoadService {
     en: 'LOADING',
     fr: 'CHARGEMENT'
   }
-  defaultLoadMessage = this.loading[localStorage.getItem('rd_language')]
+  defaultLoadMessage = this.loading[localStorage.getItem('rd_language')];
 
   constructor(
     private dialog: MatDialog
   ) { }
 
-  open(msg=this.defaultLoadMessage) {
+  open(msg = this.defaultLoadMessage) {
     this.dialogRef = this.dialog.open(LoadComponent, {
       backdropClass: 'rc-dialog-backdrop',
       data: { message: msg },

@@ -165,7 +165,7 @@
             [href]="spwProdUrl"
             target="_blank"
             matTooltip="{{ 'CMS-Dashboard.OpenLive' | translate }}{{ restaurant.restaurant_name }}"
-            mat-button color="primary">{{ 'CMS-Dashboard.ViewLivePage' | translate }}</a>
+            mat-button color="accent">{{ 'CMS-Dashboard.ViewLivePage' | translate }}</a>
         </mat-card-actions>
       </mat-card>
 
@@ -212,7 +212,7 @@
             (click)="previewSPW()">{{ 'CMS-Dashboard.Preview' | translate }}</button>
           <button
             mat-button
-            color="primary"
+            color="accent"
             [disabled]="!cmsHasSufficientData"
             (click)="publishSPW()">{{ 'CMS-Dashboard.Publish' | translate }}</button>
         </mat-card-actions>
