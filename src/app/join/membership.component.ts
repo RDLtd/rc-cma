@@ -38,13 +38,15 @@ export class MembershipComponent implements OnInit {
   };
 
   async checkout(product)  {
+    const newMember = JSON.parse(sessionStorage.getItem('rc_member_pending'));
     this.waiting = true;
     const brandProduct = this.config.brand.products;
     await this.createCheckoutSession({
       priceId: brandProduct[product].priceId,
       taxId: brandProduct.taxId,
       successUrl: brandProduct.success_url,
-      cancelUrl: brandProduct.cancel_url
+      cancelUrl: brandProduct.cancel_url,
+      email: newMember.email
     })
       .then(data => {
         console.log('MC Session', data)

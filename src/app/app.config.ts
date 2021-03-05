@@ -66,7 +66,7 @@ export class AppConfig {
         curation: `curation@${this.tld.rc}`
       },
       products: {
-        taxId: 'txr_1HuZYpFqzlrb81VHPM9p2XpX',
+        taxId: 'txr_1IRfMDFqzlrb81VHIH6hpi4y',
         membership_monthly: {
           priceId: 'price_1I0kigFqzlrb81VHkdECs1eK'
         },
@@ -101,7 +101,7 @@ export class AppConfig {
         curation: `curation@${this.tld.ri}`
       },
       products: {
-        taxId: 'txr_1HudC1Fqzlrb81VH8GYyhETf',
+        taxId: 'txr_1IRfN6Fqzlrb81VHYhn3ye2a',
         membership_monthly: {
           priceId: 'price_1HuIiGFqzlrb81VHQsg1MWwz'
         },
