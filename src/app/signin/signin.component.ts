@@ -19,7 +19,6 @@ export class SigninComponent implements OnInit {
   pwdReset: boolean = false;
   brand: string;
   stripeSessionId: any;
-  newMember: any;
   newMemberEmail: string;
 
   // translation variables
@@ -44,11 +43,8 @@ export class SigninComponent implements OnInit {
     this.activeRoute.queryParams.subscribe(params => {
       console.log('Url params', params);
       if (params['session_id']) {
-        this.newMember = JSON.parse(sessionStorage.getItem('rc_member_pending'));
-        console.log('STRIPE SUCCESS', this.newMember);
         this.stripeSessionId = params['session_id'];
         this.dspNewMemberMessage();
-
       }
     });
 
@@ -65,8 +61,9 @@ export class SigninComponent implements OnInit {
   }
 
   dspNewMemberMessage() {
-    if (!!this.newMember) {
-      console.log(this.newMember.email)
+    const newMember = JSON.parse(sessionStorage.getItem('rc_member_pending'));
+    if (!!newMember) {
+      this.newMemberEmail = newMember.email;
     }
     this.help.dspHelp('first-contact', null,'first-contact');
   }
