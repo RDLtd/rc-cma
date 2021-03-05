@@ -150,8 +150,9 @@ export class HubComponent implements AfterViewInit {
   }
 
   dspMessages(): void {
+    // console.log('AUTH', !this.member.member_authenticated);
     let data = {
-      newMember: true,
+      newMember: !this.member.member_authenticated,
       member: this.member,
       messages: this.messages
     }

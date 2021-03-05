@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { AppConfig } from '../app.config';
+import { HelpService } from '../common';
 
 @Component({
   selector: 'rc-signin',
@@ -31,7 +32,8 @@ export class SigninComponent implements OnInit {
     private translate: TranslateService,
     private activeRoute: ActivatedRoute,
     private config: AppConfig,
-    private router: Router
+    private router: Router,
+    private help: HelpService
   ) {  }
 
   ngOnInit() {
@@ -44,8 +46,9 @@ export class SigninComponent implements OnInit {
       if (params['session_id']) {
         this.newMember = JSON.parse(sessionStorage.getItem('rc_member_pending'));
         console.log('STRIPE SUCCESS', this.newMember);
-        this.dspNewMemberMessage(this.newMember.email);
         this.stripeSessionId = params['session_id'];
+        this.dspNewMemberMessage();
+
       }
     });
 
@@ -59,13 +62,13 @@ export class SigninComponent implements OnInit {
       this.t_data = data;
       //console.log(this.t_data);
     });
-
   }
 
-  dspNewMemberMessage(email: string) {
-    console.log('Email', email);
-    this.newMemberEmail = email;
-    this.openSnackBar(`Membership details and a password have been sent to ${this.newMemberEmail}. Copy the password and paste it below to access the Member's Hub.`);
+  dspNewMemberMessage() {
+    if (!!this.newMember) {
+      console.log(this.newMember.email)
+    }
+    this.help.dspHelp('first-contact', null,'first-contact');
   }
 
   signIn(formValue) {
@@ -121,9 +124,8 @@ export class SigninComponent implements OnInit {
   }
 
   openSnackBar(message: string) {
-    this.snackBar.open(message, 'OK', {
-      duration: 60000,
-      panelClass: 'rc-mat-snack-info',
+    this.snackBar.open(message, '', {
+      duration: 5000,
       verticalPosition: 'top',
       horizontalPosition: 'center',
     });

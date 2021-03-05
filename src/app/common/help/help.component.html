@@ -1,6 +1,6 @@
 <div class="rc-dialog rc-dialog-help">
 
-  <mat-toolbar class="rc-toolbar rc-toolbar-nav">
+  <mat-toolbar *ngIf="data.type === 'help'" class="rc-toolbar rc-toolbar-nav">
     <span>{{ data.header }}</span>
     <span class="rc-space-filler"></span>
     <span class="rc-toolbar-actions">
@@ -11,11 +11,14 @@
   </mat-toolbar>
 
   <mat-dialog-content>
-    <div markdown [src]="data['path']"></div>
+    <div markdown [src]="data['path']" ></div>
   </mat-dialog-content>
 
-  <mat-dialog-actions align="center" *ngIf="data['footer']">
+  <mat-dialog-actions  align="center" *ngIf="data['footer']">
     <button mat-button [mat-dialog-close]="true">{{ data['btnLabel'] }}</button>
+  </mat-dialog-actions>
+  <mat-dialog-actions  align="end" *ngIf="data.type !== 'help'">
+    <button mat-stroked-button [mat-dialog-close]="false" color="accent">OK</button>
   </mat-dialog-actions>
 
 </div>
