@@ -18,6 +18,8 @@ export class SigninComponent implements OnInit {
   pwdReset: boolean = false;
   brand: string;
   stripeSessionId: any;
+  newMember: any;
+  newMemberEmail: string;
 
   // translation variables
   t_data: any;
@@ -40,6 +42,9 @@ export class SigninComponent implements OnInit {
     this.activeRoute.queryParams.subscribe(params => {
       console.log('Url params', params);
       if (params['session_id']) {
+        this.newMember = JSON.parse(sessionStorage.getItem('rc_member_pending'));
+        console.log('STRIPE SUCCESS', this.newMember);
+        this.dspNewMemberMessage(this.newMember.email);
         this.stripeSessionId = params['session_id'];
       }
     });
@@ -55,6 +60,12 @@ export class SigninComponent implements OnInit {
       //console.log(this.t_data);
     });
 
+  }
+
+  dspNewMemberMessage(email: string) {
+    console.log('Email', email);
+    this.newMemberEmail = email;
+    this.openSnackBar(`Membership details and a password have been sent to ${this.newMemberEmail}. Copy the password and paste it below to access the Member's Hub.`);
   }
 
   signIn(formValue) {
@@ -110,8 +121,11 @@ export class SigninComponent implements OnInit {
   }
 
   openSnackBar(message: string) {
-    this.snackBar.open(message, null, {
-      duration: 5000
+    this.snackBar.open(message, 'OK', {
+      duration: 60000,
+      panelClass: 'rc-mat-snack-info',
+      verticalPosition: 'top',
+      horizontalPosition: 'center',
     });
   }
 

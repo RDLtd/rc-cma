@@ -73,7 +73,7 @@ export class AppConfig {
         membership_yearly: {
           priceId: 'price_1HuPN4Fqzlrb81VHCj3wELKF'
         },
-        success_url: `${ this.appUrl }/hub`,
+        success_url: `${ this.appUrl }/signin`,
         cancel_url: `${ this.appUrl }/membership-options`,
       },
       fee: {
