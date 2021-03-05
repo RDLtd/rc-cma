@@ -59,9 +59,6 @@ export class AuthenticationService {
     this.dbOffline = offline;
     this.member = member;
 
-    // Clear any old storage
-    localStorage.clear();
-
     // Record Member login/authentication
 
     // Set session variables
@@ -179,15 +176,14 @@ export class AuthenticationService {
     this.memberSessionSubject.next(reason);
     this.member = null;
     // Clear session variables
-    window.localStorage.clear();
     window.sessionStorage.clear();
-    // localStorage.removeItem('rd_profile');
-    // localStorage.removeItem('rd_username');
-    // localStorage.removeItem('rd_token');
-    // localStorage.removeItem('rd_token_expires_at');
-    // localStorage.removeItem('rd_access_level');
-    // localStorage.removeItem('rd_home');
-    // localStorage.removeItem('rd_session');
+    localStorage.removeItem('rd_profile');
+    localStorage.removeItem('rd_username');
+    localStorage.removeItem('rd_token');
+    localStorage.removeItem('rd_token_expires_at');
+    localStorage.removeItem('rd_access_level');
+    localStorage.removeItem('rd_home');
+    localStorage.removeItem('rd_session');
   }
 
   isAuth(): boolean {

@@ -132,6 +132,15 @@ a.rc-back {
   .rc-spinner div { background-color: white !important;
   }
 }
+.rc-user-menu {
+  padding: 16px 18px 8px;
+  h3 {
+    font-size: 18px;
+    margin: 0 0 -4px;
+    line-height: 1;
+  }
+  span { font-size: 11px; }
+}
 
 @media screen and ( min-width : 600px ){
   .rc-media-small-hide { display: block !important; }

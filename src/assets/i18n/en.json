@@ -1,10 +1,11 @@
 {
   "Header": {
+    "SignedInAs": "SIGNED IN MEMBER",
     "MyProfile" : "My Profile",
     "Logout"    : "Logout",
     "Login"     : "Login",
-    "Settings"  : "Member Settings",
-    "About"     : "About RD.CMS"
+    "Settings"  : "Account Settings",
+    "About"     : "Software Information"
   },
 
   "Footer": {

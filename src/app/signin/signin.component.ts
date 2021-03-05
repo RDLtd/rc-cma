@@ -53,10 +53,9 @@ export class SigninComponent implements OnInit {
     if (this.authService.isAuth()) {
       this.router.navigate([localStorage.getItem('rd_home') || '']);
     }
-
     this.translate.get('SignIn').subscribe(data => {
       this.t_data = data;
-      //console.log(this.t_data);
+      // console.log('SIGNIN', this.t_data);
     });
   }
 

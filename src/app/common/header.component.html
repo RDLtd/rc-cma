@@ -67,12 +67,17 @@
   </ng-template>
 
   <mat-menu #menu="matMenu">
+    <div class="rc-user-menu">
+      <h3>{{ displayName }}</h3>
+      <span>{{ t_data?.SignedInAs }}</span>
+    </div>
+    <mat-divider></mat-divider>
 
     <button
       mat-menu-item
       [routerLink]="['/profile']">
       <mat-icon>account_circle</mat-icon>
-      <span>Membership</span>
+      <span>{{ t_data?.Settings }}</span>
     </button>
     <mat-divider></mat-divider>
 
@@ -80,15 +85,15 @@
       mat-menu-item
       (click)="logout()">
       <mat-icon>logout</mat-icon>
-      <span>{{ 'Header.Logout' | translate }}</span>
+      <span>{{ t_data?.Logout | translate }}</span>
     </button>
-<!--    <mat-divider></mat-divider>-->
-<!--    <button-->
-<!--      mat-menu-item-->
-<!--      (click)="about()" >-->
-<!--      <mat-icon>help</mat-icon>-->
-<!--      <span>{{ 'Header.About' | translate }}</span>-->
-<!--    </button>-->
+    <mat-divider></mat-divider>
+    <button
+      mat-menu-item
+      (click)="about()" >
+      <mat-icon>information</mat-icon>
+      <span>{{ t_data?.About }}</span>
+    </button>
   </mat-menu>
 
 </mat-toolbar>
