@@ -22,11 +22,8 @@ export interface Product {
   templateUrl: './membership.component.html'
 })
 export class MembershipComponent implements OnInit {
-  transData: any;
-  txtTerms: any;
-  txtInstructions: any;
-  urlTerms = this.config.brand.downloads.terms;
-  urlPrivacy = this.config.brand.downloads.privacy;
+
+  transParams: any;
   waiting = false;
   stripeSessionId: string;
   stripePromise = loadStripe(environment.stripe_key);
@@ -37,7 +34,14 @@ export class MembershipComponent implements OnInit {
     private http: HttpClient,
     private route: ActivatedRoute,
     private trans: TranslateService
-  ) {}
+  ) {
+
+    this.transParams = {
+      brand: this.config.brand.name,
+      terms: this.config.brand.downloads.terms,
+      privacy: this.config.brand.downloads.privacy
+    }
+  }
 
   ngOnInit(): void {
     this.getTranslations();
@@ -50,19 +54,7 @@ export class MembershipComponent implements OnInit {
   getTranslations(): void {
     // Use get to ensure that translation is available before using 'instant'
     this.trans.get('MembershipOptions')
-      .subscribe(() => {
-        this.txtInstructions = this.trans.instant(
-          'MembershipOptions.Instructions',
-          { brand: this.config.brand.name }
-        );
-        this.txtTerms = this.trans.instant(
-          'MembershipOptions.Terms',
-          {
-            linkTerms: this.config.brand.downloads.terms,
-            linkPrivacy: this.config.brand.downloads.privacy
-          }
-        );
-    });
+      .subscribe(() => console.log('MembershipOptions loaded'));
   }
 
   // Create Stripe Session

@@ -181,6 +181,7 @@ export class HubComponent implements AfterViewInit {
     });
     dialogLookUp.afterClosed();
   }
+
   // Navigation
   launchFeature (feature: HubFeature): void {
 
@@ -210,6 +211,7 @@ export class HubComponent implements AfterViewInit {
       }
     }
   }
+
   getRestaurants() {
     this.restaurantService.getMemberRestaurants(this.member.member_id)
       .subscribe(

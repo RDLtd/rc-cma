@@ -11,11 +11,12 @@
 <!--  </mat-toolbar>-->
 
   <mat-dialog-content>
-    <div markdown [src]="data['path']" ></div>
+    <markdown ngPreserveWhitespaces [src]="data['path']"></markdown>
   </mat-dialog-content>
 
   <mat-dialog-actions  align="end">
-    <button mat-button [mat-dialog-close]="false">OK</button>
+    <button mat-button [mat-dialog-close]="false">Contact Support</button>
+    <button mat-flat-button [mat-dialog-close]="false" color="accent">OK</button>
   </mat-dialog-actions>
 
 </div>

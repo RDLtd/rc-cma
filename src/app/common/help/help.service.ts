@@ -34,7 +34,10 @@ export class HelpService {
       type: title,
       path: mdContentPath,
       btnLabel: btnLabel,
-      restaurant: restaurant
+      restaurant: restaurant,
+      transParams: {
+        email: 'jmbarnard@gmail.com'
+      }
     }
 
     let dialogRef = this.dialog.open(HelpComponent, dialogConfig);

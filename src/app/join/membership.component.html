@@ -6,7 +6,7 @@
          routerLink="/join"
          matTooltip="Back to Member contact details">
         <mat-icon>arrow_back</mat-icon>Back</a>
-      <markdown [data]="txtInstructions"></markdown>
+      <markdown [data]="'MembershipOptions.Instructions' | translate: transParams"></markdown>
     </div>
   </div>
   <div class="rc-layout-split-right">
@@ -43,11 +43,12 @@
       </div>
 
       <!-- TERMS -->
-      <markdown class="rc-txt-small" [data]="txtTerms"></markdown>
+      <markdown class="rc-txt-small"
+                [data]="'MembershipOptions.Terms' | translate: transParams"></markdown>
+
 
     </div>
   </div>
 </div>
 <!--<hr><pre>sessionId: {{ stripeSessionId | json }}</pre><hr>-->
-
 
