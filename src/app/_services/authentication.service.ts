@@ -171,12 +171,17 @@ export class AuthenticationService {
   }
 
   logout(reason): void {
+
     console.log(`Logout: ${reason}`);
     this.inSession = false;
     this.memberSessionSubject.next(reason);
     this.member = null;
+
     // Clear session variables
     window.sessionStorage.clear();
+
+    // Clear storage but keep
+    // rd_prefix & rd_language
     localStorage.removeItem('rd_profile');
     localStorage.removeItem('rd_username');
     localStorage.removeItem('rd_token');

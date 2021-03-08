@@ -156,7 +156,7 @@
           <mat-label>Your job/role</mat-label>
           <mat-select
             [(ngModel)]="pendingMember.role"
-            name="role"
+            name="job"
             required>
             <mat-option *ngFor="let role of t_data?.Roles" [value]="role">
               {{ role }}

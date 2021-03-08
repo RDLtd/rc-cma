@@ -41,8 +41,7 @@ export class HeaderComponent implements OnInit {
 
     this.translate.get('Header').subscribe(data => {
       this.t_data = data;
-      //console.log(this.t_data);
-    });
+    })
 
     this.company_name = this.config.brand.name;
     this.brandPrefix = this.config.brand.prefix;

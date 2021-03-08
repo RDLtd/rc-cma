@@ -115,6 +115,7 @@ export class JoinComponent implements OnInit {
 
   // Save pending member details
   savePendingMemberData(data): void {
+    console.log('savePending', data);
     sessionStorage.setItem('rc_member_pending', JSON.stringify(data));
     this.memberService.createPending(data)
       .toPromise()
@@ -123,11 +124,13 @@ export class JoinComponent implements OnInit {
 
   // API call to check for duplicate tel/emails
   async preRegistrationCheck(formData) {
+    console.log(formData);
     this.isSubmitting = true;
     this.load.open();
     // API call to check for duplicates
     await this.memberService.preFlight(formData)
       .then(res => {
+        console.log('preFlight', res);
         if (res['status'] === 'OK') {
           this.savePendingMemberData(formData);
           this.router.navigate(['/membership-options']).then(() => this.load.close())

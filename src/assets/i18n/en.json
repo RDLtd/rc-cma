@@ -1261,5 +1261,9 @@
     "Social": "message or via your favourite social network!",
     "RefLink": "Copy your referral link",
     "CopyLinkButton": "COPY LINK"
+  },
+  "MembershipOptions": {
+    "Instructions": "Please select your preferred **{{ brand }}** subscription option.\n\nYou will be taken to the checkout stage, where you can review your subscription before paying securely online using your preferred method\n\nIf you have a **PROMOCODE** then you can apply it at the same time.",
+    "Terms": "Please take the time to read the [Terms of Membership]({{ linkTerms }}) and [Privacy Policy]({{ linkPrivacy }}). By becoming a member of Restaurant Collective you are confirming your acceptance of these terms."
   }
 }

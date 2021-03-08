@@ -6,18 +6,13 @@
          routerLink="/join"
          matTooltip="Back to Member contact details">
         <mat-icon>arrow_back</mat-icon>Back</a>
-
-      <div markdown>
-        <h1>Membership</h1>
-        <p>Please select your preferred subscription option.</p>
-        <p>Once you've made your choice you'll be asked to review your selection and invited to pay securely online
-          using a debit or credit card.</p>
-      </div>
+      <markdown [data]="txtInstructions"></markdown>
     </div>
   </div>
   <div class="rc-layout-split-right">
     <div class="rc-layout-split-content">
-      <h1>Subscription Options:</h1>
+
+      <!-- MONTHLY -->
       <div class="rc-subscription">
         <h2>MONTHLY SUBSCRIPTION</h2>
         <p><strong>Pay just £9.99 per month</strong> for full access to all the benefits of Restaurant Collective membership.</p>
@@ -29,12 +24,15 @@
           PAY MONTHLY
         </button>
       </div>
+
+      <!-- YEARLY -->
       <div class="rc-subscription">
         <h2>ANNUAL SUBSCRIPTION</h2>
         <p><strong>Pay £99 per year</strong> and you'll get the equivalent of 2 months FREE. All of the same
-          Restaurant
-          Collective benefits, just a bit cheaper!
+          Restaurant Collective benefits, just a bit cheaper!
         </p>
+        <p><strong>AND</strong>, if you sign up for a yearly subscription before the 30 April 2021, then your fees will
+          be frozen, for life!</p>
         <button
           mat-flat-button
           color="accent"
@@ -43,11 +41,13 @@
           PAY YEARLY
         </button>
       </div>
-      <p class="rc-txt-small">Please take the time to read the <a [href]="urlTerms" target="_blank">Terms of Membership</a> and <a [href]="urlPrivacy">Privacy Policy</a>.
-        By becoming a member of Restaurant Collective you are confirming your acceptance of these terms.</p>
+
+      <!-- TERMS -->
+      <markdown class="rc-txt-small" [data]="txtTerms"></markdown>
+
     </div>
   </div>
 </div>
-<hr><pre>sessionId: {{ stripeSessionId | json }}</pre><hr>
+<!--<hr><pre>sessionId: {{ stripeSessionId | json }}</pre><hr>-->
 
 

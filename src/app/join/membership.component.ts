@@ -4,31 +4,64 @@ import { AppConfig } from '../app.config';
 import { loadStripe } from '@stripe/stripe-js/pure';
 import { environment } from '../../environments/environment';
 import { ActivatedRoute } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+
+export interface Product {
+  id: string;
+  name: string;
+  description: string;
+  priceId: string;
+  taxId: string;
+  active: boolean;
+  category: string;
+}
+
 
 @Component({
   selector: 'rc-membership',
   templateUrl: './membership.component.html'
 })
 export class MembershipComponent implements OnInit {
+  transData: any;
+  txtTerms: any;
+  txtInstructions: any;
   urlTerms = this.config.brand.downloads.terms;
   urlPrivacy = this.config.brand.downloads.privacy;
   waiting = false;
   stripeSessionId: string;
   stripePromise = loadStripe(environment.stripe_key);
+  stringInCode: any;
 
   constructor(
     private config: AppConfig,
     private http: HttpClient,
-    private route: ActivatedRoute
-  ) {
-
-  }
+    private route: ActivatedRoute,
+    private trans: TranslateService
+  ) {}
 
   ngOnInit(): void {
-    console.log(this.config.appUrl);
+    this.getTranslations();
     this.route.queryParams.subscribe(params => {
       this.stripeSessionId = params['session_id'];
       console.log('stripeSessionId', this.stripeSessionId);
+    });
+  }
+
+  getTranslations(): void {
+    // Use get to ensure that translation is available before using 'instant'
+    this.trans.get('MembershipOptions')
+      .subscribe(() => {
+        this.txtInstructions = this.trans.instant(
+          'MembershipOptions.Instructions',
+          { brand: this.config.brand.name }
+        );
+        this.txtTerms = this.trans.instant(
+          'MembershipOptions.Terms',
+          {
+            linkTerms: this.config.brand.downloads.terms,
+            linkPrivacy: this.config.brand.downloads.privacy
+          }
+        );
     });
   }
 

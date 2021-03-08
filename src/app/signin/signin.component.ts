@@ -64,7 +64,7 @@ export class SigninComponent implements OnInit {
     if (!!newMember) {
       this.newMemberEmail = newMember.email;
     }
-    this.help.dspHelp('first-contact', null,'first-contact');
+    this.help.dspHelp('signin-new-member', null, 'Thanks');
   }
 
   signIn(formValue) {
