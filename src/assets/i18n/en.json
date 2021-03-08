@@ -1,25 +1,16 @@
 {
-  "Header": {
-    "SignedInAs": "SIGNED IN MEMBER",
-    "MyProfile" : "My Profile",
-    "Logout"    : "Logout",
-    "Login"     : "Login",
-    "Settings"  : "Account Settings",
-    "About"     : "Software Information"
+  "HEADER": {
+    "signedInAs": "SIGNED IN MEMBER",
+    "logout"    : "Logout",
+    "settings"  : "Account Settings",
+    "about"     : "About this software",
+    "tooltip"   : "Member's Hub"
   },
 
-  "App": {
-    "AboutUs": "About Us",
-    "Dashboard": "Dashboard",
-    "Demographics": "Demographics",
-    "Members": "Members",
-    "Restaurants": "Restaurants",
-    "Profile": "Profile",
-    "FS": "F&S Data",
-    "Experimental": "Experimental",
-    "Curation": "Curation",
-    "Designed": "This application is designed, built and maintained by ",
-    "Copyright": "Copyright"
+  "APP": {
+    "about": "This application is designed, built and maintained by [Restaurant Developments Ltd]({{ web }}) &copy; {{ year }}.",
+    "version": "Version",
+    "browser": "Platform/browser"
   },
 
   "ConfirmCancel": {

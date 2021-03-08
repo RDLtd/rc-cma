@@ -15,7 +15,7 @@
     <button
       class="rc-toolbar-btn-lg"
       mat-icon-button
-      matTooltip="Member's Hub"
+      [matTooltip]="'HEADER.tooltip' | translate"
       [routerLink]="'/hub'">
         <svg fill="#fff" viewBox="0 0 24 24">
           <path
@@ -23,9 +23,6 @@
         </svg>
       </button>
   </span>
-
-
-
 
   <span
     *ngIf="!authService.isAuth(); else loggedIn"
@@ -35,13 +32,6 @@
   </span>
 
   <ng-template #loggedIn>
-
-<!--    <span-->
-<!--      [matMenuTriggerFor]="menu"-->
-<!--      class="rc-media-small-hide rc-link-like">-->
-<!--    {{ displayName }}-->
-<!--  </span>-->
-<!--    <button mat-icon-button [matMenuTriggerFor]="menu" style="height: 40px; overflow: hidden">-->
 
     <button
       mat-icon-button
@@ -61,20 +51,13 @@
         <img [src]="placeholderAvatar" alt="Member Options">
       </span>
     </button>
-<!--    </button>-->
-
-<!--  <button-->
-<!--    [matMenuTriggerFor]="menu"-->
-<!--    mat-icon-button>-->
-<!--    <mat-icon>menu</mat-icon>-->
-<!--  </button>-->
 
   </ng-template>
 
   <mat-menu #menu="matMenu">
     <div class="rc-user-menu">
       <h3>{{ displayName }}</h3>
-      <span>{{ t_data?.SignedInAs }}</span>
+      <span>{{ 'HEADER.signedInAs' | translate | uppercase }}</span>
     </div>
     <mat-divider></mat-divider>
 
@@ -82,7 +65,7 @@
       mat-menu-item
       [routerLink]="['/profile']">
       <mat-icon>account_circle</mat-icon>
-      <span>{{ t_data?.Settings }}</span>
+      <span>{{ 'HEADER.settings' | translate }}</span>
     </button>
     <mat-divider></mat-divider>
 
@@ -90,14 +73,14 @@
       mat-menu-item
       (click)="logout()">
       <mat-icon>logout</mat-icon>
-      <span>{{ t_data?.Logout | translate }}</span>
+      <span>{{ 'HEADER.logout' | translate }}</span>
     </button>
     <mat-divider></mat-divider>
     <button
       mat-menu-item
       (click)="about()" >
       <mat-icon>information</mat-icon>
-      <span>{{ t_data?.About }}</span>
+      <span>{{ 'HEADER.about' | translate }}</span>
     </button>
   </mat-menu>
 

@@ -23,7 +23,7 @@ export class HeaderComponent implements OnInit {
   placeholderAvatar = null;
   placeholderUrl = 'https://eu.ui-avatars.com/api/?format=svg&size=40&background=fff&color=000&name=';
   navLabel: string;
-  t_data: any;
+  transData: any;
 
 
   constructor(
@@ -39,9 +39,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
 
-    this.translate.get('Header').subscribe(data => {
-      this.t_data = data;
-    })
+    this.translate.use(localStorage.getItem('rd_language'));
 
     this.company_name = this.config.brand.name;
     this.brandPrefix = this.config.brand.prefix;

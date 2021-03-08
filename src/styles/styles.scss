@@ -757,8 +757,17 @@ a.mat-menu-item {text-decoration: none;}
   }
 }
 .rc-dialog-help {
-  .mat-dialog-content {
-    padding-top: 16px;
+  h2 {
+    color: $rc-theme-accent;
+    text-transform: uppercase;
+  }
+  h3 {
+    font-size: 18px;
+    font-weight: 500;
+  }
+  p {
+    border-left: 3px solid $rc-cool-grey;
+    padding-left: 8px;
   }
 }
 .rc-dialog-alert {

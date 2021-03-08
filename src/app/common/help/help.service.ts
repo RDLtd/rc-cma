@@ -14,11 +14,14 @@ export class HelpService {
   ) { }
 
   dspHelp(topic, restaurant = null, title = 'help') {
+
     // console.log(id);
     const lang = localStorage.getItem('rd_language');
+
     // Content to display
     let mdContentPath = `/assets/helpfiles/${lang}/${topic}.md`;
     console.log(mdContentPath);
+
     // Support button
     let btnLabel = 'OK';
 
@@ -35,9 +38,6 @@ export class HelpService {
       path: mdContentPath,
       btnLabel: btnLabel,
       restaurant: restaurant,
-      transParams: {
-        email: 'jmbarnard@gmail.com'
-      }
     }
 
     let dialogRef = this.dialog.open(HelpComponent, dialogConfig);

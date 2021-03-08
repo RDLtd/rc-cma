@@ -6,10 +6,9 @@
     <mat-icon>close</mat-icon>
   </button>
   <div>
-    <img src="../assets/images/{{ company_logo_root }}-orange-black.svg">
+    <rc-logo [height]="'48px'" [version]="'primary'"></rc-logo>
   </div>
-  <p class="mat-small rc-centre">{{ 'App.Designed' | translate }} <a href="http://rd.limited">
-    Restaurant Developments Ltd</a>. {{ 'App.Copyright' | translate }} &copy; 2020</p>
-  <h3>{{ build.name }} {{ build.version }}</h3>
-  <p class="mat-small rc-centre">{{ os_text }}</p>
+  <div class="rc-txt-small" markdown [data]="'APP.about' | translate: params"></div>
+  <p class="rc-txt-small"><strong>{{ 'APP.version' | translate }}</strong>: {{ build.version }}</p>
+  <p class="rc-txt-small"><strong>{{ 'APP.browser' | translate }}</strong>: {{ os_text }}</p>
 </div>
