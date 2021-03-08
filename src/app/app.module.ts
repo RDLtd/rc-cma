@@ -41,6 +41,9 @@ import {
 import {
   RestaurantDetailComponent,
 } from './restaurants/restaurant-detail.component';
+import {
+  MarketplaceComponent
+} from './marketplace/marketplace.component'
 
 import {
   RestaurantLookupComponent,
@@ -66,7 +69,6 @@ import {
   CmsMenuDishComponent,
   CmsReservationsComponent,
   CmsDashboardComponent,
-  AffiliatesComponent
 } from './cms';
 
 import {
@@ -136,7 +138,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     HelpComponent,
     SafePipe,
     SigninComponent,
-    AffiliatesComponent,
+    MarketplaceComponent,
     JoinComponent,
     ReferralsComponent,
     LoadComponent,

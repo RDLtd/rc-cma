@@ -19,16 +19,18 @@ export class HeaderService {
   sectionNames = {
     en: {
       hub: "Members's Hub",
-      profile: "Member Profile"
+      profile: "Member Profile",
+      market: "Marketplace"
     },
     fr: {
       hub: "Members's Hub",
-      profile: "Member Profile"
+      profile: "Member Profile",
+      market: "Marketplace"
     }
   }
 
   constructor( private config: AppConfig ) {
-    this.lang = this.config.brand.lang || 'en';
+    this.lang = localStorage.getItem('rd_language');
   }
 
   updateSectionName (str: string) {

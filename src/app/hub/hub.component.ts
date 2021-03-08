@@ -87,7 +87,7 @@ export class HubComponent implements AfterViewInit {
       description:  "A wide range of offers and services available exclusive to Restaurant Collective Members. New" +
                     " deals are being added every week, so check regularly..",
       status:       "Average savings £1750 p.a.",
-      route:        "/hub",
+      route:        "/marketplace",
       ext:          false
     },
     {

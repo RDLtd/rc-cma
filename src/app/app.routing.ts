@@ -29,9 +29,7 @@ import {
   SigninComponent
 } from './signin/signin.component';
 
-import {
-  AffiliatesComponent
-} from './cms';
+import { MarketplaceComponent } from './marketplace/marketplace.component';
 import { JoinComponent } from './join/join.component';
 import { MembershipComponent } from './join/membership.component';
 import { HubComponent } from './hub/hub.component';
@@ -45,6 +43,10 @@ const APP_ROUTES: Routes = [
   { path: 'signin', component: SigninComponent },
   { path: 'hub',
     component: HubComponent,
+    canActivate: [AuthGuard]
+  },
+  { path: 'marketplace',
+    component: MarketplaceComponent,
     canActivate: [AuthGuard]
   },
   { path: 'referral', component: SigninComponent },
@@ -94,7 +96,7 @@ const APP_ROUTES: Routes = [
       canActivate: [AuthGuard] },
 
     { path: 'affiliates',
-      component: AffiliatesComponent,
+      component: MarketplaceComponent,
       canActivate: [AuthGuard] },
 
     { path: '**', component: CmsDirectoryComponent, canActivate: [AuthGuard] }
