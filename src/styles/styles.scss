@@ -1277,6 +1277,10 @@ button.rc-member-assc {
  */
 .rc-marketplace {
   padding-top: ($rc-toolbar-height);
+  .rc-card-menu {
+    position: absolute;
+    top: 8px; right: 8px;
+  }
 }
 
 /*
