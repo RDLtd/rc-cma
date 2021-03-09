@@ -24,21 +24,29 @@
 <div class="rc-marketplace">
   <div class="mdc-layout-grid">
     <div class="mdc-layout-grid__inner">
+
       <div
         *ngFor="let affiliate of affiliates"
         class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
-
-        <mat-card class="rc-card-base">
-          <button mat-icon-button class="rc-card-menu"><mat-icon>favorite</mat-icon></button>
+        <mat-card class="rc-card-rounded rc-card-market">
+          <button
+            mat-icon-button
+            class="rc-card-menu"
+            [matTooltip]="'Add to your favourites'">
+            <mat-icon>favorite_outline</mat-icon>
+          </button>
           <div mat-card-title>
-            <h4>CATEGORY</h4>
-            <h2>Deal headline</h2>
-            <h3>Affiliate Name</h3>
+            <h4>{{ affiliate.deal.category | uppercase }}</h4>
+            <img src="assets/images/affiliates/{{ affiliate.logo }}">
+            <h2>{{ affiliate.deal.name }}</h2>
+            <h3>by {{ affiliate.name }}</h3>
           </div>
-
           <div mat-card-content>
-            <p>Description of the deal.</p>
+            <p markdown ngpreservewhitespaces>{{ affiliate.deal.description }}</p>
           </div>
+          <mat-card-actions align="end">
+            <button mat-button color="accent">FIND OUT MORE</button>
+          </mat-card-actions>
         </mat-card>
 
       </div>

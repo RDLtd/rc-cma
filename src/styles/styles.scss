@@ -550,10 +550,45 @@ a.mat-menu-item {text-decoration: none;}
   }
 }
 
+.rc-marketplace {
+  padding-top: ($rc-toolbar-height);
+  .rc-card-menu {
+    position: absolute;
+    top: 8px; right: 8px;
+  }
+}
+
 /**
 * RC Cards
 * -------------------------------
 **/
+.rc-card-rounded {
+  position: relative;
+  height: 100%;
+  border-radius: 16px !important;
+  padding: 24px !important;
+  .rc-card-menu {
+    position: absolute;
+    top: 8px
+  }
+}
+.rc-card-market {
+  img {
+    height: 48px;
+    object-fit: contain;
+  }
+  h2 {
+    margin: 8px 0 0;
+  }
+  h3 {
+    margin: -8px 0 0;
+  }
+  h4 {
+    color: $rc-theme-accent;
+    font-size: 11px;
+
+  }
+}
 
 .rc-card {
   position: relative;
@@ -611,12 +646,6 @@ a.mat-menu-item {text-decoration: none;}
   float: left;
 }
 
-.rc-card-base {
-  position: relative;
-  height: 100%;
-  border-radius: 16px !important;
-  padding: 24px !important;
-}
 
 .rc-card-app {
   position: relative;
@@ -1268,18 +1297,6 @@ button.rc-member-assc {
       width: 5%;
       text-align: right;
     }
-  }
-}
-
-/*
-** MARKETPLACE
-** --------------------------------
- */
-.rc-marketplace {
-  padding-top: ($rc-toolbar-height);
-  .rc-card-menu {
-    position: absolute;
-    top: 8px; right: 8px;
   }
 }
 

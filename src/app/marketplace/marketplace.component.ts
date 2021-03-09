@@ -7,11 +7,6 @@ import { Restaurant } from '../_models';
 import { AppConfig } from '../app.config';
 import { HeaderService } from '../common/header.service';
 
-
-export interface deal {
-
-}
-
 @Component({
   selector: 'rc-marketplace',
   templateUrl: './marketplace.component.html'
@@ -21,6 +16,8 @@ export class MarketplaceComponent implements OnInit {
 
   restaurant: Restaurant;
   affiliates: any ;
+  categories: Array<string> = [];
+  deals: any;
 
 
   constructor(
@@ -41,17 +38,40 @@ export class MarketplaceComponent implements OnInit {
     this.affiliates = [
       {
         id: "123",
-        name: "Majestic Wine",
-        ref: "MW1",
-        category: "wine",
-        value: 100,
-        title: "Restaurant Developments Ltd",
-        description: "Description",
-        tags: ['wine']
-      }
-    ]
+        name: "Restaurant Developments",
+        logo: "rdl-logo.svg",
+        about: "RDL are application developers specialising in creating digital products for the restaurant sector.",
+        deal: {
+          id: "1",
+          name: "SPW Custom Domain & Email",
+          description: "For $25 per month, you get your Single Page Website can be served from a custom domain name" +
+            " (i.e.www.your-restaurant.com) and this will include a personalised email address (e.g." +
+            " your-name@your-restaurant.com).\n\nAll content updates you make here will be instantly updated on your" +
+            " website.",
+          value: 100,
+          category: "TECHNOLOGY"
+        }
+      }]
+    this.getDeals();
+    this.getCategories();
   }
 
+  getDeals(): void {
+    // this.restaurantService.getPartners(this.config.brand.prefix.toUpperCase())
+    //   .subscribe(res => console.log('Deals', res));
+  }
+
+  getCategories(): void {
+    let i = this.affiliates.length;
+    let c;
+    while (i--) {
+      c = this.affiliates[i].deal.category;
+      if (this.categories.indexOf(c) < 0) {
+        this.categories.push(c);
+      }
+    }
+    console.log('Cats', this.categories);
+  }
   // getPartnerOffers(): void {
   //
   //   this.restaurantService.getPartners(this.config.brand.prefix.toUpperCase())
