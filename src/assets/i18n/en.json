@@ -1,11 +1,18 @@
 {
   "HEADER": {
-    "signedInAs": "SIGNED IN MEMBER",
-    "logout"    : "Logout",
-    "settings"  : "Account Settings",
-    "about"     : "About this software",
-    "tooltip"   : "Member's Hub"
+    "signedInAs"      : "SIGNED IN MEMBER",
+    "logout"          : "Logout",
+    "settings"        : "Account Settings",
+    "about"           : "About this software",
+    "tooltip"         : "Member's Hub",
+    "sectionHub"      : "Member's Hub",
+    "sectionForum"    : "Community Forum",
+    "sectionProfile"  : "Profile",
+    "sectionMarket"   : "Marketplace",
+    "sectionKnowledge": "Knowledge Base"
   },
+
+  "COMMON": {},
 
   "APP": {
     "about": "This application is designed, built and maintained by [Restaurant Developments Ltd]({{ web }}) &copy; {{ year }}.",

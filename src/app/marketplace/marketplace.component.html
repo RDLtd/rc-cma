@@ -1,6 +1,51 @@
-<!--<div class="mdc-layout-grid">-->
 
-<!--  <div class="mdc-layout-grid__inner">-->
+<mat-toolbar class="rc-toolbar rc-toolbar-nav rc-toolbar-fixed rc-toolbar-nav-adjust">
+  <span></span>
+  <span class="rc-space-filler"></span>
+  <span class="rc-section-toolbar-actions rc-media-small-hide">
+    <button
+      mat-icon-button
+      [matTooltip]="'View favourites'">
+      <mat-icon>favorite</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      [matTooltip]="'Filter by category'">
+      <mat-icon>filter_list</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      [matTooltip]="">
+      <mat-icon>more_vertical</mat-icon>
+    </button>
+  </span>
+
+</mat-toolbar>
+<div class="rc-marketplace">
+  <div class="mdc-layout-grid">
+    <div class="mdc-layout-grid__inner">
+      <div
+        *ngFor="let affiliate of affiliates"
+        class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
+
+        <mat-card class="rc-card-base">
+          <div mat-card-title>
+            <h4>CATEGORY</h4>
+            <h2>Deal headline</h2>
+            <h3>Affiliate Name</h3>
+          </div>
+
+          <div mat-card-content>
+            <p>Description of the deal.</p>
+          </div>
+        </mat-card>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
 
 <!--  <div class="mdc-layout-grid__cell mdc-layout-grid__cell&#45;&#45;span-12">-->
 <!--    <mat-toolbar class="rc-toolbar rc-toolbar-section">-->

@@ -8,13 +8,9 @@ import { AppConfig } from '../app.config';
 import { HeaderService } from '../common/header.service';
 
 
-// export interface AffiliateOffer {
-//   id: string;
-//   affiliate: string;
-//   name: string;
-//   description: string;
-// }
+export interface deal {
 
+}
 
 @Component({
   selector: 'rc-marketplace',
@@ -24,7 +20,8 @@ import { HeaderService } from '../common/header.service';
 export class MarketplaceComponent implements OnInit {
 
   restaurant: Restaurant;
-  affiliates: [any];
+  affiliates: any ;
+
 
   constructor(
     private headerService: HeaderService,
@@ -41,7 +38,18 @@ export class MarketplaceComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.affiliates = [
+      {
+        id: "123",
+        name: "Majestic Wine",
+        ref: "MW1",
+        category: "wine",
+        value: 100,
+        title: "Restaurant Developments Ltd",
+        description: "Description",
+        tags: ['wine']
+      }
+    ]
   }
 
   // getPartnerOffers(): void {

@@ -603,12 +603,21 @@ a.mat-menu-item {text-decoration: none;}
   top: 24px;
   left: 24px;
 }
+
 .rc-online { background-color: $rc-theme-success !important; }
 .rc-default { background-color: $rc-theme-accent !important; }
 .rc-action-left {
   text-align: left;
   float: left;
 }
+
+.rc-card-base {
+  position: relative;
+  height: 100%;
+  border-radius: 16px !important;
+  padding: 24px !important;
+}
+
 .rc-card-app {
   position: relative;
   height: 100%;
@@ -624,7 +633,9 @@ a.mat-menu-item {text-decoration: none;}
     margin: 0 0 -8px;
     padding: 0;
   }
-  h2 { margin: 0; color: $rc-charcoal;}
+  h2 {
+    margin: 0;
+    color: $rc-charcoal;}
   p {
     text-align: left;
     margin-bottom: 32px;
@@ -1258,6 +1269,14 @@ button.rc-member-assc {
       text-align: right;
     }
   }
+}
+
+/*
+** MARKETPLACE
+** --------------------------------
+ */
+.rc-marketplace {
+  padding-top: ($rc-toolbar-height);
 }
 
 /*
