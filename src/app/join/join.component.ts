@@ -28,7 +28,7 @@ export class JoinComponent implements OnInit {
     type: 'self',
     code: null,
     name: null,
-    affiliateId: 0,
+    id: 0,
     restaurant: null,
     promo_status: null
   };
