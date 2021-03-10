@@ -48,7 +48,7 @@ export class CmsComponent implements OnInit {
       });
 
     this.route.params.pipe(
-      switchMap((params: Params) => this.restaurantService.getById(params.affiliateId)))
+      switchMap((params: Params) => this.restaurantService.getById(params.id)))
         .subscribe( data => {
             this.restaurant = data['restaurant'][0];
             this.cmsLocalService.setRestaurant(this.restaurant);
@@ -76,7 +76,7 @@ export class CmsComponent implements OnInit {
       panelClass: 'rc-preview-dialog-container',
       backdropClass: 'rc-preview-backdrop',
       data: {
-        affiliateId: this.restaurant.restaurant_id,
+        id: this.restaurant.restaurant_id,
         number: this.restaurant.restaurant_number
       }
     });

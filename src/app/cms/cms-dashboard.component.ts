@@ -638,7 +638,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
         panelClass: 'rc-preview-dialog-container',
         backdropClass: 'rc-preview-backdrop',
         data: {
-          affiliateId: this.restaurant.restaurant_id,
+          id: this.restaurant.restaurant_id,
           number: this.restaurant.restaurant_number
         }
       });
