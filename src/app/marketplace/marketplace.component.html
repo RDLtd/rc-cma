@@ -22,7 +22,7 @@
     </button>
     <button
       mat-icon-button
-      [class.rc-highlight]="isFiltered('category')"
+      [class.rc-highlight]="!!filter"
       [matTooltip]="'Filter by category'"
       [matMenuTriggerFor]="menuFilters">
       <mat-icon>filter_list</mat-icon>
@@ -31,12 +31,15 @@
 </mat-toolbar>
 
 <mat-menu #menuFilters="matMenu">
-  <button
-    mat-menu-item
-    *ngFor="let cat of categories"
-    (click)="filterByCategory(cat)">
-    {{ cat | titlecase }}
-  </button>
+  <ng-container *ngFor="let cat of categories">
+    <button
+      mat-menu-item
+      (click)="filterByCategory(cat)">
+      {{ cat | titlecase }}
+    </button>
+    <mat-divider></mat-divider>
+  </ng-container>
+
 </mat-menu>
 
 <div class="rc-marketplace">
@@ -65,35 +68,13 @@
             <p markdown ngpreservewhitespaces>{{ deal.description }}</p>
           </div>
           <mat-card-actions align="end">
-            <button mat-button color="accent">FIND OUT MORE</button>
+            <button
+              (click)="notifyAffiliate(deal.id)"
+              mat-button
+              color="accent">FIND OUT MORE</button>
           </mat-card-actions>
         </mat-card>
       </div>
     </div>
   </div>
 </div>
-
-
-
-
-
-<!--  <div class="mdc-layout-grid__cell mdc-layout-grid__cell&#45;&#45;span-12">-->
-<!--    <mat-toolbar class="rc-toolbar rc-toolbar-section">-->
-<!--      <span>{{ 'Affiliates.Offers' | translate }}</span>-->
-<!--      <span class="rc-space-filler"></span>-->
-<!--      <span class="rc-section-toolbar-actions">-->
-
-<!--        <button-->
-<!--          mat-icon-button-->
-<!--          (click)="help.dspHelp('cms-affiliates', restaurant)">-->
-<!--          <mat-icon>help_outline</mat-icon>-->
-<!--        </button>-->
-
-<!--      </span>-->
-<!--    </mat-toolbar>-->
-<!--  </div>-->
-
-
-
-<!--  </div>-->
-<!--</div>-->

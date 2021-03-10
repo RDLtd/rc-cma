@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RestaurantService } from '../_services';
 import { MatDialog } from '@angular/material/dialog';
-import { HelpService, LoadService } from '../common';
+import { ConfirmCancelComponent, HelpService, LoadService } from '../common';
 import { TranslateService } from '@ngx-translate/core';
 import { Restaurant } from '../_models';
 import { AppConfig } from '../app.config';
@@ -161,6 +161,22 @@ export class MarketplaceComponent implements OnInit {
     this.displayedDeals = this.deals;
     this.filter = null;
   }
+
+  //
+  notifyAffiliate(dealId: string): void {
+    let selectedDeal = this.deals.find(d => {return d.id === dealId});
+    console.log(selectedDeal);
+    let dialogRef = this.dialog.open(ConfirmCancelComponent, {
+      data: {
+        title: 'Exclusive Member Deal',
+        deal: selectedDeal,
+        msg: `## ${selectedDeal.name} \n\nIf you would like to take advantage of this exclusive Member offer, or would like to know a bit more about it, confirm your interest below.\n\nWe will then forward your contact details and Member ID (qualifying you for the offer) to **${selectedDeal.affiliate.name}** and they will contact you within 2 working days.`,
+        no: 'Not now',
+        yes: 'Send Request'
+      }
+    });
+  }
+
 
 
 

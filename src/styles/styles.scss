@@ -566,10 +566,14 @@ a.mat-menu-item {text-decoration: none;}
   position: relative;
   height: 100%;
   border-radius: 16px !important;
-  padding: 24px !important;
+  padding: 24px 24px 48px !important;
   .rc-card-menu {
     position: absolute;
     top: 8px
+  }
+  .mat-card-actions {
+    position: absolute;
+    bottom: 24px; right: 24px; left: 24px;
   }
 }
 .rc-card-market {
@@ -819,7 +823,7 @@ a.mat-menu-item {text-decoration: none;}
     font: 500 20px/24px $rc-default-font;
   }
   .mat-stroked-button {
-    border-color: $rc-theme-success;
+    border-color: $rc-theme-accent;
   }
 }
 .rc-dialog-member {
