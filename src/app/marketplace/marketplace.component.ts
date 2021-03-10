@@ -7,18 +7,73 @@ import { Restaurant } from '../_models';
 import { AppConfig } from '../app.config';
 import { HeaderService } from '../common/header.service';
 
+export interface Affiliate {
+  id: string;
+  name: string;
+  logo: string;
+  about: string
+}
+
+export interface Deal {
+  id: string;
+  name: string;
+  description: string;
+  value: number,
+  category: string;
+  affiliate: Affiliate;
+  createdDate: Date;
+}
+
 @Component({
   selector: 'rc-marketplace',
   templateUrl: './marketplace.component.html'
 })
 
 export class MarketplaceComponent implements OnInit {
+  now: Date = new Date();
+  mockDeals = [
+    {
+      id: "1",
+      name: "SPW Custom Domain & Email",
+      description: "For $25 per month, you get your Single Page Website can be served from a custom domain name" +
+        " (i.e.www.your-restaurant.com) and this will include a personalised email address (e.g." +
+        " your-name@your-restaurant.com).\n\nAll content updates you make here will be instantly updated on your" +
+        " website.",
+      value: 100,
+      category: "TECHNOLOGY",
+      affiliate: {
+        id: "123",
+        name: "Restaurant Developments",
+        logo: "rdl-logo.svg",
+        about: "RDL are application developers specialising in creating digital products for the restaurant sector.",
+      },
+      createdDate: this.now
+    },
+    {
+      id: "2",
+      name: "Italian Wine Discount",
+      description: "10% off all italian wines during lockdown.",
+      value: 100,
+      category: "Wine",
+      affiliate: {
+        id: "222",
+        name: "Majestic Commercial",
+        logo: "majestic-offers-intro.png",
+        about: "Majestic Wines are best wine suppliers in Croydon.",
+      },
+      createdDate: this.now
+    }
+  ];
+
 
   restaurant: Restaurant;
   affiliates: any ;
-  categories: Array<string> = [];
-  deals: any;
-
+  categories = [];
+  deals: Array<Deal>;
+  favourites: Array<string> = [];
+  hasFavourites: boolean = true;
+  filter: string;
+  displayedDeals = [];
 
   constructor(
     private headerService: HeaderService,
@@ -29,50 +84,88 @@ export class MarketplaceComponent implements OnInit {
     private config: AppConfig,
     private loader: LoadService
   ) {
-    //this.loader.open();
+    this.loader.open();
     this.translate.use(localStorage.getItem('rd_language'));
     this.headerService.updateSectionName('market');
   }
 
   ngOnInit() {
-    this.affiliates = [
-      {
-        id: "123",
-        name: "Restaurant Developments",
-        logo: "rdl-logo.svg",
-        about: "RDL are application developers specialising in creating digital products for the restaurant sector.",
-        deal: {
-          id: "1",
-          name: "SPW Custom Domain & Email",
-          description: "For $25 per month, you get your Single Page Website can be served from a custom domain name" +
-            " (i.e.www.your-restaurant.com) and this will include a personalised email address (e.g." +
-            " your-name@your-restaurant.com).\n\nAll content updates you make here will be instantly updated on your" +
-            " website.",
-          value: 100,
-          category: "TECHNOLOGY"
-        }
-      }]
     this.getDeals();
     this.getCategories();
+    this.loader.close();
+    this.hasFavourites = this.favourites.length > 0;
   }
 
   getDeals(): void {
+    this.deals = this.mockDeals;
+    this.displayedDeals = this.deals;
     // this.restaurantService.getPartners(this.config.brand.prefix.toUpperCase())
     //   .subscribe(res => console.log('Deals', res));
   }
 
+  // Extract a list of deal categories
+  // to use for filtering
   getCategories(): void {
-    let i = this.affiliates.length;
+    let i = this.deals.length;
     let c;
     while (i--) {
-      c = this.affiliates[i].deal.category;
+      c = this.deals[i].category;
       if (this.categories.indexOf(c) < 0) {
         this.categories.push(c);
       }
     }
     console.log('Cats', this.categories);
   }
-  // getPartnerOffers(): void {
+
+  // Favourites
+  isFavourite(id: string): boolean {
+    return this.favourites.indexOf(id) >= 0;
+  }
+
+  // Add or remove favourite deals
+  toggleIsFavourite(id: string): void {
+    if (!this.isFavourite(id)) {
+      this.favourites.push(id);
+    } else {
+      this.favourites.forEach((value, index) => {
+        if (value === id) {
+          this.favourites.splice(index, 1);
+        }
+      });
+    }
+  }
+  isFiltered(str): boolean {
+    return this.filter === str;
+  }
+
+  // Only display favourite deals
+  filterByFavourites(): void {
+    this.displayedDeals = this.displayedDeals.filter(
+      function(e) {
+        return this.indexOf(e.id) >= 0;
+      },
+      this.favourites
+    );
+    this.filter = 'favourites'
+  }
+  // Category filters
+  filterByCategory(cat: string): void {
+    this.displayedDeals = this.deals.filter(function(elem) {
+      // normalise and compare
+      return elem.category.toLowerCase() === cat.toLowerCase();
+    });
+    this.filter = cat;
+  }
+  // Reset
+  clearAllFilters(): void {
+    this.displayedDeals = this.deals;
+    this.filter = null;
+  }
+
+
+
+
+    // getPartnerOffers(): void {
   //
   //   this.restaurantService.getPartners(this.config.brand.prefix.toUpperCase())
   //     .subscribe(

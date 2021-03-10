@@ -53,7 +53,7 @@ export class HubComponent implements AfterViewInit {
   // Mock up some apps/services
   mockFeatures = [
     {
-      id:           "cms",
+      id:  "cms",
       name:         "Web Content",
       icon:         "app-icon-cms",
       description:  "Manage your restaurant's web content and publish you Single Page Website (SPW) that will be used." ,

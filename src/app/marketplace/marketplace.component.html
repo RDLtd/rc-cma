@@ -1,58 +1,79 @@
 
 <mat-toolbar class="rc-toolbar rc-toolbar-nav rc-toolbar-fixed rc-toolbar-nav-adjust">
-  <span></span>
+
   <span class="rc-space-filler"></span>
+  <mat-chip-list *ngIf="!!filter">
+    <mat-chip
+      (removed)="clearAllFilters()"
+      [removable]="true">
+      Filtered by: {{ filter | titlecase }}
+      <mat-icon matChipRemove>cancel</mat-icon>
+    </mat-chip>
+  </mat-chip-list>
+
   <span class="rc-section-toolbar-actions rc-media-small-hide">
     <button
+      *ngIf="favourites.length"
       mat-icon-button
+      (click)="filterByFavourites()"
+      [class.rc-highlight]="isFiltered('favourites')"
       [matTooltip]="'View favourites'">
       <mat-icon>favorite</mat-icon>
     </button>
     <button
       mat-icon-button
-      [matTooltip]="'Filter by category'">
+      [class.rc-highlight]="isFiltered('category')"
+      [matTooltip]="'Filter by category'"
+      [matMenuTriggerFor]="menuFilters">
       <mat-icon>filter_list</mat-icon>
     </button>
-    <button
-      mat-icon-button
-      [matTooltip]="">
-      <mat-icon>more_vertical</mat-icon>
-    </button>
   </span>
-
 </mat-toolbar>
+
+<mat-menu #menuFilters="matMenu">
+  <button
+    mat-menu-item
+    *ngFor="let cat of categories"
+    (click)="filterByCategory(cat)">
+    {{ cat | titlecase }}
+  </button>
+</mat-menu>
+
 <div class="rc-marketplace">
   <div class="mdc-layout-grid">
     <div class="mdc-layout-grid__inner">
 
       <div
-        *ngFor="let affiliate of affiliates"
+        *ngFor="let deal of displayedDeals"
         class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
         <mat-card class="rc-card-rounded rc-card-market">
           <button
             mat-icon-button
             class="rc-card-menu"
+            [class.rc-highlight]="isFavourite(deal.id)"
+            (click)="toggleIsFavourite(deal.id)"
             [matTooltip]="'Add to your favourites'">
             <mat-icon>favorite_outline</mat-icon>
           </button>
           <div mat-card-title>
-            <h4>{{ affiliate.deal.category | uppercase }}</h4>
-            <img src="assets/images/affiliates/{{ affiliate.logo }}">
-            <h2>{{ affiliate.deal.name }}</h2>
-            <h3>by {{ affiliate.name }}</h3>
+            <h4>{{ deal.category | uppercase }}</h4>
+            <img src="assets/images/affiliates/{{ deal.affiliate.logo }}">
+            <h2>{{ deal.name }}</h2>
+            <h3>by {{ deal.affiliate.name }}</h3>
           </div>
           <div mat-card-content>
-            <p markdown ngpreservewhitespaces>{{ affiliate.deal.description }}</p>
+            <p markdown ngpreservewhitespaces>{{ deal.description }}</p>
           </div>
           <mat-card-actions align="end">
             <button mat-button color="accent">FIND OUT MORE</button>
           </mat-card-actions>
         </mat-card>
-
       </div>
     </div>
   </div>
 </div>
+
+
 
 
 

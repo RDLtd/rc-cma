@@ -114,9 +114,9 @@ export class CmsMenusComponent implements OnInit {
           let ds = data['sectionrecord'][0];
           this.htmlMenu.section_id = ds.cms_section_id;
           this.htmlMenu.sections = [
-              { id: 1, label: ds.cms_section_desc_1 },
-              { id: 2, label: ds.cms_section_desc_2 },
-              { id: 3, label: ds.cms_section_desc_3 }
+              { affiliateId: 1, label: ds.cms_section_desc_1 },
+              { affiliateId: 2, label: ds.cms_section_desc_2 },
+              { affiliateId: 3, label: ds.cms_section_desc_3 }
             ];
 
         } else {
@@ -125,9 +125,9 @@ export class CmsMenusComponent implements OnInit {
           this.htmlMenu.section_id = 0;
 
           this.htmlMenu.sections = [
-            { id: 1, label: this.t_data.MealDefaultSection1 },
-            { id: 2, label: this.t_data.MealDefaultSection2 },
-            { id: 3, label: this.t_data.MealDefaultSection3 }
+            { affiliateId: 1, label: this.t_data.MealDefaultSection1 },
+            { affiliateId: 2, label: this.t_data.MealDefaultSection2 },
+            { affiliateId: 3, label: this.t_data.MealDefaultSection3 }
           ];
 
           // at this point we can assume that there is no section record, so create one now so
