@@ -22,6 +22,7 @@ export interface Deal {
   category: string;
   affiliate: Affiliate;
   createdDate: Date;
+  expiryDate: Date;
 }
 
 @Component({
@@ -31,6 +32,8 @@ export interface Deal {
 
 export class MarketplaceComponent implements OnInit {
   now: Date = new Date();
+  expiry: Date = new Date('2022');
+
   mockDeals = [
     {
       id: "1",
@@ -40,28 +43,34 @@ export class MarketplaceComponent implements OnInit {
         " your-name@your-restaurant.com).\n\nAll content updates you make here will be instantly updated on your" +
         " website.",
       value: 100,
+      url: "https//restaurantcollective.org.uk/",
       category: "TECHNOLOGY",
       affiliate: {
         id: "123",
         name: "Restaurant Developments",
         logo: "rdl-logo.svg",
+        url: "https//restaurantdevelopments.ltd/",
         about: "RDL are application developers specialising in creating digital products for the restaurant sector.",
       },
-      createdDate: this.now
+      createdDate: this.now,
+      expiryDate: this.expiry
     },
     {
       id: "2",
       name: "Italian Wine Discount",
       description: "10% off all italian wines during lockdown.",
       value: 100,
+      url: "https//restaurantcollective.org.uk/",
       category: "Wine",
       affiliate: {
         id: "222",
         name: "Majestic Commercial",
-        logo: "majestic-offers-intro.png",
+        logo: "majestic-offers-intro.jpg",
+        url: "https://www.majesticcommercial.co.uk/",
         about: "Majestic Wines are best wine suppliers in Croydon.",
       },
-      createdDate: this.now
+      createdDate: this.now,
+      expiryDate: this.expiry
     }
   ];
 
@@ -97,6 +106,7 @@ export class MarketplaceComponent implements OnInit {
   }
 
   getDeals(): void {
+    console.log(this.expiry);
     this.deals = this.mockDeals;
     this.displayedDeals = this.deals;
     // this.restaurantService.getPartners(this.config.brand.prefix.toUpperCase())
@@ -194,11 +204,7 @@ export class MarketplaceComponent implements OnInit {
     });
   }
 
-
-
-
-
-    // getPartnerOffers(): void {
+  // getPartnerOffers(): void {
   //
   //   this.restaurantService.getPartners(this.config.brand.prefix.toUpperCase())
   //     .subscribe(
