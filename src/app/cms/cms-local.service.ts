@@ -71,7 +71,7 @@ export class CmsLocalService {
     });
     const dialogRef = this.dialog.open(ConfirmCancelComponent, this.dialogConfig );
     return dialogRef.afterClosed().pipe(map(result => {
-      return result.confirmed;
+      return result;
     }));
   }
 

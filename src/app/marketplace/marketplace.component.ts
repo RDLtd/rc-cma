@@ -134,12 +134,14 @@ export class MarketplaceComponent implements OnInit {
       });
     }
   }
+
   isFiltered(str): boolean {
     return this.filter === str;
   }
 
   // Only display favourite deals
   filterByFavourites(): void {
+    this.clearAllFilters();
     this.displayedDeals = this.displayedDeals.filter(
       function(e) {
         return this.indexOf(e.id) >= 0;
@@ -162,10 +164,15 @@ export class MarketplaceComponent implements OnInit {
     this.filter = null;
   }
 
-  //
+  // Send contact details to Affiliate
+  // and confirm to Member
   notifyAffiliate(dealId: string): void {
-    let selectedDeal = this.deals.find(d => {return d.id === dealId});
-    console.log(selectedDeal);
+
+    // NOTE:
+    // Array.find does not work in IE
+    // but this is less than 1% of usage
+    let selectedDeal = this.deals.find(d => { return d.id === dealId} );
+
     let dialogRef = this.dialog.open(ConfirmCancelComponent, {
       data: {
         title: 'Exclusive Member Deal',
@@ -173,6 +180,15 @@ export class MarketplaceComponent implements OnInit {
         msg: `## ${selectedDeal.name} \n\nIf you would like to take advantage of this exclusive Member offer, or would like to know a bit more about it, confirm your interest below.\n\nWe will then forward your contact details and Member ID (qualifying you for the offer) to **${selectedDeal.affiliate.name}** and they will contact you within 2 working days.`,
         no: 'Not now',
         yes: 'Send Request'
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(confirmed => {
+      if (confirmed) {
+        // Send affiliate email
+        console.log(selectedDeal);
+      } else {
+        console.log('Cancelled');
       }
     });
   }

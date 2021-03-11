@@ -183,10 +183,10 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
       this.dfImg = 'https://via.placeholder.com/350x200?text=' + this.t_data.AwaitingImage;
 
       // Observe offer count
-      this.cmsLocalService.getOfferCount()
-        .subscribe( count => {
-          this.offerInBox = count;
-        });
+      // this.cmsLocalService.getOfferCount()
+      //   .subscribe( count => {
+      //     this.offerInBox = count;
+      //   });
 
       this.cmsLocalService.getRestaurant()
         .subscribe(rest => {
@@ -215,7 +215,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
       this.checkOpeningTimes();
       this.checkDescriptions();
       this.checkImages();
-      this.getOffers();
+      // this.getOffers();
     }
   }
 
@@ -583,49 +583,49 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
     }
   }
 
-  getOffers() {
-
-    this.restaurantService.getOffers()
-      .subscribe(
-        res => {
-          this.offerCount = res['offers'].length;
-          if (this.offerCount > 0) {
-            // now look to see how many offers to show in the offer 'inbox' for this restaurant
-            this.restaurantService.getLatestAccess(Number(this.restaurant.restaurant_id), 'Viewed Offers')
-              .subscribe(
-                data => {
-
-                  if (data['latestaccess'][0].max) {
-                    // Only count offers that are more
-                    // recent than the latest view access time
-
-                    this.offerInBox = 0;
-
-                    for (let i = 0; i < this.offerCount; i++) {
-                      if (res['offers'][i].offer_marketing_date > data['latestaccess'][0].max) {
-                        this.offerInBox += 1;
-                      }
-                    }
-                  } else {
-                    // this restaurant has not seen any offers yet
-                    this.offerInBox = this.offerCount;
-                  }
-
-                  //console.log('Offers:', this.offerInBox);
-                  this.cmsLocalService.setOfferCount(this.offerInBox);
-                },
-                () => {
-                  console.log('No access records found for restaurant');
-                  // this restaurant has not seen any offers yet
-                  this.offerInBox = this.offerCount;
-                  this.cmsLocalService.setOfferCount(this.offerInBox);
-                });
-          }
-        },
-        () => {
-          console.log('No offer records found');
-        });
-  }
+  // getOffers() {
+  //
+  //   this.restaurantService.getOffers()
+  //     .subscribe(
+  //       res => {
+  //         this.offerCount = res['offers'].length;
+  //         if (this.offerCount > 0) {
+  //           // now look to see how many offers to show in the offer 'inbox' for this restaurant
+  //           this.restaurantService.getLatestAccess(Number(this.restaurant.restaurant_id), 'Viewed Offers')
+  //             .subscribe(
+  //               data => {
+  //
+  //                 if (data['latestaccess'][0].max) {
+  //                   // Only count offers that are more
+  //                   // recent than the latest view access time
+  //
+  //                   this.offerInBox = 0;
+  //
+  //                   for (let i = 0; i < this.offerCount; i++) {
+  //                     if (res['offers'][i].offer_marketing_date > data['latestaccess'][0].max) {
+  //                       this.offerInBox += 1;
+  //                     }
+  //                   }
+  //                 } else {
+  //                   // this restaurant has not seen any offers yet
+  //                   this.offerInBox = this.offerCount;
+  //                 }
+  //
+  //                 //console.log('Offers:', this.offerInBox);
+  //                 this.cmsLocalService.setOfferCount(this.offerInBox);
+  //               },
+  //               () => {
+  //                 console.log('No access records found for restaurant');
+  //                 // this restaurant has not seen any offers yet
+  //                 this.offerInBox = this.offerCount;
+  //                 this.cmsLocalService.setOfferCount(this.offerInBox);
+  //               });
+  //         }
+  //       },
+  //       () => {
+  //         console.log('No offer records found');
+  //       });
+  // }
 
   navTo(tgt) {
     // console.log('restaurants', this.restaurant.restaurant_id, 'cms', tgt);

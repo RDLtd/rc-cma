@@ -8,10 +8,11 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class ConfirmCancelComponent implements OnInit  {
 
-  defaultTitle;
-  defaultMsg;
-  defaultCancel;
-  defaultContinue;
+  txtTitle: string;
+  txtBody: string;
+  txtBtnCancel: string;
+  txtBtnConfirm: string;
+  txtDontShow: string;
 
   constructor(
       private translate: TranslateService,
@@ -19,10 +20,14 @@ export class ConfirmCancelComponent implements OnInit  {
       @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit() {
-    this.translate.get('ConfirmCancel.Title').subscribe(value => this.defaultTitle = value);
-    this.translate.get('ConfirmCancel.Message').subscribe(value => this.defaultMsg = value);
-    this.translate.get('ConfirmCancel.Cancel').subscribe(value => this.defaultCancel = value);
-    this.translate.get('ConfirmCancel.Continue').subscribe(value => this.defaultContinue = value);
+    this.translate.get('ConfirmCancel')
+      .subscribe(defaults => {
+        this.txtTitle = this.data.title || defaults.Title;
+        this.txtBody = this.data.msg || defaults.Message;
+        this.txtBtnCancel = this.data.no || defaults.Cancel;
+        this.txtBtnConfirm = this.data.yes || defaults.Continue;
+        this.txtDontShow = this.data.dontshow || defaults.DontShow;
+      });
   }
 
 }

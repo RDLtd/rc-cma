@@ -2,8 +2,9 @@
 <mat-toolbar class="rc-toolbar rc-toolbar-nav rc-toolbar-fixed rc-toolbar-nav-adjust">
 
   <span class="rc-space-filler"></span>
-  <mat-chip-list *ngIf="!!filter">
+  <mat-chip-list *ngIf="!!filter" class="rc-filter">
     <mat-chip
+      style="margin-right: 16px;"
       (removed)="clearAllFilters()"
       [removable]="true">
       Filtered by: {{ filter | titlecase }}
