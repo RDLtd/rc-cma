@@ -60,6 +60,7 @@ export class CmsLocalService {
     // load translations
     this.translate.get('ConfirmCancel').subscribe(t => {
       this.dialogConfig = {
+        autoFocus: false,
         data: {
           title: t.Sure,
           msg: t.SaveContinue,

@@ -6,11 +6,14 @@
     {{ txtBody }}
   </mat-dialog-content>
   <mat-dialog-actions align="end">
-    <button *ngIf="data.no" mat-button (click)="confirmCancelDialog.close(false )">
+    <button
+      tabindex="-1"
+      *ngIf="data['no']"
+      mat-button
+      (click)="confirmCancelDialog.close(false )">
       {{ txtBtnCancel | titlecase }}
     </button>
     <button
-      autofocus
       mat-button color="accent" (click)="confirmCancelDialog.close(true )">
       {{ txtBtnConfirm | uppercase }}
     </button>

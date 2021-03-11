@@ -174,6 +174,7 @@ export class MarketplaceComponent implements OnInit {
     let selectedDeal = this.deals.find(d => { return d.id === dealId} );
 
     let dialogRef = this.dialog.open(ConfirmCancelComponent, {
+      restoreFocus: false,
       data: {
         title: 'Exclusive Member Deal',
         deal: selectedDeal,
