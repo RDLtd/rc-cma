@@ -7,12 +7,12 @@
       style="margin-right: 16px;"
       (removed)="clearAllFilters()"
       [removable]="true">
-      Filtered by: {{ filter | titlecase }}
+      {{ 'MARKETPLACE.filteredBy' | translate }}: {{ filter | titlecase }}
       <mat-icon matChipRemove>cancel</mat-icon>
     </mat-chip>
   </mat-chip-list>
 
-  <span class="rc-section-toolbar-actions rc-media-small-hide">
+  <span class="rc-section-toolbar-actions">
     <button
       *ngIf="favourites.length"
       mat-icon-button
@@ -63,7 +63,7 @@
             <h4>{{ deal.category | uppercase }}</h4>
             <img src="assets/images/affiliates/{{ deal.affiliate.logo }}">
             <h2>{{ deal.name }}</h2>
-            <h3>by {{ deal.affiliate.name }}</h3>
+            <h3>by <a [href]="deal.affiliate.url" target="_blank">{{ deal.affiliate.name }}</a></h3>
           </div>
           <div mat-card-content>
             <p markdown ngpreservewhitespaces>{{ deal.description }}</p>
@@ -72,7 +72,7 @@
             <button
               (click)="notifyAffiliate(deal.id)"
               mat-button
-              color="accent">FIND OUT MORE</button>
+              color="accent">{{ 'MARKETPLACE.findOutMore' | translate | uppercase }}</button>
           </mat-card-actions>
         </mat-card>
       </div>

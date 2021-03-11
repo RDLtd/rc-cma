@@ -43,13 +43,13 @@ export class MarketplaceComponent implements OnInit {
         " your-name@your-restaurant.com).\n\nAll content updates you make here will be instantly updated on your" +
         " website.",
       value: 100,
-      url: "https//restaurantcollective.org.uk/",
+      url: "https://restaurantcollective.org.uk/",
       category: "TECHNOLOGY",
       affiliate: {
         id: "123",
         name: "Restaurant Developments",
         logo: "rdl-logo.svg",
-        url: "https//restaurantdevelopments.ltd/",
+        url: "https://restaurantdevelopments.ltd/",
         about: "RDL are application developers specialising in creating digital products for the restaurant sector.",
       },
       createdDate: this.now,
@@ -57,10 +57,10 @@ export class MarketplaceComponent implements OnInit {
     },
     {
       id: "2",
-      name: "Italian Wine Discount",
+      name: "25% Italian Wine Discount",
       description: "10% off all italian wines during lockdown.",
       value: 100,
-      url: "https//restaurantcollective.org.uk/",
+      url: "https://restaurantcollective.org.uk/",
       category: "Wine",
       affiliate: {
         id: "222",
@@ -91,11 +91,10 @@ export class MarketplaceComponent implements OnInit {
     private translate: TranslateService,
     private dialog: MatDialog,
     private config: AppConfig,
-    private loader: LoadService
-  ) {
-    this.loader.open();
-    this.translate.use(localStorage.getItem('rd_language'));
-    this.headerService.updateSectionName('market');
+    private loader: LoadService) {
+      this.loader.open();
+      this.translate.use(localStorage.getItem('rd_language'));
+      this.headerService.updateSectionName('market');
   }
 
   ngOnInit() {
@@ -109,8 +108,6 @@ export class MarketplaceComponent implements OnInit {
     console.log(this.expiry);
     this.deals = this.mockDeals;
     this.displayedDeals = this.deals;
-    // this.restaurantService.getPartners(this.config.brand.prefix.toUpperCase())
-    //   .subscribe(res => console.log('Deals', res));
   }
 
   // Extract a list of deal categories
@@ -151,6 +148,7 @@ export class MarketplaceComponent implements OnInit {
 
   // Only display favourite deals
   filterByFavourites(): void {
+    // remove any other filters first
     this.clearAllFilters();
     this.displayedDeals = this.displayedDeals.filter(
       function(e) {
@@ -168,7 +166,7 @@ export class MarketplaceComponent implements OnInit {
     });
     this.filter = cat;
   }
-  // Reset
+  // Reset filters
   clearAllFilters(): void {
     this.displayedDeals = this.deals;
     this.filter = null;
@@ -182,15 +180,16 @@ export class MarketplaceComponent implements OnInit {
     // Array.find does not work in IE
     // but this is less than 1% of usage
     let selectedDeal = this.deals.find(d => { return d.id === dealId} );
+    let content = this.translate.instant('MARKETPLACE');
 
     let dialogRef = this.dialog.open(ConfirmCancelComponent, {
       restoreFocus: false,
       data: {
-        title: 'Exclusive Member Deal',
+        title: content.dealRequestTitle,
         deal: selectedDeal,
-        msg: `## ${selectedDeal.name} \n\nIf you would like to take advantage of this exclusive Member offer, or would like to know a bit more about it, confirm your interest below.\n\nWe will then forward your contact details and Member ID (qualifying you for the offer) to **${selectedDeal.affiliate.name}** and they will contact you within 2 working days.`,
-        no: 'Not now',
-        yes: 'Send Request'
+        msg: this.translate.instant('MARKETPLACE.dealRequest', selectedDeal),
+        no: content.dealBtnCancel,
+        yes: content.dealBtnConfirm
       }
     });
 

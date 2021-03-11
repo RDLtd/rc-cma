@@ -19,6 +19,14 @@
     "version": "Version",
     "browser": "Platform/browser"
   },
+  "MARKETPLACE": {
+    "filteredBy": "Filtered by",
+    "findOutMore": "Find out more",
+    "dealRequestTitle": "Exclusive Member Deal",
+    "dealRequest": "## {{ name }}\n\nIf you would like to take advantage of this exclusive Member offer, or would like to know a bit more about it, confirm your interest below.\n\nWe will forward your contact details and Member ID to **{{ affiliate.name }}** and they will contact you within 2 working days with further details.\n\nThis is just to register you interest and there's no obligation on your part to proceed, unless you decide to.",
+    "dealBtnCancel": "Not now thanks",
+    "dealBtnConfirm": "Send Request"
+  },
 
   "Join": {
     "Support": "Support the Collective",
