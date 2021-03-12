@@ -18,6 +18,7 @@ export class HeaderService {
   currentAvatar = this.avatarSubject.asObservable();
 
   lang: string;
+
   sectionNames = {
     en: {
       hub: "Member's Hub",
@@ -36,8 +37,8 @@ export class HeaderService {
   constructor(
     private trans: TranslateService,
     private config: AppConfig ) {
-    this.lang = localStorage.getItem('rd_language');
-    this.trans.use(this.lang);
+      this.lang = localStorage.getItem('rd_language');
+      // this.trans.use(this.lang);
   }
 
   updateSectionName (str: string) {

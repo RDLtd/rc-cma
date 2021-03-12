@@ -22,7 +22,7 @@ export class SigninComponent implements OnInit {
   newMemberEmail: string;
 
   // translation variables
-  t_data: any;
+  trans: any;
 
   constructor(
     private authService: AuthenticationService,
@@ -53,10 +53,7 @@ export class SigninComponent implements OnInit {
     if (this.authService.isAuth()) {
       this.router.navigate([localStorage.getItem('rd_home') || '']);
     }
-    this.translate.get('SignIn').subscribe(data => {
-      this.t_data = data;
-      // console.log('SIGNIN', this.t_data);
-    });
+    this.translate.get('SignIn').subscribe(data => this.trans = data);
   }
 
   dspNewMemberMessage() {
@@ -70,9 +67,9 @@ export class SigninComponent implements OnInit {
   signIn(formValue) {
 
     // need this in here since the NgInit here executes too soon!
-    this.translate.get('SignIn').subscribe(data => {
-      this.t_data = data;
-    });
+    // this.translate.get('SignIn').subscribe(data => {
+    //   this.SIGNIN = data;
+    // });
 
     // console.log('form', formValue);
     this.isSubmitting = true;
@@ -92,7 +89,7 @@ export class SigninComponent implements OnInit {
           // Indeed, the returned 401 gives the unauthorised, we need to deal with this through translation
           // this.errorMsg = error.statusText;
           console.log(`Auth Error: ${error}`);
-          this.openSnackBar(this.t_data.Unauth);
+          this.openSnackBar(this.trans.Unauth);
           this.isSubmitting = false;
         });
   }
@@ -107,10 +104,10 @@ export class SigninComponent implements OnInit {
       data => {
         console.log(data);
         if (data['status'] === 'OK') {
-          this.openSnackBar(this.t_data.NewPassword);
+          this.openSnackBar(this.trans.NewPassword);
           this.pwdReset = false;
         } else {
-          this.openSnackBar(this.t_data.Unknown);
+          this.openSnackBar(this.trans.Unknown);
         }
       },
       error => {

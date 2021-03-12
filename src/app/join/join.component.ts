@@ -58,6 +58,7 @@ export class JoinComponent implements OnInit {
       this.stripeSessionId = params['session_id'];
       console.log('stripeSessionId', this.stripeSessionId);
     });
+
     // Switch language
     translate.onLangChange.subscribe(() => {
       this.translate.get('Join').subscribe(data => {

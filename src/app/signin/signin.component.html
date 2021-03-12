@@ -1,15 +1,15 @@
 <div class="rc-layout-split-container">
-
   <div class="rc-layout-split-left rc-bgd">
     <section class="rc-layout-split-content">
-      <rc-logo [height]="'120px'"></rc-logo>
       <!-- Welcome -->
-      <markdown ngPreserveWhitespaces [data]="t_data?.Introduction"></markdown>
+      <rc-logo [height]="'120px'"></rc-logo>
+      <markdown ngPreserveWhitespaces [data]="'SIGNIN.introduction' | translate"></markdown>
     </section>
   </div>
 
   <div class="rc-layout-split-right">
     <div class="rc-layout-split-content">
+
     <!-- Password Reset -->
     <section class="rc-signin-form" *ngIf="pwdReset">
       <form
@@ -17,17 +17,18 @@
         (ngSubmit)="frmReset.form.valid && resetPwd(frmReset.value)"
         novalidate>
         <span class="rc-warn" *ngIf="errorMsg">{{ errorMsg | uppercase }}!</span>
-        <h1>{{ 'SignIn.ResetPassword' | translate }}</h1>
-        <span>{{ 'SignIn.Or' | translate }} <a (click)="showPwdReset(false)">{{ 'SignIn.SignIn' | translate }}</a></span>
-        <p>{{ 'SignIn.EnterEmail' | translate }}</p>
+
+        <h1>{{ 'SIGNIN.ResetPassword' | translate }}</h1>
+        <span>{{ 'SIGNIN.Or' | translate }} <a (click)="showPwdReset(false)">{{ 'SIGNIN.SignIn' | translate }}</a></span>
+        <p>{{ 'SIGNIN.EnterEmail' | translate }}</p>
         <mat-form-field class="rc-full-width" hideRequiredMarker>
-          <mat-label>{{ 'SignIn.UserEmail' | translate }}</mat-label>
+          <mat-label>{{ 'SIGNIN.UserEmail' | translate }}</mat-label>
           <input
             matInput
             ngModel
             type="email"
             name="email"
-            [placeholder]="'SignIn.UserEmail' | translate"
+            [placeholder]="'SIGNIN.UserEmail' | translate"
             email
             required>
         </mat-form-field>
@@ -36,10 +37,11 @@
           class="rc-full-width"
           color="accent"
           [disabled]="isSubmitting || !frmReset.form.valid">
-          {{ 'SignIn.ResetCaps' | translate }}
+          {{ 'SIGNIN.ResetCaps' | translate }}
         </button>
       </form>
     </section>
+
     <!-- Sign in -->
     <section class="rc-signin-form" *ngIf="!pwdReset">
       <form
@@ -47,12 +49,10 @@
         (ngSubmit)="frmSignIn.form.valid && signIn(frmSignIn.value)"
         novalidate>
         <span class="rc-warn" *ngIf="errorMsg">{{ errorMsg | uppercase }}!</span>
-        <h1>{{ 'SignIn.SignIn' | translate }}</h1>
-<!--        Todo: reinstate Join link -->
-<!--        <span>{{ 'SignIn.Or' | translate }}<a [routerLink]="'/join'">{{ 'SignIn.Join' | translate }}-->
-<!--          {{ brand['name'] }}</a></span><br><br>-->
+        <markdown ngpreservewhitespaces [data]="'SIGNIN.signInOrJoin' | translate: {route: '/join', brand:
+        brand['name'] }"></markdown><br>
         <mat-form-field class="rc-full-width" hideRequiredMarker>
-          <mat-label>{{ 'SignIn.UserEmail' | translate }}</mat-label>
+          <mat-label>{{ 'SIGNIN.UserEmail' | translate }}</mat-label>
           <input
             #inputEmail
             matInput
@@ -65,7 +65,7 @@
           <mat-error *ngIf="!!inputEmail.value" align="end">Invalid email address</mat-error>
         </mat-form-field>
         <mat-form-field class="rc-full-width" hideRequiredMarker>
-          <mat-label>{{ 'SignIn.UserPassword' | translate }}</mat-label>
+          <mat-label>{{ 'SIGNIN.UserPassword' | translate }}</mat-label>
           <input
             matInput
             name="pwd"
@@ -73,18 +73,14 @@
             type="password"
             required>
         </mat-form-field>
-        <a (click)="showPwdReset(true)">{{ 'SignIn.Forgotten' | translate }}</a>
+        <a (click)="showPwdReset(true)">{{ 'SIGNIN.Forgotten' | translate }}</a>
         <br>
         <br>
         <button
           mat-flat-button
           class="rc-full-width"
           color="accent"
-          [disabled]="isSubmitting">{{ 'SignIn.SignCaps' | translate }}</button>
-<!--        <p class="rc-txt-small">{{ 'SignIn.Subject' | translate }}<a-->
-<!--          [href]="brand['downloads']['terms']" target="_blank">{{ 'SignIn.Terms' | translate }}</a>-->
-<!--          {{ 'SignIn.And' | translate }}-->
-<!--          <a [href]="brand['downloads']['privacy']" target="_blank">{{ 'SignIn.Privacy' | translate }}</a></p>-->
+          [disabled]="isSubmitting">{{ 'SIGNIN.labelBtnSignIn' | uppercase | translate }}</button>
       </form>
     </section>
   </div>
