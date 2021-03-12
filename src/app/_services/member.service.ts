@@ -448,7 +448,7 @@ export class MemberService {
     return await this.http.post(`${this.config.apiUrl}/members/preflight`, {
       administrator: {
         member_email: formData.email,
-        member_telephone: formData.tel
+        member_telephone: formData.telephone
       },
       userCode: this.config.userAPICode,
       token: this.authToken
@@ -462,9 +462,20 @@ export class MemberService {
         token: this.authToken
       });
   }
+  // createPending(pending: any) {
+  //   console.log('MS', pending);
+  //   pending.telephone = pending.tel;
+  //   pending.job = pending.role;
+  //   return this.http.post(this.config.apiUrl + '/members/create_pending',
+  //     {
+  //       pending: pending,
+  //       userCode: this.config.userAPICode,
+  //       token: this.authToken
+  //     });
+  // }
 
   createPending(pending: any) {
-    console.log('MS', pending);
+    // console.log('MS PENDING', pending);
     return this.http.post(this.config.apiUrl + '/members/create_pending',
       {
         pending: pending,

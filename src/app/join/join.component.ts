@@ -7,6 +7,14 @@ import { MatDialog } from '@angular/material/dialog';
 import { LoadService } from '../common/loader/load.service';
 import { AppConfig } from '../app.config';
 
+export interface PendingMember {
+  first_name: string;
+  last_name: string;
+  job: string;
+  telephone: string;
+  email: string;
+  referral_code: string;
+}
 
 @Component({
   selector: 'rc-join',
@@ -19,10 +27,7 @@ export class JoinComponent implements OnInit {
   newRegResult: string;
   duplicateField: string;
   currentApplicant: any;
-  pendingMember: any = {
-    name: '',
-    role: null
-  };
+  pendingMember: PendingMember;
   brand: any;
   referrer = {
     type: 'self',
@@ -82,7 +87,7 @@ export class JoinComponent implements OnInit {
     });
     // Check session storage
     this.pendingMember = JSON.parse(sessionStorage.getItem('rc_member_pending')) || {};
-    console.log('Pending Member', this.pendingMember);
+    // console.log('Pending Member', this.pendingMember);
 
     // Watch for unload event (page refresh etc.)
     // Keep data in session storage
@@ -124,7 +129,7 @@ export class JoinComponent implements OnInit {
 
   // API call to check for duplicate tel/emails
   async preRegistrationCheck(formData) {
-    console.log(formData);
+    // console.log(formData);
     this.isSubmitting = true;
     this.load.open();
     // API call to check for duplicates
@@ -135,7 +140,7 @@ export class JoinComponent implements OnInit {
           this.savePendingMemberData(formData);
           this.router.navigate(['/membership-options']).then(() => this.load.close())
         } else {
-          // console.log(res);
+          console.log('Preflight Res', res);
           this.dspRegistrationResult('duplicate', res['error']);
           this.isSubmitting = false;
           this.load.close();

@@ -26,6 +26,7 @@ export class AppConfig {
   // Build process should automatically detect the correct variables
 
   public readonly apiUrl = environment.API_URL;
+  // public readonly apiUrl = 'https://rc-server-cobb-nogzcswqv4bi56q.herokuapp.com';
 
   public readonly sql_defaults = {
     where_field: 'restaurant_name',
