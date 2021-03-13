@@ -289,6 +289,7 @@ export class ProfilePageComponent implements OnInit {
 
     const dialogRef = this.dialog.open(ReferralsComponent, {
       data: {
+        brand: this.appConfig.brand.name,
         member: this.member,
         joinUrl: this.getReferralLink()
       }

@@ -498,26 +498,11 @@
 		"terms": "Veuillez prendre le temps de lire les [Conditions d'adhésion] ({{ terms }}) et la [Politique de confidentialité] ({{ privacy }}). En devenant membre de Restaurant Collective, vous confirmez votre acceptation de ces conditions."
 	},
 	"MESSAGES": {
-		"DontShow": "NE PLUS ME MONTRER CE MESSAGE",
 		"headerMessages": "Vous avez des messages",
 		"labelBtnLater": "Fais-le plus tard",
 		"labelBtnStart": "COMMENCER ICI",
 		"messagesReadOk": "Ok, j'ai lu ceux-ci",
 		"welcomeNewMember": "# Vous y êtes!\n\nC'est formidable que vous ayez choisi de rejoindre Restaurant Collective et nous espérons que vous nous aiderez à développer cette communauté passionnante de professionnels de l'industrie et de restaurateurs indépendants.\n\n## Ajoutez votre restaurant\n\nAvant de commencer à explorer le Hub des membres, veuillez terminer la configuration initiale en associant votre restaurant à votre compte de membre.\n\nLorsque vous êtes prêt, sélectionnez l'option ** COMMENCER ICI ** ci-dessous.\n\nTrouvez votre restaurant et suivez les instructions à l'écran pour vérifier les détails et l'associer à votre abonnement.\n\nSi vous avez besoin d'aide, ouvrez la ** Base de connaissances ** et consultez le guide ** Mise en route **."
-	},
-	"Password": {
-		"Cancel": "ANNULER",
-		"Confirm": "Confirmez le nouveau mot de passe",
-		"Current": "Mot de passe actuel",
-		"Failed": "La mise à jour de votre mot de passe a échoué",
-		"Header": "Mettez à jour votre mot de passe",
-		"Invalid": "Mot de passe actuel invalide",
-		"MustBe8": "Doit être constitué d’au moins 8 caractères",
-		"New": "Nouveau mot de passe",
-		"NoMatch": "Saisie invalide",
-		"Required": "Ceci est requis",
-		"Update": "METTRE A JOUR",
-		"Updated": "Mot de passe mis à jour"
 	},
 	"Profile-Detail": {
 		"Cancel": "ANNULER",
@@ -635,21 +620,6 @@
 		"VerifyEmail": "Veuillez vérifier l'adresse e-mail ci-dessous de ",
 		"Verifying": "Identification"
 	},
-	"Referrals": {
-		"Code": "CODE:",
-		"CopyCode": "Cliquez pour copier le code",
-		"CopyLink": "Cliquez pour copier le lien",
-		"CopyLinkButton": "COPIER LIEN",
-		"Email": "email",
-		"Link": "LIEN:",
-		"RefLink": "Copier votre code parrainage",
-		"SMS": "SMS",
-		"Send": "ENVOYER LE CODE PARRAINAGE",
-		"Social": ", ou via votre réseau social préféré!",
-		"Text1": "Il s'agit de votre code de parrainage personnel que vous pouvez envoyer à vos collègues et associés pour les encourager à se joindre à vous pour soutenir notre collectif.",
-		"Text2": "Copier et coller le lien dans un",
-		"WA": "WhatsApp"
-	},
 	"Restaurant-Detail": {
 		"Address": "Adresse",
 		"Amend": "Modifiez les champs nécessitant une correction, puis appuyez sur METTRE A JOUR",
@@ -692,6 +662,33 @@
 		"Street": "Rue",
 		"ValidNumber": "Numéro valide requis",
 		"ValidPostcode": "Code postal valide requis"
+	},
+	"SETTINGS": {
+		"password": {
+			"currentPwd": "Votre mot de passe actuel",
+			"errorFailed": "La mise à jour du mot de passe a échoué",
+			"errorInvalid": "Mot de passe actuel invalide",
+			"header": "Mot de passe",
+			"instructions": "Votre nouveau mot de passe doit comporter au moins 8 caractères.",
+			"invalidNoMatch": "Vos mots de passe ne correspondent pas",
+			"invalidPwdLength": "Minimum 8 caractères",
+			"invalidRequired": "C'est nécessaire",
+			"labelBtnCancel": "annuler",
+			"labelBtnUpdate": "Mettre à jour",
+			"labelConfirm": "Confirmer le nouveau mot de passe",
+			"labelNewPwd": "Nouveau mot de passe",
+			"successUpdated": "Mot de passe mis à jour"
+		},
+		"referral": {
+			"headerReferral": "ENVOYER LE CODE PARRAINAGE",
+			"instructions": "Il s'agit d'un code de parrainage personnel que vous pouvez envoyer à vos collègues et associés pour les encourager à se joindre à vous pour soutenir **{{ brand }}**.\n\nCopiez le lien et collez-le dans un e-mail, un message texte ou sur le réseau social de votre choix!",
+			"labelBtnCancel": "annuler",
+			"labelBtnCopyLink": "Copiez le lien de parrainage",
+			"labelCode": "Code",
+			"labelLink": "Lien",
+			"tipCopyCode": "Copiez le code",
+			"tipCopyLink": "Copiez le lien de parrainage"
+		}
 	},
 	"SIGNIN": {
 		"_or": " ou ",

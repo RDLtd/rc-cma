@@ -1,55 +1,53 @@
 <div class="rc-dialog rc-dialog-med">
 
   <h1 mat-dialog-title>
-    {{ 'Referrals.Send' | translate }}
+    {{ 'SETTINGS.referral.headerReferral' | translate }}
   </h1>
 
     <mat-dialog-content>
 
       <table class="rc-layout-table">
         <tr>
-          <td>{{ 'Referrals.Code' | translate }}</td>
+          <td>{{ 'SETTINGS.referral.labelCode' | translate }}</td>
           <td>
             <a
               mat-dialog-close="code"
-              matTooltip="{{ 'Referrals.CopyCode' | translate }}">
+              matTooltip="{{ 'SETTINGS.referral.tipCopyCode' | translate }}">
               {{ data.member.member_promo_code }}
             </a>
           </td>
         </tr>
         <tr>
-          <td>{{ 'Referrals.Link' | translate }}</td>
+          <td>{{ 'SETTINGS.referral.labelLink' | translate }}</td>
           <td>
             <a
               mat-dialog-close="link"
-              matTooltip="{{ 'Referrals.CopyLink' | translate }}">
+              matTooltip="{{ 'SETTINGS.referral.tipCopyLink' | translate }}">
               {{ data.joinUrl }}
             </a>
           </td>
         </tr>
       </table>
 
-      <p>{{ 'Referrals.Text1' | translate }}</p>
-      <p>{{ 'Referrals.Text2' | translate }} <strong>{{ 'Referrals.Email' | translate }}</strong>,
-        <strong>{{ 'Referrals.SMS' | translate }}</strong>, <strong>{{ 'Referrals.WA' | translate }}
-      </strong>{{ 'Referrals.Social' | translate }}</p>
+      <markdown [data]="'SETTINGS.referral.instructions' | translate: { brand: data.brand }"></markdown>
+
     </mat-dialog-content>
 
     <mat-dialog-actions align="end">
 
       <button
+        tabindex="-1"
         type="button"
         mat-dialog-close
         mat-button>
-        {{ 'Password.Cancel' | translate }}
+        {{ 'SETTINGS.referral.labelBtnCancel' | translate }}
       </button>
 
       <button
-        mat-flat-button
+        mat-button
         mat-dialog-close="link"
-        matTooltip="{{ 'Referrals.RefLink' | translate }}"
-        color="primary">
-        {{ 'Referrals.CopyLinkButton' | translate }}
+        color="accent">
+        {{ 'SETTINGS.referral.labelBtnCopyLink' | translate }}
       </button>
 
     </mat-dialog-actions>

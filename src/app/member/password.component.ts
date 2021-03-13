@@ -31,47 +31,36 @@ export class PasswordComponent implements OnInit {
     });
   }
 
-  onPwdSubmit(f) {
+  onPwdSubmit(formData) {
 
     this.isSubmitting = true;
 
     // Check current pwd
-    this.memberService.login(this.member.member_email, f.old_pwd).subscribe(
-      () => {
-        this.memberService.password(this.member.member_id, f.new_pwd).subscribe(
-          () => {
-            let t1;
-            this.translate.get('Password.Updated').subscribe(value => {
-              t1 = value;
-              this.dspSnackbarMsg(t1, null);
-            });
-            this.isSubmitting = false;
-            this.dialog.close();
-          },
-          error => {
-            console.log(error);
-            // console.log('Failed to update password for member ' + this.member.member_id);
-            let t1;
-            this.translate.get('Password.Failed').subscribe(value => {
-              t1 = value;
-              this.dspSnackbarMsg(t1, null);
-            });
-
-            this.isSubmitting = false;
-          });
-
+    this.memberService.login(this.member.member_email, formData.old_pwd)
+      .subscribe(
+        () => {
+          this.memberService.password(this.member.member_id, formData.new_pwd)
+            .subscribe(
+              () => {
+                this.dspSnackbarMsg(this.translate.instant('SETTINGS.password.successUpdated'), null);
+                this.isSubmitting = false;
+                this.dialog.close();
+              },
+              error => {
+                console.log(error);
+                // console.log('Failed to update password for member ' + this.member.member_id);
+                this.dspSnackbarMsg(this.translate.instant('SETTINGS.password.errorFailed'), null);
+                this.isSubmitting = false;
+              }
+          );
       },
-      error => {
-        console.log(error);
-        // console.log('Member ' + this.member.member_id + ' failed authorisation');
-        let t1;
-        this.translate.get('Password.Invalid').subscribe(value => {
-          t1 = value;
-          this.dspSnackbarMsg(t1, 'OK');
-        });
-
-        this.isSubmitting = false;
-      });
+        error => {
+          console.log(error);
+          // console.log('Member ' + this.member.member_id + ' failed authorisation');
+          this.dspSnackbarMsg(this.translate.instant('SETTINGS.password.errorInvalid'), 'OK');
+          this.isSubmitting = false;
+        }
+      );
   }
 
 }
