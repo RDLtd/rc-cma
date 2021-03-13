@@ -1,7 +1,7 @@
 {
-	"APP": {
-		"about": "This application is designed, built and maintained by [Restaurant Developments Ltd]({{ web }}) &copy; {{ year }}.",
+	"ABOUT": {
 		"browser": "Platform/browser",
+		"company": "This application is designed, built and maintained by [Restaurant Developments Ltd]({{ web }}) &copy; {{ year }}.",
 		"version": "Version"
 	},
 	"CMS-Component": {
@@ -332,7 +332,7 @@
 		"Usage": "Use these links in any 'offline' situation to provide an easy way for your customers to access the website, or menus, on their smartphone or tablet. You can copy the QR code to your computer using right-click or long-press on the image.",
 		"Website": " website"
 	},
-	"ConfirmCancel": {
+	"CONFIRM": {
 		"Cancel": "NO, CANCEL",
 		"Continue": "YES, CONTINUE",
 		"DontShow": "Don't show me this again",
@@ -484,27 +484,6 @@
 		"requiredJob": "Please select your main job or role",
 		"validEmail": "A valid email address is required",
 		"validTel": "A valid mobile number is required"
-	},
-	"Login": {
-		"Access": "Access to Beta Test Section",
-		"Beta": "Beta Test Code",
-		"Cancel": "CANCEL",
-		"DontRemember": "Don't remember your password?",
-		"Email": "EMAIL ADDRESS",
-		"EmailError": "ENTER A VALID EMAIL ADDRESS",
-		"Enter": "Enter your registered email address below and we will send you a new password.",
-		"Error": "ERROR",
-		"Login": "LOGIN",
-		"NewPassword": "A NEW PASSWORD HAS BEEN EMAILED TO YOU",
-		"NotRecognised": "EMAIL NOT RECOGNISED",
-		"Password": "MEMBER PASSWORD",
-		"PasswordReset": "PASSWORD RESET",
-		"Required": "This is required",
-		"Reset": "RESET",
-		"Submit": "SUBMIT",
-		"TestText": "This section of the App is currently under beta-test. If you have been issued a beta-test code, then enter it below. This functionality will be available as soon as we have completed testing.",
-		"Title": "MEMBER LOGIN",
-		"Update": "UPDATE"
 	},
 	"MARKETPLACE": {
 		"dealBtnCancel": "Not now thanks",
@@ -739,29 +718,20 @@
 		"ValidPostcode": "Valid postcode required"
 	},
 	"SIGNIN": {
-		"And": " and ",
-		"Empowering": "Empowering Restaurants!",
-		"EnterEmail": "Enter your registered email address to reset your password. You may need to check your spam folder.",
-		"Forgotten": "Forgotten your password?",
-		"Join": "Join",
-		"NewPassword": "A new password has been sent to your email address",
-		"Of": "of ",
-		"Or": " or ",
-		"Privacy": "Privacy Policy",
-		"Register": "Register as a user",
-		"ResetCaps": "RESET PASSWORD",
-		"ResetPassword": "Reset password",
-		"SignIn": "Sign in",
-		"Subject": "This application is subject to the ",
-		"Terms": "Terms of Service",
-		"Text1": " is a non-profit organisation formed by leading restaurateurs and industry figureheads whose aim is to deliver real day-to-day support to its members.",
-		"Text2": "It is free to become an Associate Member and this includes access to our content management application that has been designed specifically to manage and distribute restaurant content.",
-		"Unauth": "Unauthorised login attempt - please check your details",
-		"Unknown": "This email address is unknown!",
-		"UserEmail": "USER EMAIL ADDRESS",
-		"UserPassword": "USER PASSWORD",
+		"_or": " or ",
+		"_signIn": "Sign in",
+		"emailInvalid": "Invalid email address",
+		"errorEmailUnkown": "This email address is unknown!",
+		"errorUserUnauthorised": "Unauthorised login attempt - please check your details",
+		"forgottenPwd": "Forgotten your password?",
 		"introduction": "# Let's work together\n\nIt’s time someone levelled the playing field for independent operators like you.\n\nWelcome to the Restaurant Collective. We’re a member-owned, non-profit organisation on a mission.\nWe want to empower and champion independent hospitality operators.",
+		"labelBtnResetPwd": "RESET PASSWORD",
 		"labelBtnSignIn": "SIGN IN",
+		"labelEmail": "USER EMAIL ADDRESS",
+		"labelPassword": "USER PASSWORD",
+		"newPwdSent": "A new password has been sent to your email address",
+		"resetPwdHeader": "Reset password",
+		"resetPwdInstructions": "Enter your registered email address to reset your password. You may need to check your spam folder.",
 		"signInOrJoin": "# Sign in\n\nor [join {{ brand }}]({{ route }})"
 	}
 }

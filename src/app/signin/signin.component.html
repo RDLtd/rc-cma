@@ -1,7 +1,7 @@
 <div class="rc-layout-split-container">
   <div class="rc-layout-split-left rc-bgd">
     <section class="rc-layout-split-content">
-      <!-- Welcome -->
+      <!-- Welcome intro -->
       <rc-logo [height]="'120px'"></rc-logo>
       <markdown ngPreserveWhitespaces [data]="'SIGNIN.introduction' | translate"></markdown>
     </section>
@@ -18,17 +18,22 @@
         novalidate>
         <span class="rc-warn" *ngIf="errorMsg">{{ errorMsg | uppercase }}!</span>
 
-        <h1>{{ 'SIGNIN.ResetPassword' | translate }}</h1>
-        <span>{{ 'SIGNIN.Or' | translate }} <a (click)="showPwdReset(false)">{{ 'SIGNIN.SignIn' | translate }}</a></span>
-        <p>{{ 'SIGNIN.EnterEmail' | translate }}</p>
+        <h1>{{ 'SIGNIN.resetPwdHeader' | translate }}</h1>
+        <span>
+          {{ 'SIGNIN._or' | translate }}
+          <a (click)="showPwdReset(false)">
+            {{ 'SIGNIN._signIn' | translate }}</a>
+        </span><br><br>
+        <p>{{ 'SIGNIN.resetPwdInstructions' | translate }}</p>
+
+
         <mat-form-field class="rc-full-width" hideRequiredMarker>
-          <mat-label>{{ 'SIGNIN.UserEmail' | translate }}</mat-label>
+          <mat-label>{{ 'SIGNIN.labelEmail' | translate }}</mat-label>
           <input
             matInput
             ngModel
             type="email"
             name="email"
-            [placeholder]="'SIGNIN.UserEmail' | translate"
             email
             required>
         </mat-form-field>
@@ -37,7 +42,7 @@
           class="rc-full-width"
           color="accent"
           [disabled]="isSubmitting || !frmReset.form.valid">
-          {{ 'SIGNIN.ResetCaps' | translate }}
+          {{ 'SIGNIN.labelBtnResetPwd' | translate }}
         </button>
       </form>
     </section>
@@ -52,7 +57,7 @@
         <markdown ngpreservewhitespaces [data]="'SIGNIN.signInOrJoin' | translate: {route: '/join', brand:
         brand['name'] }"></markdown><br>
         <mat-form-field class="rc-full-width" hideRequiredMarker>
-          <mat-label>{{ 'SIGNIN.UserEmail' | translate }}</mat-label>
+          <mat-label>{{ 'SIGNIN.labelEmail' | translate }}</mat-label>
           <input
             #inputEmail
             matInput
@@ -62,10 +67,10 @@
             email
             required
             autofocus>
-          <mat-error *ngIf="!!inputEmail.value" align="end">Invalid email address</mat-error>
+          <mat-error *ngIf="!!inputEmail.value" align="end">{{ 'SIGNIN.emailInvalid' | translate }}</mat-error>
         </mat-form-field>
         <mat-form-field class="rc-full-width" hideRequiredMarker>
-          <mat-label>{{ 'SIGNIN.UserPassword' | translate }}</mat-label>
+          <mat-label>{{ 'SIGNIN.labelPassword' | translate }}</mat-label>
           <input
             matInput
             name="pwd"
@@ -73,14 +78,14 @@
             type="password"
             required>
         </mat-form-field>
-        <a (click)="showPwdReset(true)">{{ 'SIGNIN.Forgotten' | translate }}</a>
+        <a (click)="showPwdReset(true)">{{ 'SIGNIN.forgottenPwd' | translate }}</a>
         <br>
         <br>
         <button
           mat-flat-button
           class="rc-full-width"
           color="accent"
-          [disabled]="isSubmitting">{{ 'SIGNIN.labelBtnSignIn' | uppercase | translate }}</button>
+          [disabled]="isSubmitting">{{ 'SIGNIN.labelBtnSignIn' | translate | uppercase }}</button>
       </form>
     </section>
   </div>

@@ -1,7 +1,7 @@
 {
-	"APP": {
-		"about": "Cette application est conçue, créée et gérée par [Restaurant Developments Ltd] ({{ web }}) &copy; {{ year }}.",
+	"ABOUT": {
 		"browser": "Plateforme / navigateur",
+		"company": "Cette application est conçue, créée et gérée par [Restaurant Developments Ltd] ({{ web }}) &copy; {{ year }}.",
 		"version": "Version"
 	},
 	"CMS-Component": {
@@ -332,7 +332,7 @@
 		"Usage": "Utilisez ces liens dans le cas ou vos clients souhaiteraient accéder à votre Site Web ou à vos menus depuis leur Smartphone et/ou Tablette. Vous pouvez copier le code QR en cliquant sur le bouton de droite de la souris ou de votre pad.",
 		"Website": " site web"
 	},
-	"ConfirmCancel": {
+	"CONFIRM": {
 		"Cancel": "ANNULER",
 		"Continue": "OUI",
 		"DontShow": "Ne me montre plus ça",
@@ -484,27 +484,6 @@
 		"requiredJob": "",
 		"validEmail": "",
 		"validTel": ""
-	},
-	"Login": {
-		"Access": "Accès à la Section Test Beta",
-		"Beta": "Code test version beta",
-		"Cancel": "ANNULER",
-		"DontRemember": "Mot de passe oublié?",
-		"Email": "ADRESSE EMAIL",
-		"EmailError": "SAISISSEZ UNE ADRESSE EMAIL VALIDE",
-		"Enter": "Saisissez votre adresse e-mail enregistrée ci-dessous et nous vous enverrons un nouveau mot de passe.",
-		"Error": "ERREUR",
-		"Login": "SE CONNECTER",
-		"NewPassword": "UN NOUVEAU MOT DE PASSE VOUS A ÉTÉ ENVOYÉ PAR EMAIL",
-		"NotRecognised": "EMAIL NON RECONNU",
-		"Password": "MOT DE PASSE",
-		"PasswordReset": "RÉINITIALISER LE MOT DE PASSE",
-		"Required": "Ceci est nécessaire",
-		"Reset": "RÉINITIALISER",
-		"Submit": "SOUMETTRE",
-		"TestText": "Cette fonction de l'application est actuellement en test. Si vous avez reçu un code de test, saisissez-le ci-dessous. Cette fonctionnalité sera disponible dès lors que nous aurons terminé les tests.",
-		"Title": "IDENTIFICATION",
-		"Update": "ACTUALISER"
 	},
 	"MARKETPLACE": {
 		"dealBtnCancel": "Pas maintenant merci",
@@ -739,29 +718,20 @@
 		"ValidPostcode": "Code postal valide requis"
 	},
 	"SIGNIN": {
-		"And": " et ",
-		"Empowering": "La Force Collective des Restaurateurs Indépendants!",
-		"EnterEmail": "Entrez votre adresse e-mail enregistrée pour réinitialiser votre mot de passe. Vous devrez peut-être vérifier votre dossier de courrier indésirable.",
-		"Forgotten": "Mot de passe oublié?",
-		"Join": "Rejoindre",
-		"NewPassword": "Un nouveau mot de passe a été envoyé à votre adresse email.",
-		"Of": "des ",
-		"Or": " ou ",
-		"Privacy": "Politique de confidentialité",
-		"Register": "S'inscrire en tant qu'utilisateur",
-		"ResetCaps": "RÉINITIALISER LE MOT DE PASSE",
-		"ResetPassword": "Réinitialiser le mot de passe",
-		"SignIn": "Se connecter",
-		"Subject": "Cette application est soumise aux ",
-		"Terms": "Conditions d'utilisation",
-		"Text1": " est un organisme à but non lucratif formé par des restaurateurs et des figures emblématiques dans le but de fournir un réel soutien au quotidien à ses membres. Pour lire votre email de bienvenue, peut-être devrez-vous vérifier que celui-ci ne se trouve pas dans votre dossier des indésirables.",
-		"Text2": "C’est gratuit pour devenir membre associé, ce qui inclut l’accès à notre application de gestion de contenu spécialement conçue pour gérer et distribuer le contenu d’un restaurant.",
-		"Unauth": "Connexion non autorisée - veuillez vérifier vos coordonnées",
-		"Unknown": "Cette adresse email est inconnue!",
-		"UserEmail": "ADRESSE EMAIL",
-		"UserPassword": "MOT DE PASSE",
+		"_or": " ou ",
+		"_signIn": "Se connecter",
+		"emailInvalid": "Adresse e-mail invalide",
+		"errorEmailUnkown": "Cette adresse email est inconnue!",
+		"errorUserUnauthorised": "Connexion non autorisée - veuillez vérifier vos coordonnées",
+		"forgottenPwd": "Mot de passe oublié?",
 		"introduction": "",
+		"labelBtnResetPwd": "RÉINITIALISER LE MOT DE PASSE",
 		"labelBtnSignIn": "SE CONNECTER",
+		"labelEmail": "ADRESSE EMAIL",
+		"labelPassword": "MOT DE PASSE",
+		"newPwdSent": "Un nouveau mot de passe a été envoyé à votre adresse email.",
+		"resetPwdHeader": "Réinitialiser le mot de passe",
+		"resetPwdInstructions": "Entrez votre adresse e-mail enregistrée pour réinitialiser votre mot de passe. Vous devrez peut-être vérifier votre dossier de courrier indésirable.",
 		"signInOrJoin": ""
 	}
 }

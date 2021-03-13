@@ -20,13 +20,13 @@ export class ConfirmCancelComponent implements OnInit  {
       @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit() {
-    this.translate.get('ConfirmCancel')
-      .subscribe(defaults => {
-        this.txtTitle = this.data.title || defaults.Title;
-        this.txtBody = this.data.msg || defaults.Message;
-        this.txtBtnCancel = this.data.no || defaults.Cancel;
-        this.txtBtnConfirm = this.data.yes || defaults.Continue;
-        this.txtDontShow = this.data.dontshow || defaults.DontShow;
+    this.translate.get('CONFIRM')
+      .subscribe(trans => {
+        this.txtTitle = this.data.title || trans.Title;
+        this.txtBody = this.data.msg || trans.Message;
+        this.txtBtnCancel = this.data.no || trans.Cancel;
+        this.txtBtnConfirm = this.data.yes || trans.Continue;
+        this.txtDontShow = this.data.dontshow || trans.DontShow;
       });
   }
 
