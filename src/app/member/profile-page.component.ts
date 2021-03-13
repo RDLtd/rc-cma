@@ -88,7 +88,7 @@ export class ProfilePageComponent implements OnInit {
     this.member = JSON.parse(localStorage.getItem('rd_profile'));
 
     // Updare header label
-    this.header.updateSectionName('profile');
+    this.header.updateSectionName('Settings');
 
     // Add member name to avatar url
     this.imgAvatarPlaceholderUrl += `${this.member.member_first_name} ${this.member.member_last_name}`;

@@ -36,7 +36,7 @@ export class CmsComponent implements OnInit {
     private dialog: MatDialog,
     public help: HelpService
   ) {
-
+    this.header.updateSectionName('Content & SPW');
   }
 
   ngOnInit() {
@@ -56,7 +56,6 @@ export class CmsComponent implements OnInit {
           error => console.log(error)
         );
 
-    this.header.updateSectionName('Content Management');
 
     this.member = JSON.parse(localStorage.getItem('rd_profile'));
 

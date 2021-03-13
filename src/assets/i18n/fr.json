@@ -339,9 +339,6 @@
 		"msgConfirmCancel": "Les modifications que vous avez apportées n'ont pas encore été enregistrées et seront perdues si vous continuez. Voulez-vous annuler les modifications et continuer?",
 		"titleConfirmCancel": "VEUILLEZ CONFIRMER"
 	},
-	"Footer": {
-		"Rights": "Tous droits réservés"
-	},
 	"Global": {
 		"DOW-Dimanche": "Dimanche",
 		"DOW-Friday": "Vendredi",

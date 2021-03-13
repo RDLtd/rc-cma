@@ -94,7 +94,7 @@ export class MarketplaceComponent implements OnInit {
     private loader: LoadService) {
       this.loader.open();
       this.translate.use(localStorage.getItem('rd_language'));
-      this.headerService.updateSectionName('market');
+      this.headerService.updateSectionName('marketplace');
   }
 
   ngOnInit() {

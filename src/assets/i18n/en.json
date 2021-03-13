@@ -339,9 +339,6 @@
 		"msgConfirmCancel": "The changes you have made have not yet been saved and will be lost if you continue. Do you want to discard changes and continue?",
 		"titleConfirmCancel": "Please Confirm"
 	},
-	"Footer": {
-		"Rights": ""
-	},
 	"Global": {
 		"DOW-Dimanche": "Sunday",
 		"DOW-Friday": "Friday",

@@ -19,30 +19,14 @@ export class HeaderService {
 
   lang: string;
 
-  sectionNames = {
-    en: {
-      hub: "Member's Hub",
-      profile: "Member Profile",
-      market: "Marketplace",
-      content: "Web Content Management"
-    },
-    fr: {
-      hub: "Member's Hub",
-      profile: "Member Profile",
-      market: "Marketplace",
-      content: "Web Content Management"
-    }
-  }
-
   constructor(
     private trans: TranslateService,
     private config: AppConfig ) {
-      this.lang = localStorage.getItem('rd_language');
-      // this.trans.use(this.lang);
+
   }
 
   updateSectionName (str: string) {
-    this.sectionNameSubject.next(this.sectionNames[this.lang][str])
+    this.sectionNameSubject.next(str);
   }
 
   updateAvatar(url: string) {
