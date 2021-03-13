@@ -333,11 +333,11 @@
 		"Website": " website"
 	},
 	"CONFIRM": {
-		"Cancel": "NO, CANCEL",
-		"Continue": "YES, CONTINUE",
-		"DontShow": "Don't show me this again",
-		"Message": "The changes you have made have not yet been saved and will be lost if you continue. Do you want to discard changes and continue?",
-		"Title": "PLEASE CONFIRM"
+		"labelBtnCancel": "NO, CANCEL",
+		"labelBtnConfirm": "YES, CONTINUE",
+		"labelDontShow": "Don't show me this again",
+		"msgConfirmCancel": "The changes you have made have not yet been saved and will be lost if you continue. Do you want to discard changes and continue?",
+		"titleConfirmCancel": "Please Confirm"
 	},
 	"Footer": {
 		"Rights": ""

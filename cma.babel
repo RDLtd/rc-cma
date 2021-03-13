@@ -5275,7 +5275,7 @@
                 <name>CONFIRM</name>
                 <children>
                     <concept_node>
-                        <name>Cancel</name>
+                        <name>labelBtnCancel</name>
                         <definition_loaded>false</definition_loaded>
                         <description/>
                         <comment/>
@@ -5292,7 +5292,7 @@
                         </translations>
                     </concept_node>
                     <concept_node>
-                        <name>Continue</name>
+                        <name>labelBtnConfirm</name>
                         <definition_loaded>false</definition_loaded>
                         <description/>
                         <comment/>
@@ -5309,7 +5309,7 @@
                         </translations>
                     </concept_node>
                     <concept_node>
-                        <name>DontShow</name>
+                        <name>labelDontShow</name>
                         <definition_loaded>false</definition_loaded>
                         <description/>
                         <comment/>
@@ -5326,7 +5326,7 @@
                         </translations>
                     </concept_node>
                     <concept_node>
-                        <name>Message</name>
+                        <name>msgConfirmCancel</name>
                         <definition_loaded>false</definition_loaded>
                         <description/>
                         <comment/>
@@ -5343,7 +5343,7 @@
                         </translations>
                     </concept_node>
                     <concept_node>
-                        <name>Title</name>
+                        <name>titleConfirmCancel</name>
                         <definition_loaded>false</definition_loaded>
                         <description/>
                         <comment/>

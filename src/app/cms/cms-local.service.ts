@@ -56,20 +56,21 @@ export class CmsLocalService {
     });
   }
 
-  confirmNavigation() {
-    // load translations
-    this.translate.get('ConfirmCancel').subscribe(t => {
-      this.dialogConfig = {
-        autoFocus: false,
-        data: {
-          title: t.Sure,
-          msg: t.SaveContinue,
-          no: t.Cancel,
-          yes: t.ContinueCaps,
-          showCheckbox: false
-        }
-      };
-    });
+  // Config data options can be overridden
+  confirmNavigation(options = {}) {
+    // Create default options
+    const dataOptions = {
+      title: this.translate.instant('CONFIRM.titleConfirmCancel'),
+      body: this.translate.instant('CONFIRM.msgConfirmCancel'),
+      cancel: this.translate.instant('CONFIRM.labelBtnCancel'),
+      confirm: this.translate.instant('CONFIRM.labelBtnConfirm')
+    }
+    // Override with options parameter
+    this.dialogConfig = {
+      autoFocus: false,
+      data: Object.assign(dataOptions, options)
+    };
+    // console.log(this.dialogConfig.data);
     const dialogRef = this.dialog.open(ConfirmCancelComponent, this.dialogConfig );
     return dialogRef.afterClosed().pipe(map(result => {
       return result;

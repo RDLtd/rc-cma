@@ -327,17 +327,17 @@
 		"Open": "Ouvrir le SPW publié dans une nouvelle fenêtre",
 		"QRCode": "Code QR pour ",
 		"QRInfo": "Un code QR est une image spéciale contenant des informations sur l’emplacement d’un Site Web. La plupart des smartphones ou tablettes modernes reconnaîtront et décoderont ces images depuis leur application et permettront de visiter directement la Page Web correspondante.",
-		"SPWInfo": "La Page Internet peut aussi être configurée pour fonctionner sur un nom de domaine personnalisé (par exemple www.votre-domaine.fr). Il peut s’agir d’un nom de domaine existant ou bien nous pouvons enregistrer avec vous un nom de domaine approprié. ",
+		"SPWInfo": "La Page Internet peut aussi être configurée pour fonctionner sur un nom de domaine personnalisé (par exemple www.votre-domaine.fr). Il peut s’agir d’un nom de domaine existant ou bien nous pouvons enregistrer avec vous un nom de domaine approprié. ",
 		"Section": "MENUS",
 		"Usage": "Utilisez ces liens dans le cas ou vos clients souhaiteraient accéder à votre Site Web ou à vos menus depuis leur Smartphone et/ou Tablette. Vous pouvez copier le code QR en cliquant sur le bouton de droite de la souris ou de votre pad.",
 		"Website": " site web"
 	},
 	"CONFIRM": {
-		"Cancel": "ANNULER",
-		"Continue": "OUI",
-		"DontShow": "Ne me montre plus ça",
-		"Message": "Les modifications ne seront pas sauvegardées si vous continuez. Etes-vous certain de le vouloir?",
-		"Title": "VEUILLEZ CONFIRMER"
+		"labelBtnCancel": "ANNULER",
+		"labelBtnConfirm": "OUI",
+		"labelDontShow": "Ne me montre plus ça",
+		"msgConfirmCancel": "Les modifications que vous avez apportées n'ont pas encore été enregistrées et seront perdues si vous continuez. Voulez-vous annuler les modifications et continuer?",
+		"titleConfirmCancel": "VEUILLEZ CONFIRMER"
 	},
 	"Footer": {
 		"Rights": "Tous droits réservés"
