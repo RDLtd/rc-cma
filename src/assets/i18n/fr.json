@@ -497,12 +497,13 @@
 		"instructions": "Veuillez sélectionner votre option d'abonnement **{{ brand }}** préférée.\n\nVous serez redirigé vers l'étape de paiement, où vous pourrez revoir votre abonnement avant de payer en ligne en toute sécurité en utilisant votre méthode préférée\n\nSi vous avez un ** PROMOCODE **, vous pouvez l'appliquer en même temps.",
 		"terms": "Veuillez prendre le temps de lire les [Conditions d'adhésion] ({{ terms }}) et la [Politique de confidentialité] ({{ privacy }}). En devenant membre de Restaurant Collective, vous confirmez votre acceptation de ces conditions."
 	},
-	"Messages": {
+	"MESSAGES": {
 		"DontShow": "NE PLUS ME MONTRER CE MESSAGE",
-		"Read": "Ok, j'ai lu ceux-ci",
-		"Welcome": "# Vous y êtes!\n\nC'est formidable que vous ayez choisi de rejoindre Restaurant Collective et nous espérons que vous nous aiderez à développer cette communauté passionnante de professionnels de l'industrie et de restaurateurs indépendants.\n\n## Ajoutez votre restaurant\n\nAvant de commencer à explorer le Hub des membres, veuillez terminer la configuration initiale en associant votre restaurant à votre compte de membre.\n\nLorsque vous êtes prêt, sélectionnez l'option ** COMMENCER ICI ** ci-dessous.\n\nTrouvez votre restaurant et suivez les instructions à l'écran pour vérifier les détails et l'associer à votre abonnement.\n\nSi vous avez besoin d'aide, ouvrez la ** Base de connaissances ** et consultez le guide ** Mise en route **.",
-		"WelcomeSkip": "Fais-le plus tard",
-		"WelcomeStart": "COMMENCER ICI"
+		"headerMessages": "Vous avez des messages",
+		"labelBtnLater": "Fais-le plus tard",
+		"labelBtnStart": "COMMENCER ICI",
+		"messagesReadOk": "Ok, j'ai lu ceux-ci",
+		"welcomeNewMember": "# Vous y êtes!\n\nC'est formidable que vous ayez choisi de rejoindre Restaurant Collective et nous espérons que vous nous aiderez à développer cette communauté passionnante de professionnels de l'industrie et de restaurateurs indépendants.\n\n## Ajoutez votre restaurant\n\nAvant de commencer à explorer le Hub des membres, veuillez terminer la configuration initiale en associant votre restaurant à votre compte de membre.\n\nLorsque vous êtes prêt, sélectionnez l'option ** COMMENCER ICI ** ci-dessous.\n\nTrouvez votre restaurant et suivez les instructions à l'écran pour vérifier les détails et l'associer à votre abonnement.\n\nSi vous avez besoin d'aide, ouvrez la ** Base de connaissances ** et consultez le guide ** Mise en route **."
 	},
 	"Password": {
 		"Cancel": "ANNULER",
@@ -649,18 +650,6 @@
 		"Text2": "Copier et coller le lien dans un",
 		"WA": "WhatsApp"
 	},
-	"Register": {
-		"AccessLevel": "Niveau d'accès (1-3)",
-		"Cancel": "ANNULER",
-		"ConfirmPassword": "Confirmez le mot de passe",
-		"Email": "Email",
-		"Find": "TROUVER",
-		"FirstName": "Prénom",
-		"LastName": "Nom de famille",
-		"Password": "Mot de passe",
-		"Update": "METTER A JOUR",
-		"Username": "Nom d'utilisateur"
-	},
 	"Restaurant-Detail": {
 		"Address": "Adresse",
 		"Amend": "Modifiez les champs nécessitant une correction, puis appuyez sur METTRE A JOUR",
@@ -675,19 +664,6 @@
 		"Update": "METTRE A JOUR",
 		"Update&Close": "Mettre à jour & Fermer",
 		"WebSite": "Site Web"
-	},
-	"Restaurant-List": {
-		"Error": "ne erreur s'est produite lors de la tentative d'accès à la base de données du restaurant.",
-		"Find": "Trouver un restaurant par",
-		"Found": " restaurants trouvés - le premier est ",
-		"More": "Plus que ",
-		"Name": "Nom",
-		"None": "Aucun restaurant trouvé",
-		"Number": "Nombre",
-		"PostCode": "Code postal",
-		"RGroup": "Groupe",
-		"Search": "Chercher",
-		"Status": "Statut de membre"
 	},
 	"Restaurant-Lookup": {
 		"Add": "AJOUTER",

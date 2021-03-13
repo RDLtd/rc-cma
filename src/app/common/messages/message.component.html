@@ -4,19 +4,20 @@
   <ng-container *ngIf="newMember">
     <rc-logo [height]="'64px'" [version]="'primary'"></rc-logo>
     <mat-dialog-content>
-      <div markdown [data]="content['Welcome']" ngPreserveWhitespaces></div>
+      <div markdown [data]="'MESSAGES.welcomeNewMember' | translate" ngPreserveWhitespaces></div>
     </mat-dialog-content>
     <mat-dialog-actions align="end">
       <button
+        tabindex="-1"
         mat-button
         [mat-dialog-close]="false">
-        {{ content['WelcomeSkip'] }}
+        {{ 'MESSAGES.labelBtnLater' | translate }}
       </button>
       <button
         color="accent"
-        mat-stroked-button
+        mat-button
         [mat-dialog-close]="true">
-        {{ content['WelcomeStart'] }}
+        {{ 'MESSAGES.labelBtnStart' | translate }}
       </button>
     </mat-dialog-actions>
 
@@ -25,7 +26,7 @@
 
   <ng-container *ngIf="!newMember">
 
-  <h1>Messages</h1>
+  <h1 mat-dialog-title>{{ 'MESSAGES.headerMessages' | translate }}</h1>
 
   <mat-dialog-content>
       <div class="rc-message" *ngFor="let message of data['messages']" [class.rc-message-important]="message['severity']">
@@ -38,7 +39,7 @@
     <button
       mat-stroked-button
       [mat-dialog-close]="false">
-      Ok, I've read those
+      {{ 'MESSAGES.messagesReadOk' | translate }}
     </button>
   </mat-dialog-actions>
 
