@@ -7,16 +7,16 @@
 
         <!-- Self referral -->
         <div *ngSwitchCase="'self'">
-          <markdown [data]="'Join.joinUsToday' | translate: { email: brand.email.support }"></markdown>
+          <markdown [data]="'JOIN.joinUsToday' | translate: { email: brand.email.support }"></markdown>
         </div>
         <!-- Member referral -->
         <div *ngSwitchCase="'member'">
-          <markdown [data]="'Join.joinUsByReferral' | translate: { email: brand.email.support, referrer:
+          <markdown [data]="'JOIN.joinUsByReferral' | translate: { email: brand.email.support, referrer:
           referrer?.name, brand: brand.name  }"></markdown>
         </div>
         <!-- Default -->
         <div *ngSwitchDefault>
-          <markdown [data]="'Join.joinUsToday' | translate: { email: brand.email.support }"></markdown>
+          <markdown [data]="'JOIN.joinUsToday' | translate: { email: brand.email.support }"></markdown>
         </div>
       </div>
     </div>
@@ -31,8 +31,8 @@
         <div class="rc-centre">
           <img src="../../assets/images/icons/checkmark.gif" height="128" width="128" alt="Success"/>
         </div>
-        <markdown [data]="'Join.joinSuccess' | translate: { brand: brand.name }"></markdown>
-        <p><a [routerLink]="'/signin'">{{ 'Join.SignIn' | translate }}</a></p>
+        <markdown [data]="'JOIN.joinSuccess' | translate: { brand: brand.name }"></markdown>
+        <p><a [routerLink]="'/signin'">{{ 'JOIN.linkSignIn' | translate }}</a></p>
       </div>
 
       <!-- Self Register -->
@@ -40,7 +40,7 @@
         <div class="rc-centre">
           <img src="../../assets/images/icons/checkmark.gif" height="128" width="128" alt="Success"/>
         </div>
-        <markdown [data]="'Join.joinWelcome' | translate: { brand: brand.name }"></markdown>
+        <markdown [data]="'JOIN.joinWelcome' | translate: { brand: brand.name }"></markdown>
       </div>
 
 
@@ -54,35 +54,35 @@
 
         <!-- Duplicate Telephone No. -->
         <div *ngIf="duplicateField === 'tel'" class="rc-form-msg">
-          <h1 class="rc-highlight">{{ 'Join.duplicateRegistration' | translate }}</h1>
-          <markdown ngPreserveWhitespaces [data]="'Join.duplicateMobile' | translate"></markdown>
+          <h1 class="rc-highlight">{{ 'JOIN.duplicateRegistration' | translate }}</h1>
+          <markdown ngPreserveWhitespaces [data]="'JOIN.duplicateMobile' | translate"></markdown>
         </div>
 
         <!-- Duplicate Email -->
         <div *ngIf="duplicateField === 'email'" class="rc-form-msg">
-          <h1 class="rc-highlight">{{ 'Join.duplicateRegistration' | translate }}</h1>
-          <markdown ngPreserveWhitespaces [data]="'Join.duplicateEmail' | translate"></markdown>
+          <h1 class="rc-highlight">{{ 'JOIN.duplicateRegistration' | translate }}</h1>
+          <markdown ngPreserveWhitespaces [data]="'JOIN.duplicateEmail' | translate"></markdown>
         </div>
 
         <!-- Duplicate Telephone and Email -->
         <div *ngIf="duplicateField === 'both'" class="rc-form-msg">
-          <h1 class="rc-highlight">{{ 'Join.duplicateRegistration' | translate }}</h1>
-          <markdown ngPreserveWhitespaces [data]="'Join.duplicateMobileAndEmail' | translate"></markdown>
+          <h1 class="rc-highlight">{{ 'JOIN.duplicateRegistration' | translate }}</h1>
+          <markdown ngPreserveWhitespaces [data]="'JOIN.duplicateMobileAndEmail' | translate"></markdown>
         </div>
 
         <div *ngIf="!duplicateField">
-          <h1>{{ 'Join.formContactDetails' | translate }}</h1>
+          <h1>{{ 'JOIN.headerContactDetails' | translate }}</h1>
         </div>
 
         <mat-form-field hideRequiredMarker style="width: 38%;">
-          <mat-label>{{ 'Join.labelFirstName' | translate }}</mat-label>
+          <mat-label>{{ 'JOIN.labelFirstName' | translate }}</mat-label>
           <input
             #fname
             type="text"
             name="first_name"
             [(ngModel)]="pendingMember.first_name"
             matInput
-            [placeholder]="'Join.placeholderFirstName' | translate"
+            [placeholder]="'JOIN.placeholderFirstName' | translate"
             required
             autofocus>
           <mat-error align="end">Required</mat-error>
@@ -90,63 +90,63 @@
 
         <span style="display: inline-block; width: 2%;"></span>
         <mat-form-field hideRequiredMarker style="width: 60%;">
-          <mat-label>{{ 'Join.labelLastName' | translate }}</mat-label>
+          <mat-label>{{ 'JOIN.labelLastName' | translate }}</mat-label>
           <input
             #lname
             type="text"
             name="last_name"
             [(ngModel)]="pendingMember.last_name"
             matInput
-            [placeholder]="'Join.placeholderLastName' | translate"
+            [placeholder]="'JOIN.placeholderLastName' | translate"
             required>
           <mat-error align="end">Required</mat-error>
         </mat-form-field>
 
         <!-- Role -->
         <mat-form-field hideRequiredMarker>
-          <mat-label>{{ 'Join.labelJob' | translate }}</mat-label>
+          <mat-label>{{ 'JOIN.labelJob' | translate }}</mat-label>
           <mat-select
             [(ngModel)]="pendingMember.job"
             name="job"
             required>
-            <mat-option *ngFor="let role of t_data?.jobRoles" [value]="role">
-              {{ role }}
+            <mat-option *ngFor="let job of jobs" [value]="job">
+              {{ job }}
             </mat-option>
           </mat-select>
-          <mat-error align="end">{{ 'Join.requiredJob' | translate }}</mat-error>
+          <mat-error align="end">{{ 'JOIN.invalidJobRequired' | translate }}</mat-error>
         </mat-form-field>
 
         <!-- Email -->
         <mat-form-field hideRequiredMarker>
-          <mat-label>{{ 'Join.labelEmail' | translate }}</mat-label>
+          <mat-label>{{ 'JOIN.labelEmail' | translate }}</mat-label>
           <input
             #email="ngModel"
             [(ngModel)]="pendingMember.email"
             matInput
             type="email"
             name="email"
-            [placeholder]="'Join.placeholderEmail' | translate"
+            [placeholder]="'JOIN.placeholderEmail' | translate"
             email
             required>
-          <mat-hint align="end" *ngIf="email.invalid">{{ 'Join.hintEmail' | translate }}</mat-hint>
-          <mat-error align="end" *ngIf="email?.errors">{{ 'Join.validEmail' | translate }}</mat-error>
+          <mat-hint align="end" *ngIf="email.invalid">{{ 'JOIN.hintEmail' | translate }}</mat-hint>
+          <mat-error align="end" *ngIf="email?.errors">{{ 'JOIN.invalidEmail' | translate }}</mat-error>
         </mat-form-field>
 
         <!-- Telephone -->
         <mat-form-field hideRequiredMarker>
-          <mat-label>{{ 'Join.labelTel' | translate }}</mat-label>
+          <mat-label>{{ 'JOIN.labelTel' | translate }}</mat-label>
           <input
             #mobile
             [(ngModel)]="pendingMember.telephone"
             matInput
             type="tel"
             name="telephone"
-            [placeholder]="'Join.placeholderTel' | translate"
+            [placeholder]="'JOIN.placeholderTel' | translate"
             [pattern]="patternMobile"
             minlength="9"
             maxlength="14"
             required>
-          <mat-error align="end">{{ 'Join.validTel' | translate }}</mat-error>
+          <mat-error align="end">{{ 'JOIN.invalidTelRequired' | translate }}</mat-error>
         </mat-form-field>
 
         <br><br>
@@ -156,7 +156,7 @@
           mat-flat-button
           [disabled]="isSubmitting"
           color="accent">
-          {{ 'Join.btnLabelSubmit' | translate }}
+          {{ 'JOIN.labelBtnSubmit' | translate }}
         </button>
       </form>
     </div>
