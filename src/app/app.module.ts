@@ -103,11 +103,14 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient, './assets/i18n/', '.json');
 }
 
+// Make App initialisation dependant on translations
 export function appInitializerFactory(translate: TranslateService) {
+  const lang = localStorage.getItem('rd_language') || 'en';
   return () => {
+    console.log(`Tanslation loaded ${lang}`);
     translate.addLangs(['en', 'fr']);
-    translate.setDefaultLang(localStorage.getItem('rd_language') || 'en');
-    return translate.use('en').toPromise();
+    translate.setDefaultLang(lang);
+    return translate.use(lang).toPromise();
   };
 }
 

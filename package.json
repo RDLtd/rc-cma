@@ -48,7 +48,7 @@
     "ng-connection-service": "~1.0.4",
     "ng2-file-upload": "~1.4.0",
     "ngx-clipboard": "~14.0.0",
-    "ngx-markdown": "~11.0.1",
+    "ngx-markdown": "^11.1.2",
     "ngx-page-scroll": "~7.0.4",
     "ngx-page-scroll-core": "~7.0.4",
     "rxjs": "~6.6.3",

@@ -103,6 +103,11 @@ export class ProfilePageComponent implements OnInit {
       error => console.log('No t_data', error));
   }
 
+  setLanguage(lang): void {
+    localStorage.setItem('rd_language', lang);
+    this.translate.use(lang);
+  }
+
   openSnackBar(msg: string, act = '', dur = 5000) {
     this.snackBar.open(msg, act, {
       duration: dur
@@ -378,5 +383,4 @@ export class ProfilePageComponent implements OnInit {
       });
     }
   }
-
 }

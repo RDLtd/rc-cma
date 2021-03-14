@@ -31,7 +31,6 @@
 				"tipViewPublished": "Afficher le SPW pour {{ restaurant }}"
 			},
 			"summary": {
-				"contentHours": "### Horaires d'ouvertures\n\nDernière mise à jour: {{ date }}",
 				"headerBookings": "Réservations",
 				"headerFeatures": "Descriptions et fonctionnalités",
 				"headerImages": "Images actives",
@@ -664,7 +663,7 @@
 		"errorEmailUnkown": "Cette adresse email est inconnue!",
 		"errorUserUnauthorised": "Connexion non autorisée - veuillez vérifier vos coordonnées",
 		"forgottenPwd": "Mot de passe oublié?",
-		"introduction": "",
+		"introduction": "# Travaillons ensemble\n\nIl est temps que quelqu'un nivelle les règles du jeu pour les opérateurs indépendants comme vous.\n\nBienvenue au Restaurant Collective. Nous sommes une organisation à but non lucratif appartenant à ses membres en mission.\nNous voulons responsabiliser et défendre les opérateurs hôteliers indépendants.",
 		"labelBtnResetPwd": "RÉINITIALISER LE MOT DE PASSE",
 		"labelBtnSignIn": "SE CONNECTER",
 		"labelEmail": "ADRESSE EMAIL",
@@ -672,6 +671,6 @@
 		"newPwdSent": "Un nouveau mot de passe a été envoyé à votre adresse email.",
 		"resetPwdHeader": "Réinitialiser le mot de passe",
 		"resetPwdInstructions": "Entrez votre adresse e-mail enregistrée pour réinitialiser votre mot de passe. Vous devrez peut-être vérifier votre dossier de courrier indésirable.",
-		"signInOrJoin": ""
+		"signInOrJoin": "# S'identifier\n\nou [rejoindre {{ brand }}]({{ route }})"
 	}
 }

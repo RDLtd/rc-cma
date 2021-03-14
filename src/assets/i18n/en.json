@@ -31,7 +31,6 @@
 				"tipViewPublished": "View the SPW for {{ restaurant }}"
 			},
 			"summary": {
-				"contentHours": "### Opening Hours\n\nLast updated: {{ date }}",
 				"headerBookings": "Reservations",
 				"headerFeatures": "Descriptions & features",
 				"headerImages": "Active images",
