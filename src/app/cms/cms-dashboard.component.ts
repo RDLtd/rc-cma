@@ -175,7 +175,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
       .subscribe(rest => {
           if (rest.restaurant_id) {
             this.restaurant = rest;
-            console.log(rest);
+            // console.log(rest);
             this.getLastUpdated();
           }
           // duplicate the loaded restaurant
@@ -258,7 +258,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
   checkSPW() {
     this.cms.checkSPW(this.restaurant.restaurant_id)
       .subscribe(res => {
-          console.log(res);
+          // console.log(res);
           this.cmsHasSufficientData = res['data_status_ok'];
           this.cmsChanged = !(res['published_status_ok']);
           // Enough content?

@@ -105,9 +105,11 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
 
 // Make App initialisation dependant on translations
 export function appInitializerFactory(translate: TranslateService) {
-  const lang = localStorage.getItem('rd_language') || 'en';
+  // This is checked/set in index.html
+  // then used here to load translations
+  const lang = localStorage.getItem('rd_language');
   return () => {
-    console.log(`Tanslation loaded ${lang}`);
+    console.log(`Translation loaded (${lang})`);
     translate.addLangs(['en', 'fr']);
     translate.setDefaultLang(lang);
     return translate.use(lang).toPromise();
