@@ -86,7 +86,7 @@ export class JoinComponent implements OnInit {
     // Set brand
     this.brand = this.config.brand;
     // Get array of translated jobs
-    this.translate.get('JOIN.jobRoles').subscribe(jobs => this.jobs = jobs);
+    this.jobs = this.translate.instant('JOIN.jobRoles');
 
     // // Get translations
     // this.translate.get('Join').subscribe(data => {

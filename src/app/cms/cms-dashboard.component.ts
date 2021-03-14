@@ -125,7 +125,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
     private memberService: MemberService,
     public config: AppConfig
   ) {
-
+    this.t_data = this.translate.instant('CMS-Dashboard');
     // detect language changes... need to check for change in texts
     translate.onLangChange.subscribe(() => {
       this.lang = localStorage.getItem('rd_language');
@@ -168,36 +168,54 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
     this.user = JSON.parse(localStorage.getItem('rd_profile'));
     this.userName = localStorage.getItem('rd_username');
 
-    this.t_data = this.translate.instant('CMS-Dashboard');
+    moment.locale(localStorage.getItem('rd_language'));
+    this.dfImg = 'https://via.placeholder.com/350x200?text=' + this.t_data.AwaitingImage;
 
-    this.translate.get('CMS-Dashboard').subscribe(data => {
-      //this.t_data = data;
-      moment.locale(localStorage.getItem('rd_language'));
-      this.dfImg = 'https://via.placeholder.com/350x200?text=' + this.t_data.AwaitingImage;
-
-      // Observe offer count
-      // this.cmsLocalService.getOfferCount()
-      //   .subscribe( count => {
-      //     this.offerInBox = count;
-      //   });
-
-      this.cmsLocalService.getRestaurant()
-        .subscribe(rest => {
-            if (rest.restaurant_id) {
-              this.restaurant = rest;
-              console.log(rest);
-              this.getLastUpdated();
+    this.cmsLocalService.getRestaurant()
+      .subscribe(rest => {
+          if (rest.restaurant_id) {
+            this.restaurant = rest;
+            console.log(rest);
+            this.getLastUpdated();
+          }
+          // duplicate the loaded restaurant
+          // so that we can use it to compare changes
+          for (const key in this.restaurant) {
+            if (this.restaurant.hasOwnProperty(key)) {
+              this.dbRestaurant[key] = this.restaurant[key];
             }
-            // duplicate the loaded restaurant
-            // so that we can use it to compare changes
-            for (const key in this.restaurant) {
-              if (this.restaurant.hasOwnProperty(key)) {
-                this.dbRestaurant[key] = this.restaurant[key];
-              }
-            }
-          },
-          error => console.log(error));
-    });
+          }
+        },
+        error => console.log(error));
+
+    // this.translate.get('CMS-Dashboard').subscribe(data => {
+    //   //this.t_data = data;
+    //   moment.locale(localStorage.getItem('rd_language'));
+    //   this.dfImg = 'https://via.placeholder.com/350x200?text=' + this.t_data.AwaitingImage;
+    //
+    //   // Observe offer count
+    //   // this.cmsLocalService.getOfferCount()
+    //   //   .subscribe( count => {
+    //   //     this.offerInBox = count;
+    //   //   });
+    //
+    //   // this.cmsLocalService.getRestaurant()
+    //   //   .subscribe(rest => {
+    //   //       if (rest.restaurant_id) {
+    //   //         this.restaurant = rest;
+    //   //         console.log(rest);
+    //   //         this.getLastUpdated();
+    //   //       }
+    //   //       // duplicate the loaded restaurant
+    //   //       // so that we can use it to compare changes
+    //   //       for (const key in this.restaurant) {
+    //   //         if (this.restaurant.hasOwnProperty(key)) {
+    //   //           this.dbRestaurant[key] = this.restaurant[key];
+    //   //         }
+    //   //       }
+    //   //     },
+    //   //     error => console.log(error));
+    // });
   }
 
   readAndCheckStatus () {
@@ -329,7 +347,9 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
   // Core data card
   setCoreStatus(): void {
     // Inserting an extra translate call to catch router calls via the black bar menu
-    this.translate.get('CMS-Dashboard').subscribe(data => this.t_data = data);
+    // Todo: Not sure if still needed, replace get with instant
+    this.t_data = this.translate.instant('CMS-Dashboard');
+    //this.translate.get('CMS-Dashboard').subscribe(data => this.t_data = data);
     this.core_status = 0;
     this.core_date = new Date(this.restaurant.restaurant_last_updated);
     this.core_by = this.restaurant.restaurant_verified_by;

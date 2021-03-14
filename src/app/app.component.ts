@@ -73,9 +73,12 @@ export class AppComponent implements OnInit {
     console.log(`Session countdown from : ${this.config.session_countdown} min.`);
 
     // Translations
-    this.translate.addLangs(['en', 'fr']);
-    this.translate.setDefaultLang(this.language);
-    this.translate.use(this.language);
+
+    // JB: moved this to AppModule
+
+    // this.translate.addLangs(['en', 'fr']);
+    // this.translate.setDefaultLang(this.language);
+    // this.translate.use(this.language);
 
     // Observe the session status
     this.authService.memberSessionSubject.subscribe(

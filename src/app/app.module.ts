@@ -105,7 +105,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
 
 export function appInitializerFactory(translate: TranslateService) {
   return () => {
-    translate.setDefaultLang('en');
+    translate.addLangs(['en', 'fr']);
+    translate.setDefaultLang(localStorage.getItem('rd_language') || 'en');
     return translate.use('en').toPromise();
   };
 }

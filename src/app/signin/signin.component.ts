@@ -53,7 +53,7 @@ export class SigninComponent implements OnInit {
     if (this.authService.isAuth()) {
       this.router.navigate([localStorage.getItem('rd_home') || '']);
     }
-    this.translate.get('SIGNIN').subscribe(data => this.trans = data);
+    this.trans = this.translate.instant('SIGNIN');
   }
 
   dspNewMemberMessage() {
@@ -66,8 +66,6 @@ export class SigninComponent implements OnInit {
 
   signIn(formValue) {
 
-    // Todo: this seems to be redundant?
-    console.log('Translations:', this.trans);
     // need this in here since the NgInit here executes too soon!
     // this.translate.get('SignIn').subscribe(data => {
     //   this.SIGNIN = data;
@@ -87,9 +85,7 @@ export class SigninComponent implements OnInit {
           }
         },
         error => {
-          // translation problem here - this error is not translated... Hmmm
-          // Indeed, the returned 401 gives the unauthorised, we need to deal with this through translation
-          // this.errorMsg = error.statusText;
+
           console.log(`Auth Error: ${error}`);
           this.openSnackBar(this.trans.errorUserUnauthorised);
           this.isSubmitting = false;

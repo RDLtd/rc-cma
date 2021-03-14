@@ -44,18 +44,18 @@ export class MembershipComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getTranslations();
+   // this.getTranslations();
     this.route.queryParams.subscribe(params => {
       this.stripeSessionId = params['session_id'];
       console.log('stripeSessionId', this.stripeSessionId);
     });
   }
 
-  getTranslations(): void {
-    // Use get to ensure that translation is available before using 'instant'
-    this.trans.get('MembershipOptions')
-      .subscribe(() => console.log('MembershipOptions loaded'));
-  }
+  // getTranslations(): void {
+  //   // Use get to ensure that translation is available before using 'instant'
+  //   this.trans.get('MembershipOptions')
+  //     .subscribe(() => console.log('MembershipOptions loaded'));
+  // }
 
   // Create Stripe Session
   async createCheckoutSession(options) {
