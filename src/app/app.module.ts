@@ -1,6 +1,6 @@
 
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import {
   FormsModule,
   ReactiveFormsModule
@@ -56,7 +56,6 @@ import {
 import {
   CmsImagesComponent,
   CmsComponent,
-  CmsDirectoryComponent,
   CmsMenusComponent,
   CmsHoursComponent,
   CmsFeaturesComponent,
@@ -82,7 +81,7 @@ import {
 // 3rd party packages
 import {
   TranslateModule,
-  TranslateLoader
+  TranslateLoader, TranslateService
 } from '@ngx-translate/core';
 import { TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { FileUploadModule } from 'ng2-file-upload';
@@ -104,6 +103,13 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient, './assets/i18n/', '.json');
 }
 
+export function appInitializerFactory(translate: TranslateService) {
+  return () => {
+    translate.setDefaultLang('en');
+    return translate.use('en').toPromise();
+  };
+}
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -120,7 +126,6 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     ProfileImageComponent,
     CmsImagesComponent,
     CmsComponent,
-    CmsDirectoryComponent,
     CmsMenusComponent,
     CmsHoursComponent,
     CmsFeaturesComponent,
@@ -188,8 +193,15 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     PublicService,
     CmsPreviewComponent,
     ConfirmCancelComponent,
-    LoadService
+    LoadService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: appInitializerFactory,
+      deps: [TranslateService],
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+

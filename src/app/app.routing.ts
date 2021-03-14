@@ -14,7 +14,6 @@ import {
 
 import {
   CmsComponent,
-  CmsDirectoryComponent,
   CmsImagesComponent,
   CmsMenusComponent,
   CmsHoursComponent,
@@ -57,10 +56,6 @@ const APP_ROUTES: Routes = [
       component: CmsDashboardComponent,
       canActivate: [AuthGuard] },
 
-    { path: 'directory',
-      component: CmsDirectoryComponent,
-      canActivate: [AuthGuard] },
-
     { path: 'images',
       component: CmsImagesComponent,
       canActivate: [AuthGuard] },
@@ -99,7 +94,7 @@ const APP_ROUTES: Routes = [
       component: MarketplaceComponent,
       canActivate: [AuthGuard] },
 
-    { path: '**', component: CmsDirectoryComponent, canActivate: [AuthGuard] }
+    { path: '**', component: CmsDashboardComponent, canActivate: [AuthGuard] }
   ]},
 
   { path: '**', redirectTo: '/profile' }

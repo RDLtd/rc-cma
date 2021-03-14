@@ -4,6 +4,45 @@
 		"company": "This application is designed, built and maintained by [Restaurant Developments Ltd]({{ web }}) &copy; {{ year }}.",
 		"version": "Version"
 	},
+	"CMS": {
+		"DASHBOARD": {
+			"core": {
+				"labelAddress": "Address",
+				"labelBtnRequestChange": "Change Request",
+				"labelEmail": "Email",
+				"labelFoodStyle": "Food style",
+				"labelSocial": "Social media",
+				"labelTel": "Telephone",
+				"labelWeb": "Website"
+			},
+			"spw": {
+				"headerContentRequired": "We need a bit more content",
+				"headerUnPublished": "You have unpublished changes",
+				"labelBtnMarketingLinks": "Marketing Links",
+				"labelBtnPreview": "Preview",
+				"labelBtnPublish": "publish",
+				"labelBtnViewPublished": "View your live SPW",
+				"msgAnalysing": "Analysing content...",
+				"msgContentRequired": "Good work so far but we need a bit more information to generate your Single Page Website (SPW). \n\nThe summary below should indicate which sections still need additional content. Once you've added enough data, the **PREVIEW** and **PUBLISH** options will be enabled and we can create your SPW and distribute your content to our partners.\n\nYou can [view a demo restaurant version]({{ link }}) top see what the SPW will look like with content added.",
+				"msgPublished": "Your **SPW** has been successfully published and has been synchronised with all Restaurant Collective content subscribers. You can view your page or copy the URL using the MARKETING LINK options below.",
+				"msgUnpublished": "The latest changes that you have made have not yet been published. \n\n**PREVIEW** your SPW to check and verify your content. If everything is correct then press **PUBLISH** to synchronise with all {{ brand }} distribution channels.",
+				"msgVerified": "Verified and published on {{ date }} by {{ name }}.",
+				"tipMarketingLinks": "Marketing links and QR codes",
+				"tipViewPublished": "View the SPW for {{ restaurant }}"
+			},
+			"summary": {
+				"contentHours": "### Opening Hours\n\nLast updated: {{ date }}",
+				"headerBookings": "Reservations",
+				"headerFeatures": "Descriptions & features",
+				"headerImages": "Active images",
+				"headerLocation": "Location ",
+				"headerMenus": "Active menus",
+				"headerOpeningHours": "Opening Times",
+				"msgLastUpdated": "Last updated: {{ update }}",
+				"titleSummary": "content status summary"
+			}
+		}
+	},
 	"CMS-Component": {
 		"AddRestaurant": "Add Restaurant",
 		"AffiliateOffers": "Affiliate Offers",
@@ -45,7 +84,7 @@
 		"Complete": "Complete",
 		"CopyLink": "COPY PAGE LINK",
 		"CoreData": "CORE DATA",
-		"DataChange": "Thank you.  \r\nWe have received your change request and this will be reviewed by the curation\nteam and updated accordingly.  \r\nPlease be aware that you may not see any changes for upto 24 hours.",
+		"DataChange": "Thank you.  \nWe have received your change request and this will be reviewed by the curation\nteam and updated accordingly.  \nPlease be aware that you may not see any changes for upto 24 hours.",
 		"DataVnP": "DATA VERIFIED & PUBLISHED!",
 		"Days": " days",
 		"Descriptions": "DESCRIPTIONS & FEATURES",
@@ -363,16 +402,17 @@
 		"Support": "Contact our Support Team"
 	},
 	"HEADER": {
-		"about": "About this software",
-		"logout": "Logout",
-		"sectionForum": "Community Forum",
-		"sectionHub": "Member's Hub",
-		"sectionKnowledge": "Knowledge Base",
-		"sectionMarket": "Marketplace",
-		"sectionProfile": "Profile",
-		"settings": "Account Settings",
+		"labelAbout": "About this software",
+		"labelLogout": "Logout",
+		"labelSettings": "Account Settings",
 		"signedInAs": "SIGNED IN MEMBER",
-		"tooltip": "Member's Hub"
+		"tipBtnHub": "Member's Hub"
+	},
+	"HUB": {
+		"sectionCMS": "Content Management & SPW",
+		"sectionHub": "Member's Hub",
+		"sectionMarket": "Marketplace",
+		"sectionSettings": "Account settings"
 	},
 	"JOIN": {
 		"duplicateEmail": "This **email address** is already registered, please [SIGN-IN, or retrieve your password here](/signin).",
@@ -409,12 +449,16 @@
 		"placeholderTel": "You mobile number"
 	},
 	"MARKETPLACE": {
-		"dealBtnCancel": "Not now thanks",
-		"dealBtnConfirm": "Send Request",
-		"dealRequest": "## {{ name }}\n\nIf you would like to take advantage of this exclusive Member offer, or would like to know a bit more about it, confirm your interest below.\n\nWe will forward your contact details and Member ID to **{{ affiliate.name }}** and they will contact you within 2 working days with further details.\n\nThis is just to register you interest and there's no obligation on your part to proceed, unless you decide to.",
-		"dealRequestTitle": "Exclusive Member Deal",
-		"filteredBy": "Filtered by",
-		"findOutMore": "Find out more"
+		"labelBtnCancel": "Not now thanks",
+		"labelBtnConfirm": "Send Request",
+		"labelBtnFindOutMore": "Find out more",
+		"labelFilteredBy": "Filtered by",
+		"msgRequest": "## {{ name }}\n\nIf you would like to take advantage of this exclusive Member offer, or would like to know a bit more about it, confirm your interest below.\n\nWe will forward your contact details and Member ID to **{{ affiliate.name }}** and they will contact you within 2 working days with further details.\n\nThis is just to register you interest and there's no obligation on your part to proceed, unless you decide to.",
+		"tipAddToFavourites": "Add/Remove favourites",
+		"tipClearFilters": "Clear all filters",
+		"tipFavourites": "Show favourites",
+		"tipFilterBy": "Filter results",
+		"titleRequest": "Exclusive Member Deal"
 	},
 	"MEMBERSHIP": {
 		"instructions": "Please select your preferred **{{ brand }}** subscription option.\n\nYou will be taken to the checkout stage, where you can review your subscription before paying securely online using your preferred method\n\nIf you have a **PROMOCODE** then you can apply it at the same time.",

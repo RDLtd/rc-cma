@@ -1,6 +1,5 @@
 export * from './cms-images.component';
 export * from './cms.component';
-export * from './cms-directory.component';
 export * from './cms-menus.component';
 export * from './cms-hours.component';
 export * from './cms-features.component';

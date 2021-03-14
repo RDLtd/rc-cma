@@ -7,8 +7,12 @@
       style="margin-right: 16px;"
       (removed)="clearAllFilters()"
       [removable]="true">
-      {{ 'MARKETPLACE.filteredBy' | translate }}: {{ filter | titlecase }}
-      <mat-icon matChipRemove>cancel</mat-icon>
+      {{ 'MARKETPLACE.labelFilteredBy' | translate }}: {{ filter | titlecase }}
+      <mat-icon
+        [matTooltip]="'MARKETPLACE.tipClearFilters' | translate"
+        matChipRemove>
+        cancel
+      </mat-icon>
     </mat-chip>
   </mat-chip-list>
 
@@ -18,13 +22,13 @@
       mat-icon-button
       (click)="filterByFavourites()"
       [class.rc-highlight]="isFiltered('favourites')"
-      [matTooltip]="'View favourites'">
+      [matTooltip]="'MARKETPLACE.tipFavourites' | translate">
       <mat-icon>favorite</mat-icon>
     </button>
     <button
       mat-icon-button
       [class.rc-highlight]="!!filter"
-      [matTooltip]="'Filter by category'"
+      [matTooltip]="'MARKETPLACE.tipFilterBy' | translate"
       [matMenuTriggerFor]="menuFilters">
       <mat-icon>filter_list</mat-icon>
     </button>
@@ -55,7 +59,7 @@
             class="rc-card-menu"
             [class.rc-highlight]="isFavourite(deal.id)"
             (click)="toggleIsFavourite(deal.id)"
-            [matTooltip]="'Add to your favourites'">
+            [matTooltip]="'MARKETPLACE.tipAddToFavourites' | translate">
             <mat-icon>favorite_outline</mat-icon>
           </button>
           <div mat-card-title>
@@ -71,7 +75,7 @@
             <button
               (click)="notifyAffiliate(deal.id)"
               mat-button
-              color="accent">{{ 'MARKETPLACE.findOutMore' | translate | uppercase }}</button>
+              color="accent">{{ 'MARKETPLACE.labelBtnFindOutMore' | translate | uppercase }}</button>
           </mat-card-actions>
         </mat-card>
       </div>

@@ -94,7 +94,7 @@ export class MarketplaceComponent implements OnInit {
     private loader: LoadService) {
       this.loader.open();
       this.translate.use(localStorage.getItem('rd_language'));
-      this.headerService.updateSectionName('marketplace');
+      this.headerService.updateSectionName(this.translate.instant('HUB.sectionMarket'));
   }
 
   ngOnInit() {
@@ -180,16 +180,15 @@ export class MarketplaceComponent implements OnInit {
     // Array.find does not work in IE
     // but this is less than 1% of usage
     let selectedDeal = this.deals.find(d => { return d.id === dealId} );
-    let content = this.translate.instant('MARKETPLACE');
 
     let dialogRef = this.dialog.open(ConfirmCancelComponent, {
       restoreFocus: false,
       data: {
-        title: content.dealRequestTitle,
+        title: this.translate.instant('MARKETPLACE.titleRequest'),
         deal: selectedDeal,
-        msg: this.translate.instant('MARKETPLACE.dealRequest', selectedDeal),
-        no: content.dealBtnCancel,
-        yes: content.dealBtnConfirm
+        body: this.translate.instant('MARKETPLACE.msgRequest', selectedDeal),
+        cancel: this.translate.instant('MARKETPLACE.labelBtnCancel'),
+        confirm: this.translate.instant('MARKETPLACE.labelBtnConfirm')
       }
     });
 

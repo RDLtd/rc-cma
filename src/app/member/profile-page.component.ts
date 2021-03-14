@@ -80,6 +80,7 @@ export class ProfilePageComponent implements OnInit {
           this.imgRestPlaceholderUrl = `https://via.placeholder.com/800x450?text=${this.t_data.AwaitingImage}`;
         });
       });
+
   }
 
   ngOnInit() {
@@ -88,7 +89,7 @@ export class ProfilePageComponent implements OnInit {
     this.member = JSON.parse(localStorage.getItem('rd_profile'));
 
     // Updare header label
-    this.header.updateSectionName('Settings');
+    this.header.updateSectionName(this.translate.instant('HUB.sectionSettings'));
 
     // Add member name to avatar url
     this.imgAvatarPlaceholderUrl += `${this.member.member_first_name} ${this.member.member_last_name}`;

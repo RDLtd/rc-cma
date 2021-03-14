@@ -15,7 +15,7 @@
     <button
       class="rc-toolbar-btn-lg"
       mat-icon-button
-      [matTooltip]="'HEADER.tooltip' | translate"
+      [matTooltip]="'HEADER.tipBtnHub' | translate"
       [routerLink]="'/hub'">
         <svg fill="#fff" viewBox="0 0 24 24">
           <path
@@ -65,7 +65,7 @@
       mat-menu-item
       [routerLink]="['/profile']">
       <mat-icon>account_circle</mat-icon>
-      <span>{{ 'HEADER.settings' | translate }}</span>
+      <span>{{ 'HEADER.labelSettings' | translate }}</span>
     </button>
     <mat-divider></mat-divider>
 
@@ -73,14 +73,14 @@
       mat-menu-item
       (click)="logout()">
       <mat-icon>logout</mat-icon>
-      <span>{{ 'HEADER.logout' | translate }}</span>
+      <span>{{ 'HEADER.labelLogout' | translate }}</span>
     </button>
     <mat-divider></mat-divider>
     <button
       mat-menu-item
       (click)="about()" >
       <mat-icon>information</mat-icon>
-      <span>{{ 'HEADER.about' | translate }}</span>
+      <span>{{ 'HEADER.labelAbout' | translate }}</span>
     </button>
   </mat-menu>
 

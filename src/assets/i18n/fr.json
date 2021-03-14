@@ -4,6 +4,45 @@
 		"company": "Cette application est conçue, créée et gérée par [Restaurant Developments Ltd] ({{ web }}) &copy; {{ year }}.",
 		"version": "Version"
 	},
+	"CMS": {
+		"DASHBOARD": {
+			"core": {
+				"labelAddress": "Adresse",
+				"labelBtnRequestChange": "Changer de requête",
+				"labelEmail": "Email",
+				"labelFoodStyle": "Style de cuisine",
+				"labelSocial": "Des médias sociaux",
+				"labelTel": "Téléphone",
+				"labelWeb": "site Internet"
+			},
+			"spw": {
+				"headerContentRequired": "Nous avons besoin d'un peu plus de contenu",
+				"headerUnPublished": "Vous avez des modifications non publiées",
+				"labelBtnMarketingLinks": "Liens marketing",
+				"labelBtnPreview": "Aperçu",
+				"labelBtnPublish": "Publier",
+				"labelBtnViewPublished": "Afficher votre SPW en direct",
+				"msgAnalysing": "Analyse du contenu ...",
+				"msgContentRequired": "",
+				"msgPublished": "Votre ** Page Internet ** a été publié avec succès et a été synchronisé avec tous les abonnés au contenu de Restaurant Collective. Vous pouvez afficher votre page ou copier l'URL à l'aide des options LIEN MARKETING ci-dessous.",
+				"msgUnpublished": "Les dernières modifications que vous avez apportées n'ont pas encore été publiées.\n\n** APERÇU ** votre SPW pour vérifier et vérifier votre contenu. Si tout est correct, appuyez sur ** PUBLIER ** pour synchroniser avec tous les {{ brand }} canaux de distribution.",
+				"msgVerified": "Vérifié et publié le {{ date }} par {{ name }}.",
+				"tipMarketingLinks": "Liens marketing et codes QR",
+				"tipViewPublished": "Afficher le SPW pour {{ restaurant }}"
+			},
+			"summary": {
+				"contentHours": "### Horaires d'ouvertures\n\nDernière mise à jour: {{ date }}",
+				"headerBookings": "Réservations",
+				"headerFeatures": "Descriptions et fonctionnalités",
+				"headerImages": "Images actives",
+				"headerLocation": "Emplacement",
+				"headerMenus": "Menus actifs",
+				"headerOpeningHours": "Horaires d'ouverture",
+				"msgLastUpdated": "Dernière mise à jour: {{ update }}",
+				"titleSummary": "résumé de l'état du contenu"
+			}
+		}
+	},
 	"CMS-Component": {
 		"AddRestaurant": "Ajouter un restaurant",
 		"AffiliateOffers": "Offres des partenaires affiliés",
@@ -45,7 +84,7 @@
 		"Complete": "Terminé",
 		"CopyLink": "COPIER LE LIEN DE LA PAGE",
 		"CoreData": "CŒUR DES DONNÉES",
-		"DataChange": "Merci.\r\nNous avons reçu votre demande de changement. Celle-ci sera examinée par l'équipe de curation\net mise à jour en conséquence..\r\nSachez que vous ne verrez peut-être aucun changement avant 24 heures.",
+		"DataChange": "Merci.\nNous avons reçu votre demande de changement. Celle-ci sera examinée par l'équipe de curation\net mise à jour en conséquence..\nSachez que vous ne verrez peut-être aucun changement avant 24 heures.",
 		"DataVnP": "DONNÉES VÉRIFIÉES ET PUBLIÉES!",
 		"Days": " jours",
 		"Descriptions": "DESCRIPTIONS ET CARACTÉRISTIQUES",
@@ -363,16 +402,17 @@
 		"Support": "Contacter notre équipe de support"
 	},
 	"HEADER": {
-		"about": "À propos de ce logiciel",
-		"logout": "Connectez - Out",
-		"sectionForum": "",
-		"sectionHub": "",
-		"sectionKnowledge": "Base de connaissances",
-		"sectionMarket": "",
-		"sectionProfile": "",
-		"settings": "Paramètres du compte",
+		"labelAbout": "À propos de ce logiciel",
+		"labelLogout": "Connectez - Out",
+		"labelSettings": "Paramètres du compte",
 		"signedInAs": "SIGNÉ EN MEMBRE",
-		"tooltip": ""
+		"tipBtnHub": ""
+	},
+	"HUB": {
+		"sectionCMS": "Gestion de contenu et SPW",
+		"sectionHub": "Hub des membres",
+		"sectionMarket": "marché",
+		"sectionSettings": "Paramètres du compte"
 	},
 	"JOIN": {
 		"duplicateEmail": "Cette ** adresse e-mail ** est déjà enregistrée, veuillez [vous connecter ou récupérer votre mot de passe ici] (/ signin).",
@@ -409,12 +449,16 @@
 		"placeholderTel": ""
 	},
 	"MARKETPLACE": {
-		"dealBtnCancel": "Pas maintenant merci",
-		"dealBtnConfirm": "Envoyer une demande",
-		"dealRequest": "## {{ name }}\nSi vous souhaitez profiter de cette offre exclusive pour les membres, ou souhaitez en savoir un peu plus à son sujet, confirmez votre intérêt ci-dessous.\n\nNous transmettrons vos coordonnées et votre identifiant de membre à **{{ affiliate.name }}** et ils vous contacteront dans les 2 jours ouvrables avec plus de détails.\n\nCeci est juste pour enregistrer votre intérêt et il n'y a aucune obligation de votre part de procéder, sauf si vous décidez de le faire.",
-		"dealRequestTitle": "Offre exclusive aux membres",
-		"filteredBy": "Filtre par",
-		"findOutMore": "en savoir plus"
+		"labelBtnCancel": "Pas maintenant merci",
+		"labelBtnConfirm": "Envoyer une demande",
+		"labelBtnFindOutMore": "en savoir plus",
+		"labelFilteredBy": "Filtre par",
+		"msgRequest": "## {{ name }}\nSi vous souhaitez profiter de cette offre exclusive pour les membres, ou souhaitez en savoir un peu plus à son sujet, confirmez votre intérêt ci-dessous.\n\nNous transmettrons vos coordonnées et votre identifiant de membre à **{{ affiliate.name }}** et ils vous contacteront dans les 2 jours ouvrables avec plus de détails.\n\nCeci est juste pour enregistrer votre intérêt et il n'y a aucune obligation de votre part de procéder, sauf si vous décidez de le faire.",
+		"tipAddToFavourites": "Ajouter / supprimer des favoris",
+		"tipClearFilters": "Effacer tous les filtres",
+		"tipFavourites": "Afficher les favoris",
+		"tipFilterBy": "Filtrer les résultats",
+		"titleRequest": "Offre exclusive aux membres"
 	},
 	"MEMBERSHIP": {
 		"instructions": "Veuillez sélectionner votre option d'abonnement **{{ brand }}** préférée.\n\nVous serez redirigé vers l'étape de paiement, où vous pourrez revoir votre abonnement avant de payer en ligne en toute sécurité en utilisant votre méthode préférée\n\nSi vous avez un ** PROMOCODE **, vous pouvez l'appliquer en même temps.",

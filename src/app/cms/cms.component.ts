@@ -10,6 +10,7 @@ import { CmsPreviewComponent } from './cms-preview.component';
 import { fadeAnimation } from '../shared/animations';
 import { HeaderService } from '../common/header.service';
 import { HelpService } from '../common';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'rc-cms',
@@ -34,9 +35,10 @@ export class CmsComponent implements OnInit {
     private cmsLocalService: CmsLocalService,
     private cms: CMSService,
     private dialog: MatDialog,
-    public help: HelpService
+    public help: HelpService,
+    private translate: TranslateService
   ) {
-    this.header.updateSectionName('Content & SPW');
+    this.header.updateSectionName(this.translate.instant('HUB.sectionCMS'));
   }
 
   ngOnInit() {

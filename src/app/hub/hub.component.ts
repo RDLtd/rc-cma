@@ -128,7 +128,7 @@ export class HubComponent implements AfterViewInit {
     private router: Router,
     public dialog: MatDialog) {
       this.loader.open();
-      this.header.updateSectionName('hub');
+      this.header.updateSectionName(this.translate.instant('HUB.sectionHub'));
       this.member = JSON.parse(localStorage.getItem('rd_profile'));
       this.features = this.mockFeatures;
   }

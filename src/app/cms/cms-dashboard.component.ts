@@ -123,17 +123,8 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
     private router: Router,
     private restaurantService: RestaurantService,
     private memberService: MemberService,
-    private config: AppConfig
+    public config: AppConfig
   ) {
-
-    // This object is passed to the translate pipe in the html file
-    // to allow handlebars style variable access.
-    // Todo: Brands are now independent of language so
-    //  this is not necessary anymore
-    this.locals = {
-      en: { demoUrl: this.config.brand.spwDemoUrl },
-      fr: { demoUrl: this.config.brand.spwDemoUrl }
-    };
 
     // detect language changes... need to check for change in texts
     translate.onLangChange.subscribe(() => {
@@ -177,8 +168,10 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
     this.user = JSON.parse(localStorage.getItem('rd_profile'));
     this.userName = localStorage.getItem('rd_username');
 
+    this.t_data = this.translate.instant('CMS-Dashboard');
+
     this.translate.get('CMS-Dashboard').subscribe(data => {
-      this.t_data = data;
+      //this.t_data = data;
       moment.locale(localStorage.getItem('rd_language'));
       this.dfImg = 'https://via.placeholder.com/350x200?text=' + this.t_data.AwaitingImage;
 
