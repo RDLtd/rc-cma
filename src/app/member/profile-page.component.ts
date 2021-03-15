@@ -178,15 +178,16 @@ export class ProfilePageComponent implements OnInit {
       const rest = this.restaurants[index];
       const dialogRef = this.dialog.open(ConfirmCancelComponent, {
         data: {
-          msg: this.t_data.AboutRemove + rest.restaurant_name + this.t_data.ListAssociated,
-          yes: this.t_data.Remove,
-          no: this.t_data.Cancel
+          title: this.translate.instant('CONFIRM.titleConfirmCancel'),
+          body: this.t_data.AboutRemove + rest.restaurant_name + this.t_data.ListAssociated,
+          confirm: this.t_data.Remove,
+          cancel: this.t_data.Cancel
         }
       });
 
-      dialogRef.afterClosed().subscribe(res => {
+      dialogRef.afterClosed().subscribe(confirmed => {
 
-        if (res.confirmed) {
+        if (confirmed) {
           this.restaurantService.removeAssociation(rest['association_id'])
             .subscribe(
               () => {
