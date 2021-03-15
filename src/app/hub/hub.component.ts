@@ -35,6 +35,7 @@ export class HubComponent implements AfterViewInit {
   restaurants: Array<Restaurant>;
   messages: Array<Message>;
   features: Array<HubFeature>;
+  restaurantCount = null;
 
   // Mock up some messages
   // messages = [
@@ -152,7 +153,7 @@ export class HubComponent implements AfterViewInit {
   dspMessages(): void {
     // console.log('AUTH', !this.member.member_authenticated);
     let data = {
-      newMember: true,
+      newMember: false,
       member: this.member,
       messages: this.messages
     }
@@ -217,6 +218,7 @@ export class HubComponent implements AfterViewInit {
       .subscribe(
         data => {
           this.restaurants = data['restaurants'];
+          this.restaurantCount = this.restaurants.length.toString();
           console.log(this.restaurants);
         },
         error => {

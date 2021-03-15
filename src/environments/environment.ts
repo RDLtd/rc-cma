@@ -8,5 +8,5 @@ import 'zone.js/dist/zone-error';
 export const environment = {
   production: false,
   API_URL: 'http://localhost:4000',
-  stripe_key: 'pk_test_3UC3P4HUDtjPewUWjzpP0GHs'
+  stripe_key: 'pk_test_51HwTj0DK2S86a4QiDZ7hvjuiwLjWSZU3Yy5LFYnBrEDHNsCF1nbwrXOzCOPPDV0cxHvZIC5m5TZsbWoAztS4ZCnE00nKRGn4jh'
 };

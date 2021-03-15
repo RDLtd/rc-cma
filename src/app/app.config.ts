@@ -16,9 +16,9 @@ export class AppConfig {
 
 
   // Should only need to switch here to change from local to Heroku server
-  // public readonly apiUrl = 'http://localhost:4000';
+  public readonly apiUrl = 'http://localhost:4000';
 
-  public readonly apiUrl = 'https://rc-server-staging.herokuapp.com';
+  //public readonly apiUrl = 'https://rc-server-staging.herokuapp.com';
   // public readonly apiUrl = 'https://rc-server-prod.herokuapp.com';
 
   // update 05/09/18 to read apiURL from .env file
@@ -67,12 +67,12 @@ export class AppConfig {
         curation: `curation@${this.tld.rc}`
       },
       products: {
-        taxId: 'txr_1IRfMDFqzlrb81VHIH6hpi4y',
+        taxId: 'txr_1IVEMZDK2S86a4QisRxE6Rlg',
         membership_monthly: {
-          priceId: 'price_1I0kigFqzlrb81VHkdECs1eK'
+          priceId: 'price_1IVEJbDK2S86a4QiFbh7Tnk5'
         },
         membership_yearly: {
-          priceId: 'price_1HuPN4Fqzlrb81VHCj3wELKF'
+          priceId: 'price_1IVELjDK2S86a4Qiwle01gdG'
         },
         success_url: `${ this.appUrl }/signin`,
         cancel_url: `${ this.appUrl }/membership-options`,

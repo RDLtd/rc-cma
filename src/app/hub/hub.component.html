@@ -14,8 +14,15 @@
           [matMenuTriggerFor]="menu">
 
           <!-- If multiple restaurants -->
-          <span class="rc-hub-cms-icons">
-            <mat-icon *ngFor="let icon of restaurants">store</mat-icon>
+          <span
+            *ngIf="restaurants?.length"
+            class="rc-hub-cms-icons">
+            <mat-icon
+              [matBadge]="restaurantCount"
+              matBadgeSize="medium"
+              matBadgeColor="accent">
+              store
+            </mat-icon>
           </span>
 
           <!-- multi restaurant selection -->
@@ -31,7 +38,7 @@
 
         </div>
 
-        <mat-card class="rc-card-app" (click)="launchFeature(feature)">
+        <mat-card class="rc-card-service" (click)="launchFeature(feature)">
           <img src="assets/images/icons/{{feature.icon}}.svg" alt="App Icon">
           <h2>{{ feature.name | uppercase }}</h2>
           <p>{{ feature.description }}</p>
