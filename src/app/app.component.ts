@@ -18,13 +18,13 @@ export class AppComponent implements OnInit {
 
   isConnected = true;
   inSession = false;
-  language = localStorage.getItem('rd_language') || 'en'; // Default language
+  language = localStorage.getItem('rd_language'); // Default language
 
+  // If we are offline then there is o access to translations
   connectionOffline = {
     en: "You are currently OFFLINE, please check your internet connection.",
     fr: "Vous êtes actuellement OFFLINE! Veuillez vérifier votre connexion Internet.",
   };
-
   sessionExpired = {
     en: "Your session has expired. To continue using the application, please Sign In again.",
     fr: "Votre session a expiré. Pour continuer à utiliser l’application, veuillez vous connecter à nouveau.",
@@ -52,7 +52,7 @@ export class AppComponent implements OnInit {
           });
         }
       });
-
+      // Record navagation analytics
       this.router.events.subscribe(event => {
         if (event instanceof NavigationEnd) {
           (<any>window).ga('set', 'page', event.urlAfterRedirects);
@@ -72,10 +72,8 @@ export class AppComponent implements OnInit {
     console.log(`Session length: ${this.config.session_timeout} mins`);
     console.log(`Session countdown from : ${this.config.session_countdown} min.`);
 
-    // Translations
-
     // JB: moved this to AppModule
-
+    // Translations
     // this.translate.addLangs(['en', 'fr']);
     // this.translate.setDefaultLang(this.language);
     // this.translate.use(this.language);

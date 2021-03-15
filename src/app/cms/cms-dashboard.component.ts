@@ -125,8 +125,11 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
     private memberService: MemberService,
     public config: AppConfig
   ) {
+
     this.t_data = this.translate.instant('CMS-Dashboard');
+
     // detect language changes... need to check for change in texts
+
     translate.onLangChange.subscribe(() => {
       this.lang = localStorage.getItem('rd_language');
       this.translate.get('CMS-Dashboard').subscribe(data => {
@@ -347,7 +350,8 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
   // Core data card
   setCoreStatus(): void {
     // Inserting an extra translate call to catch router calls via the black bar menu
-    // Todo: Not sure if still needed, replace get with instant
+    // Todo: JB says Not sure if still needed?
+    //  since I updated the translation loading
     this.t_data = this.translate.instant('CMS-Dashboard');
     //this.translate.get('CMS-Dashboard').subscribe(data => this.t_data = data);
     this.core_status = 0;
@@ -750,7 +754,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
 
   reqDirectoryDataChange(): void {
 
-    const dialogRef = this.dialog.open(RestaurantDetailComponent);
+    const dialogRef = this.dialog.open(RestaurantDetailComponent, {});
 
     // Setup dialog vars
     dialogRef.componentInstance.restaurant = this.restaurant;

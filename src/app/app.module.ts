@@ -104,9 +104,9 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
 }
 
 // Make App initialisation dependant on translations
+// so that we can rely on 'instant' access everywhere else
 export function appInitializerFactory(translate: TranslateService) {
-  // This is checked/set in index.html
-  // then used here to load translations
+  // LocalStorage is read/set in index.html
   const lang = localStorage.getItem('rd_language');
   return () => {
     console.log(`Translation loaded (${lang})`);

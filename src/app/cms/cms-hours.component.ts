@@ -37,6 +37,8 @@ export class CmsHoursComponent implements OnInit {
     private loadService: LoadService
   ) {
     this.loadService.open();
+
+
     // detect language changes... need to check for change in texts
     translate.onLangChange.subscribe(() => {
       this.translate.get('CMS-Hours').subscribe(data => { this.t_data = data; });
@@ -64,11 +66,14 @@ export class CmsHoursComponent implements OnInit {
   }
 
   getOpeningTimes(): void {
-
-    // get the opening time data from the api
+    // Todo: JB to speak to KS about this block
+    // Fetches the opening time data from the api
     this.cms.getTimes(this.restaurant.restaurant_id).subscribe(
       data => {
+        const days = this.translate.instant('CMS.HOURS.days');
+        // console.log(data);
         this.openingTimes = data['times'];
+
         if (data['notes'] && data['notes'] !== 'Null') {
           this.openingTimesNotes = data['notes'];
         } else {
@@ -84,14 +89,18 @@ export class CmsHoursComponent implements OnInit {
           if (!this.openingTimes[i].sessions) {
             this.openingTimes[i].sessions = [this.sessionNull];
           }
-          // update 041118, need somehow to deal with updates to DOW, but these are loaded from the DB in English!
+          this.display_dow[i] = days[i];
+            // update 041118, need somehow to deal with updates to DOW, but these are loaded from the DB in English!
           // This is wrong - need to put in a temp variable, not overwrite the data!
           // Fixed 11/07/19 ks
           // this.translate.get('Global.DOW-' + this.openingTimes[i].cms_time_day_of_week).
           //   subscribe(value => { this.openingTimes[i].cms_time_day_of_week = value; });
-          // console.log('Global.DOW-' + this.openingTimes[i].cms_time_day_of_week);
-          this.translate.get('Global.DOW-' + this.openingTimes[i].cms_time_day_of_week).
-            subscribe(value => { this.display_dow[i] = value; });
+          // console.log(days[i]);
+          //
+
+          this.translate.instant('Global.DOW-' + this.openingTimes[i].cms_time_day_of_week);
+          // this.translate.get('Global.DOW-' + this.openingTimes[i].cms_time_day_of_week).
+          //   subscribe(value => { this.display_dow[i] = value; });
         }
         this.loadService.close();
         this.dataChanged = false;
@@ -195,7 +204,6 @@ export class CmsHoursComponent implements OnInit {
     // record event
     this.ga.sendEvent('CMS-Hours', 'Edit', 'Undo Changes');
   }
-
 
   updateData(): void {
     //console.log('OT: ', this.openingTimes, this.openingTimesNotes);

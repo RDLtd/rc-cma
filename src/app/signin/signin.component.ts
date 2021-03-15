@@ -49,9 +49,9 @@ export class SigninComponent implements OnInit {
     });
 
     // If the user is already signed in
-    // redirect to their 'home' page
+    // redirect to the HUB
     if (this.authService.isAuth()) {
-      this.router.navigate([localStorage.getItem('rd_home') || '']);
+      this.router.navigate(['/hub']);
     }
     this.trans = this.translate.instant('SIGNIN');
   }
@@ -100,7 +100,7 @@ export class SigninComponent implements OnInit {
   resetPwd(formValue) {
     this.memberService.sendrecoveryemail(formValue.email).subscribe(
       data => {
-        console.log(data);
+        // console.log(data);
         if (data['status'] === 'OK') {
           this.openSnackBar(this.trans.newPwdSent);
           this.pwdReset = false;

@@ -40,6 +40,17 @@
 				"msgLastUpdated": "Dernière mise à jour: {{ update }}",
 				"titleSummary": "résumé de l'état du contenu"
 			}
+		},
+		"HOURS": {
+			"days": [
+				"Dimanche",
+				"Lundi",
+				"Mardi",
+				"Mercredi",
+				"Jeudi",
+				"Vendredi",
+				"Samedi"
+			]
 		}
 	},
 	"CMS-Component": {
@@ -132,30 +143,6 @@
 		"Website": "Site Internet",
 		"YouCan": "Pour voir à quoi ressemblera votre Site Web avec tout le contenu ajouté, veuillez-vous ",
 		"Your": "Votre"
-	},
-	"CMS-Directory": {
-		"AddressCaps": "ADRESSE",
-		"Awaiting": "En attente de vérification",
-		"ChangeCaps": "DEMANDER UN CHANGEMENT",
-		"Correct": " correct?",
-		"DataVerification": "VERIFICATION DES DONNÉES",
-		"DirectoryCaps": "LISTE DU RÉPERTOIRE",
-		"Email": "Adresse e-mail",
-		"GroupCaps": "GROUPE / SOCIÉTÉ D'INVESTISSEMENT",
-		"Knowledge": "A votre avis, les informations du répertoire sont-elles affichées pour ",
-		"LastVerified": "Vos informations ont été vérifiées pour la dernière fois par ",
-		"No": "Non",
-		"On": " sur ",
-		"Request": "Votre demande a été envoyée à notre service en charge de la gestion des bases de données, vous allez recevoir un email de confirmation",
-		"Review": "Veuillez vérifier votre liste du répertoire ci-dessous et vérifier que les informations listées et les coordonnées sont toujours correctes. Si l'une des informations a changé, ou est incomplète, veuillez nous envoyer une DEMANDE d'EDITION avec vos mises à jour.",
-		"SelectVerify": "Sélectionner pour vérifier le contenu",
-		"Social": "Liens aux réseaux sociaux",
-		"Tel": "Numéro de téléphone",
-		"URL": "URL du site Internet du restaurant",
-		"Verified": "Les informations pour ce restaurant ont été enregistrées et vérifiées comme étant",
-		"VerifiedBy": "Vérifié par ",
-		"VerifyCaps": "VÉRIFIER",
-		"Yes": "Oui"
 	},
 	"CMS-Features": {
 		"AddFeatures": "Caractéristiques supplémentaires",

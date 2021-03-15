@@ -40,6 +40,17 @@
 				"msgLastUpdated": "Last updated: {{ update }}",
 				"titleSummary": "content status summary"
 			}
+		},
+		"HOURS": {
+			"days": [
+				"Sunday",
+				"Monday",
+				"Tuesday",
+				"Wednesday",
+				"Thursday",
+				"Friday",
+				"Saturday"
+			]
 		}
 	},
 	"CMS-Component": {
@@ -132,30 +143,6 @@
 		"Website": "Website",
 		"YouCan": "You can ",
 		"Your": "Your"
-	},
-	"CMS-Directory": {
-		"AddressCaps": "ADDRESS",
-		"Awaiting": "Awaiting Verification",
-		"ChangeCaps": "CHANGE REQUEST",
-		"Correct": " correct?",
-		"DataVerification": "DATA VERIFICATION",
-		"DirectoryCaps": "DIRECTORY LISTING",
-		"Email": "Email Address",
-		"GroupCaps": "GROUP / HOLDING COMPANY",
-		"Knowledge": "To the best of your knowledge, is the directory information displayed for ",
-		"LastVerified": "Your information was last verified by ",
-		"No": "No",
-		"On": " on ",
-		"Request": "Your request has been sent to our database services, you will receive a confirmation email",
-		"Review": " Please review your directory listing below and VERIFY that the listing information and contact details are still correct. If any of the information has changed, or is incomplete, please send us a EDIT REQUEST with your updates.",
-		"SelectVerify": "Select to verify content",
-		"Social": "Social Network Links",
-		"Tel": "Telephone Number",
-		"URL": "Restaurant Website URL",
-		"Verified": "The information for this restaurant has been registered as verified",
-		"VerifiedBy": "Verified by ",
-		"VerifyCaps": "VERIFY",
-		"Yes": "Yes"
 	},
 	"CMS-Features": {
 		"AddFeatures": "Additional Features",
