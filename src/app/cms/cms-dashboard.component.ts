@@ -14,7 +14,7 @@ import {
 import { MatDialog } from '@angular/material/dialog';
 import { CmsPreviewComponent } from './cms-preview.component';
 import { Router } from '@angular/router';
-import { RestaurantDetailComponent } from '../restaurants/restaurant-detail.component';
+import { RestaurantDetailComponent } from './restaurant-detail.component';
 import { NgForm } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import {
@@ -125,32 +125,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
     private memberService: MemberService,
     public config: AppConfig
   ) {
-
     this.t_data = this.translate.instant('CMS-Dashboard');
-
-    // detect language changes... need to check for change in texts
-
-    translate.onLangChange.subscribe(() => {
-      this.lang = localStorage.getItem('rd_language');
-      this.translate.get('CMS-Dashboard').subscribe(data => {
-        this.t_data = data;
-
-        // Since the display texts are computed, we need to re-run these routines...
-        this.readAndCheckStatus();
-
-        // re-translate computed display dates
-        moment.locale(localStorage.getItem('rd_language'));
-        this.d_memberJoinDate = this.setDateRes(this.memberJoinDate);
-        this.d_publishDate = moment(this.publishDate).format('LLLL');
-        this.d_core_date = this.setDateRes(this.core_date);
-        this.d_hours_date = this.setDateRes(this.hours_date);
-        this.d_desc_date = this.setDateRes(this.desc_date);
-        this.d_img_date = this.setDateRes(this.img_date);
-        this.d_mnu_date = this.setDateRes(this.mnu_date);
-        this.d_bkg_date = this.setDateRes(this.bkg_date);
-        this.d_loc_date = this.setDateRes(this.loc_date);
-      });
-    });
   }
 
   setDateRes(theDate) {
@@ -172,7 +147,8 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
     this.userName = localStorage.getItem('rd_username');
 
     moment.locale(localStorage.getItem('rd_language'));
-    this.dfImg = 'https://via.placeholder.com/350x200?text=' + this.t_data.AwaitingImage;
+    this.dfImg = 'https://via.placeholder.com/350x200?text='
+      + this.translate.instant('CMS.DASHBOARD.core.labelAwaitingImage');
 
     this.cmsLocalService.getRestaurant()
       .subscribe(rest => {
@@ -224,7 +200,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
   readAndCheckStatus () {
     console.log('Read');
     if (!!this.restaurant) {
-      this.setMemberStatus();
+      //this.setMemberStatus();
       this.checkSPW();
       this.checkOpeningTimes();
       this.checkDescriptions();
@@ -235,27 +211,27 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
 
   setMemberStatus() {
     // If not FullMember then Ass by default
-    if (!!this.restaurant) {
-      if (this.restaurant.restaurant_rc_member_status === 'Full') {
-        console.log('FULL');
-        this.memberStatus = 100;
-        this.memberType = this.t_data.FullMember;
-        this.memberIcon = 'people';
-      } else {
-        this.memberStatus = 50;
-        this.memberType = this.t_data.AssMember;
-        this.memberIcon = 'people_outline';
-      }
-    } else {
-      this.memberStatus = 50;
-      this.memberType = this.t_data.AssMember;
-      this.memberIcon = 'people_outline';
-    }
-
-    if (!!this.last_updated) {
-      this.memberJoinDate = new Date(this.last_updated.last_updated_status);
-    }
-    this.d_memberJoinDate = this.setDateRes(this.memberJoinDate);
+    // if (!!this.restaurant) {
+    //   if (this.restaurant.restaurant_rc_member_status === 'Full') {
+    //     console.log('FULL');
+    //     this.memberStatus = 100;
+    //     this.memberType = this.t_data.FullMember;
+    //     this.memberIcon = 'people';
+    //   } else {
+    //     this.memberStatus = 50;
+    //     this.memberType = this.t_data.AssMember;
+    //     this.memberIcon = 'people_outline';
+    //   }
+    // } else {
+    //   this.memberStatus = 50;
+    //   this.memberType = this.t_data.AssMember;
+    //   this.memberIcon = 'people_outline';
+    // }
+    //
+    // if (!!this.last_updated) {
+    //   this.memberJoinDate = new Date(this.last_updated.last_updated_status);
+    // }
+    // this.d_memberJoinDate = this.setDateRes(this.memberJoinDate);
   }
 
   checkSPW() {
@@ -349,17 +325,18 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
 
   // Core data card
   setCoreStatus(): void {
+    console.log('SetCoreStatus');
     // Inserting an extra translate call to catch router calls via the black bar menu
     // Todo: JB says Not sure if still needed?
     //  since I updated the translation loading
-    this.t_data = this.translate.instant('CMS-Dashboard');
-    //this.translate.get('CMS-Dashboard').subscribe(data => this.t_data = data);
-    this.core_status = 0;
-    this.core_date = new Date(this.restaurant.restaurant_last_updated);
-    this.core_by = this.restaurant.restaurant_verified_by;
-    this.core_status = 100;
-    this.core_status_txt = this.t_data.VerifiedBy + this.core_by;
-    this.d_core_date = this.setDateRes(this.core_date);
+    // this.t_data = this.translate.instant('CMS-Dashboard');
+    // //this.translate.get('CMS-Dashboard').subscribe(data => this.t_data = data);
+    // this.core_status = 0;
+    // this.core_date = new Date(this.restaurant.restaurant_last_updated);
+    // this.core_by = this.restaurant.restaurant_verified_by;
+    // this.core_status = 100;
+    // this.core_status_txt = this.t_data.VerifiedBy + this.core_by;
+    // this.d_core_date = this.setDateRes(this.core_date);
   }
 
   checkOpeningTimes(): void {
@@ -377,10 +354,12 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
         }
         // set status to either 100 or 0
         if (this.hours_count) {
-          this.hours_status_text = this.t_data.Open + this.hours_count + this.t_data.Days;
+          this.hours_status_text = this.translate.instant(
+            'CMS.DASHBOARD.summary.statusTimes',
+            { num: this.hours_count });
           this.hours_status = 100;
         } else {
-          this.hours_status_text = this.t_data.NoData;
+          this.hours_status_text = this.translate.instant('CMS.DASHBOARD.summary.statusNoData');
           this.hours_status = 0;
         }
         this.hours_date = new Date(this.last_updated.last_updated_hours);
@@ -426,11 +405,11 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
       }
       // Set status message
       if (this.desc_status === 0) {
-        this.desc_status_text = this.t_data.NoData;
+        this.desc_status_text = this.translate.instant('CMS.DASHBOARD.summary.statusNoData');
       } else if (this.desc_status >= 100) {
-        this.desc_status_text = this.t_data.Complete;
+        this.desc_status_text = this.translate.instant('CMS.DASHBOARD.summary.statusComplete');
       } else {
-        this.desc_status_text = this.t_data.MissingSome;
+        this.desc_status_text = this.translate.instant('CMS.DASHBOARD.summary.statusSomeData');
       }
       this.desc_by = this.descriptions.cms_description_created_by;
       // this.desc_date = new Date(this.descriptions.cms_description_last_updated);
@@ -438,7 +417,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
       this.d_desc_date = this.setDateRes(this.desc_date);
 
     } else {
-      this.desc_status_text = this.t_data.NoData;
+      this.translate.instant('CMS.DASHBOARD.summary.statusNoData');
     }
   }
 
@@ -466,9 +445,11 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
 
           // set status message
           if (this.img_count === 0) {
-            this.img_status_text = this.t_data.NoData;
+            this.img_status_text = this.translate.instant('CMS.DASHBOARD.summary.statusNoData');
           } else {
-            this.img_status_text = this.img_count + this.t_data.ActiveImages;
+            this.img_status_text = this.translate.instant(
+              'CMS.DASHBOARD.summary.statusImages',
+              { count: this.img_count });
           }
 
           // if (data['elements'].length) {
@@ -525,9 +506,11 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
 
         // set status text
         if (this.mnu_status === 0) {
-          this.mnu_status_text = this.t_data.NoData;
+          this.mnu_status_text = this.translate.instant('CMS.DASHBOARD.summary.statusNoData');
         } else {
-          this.mnu_status_text = this.mnu_count + this.t_data.ActivePDFs + ' / ' + this.mnu_dish_count + this.t_data.SampleDishes;
+          this.mnu_status_text = this.translate.instant(
+            'CMS.DASHBOARD.summary.statusMenus',
+            { pdf: this.mnu_count, dish: this.mnu_dish_count });
         }
       },
       error => {
@@ -561,14 +544,14 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
 
       // set status text
       if (this.bkg_status === 0) {
-        this.bkg_status_text = this.t_data.NoData;
+        this.bkg_status_text = this.translate.instant('CMS.DASHBOARD.summary.statusNoData');
       } else if (this.bkg_status >= 100) {
-        this.bkg_status_text = this.t_data.Complete;
+        this.bkg_status_text = this.translate.instant('CMS.DASHBOARD.summary.statusComplete');
       } else {
-        this.bkg_status_text = this.t_data.MissingSome;
+        this.bkg_status_text = this.translate.instant('CMS.DASHBOARD.summary.statusSomeData');
       }
     } else {
-      this.bkg_status_text = this.t_data.NoData;
+      this.bkg_status_text = this.translate.instant('CMS.DASHBOARD.summary.statusNoData');
     }
   }
 
@@ -592,11 +575,11 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
 
     // set status text
     if (this.loc_status === 0) {
-      this.loc_status_text = this.t_data.NoData;
+      this.loc_status_text = this.translate.instant('CMS.DASHBOARD.summary.statusNoData');
     } else if (this.loc_status >= 100) {
-      this.loc_status_text = this.t_data.Complete;
+      this.loc_status_text = this.translate.instant('CMS.DASHBOARD.summary.statusComplete');
     } else {
-      this.loc_status_text = this.t_data.MissingSome;
+      this.loc_status_text = this.translate.instant('CMS.DASHBOARD.summary.statusSomeData');
     }
   }
 
@@ -743,7 +726,9 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
 
     this.restaurantService.verify(this.restaurant.restaurant_id, this.userName )
       .subscribe(() => {
-        this.cmsLocalService.dspSnackbar(this.t_data.DataVnP, 'OK', 5);
+        this.cmsLocalService.dspSnackbar(
+          this.translate.instant('CMS.DASHBOARD.spw.msgVerifiedAndPublished'),
+          'OK', 5);
         this.restaurant.restaurant_verified_by = this.userName;
         this.restaurant.restaurant_verified_on = Date().toLocaleString();
         this.dbRestaurant.restaurant_verified_by = this.userName;
@@ -785,14 +770,15 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
             }
           }
           // console.log(changeArray.length + ' changes detected');
-          this.cmsLocalService.dspSnackbar(this.t_data.ChangeSent, null, 1);
+          this.cmsLocalService.dspSnackbar(this.translate.instant('CMS.DASHBOARD.core.msgChangeRequest'),
+            null, 1);
 
           // send information to the server so that emails can be generated
           this.cms.sendRestaurantChanges(this.user.member_first_name, this.user.member_last_name, this.user.member_email,
             this.restaurant.restaurant_name, changeArray)
             .subscribe(() => {
                 // console.log('Emails generated by server');
-                const msg = this.t_data.DataChange;
+                const msg = this.translate.instant('CMS.DASHBOARD.core.msgDataChange');
                 this.cmsLocalService.dspSnackbar(msg, 'OK', 20, 'info');
                 // record event
                 this.ga.sendEvent('CMS-Dashboard', 'Core Data', 'Change Request');

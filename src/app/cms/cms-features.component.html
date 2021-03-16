@@ -2,7 +2,7 @@
   <div class="mdc-layout-grid__inner">
   <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
     <mat-toolbar class="rc-toolbar rc-toolbar-section">
-      <span>{{ 'CMS-Features.StyleFeatures' | translate }}</span>
+      <span>{{ 'CMS.FEATURES.titleDescAndFeatures' | translate }}</span>
       <span class="rc-space-filler"></span>
       <span class="rc-toolbar-actions">
         <!-- HELP -->
@@ -16,7 +16,7 @@
           mat-icon-button
           [disabled]="!dataChanged"
           (click)="resetData()"
-          [matTooltip]="'CMS-Features.UndoChanges' | translate">
+          [matTooltip]="'CMS.FEATURES.tipUndo' | translate">
           <mat-icon>undo</mat-icon>
         </button>
         <!-- SAVE CHANGES -->
@@ -24,7 +24,7 @@
           mat-icon-button
           [disabled]="!dataChanged"
           (click)="updateData()"
-          [matTooltip]="'CMS-Features.SaveChanges' | translate">
+          [matTooltip]="'CMS.FEATURES.tipSave' | translate">
           <mat-icon>check</mat-icon>
         </button>
       </span>
@@ -34,16 +34,16 @@
     <mat-card class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-12-tablet">
 
       <mat-card-title>
-        <h2>{{ 'CMS-Features.Descriptions' | translate }}</h2>
+        <h2>{{ 'CMS.FEATURES.titleDescriptions' | translate }}</h2>
       </mat-card-title>
 
       <mat-card-content>
         <!-- STRAPLINE -->
-        <h4>{{ 'CMS-Features.Strapline' | translate }}</h4>
+        <h4>{{ 'CMS.FEATURES.headerStrapline' | translate }}</h4>
         <mat-form-field
           class="rc-full-width"
           floatLabel="never">
-          <mat-label>{{ 'CMS-Features.StraplinePlace' | translate }}{{ descStraplineTotal }}{{ 'CMS-Features.Chars' | translate }})</mat-label>
+          <mat-label>{{ 'CMS.FEATURES.labelStrapline' | translate: { chars: descStraplineTotal } }}</mat-label>
           <textarea
             #strapline
             matInput
@@ -58,12 +58,12 @@
           <mat-hint align="end">{{ strapline.value.length }}/{{ descStraplineTotal }}</mat-hint>
         </mat-form-field>
         <!-- ONE SENTENCE DESC. -->
-        <h4>{{ 'CMS-Features.OneSent' | translate }}</h4>
+        <h4>{{ 'CMS.FEATURES.headerDescSentence' | translate }}</h4>
         <!-- ONE PARAGRAPH DESC. -->
         <mat-form-field
           class="rc-full-width"
           floatLabel="never">
-          <mat-label>{{ 'CMS-Features.OneSentPlace' | translate }}{{ descSentenceTotal }}{{ 'CMS-Features.Chars' | translate }})</mat-label>
+          <mat-label>{{ 'CMS.FEATURES.labelDescSentence' | translate: { chars: descSentenceTotal } }}</mat-label>
           <textarea
             #sentence
             matInput
@@ -77,10 +77,10 @@
           </textarea>
           <mat-hint align="end">{{ sentence.value.length }}/{{ descSentenceTotal }}</mat-hint>
         </mat-form-field>
-        <h4>{{ 'CMS-Features.OnePara' | translate }}</h4>
+        <h4>{{ 'CMS.FEATURES.headerDescParagraph' | translate }}</h4>
         <mat-form-field
           class="rc-full-width" floatLabel="never">
-          <mat-label>{{ 'CMS-Features.OneParaPlace' | translate }}{{ descParagraphTotal }}{{ 'CMS-Features.Chars' | translate }})</mat-label>
+          <mat-label>{{ 'CMS.FEATURES.labelDescParagraph' | translate: { chars: descParagraphTotal } }}</mat-label>
           <textarea
             #paragraph
             matInput
@@ -95,9 +95,9 @@
           <mat-hint align="end">{{ paragraph.value.length }}/{{ descParagraphTotal }}</mat-hint>
         </mat-form-field>
         <!-- LONG DESC. -->
-        <h4>{{ 'CMS-Features.Full' | translate }}</h4>
+        <h4>{{ 'CMS.FEATURES.headerDescFull' | translate }}</h4>
         <mat-form-field class="rc-full-width" floatLabel="never">
-          <mat-label>{{ 'CMS-Features.FullPlace' | translate }}{{ descFullTotal }}{{ 'CMS-Features.Chars' | translate }})</mat-label>
+          <mat-label>{{ 'CMS.FEATURES.labelDescFull' | translate: { chars: descFullTotal } }}</mat-label>
           <textarea
             #full
             matInput
@@ -118,7 +118,7 @@
     <mat-card class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-12-tablet">
       <mat-card-title>
         <!-- FEATURES -->
-        <h2>{{ 'CMS-Features.Features' | translate }}</h2>
+        <h2>{{ 'CMS.FEATURES.titleFeatures' | translate }}</h2>
       </mat-card-title>
       <mat-card-content>
         <div *ngFor="let feature of features; let iatt = index">
@@ -132,7 +132,7 @@
         </div>
       </mat-card-content>
       <!-- ADDITIONAL FEATURES -->
-      <h2>{{ 'CMS-Features.AddFeatures' | translate }}</h2>
+      <h2>{{ 'CMS.FEATURES.titleAddFeatures' | translate }}</h2>
       <mat-card-content>
         <mat-form-field class="rc-full-width" floatLabel="always">
           <mat-chip-list #chipList>
@@ -144,7 +144,7 @@
               {{ k | uppercase }}
               <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
             </mat-chip>
-            <input [placeholder]="'CMS-Features.AddFeaturesPlace' | translate"
+            <input [placeholder]="'CMS.FEATURES.tipAddFeatures' | translate"
                    [matChipInputFor]="chipList"
                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                    [matChipInputAddOnBlur]="true"

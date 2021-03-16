@@ -30,6 +30,7 @@ export class RestaurantDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+
     this.translate.get('Curation.ClearMod').subscribe(value => { this.clear_mod_text = value; });
 
     let my_country_code;
@@ -51,6 +52,8 @@ export class RestaurantDetailComponent implements OnInit {
   }
 
   loadCuisineModifiers() {
+
+    console.log('loadCuisineModifiers()');
     // get the index of the selected primary cuisine and then load the modifiers
     //
     // ToDo - fix this horrible code!
@@ -100,14 +103,6 @@ export class RestaurantDetailComponent implements OnInit {
     if (this.restaurant.restaurant_cuisine_2 === this.clear_mod_text) {
       this.restaurant.restaurant_cuisine_2 = '';
     }
-  }
-
-  toggleEditMode($event) {
-
-    console.log(this.restaurant);
-    const toggle = $event.target;
-    this.editMode = !this.editMode;
-    // toggle.checked = this.editMode;
   }
 
   openSnackBar(message: string, action: string) {

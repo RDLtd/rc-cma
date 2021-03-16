@@ -1,7 +1,7 @@
 
 <div class="rc-dialog">
 
-  <h1 mat-dialog-title>{{ 'Restaurant-Detail.Amend' | translate }}</h1>
+  <h1 mat-dialog-title>{{ 'CMS.DASHBOARD.core.titleChangeRequest' | translate }}</h1>
 
   <div mat-dialog-content>
 
@@ -11,7 +11,7 @@
         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6">
 
           <mat-form-field hideRequiredMarker class="rc-full-width">
-            <mat-label>{{ 'Restaurant-Detail.RName' | translate }}</mat-label>
+            <mat-label>{{ 'CMS.DASHBOARD.core.labelRestaurantName' | translate }}</mat-label>
             <input
               name="restaurant_name"
               type="text"
@@ -23,7 +23,7 @@
           </mat-form-field>
 
           <mat-form-field hideRequiredMarker class="rc-full-width">
-            <mat-label>{{ 'Restaurant-Detail.Address' | translate }}</mat-label>
+            <mat-label>{{ 'CMS.DASHBOARD.core.labelAddress' | translate }}</mat-label>
             <input
               name="restaurant_address_1"
               type="text"
@@ -55,7 +55,7 @@
           </mat-form-field>
 
           <mat-form-field class="rc-full-width">
-            <mat-label>{{ 'Restaurant-Detail.Postcode' | translate }}</mat-label>
+            <mat-label>{{ 'CMS.DASHBOARD.core.labelPostcode' | translate }}</mat-label>
             <input
               name="restaurant_post_code"
               type="text"
@@ -67,7 +67,7 @@
           </mat-form-field>
 
           <mat-form-field  class="rc-full-width">
-            <mat-label>{{ 'Restaurant-Detail.Group' | translate }}</mat-label>
+            <mat-label>{{ 'CMS.DASHBOARD.core.labelGroup' | translate }}</mat-label>
             <input
               name="restaurant_group_name"
               type="text"
@@ -82,7 +82,7 @@
           <mat-form-field class="rc-full-width">
             <mat-select
               name="restaurant_cuisine_1"
-              [placeholder]="'Curation.PrimCuis' | translate"
+              [placeholder]="'CMS.DASHBOARD.core.labelCuisinePrimary' | translate"
               (selectionChange)="changeCuisine()"
               [(ngModel)]="restaurant.restaurant_cuisine_1">
               <mat-option
@@ -97,7 +97,7 @@
             <mat-select
               name="restaurant_cuisine_2"
               (selectionChange)="checkModifier()"
-              [placeholder]="'Curation.SecCuis' | translate"
+              [placeholder]="'CMS.DASHBOARD.core.labelCuisineSecondary' | translate"
               [(ngModel)]="restaurant.restaurant_cuisine_2">
               <mat-option
                 *ngFor= "let cuisine of cuisine_modifiers"
@@ -112,7 +112,7 @@
         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6">
 
           <mat-form-field class="rc-full-width">
-            <mat-label>{{ 'Restaurant-Detail.Tel' | translate }}</mat-label>
+            <mat-label>{{ 'CMS.DASHBOARD.core.labelTel' | translate }}</mat-label>
             <input
               name="restaurant_telephone"
               type="text"
@@ -136,11 +136,10 @@
           </mat-form-field>
 
           <mat-form-field class="rc-full-width">
-            <mat-label>{{ 'Restaurant-Detail.WebSite' | translate }}</mat-label>
+            <mat-label>{{ 'CMS.DASHBOARD.core.labelWeb' | translate }}</mat-label>
             <input
               name="restaurant_website"
               type="text"
-              [placeholder]="'Restaurant-Detail.WebSite' | translate"
               matInput
               #restaurant_name="ngModel"
               [(ngModel)]="restaurant.restaurant_website"
@@ -200,12 +199,11 @@
   <div mat-dialog-actions align="end">
 
     <button
+      tabindex="-1"
       mat-button
       mat-dialog-close
-      (click)="setCancel(true)"
-      [matTooltip]="'Restaurant-Detail.Cancel&Close' | translate"
-      matTooltipPosition="above">
-      {{ 'Restaurant-Detail.Cancel' | translate }}
+      (click)="setCancel(true)">
+      {{ 'CMS.DASHBOARD.core.labelBtnCancel' | translate | uppercase }}
     </button>
 
     <button
@@ -213,7 +211,7 @@
       mat-dialog-close
       (click)="setCancel(false)"
       color="accent">
-      {{ 'Restaurant-Detail.Update' | translate }}
+      {{ 'CMS.DASHBOARD.core.labelBtnConfirm' | translate | uppercase }}
     </button>
 
   </div>

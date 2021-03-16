@@ -107,7 +107,7 @@ export class CmsFeaturesComponent implements OnInit {
       .subscribe(
       () => {
         this.cmsLocalService.dspSnackbar(
-          `${this.restaurant.restaurant_name} ${this.translate.instant('CMS-Features.FeaturesUpdated')}`,
+          `${this.restaurant.restaurant_name} ${this.translate.instant('CMS.FEATURES.msgFeaturesUpdated')}`,
           null,
           5);
       },
@@ -119,7 +119,7 @@ export class CmsFeaturesComponent implements OnInit {
       () => {
         // console.log('Desc updated', data);
         this.cmsLocalService.dspSnackbar(
-          `${this.restaurant.restaurant_name} ${this.translate.instant('CMS-Features.DescriptionsUpdated')}`,
+          `${this.restaurant.restaurant_name} ${this.translate.instant('CMS.FEATURES.msgDescriptionsUpdated')}`,
           null,
           5);
       },

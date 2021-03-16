@@ -39,7 +39,7 @@ import {
 
 import {
   RestaurantDetailComponent,
-} from './restaurants/restaurant-detail.component';
+} from './cms/restaurant-detail.component';
 import {
   MarketplaceComponent
 } from './marketplace/marketplace.component'

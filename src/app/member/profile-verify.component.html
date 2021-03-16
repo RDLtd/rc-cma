@@ -8,7 +8,7 @@
     (ngSubmit)="profileVerifyForm.form.valid && onProfileVerifySubmit(profileVerifyForm.form)">
 
     <mat-dialog-content>
-      <!-- TODO: Translation required -->
+
       <!-- Just need email -->
       <div *ngIf="data.contactEmailRequired && !data.verificationCodeRequired">
         <p>{{ 'Profile-Verify.Main' | translate }}<strong>{{ data.restaurant.restaurant_name }}</strong>.

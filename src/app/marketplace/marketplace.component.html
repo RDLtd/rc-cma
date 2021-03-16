@@ -48,7 +48,7 @@
 
 <div class="rc-marketplace">
   <div class="mdc-layout-grid">
-    <div class="mdc-layout-grid__inner">
+    <div class="mdc-layout-grid__inner" [@insertAnimation]="displayedDeals?.length">
 
       <div
         *ngFor="let deal of displayedDeals"
@@ -57,23 +57,23 @@
           <button
             mat-icon-button
             class="rc-card-menu"
-            [class.rc-highlight]="isFavourite(deal.id)"
-            (click)="toggleIsFavourite(deal.id)"
+            [class.rc-highlight]="isFavourite(deal.deal_id)"
+            (click)="toggleIsFavourite(deal.deal_id)"
             [matTooltip]="'MARKETPLACE.tipAddToFavourites' | translate">
             <mat-icon>favorite_outline</mat-icon>
           </button>
           <div mat-card-title>
-            <h4>{{ deal.category | uppercase }}</h4>
-            <img src="assets/images/affiliates/{{ deal.affiliate.logo }}">
+            <h4>{{ deal.deal_category | uppercase }}</h4>
+            <img src="assets/images/affiliates/{{ deal.affiliate_logo_path }}" alt=" {{ deal.affiliate_name }}">
             <h2>{{ deal.name }}</h2>
-            <h3>by <a [href]="deal.affiliate.url" target="_blank">{{ deal.affiliate.name }}</a></h3>
+            <h3>by <a [href]="deal.affiliate_url" target="_blank">{{ deal.affiliate_name }}</a></h3>
           </div>
           <div mat-card-content>
-            <p markdown ngpreservewhitespaces>{{ deal.description }}</p>
+            <p markdown ngpreservewhitespaces>{{ deal.deal_description }}</p>
           </div>
           <mat-card-actions align="end">
             <button
-              (click)="notifyAffiliate(deal.id)"
+              (click)="notifyAffiliate(deal)"
               mat-button
               color="accent">{{ 'MARKETPLACE.labelBtnFindOutMore' | translate | uppercase }}</button>
           </mat-card-actions>

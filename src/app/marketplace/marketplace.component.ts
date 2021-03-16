@@ -6,31 +6,17 @@ import { TranslateService } from '@ngx-translate/core';
 import { Restaurant } from '../_models';
 import { AppConfig } from '../app.config';
 import { HeaderService } from '../common/header.service';
-
-export interface Affiliate {
-  id: string;
-  name: string;
-  logo: string;
-  about: string
-}
-
-export interface Deal {
-  id: string;
-  name: string;
-  description: string;
-  value: number,
-  category: string;
-  affiliate: Affiliate;
-  createdDate: Date;
-  expiryDate: Date;
-}
+import { MarketplaceService } from './marketplace.service';
+import { insertAnimation } from '../shared/animations';
 
 @Component({
   selector: 'rc-marketplace',
-  templateUrl: './marketplace.component.html'
+  templateUrl: './marketplace.component.html',
+  animations: [insertAnimation]
 })
 
 export class MarketplaceComponent implements OnInit {
+
   now: Date = new Date();
   expiry: Date = new Date('2022');
 
@@ -95,7 +81,7 @@ export class MarketplaceComponent implements OnInit {
   restaurant: Restaurant;
   affiliates: any ;
   categories = [];
-  deals: Array<Deal>;
+  deals: Array<any>;
   favourites: Array<string> = [];
   hasFavourites: boolean = true;
   filter: string;
@@ -108,6 +94,7 @@ export class MarketplaceComponent implements OnInit {
     private translate: TranslateService,
     private dialog: MatDialog,
     private config: AppConfig,
+    private marketService: MarketplaceService,
     private loader: LoadService) {
       this.loader.open();
       this.translate.use(localStorage.getItem('rd_language'));
@@ -116,24 +103,26 @@ export class MarketplaceComponent implements OnInit {
 
   ngOnInit() {
     this.getDeals();
-    this.getCategories();
     this.loader.close();
     this.hasFavourites = this.favourites.length > 0;
   }
 
   getDeals(): void {
-    console.log(this.expiry);
-    this.deals = this.mockDeals;
-    this.displayedDeals = this.deals;
+    this.marketService.getDeals().subscribe( data => {
+      console.log(data);
+      this.deals = data.deals;
+      this.displayedDeals = this.deals;
+      this.setCategories();
+    });
   }
 
   // Extract a list of deal categories
   // to use for filtering
-  getCategories(): void {
+  setCategories(): void {
     let i = this.deals.length;
     let c;
     while (i--) {
-      c = this.deals[i].category;
+      c = this.deals[i].deal_category;
       if (this.categories.indexOf(c) < 0) {
         this.categories.push(c);
       }
@@ -168,8 +157,8 @@ export class MarketplaceComponent implements OnInit {
     // remove any other filters first
     this.clearAllFilters();
     this.displayedDeals = this.displayedDeals.filter(
-      function(e) {
-        return this.indexOf(e.id) >= 0;
+      function(obj) {
+        return this.indexOf(obj.deal_id) >= 0;
       },
       this.favourites
     );
@@ -177,9 +166,9 @@ export class MarketplaceComponent implements OnInit {
   }
   // Category filters
   filterByCategory(cat: string): void {
-    this.displayedDeals = this.deals.filter(function(elem) {
+    this.displayedDeals = this.deals.filter(function(obj) {
       // normalise and compare
-      return elem.category.toLowerCase() === cat.toLowerCase();
+      return obj.deal_category.toLowerCase() === cat.toLowerCase();
     });
     this.filter = cat;
   }
@@ -191,19 +180,14 @@ export class MarketplaceComponent implements OnInit {
 
   // Send contact details to Affiliate
   // and confirm to Member
-  notifyAffiliate(dealId: string): void {
-
-    // NOTE:
-    // Array.find does not work in IE
-    // but this is less than 1% of usage
-    let selectedDeal = this.deals.find(d => { return d.id === dealId} );
+  notifyAffiliate(selectedDeal: any): void {
 
     let dialogRef = this.dialog.open(ConfirmCancelComponent, {
       restoreFocus: false,
       data: {
         title: this.translate.instant('MARKETPLACE.titleRequest'),
         deal: selectedDeal,
-        body: this.translate.instant('MARKETPLACE.msgRequest', selectedDeal),
+        body: this.translate.instant('MARKETPLACE.msgRequest', { deal: selectedDeal.deal_name, affiliate: selectedDeal.affiliate_name }),
         cancel: this.translate.instant('MARKETPLACE.labelBtnCancel'),
         confirm: this.translate.instant('MARKETPLACE.labelBtnConfirm')
       }

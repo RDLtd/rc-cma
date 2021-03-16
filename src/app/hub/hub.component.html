@@ -1,15 +1,15 @@
 
 <div class="rc-hub">
   <div class="mdc-layout-grid">
-    <div class="mdc-layout-grid__inner">
+    <div class="mdc-layout-grid__inner" [@insertAnimation]="services?.length">
       <!-- Apps/Services -->
       <div
-        *ngFor="let feature of features"
+        *ngFor="let service of services"
         class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
 
         <div
           class="rc-hub-cms"
-          *ngIf="feature.id === 'cms'"
+          *ngIf="service.service_id === 1"
           #menuTrigger="matMenuTrigger"
           [matMenuTriggerFor]="menu">
 
@@ -38,11 +38,11 @@
 
         </div>
 
-        <mat-card class="rc-card-service" (click)="launchFeature(feature)">
-          <img src="assets/images/icons/{{feature.icon}}.svg" alt="App Icon">
-          <h2>{{ feature.name | uppercase }}</h2>
-          <p>{{ feature.description }}</p>
-          <span>{{ feature.status }}</span>
+        <mat-card class="rc-card-service" (click)="launchFeature(service)">
+          <img src="assets/images/icons/{{service.service_logo_path}}.svg" alt="App Icon">
+          <h2>{{ service.service_name | uppercase }}</h2>
+          <p>{{ service.service_description }}</p>
+          <span>{{ service.service_highlight }}</span>
         </mat-card>
 
       </div>

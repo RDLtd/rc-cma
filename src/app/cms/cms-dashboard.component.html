@@ -261,7 +261,7 @@
               [class.rc-content-status-partial]="hours_status < 100 && hours_status > 0"
               (click)="navTo('opening-times')">
               <mat-icon matListIcon>watch_later</mat-icon>
-              <h3 matLine>{{ 'CMS.DASHBOARD.summary.headerOpeningHours' | translate | uppercase }}</h3>
+              <h3 matLine>{{ 'CMS.DASHBOARD.summary.headerTimes' | translate | uppercase }}</h3>
               <p matLine>{{ 'CMS.DASHBOARD.summary.msgLastUpdated' | translate: { update: d_hours_date} }}</p>
               <mat-progress-bar  matLine mode="determinate" value="{{ hours_status }}"></mat-progress-bar>
               <p matLine><span>{{ hours_status_text }}</span></p>
