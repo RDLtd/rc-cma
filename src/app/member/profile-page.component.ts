@@ -178,7 +178,6 @@ export class ProfilePageComponent implements OnInit {
       const rest = this.restaurants[index];
       const dialogRef = this.dialog.open(ConfirmCancelComponent, {
         data: {
-          title: this.translate.instant('CONFIRM.titleConfirmCancel'),
           body: this.t_data.AboutRemove + rest.restaurant_name + this.t_data.ListAssociated,
           confirm: this.t_data.Remove,
           cancel: this.t_data.Cancel

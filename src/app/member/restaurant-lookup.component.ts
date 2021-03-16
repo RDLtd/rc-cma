@@ -187,9 +187,9 @@ export class RestaurantLookupComponent implements OnInit {
       const confirmDialog = this.dialog.open(ConfirmCancelComponent, {
         data: {
           title: this.t_data.PleaseNote,
-          msg: this.t_data.Info + '**' + newRestaurant.restaurant_name + this.t_data.NotYetCurated,
-          yes: 'OK',
-          no: null
+          body: this.t_data.Info + '**' + newRestaurant.restaurant_name + this.t_data.NotYetCurated,
+          confirm: 'OK',
+          cancel: null
         }
       });
       confirmDialog.afterClosed().subscribe(ok => {

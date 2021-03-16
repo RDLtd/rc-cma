@@ -1,20 +1,20 @@
 <div class="rc-dialog rc-dialog-alert">
   <h2 mat-dialog-title>
-    {{ data.title }}
+    {{ data.title || 'CONFIRM.titleConfirmCancel' | translate }}
   </h2>
   <mat-dialog-content markdown>
-    {{ data.body }}
+    {{ data.body || 'CONFIRM.msgConfirmCancel' | translate}}
   </mat-dialog-content>
   <mat-dialog-actions align="end">
     <button
       tabindex="-1"
       mat-button
       (click)="confirmCancelDialog.close(false )">
-      {{ data.cancel }}
+      {{ data.cancel || 'CONFIRM.labelBtnCancel' | translate }}
     </button>
     <button
       mat-button color="accent" (click)="confirmCancelDialog.close(true )">
-      {{ data.confirm | uppercase }}
+      {{ data.confirm || 'CONFIRM.labelBtnConfirm' | translate | uppercase }}
     </button>
   </mat-dialog-actions>
 </div>

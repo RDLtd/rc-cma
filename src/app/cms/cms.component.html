@@ -11,7 +11,7 @@
 
     <span class="rc-link-like"
           [matMenuTriggerFor]="cmsRestaurants"
-          [matTooltip]="'CMS-Component.ManagedByYou' | translate">
+          [matTooltip]="'CMS.NAV.tipYourRestaurants' | translate">
           {{ restaurant?.restaurant_name }}
     </span>
     <mat-menu #cmsRestaurants="matMenu">
@@ -27,7 +27,7 @@
         mat-menu-item
         [routerLink]="['/profile']">
         <mat-icon>add_circle</mat-icon>
-        <span>{{ 'CMS-Component.AddRestaurant' | translate }}</span>
+        <span>{{ 'CMS.NAV.labelAddRestaurant' | translate }}</span>
       </button>
     </mat-menu>
 
@@ -36,51 +36,51 @@
     <span class="rc-section-toolbar-actions rc-media-small-hide">
 
           <button mat-icon-button
-             [matTooltip]="'CMS-Component.RDashboard' | translate"
+             [matTooltip]="'CMS.NAV.tipDashboard' | translate"
              [routerLink]="['dashboard']"
              [routerLinkActive]="['rc-link-active']">
             <mat-icon>dashboard</mat-icon>
           </button>
 
            <button mat-icon-button
-              [matTooltip]="'CMS-Component.ROpeningTimes' | translate"
+              [matTooltip]="'CMS.NAV.tipHours' | translate"
               [routerLink]="['opening-times']"
               [routerLinkActive]="['rc-link-active']">
             <mat-icon>watch_later</mat-icon>
           </button>
           <button mat-icon-button
-             [matTooltip]="'CMS-Component.RFeatures' | translate"
+             [matTooltip]="'CMS.NAV.tipFeatures' | translate"
              [routerLink]="['features']"
              [routerLinkActive]="['rc-link-active']">
             <mat-icon>check_box</mat-icon>
           </button>
           <button mat-icon-button
-             [matTooltip]="'CMS-Component.RImages' | translate"
+             [matTooltip]="'CMS.NAV.tipImages' | translate"
              [routerLink]="['images']"
              [routerLinkActive]="['rc-link-active']">
             <mat-icon>image</mat-icon>
           </button>
           <button mat-icon-button
-             [matTooltip]="'CMS-Component.RMenus' | translate"
+             [matTooltip]="'CMS.NAV.tipMenus' | translate"
              [routerLink]="['menus']"
              [routerLinkActive]="['rc-link-active']">
             <mat-icon>restaurant</mat-icon>
           </button>
           <button mat-icon-button
-             [matTooltip]="'CMS-Component.RReservations' | translate"
+             [matTooltip]="'CMS.NAV.tipReservations' | translate"
              [routerLink]="['reservations']"
              [routerLinkActive]="['rc-link-active']">
             <mat-icon>event</mat-icon>
           </button>
           <button mat-icon-button
-             [matTooltip]="'CMS-Component.RLocation' | translate"
+             [matTooltip]="'CMS.NAV.tipContacts' | translate"
              [routerLink]="['location']"
              [routerLinkActive]="['rc-link-active']">
             <mat-icon>place</mat-icon>
           </button>
           <button
               mat-icon-button
-             [matTooltip]="'CMS-Component.RPreview' | translate"
+             [matTooltip]="'CMS.NAV.tipPreview' | translate"
              (click)="getPreview()">
             <mat-icon>personal_video</mat-icon>
           </button>
@@ -99,31 +99,31 @@
 
     <a mat-menu-item [routerLink]="['dashboard']">
       <mat-icon>dashboard</mat-icon>
-      <span>{{ 'CMS-Component.Dashboard' | translate }}</span>
+      <span>{{ 'CMS.NAV.labelDashboard' | translate }}</span>
     </a>
     <a mat-menu-item [routerLink]="['opening-times']">
       <mat-icon>watch_later</mat-icon>
-      <span>{{ 'CMS-Component.Times' | translate }}</span>
+      <span>{{ 'CMS.NAV.labelHours' | translate }}</span>
     </a>
     <a mat-menu-item [routerLink]="['features']">
       <mat-icon>check_box</mat-icon>
-      <span>{{ 'CMS-Component.Features' | translate }}</span>
+      <span>{{ 'CMS.NAV.labelFeatures' | translate }}</span>
     </a>
     <a mat-menu-item [routerLink]="['menus']">
       <mat-icon>restaurant</mat-icon>
-      <span>{{ 'CMS-Component.Menus' | translate }}</span>
+      <span>{{ 'CMS.NAV.labelMenus' | translate }}</span>
     </a>
     <a mat-menu-item [routerLink]="['reservations']">
       <mat-icon>event</mat-icon>
-      <span>{{ 'CMS-Component.Reservations' | translate }}</span>
+      <span>{{ 'CMS.NAV.labelReservations' | translate }}</span>
     </a>
     <a mat-menu-item [routerLink]="['images']">
       <mat-icon>image</mat-icon>
-      <span>{{ 'CMS-Component.Images' | translate }}</span>
+      <span>{{ 'CMS.NAV.labelImages' | translate }}</span>
     </a>
     <a mat-menu-item [routerLink]="['location']">
       <mat-icon>place</mat-icon>
-      <span>{{ 'CMS-Component.Location' | translate }}</span>
+      <span>{{ 'CMS.NAV.labelLocation' | translate }}</span>
     </a>
 <!--    <a mat-menu-item [routerLink]="['affiliates']">-->
 <!--      <mat-icon>redeem</mat-icon>-->
