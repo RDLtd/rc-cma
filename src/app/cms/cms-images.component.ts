@@ -23,6 +23,9 @@ export class CmsImagesComponent implements OnInit {
   cmsImages: any;
   showLoader: boolean = false;
 
+  // translation variables
+  t_data: any;
+
   constructor(
     private cmsLocalService: CmsLocalService,
     private cms: CMSService,
@@ -35,6 +38,10 @@ export class CmsImagesComponent implements OnInit {
   ngOnInit() {
 
     this.loader.open();
+
+    this.translate.get('CMS-Images').subscribe(data => {
+      this.t_data = data;
+    });
 
     // Subscribe to service
     this.cmsLocalService.getRestaurant()
@@ -76,21 +83,19 @@ export class CmsImagesComponent implements OnInit {
 
     let msg: string;
     img.cms_element_active = !img.cms_element_active;
-    img.cms_element_active ?
-      msg = this.translate.instant('CMS.IMAGES.msgNowActive', { img: img.cms_element_id }):
-      msg = this.translate.instant('CMS.IMAGES.msgNowOffline', { img: img.cms_element_id });
+    img.cms_element_active ? msg = this.t_data.IsActive : msg = this.t_data.IsOffline;
 
     this.cms.updateElement(img).subscribe(
       () => {
         this.updateLastUpdated('images');
         this.cmsLocalService.dspSnackbar(
-          msg,
+          `Image ${ img.cms_element_id } ${ msg }`,
           null,
           3);
       },
       error => {
         this.cmsLocalService.dspSnackbar(
-          `${this.translate.instant('CMS.IMAGES.msgUpdateFailed')}!`,
+          `${this.t_data.UpdateFailed}`,
           null,
           3);
         console.log(error);
@@ -128,9 +133,9 @@ export class CmsImagesComponent implements OnInit {
 
     let dialogRef = this.dialog.open(ConfirmCancelComponent, {
       data: {
-        body:
-          this.translate.instant('CMS.IMAGES.msgConfirmDelete',
-            { img: img.cms_element_id})
+        msg: this.t_data.DeleteImage + img.cms_element_id + this.t_data.Want,
+        yes: this.t_data.YesDelete,
+        no: this.t_data.NoCancel
       }
     });
 
@@ -151,7 +156,7 @@ export class CmsImagesComponent implements OnInit {
               this.updateLastUpdated('images');
 
               this.cmsLocalService.dspSnackbar(
-                this.translate.instant('CMS.IMAGES.msgDeleted', { img: img.cms_element_id }),
+                'Image ' + img.cms_element_id + this.t_data.Deleted,
                 null,
                 3);
               dialogRef.close();
@@ -159,7 +164,7 @@ export class CmsImagesComponent implements OnInit {
             error => {
             console.log(error);
             this.cmsLocalService.dspSnackbar(
-              this.translate.instant('CMS.IMAGES.msgUpdateFailed'),
+              this.t_data.UpdateFailed,
               null,
               3);
             }

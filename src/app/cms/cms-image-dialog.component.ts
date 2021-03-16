@@ -16,29 +16,32 @@ export class CmsImageDialogComponent implements OnInit {
   cmsImages: any;
   dialog: any;
 
+  // translation variables
+  t_data: any;
+
   constructor(
     private cms: CMSService,
     private translate: TranslateService,
     private cmsLocalService: CmsLocalService) { }
 
   ngOnInit() {
-
+    this.translate.get('CMS-Image-Dialog').subscribe(data => {
+      this.t_data = data;
+    });
   }
 
   toggleImageStatus(img): void {
     let msg;
     img.cms_element_active = !img.cms_element_active;
-    img.cms_element_active ?
-      msg = this.translate.instant('CMS.IMAGES.msgNowActive', { img: img.cms_element_id }):
-      msg = this.translate.instant('CMS.IMAGES.msgNowOffline', { img: img.cms_element_id });
+    img.cms_element_active ? msg = this.t_data.IsActive : msg = this.t_data.IsOffline;
 
     this.cms.updateElement(img).subscribe(
       () => {
-        this.cmsLocalService.dspSnackbar(msg, null, 3);
+        this.cmsLocalService.dspSnackbar(`Image ${ img.cms_element_id } ${ msg }`, null, 3);
 
       },
       () => {
-        this.cmsLocalService.dspSnackbar(this.translate.instant('CMA.IMAGES.msgUpdateFailed'), null, 3);
+        this.cmsLocalService.dspSnackbar(this.t_data.UpdateFailed, null, 3);
       });
 
     this.cms.updateLastCreatedField(Number(this.restaurant.restaurant_id), 'images').subscribe(
@@ -65,8 +68,7 @@ export class CmsImageDialogComponent implements OnInit {
     this.cms.defaultElement(img.cms_element_id, true).subscribe(
       () => {
         img.cms_element_default = 1;
-        this.cmsLocalService.dspSnackbar(
-          this.translate.instant('CMS.IMAGES.msgDefaultUpdated'), null, 3)
+        this.cmsLocalService.dspSnackbar(this.t_data.DefaultUpdated, null, 3)
       },
       error => {
         console.log(error);

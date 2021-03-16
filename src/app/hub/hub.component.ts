@@ -9,7 +9,7 @@ import { MatMenuTrigger } from '@angular/material/menu';
 import { RestaurantLookupComponent } from '../member';
 import { TranslateService } from '@ngx-translate/core';
 
-export interface HubService {
+export interface HubFeature {
   id:           string;
   name:         string;
   icon:         string;
@@ -34,8 +34,7 @@ export class HubComponent implements AfterViewInit {
   member: Member;
   restaurants: Array<Restaurant>;
   messages: Array<Message>;
-  features: Array<HubService>;
-  restaurantCount = null;
+  features: Array<HubFeature>;
 
   // Mock up some messages
   // messages = [
@@ -153,7 +152,7 @@ export class HubComponent implements AfterViewInit {
   dspMessages(): void {
     // console.log('AUTH', !this.member.member_authenticated);
     let data = {
-      newMember: false,
+      newMember: true,
       member: this.member,
       messages: this.messages
     }
@@ -184,11 +183,11 @@ export class HubComponent implements AfterViewInit {
   }
 
   // Navigation
-  launchFeature (service: HubService): void {
+  launchFeature (feature: HubFeature): void {
 
-    switch (service.id) {
+    switch (feature.id) {
       case "cms": {
-        console.log(service.id);
+        console.log(feature.id);
         const i = this.restaurants.length;
         // No restaurants added yet
         if (i === 0) {
@@ -203,10 +202,10 @@ export class HubComponent implements AfterViewInit {
         break;
       }
       default: {
-        if (service.ext) {
-          window.open(service.route, '_blank');
+        if (feature.ext) {
+          window.open(feature.route, '_blank');
         } else {
-          this.router.navigate([service.route]).then();
+          this.router.navigate([feature.route]).then();
         }
         break;
       }
@@ -218,7 +217,6 @@ export class HubComponent implements AfterViewInit {
       .subscribe(
         data => {
           this.restaurants = data['restaurants'];
-          this.restaurantCount = this.restaurants.length.toString();
           console.log(this.restaurants);
         },
         error => {

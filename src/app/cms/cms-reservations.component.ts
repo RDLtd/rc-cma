@@ -43,9 +43,9 @@ export class CmsReservationsComponent implements OnInit {
     public help: HelpService
   ) {
       // detect language changes... need to check for change in texts
-    //   translate.onLangChange.subscribe(() => {
-    //     this.translate.get('CMS-Reservations').subscribe(data => {this.t_data = data; });
-    // });
+      translate.onLangChange.subscribe(() => {
+        this.translate.get('CMS-Reservations').subscribe(data => {this.t_data = data; });
+    });
   }
 
   ngOnInit() {

@@ -71,23 +71,6 @@ export class MarketplaceComponent implements OnInit {
       },
       createdDate: this.now,
       expiryDate: this.expiry
-    },
-    {
-      id: "3",
-      name: "Save £££'s on your energy bills",
-      description: "Save the price of your subscription or we'll pay for it ourselves!",
-      value: 100,
-      url: "https://restaurantcollective.org.uk/",
-      category: "ENERGY",
-      affiliate: {
-        id: "123",
-        name: "Restaurant Developments",
-        logo: "rdl-logo.svg",
-        url: "https://restaurantdevelopments.ltd/",
-        about: "RDL are application developers specialising in creating digital products for the restaurant sector.",
-      },
-      createdDate: this.now,
-      expiryDate: this.expiry
     }
   ];
 

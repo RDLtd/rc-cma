@@ -20,7 +20,6 @@ export class SigninComponent implements OnInit {
   brand: string;
   stripeSessionId: any;
   newMemberEmail: string;
-  hidePwd = true;
 
   // translation variables
   trans: any;

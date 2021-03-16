@@ -41,9 +41,6 @@
 				"titleSummary": "content status summary"
 			}
 		},
-		"FEATURES": {
-			"titleFeatures": "Style & Features"
-		},
 		"HOURS": {
 			"days": [
 				"Sunday",
@@ -54,45 +51,6 @@
 				"Friday",
 				"Saturday"
 			]
-		},
-		"IMAGES": {
-			"labelActivate": "Activate image",
-			"labelDeactivate": "Take offline",
-			"labelDefault": "Use as default image",
-			"labelDownload": "Download this image",
-			"msgConfirmDelete": "You are about to delete **image {{ img }}**,  are you sure that you want to do that?",
-			"msgDefaultUpdated": "The default image has been successfully updated",
-			"msgDeleted": "Image {{ img }} has now been deleted",
-			"msgNowActive": "Image {{ img }} is now ACTIVE",
-			"msgNowOffline": "Image {{ img }} is now OFFLINE",
-			"msgUpdateFailed": "Updates failed",
-			"tagActive": "Active",
-			"tagDefault": "Default",
-			"tagOffline": "Offline",
-			"tipAddImage": "Add a new image",
-			"tipChangeStatus": "Change status",
-			"tipDelete": "Delete this image",
-			"tipDownload": "Download this image",
-			"titleRestaurantImages": "Restaurant Images"
-		},
-		"NAV": {
-			"labelAddRestaurant": "Add a restaurant",
-			"labelDashboard": "Dashboard",
-			"labelFeatures": "Features",
-			"labelHours": "Opening Times",
-			"labelImages": "Images",
-			"labelLocation": "Location",
-			"labelMenus": "Menus",
-			"labelReservations": "Reservations",
-			"tipContacts": "Contact & location information",
-			"tipDashboard": "Content dashboard",
-			"tipFeatures": "Descriptions & features",
-			"tipHours": "Opening times",
-			"tipImages": "Images",
-			"tipMenus": "Menus",
-			"tipPreview": "Preview your content",
-			"tipReservations": "Reservations",
-			"tipYourRestaurants": "Select a restaurant"
 		}
 	},
 	"CMS-Component": {
@@ -193,7 +151,7 @@
 		"Descriptions": "Descriptions",
 		"DescriptionsUpdated": " descriptions updated!",
 		"Features": "Features",
-		"FeaturesUpdated": "features updated!",
+		"FeaturesUpdated": " features updated!",
 		"Full": "Full description",
 		"FullPlace": "Full restaurant description (",
 		"OnePara": "One paragraph description",
@@ -247,6 +205,38 @@
 		"TimesUpdated": " opening times updated!",
 		"UndoChanges": "Undo changes",
 		"UpdateFailed": "Updates failed!"
+	},
+	"CMS-Image-Dialog": {
+		"Activate": "Activate",
+		"Available": "Available",
+		"Deactivate": "Deactivate",
+		"Default": "Make this my default",
+		"DefaultTag": "Default",
+		"DefaultUpdated": "Default image updated",
+		"Download": "Download this image",
+		"IsActive": "is now ACTIVE",
+		"IsOffline": "is now OFFLINE",
+		"Offline": "Offline",
+		"UpdateFailed": "Updates failed!"
+	},
+	"CMS-Images": {
+		"AddImage": "ADD AN IMAGE",
+		"Available": "Available",
+		"ChangeStatus": "Change status",
+		"DefaultTag": "Default",
+		"Delete": "Delete this image",
+		"DeleteImage": "You are about to delete image ",
+		"Deleted": " Deleted",
+		"Download": "Download this image",
+		"IsActive": "is now ACTIVE",
+		"IsOffline": "is now OFFLINE",
+		"NoCancel": "No, cancel",
+		"Offline": "Offline",
+		"RImages": "Restaurant Images",
+		"UpdateFailed": "Updates failed!",
+		"UploadImage": "Upload a new image",
+		"Want": " - is that what you want to do?",
+		"YesDelete": "Yes, delete"
 	},
 	"CMS-Location": {
 		"CarParking": "Car Parking",
