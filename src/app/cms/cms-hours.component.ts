@@ -39,15 +39,16 @@ export class CmsHoursComponent implements OnInit {
     this.loadService.open();
 
 
-    // detect language changes... need to check for change in texts
-    translate.onLangChange.subscribe(() => {
-      this.translate.get('CMS-Hours').subscribe(data => { this.t_data = data; });
-      const t = this.openingTimes.length;
-      for (let i = 0; i < t; i++) {
-        this.translate.get('Global.DOW-' + this.openingTimes[i].cms_time_day_of_week).
-        subscribe(value => { this.display_dow[i] = value; });
-      }
-    });
+    // // detect language changes... need to check for change in texts
+    // translate.onLangChange.subscribe(() => {
+    //   this.translate.get('CMS-Hours').subscribe(data => { this.t_data = data; });
+    //   const t = this.openingTimes.length;
+    //   for (let i = 0; i < t; i++) {
+    //     this.translate.get('Global.DOW-' + this.openingTimes[i].cms_time_day_of_week).
+    //     subscribe(value => { this.display_dow[i] = value; });
+    //   }
+    // });
+
   }
 
   ngOnInit() {

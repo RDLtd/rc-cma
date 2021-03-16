@@ -39,9 +39,9 @@ export class CmsMenusComponent implements OnInit {
     private loader: LoadService
   ) {
     // detect language changes... need to check for change in texts
-    translate.onLangChange.subscribe(() => {
-      this.translate.get('CMS-Menus').subscribe(data => {this.t_data = data; });
-    });
+    // translate.onLangChange.subscribe(() => {
+    //   this.translate.get('CMS-Menus').subscribe(data => {this.t_data = data; });
+    // });
   }
 
   ngOnInit() {
