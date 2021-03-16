@@ -39,9 +39,9 @@ export class CmsMenusComponent implements OnInit {
     private loader: LoadService
   ) {
     // detect language changes... need to check for change in texts
-    translate.onLangChange.subscribe(() => {
-      this.translate.get('CMS-Menus').subscribe(data => {this.t_data = data; });
-    });
+    // translate.onLangChange.subscribe(() => {
+    //   this.translate.get('CMS-Menus').subscribe(data => {this.t_data = data; });
+    // });
   }
 
   ngOnInit() {
@@ -357,9 +357,9 @@ export class CmsMenusComponent implements OnInit {
     console.log(dish);
     let dialogRef = this.dialog.open(ConfirmCancelComponent, {
       data: {
-        msg: this.t_data.Remove + this.htmlMenu.dishes[dish.cms_dish_idx].cms_dish_name + this.t_data.FromMenu,
-        yes: this.t_data.Yes,
-        no: this.t_data.No
+        body: this.t_data.Remove + this.htmlMenu.dishes[dish.cms_dish_idx].cms_dish_name + this.t_data.FromMenu,
+        confirm: this.t_data.Yes,
+        cancel: this.t_data.No
       }
     });
 
@@ -454,14 +454,14 @@ export class CmsMenusComponent implements OnInit {
   deletePdfMenu(menu): void {
     let dialogRef = this.dialog.open(ConfirmCancelComponent, {
       data: {
-        msg: this.t_data.DeleteMenu + menu.cms_element_title + this.t_data.Want,
-        yes: this.t_data.YesDelete,
-        no: this.t_data.NoCancel
+        body: this.t_data.DeleteMenu + menu.cms_element_title + this.t_data.Want,
+        confirm: this.t_data.YesDelete,
+        cancel: this.t_data.NoCancel
       }
     });
 
-    dialogRef.afterClosed().subscribe(res => {
-      if (res.confirmed) {
+    dialogRef.afterClosed().subscribe(confirmed => {
+      if (confirmed) {
         this.cms.deleteElement(menu.cms_element_id)
           .subscribe(res => {
               console.log(res);

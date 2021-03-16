@@ -72,14 +72,14 @@ export class ProfilePageComponent implements OnInit {
       this.loadService.open();
 
       // detect language changes... need to check for change in texts
-      translate.onLangChange.subscribe(() => {
-        this.translate.get('Profile-Page').subscribe(data => {
-          this.t_data = data;
-          this.d_member_job = this.t_data[this.member.member_job];
-          this.d_member_signedup = moment(this.member.member_signedup).format('DD MMMM YYYY');
-          this.imgRestPlaceholderUrl = `https://via.placeholder.com/800x450?text=${this.t_data.AwaitingImage}`;
-        });
-      });
+      // translate.onLangChange.subscribe(() => {
+      //   this.translate.get('Profile-Page').subscribe(data => {
+      //     this.t_data = data;
+      //     this.d_member_job = this.t_data[this.member.member_job];
+      //     this.d_member_signedup = moment(this.member.member_signedup).format('DD MMMM YYYY');
+      //     this.imgRestPlaceholderUrl = `https://via.placeholder.com/800x450?text=${this.t_data.AwaitingImage}`;
+      //   });
+      // });
 
   }
 
@@ -105,7 +105,7 @@ export class ProfilePageComponent implements OnInit {
 
   setLanguage(lang): void {
     localStorage.setItem('rd_language', lang);
-    this.translate.use(lang);
+    window.location.reload();
   }
 
   openSnackBar(msg: string, act = '', dur = 5000) {
@@ -178,15 +178,15 @@ export class ProfilePageComponent implements OnInit {
       const rest = this.restaurants[index];
       const dialogRef = this.dialog.open(ConfirmCancelComponent, {
         data: {
-          msg: this.t_data.AboutRemove + rest.restaurant_name + this.t_data.ListAssociated,
-          yes: this.t_data.Remove,
-          no: this.t_data.Cancel
+          body: this.t_data.AboutRemove + rest.restaurant_name + this.t_data.ListAssociated,
+          confirm: this.t_data.Remove,
+          cancel: this.t_data.Cancel
         }
       });
 
-      dialogRef.afterClosed().subscribe(res => {
+      dialogRef.afterClosed().subscribe(confirmed => {
 
-        if (res.confirmed) {
+        if (confirmed) {
           this.restaurantService.removeAssociation(rest['association_id'])
             .subscribe(
               () => {

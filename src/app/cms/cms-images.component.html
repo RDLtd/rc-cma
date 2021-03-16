@@ -2,7 +2,7 @@
   <div class="mdc-layout-grid__inner" [@insertAnimation]="cmsImages?.length">
     <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
       <mat-toolbar class="rc-toolbar-section">
-      <span>{{ 'CMS-Images.RImages' | translate }}</span>
+      <span>{{ 'CMS.IMAGES.titleRestaurantImages' | translate }}</span>
       <span class="rc-space-filler"></span>
       <span class="rc-toolbar-actions">
         <button
@@ -12,7 +12,7 @@
         </button>
 
         <button mat-icon-button (click)="addImage()"
-                matTooltip="{{ 'CMS-Images.UploadImage' | translate }}">
+                matTooltip="{{ 'CMS.IMAGES.tipAddImage' | translate }}">
           <mat-icon>add_circle_outline</mat-icon>
         </button>
       </span>
@@ -30,18 +30,18 @@
           class="rc-default"
           selected="true"
           *ngIf="image['cms_element_default']">
-          {{ 'CMS-Images.DefaultTag' | translate }}
+          {{ 'CMS.IMAGES.tagDefault' | translate }}
         </mat-chip>
         <mat-chip
           class="rc-online"
           selected="true"
           *ngIf="image['cms_element_active']">
-          {{ 'CMS-Images.Available' | translate }}
+          {{ 'CMS.IMAGES.tagActive' | translate }}
         </mat-chip>
         <mat-chip
           selected="false"
           *ngIf="!image['cms_element_active']">
-          {{ 'CMS-Images.Offline' | translate }}
+          {{ 'CMS.IMAGES.tagOffline' | translate }}
         </mat-chip>
       </mat-chip-list>
       <div>
@@ -70,19 +70,19 @@
             mat-icon-button
             [href]="image['cms_element_image_path']"
             target="_blank"
-            title="{{ 'CMS-Images.Download' | translate }}">
+            title="{{ 'CMS.IMAGES.tipDownload' | translate }}">
             <mat-icon>cloud_download</mat-icon>
           </a>
          <button
              mat-icon-button
-             title="{{ 'CMS-Images.Delete' | translate }}"
+             title="{{ 'CMS.IMAGES.tipDelete' | translate }}"
              [disabled]="image['cms_element_default'] == 'Y' || image['cms_element_default'] == true"
              (click)="deleteImage(image)">
             <mat-icon>delete</mat-icon>
           </button>
           <mat-checkbox
             labelPosition="before"
-            title="{{ 'CMS-Images.ChangeStatus' | translate }}"
+            title="{{ 'CMS.IMAGES.tipChangeStatus' | translate }}"
             (change)="updateImageStatus(image)"
             [checked]="image['cms_element_active']"
             [disabled]="image['cms_element_default'] == 1"
@@ -93,9 +93,14 @@
     </div>
     </div>
     <!-- Add image option -->
-    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 rc-add-content" (click)="addImage()" *ngIf="!showLoader">
+    <div
+      *ngIf="!showLoader"
+      class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 rc-add-content"
+      (click)="addImage()">
       <mat-icon>add_circle_outline</mat-icon>
-      <span class="rc-add-content-label">{{ 'CMS-Images.AddImage' | translate }}</span>
+      <span class="rc-add-content-label">
+        {{ 'CMS.IMAGES.tipAddImage' | translate }}
+      </span>
     </div>
   </div>
 </div>

@@ -20,18 +20,18 @@
 
     <button mat-menu-item (click)="toggleImageStatus(image)" [disabled]="image.cms_element_default == 1">
       <mat-icon>cloud_circle</mat-icon>
-      <span *ngIf="image.cms_element_active">{{ 'CMS-Image-Dialog.Deactivate' | translate }}</span>
-      <span *ngIf="!image.cms_element_active">{{ 'CMS-Image-Dialog.Activate' | translate }}</span>
+      <span *ngIf="image.cms_element_active">{{ 'CMS.IMAGES.labelDeactivate' | translate }}</span>
+      <span *ngIf="!image.cms_element_active">{{ 'CMS.IMAGES.labelActivate' | translate }}</span>
     </button>
 
     <button mat-menu-item (click)="setDefaultImage(image)" [disabled]="image.cms_element_active == 0 || image.cms_element_default == 1">
       <mat-icon>image</mat-icon>
-      <span>{{ 'CMS-Image-Dialog.Default' | translate }}</span>
+      <span>{{ 'CMS.IMAGES.labelDefault' | translate }}</span>
     </button>
 
     <a [href]="image.cms_element_image_path" target="_blank" mat-menu-item>
       <mat-icon>cloud_download</mat-icon>
-      <span>{{ 'CMS-Image-Dialog.Download' | translate }}</span>
+      <span>{{ 'CMS.IMAGES.labelDownload' | translate }}</span>
     </a>
 
 

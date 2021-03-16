@@ -27,9 +27,6 @@ export class CmsFeaturesComponent implements OnInit {
   separatorKeysCodes = [ENTER, 188];
   removable: boolean = true;
 
-  // translation variables
-  t_data: any;
-
   constructor(
     private cmsLocalService: CmsLocalService,
     private cms: CMSService,
@@ -53,9 +50,6 @@ export class CmsFeaturesComponent implements OnInit {
         },
         error => console.log(error));
 
-    this.translate.get('CMS-Features').subscribe(data => {
-      this.t_data = data;
-    });
   }
 
   confirmNavigation() {
@@ -112,7 +106,10 @@ export class CmsFeaturesComponent implements OnInit {
     this.cms.updateAttributes(this.restaurant.restaurant_id, this.features, this.keywords.join(','))
       .subscribe(
       () => {
-        this.cmsLocalService.dspSnackbar(this.restaurant.restaurant_name + this.t_data.FeaturesUpdated, null, 5);
+        this.cmsLocalService.dspSnackbar(
+          `${this.restaurant.restaurant_name} ${this.translate.instant('CMS-Features.FeaturesUpdated')}`,
+          null,
+          5);
       },
       error => {
         console.log('Error', error);
@@ -121,7 +118,10 @@ export class CmsFeaturesComponent implements OnInit {
     this.cms.updateDescription(this.descriptions).subscribe(
       () => {
         // console.log('Desc updated', data);
-        this.cmsLocalService.dspSnackbar(this.restaurant.restaurant_name + this.t_data.DescriptionsUpdated, null, 5);
+        this.cmsLocalService.dspSnackbar(
+          `${this.restaurant.restaurant_name} ${this.translate.instant('CMS-Features.DescriptionsUpdated')}`,
+          null,
+          5);
       },
       error => {
         console.log('Error', error);

@@ -46,12 +46,12 @@ export class CmsFileUploadComponent implements OnInit {
   ) {
 
     // detect language changes... need to check for change in texts
-    translate.onLangChange.subscribe(() => {
-      this.translate.get('CMS-File-Upload')
-        .subscribe(data => {
-          this.setImageClasses(data);
-        });
-    });
+    // translate.onLangChange.subscribe(() => {
+    //   this.translate.get('CMS-File-Upload')
+    //     .subscribe(data => {
+    //       this.setImageClasses(data);
+    //     });
+    // });
   }
 
   ngOnInit() {

@@ -67,12 +67,12 @@ export class AppConfig {
         curation: `curation@${this.tld.rc}`
       },
       products: {
-        taxId: 'txr_1IRfMDFqzlrb81VHIH6hpi4y',
+        taxId: 'txr_1IVEMZDK2S86a4QisRxE6Rlg',
         membership_monthly: {
-          priceId: 'price_1I0kigFqzlrb81VHkdECs1eK'
+          priceId: 'price_1IVEJbDK2S86a4QiFbh7Tnk5'
         },
         membership_yearly: {
-          priceId: 'price_1HuPN4Fqzlrb81VHCj3wELKF'
+          priceId: 'price_1IVELjDK2S86a4Qiwle01gdG'
         },
         success_url: `${ this.appUrl }/signin`,
         cancel_url: `${ this.appUrl }/membership-options`,
