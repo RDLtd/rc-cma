@@ -654,7 +654,7 @@ a.mat-menu-item {text-decoration: none;}
 }
 
 
-.rc-card-service {
+.rc-card-app {
   position: relative;
   height: 100%;
   cursor: pointer;
@@ -666,7 +666,6 @@ a.mat-menu-item {text-decoration: none;}
     h2 { color: $rc-theme-accent }
   }
   img {
-    height: 96px;
     margin: 0 0 -8px;
     padding: 0;
   }
@@ -1485,20 +1484,9 @@ button.rc-member-assc {
     .rc-hub-cms-icons {
       display: block;
       position: absolute;
-      top: 16px;
+      top: 12px;
       left: 16px;
       z-index: 2;
-      .mat-icon {
-        $size: 36px;
-        font-size: $size;
-        height: $size;
-        width: $size;
-        color: $rc-theme-primary;
-      }
-      .mat-badge-content {
-        right: -6px;
-        top: -6px;
-      }
     }
     .mat-icon {
       font-size: 24px;

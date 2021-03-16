@@ -75,17 +75,13 @@
             matInput
             name="pwd"
             ngModel
-            [type]="hidePwd ? 'password' : 'text'"
+            type="password"
             required>
-            <button type="button" mat-icon-button matSuffix (click)="hidePwd = !hidePwd">
-              <mat-icon>{{ hidePwd ? 'visibility_off' : 'visibility'}}</mat-icon>
-          </button>
         </mat-form-field>
         <a (click)="showPwdReset(true)">{{ 'SIGNIN.forgottenPwd' | translate }}</a>
         <br>
         <br>
         <button
-          type="submit"
           mat-flat-button
           class="rc-full-width"
           color="accent"

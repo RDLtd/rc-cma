@@ -39,6 +39,8 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
 
+    //this.translate.use(localStorage.getItem('rd_language'));
+
     this.company_name = this.config.brand.name;
     this.brandPrefix = this.config.brand.prefix;
 
