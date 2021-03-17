@@ -7,7 +7,7 @@
   fxLayoutGap.xs="0">
   <div fxFlex>
     <mat-toolbar class="rc-toolbar rc-toolbar-section">
-      <span>{{ 'CMS-Menus.MenuInfo' | translate }}</span>
+      <span>{{ 'CMS.MENUS.headerMenuInfo' | translate }}</span>
       <span class="rc-space-filler"></span>
       <span class="rc-toolbar-actions">
         <button
@@ -30,7 +30,7 @@
     class="rc-content-panel">
     <mat-form-field
       class="rc-full-width">
-      <mat-label>{{ 'CMS-Menus.MenuGenInfo' | translate }} {{ menuOverviewLength }})</mat-label>
+      <mat-label>{{ 'CMS.MENUS.labelMenuGenInfo' | translate: { max: menuOverviewLength } }}</mat-label>
           <textarea
             #overview
             matInput
@@ -49,7 +49,7 @@
   <!-- SAMPLE MENU TOOLBAR -->
   <div fxFlex>
     <mat-toolbar class="rc-toolbar rc-toolbar-section">
-      <span>{{ 'CMS-Menus.SampleDishes' | translate }}</span>
+      <span>{{ 'CMS.MENUS.headerSampleDishes' | translate }}</span>
       <span class="rc-space-filler"></span>
       <span class="rc-toolbar-actions">
         <button
@@ -60,7 +60,7 @@
         <button
           mat-icon-button
           (click)="addDish()"
-          matTooltip="{{ 'CMS-Menus.AddDish' | translate }}">
+          matTooltip="{{ 'CMS.MENUS.tipAddDish' | translate }}">
           <mat-icon>add_circle_outline</mat-icon>
         </button>
         <button
@@ -71,7 +71,16 @@
       </span>
     </mat-toolbar>
   </div>
-  <div fxFlex class="rc-content-panel" markdown [data]="'CMS-Menus.VGF' | translate"></div>
+  <div
+    fxFlex
+    class="rc-content-panel"
+    markdown [data]="'CMS.MENUS.infoSampleDishes' | translate:
+    { icon: {
+      veg: '../assets/images/icons/vegetarian.svg',
+      vegan: '../assets/images/icons/vegan.svg',
+      gluten: '../assets/images/icons/gluten-free.svg' }}">
+
+  </div>
 
   <!-- SAMPLE MENU SECTION -->
   <div
@@ -79,7 +88,7 @@
     *ngFor="let section of htmlMenu.sections">
     <div class="rc-cms-menu-section">
       <mat-form-field class="rc-full-width">
-        <mat-label>{{ 'CMS-Menus.AddSection' | translate }}</mat-label>
+        <mat-label>{{ 'CMS.MENUS.labelSection' | translate }}</mat-label>
         <input
           [(ngModel)]="section.label"
           name="menuSection{{ section.id }}"
@@ -89,7 +98,7 @@
         <button mat-button *ngIf="section.label" matSuffix mat-icon-button aria-label="Clear" (click)="section.label=''">
           <mat-icon>close</mat-icon>
         </button>
-        <mat-hint>{{ 'CMS-Menus.SectionHint' | translate }}</mat-hint>
+        <mat-hint>{{ 'CMS.MENUS.hintSection' | translate }}</mat-hint>
       </mat-form-field>
 
     </div>
@@ -146,7 +155,7 @@
   <!-- DOWNLOAD MENUS -->
   <div fxFlex>
     <mat-toolbar class="rc-toolbar rc-toolbar-section">
-      <span>{{ 'CMS-Menus.DownloadableMenus' | translate }}</span>
+      <span>{{ 'CMS.MENUS.headerDownloads' | translate }}</span>
       <span class="rc-space-filler"></span>
       <span class="rc-toolbar-actions">
         <button
@@ -157,7 +166,7 @@
         <button
           mat-icon-button
           (click)="addPdfMenu()"
-          matTooltip="{{ 'CMS-Menus.UploadNewMenu' | translate }}">
+          matTooltip="{{ 'CMS.MENUS.tipUploadPdf' | translate }}">
           <mat-icon>add_circle_outline</mat-icon>
         </button>
       </span>
@@ -178,11 +187,15 @@
         #card id="{{ i }}"
         class="rc-card rc-cms-menu-download"
         (click)="viewPdfMenu(menu)">
-        <div class="rc-card-content">
+
+        <div
+          class="rc-card-content">
           <h2 mat-card-title>{{ menu.cms_element_title }}</h2>
           <span>{{ menu.cms_element_caption }}</span>
-          <p>{{ 'CMS-Menus.UploadedOn' | translate }} {{ menu.cms_element_created_on | date }} {{ 'CMS-Menus.By' | translate }} {{ menu.cms_element_created_by }}</p>
+          <p class="rc-txt-small" markdown>{{ 'CMS.MENUS.uploadStatus' | translate:
+            { date: menu.cms_element_created_on | date, user: menu.cms_element_created_by } }}</p>
         </div>
+
         <div class="rc-card-actions">
           <span>
             <mat-chip-list>
@@ -190,12 +203,12 @@
                 class="rc-online"
                 selected="true"
                 *ngIf="menu.cms_element_active">
-                {{ 'CMS-Menus.Available' | translate }}
+                {{ 'CMS.MENUS.labelActive' | translate }}
               </mat-chip>
               <mat-chip
                 selected="false"
                 *ngIf="!menu.cms_element_active">
-                {{ 'CMS-Menus.Offline' | translate }}
+                {{ 'CMS.MENUS.labelOffline' | translate }}
               </mat-chip>
             </mat-chip-list>
           </span>
@@ -203,13 +216,14 @@
           <span (click)="stopBubbling($event)">
             <button
               mat-icon-button
-              title="{{ 'CMS-Menus.Delete' | translate }} {{ menu.cms_element_title }}"
+              matTooltip="{{ 'CMS.MENUS.labelBtnDelete' | translate }}"
               (click)="deletePdfMenu(menu)">
               <mat-icon>delete</mat-icon>
             </button>
             <mat-checkbox
               labelPosition="before"
               color="accent"
+              matTooltip="{{ 'CMS.MENUS.tipToggleActive' | translate }}"
               [checked]="menu.cms_element_active"
               (change)="togglePdfMenuStatus(menu)">
             </mat-checkbox>
@@ -224,12 +238,14 @@
         <rc-loader></rc-loader>
       </div>
       <div
-        fxFlex
+        fxFlex="0 1 calc(33.3% - 16px)"
+        fxFlex.lt-md="0 1 calc(50% - 16px)"
+        fxFlex.lt-sm="0 1 calc(100%)"
         class="rc-add-content rc-cms-menu-download"
         (click)="addPdfMenu()"
         *ngIf="!showLoader">
         <mat-icon>add_circle_outline</mat-icon>
-        <span class="rc-add-content-label">{{ 'CMS-Menus.AddMenu' | translate }}</span>
+        <span class="rc-add-content-label">{{ 'CMS.MENUS.labelAddMenu' | translate }}</span>
       </div>
 
     </div>
