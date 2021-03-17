@@ -7,6 +7,7 @@
   </mat-dialog-content>
   <mat-dialog-actions align="end">
     <button
+      *ngIf="data.cancel !== 'hide'"
       tabindex="-1"
       mat-button
       (click)="confirmCancelDialog.close(false )">

@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ViewChild } from "@angular/core";
 import { MatDialog, MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { MessageComponent, Message, LoadService } from "../common";
+import { MessageComponent, Message, LoadService, ConfirmCancelComponent } from "../common";
 import { Router } from '@angular/router';
 import { HeaderService } from '../common/header.service';
 import { Member, Restaurant } from '../_models';
@@ -189,8 +189,19 @@ export class HubComponent implements AfterViewInit {
   }
 
   // Navigation
-  launchFeature (service: any): void {
+  launchFeature (service: any) {
     console.log(service.service_id);
+    if (service.service_disabled) {
+      let dialogReg = this.dialog.open(ConfirmCancelComponent, {
+        data: {
+          title: 'Service unavailable',
+          body: `Sorry but **${ service.service_name }** is not currently available. The launch date for this service is 17 April 2021, please try again then!`,
+          confirm: 'OK',
+          cancel: 'hide'
+        }
+      });
+      return false;
+    }
     switch (service.service_id) {
       case 1: {
         console.log(service.service_id);
