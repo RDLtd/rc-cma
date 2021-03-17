@@ -211,6 +211,27 @@
 			"tipReservations": "Réservations",
 			"tipYourRestaurants": "Sélectionnez un restaurant"
 		},
+		"RESERVATIONS": {
+			"invalidEmail": "Email Invalide",
+			"labelGeneral": "Informations générales sur les réservations ({{caractères max.)",
+			"labelGroupPolicy": "Quelle est votre politique concernant les réservations de groupe (max. {{ max }} caractères)?",
+			"labelMaxCovers": "Max couvertures",
+			"labelMaxDays": "Max. Jours à l'avance",
+			"labelPrivate": "Proposez-vous des options de restauration privées (max. {{ max }} caractères)?",
+			"labelProvider": "Fournisseur de services de réservation",
+			"msgEnterProvider": "Veuillez saisir votre {{ id }}",
+			"msgNoOnlineBookings": "Veuillez vous assurer de remplir la section ** Informations générales **, en donnant des détails sur la façon dont les clients peuvent réserver à l'avance, en décrivant votre politique concernant les réservations et en incluant les numéros de téléphone spéciaux, etc.",
+			"msgNoTest": "Ce service ne nécessite pas de test - il n'a pas d'URL associée",
+			"msgResInfoUpdated": "{{ name }} informations de réservation mises à jour",
+			"msgUpdateFailed": "Les mises à jour ont échoué[",
+			"tipSave": "Sauvegarder les modifications",
+			"tipUndo": "Annuler les changements",
+			"titleGeneral": "Informations générales",
+			"titleGroupBookings": "RÉSERVATIONS DE GROUPE",
+			"titleOnline": "Réservations en ligne",
+			"titlePrivate": "Dîner privé",
+			"titleReservationsInfo": "Informations sur les réservations"
+		},
 		"UPLOAD": {
 			"errorExceedsMax": "Ce fichier dépasse la taille maximale pouvant être téléchargée.",
 			"imgClass": {
@@ -259,28 +280,8 @@
 		"TestLink": "Lien de test",
 		"UpdateFailed": "Les mises à jour ont échoué!",
 		"ValidEmail": "Une adresse email valide est requis",
-		"ValidTelephone": "Une Numéro de téléphone valide est requis"
-	},
-	"CMS-SPW-Links": {
-		"Click": "Cliquer pour télécharger",
-		"Contact": "Contactez notre équipe d’assistance",
-		"Copy": "Copiez le lien de votre Page Web dans votre Presse-Papiers",
-		"Custom": "NOMS DE DOMAINE PERSONNALISÉS",
-		"Further": "  pour plus d’information.",
-		"LinkInfo": "Le lien vers le Site Web, ou URL, ci-dessus est un lien permanent vers la Page Web générée automatiquement par Restaurateurs Indépendants. Ce lien peut être partagé avec vos clients et/ou partenaires depuis n’importe quel support numérique.",
-		"Mail": "mailto:curation@restaurateursindependants.fr",
-		"Main": "SITE WEB",
-		"Marketing": "Liens Marketing",
-		"Menus": " menus",
-		"OfflineLinks": "Liens Hors Ligne – Code QR.",
-		"OnlineLinks": "Liens En Ligne vers la Page Web",
-		"Open": "Ouvrir le SPW publié dans une nouvelle fenêtre",
-		"QRCode": "Code QR pour ",
-		"QRInfo": "Un code QR est une image spéciale contenant des informations sur l’emplacement d’un Site Web. La plupart des smartphones ou tablettes modernes reconnaîtront et décoderont ces images depuis leur application et permettront de visiter directement la Page Web correspondante.",
-		"SPWInfo": "La Page Internet peut aussi être configurée pour fonctionner sur un nom de domaine personnalisé (par exemple www.votre-domaine.fr). Il peut s’agir d’un nom de domaine existant ou bien nous pouvons enregistrer avec vous un nom de domaine approprié. ",
-		"Section": "MENUS",
-		"Usage": "Utilisez ces liens dans le cas ou vos clients souhaiteraient accéder à votre Site Web ou à vos menus depuis leur Smartphone et/ou Tablette. Vous pouvez copier le code QR en cliquant sur le bouton de droite de la souris ou de votre pad.",
-		"Website": " site web"
+		"ValidTelephone": "Une Numéro de téléphone valide est requis",
+		"msgResInfoUpdated": "{{ name }} informations de réservation mises à jour"
 	},
 	"CONFIRM": {
 		"labelBtnCancel": "ANNULER",
