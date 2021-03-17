@@ -119,6 +119,38 @@
 			"tipDownload": "Téléchargez cette image",
 			"titleRestaurantImages": "Images de restaurant"
 		},
+		"LINKS": {
+			"infoCustomDomain": "Le ** SPW ** peut également être configuré pour fonctionner sur un domaine personnalisé (par exemple www.your-domain.com).\n\nIl peut s'agir d'un nom de domaine existant ou nous pouvons enregistrer un nom de domaine approprié pour vous. Contactez l '[Equipe de curation] (mailto:{{ email }}) pour plus de détails.",
+			"infoQRCodes": "** Les codes QR ** sont des images spéciales qui contiennent des informations sur l'emplacement d'un site Web.\n\nLa plupart des smartphones ou tablettes modernes reconnaissent et décodent ces images, via leurs applications de caméra, et offrent la possibilité de visiter directement la page Web correspondante.",
+			"infoSpwLink": "Le lien du site Web, ou URL, ci-dessus est un lien permanent vers le site Web à page unique ou ** SPW ** qui est automatiquement généré par ** Restaurant Collective **.\n\nCe lien peut être partagé avec les clients ou partenaires via tout support numérique.",
+			"labelMenus": "Télécharger le code du menu SPW",
+			"labelWebsite": "Télécharger le code SPW",
+			"tipCopyLink": "Copiez le lien SPW",
+			"tipOpenSpw": "Ouvrir SPW dans une nouvelle fenêtre",
+			"tipQRCodeMenu": "Un code QR pour associer les clients directement à la section de menu du {{ name }} SPW - Cliquez pour copier",
+			"tipQRCodeWebsite": "Cliquez pour copier le code QR pour {{ name }} SPW",
+			"titleCustomDomain": "Noms de domaine personnalisés",
+			"titleMarketing": "Liens marketing",
+			"titleQRCodes": "Codes QR SPW et Menu",
+			"titleWebLinks": "Lien / URL du site Web SPW"
+		},
+		"LOCATION": {
+			"infoDirectionsDownload": "Si vous disposez d'une carte PDF ou d'un itinéraire, vous pouvez la mettre à la disposition de vos clients en téléchargeant une copie ici.",
+			"labelBtnUploadDirections": "Ajouter",
+			"labelBtnViewDirections": "Afficher le courant",
+			"labelParking": "Tout parking disponible à proximité ({{ chars }} caractères max.)",
+			"labelPublicTransport": "Trains, bus, gares, etc. ({{ chars }} caractères max.)",
+			"msgNewCoords": "Coordonnées mises à jour en latitude: {{ lat }} et longitude {{ lng }}.",
+			"msgTransportUpdated": "Informations de transport mises à jour",
+			"msgUpdateFailed": "mise à jour a échoué",
+			"tipSave": "Sauvegarder les modifications",
+			"tipUndo": "Annuler les changements",
+			"titleLocation": "Information de Lieu",
+			"titleMapPos": "EMPLACEMENT DE LA CARTE",
+			"titleParking": "Parking",
+			"titlePdf": "Téléchargement des directions",
+			"titlePublicTransport": "Transport public"
+		},
 		"MENUS": {
 			"defaultContentSection1": "entrées",
 			"defaultContentSection2": "Plats principaux",
@@ -204,37 +236,6 @@
 			"titleUploadImage": "Télécharger une image",
 			"titleUploadMenu": "Télécharger un menu"
 		}
-	},
-	"CMS-Hours": {
-		"AddSession": "AJOUTER UN SERVICE",
-		"Closed": "Fermé",
-		"End": "FIN",
-		"General": "Informations générales",
-		"Notes": "REMARQUES OPTIONNELLES",
-		"OpeningTimes": "Horaires d'ouverture",
-		"SaveChanges": "Sauvegarder les modifications",
-		"Session": "Service",
-		"Start": "DÉBUT",
-		"TimesUpdated": " horaires d'ouverture mis à jour!",
-		"UndoChanges": "Annuler les changements",
-		"UpdateFailed": "Les mises à jour ont échoué!"
-	},
-	"CMS-Location": {
-		"CarParking": "Parking",
-		"Directions": "Téléchargements",
-		"LocInfo": "Information sur la Localisation",
-		"MapPos": "Situation sur un Plan",
-		"NewGeo": "Nouvelles coordonnées de géolocalisation: (lat, lng) ",
-		"PDF": "Si vous avez une carte PDF ou des instructions, vous pouvez la mettre à la disposition de vos clients en téléchargeant une copie ici.",
-		"PublicTransport": "Transport public",
-		"SaveChanges": "Sauvegarder les modifications",
-		"Transport": "Proche de bus, métro ou tramway? (max.",
-		"TransportUpdate": " informations de transport mises à jour!",
-		"UndoChanges": "Annuler les changements",
-		"UpdateFailed": "Les mises à jour ont échoué!",
-		"UploadDirections": "AJOUTER",
-		"ViewDirections": "VOIR",
-		"WhatParking": "Les caractéristiques du parking? (max."
 	},
 	"CMS-Reservations": {
 		"General": "Général",

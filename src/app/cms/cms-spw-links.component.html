@@ -2,10 +2,10 @@
 
   <div mat-dialog-title>
     <mat-toolbar class="rc-toolbar rc-toolbar-nav">
-      <span>{{ 'CMS-SPW-Links.Marketing' | translate }}</span>
+      <span>{{ 'CMS.LINKS.titleMarketing' | translate }}</span>
       <span class="rc-space-filler"></span>
       <span class="rc-toolbar-actions">
-        <button mat-icon-button ngxClipboard matTooltip="{{ 'CMS-SPW-Links.Copy' | translate }}"
+        <button mat-icon-button ngxClipboard matTooltip="{{ 'CMS.LINKS.tipCopyLink' | translate }}"
                 [cbContent]="data['spwUrl']"><mat-icon>link</mat-icon></button>
         <button mat-icon-button mat-dialog-close>
         <mat-icon>close</mat-icon>
@@ -16,50 +16,54 @@
 
   <div mat-dialog-content>
 
-    <h2>{{ 'CMS-SPW-Links.OnlineLinks' | translate }}</h2>
-    <p><a [href]="data['spwUrl']" target="_blank"
-          matTooltip="{{ 'CMS-SPW-Links.Open' | translate }}">{{ data['spwUrl'] }}</a></p>
-    <p>{{ 'CMS-SPW-Links.LinkInfo' | translate }}</p>
+    <h2>{{ 'CMS.LINKS.titleWebLinks' | translate }}</h2>
+    <p>
+      <a
+        [href]="data['spwUrl']"
+        target="_blank"
+        matTooltip="{{ 'CMS.LINKS.tipOpenSpw' | translate }}">
+        {{ data['spwUrl'] }}</a>
+    </p>
+    <markdown ngpreservewhitespaces>{{ 'CMS.LINKS.infoSpwLink' | translate}}</markdown>
 
-    <h2>{{ 'CMS-SPW-Links.OfflineLinks' | translate }}</h2>
-    <p>{{ 'CMS-SPW-Links.QRInfo' | translate }}</p>
+    <h2>{{ 'CMS.LINKS.titleQRCodes' | translate }}</h2>
+    <markdown ngpreservewhitespaces>{{ 'CMS.LINKS.infoQRCodes' | translate }}</markdown>
 
     <div class="rc-codes">
       <a
         download="QR-Code-Website"
-        href="{{ base64main }}"
-        matTooltip="{{ 'CMS-SPW-Links.Click' | translate }}">
+        href="{{ base64main }}">
         <qrcode
           [qrdata]="data['spwUrl']"
           [elementType]="'img'"
           [width]="256"
           [errorCorrectionLevel]="'M'"
-          matTooltip="{{ 'CMS-SPW-Links.QRCode' | translate }}{{ data['restaurant']['restaurant_name'] }}
-                {{ 'CMS-SPW-Links.Website' | translate }}"></qrcode>
-        <span>{{ 'CMS-SPW-Links.Main' | translate }}</span>
+          matTooltipPosition="above"
+          matTooltip="{{ 'CMS.LINKS.tipQRCodeWebsite' | translate:
+          { name: data['restaurant']['restaurant_name'] } }}">
+        </qrcode>
+        <span>{{ 'CMS.LINKS.labelWebsite' | translate }}</span>
       </a>
       <a
         download="QR-Code-Menu"
-        href="{{ base64menu }}"
-        matTooltip="{{ 'CMS-SPW-Links.Click' | translate }}">
+        href="{{ base64menu }}">
         <qrcode
           [qrdata]="data['spwMenus']"
           [elementType]="'img'"
           [width]="256"
           [errorCorrectionLevel]="'M'"
-          matTooltip="{{ 'CMS-SPW-Links.QRCode' | translate }}{{ data['restaurant']['restaurant_name'] }}
-                {{ 'CMS-SPW-Links.Menus' | translate }}"></qrcode>
-        <span>{{ 'CMS-SPW-Links.Section' | translate }}</span>
+          matTooltipPosition="above"
+          matTooltip="{{ 'CMS.LINKS.tipQRCodeMenu' | translate:
+          { name: data['restaurant']['restaurant_name'] } }}"></qrcode>
+        <span>{{ 'CMS.LINKS.labelMenus' | translate }}</span>
       </a>
     </div>
 
-    <p>{{ 'CMS-SPW-Links.Usage' | translate }}</p>
+    <markdown>{{ 'CMS.LINKS.infoUsage' | translate }}</markdown>
 
-    <h2>{{ 'CMS-SPW-Links.Custom' | translate }}</h2>
+    <h2>{{ 'CMS.LINKS.titleCustomDomain' | translate }}</h2>
 
-    <p>{{ 'CMS-SPW-Links.SPWInfo' | translate }}<a
-        href="{{ 'CMS-SPW-Links.Mail' | translate }}">{{ 'CMS-SPW-Links.Contact' | translate }}</a>
-        {{ 'CMS-SPW-Links.Further' | translate }}</p>
+    <markdown>{{ 'CMS.LINKS.infoCustomDomain' | translate: { email: data.curation } }}</markdown>
 
   </div>
 

@@ -691,7 +691,8 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
         data: {
           spwUrl: this.spwProdUrl,
           spwMenus: `${this.spwPreviewUrl}#menus`,
-          restaurant: this.restaurant
+          restaurant: this.restaurant,
+          curation: this.config.brand.email.curation
         }
       });
   }
