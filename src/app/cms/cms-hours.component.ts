@@ -25,9 +25,6 @@ export class CmsHoursComponent implements OnInit {
   maxSessions = 3;
   showLoader: boolean = false;
 
-  // translation variables
-  t_data: any;
-
   constructor(
     private cmsLocalService: CmsLocalService,
     private cms: CMSService,
@@ -37,18 +34,6 @@ export class CmsHoursComponent implements OnInit {
     private loadService: LoadService
   ) {
     this.loadService.open();
-
-
-    // // detect language changes... need to check for change in texts
-    // translate.onLangChange.subscribe(() => {
-    //   this.translate.get('CMS-Hours').subscribe(data => { this.t_data = data; });
-    //   const t = this.openingTimes.length;
-    //   for (let i = 0; i < t; i++) {
-    //     this.translate.get('Global.DOW-' + this.openingTimes[i].cms_time_day_of_week).
-    //     subscribe(value => { this.display_dow[i] = value; });
-    //   }
-    // });
-
   }
 
   ngOnInit() {
@@ -61,14 +46,13 @@ export class CmsHoursComponent implements OnInit {
           }
         },
         error => console.log(error));
-    this.translate.get('CMS-Hours').subscribe(data => {
-      this.t_data = data;
-    });
   }
 
   getOpeningTimes(): void {
     // Todo: JB to speak to KS about this block
     // Fetches the opening time data from the api
+    // This is just to create a reference in BabelEdit
+    const BabelEdit = this.translate.instant('CMS.HOURS.days.0');
     this.cms.getTimes(this.restaurant.restaurant_id).subscribe(
       data => {
         const days = this.translate.instant('CMS.HOURS.days');
@@ -210,14 +194,17 @@ export class CmsHoursComponent implements OnInit {
     //console.log('OT: ', this.openingTimes, this.openingTimesNotes);
     this.cms.updateTimes(this.openingTimes, this.openingTimesNotes).subscribe(
       () => {
-        this.cmsLocalService.dspSnackbar(this.restaurant.restaurant_name + this.t_data.TimesUpdated, null, 3);
+        this.cmsLocalService.dspSnackbar(this.translate.instant(
+          'CMS.HOURS.msgTimesUpdated',
+          { restaurant: this.restaurant.restaurant_name }),
+          null, 3);
         this.dataChanged = false;
         // record event
         this.ga.sendEvent('CMS-Hours', 'Edit', 'Changes Saved');
       },
       error => {
         console.log(error);
-        this.cmsLocalService.dspSnackbar(this.t_data.UpdateFailed, null, 3);
+        this.cmsLocalService.dspSnackbar(this.translate.instant('CMS.HOURS.msgUpdateFailed'), null, 3);
       });
     this.cms.updateLastCreatedField(Number(this.restaurant.restaurant_id), 'hours').subscribe(
       () => {},

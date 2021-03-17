@@ -3,7 +3,7 @@
 
   <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
     <mat-toolbar class="rc-toolbar rc-toolbar-section">
-      <span>{{ 'CMS-Hours.OpeningTimes' | translate }}</span>
+      <span>{{ 'CMS.HOURS.titleHours' | translate }}</span>
       <span class="rc-space-filler"></span>
       <span class="rc-toolbar-actions">
 
@@ -20,6 +20,7 @@
           [matTooltip]="'CMS-Hours.UndoChanges' | translate">
           <mat-icon>undo</mat-icon>
         </button>
+
         <button
           mat-icon-button
           [disabled]="!dataChanged"
@@ -35,9 +36,9 @@
 
   <mat-card
     class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
-    <mat-card-title>{{ 'CMS-Hours.Notes' | translate }}</mat-card-title>
+    <mat-card-title>{{ 'CMS.HOURS.titleNotes' | translate }}</mat-card-title>
       <mat-form-field class="rc-full-width">
-        <mat-label>{{ 'CMS-Hours.General' | translate }} (max 1000 {{ 'CMS-Features.Chars' | translate }})</mat-label>
+        <mat-label>{{ 'CMS.HOURS.labelGeneral' | translate: { chars: '1000'} }}</mat-label>
         <textarea
           matInput
           matTextareaAutosize
@@ -68,11 +69,11 @@
     <mat-card-content>
 
       <div *ngFor="let session of cmstime.sessions; let j = index">
-        <h4 *ngIf="!cmstime.closed">{{ 'CMS-Hours.Session' | translate }} {{ j + 1 }}</h4>
-        <h4 *ngIf="cmstime.closed">{{ 'CMS-Hours.Closed' | translate }}</h4>
+        <h4 *ngIf="!cmstime.closed">{{ 'CMS.HOURS.labelSession' | translate }} {{ j + 1 }}</h4>
+        <h4 *ngIf="cmstime.closed">{{ 'CMS.HOURS.labelClosed' | translate }}</h4>
         <div class="rc-session">
           <mat-form-field class="rc-session-time">
-            <mat-label>{{ 'CMS-Hours.Start' | translate }}</mat-label>
+            <mat-label>{{ 'CMS.HOURS.labelStart' | translate | uppercase}}</mat-label>
             <input
               matInput
               type="time"
@@ -82,7 +83,7 @@
               [disabled]="cmstime.closed">
           </mat-form-field>
           <mat-form-field class="rc-session-time">
-            <mat-label>{{ 'CMS-Hours.End' | translate }}</mat-label>
+            <mat-label>{{ 'CMS.HOURS.labelEnd' | translate | uppercase}}</mat-label>
             <input
               matInput
               type="time"
@@ -109,7 +110,7 @@
         mat-button
         (click)="addSession(i)"
         [disabled]="cmstime.sessions.length >= maxSessions">
-        {{ 'CMS-Hours.AddSession' | translate }}
+        {{ 'CMS.HOURS.labelBtnAddSession' | translate | uppercase }}
       </button>
     </mat-card-actions>
 
