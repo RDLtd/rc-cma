@@ -83,7 +83,7 @@
       type="button"
       mat-flat-button
       [mat-dialog-close]="formDish"
-      color="primary"
+      color="accent"
       [disabled]="!formDish.dirty || !formDish.valid">{{ 'CMS.MENUS.labelBtnUpdate' | translate | uppercase }}</button>
   </mat-dialog-actions>
 
@@ -95,7 +95,7 @@
     <button
       type="button"
       mat-flat-button
-      color="primary"
+      color="accent"
       [mat-dialog-close]="formDish"
       [disabled]="!formDish.valid">{{ 'CMS.MENUS.labelBtnSave' | translate | uppercase }}
     </button>
