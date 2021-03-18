@@ -6,6 +6,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ConfirmCancelComponent } from '../common';
 import { TranslateService } from '@ngx-translate/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Injectable()
 
@@ -23,6 +24,8 @@ export class CmsLocalService {
   constructor(
     private snackBar: MatSnackBar,
     private translate: TranslateService,
+    private router: Router,
+    private route: ActivatedRoute,
     private dialog: MatDialog
   ) { }
 
@@ -55,6 +58,8 @@ export class CmsLocalService {
       verticalPosition: 'bottom',
     });
   }
+
+
 
   // Config data options can be overridden
   confirmNavigation(options = {}) {

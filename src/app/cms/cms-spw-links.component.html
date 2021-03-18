@@ -5,8 +5,13 @@
       <span>{{ 'CMS.LINKS.titleMarketing' | translate }}</span>
       <span class="rc-space-filler"></span>
       <span class="rc-toolbar-actions">
-        <button mat-icon-button ngxClipboard matTooltip="{{ 'CMS.LINKS.tipCopyLink' | translate }}"
-                [cbContent]="data['spwUrl']"><mat-icon>link</mat-icon></button>
+        <button
+          mat-icon-button
+          ngxClipboard
+          matTooltip="{{ 'CMS.LINKS.tipCopyLink' | translate }}"
+          [cbContent]="data['spwUrl']">
+          <mat-icon>link</mat-icon>
+        </button>
         <button mat-icon-button mat-dialog-close>
         <mat-icon>close</mat-icon>
       </button>
@@ -38,7 +43,6 @@
           [elementType]="'img'"
           [width]="256"
           [errorCorrectionLevel]="'M'"
-          matTooltipPosition="above"
           matTooltip="{{ 'CMS.LINKS.tipQRCodeWebsite' | translate:
           { name: data['restaurant']['restaurant_name'] } }}">
         </qrcode>
@@ -52,7 +56,6 @@
           [elementType]="'img'"
           [width]="256"
           [errorCorrectionLevel]="'M'"
-          matTooltipPosition="above"
           matTooltip="{{ 'CMS.LINKS.tipQRCodeMenu' | translate:
           { name: data['restaurant']['restaurant_name'] } }}"></qrcode>
         <span>{{ 'CMS.LINKS.labelMenus' | translate }}</span>

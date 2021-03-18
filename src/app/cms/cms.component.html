@@ -1,6 +1,6 @@
 <header>
-
-  <mat-toolbar class="rc-toolbar rc-toolbar-nav rc-toolbar-fixed rc-toolbar-nav-adjust">
+  <mat-toolbar
+    class="rc-toolbar rc-toolbar-nav rc-toolbar-fixed rc-toolbar-nav-adjust">
 
     <button
       *ngIf="restaurants?.length > 0"
@@ -9,12 +9,15 @@
       <mat-icon>arrow_drop_down</mat-icon>
     </button>
 
-    <span class="rc-link-like"
-          [matMenuTriggerFor]="cmsRestaurants"
-          [matTooltip]="'CMS.NAV.tipYourRestaurants' | translate">
-          {{ restaurant?.restaurant_name }}
+    <span
+      class="rc-link-like"
+      [matMenuTriggerFor]="cmsRestaurants"
+      [matTooltip]="'CMS.NAV.tipYourRestaurants' | translate">
+      {{ restaurant?.restaurant_name }}
     </span>
+
     <mat-menu #cmsRestaurants="matMenu">
+
       <button
         *ngFor="let restaurant of restaurants"
         mat-menu-item
@@ -22,13 +25,16 @@
         <mat-icon>store</mat-icon>
         <span>{{ restaurant.restaurant_name }}</span>
       </button>
+
       <mat-divider></mat-divider>
+
       <button
         mat-menu-item
         [routerLink]="['/profile']">
         <mat-icon>add_circle</mat-icon>
         <span>{{ 'CMS.NAV.labelAddRestaurant' | translate }}</span>
       </button>
+
     </mat-menu>
 
     <span class="rc-space-filler"></span>
@@ -125,13 +131,6 @@
       <mat-icon>place</mat-icon>
       <span>{{ 'CMS.NAV.labelLocation' | translate }}</span>
     </a>
-<!--    <a mat-menu-item [routerLink]="['affiliates']">-->
-<!--      <mat-icon>redeem</mat-icon>-->
-<!--      <span>{{ offerCount }} {{ 'CMS-Component.AffiliateOffers' | translate }}</span>-->
-<!--      <span-->
-<!--        *ngIf="offerInBox"-->
-<!--        class="rc-counter">{{ offerInBox }}</span>-->
-<!--    </a>-->
   </mat-menu>
 </header>
 

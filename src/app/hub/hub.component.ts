@@ -202,6 +202,8 @@ export class HubComponent implements AfterViewInit {
       });
       return false;
     }
+    // Todo: use section labels like 'cms' instead of actual routes for
+    //  internal service
     switch (service.service_id) {
       case 1: {
         console.log(service.service_id);
