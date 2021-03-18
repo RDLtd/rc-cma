@@ -5,11 +5,11 @@ import { CmsLocalService } from '../cms';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
-  selector: 'rc-profile-verify',
-  templateUrl: './profile-verify.component.html'
+  selector: 'rc-verification',
+  templateUrl: './verification.component.html'
 })
 
-export class ProfileVerifyComponent implements OnInit {
+export class VerificationComponent implements OnInit {
 
   @ViewChild('verifyCode') verifyCode: ElementRef;
   @ViewChild('email') email: ElementRef;
@@ -27,7 +27,7 @@ export class ProfileVerifyComponent implements OnInit {
     private memberService: MemberService,
     private dialog: MatDialog,
     private translate: TranslateService,
-    public profileVerifyDialog: MatDialogRef<ProfileVerifyComponent>,
+    public profileVerifyDialog: MatDialogRef<VerificationComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
 

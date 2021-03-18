@@ -4,8 +4,8 @@ import {
 } from '@angular/router';
 
 import {
-  ProfilePageComponent
-} from './member';
+  SettingsComponent
+} from './settings';
 
 import {
   AuthGuard,
@@ -49,7 +49,7 @@ const APP_ROUTES: Routes = [
     canActivate: [AuthGuard]
   },
   { path: 'referral', component: SigninComponent },
-  { path: 'profile', component: ProfilePageComponent, canActivate: [AuthGuard]},
+  { path: 'profile', component: SettingsComponent, canActivate: [AuthGuard]},
   { path: 'restaurants/:id/cms', component: CmsComponent,  canActivate: [AuthGuard], children: [
 
     { path: 'dashboard',

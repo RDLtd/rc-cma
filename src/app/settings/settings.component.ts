@@ -9,8 +9,8 @@ import {
 } from '../_services';
 import { MatDialog } from '@angular/material/dialog';
 import { PasswordComponent } from './password.component';
-import { ProfileDetailComponent } from './profile-detail.component';
-import { ProfileImageComponent } from './profile-image.component';
+import { ContactsComponent } from './contacts.component';
+import { ImageComponent } from './image.component';
 import { RestaurantLookupComponent } from './restaurant-lookup.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -25,11 +25,11 @@ import { HeaderService } from '../common/header.service';
 
 
 @Component({
-  selector: 'rc-profile-page',
-  templateUrl: './profile-page.component.html'
+  selector: 'rc-settings',
+  templateUrl: './settings.component.html'
 })
 
-export class ProfilePageComponent implements OnInit {
+export class SettingsComponent implements OnInit {
 
   @ViewChild('card') card;
   restaurants: Array<Restaurant>;
@@ -82,7 +82,7 @@ export class ProfilePageComponent implements OnInit {
     // Updare header label
     this.header.updateSectionName(this.translate.instant('HUB.sectionSettings'));
 
-    // Add member name to avatar url
+    // Add settings name to avatar url
     this.imgAvatarPlaceholderUrl += `${this.member.member_first_name} ${this.member.member_last_name}`;
     this.lang = localStorage.getItem('rd_language');
     moment.locale(this.lang);
@@ -231,7 +231,7 @@ export class ProfilePageComponent implements OnInit {
     if (this.isDemoMember) {
       this.openSnackBar(this.t_data.DemoProfile, '');
     } else {
-      const dialogRef = this.dialog.open(ProfileDetailComponent);
+      const dialogRef = this.dialog.open(ContactsComponent);
       dialogRef.componentInstance.member = this.member;
       dialogRef.componentInstance.dialog = dialogRef;
     }
@@ -251,7 +251,7 @@ export class ProfilePageComponent implements OnInit {
     if (this.isDemoMember) {
       this.openSnackBar(this.t_data.DemoImage, '');
     } else {
-      const dialogRef = this.dialog.open(ProfileImageComponent, {
+      const dialogRef = this.dialog.open(ImageComponent, {
         data: {
           member: this.member
         }
@@ -270,7 +270,7 @@ export class ProfilePageComponent implements OnInit {
             const imgUrl = data.str;
             // Get cloudinary reference
             this.clPublicId = this.getMemberClPublicId(imgUrl);
-            // update member local storage
+            // update settings local storage
             this.member.member_image_path = imgUrl;
             localStorage.setItem('rd_profile', JSON.stringify(this.member));
             localStorage.setItem('rd_avatar', this.clPublicId);

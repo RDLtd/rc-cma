@@ -6,7 +6,7 @@ import { HeaderService } from '../common/header.service';
 import { Member, Restaurant } from '../_models';
 import { MemberService, RestaurantService } from '../_services';
 import { MatMenuTrigger } from '@angular/material/menu';
-import { RestaurantLookupComponent } from '../member';
+import { RestaurantLookupComponent } from '../settings';
 import { TranslateService } from '@ngx-translate/core';
 import { HubService } from './hub.service';
 import { insertAnimation } from '../shared/animations';
@@ -35,7 +35,7 @@ export class HubComponent implements AfterViewInit {
   //   {
   //     severity: 1,
   //     message_subject_en: 'An Important Message',
-  //     message_text_en: 'This a critical message and we want the member to acknowledge reading it.'
+  //     message_text_en: 'This a critical message and we want the settings to acknowledge reading it.'
   //   },
   //   {
   //     severity: 0,
@@ -156,7 +156,7 @@ export class HubComponent implements AfterViewInit {
   }
 
   dspMessages(): void {
-    // console.log('AUTH', !this.member.member_authenticated);
+    // console.log('AUTH', !this.settings.member_authenticated);
     let data = {
       newMember: false,
       member: this.member,

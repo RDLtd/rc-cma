@@ -126,7 +126,7 @@ export class JoinComponent implements OnInit {
     }
   }
 
-  // Save pending member details
+  // Save pending settings details
   savePendingMemberData(data): void {
     console.log('savePending', data);
     sessionStorage.setItem('rc_member_pending', JSON.stringify(data));
@@ -202,9 +202,9 @@ export class JoinComponent implements OnInit {
   //         // TODO removed the 'success' snack bar display. Might need to consider showing it in the 'self' path?
   //         // this.cmsLocalService.dspSnackbar(this.t_data.Success);
   //
-  //         // If the member has been referred
+  //         // If the settings has been referred
   //         // update the usage record and fast-track them
-  //         if (this.referrer.type === 'member') {
+  //         if (this.referrer.type === 'settings') {
   //           this.updateReferralUsage(data['member_id']);
   //           this.autoSignIn(data['member_id']);
   //         } else {
@@ -225,7 +225,7 @@ export class JoinComponent implements OnInit {
   //         20
   //       );
   //       // TODO more translations (or do we care since this is only relevant for support...)
-  //       this.appService.reportCriticalError('Failed to register new member!\n\n' +
+  //       this.appService.reportCriticalError('Failed to register new settings!\n\n' +
   //         'First Name : ' + admin.member_first_name + '\n\n' +
   //         'Last Name : ' + admin.member_last_name + '\n\n' +
   //         'Telephone : ' + admin.member_telephone + '\n\n' +
@@ -242,11 +242,11 @@ export class JoinComponent implements OnInit {
   // }
 
   autoSignIn(member_id) {
-    // take the member directly to authentication - first need to re-read the member record to get the full object
+    // take the settings directly to authentication - first need to re-read the settings record to get the full object
     this.memberService.getById(member_id)
       .subscribe(
         memberData => {
-          const newMember = memberData['member'][0];
+          const newMember = memberData['settings'][0];
           this.authService.setMember(newMember);
           // no need to check for valid result, using a temporary token for now
           this.authService.setAuthSession(newMember,
@@ -255,7 +255,7 @@ export class JoinComponent implements OnInit {
         },
         error => {
           // should not really get here, but you never know...
-          console.log('Failed to re-read member record', JSON.stringify(error));
+          console.log('Failed to re-read settings record', JSON.stringify(error));
         });
   }
 

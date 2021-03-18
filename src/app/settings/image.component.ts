@@ -11,10 +11,10 @@ import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'rc-profile-image',
-  templateUrl: './profile-image.component.html'
+  templateUrl: './image.component.html'
 })
 
-export class ProfileImageComponent implements OnInit {
+export class ImageComponent implements OnInit {
 
   @Input()
   responses: Array<any>;
@@ -146,7 +146,7 @@ export class ProfileImageComponent implements OnInit {
   updateImage() {
 
     this.inProgress = true;
-    // update db and local member
+    // update db and local settings
 
     this.memberService.updateAvatar(this.data.member.member_id, this.imgURL).subscribe(
       () => {

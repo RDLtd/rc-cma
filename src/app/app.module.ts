@@ -46,12 +46,12 @@ import {
 
 import {
   RestaurantLookupComponent,
-  ProfilePageComponent,
-  ProfileVerifyComponent,
+  SettingsComponent,
+  VerificationComponent,
   PasswordComponent,
-  ProfileDetailComponent,
-  ProfileImageComponent
-} from './member';
+  ContactsComponent,
+  ImageComponent
+} from './settings';
 
 import {
   CmsImagesComponent,
@@ -88,7 +88,7 @@ import { FileUploadModule } from 'ng2-file-upload';
 import { MarkdownModule } from 'ngx-markdown';
 import { ClipboardModule } from 'ngx-clipboard';
 import { JoinComponent } from './join/join.component';
-import { ReferralsComponent } from './member/referrals.component';
+import { ReferralsComponent } from './settings/referrals.component';
 import { LoadComponent } from './common/loader/load.component';
 import { CmsSpwLinksComponent } from './cms/cms-spw-links.component';
 import { QRCodeModule } from 'angularx-qrcode';
@@ -123,13 +123,13 @@ export function appInitializerFactory(translate: TranslateService) {
     PasswordComponent,
     RestaurantLookupComponent,
     RestaurantDetailComponent,
-    ProfilePageComponent,
-    ProfileVerifyComponent,
+    SettingsComponent,
+    VerificationComponent,
     ConfirmCancelComponent,
     MessageComponent,
     PwdMatchValidator,
-    ProfileDetailComponent,
-    ProfileImageComponent,
+    ContactsComponent,
+    ImageComponent,
     CmsImagesComponent,
     CmsComponent,
     CmsMenusComponent,

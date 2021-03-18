@@ -841,7 +841,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
                   },
                   error => {
                     console.log(error);
-                    console.log('Failed to update messages_seen for member ' + this.user.member_id);
+                    console.log('Failed to update messages_seen for settings ' + this.user.member_id);
                   });
               }
             } else {

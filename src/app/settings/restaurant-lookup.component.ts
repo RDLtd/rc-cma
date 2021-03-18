@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { Restaurant } from '../_models';
 import { RestaurantService, CMSService } from '../_services';
 import { AppConfig } from '../app.config';
-import { ProfileVerifyComponent } from './profile-verify.component';
+import { VerificationComponent } from './verification.component';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TranslateService } from '@ngx-translate/core';
@@ -123,7 +123,7 @@ export class RestaurantLookupComponent implements OnInit {
 
       // Verification
       if (this.verificationCodeRequired || this.contactEmailRequired) {
-        const dialogref = this.dialog.open(ProfileVerifyComponent, {
+        const dialogref = this.dialog.open(VerificationComponent, {
           data: {
             restaurant: selected,
             member: this.data.member,
@@ -162,7 +162,7 @@ export class RestaurantLookupComponent implements OnInit {
         }
         this.data.associatedRestaurants.push(newRestaurant);
 
-        // If the new restaurant is not already a member
+        // If the new restaurant is not already a settings
         if (newRestaurant.restaurant_rc_member_status !== 'Full'
           && newRestaurant.restaurant_rc_member_status !== 'Associate') {
           this.restaurantService.updateMemberStatus(newRestaurant.restaurant_id, 'Associate').subscribe(

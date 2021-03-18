@@ -5,10 +5,10 @@ import { MemberService } from '../_services';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
-  selector: 'rc-profile-detail',
-  templateUrl: './profile-detail.component.html'
+  selector: 'rc-contacts',
+  templateUrl: './contacts.component.html'
 })
-export class ProfileDetailComponent implements OnInit {
+export class ContactsComponent implements OnInit {
 
   @ViewChild('formProfile', {static: true}) formProfile;
   member: Member;
@@ -26,7 +26,7 @@ export class ProfileDetailComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // console.log(this.member);
+    // console.log(this.settings);
     this.translate.get('Profile-Detail').subscribe(data => this.t_data = data);
     this.member_full_name = this.member.member_first_name + ' ' + this.member.member_last_name;
   }
