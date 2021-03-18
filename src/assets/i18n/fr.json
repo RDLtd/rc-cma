@@ -526,7 +526,7 @@
 		"infoReferrals": "Il s'agit d'un code de référence unique que vous pouvez partager avec n'importe lequel de vos collègues, pour les encourager à rejoindre Restaurant Collective et à faire partie de cette nouvelle organisation passionnante.",
 		"labelEmail": "Email",
 		"labelJoined": "Date d'inscription",
-		"labelLang": "Langage par défaut",
+		"labelLang": "Langage",
 		"labelMemberId": "ID membres",
 		"labelName": "Prénom",
 		"labelPwd": "Mot de passe",
@@ -562,6 +562,7 @@
 		"tipEdit": "modifier",
 		"titleAccount": "Details du compte",
 		"titleAuthentication": "Authentification",
+		"titleManagedRestaurants": "Restaurants gérés",
 		"titleMember": "Détails du membre",
 		"titleReferrals": "Code de parrainage"
 	},

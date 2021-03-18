@@ -526,7 +526,7 @@
 		"infoReferrals": "This is a unique referral code that you can share with any of your colleagues, to encourage them to join Restaurant Collective and be part of this exciting new organisation.",
 		"labelEmail": "Email",
 		"labelJoined": "Join Date",
-		"labelLang": "Default language",
+		"labelLang": "Language",
 		"labelMemberId": "Member ID",
 		"labelName": "Name",
 		"labelPwd": "Password",
@@ -562,6 +562,7 @@
 		"tipEdit": "Edit",
 		"titleAccount": "Account details",
 		"titleAuthentication": "Authentication",
+		"titleManagedRestaurants": "Managed restaurants",
 		"titleMember": "Member details",
 		"titleReferrals": "Referral code"
 	},

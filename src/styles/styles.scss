@@ -1180,6 +1180,36 @@ ul.rc-lookup-results {
     padding: 0;
   }
 }
+.rc-managed-restaurant {
+  position: relative;
+  display: flex;
+  background-color: #eee;
+  margin: 0 0 8px 0;
+
+
+  .mat-icon {
+    transition: all .3s ease-out;
+    position: absolute;
+    cursor: pointer;
+    top: 8px; right: 8px;
+  }
+  &:last-child {
+    margin-bottom: 0;
+  }
+  h3 {
+    margin: 0;
+    padding: 4px 0 0;
+  }
+  p {
+    margin: 0;
+  }
+  cl-image {
+    cursor: pointer;
+    margin: 0 8px -8px 0;
+  }
+  &:hover {
+  }
+}
 .rc-card-subtitle {
   display: block;
   margin: -20px 0 12px 0;

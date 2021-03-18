@@ -5,6 +5,7 @@
       <!-- col 1 -->
       <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6">
         <div class="mdc-layout-grid__inner">
+
           <!-- Contacts -->
           <mat-card
             class="rc-card-rounded mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
@@ -15,16 +16,16 @@
                 <button
                   mat-icon-button
                   color="accent"
-                  (click)="help.dspHelp('profile-user')"
-                  matTooltip="{{ 'SETTINGS.tipHelp' | translate }}">
-                  <mat-icon>help_outline</mat-icon>
+                  (click)="updateProfile()"
+                  matTooltip="{{ 'SETTINGS.tipEdit' | translate }}">
+                  <mat-icon>edit</mat-icon>
                 </button>
                 <button
                   mat-icon-button
                   color="accent"
-                  (click)="updateProfile()"
-                  matTooltip="{{ 'SETTINGS.tipEdit' | translate }}">
-                  <mat-icon>edit</mat-icon>
+                  (click)="help.dspHelp('profile-user')"
+                  matTooltip="{{ 'SETTINGS.tipHelp' | translate }}">
+                  <mat-icon>help_outline</mat-icon>
                 </button>
               </span>
             </div>
@@ -32,14 +33,19 @@
               {{ 'SETTINGS.infoMember' | translate }}
             </div>
             <mat-card-content>
-
+              <!-- Avatar -->
               <cl-image
+                style="cursor: pointer"
+                width="96"
+                height="96"
                 *ngIf="clPublicId"
                 (click)="updateImage()"
+                matTooltip="{{ 'SETTING.tipAvatar' | translate }}"
+                matTooltipPosition="below"
                 [public-id]="clPublicId">
                 <cl-transformation
-                  width="120"
-                  height="120"
+                  width="360"
+                  height="360"
                   radius="max"
                   crop="fill"
                   gravity="face">
@@ -69,20 +75,15 @@
                     (change)="setLanguage(lang)"
                     [(ngModel)]="lang">
                     <mat-radio-button class="example-radio-button" [value]="'en'">
-                      English
+                      english
                     </mat-radio-button>
                     <mat-radio-button class="example-radio-button" [value]="'fr'">
-                      French
+                      français
                     </mat-radio-button>
                   </mat-radio-group>
                 </li>
               </ul>
               <!-- Profile Image -->
-
-
-
-
-
             </mat-card-content>
           </mat-card>
           <!-- Auth -->
@@ -148,7 +149,7 @@
             <mat-card-content>
               <ul class="rc-line-items">
                 <li><label>{{ 'SETTINGS.labelReferralCode' | translate }}:</label>
-                  {{ member?.member_promo_code | lowercase }}
+                  {{ member?.member_promo_code | uppercase }}
                 </li>
               </ul>
             </mat-card-content>
@@ -163,21 +164,16 @@
                 <button
                   mat-icon-button
                   color="accent"
-                  (click)="help.dspHelp('profile-restaurants')"
+                  (click)="updateProfile()"
                   matTooltip="{{ 'SETTINGS.tipEdit' | translate }}">
-                  <mat-icon>help_outline</mat-icon>
-                </button>
-                <button
-                  mat-icon-button (click)="addRestaurants()"
-                  matTooltip="{{ 'Profile-Page.NewAssociation' | translate }}">
-                  <mat-icon>add_circle_outline</mat-icon>
+                  <mat-icon>edit</mat-icon>
                 </button>
                 <button
                   mat-icon-button
                   color="accent"
-                  (click)="updateProfile()"
+                  (click)="help.dspHelp('profile-restaurants')"
                   matTooltip="{{ 'SETTINGS.tipEdit' | translate }}">
-                  <mat-icon>edit</mat-icon>
+                  <mat-icon>help_outline</mat-icon>
                 </button>
               </span>
             </div>
@@ -190,42 +186,53 @@
                 <li><label>{{ 'SETTINGS.labelJoined' | translate }}:</label>{{ d_member_signedup }}</li>
                 <li><label>{{ 'SETTINGS.labelSubscription' | translate }}:</label>Monthly</li>
               </ul>
+              <div class="rc-card-title" style="margin-top: 24px;">
+                <h2>{{ 'SETTINGS.titleManagedRestaurants' | translate }}</h2>
+                <span class="rc-space-filler"></span>
+                <span>
+                <button
+                  mat-icon-button (click)="addRestaurants()"
+                  matTooltip="{{ 'Profile-Page.NewAssociation' | translate }}">
+                  <mat-icon>add_circle_outline</mat-icon>
+                </button>
+              </span>
+              </div>
 
-              <h2>Managed restaurants</h2>
 
               <div class="rc-managed-restaurants">
                 <div
                   *ngFor="let restaurant of restaurants; let idx = index"
-                  [routerLink]="['/restaurants', restaurant.restaurant_id, 'cms', 'dashboard']"
                   class="rc-managed-restaurant">
+                  <!-- image -->
                   <cl-image
+                    [routerLink]="['/restaurants', restaurant.restaurant_id, 'cms', 'dashboard']"
                     [public-id]="getClPublicId(idx)"
                     width="180"
                     height="120">
                     <cl-transformation
+                      dpr="auto"
+                      responsive
                       width="360"
                       height="240"
                       crop="fill"
                       quality="auto">
                     </cl-transformation>
                   </cl-image>
+                  <mat-icon
+                    matTooltip="{{ 'SETTINGS.tipRemove' | translate }}"
+                    (click)="removeAssociation(idx)">
+                    cancel
+                  </mat-icon>
+
 
                   <div
                     [routerLink]="['/restaurants', restaurant.restaurant_id, 'cms', 'dashboard']">
-                    <h2>{{ restaurant.restaurant_name }}</h2>
-                    <span>{{ restaurant?.restaurant_address_1 }}</span>
-                    <span>{{ restaurant?.restaurant_address_2 }}</span>
-                    <span *ngIf="restaurant.restaurant_address_3">{{ restaurant?.restaurant_address_3 }}</span>
-                    <span>{{ restaurant?.restaurant_post_code }}</span>
+                    <h3>{{ restaurant.restaurant_name }}</h3>
+                    <p class="rc-txt-small">{{ restaurant?.restaurant_address_1 }}, {{
+                      restaurant?.restaurant_address_2 }}<br>
+                    {{ restaurant?.restaurant_address_2 }}<br>
+                        {{ restaurant?.restaurant_post_code }}</p>
                   </div>
-
-                </div>
-                <div
-                  class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 rc-add-content"
-                  (click)="addRestaurants()"
-                  *ngIf="!showLoader">
-                  <mat-icon>add_circle_outline</mat-icon>
-                  <div class="rc-add-content-label">{{ 'Profile-Page.AddRestaurant' | translate }}</div>
                 </div>
               </div>
 
