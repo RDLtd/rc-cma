@@ -338,6 +338,8 @@
 		"placeholderTel": ""
 	},
 	"MARKETPLACE": {
+		"labelAvailableLocal": "Local",
+		"labelAvailableNational": "nationale",
 		"labelBtnCancel": "Pas maintenant merci",
 		"labelBtnConfirm": "Envoyer une demande",
 		"labelBtnFindOutMore": "en savoir plus",
@@ -520,6 +522,18 @@
 		"ValidPostcode": "Code postal valide requis"
 	},
 	"SETTINGS": {
+		"infoMember": "Tous les contacts concernant votre adhésion seront envoyés à cette adresse e-mail.",
+		"infoReferrals": "Il s'agit d'un code de référence unique que vous pouvez partager avec n'importe lequel de vos collègues, pour les encourager à rejoindre Restaurant Collective et à faire partie de cette nouvelle organisation passionnante.",
+		"labelEmail": "Email",
+		"labelJoined": "Date d'inscription",
+		"labelLang": "Langage par défaut",
+		"labelMemberId": "ID membres",
+		"labelName": "Prénom",
+		"labelPwd": "Mot de passe",
+		"labelReferralCode": "Code de parrainage",
+		"labelRole": "Rôle",
+		"labelSubscription": "abonnement",
+		"labelTel": "Mobile",
 		"password": {
 			"currentPwd": "Votre mot de passe actuel",
 			"errorFailed": "La mise à jour du mot de passe a échoué",
@@ -544,7 +558,12 @@
 			"labelLink": "Lien",
 			"tipCopyCode": "Copiez le code",
 			"tipCopyLink": "Copiez le lien de parrainage"
-		}
+		},
+		"tipEdit": "modifier",
+		"titleAccount": "Details du compte",
+		"titleAuthentication": "Authentification",
+		"titleMember": "Détails du membre",
+		"titleReferrals": "Code de parrainage"
 	},
 	"SIGNIN": {
 		"_or": " ou ",

@@ -556,6 +556,16 @@ a.mat-menu-item {text-decoration: none;}
     position: absolute;
     top: 8px; right: 8px;
   }
+  .rc-icon-tag {
+    position: absolute;
+    bottom: 22px;
+    display: flex;
+    font-size: 14px;
+    color: $rc-charcoal;
+    .mat-icon {
+      margin-right: 4px;
+    }
+  }
 
 
 }
@@ -1155,6 +1165,42 @@ ul.rc-lookup-results {
     font-size: 16px;
   }
 }
+.rc-card-title {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+  > .mat-icon {
+    $size: 32px;
+    font-size: $size;
+    height: $size;
+    width: $size;
+  }
+  h2 {
+    margin: 0;
+    padding: 0;
+  }
+}
+.rc-card-subtitle {
+  display: block;
+  margin: -20px 0 12px 0;
+  font-size: 14px;
+}
+ul.rc-line-items {
+  display: block;
+  li {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid $rc-cool-grey;
+    padding: 8px 0;
+    text-align: left;
+    label {
+      flex-basis: 38%;
+    }
+  }
+}
+
+
+
 .rc-member-profile {
   box-sizing: border-box;
   background: white;

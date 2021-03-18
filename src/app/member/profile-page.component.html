@@ -1,264 +1,229 @@
-<div class="rc-section rc-section-profile">
+<div class="rc-section rc-section-profile rc-section-settings">
+  <!-- page grid -->
   <div class="mdc-layout-grid">
     <div class="mdc-layout-grid__inner">
-      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
-        <mat-toolbar class="rc-section-toolbar">
-          <span
-            class="rc-toolbar-title">{{ 'HEADER.labelSettings' | translate | uppercase }}</span>
-          <span class="rc-space-filler"></span>
-          <span class="rc-section-toolbar-actions rc-media-small-hide">
-
-          <button
-            mat-icon-button
-            (click)="help.dspHelp('profile-user')">
-            <mat-icon>help_outline</mat-icon>
-          </button>
-
-          <button
-            (click)="dspReferrals()"
-            mat-icon-button
-            matTooltip="{{ 'Profile-Page.SendReferral' | translate }}">
-            <mat-icon>contact_mail</mat-icon>
-          </button>
-
-          <button
-            mat-icon-button
-            (click)="updateProfile()"
-            matTooltip="{{ 'Profile-Page.EditContact' | translate }}">
-            <mat-icon>edit</mat-icon>
-          </button>
-
-          <button
-            mat-icon-button
-            (click)="updateImage()"
-            matTooltip="{{ 'Profile-Page.UpdateImage' | translate }}">
-            <mat-icon>portrait</mat-icon>
-          </button>
-          <button
-            mat-icon-button
-            (click)="updatePassword()"
-            matTooltip="{{ 'Profile-Page.UpdatePassword' | translate }}">
-            <mat-icon>lock</mat-icon>
-          </button>
-
-        </span>
-
-          <span class="rc-section-toolbar-actions rc-media-med">
-
-          <button
-            mat-icon-button
-            [matMenuTriggerFor]="profileMenu"
-            matTooltip="{{ 'Profile-Page.EditProfile' | translate }}">
-            <mat-icon>more_vert</mat-icon>
-          </button>
-
-        </span>
-
-        </mat-toolbar>
-        <mat-menu #profileMenu="matMenu">
-          <button mat-menu-item (click)="updateProfile()">
-            <mat-icon>edit</mat-icon>
-            <span>{{ 'Profile-Page.EditProfile' | translate }}</span>
-          </button>
-          <button mat-menu-item (click)="updateImage()">
-            <mat-icon>portrait</mat-icon>
-            <span>{{ 'Profile-Page.UpdateImage' | translate }}</span>
-          </button>
-          <button mat-menu-item (click)="updatePassword()">
-            <mat-icon>lock</mat-icon>
-            <span>{{ 'Profile-Page.UpdatePassword' | translate }}</span>
-          </button>
-        </mat-menu>
-        <section class="rc-member-profile ">
-          <div class="mdc-layout-grid rc-member-profile">
-            <div class="mdc-layout-grid__inner">
-              <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-5">
-                <!-- Job Role -->
-                <span
-                  class="rc-active"
-                  (click)="updateProfile()">
-                  <mat-icon>person</mat-icon>
-                  {{ member?.member_first_name | titlecase }} {{ member?.member_last_name |
-                  titlecase }}
-                </span>
-
-                <span
-                  class="rc-active"
-                  (click)="updateProfile()">
-                <mat-icon>business</mat-icon>
-                  {{ d_member_job }}
-                </span>
-                <!-- User ID -->
-                <span><mat-icon>account_circle</mat-icon> ID: {{ member.member_id }}</span>
-                <!-- Date joined -->
-                <span>{{ 'Profile-Page.MemberSince' | translate }} {{ d_member_signedup }}</span>
-
-              </div>
-              <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-5">
-                <span class="rc-active" (click)="updateProfile()"><mat-icon>mail_outline</mat-icon>
-                  {{ member.member_email }}</span>
-                <span class="rc-active" (click)="updateProfile()"><mat-icon>smartphone</mat-icon>
-                  {{ member.member_telephone }}</span>
-                <span class="rc-active" (click)="updatePassword()"><mat-icon>vpn_key</mat-icon> ********</span>
-                <!-- REFERRALS -->
-                <span
-                  (click)="dspReferrals()"
-                  class="rc-active"
-                  matTooltip="{{ 'Profile-Page.SendReferral' | translate }}">
-                <mat-icon>contact_mail</mat-icon>
-                  {{ 'Profile-Page.ReferralCode' | translate }}:&nbsp;<a>{{ member?.member_promo_code }}</a>
+      <!-- col 1 -->
+      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6">
+        <div class="mdc-layout-grid__inner">
+          <!-- Contacts -->
+          <mat-card
+            class="rc-card-rounded mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+            <div class="rc-card-title">
+              <h2>{{ 'SETTINGS.titleMember' | translate }}</h2>
+              <span class="rc-space-filler"></span>
+              <span>
+                <button
+                  mat-icon-button
+                  color="accent"
+                  (click)="help.dspHelp('profile-user')"
+                  matTooltip="{{ 'SETTINGS.tipHelp' | translate }}">
+                  <mat-icon>help_outline</mat-icon>
+                </button>
+                <button
+                  mat-icon-button
+                  color="accent"
+                  (click)="updateProfile()"
+                  matTooltip="{{ 'SETTINGS.tipEdit' | translate }}">
+                  <mat-icon>edit</mat-icon>
+                </button>
               </span>
-              </div>
-
-              <!-- Profile Image -->
-              <div
-                class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2 rc-active"
-                (click)="updateImage()">
-
-                <cl-image
-                *ngIf="clPublicId"
-                [public-id]="clPublicId">
-                  <cl-transformation
-                    width="400"
-                    height="400"
-                    radius="max"
-                    crop="fill"
-                    gravity="face">
-                  </cl-transformation>
-                </cl-image>
-
-              </div>
             </div>
-          </div>
-        </section>
-      </div>
-    </div>
-  </div>
-  <!-- Restaurants -->
-  <div class="mdc-layout-grid">
-    <div class="mdc-layout-grid__inner">
-      <mat-toolbar
-        class="rc-section-toolbar mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
-      <span class="rc-toolbar-title">
-        {{ 'Profile-Page.AssociatedRestaurants' | translate }}
-      </span>
-        <span class="rc-space-filler"></span>
-        <span class="rc-section-toolbar-actions">
+            <div class="rc-card-subtitle">
+              {{ 'SETTINGS.infoMember' | translate }}
+            </div>
+            <mat-card-content>
 
-         <button
-           mat-icon-button
-           (click)="help.dspHelp('profile-restaurants')">
-          <mat-icon>help_outline</mat-icon>
-        </button>
+              <cl-image
+                *ngIf="clPublicId"
+                (click)="updateImage()"
+                [public-id]="clPublicId">
+                <cl-transformation
+                  width="120"
+                  height="120"
+                  radius="max"
+                  crop="fill"
+                  gravity="face">
+                </cl-transformation>
+              </cl-image>
 
-          <!--<a-->
-          <!--*ngIf="authService.isAuthLevel(3)"-->
-          <!--mat-icon-button-->
-          <!--(click)="benchmarking()"-->
-          <!--matTooltip="{{ 'Profile-Page.GroupFnS' | translate }}">-->
-          <!--<mat-icon>equalizer</mat-icon>-->
-          <!--</a>-->
+              <ul class="rc-line-items">
+                <li>
+                  <label>{{ 'SETTINGS.labelName' | translate }}:</label>
+                  {{ member?.member_first_name | titlecase }} {{ member?.member_last_name | titlecase }}
+                </li>
+                <li>
+                  <label>{{ 'SETTINGS.labelRole' | translate }}:</label>
+                  {{ member?.member_role | titlecase }}
+                </li>
+                <li>
+                  <label>{{ 'SETTINGS.labelEmail' | translate }}:</label>
+                  {{ member?.member_email | lowercase }}
+                </li>
+                <li>
+                  <label>{{ 'SETTINGS.labelTel' | translate }}:</label>
+                  {{ member?.member_telephone }}
+                </li>
+                <li>
+                  <label>{{ 'SETTINGS.labelLang' | translate }}:</label>
+                  <a (click)="setLanguage('fr')">French</a> | <a (click)="setLanguage('en')">English</a>
+                </li>
+              </ul>
+              <!-- Profile Image -->
 
-        <button
-          mat-icon-button (click)="addRestaurants()"
-          matTooltip="{{ 'Profile-Page.NewAssociation' | translate }}">
-          <mat-icon>add_circle_outline</mat-icon>
-        </button>
 
-      </span>
-      </mat-toolbar>
 
-      <div
-        class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 rc-add-content"
-        *ngIf="showLoader">
-        <rc-loader></rc-loader>
-      </div>
 
-      <!-- ASSOCIATED RESTAURANTS -->
-      <div
-        class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 rc-card-restaurant"
-        *ngFor="let restaurant of restaurants; let idx = index">
 
-        <!-- membership -->
-<!--        <button-->
-<!--          *ngIf="restaurant?.restaurant_rc_member_status !== 'Full'"-->
-<!--          class="rc-member-assc"-->
-<!--          mat-mini-fab-->
-<!--          color=""-->
-<!--          matTooltip="{{ restaurant.restaurant_name }} {{ 'Profile-Page.IsAssociate' | translate }} {{ brand.name }}">-->
-<!--          <mat-icon>people_outline</mat-icon>-->
-<!--        </button>-->
-<!--        <button-->
-<!--          *ngIf="restaurant?.restaurant_rc_member_status === 'Full'"-->
-<!--          class="rc-member-full"-->
-<!--          mat-mini-fab-->
-<!--          color=""-->
-<!--          matTooltip="{{ restaurant.restaurant_name }} {{ 'Profile-Page.IsFull' | translate }} {{ brand.name }}">-->
-<!--          <mat-icon>people</mat-icon>-->
-<!--        </button>-->
-        <!-- image -->
-        <div [routerLink]="['/restaurants', restaurant.restaurant_id, 'cms', 'dashboard']">
-         <cl-image
-            [public-id]="getClPublicId(idx)"
-            width="400"
-            height="225">
-           <cl-transformation
-             width="400"
-             height="225"
-             crop="fill"
-             quality="auto">
-           </cl-transformation>
-         </cl-image>
+            </mat-card-content>
+          </mat-card>
+          <!-- Auth -->
+          <mat-card
+            class="rc-card-rounded mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+            <div class="rc-card-title">
+              <h2>{{ 'SETTINGS.titleAuthentication' | translate }}</h2>
+              <span class="rc-space-filler"></span>
+              <span>
+            <button
+              mat-icon-button
+              color="accent"
+              (click)="updatePassword()"
+              matTooltip="{{ 'SETTINGS.tipEdit' | translate }}">
+              <mat-icon>edit</mat-icon>
+            </button>
+          </span>
+            </div>
+            <div class="rc-card-subtitle">
+              {{ 'SETTINGS.infoMember' | translate }}
+            </div>
+            <mat-card-content>
+              <ul class="rc-line-items">
+                <li><label>{{ 'SETTINGS.labelEmail' | translate }}:</label>
+                  {{ member?.member_email | lowercase }}
+                </li>
+                <li><label>{{ 'SETTINGS.labelPwd' | translate }}:</label>
+                  ********
+                </li>
+              </ul>
+            </mat-card-content>
+          </mat-card>
         </div>
-
-        <div
-          [routerLink]="['/restaurants', restaurant.restaurant_id, 'cms', 'dashboard']"
-          class="rc-card-restaurant-content">
-          <h2>{{ restaurant.restaurant_name }}</h2>
-          <span>{{ restaurant?.restaurant_address_1 }}</span>
-          <span>{{ restaurant?.restaurant_address_2 }}</span>
-          <span *ngIf="restaurant.restaurant_address_3">{{ restaurant?.restaurant_address_3 }}</span>
-          <span>{{ restaurant?.restaurant_post_code }}</span>
-        </div>
-
-        <div class="rc-card-restaurant-nav">
-          <button
-            mat-icon-button
-            color="warn"
-            (click)="removeAssociation(idx)"
-            matTooltip="{{ 'Profile-Page.Unassociate' | translate }} {{ restaurant.restaurant_name }}">
-            <mat-icon>close</mat-icon>
-          </button>
-          <span class="rc-space-filler"></span>
-
-
-          <!--        <button-->
-          <!--          [disabled]="!authService.isAuthLevel(2)"-->
-          <!--          mat-icon-button-->
-          <!--          [routerLink]="['/fs/profit']"-->
-          <!--          matTooltip="{{ 'Profile-Page.ManageFnS' | translate }} {{ restaurant.restaurant_name }}">-->
-          <!--          <mat-icon>equalizer</mat-icon>-->
-          <!--        </button>-->
-
-          <button
-            mat-icon-button
-            [routerLink]="['/restaurants', restaurant.restaurant_id, 'cms', 'dashboard']"
-            matTooltip="{{ 'Profile-Page.ManageContent' | translate }} {{ restaurant.restaurant_name }}">
-            <mat-icon>edit</mat-icon>
-          </button>
-
-        </div>
-
       </div>
-      <div
-        class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 rc-add-content"
-        (click)="addRestaurants()"
-        *ngIf="!showLoader">
-        <mat-icon>add_circle_outline</mat-icon>
-        <div class="rc-add-content-label">{{ 'Profile-Page.AddRestaurant' | translate }}</div>
+      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6">
+        <div class="mdc-layout-grid__inner">
+          <!-- Referrals -->
+          <mat-card
+            class="rc-card-rounded mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+            <div class="rc-card-title">
+              <h2>{{ 'SETTINGS.titleReferrals' | translate }}</h2>
+              <span class="rc-space-filler"></span>
+              <span>
+                <button
+                  mat-icon-button
+                  color="accent"
+                  (click)="dspReferrals()"
+                  matTooltip="{{ 'SETTINGS.tipReferEmail' | translate }}">
+                  <mat-icon>email</mat-icon>
+                </button>
+                <button
+                  mat-icon-button
+                  color="accent"
+                  (click)="dspReferrals()"
+                  matTooltip="{{ 'SETTINGS.tipReferSocial' | translate }}">
+                  <mat-icon>share</mat-icon>
+                </button>
+              </span>
+            </div>
+            <div class="rc-card-subtitle">
+              {{ 'SETTINGS.infoReferrals' | translate }}
+            </div>
+            <mat-card-content>
+              <ul class="rc-line-items">
+                <li><label>{{ 'SETTINGS.labelReferralCode' | translate }}:</label>
+                  {{ member?.member_promo_code | lowercase }}
+                </li>
+              </ul>
+            </mat-card-content>
+          </mat-card>
+          <!-- Account -->
+          <mat-card
+            class="rc-card-rounded mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+            <div class="rc-card-title">
+              <h2>{{ 'SETTINGS.titleAccount' | translate }}</h2>
+              <span class="rc-space-filler"></span>
+              <span>
+                <button
+                  mat-icon-button
+                  color="accent"
+                  (click)="help.dspHelp('profile-restaurants')"
+                  matTooltip="{{ 'SETTINGS.tipEdit' | translate }}">
+                  <mat-icon>help_outline</mat-icon>
+                </button>
+                <button
+                  mat-icon-button (click)="addRestaurants()"
+                  matTooltip="{{ 'Profile-Page.NewAssociation' | translate }}">
+                  <mat-icon>add_circle_outline</mat-icon>
+                </button>
+                <button
+                  mat-icon-button
+                  color="accent"
+                  (click)="updateProfile()"
+                  matTooltip="{{ 'SETTINGS.tipEdit' | translate }}">
+                  <mat-icon>edit</mat-icon>
+                </button>
+              </span>
+            </div>
+            <div class="rc-card-subtitle">
+              {{ 'SETTINGS.infoMember' | translate }}
+            </div>
+            <mat-card-content>
+              <ul class="rc-line-items">
+                <li><label>{{ 'SETTINGS.labelMemberId' | translate }}:</label>James Barnard</li>
+                <li><label>{{ 'SETTINGS.labelJoined' | translate }}:</label>{{ d_member_signedup }}</li>
+                <li><label>{{ 'SETTINGS.labelSubscription' | translate }}:</label>Monthly</li>
+              </ul>
+
+              <h2>Managed restaurants</h2>
+
+              <div class="rc-managed-restaurants">
+                <div
+                  *ngFor="let restaurant of restaurants; let idx = index"
+                  [routerLink]="['/restaurants', restaurant.restaurant_id, 'cms', 'dashboard']"
+                  class="rc-managed-restaurant">
+                  <cl-image
+                    [public-id]="getClPublicId(idx)"
+                    width="180"
+                    height="120">
+                    <cl-transformation
+                      width="360"
+                      height="240"
+                      crop="fill"
+                      quality="auto">
+                    </cl-transformation>
+                  </cl-image>
+
+                  <div
+                    [routerLink]="['/restaurants', restaurant.restaurant_id, 'cms', 'dashboard']">
+                    <h2>{{ restaurant.restaurant_name }}</h2>
+                    <span>{{ restaurant?.restaurant_address_1 }}</span>
+                    <span>{{ restaurant?.restaurant_address_2 }}</span>
+                    <span *ngIf="restaurant.restaurant_address_3">{{ restaurant?.restaurant_address_3 }}</span>
+                    <span>{{ restaurant?.restaurant_post_code }}</span>
+                  </div>
+
+                </div>
+                <div
+                  class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 rc-add-content"
+                  (click)="addRestaurants()"
+                  *ngIf="!showLoader">
+                  <mat-icon>add_circle_outline</mat-icon>
+                  <div class="rc-add-content-label">{{ 'Profile-Page.AddRestaurant' | translate }}</div>
+                </div>
+              </div>
+
+            </mat-card-content>
+          </mat-card>
+        </div>
       </div>
     </div>
   </div>
 </div>
-<div class="rc-centre"><a (click)="setLanguage('fr')">FRENCH</a> | <a (click)="setLanguage('en')">ENGLISH</a></div>
-<!--<pre>{{ restaurants | json }}</pre>-->

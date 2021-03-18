@@ -71,11 +71,25 @@
           <div mat-card-content>
             <p markdown ngpreservewhitespaces>{{ deal.deal_description }}</p>
           </div>
+          <span
+            *ngIf="!deal.deal_national"
+            class="rc-icon-tag">
+            <mat-icon>moped</mat-icon>
+            {{ 'MARKETPLACE.labelAvailableLocal' | translate | uppercase }}
+          </span >
+          <span
+            *ngIf="deal.deal_national"
+            class="rc-icon-tag">
+            <mat-icon>local_shipping</mat-icon>
+            {{ 'MARKETPLACE.labelAvailableNational' | translate | uppercase }}
+          </span>
+
           <mat-card-actions align="end">
             <button
               (click)="notifyAffiliate(deal)"
               mat-button
               color="accent">{{ 'MARKETPLACE.labelBtnFindOutMore' | translate | uppercase }}</button>
+
           </mat-card-actions>
         </mat-card>
       </div>

@@ -338,6 +338,8 @@
 		"placeholderTel": "You mobile number"
 	},
 	"MARKETPLACE": {
+		"labelAvailableLocal": "Local",
+		"labelAvailableNational": "National",
 		"labelBtnCancel": "Not now thanks",
 		"labelBtnConfirm": "Send Request",
 		"labelBtnFindOutMore": "Find out more",
@@ -520,6 +522,18 @@
 		"ValidPostcode": "Valid postcode required"
 	},
 	"SETTINGS": {
+		"infoMember": "All contact regarding your Membership will be sent to this email address.",
+		"infoReferrals": "This is a unique referral code that you can share with any of your colleagues, to encourage them to join Restaurant Collective and be part of this exciting new organisation.",
+		"labelEmail": "Email",
+		"labelJoined": "Join Date",
+		"labelLang": "Default language",
+		"labelMemberId": "Member ID",
+		"labelName": "Name",
+		"labelPwd": "Password",
+		"labelReferralCode": "Referral Code",
+		"labelRole": "Role",
+		"labelSubscription": "Subscription",
+		"labelTel": "Mobile",
 		"password": {
 			"currentPwd": "Your current password",
 			"errorFailed": "Password update failed",
@@ -544,7 +558,12 @@
 			"labelLink": "Link",
 			"tipCopyCode": "Copy the code",
 			"tipCopyLink": "Copy the referral link"
-		}
+		},
+		"tipEdit": "Edit",
+		"titleAccount": "Account details",
+		"titleAuthentication": "Authentication",
+		"titleMember": "Member details",
+		"titleReferrals": "Referral code"
 	},
 	"SIGNIN": {
 		"_or": " or ",
