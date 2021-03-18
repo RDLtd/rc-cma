@@ -51,6 +51,7 @@ export class ProfilePageComponent implements OnInit {
   d_member_signedup: string;
   d_member_job: string;
   memberImagePath = this.imgUserPlaceHolderUrl;
+  lang: string;
 
   constructor(
     private header: HeaderService,
@@ -71,16 +72,6 @@ export class ProfilePageComponent implements OnInit {
 
       this.loadService.open();
 
-      // detect language changes... need to check for change in texts
-      // translate.onLangChange.subscribe(() => {
-      //   this.translate.get('Profile-Page').subscribe(data => {
-      //     this.t_data = data;
-      //     this.d_member_job = this.t_data[this.member.member_job];
-      //     this.d_member_signedup = moment(this.member.member_signedup).format('DD MMMM YYYY');
-      //     this.imgRestPlaceholderUrl = `https://via.placeholder.com/800x450?text=${this.t_data.AwaitingImage}`;
-      //   });
-      // });
-
   }
 
   ngOnInit() {
@@ -93,8 +84,8 @@ export class ProfilePageComponent implements OnInit {
 
     // Add member name to avatar url
     this.imgAvatarPlaceholderUrl += `${this.member.member_first_name} ${this.member.member_last_name}`;
-
-    moment.locale(localStorage.getItem('rd_language'));
+    this.lang = localStorage.getItem('rd_language');
+    moment.locale(this.lang);
     this.translate.get('Profile-Page').subscribe(data => {
       this.t_data = data;
       this.imgRestPlaceholderUrl = `https://via.placeholder.com/800x450?text=${this.t_data.AwaitingImage}`;

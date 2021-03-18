@@ -65,7 +65,16 @@
                 </li>
                 <li>
                   <label>{{ 'SETTINGS.labelLang' | translate }}:</label>
-                  <a (click)="setLanguage('fr')">French</a> | <a (click)="setLanguage('en')">English</a>
+                  <mat-radio-group
+                    (change)="setLanguage(lang)"
+                    [(ngModel)]="lang">
+                    <mat-radio-button class="example-radio-button" [value]="'en'">
+                      English
+                    </mat-radio-button>
+                    <mat-radio-button class="example-radio-button" [value]="'fr'">
+                      French
+                    </mat-radio-button>
+                  </mat-radio-group>
                 </li>
               </ul>
               <!-- Profile Image -->
