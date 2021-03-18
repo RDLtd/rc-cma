@@ -82,7 +82,7 @@ export class SettingsComponent implements OnInit {
     // Updare header label
     this.header.updateSectionName(this.translate.instant('HUB.sectionSettings'));
 
-    // Add settings name to avatar url
+    // Add member name to avatar url
     this.imgAvatarPlaceholderUrl += `${this.member.member_first_name} ${this.member.member_last_name}`;
     this.lang = localStorage.getItem('rd_language');
     moment.locale(this.lang);
@@ -270,7 +270,7 @@ export class SettingsComponent implements OnInit {
             const imgUrl = data.str;
             // Get cloudinary reference
             this.clPublicId = this.getMemberClPublicId(imgUrl);
-            // update settings local storage
+            // update member local storage
             this.member.member_image_path = imgUrl;
             localStorage.setItem('rd_profile', JSON.stringify(this.member));
             localStorage.setItem('rd_avatar', this.clPublicId);

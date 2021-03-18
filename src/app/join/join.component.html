@@ -10,7 +10,7 @@
           <markdown [data]="'JOIN.joinUsToday' | translate: { email: brand.email.support }"></markdown>
         </div>
         <!-- Member referral -->
-        <div *ngSwitchCase="'settings'">
+        <div *ngSwitchCase="'member'">
           <markdown [data]="'JOIN.joinUsByReferral' | translate: { email: brand.email.support, referrer:
           referrer?.name, brand: brand.name  }"></markdown>
         </div>

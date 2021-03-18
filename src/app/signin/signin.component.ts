@@ -62,7 +62,7 @@ export class SigninComponent implements OnInit {
     if (!!newMember) {
       this.newMemberEmail = newMember.email;
     }
-    this.help.dspHelp('signin-new-settings', null, 'Thanks');
+    this.help.dspHelp('signin-new-member', null, 'Thanks');
   }
 
   signIn(formValue) {
@@ -77,10 +77,10 @@ export class SigninComponent implements OnInit {
     this.authService.login(formValue)
       .subscribe(
         authResult => {
-          console.log('auth OK');
+          console.log('auth OK', authResult);
           this.isSubmitting = false;
           if (authResult && authResult['token']) {
-            this.authService.setAuthSession(authResult['settings'], authResult['token'], this.dbOffline);
+            this.authService.setAuthSession(authResult['member'], authResult['token'], this.dbOffline);
           } else {
             console.log('Auth Failed');
           }

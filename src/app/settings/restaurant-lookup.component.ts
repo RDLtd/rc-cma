@@ -162,7 +162,7 @@ export class RestaurantLookupComponent implements OnInit {
         }
         this.data.associatedRestaurants.push(newRestaurant);
 
-        // If the new restaurant is not already a settings
+        // If the new restaurant is not already a member
         if (newRestaurant.restaurant_rc_member_status !== 'Full'
           && newRestaurant.restaurant_rc_member_status !== 'Associate') {
           this.restaurantService.updateMemberStatus(newRestaurant.restaurant_id, 'Associate').subscribe(

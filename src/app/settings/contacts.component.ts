@@ -26,7 +26,7 @@ export class ContactsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // console.log(this.settings);
+    // console.log(this.member);
     this.translate.get('Profile-Detail').subscribe(data => this.t_data = data);
     this.member_full_name = this.member.member_first_name + ' ' + this.member.member_last_name;
   }

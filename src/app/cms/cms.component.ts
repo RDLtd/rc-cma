@@ -57,7 +57,7 @@ export class CmsComponent implements OnInit {
 
     this.restaurantService.getMemberRestaurants(this.member.member_id)
       .subscribe( data => {
-          // console.log('CMS.ts get list of assc. restaurants using member_id', this.settings.member_id);
+          // console.log('CMS.ts get list of assc. restaurants using member_id', this.member.member_id);
           this.restaurants = data['restaurants'];
           // console.log('Length', this.restaurants.length);
         },

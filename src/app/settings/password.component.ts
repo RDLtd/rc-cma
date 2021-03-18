@@ -48,7 +48,7 @@ export class PasswordComponent implements OnInit {
               },
               error => {
                 console.log(error);
-                // console.log('Failed to update password for settings ' + this.settings.member_id);
+                // console.log('Failed to update password for settings ' + this.member.member_id);
                 this.dspSnackbarMsg(this.translate.instant('SETTINGS.password.errorFailed'), null);
                 this.isSubmitting = false;
               }
@@ -56,7 +56,7 @@ export class PasswordComponent implements OnInit {
       },
         error => {
           console.log(error);
-          // console.log('Member ' + this.settings.member_id + ' failed authorisation');
+          // console.log('Member ' + this.member.member_id + ' failed authorisation');
           this.dspSnackbarMsg(this.translate.instant('SETTINGS.password.errorInvalid'), 'OK');
           this.isSubmitting = false;
         }

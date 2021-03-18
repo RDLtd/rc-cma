@@ -46,11 +46,11 @@ export class AuthenticationService {
   }
 
   // public getLoggedInUser(): Member {
-  //   return this.settings;
+  //   return this.member;
   // }
 
   public setMember(member: Member) {
-    //console.log('setMember', settings);
+    //console.log('setMember', member);
     this.member = member;
   }
 
@@ -58,6 +58,8 @@ export class AuthenticationService {
 
     this.dbOffline = offline;
     this.member = member;
+
+    console.log('M', member);
 
     // Record Member login/authentication
 
@@ -73,7 +75,7 @@ export class AuthenticationService {
     this.dspHomeScreen('active');
 
     // Set members 'homepage' based on access their level
-    // if (this.dbOffline && settings.member_access_level < 4) {
+    // if (this.dbOffline && member.member_access_level < 4) {
     //
     //   // Not Super Admin
     //   localStorage.setItem('rd_home', '/hub');
@@ -81,19 +83,19 @@ export class AuthenticationService {
     //
     // } else {
     //
-    //   switch (settings.member_access_level) {
+    //   switch (member.member_access_level) {
     //     // 3rd party agent
     //     case '0': {
     //       console.log('ACCESS LEVEL 0');
     //       // localStorage.setItem('rd_home', '/agent');
-    //       // localStorage.setItem('rd_launch_number', settings.member_launch_number);
+    //       // localStorage.setItem('rd_launch_number', member.member_launch_number);
     //       // this.dspHomeScreen('active');
     //       break;
     //     }
     //     // Curator
     //     case '1': {
     //       console.log('ACCESS LEVEL 1');
-    //       // this.restaurantService.getCurationZoneSet(settings.member_id)
+    //       // this.restaurantService.getCurationZoneSet(member.member_id)
     //       //   .subscribe(
     //       //     data => {
     //       //       this.curation_zone_set = data['curation_zone_set'];
@@ -119,7 +121,7 @@ export class AuthenticationService {
     //     // Restaurant / Content Administrator
     //     case '2': {
     //       console.log('ACCESS LEVEL 2');
-    //       this.restaurantService.getMemberRestaurants(settings.member_id)
+    //       this.restaurantService.getMemberRestaurants(member.member_id)
     //         .subscribe(
     //           data => {
     //
