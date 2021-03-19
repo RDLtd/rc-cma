@@ -1,58 +1,58 @@
 <div class="rc-dialog rc-dialog-small">
 
-  <h1 mat-dialog-title>{{ 'Profile-Detail.UpdateProfile' | translate }}</h1>
+  <h1 mat-dialog-title>{{ 'SETTINGS.contacts.titleUpdateContacts' | translate }}</h1>
 
-  <form #formProfile="ngForm" (ngSubmit)="formProfile.valid && onProfileUpdate(formProfile.value)">
+  <form #formProfile="ngForm">
     <mat-dialog-content>
       <section>
         <div>
-          <mat-form-field hideRequiredMarker class="rc-full-width">
-            <mat-label>{{ 'Profile-Detail.FullName' | translate }}</mat-label>
+          <mat-form-field hideRequiredMarker style="width: 38%;">
+            <mat-label>{{ 'SETTINGS.contacts.labelFirstName' | translate }}</mat-label>
             <input
-              name="member_fullname"
+              name="member_first_name"
               matInput
-              [(ngModel)]="member_full_name"
+              [(ngModel)]="member.member_first_name"
               required>
-            <mat-hint align="end">{{ 'Profile-Detail.Names' | translate }}</mat-hint>
-            <mat-error align="end">{{ 'Profile-Detail.Required' | translate }}</mat-error>
+            <mat-error align="end">{{ 'SETTINGS.contacts.invalidRequired' | translate }}</mat-error>
+          </mat-form-field>
+          <span style="display: inline-block; width: 2%;"></span>
+          <mat-form-field hideRequiredMarker style="width: 60%;">
+            <mat-label>{{ 'SETTINGS.contacts.labelLastName' | translate }}</mat-label>
+            <input
+              name="member_last_name"
+              matInput
+              [(ngModel)]="member.member_last_name"
+              required>
+            <mat-error align="end">{{ 'SETTINGS.contacts.invalidRequired' | translate }}</mat-error>
+          </mat-form-field>
+
+          <!-- Role -->
+          <mat-form-field hideRequiredMarker class="rc-full-width">
+            <mat-label>{{ 'SETTINGS.contacts.labelJobRole' | translate }}</mat-label>
+            <mat-select
+              [(ngModel)]="member.member_role"
+              name="member_role"
+              required>
+              <mat-option *ngFor="let job of jobRoles" [value]="job">
+                {{ job }}
+              </mat-option>
+            </mat-select>
+            <mat-error align="end">{{ 'JOIN.invalidJobRequired' | translate }}</mat-error>
           </mat-form-field>
 
           <mat-form-field hideRequiredMarker class="rc-full-width">
-            <mat-label>{{ 'Profile-Detail.Email' | translate }}</mat-label>
+            <mat-label>{{ 'SETTINGS.contacts.labelEmail' | translate }}</mat-label>
             <input
               name="member_email"
               matInput
               [(ngModel)]="member.member_email"
               required
               email>
-            <mat-error align="end">{{ 'Profile-Detail.ValidEmail' | translate }}</mat-error>
+            <mat-error align="end">{{ 'SETTINGS.contacts.invalidEmail' | translate }}</mat-error>
           </mat-form-field>
 
           <mat-form-field hideRequiredMarker class="rc-full-width">
-            <mat-label>{{ 'Profile-Detail.JobTitle' | translate }}</mat-label>
-            <input
-              name="member_job"
-              matInput
-              ngModel
-              [(ngModel)]="member.member_job"
-              required>
-            <mat-hint align="end">{{ 'Profile-Detail.Job' | translate }}</mat-hint>
-            <mat-error align="end">{{ 'Profile-Detail.Required' | translate }}</mat-error>
-          </mat-form-field>
-
-          <mat-form-field hideRequiredMarker class="rc-full-width">
-            <mat-label>{{ 'Profile-Detail.Group' | translate }}</mat-label>
-            <input
-              name="member_restaurant_group"
-              matInput
-              ngModel
-              [(ngModel)]="member.member_restaurant_group">
-            <mat-hint align="end">{{ 'Profile-Detail.Company' | translate }}</mat-hint>
-            <mat-error align="end">{{ 'Profile-Detail.Required' | translate }}</mat-error>
-          </mat-form-field>
-
-          <mat-form-field hideRequiredMarker class="rc-full-width">
-            <mat-label>{{ 'Profile-Detail.Mobile' | translate }}</mat-label>
+            <mat-label>{{ 'SETTINGS.contacts.labelTel' | translate }}</mat-label>
             <input
               name="member_telephone"
               type="text"
@@ -62,7 +62,7 @@
               minlength="11"
               pattern="^[0-9 ]+$"
               required>
-            <mat-error align="end">{{ 'Profile-Detail.InvalidMobile' | translate }}</mat-error>
+            <mat-error align="end">{{ 'SETTINGS.contacts.invalidMobile' | translate }}</mat-error>
           </mat-form-field>
 
         </div>
@@ -74,17 +74,19 @@
 
       <button
         type="button"
-        mat-dialog-close
+        tabindex="-1"
+        (click)="contactsDialog.close({ confirmed: false })"
         mat-button
         [disabled]="isSubmitting">
-        {{ 'Profile-Detail.Cancel' | translate }}
+        {{ 'SETTINGS.contacts.labelBtnCancel' | translate }}
       </button>
 
       <button
-        mat-flat-button
-        color="primary"
+        mat-button
+        (click)="contactsDialog.close({ confirmed: true, member: member })"
+        color="accent"
         [disabled]="isSubmitting || !formProfile.form.valid">
-        {{ 'Profile-Detail.Update' | translate }}
+        {{ 'SETTINGS.contacts.labelBtnUpdate' | translate | uppercase }}
       </button>
 
     </mat-dialog-actions>

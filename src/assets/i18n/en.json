@@ -522,6 +522,18 @@
 		"ValidPostcode": "Valid postcode required"
 	},
 	"SETTINGS": {
+		"contacts": {
+			"invalidMobile": "Invalid number",
+			"invalidRequired": "This is required",
+			"labelBtnCancel": "Cancel",
+			"labelBtnUpdate": "Update",
+			"labelEmail": "Email address",
+			"labelFirstName": "First name",
+			"labelJobRole": "Job role",
+			"labelLastName": "Last name",
+			"labelTel": "Mobile number",
+			"titleUpdateContacts": "Member details"
+		},
 		"infoAccounts": "The restaurants linked to your account are shown below and you can manage additional restaurants by adding them here, subject to your current subscription.\n\nUse the option above to MANAGE PAYMENTS and access your billing history.",
 		"infoAuth": "These are you Membership credentials that you'll need to Sign In to the application. Passwords must be at least 8 characters.",
 		"infoAvatar": "Click the image add/edit and personalise your Membership details.",
@@ -538,6 +550,8 @@
 		"labelRole": "Role",
 		"labelSubscription": "Subscription",
 		"labelTel": "Mobile",
+		"msgContactsUpdated": "Your contact details have been updated",
+		"msgUpdateFailed": "Sorry, there was a problem updating your information",
 		"password": {
 			"currentPwd": "Your current password",
 			"errorFailed": "Password update failed",
@@ -564,7 +578,9 @@
 			"tipCopyLink": "Copy the referral link"
 		},
 		"tipAvatar": "Upload an image to use as an avatar",
+		"tipCopyReferral": "Copy your referral link",
 		"tipEdit": "Edit",
+		"tipEmailReferral": "Send an email",
 		"tipHelp": "Help",
 		"tipManagePayments": "View your payments and billing history",
 		"tipRemove": "Remove {{ name }} from your account",

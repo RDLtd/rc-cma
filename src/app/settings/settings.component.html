@@ -2,10 +2,10 @@
   <!-- page grid -->
   <div class="mdc-layout-grid">
     <div class="mdc-layout-grid__inner">
+
       <!-- col 1 -->
       <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6">
         <div class="mdc-layout-grid__inner">
-
           <!-- Contacts -->
           <mat-card
             class="rc-card-rounded mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
@@ -15,7 +15,7 @@
               <span>
                 <button
                   mat-icon-button
-                  (click)="updateProfile()"
+                  (click)="updateMemberContacts()"
                   matTooltip="{{ 'SETTINGS.tipEdit' | translate }}">
                   <mat-icon>edit</mat-icon>
                 </button>
@@ -35,7 +35,7 @@
               <ul class="rc-line-items">
                 <li>
                   <label>{{ 'SETTINGS.labelName' | translate }}:</label>
-                  {{ member?.member_first_name | titlecase }} {{ member?.member_last_name | titlecase }}
+                  {{ member.member_first_name | titlecase }} {{ member?.member_last_name | titlecase }}
                 </li>
                 <li>
                   <label>{{ 'SETTINGS.labelRole' | translate }}:</label>
@@ -119,6 +119,8 @@
           </mat-card>
         </div>
       </div>
+
+      <!-- Col 2 -->
       <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6">
         <div class="mdc-layout-grid__inner">
           <!-- Referrals -->
@@ -130,15 +132,15 @@
               <span>
                 <button
                   mat-icon-button
-                  (click)="dspReferrals()"
-                  matTooltip="{{ 'SETTINGS.tipReferEmail' | translate }}">
-                  <mat-icon>email</mat-icon>
+                  ngxClipboard
+                  [cbContent]="getReferralCode()"
+                  matTooltip="{{ 'SETTINGS.tipCopyReferral' | translate }}">
+                  <mat-icon>link</mat-icon>
                 </button>
                 <button
                   mat-icon-button
-                  (click)="dspReferrals()"
-                  matTooltip="{{ 'SETTINGS.tipReferSocial' | translate }}">
-                  <mat-icon>share</mat-icon>
+                  matTooltip="{{ 'SETTINGS.tipEmailReferral' | translate }}">
+                  <mat-icon>email</mat-icon>
                 </button>
               </span>
             </div>

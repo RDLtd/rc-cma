@@ -522,6 +522,18 @@
 		"ValidPostcode": "Code postal valide requis"
 	},
 	"SETTINGS": {
+		"contacts": {
+			"invalidMobile": "Numéro invalide",
+			"invalidRequired": "C'est nécessaire",
+			"labelBtnCancel": "annuler",
+			"labelBtnUpdate": "Mettre à jour",
+			"labelEmail": "Adresse électronique",
+			"labelFirstName": "Prénom",
+			"labelJobRole": "Rôle de l'emploi",
+			"labelLastName": "Nom de famille\\",
+			"labelTel": "Numéro de portable",
+			"titleUpdateContacts": "Détails du membre"
+		},
 		"infoAccounts": "Les restaurants liés à votre compte sont affichés ci-dessous et vous pouvez gérer des restaurants supplémentaires en les ajoutant ici, sous réserve de votre abonnement actuel.\n\nUtilisez l'option ci-dessus pour GÉRER LES PAIEMENTS et accéder à votre historique de facturation.",
 		"infoAuth": "Ce sont vos informations d'identification d'adhésion dont vous aurez besoin pour vous connecter à l'application. Les mots de passe doivent comporter au moins 8 caractères.",
 		"infoAvatar": "Cliquez sur l'image ajouter / modifier et personnaliser les détails de votre adhésion.",
@@ -538,6 +550,8 @@
 		"labelRole": "Rôle",
 		"labelSubscription": "abonnement",
 		"labelTel": "Mobile",
+		"msgContactsUpdated": "Vos coordonnées ont été mises à jour",
+		"msgUpdateFailed": "Désolé, un problème est survenu lors de la mise à jour de vos informations",
 		"password": {
 			"currentPwd": "Votre mot de passe actuel",
 			"errorFailed": "La mise à jour du mot de passe a échoué",
@@ -564,7 +578,9 @@
 			"tipCopyLink": "Copiez le lien de parrainage"
 		},
 		"tipAvatar": "Télécharger une image à utiliser comme avatar",
+		"tipCopyReferral": "Copiez votre lien de parrainage",
 		"tipEdit": "modifier",
+		"tipEmailReferral": "Envoyer un e-mail",
 		"tipHelp": "Aidez-moi",
 		"tipManagePayments": "Afficher vos paiements et votre historique de facturation",
 		"tipRemove": "Supprimer {{ name }} de votre compte",

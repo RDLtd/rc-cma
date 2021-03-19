@@ -88,7 +88,6 @@ import { FileUploadModule } from 'ng2-file-upload';
 import { MarkdownModule } from 'ngx-markdown';
 import { ClipboardModule } from 'ngx-clipboard';
 import { JoinComponent } from './join/join.component';
-import { ReferralsComponent } from './settings/referrals.component';
 import { LoadComponent } from './common/loader/load.component';
 import { CmsSpwLinksComponent } from './cms/cms-spw-links.component';
 import { QRCodeModule } from 'angularx-qrcode';
@@ -149,7 +148,6 @@ export function appInitializerFactory(translate: TranslateService) {
     SigninComponent,
     MarketplaceComponent,
     JoinComponent,
-    ReferralsComponent,
     LoadComponent,
     CmsSpwLinksComponent,
     MembershipComponent,
@@ -182,7 +180,8 @@ export function appInitializerFactory(translate: TranslateService) {
       api_secret: 'EhLM0NhD7HvJDjX5IvF90u6guq8'
     }),
     QRCodeModule,
-    GoogleMapsModule
+    GoogleMapsModule,
+    ClipboardModule
   ],
   providers: [
     AppConfig,

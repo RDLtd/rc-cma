@@ -16,7 +16,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import * as moment from 'moment';
-import { ReferralsComponent } from './referrals.component';
 import { ClipboardService } from 'ngx-clipboard';
 import { AppConfig } from '../app.config';
 import { CmsLocalService } from '../cms';
@@ -69,23 +68,23 @@ export class SettingsComponent implements OnInit {
     private _clipboardService: ClipboardService,
     private loadService: LoadService,
     public dialog: MatDialog) {
-
       this.loadService.open();
-
   }
 
   ngOnInit() {
 
     this.brand = this.appConfig.brand;
     this.member = JSON.parse(localStorage.getItem('rd_profile'));
+    this.lang = localStorage.getItem('rd_language');
 
-    // Updare header label
+    // Update header label
     this.header.updateSectionName(this.translate.instant('HUB.sectionSettings'));
 
     // Add member name to avatar url
     this.imgAvatarPlaceholderUrl += `${this.member.member_first_name} ${this.member.member_last_name}`;
-    this.lang = localStorage.getItem('rd_language');
+
     moment.locale(this.lang);
+
     this.translate.get('Profile-Page').subscribe(data => {
       this.t_data = data;
       this.imgRestPlaceholderUrl = `https://via.placeholder.com/800x450?text=${this.t_data.AwaitingImage}`;
@@ -94,6 +93,7 @@ export class SettingsComponent implements OnInit {
       error => console.log('No t_data', error));
   }
 
+  // Switch language
   setLanguage(lang): void {
     localStorage.setItem('rd_language', lang);
     window.location.reload();
@@ -222,19 +222,51 @@ export class SettingsComponent implements OnInit {
         return this.imgRestPlaceholderUrl;
     }
   }
+
   getMemberClPublicId(url) {
       const a = url.split('/');
       return a.splice(a.length - 3).join('/');
   }
 
-  updateProfile() {
-    if (this.isDemoMember) {
-      this.openSnackBar(this.t_data.DemoProfile, '');
-    } else {
-      const dialogRef = this.dialog.open(ContactsComponent);
-      dialogRef.componentInstance.member = this.member;
-      dialogRef.componentInstance.dialog = dialogRef;
-    }
+  updateMemberContacts() {
+    // save a reference to the current member details
+    // in case the update is cancelled
+    const cachedMember = Object.assign([], this.member);
+    const dialogRef = this.dialog.open(ContactsComponent, {
+      data: {
+        member: this.member
+      }
+    });
+    dialogRef.afterClosed().subscribe( res => {
+
+      if (res.confirmed) {
+        // console.log('Update with:', res.member);
+        this.updateMember(res.member);
+
+      } else {
+
+        // Cancelled updates so revert
+        console.log('Revert');
+        // Reset form data from cache
+        this.member = Object.assign({}, cachedMember);
+      }
+    });
+  }
+
+  updateMember(member) {
+    // console.log('update:', member);
+    // update member
+    this.memberService.update(member)
+      .subscribe(
+        () => {
+          localStorage.setItem('rd_profile', JSON.stringify(this.member));
+          localStorage.setItem('rd_username', `${this.member.member_first_name} ${this.member.member_last_name}`);
+          this.openSnackBar(this.translate.instant('SETTINGS.msgContactsUpdated'));
+        },
+        error => {
+          console.log(error);
+          this.openSnackBar(this.translate.instant('SETTINGS.msgUpdateFailed'));
+        });
   }
 
   updatePassword () {
@@ -282,43 +314,8 @@ export class SettingsComponent implements OnInit {
 
   }
 
-  dspReferrals() {
-
-    const dialogRef = this.dialog.open(ReferralsComponent, {
-      data: {
-        brand: this.appConfig.brand.name,
-        member: this.member,
-        joinUrl: this.getReferralLink()
-      }
-    });
-
-    dialogRef.afterClosed().subscribe( tgt => {
-
-      switch (tgt) {
-        case 'code': {
-          this._clipboardService.copyFromContent(this.member.member_promo_code);
-          this.openSnackBar(
-            this.t_data.Copied,
-            'OK',
-            10000
-          );
-          break;
-        }
-        case 'link': {
-          this._clipboardService.copyFromContent(this.getReferralLink());
-          this.openSnackBar(
-            this.t_data.Copied,
-            'OK',
-            10000
-          );
-          break;
-        }
-        default: {
-          break;
-        }
-      }
-
-    });
+  getReferralCode(): string {
+    return `${this.appConfig.brand.joinUrl}?referral=${this.member.member_promo_code}`
   }
 
   addRestaurants() {

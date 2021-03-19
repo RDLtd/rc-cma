@@ -16,9 +16,9 @@ export class AppConfig {
 
 
   // Should only need to switch here to change from local to Heroku server
-  // public readonly apiUrl = 'http://localhost:4000';
+  public readonly apiUrl = 'http://localhost:4000';
 
-  public readonly apiUrl = 'https://rc-server-staging.herokuapp.com';
+  // public readonly apiUrl = 'https://rc-server-staging.herokuapp.com';
   //public readonly apiUrl = 'https://rc-server-prod.herokuapp.com';
 
   // update 05/09/18 to read apiURL from .env file
@@ -61,6 +61,7 @@ export class AppConfig {
       prefix: 'rc',
       logo: 'rc-logo',
       url: `https://${this.tld.rc}`,
+      joinUrl: `https://app.${this.tld.rc}/join`,
       spwDemoUrl: `https://example-restaurant.com/`,
       email: {
         support: `support@${this.tld.rc}`,
@@ -96,6 +97,7 @@ export class AppConfig {
       prefix: 'ri',
       logo: 'ri-logo',
       url: `https://${this.tld.ri}`,
+      joinUrl: `https://app.${this.tld.ri}/join`,
       spwDemoUrl: `https://example-restaurant.com/`,
       email: {
         support: `support@${this.tld.ri}`,

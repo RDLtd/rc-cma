@@ -1,8 +1,7 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { Member } from '../_models';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { MemberService } from '../_services';
 import { TranslateService } from '@ngx-translate/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'rc-contacts',
@@ -10,60 +9,19 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class ContactsComponent implements OnInit {
 
-  @ViewChild('formProfile', {static: true}) formProfile;
+  //@ViewChild('formProfile', {static: true}) formProfile;
   member: Member;
-  member_full_name: string;
   isSubmitting: boolean = false;
-  dialog: any;
-
-  // translation variables
-  t_data: any;
+  jobRoles: any;
 
   constructor(
-    private snackBar: MatSnackBar,
-    private translate: TranslateService,
-    private memberService: MemberService
+    public contactsDialog: MatDialogRef<ContactsComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private translate: TranslateService
   ) { }
 
   ngOnInit() {
-    // console.log(this.member);
-    this.translate.get('Profile-Detail').subscribe(data => this.t_data = data);
-    this.member_full_name = this.member.member_first_name + ' ' + this.member.member_last_name;
-  }
-
-  onProfileUpdate(f) {
-    // console.log(f);
-    const fullName = f.member_fullname.split(' ');
-    this.member.member_first_name = fullName[0];
-    this.member.member_last_name = fullName.slice(1).join(); // combine whatever's left
-
-    console.log(this.member);
-
-    this.memberService.update(this.member).
-      subscribe(
-        () => {
-          localStorage.setItem('rd_profile', JSON.stringify(this.member));
-          localStorage.setItem('rd_username', `${this.member.member_first_name} ${this.member.member_last_name}`);
-          this.dspSnackBar(this.t_data.ProfileUpdated);
-          this.dialog.close();
-        },
-        error => {
-          console.log(error);
-          this.dspSnackBar(this.t_data.ErrorUpdating);
-      });
-
-    console.log(this.member);
-
-  }
-
-  toggleSection(section) {
-    // console.log(section);
-    section.classList.toggle('rc-card-section-content-open');
-  }
-
-  dspSnackBar(msg: string) {
-    this.snackBar.open(msg, null, {
-      duration: 5000
-    });
+    this.jobRoles = this.translate.instant('JOIN.jobRoles');
+    this.member = this.data.member;
   }
 }
