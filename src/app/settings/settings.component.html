@@ -20,12 +20,6 @@
                   matTooltip="{{ 'SETTINGS.tipEdit' | translate }}">
                   <mat-icon>edit</mat-icon>
                 </button>
-<!--                <button-->
-<!--                  mat-icon-button-->
-<!--                  (click)="help.dspHelp('profile-user')"-->
-<!--                  matTooltip="{{ 'SETTINGS.tipHelp' | translate }}">-->
-<!--                  <mat-icon>help_outline</mat-icon>-->
-<!--                </button>-->
               </span>
             </div>
             <div class="rc-card-subtitle">
@@ -55,10 +49,10 @@
                   <mat-radio-group
                     (change)="setLanguage(lang)"
                     [(ngModel)]="lang">
-                    <mat-radio-button class="example-radio-button" [value]="'en'">
+                    <mat-radio-button [value]="'en'">
                       english
                     </mat-radio-button>
-                    <mat-radio-button class="example-radio-button" [value]="'fr'">
+                    <mat-radio-button [value]="'fr'">
                       français
                     </mat-radio-button>
                   </mat-radio-group>
@@ -199,6 +193,22 @@
 
 
               <div class="rc-managed-restaurants">
+
+                <div
+                  *ngIf="restaurants?.length === 0"
+                  class="rc-managed-restaurant-placeholder">
+                  <div>
+                    ADD YOUR RESTAURANT
+                  </div>
+                  <div markdown ngpreservewhitespaces>
+                      To begin managing your web content and publishing your **Single Page Website** that's included with
+                      your Membership, add your restaurant here
+                  </div>
+
+                </div>
+
+
+
                 <div
                   *ngFor="let restaurant of restaurants; let idx = index"
                   class="rc-managed-restaurant">
@@ -223,14 +233,11 @@
                     cancel
                   </mat-icon>
 
-
                   <div
                     [routerLink]="['/restaurants', restaurant.restaurant_id, 'cms', 'dashboard']">
                     <h3>{{ restaurant.restaurant_name }}</h3>
-                    <p class="rc-txt-small">{{ restaurant?.restaurant_address_1 }}, {{
-                      restaurant?.restaurant_address_2 }}<br>
-                    {{ restaurant?.restaurant_address_2 }}<br>
-                        {{ restaurant?.restaurant_post_code }}</p>
+                    <p class="rc-txt-small">{{ restaurant?.restaurant_address_1 }}, {{ restaurant?.restaurant_address_2 }}<br>
+                    {{ restaurant?.restaurant_address_2 }}<br>{{ restaurant?.restaurant_post_code }}</p>
                   </div>
                 </div>
               </div>

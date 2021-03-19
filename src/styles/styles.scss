@@ -622,6 +622,31 @@ a.mat-menu-item {text-decoration: none;}
 
   }
 }
+.rc-managed-restaurant-placeholder {
+  background-color: #eee;
+  padding: 0;
+  display: flex;
+
+  div:first-child {
+    background-color: #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 180px;
+    height:120px;
+    color: #000;
+    font-size: 14px;
+    line-height: 1.2;
+    text-align: center;
+  }
+  div:last-child {
+    flex: auto;
+    padding: 16px;
+    height: 120px;
+    width: 100%;
+    font-size: 14px;
+  }
+}
 
 .rc-card {
   position: relative;

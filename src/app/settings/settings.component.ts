@@ -3,7 +3,6 @@ import { Restaurant, Member } from '../_models';
 import {
   RestaurantService,
   MemberService,
-  AuthenticationService,
   CMSService,
   AnalyticsService
 } from '../_services';
@@ -47,8 +46,9 @@ export class SettingsComponent implements OnInit {
 
   brand: any;
   d_member_signedup: string;
-  d_member_job: string;
+  // d_member_job: string;
   memberImagePath = this.imgUserPlaceHolderUrl;
+
   lang: string;
 
   constructor(
@@ -62,7 +62,6 @@ export class SettingsComponent implements OnInit {
     private router: Router,
     private translate: TranslateService,
     public help: HelpService,
-    public authService: AuthenticationService,
     public appConfig: AppConfig,
     private _clipboardService: ClipboardService,
     private loadService: LoadService,
@@ -75,7 +74,9 @@ export class SettingsComponent implements OnInit {
     this.brand = this.appConfig.brand;
     this.member = JSON.parse(localStorage.getItem('rd_profile'));
     this.lang = localStorage.getItem('rd_language');
+
     moment.locale(this.lang);
+
     this.setMember();
 
     // Update header label
@@ -184,6 +185,7 @@ export class SettingsComponent implements OnInit {
   }
 
   getDefaultImages() {
+
     const numberOfRestaurants = this.restaurants.length;
     for (let i = 0; i < numberOfRestaurants; i++) {
       this.cms.getElementClass(this.restaurants[i].restaurant_id, 'Image', 'Y')
