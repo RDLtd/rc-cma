@@ -67,8 +67,8 @@
                 <!-- Avatar -->
                 <cl-image
                   style="cursor: pointer"
-                  width="96"
-                  height="96"
+                  width="120"
+                  height="120"
                   *ngIf="clPublicId"
                   (click)="updateImage()"
                   matTooltip="{{ 'SETTINGS.tipAvatar' | translate }}"
@@ -86,7 +86,6 @@
                   <span>{{ 'SETTINGS.infoAvatar' | translate}}</span>
                 </div>
               </div>
-              <!-- Profile Image -->
             </mat-card-content>
           </mat-card>
           <!-- Auth -->
@@ -162,21 +161,15 @@
               <span class="rc-space-filler"></span>
               <span>
                 <button
-                  mat-icon-button
-                  (click)="updateProfile()"
-                  matTooltip="{{ 'SETTINGS.tipEdit' | translate }}">
-                  <mat-icon>edit</mat-icon>
-                </button>
-                <button
-                  mat-icon-button
-                  (click)="help.dspHelp('profile-restaurants')"
-                  matTooltip="{{ 'SETTINGS.tipEdit' | translate }}">
-                  <mat-icon>help_outline</mat-icon>
+                  STYLE="background-color: #ddd;"
+                  mat-flat-button
+                  matTooltip="{{ 'SETTINGS.tipManagePayments' | translate }}">
+                  {{ 'SETTINGS.labelManagePayments' | translate | uppercase }}
                 </button>
               </span>
             </div>
             <div class="rc-card-subtitle">
-              {{ 'SETTINGS.infoMember' | translate }}
+              {{ 'SETTINGS.infoAccounts' | translate }}
             </div>
             <mat-card-content>
               <ul class="rc-line-items">

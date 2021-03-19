@@ -522,6 +522,7 @@
 		"ValidPostcode": "Valid postcode required"
 	},
 	"SETTINGS": {
+		"infoAccounts": "The restaurants linked to your account are shown below and you can manage additional restaurants by adding them here, subject to your current subscription.\n\nUse the option above to MANAGE PAYMENTS and access your billing history.",
 		"infoAuth": "These are you Membership credentials that you'll need to Sign In to the application. Passwords must be at least 8 characters.",
 		"infoAvatar": "Click the image add/edit and personalise your Membership details.",
 		"infoMember": "All contact regarding your Membership will be sent to this email address.",
@@ -529,6 +530,7 @@
 		"labelEmail": "Email",
 		"labelJoined": "Join Date",
 		"labelLang": "Language",
+		"labelManagePayments": "Manage payments",
 		"labelMemberId": "Member ID",
 		"labelName": "Name",
 		"labelPwd": "Password",
@@ -564,6 +566,7 @@
 		"tipAvatar": "Upload an image to use as an avatar",
 		"tipEdit": "Edit",
 		"tipHelp": "Help",
+		"tipManagePayments": "View your payments and billing history",
 		"tipRemove": "Remove {{ name }} from your account",
 		"titleAccount": "Account details",
 		"titleAuthentication": "Authentication",

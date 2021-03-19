@@ -522,6 +522,7 @@
 		"ValidPostcode": "Code postal valide requis"
 	},
 	"SETTINGS": {
+		"infoAccounts": "Les restaurants liés à votre compte sont affichés ci-dessous et vous pouvez gérer des restaurants supplémentaires en les ajoutant ici, sous réserve de votre abonnement actuel.\n\nUtilisez l'option ci-dessus pour GÉRER LES PAIEMENTS et accéder à votre historique de facturation.",
 		"infoAuth": "Ce sont vos informations d'identification d'adhésion dont vous aurez besoin pour vous connecter à l'application. Les mots de passe doivent comporter au moins 8 caractères.",
 		"infoAvatar": "Cliquez sur l'image ajouter / modifier et personnaliser les détails de votre adhésion.",
 		"infoMember": "Tous les contacts concernant votre adhésion seront envoyés à cette adresse e-mail.",
@@ -529,6 +530,7 @@
 		"labelEmail": "Email",
 		"labelJoined": "Date d'inscription",
 		"labelLang": "Langage",
+		"labelManagePayments": "Gérer les paiements",
 		"labelMemberId": "ID membres",
 		"labelName": "Prénom",
 		"labelPwd": "Mot de passe",
@@ -564,6 +566,7 @@
 		"tipAvatar": "Télécharger une image à utiliser comme avatar",
 		"tipEdit": "modifier",
 		"tipHelp": "Aidez-moi",
+		"tipManagePayments": "Afficher vos paiements et votre historique de facturation",
 		"tipRemove": "Supprimer {{ name }} de votre compte",
 		"titleAccount": "Details du compte",
 		"titleAuthentication": "Authentification",
