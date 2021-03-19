@@ -50,7 +50,7 @@ export class AuthenticationService {
   // }
 
   public setMember(member: Member) {
-    //console.log('setMember', member);
+    console.log('setMember', member);
     this.member = member;
   }
 

@@ -1,6 +1,6 @@
 <div class="rc-dialog rc-dialog-image-upload">
 
-  <h1 mat-dialog-title>{{ 'Profile-Image.ProfileImage' | translate }}</h1>
+  <h2 mat-dialog-title>{{ 'SETTINGS.titleUploadAvatar' | translate }}</h2>
 
   <mat-dialog-content>
 
@@ -8,13 +8,16 @@
 
       <form>
         <label class="image-select" for="imgUpload">
+
           <div class="image-container">
-            <img id="imgPreview" [src]="imgPreviewSrc" alt="Preview Image">
+            <img id="imgPreview" [src]="imgPreviewSrc">
           </div>
+
           <div class="image-select-label">
-            <span  *ngIf="!inProgress">{{ 'Profile-Image.SelectImage' | translate }}</span>
-            <span *ngIf="inProgress">{{ 'Profile-Image.LoadingImage' | translate }}</span>
+            <span  *ngIf="!inProgress">{{ 'SETTINGS.labelSelectImage' | translate | uppercase }}</span>
+            <span *ngIf="inProgress">{{ 'SETTINGS.labelLoadingImage' | translate | uppercase }}</span>
           </div>
+
         </label>
 
         <input
@@ -28,30 +31,31 @@
           multiple />
       </form>
 
-      <mat-progress-bar *ngIf="inProgress" color="primary" [value]="uploader?.progress"></mat-progress-bar>
+      <mat-progress-bar color="accent" *ngIf="inProgress" [value]="uploader?.progress"></mat-progress-bar>
     </div>
 
   </mat-dialog-content>
 
   <mat-dialog-actions align="center">
     <button
+      tabindex="-1"
       mat-button
       mat-dialog-close>
-      {{ 'Profile-Image.Cancel' | translate }}
+      {{ 'SETTINGS.labelBtnCancel' | translate }}
+    </button>
+    <button
+      tabindex="-1"
+      mat-button
+      (click)="deleteImage()"
+      [disabled]="inProgress">
+      {{ 'SETTINGS.labelBtnDelete' | translate }}
     </button>
     <button
       mat-button
-      color="warn"
-      (click)="deleteImage()"
-      [disabled]="inProgress">
-      {{ 'Profile-Image.Delete' | translate }}
-    </button>
-    <button
-      mat-raised-button
       (click)="updateImage()"
-      color="primary"
+      color="accent"
       [disabled]="!imgPrimed">
-      {{ 'Profile-Image.Update' | translate }}
+      {{ 'SETTINGS.labelBtnUpload' | translate | uppercase }}
     </button>
   </mat-dialog-actions>
 

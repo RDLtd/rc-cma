@@ -44,75 +44,6 @@ export class HubComponent implements AfterViewInit {
   //   }
   // ];
 
-  // Mock up some apps/services
-  // mockFeatures = [
-  //   {
-  //     id:  "cms",
-  //     name:         "Web Content",
-  //     icon:         "app-icon-cms",
-  //     description:  "Manage your restaurant's web content and publish you Single Page Website (SPW) that will be used." ,
-  //     status:       "Last updated on 28.02.2021",
-  //     route:        "/restaurant",
-  //     ext:          false
-  //   },
-  //   {
-  //     id:           "forum",
-  //     name:         "Community Forum",
-  //     icon:         "app-icon-forum",
-  //     description:  "Visit our Facebook Community Group  of restaurant professionals and contribute.",
-  //     status:       "134 Members Online Now!",
-  //     route:        "https://www.facebook.com/restaurantcollective/",
-  //     ext:          true
-  //   },
-  //   {
-  //     id:           "knowledge",
-  //     name:         "Knowledge Base",
-  //     icon:         "app-icon-knowledge",
-  //     description:  "Get help and information from the experts, with advice on all aspects of running a restaurant," +
-  //                   " including help using the Member's Hub.",
-  //     status:       "8 New articles published this week",
-  //     route:        "https://restaurantcollective.org.uk/",
-  //     ext:          true
-  //   },
-  //   {
-  //     id:           "market",
-  //     name:         "Deals Marketplace",
-  //     icon:         "app-icon-market",
-  //     description:  "A wide range of offers and services available exclusive to Restaurant Collective Members. New" +
-  //                   " deals are being added every week, so check regularly..",
-  //     status:       "Average savings £1750 p.a.",
-  //     route:        "/marketplace",
-  //     ext:          false
-  //   },
-  //   {
-  //     id:           "settings",
-  //     name:         "Membership Settings",
-  //     icon:         "app-icon-profile",
-  //     description:  "Manage your Restaurant Collective membership account and user profile.",
-  //     status:       "Member since 28 Feb 2021",
-  //     route:        "/profile",
-  //     ext:          false
-  //   },
-  //   // {
-  //   //   name: "Job & Staff Search",
-  //   //   icon: "app-icon-jobs",
-  //   //   desc: "Manage your Restaurant Collective membership account and user profile.",
-  //   //   status: "22 new jobs published today",
-  //   //   route: "job-search",
-  //   //   ext: true
-  //   // },
-  //   {
-  //     id: "survey",
-  //     name: "Tell us what you need",
-  //     icon: "app-icon-survey",
-  //     description: "We want to provide the tools and" +
-  //       " services that our members need the most. Help us to help you by taking 30 seconds to tell us what you want. ",
-  //     status: "736 RESPONSES SO FAR",
-  //     route: "https://restaurantcollective.org.uk/",
-  //     ext: true
-  //   }
-  // ]
-
   constructor(
     private loader: LoadService,
     private header: HeaderService,
@@ -156,9 +87,9 @@ export class HubComponent implements AfterViewInit {
   }
 
   dspMessages(): void {
-    // console.log('AUTH', !this.member.member_authenticated);
+    console.log('New member', this.member.isAuthenticated);
     let data = {
-      newMember: false,
+      newMember: !this.member.isAuthenticated,
       member: this.member,
       messages: this.messages
     }

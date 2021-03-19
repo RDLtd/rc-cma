@@ -34,4 +34,5 @@
   member_messages_seen: string;
   member_launch_number: number;
   member_promo_code: string;
+  isAuthenticated: boolean;
 }

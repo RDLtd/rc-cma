@@ -14,17 +14,18 @@
               <span class="rc-space-filler"></span>
               <span>
                 <button
+                  color="accent"
                   mat-icon-button
                   (click)="updateMemberContacts()"
                   matTooltip="{{ 'SETTINGS.tipEdit' | translate }}">
                   <mat-icon>edit</mat-icon>
                 </button>
-                <button
-                  mat-icon-button
-                  (click)="help.dspHelp('profile-user')"
-                  matTooltip="{{ 'SETTINGS.tipHelp' | translate }}">
-                  <mat-icon>help_outline</mat-icon>
-                </button>
+<!--                <button-->
+<!--                  mat-icon-button-->
+<!--                  (click)="help.dspHelp('profile-user')"-->
+<!--                  matTooltip="{{ 'SETTINGS.tipHelp' | translate }}">-->
+<!--                  <mat-icon>help_outline</mat-icon>-->
+<!--                </button>-->
               </span>
             </div>
             <div class="rc-card-subtitle">
@@ -96,6 +97,7 @@
               <span class="rc-space-filler"></span>
               <span>
             <button
+              color="accent"
               mat-icon-button
               (click)="updatePassword()"
               matTooltip="{{ 'SETTINGS.tipEdit' | translate }}">
@@ -131,13 +133,16 @@
               <span class="rc-space-filler"></span>
               <span>
                 <button
+                  color="accent"
                   mat-icon-button
                   ngxClipboard
+                  (click)="copied()"
                   [cbContent]="getReferralCode()"
                   matTooltip="{{ 'SETTINGS.tipCopyReferral' | translate }}">
                   <mat-icon>link</mat-icon>
                 </button>
                 <button
+                  color="accent"
                   mat-icon-button
                   matTooltip="{{ 'SETTINGS.tipEmailReferral' | translate }}">
                   <mat-icon>email</mat-icon>
@@ -183,10 +188,11 @@
                 <h2>{{ 'SETTINGS.titleManagedRestaurants' | translate }}</h2>
                 <span class="rc-space-filler"></span>
                 <span>
-                <button
-                  mat-icon-button (click)="addRestaurants()"
-                  matTooltip="{{ 'Profile-Page.NewAssociation' | translate }}">
-                  <mat-icon>add_circle_outline</mat-icon>
+                  <button
+                    color="accent"
+                    mat-icon-button (click)="addRestaurants()"
+                    matTooltip="{{ 'SETTINGS.labelAddRestaurant' | translate }}">
+                    <mat-icon>add_circle_outline</mat-icon>
                 </button>
               </span>
               </div>

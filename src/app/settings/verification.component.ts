@@ -106,7 +106,7 @@ export class VerificationComponent implements OnInit {
       } else {
         // Invalid
         this.cmsLocalService.dspSnackbar(
-          this.t_data.Again,
+          this.translate.instant('VERIFY.msgInvalidCode'),
           'OK',
           10);
         // console.log(this.codeInput);
@@ -131,7 +131,7 @@ export class VerificationComponent implements OnInit {
       .subscribe(
       () => {
         this.cmsLocalService.dspSnackbar(
-          this.t_data.CodeSent + r.restaurant_email,
+          this.translate.instant('VERIFY.msgCodeSent', { email: r.restaurant_email }),
           'OK',
           10);
       },
@@ -152,6 +152,9 @@ export class VerificationComponent implements OnInit {
   }
 
   notifyCuration() {
+
+    // TODO: Can we use the new email service for this stuff now?
+
     const d = this.data;
     const msg =
       `# ${this.t_data.Change}\n\n` +

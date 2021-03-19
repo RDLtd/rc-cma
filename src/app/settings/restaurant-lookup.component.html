@@ -1,7 +1,7 @@
 <form #restListing="ngForm">
 
   <h1 mat-dialog-title>
-    {{ 'Restaurant-Lookup.Find' | translate }}
+    {{ 'LOOKUP.titleFind' | translate }}
   </h1>
 
   <mat-dialog-content>
@@ -10,7 +10,7 @@
       <mat-form-field
         floatLabel="always"
         class="rc-full-width">
-        <mat-label>{{ 'Restaurant-Lookup.EnterName' | translate | uppercase }}</mat-label>
+        <mat-label>{{ 'LOOKUP.labelEnterName' | translate | uppercase }}</mat-label>
         <input
           #searchInput
           name="search"
@@ -24,13 +24,13 @@
     </section>
 
     <section>
-      <span [hidden]="!noSearchResults">{{ 'Restaurant-Lookup.Sorry' | translate }}</span>
+      <span [hidden]="!noSearchResults">{{ 'LOOKUP.msgNoMatch' | translate }}</span>
       <ul class="rc-lookup-results">
         <li *ngFor="let restaurant of restaurants">
           <a (click)="associateRestaurant(restaurant)">
             <span>{{ restaurant.restaurant_name }} – {{ restaurant.restaurant_post_code }}</span>
             <span class="rc-space-filler"></span>
-            <span>{{ 'Restaurant-Lookup.Add' | translate }}</span>
+            <span>{{ 'LOOKUP.labelAdd' | translate }}</span>
           </a>
         </li>
       </ul>
@@ -39,17 +39,16 @@
     <section
       *ngIf="noSearchResults || dspNewListingForm"
       class="rc-lookup-request">
-      <h2 mat-dialog-title>{{ 'Restaurant-Lookup.New' | translate }}</h2>
+      <h2 mat-dialog-title>{{ 'LOOKUP.titleNew' | translate }}</h2>
       <mat-form-field
-        floatLabel="always"
+        hideRequiredMarker
         class="rc-full-width">
-        <mat-label>{{ 'Restaurant-Lookup.Name' | translate }}</mat-label>
+        <mat-label>{{ 'LOOKUP.labelName' | translate }}</mat-label>
         <input
         #newRestInput
         id="newRestInput"
         matInput
         name="newRestaurantName"
-        placeholder="{{ 'Restaurant-Lookup.Name' | translate }}"
         [ngModel]="searchInput.value"
         type="text"
         required
@@ -58,49 +57,47 @@
       </mat-form-field>
 
       <mat-form-field
-        floatLabel="always"
+        hideRequiredMarker
         class="rc-half-width">
-        <mat-label>{{ 'Restaurant-Lookup.PostCode' | translate }}</mat-label>
+        <mat-label>{{ 'LOOKUP.labelPostCode' | translate }}</mat-label>
         <input
           style="text-transform: uppercase"
           matInput
           name="newRestaurantPostcode"
-          placeholder="{{ 'Restaurant-Lookup.PostCode' | translate }}"
           ngModel
           type="text"
           minlength="5"
           autocomplete="off"
           required>
-        <mat-error>{{ 'Restaurant-Lookup.ValidPostcode' | translate }}</mat-error>
+        <mat-error>{{ 'LOOKUP.errorPostcode' | translate }}</mat-error>
       </mat-form-field>
 
       <mat-form-field
-        floatLabel="always"
+        hideRequiredMarker
         class="rc-half-width">
-        <mat-label>Telephone</mat-label>
+        <mat-label>{{ 'LOOKUP.labelTel' | translate }}</mat-label>
         <input
           matInput
           name="newRestaurantTel"
-          placeholder="TEL"
           ngModel
           type="text"
           autocomplete="off"
           pattern="[0-9][0-9]*|0"
           minlength="10"
           required>
-        <mat-error>{{ 'Restaurant-Lookup.ValidNumber' | translate }}</mat-error>
+        <mat-error>{{ 'LOOKUP.errorTel' | translate }}</mat-error>
       </mat-form-field>
 
       <div class="rc-lookup-actions">
         <button
           mat-button
-          mat-dialog-close="">{{ 'Restaurant-Lookup.Cancel' | translate }}
+          mat-dialog-close="">{{ 'LOOKUP.labelBtnCancel' | translate | uppercase }}
         </button>
         <button
-          mat-raised-button
+          mat-button
           color="accent"
           [disabled]="!restListing.form.valid"
-          (click)="sendNewRequest(restListing.form.value)">{{ 'Restaurant-Lookup.Send' | translate }}</button>
+          (click)="sendNewRequest(restListing.form.value)">{{ 'LOOKUP.labelBtnSend' | translate | uppercase }}</button>
       </div>
 
     </section>
@@ -110,12 +107,14 @@
   <mat-dialog-actions align="end" *ngIf="!dspNewListingForm && !noSearchResults">
     <button
       mat-button
-      mat-dialog-close="">{{ 'Restaurant-Lookup.Cancel' | translate }}
+      mat-dialog-close="">{{ 'LOOKUP.labelBtnCancel' | translate | uppercase}}
     </button>
     <button
       *ngIf="searchInput.value"
       mat-button
-      (click)="showRequestForm(searchInput)">{{ 'Restaurant-Lookup.NotListed' | translate }}</button>
+      (click)="showRequestForm(searchInput)">
+      {{ 'LOOKUP.labelBtnNotListed' | translate | uppercase }}
+    </button>
   </mat-dialog-actions>
 
 </form>
