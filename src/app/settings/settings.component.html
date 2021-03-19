@@ -31,24 +31,6 @@
               {{ 'SETTINGS.infoMember' | translate }}
             </div>
             <mat-card-content>
-              <!-- Avatar -->
-              <cl-image
-                style="cursor: pointer"
-                width="96"
-                height="96"
-                *ngIf="clPublicId"
-                (click)="updateImage()"
-                matTooltip="{{ 'SETTING.tipAvatar' | translate }}"
-                matTooltipPosition="below"
-                [public-id]="clPublicId">
-                <cl-transformation
-                  width="360"
-                  height="360"
-                  radius="max"
-                  crop="fill"
-                  gravity="face">
-                </cl-transformation>
-              </cl-image>
 
               <ul class="rc-line-items">
                 <li>
@@ -81,6 +63,29 @@
                   </mat-radio-group>
                 </li>
               </ul>
+              <div class="rc-sub-panel">
+                <!-- Avatar -->
+                <cl-image
+                  style="cursor: pointer"
+                  width="96"
+                  height="96"
+                  *ngIf="clPublicId"
+                  (click)="updateImage()"
+                  matTooltip="{{ 'SETTINGS.tipAvatar' | translate }}"
+                  matTooltipPosition="below"
+                  [public-id]="clPublicId">
+                  <cl-transformation
+                    width="360"
+                    height="360"
+                    crop="fill"
+                    gravity="face">
+                  </cl-transformation>
+                </cl-image>
+                <div>
+                  <h3>{{ 'SETTINGS.titleAvatar' | translate }}</h3>
+                  <span>{{ 'SETTINGS.infoAvatar' | translate}}</span>
+                </div>
+              </div>
               <!-- Profile Image -->
             </mat-card-content>
           </mat-card>
@@ -175,7 +180,7 @@
             </div>
             <mat-card-content>
               <ul class="rc-line-items">
-                <li><label>{{ 'SETTINGS.labelMemberId' | translate }}:</label>James Barnard</li>
+                <li><label>{{ 'SETTINGS.labelMemberId' | translate }}:</label>{{ member.member_id }}</li>
                 <li><label>{{ 'SETTINGS.labelJoined' | translate }}:</label>{{ d_member_signedup }}</li>
                 <li><label>{{ 'SETTINGS.labelSubscription' | translate }}:</label>Monthly</li>
               </ul>
@@ -212,7 +217,7 @@
                     </cl-transformation>
                   </cl-image>
                   <mat-icon
-                    matTooltip="{{ 'SETTINGS.tipRemove' | translate }}"
+                    matTooltip="{{ 'SETTINGS.tipRemove' | translate: { name: restaurant.restaurant_name } }}"
                     (click)="removeAssociation(idx)">
                     cancel
                   </mat-icon>

@@ -574,7 +574,22 @@ a.mat-menu-item {text-decoration: none;}
 * RC Cards
 * -------------------------------
 **/
-
+.rc-sub-panel {
+  overflow: hidden;
+  display: flex;
+  padding: 0;
+  margin: 24px 0 0;
+  background-color: #eee;
+  > div {
+    padding: 8px 16px;
+    h3 { margin: 0;}
+    span { font-size: 14px;}
+  }
+  cl-image {
+    background-color: #eee;
+    margin-bottom: -7px;
+  }
+}
 .rc-card-rounded {
   position: relative;
   height: 100%;

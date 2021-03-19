@@ -522,6 +522,7 @@
 		"ValidPostcode": "Code postal valide requis"
 	},
 	"SETTINGS": {
+		"infoAvatar": "Cliquez sur l'image ajouter / modifier et personnaliser les détails de votre adhésion.",
 		"infoMember": "Tous les contacts concernant votre adhésion seront envoyés à cette adresse e-mail.",
 		"infoReferrals": "Il s'agit d'un code de référence unique que vous pouvez partager avec n'importe lequel de vos collègues, pour les encourager à rejoindre Restaurant Collective et à faire partie de cette nouvelle organisation passionnante.",
 		"labelEmail": "Email",
@@ -559,9 +560,13 @@
 			"tipCopyCode": "Copiez le code",
 			"tipCopyLink": "Copiez le lien de parrainage"
 		},
+		"tipAvatar": "Télécharger une image à utiliser comme avatar",
 		"tipEdit": "modifier",
+		"tipHelp": "Aidez-moi",
+		"tipRemove": "Supprimer {{ name }} de votre compte",
 		"titleAccount": "Details du compte",
 		"titleAuthentication": "Authentification",
+		"titleAvatar": "Avatar / Image",
 		"titleManagedRestaurants": "Restaurants gérés",
 		"titleMember": "Détails du membre",
 		"titleReferrals": "Code de parrainage"

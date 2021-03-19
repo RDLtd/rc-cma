@@ -522,6 +522,7 @@
 		"ValidPostcode": "Valid postcode required"
 	},
 	"SETTINGS": {
+		"infoAvatar": "Click the image add/edit and personalise your Membership details.",
 		"infoMember": "All contact regarding your Membership will be sent to this email address.",
 		"infoReferrals": "This is a unique referral code that you can share with any of your colleagues, to encourage them to join Restaurant Collective and be part of this exciting new organisation.",
 		"labelEmail": "Email",
@@ -559,9 +560,13 @@
 			"tipCopyCode": "Copy the code",
 			"tipCopyLink": "Copy the referral link"
 		},
+		"tipAvatar": "Upload an image to use as an avatar",
 		"tipEdit": "Edit",
+		"tipHelp": "Help",
+		"tipRemove": "Remove {{ name }} from your account",
 		"titleAccount": "Account details",
 		"titleAuthentication": "Authentication",
+		"titleAvatar": "Avatar / Image",
 		"titleManagedRestaurants": "Managed restaurants",
 		"titleMember": "Member details",
 		"titleReferrals": "Referral code"
