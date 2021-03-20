@@ -181,7 +181,7 @@ export class RestaurantLookupComponent implements OnInit {
     if (curationComplete) {
 
       this.dialog.closeAll();
-      this.dspSnackBar(newRestaurant.restaurant_name + this.t_data.Added);
+      this.dspSnackBar(this.translate.instant('LOOKUP.msgRestaurantAdded', { name: newRestaurant.restaurant_name }));
 
     } else {
       const confirmDialog = this.dialog.open(ConfirmCancelComponent, {
@@ -233,7 +233,7 @@ export class RestaurantLookupComponent implements OnInit {
     console.log(f.newRestaurantName);
     // API call to add listing
     this.dialogRef.close(f);
-    this.dspSnackBar(this.t_data.RequestSent);
+    this.dspSnackBar(this.translate.instant('LOOKUP.msgRequestSent'));
   }
 
   dspSnackBar(msg: string, action = null, d = 3, style = 'info') {

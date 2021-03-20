@@ -88,7 +88,7 @@ export class SettingsComponent implements OnInit {
 
     // Add restaurant placeholder
     this.imgRestPlaceholderUrl =
-      `https://via.placeholder.com/800x450?text=${this.translate.instant('SETTINGS.labelAwaitingImage')}`;
+      `https://via.placeholder.com/360x240?text=${this.translate.instant('SETTINGS.labelAwaitingImage')}`;
   }
   // Switch language
   setLanguage(lang): void {
@@ -174,7 +174,7 @@ export class SettingsComponent implements OnInit {
             () => {
               this.restaurants.splice(index, 1);
               this.defaultImages.splice(index, 1);
-              this.openSnackBar(this.translate.instant('SETTINGS.msgRemoved', { name: rest.restaurant_name }), 'OK');
+              this.openSnackBar(this.translate.instant('SETTINGS.msgRestaurantRemoved', { name: rest.restaurant_name }), 'OK');
               // record event
               this.ga.sendEvent('Profile', 'Edit', 'Remove Association');
             },
