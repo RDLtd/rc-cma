@@ -41,7 +41,7 @@ export class SettingsComponent implements OnInit {
   referrer: any;
   showRestaurantFinder = true;
   imgAvatarPlaceholderUrl: string = 'https://eu.ui-avatars.com/api/?format=svg&size=48&background=fff&color=000&name=';
-  imgUserPlaceHolderUrl = 'https://res.cloudinary.com/rdl/image/upload/v1501827164/avatars/placeholder-male.jpg';
+  imgUserPlaceHolderUrl = null;
   clPublicId: string;
 
   brand: any;
@@ -73,6 +73,7 @@ export class SettingsComponent implements OnInit {
 
     this.brand = this.appConfig.brand;
     this.member = JSON.parse(localStorage.getItem('rd_profile'));
+    console.log('Init member', this.member);
     this.lang = localStorage.getItem('rd_language');
 
     moment.locale(this.lang);
@@ -214,8 +215,13 @@ export class SettingsComponent implements OnInit {
   }
 
   getMemberClPublicId(url) {
-      const a = url.split('/');
-      return a.splice(a.length - 3).join('/');
+      if(!!url) {
+        const a = url.split('/');
+        return a.splice(a.length - 3).join('/');
+      } else {
+        return null;
+      }
+
   }
 
   updateMemberContacts() {
@@ -273,24 +279,30 @@ export class SettingsComponent implements OnInit {
     });
     dialogRef.componentInstance.dialog = dialogRef;
     dialogRef.afterClosed().subscribe(data => {
-      console.log('str', data.str);
+      console.log('Close dialog', data);
       if (!!data) {
+        console.log('!!', data);
         if (data.str === 'delete') {
-          this.member.member_image_path = this.imgUserPlaceHolderUrl;
-          localStorage.setItem('rd_profile', JSON.stringify(this.member));
-          this.clPublicId = this.getMemberClPublicId(this.imgUserPlaceHolderUrl);
+
+          this.member.member_image_path = null;
+          this.clPublicId = null;
           localStorage.removeItem('rd_avatar');
           this.header.updateAvatar(null);
+
+
         } else {
+
           const imgUrl = data.str;
           // Get cloudinary reference
           this.clPublicId = this.getMemberClPublicId(imgUrl);
           // update member local storage
           this.member.member_image_path = imgUrl;
-          localStorage.setItem('rd_profile', JSON.stringify(this.member));
+          //localStorage.setItem('rd_profile', JSON.stringify(this.member));
           localStorage.setItem('rd_avatar', this.clPublicId);
           this.header.updateAvatar(data.str);
         }
+        localStorage.setItem('rd_profile', JSON.stringify(this.member));
+        this.openSnackBar(this.translate.instant('SETTINGS.msgAvatarUpdated'));
       }
     });
   }

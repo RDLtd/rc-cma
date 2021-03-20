@@ -1,3 +1,4 @@
+
 <div class="rc-section rc-section-profile rc-section-settings">
   <!-- page grid -->
   <div class="mdc-layout-grid">
@@ -76,6 +77,21 @@
                     gravity="face">
                   </cl-transformation>
                 </cl-image>
+
+                <div
+                  *ngIf="!clPublicId"
+                  class="rc-avatar-placeholder"
+                  (click)="updateImage()">
+
+                  <!-- Placeholder avatar -->
+                  <svg viewBox="0 0 240 240">
+                    <g>
+                      <g fill="#00A69B">
+                        <path d="M120,0 C53.76,0 0,53.76 0,120 C0,186.24 53.76,240 120,240 C186.24,240 240,186.24 240,120 C240,53.76 186.24,0 120,0 Z M120,36 C139.92,36 156,52.08 156,72 C156,91.92 139.92,108 120,108 C100.08,108 84,91.92 84,72 C84,52.08 100.08,36 120,36 Z M120,206.4 C90,206.4 63.48,191.04 48,167.76 C48.36,143.88 96,130.8 120,130.8 C143.88,130.8 191.64,143.88 192,167.76 C176.52,191.04 150,206.4 120,206.4 Z" id="Shape"></path>
+                      </g>
+                    </g>
+                  </svg>
+                </div>
                 <div>
                   <h3>{{ 'SETTINGS.titleAvatar' | translate }}</h3>
                   <span>{{ 'SETTINGS.infoAvatar' | translate}}</span>

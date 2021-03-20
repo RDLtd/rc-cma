@@ -581,13 +581,31 @@ a.mat-menu-item {text-decoration: none;}
   margin: 24px 0 0;
   background-color: #eee;
   > div {
-    padding: 8px 16px;
+    padding: 8px;
     h3 { margin: 0;}
     span { font-size: 14px;}
   }
   cl-image {
     background-color: #eee;
     margin-bottom: -7px;
+  }
+  .rc-avatar-placeholder {
+    cursor: pointer;
+    transition: all .3s ease-out;
+    opacity: .8;
+    &:hover {
+      transform: scale(.95);
+      opacity: 1;
+      color: black;
+    }
+    svg {
+      display: block;
+      width: 120px;
+      height: 120px;
+      g {
+        fill: $rc-cool-grey;
+      }
+    }
   }
 }
 .rc-card-rounded {
@@ -1624,89 +1642,3 @@ button.rc-member-assc {
   }
 }
 
-/*
-** Financial & Statistical
-** ---------------------------------
-*/
-
-/*
-
-.rc-fs-input {
-  form {
-    input[type=number]::-webkit-inner-spin-button,
-    input[type=number]::-webkit-outer-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
-    }
-    input { font-size: 24px; }
-    span { font-size: inherit; }
-    label { text-transform: uppercase; }
-    dl { margin: 8px 0 8px 24px; }
-    dt { }
-    dd {
-      margin: 0;
-      padding: 0 0 8px 0;
-      font-size: 12px;
-    }
-    .mat-input-subscript-wrapper {
-      font-size: 11px !important;
-      margin-top: 0 !important;
-    }
-  }
-  header {
-    margin-top: 24px;
-    padding: 24px 0 12px;
-    background: white;
-    mat-toolbar {
-      background-color: #fff;
-      mat-icon { margin-right: 8px; }
-    }
-    .mat-button-toggle-group,
-    .mat-button-toggle-standalone { box-shadow: none; }
-  }
-  section {
-    background: #fff;
-    margin-top: 24px;
-    padding: 16px;
-    @include mat-elevation(2);
-    &:last-child { margin-bottom: 48px; }
-  }
-  .rc-toolbar-fs {
-    $toolbar-height: 48px;
-    height:$toolbar-height;
-    background-color: $rc-theme-black;
-    color: #fff;
-    &.mat-toolbar { min-height: $toolbar-height; }
-    mat-toolbar-row { height: $toolbar-height; }
-    margin-bottom: 16px;
-    mat-icon { margin-right: 16px; }
-    .mat-select-trigger { font-size: 24px; }
-  }
-  .mdc-layout-grid { max-width: 640px; }
-}
-.rc-fs-graph-toolbar {
-  background-color: white;
-  padding-left: 0;
-  margin-bottom: 16px;
-  .mat-button-toggle-group,
-  .mat-button-toggle-standalone { box-shadow: none; }
-}
-.rc-fs-graphlet {
-  cursor: pointer;
-  transition: all .3s ease-out;
-  &:hover { @include mat-elevation(4); }
-}
-.rc-fs-graph-card.mat-card-title { display: flex !important; }
-.rc-dg-graph-card.mat-card-title {
-  display: flex !important;
-  font-size: 20px;
-}
-.rc-card-toggle {
-  font-size: 12px;
-  text-transform: uppercase;
-  .mat-button-toggle-checked {
-    background-color: $rc-theme-primary;
-    color: white;
-  }
-}
-*/
