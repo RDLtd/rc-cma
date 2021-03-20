@@ -15,10 +15,9 @@ export class VerificationComponent implements OnInit {
   @ViewChild('email') email: ElementRef;
   editable = false;
   originalEmail: string;
+  codeRequested = false;
 
   isSubmitting: boolean = false;
-  // translation variables
-  t_data: any;
 
   constructor(
     private cmsService: CMSService,
@@ -33,8 +32,6 @@ export class VerificationComponent implements OnInit {
 
 
   ngOnInit() {
-    // send email with verification code to restaurant email
-    this.translate.get('Profile-Verify').subscribe(data => this.t_data = data);
     // console.log('Data', this.data);
     this.editable = this.data.contactEmailRequired;
   }
@@ -120,6 +117,7 @@ export class VerificationComponent implements OnInit {
   }
 
   reqVerificationCode() {
+    this.codeRequested = true;
     const userName = localStorage.getItem('rd_username');
     const r = this.data.restaurant;
     console.log(r);
@@ -157,14 +155,14 @@ export class VerificationComponent implements OnInit {
 
     const d = this.data;
     const msg =
-      `# ${this.t_data.Change}\n\n` +
-      `${this.t_data.Just}.\n\n` +
-      ` - **${this.t_data.User}**: ${localStorage.getItem('rd_username')}(${d.member.member_id})\n` +
-      ` - **Restaurant**: ${d.restaurant.restaurant_name} (${d.restaurant.restaurant_id})\n` +
-      ` - **${this.t_data.Oemail}**: ${this.originalEmail}\n` +
-      ` - **${this.t_data.Nemail}**: ${d.restaurant.restaurant_email}\n\n` +
-      `## ${this.t_data.ASAP}`;
+      `# EMAIL CHANGE REQUEST` +
+      `The following restaurant has just been associated to a Member and the email address was updated at the same time.\n\n` +
+      ` - **MEMBER**: ${localStorage.getItem('rd_username')}(${d.member.member_id})\n` +
+      ` - **RESTAURANT**: ${d.restaurant.restaurant_name} (${d.restaurant.restaurant_id})\n` +
+      ` - **CURRENT EMAIL**: ${this.originalEmail}\n` +
+      ` - **NEW EMAIL**: ${d.restaurant.restaurant_email}\n\n` +
+      `## Please review these changes A.S.A.P.`;
 
-    this.memberService.sendEmailRequest( 'curation', 'support', this.t_data.Change, msg).subscribe(res => console.log(res));
+    this.memberService.sendEmailRequest( 'curation', 'support', 'Change Review', msg).subscribe(res => console.log(res));
   }
 }

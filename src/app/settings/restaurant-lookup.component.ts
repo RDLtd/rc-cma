@@ -21,8 +21,6 @@ export class RestaurantLookupComponent implements OnInit {
   restaurants: Restaurant[] = [];
   sql_parameters: any = this.config.sql_defaults;
   sql_param_country: string;
-  // translation variables
-  t_data: any;
 
   constructor(
     private   restaurantService: RestaurantService,
@@ -38,8 +36,6 @@ export class RestaurantLookupComponent implements OnInit {
 
   ngOnInit() {
     this.sql_param_country = localStorage.getItem('rd_brand') === 'ri' ? 'FR' : 'UK';
-    this.translate.get('Restaurant-Lookup')
-      .subscribe(data => this.t_data = data);
   }
 
   findRestaurants(str) {
@@ -88,6 +84,7 @@ export class RestaurantLookupComponent implements OnInit {
 
     // Make sure it's not already been associated
     // by comparing to current associations
+
     const totalAssociatedRestaurants = this.data.associatedRestaurants.length;
     for (let i = 0; i < totalAssociatedRestaurants; i++) {
       const associatedRestaurant = this.data.associatedRestaurants[i];
@@ -95,7 +92,7 @@ export class RestaurantLookupComponent implements OnInit {
         associatedRestaurant.restaurant_address_1 === selected.restaurant_address_1) {
         // console.log('Restaurant already associated');
         this.dspSnackBar(
-          selected.restaurant_name + this.t_data.AlreadyAdded
+          this.translate.instant('LOOKUP.msgAlreadyAdded', { name: selected.restaurant_name})
         );
         return;
       }
@@ -110,7 +107,7 @@ export class RestaurantLookupComponent implements OnInit {
       // i.e. is there already an admin user
       if (selected.restaurant_data_status === 'Verified By Owner') {
         this.dspSnackBar(
-          selected.restaurant_name + this.t_data.AlreadyVerified
+          this.translate.instant('LOOKUP.msgAlreadyVerified', { name: selected.restaurant_name })
         );
         return;
       }
@@ -152,7 +149,9 @@ export class RestaurantLookupComponent implements OnInit {
   }
 
   addAssociation(newRestaurant) {
+
     console.log('New Restaurant:', newRestaurant);
+
     const curationComplete = (newRestaurant.restaurant_data_status === 'Curation Complete');
     this.restaurantService.addAssociation(this.data.member.member_id, newRestaurant.restaurant_id).subscribe(
       () => {
@@ -162,6 +161,7 @@ export class RestaurantLookupComponent implements OnInit {
         }
         this.data.associatedRestaurants.push(newRestaurant);
 
+        // TODO: Is this still required?
         // If the new restaurant is not already a member
         if (newRestaurant.restaurant_rc_member_status !== 'Full'
           && newRestaurant.restaurant_rc_member_status !== 'Associate') {
@@ -186,10 +186,12 @@ export class RestaurantLookupComponent implements OnInit {
     } else {
       const confirmDialog = this.dialog.open(ConfirmCancelComponent, {
         data: {
-          title: this.t_data.PleaseNote,
-          body: this.t_data.Info + '**' + newRestaurant.restaurant_name + this.t_data.NotYetCurated,
+          title: this.translate.instant('LOOKUP.titlePleaseNote'),
+          body: this.translate.instant(
+            'LOOKUP.msgNotCurated',
+            { name: newRestaurant.restaurant_name }),
           confirm: 'OK',
-          cancel: null
+          cancel: 'hide'
         }
       });
       confirmDialog.afterClosed().subscribe(ok => {
@@ -197,15 +199,15 @@ export class RestaurantLookupComponent implements OnInit {
           // Custom email now set up
           // Notify curation team
           const req = [
-            ` ${this.t_data.Admin}: ${localStorage.getItem('rd_username')}`,
+            ` Name: ${localStorage.getItem('rd_username')}`,
             ` Email: ${this.data.member.member_email}`,
             ` ***`,
             ` Restaurant: ${newRestaurant.restaurant_name}`,
             ` Restaurant #: ${newRestaurant.restaurant_number}`,
-            ` ${this.t_data.Street}: ${newRestaurant.restaurant_address_1}`,
-            ` ${this.t_data.PostCodeLower}: ${newRestaurant.restaurant_post_code}`,
+            ` Address 1: ${newRestaurant.restaurant_address_1}`,
+            ` Postcode: ${newRestaurant.restaurant_post_code}`,
             `***`,
-            `${this.t_data.Immediate}`
+            `This restaurant requires immediate curation. Please notify the Member when it has been completed. Thank you`
           ];
 
           console.log(req);

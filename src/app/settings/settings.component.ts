@@ -312,6 +312,9 @@ export class SettingsComponent implements OnInit {
 
   addRestaurants() {
 
+    // Check teh Member's plan. Can we add a restaurant
+    // or do they need to upgrade?
+
     const dialogRef = this.dialog.open(RestaurantLookupComponent, {
       width: '480px',
       position: {'top': '10vh'},
@@ -322,6 +325,7 @@ export class SettingsComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
+
       if (result) {
         console.log('AC', result);
 

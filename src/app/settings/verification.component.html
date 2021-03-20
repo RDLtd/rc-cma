@@ -81,10 +81,12 @@
 
       <button
         type="button"
-        [disabled]="isSubmitting"
+        [disabled]="isSubmitting || codeRequested"
         (click)="reqVerificationCode()"
         mat-button>
-        {{ 'VERIFY.labelBtnRequestCode' | translate | uppercase }}
+        <span *ngIf="!codeRequested">{{ 'VERIFY.labelBtnRequestCode' | translate | uppercase }}</span>
+        <span *ngIf="codeRequested">{{ 'VERIFY.labelBtnSent' | translate | uppercase }}</span>
+
       </button>
 
       <button
