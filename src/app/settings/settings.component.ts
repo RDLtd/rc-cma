@@ -297,12 +297,11 @@ export class SettingsComponent implements OnInit {
           this.clPublicId = this.getMemberClPublicId(imgUrl);
           // update member local storage
           this.member.member_image_path = imgUrl;
-          //localStorage.setItem('rd_profile', JSON.stringify(this.member));
           localStorage.setItem('rd_avatar', this.clPublicId);
           this.header.updateAvatar(data.str);
         }
         localStorage.setItem('rd_profile', JSON.stringify(this.member));
-        this.openSnackBar(this.translate.instant('SETTINGS.msgAvatarUpdated'));
+        this.openSnackBar(this.translate.instant('SETTINGS.msgAvatarUpdated'), 'OK');
       }
     });
   }

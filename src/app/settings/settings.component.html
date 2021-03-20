@@ -77,13 +77,11 @@
                     gravity="face">
                   </cl-transformation>
                 </cl-image>
-
+                <!-- Placeholder avatar -->
                 <div
                   *ngIf="!clPublicId"
                   class="rc-avatar-placeholder"
                   (click)="updateImage()">
-
-                  <!-- Placeholder avatar -->
                   <svg viewBox="0 0 240 240">
                     <g>
                       <g fill="#00A69B">
@@ -151,12 +149,6 @@
                   matTooltip="{{ 'SETTINGS.tipCopyReferral' | translate }}">
                   <mat-icon>link</mat-icon>
                 </button>
-                <button
-                  color="accent"
-                  mat-icon-button
-                  matTooltip="{{ 'SETTINGS.tipEmailReferral' | translate }}">
-                  <mat-icon>email</mat-icon>
-                </button>
               </span>
             </div>
             <div class="rc-card-subtitle">
@@ -165,7 +157,8 @@
             <mat-card-content>
               <ul class="rc-line-items">
                 <li><label>{{ 'SETTINGS.labelReferralCode' | translate }}:</label>
-                  {{ member?.member_promo_code | uppercase }}
+                  <a [href]="getReferralCode()">{{
+                    member?.member_promo_code | uppercase }}</a>
                 </li>
               </ul>
             </mat-card-content>
