@@ -57,6 +57,8 @@ export class HubComponent implements AfterViewInit {
       this.loader.open();
       this.header.updateSectionName(this.translate.instant('HUB.sectionHub'));
       this.member = JSON.parse(localStorage.getItem('rd_profile'));
+      console.log('HUB');
+      console.log(this.member.member_image_path);
 
   }
 

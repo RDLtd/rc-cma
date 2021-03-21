@@ -19,12 +19,10 @@ export class HeaderComponent implements OnInit {
   company_name;
   brandPrefix;
   inSession = true;
-  avatarId = null;
-  placeholderAvatar = null;
+  avatarUrl = null;
   placeholderUrl = 'https://eu.ui-avatars.com/api/?format=svg&size=40&background=fff&color=000&name=';
   navLabel: string;
-  transData: any;
-
+  member: any;
 
   constructor(
     public authService: AuthenticationService,
@@ -39,20 +37,27 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
 
+    // console.log('Init header');
+
     this.company_name = this.config.brand.name;
     this.brandPrefix = this.config.brand.prefix;
+    this.displayName = localStorage.getItem('rd_username');
+    this.member = JSON.parse(localStorage.getItem('rd_profile'));
 
-    // If page refreshed
-    this.displayName = (this.authService.isAuth() ? localStorage.getItem('rd_username') : this.lblMemberLogin);
-    this.avatarId = localStorage.getItem('rd_avatar');
-    this.placeholderAvatar = this.placeholderUrl + this.displayName;
+    // Set default avatar/placeholder
+    // Force different thread to ensure member is set
+    setTimeout(() => this.avatarUrl = this.member.member_image_path || this.placeholderUrl + this.displayName, 0);
 
-    // Listen for updates to the header section tag
+    // Listen for changes to the section
     this.header.sectionName.subscribe(str => {
       this.navLabel = str;
     });
 
-    this.header.currentAvatar.subscribe(url => this.avatarId = url || this.placeholderAvatar);
+    // Listen for changes to the avatar
+    this.header.currentAvatar.subscribe(url => {
+      this.avatarUrl = url || this.placeholderUrl + this.displayName;
+      console.log('Avatar change', this.avatarUrl);
+    });
 
     // Get notified anytime the login status changes
     this.authService.memberSessionSubject.subscribe(
@@ -61,21 +66,16 @@ export class HeaderComponent implements OnInit {
           case 'active': {
             // Successful login
             this.displayName = localStorage.getItem('rd_username');
-            this.avatarId = localStorage.getItem('rd_avatar');
-            this.placeholderAvatar = this.placeholderUrl + this.displayName;
             break;
           }
           case 'closed': {
             // User logged out
-            this.displayName = this.lblMemberLogin;
             this.inSession = false;
             this.router.navigate(['/']);
             break;
           }
           case 'expired': {
-            // Session expired
-            this.displayName = this.lblMemberLogin;
-            // new login page
+            // Session expired, logout
             this.inSession = false;
             this.router.navigate(['/']);
             break;

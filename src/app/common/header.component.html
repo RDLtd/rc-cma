@@ -38,8 +38,7 @@
       class="rc-avatar"
       [matMenuTriggerFor]="menu">
       <cl-image
-        *ngIf="avatarId"
-        [public-id]="avatarId">
+        [public-id]="avatarUrl">
         <cl-transformation
           width="48"
           height="48"
@@ -47,7 +46,7 @@
           gravity="face">
         </cl-transformation>
       </cl-image>
-      <span *ngIf="!avatarId" >
+      <span *ngIf="!avatarUrl" >
         <img [src]="placeholderAvatar" alt="{{ displayName }}">
       </span>
     </button>

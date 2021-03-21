@@ -47,7 +47,7 @@ export class SettingsComponent implements OnInit {
   brand: any;
   d_member_signedup: string;
   // d_member_job: string;
-  memberImagePath = this.imgUserPlaceHolderUrl;
+  //memberImagePath = this.imgUserPlaceHolderUrl;
 
   lang: string;
 
@@ -84,7 +84,11 @@ export class SettingsComponent implements OnInit {
     this.header.updateSectionName(this.translate.instant('HUB.sectionSettings'));
 
     // Add member name to avatar url
-    this.imgAvatarPlaceholderUrl += `${this.member.member_first_name} ${this.member.member_last_name}`;
+    //this.imgAvatarPlaceholderUrl += `${this.member.member_first_name} ${this.member.member_last_name}`;
+    if (this.member.member_image_path) {
+      setTimeout(() => this.header.updateAvatar(this.member.member_image_path), 0);
+      //this.header.updateAvatar(this.member.member_image_path);
+    }
 
     // Add restaurant placeholder
     this.imgRestPlaceholderUrl =
@@ -215,9 +219,13 @@ export class SettingsComponent implements OnInit {
   }
 
   getMemberClPublicId(url) {
+
       if(!!url) {
-        const a = url.split('/');
-        return a.splice(a.length - 3).join('/');
+        //this.header.updateAvatar(url);
+        const arr = url.split('/');
+
+        return arr.splice(arr.length - 3).join('/');
+
       } else {
         return null;
       }
