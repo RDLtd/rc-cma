@@ -613,6 +613,7 @@ a.mat-menu-item {text-decoration: none;}
   height: 100%;
   border-radius: 16px !important;
   padding: 24px 24px 48px !important;
+  box-shadow: 0 9px 68px 0 rgb(0 0 0 / 20%);
   .rc-card-menu {
     position: absolute;
     top: 8px
@@ -732,7 +733,7 @@ a.mat-menu-item {text-decoration: none;}
   border-radius: 16px !important;
   padding: 24px !important;
   &:hover {
-    @include mat-elevation(4);
+    @include mat-elevation(5);
     h2 { color: $rc-theme-accent }
   }
   img {
@@ -1641,5 +1642,31 @@ button.rc-member-assc {
       cursor: pointer;
     }
   }
+}
+
+.rc-member-plans {
+  // this seems a bit excessive, but it's the only way I've managed
+  // to override the default mat classes
+  .mat-list-base .mat-list-item .mat-list-item-content-reverse, .mat-list-base .mat-list-option .mat-list-item-content-reverse {
+    padding: 0;
+    margin: 0;
+  }
+  .mat-list-item.mat-list-option {
+    height: auto !important;
+    margin: 8px 0;
+    padding: 16px;
+    border-radius: 6px;
+    border: 1px solid $rc-theme-accent;
+    h2 {
+      font-weight: $rc-display-font-weight;
+      line-height: 1.1;
+      margin: 0 0 4px;
+
+    }
+    p {
+      font-size: 12px;
+    }
+  }
+
 }
 

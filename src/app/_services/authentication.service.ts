@@ -22,6 +22,7 @@ export class AuthenticationService {
   private sessionExpiresAt: any;
   private sessionTimeLeft: any;
   private checkingActivity: boolean = false;
+
   private authToken = new BehaviorSubject(new HttpParams().set('Authorization', 'Bearer' +
     '234242423wdfsdvdsfsdrfg34tdfverge'));
 
@@ -58,8 +59,6 @@ export class AuthenticationService {
 
     this.dbOffline = offline;
     this.member = member;
-
-    console.log('M', member);
 
     // Record Member login/authentication
 

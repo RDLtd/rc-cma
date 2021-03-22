@@ -56,7 +56,7 @@ export class HeaderComponent implements OnInit {
     // Listen for changes to the avatar
     this.header.currentAvatar.subscribe(url => {
       this.avatarUrl = url || this.placeholderUrl + this.displayName;
-      console.log('Avatar change', this.avatarUrl);
+      // console.log('Avatar change', this.avatarUrl);
     });
 
     // Get notified anytime the login status changes

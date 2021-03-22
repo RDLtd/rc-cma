@@ -1,0 +1,36 @@
+<div class="rc-member-plans rc-dialog rc-dialog-med">
+
+  <h1 mat-dialog-title>Membership Plans ({{ selectedOptions }})</h1>
+  <p>Your current Restaurant Collective Membership plan will renew on September 19, 2021. Your current yearly total is
+    £99 (plus VAT). To upgrade, select an option below and wwe will calculate any additional charges.</p>
+
+  <mat-dialog-content>
+
+    <mat-selection-list
+      disableRipple
+      #rcPlans
+      [multiple]="false"
+      [(ngModel)]="selectedOptions">
+
+      <mat-list-option *ngFor="let plan of data.plans" [value]="plan.id">
+        <h2>{{ plan.name }}</h2>
+        <p class="rc-txt-small">{{ plan.benefits }}</p>
+      </mat-list-option>
+
+    </mat-selection-list>
+
+
+
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>
+      CANCEL
+    </button>
+  </mat-dialog-actions>
+
+
+
+
+
+
+</div>

@@ -20,6 +20,7 @@ import { AppConfig } from '../app.config';
 import { CmsLocalService } from '../cms';
 import { LoadService, ConfirmCancelComponent, HelpService } from '../common';
 import { HeaderService } from '../common/header.service';
+import { MembershipPlanComponent } from '../join/membership-plan.component';
 
 
 @Component({
@@ -40,16 +41,54 @@ export class SettingsComponent implements OnInit {
   showLoader = false;
   referrer: any;
   showRestaurantFinder = true;
-  imgAvatarPlaceholderUrl: string = 'https://eu.ui-avatars.com/api/?format=svg&size=48&background=fff&color=000&name=';
-  imgUserPlaceHolderUrl = null;
   clPublicId: string;
-
   brand: any;
   d_member_signedup: string;
-  // d_member_job: string;
-  //memberImagePath = this.imgUserPlaceHolderUrl;
-
   lang: string;
+
+  membershipPlans = [
+    {
+      id: 1,
+      name: 'Single-Site',
+      benefits: 'Content management and hosted Single Page Website for one restaurant. Full access to the Hub' +
+        ' including Community Forum and Knowledge Base.',
+      cost: {
+        monthly: 999,
+        yearly: 9900
+      }
+    },
+    {
+      id: 2,
+      name: 'Multi-Site',
+      benefits: 'Community Forum, Knowledge Base and Web Content Management and hosted SPW licences for up to 3' +
+        ' restaurants, plus 1 hour per month of technical support',
+      cost: {
+        monthly: 1825,
+        yearly: 18900
+      }
+    },
+    {
+      id: 3,
+      name: 'Group',
+      benefits: 'Community Forum, Knowledge Base and Web Content Management and hosted SPW licences for up to 6' +
+        ' restaurants, plus 2 hours per month of technical support',
+      cost: {
+        monthly: 2825,
+        yearly: 29800
+      }
+    },
+    {
+      id: 4,
+      name: 'Large Group',
+      benefits: 'Community Forum, Knowledge Base and Web Content Management and hosted SPW licences for up to 10' +
+        ' restaurants, plus 3 hours per month technical support',
+      cost: {
+        monthly: 3825,
+        yearly: 40900
+      }
+    }
+  ]
+
 
   constructor(
     private header: HeaderService,
@@ -73,7 +112,6 @@ export class SettingsComponent implements OnInit {
 
     this.brand = this.appConfig.brand;
     this.member = JSON.parse(localStorage.getItem('rd_profile'));
-    console.log('Init member', this.member);
     this.lang = localStorage.getItem('rd_language');
 
     moment.locale(this.lang);
@@ -84,7 +122,6 @@ export class SettingsComponent implements OnInit {
     this.header.updateSectionName(this.translate.instant('HUB.sectionSettings'));
 
     // Add member name to avatar url
-    //this.imgAvatarPlaceholderUrl += `${this.member.member_first_name} ${this.member.member_last_name}`;
     if (this.member.member_image_path) {
       setTimeout(() => this.header.updateAvatar(this.member.member_image_path), 0);
       //this.header.updateAvatar(this.member.member_image_path);
@@ -369,6 +406,14 @@ export class SettingsComponent implements OnInit {
         this.getAssociatedRestaurants(this.member.member_id);
       }
       this.dialog.closeAll();
+    });
+  }
+
+  viewMemberPlans(): void {
+    let dialogRef = this.dialog.open(MembershipPlanComponent, {
+      data: {
+        plans: this.membershipPlans
+      }
     });
   }
 }
