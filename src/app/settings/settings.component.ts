@@ -21,6 +21,7 @@ import { CmsLocalService } from '../cms';
 import { LoadService, ConfirmCancelComponent, HelpService } from '../common';
 import { HeaderService } from '../common/header.service';
 import { MembershipPlanComponent } from '../join/membership-plan.component';
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -84,7 +85,6 @@ export class SettingsComponent implements OnInit {
       renewal: '19'
     }
   ]
-  currentPlanId = 1;
 
 
   constructor(
@@ -101,6 +101,7 @@ export class SettingsComponent implements OnInit {
     public appConfig: AppConfig,
     private _clipboardService: ClipboardService,
     private loadService: LoadService,
+    private http: HttpClient,
     public dialog: MatDialog) {
       this.loadService.open();
   }
@@ -354,8 +355,9 @@ export class SettingsComponent implements OnInit {
 
   addRestaurants() {
 
-    // Check teh Member's plan. Can we add a restaurant
-    // or do they need to upgrade?
+    // Todo: check whether the Member has capacity
+    //  on their existing plan and if not, prompt an upgrade
+    // *******************************************
 
     const dialogRef = this.dialog.open(RestaurantLookupComponent, {
       width: '480px',
@@ -407,9 +409,10 @@ export class SettingsComponent implements OnInit {
   }
 
   viewMemberPlans(): void {
+    // Todo: Get available plans via API
+    //  Set Member's current plan
     let dialogRef = this.dialog.open(MembershipPlanComponent, {
       maxWidth: '600px',
-      //position: {'top': '10vh'},
       data: {
         currentPlanId: 1,
         plans: this.membershipPlans
@@ -429,4 +432,5 @@ export class SettingsComponent implements OnInit {
         }
       );
   }
+
 }

@@ -5,9 +5,7 @@ import { CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'rc-membership-plan',
-  templateUrl: './membership-plan.component.html',
-  styles: [
-  ]
+  templateUrl: './membership-plan.component.html'
 })
 
 export class MembershipPlanComponent implements OnInit {
@@ -17,7 +15,6 @@ export class MembershipPlanComponent implements OnInit {
   selectedPlan: any;
   planInstructions: string;
   planChanged = false;
-
 
   constructor(
     private currencyPipe: CurrencyPipe,
@@ -41,7 +38,6 @@ export class MembershipPlanComponent implements OnInit {
   selectPlan(id) {
     this.planChanged = id !== this.originalPlan;
     this.selectedPlan = this.getPlan(id);
-
     if (this.planChanged) {
       this.planInstructions = this.translate.instant(
         'PLANS.infoNewPlan',
@@ -58,16 +54,12 @@ export class MembershipPlanComponent implements OnInit {
           price: this.currencyPipe.transform(this.selectedPlan.price, 'GBP')
         })
     }
-
   }
-
-
 
   ordinate(n: number, keepNumber: boolean = true) {
     const ordinals: string[] = ['th','st','nd','rd'];
     let v = n % 100;
-    return ( keepNumber? n:'') + ( ordinals[(v-20)%10]||ordinals[v]||ordinals[0]);
+    return ( keepNumber? n:'') + ( ordinals[(v-20)%10] || ordinals[v] || ordinals[0] );
   }
-
 
 }
