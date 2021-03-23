@@ -83,7 +83,7 @@ export class SettingsComponent implements OnInit {
       subscription: 'm',
       renewal: '19'
     }
-  ]
+  ];
   currentPlanId = 1;
 
 
@@ -121,7 +121,7 @@ export class SettingsComponent implements OnInit {
     // Add member name to avatar url
     if (this.member.member_image_path) {
       setTimeout(() => this.header.updateAvatar(this.member.member_image_path), 0);
-      //this.header.updateAvatar(this.member.member_image_path);
+      // this.header.updateAvatar(this.member.member_image_path);
     }
 
     // Add restaurant placeholder
@@ -254,8 +254,8 @@ export class SettingsComponent implements OnInit {
 
   getMemberClPublicId(url) {
 
-      if(!!url) {
-        //this.header.updateAvatar(url);
+      if (!!url) {
+        // this.header.updateAvatar(url);
         const arr = url.split('/');
 
         return arr.splice(arr.length - 3).join('/');
@@ -349,7 +349,7 @@ export class SettingsComponent implements OnInit {
   }
 
   getReferralCode(): string {
-    return `${this.appConfig.brand.joinUrl}?referral=${this.member.member_promo_code}`
+    return `${this.appConfig.brand.joinUrl}?referral=${this.member.member_promo_code}`;
   }
 
   addRestaurants() {
@@ -397,7 +397,7 @@ export class SettingsComponent implements OnInit {
             console.log(error);
             this.showRestaurantFinder = false;
           }
-        )
+        );
       } else {
         this.showRestaurantFinder = false;
         this.getAssociatedRestaurants(this.member.member_id);
@@ -407,9 +407,9 @@ export class SettingsComponent implements OnInit {
   }
 
   viewMemberPlans(): void {
-    let dialogRef = this.dialog.open(MembershipPlanComponent, {
+    const dialogRef = this.dialog.open(MembershipPlanComponent, {
       maxWidth: '600px',
-      //position: {'top': '10vh'},
+      // position: {'top': '10vh'},
       data: {
         currentPlanId: 1,
         plans: this.membershipPlans
@@ -420,9 +420,25 @@ export class SettingsComponent implements OnInit {
   managePayments() {
     console.log('active OK');
     // cus_J9Np2sKVI4FrG2
-    this.memberService.accessCustomerPortal('cus_J9Np2sKVI4FrG2')
-      .subscribe( () => {
-          console.log('accessCustomerPortal OK');
+    // cus_JAPi9CfyR6sfm1
+    //
+    // First get the stripe customer number for this member from the database
+    // test - this.memberService.getStripeCustomerNumber('1103')
+    this.memberService.getStripeCustomerNumber(this.member.member_id)
+      .subscribe( (customer) => {
+          // console.log('got customer number', customer, 'api', this.appConfig.apiUrl);
+          // need to send stripe back to this window
+          // @ts-ignore
+          this.memberService.accessCustomerPortal(customer.customer_number, window.location.href)
+            .subscribe( (data) => {
+                console.log('accessed CustomerPortal OK', data);
+                // @ts-ignore
+                window.open(data.url, '_self');
+              },
+              error => {
+                console.log('accessCustomerPortal error', error);
+              }
+            );
         },
         error => {
           console.log('accessCustomerPortal error', error);

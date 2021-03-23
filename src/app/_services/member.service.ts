@@ -493,10 +493,22 @@ export class MemberService {
       });
   }
 
-  accessCustomerPortal(customer_id: string) {
+  accessCustomerPortal(customer_id: string, api_url: string) {
+    // console.log('service', customer_id, api_url);
     return this.http.post(this.config.apiUrl + '/payments/create-customer-portal-session',
       {
         customer_id: customer_id,
+        api_url: api_url,
+        userCode: this.config.userAPICode,
+        token: this.authToken
+      });
+  }
+
+  getStripeCustomerNumber(member_id: string) {
+    // console.log(member_id);
+    return this.http.post(this.config.apiUrl + '/members/get_stripe_customer_id',
+      {
+        member_id: member_id,
         userCode: this.config.userAPICode,
         token: this.authToken
       });
