@@ -416,4 +416,17 @@ export class SettingsComponent implements OnInit {
       }
     });
   }
+
+  managePayments() {
+    console.log('active OK');
+    // cus_J9Np2sKVI4FrG2
+    this.memberService.accessCustomerPortal('cus_J9Np2sKVI4FrG2')
+      .subscribe( () => {
+          console.log('accessCustomerPortal OK');
+        },
+        error => {
+          console.log('accessCustomerPortal error', error);
+        }
+      );
+  }
 }
