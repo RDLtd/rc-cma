@@ -95,6 +95,8 @@ import { GoogleMapsModule } from '@angular/google-maps';
 import { MembershipComponent } from './join/membership.component';
 import { HubComponent } from './hub/hub.component';
 import { LogoComponent } from './common/logo/logo.component';
+import { MembershipPlanComponent } from './join/membership-plan.component';
+import { CurrencyPipe } from '@angular/common';
 
 
 // AoT requires an exported function for factories
@@ -152,7 +154,8 @@ export function appInitializerFactory(translate: TranslateService) {
     CmsSpwLinksComponent,
     MembershipComponent,
     HubComponent,
-    LogoComponent
+    LogoComponent,
+    MembershipPlanComponent
   ],
   imports: [
     AngularMaterialModule,
@@ -199,6 +202,7 @@ export function appInitializerFactory(translate: TranslateService) {
     CmsPreviewComponent,
     ConfirmCancelComponent,
     LoadService,
+    CurrencyPipe,
     {
       provide: APP_INITIALIZER,
       useFactory: appInitializerFactory,

@@ -374,6 +374,11 @@
 		"messagesReadOk": "Ok, j'ai lu ceux-ci",
 		"welcomeNewMember": "# Vous y êtes!\n\nC'est formidable que vous ayez choisi de rejoindre Restaurant Collective et nous espérons que vous nous aiderez à développer cette communauté passionnante de professionnels de l'industrie et de restaurateurs indépendants.\n\n## Ajoutez votre restaurant\n\nAvant de commencer à explorer le Hub des membres, veuillez terminer la configuration initiale en associant votre restaurant à votre compte de membre.\n\nLorsque vous êtes prêt, sélectionnez l'option ** COMMENCER ICI ** ci-dessous.\n\nTrouvez votre restaurant et suivez les instructions à l'écran pour vérifier les détails et l'associer à votre abonnement.\n\nSi vous avez besoin d'aide, ouvrez la ** Base de connaissances ** et consultez le guide ** Mise en route **."
 	},
+	"PLANS": {
+		"infoCurrentPlan": "Votre abonnement actuel est renouvelé le **{{ date }}** de chaque mois pour un total de **{{ price }}**. Pour mettre à niveau, sélectionnez une autre option ci-dessous et nous calculerons tous les frais supplémentaires dus.",
+		"infoNewPlan": "Cela fera passer votre package à **{{ plan }} Membership **. Nous vous facturerons **{{ prorate }}** maintenant, au prorata de la période de facturation actuelle et, à partir de **{{ renewal }}**, nous facturerons votre nouveau total de **{{ price }}** par an .",
+		"titlePlans": "Plans d'adhésion"
+	},
 	"SETTINGS": {
 		"contacts": {
 			"invalidMobile": "Numéro invalide",

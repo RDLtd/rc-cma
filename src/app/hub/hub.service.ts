@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { AppConfig } from '../app.config';
 import { AppService } from '../_services';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -18,6 +19,7 @@ export class HubService {
     this.app.authToken.subscribe(token => this.authToken = token);
   }
 
+
   getServices(): any {
     return this.http.post(this.config.apiUrl + '/cms/getservices',
       {
@@ -25,5 +27,19 @@ export class HubService {
         token: this.authToken
       });
   }
+
+  // Set the authenticated flag to true
+  // i.e. the member has seen the welcome messages
+  updateMemberAuth(member) {
+    console.log(member);
+    localStorage.setItem('rd_profile', JSON.stringify(member));
+    return this.http.post(this.config.apiUrl + '/members/setauthenticated',
+      {
+        member_id: member.member_id,
+        userCode: this.config.userAPICode,
+        token: this.authToken
+      });
+  }
+
 
 }

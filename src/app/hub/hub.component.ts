@@ -57,23 +57,24 @@ export class HubComponent implements AfterViewInit {
       this.loader.open();
       this.header.updateSectionName(this.translate.instant('HUB.sectionHub'));
       this.member = JSON.parse(localStorage.getItem('rd_profile'));
-      console.log('HUB');
-      console.log(this.member.member_image_path);
+      console.log('New member', !this.member.isAuthenticated);
 
   }
 
   ngAfterViewInit(): void {
+
     this.getServices();
     this.getRestaurants();
     this.loader.close();
-    // Delay a little so that it opens after everything else
+
+    // Delay messages a little so that it opens after everything else
     setTimeout(() => this.getMessages(), 500);
 
   }
 
   getServices(): void {
     this.hubService.getServices().subscribe(data => {
-      console.log(data.services);
+      // console.log(data.services);
       this.services = data.services;
     });
   }
@@ -89,7 +90,7 @@ export class HubComponent implements AfterViewInit {
   }
 
   dspMessages(): void {
-    console.log('New member', this.member.isAuthenticated);
+
     let data = {
       newMember: !this.member.isAuthenticated,
       member: this.member,
@@ -104,6 +105,10 @@ export class HubComponent implements AfterViewInit {
         .subscribe(addRestaurant => {
           if (addRestaurant) {
             this.openRestaurantLookup();
+          } else {
+            // Skipped so update mark as seen
+            this.member.isAuthenticated = true;
+            this.hubService.updateMemberAuth(this.member).subscribe(res => console.log('IA', res));
           }
         });
     }
@@ -123,7 +128,7 @@ export class HubComponent implements AfterViewInit {
 
   // Navigation
   launchFeature (service: any) {
-    console.log(service.service_id);
+
     if (service.service_disabled) {
       let dialogReg = this.dialog.open(ConfirmCancelComponent, {
         data: {
