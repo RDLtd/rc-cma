@@ -52,42 +52,39 @@ export class SettingsComponent implements OnInit {
       name: 'Single-Site',
       benefits: 'Content management and hosted Single Page Website for one restaurant. Full access to the Hub' +
         ' including Community Forum and Knowledge Base.',
-      cost: {
-        monthly: 999,
-        yearly: 9900
-      }
+      subscription: 'm',
+      price: 9.99,
+      renewal: '19'
     },
     {
       id: 2,
       name: 'Multi-Site',
       benefits: 'Community Forum, Knowledge Base and Web Content Management and hosted SPW licences for up to 3' +
         ' restaurants, plus 1 hour per month of technical support',
-      cost: {
-        monthly: 1825,
-        yearly: 18900
-      }
+      price: 18.25,
+      subscription: 'm',
+      renewal: '19'
     },
     {
       id: 3,
       name: 'Group',
       benefits: 'Community Forum, Knowledge Base and Web Content Management and hosted SPW licences for up to 6' +
         ' restaurants, plus 2 hours per month of technical support',
-      cost: {
-        monthly: 2825,
-        yearly: 29800
-      }
+      price: 28.25,
+      subscription: 'm',
+      renewal: '19'
     },
     {
       id: 4,
       name: 'Large Group',
       benefits: 'Community Forum, Knowledge Base and Web Content Management and hosted SPW licences for up to 10' +
         ' restaurants, plus 3 hours per month technical support',
-      cost: {
-        monthly: 3825,
-        yearly: 40900
-      }
+      price: 38.25,
+      subscription: 'm',
+      renewal: '19'
     }
   ]
+  currentPlanId = 1;
 
 
   constructor(
@@ -411,7 +408,10 @@ export class SettingsComponent implements OnInit {
 
   viewMemberPlans(): void {
     let dialogRef = this.dialog.open(MembershipPlanComponent, {
+      maxWidth: '600px',
+      //position: {'top': '10vh'},
       data: {
+        currentPlanId: 1,
         plans: this.membershipPlans
       }
     });
