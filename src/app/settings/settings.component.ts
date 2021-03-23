@@ -40,14 +40,14 @@ export class SettingsComponent implements OnInit {
   showLoader = false;
   referrer: any;
   showRestaurantFinder = true;
-  imgAvatarPlaceholderUrl: string = 'https://eu.ui-avatars.com/api/?format=svg&size=48&background=fff&color=000&name=';
+  imgAvatarPlaceholderUrl = 'https://eu.ui-avatars.com/api/?format=svg&size=48&background=fff&color=000&name=';
   imgUserPlaceHolderUrl = null;
   clPublicId: string;
 
   brand: any;
   d_member_signedup: string;
   // d_member_job: string;
-  //memberImagePath = this.imgUserPlaceHolderUrl;
+  // memberImagePath = this.imgUserPlaceHolderUrl;
 
   lang: string;
 
@@ -84,10 +84,10 @@ export class SettingsComponent implements OnInit {
     this.header.updateSectionName(this.translate.instant('HUB.sectionSettings'));
 
     // Add member name to avatar url
-    //this.imgAvatarPlaceholderUrl += `${this.member.member_first_name} ${this.member.member_last_name}`;
+    // this.imgAvatarPlaceholderUrl += `${this.member.member_first_name} ${this.member.member_last_name}`;
     if (this.member.member_image_path) {
       setTimeout(() => this.header.updateAvatar(this.member.member_image_path), 0);
-      //this.header.updateAvatar(this.member.member_image_path);
+      // this.header.updateAvatar(this.member.member_image_path);
     }
 
     // Add restaurant placeholder
@@ -220,8 +220,8 @@ export class SettingsComponent implements OnInit {
 
   getMemberClPublicId(url) {
 
-      if(!!url) {
-        //this.header.updateAvatar(url);
+      if (!!url) {
+        // this.header.updateAvatar(url);
         const arr = url.split('/');
 
         return arr.splice(arr.length - 3).join('/');
@@ -315,7 +315,7 @@ export class SettingsComponent implements OnInit {
   }
 
   getReferralCode(): string {
-    return `${this.appConfig.brand.joinUrl}?referral=${this.member.member_promo_code}`
+    return `${this.appConfig.brand.joinUrl}?referral=${this.member.member_promo_code}`;
   }
 
   addRestaurants() {
@@ -363,12 +363,25 @@ export class SettingsComponent implements OnInit {
             console.log(error);
             this.showRestaurantFinder = false;
           }
-        )
+        );
       } else {
         this.showRestaurantFinder = false;
         this.getAssociatedRestaurants(this.member.member_id);
       }
       this.dialog.closeAll();
     });
+  }
+
+  managePayments() {
+    console.log('active OK');
+    // cus_J9Np2sKVI4FrG2
+    this.memberService.accessCustomerPortal('cus_J9Np2sKVI4FrG2')
+      .subscribe( () => {
+          console.log('accessCustomerPortal OK');
+        },
+        error => {
+          console.log('accessCustomerPortal error', error);
+        }
+      );
   }
 }

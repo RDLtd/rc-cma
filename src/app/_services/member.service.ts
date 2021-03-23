@@ -493,4 +493,13 @@ export class MemberService {
       });
   }
 
+  accessCustomerPortal(customer_id: string) {
+    return this.http.post(this.config.apiUrl + '/payments/create-customer-portal-session',
+      {
+        customer_id: customer_id,
+        userCode: this.config.userAPICode,
+        token: this.authToken
+      });
+  }
+
 }
