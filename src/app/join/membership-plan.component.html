@@ -13,6 +13,9 @@
 
   <mat-dialog-content>
 
+    <mat-tab-group mat-stretch-tabs mat-align-tabs="center">
+      <mat-tab label="Monthly subscription">
+
     <mat-selection-list
       disableRipple
       [multiple]="false"
@@ -37,6 +40,36 @@
       </mat-list-option>
 
     </mat-selection-list>
+      </mat-tab>
+      <mat-tab label="Yeayly Subscription">
+        <mat-selection-list
+          disableRipple
+          [multiple]="false"
+          (selectionChange)="selectPlan(selectedOptions[0])"
+          [(ngModel)]="selectedOptions">
+
+          <mat-list-option *ngFor="let plan of data.plans" [value]="plan.id">
+            <div class="content">
+              <div>
+                <h3>{{ plan.name }} <ng-container *ngIf="plan.id === data.currentPlan">(current package)</ng-container></h3>
+                <p>{{ plan.benefits }}</p>
+              </div>
+              <div class="rc-space-filler"></div>
+              <div>
+                <h3
+                  style="text-align: right">{{ plan.price | currency: 'GBP' }}
+                  <span>Monthly</span>
+                </h3>
+
+              </div>
+            </div>
+          </mat-list-option>
+
+        </mat-selection-list>
+      </mat-tab>
+
+    </mat-tab-group>
+
 
   </mat-dialog-content>
 
