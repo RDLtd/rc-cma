@@ -514,6 +514,17 @@ export class MemberService {
       });
   }
 
+  changeSubscription(subscription_id: string, price_id: string) {
+    console.log('changeSubscription', subscription_id, price_id);
+    return this.http.post(this.config.apiUrl + '/payments/change-subscription',
+      {
+        subscription_id: subscription_id,
+        price_id: price_id,
+        userCode: this.config.userAPICode,
+        token: this.authToken
+      });
+  }
+
   getStripeCustomerNumber(member_id: string) {
     // console.log(member_id);
     return this.http.post(this.config.apiUrl + '/members/get_stripe_customer_id',
