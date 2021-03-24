@@ -87,6 +87,8 @@ export class SettingsComponent implements OnInit {
   ];
   currentPlanId = 1;
 
+  products: Object;
+
 
   constructor(
     private header: HeaderService,
@@ -115,10 +117,6 @@ export class SettingsComponent implements OnInit {
 
     moment.locale(this.lang);
 
-    this.memberService.getProducts().subscribe(data => {
-      console.log(data);
-    });
-
     this.setMember();
 
     // Update header label
@@ -133,6 +131,9 @@ export class SettingsComponent implements OnInit {
     // Add restaurant placeholder
     this.imgRestPlaceholderUrl =
       `https://via.placeholder.com/360x240?text=${this.translate.instant('SETTINGS.labelAwaitingImage')}`;
+
+    this.setProducts();
+
   }
   // Switch language
   setLanguage(lang): void {
@@ -362,6 +363,7 @@ export class SettingsComponent implements OnInit {
 
     // Todo: check whether the Member has capacity
     //  on their existing plan and if not, prompt an upgrade
+    //  and launch upgrade dialog if not
     // *******************************************
 
     const dialogRef = this.dialog.open(RestaurantLookupComponent, {
@@ -413,14 +415,21 @@ export class SettingsComponent implements OnInit {
     });
   }
 
+  setProducts(): void {
+    this.memberService.getProducts().subscribe(obj => {
+      this.products = obj['products'];
+      console.log(this.products);
+    })
+  }
+
   viewMemberPlans(): void {
-    // Todo: Get available plans via API
-    //  Set Member's current plan
+
     let dialogRef = this.dialog.open(MembershipPlanComponent, {
       maxWidth: '600px',
       data: {
+        currencyCode: this.appConfig.brand.currency.code,
         currentPlanId: 1,
-        plans: this.membershipPlans
+        products: this.products
       }
     });
   }

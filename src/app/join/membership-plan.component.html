@@ -1,5 +1,6 @@
 <div class="rc-member-plans rc-dialog rc-dialog-med">
 
+
   <div style="display: flex;">
     <h2>{{ 'PLANS.titlePlans' | translate }}</h2>
     <span class="rc-space-filler"></span>
@@ -13,8 +14,12 @@
 
   <mat-dialog-content>
 
-    <mat-tab-group mat-stretch-tabs mat-align-tabs="center">
-      <mat-tab label="Monthly subscription">
+    <mat-tab-group
+      [selectedIndex]="selectedTab"
+      dynamicHeight
+      mat-stretch-tabs
+      mat-align-tabs="center">
+      <mat-tab label="MONTHLY">
 
     <mat-selection-list
       disableRipple
@@ -22,16 +27,17 @@
       (selectionChange)="selectPlan(selectedOptions[0])"
       [(ngModel)]="selectedOptions">
 
-      <mat-list-option *ngFor="let plan of data.plans" [value]="plan.id">
+      <mat-list-option *ngFor="let plan of plans.monthly" [value]="plan.product_id">
         <div class="content">
           <div>
-            <h3>{{ plan.name }} <ng-container *ngIf="plan.id === data.currentPlan">(current package)</ng-container></h3>
-            <p>{{ plan.benefits }}</p>
+            <h3>{{ plan.product_name }}
+              <ng-container *ngIf="isCurrentPlan(plan.product_id)">(current package)</ng-container></h3>
+            <p>{{ plan.product_description }}</p>
           </div>
           <div class="rc-space-filler"></div>
           <div>
             <h3
-              style="text-align: right">{{ plan.price | currency: 'GBP' }}
+              style="text-align: right">{{ plan.product_price | currency: data.currencyCode }}
               <span>Monthly</span>
             </h3>
 
@@ -41,24 +47,25 @@
 
     </mat-selection-list>
       </mat-tab>
-      <mat-tab label="Yeayly Subscription">
+      <mat-tab label="YEARLY">
         <mat-selection-list
           disableRipple
           [multiple]="false"
           (selectionChange)="selectPlan(selectedOptions[0])"
           [(ngModel)]="selectedOptions">
 
-          <mat-list-option *ngFor="let plan of data.plans" [value]="plan.id">
+          <mat-list-option *ngFor="let plan of plans.yearly" [value]="plan.product_id">
             <div class="content">
               <div>
-                <h3>{{ plan.name }} <ng-container *ngIf="plan.id === data.currentPlan">(current package)</ng-container></h3>
-                <p>{{ plan.benefits }}</p>
+                <h3>{{ plan.product_name }}
+                  <ng-container *ngIf="isCurrentPlan(plan.product_id)">(current package)</ng-container></h3>
+                <p>{{ plan.product_description }}</p>
               </div>
               <div class="rc-space-filler"></div>
               <div>
                 <h3
-                  style="text-align: right">{{ plan.price | currency: 'GBP' }}
-                  <span>Monthly</span>
+                  style="text-align: right">{{ plan.product_price | currency: data.currencyCode }}
+                  <span>Yearly</span>
                 </h3>
 
               </div>
@@ -73,10 +80,6 @@
 
   </mat-dialog-content>
 
-<!--  <mat-dialog-actions align="end">-->
-<!--    <button mat-button mat-dialog-close>-->
-<!--      CANCEL-->
-<!--    </button>-->
-<!--  </mat-dialog-actions>-->
+
 
 </div>
