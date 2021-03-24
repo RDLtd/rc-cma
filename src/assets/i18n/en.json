@@ -377,8 +377,8 @@
 	"PLANS": {
 		"infoCurrentPlanMonthly": "Your current Membership renews on the **{{ renewal }}** of each month at a total of **{{ price }}**. To upgrade, select another option below and we'll calculate any additional charges due.",
 		"infoCurrentPlanYearly": "Your current Membership renews on the **{{ renewal }}** at a total of **{{ price }}**. To upgrade, select another option below and we'll calculate any additional charges due.",
-		"infoNewPlanMonthly": "You’re upgrading your plan to **{{ plan }}**.  We’ll charge you **{{ prorate }}** now, which is prorated for the current billing period and from **{{ renewal }}**, we’ll bill you once a month at the new total of **{{ price }}**.",
-		"infoNewPlanYearly": "You’re upgrading your package to **{{ plan }} Membership**.  We’ll charge you **{{ prorate }}** now, which is prorated for the current billing period and from **{{ renewal }}**, we’ll bill you the new yearly total of **{{ price }}**.",
+		"infoNewPlanMonthly": "You’re upgrading your plan to **{{ plan }}**.  We’ll charge you **{{ prorate }}** now, which is prorated for the current billing period, and from **{{ renewal }}** we’ll bill you once a month at the new rate of **{{ price }}**.",
+		"infoNewPlanYearly": "You’re upgrading your package to **{{ plan }} Membership**.  We’ll charge you **{{ prorate }}** now, which is prorated for the current billing period, and from **{{ renewal }}** we’ll bill you at the new yearly fee of **{{ price }}**.",
 		"titlePlans": "Membership plans"
 	},
 	"SETTINGS": {
@@ -450,7 +450,7 @@
 		"titleAccount": "Account details",
 		"titleAuthentication": "Authentication",
 		"titleAvatar": "Avatar / Image",
-		"titleManagedRestaurants": "Managed restaurants",
+		"titleManagedRestaurants": "Managed restaurants ",
 		"titleMember": "Member details",
 		"titleReferrals": "Referral code",
 		"titleUploadAvatar": "Upload image"

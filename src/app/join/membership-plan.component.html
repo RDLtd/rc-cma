@@ -6,7 +6,7 @@
     <span class="rc-space-filler"></span>
     <span>
       <button tabindex="-1" mat-button mat-dialog-close>CANCEL</button>
-      <button tabindex="-1" mat-flat-button color="accent" [disabled]="!planChanged">CHANGE PLAN</button>
+      <button tabindex="-1" mat-flat-button color="accent" [disabled]="!planChanged" (click)="upgradePlan()">CHANGE PLAN</button>
     </span>
   </div>
 
@@ -17,8 +17,8 @@
     <mat-tab-group
       [selectedIndex]="selectedTabIndex"
       dynamicHeight
+      disableRipple
       mat-stretch-tabs
-      color="accent"
       mat-align-tabs="center">
 
       <mat-tab label="MONTHLY">

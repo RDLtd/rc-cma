@@ -161,7 +161,9 @@
                 <li><label>{{ 'SETTINGS.labelMemberId' | translate }}:</label>{{ member.member_id }}</li>
                 <li><label>{{ 'SETTINGS.labelJoined' | translate }}:</label>{{ d_member_signedup }}</li>
                 <li><label>{{ 'SETTINGS.labelSubscription' | translate }}:</label>
-                  <a (click)="viewMemberPlans()" matTooltip="View Membership Plans">Single Site (Monthly)</a>
+                  <a (click)="viewMemberPlans()" matTooltip="View Membership Plans">
+                    {{ currentProduct?.product_name }}
+                  </a>
                 </li>
               </ul>
               <div class="rc-card-title" style="margin-top: 24px;">
@@ -170,7 +172,7 @@
                 <span>
                   <button
                     color="accent"
-                    mat-icon-button (click)="addRestaurants()"
+                    mat-icon-button (click)="checkAllowance()"
                     matTooltip="{{ 'SETTINGS.labelAddRestaurant' | translate }}">
                     <mat-icon>add_circle_outline</mat-icon>
                 </button>

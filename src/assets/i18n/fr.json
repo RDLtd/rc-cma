@@ -377,8 +377,8 @@
 	"PLANS": {
 		"infoCurrentPlanMonthly": "Votre abonnement actuel est renouvelé le **{{ renewal }}** de chaque mois pour un total de **{{ price }}**. Pour mettre à niveau, sélectionnez une autre option ci-dessous et nous calculerons tous les frais supplémentaires dus.",
 		"infoCurrentPlanYearly": "Votre abonnement actuel est renouvelé le **{{ renewal }}** pour un total de **{{ price }}**. Pour mettre à niveau, sélectionnez une autre option ci-dessous et nous calculerons tous les frais supplémentaires dus.",
-		"infoNewPlanMonthly": "Vous mettez à niveau votre forfait vers **{{ plan }}**. Nous vous facturerons **{{ prorate }}** maintenant, au prorata pour la période de facturation actuelle et à partir de **{{ renewal }}**, nous vous facturerons une fois par mois au nouveau total de **{{ price }}**.",
-		"infoNewPlanYearly": "Vous mettez à niveau votre forfait en **{{ plan }} abonnement **. Nous vous facturerons **{{ prorate }}** maintenant, au prorata pour la période de facturation actuelle et à partir de **{{ renewal }}**, nous vous facturerons le nouveau total annuel de **{{ price }}**.",
+		"infoNewPlanMonthly": "Vous mettez à niveau votre forfait vers **{{ plan }}**. Nous vous facturerons **{{ prorate }}** maintenant, au prorata de la période de facturation actuelle, et à partir de **{{ renewal }}**, nous vous facturerons une fois par mois au nouveau taux de **{{ price }}**.",
+		"infoNewPlanYearly": "Vous mettez à niveau votre forfait en **{{ plan }} abonnement **. Nous vous facturerons **{{ prorate }}** maintenant, au prorata de la période de facturation actuelle, et à partir de **{{ renewal }}**, nous vous facturerons les nouveaux frais annuels de **{{ price }}** .",
 		"titlePlans": "Plans d'adhésion"
 	},
 	"SETTINGS": {

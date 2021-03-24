@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';
 import { CurrencyPipe } from '@angular/common';
 
@@ -27,6 +27,7 @@ export class MembershipPlanComponent implements OnInit {
   }
 
   constructor(
+    private dialog: MatDialogRef<MembershipPlanComponent>,
     private currencyPipe: CurrencyPipe,
     private translate: TranslateService,
     @Inject(MAT_DIALOG_DATA) public data: any
@@ -62,6 +63,7 @@ export class MembershipPlanComponent implements OnInit {
           {
             plan: this.selectedPlan.product_name,
             renewal: this.renewalDate,
+            prorate: this.getProrate(),
             price: this.currencyPipe.transform(this.selectedPlan.product_price, this.data.currencyCode)
           });
       } else {
@@ -70,6 +72,7 @@ export class MembershipPlanComponent implements OnInit {
           {
             plan: this.selectedPlan.product_name,
             renewal: this.renewalDate,
+            prorate: this.getProrate(),
             price: this.currencyPipe.transform(this.selectedPlan.product_price, this.data.currencyCode)
           });
       }
@@ -109,6 +112,22 @@ export class MembershipPlanComponent implements OnInit {
     this.updatePlanInstructions(this.selectedPlan.product_period);
   }
 
+  getProrate(): string {
+    let oneDay, now, then, daysToRenewal, dayRate;
+    oneDay = (1000*60*60*24);
+    now = new Date().getTime();
+    then = new Date(this.renewalDate).getTime();
+    // Get whole days
+    daysToRenewal = Math.floor((then - now) / oneDay );
+    // Calculate day rates
+    if (this.selectedPeriod === 'm') {
+      dayRate = (this.selectedPlan.product_price * 12) / 365;
+    } else {
+      dayRate = this.selectedPlan.product_price / 365;
+    }
+    return this.currencyPipe.transform((daysToRenewal * dayRate), this.data.currencyCode);
+  }
+
   ordinate(n: number, keepNumber: boolean = true) {
     const ordinals: string[] = ['th','st','nd','rd'];
     let v = n % 100;
@@ -116,7 +135,9 @@ export class MembershipPlanComponent implements OnInit {
   }
 
   upgradePlan(){
-
+    this.dialog.close({
+      productId: this.selectedPlan.stripe_product_id
+    });
   }
 
 }
