@@ -504,6 +504,16 @@ export class MemberService {
       });
   }
 
+  getUpcomingInvoice(customer_id: string) {
+    console.log('getUpcomingInvoice', customer_id);
+    return this.http.post(this.config.apiUrl + '/payments/get-upcoming-invoice',
+      {
+        customer_id: customer_id,
+        userCode: this.config.userAPICode,
+        token: this.authToken
+      });
+  }
+
   getStripeCustomerNumber(member_id: string) {
     // console.log(member_id);
     return this.http.post(this.config.apiUrl + '/members/get_stripe_customer_id',
@@ -517,6 +527,15 @@ export class MemberService {
   getProducts() {
     return this.http.post(this.config.apiUrl + '/members/getproducts',
       {
+        userCode: this.config.userAPICode,
+        token: this.authToken
+      });
+  }
+
+  getProductsMaxRestaurants(max_restaurants: number) {
+    return this.http.post(this.config.apiUrl + '/members/getproductsmaxrestaurants',
+      {
+        max_restaurants: max_restaurants,
         userCode: this.config.userAPICode,
         token: this.authToken
       });

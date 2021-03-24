@@ -85,9 +85,9 @@ export class SettingsComponent implements OnInit {
       renewal: '19'
     }
   ];
-  currentPlanId = 1;
 
   products: Object;
+  productRenewalDate: Date;
 
 
   constructor(
@@ -416,10 +416,18 @@ export class SettingsComponent implements OnInit {
   }
 
   setProducts(): void {
+
+    this.memberService.getUpcomingInvoice('cus_JAPi9CfyR6sfm1').subscribe(data => {
+      // @ts-ignore
+      //const upcomingDate = new Date(data.invoice.period_end * 1000);
+      this.productRenewalDate = new Date(data.invoice.period_end * 1000);
+    });
+
     this.memberService.getProducts().subscribe(obj => {
       this.products = obj['products'];
       console.log(this.products);
-    })
+    });
+
   }
 
   viewMemberPlans(): void {
@@ -429,9 +437,14 @@ export class SettingsComponent implements OnInit {
       data: {
         currencyCode: this.appConfig.brand.currency.code,
         currentPlanId: 1,
-        products: this.products
+        products: this.products,
+        renewal: this.productRenewalDate
       }
     });
+    dialogRef.afterClosed().subscribe(res => {
+      if (res) {
+      }
+    })
   }
 
   managePayments() {

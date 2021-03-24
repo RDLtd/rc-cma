@@ -5,9 +5,9 @@
     <h2>{{ 'PLANS.titlePlans' | translate }}</h2>
     <span class="rc-space-filler"></span>
     <span>
-    <button tabindex="-1" mat-button mat-dialog-close>CANCEL</button>
-    <button tabindex="-1" mat-flat-button color="accent" [disabled]="!planChanged">CHANGE PLAN</button>
-      </span>
+      <button tabindex="-1" mat-button mat-dialog-close>CANCEL</button>
+      <button tabindex="-1" mat-flat-button color="accent" [disabled]="!planChanged">CHANGE PLAN</button>
+    </span>
   </div>
 
   <markdown ngpreservewhitespaces [data]="planInstructions"></markdown>
@@ -15,14 +15,14 @@
   <mat-dialog-content>
 
     <mat-tab-group
-      [selectedIndex]="selectedTab"
+      [selectedIndex]="selectedTabIndex"
       dynamicHeight
       mat-stretch-tabs
+      color="accent"
       mat-align-tabs="center">
-      <mat-tab label="MONTHLY">
 
-    <mat-selection-list
-      disableRipple
+      <mat-tab label="MONTHLY">
+        <mat-selection-list
       [multiple]="false"
       (selectionChange)="selectPlan(selectedOptions[0])"
       [(ngModel)]="selectedOptions">
@@ -47,6 +47,7 @@
 
     </mat-selection-list>
       </mat-tab>
+
       <mat-tab label="YEARLY">
         <mat-selection-list
           disableRipple
@@ -77,9 +78,6 @@
 
     </mat-tab-group>
 
-
   </mat-dialog-content>
-
-
 
 </div>
