@@ -385,34 +385,34 @@ export class SettingsComponent implements OnInit {
   }
 
   setProducts(): void {
-
     this.memberService.getUpcomingInvoice(this.member.member_customer_id).subscribe(data => {
-      // @ts-ignore
-      //const upcomingDate = new Date(data.invoice.period_end * 1000);
-      this.productRenewalDate = new Date(data.invoice.period_end * 1000);
+      // console.log('getUpcomingInvoice', new Date(data['invoice']['period_end']*1000).toDateString());
+      this.productRenewalDate = new Date(data['invoice']['period_end'] * 1000);
     });
 
     this.memberService.getProducts().subscribe(obj => {
       this.products = obj['products'];
       // Set current product
-      // If this is a legacy registration then just use
-      // the first product
+      // If this is an old registration then just use
+      // the first product to keep things working
       this.currentProduct =
         this.products.find(p => p.product_stripe_id === this.member.member_product_id) || this.products[0];
       console.log(this.currentProduct);
     });
-
   }
 
   viewMemberPlans(): void {
-
+    // this date is to stop old registrations breaking
+    let fallbackDate = new Date();
+    fallbackDate.setDate(fallbackDate.getDate() + 2);
+    // --------------------
     let dialogRef = this.dialog.open(MembershipPlanComponent, {
       maxWidth: '600px',
       data: {
         currencyCode: this.appConfig.brand.currency.code,
-        currentPlanId: 1,
+        currentPlanId: this.currentProduct.product_id,
         products: this.products,
-        renewal: this.productRenewalDate
+        renewal: this.productRenewalDate || fallbackDate
       }
     });
     dialogRef.afterClosed().subscribe(changed => {
