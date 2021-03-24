@@ -113,6 +113,10 @@ export class SettingsComponent implements OnInit {
 
     moment.locale(this.lang);
 
+    this.memberService.getProducts().subscribe(data => {
+      console.log(data);
+    });
+
     this.setMember();
 
     // Update header label
@@ -418,20 +422,16 @@ export class SettingsComponent implements OnInit {
   }
 
   managePayments() {
-    console.log('active OK');
-    // cus_J9Np2sKVI4FrG2
-    // cus_JAPi9CfyR6sfm1
     //
     // First get the stripe customer number for this member from the database
     // test - this.memberService.getStripeCustomerNumber('1103')
     this.memberService.getStripeCustomerNumber(this.member.member_id)
       .subscribe( (customer) => {
-          // console.log('got customer number', customer, 'api', this.appConfig.apiUrl);
           // need to send stripe back to this window
           // @ts-ignore
           this.memberService.accessCustomerPortal(customer.customer_number, window.location.href)
             .subscribe( (data) => {
-                console.log('accessed CustomerPortal OK', data);
+                // console.log('accessed CustomerPortal OK', data);
                 // @ts-ignore
                 window.open(data.url, '_self');
               },
@@ -441,7 +441,7 @@ export class SettingsComponent implements OnInit {
             );
         },
         error => {
-          console.log('accessCustomerPortal error', error);
+          console.log('getStripeCustomerNumber error', error);
         }
       );
   }

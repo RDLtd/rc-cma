@@ -514,4 +514,12 @@ export class MemberService {
       });
   }
 
+  getProducts() {
+    return this.http.post(this.config.apiUrl + '/members/getproducts',
+      {
+        userCode: this.config.userAPICode,
+        token: this.authToken
+      });
+  }
+
 }
