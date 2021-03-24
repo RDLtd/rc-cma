@@ -119,6 +119,12 @@ export class SettingsComponent implements OnInit {
       console.log(data);
     });
 
+    this.memberService.getUpcomingInvoice('cus_JAPi9CfyR6sfm1').subscribe(data => {
+      // @ts-ignore
+      const upcomingDate = new Date(data.invoice.period_end * 1000);
+      console.log(upcomingDate.toUTCString());
+    });
+
     this.setMember();
 
     // Update header label
