@@ -1644,10 +1644,14 @@ button.rc-member-assc {
   }
 }
 
+/*
+/  Membership plans
+*/
 .rc-member-plans {
   // this seems a bit excessive, but it's the only way I've managed
   // to override the default mat classes
-  .mat-list-base .mat-list-item .mat-list-item-content-reverse, .mat-list-base .mat-list-option .mat-list-item-content-reverse {
+  .mat-list-base .mat-list-item .mat-list-item-content-reverse,
+  .mat-list-base .mat-list-option .mat-list-item-content-reverse {
     padding: 0;
     margin: 0;
   }
@@ -1694,6 +1698,5 @@ button.rc-member-assc {
       display: block;
     }
   }
-
 }
 
