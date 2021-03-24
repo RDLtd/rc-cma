@@ -394,7 +394,11 @@ export class SettingsComponent implements OnInit {
 
     this.memberService.getProducts().subscribe(obj => {
       this.products = obj['products'];
-      this.currentProduct = this.products.find(p => p.product_stripe_id === this.member.member_product_id);
+      // Set current product
+      // If this is a legacy registration then just use
+      // the first product
+      this.currentProduct =
+        this.products.find(p => p.product_stripe_id === this.member.member_product_id) || this.products[0];
       console.log(this.currentProduct);
     });
 
