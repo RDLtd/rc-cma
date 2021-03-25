@@ -514,10 +514,11 @@ export class MemberService {
       });
   }
 
-  changeSubscription(subscription_id: string, price_id: string) {
-    // console.log('changeSubscription', subscription_id, price_id);
+  changeSubscription(member_id: string, subscription_id: string, price_id: string) {
+    // console.log('changeSubscription', member_id, subscription_id, price_id);
     return this.http.post(this.config.apiUrl + '/payments/change-subscription',
       {
+        member_id: member_id,
         subscription_id: subscription_id,
         price_id: price_id,
         userCode: this.config.userAPICode,

@@ -316,7 +316,7 @@
 		],
 		"joinSuccess": "# Ok thanks!\n\nA member of our Support & Curation Team will be in contact with you shortly.\n\n**{{ brand }} Curation Team**",
 		"joinUsByReferral": "# Join us{{ referrer }}\n\nYou've been invited by {{ referrer }} to become part of {{ brand }}, an exciting new organisation that has been exclusively created to support both independent and group restaurants, and affect positive change within the industry. To join us:\n\n 1. Provide your name and contact details\n\n 2. Select your subscription option\n\n 3. Pay your subscription online\n\nIf you experience any problems activating your membership then do please [contact our Support Team]({{ email }}).",
-		"joinUsToday": "# Join us!\n\nJust complete the following 3 steps and you'll soon be part of an exciting organisation:\n\n 1. Provide your name and contact details\n\n 2. Select your subscription option\n\n 3. Pay your subscription online\n\nIf you experience any problems activating your membership then do please [contact our Support Team]({{ email }}).",
+		"joinUsToday": "# Join us!\n\nJust complete the following 3 steps and in no time you’ll be part of the Collective!\n\n 1. Provide your name and contact details\n\n 2. Select either a monthly or yearly subscription\n\n 3. Pay your subscription online\n\nIIf you experience any problems throughout this process please [contact our support team]({{ email }}).",
 		"joinWelcome": "# Welcome\n\nYou've successfully registered yourself as a **Member** and we've sent you login details and along with some further information.\n\nClose this window and check your email.\n\nMany thanks.\n\n**{{ brand }} Curation Team**",
 		"labelBtnSubmit": "NEXT",
 		"labelEmail": "Email address",
@@ -364,7 +364,11 @@
 		"titleRequest": "Exclusive Member Deal"
 	},
 	"MEMBERSHIP": {
-		"instructions": "Please select your preferred **{{ brand }}** subscription option.\n\nYou will be taken to the checkout stage, where you can review your subscription before paying securely online using your preferred method\n\nIf you have a **PROMOCODE** then you can apply it at the same time.",
+		"infoMembershipMonthly": "##  MONTHLY SUBSCRIPTION\n\nPay just **{{ fee }}** per month for full access to all the benefits offered by **{{ brand }}** Membership.",
+		"infoMembershipYearly": "## ANNUAL SUBSCRIPTION\n\nPay **{{ fee }}** per year and you'll get a full 12 month membership for the price of only 10. All the same **{{ brand }}** benefits, just a bit cheaper!\n\n**And**, if you sign up for a yearly subscription before the 16 April 2021, then your fees will be frozen, for life!",
+		"instructions": "Please select your **{{ brand }}** subscription option.\n\nYou will be taken to the checkout stage, where you can review your subscription before paying securely online.\n\nIf you have a **PROMOCODE** then you can apply it during the payment process.",
+		"labelPayMonthly": "Pay monthly",
+		"labelPayYearly": "Pay yearly",
 		"terms": "Please take the time to read the [Terms of Membership]({{ terms }}) and [Privacy Policy]({{ privacy }}). By becoming a member of Restaurant Collective you are confirming your acceptance of these terms."
 	},
 	"MESSAGES": {

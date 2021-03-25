@@ -87,11 +87,10 @@ export class SettingsComponent implements OnInit {
     // Update header label
     this.header.updateSectionName(this.translate.instant('HUB.sectionSettings'));
 
-    // Add member name to avatar url
-    if (this.member.member_image_path) {
-      setTimeout(() => this.header.updateAvatar(this.member.member_image_path), 0);
-      // this.header.updateAvatar(this.member.member_image_path);
-    }
+    // Update avatar
+    // if (this.member.member_image_path) {
+    //   setTimeout(() => this.header.updateAvatar(this.member.member_image_path), 0);
+    // }
 
     // Add restaurant placeholder
     this.imgRestPlaceholderUrl =
@@ -114,6 +113,10 @@ export class SettingsComponent implements OnInit {
   }
 
   setMember() {
+    // in case of rogue values from the db
+    if (this.member.member_image_path === 'null' || this.member.member_image_path === 'undefined') {
+      this.member.member_image_path = null;
+    }
     this.d_member_signedup = moment(this.member.member_signedup).format('DD MMMM YYYY');
     // Get Cloudinary img path
     this.clPublicId = this.getMemberClPublicId(this.member.member_image_path);
@@ -226,10 +229,9 @@ export class SettingsComponent implements OnInit {
 
   getMemberClPublicId(url) {
 
-      if (!!url) {
-        // this.header.updateAvatar(url);
-        const arr = url.split('/');
+      if (!!url && url !== 'null') {
 
+        const arr = url.split('/');
         return arr.splice(arr.length - 3).join('/');
 
       } else {
@@ -420,13 +422,17 @@ export class SettingsComponent implements OnInit {
       // console.log(this.member);
       if (changed) {
         console.log(changed);
-       this.memberService.changeSubscription( this.member.member_subscription_id, changed.priceId )
+       this.memberService.changeSubscription( this.member.member_id, this.member.member_subscription_id, changed.priceId )
          .subscribe(result => {
            this.currentProduct = this.products.find(p => p.product_stripe_id === changed.productId);
-           console.log('Subscription success', result);
-           this.openSnackBar(this.translate.instant(
-             'SETTINGS.msgPlanUpdated',
-             { plan: this.currentProduct.product_name }), 'OK');
+           // reload member
+           this.memberService.getById(this.member.member_id).subscribe(m => {
+             this.member = this.member = m['member'][0];
+             localStorage.setItem('rd_profile', JSON.stringify(this.member));
+             this.openSnackBar(this.translate.instant(
+               'SETTINGS.msgPlanUpdated',
+               { plan: this.currentProduct.product_name }), 'OK');
+           });
          },
            error => {
              console.log('Subscription Error', error);
