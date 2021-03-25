@@ -408,7 +408,7 @@ export class MemberService {
   }
 
   async getReferral(referralCode: string) {
-      let data = await this.http.post(this.config.apiUrl + '/members/getpromo',
+      const data = await this.http.post(this.config.apiUrl + '/members/getpromo',
       {
         promo_code: referralCode,
         userCode: this.config.userAPICode,
@@ -515,7 +515,7 @@ export class MemberService {
   }
 
   changeSubscription(subscription_id: string, price_id: string) {
-    console.log('changeSubscription', subscription_id, price_id);
+    // console.log('changeSubscription', subscription_id, price_id);
     return this.http.post(this.config.apiUrl + '/payments/change-subscription',
       {
         subscription_id: subscription_id,
