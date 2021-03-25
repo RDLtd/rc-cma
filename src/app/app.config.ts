@@ -76,11 +76,6 @@ export class AppConfig {
         success_url: `${ this.appUrl }/signin`,
         cancel_url: `${ this.appUrl }/membership-options`,
       },
-      fee: {
-        month: '3.50',
-        year: '42.00',
-        yearIncVat: '50.40'
-      },
       currency: {
         symbol: '£',
         code: 'GBP'
@@ -109,11 +104,6 @@ export class AppConfig {
         membership_yearly: {
           priceId: 'price_1HuaaeFqzlrb81VHFyBJUwPs'
         }
-      },
-      fee: {
-        month: '4.00',
-        year: '48.00',
-        yearIncVat: '57.60'
       },
       currency: {
         symbol: '€',

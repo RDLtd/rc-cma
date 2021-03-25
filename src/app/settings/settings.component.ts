@@ -36,6 +36,7 @@ export class SettingsComponent implements OnInit {
   restaurant: Restaurant;
   member: Member;
 
+
   defaultImages: Array<any> = [];
   imgRestPlaceholderUrl;
   isDemoMember = false;
@@ -47,45 +48,10 @@ export class SettingsComponent implements OnInit {
   d_member_signedup: string;
   lang: string;
 
-  membershipPlans = [
-    {
-      id: 1,
-      name: 'Single-Site',
-      benefits: 'Content management and hosted Single Page Website for one restaurant. Full access to the Hub' +
-        ' including Community Forum and Knowledge Base.',
-      subscription: 'm',
-      price: 9.99,
-      renewal: '19'
-    },
-    {
-      id: 2,
-      name: 'Multi-Site',
-      benefits: 'Community Forum, Knowledge Base and Web Content Management and hosted SPW licences for up to 3' +
-        ' restaurants, plus 1 hour per month of technical support',
-      price: 18.25,
-      subscription: 'm',
-      renewal: '19'
-    },
-    {
-      id: 3,
-      name: 'Group',
-      benefits: 'Community Forum, Knowledge Base and Web Content Management and hosted SPW licences for up to 6' +
-        ' restaurants, plus 2 hours per month of technical support',
-      price: 28.25,
-      subscription: 'm',
-      renewal: '19'
-    },
-    {
-      id: 4,
-      name: 'Large Group',
-      benefits: 'Community Forum, Knowledge Base and Web Content Management and hosted SPW licences for up to 10' +
-        ' restaurants, plus 3 hours per month technical support',
-      price: 38.25,
-      subscription: 'm',
-      renewal: '19'
-    }
-  ];
-  currentPlanId = 1;
+
+  products: [any];
+  productRenewalDate: Date;
+  currentProduct: any;
 
 
   constructor(
@@ -111,19 +77,10 @@ export class SettingsComponent implements OnInit {
 
     this.brand = this.appConfig.brand;
     this.member = JSON.parse(localStorage.getItem('rd_profile'));
+    console.log(this.member);
     this.lang = localStorage.getItem('rd_language');
 
     moment.locale(this.lang);
-
-    this.memberService.getProducts().subscribe(data => {
-      console.log(data);
-    });
-
-    this.memberService.getUpcomingInvoice('cus_JAPi9CfyR6sfm1').subscribe(data => {
-      // @ts-ignore
-      const upcomingDate = new Date(data.invoice.period_end * 1000);
-      console.log(upcomingDate.toUTCString());
-    });
 
     this.setMember();
 
@@ -139,6 +96,9 @@ export class SettingsComponent implements OnInit {
     // Add restaurant placeholder
     this.imgRestPlaceholderUrl =
       `https://via.placeholder.com/360x240?text=${this.translate.instant('SETTINGS.labelAwaitingImage')}`;
+
+    this.setProducts();
+
   }
   // Switch language
   setLanguage(lang): void {
@@ -364,69 +324,105 @@ export class SettingsComponent implements OnInit {
     return `${this.appConfig.brand.joinUrl}?referral=${this.member.member_promo_code}`;
   }
 
+  // Does the current plan allow for more restaurants to be added
+  checkAllowance() {
+    if (this.currentProduct.product_max_restaurants > this.restaurants.length) {
+      this.addRestaurants();
+    } else {
+      this.viewMemberPlans();
+    }
+  }
+
   addRestaurants() {
 
-    // Todo: check whether the Member has capacity
-    //  on their existing plan and if not, prompt an upgrade
-    // *******************************************
+      const dialogRef = this.dialog.open(RestaurantLookupComponent, {
+        width: '480px',
+        position: {'top': '10vh'},
+        data: {
+          associatedRestaurants: this.restaurants,
+          member: this.member
+        }
+      });
 
-    const dialogRef = this.dialog.open(RestaurantLookupComponent, {
-      width: '480px',
-      position: {'top': '10vh'},
-      data: {
-        associatedRestaurants: this.restaurants,
-        member: this.member
-      }
+      dialogRef.afterClosed().subscribe(result => {
+
+        if (result) {
+          console.log('AC', result);
+
+          // Form markdown message
+          const bodyContent =
+            `# New Restaurant\n\n` +
+            `Please create:\n\n` +
+            ` - **Restaurant**: ${result.newRestaurantName}\n` +
+            ` - **Code**: ${result.newRestaurantPostcode}\n` +
+            ` - **Telephone**: ${result.newRestaurantTel}\n` +
+            ` - **Member name**: ${this.member.member_first_name} ${this.member.member_last_name}\n` +
+            ` - **Member ID: ${this.member.member_id}\n` +
+            ` - **Member Email**: ${this.member.member_email}\n\n` +
+            `Contact the user directly if any clarification is required.\n\n` +
+            `Thank you`;
+
+          this.memberService.sendEmailRequest(
+            'curation',
+            'support',
+            'New Restaurant',
+            bodyContent)
+            .subscribe(() => {
+                this.cmsLocalService.dspSnackbar(this.translate.instant('SETTINGS.msgNewRequestReceived'), 'OK', 20, 'info');
+                this.showRestaurantFinder = false;
+              },
+              error => {
+                console.log(error);
+                this.showRestaurantFinder = false;
+              }
+            );
+        } else {
+          this.showRestaurantFinder = false;
+          this.getAssociatedRestaurants(this.member.member_id);
+        }
+        this.dialog.closeAll();
+      });
+  }
+
+  setProducts(): void {
+    this.memberService.getUpcomingInvoice(this.member.member_customer_id).subscribe(data => {
+      // console.log('getUpcomingInvoice', new Date(data['invoice']['period_end']*1000).toDateString());
+      this.productRenewalDate = new Date(data['invoice']['period_end'] * 1000);
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-
-      if (result) {
-        console.log('AC', result);
-
-        // Form markdown message
-        const bodyContent =
-          `# New Restaurant\n\n` +
-          `Please create:\n\n` +
-          ` - **Restaurant**: ${result.newRestaurantName}\n` +
-          ` - **Code**: ${result.newRestaurantPostcode}\n` +
-          ` - **Telephone**: ${result.newRestaurantTel}\n` +
-          ` - **Member name**: ${this.member.member_first_name} ${this.member.member_last_name}\n` +
-          ` - **Member ID: ${this.member.member_id}\n` +
-          ` - **Member Email**: ${this.member.member_email}\n\n` +
-          `Contact the user directly if any clarification is required.\n\n` +
-          `Thank you`;
-
-        this.memberService.sendEmailRequest(
-          'curation',
-          'support',
-          'New Restaurant',
-          bodyContent)
-          .subscribe( () => {
-            this.cmsLocalService.dspSnackbar(this.translate.instant('SETTINGS.msgNewRequestReceived'), 'OK', 20, 'info');
-            this.showRestaurantFinder = false;
-          },
-            error => {
-            console.log(error);
-            this.showRestaurantFinder = false;
-          }
-        );
-      } else {
-        this.showRestaurantFinder = false;
-        this.getAssociatedRestaurants(this.member.member_id);
-      }
-      this.dialog.closeAll();
+    this.memberService.getProducts().subscribe(obj => {
+      this.products = obj['products'];
+      // Set current product
+      // If this is an old registration then just use
+      // the first product to keep things working
+      this.currentProduct =
+        this.products.find(p => p.product_stripe_id === this.member.member_product_id) || this.products[0];
+      console.log(this.currentProduct);
     });
   }
 
   viewMemberPlans(): void {
-    // Todo: Get available plans via API
-    //  Set Member's current plan
+    // this date is to stop old registrations breaking
+    let fallbackDate = new Date();
+    fallbackDate.setDate(fallbackDate.getDate() + 2);
+    // --------------------
     let dialogRef = this.dialog.open(MembershipPlanComponent, {
       maxWidth: '600px',
       data: {
-        currentPlanId: 1,
-        plans: this.membershipPlans
+        currencyCode: this.appConfig.brand.currency.code,
+        currentPlanId: this.currentProduct.product_id,
+        products: this.products,
+        renewal: this.productRenewalDate || fallbackDate
+      }
+    });
+    dialogRef.afterClosed().subscribe(changed => {
+      // console.log(this.member);
+      if (changed) {
+       this.memberService.changeSubscription( this.member.member_subscription_id, changed.productId )
+         .subscribe(result => {
+           this.currentProduct = this.products.find(p => p.product_stripe_id === changed.productId);
+           console.log(result);
+         });
       }
     });
   }

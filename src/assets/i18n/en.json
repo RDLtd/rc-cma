@@ -375,9 +375,12 @@
 		"welcomeNewMember": "# You're in!\n\nIt's great that you've chosen to join Restaurant Collective and we hope that you'll help us to grow this exciting community of industry professionals and independent restaurateurs.\n\n## Add your restaurant\n\nBefore you start exploring the Member's Hub, please complete the initial set up by linking your restaurant to your membership account.\n\nWhen you're ready, select the **START HERE** option below.\n\nFind your restaurant and follow the on-screen instructions to verify the details and link it to your Membership.\n\nIf you need any help, then open the **Knowledge Base** and see the **Getting Started** guide."
 	},
 	"PLANS": {
-		"infoCurrentPlan": "Your current Membership renews on the **{{ renewal }}** of each month at a total is **{{ price }}**. To upgrade, select another option below and we'll calculate any additional charges due.",
-		"infoNewPlan": "This will upgade your package to **{{ plan }} Membership**.  We’ll charge you **{{ prorate }}** now, which is prorated for the current billing period and, from **{{ renewal }}**, we’ll bill your new total of **{{ price }}** a year.",
-		"titlePlans": "Membership plans"
+		"infoCurrentPlanMonthly": "Your current membership plan renews on the **{{ renewal }}** of each month at **{{ price }}**. To change your plan, select another option below and we'll calculate any additional charges due.",
+		"infoCurrentPlanYearly": "Your current membership plan renews on the **{{ renewal }}** at a total of **{{ price }}**. To change your plan, select another option below and we'll calculate any additional charges due.",
+		"infoNewPlanMonthly": "If you choose to go ahead and change your membership plan to **{{ plan }}** then we’ll charge you **{{ prorate }}** now – which is prorated for the current billing period – and from **{{ renewal }}** your new monthly subscription will be **{{ price }}**.",
+		"infoNewPlanYearly": "If you choose to change your membership plan to **{{plan}}** then we’ll charge you **{{ prorate }}** now –  which is prorated for the current billing period – and from **{{ renewal }}** we’ll bill you at the new yearly subscription fee of **{{ price }}**.",
+		"labelCurrentPlan": "current plan",
+		"titlePlans": "Available Membership plans"
 	},
 	"SETTINGS": {
 		"contacts": {
@@ -448,7 +451,7 @@
 		"titleAccount": "Account details",
 		"titleAuthentication": "Authentication",
 		"titleAvatar": "Avatar / Image",
-		"titleManagedRestaurants": "Managed restaurants",
+		"titleManagedRestaurants": "Managed restaurants ",
 		"titleMember": "Member details",
 		"titleReferrals": "Referral code",
 		"titleUploadAvatar": "Upload image"

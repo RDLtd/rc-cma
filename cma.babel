@@ -5612,7 +5612,7 @@
                 <name>PLANS</name>
                 <children>
                     <concept_node>
-                        <name>infoCurrentPlan</name>
+                        <name>infoCurrentPlanMonthly</name>
                         <definition_loaded>false</definition_loaded>
                         <description/>
                         <comment/>
@@ -5629,7 +5629,58 @@
                         </translations>
                     </concept_node>
                     <concept_node>
-                        <name>infoNewPlan</name>
+                        <name>infoCurrentPlanYearly</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-GB</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>infoNewPlanMonthly</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-GB</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>infoNewPlanYearly</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-GB</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>labelCurrentPlan</name>
                         <definition_loaded>false</definition_loaded>
                         <description/>
                         <comment/>
