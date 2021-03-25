@@ -415,13 +415,21 @@ export class SettingsComponent implements OnInit {
         renewal: this.productRenewalDate || fallbackDate
       }
     });
+
     dialogRef.afterClosed().subscribe(changed => {
       // console.log(this.member);
       if (changed) {
-       this.memberService.changeSubscription( this.member.member_subscription_id, changed.productId )
+        console.log(changed);
+       this.memberService.changeSubscription( this.member.member_subscription_id, changed.priceId )
          .subscribe(result => {
            this.currentProduct = this.products.find(p => p.product_stripe_id === changed.productId);
-           console.log(result);
+           console.log('Subscription success', result);
+           this.openSnackBar(this.translate.instant(
+             'SETTINGS.msgPlanUpdated',
+             { plan: this.currentProduct.product_name }), 'OK');
+         },
+           error => {
+             console.log('Subscription Error', error);
          });
       }
     });

@@ -295,7 +295,7 @@
 		"sectionCMS": "Content Management & SPW",
 		"sectionHub": "Member's Hub",
 		"sectionMarket": "Marketplace",
-		"sectionSettings": "Account settings"
+		"sectionSettings": "Member settings"
 	},
 	"JOIN": {
 		"duplicateEmail": "This **email address** is already registered, please [SIGN-IN, or retrieve your password here](/signin).",
@@ -378,8 +378,10 @@
 		"infoCurrentPlanMonthly": "Your current membership plan renews on the **{{ renewal }}** of each month at **{{ price }}**. To change your plan, select another option below and we'll calculate any additional charges due.",
 		"infoCurrentPlanYearly": "Your current membership plan renews on the **{{ renewal }}** at a total of **{{ price }}**. To change your plan, select another option below and we'll calculate any additional charges due.",
 		"infoNewPlanMonthly": "If you choose to go ahead and change your membership plan to **{{ plan }}** then we’ll charge you **{{ prorate }}** now – which is prorated for the current billing period – and from **{{ renewal }}** your new monthly subscription will be **{{ price }}**.",
-		"infoNewPlanYearly": "If you choose to change your membership plan to **{{plan}}** then we’ll charge you **{{ prorate }}** now –  which is prorated for the current billing period – and from **{{ renewal }}** we’ll bill you at the new yearly subscription fee of **{{ price }}**.",
+		"infoNewPlanYearly": "If you choose to change your membership plan to **{{ plan }}** then we’ll charge you **{{ prorate }}** now –  which is prorated for the current billing period – and from **{{ renewal }}** we’ll bill you at the new yearly subscription fee of **{{ price }}**.",
+		"labelAddRestaurant": "Add your restaurant here",
 		"labelCurrentPlan": "current plan",
+		"msgAddRestaurant": "Begin managing your web content and publishing your **Single Page Website** that's included with your Membership plan.",
 		"titlePlans": "Available Membership plans"
 	},
 	"SETTINGS": {
@@ -423,6 +425,7 @@
 		"msgContactsUpdated": "Your contact details have been updated",
 		"msgLinkCopied": "Your referral link has been copied to the clipboard",
 		"msgNewRequestReceived": "New request successfully received. Thank you.",
+		"msgPlanUpdated": "Your membership plan has been successfully updated to {{ plan }}",
 		"msgRemoveRestaurant": "Are you sure that you want to remove **{{ name }}** from your Membership account?",
 		"msgRestaurantRemoved": "{{ name }} has been removed from your account",
 		"msgUpdateFailed": "Sorry, there was a problem updating your information",

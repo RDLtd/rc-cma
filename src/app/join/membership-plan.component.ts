@@ -38,13 +38,13 @@ export class MembershipPlanComponent implements OnInit {
     // cache the original product
     this.originalPlan = this.selectedPlan = this.getPlan(this.products[0].product_id);
 
-    // get the current period m/y to set the tab
-    this.selectedTabIndex = this.originalPlan.product_period === 'm'? 0 : 1;
-
     // set the subscription period
     this.selectedPeriod = this.originalPlan.product_period;
 
-    // split products into monthly/yearly
+    // get the current period m/y to set the tab
+    this.selectedTabIndex = this.selectedPeriod === 'm'? 0 : 1;
+
+    // split products into monthly/yearly arrays
     this.plans.monthly = this.data.products.filter(obj => obj.product_period === 'm');
     this.plans.yearly = this.data.products.filter(obj => obj.product_period === 'y');
 
@@ -53,9 +53,10 @@ export class MembershipPlanComponent implements OnInit {
 
   }
 
+  // Update dialog content based on current selection
   updatePlanInstructions(period: string): void {
-
-      // new plans
+    let monthly = this.selectedPeriod === 'm';
+      // for new plans
     if (this.planChanged) {
       if (period === 'm') {
         this.planInstructions = this.translate.instant(
@@ -112,20 +113,31 @@ export class MembershipPlanComponent implements OnInit {
     this.updatePlanInstructions(this.selectedPlan.product_period);
   }
 
+  // getProrata(): string {
+  //   // ratio calculation for prorate amount
+  //   // here just using example price and dates
+  //   const product_price = 21.50;
+  //   const today = new Date(2021, 4, 7).getTime();
+  //   const period_start = new Date(2021, 3, 23).getTime();
+  //   const period_end = new Date(2021, 4, 25).getTime();
+  //   const fraction = (period_end - today) / (period_end - period_start);
+  //   const price_to_pay = product_price * fraction;
+  //   console.log(period_start, period_end, today, fraction, product_price, price_to_pay);
+  // }
+
   getProrate(): string {
-    let oneDay, now, then, daysToRenewal, dayRate;
+    let oneDay, now, renewal, daysToRenewal, dayRate, amountDue;
     oneDay = (1000*60*60*24);
     now = new Date().getTime();
-    then = new Date(this.renewalDate).getTime();
+    renewal = new Date(this.renewalDate).getTime();
     // Get whole days
-    daysToRenewal = Math.ceil((then - now) / oneDay );
+    daysToRenewal = Math.floor((renewal - now) / oneDay );
     // Calculate day rates
-    if (this.selectedPeriod === 'm') {
-      dayRate = (this.selectedPlan.product_price * 12) / 365;
-    } else {
-      dayRate = this.selectedPlan.product_price / 365;
-    }
-    return this.currencyPipe.transform((daysToRenewal * dayRate), this.data.currencyCode);
+    dayRate = this.selectedPeriod === 'm'? (this.selectedPlan.product_price * 12)/365 : this.selectedPlan.product_price / 365;
+    console.log (`${daysToRenewal} days to renewal at ${dayRate} per day`);
+    amountDue = (daysToRenewal * dayRate) - this.originalPlan.product_price;
+
+    return this.currencyPipe.transform(amountDue, this.data.currencyCode);
   }
 
   ordinate(n: number, keepNumber: boolean = true) {
@@ -135,8 +147,10 @@ export class MembershipPlanComponent implements OnInit {
   }
 
   upgradePlan(){
+    console.log(this.selectedPlan);
     this.dialog.close({
-      productId: this.selectedPlan.stripe_product_id
+      productId: this.selectedPlan.product_stripe_id,
+      priceId: this.selectedPlan.product_stripe_price_id
     });
   }
 

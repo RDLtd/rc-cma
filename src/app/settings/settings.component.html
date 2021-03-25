@@ -164,11 +164,17 @@
                   <a (click)="viewMemberPlans()" matTooltip="View Membership Plans">
                     {{ currentProduct?.product_name }}
                   </a>
+                  <span class="rc-space-filler"></span>
                 </li>
               </ul>
-              <div class="rc-card-title" style="margin-top: 24px;">
-                <h2>{{ 'SETTINGS.titleManagedRestaurants' | translate }}</h2>
+              <div class="rc-card-title" style="margin: 24px 0 8px 0;">
+                <h2>{{ 'SETTINGS.titleManagedRestaurants' | translate }}
+                  <span style="font-size: .75em; font-weight: 300;">
+                    ({{ restaurants?.length }}/{{ this.currentProduct?.product_max_restaurants }})
+                  </span>
+                </h2>
                 <span class="rc-space-filler"></span>
+
                 <span>
                   <button
                     color="accent"
@@ -186,17 +192,13 @@
                   *ngIf="restaurants?.length === 0"
                   (click)="addRestaurants()"
                   class="rc-managed-restaurant-placeholder">
-                  <div>
-                    ADD YOUR RESTAURANT
-                  </div>
+
+                  <div>{{ 'PLANS.labelAddRestaurant' | translate | uppercase }}</div>
                   <div markdown ngpreservewhitespaces>
-                      To begin managing your web content and publishing your **Single Page Website** that's included with
-                      your Membership, add your restaurant here
+                    {{ 'PLANS.msgAddRestaurant' | translate }}
                   </div>
 
                 </div>
-
-
 
                 <div
                   *ngFor="let restaurant of restaurants; let idx = index"
@@ -229,6 +231,7 @@
                     {{ restaurant?.restaurant_address_2 }}<br>{{ restaurant?.restaurant_post_code }}</p>
                   </div>
                 </div>
+
               </div>
 
             </mat-card-content>

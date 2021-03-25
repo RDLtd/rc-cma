@@ -295,7 +295,7 @@
 		"sectionCMS": "Gestion de contenu et SPW",
 		"sectionHub": "Hub des membres",
 		"sectionMarket": "marché",
-		"sectionSettings": "Paramètres du compte"
+		"sectionSettings": "Paramètres des membres"
 	},
 	"JOIN": {
 		"duplicateEmail": "Cette ** adresse e-mail ** est déjà enregistrée, veuillez [vous connecter ou récupérer votre mot de passe ici] (/ signin).",
@@ -379,7 +379,9 @@
 		"infoCurrentPlanYearly": "Votre abonnement actuel est renouvelé le **{{ renewal }}** pour un total de **{{ price }}**. Pour modifier votre forfait, sélectionnez une autre option ci-dessous et nous calculerons tous les frais supplémentaires dus.",
 		"infoNewPlanMonthly": "Si vous décidez de modifier votre formule d'abonnement en **{{ plan }}**, nous vous facturerons **{{ prorate }}** maintenant - au prorata pour la période de facturation actuelle - et à partir de **{{ renewal }}** votre nouvel abonnement mensuel sera **{{ price }}**.",
 		"infoNewPlanYearly": "Si vous choisissez de changer votre formule d'abonnement en **{{plan}}**, nous vous facturerons **{{ prorate }}** maintenant - au prorata pour la période de facturation actuelle - et à partir de **{{ renewal }}** nous vous facturera les nouveaux frais d'abonnement annuels de **{{ price }}**.",
+		"labelAddRestaurant": "Ajoutez votre restaurant ici",
 		"labelCurrentPlan": "plan actuel",
+		"msgAddRestaurant": "Commencez à gérer votre contenu Web et à publier votre ** site Web à page unique ** inclus dans votre plan d'abonnement.",
 		"titlePlans": "Plans d'adhésion disponibles"
 	},
 	"SETTINGS": {
@@ -423,6 +425,7 @@
 		"msgContactsUpdated": "Vos coordonnées ont été mises à jour",
 		"msgLinkCopied": "Votre lien de parrainage a été copié dans le presse-papiers",
 		"msgNewRequestReceived": "Nouvelle demande reçue avec succès. Merci.",
+		"msgPlanUpdated": "Votre plan d'abonnement a été mis à jour avec succès vers {{ plan }}",
 		"msgRemoveRestaurant": "Voulez-vous vraiment supprimer **{{ name }}** de votre compte d'abonnement?",
 		"msgRestaurantRemoved": "{{ name }} a été supprimé de votre compte",
 		"msgUpdateFailed": "Désolé, un problème est survenu lors de la mise à jour de vos informations",
