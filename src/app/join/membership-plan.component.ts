@@ -61,7 +61,7 @@ export class MembershipPlanComponent implements OnInit {
         this.planInstructions = this.translate.instant(
           'PLANS.infoNewPlanMonthly',
           {
-            plan: this.selectedPlan.product_name,
+            plan: this.selectedPlan.product_name.trim(),
             renewal: this.renewalDate,
             prorate: this.getProrate(),
             price: this.currencyPipe.transform(this.selectedPlan.product_price, this.data.currencyCode)
@@ -70,7 +70,7 @@ export class MembershipPlanComponent implements OnInit {
         this.planInstructions = this.translate.instant(
           'PLANS.infoNewPlanYearly',
           {
-            plan: this.selectedPlan.product_name,
+            plan: this.selectedPlan.product_name.trim(),
             renewal: this.renewalDate,
             prorate: this.getProrate(),
             price: this.currencyPipe.transform(this.selectedPlan.product_price, this.data.currencyCode)
@@ -82,7 +82,7 @@ export class MembershipPlanComponent implements OnInit {
         this.planInstructions = this.translate.instant(
           'PLANS.infoCurrentPlanMonthly',
           {
-            plan: this.selectedPlan.product_name,
+            plan: this.selectedPlan.product_name.trim(),
             renewal: this.ordinate(this.renewalDay),
             price: this.currencyPipe.transform(this.selectedPlan.product_price, this.data.currencyCode)
           });
@@ -90,7 +90,7 @@ export class MembershipPlanComponent implements OnInit {
         this.planInstructions = this.translate.instant(
           'PLANS.infoCurrentPlanYearly',
           {
-            plan: this.selectedPlan.product_name,
+            plan: this.selectedPlan.product_name.trim(),
             renewal: this.renewalDate,
             price: this.currencyPipe.transform(this.selectedPlan.product_price, this.data.currencyCode)
           });
@@ -118,7 +118,7 @@ export class MembershipPlanComponent implements OnInit {
     now = new Date().getTime();
     then = new Date(this.renewalDate).getTime();
     // Get whole days
-    daysToRenewal = Math.floor((then - now) / oneDay );
+    daysToRenewal = Math.ceil((then - now) / oneDay );
     // Calculate day rates
     if (this.selectedPeriod === 'm') {
       dayRate = (this.selectedPlan.product_price * 12) / 365;
