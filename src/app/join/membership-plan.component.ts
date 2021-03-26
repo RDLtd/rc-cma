@@ -107,6 +107,10 @@ export class MembershipPlanComponent implements OnInit {
     return id === this.originalPlan.product_id;
   }
 
+  exceedsPlan(allowance: number): boolean {
+    return allowance < this.data.max;
+  }
+
   selectPlan(id) {
     this.planChanged = id !== this.originalPlan.product_id;
     this.selectedPlan = this.getPlan(id);

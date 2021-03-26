@@ -21,7 +21,6 @@ import { CmsLocalService } from '../cms';
 import { LoadService, ConfirmCancelComponent, HelpService } from '../common';
 import { HeaderService } from '../common/header.service';
 import { MembershipPlanComponent } from '../join/membership-plan.component';
-import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -68,7 +67,6 @@ export class SettingsComponent implements OnInit {
     public appConfig: AppConfig,
     private _clipboardService: ClipboardService,
     private loadService: LoadService,
-    private http: HttpClient,
     public dialog: MatDialog) {
       this.loadService.open();
   }
@@ -326,8 +324,9 @@ export class SettingsComponent implements OnInit {
     return `${this.appConfig.brand.joinUrl}?referral=${this.member.member_promo_code}`;
   }
 
-  // Does the current plan allow for more restaurants to be added
+  // Does the current plan allow for more restaurants to be added?
   checkAllowance() {
+    console.log(this.currentProduct, this.restaurants.length);
     if (this.currentProduct.product_max_restaurants > this.restaurants.length) {
       this.addRestaurants();
     } else {
@@ -395,8 +394,10 @@ export class SettingsComponent implements OnInit {
     this.memberService.getProducts().subscribe(obj => {
       this.products = obj['products'];
       // Set current product
+      //
       // If this is an old registration then just use
       // the first product to keep things working
+      //
       this.currentProduct =
         this.products.find(p => p.product_stripe_id === this.member.member_product_id) || this.products[0];
       console.log(this.currentProduct);
@@ -404,17 +405,19 @@ export class SettingsComponent implements OnInit {
   }
 
   viewMemberPlans(): void {
-    // this date is to stop old registrations breaking
+    //
+    // this fallbackDate is just to stop old registrations breaking
     let fallbackDate = new Date();
     fallbackDate.setDate(fallbackDate.getDate() + 2);
-    // --------------------
+    //
     let dialogRef = this.dialog.open(MembershipPlanComponent, {
       maxWidth: '600px',
       data: {
         currencyCode: this.appConfig.brand.currency.code,
         currentPlanId: this.currentProduct.product_id,
         products: this.products,
-        renewal: this.productRenewalDate || fallbackDate
+        renewal: this.productRenewalDate || fallbackDate,
+        max: this.restaurants.length
       }
     });
 
@@ -425,13 +428,14 @@ export class SettingsComponent implements OnInit {
        this.memberService.changeSubscription( this.member.member_id, this.member.member_subscription_id, changed.priceId )
          .subscribe(result => {
            this.currentProduct = this.products.find(p => p.product_stripe_id === changed.productId);
-           // reload member
+           // reload member & update local storage
            this.memberService.getById(this.member.member_id).subscribe(m => {
              this.member = this.member = m['member'][0];
              localStorage.setItem('rd_profile', JSON.stringify(this.member));
              this.openSnackBar(this.translate.instant(
                'SETTINGS.msgPlanUpdated',
-               { plan: this.currentProduct.product_name }), 'OK');
+               { plan: this.currentProduct.product_name }),
+               'OK');
            });
          },
            error => {
@@ -442,9 +446,7 @@ export class SettingsComponent implements OnInit {
   }
 
   managePayments() {
-    //
     // First get the stripe customer number for this member from the database
-    // test - this.memberService.getStripeCustomerNumber('1103')
     this.memberService.getStripeCustomerNumber(this.member.member_id)
       .subscribe( (customer) => {
           // need to send stripe back to this window

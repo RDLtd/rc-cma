@@ -30,7 +30,7 @@
           <mat-form-field hideRequiredMarker class="rc-full-width">
             <mat-label>{{ 'SETTINGS.contacts.labelJobRole' | translate }}</mat-label>
             <mat-select
-              [(ngModel)]="member.member_role"
+              [(ngModel)]="member.member_job"
               name="member_role"
               required>
               <mat-option *ngFor="let job of jobRoles" [value]="job">
