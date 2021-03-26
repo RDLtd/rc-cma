@@ -21,45 +21,49 @@
       mat-stretch-tabs
       mat-align-tabs="center">
 
+      <!-- MONTHLY PLANS -->
       <mat-tab label="MONTHLY">
         <mat-selection-list
-      [multiple]="false"
-      (selectionChange)="selectPlan(selectedOptions[0])"
-      [(ngModel)]="selectedOptions">
+          [multiple]="false"
+          (selectionChange)="selectPlan(selectedOptions[0])"
+          [(ngModel)]="selectedOptions">
+          <mat-list-option
+            *ngFor="let plan of plans.monthly"
+            [disabled]="exceedsPlan(plan.product_max_restaurants)"
+            [value]="plan.product_id">
+            <div class="content">
+              <div>
+                <h3>
+                  {{ plan.product_name }}
+                  <ng-container
+                    *ngIf="isCurrentPlan(plan.product_id)">({{ 'PLANS.labelCurrentPlan' | translate }})
+                  </ng-container>
+                </h3>
+                <p>{{ plan.product_description }}</p>
+              </div>
+              <div class="rc-space-filler"></div>
+              <div>
+                <h3
+                  style="text-align: right">{{ plan.product_price | currency: data.currencyCode }}
+                  <span>Monthly</span>
+                </h3>
 
-      <mat-list-option *ngFor="let plan of plans.monthly" [value]="plan.product_id">
-        <div class="content">
-          <div>
-            <h3>
-              {{ plan.product_name }}
-              <ng-container
-                *ngIf="isCurrentPlan(plan.product_id)">({{ 'PLANS.labelCurrentPlan' | translate }})
-              </ng-container>
-            </h3>
-            <p>{{ plan.product_description }}</p>
-          </div>
-          <div class="rc-space-filler"></div>
-          <div>
-            <h3
-              style="text-align: right">{{ plan.product_price | currency: data.currencyCode }}
-              <span>Monthly</span>
-            </h3>
-
-          </div>
-        </div>
-      </mat-list-option>
-
-    </mat-selection-list>
+              </div>
+            </div>
+          </mat-list-option>
+        </mat-selection-list>
       </mat-tab>
-
+      <!-- YEARLY PLANS -->
       <mat-tab label="YEARLY">
         <mat-selection-list
           disableRipple
           [multiple]="false"
           (selectionChange)="selectPlan(selectedOptions[0])"
           [(ngModel)]="selectedOptions">
-
-          <mat-list-option *ngFor="let plan of plans.yearly" [value]="plan.product_id">
+          <mat-list-option
+            *ngFor="let plan of plans.yearly"
+            [disabled]="exceedsPlan(plan.product_max_restaurants)"
+            [value]="plan.product_id">
             <div class="content">
               <div>
                 <h3>{{ plan.product_name }}
@@ -76,7 +80,6 @@
               </div>
             </div>
           </mat-list-option>
-
         </mat-selection-list>
       </mat-tab>
 

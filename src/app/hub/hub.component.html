@@ -42,7 +42,7 @@
           <img src="assets/images/icons/{{service.service_logo_path}}.svg" alt="App Icon">
           <h2>{{ service.service_name | uppercase }}</h2>
           <p>{{ service.service_description }}</p>
-          <span>{{ service.service_highlight }}</span>
+          <span *ngIf="!service.service_disabled">{{ service.service_highlight }}</span>
         </mat-card>
 
       </div>

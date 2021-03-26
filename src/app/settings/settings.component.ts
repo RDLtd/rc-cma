@@ -21,7 +21,6 @@ import { CmsLocalService } from '../cms';
 import { LoadService, ConfirmCancelComponent, HelpService } from '../common';
 import { HeaderService } from '../common/header.service';
 import { MembershipPlanComponent } from '../join/membership-plan.component';
-import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -68,7 +67,6 @@ export class SettingsComponent implements OnInit {
     public appConfig: AppConfig,
     private _clipboardService: ClipboardService,
     private loadService: LoadService,
-    private http: HttpClient,
     public dialog: MatDialog) {
       this.loadService.open();
   }
@@ -87,11 +85,10 @@ export class SettingsComponent implements OnInit {
     // Update header label
     this.header.updateSectionName(this.translate.instant('HUB.sectionSettings'));
 
-    // Add member name to avatar url
-    if (this.member.member_image_path) {
-      setTimeout(() => this.header.updateAvatar(this.member.member_image_path), 0);
-      // this.header.updateAvatar(this.member.member_image_path);
-    }
+    // Update avatar
+    // if (this.member.member_image_path) {
+    //   setTimeout(() => this.header.updateAvatar(this.member.member_image_path), 0);
+    // }
 
     // Add restaurant placeholder
     this.imgRestPlaceholderUrl =
@@ -114,6 +111,10 @@ export class SettingsComponent implements OnInit {
   }
 
   setMember() {
+    // in case of rogue values from the db
+    if (this.member.member_image_path === 'null' || this.member.member_image_path === 'undefined') {
+      this.member.member_image_path = null;
+    }
     this.d_member_signedup = moment(this.member.member_signedup).format('DD MMMM YYYY');
     // Get Cloudinary img path
     this.clPublicId = this.getMemberClPublicId(this.member.member_image_path);
@@ -226,10 +227,9 @@ export class SettingsComponent implements OnInit {
 
   getMemberClPublicId(url) {
 
-      if (!!url) {
-        // this.header.updateAvatar(url);
-        const arr = url.split('/');
+      if (!!url && url !== 'null') {
 
+        const arr = url.split('/');
         return arr.splice(arr.length - 3).join('/');
 
       } else {
@@ -324,8 +324,9 @@ export class SettingsComponent implements OnInit {
     return `${this.appConfig.brand.joinUrl}?referral=${this.member.member_promo_code}`;
   }
 
-  // Does the current plan allow for more restaurants to be added
+  // Does the current plan allow for more restaurants to be added?
   checkAllowance() {
+    console.log(this.currentProduct, this.restaurants.length);
     if (this.currentProduct.product_max_restaurants > this.restaurants.length) {
       this.addRestaurants();
     } else {
@@ -393,8 +394,10 @@ export class SettingsComponent implements OnInit {
     this.memberService.getProducts().subscribe(obj => {
       this.products = obj['products'];
       // Set current product
+      //
       // If this is an old registration then just use
       // the first product to keep things working
+      //
       this.currentProduct =
         this.products.find(p => p.product_stripe_id === this.member.member_product_id) || this.products[0];
       console.log(this.currentProduct);
@@ -402,17 +405,19 @@ export class SettingsComponent implements OnInit {
   }
 
   viewMemberPlans(): void {
-    // this date is to stop old registrations breaking
+    //
+    // this fallbackDate is just to stop old registrations breaking
     let fallbackDate = new Date();
     fallbackDate.setDate(fallbackDate.getDate() + 2);
-    // --------------------
+    //
     let dialogRef = this.dialog.open(MembershipPlanComponent, {
       maxWidth: '600px',
       data: {
         currencyCode: this.appConfig.brand.currency.code,
         currentPlanId: this.currentProduct.product_id,
         products: this.products,
-        renewal: this.productRenewalDate || fallbackDate
+        renewal: this.productRenewalDate || fallbackDate,
+        max: this.restaurants.length
       }
     });
 
@@ -420,13 +425,18 @@ export class SettingsComponent implements OnInit {
       // console.log(this.member);
       if (changed) {
         console.log(changed);
-       this.memberService.changeSubscription( this.member.member_subscription_id, changed.priceId )
+       this.memberService.changeSubscription( this.member.member_id, this.member.member_subscription_id, changed.priceId )
          .subscribe(result => {
            this.currentProduct = this.products.find(p => p.product_stripe_id === changed.productId);
-           console.log('Subscription success', result);
-           this.openSnackBar(this.translate.instant(
-             'SETTINGS.msgPlanUpdated',
-             { plan: this.currentProduct.product_name }), 'OK');
+           // reload member & update local storage
+           this.memberService.getById(this.member.member_id).subscribe(m => {
+             this.member = this.member = m['member'][0];
+             localStorage.setItem('rd_profile', JSON.stringify(this.member));
+             this.openSnackBar(this.translate.instant(
+               'SETTINGS.msgPlanUpdated',
+               { plan: this.currentProduct.product_name }),
+               'OK');
+           });
          },
            error => {
              console.log('Subscription Error', error);
@@ -436,9 +446,7 @@ export class SettingsComponent implements OnInit {
   }
 
   managePayments() {
-    //
     // First get the stripe customer number for this member from the database
-    // test - this.memberService.getStripeCustomerNumber('1103')
     this.memberService.getStripeCustomerNumber(this.member.member_id)
       .subscribe( (customer) => {
           // need to send stripe back to this window

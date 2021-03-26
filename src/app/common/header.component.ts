@@ -46,7 +46,15 @@ export class HeaderComponent implements OnInit {
 
     // Set default avatar/placeholder
     // Force different thread to ensure member is set
-    setTimeout(() => this.avatarUrl = this.member.member_image_path || this.placeholderUrl + this.displayName, 0);
+
+    setTimeout(() => {
+      // watch for rogue values coming from the db
+        if (this.member.member_image_path !== null && this.member.member_image_path !== 'null') {
+          this.avatarUrl = this.member.member_image_path;
+        } else {
+          this.avatarUrl = this.placeholderUrl + this.displayName;
+        }
+      }, 0);
 
     // Listen for changes to the section
     this.header.sectionName.subscribe(str => {

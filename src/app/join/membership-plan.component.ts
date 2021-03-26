@@ -36,7 +36,7 @@ export class MembershipPlanComponent implements OnInit {
   ngOnInit(): void {
 
     // cache the original product
-    this.originalPlan = this.selectedPlan = this.getPlan(this.products[0].product_id);
+    this.originalPlan = this.selectedPlan = this.getPlan(this.data.currentPlanId);
 
     // set the subscription period
     this.selectedPeriod = this.originalPlan.product_period;
@@ -85,7 +85,7 @@ export class MembershipPlanComponent implements OnInit {
           {
             plan: this.selectedPlan.product_name.trim(),
             renewal: this.ordinate(this.renewalDay),
-            price: this.currencyPipe.transform(this.selectedPlan.product_price, this.data.currencyCode)
+            price: this.currencyPipe.transform(this.originalPlan.product_price, this.data.currencyCode)
           });
       } else {
         this.planInstructions = this.translate.instant(
@@ -93,7 +93,7 @@ export class MembershipPlanComponent implements OnInit {
           {
             plan: this.selectedPlan.product_name.trim(),
             renewal: this.renewalDate,
-            price: this.currencyPipe.transform(this.selectedPlan.product_price, this.data.currencyCode)
+            price: this.currencyPipe.transform(this.originalPlan.product_price, this.data.currencyCode)
           });
       }
     }
@@ -105,6 +105,10 @@ export class MembershipPlanComponent implements OnInit {
 
   isCurrentPlan(id): boolean {
     return id === this.originalPlan.product_id;
+  }
+
+  exceedsPlan(allowance: number): boolean {
+    return allowance < this.data.max;
   }
 
   selectPlan(id) {

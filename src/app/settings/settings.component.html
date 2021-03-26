@@ -36,7 +36,7 @@
                 </li>
                 <li>
                   <label>{{ 'SETTINGS.labelRole' | translate }}:</label>
-                  {{ member?.member_role | titlecase }}
+                  {{ member?.member_job | titlecase }}
                 </li>
                 <li>
                   <label>{{ 'SETTINGS.labelEmail' | translate }}:</label>
@@ -51,12 +51,8 @@
                   <mat-radio-group
                     (change)="setLanguage(lang)"
                     [(ngModel)]="lang">
-                    <mat-radio-button [value]="'en'">
-                      english
-                    </mat-radio-button>
-                    <mat-radio-button [value]="'fr'">
-                      français
-                    </mat-radio-button>
+                    <mat-radio-button [value]="'en'">english</mat-radio-button>
+                    <mat-radio-button [value]="'fr'">français</mat-radio-button>
                   </mat-radio-group>
                 </li>
               </ul>

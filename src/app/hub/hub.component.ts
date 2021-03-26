@@ -132,8 +132,8 @@ export class HubComponent implements AfterViewInit {
     if (service.service_disabled) {
       let dialogReg = this.dialog.open(ConfirmCancelComponent, {
         data: {
-          title: 'Service unavailable',
-          body: `Sorry but **${ service.service_name }** is not currently available. The launch date for this service is 17 April 2021, please try again then!`,
+          title: 'Coming soon',
+          body: service.service_disabled_message,
           confirm: 'OK',
           cancel: 'hide'
         }

@@ -314,10 +314,10 @@
 			"Façade de la maison",
 			"Autre"
 		],
-		"joinSuccess": "",
+		"joinSuccess": "# OK merci!\n\nUn membre de notre équipe Support & Curation sera en contact avec vous sous peu.\n\n**{{ brand }} Équipe de curation **",
 		"joinUsByReferral": "",
-		"joinUsToday": "",
-		"joinWelcome": "",
+		"joinUsToday": "# Rejoignez-nous!\n\nSuivez simplement les 3 étapes suivantes et en un rien de temps, vous ferez partie du Collectif!\n\n 1. Indiquez votre nom et vos coordonnées\n\n 2. Sélectionnez un abonnement mensuel ou annuel\n\n 3. Payez votre abonnement en ligne\n\nSi vous rencontrez des problèmes tout au long de ce processus, veuillez [contacter notre équipe d'assistance] ({{ email }}).",
+		"joinWelcome": "# Bienvenue\n\nVous vous êtes inscrit avec succès en tant que ** Membre ** et nous vous avons envoyé des informations de connexion ainsi que des informations supplémentaires.\n\nFermez cette fenêtre et vérifiez votre messagerie.\n\nMerci beaucoup.\n\n**{{ brand }} Équipe de curation **",
 		"labelBtnSubmit": "Suivant",
 		"labelEmail": "",
 		"labelFirstName": "",
@@ -364,7 +364,11 @@
 		"titleRequest": "Offre exclusive aux membres"
 	},
 	"MEMBERSHIP": {
-		"instructions": "Veuillez sélectionner votre option d'abonnement **{{ brand }}** préférée.\n\nVous serez redirigé vers l'étape de paiement, où vous pourrez revoir votre abonnement avant de payer en ligne en toute sécurité en utilisant votre méthode préférée\n\nSi vous avez un ** PROMOCODE **, vous pouvez l'appliquer en même temps.",
+		"infoMembershipMonthly": "##  SOUSCRIPTION MENSUELLE\n\nPayez seulement **{{ fee }}** par mois pour un accès complet à tous les avantages offerts par l'abonnement **{{ brand }}**.",
+		"infoMembershipYearly": "## SOUSCRIPTION ANNUELLE\n\nPayez **{{ fee }}** par an et vous obtiendrez un abonnement complet de 12 mois pour le prix de seulement 10. Tout de même **{{ brand }}** avantages, juste un peu moins chers!\n\n** Et **, si vous souscrivez à un abonnement annuel avant le 16 avril 2021, vos frais seront gelés à vie!",
+		"instructions": "Veuillez sélectionner votre option d'abonnement **{{ brand }}**.\n\nVous serez redirigé vers l'étape de paiement, où vous pourrez revoir votre abonnement avant de payer en ligne en toute sécurité.\n\nSi vous avez un ** PROMOCODE **, vous pouvez l'appliquer pendant le processus de paiement.",
+		"labelPayMonthly": "Payez tous les mois",
+		"labelPayYearly": "Payez annuellement",
 		"terms": "Veuillez prendre le temps de lire les [Conditions d'adhésion] ({{ terms }}) et la [Politique de confidentialité] ({{ privacy }}). En devenant membre de Restaurant Collective, vous confirmez votre acceptation de ces conditions."
 	},
 	"MESSAGES": {

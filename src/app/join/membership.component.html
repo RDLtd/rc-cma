@@ -14,38 +14,36 @@
 
       <!-- MONTHLY -->
       <div class="rc-subscription">
-        <h2>MONTHLY SUBSCRIPTION</h2>
-        <p><strong>Pay just £9.99 per month</strong> for full access to all the benefits of Restaurant Collective membership.</p>
+
+        <markdown ngpreservewhitespaces [data]="mdProdMonthly"></markdown>
+
         <button
           mat-flat-button
           color="accent"
-          (click)="checkout('membership_monthly')"
+          (click)="checkout(0)"
           [disabled]="waiting">
-          PAY MONTHLY
+          {{ 'MEMBERSHIP.labelPayMonthly' | translate | uppercase }}
         </button>
+
       </div>
 
       <!-- YEARLY -->
       <div class="rc-subscription">
-        <h2>ANNUAL SUBSCRIPTION</h2>
-        <p><strong>Pay £99 per year</strong> and you'll get the equivalent of 2 months FREE. All of the same
-          Restaurant Collective benefits, just a bit cheaper!
-        </p>
-        <p><strong>AND</strong>, if you sign up for a yearly subscription before the 30 April 2021, then your fees will
-          be frozen, for life!</p>
+
+        <markdown ngpreservewhitespaces [data]="mdProdYearly"></markdown>
+
         <button
           mat-flat-button
           color="accent"
-          (click)="checkout('membership_yearly')"
+          (click)="checkout(1)"
           [disabled]="waiting">
-          PAY YEARLY
+          {{ 'MEMBERSHIP.labelPayYearly' | translate | uppercase }}
         </button>
       </div>
 
       <!-- TERMS -->
       <markdown class="rc-txt-small"
                 [data]="'MEMBERSHIP.terms' | translate: transParams"></markdown>
-
 
     </div>
   </div>
