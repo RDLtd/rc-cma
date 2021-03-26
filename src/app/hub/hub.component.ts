@@ -26,7 +26,6 @@ export class HubComponent implements AfterViewInit {
   member: Member;
   restaurants: Array<Restaurant>;
   messages: Array<Message>;
-  restaurantCount = null;
   services: any;
   webContentDefaultRoute: [];
 
@@ -123,7 +122,11 @@ export class HubComponent implements AfterViewInit {
         member: this.member
       }
     });
-    dialogLookUp.afterClosed();
+
+    dialogLookUp.afterClosed()
+      .subscribe(() => {
+        console.log('this.restaurants', this.restaurants);
+      });
   }
 
   // Navigation
@@ -174,8 +177,6 @@ export class HubComponent implements AfterViewInit {
       .subscribe(
         data => {
           this.restaurants = data['restaurants'];
-          // Set count as a string for the badge
-          this.restaurantCount = this.restaurants.length.toString();
           // console.log(this.restaurants);
         },
         error => {

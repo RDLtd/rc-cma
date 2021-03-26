@@ -163,16 +163,16 @@ export class RestaurantLookupComponent implements OnInit {
 
         // TODO: Is this still required?
         // If the new restaurant is not already a member
-        if (newRestaurant.restaurant_rc_member_status !== 'Full'
-          && newRestaurant.restaurant_rc_member_status !== 'Associate') {
-          this.restaurantService.updateMemberStatus(newRestaurant.restaurant_id, 'Associate').subscribe(
-            () => {
-              console.log('Member status updated to Associate');
-            },
-            error => {
-              console.log('Member status update failed (' + error + ')');
-            });
-        }
+        // if (newRestaurant.restaurant_rc_member_status !== 'Full'
+        //   && newRestaurant.restaurant_rc_member_status !== 'Associate') {
+        //   this.restaurantService.updateMemberStatus(newRestaurant.restaurant_id, 'Associate').subscribe(
+        //     () => {
+        //       console.log('Member status updated to Associate');
+        //     },
+        //     error => {
+        //       console.log('Member status update failed (' + error + ')');
+        //     });
+        // }
       },
       error => {
         console.log(error);

@@ -18,7 +18,7 @@
             *ngIf="restaurants?.length"
             class="rc-hub-cms-icons">
             <mat-icon
-              [matBadge]="restaurantCount"
+              [matBadge]="restaurants?.length.toString()"
               matBadgeSize="medium"
               matBadgeColor="accent">
               store

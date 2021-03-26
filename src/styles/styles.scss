@@ -225,6 +225,10 @@ a.mat-menu-item {text-decoration: none;}
   .rc-layout-split-left {
     background-color: $rc-theme-primary;
     color: white;
+    a {
+      color: black;
+      text-decoration: underline;
+    }
   }
   .rc-layout-split-content {
     max-width: 420px;
@@ -287,7 +291,7 @@ a.mat-menu-item {text-decoration: none;}
       font-weight: $rc-default-font-weight;
     }
   }
-  $circle: 56px;
+  $circle: 36px;
   ol {
     counter-reset: rc-counter;
     list-style: none;
@@ -296,7 +300,8 @@ a.mat-menu-item {text-decoration: none;}
   }
   ol li {
     position: relative;
-    padding: 18px 0  18px $circle;
+    padding-left: $circle;
+    margin: 24px 0;
     font: $rc-default-font-weight 18px/1.25 $rc-default-font;
   }
   ol li:before {
@@ -306,7 +311,7 @@ a.mat-menu-item {text-decoration: none;}
     left: -12px;
     top: 50%;
     transform: translateY(-50%);
-    font: 500 24px/1 $rc-default-font;
+    font: 500 18px/1 $rc-default-font;
     background: rgba(255, 255, 255, .1);
     border-radius: 50%;
     height: $circle;

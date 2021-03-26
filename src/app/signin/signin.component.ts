@@ -86,7 +86,6 @@ export class SigninComponent implements OnInit {
           }
         },
         error => {
-
           console.log(`Auth Error: ${error}`);
           this.openSnackBar(this.trans.errorUserUnauthorised);
           this.isSubmitting = false;

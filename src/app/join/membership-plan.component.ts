@@ -130,6 +130,7 @@ export class MembershipPlanComponent implements OnInit {
   // }
 
   getProrate(): string {
+
     let oneDay, now, renewal, daysToRenewal, dayRate, amountDue;
     oneDay = (1000*60*60*24);
     now = new Date().getTime();
@@ -140,6 +141,7 @@ export class MembershipPlanComponent implements OnInit {
     dayRate = this.selectedPeriod === 'm'? (this.selectedPlan.product_price * 12)/365 : this.selectedPlan.product_price / 365;
     console.log (`${daysToRenewal} days to renewal at ${dayRate} per day`);
     amountDue = (daysToRenewal * dayRate) - this.originalPlan.product_price;
+
 
     return this.currencyPipe.transform(amountDue, this.data.currencyCode);
   }
