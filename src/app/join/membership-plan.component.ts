@@ -149,18 +149,17 @@ export class MembershipPlanComponent implements OnInit {
   // }
 
   getProrate(): string {
-
-    let oneDay, now, renewal, daysToRenewal, dayRate, amountDue;
-    oneDay = (1000*60*60*24);
-    now = new Date().getTime();
-    renewal = new Date(this.renewalDate).getTime();
-    // Get whole days
-    daysToRenewal = Math.floor((renewal - now) / oneDay );
-    // Calculate day rates
-    dayRate = this.selectedPeriod === 'm'? (this.selectedPlan.product_price * 12)/365 : this.selectedPlan.product_price / 365;
-    amountDue = (daysToRenewal * dayRate) - this.originalPlan.product_price;
-
-    return this.currencyPipe.transform(amountDue, this.data.currencyCode);
+    const oneHour = (1000*60*60);
+    const now = new Date().getTime();
+    const renewal = new Date(this.renewalDate).getTime();
+    // Get hours left before scheduled renewal
+    const hoursToRenewal = Math.ceil((renewal - now) / oneHour );
+    // Calculate new and old hourly rates
+    const newHourlyRate = this.selectedPeriod === 'm'? (this.selectedPlan.product_price * 12)/365/24 : this.selectedPlan.product_price /365/24;
+    const oldHourlyRate = this.originalPlan.product_period === 'm'? (this.originalPlan.product_price * 12)/365/24 : this.originalPlan.product_price /365/24;
+    const balanceDue = (hoursToRenewal * newHourlyRate) - (hoursToRenewal * oldHourlyRate);
+    // console.log('Balance = ', this.currencyPipe.transform(balanceDue, this.data.currencyCode));
+    return this.currencyPipe.transform(balanceDue, this.data.currencyCode);
   }
 
   ordinate(n: number, keepNumber: boolean = true) {

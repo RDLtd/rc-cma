@@ -72,7 +72,7 @@ export class SettingsComponent implements OnInit {
   ngOnInit() {
     this.member = JSON.parse(localStorage.getItem('rd_profile'));
     this.setMember();
-    // console.log(this.member);
+    console.log(this.member);
     moment.locale(this.lang);
 
     // Update header label
