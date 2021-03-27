@@ -34,7 +34,7 @@ export class SettingsComponent implements OnInit {
   restaurants: Array<Restaurant>;
   restaurant: Restaurant;
   member: Member;
-
+  lang: string;
 
   defaultImages: Array<any> = [];
   imgRestPlaceholderUrl;
@@ -43,10 +43,7 @@ export class SettingsComponent implements OnInit {
   referrer: any;
   showRestaurantFinder = true;
   clPublicId: string;
-  brand: any;
   d_member_signedup: string;
-  lang: string;
-
 
   products: [any];
   productRenewalDate: Date;
@@ -69,26 +66,17 @@ export class SettingsComponent implements OnInit {
     private loadService: LoadService,
     public dialog: MatDialog) {
       this.loadService.open();
+      this.lang = localStorage.getItem('rd_language');
   }
 
   ngOnInit() {
-
-    this.brand = this.appConfig.brand;
     this.member = JSON.parse(localStorage.getItem('rd_profile'));
-    console.log(this.member);
-    this.lang = localStorage.getItem('rd_language');
-
-    moment.locale(this.lang);
-
     this.setMember();
+    // console.log(this.member);
+    moment.locale(this.lang);
 
     // Update header label
     this.header.updateSectionName(this.translate.instant('HUB.sectionSettings'));
-
-    // Update avatar
-    // if (this.member.member_image_path) {
-    //   setTimeout(() => this.header.updateAvatar(this.member.member_image_path), 0);
-    // }
 
     // Add restaurant placeholder
     this.imgRestPlaceholderUrl =
@@ -424,8 +412,11 @@ export class SettingsComponent implements OnInit {
     dialogRef.afterClosed().subscribe(changed => {
       // console.log(this.member);
       if (changed) {
-        console.log(changed);
-       this.memberService.changeSubscription( this.member.member_id, this.member.member_subscription_id, changed.priceId )
+
+        this.loadService.open(this.translate.instant('LOADER.msgUpdatingPlan'));
+
+        // Change membership plan
+        this.memberService.changeSubscription( this.member.member_id, this.member.member_subscription_id, changed.priceId )
          .subscribe(result => {
            this.currentProduct = this.products.find(p => p.product_stripe_id === changed.productId);
            // reload member & update local storage
@@ -436,10 +427,12 @@ export class SettingsComponent implements OnInit {
                'SETTINGS.msgPlanUpdated',
                { plan: this.currentProduct.product_name }),
                'OK');
-           });
+              });
+             this.loadService.close();
          },
            error => {
              console.log('Subscription Error', error);
+             this.loadService.close();
          });
       }
     });

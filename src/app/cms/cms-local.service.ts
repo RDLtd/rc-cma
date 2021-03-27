@@ -59,8 +59,6 @@ export class CmsLocalService {
     });
   }
 
-
-
   // Config data options can be overridden
   confirmNavigation(options = {}) {
     // Override with options parameter

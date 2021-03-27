@@ -331,6 +331,10 @@
 		"placeholderLastName": "Your last name",
 		"placeholderTel": "You mobile number"
 	},
+	"LOADER": {
+		"msgDefaultLoading": "Loading",
+		"msgUpdatingPlan": "Updating Membership Plan"
+	},
 	"LOOKUP": {
 		"errorPostcode": "A valid postcode is required",
 		"errorTel": "A valid number is required",
@@ -382,6 +386,7 @@
 	"PLANS": {
 		"infoCurrentPlanMonthly": "Your current membership plan renews on the **{{ renewal }}** of each month at **{{ price }}**. To change your plan, select another option below and we'll calculate any additional charges due.",
 		"infoCurrentPlanYearly": "Your current membership plan renews on the **{{ renewal }}** at a total of **{{ price }}**. To change your plan, select another option below and we'll calculate any additional charges due.",
+		"infoDowngrading": "If you choose to go ahead and change your membership plan to **{{ plan }}** then we’ll credit your account with the difference in subscription fees for this period and from **{{ renewal }}** your new payment will be **{{ price }}**.",
 		"infoNewPlanMonthly": "If you choose to go ahead and change your membership plan to **{{ plan }}** then we’ll charge you **{{ prorate }}** now – which is prorated for the current billing period – and from **{{ renewal }}** your new monthly subscription will be **{{ price }}**.",
 		"infoNewPlanYearly": "If you choose to change your membership plan to **{{ plan }}** then we’ll charge you **{{ prorate }}** now –  which is prorated for the current billing period – and from **{{ renewal }}** we’ll bill you at the new yearly subscription fee of **{{ price }}**.",
 		"labelAddRestaurant": "Add your restaurant here",

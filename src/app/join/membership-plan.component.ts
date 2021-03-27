@@ -55,9 +55,26 @@ export class MembershipPlanComponent implements OnInit {
 
   // Update dialog content based on current selection
   updatePlanInstructions(period: string): void {
+
+    const isDowngrading = Number(this.selectedPlan.product_price) < Number(this.originalPlan.product_price);
+
     let monthly = this.selectedPeriod === 'm';
       // for new plans
+
     if (this.planChanged) {
+
+      if (isDowngrading) {
+        this.planInstructions = this.translate.instant(
+          'PLANS.infoDowngrading',
+          {
+            plan: this.selectedPlan.product_name.trim(),
+            renewal: this.renewalDate,
+            period: period,
+            price: this.currencyPipe.transform(this.selectedPlan.product_price, this.data.currencyCode)
+          });
+        return;
+      }
+
       if (period === 'm') {
         this.planInstructions = this.translate.instant(
           'PLANS.infoNewPlanMonthly',
@@ -67,7 +84,9 @@ export class MembershipPlanComponent implements OnInit {
             prorate: this.getProrate(),
             price: this.currencyPipe.transform(this.selectedPlan.product_price, this.data.currencyCode)
           });
+
       } else {
+
         this.planInstructions = this.translate.instant(
           'PLANS.infoNewPlanYearly',
           {
@@ -139,9 +158,7 @@ export class MembershipPlanComponent implements OnInit {
     daysToRenewal = Math.floor((renewal - now) / oneDay );
     // Calculate day rates
     dayRate = this.selectedPeriod === 'm'? (this.selectedPlan.product_price * 12)/365 : this.selectedPlan.product_price / 365;
-    console.log (`${daysToRenewal} days to renewal at ${dayRate} per day`);
     amountDue = (daysToRenewal * dayRate) - this.originalPlan.product_price;
-
 
     return this.currencyPipe.transform(amountDue, this.data.currencyCode);
   }

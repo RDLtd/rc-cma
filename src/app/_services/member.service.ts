@@ -514,7 +514,7 @@ export class MemberService {
       });
   }
 
-  changeSubscription(member_id: string, subscription_id: string, price_id: string) {
+  changeSubscription( member_id: string, subscription_id: string, price_id: string) {
     // console.log('changeSubscription', member_id, subscription_id, price_id);
     return this.http.post(this.config.apiUrl + '/payments/change-subscription',
       {

@@ -331,6 +331,10 @@
 		"placeholderLastName": "",
 		"placeholderTel": ""
 	},
+	"LOADER": {
+		"msgDefaultLoading": "Chargement",
+		"msgUpdatingPlan": "Mettre à jour le plan d'adhésion"
+	},
 	"LOOKUP": {
 		"errorPostcode": "Un code postal valide est requis",
 		"errorTel": "Un numéro valide est requis",
@@ -382,6 +386,7 @@
 	"PLANS": {
 		"infoCurrentPlanMonthly": "Votre abonnement actuel est renouvelé le **{{ renewal }}** de chaque mois à **{{ price }}**. Pour modifier votre forfait, sélectionnez une autre option ci-dessous et nous calculerons tous les frais supplémentaires dus.",
 		"infoCurrentPlanYearly": "Votre abonnement actuel est renouvelé le **{{ renewal }}** pour un total de **{{ price }}**. Pour modifier votre forfait, sélectionnez une autre option ci-dessous et nous calculerons tous les frais supplémentaires dus.",
+		"infoDowngrading": "Si vous décidez de modifier votre formule d'abonnement en **{{ plan }}**, nous créditerons votre compte de la différence des frais d'abonnement pour cette période et à partir de **{{ renewal }}** votre nouveau paiement sera * *{{ price }}**.",
 		"infoNewPlanMonthly": "Si vous décidez de modifier votre formule d'abonnement en **{{ plan }}**, nous vous facturerons **{{ prorate }}** maintenant - au prorata pour la période de facturation actuelle - et à partir de **{{ renewal }}** votre nouvel abonnement mensuel sera **{{ price }}**.",
 		"infoNewPlanYearly": "Si vous choisissez de changer votre formule d'abonnement en **{{plan}}**, nous vous facturerons **{{ prorate }}** maintenant - au prorata pour la période de facturation actuelle - et à partir de **{{ renewal }}** nous vous facturera les nouveaux frais d'abonnement annuels de **{{ price }}**.",
 		"labelAddRestaurant": "Ajoutez votre restaurant ici",
