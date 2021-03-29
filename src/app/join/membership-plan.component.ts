@@ -56,7 +56,8 @@ export class MembershipPlanComponent implements OnInit {
   // Update dialog content based on current selection
   updatePlanInstructions(period: string): void {
 
-    const isDowngrading = Number(this.selectedPlan.product_price) < Number(this.originalPlan.product_price);
+    // If this is downgrading and/or switching to
+    const isDowngrading = Number(this.selectedPlan.product_max_restaurants) < Number(this.originalPlan.product_max_restaurants);
 
     let monthly = this.selectedPeriod === 'm';
       // for new plans
@@ -76,6 +77,7 @@ export class MembershipPlanComponent implements OnInit {
       }
 
       if (period === 'm') {
+
         this.planInstructions = this.translate.instant(
           'PLANS.infoNewPlanMonthly',
           {
@@ -150,16 +152,18 @@ export class MembershipPlanComponent implements OnInit {
 
   getProrate(): string {
     const oneHour = (1000*60*60);
-    const now = new Date().getTime();
-    const renewal = new Date(this.renewalDate).getTime();
-    // Get hours left before scheduled renewal
-    const hoursToRenewal = Math.ceil((renewal - now) / oneHour );
+    // Get hours left before scheduled renewal (renewal - now / hour)
+    const hoursToRenewal = Math.ceil((new Date(this.renewalDate).getTime() - new Date().getTime()) / oneHour );
+    console.log(this.renewalDate, hoursToRenewal);
     // Calculate new and old hourly rates
-    const newHourlyRate = this.selectedPeriod === 'm'? (this.selectedPlan.product_price * 12)/365/24 : this.selectedPlan.product_price /365/24;
-    const oldHourlyRate = this.originalPlan.product_period === 'm'? (this.originalPlan.product_price * 12)/365/24 : this.originalPlan.product_price /365/24;
+    const newHourlyRate = this.getHourlyRate(this.selectedPlan.product_price, this.selectedPlan.product_period);
+    const oldHourlyRate = this.getHourlyRate(this.originalPlan.product_price, this.originalPlan.product_period);
     const balanceDue = (hoursToRenewal * newHourlyRate) - (hoursToRenewal * oldHourlyRate);
-    // console.log('Balance = ', this.currencyPipe.transform(balanceDue, this.data.currencyCode));
     return this.currencyPipe.transform(balanceDue, this.data.currencyCode);
+  }
+
+  getHourlyRate(price: any, period: string): number {
+    return period === 'm' ? price/365/24*12 : price/365/24;
   }
 
   ordinate(n: number, keepNumber: boolean = true) {
