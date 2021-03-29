@@ -209,6 +209,7 @@
     <button
       mat-button
       mat-dialog-close
+      [disabled]="!restForm.dirty"
       (click)="setCancel(false)"
       color="accent">
       {{ 'CMS.DASHBOARD.core.labelBtnConfirm' | translate | uppercase }}
