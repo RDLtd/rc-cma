@@ -21,6 +21,7 @@ import { CmsLocalService } from '../cms';
 import { LoadService, ConfirmCancelComponent, HelpService } from '../common';
 import { HeaderService } from '../common/header.service';
 import { MembershipPlanComponent } from '../join/membership-plan.component';
+import { CurrencyPipe } from '@angular/common';
 
 
 @Component({
@@ -64,16 +65,20 @@ export class SettingsComponent implements OnInit {
     public appConfig: AppConfig,
     private _clipboardService: ClipboardService,
     private loadService: LoadService,
+    private currencyPipe: CurrencyPipe,
     public dialog: MatDialog) {
-      this.loadService.open();
-      this.lang = localStorage.getItem('rd_language');
+
+    this.loadService.open();
+    this.lang = localStorage.getItem('rd_language');
+    this.member = JSON.parse(localStorage.getItem('rd_profile'));
+    moment.locale(this.lang);
+    console.log(this.member);
+
   }
 
   ngOnInit() {
-    this.member = JSON.parse(localStorage.getItem('rd_profile'));
+
     this.setMember();
-    console.log(this.member);
-    moment.locale(this.lang);
 
     // Update header label
     this.header.updateSectionName(this.translate.instant('HUB.sectionSettings'));
@@ -85,6 +90,7 @@ export class SettingsComponent implements OnInit {
     this.setProducts();
 
   }
+
   // Switch language
   setLanguage(lang): void {
     localStorage.setItem('rd_language', lang);
@@ -312,15 +318,59 @@ export class SettingsComponent implements OnInit {
     return `${this.appConfig.brand.joinUrl}?referral=${this.member.member_promo_code}`;
   }
 
-  // Does the current plan allow for more restaurants to be added?
+  // Does the subscription allow for more restaurants to be added?
   checkAllowance() {
-    console.log(this.currentProduct, this.restaurants.length);
-    if (this.currentProduct.product_max_restaurants > this.restaurants.length) {
+    // 1st restaurant is included free
+    // All additional restaurants charged at flat rate
+    if (this.restaurants.length === 0) {
       this.addRestaurants();
     } else {
-      this.viewMemberPlans();
+      // When a member wants to add an additional/chargeable restaurant
+      // we can use current total to calculate the chargeable quantity
+      // and the new one as the new one becomes the freebie
+      const totalChargeable = this.restaurants.length;
+      // extract the correct product based on period/max restaurants values
+      // should create an array of 1
+      const newProduct = this.products.filter(
+        p => p.product_max_restaurants === 2 && p.product_period === this.currentProduct.product_period)[0];
+      const newTotal = (newProduct.product_price * totalChargeable) + Number(this.currentProduct.product_price);
+      let dialogRef = this.dialog.open(ConfirmCancelComponent, {
+        data: {
+          title: this.translate.instant('SETTINGS.titleConfirmAddRestaurant'),
+          body: this.translate.instant(
+            'SETTINGS.msgAddRestaurant_' + this.currentProduct.product_period,
+            {
+              price: this.currencyPipe.transform(
+                newProduct.product_price,
+                this.appConfig.brand.currency.code),
+              total: this.currencyPipe.transform(newTotal,
+                this.appConfig.brand.currency.code)
+            }),
+          confirm: 'Continue'
+        }
+      });
+
+      dialogRef.afterClosed().subscribe( confirmed => {
+        if (confirmed) {
+          this.loadService.open('Adding Restaurant');
+          // update subscription charge
+          this.memberService.addRestaurantSubscription(
+            this.member.member_id,
+            this.member.member_subscription_id,
+            newProduct.product_stripe_price_id,
+            totalChargeable
+          )
+            .subscribe(res => {
+              console.log(res);
+              this.loadService.close();
+              this.addRestaurants();
+            });
+        }
+      });
     }
   }
+
+
 
   addRestaurants() {
 
@@ -386,6 +436,7 @@ export class SettingsComponent implements OnInit {
       // If this is an old registration then just use
       // the first product to keep things working
       //
+      console.log('P',this.products);
       this.currentProduct =
         this.products.find(p => p.product_stripe_id === this.member.member_product_id) || this.products[0];
       console.log(this.currentProduct);

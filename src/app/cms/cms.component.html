@@ -3,13 +3,14 @@
     class="rc-toolbar rc-toolbar-nav rc-toolbar-fixed rc-toolbar-nav-adjust">
 
     <button
-      *ngIf="restaurants?.length > 0"
+      *ngIf="restaurants?.length > 1"
       mat-icon-button
       [matMenuTriggerFor]="cmsRestaurants">
       <mat-icon>arrow_drop_down</mat-icon>
     </button>
 
     <span
+      *ngIf="restaurants?.length > 1"
       class="rc-link-like"
       [matMenuTriggerFor]="cmsRestaurants"
       [matTooltip]="'CMS.NAV.tipYourRestaurants' | translate">
