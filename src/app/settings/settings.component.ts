@@ -540,9 +540,9 @@ export class SettingsComponent implements OnInit {
       console.log('Create Restaurant Subscription');
       this.memberService.createRestaurantSubscription(
         this.member.member_id,
-        this.member.member_subscription_id,
+        this.member.member_customer_id,
         this.restaurantProduct.product_stripe_price_id,
-        2
+        1
       ).subscribe(res => {
         console.log(res);
       })
@@ -553,7 +553,7 @@ export class SettingsComponent implements OnInit {
         this.member.member_id,
         this.member.member_subscription_id,
         this.restaurantProduct.product_stripe_price_id,
-        this.restaurants.length
+        this.restaurants.length - 1
       )
         .subscribe(res => {
             console.log(res);
