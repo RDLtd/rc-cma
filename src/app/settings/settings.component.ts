@@ -45,6 +45,8 @@ export class SettingsComponent implements OnInit {
   showRestaurantFinder = true;
   clPublicId: string;
   d_member_signedup: string;
+  restaurantProduct: any;
+  restaurantCount = null;
 
   products: [any];
   productRenewalDate: Date;
@@ -86,9 +88,7 @@ export class SettingsComponent implements OnInit {
     // Add restaurant placeholder
     this.imgRestPlaceholderUrl =
       `https://via.placeholder.com/360x240?text=${this.translate.instant('SETTINGS.labelAwaitingImage')}`;
-
     this.setProducts();
-
   }
 
   // Switch language
@@ -140,73 +140,6 @@ export class SettingsComponent implements OnInit {
 
   copied(): void {
     this.openSnackBar(this.translate.instant('SETTINGS.msgLinkCopied'), 'OK');
-  }
-
-  getAssociatedRestaurants(id) {
-
-    this.restaurantService.getMemberRestaurants(id)
-      .subscribe(
-        data => {
-          this.restaurants = data['restaurants'];
-          if (this.restaurants.length) {
-            this.getDefaultImages();
-          } else if (this.showRestaurantFinder) {
-            this.showRestaurantFinder = false;
-            this.addRestaurants();
-          }
-          this.loadService.close();
-        },
-        error => {
-          console.log(error);
-          this.loadService.close();
-        });
-  }
-
-  removeAssociation(index) {
-    const rest = this.restaurants[index];
-    const dialogRef = this.dialog.open(ConfirmCancelComponent, {
-      data: {
-        body: this.translate.instant('SETTINGS.msgRemoveRestaurant', { name: rest.restaurant_name }),
-        confirm: this.translate.instant('SETTINGS.labelBtnRemove')
-      }
-    });
-
-    dialogRef.afterClosed().subscribe(confirmed => {
-
-      if (confirmed) {
-        this.restaurantService.removeAssociation(rest['association_id'])
-          .subscribe(
-            () => {
-              this.restaurants.splice(index, 1);
-              this.defaultImages.splice(index, 1);
-              this.openSnackBar(this.translate.instant('SETTINGS.msgRestaurantRemoved', { name: rest.restaurant_name }), 'OK');
-              // record event
-              this.ga.sendEvent('Profile', 'Edit', 'Remove Association');
-            },
-            error => {
-              console.log(error);
-            });
-      }
-    });
-  }
-
-  getDefaultImages() {
-
-    const numberOfRestaurants = this.restaurants.length;
-    for (let i = 0; i < numberOfRestaurants; i++) {
-      this.cms.getElementClass(this.restaurants[i].restaurant_id, 'Image', 'Y')
-        .subscribe(
-        data => {
-          if (data['count'] > 0) {
-            this.defaultImages[i] = data['elements'][0].cms_element_image_path;
-          } else {
-            this.defaultImages[i] = null;
-          }
-        },
-        error => {
-          console.log(error);
-        });
-    }
   }
 
   getClPublicId(idx) {
@@ -318,22 +251,105 @@ export class SettingsComponent implements OnInit {
     return `${this.appConfig.brand.joinUrl}?referral=${this.member.member_promo_code}`;
   }
 
-  // Does the subscription allow for more restaurants to be added?
+
+
+
+
+  getAssociatedRestaurants(id) {
+
+    console.log('getAssociatedRestaurants', this.restaurantCount);
+
+    this.restaurantService.getMemberRestaurants(id)
+      .subscribe(
+        data => {
+          this.restaurants = data['restaurants'];
+          if (this.restaurants.length) {
+            this.getDefaultImages();
+
+            // Have any been added?
+            if (!!this.restaurantCount && this.restaurantCount < this.restaurants.length) {
+              console.log('addRestaurantSubscription()');
+              this.addRestaurantSubscription();
+            }
+          } else if (this.showRestaurantFinder) {
+            this.showRestaurantFinder = false;
+            this.addRestaurants();
+          }
+          this.loadService.close();
+        },
+        error => {
+          console.log(error);
+          this.loadService.close();
+        });
+  }
+
+  removeAssociation(index) {
+    const rest = this.restaurants[index];
+    const dialogRef = this.dialog.open(ConfirmCancelComponent, {
+      data: {
+        body: this.translate.instant('SETTINGS.msgRemoveRestaurant', { name: rest.restaurant_name }),
+        confirm: this.translate.instant('SETTINGS.labelBtnRemove')
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(confirmed => {
+
+      if (confirmed) {
+        // If this is the last added restaurant
+        if (this.restaurants.length === 2) {
+          this.deleteRestaurantSubscription();
+        }
+        this.restaurantService.removeAssociation(rest['association_id'])
+          .subscribe(
+            () => {
+              this.restaurants.splice(index, 1);
+              this.defaultImages.splice(index, 1);
+              this.openSnackBar(this.translate.instant('SETTINGS.msgRestaurantRemoved', { name: rest.restaurant_name }), 'OK');
+              // record event
+              this.ga.sendEvent('Profile', 'Edit', 'Remove Association');
+            },
+            error => {
+              console.log(error);
+            });
+      }
+    });
+  }
+
+  getDefaultImages() {
+
+    const numberOfRestaurants = this.restaurants.length;
+    for (let i = 0; i < numberOfRestaurants; i++) {
+      this.cms.getElementClass(this.restaurants[i].restaurant_id, 'Image', 'Y')
+        .subscribe(
+          data => {
+            if (data['count'] > 0) {
+              this.defaultImages[i] = data['elements'][0].cms_element_image_path;
+            } else {
+              this.defaultImages[i] = null;
+            }
+          },
+          error => {
+            console.log(error);
+          });
+    }
+  }
+
   checkAllowance() {
+
+    this.restaurantCount = this.restaurants.length;
+    console.log('COUNT', this.restaurantCount);
+
     // 1st restaurant is included free
     // All additional restaurants charged at flat rate
-    if (this.restaurants.length === 0) {
+    if (!this.restaurantCount) {
       this.addRestaurants();
     } else {
-      // When a member wants to add an additional/chargeable restaurant
-      // we can use current total to calculate the chargeable quantity
-      // and the new one as the new one becomes the freebie
-      const totalChargeable = this.restaurants.length;
       // extract the correct product based on period/max restaurants values
       // should create an array of 1
-      const newProduct = this.products.filter(
+      this.restaurantProduct = this.products.filter(
         p => p.product_max_restaurants === 2 && p.product_period === this.currentProduct.product_period)[0];
-      const newTotal = (newProduct.product_price * totalChargeable) + Number(this.currentProduct.product_price);
+      const newTotal = (this.restaurantProduct.product_price * this.restaurantCount) + Number(this.currentProduct.product_price);
+      console.log();
       let dialogRef = this.dialog.open(ConfirmCancelComponent, {
         data: {
           title: this.translate.instant('SETTINGS.titleConfirmAddRestaurant'),
@@ -341,7 +357,7 @@ export class SettingsComponent implements OnInit {
             'SETTINGS.msgAddRestaurant_' + this.currentProduct.product_period,
             {
               price: this.currencyPipe.transform(
-                newProduct.product_price,
+                this.restaurantProduct.product_price,
                 this.appConfig.brand.currency.code),
               total: this.currencyPipe.transform(newTotal,
                 this.appConfig.brand.currency.code)
@@ -352,25 +368,11 @@ export class SettingsComponent implements OnInit {
 
       dialogRef.afterClosed().subscribe( confirmed => {
         if (confirmed) {
-          this.loadService.open('Adding Restaurant');
-          // update subscription charge
-          this.memberService.addRestaurantSubscription(
-            this.member.member_id,
-            this.member.member_subscription_id,
-            newProduct.product_stripe_price_id,
-            totalChargeable
-          )
-            .subscribe(res => {
-              console.log(res);
-              this.loadService.close();
-              this.addRestaurants();
-            });
+          this.addRestaurants();
         }
       });
     }
   }
-
-
 
   addRestaurants() {
 
@@ -386,6 +388,7 @@ export class SettingsComponent implements OnInit {
       dialogRef.afterClosed().subscribe(result => {
 
         if (result) {
+
           console.log('AC', result);
 
           // Form markdown message
@@ -511,5 +514,61 @@ export class SettingsComponent implements OnInit {
         }
       );
   }
+
+  deleteRestaurantSubscription(): void {
+    this.loadService.open('Removing Restaurant');
+    this.memberService.deleteRestaurantSubscription( this.member.member_subscription_id)
+      .subscribe(res => {
+        console.log(res);
+        this.loadService.close();
+      },
+        error => {
+          console.log(error);
+          this.loadService.close();
+        }
+    )
+  }
+
+  addRestaurantSubscription(): void {
+
+    console.log('length', this.restaurants.length);
+    console.log('count', this.restaurantCount);
+
+    // If this is the first additional restaurant
+    // i.e. it's the 2nd restaurant that's been associated
+    if (this.restaurants.length === 2) {
+      console.log('Create Restaurant Subscription');
+      this.memberService.createRestaurantSubscription(
+        this.member.member_id,
+        this.member.member_subscription_id,
+        this.restaurantProduct.product_stripe_price_id,
+        2
+      ).subscribe(res => {
+        console.log(res);
+      })
+    } else {
+      console.log('Add Restaurant Subscription');
+      // update subscription charge
+      this.memberService.addRestaurantSubscription(
+        this.member.member_id,
+        this.member.member_subscription_id,
+        this.restaurantProduct.product_stripe_price_id,
+        this.restaurants.length
+      )
+        .subscribe(res => {
+            console.log(res);
+            this.loadService.close();
+            this.addRestaurants();
+          },
+          error => {
+            console.log(error);
+            this.loadService.close();
+          }
+        );
+    }
+
+  }
+
+
 
 }

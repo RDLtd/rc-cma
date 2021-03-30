@@ -553,6 +553,29 @@ export class MemberService {
       });
   }
 
+  deleteRestaurantSubscription(subscription_id: string) {
+    console.log('deleteRestaurantSubscription', subscription_id);
+    return this.http.post(this.config.apiUrl + '/payments/delete-restaurant-subscription',
+      {
+        subscription_id: subscription_id,
+        userCode: this.config.userAPICode,
+        token: this.authToken
+      });
+  }
+
+  createRestaurantSubscription( member_id: string, subscription_id: string, price_id: string, quantity: number) {
+    console.log('createRestaurantSubscription', member_id, subscription_id, price_id, quantity);
+    return this.http.post(this.config.apiUrl + '/payments/create-restaurant-subscription',
+      {
+        member_id: member_id,
+        subscription_id: subscription_id,
+        price_id: price_id,
+        quantity: quantity,
+        userCode: this.config.userAPICode,
+        token: this.authToken
+      });
+  }
+
   addRestaurantSubscription( member_id: string, subscription_id: string, price_id: string, quantity: number) {
     console.log('addRestaurantSubscription', member_id, subscription_id, price_id, quantity);
     return this.http.post(this.config.apiUrl + '/payments/add-restaurant-subscription',

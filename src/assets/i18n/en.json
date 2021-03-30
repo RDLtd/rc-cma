@@ -431,7 +431,7 @@
 		"labelSelectImage": "Select an image",
 		"labelSubscription": "Subscription",
 		"labelTel": "Mobile",
-		"msgAddRestaurant_m": "Adding another restaurant will increase your membership subscription by **{{ price }}**. \n\nWe'll calculate any additional prorated amount due for this period, based on the time left, and charge that to your account today. Your new subscription total will then become **{{ total }} per month**.\n\n**Would you like to continue?**",
+		"msgAddRestaurant_m": "Adding another restaurant will increase your membership subscription by **{{ price }}**. \n\nWe'll calculate any additional prorated fees that would be due in this period and charge that to your account, once you've successfully added your restaurant.\n\nYour new subscription total would then become **{{ total }} per month**. Would you like to go ahead and add a restaurant?",
 		"msgAddRestaurant_y": "Adding another restaurant will increase your membership subscription by **{{ price }}** a year.\n\nWe'll calculate any additional prorated amount due for this period, based on the time left, and charge that to your account today. Your new subscription total will then become **{{ total }} per year**.\n\n**Would you like to continue?**",
 		"msgAvatarUpdated": "Avater image updated",
 		"msgContactsUpdated": "Your contact details have been updated",
