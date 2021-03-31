@@ -360,12 +360,19 @@
 		"labelBtnCancel": "Pas maintenant merci",
 		"labelBtnConfirm": "Envoyer une demande",
 		"labelBtnFindOutMore": "en savoir plus",
+		"labelDownload": "Télécharger l'information",
 		"labelFilteredBy": "Filtre par",
+		"labelInfo": "Pour plus d'informations",
+		"labelRequest": "Demande de contact",
+		"labelUrl": "lien de site Web",
 		"msgRequest": "## {{ deal }}\nSi vous souhaitez profiter de cette offre exclusive pour les membres, ou souhaitez en savoir un peu plus à son sujet, confirmez votre intérêt ci-dessous.\n\nNous transmettrons vos coordonnées et votre identifiant de membre à **{{ affiliate }}** et ils vous contacteront dans les 2 jours ouvrables avec plus de détails.\n\nCeci est juste pour enregistrer votre intérêt et il n'y a aucune obligation de votre part de procéder, sauf si vous décidez de le faire.",
 		"tipAddToFavourites": "Ajouter / supprimer des favoris",
 		"tipClearFilters": "Effacer tous les filtres",
+		"tipDownload": "Téléchargement PDF",
 		"tipFavourites": "Afficher les favoris",
 		"tipFilterBy": "Filtrer les résultats",
+		"tipLink": "Plus d'informations en ligne",
+		"tipRequestContact": "Quelqu'un vous contactera à propos de cette offre",
 		"titleRequest": "Offre exclusive aux membres"
 	},
 	"MEMBERSHIP": {
@@ -407,7 +414,7 @@
 			"labelTel": "Numéro de portable",
 			"titleUpdateContacts": "Détails du membre"
 		},
-		"infoAccounts": "Les restaurants liés à votre compte sont affichés ci-dessous et vous pouvez gérer des restaurants supplémentaires en les ajoutant ici, sous réserve de votre abonnement actuel.\n\nUtilisez l'option ci-dessus pour GÉRER LES PAIEMENTS et accéder à votre historique de facturation.",
+		"infoAccounts": "Les restaurants liés à votre compte sont affichés ci-dessous et vous pouvez gérer des restaurants supplémentaires en les ajoutant simplement ici.\n\nPour afficher votre historique de facturation et les détails de paiement, ou pour télécharger vos factures, sélectionnez l'option «GÉRER LES PAIEMENTS» ci-dessus.",
 		"infoAuth": "Ce sont vos informations d'identification d'adhésion dont vous aurez besoin pour vous connecter à l'application. Les mots de passe doivent comporter au moins 8 caractères.",
 		"infoAvatar": "Cliquez sur l'image ajouter / modifier et personnaliser les détails de votre adhésion.",
 		"infoMember": "Tous les contacts concernant votre adhésion seront envoyés à cette adresse e-mail.",

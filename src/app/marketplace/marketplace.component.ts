@@ -129,7 +129,14 @@ export class MarketplaceComponent implements OnInit {
       data: {
         title: this.translate.instant('MARKETPLACE.titleRequest'),
         deal: selectedDeal,
-        body: this.translate.instant('MARKETPLACE.msgRequest', { deal: selectedDeal.deal_name, affiliate: selectedDeal.affiliate_name }),
+        body: this.translate.instant(
+          'MARKETPLACE.msgRequest',
+          {
+            deal: selectedDeal.deal_name,
+            affiliate: selectedDeal.affiliate_name,
+            download: selectedDeal.deal_download,
+            url: selectedDeal.deal_url
+          }),
         cancel: this.translate.instant('MARKETPLACE.labelBtnCancel'),
         confirm: this.translate.instant('MARKETPLACE.labelBtnConfirm')
       }

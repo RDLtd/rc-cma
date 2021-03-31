@@ -84,15 +84,49 @@
             <mat-icon>local_shipping</mat-icon>
             {{ 'MARKETPLACE.labelAvailableNational' | translate | uppercase }}
           </span>
-
           <mat-card-actions align="end">
-            <button
-              (click)="notifyAffiliate(deal)"
-              mat-button
-              color="accent">{{ 'MARKETPLACE.labelBtnFindOutMore' | translate | uppercase }}</button>
-
+            <button mat-button color="accent" [matMenuTriggerFor]="menu">
+              {{ 'MARKETPLACE.labelBtnFindOutMore' | translate | uppercase }}
+            </button>
           </mat-card-actions>
         </mat-card>
+
+        <mat-menu #menu="matMenu" xPosition="after" yPosition="above">
+          <div class="rc-user-menu">
+            <h3>{{ deal.affiliate_name }}</h3>
+            <span>{{ 'MARKETPLACE.labelInfo' | translate | uppercase }}</span>
+          </div>
+          <mat-divider></mat-divider>
+          <button
+            mat-menu-item
+            matTooltip="{{ 'MARKETPLACE.tipRequestContact' | translate }}"
+            [routerLink]="['/profile']">
+            <mat-icon>contact_mail</mat-icon>
+            <span>{{ 'MARKETPLACE.labelRequest' | translate }}</span>
+          </button>
+          <mat-divider></mat-divider>
+
+          <ng-container *ngIf="!!deal.deal_url">
+          <a
+            mat-menu-item
+            [href]="deal.deal_url"
+            target="_blank">
+            <mat-icon>open_in_new</mat-icon>
+            <span>{{ 'MARKETPLACE.labelUrl' | translate }}</span>
+          </a>
+          <mat-divider></mat-divider>
+          </ng-container>
+          <ng-container *ngIf="!!deal.deal_download">
+          <a
+            mat-menu-item
+            [href]="deal.deal_download"
+            target="_blank">
+            <mat-icon>download</mat-icon>
+            <span>{{ 'MARKETPLACE.labelDownload' | translate }}</span>
+          </a>
+          <mat-divider></mat-divider>
+          </ng-container>
+        </mat-menu>
       </div>
     </div>
   </div>

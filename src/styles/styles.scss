@@ -630,20 +630,30 @@ a.mat-menu-item {text-decoration: none;}
 }
 .rc-card-market {
   img {
-    height: 48px;
+    height: 64px;
     object-fit: contain;
-    margin-bottom: 16px;
+    margin-bottom: 8px;
   }
   h2 {
     margin: 8px 0 0;
+    line-height: 1.1;
   }
   h3 {
-    margin: -8px 0 0;
+    margin: 0 0;
   }
   h4 {
     color: $rc-theme-accent;
     font-size: 11px;
 
+  }
+  p {
+    font-size: 14px;
+    line-height: 1.45;
+  }
+  ol { margin: 0; padding: 0;}
+  li {
+    list-style: disc;
+    margin-left: 16px;
   }
 }
 .rc-managed-restaurant-placeholder {

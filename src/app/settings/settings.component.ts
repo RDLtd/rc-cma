@@ -20,7 +20,6 @@ import { AppConfig } from '../app.config';
 import { CmsLocalService } from '../cms';
 import { LoadService, ConfirmCancelComponent, HelpService } from '../common';
 import { HeaderService } from '../common/header.service';
-import { MembershipPlanComponent } from '../join/membership-plan.component';
 import { CurrencyPipe } from '@angular/common';
 
 
@@ -346,54 +345,19 @@ export class SettingsComponent implements OnInit {
       )
   }
 
-
-
-
-
   viewMemberPlans(): void {
+    this.managePayments();
     //
-    // this fallbackDate is just to stop old registrations breaking
-    let fallbackDate = new Date();
-    fallbackDate.setDate(fallbackDate.getDate() + 2);
-    //
-    let dialogRef = this.dialog.open(MembershipPlanComponent, {
-      maxWidth: '600px',
-      data: {
-        currencyCode: this.appConfig.brand.currency.code,
-        currentPlanId: this.currentProduct.product_id,
-        products: this.products,
-        renewal: this.productRenewalDate || fallbackDate,
-        max: this.restaurants.length
-      }
-    });
-
-    dialogRef.afterClosed().subscribe(changed => {
-      // console.log(this.member);
-      if (changed) {
-
-        this.loadService.open(this.translate.instant('LOADER.msgUpdatingPlan'));
-
-        // Change membership plan
-        this.memberService.changeSubscription( this.member.member_id, this.member.member_subscription_id, changed.priceId )
-          .subscribe(result => {
-              this.currentProduct = this.products.find(p => p.product_stripe_id === changed.productId);
-              // reload member & update local storage
-              this.memberService.getById(this.member.member_id).subscribe(m => {
-                this.member = this.member = m['member'][0];
-                localStorage.setItem('rd_profile', JSON.stringify(this.member));
-                this.openSnackBar(this.translate.instant(
-                  'SETTINGS.msgPlanUpdated',
-                  { plan: this.currentProduct.product_name }),
-                  'OK');
-              });
-              this.loadService.close();
-            },
-            error => {
-              console.log('Subscription Error', error);
-              this.loadService.close();
-            });
-      }
-    });
+    // let dialogRef = this.dialog.open(MembershipPlanComponent, {
+    //   maxWidth: '600px',
+    //   data: {
+    //     currencyCode: this.appConfig.brand.currency.code,
+    //     currentPlanId: this.currentProduct.product_id,
+    //     products: this.products,
+    //     renewal: this.productRenewalDate,
+    //     max: this.restaurants.length
+    //   }
+    // });
   }
 
   managePayments() {
@@ -419,8 +383,6 @@ export class SettingsComponent implements OnInit {
         }
       );
   }
-
-
 
   updateMemberContacts() {
     // save a reference to the current member details

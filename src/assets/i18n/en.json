@@ -360,12 +360,19 @@
 		"labelBtnCancel": "Not now thanks",
 		"labelBtnConfirm": "Send Request",
 		"labelBtnFindOutMore": "Find out more",
+		"labelDownload": "Download information",
 		"labelFilteredBy": "Filtered by",
+		"labelInfo": "For more information",
+		"labelRequest": "Request contact",
+		"labelUrl": "Website link",
 		"msgRequest": "## {{ deal }}\n\nIf you would like to take advantage of this exclusive Member offer, or would like to know a bit more about it, confirm your interest below.\n\nWe will forward your contact details and Member ID to **{{ affiliate }}** and they will contact you within 2 working days with further details.\n\nThis is just to register you interest and there's no obligation on your part to proceed, unless you decide to.",
 		"tipAddToFavourites": "Add/Remove favourites",
 		"tipClearFilters": "Clear all filters",
+		"tipDownload": "PDF Download",
 		"tipFavourites": "Show favourites",
 		"tipFilterBy": "Filter results",
+		"tipLink": "More information online",
+		"tipRequestContact": "Someone will contact you about this deal",
 		"titleRequest": "Exclusive Member Deal"
 	},
 	"MEMBERSHIP": {
@@ -407,7 +414,7 @@
 			"labelTel": "Mobile number",
 			"titleUpdateContacts": "Member details"
 		},
-		"infoAccounts": "The restaurants linked to your account are shown below and you can manage additional restaurants by adding them here, subject to your current subscription.\n\nUse the option above to MANAGE PAYMENTS and access your billing history.",
+		"infoAccounts": "Restaurants that are linked to your account are shown below and you can manage additional restaurants by simply adding them here.\n\nTo view your billing history and payment details, or to download your invoices, select the 'MANAGE PAYMENTS' option above.",
 		"infoAuth": "These are you Membership credentials that you'll need to Sign In to the application. Passwords must be at least 8 characters.",
 		"infoAvatar": "Click the image add/edit and personalise your Membership details.",
 		"infoMember": "All contact regarding your Membership will be sent to this email address.",

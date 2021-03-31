@@ -141,8 +141,8 @@
               <span>
 
                 <button
-                  STYLE="background-color: #ddd;"
-                  mat-flat-button (click)="managePayments()"
+                  mat-button (click)="managePayments()"
+                  color="accent"
                   matTooltip="{{ 'SETTINGS.tipManagePayments' | translate }}">
                   {{ 'SETTINGS.labelManagePayments' | translate | uppercase }}
                 </button>
@@ -157,7 +157,8 @@
                 <li><label>{{ 'SETTINGS.labelMemberId' | translate }}:</label>{{ member.member_id }}</li>
                 <li><label>{{ 'SETTINGS.labelJoined' | translate }}:</label>{{ d_member_signedup }}</li>
                 <li><label>{{ 'SETTINGS.labelSubscription' | translate }}:</label>
-                  <a (click)="viewMemberPlans()" matTooltip="View Membership Plans">
+                  <a (click)="viewMemberPlans()"
+                     matTooltip="{{ 'SETTINGS.tipManagePayments' | translate }}">
                     {{ currentProduct?.product_name }}
                   </a>
                   <span class="rc-space-filler"></span>
