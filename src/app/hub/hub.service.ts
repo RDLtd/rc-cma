@@ -31,7 +31,7 @@ export class HubService {
   // Set the authenticated flag to true
   // i.e. the member has seen the welcome messages
   updateMemberAuth(member) {
-    console.log(member);
+    // console.log(member);
     localStorage.setItem('rd_profile', JSON.stringify(member));
     return this.http.post(this.config.apiUrl + '/members/setauthenticated',
       {

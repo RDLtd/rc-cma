@@ -72,12 +72,6 @@ export class AppComponent implements OnInit {
     console.log(`Session length: ${this.config.session_timeout} mins`);
     console.log(`Session countdown from : ${this.config.session_countdown} min.`);
 
-    // JB: moved this to AppModule
-    // Translations
-    // this.translate.addLangs(['en', 'fr']);
-    // this.translate.setDefaultLang(this.language);
-    // this.translate.use(this.language);
-
     // Observe the session status
     this.authService.memberSessionSubject.subscribe(
       sessionStatus => {
@@ -113,7 +107,6 @@ export class AppComponent implements OnInit {
   onDeactivate() {
     // console.log('onDeactivate');
     // document.body.scrollTop = 0;
-    // Alternatively, you can scroll to top by using this other call:
     window.scrollTo(0, 0)
   }
 }

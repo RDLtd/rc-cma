@@ -107,7 +107,8 @@ export class HubComponent implements AfterViewInit {
           } else {
             // Skipped so update mark as seen
             this.member.isAuthenticated = true;
-            this.hubService.updateMemberAuth(this.member).subscribe(res => console.log('IA', res));
+            this.hubService.updateMemberAuth(this.member)
+              .subscribe(res => console.log('updateMemberAuth Success', res));
           }
         });
     }
