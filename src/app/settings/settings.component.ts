@@ -45,7 +45,7 @@ export class SettingsComponent implements OnInit {
   showRestaurantFinder = true;
   clPublicId: string;
   d_member_signedup: string;
-  restaurantProduct: any;
+  restProd: any;
   cachedRestaurantsLength = null;
 
   products: [any];
@@ -114,7 +114,7 @@ export class SettingsComponent implements OnInit {
       // Find & store the current Member product
       this.currentProduct =
         this.products.find(p => p.product_stripe_id === this.member.member_product_id) || this.products[0];
-      console.log(this.currentProduct);
+      console.log('Current product', this.currentProduct);
     });
   }
 
@@ -155,12 +155,10 @@ export class SettingsComponent implements OnInit {
       this.addRestaurants();
     } else {
       // This is an additional restaurant
-      // Find the restaurant subscription product by filtering
-      // and using the 1st element of the filtered array
-      this.restaurantProduct = this.products.filter(
-        p => p.product_max_restaurants === 2 && p.product_period === this.currentProduct.product_period)[0];
+
+      this.restProd = this.getRestaurantProduct();
       // Calculate the new total subscription
-      const newTotal = (this.restaurantProduct.product_price * this.cachedRestaurantsLength) + Number(this.currentProduct.product_price);
+      const newTotal = (this.restProd.product_price * this.cachedRestaurantsLength) + Number(this.currentProduct.product_price);
       // Confirm charges
       let dialogRef = this.dialog.open(ConfirmCancelComponent, {
         data: {
@@ -169,7 +167,7 @@ export class SettingsComponent implements OnInit {
             'SETTINGS.msgAddRestaurant_' + this.currentProduct.product_period,
             {
               price: this.currencyPipe.transform(
-                this.restaurantProduct.product_price,
+                this.restProd.product_price,
                 this.appConfig.brand.currency.code),
               total: this.currencyPipe.transform(newTotal,
                 this.appConfig.brand.currency.code)
@@ -185,6 +183,13 @@ export class SettingsComponent implements OnInit {
         }
       });
     }
+  }
+
+  getRestaurantProduct(): object {
+    // Find the restaurant subscription product by filtering
+    // and using the 1st element of the filtered array
+    return this.products.filter(
+      p => p.product_max_restaurants === 2 && p.product_period === this.currentProduct.product_period)[0];
   }
 
   addRestaurants() {
@@ -253,7 +258,7 @@ export class SettingsComponent implements OnInit {
       this.memberService.createRestaurantSubscription(
         this.member.member_id,
         this.member.member_customer_id,
-        this.restaurantProduct.product_stripe_price_id,
+        this.restProd.product_stripe_price_id,
         1
       ).subscribe(res => {
         console.log(res);
@@ -267,28 +272,33 @@ export class SettingsComponent implements OnInit {
           this.loadService.close()
         });
     } else {
-      this.loadService.open('Add to Subscription');
       // update subscription charge
-      this.memberService.addRestaurantSubscription(
-        this.member.member_id,
-        this.member.member_subscription_id,
-        this.restaurantProduct.product_stripe_price_id,
-        this.restaurants.length - 1
-      )
-        .subscribe(res => {
-            console.log(res);
-            this.loadService.close();
-          },
-          error => {
-            console.log(error);
-            this.loadService.close();
-          }
-        );
+      this.updateRestaurantSubscription(this.restaurants.length - 1);
     }
+  }
 
+  updateRestaurantSubscription(qty: number): void {
+    this.loadService.open('Update Subscription');
+    this.restProd = this.getRestaurantProduct();
+    this.memberService.addRestaurantSubscription(
+      this.member.member_id,
+      this.member.member_subscription_id,
+      this.restProd.product_stripe_price_id,
+      qty
+    )
+      .subscribe(res => {
+          console.log(res);
+          this.loadService.close();
+        },
+        error => {
+          console.log(error);
+          this.loadService.close();
+        }
+      );
   }
 
   removeAssociation(index) {
+
     const rest = this.restaurants[index];
     const dialogRef = this.dialog.open(ConfirmCancelComponent, {
       data: {
@@ -300,9 +310,11 @@ export class SettingsComponent implements OnInit {
     dialogRef.afterClosed().subscribe(confirmed => {
 
       if (confirmed) {
-        // If this is the last added restaurant
-        if (this.restaurants.length === 2) {
-          this.deleteRestaurantSubscription();
+        const addedRestaurantCount = this.restaurants.length - 1;
+        // do we need to update the restaurant subscription?
+        if (addedRestaurantCount) {
+          addedRestaurantCount === 1?
+            this.deleteRestaurantSubscription(): this.updateRestaurantSubscription(addedRestaurantCount - 1);
         }
         this.restaurantService.removeAssociation(rest['association_id'])
           .subscribe(

@@ -73,6 +73,7 @@
           </div>
           <span
             *ngIf="!deal.deal_national"
+            [matTooltip]="deal.deal_distribution"
             class="rc-icon-tag">
             <mat-icon>moped</mat-icon>
             {{ 'MARKETPLACE.labelAvailableLocal' | translate | uppercase }}
