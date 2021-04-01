@@ -391,7 +391,7 @@
 		"labelBtnLater": "Do it later",
 		"labelBtnStart": "START HERE",
 		"messagesReadOk": "Ok, I've read those",
-		"welcomeNewMember": "# You're in!\n\nIt's great that you've chosen to join Restaurant Collective and we hope that you'll help us to grow this exciting community of industry professionals and independent restaurateurs.\n\n## Add your restaurant\n\nBefore you start exploring the Member's Hub, please complete the initial set up by linking your restaurant to your membership account.\n\nWhen you're ready, select the **START HERE** option below.\n\nFind your restaurant and follow the on-screen instructions to verify the details and link it to your Membership.\n\nIf you need any help, then open the **Knowledge Base** and see the **Getting Started** guide."
+		"welcomeNewMember": "# You're in!\n\nIt's great that you've chosen to join Restaurant Collective and we hope that you'll help us to grow this exciting community of industry professionals and independent restaurateurs.\n\n## Add your restaurant\n\nBefore you start exploring the Member's Hub, please complete the initial set up by linking your restaurant to your membership account.\n\nWhen you're ready, select the **START HERE** option below.\n\nFind your restaurant and follow the on-screen instructions to verify the details and link it to your Membership.\n"
 	},
 	"PLANS": {
 		"infoCurrentPlanMonthly": "Your current membership plan renews on the **{{ renewal }}** of each month at **{{ price }}**. To change your plan, select another option below and we'll calculate any additional charges due.",
@@ -418,9 +418,9 @@
 			"titleUpdateContacts": "Member details"
 		},
 		"infoAccounts": "Restaurants that are linked to your account are shown below and you can manage additional restaurants by simply adding them here.\n\nTo view your billing history and payment details, or to download your invoices, select the 'MANAGE PAYMENTS' option above.",
-		"infoAuth": "These are you Membership credentials that you'll need to Sign In to the application. Passwords must be at least 8 characters.",
+		"infoAuth": "These are the Membership credentials that you'll need to Sign In to the application. Passwords must be at least 8 characters.",
 		"infoAvatar": "Click the image add/edit and personalise your Membership details.",
-		"infoMember": "All contact regarding your Membership will be sent to this email address.",
+		"infoMember": "All communications regarding your Membership will be sent to this email address.",
 		"infoReferrals": "This is a unique referral code that you can share with any of your colleagues, to encourage them to join Restaurant Collective and be part of this exciting new organisation.",
 		"labelAddRestaurant": "Add a restaurant to this account",
 		"labelAwaitingImage": "AWAITING IMAGE",
