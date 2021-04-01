@@ -316,7 +316,7 @@
 		],
 		"joinSuccess": "# OK merci!\n\nUn membre de notre équipe Support & Curation sera en contact avec vous sous peu.\n\n**{{ brand }} Équipe de curation **",
 		"joinUsByReferral": "",
-		"joinUsToday": "# Rejoignez-nous!\n\nSuivez simplement les 3 étapes suivantes et en un rien de temps, vous ferez partie du Collectif!\n\n 1. Indiquez votre nom et vos coordonnées\n\n 2. Sélectionnez un abonnement mensuel ou annuel\n\n 3. Payez votre abonnement en ligne\n\nSi vous rencontrez des problèmes tout au long de ce processus, veuillez [contacter notre équipe d'assistance] ({{ email }}).",
+		"joinUsToday": "# Rejoignez-nous!\n\nSuivez simplement les 3 étapes suivantes et en un rien de temps, vous ferez partie du Collectif!\n\n 1. Indiquez votre nom et vos coordonnées\n\n 2. Sélectionnez un abonnement mensuel ou annuel\n\n 3. Payez votre abonnement en ligne\n\nSi vous rencontrez des problèmes tout au long de ce processus, veuillez envoyer un e-mail à:\n\n{{ email }}",
 		"joinWelcome": "# Bienvenue\n\nVous vous êtes inscrit avec succès en tant que ** Membre ** et nous vous avons envoyé des informations de connexion ainsi que des informations supplémentaires.\n\nFermez cette fenêtre et vérifiez votre messagerie.\n\nMerci beaucoup.\n\n**{{ brand }} Équipe de curation **",
 		"labelBtnSubmit": "Suivant",
 		"labelEmail": "",

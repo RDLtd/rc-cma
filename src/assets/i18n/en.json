@@ -316,7 +316,7 @@
 		],
 		"joinSuccess": "# Ok thanks!\n\nA member of our Support & Curation Team will be in contact with you shortly.\n\n**{{ brand }} Curation Team**",
 		"joinUsByReferral": "# Join us{{ referrer }}\n\nYou've been invited by {{ referrer }} to become part of {{ brand }}, an exciting new organisation that has been exclusively created to support both independent and group restaurants, and affect positive change within the industry. To join us:\n\n 1. Provide your name and contact details\n\n 2. Select your subscription option\n\n 3. Pay your subscription online\n\nIf you experience any problems activating your membership then do please [contact our Support Team]({{ email }}).",
-		"joinUsToday": "# Join us!\n\nJust complete the following 3 steps and in no time you’ll be part of the Collective!\n\n 1. Provide your name and contact details\n\n 2. Select either a monthly or yearly subscription\n\n 3. Pay your subscription online\n\nIf you experience any problems throughout this process please [contact our support team]({{ email }})",
+		"joinUsToday": "# Join us!\n\nJust complete the following 3 steps and in no time you’ll be part of the Collective!\n\n 1. Provide your name and contact details\n\n 2. Select either a monthly or yearly subscription\n\n 3. Pay your subscription online\n\nIf you experience any problems throughout this process please email: \n\n{{ email }}",
 		"joinWelcome": "# Welcome\n\nYou've successfully registered yourself as a **Member** and we've sent you login details and along with some further information.\n\nClose this window and check your email.\n\nMany thanks.\n\n**{{ brand }} Curation Team**",
 		"labelBtnSubmit": "NEXT",
 		"labelEmail": "Email address",
