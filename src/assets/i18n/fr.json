@@ -367,6 +367,7 @@
 		"labelUrl": "Page web",
 		"msgEmailAffiiateRequest": "Votre demande à été envoyé.\n\nLes détails de votre abonnement ont été envoyés à {{ affiliate }} et un membre de son équipe doit vous contacter dans les deux jours ouvrables.\n",
 		"msgRequest": "Vos coordonnées et votre numéro de membre seront envoyés à **{{ affiliate }}** et un membre de son équipe devra vous contacter dans les deux jours ouvrables pour discuter de l'offre **{{ deal }}**.\n\nCeci est juste pour enregistrer votre intérêt auprès d'eux et il n'y a aucune obligation de procéder, à moins que vous ne choisissiez de le faire.",
+		"msgRequestSent": "Merci. Votre demande à été envoyé.",
 		"tipAddToFavourites": "Ajouter / supprimer des favoris",
 		"tipClearFilters": "Effacer tous les filtres",
 		"tipDownload": "Téléchargement PDF",

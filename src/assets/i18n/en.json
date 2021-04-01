@@ -367,6 +367,7 @@
 		"labelUrl": "Webpage",
 		"msgEmailAffiiateRequest": "Your request has been sent.\n\nYou Membership details have been sent to {{ affiliate }} and someone from their team should contact you within 2 working days. \n",
 		"msgRequest": "Your contact details and Membership ID will be sent to **{{ affiliate }}** and someone from their team should contact you within 2 working days to discuss the **{{ deal }}** deal.\n\nThis is just to register you interest with them and there's no obligation to proceed, unless you should choose to do so.",
+		"msgRequestSent": "Thank you. Your request has been sent.",
 		"tipAddToFavourites": "Add/Remove favourites",
 		"tipClearFilters": "Clear all filters",
 		"tipDownload": "PDF Download",

@@ -104,6 +104,7 @@ export class HubComponent implements AfterViewInit {
         .subscribe(addRestaurant => {
           if (addRestaurant) {
             this.openRestaurantLookup();
+            this.member.isAuthenticated = true;
           } else {
             // Skipped so update mark as seen
             this.member.isAuthenticated = true;

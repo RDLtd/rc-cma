@@ -8,6 +8,7 @@ import { AppConfig } from '../app.config';
 import { HeaderService } from '../common/header.service';
 import { MarketplaceService } from './marketplace.service';
 import { insertAnimation } from '../shared/animations';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'rc-marketplace',
@@ -30,6 +31,7 @@ export class MarketplaceComponent implements OnInit {
   displayedDeals = [];
 
   constructor(
+    private snackbar: MatSnackBar,
     private headerService: HeaderService,
     public help: HelpService,
     private restaurantService: RestaurantService,
@@ -186,6 +188,7 @@ export class MarketplaceComponent implements OnInit {
     }).subscribe(
       () => {
         console.log('Offer confirmation from ' + deal.affiliate_name);
+        this.snackbar.open(this.translate.instant('MARKETPLACE.msgRequestSent'), null, { duration: 3000 });
       },
       error => {
         console.log('Could not send offer confirmation', error);

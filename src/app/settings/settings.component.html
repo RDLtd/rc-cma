@@ -231,35 +231,35 @@
           </mat-card>
 
           <!-- Referrals -->
-          <mat-card
-            class="rc-card-rounded mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
-            <div class="rc-card-title">
-              <h2>{{ 'SETTINGS.titleReferrals' | translate }}</h2>
-              <span class="rc-space-filler"></span>
-              <span>
-                <button
-                  color="accent"
-                  mat-icon-button
-                  ngxClipboard
-                  (click)="copied()"
-                  [cbContent]="getReferralCode()"
-                  matTooltip="{{ 'SETTINGS.tipCopyReferral' | translate }}">
-                  <mat-icon>link</mat-icon>
-                </button>
-              </span>
-            </div>
-            <div class="rc-card-subtitle">
-              {{ 'SETTINGS.infoReferrals' | translate }}
-            </div>
-            <mat-card-content>
-              <ul class="rc-line-items">
-                <li><label>{{ 'SETTINGS.labelReferralCode' | translate }}:</label>
-                  <a [href]="getReferralCode()">{{
-                    member?.member_promo_code | uppercase }}</a>
-                </li>
-              </ul>
-            </mat-card-content>
-          </mat-card>
+<!--          <mat-card-->
+<!--            class="rc-card-rounded mdc-layout-grid__cell mdc-layout-grid__cell&#45;&#45;span-12">-->
+<!--            <div class="rc-card-title">-->
+<!--              <h2>{{ 'SETTINGS.titleReferrals' | translate }}</h2>-->
+<!--              <span class="rc-space-filler"></span>-->
+<!--              <span>-->
+<!--                <button-->
+<!--                  color="accent"-->
+<!--                  mat-icon-button-->
+<!--                  ngxClipboard-->
+<!--                  (click)="copied()"-->
+<!--                  [cbContent]="getReferralCode()"-->
+<!--                  matTooltip="{{ 'SETTINGS.tipCopyReferral' | translate }}">-->
+<!--                  <mat-icon>link</mat-icon>-->
+<!--                </button>-->
+<!--              </span>-->
+<!--            </div>-->
+<!--            <div class="rc-card-subtitle">-->
+<!--              {{ 'SETTINGS.infoReferrals' | translate }}-->
+<!--            </div>-->
+<!--            <mat-card-content>-->
+<!--              <ul class="rc-line-items">-->
+<!--                <li><label>{{ 'SETTINGS.labelReferralCode' | translate }}:</label>-->
+<!--                  <a [href]="getReferralCode()">{{-->
+<!--                    member?.member_promo_code | uppercase }}</a>-->
+<!--                </li>-->
+<!--              </ul>-->
+<!--            </mat-card-content>-->
+<!--          </mat-card>-->
         </div>
       </div>
     </div>

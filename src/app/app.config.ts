@@ -17,9 +17,9 @@ export class AppConfig {
 
   // Should only need to switch here to change from local to Heroku server
   // public readonly apiUrl = 'http://localhost:4000';
-  public readonly apiUrl = 'https://rc-server-cobb20-n5fxl047dapoj.herokuapp.com'
+  // public readonly apiUrl = 'https://rc-server-cobb20-n5fxl047dapoj.herokuapp.com'
 
-  // public readonly apiUrl = 'https://rc-server-staging.herokuapp.com';
+  public readonly apiUrl = 'https://rc-server-staging.herokuapp.com';
   // public readonly apiUrl = 'https://rc-server-prod.herokuapp.com';
   // public readonly apiUrl = 'https://rc-server-prod.herokuapp.com';
 
@@ -83,8 +83,8 @@ export class AppConfig {
         code: 'GBP'
       },
       downloads: {
-        terms: `https://${this.tld.rc}/downloads/RC-Terms.pdf`,
-        privacy: `https://${this.tld.rc}/downloads/RC-Privacy.pdf`
+        terms: `https://${this.tld.rc}/terms-conditions/`,
+        privacy: `https://${this.tld.rc}/privacy-policy/`
       }
     },
     ri: {
