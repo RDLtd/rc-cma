@@ -476,13 +476,13 @@ export class CMSService {
       });
   }
 
-  sendOfferConfirmation(obj: any, member: any) {
+  sendOfferConfirmation(obj: any) {
     return this.http.post(this.config.apiUrl + '/cms/sendofferconfirmation',
       {
         affiliate_name: obj.affiliate_name,
         affiliate_contact_message: obj.affiliate_contact_message,
         restaurant_name: obj.restaurant_name,
-        restaurant_email: member.member_email,
+        restaurant_email: obj.restaurant_email,
         restaurant_number: obj.restaurant_number,
         company_prefix: this.config.brand.prefix,
         email_language: localStorage.getItem('rd_language'),
