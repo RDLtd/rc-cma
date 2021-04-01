@@ -51,7 +51,6 @@ export class SettingsComponent implements OnInit {
   productRenewalDate: Date;
   currentProduct: any;
 
-
   constructor(
     private header: HeaderService,
     private cmsLocalService: CmsLocalService,
@@ -117,7 +116,7 @@ export class SettingsComponent implements OnInit {
     });
   }
 
-  getAssociatedRestaurants(id) {
+  getAssociatedRestaurants(id): void {
     console.log('cachedRestaurantsLength = ', this.cachedRestaurantsLength);
 
     this.restaurantService.getMemberRestaurants(id)
@@ -143,7 +142,7 @@ export class SettingsComponent implements OnInit {
         });
   }
 
-  checkAllowance() {
+  checkAllowance(): void {
     // Cache the current restaurant length
     this.cachedRestaurantsLength = this.restaurants.length;
     console.log('cachedRestaurantsLength =', this.cachedRestaurantsLength);
@@ -191,7 +190,7 @@ export class SettingsComponent implements OnInit {
       p => p.product_max_restaurants === 2 && p.product_period === this.currentProduct.product_period)[0];
   }
 
-  addRestaurants() {
+  addRestaurants(): void {
 
     // Open restaurant search
     const dialogRef = this.dialog.open(RestaurantLookupComponent, {
@@ -296,7 +295,7 @@ export class SettingsComponent implements OnInit {
       );
   }
 
-  removeAssociation(index) {
+  removeAssociation(index): void {
 
     const rest = this.restaurants[index];
     const dialogRef = this.dialog.open(ConfirmCancelComponent, {
@@ -346,21 +345,20 @@ export class SettingsComponent implements OnInit {
   }
 
   viewMemberPlans(): void {
-    this.managePayments();
-    //
-    // let dialogRef = this.dialog.open(MembershipPlanComponent, {
-    //   maxWidth: '600px',
-    //   data: {
-    //     currencyCode: this.appConfig.brand.currency.code,
-    //     currentPlanId: this.currentProduct.product_id,
-    //     products: this.products,
-    //     renewal: this.productRenewalDate,
-    //     max: this.restaurants.length
-    //   }
-    // });
+    const msg = this.currentProduct.product_period === 'm'?
+      'SETTINGS.msgChangePlanToYearly' : 'SETTINGS.msgChangePlanToMonthly';
+    let dialogRef = this.dialog.open(ConfirmCancelComponent, {
+      maxWidth: '600px',
+      data: {
+        title: this.translate.instant('SETTINGS.titleSubscription'),
+        body: this.translate.instant( msg, { plan: this.currentProduct.product_name }),
+        confirm: 'OK',
+        cancel: 'hide'
+      }
+    });
   }
 
-  managePayments() {
+  managePayments(): void {
     // First get the stripe customer number for this member from the database
     this.memberService.getStripeCustomerNumber(this.member.member_id)
       .subscribe( (customer) => {
@@ -384,7 +382,7 @@ export class SettingsComponent implements OnInit {
       );
   }
 
-  updateMemberContacts() {
+  updateMemberContacts(): void {
     // save a reference to the current member details
     // in case the update is cancelled
     const cachedMember = Object.assign([], this.member);
@@ -409,7 +407,7 @@ export class SettingsComponent implements OnInit {
     });
   }
 
-  updateMember(member) {
+  updateMember(member): void {
     // console.log('update:', member);
     // update member
     this.memberService.update(member)
@@ -425,13 +423,13 @@ export class SettingsComponent implements OnInit {
         });
   }
 
-  updatePassword () {
+  updatePassword (): void {
     const dialogRef = this.dialog.open(PasswordComponent);
     dialogRef.componentInstance.member = this.member;
     dialogRef.componentInstance.dialog = dialogRef;
   }
 
-  updateImage() {
+  updateImage(): void {
     const dialogRef = this.dialog.open(ImageComponent, {
       data: {
         member: this.member
@@ -470,7 +468,7 @@ export class SettingsComponent implements OnInit {
     return `${this.appConfig.brand.joinUrl}?referral=${this.member.member_promo_code}`;
   }
 
-  getDefaultImages() {
+  getDefaultImages(): void {
 
     const numberOfRestaurants = this.restaurants.length;
     for (let i = 0; i < numberOfRestaurants; i++) {
@@ -516,7 +514,7 @@ export class SettingsComponent implements OnInit {
     this.openSnackBar(this.translate.instant('SETTINGS.msgLinkCopied'), 'OK');
   }
 
-  getClPublicId(idx) {
+  getClPublicId(idx): void {
 
     if (this.defaultImages[idx]) {
       const a = this.defaultImages[idx].split('/');
@@ -526,7 +524,7 @@ export class SettingsComponent implements OnInit {
     }
   }
 
-  getMemberClPublicId(url) {
+  getMemberClPublicId(url): string {
 
     if (!!url && url !== 'null') {
 
@@ -545,9 +543,9 @@ export class SettingsComponent implements OnInit {
     window.location.reload();
   }
 
-  openSnackBar(msg: string, act = '', dur = 5000) {
+  openSnackBar(msg: string, act = '', dur = 5000, pos: any = 'top'): void {
     this.snackBar.open(msg, act, {
-      verticalPosition: 'top',
+      verticalPosition: pos,
       duration: dur
     });
   }

@@ -68,11 +68,11 @@ a.rc-back {
   width: 100%;
   display: inline-flex;
   justify-content: flex-start;
-  color: #fff;
+  color: #fff !important;
   font-size: 16px;
-  text-decoration: none;
+  text-decoration: none !important;
   margin: 1rem 0;
-  transition: all .3s ease-out;
+  transition: transform .3s ease-out;
   &:hover {
     color: white;
     .mat-icon {
