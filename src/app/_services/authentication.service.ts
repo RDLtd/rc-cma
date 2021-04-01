@@ -7,6 +7,7 @@ import { Member } from '../_models';
 import { RestaurantService } from './restaurant.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { StorageService } from './storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,10 +18,11 @@ export class AuthenticationService {
   public member: Member = new Member();
   private dbOffline = false;
   private inSession: boolean = false;
-  private curation_zone_set: any[] = [];
+  //private curation_zone_set: any[] = [];
   private sessionExpiresAt: any;
   private sessionTimeLeft: any;
   private checkingActivity: boolean = false;
+
   private authToken = new BehaviorSubject(new HttpParams().set('Authorization', 'Bearer' +
     '234242423wdfsdvdsfsdrfg34tdfverge'));
 
@@ -30,10 +32,11 @@ export class AuthenticationService {
     private router: Router,
     private http: HttpClient,
     private translate: TranslateService,
+    private storage: StorageService,
     private config: AppConfig) { }
 
   public login(form) {
-    console.log('LOGIN', this.authToken);
+    // console.log('LOGIN', this.authToken);
     return this.http.post(this.config.apiUrl + '/members/authenticate',
       {
         email: form.email,
@@ -43,12 +46,12 @@ export class AuthenticationService {
       });
   }
 
-  public getLoggedInUser(): Member {
-    return this.member;
-  }
+  // public getLoggedInUser(): Member {
+  //   return this.member;
+  // }
 
   public setMember(member: Member) {
-    //console.log('setMember', member);
+    console.log('setMember', member);
     this.member = member;
   }
 
@@ -56,6 +59,8 @@ export class AuthenticationService {
 
     this.dbOffline = offline;
     this.member = member;
+
+    // Record Member login/authentication
 
     // Set session variables
     localStorage.setItem('rd_profile', JSON.stringify(member));
@@ -66,101 +71,118 @@ export class AuthenticationService {
 
     this.translate.use(localStorage.getItem('rd_language'));
     this.setNewSessionExpiry();
+    this.dspHomeScreen('active');
 
     // Set members 'homepage' based on access their level
-    if (this.dbOffline && member.member_access_level < 4) {
-
-      // Not Super Admin
-      localStorage.setItem('rd_home', '/');
-      this.dspHomeScreen('active');
-
-    } else {
-
-      switch (member.member_access_level) {
-        // 3rd party agent
-        case '0': {
-          localStorage.setItem('rd_home', '/agent');
-          localStorage.setItem('rd_launch_number', member.member_launch_number);
-          this.dspHomeScreen('active');
-          break;
-        }
-        // Curator
-        case '1': {
-          this.restaurantService.getCurationZoneSet(member.member_id)
-            .subscribe(
-              data => {
-                this.curation_zone_set = data['curation_zone_set'];
-                // need to check that there are actually some data!
-                if (data['curation_zone_set'].length > 0) {
-                  // default is to take the first item on the list - should never be more than 1
-                  // but this does not really matter, since the others will be loaded into the dropdown
-                  localStorage.setItem('rd_home', '/curationzone/' + this.curation_zone_set[0].curation_id);
-                  this.dspHomeScreen('active');
-                } else {
-                  this.openSnackBar('You have not been assigned a curation zone!', '');
-                  localStorage.setItem('rd_home', '/');
-                  this.dspHomeScreen('closed');
-                }
-              },
-              () => {
-                this.openSnackBar('There was an error trying to access the curation database', '');
-                localStorage.setItem('rd_home', '/');
-                this.dspHomeScreen('closed');
-              });
-          break;
-        }
-        // Restaurant / Content Administrator
-        case '2': {
-          this.restaurantService.getMemberRestaurants(member.member_id)
-            .subscribe(
-              data => {
-                if (data['count'] > 0) {
-                  localStorage.setItem('rd_home', `restaurants/${data['restaurants'][0].restaurant_id}/cms/dashboard`);
-                } else {
-                  localStorage.setItem('rd_home', '/profile');
-                }
-                this.dspHomeScreen('active');
-              },
-              error => {
-                console.log(error);
-              });
-
-          break;
-        }
-        // RDL Admin
-        case '3': {
-          localStorage.setItem('rd_home', '/dashboard');
-          this.dspHomeScreen('active');
-          break;
-        }
-        // RDL Developer
-        case '4': {
-          localStorage.setItem('rd_home', '/dashboard');
-          this.dspHomeScreen('active');
-          break;
-        }
-        default: {
-          localStorage.setItem('rd_home', '/profile');
-          this.dspHomeScreen('closed')
-          break;
-        }
-      }
-    }
+    // if (this.dbOffline && member.member_access_level < 4) {
+    //
+    //   // Not Super Admin
+    //   localStorage.setItem('rd_home', '/hub');
+    //   this.dspHomeScreen('active');
+    //
+    // } else {
+    //
+    //   switch (member.member_access_level) {
+    //     // 3rd party agent
+    //     case '0': {
+    //       console.log('ACCESS LEVEL 0');
+    //       // localStorage.setItem('rd_home', '/agent');
+    //       // localStorage.setItem('rd_launch_number', member.member_launch_number);
+    //       // this.dspHomeScreen('active');
+    //       break;
+    //     }
+    //     // Curator
+    //     case '1': {
+    //       console.log('ACCESS LEVEL 1');
+    //       // this.restaurantService.getCurationZoneSet(member.member_id)
+    //       //   .subscribe(
+    //       //     data => {
+    //       //       this.curation_zone_set = data['curation_zone_set'];
+    //       //       // need to check that there are actually some data!
+    //       //       if (data['curation_zone_set'].length > 0) {
+    //       //         // default is to take the first item on the list - should never be more than 1
+    //       //         // but this does not really matter, since the others will be loaded into the dropdown
+    //       //         localStorage.setItem('rd_home', '/curationzone/' + this.curation_zone_set[0].curation_id);
+    //       //         this.dspHomeScreen('active');
+    //       //       } else {
+    //       //         this.openSnackBar('You have not been assigned a curation zone!', '');
+    //       //         localStorage.setItem('rd_home', '/');
+    //       //         this.dspHomeScreen('closed');
+    //       //       }
+    //       //     },
+    //       //     () => {
+    //       //       this.openSnackBar('There was an error trying to access the curation database', '');
+    //       //       localStorage.setItem('rd_home', '/');
+    //       //       this.dspHomeScreen('closed');
+    //       //     });
+    //       break;
+    //     }
+    //     // Restaurant / Content Administrator
+    //     case '2': {
+    //       console.log('ACCESS LEVEL 2');
+    //       this.restaurantService.getMemberRestaurants(member.member_id)
+    //         .subscribe(
+    //           data => {
+    //
+    //             // if (data['count'] > 0) {
+    //             //   localStorage.setItem('rd_home', `restaurants/${data['restaurants'][0].restaurant_id}/cms/dashboard`);
+    //             // } else {
+    //             //   localStorage.setItem('rd_home', '/profile');
+    //             // }
+    //
+    //             // Now direct all traffic to the HUB
+    //             localStorage.setItem('rd_home', '/hub');
+    //
+    //             this.dspHomeScreen('active');
+    //           },
+    //           error => {
+    //             console.log(error);
+    //           });
+    //
+    //       break;
+    //     }
+    //     // RDL Admin
+    //     case '3': {
+    //       console.log('ACCESS LEVEL 3');
+    //       localStorage.setItem('rd_home', '/hub');
+    //       this.dspHomeScreen('active');
+    //       break;
+    //     }
+    //     // RDL Developer
+    //     case '4': {
+    //       console.log('ACCESS LEVEL 4');
+    //       localStorage.setItem('rd_home', '/hub');
+    //       this.dspHomeScreen('active');
+    //       break;
+    //     }
+    //     default: {
+    //       console.log('ACCESS LEVEL DEFAULT');
+    //       localStorage.setItem('rd_home', '/hub');
+    //       this.dspHomeScreen('closed')
+    //       break;
+    //     }
+    //   }
+    // }
   }
 
   dspHomeScreen(sessionStatus): void {
     this.inSession = sessionStatus === 'active';
     this.memberSessionSubject.next(sessionStatus);
-    this.router.navigate([localStorage.getItem('rd_home')]);
+    this.router.navigate(['/hub']);
   }
 
   logout(reason): void {
+
     console.log(`Logout: ${reason}`);
     this.inSession = false;
     this.memberSessionSubject.next(reason);
     this.member = null;
 
     // Clear session variables
+    window.sessionStorage.clear();
+
+    // Clear storage but keep
+    // rd_prefix & rd_language
     localStorage.removeItem('rd_profile');
     localStorage.removeItem('rd_username');
     localStorage.removeItem('rd_token');
@@ -168,9 +190,7 @@ export class AuthenticationService {
     localStorage.removeItem('rd_access_level');
     localStorage.removeItem('rd_home');
     localStorage.removeItem('rd_session');
-
   }
-
 
   isAuth(): boolean {
     // Check expiry mins
@@ -242,7 +262,7 @@ export class AuthenticationService {
   }
 
   setNewSessionExpiry() {
-    console.log('SE SET');
+    // console.log('SE SET');
     // create session
     // now + session length
     // session length set in mins so convert to milliseconds
@@ -250,12 +270,12 @@ export class AuthenticationService {
     localStorage.setItem('rd_token_expires_at', this.sessionExpiresAt);
   }
 
-  isAuthLevel(requiredLevel): boolean {
-    const userLevel = localStorage.getItem('rd_access_level');
-    // Bump up access level if db is offline
-    if (this.dbOffline) { requiredLevel = 4; }
-    return (this.isAuth() && (userLevel >= requiredLevel));
-  }
+  // isAuthLevel(requiredLevel): boolean {
+  //   const userLevel = localStorage.getItem('rd_access_level');
+  //   // Bump up access level if db is offline
+  //   if (this.dbOffline) { requiredLevel = 4; }
+  //   return (this.isAuth() && (userLevel >= requiredLevel));
+  // }
 
   openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {

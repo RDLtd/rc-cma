@@ -1,0 +1,134 @@
+
+<mat-toolbar class="rc-toolbar rc-toolbar-nav rc-toolbar-fixed rc-toolbar-nav-adjust">
+
+  <span class="rc-space-filler"></span>
+  <mat-chip-list *ngIf="!!filter" class="rc-filter">
+    <mat-chip
+      style="margin-right: 16px;"
+      (removed)="clearAllFilters()"
+      [removable]="true">
+      {{ 'MARKETPLACE.labelFilteredBy' | translate }}: {{ filter | titlecase }}
+      <mat-icon
+        [matTooltip]="'MARKETPLACE.tipClearFilters' | translate"
+        matChipRemove>
+        cancel
+      </mat-icon>
+    </mat-chip>
+  </mat-chip-list>
+
+  <span class="rc-section-toolbar-actions">
+    <button
+      *ngIf="favourites.length"
+      mat-icon-button
+      (click)="filterByFavourites()"
+      [class.rc-highlight]="isFiltered('favourites')"
+      [matTooltip]="'MARKETPLACE.tipFavourites' | translate">
+      <mat-icon>favorite</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      [class.rc-highlight]="!!filter"
+      [matTooltip]="'MARKETPLACE.tipFilterBy' | translate"
+      [matMenuTriggerFor]="menuFilters">
+      <mat-icon>filter_list</mat-icon>
+    </button>
+  </span>
+</mat-toolbar>
+
+<mat-menu #menuFilters="matMenu">
+  <ng-container *ngFor="let cat of categories">
+    <button
+      mat-menu-item
+      (click)="filterByCategory(cat)">
+      {{ cat | titlecase }}
+    </button>
+    <mat-divider></mat-divider>
+  </ng-container>
+</mat-menu>
+
+<div class="rc-marketplace">
+  <div class="mdc-layout-grid">
+    <div class="mdc-layout-grid__inner" [@insertAnimation]="displayedDeals?.length">
+
+      <div
+        *ngFor="let deal of displayedDeals"
+        class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
+        <mat-card class="rc-card-rounded rc-card-market">
+          <button
+            mat-icon-button
+            class="rc-card-menu"
+            [class.rc-highlight]="isFavourite(deal.deal_id)"
+            (click)="toggleIsFavourite(deal.deal_id)"
+            [matTooltip]="'MARKETPLACE.tipAddToFavourites' | translate">
+            <mat-icon>favorite_outline</mat-icon>
+          </button>
+          <div mat-card-title>
+            <h4>{{ deal.deal_category | uppercase }}</h4>
+            <img src="{{ deal.affiliate_logo_path }}" alt="{{ deal.affiliate_name }}">
+            <h2>{{ deal.deal_name }}</h2>
+            <h3>by <a [href]="deal.affiliate_url" target="_blank">{{ deal.affiliate_name }}</a></h3>
+          </div>
+          <div mat-card-content>
+            <p markdown ngpreservewhitespaces>{{ deal.deal_description }}</p>
+          </div>
+          <span
+            *ngIf="!deal.deal_national"
+            [matTooltip]="deal.deal_distribution"
+            class="rc-icon-tag">
+            <mat-icon>moped</mat-icon>
+            {{ 'MARKETPLACE.labelAvailableLocal' | translate | uppercase }}
+          </span >
+          <span
+            *ngIf="deal.deal_national"
+            matTooltip="{{ 'MARKETPLACE.tipNational' | translate }}"
+            class="rc-icon-tag">
+            <mat-icon>local_shipping</mat-icon>
+            {{ 'MARKETPLACE.labelAvailableNational' | translate | uppercase }}
+          </span>
+          <mat-card-actions align="end">
+            <button mat-button color="accent" [matMenuTriggerFor]="menu">
+              {{ 'MARKETPLACE.labelBtnFindOutMore' | translate | uppercase }}
+              <mat-icon>menu</mat-icon>
+            </button>
+          </mat-card-actions>
+        </mat-card>
+
+        <mat-menu #menu="matMenu" xPosition="after" yPosition="above">
+          <div class="rc-user-menu">
+            <h3>{{ deal.affiliate_name }}</h3>
+            <span>{{ 'MARKETPLACE.labelInfo' | translate | uppercase }}</span>
+          </div>
+          <mat-divider></mat-divider>
+          <button
+            mat-menu-item
+            (click)="notifyAffiliate(deal)">
+            <mat-icon>contact_mail</mat-icon>
+            <span>{{ 'MARKETPLACE.labelRequest' | translate }}</span>
+          </button>
+          <mat-divider></mat-divider>
+
+          <ng-container *ngIf="!!deal.deal_url">
+          <a
+            mat-menu-item
+            [href]="deal.deal_url"
+            target="_blank">
+            <mat-icon>open_in_new</mat-icon>
+            <span>{{ 'MARKETPLACE.labelUrl' | translate }}</span>
+          </a>
+          <mat-divider></mat-divider>
+          </ng-container>
+          <ng-container *ngIf="!!deal.deal_download">
+          <a
+            mat-menu-item
+            [href]="deal.deal_download"
+            target="_blank">
+            <mat-icon>download</mat-icon>
+            <span>{{ 'MARKETPLACE.labelDownload' | translate }}</span>
+          </a>
+          <mat-divider></mat-divider>
+          </ng-container>
+        </mat-menu>
+      </div>
+    </div>
+  </div>
+</div>

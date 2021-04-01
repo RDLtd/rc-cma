@@ -4,29 +4,32 @@
 
   <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
     <mat-toolbar class="rc-toolbar rc-toolbar-section">
-      <span>{{ 'CMS-Location.LocInfo' | translate }}</span>
+      <span>{{ 'CMS.LOCATION.titleLocation' | translate }}</span>
       <span class="rc-space-filler"></span>
       <span class="rc-toolbar-actions">
+
         <!-- HELP -->
         <button
           mat-icon-button
           (click)="help.dspHelp('cms-location-transport', restaurant)">
           <mat-icon>help_outline</mat-icon>
         </button>
+
         <!-- UNDO CHANGES -->
         <button
           mat-icon-button
           [disabled]="!dataChanged"
           (click)="resetData()"
-          [matTooltip]="'CMS-Features.UndoChanges' | translate">
+          [matTooltip]="'CMS.LOCATION.tipUndo' | translate">
           <mat-icon>undo</mat-icon>
         </button>
+
         <!-- SAVE CHANGES -->
         <button
           mat-icon-button
           [disabled]="!dataChanged"
           (click)="updateTransport()"
-          [matTooltip]="'CMS-Features.SaveChanges' | translate">
+          [matTooltip]="'CMS.LOCATION.tipSave' | translate">
           <mat-icon>check</mat-icon>
         </button>
 
@@ -37,22 +40,22 @@
   <mat-card class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--span-8-tablet">
 
     <mat-card-title>
-      <h2>{{ 'CMS-Location.CarParking' | translate }}</h2></mat-card-title>
+      <h2>{{ 'CMS.LOCATION.titleParking' | translate }}</h2></mat-card-title>
     <mat-card-content>
       <mat-form-field
         class="rc-full-width">
-          <textarea
-            #privateRoom
-            matInput
-            matTextareaAutosize
-            matAutosizeMinRows="3"
-            matAutosizeMaxRows="5"
-            name="cms_description_car_parking"
-            maxlength="{{ transportPrivateLength }}"
-            placeholder="{{ 'CMS-Location.WhatParking' | translate }} {{ transportPrivateLength }})"
-            (keyup)="setChanged(privateRoom)"
-            [(ngModel)]="descriptions.cms_description_car_parking">
-          </textarea>
+        <mat-label>{{ 'CMS.LOCATION.labelParking' | translate: { chars: transportPrivateLength } }}</mat-label>
+        <textarea
+          #privateRoom
+          matInput
+          matTextareaAutosize
+          matAutosizeMinRows="3"
+          matAutosizeMaxRows="5"
+          name="cms_description_car_parking"
+          maxlength="{{ transportPrivateLength }}"
+          (keyup)="setChanged(privateRoom)"
+          [(ngModel)]="descriptions.cms_description_car_parking">
+        </textarea>
         <mat-hint align="end">{{ privateRoom.value.length }}/{{ transportPrivateLength }}</mat-hint>
       </mat-form-field>
     </mat-card-content>
@@ -62,10 +65,11 @@
   <mat-card class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--span-8-tablet">
 
     <mat-card-title>
-      <h2>{{ 'CMS-Location.PublicTransport' | translate }}</h2></mat-card-title>
+      <h2>{{ 'CMS.LOCATION.titlePublicTransport' | translate }}</h2></mat-card-title>
     <mat-card-content>
       <mat-form-field
         class="rc-full-width">
+        <mat-label>{{ 'CMS.LOCATION.labelPublicTransport' | translate: { chars: transportPublicLength } }}</mat-label>
           <textarea
             #publicTrans
             matInput
@@ -74,7 +78,6 @@
             matAutosizeMaxRows="5"
             name="cms_description_public_transport"
             maxlength="{{ transportPublicLength }}"
-            placeholder="{{ 'CMS-Location.Transport' | translate }} {{ transportPublicLength }})"
             (keyup)="setChanged(publicTrans)"
             [(ngModel)]="descriptions.cms_description_public_transport">
           </textarea>
@@ -88,16 +91,16 @@
 
     <mat-card-title>
       <div class="rc-cms-card-nav"></div>
-      <h2>{{ 'CMS-Location.Directions' | translate }}</h2></mat-card-title>
+      <h2>{{ 'CMS.LOCATION.titlePdf' | translate }}</h2></mat-card-title>
     <mat-card-content>
-      {{ 'CMS-Location.PDF' | translate }}
+      {{ 'CMS.LOCATION.infoDirectionsDownload' | translate }}
     </mat-card-content>
     <mat-card-actions align="end">
 
       <button
         mat-button
         (click)="uploadDirections()">
-        {{ 'CMS-Location.UploadDirections' | translate | uppercase }}
+        {{ 'CMS.LOCATION.labelBtnUploadDirections' | translate | uppercase }}
       </button>
 
       <button
@@ -105,7 +108,7 @@
         mat-button
         [disabled]="!fileLoaded"
         (click)="viewDirections()">
-        {{ 'CMS-Location.ViewDirections' | translate | uppercase }}
+        {{ 'CMS.LOCATION.labelBtnViewDirections' | translate | uppercase }}
       </button>
     </mat-card-actions>
 
@@ -114,7 +117,7 @@
   <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
     <mat-toolbar class="rc--toolbar rc-toolbar-section">
       <!--<mat-icon>place</mat-icon>-->
-      <span>{{ 'CMS-Location.MapPos' | translate }}</span>
+      <span>{{ 'CMS.LOCATION.titleMapPos' | translate }}</span>
       <span class="rc-space-filler"></span>
       <span class="rc-toolbar-actions">
 
@@ -128,14 +131,14 @@
           mat-icon-button
           [disabled]="!dataChanged"
           (click)="resetMapData()"
-          [matTooltip]="'CMS-Location.UndoChanges' | translate">
+          [matTooltip]="'CMS.LOCATION.tipUndo' | translate">
           <mat-icon>undo</mat-icon>
         </button>
 
         <button
           mat-icon-button
           [disabled]="!dataChanged"
-          [matTooltip]="'CMS-Location.SaveChanges' | translate"
+          [matTooltip]="'CMS.LOCATION.tipSave' | translate"
           (click)="updateGeoCoords()">
           <mat-icon>check</mat-icon>
         </button>

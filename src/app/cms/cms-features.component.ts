@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { CMSService, HelpService } from '../_services';
+import { CMSService } from '../_services';
 import { CmsLocalService } from './cms-local.service';
 import { Restaurant, CMSDescription } from '../_models';
 import { ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { TranslateService } from '@ngx-translate/core';
-import { LoadService } from '../common/loader/load.service';
+import { LoadService, HelpService } from '../common';
 
 @Component({
   selector: 'rc-cms-features',
@@ -26,9 +26,6 @@ export class CmsFeaturesComponent implements OnInit {
   descFullTotal = 5000;
   separatorKeysCodes = [ENTER, 188];
   removable: boolean = true;
-
-  // translation variables
-  t_data: any;
 
   constructor(
     private cmsLocalService: CmsLocalService,
@@ -53,9 +50,6 @@ export class CmsFeaturesComponent implements OnInit {
         },
         error => console.log(error));
 
-    this.translate.get('CMS-Features').subscribe(data => {
-      this.t_data = data;
-    });
   }
 
   confirmNavigation() {
@@ -112,7 +106,10 @@ export class CmsFeaturesComponent implements OnInit {
     this.cms.updateAttributes(this.restaurant.restaurant_id, this.features, this.keywords.join(','))
       .subscribe(
       () => {
-        this.cmsLocalService.dspSnackbar(this.restaurant.restaurant_name + this.t_data.FeaturesUpdated, null, 5);
+        this.cmsLocalService.dspSnackbar(
+          `${this.restaurant.restaurant_name} ${this.translate.instant('CMS.FEATURES.msgFeaturesUpdated')}`,
+          null,
+          5);
       },
       error => {
         console.log('Error', error);
@@ -121,7 +118,10 @@ export class CmsFeaturesComponent implements OnInit {
     this.cms.updateDescription(this.descriptions).subscribe(
       () => {
         // console.log('Desc updated', data);
-        this.cmsLocalService.dspSnackbar(this.restaurant.restaurant_name + this.t_data.DescriptionsUpdated, null, 5);
+        this.cmsLocalService.dspSnackbar(
+          `${this.restaurant.restaurant_name} ${this.translate.instant('CMS.FEATURES.msgDescriptionsUpdated')}`,
+          null,
+          5);
       },
       error => {
         console.log('Error', error);

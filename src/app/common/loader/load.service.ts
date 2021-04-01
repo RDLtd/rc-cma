@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { LoadComponent } from './load.component';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root'
@@ -9,17 +10,13 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 export class LoadService {
 
   dialogRef: MatDialogRef<LoadComponent>;
-  loading = {
-    en: 'LOADING',
-    fr: 'CHARGEMENT'
-  }
-  defaultLoadMessage = this.loading[localStorage.getItem('rd_language')]
 
   constructor(
+    private translate: TranslateService,
     private dialog: MatDialog
   ) { }
 
-  open(msg=this.defaultLoadMessage) {
+  open(msg = this.translate.instant('LOADER.msgDefaultLoading')) {
     this.dialogRef = this.dialog.open(LoadComponent, {
       backdropClass: 'rc-dialog-backdrop',
       data: { message: msg },

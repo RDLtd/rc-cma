@@ -17,15 +17,16 @@ export class AppConfig {
 
   // Should only need to switch here to change from local to Heroku server
   // public readonly apiUrl = 'http://localhost:4000';
+  // public readonly apiUrl = 'https://rc-server-cobb20-n5fxl047dapoj.herokuapp.com'
 
   public readonly apiUrl = 'https://rc-server-staging.herokuapp.com';
+  // public readonly apiUrl = 'https://rc-server-prod.herokuapp.com';
   // public readonly apiUrl = 'https://rc-server-prod.herokuapp.com';
 
   // update 05/09/18 to read apiURL from .env file
   // This is Angular's equivalent! See the 'environments' folder
   // Build process should automatically detect the correct variables
-
-  //public readonly apiUrl = environment.API_URL;
+  // public readonly apiUrl = environment.API_URL;
 
   public readonly sql_defaults = {
     where_field: 'restaurant_name',
@@ -60,34 +61,30 @@ export class AppConfig {
       prefix: 'rc',
       logo: 'rc-logo',
       url: `https://${this.tld.rc}`,
+      joinUrl: `https://app.${this.tld.rc}/join`,
       spwDemoUrl: `https://example-restaurant.com/`,
       email: {
         support: `support@${this.tld.rc}`,
         curation: `curation@${this.tld.rc}`
       },
       products: {
-        taxId: 'txr_1HuZYpFqzlrb81VHPM9p2XpX',
+        taxId: 'txr_1IVEMZDK2S86a4QisRxE6Rlg',
         membership_monthly: {
-          priceId: 'price_1I0kigFqzlrb81VHkdECs1eK'
+          priceId: 'price_1IVEJbDK2S86a4QiFbh7Tnk5'
         },
         membership_yearly: {
-          priceId: 'price_1HuPN4Fqzlrb81VHCj3wELKF'
+          priceId: 'price_1IVELjDK2S86a4Qiwle01gdG'
         },
         success_url: `${ this.appUrl }/signin`,
         cancel_url: `${ this.appUrl }/membership-options`,
-      },
-      fee: {
-        month: '3.50',
-        year: '42.00',
-        yearIncVat: '50.40'
       },
       currency: {
         symbol: '£',
         code: 'GBP'
       },
       downloads: {
-        terms: `https://${this.tld.rc}/downloads/RC-Terms.pdf`,
-        privacy: `https://${this.tld.rc}/downloads/RC-Privacy.pdf`
+        terms: `https://${this.tld.rc}/terms-conditions/`,
+        privacy: `https://${this.tld.rc}/privacy-policy/`
       }
     },
     ri: {
@@ -95,24 +92,20 @@ export class AppConfig {
       prefix: 'ri',
       logo: 'ri-logo',
       url: `https://${this.tld.ri}`,
+      joinUrl: `https://app.${this.tld.ri}/join`,
       spwDemoUrl: `https://example-restaurant.com/`,
       email: {
         support: `support@${this.tld.ri}`,
         curation: `curation@${this.tld.ri}`
       },
       products: {
-        taxId: 'txr_1HudC1Fqzlrb81VH8GYyhETf',
+        taxId: 'txr_1IRfN6Fqzlrb81VHYhn3ye2a',
         membership_monthly: {
           priceId: 'price_1HuIiGFqzlrb81VHQsg1MWwz'
         },
         membership_yearly: {
           priceId: 'price_1HuaaeFqzlrb81VHFyBJUwPs'
         }
-      },
-      fee: {
-        month: '4.00',
-        year: '48.00',
-        yearIncVat: '57.60'
       },
       currency: {
         symbol: '€',

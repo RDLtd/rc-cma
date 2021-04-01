@@ -408,7 +408,7 @@ export class MemberService {
   }
 
   async getReferral(referralCode: string) {
-      let data = await this.http.post(this.config.apiUrl + '/members/getpromo',
+      const data = await this.http.post(this.config.apiUrl + '/members/getpromo',
       {
         promo_code: referralCode,
         userCode: this.config.userAPICode,
@@ -443,4 +443,150 @@ export class MemberService {
         token: this.authToken});
   }
 
+  async preFlight(formData: any) {
+    // console.log(formData);
+    return await this.http.post(`${this.config.apiUrl}/members/preflight`, {
+      administrator: {
+        member_email: formData.email,
+        member_telephone: formData.telephone
+      },
+      userCode: this.config.userAPICode,
+      token: this.authToken
+    }).toPromise();
+  }
+
+  getAllPending() {
+    return this.http.post(this.config.apiUrl + '/members/get_pending',
+      {
+        userCode: this.config.userAPICode,
+        token: this.authToken
+      });
+  }
+  // createPending(pending: any) {
+  //   console.log('MS', pending);
+  //   pending.telephone = pending.tel;
+  //   pending.job = pending.role;
+  //   return this.http.post(this.config.apiUrl + '/members/create_pending',
+  //     {
+  //       pending: pending,
+  //       userCode: this.config.userAPICode,
+  //       token: this.authToken
+  //     });
+  // }
+
+  createPending(pending: any) {
+    // console.log('MS PENDING', pending);
+    return this.http.post(this.config.apiUrl + '/members/create_pending',
+      {
+        pending: pending,
+        userCode: this.config.userAPICode,
+        token: this.authToken
+      });
+  }
+
+  deleteAllPending(pending: any) {
+    return this.http.post(this.config.apiUrl + '/members/delete_pending',
+      {
+        pending: pending,
+        userCode: this.config.userAPICode,
+        token: this.authToken
+      });
+  }
+
+  accessCustomerPortal(customer_id: string, api_url: string) {
+    // console.log('service', customer_id, api_url);
+    return this.http.post(this.config.apiUrl + '/payments/create-customer-portal-session',
+      {
+        customer_id: customer_id,
+        api_url: api_url,
+        userCode: this.config.userAPICode,
+        token: this.authToken
+      });
+  }
+
+  getUpcomingInvoice(customer_id: string) {
+    console.log('getUpcomingInvoice', customer_id);
+    return this.http.post(this.config.apiUrl + '/payments/get-upcoming-invoice',
+      {
+        customer_id: customer_id,
+        userCode: this.config.userAPICode,
+        token: this.authToken
+      });
+  }
+
+  // changeSubscription( member_id: string, customer_id: string) {
+  //   // console.log('changeSubscription', member_id, subscription_id, price_id);
+  //   return this.http.post(this.config.apiUrl + '/payments/change-subscription',
+  //     {
+  //       member_id: member_id,
+  //       customer_id: customer_id,
+  //       userCode: this.config.userAPICode,
+  //       token: this.authToken
+  //     });
+  // }
+
+  getStripeCustomerNumber(member_id: string) {
+    // console.log(member_id);
+    return this.http.post(this.config.apiUrl + '/members/get_stripe_customer_id',
+      {
+        member_id: member_id,
+        userCode: this.config.userAPICode,
+        token: this.authToken
+      });
+  }
+
+  getProducts() {
+    return this.http.post(this.config.apiUrl + '/members/getproducts',
+      {
+        userCode: this.config.userAPICode,
+        token: this.authToken
+      });
+  }
+
+  getProductsMaxRestaurants(max_restaurants: number) {
+    return this.http.post(this.config.apiUrl + '/members/getproductsmaxrestaurants',
+      {
+        max_restaurants: max_restaurants,
+        userCode: this.config.userAPICode,
+        token: this.authToken
+      });
+  }
+
+  deleteRestaurantSubscription(subscription_id: string) {
+    console.log('deleteRestaurantSubscription', subscription_id);
+    return this.http.post(this.config.apiUrl + '/payments/delete-restaurant-subscription',
+      {
+        subscription_id: subscription_id,
+        userCode: this.config.userAPICode,
+        token: this.authToken
+      });
+  }
+
+  createRestaurantSubscription( member_id: string, customer_id: string, price_id: string, quantity: number) {
+    console.log('createRestaurantSubscription', member_id, price_id, customer_id, quantity);
+    return this.http.post(this.config.apiUrl + '/payments/create-restaurant-subscription',
+      {
+        member_id: member_id,
+        customer_id: customer_id,
+        price_id: price_id,
+        quantity: quantity,
+        userCode: this.config.userAPICode,
+        token: this.authToken
+      });
+  }
+
+  addRestaurantSubscription( member_id: string, subscription_id: string, price_id: string, quantity: number) {
+    console.log('addRestaurantSubscription', member_id, subscription_id, price_id, quantity);
+    return this.http.post(this.config.apiUrl + '/payments/add-restaurant-subscription',
+      {
+        member_id: member_id,
+        subscription_id: subscription_id,
+        price_id: price_id,
+        quantity: quantity,
+        userCode: this.config.userAPICode,
+        token: this.authToken
+      });
+  }
+
 }
+

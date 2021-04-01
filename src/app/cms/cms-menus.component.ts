@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Restaurant, CMSDish, CMSSection } from '../_models';
 import { CmsLocalService } from './cms-local.service';
-import { CMSService, HelpService } from '../_services';
+import { CMSService } from '../_services';
 import { CmsFileUploadComponent } from './cms-file-upload.component';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { ConfirmCancelComponent } from '../common';
+import { ConfirmCancelComponent, HelpService, LoadService } from '../common';
 import { CmsMenuDishComponent } from './cms-menu-dish.component';
 import { TranslateService } from '@ngx-translate/core';
 import { AppConfig } from '../app.config';
-import { LoadService } from '../common/loader/load.service';
 
 @Component({
   selector: 'rc-cms-menus',
@@ -26,8 +25,6 @@ export class CmsMenusComponent implements OnInit {
   dataChanged: boolean = false;
   htmlMenu: any = {};
 
-  // translation obj
-  t_data: any;
   index: any;
 
   constructor(
@@ -38,19 +35,11 @@ export class CmsMenusComponent implements OnInit {
     public help: HelpService,
     private config: AppConfig,
     private loader: LoadService
-  ) {
-    // detect language changes... need to check for change in texts
-    translate.onLangChange.subscribe(() => {
-      this.translate.get('CMS-Menus').subscribe(data => {this.t_data = data; });
-    });
-  }
+  ) {  }
 
   ngOnInit() {
     this.loader.open();
     this.currencySymbol = this.config.brand.currencySymbol;
-    this.translate.get('CMS-Menus').subscribe(data => {
-      this.t_data = data;
-    });
 
     // Subscribe to service
     this.cmsLocalService.getRestaurant()
@@ -88,7 +77,9 @@ export class CmsMenusComponent implements OnInit {
       .subscribe(
       () => {
         this.dataChanged = false;
-        this.cmsLocalService.dspSnackbar(this.restaurant.restaurant_name + this.t_data.OverviewUpdate, null, 5);
+        this.cmsLocalService.dspSnackbar(
+          this.restaurant.restaurant_name + this.translate.instant('CMS.MENUS.msgOverviewUpdated'),
+          null, 5);
       },
       error => {
         console.log('Error', error);
@@ -110,7 +101,7 @@ export class CmsMenusComponent implements OnInit {
   getHtmlMenuSections(id) {
     this.cms.getSections(Number(id))
       .subscribe(data => {
-        // console.log('Sections Data:', data);
+        console.log('Sections Data:', data);
         if (data['count'] > 0) {
           let ds = data['sectionrecord'][0];
           this.htmlMenu.section_id = ds.cms_section_id;
@@ -121,23 +112,24 @@ export class CmsMenusComponent implements OnInit {
             ];
 
         } else {
+
           // console.log('No section records found in database for restaurant, applying defaults' + this.restaurant.restaurant_id);
 
           this.htmlMenu.section_id = 0;
 
           this.htmlMenu.sections = [
-            { id: 1, label: this.t_data.MealDefaultSection1 },
-            { id: 2, label: this.t_data.MealDefaultSection2 },
-            { id: 3, label: this.t_data.MealDefaultSection3 }
+            { id: 1, label: this.translate.instant('CMS.MENUS.defaultContentSection1') },
+            { id: 2, label: this.translate.instant('CMS.MENUS.defaultContentSection2') },
+            { id: 3, label: this.translate.instant('CMS.MENUS.defaultContentSection3') }
           ];
 
           // at this point we can assume that there is no section record, so create one now so
           // that the App just has to use update
           let cmsSection = new CMSSection;
           cmsSection.cms_section_restaurant_id = Number(this.restaurant.restaurant_id);
-          cmsSection.cms_section_desc_1 = this.t_data.MealDefaultSection1;
-          cmsSection.cms_section_desc_2 = this.t_data.MealDefaultSection2;
-          cmsSection.cms_section_desc_3 = this.t_data.MealDefaultSection3;
+          cmsSection.cms_section_desc_1 = this.translate.instant('CMS.MENUS.defaultContentSection1');
+          cmsSection.cms_section_desc_2 = this.translate.instant('CMS.MENUS.defaultContentSection2');
+          cmsSection.cms_section_desc_3 = this.translate.instant('CMS.MENUS.defaultContentSection3');
           cmsSection.cms_section_created_by = this.userName;
           this.cms.createSection(cmsSection).subscribe(
             data => {
@@ -169,11 +161,9 @@ export class CmsMenusComponent implements OnInit {
     sect.cms_section_desc_2 = this.htmlMenu.sections[1].label.toUpperCase();
     sect.cms_section_desc_3 = this.htmlMenu.sections[2].label.toUpperCase();
 
-    //console.log('Trans:', this.t_data);
-
     this.cms.updateSection(sect).subscribe(
       () => {
-        this.cmsLocalService.dspSnackbar(this.t_data.SectionUpdate, null, 3);
+        this.cmsLocalService.dspSnackbar(this.translate.instant('CMS.MENUS.msgSectionUpdated'), null, 3);
         this.dataChanged = false;
       },
       error => {
@@ -292,7 +282,8 @@ export class CmsMenusComponent implements OnInit {
             this.htmlMenu.dishes[dish.cms_dish_idx] = newDish;
             // replace idx reference in case user edits again before page reload
             this.htmlMenu.dishes[dish.cms_dish_idx].cms_dish_idx = dish.cms_dish_idx;
-            this.cmsLocalService.dspSnackbar(newDish.cms_dish_name + this.t_data.Updated, null, 3);
+            this.cmsLocalService.dspSnackbar(this.translate.instant(
+              'CMS.MENUS.msgUpdated', { item: newDish.cms_dish_name }), null, 3);
           },
           error => { console.log(error);
           });
@@ -340,7 +331,8 @@ export class CmsMenusComponent implements OnInit {
           () => {
             // Reload dishes
             this.getHtmlMenuDishes(this.restaurant.restaurant_id);
-            this.cmsLocalService.dspSnackbar(newDish.cms_dish_name + this.t_data.Added, null, 3);
+            this.cmsLocalService.dspSnackbar(this.translate.instant(
+              'CMS.MENUS.msgAdded', { item: newDish.cms_dish_name }), null, 3);
           },
           error => {
             console.log(error);
@@ -358,14 +350,13 @@ export class CmsMenusComponent implements OnInit {
     console.log(dish);
     let dialogRef = this.dialog.open(ConfirmCancelComponent, {
       data: {
-        msg: this.t_data.Remove + this.htmlMenu.dishes[dish.cms_dish_idx].cms_dish_name + this.t_data.FromMenu,
-        yes: this.t_data.Yes,
-        no: this.t_data.No
+        body: this.translate.instant('CMS.MENUS.msgRemoveFromMenu', { item: this.htmlMenu.dishes[dish.cms_dish_idx].cms_dish_name }),
+        confirm: this.translate.instant('CMS.MENUS.labelBtnDelete'),
       }
     });
 
-    dialogRef.afterClosed().subscribe(action => {
-      if (action.confirmed) {
+    dialogRef.afterClosed().subscribe(confirmed => {
+      if (confirmed) {
 
         // save to use in success message
         const deletedDishName = this.htmlMenu.dishes[dish.cms_dish_idx].cms_dish_name;
@@ -373,7 +364,10 @@ export class CmsMenusComponent implements OnInit {
         this.cms.deleteDish(dish.cms_dish_id).subscribe(
           data => {
             console.log('cms.deleteDish', data);
-            this.cmsLocalService.dspSnackbar(`${deletedDishName} ${this.t_data.Removed}`, null, 3);
+            this.cmsLocalService.dspSnackbar(this.translate.instant(
+              'CMS.MENUS.msgRemovedFromMenu',
+              { item: deletedDishName }),
+              null, 3);
           },
           error => {
             console.log(error);
@@ -413,9 +407,12 @@ export class CmsMenusComponent implements OnInit {
   }
 
   togglePdfMenuStatus(menu) {
+
     let msg: string;
     menu.cms_element_active = !menu.cms_element_active;
-    menu.cms_element_active ? msg = this.t_data.IsActive : msg = this.t_data.IsOffline;
+    menu.cms_element_active ?
+      msg = this.translate.instant('CMS.MENUS.msgIsActive', { item: menu.cms_element_title }) :
+      msg = this.translate.instant('CMS.MENUS.msgIsOffline', { item: menu.cms_element_title });
 
     this.cms.updateElement(menu).subscribe(
       data => {
@@ -423,7 +420,7 @@ export class CmsMenusComponent implements OnInit {
         this.cmsLocalService.dspSnackbar(`${ menu.cms_element_title } ${ msg }`, null, 3);
       },
       error => {
-        this.cmsLocalService.dspSnackbar(this.t_data.UpdateFailed, null, 3);
+        this.cmsLocalService.dspSnackbar(this.translate.instant('CMS.MENU.msgUpdateFailed'), null, 3);
         console.log(error);
       });
 
@@ -455,14 +452,15 @@ export class CmsMenusComponent implements OnInit {
   deletePdfMenu(menu): void {
     let dialogRef = this.dialog.open(ConfirmCancelComponent, {
       data: {
-        msg: this.t_data.DeleteMenu + menu.cms_element_title + this.t_data.Want,
-        yes: this.t_data.YesDelete,
-        no: this.t_data.NoCancel
+        body: this.translate.instant(
+          'CMS.MENUS.msgConfirmDeleteMenu',
+          { item: menu.cms_element_title }),
+        confirm: this.translate.instant('CMS.MENUS.labelBtnDelete')
       }
     });
 
-    dialogRef.afterClosed().subscribe(res => {
-      if (res.confirmed) {
+    dialogRef.afterClosed().subscribe(confirmed => {
+      if (confirmed) {
         this.cms.deleteElement(menu.cms_element_id)
           .subscribe(res => {
               console.log(res);
@@ -473,12 +471,15 @@ export class CmsMenusComponent implements OnInit {
                   this.menus.splice(i, 1);
                 }
               }
-              this.cmsLocalService.dspSnackbar(menu.cms_element_title + this.t_data.Deleted, null, 3);
+              this.cmsLocalService.dspSnackbar(this.translate.instant(
+                'CMS.MENUS.msgItemDeleted',
+                { item: menu.cms_element_title }),
+                null, 3);
               dialogRef.close();
             },
             error => {
               console.log(error);
-              this.cmsLocalService.dspSnackbar(this.t_data.UpdateFailed, null, 3);
+              this.cmsLocalService.dspSnackbar(this.translate.instant('CMS.MENUS.msgUpdateFailed'), null, 3);
             }
           );
 

@@ -19,7 +19,6 @@
           gravity="auto">
         </cl-transformation>
       </cl-image>
-
     </div>
 
     <mat-card-title>{{ restaurant?.restaurant_name }}</mat-card-title>
@@ -33,28 +32,28 @@
         </button>
       </div>
       <dl>
-        <dt>{{ 'CMS-Dashboard.FoodStyle' | translate }}</dt>
+        <dt>{{ 'CMS.DASHBOARD.core.labelFoodStyle' | translate }}</dt>
         <dd>
           {{ restaurant?.restaurant_cuisine_1 }}
           <span *ngIf="restaurant?.restaurant_cuisine_2"> – {{ restaurant?.restaurant_cuisine_2 }}</span>
           <span *ngIf="restaurant?.restaurant_cuisine_3"> – {{ restaurant?.restaurant_cuisine_3 }}</span>
         </dd>
-        <dt>{{ 'CMS-Dashboard.Address' | translate }}</dt>
+        <dt>{{ 'CMS.DASHBOARD.core.labelAddress' | translate }}</dt>
         <dd>
           <span>{{ restaurant?.restaurant_address_1 }}</span>
           <span>{{ restaurant?.restaurant_address_2 }}</span>
           <span *ngIf="restaurant?.restaurant_address_3">{{ restaurant?.restaurant_address_3 }}</span>
           <span>{{ restaurant?.restaurant_post_code }}</span>
         </dd>
-        <dt>{{ 'CMS-Dashboard.Telephone' | translate }}</dt>
+        <dt>{{ 'CMS.DASHBOARD.core.labelTel' | translate }}</dt>
         <dd>
           <a href="tel:{{ restaurant?.restaurant_telephone }}">{{ restaurant?.restaurant_telephone }}</a>
         </dd>
-        <dt>{{ 'CMS-Dashboard.Email' | translate }}</dt>
+        <dt>{{ 'CMS.DASHBOARD.core.labelEmail' | translate }}</dt>
         <dd>
           <a href="mailto:{{ restaurant?.restaurant_email }}">{{ restaurant?.restaurant_email }}</a>
         </dd>
-        <dt>{{ 'CMS-Dashboard.Website' | translate }}</dt>
+        <dt>{{ 'CMS.DASHBOARD.core.labelWeb' | translate }}</dt>
         <dd>
           <a
             (click)="openRestaurantWebsite(restaurant.restaurant_website)"
@@ -62,7 +61,7 @@
             {{ restaurant?.restaurant_website }}
           </a>
         </dd>
-        <dt>{{ 'CMS-Dashboard.Social' | translate }}</dt>
+        <dt>{{ 'CMS.DASHBOARD.core.labelSocial' | translate }}</dt>
         <dd>
           <ul class="rc-cms-social">
             <li [class.rc-disable]="!restaurant?.restaurant_facebook">
@@ -93,41 +92,21 @@
       </dl>
     </mat-card-content>
     <mat-card-actions align="end">
-      <button mat-button (click)="reqDirectoryDataChange()">{{ 'CMS-Dashboard.ChangeCaps' | translate }}</button>
+      <button mat-button (click)="reqDirectoryDataChange()">
+        {{ 'CMS.DASHBOARD.core.labelBtnRequestChange' | translate | uppercase }}
+      </button>
     </mat-card-actions>
   </mat-card>
 
   <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-7">
     <div class="mdc-layout-grid__inner">
 
-      <!-- Dashboard messages -->
-      <mat-card
-        *ngIf="offerInBox"
-        class="rc-cms-dash-info mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--align-top">
-        <mat-card-header>
-          <mat-card-title><strong>{{ 'CMS-Dashboard.NewAffOffs' | translate }}</strong> {{ 'CMS-Dashboard.Available' | translate }}</mat-card-title>
-          <span class="rc-space-filler"></span>
-          <mat-icon class="rc-success">redeem</mat-icon>
-        </mat-card-header>
-        <mat-card-content *ngIf="offerInBox === 1">
-          {{ 'CMS-Dashboard.NewOffer' | translate }}<br>
-        </mat-card-content>
-        <mat-card-content *ngIf="offerInBox > 1">
-          {{ 'CMS-Dashboard.ThereAre' | translate }} {{ offerInBox }} {{ 'CMS-Dashboard.NewOffers' | translate }}<br>
-        </mat-card-content>
-        <mat-card-actions align="end">
-          <button
-            (click)="navTo('affiliates')"
-            mat-button>{{ 'CMS-Dashboard.ViewAll' | translate }} {{ offerCount }} {{ 'CMS-Dashboard.Offers' | translate }}</button>
-        </mat-card-actions>
-      </mat-card>
-
       <!-- SPW: loading -->
       <mat-card
         *ngIf="isPreviewing"
         class="rc-cms-dash-info mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--align-top">
         <mat-card-header>
-          <mat-card-title>{{ 'CMS-Dashboard.Analysing' | translate }}</mat-card-title>
+          <mat-card-title>{{ 'CMS.DASHBOARD.spw.msgAnalysing' | translate }}</mat-card-title>
         </mat-card-header>
         <mat-card-content>
           <rc-loader></rc-loader>
@@ -142,31 +121,43 @@
         <!-- HEADER -->
         <!-- Verified by/data -->
         <mat-card-header *ngIf="!isPreviewing">
-          <mat-card-title>{{ 'CMS-Dashboard.VerifiedOn' | translate }} {{ d_publishDate }}
-            {{ 'CMS-Dashboard.By' | translate }} {{ restaurant.restaurant_verified_by }}</mat-card-title>
+          <mat-card-title
+            ngpreservewhitespaces
+            markdown>
+            {{ 'CMS.DASHBOARD.spw.msgVerified' | translate: { date: d_publishDate, name:
+            restaurant.restaurant_verified_by } }}
+          </mat-card-title>
           <span class="rc-space-filler"></span>
           <mat-icon class="rc-success">cloud_done</mat-icon>
         </mat-card-header>
+
         <!-- CONTENT -->
-        <mat-card-content *ngIf="!isPreviewing">
-          {{ 'CMS-Dashboard.Your' | translate }} <strong>
-          {{ 'CMS-Dashboard.SPW' | translate }}</strong>
-          {{ 'CMS-Dashboard.HasBeenPublished' | translate }}
+        <mat-card-content
+          *ngIf="!isPreviewing"
+          markdown
+          ngpreservewhitespaces>
+          {{ 'CMS.DASHBOARD.spw.msgPublished' | translate }}
         </mat-card-content>
+
         <!-- ACTIONS -->
         <mat-card-actions align="end" *ngIf="!isPreviewing">
           <button
             mat-button
             (click)="dspSPWLinks()"
             color="secondary"
-            matTooltip="{{ 'CMS-Dashboard.Download' | translate }}"
-            [disabled]="isPreviewing">{{ 'CMS-Dashboard.Marketing' | translate }}</button>
+            matTooltip="{{ 'CMS.DASHBOARD.spw.tipMarketingLinks' | translate }}"
+            [disabled]="isPreviewing">
+            {{ 'CMS.DASHBOARD.spw.labelBtnMarketingLinks' | translate | uppercase }}
+          </button>
           <a
             [disabled]="isPreviewing"
             [href]="spwProdUrl"
             target="_blank"
-            matTooltip="{{ 'CMS-Dashboard.OpenLive' | translate }}{{ restaurant.restaurant_name }}"
-            mat-button color="primary">{{ 'CMS-Dashboard.ViewLivePage' | translate }}</a>
+            matTooltip="{{ 'CMS.DASHBOARD.spw.tipViewPublished' | translate: {
+            restaurant: restaurant.restaurant_name } }}"
+            mat-button color="accent">
+            {{ 'CMS.DASHBOARD.spw.labelBtnViewPublished' | translate | uppercase }}
+          </a>
         </mat-card-actions>
       </mat-card>
 
@@ -178,27 +169,33 @@
         <!-- HEADER -->
         <!-- Unpublished changes -->
         <mat-card-header *ngIf="!isPreviewing && cmsHasSufficientData">
-          <mat-card-title>{{ 'CMS-Dashboard.HaveUnpublished' | translate }}</mat-card-title>
+          <mat-card-title>{{ 'CMS.DASHBOARD.spw.headerUnPublished' | translate | uppercase }}</mat-card-title>
           <span class="rc-space-filler"></span>
           <mat-icon class="rc-warn">cloud_off</mat-icon>
         </mat-card-header>
+
         <!-- More content required -->
         <mat-card-header *ngIf="!isPreviewing && !cmsHasSufficientData">
-          <mat-card-title>{{ 'CMS-Dashboard.NeedMoreContent' | translate }}</mat-card-title>
+          <mat-card-title>{{ 'CMS.DASHBOARD.spw.headerContentRequired' | translate | uppercase }}</mat-card-title>
           <span class="rc-space-filler"></span>
           <mat-icon class="rc-warn">cloud_off</mat-icon>
         </mat-card-header>
 
         <!-- CONTENT -->
         <!-- Unpublished changes -->
-        <mat-card-content  *ngIf="!isPreviewing && cmsHasSufficientData">
-          {{ 'CMS-Dashboard.NotPublished' | translate }}
-          <strong> {{ 'CMS-Dashboard.Preview' | translate }}</strong> {{ 'CMS-Dashboard.IfCorrect' | translate }}
-          <strong> {{ 'CMS-Dashboard.Publish' | translate }}</strong> {{ 'CMS-Dashboard.Sync' | translate }}
+        <mat-card-content
+          *ngIf="!isPreviewing && cmsHasSufficientData"
+          markdown
+          ngpreservewhitespaces>
+          {{ 'CMS.DASHBOARD.spw.msgUnpublished' | translate: { brand: config.brand.name } }}
         </mat-card-content>
+
         <!-- More content required -->
-        <mat-card-content  *ngIf="!isPreviewing && !cmsHasSufficientData">
-          <p markdown [data]="'CMS-Dashboard.ViewDemo' | translate:locals[lang]"></p>
+        <mat-card-content
+          *ngIf="!isPreviewing && !cmsHasSufficientData"
+          markdown
+          ngpreservewhitespaces>
+          {{ 'CMS.DASHBOARD.spw.msgContentRequired' | translate: { link: config.brand.spwDemoUrl } }}
         </mat-card-content>
 
         <!-- ACTIONS -->
@@ -210,12 +207,12 @@
             mat-button
             color="secondary"
             [disabled]="isPreviewing"
-            (click)="previewSPW()">{{ 'CMS-Dashboard.Preview' | translate }}</button>
+            (click)="previewSPW()">{{ 'CMS.DASHBOARD.spw.labelBtnPreview' | translate | uppercase }}</button>
           <button
             mat-button
-            color="primary"
+            color="accent"
             [disabled]="!cmsHasSufficientData"
-            (click)="publishSPW()">{{ 'CMS-Dashboard.Publish' | translate }}</button>
+            (click)="publishSPW()">{{ 'CMS.DASHBOARD.spw.labelBtnPublish' | translate | uppercase }}</button>
         </mat-card-actions>
       </mat-card>
 
@@ -231,7 +228,7 @@
         </div>
         <mat-card-content class="rc-cms-dash-info">
           <mat-card-header>
-            <mat-card-title>CONTENT STATUS SUMMARY</mat-card-title>
+            <mat-card-title>{{ 'CMS.DASHBOARD.summary.titleSummary' | translate | uppercase}}</mat-card-title>
           </mat-card-header>
 
           <mat-list class="rc-content-status">
@@ -242,8 +239,8 @@
               [class.rc-content-status-partial]="hours_status < 100 && hours_status > 0"
               (click)="navTo('opening-times')">
               <mat-icon matListIcon>watch_later</mat-icon>
-              <h3 matLine>{{ 'CMS-Dashboard.OpeningHours' | translate }}</h3>
-              <p matLine>{{ 'CMS-Dashboard.LastUpdated' | translate }} {{ d_hours_date }}</p>
+              <h3 matLine>{{ 'CMS.DASHBOARD.summary.headerTimes' | translate | uppercase }}</h3>
+              <p matLine>{{ 'CMS.DASHBOARD.summary.msgLastUpdated' | translate: { update: d_hours_date} }}</p>
               <mat-progress-bar  matLine mode="determinate" value="{{ hours_status }}"></mat-progress-bar>
               <p matLine><span>{{ hours_status_text }}</span></p>
             </mat-list-item>
@@ -254,8 +251,8 @@
               [class.rc-content-status-partial]="desc_status < 100 && desc_status > 0"
               (click)="navTo('features')">
               <mat-icon matListIcon>check_box</mat-icon>
-              <h3 matLine>{{ 'CMS-Dashboard.Descriptions' | translate }}</h3>
-              <p matLine>{{ 'CMS-Dashboard.LastUpdated' | translate }} {{ d_desc_date }}</p>
+              <h3 matLine>{{ 'CMS.DASHBOARD.summary.headerFeatures' | translate | uppercase }}</h3>
+              <p matLine>{{ 'CMS.DASHBOARD.summary.msgLastUpdated' | translate : { update: d_desc_date } }}</p>
               <mat-progress-bar  matLine mode="determinate" value="{{ desc_status }}"></mat-progress-bar>
               <p matLine><span>{{ desc_status_text }}</span></p>
             </mat-list-item>
@@ -266,8 +263,8 @@
               [class.rc-content-status-partial]="img_status < 100 && img_status > 0"
               (click)="navTo('images')">
               <mat-icon matListIcon>image</mat-icon>
-              <h3 matLine>{{ 'CMS-Dashboard.ActiveImagesCaps' | translate }}</h3>
-              <p matLine>{{ 'CMS-Dashboard.LastUpdated' | translate }} {{ d_img_date }}</p>
+              <h3 matLine>{{ 'CMS.DASHBOARD.summary.headerImages' | translate | uppercase }}</h3>
+              <p matLine>{{ 'CMS.DASHBOARD.summary.msgLastUpdated' | translate: { update: d_img_date } }}</p>
               <mat-progress-bar  matLine mode="determinate" value="{{ img_status }}"></mat-progress-bar>
               <p matLine><span>{{ img_status_text }}</span></p>
             </mat-list-item>
@@ -278,8 +275,8 @@
               [class.rc-content-status-partial]="mnu_status < 100 && mnu_status > 0"
               (click)="navTo('menus')">
               <mat-icon matListIcon>restaurant</mat-icon>
-              <h3 matLine>{{ 'CMS-Dashboard.ActiveMenus' | translate }}</h3>
-              <p matLine>{{ 'CMS-Dashboard.LastUpdated' | translate }} {{ d_mnu_date }}</p>
+              <h3 matLine>{{ 'CMS.DASHBOARD.summary.headerMenus' | translate | uppercase }}</h3>
+              <p matLine>{{ 'CMS.DASHBOARD.summary.msgLastUpdated' | translate: { update: d_mnu_date } }}</p>
               <mat-progress-bar  matLine mode="determinate" value="{{ mnu_status }}"></mat-progress-bar>
               <p matLine><span>{{ mnu_status_text }}</span></p>
             </mat-list-item>
@@ -290,8 +287,8 @@
               [class.rc-content-status-partial]="bkg_status < 100 && bkg_status > 0"
               (click)="navTo('reservations')">
               <mat-icon matListIcon>event</mat-icon>
-              <h3 matLine>{{ 'CMS-Dashboard.OnlineBookings' | translate }}</h3>
-              <p matLine>{{ 'CMS-Dashboard.LastUpdated' | translate }} {{ d_bkg_date }}</p>
+              <h3 matLine>{{ 'CMS.DASHBOARD.summary.headerBookings' | translate | uppercase }}</h3>
+              <p matLine>{{ 'CMS.DASHBOARD.summary.msgLastUpdated' | translate: { update: d_bkg_date } }}</p>
               <mat-progress-bar  matLine mode="determinate" value="{{ bkg_status }}"></mat-progress-bar>
               <p matLine><span>{{ bkg_status_text }}</span></p>
             </mat-list-item>
@@ -302,8 +299,8 @@
               [class.rc-content-status-partial]="loc_status < 100 && loc_status > 0"
               (click)="navTo('location')">
               <mat-icon matListIcon>place</mat-icon>
-              <h3 matLine>{{ 'CMS-Dashboard.LocInfo' | translate }}</h3>
-              <p matLine>{{ 'CMS-Dashboard.LastUpdated' | translate }} {{ d_loc_date }}</p>
+              <h3 matLine>{{ 'CMS.DASHBOARD.summary.headerLocation' | translate | uppercase }}</h3>
+              <p matLine>{{ 'CMS.DASHBOARD.summary.msgLastUpdated' | translate: { update: d_loc_date } }}</p>
               <mat-progress-bar  matLine mode="determinate" color="primary" value="{{ loc_status }}"></mat-progress-bar>
               <p matLine><span>{{ loc_status_text }}</span></p>
             </mat-list-item>

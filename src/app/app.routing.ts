@@ -4,8 +4,8 @@ import {
 } from '@angular/router';
 
 import {
-  ProfilePageComponent
-} from './member';
+  SettingsComponent
+} from './settings';
 
 import {
   AuthGuard,
@@ -14,7 +14,6 @@ import {
 
 import {
   CmsComponent,
-  CmsDirectoryComponent,
   CmsImagesComponent,
   CmsMenusComponent,
   CmsHoursComponent,
@@ -29,11 +28,8 @@ import {
   SigninComponent
 } from './signin/signin.component';
 
-import {
-  AffiliatesComponent
-} from './cms';
+import { MarketplaceComponent } from './marketplace/marketplace.component';
 import { JoinComponent } from './join/join.component';
-import { StripeComponent } from './join/stripe.component';
 import { MembershipComponent } from './join/membership.component';
 import { HubComponent } from './hub/hub.component';
 
@@ -42,20 +38,22 @@ const APP_ROUTES: Routes = [
   { path: 'join/:code', component: JoinComponent },
   { path: 'join', component: JoinComponent },
   { path: 'membership-options', component: MembershipComponent },
-  { path: 'pay', component: StripeComponent },
   { path: 'login', component: SigninComponent },
   { path: 'signin', component: SigninComponent },
-  { path: 'hub', component: HubComponent },
+  { path: 'hub',
+    component: HubComponent,
+    canActivate: [AuthGuard]
+  },
+  { path: 'marketplace',
+    component: MarketplaceComponent,
+    canActivate: [AuthGuard]
+  },
   { path: 'referral', component: SigninComponent },
-  { path: 'profile', component: ProfilePageComponent, canActivate: [AuthGuard]},
+  { path: 'profile', component: SettingsComponent, canActivate: [AuthGuard]},
   { path: 'restaurants/:id/cms', component: CmsComponent,  canActivate: [AuthGuard], children: [
 
     { path: 'dashboard',
       component: CmsDashboardComponent,
-      canActivate: [AuthGuard] },
-
-    { path: 'directory',
-      component: CmsDirectoryComponent,
       canActivate: [AuthGuard] },
 
     { path: 'images',
@@ -93,10 +91,10 @@ const APP_ROUTES: Routes = [
       canActivate: [AuthGuard] },
 
     { path: 'affiliates',
-      component: AffiliatesComponent,
+      component: MarketplaceComponent,
       canActivate: [AuthGuard] },
 
-    { path: '**', component: CmsDirectoryComponent, canActivate: [AuthGuard] }
+    { path: '**', component: CmsDashboardComponent, canActivate: [AuthGuard] }
   ]},
 
   { path: '**', redirectTo: '/profile' }

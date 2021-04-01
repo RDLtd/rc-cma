@@ -6,6 +6,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ConfirmCancelComponent } from '../common';
 import { TranslateService } from '@ngx-translate/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Injectable()
 
@@ -23,6 +24,8 @@ export class CmsLocalService {
   constructor(
     private snackBar: MatSnackBar,
     private translate: TranslateService,
+    private router: Router,
+    private route: ActivatedRoute,
     private dialog: MatDialog
   ) { }
 
@@ -50,26 +53,23 @@ export class CmsLocalService {
   dspSnackbar(msg: string, actn: string = '', d: number = 3, style: any = 'info'): void {
     this.snackBar.open(msg, actn, {
       duration: d * 1000,
-      panelClass: [`rc-mat-snack-${style}`]
+      panelClass: [`rc-mat-snack-${style}`],
+      horizontalPosition: 'center',
+      verticalPosition: 'bottom',
     });
   }
 
-  confirmNavigation() {
-    // load translations
-    this.translate.get('ConfirmCancel').subscribe(t => {
-      this.dialogConfig = {
-        data: {
-          title: t.Sure,
-          msg: t.SaveContinue,
-          no: t.Cancel,
-          yes: t.ContinueCaps,
-          showCheckbox: false
-        }
-      };
-    });
+  // Config data options can be overridden
+  confirmNavigation(options = {}) {
+    // Override with options parameter
+    this.dialogConfig = {
+      autoFocus: false,
+      data: options
+    };
+    // console.log(this.dialogConfig.data);
     const dialogRef = this.dialog.open(ConfirmCancelComponent, this.dialogConfig );
     return dialogRef.afterClosed().pipe(map(result => {
-      return result.confirmed;
+      return result;
     }));
   }
 

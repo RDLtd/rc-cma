@@ -31,8 +31,8 @@ export class CmsFileUploadComponent implements OnInit {
   @ViewChild('menuUploadForm') menuForm: NgForm;
 
   // translation variables
-  t_data: any;
-  t_data_type;
+  // t_data: any;
+  // t_data_type;
 
   imgClasses: Array<any>;
 
@@ -46,21 +46,17 @@ export class CmsFileUploadComponent implements OnInit {
   ) {
 
     // detect language changes... need to check for change in texts
-    translate.onLangChange.subscribe(() => {
-      this.translate.get('CMS-File-Upload')
-        .subscribe(data => {
-          this.setImageClasses(data);
-        });
-    });
+    // translate.onLangChange.subscribe(() => {
+    //   this.translate.get('CMS-File-Upload')
+    //     .subscribe(data => {
+    //       this.setImageClasses(data);
+    //     });
+    // });
   }
 
   ngOnInit() {
-
-    this.translate.get('CMS-File-Upload')
-      .subscribe(data => {
-        this.setImageClasses(data);
-        this.uploadMessageTxt = data.MaxSizeExceeded;
-      });
+    this.uploadMessageTxt = this.translate.instant('CMS.UPLOAD.errorMaxExceeded');
+    this.setImageClasses();
 
     this.filePreview = '';
 
@@ -158,31 +154,39 @@ export class CmsFileUploadComponent implements OnInit {
       );
   }
 
-  setImageClasses(data) {
-    this.t_data = data;
+  setImageClasses() {
+    const imgs = this.translate.instant('CMS.UPLOAD.imgClass');
     this.imgClasses = [
-      { lbl: data.RestExt, value: 'exterior' },
-      { lbl: data.RestInt, value: 'interior' },
-      { lbl: data.HeadChef, value: 'chef' },
-      { lbl: data.Dishes, value: 'dishes' },
-      { lbl: data.Service, value: 'service' },
-      { lbl: data.Cocktails, value: 'cocktails' },
-      { lbl: data.Life, value: 'life' },
-      { lbl: data.Team, value: 'team' }
+      { lbl: imgs.exterior, value: 'exterior' },
+      { lbl: imgs.interior, value: 'interior' },
+      { lbl: imgs.chef, value: 'chef' },
+      { lbl: imgs.dishes, value: 'dishes' },
+      { lbl: imgs.service, value: 'service' },
+      { lbl: imgs.cocktail, value: 'cocktails' },
+      { lbl: imgs.life, value: 'life' },
+      { lbl: imgs.team, value: 'team' }
       ];
     // Image upload
     if (this.data.type === 'image') {
-      this.uploadLabel = `${this.t_data.Choose} ${this.t_data.Image} ${this.t_data.ToUpload}`;
-      this.t_data_type = this.t_data.Image;
+
+      this.uploadLabel = this.translate.instant('CMS.UPLOAD.labelChooseImage');
+      //this.t_data_type = this.t_data.Image;
+
     } else {
+
     // Non-Image
       if (this.data.type === 'menu') {
-        this.uploadLabel = `${this.t_data.Choose} ${this.t_data.Menu} ${this.t_data.ToUpload}`;
-        this.t_data_type = this.t_data.Menu;
+
+        this.uploadLabel = this.translate.instant('CMS.UPLOAD.labelChooseMenu');
+       // this.t_data_type = this.t_data.Menu;
+
       } else {
-        this.uploadLabel = `${this.t_data.Choose} ${this.t_data.Directions} ${this.t_data.ToUpload}`;
-        this.t_data_type = this.t_data.Directions;
+
+        this.uploadLabel = this.translate.instant('CMS.UPLOAD.labelChooseDirections');;
+        //this.t_data_type = this.t_data.Directions;
+
       }
+
     }
   }
 

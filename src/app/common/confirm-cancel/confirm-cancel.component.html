@@ -1,18 +1,21 @@
 <div class="rc-dialog rc-dialog-alert">
-  <h1 mat-dialog-title>
-    {{ data['title'] || defaultTitle }}
-  </h1>
+  <h2 mat-dialog-title>
+    {{ data.title || 'CONFIRM.titleConfirmCancel' | translate }}
+  </h2>
   <mat-dialog-content markdown>
-    {{ data['msg'] || defaultMsg }}
+    {{ data.body || 'CONFIRM.msgConfirmCancel' | translate}}
   </mat-dialog-content>
   <mat-dialog-actions align="end">
-    <button *ngIf="data.no" mat-button (click)="confirmCancelDialog.close({ confirmed: false })">
-      {{ data['no'] || defaultCancel }}
+    <button
+      *ngIf="data.cancel !== 'hide'"
+      tabindex="-1"
+      mat-button
+      (click)="confirmCancelDialog.close(false )">
+      {{ data.cancel || 'CONFIRM.labelBtnCancel' | translate }}
     </button>
     <button
-      mat-stroked-button (click)="confirmCancelDialog.close({ confirmed: true })">
-      {{ data['yes'] || defaultContinue }}
+      mat-button color="accent" (click)="confirmCancelDialog.close(true )">
+      {{ data.confirm || 'CONFIRM.labelBtnConfirm' | translate | uppercase }}
     </button>
   </mat-dialog-actions>
-  <mat-checkbox *ngIf="data.showCheckbox">Don't show me this again</mat-checkbox>
 </div>

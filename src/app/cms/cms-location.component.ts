@@ -1,11 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CmsLocalService } from './cms-local.service';
-import { CMSService, HelpService } from '../_services';
+import { CMSService } from '../_services';
 import { CmsFileUploadComponent } from './cms-file-upload.component';
 import { MatDialog } from '@angular/material/dialog';
 import { CMSDescription } from '../_models';
 import { TranslateService } from '@ngx-translate/core';
 import { GoogleMap, MapMarker } from '@angular/google-maps';
+import { HelpService} from '../common';
 
 @Component({
   selector: 'rc-cms-location',
@@ -25,9 +26,6 @@ export class CmsLocationComponent implements OnInit {
   dataChanged = false;
   transportPublicLength: Number = 500;
   transportPrivateLength: Number = 500;
-
-  // translation variables
-  t_data: any;
 
   // Map
   mapWidth: '100%';
@@ -63,10 +61,6 @@ export class CmsLocationComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-
-    this.translate.get('CMS-Location').subscribe(data => {
-      this.t_data = data;
-    });
 
     // Subscribe to service
     this.cmsLocalService.getRestaurant()
@@ -140,13 +134,15 @@ export class CmsLocationComponent implements OnInit {
     this.cms.updateCoordinates(this.restaurant.restaurant_id, this.restaurant.restaurant_lat,
       this.restaurant.restaurant_lng).subscribe(
       () => {
-        this.cmsLocalService.dspSnackbar(this.t_data.NewGeo + this.restaurant.restaurant_lat + ', ' +
-          this.restaurant.restaurant_lng, null, 3);
+        this.cmsLocalService.dspSnackbar(this.translate.instant(
+          'CMS.LOCATION.msgNewCoords',
+          { lat: this.restaurant.restaurant_lat, lng: this.restaurant.restaurant_lng }),
+          null, 3);
         this.dataChanged = false;
       },
       error => {
         console.log(JSON.stringify(error));
-        this.cmsLocalService.dspSnackbar(this.t_data.UpdateFailed, null, 3);
+        this.cmsLocalService.dspSnackbar(this.translate.instant('CMS.LOCATION.msgUpdateFailed'), null, 3);
         this.resetMapData();
         this.dataChanged = false;
       });
@@ -202,7 +198,7 @@ export class CmsLocationComponent implements OnInit {
     this.cms.updateDescription(this.descriptions).subscribe(
       () => {
         this.dataChanged = false;
-        this.cmsLocalService.dspSnackbar(this.restaurant.restaurant_name + this.t_data.TransportUpdate, null, 5);
+        this.cmsLocalService.dspSnackbar(this.translate.instant('CMS.LOCATION.msgTransportUpdated'), null, 5);
       },
       error => {
         console.log('Error', error);
@@ -218,7 +214,7 @@ export class CmsLocationComponent implements OnInit {
   setChanged(elem) {
     if (!this.dataChanged) {
       this.dataChanged = true;
-      // console.log('Change', elem.name);
+      console.log('Change', elem.name);
     }
   }
 }

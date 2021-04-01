@@ -3,56 +3,20 @@
     <div class="rc-layout-split-content">
       <div class="rc-join-welcome" [ngSwitch]="referrer.type">
 
-        <span class="rc-logo">
-          <img src="assets/images/{{ brand.logo }}-trans-white.svg" alt="Restaurant Collective Logo">
-        </span>
+        <rc-logo [height]="'120px'"></rc-logo>
 
-        <!-- Self -->
+        <!-- Self referral -->
         <div *ngSwitchCase="'self'">
-          <h1>Join us today</h1>
-          <p>Just complete the following 3 steps and you'll soon be part of an exciting organisation:</p>
-          <ol>
-            <li>Provide your name and contact details</li>
-            <li>Select your subscription option</li>
-            <li>Pay your subscription online</li>
-          </ol>
-          <markdown [data]="t_data?.Problems">
-            <a href="mailto:{{ brand.email.support }}">{{ t_data?.SupportTeam }}</a>.
-          </markdown>
+          <markdown [data]="'JOIN.joinUsToday' | translate: { email: brand.email.support }"></markdown>
         </div>
-
-        <!-- Member -->
+        <!-- Member referral -->
         <div *ngSwitchCase="'member'">
-          <h1>{{ referrer?.name }} Invitation</h1>
-          <p>Just complete the following 3 steps and you can join me in supporting this exciting new organisation
-            for our inductry:</p>
-          <ol>
-            <li>Provide your name and contact details</li>
-            <li>Select your subscription option</li>
-            <li>Pay your subscription online</li>
-          </ol>
-          <markdown [data]="t_data?.Problems">
-            <a href="mailto:{{ brand.email.support }}">{{ t_data?.SupportTeam }}</a>.
-          </markdown>
-
-
+          <markdown [data]="'JOIN.joinUsByReferral' | translate: { email: brand.email.support, referrer:
+          referrer?.name, brand: brand.name  }"></markdown>
         </div>
-
         <!-- Default -->
         <div *ngSwitchDefault>
-          <h1>{{ 'Join.Free' | translate }}</h1>
-          <p>{{ 'Join.Part' | translate }}<strong>{{ brand.name }}</strong>
-            {{ 'Join.Enjoy' | translate }}</p>
-          <ol>
-            <li>{{ 'Join.Free1' | translate }}</li>
-            <li>{{ 'Join.Free2' | translate }}</li>
-            <li>{{ 'Join.Free3' | translate }}</li>
-          </ol>
-          <div>
-            <p>{{ 'Join.Problems' | translate }}
-              <a href="mailto:{{ brand.email.support }}">{{ 'Join.SupportTeam' | translate }}</a>.
-            </p>
-          </div>
+          <markdown [data]="'JOIN.joinUsToday' | translate: { email: brand.email.support }"></markdown>
         </div>
       </div>
     </div>
@@ -65,11 +29,10 @@
       <!-- Support Request sent -->
       <div *ngSwitchCase="'support-request-sent'">
         <div class="rc-centre">
-          <img src="../../assets/images/icons/checkmark.gif" height="128" width="128" alt="Success"/></div>
-        <h1>{{ 'Join.OK' | translate }}</h1>
-        <p>{{ 'Join.Team' | translate }}</p>
-        <p><strong>{{ brand.name }} {{ 'Join.Curation' | translate }}</strong></p>
-        <p><a [routerLink]="'/signin'">{{ 'Join.SignIn' | translate }}</a></p>
+          <img src="../../assets/images/icons/checkmark.gif" height="128" width="128" alt="Success"/>
+        </div>
+        <markdown [data]="'JOIN.joinSuccess' | translate: { brand: brand.name }"></markdown>
+        <p><a [routerLink]="'/signin'">{{ 'JOIN.linkSignIn' | translate }}</a></p>
       </div>
 
       <!-- Self Register -->
@@ -77,12 +40,7 @@
         <div class="rc-centre">
           <img src="../../assets/images/icons/checkmark.gif" height="128" width="128" alt="Success"/>
         </div>
-        <h1>{{ 'Join.Welcome' | translate }}</h1>
-        <p>{{ 'Join.Successful' | translate }} <strong>{{ 'Join.ContentAdmin' | translate }}</strong>
-          {{ 'Join.SentDetails' | translate }}</p>
-        <p>{{ 'Join.Close' | translate }}</p>
-        <p>{{ 'Join.Ta' | translate }}</p>
-        <p><strong>{{ brand.name }} {{ 'Join.Curation' | translate }}</strong></p>
+        <markdown [data]="'JOIN.joinWelcome' | translate: { brand: brand.name }"></markdown>
       </div>
 
 
@@ -96,44 +54,35 @@
 
         <!-- Duplicate Telephone No. -->
         <div *ngIf="duplicateField === 'tel'" class="rc-form-msg">
-          <h1 class="rc-highlight">{{ 'Join.AlreadyRegHeader' | translate }}</h1>
-          <markdown ngPreserveWhitespaces>
-            This **mobile number** is already registered, please [SIGN-IN, or
-            retrieve your password here](/signin).
-          </markdown>
+          <h1 class="rc-highlight">{{ 'JOIN.duplicateRegistration' | translate }}</h1>
+          <markdown ngPreserveWhitespaces [data]="'JOIN.duplicateMobile' | translate"></markdown>
         </div>
 
         <!-- Duplicate Email -->
         <div *ngIf="duplicateField === 'email'" class="rc-form-msg">
-          <h1 class="rc-highlight">{{ 'Join.AlreadyRegHeader' | translate }}</h1>
-          <markdown ngPreserveWhitespaces>
-            This **email address** is already registered, please [SIGN-IN, or
-            retrieve your password here](/signin).
-          </markdown>
+          <h1 class="rc-highlight">{{ 'JOIN.duplicateRegistration' | translate }}</h1>
+          <markdown ngPreserveWhitespaces [data]="'JOIN.duplicateEmail' | translate"></markdown>
         </div>
 
         <!-- Duplicate Telephone and Email -->
         <div *ngIf="duplicateField === 'both'" class="rc-form-msg">
-          <h1 class="rc-highlight">{{ 'Join.AlreadyRegHeader' | translate }}</h1>
-          <markdown ngPreserveWhitespaces>
-            This **mobile number** and **email address** have already been registered [Sign-in, or
-            retrieve your password here](/signin).
-          </markdown>
+          <h1 class="rc-highlight">{{ 'JOIN.duplicateRegistration' | translate }}</h1>
+          <markdown ngPreserveWhitespaces [data]="'JOIN.duplicateMobileAndEmail' | translate"></markdown>
         </div>
 
         <div *ngIf="!duplicateField">
-          <h1>Your Contact Details</h1>
+          <h1>{{ 'JOIN.headerContactDetails' | translate }}</h1>
         </div>
 
         <mat-form-field hideRequiredMarker style="width: 38%;">
-          <mat-label>First name</mat-label>
+          <mat-label>{{ 'JOIN.labelFirstName' | translate }}</mat-label>
           <input
             #fname
             type="text"
             name="first_name"
             [(ngModel)]="pendingMember.first_name"
             matInput
-            placeholder="Your first name"
+            [placeholder]="'JOIN.placeholderFirstName' | translate"
             required
             autofocus>
           <mat-error align="end">Required</mat-error>
@@ -141,64 +90,63 @@
 
         <span style="display: inline-block; width: 2%;"></span>
         <mat-form-field hideRequiredMarker style="width: 60%;">
-          <mat-label>Last name</mat-label>
+          <mat-label>{{ 'JOIN.labelLastName' | translate }}</mat-label>
           <input
             #lname
             type="text"
             name="last_name"
             [(ngModel)]="pendingMember.last_name"
             matInput
-            placeholder="Your last name"
+            [placeholder]="'JOIN.placeholderLastName' | translate"
             required>
           <mat-error align="end">Required</mat-error>
         </mat-form-field>
 
         <!-- Role -->
         <mat-form-field hideRequiredMarker>
-          <mat-label>Your job/role</mat-label>
+          <mat-label>{{ 'JOIN.labelJob' | translate }}</mat-label>
           <mat-select
-            [(ngModel)]="pendingMember.role"
-            name="role"
+            [(ngModel)]="pendingMember.job"
+            name="job"
             required>
-            <mat-option *ngFor="let role of t_data?.Roles" [value]="role">
-              {{ role }}
+            <mat-option *ngFor="let job of jobs" [value]="job">
+              {{ job }}
             </mat-option>
           </mat-select>
-          <mat-error align="end">Please select your main job or role</mat-error>
+          <mat-error align="end">{{ 'JOIN.invalidJobRequired' | translate }}</mat-error>
         </mat-form-field>
 
         <!-- Email -->
         <mat-form-field hideRequiredMarker>
-          <mat-label>{{ 'Join.Email' | translate }}</mat-label>
+          <mat-label>{{ 'JOIN.labelEmail' | translate }}</mat-label>
           <input
             #email="ngModel"
             [(ngModel)]="pendingMember.email"
             matInput
             type="email"
             name="email"
-            [placeholder]="'Join.Email' | translate"
+            [placeholder]="'JOIN.placeholderEmail' | translate"
             email
             required>
-          <mat-hint align="end" *ngIf="email.invalid">{{ 'Join.Contact' | translate }}</mat-hint>
-          <mat-error align="end" *ngIf="email?.errors">{{ 'Join.ValidEmail' | translate }}</mat-error>
+          <mat-hint align="end" *ngIf="email.invalid">{{ 'JOIN.hintEmail' | translate }}</mat-hint>
+          <mat-error align="end" *ngIf="email?.errors">{{ 'JOIN.invalidEmail' | translate }}</mat-error>
         </mat-form-field>
 
         <!-- Telephone -->
         <mat-form-field hideRequiredMarker>
-          <mat-label>{{ 'Join.Mobile' | translate }}</mat-label>
+          <mat-label>{{ 'JOIN.labelTel' | translate }}</mat-label>
           <input
             #mobile
-            [(ngModel)]="pendingMember.tel"
+            [(ngModel)]="pendingMember.telephone"
             matInput
             type="tel"
-            name="tel"
-            [placeholder]="'Join.Mobile' | translate"
+            name="telephone"
+            [placeholder]="'JOIN.placeholderTel' | translate"
             [pattern]="patternMobile"
             minlength="9"
             maxlength="14"
             required>
-          <mat-error align="end">{{ 'Join.ValidTelephone' |
-            translate }}</mat-error>
+          <mat-error align="end">{{ 'JOIN.invalidTelRequired' | translate }}</mat-error>
         </mat-form-field>
 
         <br><br>
@@ -207,214 +155,11 @@
           type="submit"
           mat-flat-button
           [disabled]="isSubmitting"
-          color="primary">
-          NEXT
+          color="accent">
+          {{ 'JOIN.labelBtnSubmit' | translate }}
         </button>
       </form>
     </div>
     </div>
   </div>
 </div>
-
-<!--<div class="rc-join">-->
-<!--  <div class="rc-join-info-container">-->
-<!--    <div>-->
-<!--      <div class="rc-join-welcome" [ngSwitch]="referrer.type">-->
-
-<!--        <img class="rc-brand-logo" src="../assets/images/{{ brand.logo }}-trans-white.svg" alt="Logo">-->
-
-<!--        &lt;!&ndash; Self &ndash;&gt;-->
-<!--        <div *ngSwitchCase="'self'">-->
-<!--          <h1>{{ 'Join.Free' | translate }}</h1>-->
-<!--          <p>{{ 'Join.Part' | translate }} <strong>{{ brand.name }}</strong>-->
-<!--            {{ 'Join.Enjoy' | translate }}</p>-->
-<!--          <ol>-->
-<!--            <li>{{ 'Join.Free1' | translate }}</li>-->
-<!--            <li>{{ 'Join.Free2' | translate }}</li>-->
-<!--            <li>{{ 'Join.Free3' | translate }}</li>-->
-<!--          </ol>-->
-<!--          <div *ngIf="brand.name === 'Restaurant Collective'; else French">-->
-<!--            <p>{{ 'Join.Problems' | translate }}-->
-<!--              <a href="mailto:{{brand.email.support}}">{{ 'Join.SupportTeam' | translate }}</a>.-->
-<!--            </p>-->
-<!--          </div>-->
-<!--          <ng-template #French>-->
-<!--            <p>{{ 'Join.Problems' | translate }}-->
-<!--              <a href="mailto:support@restaurateurs-independants.fr">{{ 'Join.SupportTeam' | translate }}</a>.-->
-<!--            </p>-->
-<!--          </ng-template>-->
-<!--        </div>-->
-<!--        &lt;!&ndash; Member &ndash;&gt;-->
-<!--        <div *ngSwitchCase="'member'">-->
-<!--          <h1>{{ 'Join.Support' | translate }}</h1>-->
-<!--          <p>{{ 'Join.Invited' | translate }} <strong>{{ referrer?.name }}</strong> {{ 'Join.Become' | translate }}-->
-<!--            {{ brand.name }},-->
-<!--            {{ 'Join.Exciting' | translate }}</p>-->
-<!--          <p>{{ 'Join.ToActivate' | translate }} {{ referrer?.name }} {{ 'Join.Follow' | translate }}</p>-->
-<!--          <ol>-->
-<!--            <li>{{ 'Join.Step1' | translate }}</li>-->
-<!--            <li>{{ 'Join.Step2' | translate }}</li>-->
-<!--            <li>{{ 'Join.Step3' | translate }}</li>-->
-<!--          </ol>-->
-
-<!--          <div>-->
-<!--            <p>{{ 'Join.Problems' | translate }}-->
-<!--              <a href="mailto:{{ brand.email.support }}">{{ 'Join.SupportTeam' | translate }}</a>.-->
-<!--            </p>-->
-<!--          </div>-->
-
-<!--        </div>-->
-
-<!--        &lt;!&ndash; Default &ndash;&gt;-->
-<!--        <div *ngSwitchDefault>-->
-<!--          <h1>{{ 'Join.Free' | translate }}</h1>-->
-<!--          <p>{{ 'Join.Part' | translate }}<strong>{{ brand.name }}</strong>-->
-<!--            {{ 'Join.Enjoy' | translate }}</p>-->
-<!--          <ol>-->
-<!--            <li>{{ 'Join.Free1' | translate }}</li>-->
-<!--            <li>{{ 'Join.Free2' | translate }}</li>-->
-<!--            <li>{{ 'Join.Free3' | translate }}</li>-->
-<!--          </ol>-->
-<!--          <div>-->
-<!--            <p>{{ 'Join.Problems' | translate }}-->
-<!--              <a href="mailto:{{ brand.email.support }}">{{ 'Join.SupportTeam' | translate }}</a>.-->
-<!--            </p>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-
-<!--  <div class="rc-join-form" [ngSwitch]="newRegResult">-->
-
-<!--    &lt;!&ndash; Support Request sent &ndash;&gt;-->
-<!--    <div *ngSwitchCase="'support-request-sent'">-->
-<!--      <div class="rc-centre">-->
-<!--        <img src="../../assets/images/icons/checkmark.gif" height="128" width="128" alt="Success"/></div>-->
-<!--      <h1>{{ 'Join.OK' | translate }}</h1>-->
-<!--      <p>{{ 'Join.Team' | translate }}</p>-->
-<!--      <p><strong>{{ brand.name }} {{ 'Join.Curation' | translate }}</strong></p>-->
-<!--      <p><a [routerLink]="'/signin'">{{ 'Join.SignIn' | translate }}</a></p>-->
-<!--    </div>-->
-
-<!--    &lt;!&ndash; Self Register &ndash;&gt;-->
-<!--    <div *ngSwitchCase="'self-registered'">-->
-<!--      <div class="rc-centre">-->
-<!--        <img src="../../assets/images/icons/checkmark.gif" height="128" width="128" alt="Success"/></div>-->
-<!--      <h1>{{ 'Join.Welcome' | translate }}</h1>-->
-<!--      <p>{{ 'Join.Successful' | translate }} <strong>{{ 'Join.ContentAdmin' | translate }}</strong>-->
-<!--        {{ 'Join.SentDetails' | translate }}</p>-->
-<!--      <p>{{ 'Join.Close' | translate }}</p>-->
-<!--      <p>{{ 'Join.Ta' | translate }}</p>-->
-<!--      <p><strong>{{ brand.name }} {{ 'Join.Curation' | translate }}</strong></p>-->
-<!--    </div>-->
-
-<!--    <form-->
-<!--      style="transition: all .2s ease-out"-->
-<!--      *ngSwitchDefault-->
-<!--      #formJoin="ngForm"-->
-<!--      (ngSubmit)="formJoin.form.valid && submitJoinForm(formJoin.value)"-->
-<!--      novalidate>-->
-
-<!--      <div *ngIf="duplicateField === 'tel'">-->
-<!--        <h1 class="rc-highlight">{{ 'Join.AlreadyRegHeader' | translate }}</h1>-->
-<!--        <p>{{ 'Join.MobileReg' | translate }}<a [routerLink]="['/signin']">{{ 'Join.SignInPassword' | translate }}</a>.</p>-->
-<!--        <p>{{ 'Join.If' | translate }}<a-->
-<!--          (click)="curationRequest()">{{ 'Join.Callback' | translate }}</a>{{ 'Join.Someone' | translate }}</p>-->
-<!--      </div>-->
-<!--      <div *ngIf="duplicateField === 'email'">-->
-<!--        <h1 class="rc-highlight">{{ 'Join.AlreadyRegHeader' | translate }}</h1>-->
-<!--        <p>{{ 'Join.EmailReg' | translate }}<a-->
-<!--          [routerLink]="['/signin']">{{ 'Join.SignInPassword' | translate }}</a>.</p>-->
-<!--        <p>{{ 'Join.If' | translate }}<a-->
-<!--          (click)="curationRequest()">{{ 'Join.Callback' | translate }}</a>{{ 'Join.Someone' | translate }}</p>-->
-<!--      </div>-->
-<!--      <div *ngIf="duplicateField === 'both'">-->
-<!--        <h1 class="rc-highlight">{{ 'Join.AlreadyRegHeader' | translate }}</h1>-->
-<!--        <p>{{ 'Join.BothReg' | translate }}<a [routerLink]="['/signin']">{{-->
-<!--          'Join.SignInPassword' | translate }}</a>.</p>-->
-<!--        <p>{{ 'Join.If' | translate }}<a-->
-<!--          (click)="curationRequest()">{{ 'Join.Callback' | translate }}</a>{{ 'Join.Someone' | translate }}</p>-->
-<!--      </div>-->
-
-<!--      <div *ngIf="!duplicateField">-->
-<!--      <h1>{{ 'Join.JoinUs' | translate }}</h1>-->
-<!--      <span>{{ 'Join.Or' | translate }} <a [routerLink]="'/signin'">{{ 'Join.SignIn' | translate }}</a>-->
-<!--        {{ 'Join.Already' | translate }}</span>-->
-<!--      </div>-->
-
-<!--      <mat-form-field hideRequiredMarker>-->
-<!--        <mat-label>{{ 'Join.FullName' | translate }}</mat-label>-->
-<!--        <input-->
-<!--          #name="ngModel"-->
-<!--          ngModel-->
-<!--          matInput-->
-<!--          type="text"-->
-<!--          name="name"-->
-<!--          [placeholder]="'Join.FullName' | translate"-->
-<!--          autofocus-->
-<!--          required>-->
-<!--        <mat-hint align="end" *ngIf="name.invalid">{{ 'Join.FirstAndLast' | translate }}</mat-hint>-->
-<!--        <mat-error align="end" *ngIf="name.errors?.required">{{ 'Join.FullName' | translate }}-->
-<!--          {{ 'Join.Required' | translate }}</mat-error>-->
-<!--      </mat-form-field>-->
-<!--      <mat-form-field hideRequiredMarker>-->
-<!--        <mat-label>{{ 'Join.Job' | translate }}</mat-label>-->
-<!--        <mat-select ngModel name="role">-->
-<!--          <mat-option value="Owner">{{ 'Join.Owner' | translate }}</mat-option>-->
-<!--          <mat-option value="Chef">{{ 'Join.Chef' | translate }}</mat-option>-->
-<!--          <mat-option value="Manager">{{ 'Join.Manager' | translate }}</mat-option>-->
-<!--        </mat-select>-->
-<!--      </mat-form-field>-->
-<!--      <mat-form-field hideRequiredMarker>-->
-<!--        <mat-label>{{ 'Join.Email' | translate }}</mat-label>-->
-<!--        <input-->
-<!--          #email="ngModel"-->
-<!--          ngModel-->
-<!--          matInput-->
-<!--          type="email"-->
-<!--          name="email"-->
-<!--          [placeholder]="'Join.Email' | translate"-->
-<!--          email-->
-<!--          required>-->
-<!--        <mat-hint align="end" *ngIf="email.invalid">{{ 'Join.Contact' | translate }}</mat-hint>-->
-<!--        <mat-error align="end" *ngIf="email?.errors">{{ 'Join.ValidEmail' | translate }}</mat-error>-->
-<!--      </mat-form-field>-->
-<!--      <mat-form-field hideRequiredMarker>-->
-<!--        <mat-label>{{ 'Join.Mobile' | translate }}</mat-label>-->
-<!--        <input-->
-<!--          #mobile="ngModel"-->
-<!--          ngModel-->
-<!--          matInput-->
-<!--          type="tel"-->
-<!--          name="mobile"-->
-<!--          [placeholder]="'Join.Mobile' | translate"-->
-<!--          required>-->
-<!--        <mat-error align="end" *ngIf="mobile.errors?.required">{{ 'Join.ValidTelephone' | translate }}</mat-error>-->
-<!--      </mat-form-field>-->
-<!--      <mat-form-field *ngIf="!referrer?.code">-->
-<!--        <mat-label>{{ 'Join.RefCode' | translate }}</mat-label>-->
-<!--        <input-->
-<!--          #code="ngModel"-->
-<!--          ngModel-->
-<!--          matInput-->
-<!--          type="text"-->
-<!--          name="code"-->
-<!--          [placeholder]="'Join.RefCode' | translate">-->
-<!--      </mat-form-field>-->
-<!--      <button-->
-<!--        type="submit"-->
-<!--        mat-flat-button-->
-<!--        [disabled]="!formJoin.valid || isSubmitting"-->
-<!--        color="accent">{{ 'Join.Join' | translate }}</button>-->
-<!--      <p class="mat-small">{{ 'Join.Confirm' | translate }} <a-->
-<!--        [href]="brand.downloads.terms" target="_blank">{{ 'Join.Terms' | translate }}</a> {{ 'Join.And' |-->
-<!--        translate }}-->
-<!--        <a [href]="brand.downloads.privacy" target="_blank">{{ 'Join.Privacy' | translate }}</a>.-->
-<!--      </p>-->
-<!--    </form>-->
-<!--  </div>-->
-
-<!--</div>-->
-
-

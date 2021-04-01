@@ -1,54 +1,52 @@
 <div class="rc-layout-split-container">
   <div class="rc-layout-split-left">
     <div class="rc-layout-split-content">
+      <rc-logo [height]="'100px'"></rc-logo>
       <a class="rc-back"
          routerLink="/join"
          matTooltip="Back to Member contact details">
         <mat-icon>arrow_back</mat-icon>Back</a>
-      <span class="rc-logo">
-        <img src="assets/images/rc-logo-trans-white.svg" alt="Restaurant Collective Logo">
-      </span>
-      <div markdown>
-        <h1>Membership</h1>
-        <p>Please select your preferred subscription option.</p>
-        <p>Once you've made your choice you'll be asked to review your selection and invited to pay securely online
-          using a debit or credit card.</p>
-      </div>
+      <markdown [data]="'MEMBERSHIP.instructions' | translate: transParams"></markdown>
     </div>
   </div>
   <div class="rc-layout-split-right">
     <div class="rc-layout-split-content">
-      <h1>Subscription Options:</h1>
+
+      <!-- MONTHLY -->
       <div class="rc-subscription">
-        <h2>MONTHLY SUBSCRIPTION</h2>
-        <p><strong>Pay just £9.99 per month</strong> for full access to all the benefits of Restaurant Collective membership.</p>
+
+        <markdown ngpreservewhitespaces [data]="mdProdMonthly"></markdown>
+
         <button
           mat-flat-button
-          color="primary"
-          (click)="checkout('membership_monthly')"
+          color="accent"
+          (click)="checkout(0)"
           [disabled]="waiting">
-          PAY MONTHLY
+          {{ 'MEMBERSHIP.labelPayMonthly' | translate | uppercase }}
         </button>
+
       </div>
+
+      <!-- YEARLY -->
       <div class="rc-subscription">
-        <h2>ANNUAL SUBSCRIPTION</h2>
-        <p><strong>Pay £99 per year</strong> and you'll get the equivalent of 2 months FREE. All of the same
-          Restaurant
-          Collective benefits, just a bit cheaper!
-        </p>
+
+        <markdown ngpreservewhitespaces [data]="mdProdYearly"></markdown>
+
         <button
           mat-flat-button
-          color="primary"
-          (click)="checkout('membership_yearly')"
+          color="accent"
+          (click)="checkout(1)"
           [disabled]="waiting">
-          PAY YEARLY
+          {{ 'MEMBERSHIP.labelPayYearly' | translate | uppercase }}
         </button>
       </div>
-      <p class="rc-txt-small">Please take the time to read the <a>Terms of Membership</a> and <a>Privacy Policy</a>.
-        By becoming a member of Restaurant Collective you are confirming your acceptance of these terms.</p>
+
+      <!-- TERMS -->
+      <markdown class="rc-txt-small"
+                [data]="'MEMBERSHIP.terms' | translate: transParams"></markdown>
+
     </div>
   </div>
 </div>
-<hr><pre>sessionId: {{ stripeSessionId | json }}</pre><hr>
-
+<!--<hr><pre>sessionId: {{ stripeSessionId | json }}</pre><hr>-->
 

@@ -461,16 +461,16 @@ export class CMSService {
   sendOfferRequestToAffiliateEmail(obj: any) {
     return this.http.post(this.config.apiUrl + '/cms/sendofferrequesttoaffiliate',
       {
-        company_prefix: obj.company_prefix,
+        affiliate_offer: obj.affiliate_offer,
         affiliate_email: obj.affiliate_email,
         affiliate_name: obj.affiliate_name,
-        restaurant_name: obj.restaurant_name,
-        restaurant_address: obj.restaurant_address,
-        restaurant_telephone: obj.restaurant_telephone,
-        restaurant_email: obj.restaurant_email,
-        admin_fullname: obj.admin_fullname,
-        restaurant_number: obj.restaurant_number,
-        email_language: obj.email_language,
+        member_id: obj.member_id,
+        member_first_name: obj.member_first_name,
+        member_last_name: obj.member_last_name,
+        member_email: obj.member_email,
+        // admin_fullname: localStorage.getItem('rd_username'),
+        company_prefix: this.config.brand.prefix,
+        email_language: localStorage.getItem('rd_language'),
         userCode: this.config.userAPICode,
         token: this.authToken
       });
@@ -479,15 +479,16 @@ export class CMSService {
   sendOfferConfirmation(obj: any) {
     return this.http.post(this.config.apiUrl + '/cms/sendofferconfirmation',
       {
-        company_prefix: obj.company_prefix,
         affiliate_name: obj.affiliate_name,
         affiliate_contact_message: obj.affiliate_contact_message,
         restaurant_name: obj.restaurant_name,
-        restaurant_email: obj.restaurant_email,
+        restaurant_email: 'jmbarnard@gmail.com',
         restaurant_number: obj.restaurant_number,
-        email_language: obj.email_language,
+        company_prefix: this.config.brand.prefix,
+        email_language: localStorage.getItem('rd_language'),
         userCode: this.config.userAPICode,
-        token: this.authToken });
+        token: this.authToken
+      });
   }
 
   getLastUpdatedRecord(restaurant_id: number) {

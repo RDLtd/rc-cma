@@ -5,6 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AppConfig } from '../app.config';
 import { AboutComponent } from './about.component';
+import { HeaderService } from './header.service';
 
 @Component({
   selector: 'rc-header',
@@ -16,11 +17,12 @@ export class HeaderComponent implements OnInit {
   displayName: string = this.lblMemberLogin;
   dialogRef: any;
   company_name;
+  brandPrefix;
   inSession = true;
-  avatarId: any;
-  placeholderAvatar = null;
-  placeholderUrl = 'https://eu.ui-avatars.com/api/?format=svg&size=40&background=fff&color=000&name='
-
+  avatarUrl = null;
+  placeholderUrl = 'https://eu.ui-avatars.com/api/?format=svg&size=40&background=fff&color=000&name=';
+  navLabel: string;
+  member: any;
 
   constructor(
     public authService: AuthenticationService,
@@ -28,15 +30,43 @@ export class HeaderComponent implements OnInit {
     private dialog: MatDialog,
     private router: Router,
     private route: ActivatedRoute,
-    private config: AppConfig ) { }
+    private header: HeaderService,
+    private config: AppConfig ) {
+
+  }
 
   ngOnInit() {
 
+    // console.log('Init header');
+
     this.company_name = this.config.brand.name;
-    // If page refreshed
-    this.displayName = (this.authService.isAuth() ? localStorage.getItem('rd_username') : this.lblMemberLogin);
-    this.avatarId = localStorage.getItem('rd_avatar');
-    this.placeholderAvatar = this.placeholderUrl + this.displayName;
+    this.brandPrefix = this.config.brand.prefix;
+    this.displayName = localStorage.getItem('rd_username');
+    this.member = JSON.parse(localStorage.getItem('rd_profile'));
+
+    // Set default avatar/placeholder
+    // Force different thread to ensure member is set
+
+    setTimeout(() => {
+      // watch for rogue values coming from the db
+        if (this.member.member_image_path !== null && this.member.member_image_path !== 'null') {
+          this.avatarUrl = this.member.member_image_path;
+        } else {
+          this.avatarUrl = this.placeholderUrl + this.displayName;
+        }
+      }, 0);
+
+    // Listen for changes to the section
+    this.header.sectionName.subscribe(str => {
+      this.navLabel = str;
+    });
+
+    // Listen for changes to the avatar
+    this.header.currentAvatar.subscribe(url => {
+      this.avatarUrl = url || this.placeholderUrl + this.displayName;
+      // console.log('Avatar change', this.avatarUrl);
+    });
+
     // Get notified anytime the login status changes
     this.authService.memberSessionSubject.subscribe(
       sessionStatus => {
@@ -44,21 +74,16 @@ export class HeaderComponent implements OnInit {
           case 'active': {
             // Successful login
             this.displayName = localStorage.getItem('rd_username');
-            this.avatarId = localStorage.getItem('rd_avatar');
-            this.placeholderAvatar = this.placeholderUrl + this.displayName;
             break;
           }
           case 'closed': {
             // User logged out
-            this.displayName = this.lblMemberLogin;
             this.inSession = false;
             this.router.navigate(['/']);
             break;
           }
           case 'expired': {
-            // Session expired
-            this.displayName = this.lblMemberLogin;
-            // new login page
+            // Session expired, logout
             this.inSession = false;
             this.router.navigate(['/']);
             break;

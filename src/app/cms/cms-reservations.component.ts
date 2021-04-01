@@ -1,8 +1,9 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CmsLocalService } from './cms-local.service';
-import { CMSService, RestaurantService, HelpService } from '../_services';
+import { CMSService, RestaurantService } from '../_services';
 import { Restaurant, CMSDescription } from '../_models';
 import { TranslateService } from '@ngx-translate/core';
+import { HelpService} from '../common';
 
 @Component({
   selector: 'rc-cms-reservations',
@@ -11,9 +12,6 @@ import { TranslateService } from '@ngx-translate/core';
 export class CmsReservationsComponent implements OnInit {
 
   @ViewChild('provider_id') private provider_id_input: ElementRef;
-
-  // translation variables
-  t_data: any;
 
   // data objs
   restaurant: Restaurant;
@@ -40,18 +38,9 @@ export class CmsReservationsComponent implements OnInit {
     private translate: TranslateService,
     private restaurantService: RestaurantService,
     public help: HelpService
-  ) {
-      // detect language changes... need to check for change in texts
-      translate.onLangChange.subscribe(() => {
-        this.translate.get('CMS-Reservations').subscribe(data => {this.t_data = data; });
-    });
-  }
+  ) {  }
 
   ngOnInit() {
-
-    this.translate.get('CMS-Reservations').subscribe(data => {
-      this.t_data = data;
-    });
     // Subscribe to service
     this.cmsLocalService.getRestaurant()
       .subscribe(data => {
@@ -141,7 +130,7 @@ export class CmsReservationsComponent implements OnInit {
       window.open(this.booking_providers[this.selected_booking_provider_index].booking_provider_url +
         this.booking_provider_reference);
     } else {
-      this.cmsLocalService.dspSnackbar(`${this.t_data.NoTest}`, null, 3);
+      this.cmsLocalService.dspSnackbar(this.translate.instant('CMS.RESERVATIONS.msgNoTest'), null, 3);
     }
   }
 
@@ -157,8 +146,11 @@ export class CmsReservationsComponent implements OnInit {
     // Check for required fields
     if (this.selected_booking_provider_id > 1 && this.selected_booking_provider_id !== 5) {
       if (!this.booking_provider_reference) {
-        this.cmsLocalService.dspSnackbar(`${this.t_data.PleaseEnter} ${this.selected_booking_provider.booking_provider_rid_label}`,
-          null, 3);
+        this.cmsLocalService.dspSnackbar(
+          this.translate.instant(
+            'CMS.RESERVATIONS.msgEnterProvider',
+            { id: this.selected_booking_provider.booking_provider_rid_label }),
+            null, 3);
         return;
       }
     }
@@ -169,11 +161,17 @@ export class CmsReservationsComponent implements OnInit {
     this.cms.updateDescription(this.descriptions).subscribe(
       () => {
         this.dataChanged = false;
-        this.cmsLocalService.dspSnackbar(`${this.restaurant.restaurant_name} ${this.t_data.ResInfoUpdate}`, null, 5);
+        this.cmsLocalService.dspSnackbar(
+          this.translate.instant(
+            'CMS.RESERVATIONS.msgResInfoUpdated',
+            { name: this.restaurant.restaurant_name }),
+            null, 5);
       },
       error => {
         console.log('Error', error);
-        this.cmsLocalService.dspSnackbar(this.t_data.UpdateFailed, null, 3);
+        this.cmsLocalService.dspSnackbar(this.translate.instant(
+          'CMS.RESERVATIONS.msgUpdateFailed'),
+          null, 3);
       });
 
     this.cms.updateLastCreatedField(Number(this.restaurant.restaurant_id), 'booking').subscribe(

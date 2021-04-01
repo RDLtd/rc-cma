@@ -1,30 +1,51 @@
 <div class="rc-dialog rc-dialog-med">
 
-<mat-toolbar class="rc-toolbar">
-  <span>{{ brandName }}</span>
-  <span class="rc-space-filler"></span>
-  <span class="rc-toolbar-actions">
-    <button mat-icon-button mat-dialog-close>
-      <mat-icon>close</mat-icon>
+<!--  WELCOME NEW MEMBER-->
+  <ng-container *ngIf="newMember">
+    <rc-logo [height]="'64px'" [version]="'primary'"></rc-logo>
+    <mat-dialog-content>
+      <div markdown [data]="'MESSAGES.welcomeNewMember' | translate" ngPreserveWhitespaces></div>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+      <button
+        tabindex="-1"
+        mat-button
+        [mat-dialog-close]="false">
+        {{ 'MESSAGES.labelBtnLater' | translate }}
+      </button>
+      <button
+        color="accent"
+        mat-button
+        [mat-dialog-close]="true">
+        {{ 'MESSAGES.labelBtnStart' | translate }}
+      </button>
+    </mat-dialog-actions>
+
+  </ng-container>
+
+
+  <ng-container *ngIf="!newMember">
+
+  <h1 mat-dialog-title>{{ 'MESSAGES.headerMessages' | translate }}</h1>
+
+  <mat-dialog-content>
+      <div class="rc-message" *ngFor="let message of data['messages']" [class.rc-message-important]="message['severity']">
+        <h3><mat-icon>message</mat-icon>{{ message['heading'] | uppercase }}</h3>
+        <div markdown [data]="message['body']"></div>
+      </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button
+      mat-stroked-button
+      [mat-dialog-close]="false">
+      {{ 'MESSAGES.messagesReadOk' | translate }}
     </button>
-  </span>
-</mat-toolbar>
+  </mat-dialog-actions>
 
-<mat-dialog-content>
-    <div class="rc-message" *ngFor="let message of data['messages']" [class.rc-message-important]="message['severity']">
-      <h3><mat-icon>message</mat-icon>{{ message['heading'] | uppercase }}</h3>
-      <div markdown [data]="message['body']"></div>
-    </div>
-</mat-dialog-content>
+  </ng-container>
 
-<mat-dialog-actions align="end">
-  <button
-    color="secondary"
-    mat-flat-button
-    [mat-dialog-close]="true">
-    {{ 'Messages.DontShow' | translate }}
-  </button>
-</mat-dialog-actions>
+
 </div>
 
 

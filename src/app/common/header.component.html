@@ -1,8 +1,29 @@
 
-<mat-toolbar class="rc-toolbar rc-toolbar-fixed">
+<mat-toolbar class="rc-header rc-toolbar rc-toolbar-fixed">
 
-  <span>{{ company_name }}</span>
+  <a routerLink="/hub"
+     class="rc-brand-wrap">
+    <rc-logo></rc-logo>
+  </a>
+
+  <!-- section label -->
+  <span class="rc-header-tag">{{ navLabel | uppercase }}</span>
+
   <span class="rc-space-filler"></span>
+
+  <span>
+    <button
+      class="rc-toolbar-btn-lg"
+      mat-icon-button
+      [matTooltip]="'HEADER.tipBtnHub' | translate"
+      [routerLink]="'/hub'">
+        <svg fill="#fff" viewBox="0 0 24 24">
+          <path
+      d="M6,8c1.1,0 2,-0.9 2,-2s-0.9,-2 -2,-2 -2,0.9 -2,2 0.9,2 2,2zM12,20c1.1,0 2,-0.9 2,-2s-0.9,-2 -2,-2 -2,0.9 -2,2 0.9,2 2,2zM6,20c1.1,0 2,-0.9 2,-2s-0.9,-2 -2,-2 -2,0.9 -2,2 0.9,2 2,2zM6,14c1.1,0 2,-0.9 2,-2s-0.9,-2 -2,-2 -2,0.9 -2,2 0.9,2 2,2zM12,14c1.1,0 2,-0.9 2,-2s-0.9,-2 -2,-2 -2,0.9 -2,2 0.9,2 2,2zM16,6c0,1.1 0.9,2 2,2s2,-0.9 2,-2 -0.9,-2 -2,-2 -2,0.9 -2,2zM12,8c1.1,0 2,-0.9 2,-2s-0.9,-2 -2,-2 -2,0.9 -2,2 0.9,2 2,2zM18,14c1.1,0 2,-0.9 2,-2s-0.9,-2 -2,-2 -2,0.9 -2,2 0.9,2 2,2zM18,20c1.1,0 2,-0.9 2,-2s-0.9,-2 -2,-2 -2,0.9 -2,2 0.9,2 2,2z"></path>
+        </svg>
+      </button>
+  </span>
+
   <span
     *ngIf="!authService.isAuth(); else loggedIn"
     (click)="login()"
@@ -12,58 +33,53 @@
 
   <ng-template #loggedIn>
 
+    <button
+      mat-icon-button
+      class="rc-avatar"
+      [matMenuTriggerFor]="menu">
+      <cl-image
+        [public-id]="avatarUrl">
+        <cl-transformation
+          width="48"
+          height="48"
+          crop="fill"
+          gravity="face">
+        </cl-transformation>
+      </cl-image>
+<!--      <span *ngIf="!avatarUrl" >-->
+<!--        <img [src]="placeholderAvatar" alt="{{ displayName }}">-->
+<!--      </span>-->
+    </button>
 
-    <span
-      [matMenuTriggerFor]="menu"
-      class="rc-media-small-hide rc-link-like">
-    {{ displayName }}
-  </span>
-<!--    <button mat-icon-button [matMenuTriggerFor]="menu" style="height: 40px; overflow: hidden">-->
-<!--      <cl-image-->
-<!--        *ngIf="avatarId"-->
-<!--        [public-id]="avatarId">-->
-<!--        <cl-transformation-->
-<!--          width="40"-->
-<!--          height="40"-->
-<!--          radius="max"-->
-<!--          crop="fill"-->
-<!--          gravity="face">-->
-<!--        </cl-transformation>-->
-<!--      </cl-image>-->
-<!--      <div *ngIf="!avatarId" style="width: 40px; height: 40px; border-radius: 20px; overflow: hidden;">-->
-<!--        <img [src]="placeholderAvatar">-->
-<!--      </div>-->
-<!--    </button>-->
-
-  <button
-    [matMenuTriggerFor]="menu"
-    mat-icon-button>
-    <mat-icon>menu</mat-icon>
-  </button>
   </ng-template>
 
   <mat-menu #menu="matMenu">
+    <div class="rc-user-menu">
+      <h3>{{ displayName }}</h3>
+      <span>{{ 'HEADER.signedInAs' | translate | uppercase }}</span>
+    </div>
+    <mat-divider></mat-divider>
+
     <button
       mat-menu-item
-      *ngIf="authService.isAuthLevel(1)"
       [routerLink]="['/profile']">
       <mat-icon>account_circle</mat-icon>
-      <span>{{ 'Header.Settings' | translate }}</span>
+      <span>{{ 'HEADER.labelSettings' | translate }}</span>
     </button>
     <mat-divider></mat-divider>
+
     <button
       mat-menu-item
-      *ngIf="authService.isAuth()"
       (click)="logout()">
-      <mat-icon>exit_to_app</mat-icon>
-      <span>{{ 'Header.Logout' | translate }}</span>
+      <mat-icon>logout</mat-icon>
+      <span>{{ 'HEADER.labelLogout' | translate }}</span>
     </button>
     <mat-divider></mat-divider>
     <button
       mat-menu-item
       (click)="about()" >
-      <mat-icon>help</mat-icon>
-      <span>{{ 'Header.About' | translate }}</span>
+      <mat-icon>information</mat-icon>
+      <span>{{ 'HEADER.labelAbout' | translate }}</span>
     </button>
   </mat-menu>
 

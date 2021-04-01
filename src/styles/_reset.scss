@@ -10,19 +10,22 @@ body {
   margin:   0;
   height:   100%;
   color:    $rc-theme-text;
+  background-color: #efefef;
+  font-family: sans-serif;
 }
 // Maintain structure when little content
-main { min-height: 80vh; }
+main { min-height: 100vh; }
 
 *:focus {outline:0;}
 
 // Default inline links
 a {
   cursor: pointer;
-  color: $rc-theme-primary;
+  color: $rc-theme-accent;
   text-decoration: none;
   &:hover { text-decoration: underline; }
 }
+
 // Default lists
 ol {
   margin: 0;
@@ -31,3 +34,18 @@ ol {
 }
 
 hr { margin: 3em 0; }
+
+* {
+  box-sizing: border-box;
+  ul, li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px white inset !important;
+}

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="120px" height="120px" viewBox="0 0 120 120" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.6 (67491) - http://www.bohemiancoding.com/sketch -->
+    <title>logo-avatar</title>
+    <desc>Created with Sketch.</desc>
+    <g id="logo-avatar" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="account_circle-black-24dp" fill="#454540" fill-rule="nonzero">
+            <path d="M60,0 C26.88,0 0,26.88 0,60 C0,93.12 26.88,120 60,120 C93.12,120 120,93.12 120,60 C120,26.88 93.12,0 60,0 Z M60,18 C69.96,18 78,26.04 78,36 C78,45.96 69.96,54 60,54 C50.04,54 42,45.96 42,36 C42,26.04 50.04,18 60,18 Z M60,103.2 C45,103.2 31.74,95.52 24,83.88 C24.18,71.94 48,65.4 60,65.4 C71.94,65.4 95.82,71.94 96,83.88 C88.26,95.52 75,103.2 60,103.2 Z" id="Shape"></path>
+        </g>
+    </g>
+</svg>

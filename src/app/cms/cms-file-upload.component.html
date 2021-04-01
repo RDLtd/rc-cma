@@ -2,25 +2,26 @@
 
   <div *ngIf="data.type === 'image'">
     <h1 mat-dialog-title>
-      {{ 'CMS-File-Upload.NewImage' | translate }}
+      {{ 'CMS.UPLOAD.titleUploadImage' | translate }}
     </h1>
   </div>
   <div *ngIf="data.type === 'menu'">
     <h1 mat-dialog-title>
-      {{ 'CMS-File-Upload.NewMenu' | translate }}
+      {{ 'CMS.UPLOAD.titleUploadMenu' | translate }}
     </h1>
   </div>
   <div *ngIf="data.type === 'direction'">
     <h1 mat-dialog-title>
-      {{ 'CMS-File-Upload.NewDirection' | translate }}
+      {{ 'CMS.UPLOAD.titleUploadDirections' | translate }}
     </h1>
   </div>
 
   <p class="rc-warn" markdown [data]="uploadMessage | translate"></p>
+
   <mat-dialog-content>
       <!-- IMAGE PREVIEW-->
-      <div *ngIf="data.type === 'image'" style="height: 300px; background-color: #eee; overflow: hidden;">
-        <img *ngIf="filePreview" [src]="filePreview" [alt]="" style="height: 100%; width: auto;">
+      <div *ngIf="data.type === 'image'" class="rc-file-upload-preview">
+        <img *ngIf="filePreview" [src]="filePreview" [alt]="">
       </div>
 
       <!-- FILE SELECT BUTTON -->
@@ -52,19 +53,19 @@
 
           <!-- MENU CATEGORY -->
         <mat-form-field class="rc-full-width">
+          <mat-label>{{ 'CMS.UPLOAD.labelMenuName' | translate }}</mat-label>
           <input
             matInput
             ngModel
             name="menuClass"
-            [placeholder]="'CMS-File-Upload.MenuName' | translate"
             required>
         </mat-form-field>
           <!-- MENU DESC/CAPTION -->
         <mat-form-field class="rc-full-width">
+          <mat-label>{{ 'CMS.UPLOAD.labelMenuCaption' | translate }}</mat-label>
           <input matInput
                  ngModel
-                 name="menuCaption"
-                 [placeholder]="'CMS-File-Upload.MenuCaption' | translate">
+                 name="menuCaption">
         </mat-form-field>
 
         </section>
@@ -78,10 +79,10 @@
         <!-- CATEGORY -->
         <section>
           <mat-form-field class="rc-full-width">
+            <mat-label>{{ 'CMS.UPLOAD.labelImgCat' | translate }}</mat-label>
             <mat-select
               required
               ngModel
-              [placeholder]="'CMS-File-Upload.ImageCat' | translate"
               name="imgClass"
               class="rc-full-width">
                 <mat-option
@@ -98,7 +99,7 @@
           <mat-checkbox
               ngModel
             name="imgDefault">
-            <span>{{ 'CMS-File-Upload.Default' | translate }}</span>
+            <span>{{ 'CMS.UPLOAD.labelMakeDefault' | translate }}</span>
           </mat-checkbox>
         </section>
 
@@ -110,12 +111,12 @@
 
   <mat-progress-bar *ngIf="inProgress" color="primary" [value]="uploader?.progress"></mat-progress-bar>
 
-  <mat-dialog-actions align="center">
+  <mat-dialog-actions align="end">
     <!-- Cancel upload -->
     <button
       mat-button
       mat-dialog-close>
-      {{ 'CMS-File-Upload.CancelCap' | translate }}
+      {{ 'CMS.UPLOAD.labelBtnCancel' | translate }}
     </button>
     <!-- Start ulpoad -->
     <button
@@ -123,7 +124,7 @@
       (click)="upload()"
       color="primary"
       [disabled]="!filePrimed || !validForm()">
-      {{ 'CMS-File-Upload.UploadCap' | translate }}
+      {{ 'CMS.UPLOAD.labelBtnUpload' | translate }}
     </button>
 
   </mat-dialog-actions>

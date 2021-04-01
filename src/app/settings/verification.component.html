@@ -1,0 +1,109 @@
+<div class="rc-dialog rc-dialog-small">
+
+  <h1 mat-dialog-title>{{ 'VERIFY.titleVerify' | translate }}</h1>
+
+  <form
+    novalidate
+    #profileVerifyForm="ngForm"
+    (ngSubmit)="profileVerifyForm.form.valid && onProfileVerifySubmit(profileVerifyForm.form)">
+
+    <mat-dialog-content>
+
+      <!-- Just need email -->
+      <div *ngIf="data['contactEmailRequired'] && !data['verificationCodeRequired']">
+
+        <markdown ngpreservewhitespaces>{{ 'VERIFY.infoEmail' | translate:
+          { name: data["restaurant"]["restaurant_name"] } }}</markdown>
+
+
+      </div>
+
+      <!-- Just need code, but check email too -->
+      <div *ngIf="!data['contactEmailRequired'] && data['verificationCodeRequired']">
+
+        <markdown ngpreservewhitespaces>{{ 'VERIFY.infoCode' | translate:
+          { name: data["restaurant"]["restaurant_name"] } }}</markdown>
+
+      </div>
+
+      <!-- Need email & code -->
+      <div *ngIf="data['contactEmailRequired'] && data['verificationCodeRequired']">
+
+        <markdown ngpreservewhitespaces>{{ 'VERIFY.infoEmailAndCode' | translate:
+          { name: data["restaurant"]["restaurant_name"] } }}</markdown>
+
+      </div>
+
+      <mat-form-field
+        hideRequiredMarker
+        class="rc-full-width">
+        <mat-label>{{ 'VERIFY.labelEmail' | translate }}:</mat-label>
+        <input
+          #email
+          [(ngModel)]="data['restaurant']['restaurant_email']"
+          autocomplete="off"
+          name="restaurant_email"
+          type="email"
+          matInput
+          pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$"
+          [disabled]="!editable"
+          required>
+        <button
+          *ngIf="!editable"
+          mat-icon-button
+          color="accent"
+          matSuffix
+          (click)="editEmail()">
+          <mat-icon style="padding-bottom: 0.15em;">edit</mat-icon>
+        </button>
+        <mat-error align="end">{{ 'VERIFY.errorInvalidEmail' | translate }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field
+        [hidden]="!data['verificationCodeRequired']"
+        class="rc-full-width"
+        hideRequiredMarker>
+        <mat-label>{{ 'VERIFY.labelCode' | translate }}:</mat-label>
+        <input
+          #verifyCode
+          name="profile_verify"
+          matInput
+          ngModel
+          autocomplete="off"
+          minlength="10"
+          required>
+        <mat-error align="end">{{ 'VERIFY.errorInvalidCode' | translate }}</mat-error>
+      </mat-form-field>
+
+    </mat-dialog-content>
+
+    <mat-dialog-actions align="end" style="margin-top:24px;">
+
+      <button
+        type="button"
+        [disabled]="isSubmitting || codeRequested"
+        (click)="reqVerificationCode()"
+        mat-button>
+        <span *ngIf="!codeRequested">{{ 'VERIFY.labelBtnRequestCode' | translate | uppercase }}</span>
+        <span *ngIf="codeRequested">{{ 'VERIFY.labelBtnSent' | translate | uppercase }}</span>
+
+      </button>
+
+      <button
+        type="button"
+        mat-dialog-close
+        mat-button (click)="profileVerifyDialog.close({ confirmed: false })">
+        {{ 'VERIFY.labelBtnCancel' | translate | uppercase }}
+      </button>
+
+      <button
+        mat-flat-button
+        color="accent"
+        [disabled]="isSubmitting || !profileVerifyForm.form.valid">
+        {{ 'VERIFY.labelBtnSubmit' | translate | uppercase }}
+      </button>
+
+    </mat-dialog-actions>
+
+  </form>
+</div>

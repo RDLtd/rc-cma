@@ -1,6 +1,6 @@
 
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import {
   FormsModule,
   ReactiveFormsModule
@@ -18,7 +18,6 @@ import { routing } from './app.routing';
 import { AppConfig } from './app.config';
 import { SafePipe } from './shared/app.safe';
 import { HeaderComponent } from './common/header.component';
-import { FooterComponent } from './common/footer.component';
 import { SigninComponent } from './signin/signin.component';
 import { AboutComponent } from './common/about.component';
 import { PwdMatchValidator } from './shared/pwdMatch.validator';
@@ -35,27 +34,28 @@ import {
   RestaurantService,
   CMSService,
   PublicService,
-  HelpService,
   AnalyticsService
 } from './_services';
 
 import {
   RestaurantDetailComponent,
-} from './restaurants/restaurant-detail.component';
+} from './cms/restaurant-detail.component';
+import {
+  MarketplaceComponent
+} from './marketplace/marketplace.component'
 
 import {
   RestaurantLookupComponent,
-  ProfilePageComponent,
-  ProfileVerifyComponent,
+  SettingsComponent,
+  VerificationComponent,
   PasswordComponent,
-  ProfileDetailComponent,
-  ProfileImageComponent
-} from './member';
+  ContactsComponent,
+  ImageComponent
+} from './settings';
 
 import {
   CmsImagesComponent,
   CmsComponent,
-  CmsDirectoryComponent,
   CmsMenusComponent,
   CmsHoursComponent,
   CmsFeaturesComponent,
@@ -67,35 +67,35 @@ import {
   CmsMenuDishComponent,
   CmsReservationsComponent,
   CmsDashboardComponent,
-  AffiliatesComponent
 } from './cms';
 
 import {
   LoaderComponent,
   HelpComponent,
   ConfirmCancelComponent,
-  MessageComponent
+  MessageComponent,
+  HelpService,
+  LoadService
 } from './common';
 
 // 3rd party packages
 import {
   TranslateModule,
-  TranslateLoader
+  TranslateLoader, TranslateService
 } from '@ngx-translate/core';
 import { TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { FileUploadModule } from 'ng2-file-upload';
 import { MarkdownModule } from 'ngx-markdown';
 import { ClipboardModule } from 'ngx-clipboard';
 import { JoinComponent } from './join/join.component';
-import { ReferralsComponent } from './member/referrals.component';
 import { LoadComponent } from './common/loader/load.component';
-import { LoadService } from './common/loader/load.service';
 import { CmsSpwLinksComponent } from './cms/cms-spw-links.component';
 import { QRCodeModule } from 'angularx-qrcode';
 import { GoogleMapsModule } from '@angular/google-maps';
-import { StripeComponent } from './join/stripe.component';
 import { MembershipComponent } from './join/membership.component';
 import { HubComponent } from './hub/hub.component';
+import { LogoComponent } from './common/logo/logo.component';
+import { CurrencyPipe } from '@angular/common';
 
 
 // AoT requires an exported function for factories
@@ -103,24 +103,35 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient, './assets/i18n/', '.json');
 }
 
+// Make App initialisation dependant on translations
+// so that we can rely on 'instant' access everywhere else
+export function appInitializerFactory(translate: TranslateService) {
+  // LocalStorage is read/set in index.html
+  const lang = localStorage.getItem('rd_language');
+  return () => {
+    console.log(`Translation loaded (${lang})`);
+    translate.addLangs(['en', 'fr']);
+    translate.setDefaultLang(lang);
+    return translate.use(lang).toPromise();
+  };
+}
+
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    FooterComponent,
     PasswordComponent,
     RestaurantLookupComponent,
     RestaurantDetailComponent,
-    ProfilePageComponent,
-    ProfileVerifyComponent,
+    SettingsComponent,
+    VerificationComponent,
     ConfirmCancelComponent,
     MessageComponent,
     PwdMatchValidator,
-    ProfileDetailComponent,
-    ProfileImageComponent,
+    ContactsComponent,
+    ImageComponent,
     CmsImagesComponent,
     CmsComponent,
-    CmsDirectoryComponent,
     CmsMenusComponent,
     CmsHoursComponent,
     CmsFeaturesComponent,
@@ -136,14 +147,13 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     HelpComponent,
     SafePipe,
     SigninComponent,
-    AffiliatesComponent,
+    MarketplaceComponent,
     JoinComponent,
-    ReferralsComponent,
     LoadComponent,
     CmsSpwLinksComponent,
-    StripeComponent,
     MembershipComponent,
-    HubComponent
+    HubComponent,
+    LogoComponent
   ],
   imports: [
     AngularMaterialModule,
@@ -171,7 +181,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
       api_secret: 'EhLM0NhD7HvJDjX5IvF90u6guq8'
     }),
     QRCodeModule,
-    GoogleMapsModule
+    GoogleMapsModule,
+    ClipboardModule
   ],
   providers: [
     AppConfig,
@@ -188,8 +199,16 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     PublicService,
     CmsPreviewComponent,
     ConfirmCancelComponent,
-    LoadService
+    LoadService,
+    CurrencyPipe,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: appInitializerFactory,
+      deps: [TranslateService],
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+

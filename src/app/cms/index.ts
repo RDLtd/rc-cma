@@ -1,6 +1,5 @@
 export * from './cms-images.component';
 export * from './cms.component';
-export * from './cms-directory.component';
 export * from './cms-menus.component';
 export * from './cms-hours.component';
 export * from './cms-features.component';
@@ -12,4 +11,3 @@ export * from './cms-local.service';
 export * from './cms-menu-dish.component';
 export * from './cms-reservations.component';
 export * from './cms-dashboard.component';
-export * from './affiliates.component';
