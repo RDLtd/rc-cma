@@ -461,10 +461,14 @@ export class CMSService {
   sendOfferRequestToAffiliateEmail(obj: any) {
     return this.http.post(this.config.apiUrl + '/cms/sendofferrequesttoaffiliate',
       {
-
+        affiliate_offer: obj.affiliate_offer,
         affiliate_email: obj.affiliate_email,
         affiliate_name: obj.affiliate_name,
-        admin_fullname: localStorage.getItem('rd_username'),
+        member_id: obj.member_id,
+        member_first_name: obj.member_first_name,
+        member_last_name: obj.member_last_name,
+        member_email: obj.member_email,
+        // admin_fullname: localStorage.getItem('rd_username'),
         company_prefix: this.config.brand.prefix,
         email_language: localStorage.getItem('rd_language'),
         userCode: this.config.userAPICode,

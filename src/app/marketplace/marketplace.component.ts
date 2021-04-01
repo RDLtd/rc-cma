@@ -150,15 +150,22 @@ export class MarketplaceComponent implements OnInit {
       }
     });
   }
+
   // Send restaurant request to Affiliate
   sendAffiliateRequestEmail(deal){
+    const member = JSON.parse(localStorage.getItem('rd_profile'));
     this.cmsService.sendOfferRequestToAffiliateEmail({
+      affiliate_offer: deal.deal_name,
       affiliate_email: deal.affiliate_email,
-      affiliate_name: deal.affiliate_name
+      affiliate_name: deal.affiliate_name,
+      member_id: member.member_id,
+      member_email: member.member_email,
+      member_first_name: member.member_first_name,
+      member_last_name: member.member_last_name
     }).subscribe(
       () => {
         console.log('Email sent to ' + deal.affiliate_name);
-        this.sendAffiliateConfirmation(deal);
+        this.sendAffiliateConfirmation(deal, member);
       },
       error => {
         console.log('Affiliate email failed', error);
@@ -166,14 +173,13 @@ export class MarketplaceComponent implements OnInit {
   }
 
   // Send confirmation
-  sendAffiliateConfirmation(deal: any) {
-    const member = JSON.parse(localStorage.getItem('rd_profile'));
+  sendAffiliateConfirmation(deal: any, member: any) {
     this.cmsService.sendOfferConfirmation({
       affiliate_email: deal.affiliate_email,
       affiliate_name: deal.affiliate_name,
-      affiliate_contact_message: this.translate.instant('MARKETPLACE.msgEmailAffiiateRequest', {
-        affiliate: deal.affiliate_name
-      }),
+      affiliate_contact_message: this.translate.instant(
+        'MARKETPLACE.msgEmailAffiiateRequest',
+        { affiliate: deal.affiliate_name }),
       restaurant_name: null,
       restaurant_email: member.member_email,
       restaurant_number: member.member_id
