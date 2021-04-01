@@ -103,16 +103,20 @@ export class HubComponent implements AfterViewInit {
       dialogMessages.afterClosed()
         .subscribe(addRestaurant => {
           if (addRestaurant) {
+            this.updateMemberAuth();
             this.openRestaurantLookup();
-            this.member.isAuthenticated = true;
           } else {
             // Skipped so update mark as seen
-            this.member.isAuthenticated = true;
-            this.hubService.updateMemberAuth(this.member)
-              .subscribe(res => console.log('updateMemberAuth Success', res));
+            this.updateMemberAuth();
           }
         });
     }
+  }
+
+  updateMemberAuth(): void {
+    this.member.isAuthenticated = true;
+    this.hubService.updateMemberAuth(this.member)
+      .subscribe(res => console.log('updateMemberAuth Success', res));
   }
 
   openRestaurantLookup(): void {
