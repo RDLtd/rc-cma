@@ -364,7 +364,7 @@
 		"labelFilteredBy": "Filtered by",
 		"labelInfo": "For more information",
 		"labelRequest": "Request contact",
-		"labelUrl": "Website link",
+		"labelUrl": "Webpage",
 		"msgRequest": "## {{ deal }}\n\nIf you would like to take advantage of this exclusive Member offer, or would like to know a bit more about it, confirm your interest below.\n\nWe will forward your contact details and Member ID to **{{ affiliate }}** and they will contact you within 2 working days with further details.\n\nThis is just to register you interest and there's no obligation on your part to proceed, unless you decide to.",
 		"tipAddToFavourites": "Add/Remove favourites",
 		"tipClearFilters": "Clear all filters",
@@ -372,6 +372,7 @@
 		"tipFavourites": "Show favourites",
 		"tipFilterBy": "Filter results",
 		"tipLink": "More information online",
+		"tipNational": "Available to all UK locations",
 		"tipRequestContact": "Someone will contact you about this deal",
 		"titleRequest": "Exclusive Member Deal"
 	},

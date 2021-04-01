@@ -64,7 +64,7 @@
           </button>
           <div mat-card-title>
             <h4>{{ deal.deal_category | uppercase }}</h4>
-            <img src="{{ deal.affiliate_logo_path }}" alt=" {{ deal.affiliate_name }}">
+            <img src="{{ deal.affiliate_logo_path }}" alt="{{ deal.affiliate_name }}">
             <h2>{{ deal.deal_name }}</h2>
             <h3>by <a [href]="deal.affiliate_url" target="_blank">{{ deal.affiliate_name }}</a></h3>
           </div>
@@ -80,6 +80,7 @@
           </span >
           <span
             *ngIf="deal.deal_national"
+            matTooltip="{{ 'MARKETPLACE.tipNational' | translate }}"
             class="rc-icon-tag">
             <mat-icon>local_shipping</mat-icon>
             {{ 'MARKETPLACE.labelAvailableNational' | translate | uppercase }}
@@ -87,6 +88,7 @@
           <mat-card-actions align="end">
             <button mat-button color="accent" [matMenuTriggerFor]="menu">
               {{ 'MARKETPLACE.labelBtnFindOutMore' | translate | uppercase }}
+              <mat-icon>menu</mat-icon>
             </button>
           </mat-card-actions>
         </mat-card>

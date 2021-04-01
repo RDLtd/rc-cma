@@ -563,6 +563,8 @@ a.mat-menu-item {text-decoration: none;}
   }
   .rc-icon-tag {
     position: absolute;
+    cursor: default;
+    z-index: 20;
     bottom: 22px;
     display: flex;
     font-size: 14px;
