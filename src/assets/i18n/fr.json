@@ -357,7 +357,7 @@
 	"MARKETPLACE": {
 		"labelAvailableLocal": "Local",
 		"labelAvailableNational": "nationale",
-		"labelBtnCancel": "Pas maintenant merci",
+		"labelBtnCancel": "Demande d'annulation",
 		"labelBtnConfirm": "Envoyer une demande",
 		"labelBtnFindOutMore": "en savoir plus",
 		"labelDownload": "Télécharger l'information",
@@ -365,7 +365,8 @@
 		"labelInfo": "Pour plus d'informations",
 		"labelRequest": "Demande de contact",
 		"labelUrl": "Page web",
-		"msgRequest": "## {{ deal }}\nSi vous souhaitez profiter de cette offre exclusive pour les membres, ou souhaitez en savoir un peu plus à son sujet, confirmez votre intérêt ci-dessous.\n\nNous transmettrons vos coordonnées et votre identifiant de membre à **{{ affiliate }}** et ils vous contacteront dans les 2 jours ouvrables avec plus de détails.\n\nCeci est juste pour enregistrer votre intérêt et il n'y a aucune obligation de votre part de procéder, sauf si vous décidez de le faire.",
+		"msgEmailAffiiateRequest": "Votre demande à été envoyé.\n\nLes détails de votre abonnement ont été envoyés à {{ affiliate }} et un membre de son équipe doit vous contacter dans les deux jours ouvrables.\n",
+		"msgRequest": "Vos coordonnées et votre numéro de membre seront envoyés à **{{ affiliate }}** et un membre de son équipe devra vous contacter dans les deux jours ouvrables pour discuter de l'offre **{{ deal }}**.\n\nCeci est juste pour enregistrer votre intérêt auprès d'eux et il n'y a aucune obligation de procéder, à moins que vous ne choisissiez de le faire.",
 		"tipAddToFavourites": "Ajouter / supprimer des favoris",
 		"tipClearFilters": "Effacer tous les filtres",
 		"tipDownload": "Téléchargement PDF",

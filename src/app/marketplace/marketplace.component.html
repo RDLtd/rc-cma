@@ -101,8 +101,7 @@
           <mat-divider></mat-divider>
           <button
             mat-menu-item
-            matTooltip="{{ 'MARKETPLACE.tipRequestContact' | translate }}"
-            [routerLink]="['/profile']">
+            (click)="notifyAffiliate(deal)">
             <mat-icon>contact_mail</mat-icon>
             <span>{{ 'MARKETPLACE.labelRequest' | translate }}</span>
           </button>

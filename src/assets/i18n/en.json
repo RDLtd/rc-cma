@@ -357,7 +357,7 @@
 	"MARKETPLACE": {
 		"labelAvailableLocal": "Local",
 		"labelAvailableNational": "National",
-		"labelBtnCancel": "Not now thanks",
+		"labelBtnCancel": "Cancel request",
 		"labelBtnConfirm": "Send Request",
 		"labelBtnFindOutMore": "Find out more",
 		"labelDownload": "Download information",
@@ -365,7 +365,8 @@
 		"labelInfo": "For more information",
 		"labelRequest": "Request contact",
 		"labelUrl": "Webpage",
-		"msgRequest": "## {{ deal }}\n\nIf you would like to take advantage of this exclusive Member offer, or would like to know a bit more about it, confirm your interest below.\n\nWe will forward your contact details and Member ID to **{{ affiliate }}** and they will contact you within 2 working days with further details.\n\nThis is just to register you interest and there's no obligation on your part to proceed, unless you decide to.",
+		"msgEmailAffiiateRequest": "Your request has been sent.\n\nYou Membership details have been sent to {{ affiliate }} and someone from their team should contact you within 2 working days. \n",
+		"msgRequest": "Your contact details and Membership ID will be sent to **{{ affiliate }}** and someone from their team should contact you within 2 working days to discuss the **{{ deal }}** deal.\n\nThis is just to register you interest with them and there's no obligation to proceed, unless you should choose to do so.",
 		"tipAddToFavourites": "Add/Remove favourites",
 		"tipClearFilters": "Clear all filters",
 		"tipDownload": "PDF Download",
