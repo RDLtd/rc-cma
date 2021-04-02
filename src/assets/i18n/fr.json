@@ -160,7 +160,7 @@
 			"headerMenuInfo": "Informations sur le menu et le plat",
 			"headerSampleDishes": "Exemples de plats",
 			"hintSection": "Par exemple, les entrées, le plat principal ou le déjeuner, etc.",
-			"infoSampleDishes": "Ajoutez une sélection de vos plats les plus populaires. Nous vous recommandons de choisir un échantillon de votre gamme de prix et des plats qui reflètent le mieux votre style de nourriture. Vous pouvez afficher les plats comme\n! [Végétarien] ({{ icon.veg }}) ** Végétarien **,\n! [Vegan] ({{ icon.vegan }}) ** Vegan ** ou\n! [Sans gluten] ({{ icon.gluten }}) ** Sans gluten ** lorsque vous les ajoutez.",
+			"infoSampleDishes": "Ajoutez une sélection de vos plats les plus populaires. Nous vous recommandons de choisir un échantillon de votre gamme de prix et des plats qui reflètent le mieux votre style de nourriture. Vous pouvez afficher les plats comme\n![Végétarien]({{ icon.veg }}) **Végétarien**,\n![Vegan]({{ icon.vegan }}) **Vegan** ou\n![Sans gluten]({{ icon.gluten }}) **Sans gluten** lorsque vous les ajoutez.",
 			"labelActive": "En ligne",
 			"labelAddMenu": "Ajouter un menu",
 			"labelBtnCancel": "annuler",
@@ -320,7 +320,7 @@
 		"joinSuccess": "# OK merci!\n\nUn membre de notre équipe Support & Curation sera en contact avec vous sous peu.\n\n**{{ brand }} Équipe de curation **",
 		"joinUsByReferral": "",
 		"joinUsToday": "# Rejoignez-nous!\n\nSuivez simplement les 3 étapes suivantes et en un rien de temps, vous ferez partie du Collectif!\n\n 1. Indiquez votre nom et vos coordonnées\n\n 2. Sélectionnez un abonnement mensuel ou annuel\n\n 3. Payez votre abonnement en ligne\n\nSi vous rencontrez des problèmes tout au long de ce processus, veuillez envoyer un e-mail à:\n\n{{ email }}",
-		"joinWelcome": "# Bienvenue\n\nVous vous êtes inscrit avec succès en tant que ** Membre ** et nous vous avons envoyé des informations de connexion ainsi que des informations supplémentaires.\n\nFermez cette fenêtre et vérifiez votre messagerie.\n\nMerci beaucoup.\n\n**{{ brand }} Équipe de curation **",
+		"joinWelcome": "# Bienvenue\n\nVous vous êtes inscrit avec succès en tant que **Membre** et nous vous avons envoyé des informations de connexion ainsi que des informations supplémentaires.\n\nFermez cette fenêtre et vérifiez votre messagerie.\n\nMerci beaucoup.\n\n**{{ brand }} Équipe de curation**",
 		"labelBtnSubmit": "Suivant",
 		"labelEmail": "Adresse Email",
 		"labelFirstName": "Prénom",
@@ -500,10 +500,12 @@
 		"labelBtnSignIn": "SE CONNECTER",
 		"labelEmail": "ADRESSE EMAIL",
 		"labelPassword": "MOT DE PASSE",
+		"msgNewMember": "Dans les prochaines minutes, vous devriez recevoir un e-mail de bienvenue à votre adresse enregistrée.\n\nL'e-mail comprendra un mot de passe généré par le système que vous devrez utiliser pour vous connecter.\n\n- **Copiez le mot de passe** et retournez sur cette page\n- Cliquez sur 'OK' pour fermer cette fenêtre de message\n- Collez votre mot de passe dans le formulaire et **connectez-vous**.\n",
 		"newPwdSent": "Un nouveau mot de passe a été envoyé à votre adresse email.",
 		"resetPwdHeader": "Réinitialiser le mot de passe",
 		"resetPwdInstructions": "Entrez votre adresse e-mail enregistrée pour réinitialiser votre mot de passe. Vous devrez peut-être vérifier votre dossier de courrier indésirable.",
-		"signInOrJoin": "# S'identifier\n\nou [rejoindre {{ brand }}]({{ route }})"
+		"signInOrJoin": "# S'identifier\n\nou [rejoindre {{ brand }}]({{ route }})",
+		"titleThanks": "Merci de vous joindre a nous"
 	},
 	"VERIFY": {
 		"errorInvalidCode": "Code de vérification invalide",

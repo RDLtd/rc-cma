@@ -500,10 +500,12 @@
 		"labelBtnSignIn": "SIGN IN",
 		"labelEmail": "USER EMAIL ADDRESS",
 		"labelPassword": "USER PASSWORD",
+		"msgNewMember": "In the next couple of minutes you should receive a welcome email from us that includes a system generated password that you will need to use to sign in.\n\n- **Copy the password** & return to this page\n- Click 'OK' to close this message window\n- Paste the password into the form and **Sign In**.\n",
 		"newPwdSent": "A new password has been sent to your email address",
 		"resetPwdHeader": "Reset password",
 		"resetPwdInstructions": "Enter your registered email address to reset your password. You may need to check your spam folder.",
-		"signInOrJoin": "# Sign in\n\nor [join {{ brand }}]({{ route }})"
+		"signInOrJoin": "# Sign in\n\nor [Join {{ brand }}]({{ route }})",
+		"titleThanks": "Thanks for joining us"
 	},
 	"VERIFY": {
 		"errorInvalidCode": "Invalid verification code",

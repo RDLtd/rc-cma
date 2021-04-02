@@ -490,6 +490,10 @@ a.mat-menu-item {text-decoration: none;}
     background-color: $rc-theme-secondary;
     color: black;
     text-transform: uppercase;
+    font-size: 12px;
+    @include mq(small) {
+      font-size: 16px;
+    }
   }
   &.rc-toolbar-fixed {
     position: fixed;
@@ -921,6 +925,11 @@ a.mat-menu-item {text-decoration: none;}
   }
   .mat-stroked-button {
     border-color: $rc-theme-accent;
+  }
+  ul { margin-left: 24px;}
+  li {
+    list-style: disc;
+    margin-bottom: 4px;
   }
 }
 .rc-dialog-member {
