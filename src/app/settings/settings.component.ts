@@ -350,7 +350,6 @@ export class SettingsComponent implements OnInit {
     const msg = this.currentProduct.product_period === 'm' ?
       'SETTINGS.msgChangePlanToYearly' : 'SETTINGS.msgChangePlanToMonthly';
     const dialogRef = this.dialog.open(ConfirmCancelComponent, {
-      maxWidth: '600px',
       data: {
         title: this.translate.instant('SETTINGS.titleSubscription'),
         body: this.translate.instant( msg, { plan: this.currentProduct.product_name }),
