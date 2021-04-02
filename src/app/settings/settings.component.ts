@@ -283,6 +283,7 @@ export class SettingsComponent implements OnInit {
       this.member.member_id,
       this.member.member_subscription_id,
       this.restProd.product_stripe_price_id,
+      this.restProd.product_tax_id,
       qty
     )
       .subscribe(res => {
