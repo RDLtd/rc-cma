@@ -286,7 +286,9 @@
 	},
 	"HEADER": {
 		"labelAbout": "À propos de ce logiciel",
+		"labelHub": "Hub des membres",
 		"labelLogout": "Connectez - Out",
+		"labelMarketplace": "marché",
 		"labelSettings": "Paramètres du compte",
 		"signedInAs": "SIGNÉ EN MEMBRE",
 		"tipBtnHub": ""

@@ -286,7 +286,9 @@
 	},
 	"HEADER": {
 		"labelAbout": "About this software",
+		"labelHub": "Member's Hub",
 		"labelLogout": "Logout",
+		"labelMarketplace": "Marketplace",
 		"labelSettings": "Account Settings",
 		"signedInAs": "SIGNED IN MEMBER",
 		"tipBtnHub": "Member's Hub"
