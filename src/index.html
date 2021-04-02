@@ -22,7 +22,7 @@
       }
       localStorage.setItem('rd_locale', loc);
       // Is this an RI domain
-      if (ref.includes('independants') || loc.substr(3) === 'fr') {
+      if (ref.includes('independants')) {
         localStorage.setItem('rd_brand', 'ri');
         document.title = 'Restaurateurs Indépendants';
         return 'ri';
