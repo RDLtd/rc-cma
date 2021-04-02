@@ -306,6 +306,7 @@
 		"hintEmail": "Your contact email address",
 		"invalidEmail": "A valid email address is required",
 		"invalidJobRequired": "Please select your main job or role",
+		"invalidRequired": "Required",
 		"invalidTelRequired": "A valid mobile number is required",
 		"jobRoles": [
 			"Owner/Manager",

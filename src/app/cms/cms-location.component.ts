@@ -93,6 +93,7 @@ export class CmsLocationComponent implements OnInit {
       .subscribe(
         data => {
           this.directions_copy = this.descriptions = data['descriptions'][0];
+
           // update 041118 - fudge to fix back end returning (or something returning) 'undefined'
           if (this.descriptions.cms_description_car_parking === 'undefined') {
             this.descriptions.cms_description_car_parking = '';
@@ -161,6 +162,7 @@ export class CmsLocationComponent implements OnInit {
       data => {
         if (data['elements'].length > 0) {
           this.directions = data['elements'][0];
+          console.log(this.directions);
           this.fileLoaded = true;
         } else {
           this.fileLoaded = false;
@@ -176,6 +178,7 @@ export class CmsLocationComponent implements OnInit {
   }
 
   uploadDirections() {
+
     let dialogRef = this.dialog.open(CmsFileUploadComponent, {
       data: {
         type: 'direction',

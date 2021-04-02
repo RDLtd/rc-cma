@@ -15,7 +15,9 @@ image window will automatically close.
 
 ### Default image
 
-Decide which image best represents the restaurant and mark it as the **DEFAULT** image - you can do this after upload by selecting the image card and using the **MORE** menu (...) in the top right corner. The default image will be used as the *hero* image on the restaurant's web page and will also be used by 3rd party website in their search results.
+Decide which image best represents the restaurant and mark it as the **DEFAULT** image - you can do this after 
+upload by selecting the image to open it in a new modal window, then using the **MORE** menu (...) in the top right corner. The default image 
+will be then used as the *hero* image on the restaurant's web page and will also be used by 3rd party website in their search results.
 
 ### Activate/deactivate
 
