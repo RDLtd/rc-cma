@@ -562,13 +562,14 @@ export class MemberService {
       });
   }
 
-  createRestaurantSubscription( member_id: string, customer_id: string, price_id: string, quantity: number) {
-    console.log('createRestaurantSubscription', member_id, price_id, customer_id, quantity);
+  createRestaurantSubscription( member_id: string, customer_id: string, price_id: string, tax_id: string, quantity: number) {
+    console.log('createRestaurantSubscription', member_id, price_id, customer_id, tax_id, quantity);
     return this.http.post(this.config.apiUrl + '/payments/create-restaurant-subscription',
       {
         member_id: member_id,
         customer_id: customer_id,
         price_id: price_id,
+        tax_id: tax_id,
         quantity: quantity,
         userCode: this.config.userAPICode,
         token: this.authToken
