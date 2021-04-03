@@ -60,7 +60,7 @@
               #tel="ngModel"
               [(ngModel)]="member.member_telephone"
               minlength="11"
-              pattern="^[0-9 ]+$"
+              [pattern]="patternMobile"
               required>
             <mat-error align="end">{{ 'SETTINGS.contacts.invalidMobile' | translate }}</mat-error>
           </mat-form-field>
