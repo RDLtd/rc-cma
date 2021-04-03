@@ -837,6 +837,9 @@ a.mat-menu-item {text-decoration: none;}
   position: relative;
   padding: 0;
   max-width: 960px;
+  input {
+    text-overflow:ellipsis;
+  }
 
   .mat-dialog-title {
     font: 500 24px/36px $rc-default-font;
