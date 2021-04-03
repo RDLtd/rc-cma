@@ -1286,8 +1286,8 @@ ul.rc-lookup-results {
     flex-direction: row;
   }
   &-image {
-    width: 240px;
-    height: 120px;
+    width: 100%;
+    height: 160px;
     object-fit: cover;
     @include mq(small) {
       height: 120px;
