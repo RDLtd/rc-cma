@@ -500,7 +500,7 @@
 		"labelBtnSignIn": "SE CONNECTER",
 		"labelEmail": "ADRESSE EMAIL",
 		"labelPassword": "MOT DE PASSE",
-		"msgNewMember": "Dans les prochaines minutes, vous devriez recevoir un e-mail de bienvenue à votre adresse enregistrée.\n\nL'e-mail comprendra un mot de passe généré par le système que vous devrez utiliser pour vous connecter.\n\n- **Copiez le mot de passe** et retournez sur cette page\n- Cliquez sur 'OK' pour fermer cette fenêtre de message\n- Collez votre mot de passe dans le formulaire et **connectez-vous**.\n",
+		"msgNewMember": "Dans les prochaines minutes, vous devriez recevoir un ** e-mail de bienvenue ** de notre part qui comprend un mot de passe généré par le système.\n\n- **Copiez le mot de passe** et retournez sur cette page\n- Fermez cette fenêtre de message en cliquant sur 'OK'\n- Collez votre mot de passe dans le formulaire et **Connexion**.\n\nVous recevrez également un reçu de paiement pour vos dossiers.\n",
 		"newPwdSent": "Un nouveau mot de passe a été envoyé à votre adresse email.",
 		"resetPwdHeader": "Réinitialiser le mot de passe",
 		"resetPwdInstructions": "Entrez votre adresse e-mail enregistrée pour réinitialiser votre mot de passe. Vous devrez peut-être vérifier votre dossier de courrier indésirable.",
