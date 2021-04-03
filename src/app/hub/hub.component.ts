@@ -103,12 +103,10 @@ export class HubComponent implements AfterViewInit {
       dialogMessages.afterClosed()
         .subscribe(addRestaurant => {
           if (addRestaurant) {
-            this.updateMemberAuth();
             this.openRestaurantLookup();
-          } else {
-            // Skipped so update mark as seen
-            this.updateMemberAuth();
           }
+          // Mark as seen
+          this.updateMemberAuth();
         });
     }
   }

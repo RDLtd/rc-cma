@@ -441,11 +441,18 @@ export class CmsMenusComponent implements OnInit {
       }
     });
 
-    this.cms.updateLastCreatedField(Number(this.restaurant.restaurant_id), 'menus').subscribe(
-      () => {},
-      () => {
-        console.log('error in updatelastupdatedfield for menus');
-      });
+    dialogRef.afterClosed()
+      .subscribe(() => {
+        this.cms.updateLastCreatedField(Number(this.restaurant.restaurant_id), 'menus').subscribe(
+          (res) => { console.log(res);},
+          () => {
+            console.log('error in updatelastupdatedfield for menus');
+          });
+        // Refresh
+        this.getPdfMenus();
+    });
+
+
     dialogRef.componentInstance.dialog = dialogRef;
   }
 
@@ -484,7 +491,7 @@ export class CmsMenusComponent implements OnInit {
           );
 
         this.cms.updateLastCreatedField(Number(this.restaurant.restaurant_id), 'menus').subscribe(
-          () => {},
+          (res) => { console.log(res)},
           () => {
             console.log('error in updatelastupdatedfield for menus');
           });

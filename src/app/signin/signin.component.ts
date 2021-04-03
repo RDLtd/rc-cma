@@ -4,7 +4,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { AppConfig } from '../app.config';
-import { HelpService } from '../common';
+import { ConfirmCancelComponent, HelpService } from '../common';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'rc-signin',
@@ -26,6 +27,7 @@ export class SigninComponent implements OnInit {
   trans: any;
 
   constructor(
+    private dialog: MatDialog,
     private authService: AuthenticationService,
     private memberService: MemberService,
     public snackBar: MatSnackBar,
@@ -54,7 +56,7 @@ export class SigninComponent implements OnInit {
     if (this.authService.isAuth()) {
       this.router.navigate(['/hub']);
     }
-    this.trans = this.translate.instant('SIGNIN');
+    //this.trans = this.translate.instant('SIGNIN');
   }
 
   dspNewMemberMessage() {
@@ -62,15 +64,17 @@ export class SigninComponent implements OnInit {
     if (!!newMember) {
       this.newMemberEmail = newMember.email;
     }
-    this.help.dspHelp('signin-new-member', null, 'Thanks');
+    let dialogRef = this.dialog.open(ConfirmCancelComponent, {
+      data: {
+        title: this.translate.instant('SIGNIN.titleThanks'),
+        body: this.translate.instant('SIGNIN.msgNewMember'),
+        confirm: 'OK',
+        cancel: 'hide'
+      }
+    })
   }
 
   signIn(formValue) {
-
-    // need this in here since the NgInit here executes too soon!
-    // this.translate.get('SignIn').subscribe(data => {
-    //   this.SIGNIN = data;
-    // });
 
     // console.log('form', formValue);
     this.isSubmitting = true;
@@ -102,10 +106,10 @@ export class SigninComponent implements OnInit {
       data => {
         // console.log(data);
         if (data['status'] === 'OK') {
-          this.openSnackBar(this.trans.newPwdSent);
+          this.openSnackBar(this.translate.instant('SIGNIN.newPwdSent'));
           this.pwdReset = false;
         } else {
-          this.openSnackBar(this.trans.errorEmailUnknown);
+          this.openSnackBar(this.translate.instant('SIGNIN.errorEmailUnknown'));
         }
       },
       error => {

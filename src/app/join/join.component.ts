@@ -59,16 +59,8 @@ export class JoinComponent implements OnInit {
       this.stripeSessionId = params['session_id'];
       console.log('stripeSessionId', this.stripeSessionId);
     });
-
-    // Switch language
-    // translate.onLangChange.subscribe(() => {
-    //   this.translate.get('Join').subscribe(data => {
-    //     this.t_data = data;
-    //   });
-    // });
-
-
   }
+
   ngOnInit() {
 
     // Check for a referral code in the url
@@ -87,11 +79,6 @@ export class JoinComponent implements OnInit {
     this.brand = this.config.brand;
     // Get array of translated jobs
     this.jobs = this.translate.instant('JOIN.jobRoles');
-
-    // // Get translations
-    // this.translate.get('Join').subscribe(data => {
-    //   this.t_data = data;
-    // });
 
     // Check session storage
     // console.log('Pending Member', this.pendingMember);

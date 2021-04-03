@@ -85,7 +85,7 @@
             [placeholder]="'JOIN.placeholderFirstName' | translate"
             required
             autofocus>
-          <mat-error align="end">Required</mat-error>
+          <mat-error align="end">{{ 'JOIN.invalidRequired' | translate }}</mat-error>
         </mat-form-field>
 
         <span style="display: inline-block; width: 2%;"></span>
@@ -99,7 +99,7 @@
             matInput
             [placeholder]="'JOIN.placeholderLastName' | translate"
             required>
-          <mat-error align="end">Required</mat-error>
+          <mat-error align="end">{{ 'JOIN.invalidRequired' | translate }}</mat-error>
         </mat-form-field>
 
         <!-- Role -->

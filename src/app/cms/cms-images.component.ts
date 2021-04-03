@@ -134,9 +134,9 @@ export class CmsImagesComponent implements OnInit {
       }
     });
 
-    dialogRef.afterClosed().subscribe(res => {
+    dialogRef.afterClosed().subscribe(confirmed => {
 
-      if (res.confirmed) {
+      if (confirmed) {
         this.cms.deleteElement(img.cms_element_id)
           .subscribe(res => {
             // console.log(res);

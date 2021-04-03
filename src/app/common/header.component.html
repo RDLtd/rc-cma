@@ -7,7 +7,7 @@
   </a>
 
   <!-- section label -->
-  <span class="rc-header-tag">{{ navLabel | uppercase }}</span>
+  <span class="rc-header-tag rc-media-small-hide">{{ navLabel | uppercase }}</span>
 
   <span class="rc-space-filler"></span>
 
@@ -58,6 +58,14 @@
       <h3>{{ displayName }}</h3>
       <span>{{ 'HEADER.signedInAs' | translate | uppercase }}</span>
     </div>
+    <mat-divider></mat-divider>
+
+    <button
+      mat-menu-item
+      [routerLink]="['/hub']">
+      <mat-icon>apps</mat-icon>
+      <span>{{ 'HEADER.labelHub' | translate }}</span>
+    </button>
     <mat-divider></mat-divider>
 
     <button

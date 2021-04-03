@@ -160,7 +160,7 @@
 			"headerMenuInfo": "Informations sur le menu et le plat",
 			"headerSampleDishes": "Exemples de plats",
 			"hintSection": "Par exemple, les entrées, le plat principal ou le déjeuner, etc.",
-			"infoSampleDishes": "Ajoutez une sélection de vos plats les plus populaires. Nous vous recommandons de choisir un échantillon de votre gamme de prix et des plats qui reflètent le mieux votre style de nourriture. Vous pouvez afficher les plats comme\n! [Végétarien] ({{ icon.veg }}) ** Végétarien **,\n! [Vegan] ({{ icon.vegan }}) ** Vegan ** ou\n! [Sans gluten] ({{ icon.gluten }}) ** Sans gluten ** lorsque vous les ajoutez.",
+			"infoSampleDishes": "Ajoutez une sélection de vos plats les plus populaires. Nous vous recommandons de choisir un échantillon de votre gamme de prix et des plats qui reflètent le mieux votre style de nourriture. Vous pouvez afficher les plats comme\n![Végétarien]({{ icon.veg }}) **Végétarien**,\n![Vegan]({{ icon.vegan }}) **Vegan** ou\n![Sans gluten]({{ icon.gluten }}) **Sans gluten** lorsque vous les ajoutez.",
 			"labelActive": "En ligne",
 			"labelAddMenu": "Ajouter un menu",
 			"labelBtnCancel": "annuler",
@@ -286,7 +286,9 @@
 	},
 	"HEADER": {
 		"labelAbout": "À propos de ce logiciel",
+		"labelHub": "Hub des membres",
 		"labelLogout": "Connectez - Out",
+		"labelMarketplace": "marché",
 		"labelSettings": "Paramètres du compte",
 		"signedInAs": "SIGNÉ EN MEMBRE",
 		"tipBtnHub": ""
@@ -302,10 +304,11 @@
 		"duplicateMobile": "Ce numéro de téléphone est déjà enregistré. ",
 		"duplicateMobileAndEmail": "Ce ** numéro de mobile ** et cette ** adresse e-mail ** ont déjà été enregistrés [Connectez-vous ou récupérez votre mot de passe ici] (/signin).",
 		"duplicateRegistration": "Déjà enregistré!",
-		"headerContactDetails": "",
-		"hintEmail": "",
-		"invalidEmail": "",
-		"invalidJobRequired": "",
+		"headerContactDetails": "Détails de votre contact",
+		"hintEmail": "Votre adresse email de contact",
+		"invalidEmail": "Une adresse email valide est exigée",
+		"invalidJobRequired": "Veuillez sélectionner votre emploi ou rôle principal",
+		"invalidRequired": "Champs obligatoires",
 		"invalidTelRequired": "Un numéro de téléphone valide est requis",
 		"jobRoles": [
 			"Propriétaire / Gérant",
@@ -316,20 +319,20 @@
 		],
 		"joinSuccess": "# OK merci!\n\nUn membre de notre équipe Support & Curation sera en contact avec vous sous peu.\n\n**{{ brand }} Équipe de curation **",
 		"joinUsByReferral": "",
-		"joinUsToday": "# Rejoignez-nous!\n\nSuivez simplement les 3 étapes suivantes et en un rien de temps, vous ferez partie du Collectif!\n\n 1. Indiquez votre nom et vos coordonnées\n\n 2. Sélectionnez un abonnement mensuel ou annuel\n\n 3. Payez votre abonnement en ligne\n\nSi vous rencontrez des problèmes tout au long de ce processus, veuillez [contacter notre équipe d'assistance] ({{ email }}).",
-		"joinWelcome": "# Bienvenue\n\nVous vous êtes inscrit avec succès en tant que ** Membre ** et nous vous avons envoyé des informations de connexion ainsi que des informations supplémentaires.\n\nFermez cette fenêtre et vérifiez votre messagerie.\n\nMerci beaucoup.\n\n**{{ brand }} Équipe de curation **",
+		"joinUsToday": "# Rejoignez-nous!\n\nSuivez simplement les 3 étapes suivantes et en un rien de temps, vous ferez partie du Collectif!\n\n 1. Indiquez votre nom et vos coordonnées\n\n 2. Sélectionnez un abonnement mensuel ou annuel\n\n 3. Payez votre abonnement en ligne\n\nSi vous rencontrez des problèmes tout au long de ce processus, veuillez envoyer un e-mail à:\n\n{{ email }}",
+		"joinWelcome": "# Bienvenue\n\nVous vous êtes inscrit avec succès en tant que **Membre** et nous vous avons envoyé des informations de connexion ainsi que des informations supplémentaires.\n\nFermez cette fenêtre et vérifiez votre messagerie.\n\nMerci beaucoup.\n\n**{{ brand }} Équipe de curation**",
 		"labelBtnSubmit": "Suivant",
-		"labelEmail": "",
-		"labelFirstName": "",
-		"labelJob": "",
-		"labelLastName": "",
-		"labelTel": "",
+		"labelEmail": "Adresse Email",
+		"labelFirstName": "Prénom",
+		"labelJob": "Votre travail / rôle",
+		"labelLastName": "Nom de famille",
+		"labelTel": "Mobile",
 		"linkSignIn": "Connectez-vous",
 		"msgCheckEmail": "Accéder à votre email pour les informations d'identification de connexion",
-		"placeholderEmail": "",
-		"placeholderFirstName": "",
-		"placeholderLastName": "",
-		"placeholderTel": ""
+		"placeholderEmail": "Votre adresse email",
+		"placeholderFirstName": "Ton prénom",
+		"placeholderLastName": "Votre nom de famille",
+		"placeholderTel": "Votre numéro de portable"
 	},
 	"LOADER": {
 		"msgDefaultLoading": "Chargement",
@@ -391,7 +394,7 @@
 		"labelBtnLater": "Fais-le plus tard",
 		"labelBtnStart": "COMMENCER ICI",
 		"messagesReadOk": "Ok, j'ai lu ceux-ci",
-		"welcomeNewMember": "# Vous y êtes!\n\nC'est formidable que vous ayez choisi de rejoindre Restaurant Collective et nous espérons que vous nous aiderez à développer cette communauté passionnante de professionnels de l'industrie et de restaurateurs indépendants.\n\n## Ajoutez votre restaurant\n\nAvant de commencer à explorer le Hub des membres, veuillez terminer la configuration initiale en associant votre restaurant à votre compte de membre.\n\nLorsque vous êtes prêt, sélectionnez l'option ** COMMENCER ICI ** ci-dessous.\n\nTrouvez votre restaurant et suivez les instructions à l'écran pour vérifier les détails et l'associer à votre abonnement.\n\nSi vous avez besoin d'aide, ouvrez la ** Base de connaissances ** et consultez le guide ** Mise en route **."
+		"welcomeNewMember": "# Vous y êtes!\n\nC'est formidable que vous ayez choisi de rejoindre Restaurant Collective et nous espérons que vous nous aiderez à développer cette communauté passionnante de professionnels de l'industrie et de restaurateurs indépendants.\n\n## Ajoutez votre restaurant\n\nAvant de commencer à explorer le Hub des membres, veuillez terminer la configuration initiale en associant votre restaurant à votre compte de membre.\n\nLorsque vous êtes prêt, sélectionnez l'option ** COMMENCER ICI ** ci-dessous.\n\nTrouvez votre restaurant et suivez les instructions à l'écran pour vérifier les détails et l'associer à votre abonnement.\n"
 	},
 	"PLANS": {
 		"infoCurrentPlanMonthly": "Votre abonnement actuel est renouvelé le **{{ renewal }}** de chaque mois à **{{ price }}**. Pour modifier votre forfait, sélectionnez une autre option ci-dessous et nous calculerons tous les frais supplémentaires dus.",
@@ -420,7 +423,7 @@
 		"infoAccounts": "Les restaurants liés à votre compte sont affichés ci-dessous et vous pouvez gérer des restaurants supplémentaires en les ajoutant simplement ici.\n\nPour afficher votre historique de facturation et les détails de paiement, ou pour télécharger vos factures, sélectionnez l'option «GÉRER LES PAIEMENTS» ci-dessus.",
 		"infoAuth": "Ce sont vos informations d'identification d'adhésion dont vous aurez besoin pour vous connecter à l'application. Les mots de passe doivent comporter au moins 8 caractères.",
 		"infoAvatar": "Cliquez sur l'image ajouter / modifier et personnaliser les détails de votre adhésion.",
-		"infoMember": "Tous les contacts concernant votre adhésion seront envoyés à cette adresse e-mail.",
+		"infoMember": "Toutes les communications concernant votre adhésion seront envoyées à cette adresse e-mail.",
 		"infoReferrals": "Il s'agit d'un code de référence unique que vous pouvez partager avec n'importe lequel de vos collègues, pour les encourager à rejoindre Restaurant Collective et à faire partie de cette nouvelle organisation passionnante.",
 		"labelAddRestaurant": "Ajouter un restaurant à ce compte",
 		"labelAwaitingImage": "EN ATTENTE D'IMAGE",
@@ -497,10 +500,12 @@
 		"labelBtnSignIn": "SE CONNECTER",
 		"labelEmail": "ADRESSE EMAIL",
 		"labelPassword": "MOT DE PASSE",
+		"msgNewMember": "Dans les prochaines minutes, vous devriez recevoir un ** e-mail de bienvenue ** de notre part qui comprend un mot de passe généré par le système.\n\n- **Copiez le mot de passe** et retournez sur cette page\n- Fermez cette fenêtre de message en cliquant sur 'OK'\n- Collez votre mot de passe dans le formulaire et **Connexion**.\n\nVous recevrez également un reçu de paiement pour vos dossiers.\n",
 		"newPwdSent": "Un nouveau mot de passe a été envoyé à votre adresse email.",
 		"resetPwdHeader": "Réinitialiser le mot de passe",
 		"resetPwdInstructions": "Entrez votre adresse e-mail enregistrée pour réinitialiser votre mot de passe. Vous devrez peut-être vérifier votre dossier de courrier indésirable.",
-		"signInOrJoin": "# S'identifier\n\nou [rejoindre {{ brand }}]({{ route }})"
+		"signInOrJoin": "# S'identifier\n\nou [rejoindre {{ brand }}]({{ route }})",
+		"titleThanks": "Merci de vous joindre a nous"
 	},
 	"VERIFY": {
 		"errorInvalidCode": "Code de vérification invalide",

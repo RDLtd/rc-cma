@@ -8,8 +8,9 @@
     <form (ngSubmit)="restForm.form.valid" #restForm="ngForm">
 
       <div class="mdc-layout-grid rc-no-grid-gutter">
+        <!-- Col 1 -->
         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6">
-
+          <!-- Name -->
           <mat-form-field hideRequiredMarker class="rc-full-width">
             <mat-label>{{ 'CMS.DASHBOARD.core.labelRestaurantName' | translate }}</mat-label>
             <input
@@ -21,7 +22,7 @@
               [disabled]="!editMode">
             <mat-hint align="end" *ngIf="restaurant.restaurant_group_name">Group: {{ restaurant.restaurant_group_name }}</mat-hint>
           </mat-form-field>
-
+          <!-- address -->
           <mat-form-field hideRequiredMarker class="rc-full-width">
             <mat-label>{{ 'CMS.DASHBOARD.core.labelAddress' | translate }}</mat-label>
             <input
@@ -33,7 +34,6 @@
               required
               [disabled]="!editMode">
           </mat-form-field>
-
           <mat-form-field  hideRequiredMarker class="rc-full-width">
             <input
               name="restaurant_address_2"
@@ -43,7 +43,6 @@
               [(ngModel)]="restaurant.restaurant_address_2"
               [disabled]="!editMode">
           </mat-form-field>
-
           <mat-form-field class="rc-full-width">
             <input
               name="restaurant_address_3"
@@ -53,7 +52,7 @@
               [(ngModel)]="restaurant.restaurant_address_3"
               [disabled]="!editMode">
           </mat-form-field>
-
+          <!-- Postcode -->
           <mat-form-field class="rc-full-width">
             <mat-label>{{ 'CMS.DASHBOARD.core.labelPostcode' | translate }}</mat-label>
             <input
@@ -65,7 +64,7 @@
               [disabled]="!editMode">
             <mat-hint align="end">{{ restaurant.restaurant_region }} // {{ restaurant.restaurant_lat }} // {{ restaurant.restaurant_lng }}</mat-hint>
           </mat-form-field>
-
+          <!-- Holding group -->
           <mat-form-field  class="rc-full-width">
             <mat-label>{{ 'CMS.DASHBOARD.core.labelGroup' | translate }}</mat-label>
             <input
@@ -76,9 +75,8 @@
               [(ngModel)]="restaurant.restaurant_group_name"
               [disabled]="!editMode">
           </mat-form-field>
-
           <div class="rc-card-vspacer"></div>
-
+          <!-- Cuisine -->
           <mat-form-field class="rc-full-width">
             <mat-select
               name="restaurant_cuisine_1"
@@ -92,7 +90,6 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
-
           <mat-form-field class="rc-full-width">
             <mat-select
               name="restaurant_cuisine_2"
@@ -106,11 +103,10 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
-
         </div>
-
+        <!-- Col 2 -->
         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6">
-
+          <!-- Telephone -->
           <mat-form-field class="rc-full-width">
             <mat-label>{{ 'CMS.DASHBOARD.core.labelTel' | translate }}</mat-label>
             <input
@@ -122,7 +118,7 @@
               required
               [disabled]="!editMode">
           </mat-form-field>
-
+          <!-- Email -->
           <mat-form-field hideRequiredMarker class="rc-full-width">
             <mat-label>Email</mat-label>
             <input
@@ -134,7 +130,7 @@
               required
               [disabled]="!editMode">
           </mat-form-field>
-
+          <!-- Website -->
           <mat-form-field class="rc-full-width">
             <mat-label>{{ 'CMS.DASHBOARD.core.labelWeb' | translate }}</mat-label>
             <input
@@ -145,7 +141,7 @@
               [(ngModel)]="restaurant.restaurant_website"
               [disabled]="!editMode">
           </mat-form-field>
-
+          <!-- Social media -->
           <mat-form-field class="rc-full-width">
             <mat-label>Facebook</mat-label>
             <input
@@ -156,7 +152,6 @@
               [(ngModel)]="restaurant.restaurant_facebook"
               [disabled]="!editMode">
           </mat-form-field>
-
           <mat-form-field class="rc-full-width">
             <mat-label>Twitter</mat-label>
             <input
@@ -167,7 +162,6 @@
               [(ngModel)]="restaurant.restaurant_twitter"
               [disabled]="!editMode">
           </mat-form-field>
-
           <mat-form-field class="rc-full-width">
             <mat-label>Instagram</mat-label>
             <input
@@ -178,19 +172,8 @@
               [(ngModel)]="restaurant.restaurant_instagram"
               [disabled]="!editMode">
           </mat-form-field>
-
           <div class="rc-card-vspacer"></div>
-
-
-<!--          <mat-checkbox-->
-<!--            name="ra_member"-->
-<!--            value="signedup"-->
-<!--            [(ngModel)]="restaurant.restaurant_signedup">-->
-<!--            Restaurant Association Member-->
-<!--          </mat-checkbox>-->
-
         </div>
-
       </div>
     </form>
 
@@ -216,7 +199,4 @@
     </button>
 
   </div>
-
-  <!--<button mat-button (click)="getFinancials(restaurant.restaurant_id)">Get Financial Data</button>-->
-
 </div>

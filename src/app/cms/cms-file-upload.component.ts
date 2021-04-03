@@ -30,10 +30,6 @@ export class CmsFileUploadComponent implements OnInit {
   @ViewChild('imgUploadForm') imgForm: NgForm;
   @ViewChild('menuUploadForm') menuForm: NgForm;
 
-  // translation variables
-  // t_data: any;
-  // t_data_type;
-
   imgClasses: Array<any>;
 
   constructor(
@@ -45,13 +41,6 @@ export class CmsFileUploadComponent implements OnInit {
     private cms: CMSService
   ) {
 
-    // detect language changes... need to check for change in texts
-    // translate.onLangChange.subscribe(() => {
-    //   this.translate.get('CMS-File-Upload')
-    //     .subscribe(data => {
-    //       this.setImageClasses(data);
-    //     });
-    // });
   }
 
   ngOnInit() {
@@ -166,27 +155,21 @@ export class CmsFileUploadComponent implements OnInit {
       { lbl: imgs.life, value: 'life' },
       { lbl: imgs.team, value: 'team' }
       ];
+
     // Image upload
     if (this.data.type === 'image') {
-
       this.uploadLabel = this.translate.instant('CMS.UPLOAD.labelChooseImage');
       //this.t_data_type = this.t_data.Image;
-
     } else {
 
     // Non-Image
       if (this.data.type === 'menu') {
-
         this.uploadLabel = this.translate.instant('CMS.UPLOAD.labelChooseMenu');
        // this.t_data_type = this.t_data.Menu;
-
       } else {
-
         this.uploadLabel = this.translate.instant('CMS.UPLOAD.labelChooseDirections');;
         //this.t_data_type = this.t_data.Directions;
-
       }
-
     }
   }
 
@@ -197,8 +180,6 @@ export class CmsFileUploadComponent implements OnInit {
     this.uploadLabel = f.file.name;
     this.uploadFileSize = f.file.size/1000/1000;
     this.filePrimed = true;
-
-
 
     // Set image preview
     if (this.data.type === 'image') {
@@ -242,10 +223,10 @@ export class CmsFileUploadComponent implements OnInit {
       e.cms_element_title = this.imgForm.form.controls.imgClass.value || 'restaurant';
       e.cms_element_caption = null;
       e.cms_element_class = 'Image';
-      // If it's the first image that's been u[loaded
+      // If it's the first image that's been uploaded
       // mark it as the default
       if (!this.data.tgtObject.length) { isDefaultImage = true; }
-      console.log('Default image?', isDefaultImage);
+      // console.log('Default image?', isDefaultImage);
     } else if(this.data.type === 'menu'){
       e.cms_element_title = this.menuForm.form.controls.menuClass.value || 'Menu';
       e.cms_element_caption = this.menuForm.form.controls.menuCaption.value || '';
@@ -275,8 +256,15 @@ export class CmsFileUploadComponent implements OnInit {
     this.cms.createElement(e).subscribe(
       data => {
         e.cms_element_id = data['cms_element_id'];
-        //console.log(e);
-        this.data.tgtObject.push(e);
+        console.log('e', e);
+        // There is only 1 file for directions
+        // not an array
+        if(this.data.type === 'direction') {
+          this.data.tgtObject = e;
+        } else {
+          this.data.tgtObject.push(e);
+        }
+
         if (this.data.type === 'image') {
           // if user wants to make it their default image
           if (this.imgForm.form.controls.imgDefault.value) {

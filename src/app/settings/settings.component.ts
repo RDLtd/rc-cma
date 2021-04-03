@@ -108,7 +108,7 @@ export class SettingsComponent implements OnInit {
       this.products = obj['products'];
       // Set current product
       // *** If it's an old registration, use product[0] to keep things working
-      console.log('Products loaded',this.products);
+      console.log('Products loaded', this.products);
       // Find & store the current Member product
       this.currentProduct =
         this.products.find(p => p.product_stripe_id === this.member.member_product_id) || this.products[0];
@@ -158,7 +158,7 @@ export class SettingsComponent implements OnInit {
       // Calculate the new total subscription
       const newTotal = (this.restProd.product_price * this.cachedRestaurantsLength) + Number(this.currentProduct.product_price);
       // Confirm charges
-      let dialogRef = this.dialog.open(ConfirmCancelComponent, {
+      const dialogRef = this.dialog.open(ConfirmCancelComponent, {
         data: {
           title: this.translate.instant('SETTINGS.titleConfirmAddRestaurant'),
           body: this.translate.instant(
@@ -257,17 +257,18 @@ export class SettingsComponent implements OnInit {
         this.member.member_id,
         this.member.member_customer_id,
         this.restProd.product_stripe_price_id,
+        this.restProd.product_tax_id,
         1
       ).subscribe(res => {
         console.log(res);
         // Now update member's subscription id
         this.member.member_subscription_id = res['subscription_id'];
         localStorage.setItem('rd_profile', JSON.stringify(this.member));
-        this.loadService.close()
+        this.loadService.close();
       },
         error => {
           console.log(error);
-          this.loadService.close()
+          this.loadService.close();
         });
     } else {
       // update subscription charge
@@ -282,6 +283,7 @@ export class SettingsComponent implements OnInit {
       this.member.member_id,
       this.member.member_subscription_id,
       this.restProd.product_stripe_price_id,
+      this.restProd.product_tax_id,
       qty
     )
       .subscribe(res => {
@@ -311,8 +313,8 @@ export class SettingsComponent implements OnInit {
         const addedRestaurantCount = this.restaurants.length - 1;
         // do we need to update the restaurant subscription?
         if (addedRestaurantCount) {
-          addedRestaurantCount === 1?
-            this.deleteRestaurantSubscription(): this.updateRestaurantSubscription(addedRestaurantCount - 1);
+          addedRestaurantCount === 1 ?
+            this.deleteRestaurantSubscription() : this.updateRestaurantSubscription(addedRestaurantCount - 1);
         }
         this.restaurantService.removeAssociation(rest['association_id'])
           .subscribe(
@@ -341,14 +343,13 @@ export class SettingsComponent implements OnInit {
           console.log(error);
           this.loadService.close();
         }
-      )
+      );
   }
 
   viewMemberPlans(): void {
-    const msg = this.currentProduct.product_period === 'm'?
+    const msg = this.currentProduct.product_period === 'm' ?
       'SETTINGS.msgChangePlanToYearly' : 'SETTINGS.msgChangePlanToMonthly';
-    let dialogRef = this.dialog.open(ConfirmCancelComponent, {
-      maxWidth: '600px',
+    const dialogRef = this.dialog.open(ConfirmCancelComponent, {
       data: {
         title: this.translate.instant('SETTINGS.titleSubscription'),
         body: this.translate.instant( msg, { plan: this.currentProduct.product_name }),
@@ -549,4 +550,5 @@ export class SettingsComponent implements OnInit {
       duration: dur
     });
   }
+
 }

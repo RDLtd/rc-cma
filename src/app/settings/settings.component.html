@@ -197,27 +197,26 @@
                   *ngFor="let restaurant of restaurants; let idx = index"
                   class="rc-managed-restaurant">
                   <!-- image -->
+                  <div class="rc-managed-restaurant-image">
                   <cl-image
+                    style="display: block; width: 100%; height: 100%;"
                     [routerLink]="['/restaurants', restaurant.restaurant_id, 'cms', 'dashboard']"
-                    [public-id]="getClPublicId(idx)"
-                    width="180"
-                    height="120">
+                    [public-id]="getClPublicId(idx)">
                     <cl-transformation
                       dpr="auto"
                       responsive
-                      width="360"
-                      height="240"
                       crop="fill"
                       quality="auto">
                     </cl-transformation>
                   </cl-image>
+                  </div>
                   <mat-icon
                     matTooltip="{{ 'SETTINGS.tipRemove' | translate: { name: restaurant.restaurant_name } }}"
                     (click)="removeAssociation(idx)">
                     cancel
                   </mat-icon>
 
-                  <div
+                  <div class="rc-managed-restaurant-info"
                     [routerLink]="['/restaurants', restaurant.restaurant_id, 'cms', 'dashboard']">
                     <h3>{{ restaurant.restaurant_name }}</h3>
                     <p class="rc-txt-small">{{ restaurant?.restaurant_address_1 }}, {{ restaurant?.restaurant_address_2 }}<br>

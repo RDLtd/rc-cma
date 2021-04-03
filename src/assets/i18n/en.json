@@ -286,7 +286,9 @@
 	},
 	"HEADER": {
 		"labelAbout": "About this software",
+		"labelHub": "Member's Hub",
 		"labelLogout": "Logout",
+		"labelMarketplace": "Marketplace",
 		"labelSettings": "Account Settings",
 		"signedInAs": "SIGNED IN MEMBER",
 		"tipBtnHub": "Member's Hub"
@@ -306,6 +308,7 @@
 		"hintEmail": "Your contact email address",
 		"invalidEmail": "A valid email address is required",
 		"invalidJobRequired": "Please select your main job or role",
+		"invalidRequired": "Required",
 		"invalidTelRequired": "A valid mobile number is required",
 		"jobRoles": [
 			"Owner/Manager",
@@ -316,7 +319,7 @@
 		],
 		"joinSuccess": "# Ok thanks!\n\nA member of our Support & Curation Team will be in contact with you shortly.\n\n**{{ brand }} Curation Team**",
 		"joinUsByReferral": "# Join us{{ referrer }}\n\nYou've been invited by {{ referrer }} to become part of {{ brand }}, an exciting new organisation that has been exclusively created to support both independent and group restaurants, and affect positive change within the industry. To join us:\n\n 1. Provide your name and contact details\n\n 2. Select your subscription option\n\n 3. Pay your subscription online\n\nIf you experience any problems activating your membership then do please [contact our Support Team]({{ email }}).",
-		"joinUsToday": "# Join us!\n\nJust complete the following 3 steps and in no time you’ll be part of the Collective!\n\n 1. Provide your name and contact details\n\n 2. Select either a monthly or yearly subscription\n\n 3. Pay your subscription online\n\nIf you experience any problems throughout this process please [contact our support team]({{ email }})",
+		"joinUsToday": "# Join us!\n\nJust complete the following 3 steps and in no time you’ll be part of the Collective!\n\n 1. Provide your name and contact details\n\n 2. Select either a monthly or yearly subscription\n\n 3. Pay your subscription online\n\nIf you experience any problems throughout this process please email: \n\n{{ email }}",
 		"joinWelcome": "# Welcome\n\nYou've successfully registered yourself as a **Member** and we've sent you login details and along with some further information.\n\nClose this window and check your email.\n\nMany thanks.\n\n**{{ brand }} Curation Team**",
 		"labelBtnSubmit": "NEXT",
 		"labelEmail": "Email address",
@@ -391,7 +394,7 @@
 		"labelBtnLater": "Do it later",
 		"labelBtnStart": "START HERE",
 		"messagesReadOk": "Ok, I've read those",
-		"welcomeNewMember": "# You're in!\n\nIt's great that you've chosen to join Restaurant Collective and we hope that you'll help us to grow this exciting community of industry professionals and independent restaurateurs.\n\n## Add your restaurant\n\nBefore you start exploring the Member's Hub, please complete the initial set up by linking your restaurant to your membership account.\n\nWhen you're ready, select the **START HERE** option below.\n\nFind your restaurant and follow the on-screen instructions to verify the details and link it to your Membership.\n\nIf you need any help, then open the **Knowledge Base** and see the **Getting Started** guide."
+		"welcomeNewMember": "# You're in!\n\nIt's great that you've chosen to join Restaurant Collective and we hope that you'll help us to grow this exciting community of industry professionals and independent restaurateurs.\n\n## Add your restaurant\n\nBefore you start exploring the Member's Hub, please complete the initial set up by linking your restaurant to your membership account.\n\nWhen you're ready, select the **START HERE** option below.\n\nFind your restaurant and follow the on-screen instructions to verify the details and link it to your Membership.\n"
 	},
 	"PLANS": {
 		"infoCurrentPlanMonthly": "Your current membership plan renews on the **{{ renewal }}** of each month at **{{ price }}**. To change your plan, select another option below and we'll calculate any additional charges due.",
@@ -418,9 +421,9 @@
 			"titleUpdateContacts": "Member details"
 		},
 		"infoAccounts": "Restaurants that are linked to your account are shown below and you can manage additional restaurants by simply adding them here.\n\nTo view your billing history and payment details, or to download your invoices, select the 'MANAGE PAYMENTS' option above.",
-		"infoAuth": "These are you Membership credentials that you'll need to Sign In to the application. Passwords must be at least 8 characters.",
+		"infoAuth": "These are the Membership credentials that you'll need to Sign In to the application. Passwords must be at least 8 characters.",
 		"infoAvatar": "Click the image add/edit and personalise your Membership details.",
-		"infoMember": "All contact regarding your Membership will be sent to this email address.",
+		"infoMember": "All communications regarding your Membership will be sent to this email address.",
 		"infoReferrals": "This is a unique referral code that you can share with any of your colleagues, to encourage them to join Restaurant Collective and be part of this exciting new organisation.",
 		"labelAddRestaurant": "Add a restaurant to this account",
 		"labelAwaitingImage": "AWAITING IMAGE",
@@ -497,10 +500,12 @@
 		"labelBtnSignIn": "SIGN IN",
 		"labelEmail": "USER EMAIL ADDRESS",
 		"labelPassword": "USER PASSWORD",
+		"msgNewMember": "In the next couple of minutes you should receive a **welcome email** from us that includes a system generated password.\n\n- **Copy the password** & return to this page\n- Close this message window by clicking 'OK'\n- Paste your password into the form and **Sign In**.\n\nYou will also receive a payment receipt for your records.\n",
 		"newPwdSent": "A new password has been sent to your email address",
 		"resetPwdHeader": "Reset password",
 		"resetPwdInstructions": "Enter your registered email address to reset your password. You may need to check your spam folder.",
-		"signInOrJoin": "# Sign in\n\nor [join {{ brand }}]({{ route }})"
+		"signInOrJoin": "# Sign in\n\nor [Join {{ brand }}]({{ route }})",
+		"titleThanks": "Thanks for joining us"
 	},
 	"VERIFY": {
 		"errorInvalidCode": "Invalid verification code",
