@@ -132,7 +132,10 @@ export class SettingsComponent implements OnInit {
             }
           } else if (this.showRestaurantFinder) {
             this.showRestaurantFinder = false;
-            this.addRestaurants();
+            // Members no longer need to have a restaurant
+            // so stop automatically prompting everytime
+            // they are in settings
+            // this.addRestaurants();
           }
           this.loadService.close();
         },
