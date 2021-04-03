@@ -98,17 +98,26 @@
     <mat-card-actions align="end">
 
       <button
-        mat-button
-        (click)="uploadDirections()">
-        {{ 'CMS.LOCATION.labelBtnUploadDirections' | translate | uppercase }}
+        *ngIf="fileLoaded"
+        mat-icon-button
+        matTooltip="{{ 'CMS.LOCATION.tipDelete' | translate }}"
+        (click)="deleteDirections()">
+        <mat-icon>delete</mat-icon>
       </button>
 
       <button
-        *ngIf="directions"
-        mat-button
+        mat-icon-button
+        matTooltip="{{ 'CMS.LOCATION.tipUploadDirections' | translate }}"
+        (click)="uploadDirections()">
+        <mat-icon>cloud_upload</mat-icon>
+      </button>
+
+      <button
+        mat-icon-button
+        matTooltip="{{ 'CMS.LOCATION.tipViewDirections' | translate }}"
         [disabled]="!fileLoaded"
         (click)="viewDirections()">
-        {{ 'CMS.LOCATION.labelBtnViewDirections' | translate | uppercase }}
+        <mat-icon>launch</mat-icon>
       </button>
     </mat-card-actions>
 

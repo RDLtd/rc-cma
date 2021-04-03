@@ -214,66 +214,88 @@ export class CmsFileUploadComponent implements OnInit {
   addElement() {
 
     const now = new Date().toLocaleString();
-    let e = new CMSElement();
+    let elem = new CMSElement();
     let isDefaultImage = false;
 
-    e.cms_element_restaurant_id = this.data.restaurant.restaurant_id;
+    elem.cms_element_restaurant_id = this.data.restaurant.restaurant_id;
 
     if (this.data.type === 'image') {
-      e.cms_element_title = this.imgForm.form.controls.imgClass.value || 'restaurant';
-      e.cms_element_caption = null;
-      e.cms_element_class = 'Image';
+      elem.cms_element_title = this.imgForm.form.controls.imgClass.value || 'restaurant';
+      elem.cms_element_caption = null;
+      elem.cms_element_class = 'Image';
       // If it's the first image that's been uploaded
       // mark it as the default
       if (!this.data.tgtObject.length) { isDefaultImage = true; }
       // console.log('Default image?', isDefaultImage);
     } else if(this.data.type === 'menu'){
-      e.cms_element_title = this.menuForm.form.controls.menuClass.value || 'Menu';
-      e.cms_element_caption = this.menuForm.form.controls.menuCaption.value || '';
-      e.cms_element_class = 'Menu';
+      elem.cms_element_title = this.menuForm.form.controls.menuClass.value || 'Menu';
+      elem.cms_element_caption = this.menuForm.form.controls.menuCaption.value || '';
+      elem.cms_element_class = 'Menu';
     } else if (this.data.type === 'direction') {
-      e.cms_element_title = 'Directions';
-      e.cms_element_caption = null;
-      e.cms_element_class = 'Directions';
+      elem.cms_element_title = 'Directions';
+      elem.cms_element_caption = null;
+      elem.cms_element_class = 'Directions';
     }
 
     // Add Cloudinary public-id to element
     let clArr = this.fileUrl.split('/');
-    e['cms_element_image_ref'] = clArr.slice(clArr.length - 3).join('/');
+    elem['cms_element_image_ref'] = clArr.slice(clArr.length - 3).join('/');
 
-    e.cms_element_image_path = this.fileUrl;
-    e.cms_element_active = true;
-    e.cms_element_default = isDefaultImage;
-    e.cms_element_live_from = now;
-    e.cms_element_live_to = '2100-06-30 00:00:00+00';
-    e.cms_element_created_by = localStorage.getItem('rd_username');
-    e.cms_element_approved_on = now;
-    e.cms_element_approved_by = localStorage.getItem('rd_username');
-    e.cms_element_original_filename = this.uploadLabel;
+    elem.cms_element_image_path = this.fileUrl;
+    elem.cms_element_active = true;
+    elem.cms_element_default = isDefaultImage;
+    elem.cms_element_live_from = now;
+    elem.cms_element_live_to = '2100-06-30 00:00:00+00';
+    elem.cms_element_created_by = localStorage.getItem('rd_username');
+    elem.cms_element_approved_on = now;
+    elem.cms_element_approved_by = localStorage.getItem('rd_username');
+    elem.cms_element_original_filename = this.uploadLabel;
 
-    // console.log(e);
+    console.log(elem);
 
-    this.cms.createElement(e).subscribe(
+    if(this.data.type === 'direction' && !!this.data.tgtObject) {
+      console.log('elem', elem);
+      console.log('obj', this.data.tgtObject.cms_element_id);
+      elem['cms_element_id'] = this.data.tgtObject.cms_element_id;
+      this.updateDirections(elem);
+    } else {
+      this.createElement(elem)
+    }
+  }
+
+  createElement(elem): void {
+    this.cms.createElement(elem).subscribe(
       data => {
-        e.cms_element_id = data['cms_element_id'];
-        console.log('e', e);
+        elem.cms_element_id = data['cms_element_id'];
+        console.log('e', elem);
         // There is only 1 file for directions
         // not an array
         if(this.data.type === 'direction') {
-          this.data.tgtObject = e;
+          this.data.tgtObject = elem;
         } else {
-          this.data.tgtObject.push(e);
+          this.data.tgtObject.push(elem);
         }
 
         if (this.data.type === 'image') {
           // if user wants to make it their default image
           if (this.imgForm.form.controls.imgDefault.value) {
-            this.setDefaultImage(e);
+            this.setDefaultImage(elem);
           }
         }
       },
       error => {
         console.log(error.statusText);
+        console.log(error);
+      });
+  }
+
+  updateDirections(elem): void {
+    this.cms.updateElement(elem).subscribe(
+      data => {
+        elem.cms_element_id = data['cms_element_id'];
+        this.data.tgtObject = elem;
+      },
+      error => {
         console.log(error);
       });
   }
