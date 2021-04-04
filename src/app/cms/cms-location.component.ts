@@ -6,7 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { CMSDescription } from '../_models';
 import { TranslateService } from '@ngx-translate/core';
 import { GoogleMap, MapMarker } from '@angular/google-maps';
-import { HelpService} from '../common';
+import { ConfirmCancelComponent, HelpService } from '../common';
 
 @Component({
   selector: 'rc-cms-location',
@@ -179,6 +179,7 @@ export class CmsLocationComponent implements OnInit {
 
   uploadDirections() {
 
+    console.log('D', this.directions);
     let dialogRef = this.dialog.open(CmsFileUploadComponent, {
       data: {
         type: 'direction',
@@ -186,6 +187,8 @@ export class CmsLocationComponent implements OnInit {
         restaurant: this.restaurant
       }
     });
+    // Reload directions
+    dialogRef.afterClosed().subscribe(() => this.getDirectionFile());
 
     this.cms.updateLastCreatedField(Number(this.restaurant.restaurant_id), 'location').subscribe(
       () => {},
@@ -194,6 +197,26 @@ export class CmsLocationComponent implements OnInit {
       });
 
     dialogRef.componentInstance.dialog = dialogRef;
+  }
+
+  deleteDirections(): void {
+    console.log(this.directions);
+    let dialogRef = this.dialog.open(ConfirmCancelComponent, {
+      data: {
+        title: 'Are you sure?',
+        body: '',
+        confirm: 'delete'
+      }
+    });
+    dialogRef.afterClosed()
+      .subscribe( confirmed => {
+        if(confirmed) {
+          this.cms.deleteElement(this.directions.cms_element_id)
+            .subscribe(res => {
+              this.getDirectionFile();
+            }, error => console.log(error));
+        }
+      });
   }
 
   updateTransport(): void {

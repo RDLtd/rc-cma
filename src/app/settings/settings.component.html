@@ -197,9 +197,8 @@
                   *ngFor="let restaurant of restaurants; let idx = index"
                   class="rc-managed-restaurant">
                   <!-- image -->
-                  <div class="rc-managed-restaurant-image">
                   <cl-image
-                    style="display: block; width: 100%; height: 100%;"
+                    class="rc-managed-restaurant-image"
                     [routerLink]="['/restaurants', restaurant.restaurant_id, 'cms', 'dashboard']"
                     [public-id]="getClPublicId(idx)">
                     <cl-transformation
@@ -209,7 +208,6 @@
                       quality="auto">
                     </cl-transformation>
                   </cl-image>
-                  </div>
                   <mat-icon
                     matTooltip="{{ 'SETTINGS.tipRemove' | translate: { name: restaurant.restaurant_name } }}"
                     (click)="removeAssociation(idx)">

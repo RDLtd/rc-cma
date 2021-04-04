@@ -1,6 +1,7 @@
 {
   "name": "rc-app",
   "description": "",
+  "stack": "heroku-20",
   "scripts": {
   },
   "env": {
