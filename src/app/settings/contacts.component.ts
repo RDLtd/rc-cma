@@ -13,6 +13,7 @@ export class ContactsComponent implements OnInit {
   member: Member;
   isSubmitting: boolean = false;
   jobRoles: any;
+  patternMobile = '^([+\\d]\\d*)?\\d$';
 
   constructor(
     public contactsDialog: MatDialogRef<ContactsComponent>,

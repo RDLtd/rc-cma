@@ -37,7 +37,7 @@ export class JoinComponent implements OnInit {
     restaurant: null,
     promo_status: null
   };
-  //t_data: any;
+
   patternMobile = '^([+\\d]\\d*)?\\d$';
   lang = localStorage.getItem('rd_language');
   stripeSessionId: any;
