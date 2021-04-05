@@ -50,6 +50,7 @@ export class SettingsComponent implements OnInit {
   products: [any];
   productRenewalDate: Date;
   currentProduct: any;
+  isFreeMembership = false;
 
   constructor(
     private header: HeaderService,
@@ -89,6 +90,8 @@ export class SettingsComponent implements OnInit {
   }
 
   setMember(): void {
+    // Is it a founder or BJT introduction
+    this.isFreeMembership = this.member.member_membership_type === 'Free';
     // in case of rogue values from the db
     if (this.member.member_image_path === 'null' || this.member.member_image_path === 'undefined') {
       this.member.member_image_path = null;
@@ -125,10 +128,13 @@ export class SettingsComponent implements OnInit {
           this.restaurants = data['restaurants'];
           if (this.restaurants.length) {
             this.getDefaultImages();
+
             // Have any new restaurants just been added?
             if (!!this.cachedRestaurantsLength && this.cachedRestaurantsLength < this.restaurants.length) {
-              console.log('A new restaurant was added, so update subscription');
-              this.addRestaurantSubscription();
+              // Do we need to charge the Member?
+              if (!this.isFreeMembership) {
+                this.addRestaurantSubscription();
+              }
             }
           } else if (this.showRestaurantFinder) {
             this.showRestaurantFinder = false;
@@ -150,7 +156,7 @@ export class SettingsComponent implements OnInit {
     this.cachedRestaurantsLength = this.restaurants.length;
     console.log('cachedRestaurantsLength =', this.cachedRestaurantsLength);
 
-    if (this.restaurants.length === 0) {
+    if (this.restaurants.length === 0 || this.isFreeMembership) {
       // No restaurants have been added yet so
       //  no need to update the subscription
       this.addRestaurants();
