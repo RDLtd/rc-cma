@@ -23,9 +23,6 @@ export class SigninComponent implements OnInit {
   newMemberEmail: string;
   hidePwd = true;
 
-  // translation variables
-  trans: any;
-
   constructor(
     private dialog: MatDialog,
     private authService: AuthenticationService,
@@ -91,8 +88,9 @@ export class SigninComponent implements OnInit {
         },
         error => {
           console.log(`Auth Error: ${error}`);
-          this.openSnackBar(this.trans.errorUserUnauthorised);
           this.isSubmitting = false;
+          this.openSnackBar(this.translate.instant('SIGNIN.errorUserUnauthorised'));
+
         });
   }
 
