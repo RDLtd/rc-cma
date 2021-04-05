@@ -356,7 +356,8 @@
 		"msgNotCurated": "**{{ name }}** has not yet been curated.  However, the team will be notified and curation will take place within the next 48 hours.\n\nIn the meantime, please tell us if any of the current information is incorrect by sending a **Change Request**.\",",
 		"msgRestaurantAdded": "{{ name }} has been added to your account.",
 		"titleFind": "Restaurant finder",
-		"titleNew": "New restaurant"
+		"titleNew": "New restaurant",
+		"titlePleaseNote": "Please note"
 	},
 	"MARKETPLACE": {
 		"labelAvailableLocal": "Local",

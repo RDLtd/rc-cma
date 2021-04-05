@@ -396,8 +396,9 @@ export class CMSService {
     return this.http.post(this.config.apiUrl + '/cms/sendrestaurantvalidation',
       {
         company_prefix: this.config.brand.prefix,
-        member: member,
-        restaurant: restaurant,
+        member_first_name: member.member_first_name,
+        member_last_name: member.member_last_name,
+        restaurant_name: restaurant.restaurant_name,
         changes: changes,
         userCode: this.config.userAPICode,
         token: this.authToken

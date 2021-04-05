@@ -155,7 +155,7 @@ export class VerificationComponent implements OnInit {
 
     const d = this.data;
     const msg =
-      `# EMAIL CHANGE REQUEST` +
+      `# EMAIL CHANGE REQUEST\n\n` +
       `The following restaurant has just been associated to a Member and the email address was updated at the same time.\n\n` +
       ` - **MEMBER**: ${localStorage.getItem('rd_username')}(${d.member.member_id})\n` +
       ` - **RESTAURANT**: ${d.restaurant.restaurant_name} (${d.restaurant.restaurant_id})\n` +
