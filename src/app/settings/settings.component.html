@@ -143,6 +143,7 @@
                 <button
                   mat-button (click)="managePayments()"
                   color="accent"
+                  [disabled]="isFreeMembership"
                   matTooltip="{{ 'SETTINGS.tipManagePayments' | translate }}">
                   {{ 'SETTINGS.labelManagePayments' | translate | uppercase }}
                 </button>
@@ -157,7 +158,12 @@
                 <li><label>{{ 'SETTINGS.labelMemberId' | translate }}:</label>{{ member.member_id }}</li>
                 <li><label>{{ 'SETTINGS.labelJoined' | translate }}:</label>{{ d_member_signedup }}</li>
                 <li><label>{{ 'SETTINGS.labelSubscription' | translate }}:</label>
-                  <a (click)="viewMemberPlans()"
+                  <span *ngIf="isFreeMembership">
+                    {{ 'SETTINGS.labelFreeMembership' | translate }}
+                  </span>
+                  <a
+                    *ngIf="!isFreeMembership"
+                    (click)="viewMemberPlans()"
                      matTooltip="{{ 'SETTINGS.tipManagePayments' | translate }}">
                     {{ currentProduct?.product_name }}
                   </a>
