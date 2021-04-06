@@ -102,10 +102,13 @@ export class SettingsComponent implements OnInit {
   }
 
   setProducts(): void {
-    this.memberService.getUpcomingInvoice(this.member.member_customer_id).subscribe(data => {
-      // create renewal date obj.
-      this.productRenewalDate = new Date(data['invoice']['period_end'] * 1000);
-    });
+    // Any pending invoices
+    if (!this.isFreeMembership) {
+      this.memberService.getUpcomingInvoice(this.member.member_customer_id).subscribe(data => {
+        // create renewal date obj.
+        this.productRenewalDate = new Date(data['invoice']['period_end'] * 1000);
+      });
+    }
 
     this.memberService.getProducts().subscribe(obj => {
       this.products = obj['products'];
