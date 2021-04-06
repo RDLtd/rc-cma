@@ -19,9 +19,8 @@ export class AppConfig {
   // public readonly apiUrl = 'http://localhost:4000';
   // public readonly apiUrl = 'https://rc-server-cobb20-n5fxl047dapoj.herokuapp.com'
 
-  public readonly apiUrl = 'https://rc-server-staging.herokuapp.com';
-  // public readonly apiUrl = 'https://rc-server-prod.herokuapp.com';
-  // public readonly apiUrl = 'https://rc-server-prod.herokuapp.com';
+  // public readonly apiUrl = 'https://rc-server-staging.herokuapp.com';
+  public readonly apiUrl = 'https://rc-server-prod.herokuapp.com';
 
   // update 05/09/18 to read apiURL from .env file
   // This is Angular's equivalent! See the 'environments' folder
