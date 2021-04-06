@@ -86,10 +86,10 @@ export class JoinComponent implements OnInit {
 
     // Watch for unload event (page refresh etc.)
     // Keep data in session storage
-    const that = this;
-    window.addEventListener("beforeunload", () => {
-      that.savePendingMemberData(that.pendingMember);
-    });
+    // const that = this;
+    // window.addEventListener("beforeunload", () => {
+    //   that.savePendingMemberData(that.pendingMember);
+    // });
   }
 
   // Display referrer details
@@ -115,11 +115,13 @@ export class JoinComponent implements OnInit {
 
   // Save pending member details
   savePendingMemberData(data): void {
-    console.log('savePending', data);
-    sessionStorage.setItem('rc_member_pending', JSON.stringify(data));
-    this.memberService.createPending(data)
-      .toPromise()
-      .then(res => console.log(`Saved Pending = ${res}`));
+    if (!!data.first_name) {
+      console.log('savePending', data);
+      sessionStorage.setItem('rc_member_pending', JSON.stringify(data));
+      this.memberService.createPending(data)
+        .toPromise()
+        .then(res => console.log(`Saved Pending = ${res}`));
+    }
   }
 
   // API call to check for duplicate tel/emails
@@ -142,91 +144,6 @@ export class JoinComponent implements OnInit {
         }
       });
   }
-
-  // async submitJoinForm(applicant) {
-  //   this.currentApplicant = applicant;
-  //   this.isSubmitting = true;
-  //
-  //   this.load.open();
-  //
-  //   // TODO
-  //   // NB Note that for this early December version we set member_type to 'Full'
-  //   // Once there is a paywall we will set this to 'Payment Pending' and update once payment
-  //   // has been received
-  //   const admin = {
-  //     member_first_name: applicant.first_name,
-  //     member_last_name: applicant.last_name,
-  //     member_email: applicant.email,
-  //     member_telephone: applicant.mobile,
-  //     member_job: applicant.role,
-  //     member_language: localStorage.getItem('rd_language'),
-  //     restaurant_id: 0,
-  //     member_id: 0,
-  //     member_promo_status: this.referrer.promo_status,
-  //     member_type: 'Full'
-  //   };
-  //
-  //   // Register new admin
-  //   this.createContentAdministrator(admin);
-  // }
-
-  // createContentAdministrator(admin) {
-  //
-  //   // for now assume no restaurant known, might change for different join modes
-  //
-  //   // test to break it...
-  //   // admin.member_language = 'kkkkkkk';
-  //   this.memberService.createAdministrator(admin).subscribe(
-  //     data => {
-  //       console.log(data);
-  //       // Check for duplicate administrator record
-  //       if (data['status'] === 'Duplicate') {
-  //         this.dspRegistrationResult('duplicate', data['error']);
-  //       } else {
-  //         // Successful registration
-  //         sessionStorage.setItem('referrer_type', this.referrer.type);
-  //
-  //         // TODO removed the 'success' snack bar display. Might need to consider showing it in the 'self' path?
-  //         // this.cmsLocalService.dspSnackbar(this.t_data.Success);
-  //
-  //         // If the member has been referred
-  //         // update the usage record and fast-track them
-  //         if (this.referrer.type === 'member') {
-  //           this.updateReferralUsage(data['member_id']);
-  //           this.autoSignIn(data['member_id']);
-  //         } else {
-  //           // Registration success
-  //           this.dspRegistrationResult('self-registered');
-  //         }
-  //
-  //       }
-  //       this.load.close();
-  //       this.isSubmitting = false;
-  //
-  //     },
-  //     error => {
-  //       console.log(JSON.stringify(error));
-  //       this.cmsLocalService.dspSnackbar(
-  //         `${this.t_data.Critical}`,
-  //         'OK',
-  //         20
-  //       );
-  //       // TODO more translations (or do we care since this is only relevant for support...)
-  //       this.appService.reportCriticalError('Failed to register new member!\n\n' +
-  //         'First Name : ' + admin.member_first_name + '\n\n' +
-  //         'Last Name : ' + admin.member_last_name + '\n\n' +
-  //         'Telephone : ' + admin.member_telephone + '\n\n' +
-  //         'Email : ' + admin.member_email).subscribe(emaildata => {
-  //           console.log(emaildata);
-  //           this.load.close();
-  //         },
-  //         emailerror => {
-  //           console.log(emailerror);
-  //           this.load.close();
-  //         });
-  //     });
-  //
-  // }
 
   autoSignIn(member_id) {
     // take the member directly to authentication - first need to re-read the member record to get the full object
