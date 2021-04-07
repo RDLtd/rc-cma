@@ -324,10 +324,12 @@ export class SettingsComponent implements OnInit {
       if (confirmed) {
         const addedRestaurantCount = this.restaurants.length - 1;
         // do we need to update the restaurant subscription?
-        if (addedRestaurantCount) {
+
+        if (addedRestaurantCount && !this.isFreeMembership) {
           addedRestaurantCount === 1 ?
             this.deleteRestaurantSubscription() : this.updateRestaurantSubscription(addedRestaurantCount - 1);
         }
+
         this.restaurantService.removeAssociation(rest['association_id'])
           .subscribe(
             () => {

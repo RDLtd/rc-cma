@@ -356,7 +356,8 @@
 		"msgNotCurated": "**{{ name }}** n'a pas encore été organisé. Cependant, l'équipe sera notifiée et la curation aura lieu dans les 48 heures à venir.\n\nEn attendant, veuillez nous indiquer si l'une des informations actuelles est incorrecte en envoyant une ** demande de modification **. \",",
 		"msgRestaurantAdded": "{{ name }} a été ajouté à votre compte.",
 		"titleFind": "Recherche de restaurant",
-		"titleNew": "Nouveau restaurant"
+		"titleNew": "Nouveau restaurant",
+		"titlePleaseNote": "Notez s'il vous plaît"
 	},
 	"MARKETPLACE": {
 		"labelAvailableLocal": "Local",
@@ -446,6 +447,7 @@
 		"labelSelectImage": "Sélectionnez une image",
 		"labelSubscription": "abonnement",
 		"labelTel": "Mobile",
+
 		"msgAddRestaurant_m": "L'ajout d'un autre restaurant augmentera votre abonnement de **{{ price }}**.\n\nNous calculerons tous les frais supplémentaires au prorata qui seraient dus au cours de cette période et les imputerons à votre compte, une fois que vous aurez ajouté votre restaurant avec succès.\n\nLe nouveau total de votre abonnement deviendrait alors **{{ total }} par mois**. Souhaitez-vous continuer et ajouter un restaurant?",
 		"msgAddRestaurant_y": "L'ajout d'un autre restaurant augmentera votre abonnement de **{{ price }}** par an.\n\nNous calculerons tout montant supplémentaire au prorata dû pour cette année, en fonction du temps restant, et le facturerons automatiquement sur votre compte.\n\nLe nouveau total de votre abonnement deviendra alors **{{ total }} plus TVA par an**. **Voulez-vous continuer?**",
 		"msgAvatarUpdated": "Image Avater mise à jour",

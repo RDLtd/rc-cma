@@ -1,6 +1,7 @@
 ﻿import { environment } from '../environments/environment';
 import { Injectable } from "@angular/core";
 
+
 declare const require: any;
 
 @Injectable()
@@ -18,12 +19,9 @@ export class AppConfig {
   // Should only need to switch here to change from local to Heroku server
   // public readonly apiUrl = 'http://localhost:4000';
   // public readonly apiUrl = 'https://rc-server-cobb20-n5fxl047dapoj.herokuapp.com'
-
   // public readonly apiUrl = 'https://rc-server-staging.herokuapp.com';
   // public readonly apiUrl = 'https://rc-server-prod.herokuapp.com';
-  // public readonly apiUrl = 'https://rc-server-prod.herokuapp.com';
 
-  // update 05/09/18 to read apiURL from .env file
   // This is Angular's equivalent! See the 'environments' folder
   // Build process should automatically detect the correct variables
   public readonly apiUrl = environment.API_URL;
