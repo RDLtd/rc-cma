@@ -4,7 +4,7 @@ import { MemberService, AuthenticationService, AppService } from '../_services';
 import { CmsLocalService } from '../cms';
 import { TranslateService } from '@ngx-translate/core';
 import { MatDialog } from '@angular/material/dialog';
-import { LoadService } from '../common/loader/load.service';
+import { LoadService } from '../common';
 import { AppConfig } from '../app.config';
 
 export interface PendingMember {
@@ -201,26 +201,4 @@ export class JoinComponent implements OnInit {
       }
     }
   }
-
-  // curationRequest() {
-  //   this.load.open(this.t_data.Sending);
-  //   // Format as markdown
-  //   const msg = `## ${this.t_data.Help}\n\n` +
-  //     `${this.t_data.Attempt}\n\n` +
-  //     `${this.t_data.ASAP}\n` +
-  //     ` - **${this.t_data.FullName}**: ${this.currentApplicant.name}\n` +
-  //     ` - **${this.t_data.Mobile}**: ${this.currentApplicant.mobile}\n` +
-  //     ` - **${this.t_data.Email}**: ${this.currentApplicant.email}\n` +
-  //     ` - **${this.t_data.Job}**: ${this.currentApplicant.role}\n`;
-  //
-  //   this.memberService.sendEmailRequest('curation', 'support', this.t_data.Problem, msg).subscribe(data => {
-  //       console.log(data);
-  //       this.newRegResult = 'support-request-sent';
-  //       this.load.close();
-  //   },
-  //     error => {
-  //       console.log(error);
-  //       this.load.close();
-  //     });
-  // }
 }

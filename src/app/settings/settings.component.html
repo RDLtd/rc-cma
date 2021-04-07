@@ -205,7 +205,7 @@
                   <!-- image -->
                   <cl-image
                     class="rc-managed-restaurant-image"
-                    [routerLink]="['/restaurants', restaurant.restaurant_id, 'cms', 'dashboard']"
+                    [routerLink]="['/cms', restaurant.restaurant_id]"
                     [public-id]="getClPublicId(idx)">
                     <cl-transformation
                       width="400"
@@ -223,7 +223,7 @@
                   </mat-icon>
 
                   <div class="rc-managed-restaurant-info"
-                    [routerLink]="['/restaurants', restaurant.restaurant_id, 'cms', 'dashboard']">
+                    [routerLink]="['/cms', restaurant.restaurant_id]">
                     <h3>{{ restaurant.restaurant_name }}</h3>
                     <p class="rc-txt-small">{{ restaurant?.restaurant_address_1 }}, {{ restaurant?.restaurant_address_2 }}<br>
                     {{ restaurant?.restaurant_address_2 }}<br>{{ restaurant?.restaurant_post_code }}</p>
