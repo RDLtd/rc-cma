@@ -389,6 +389,7 @@
 		"instructions": "Veuillez sélectionner votre option d'abonnement **{{ brand }}**.\n\nVous serez redirigé vers l'étape de paiement, où vous pourrez revoir votre abonnement avant de payer en ligne en toute sécurité.\n\nSi vous avez un ** PROMOCODE **, vous pouvez l'appliquer pendant le processus de paiement.",
 		"labelPayMonthly": "Payez tous les mois",
 		"labelPayYearly": "Payez annuellement",
+		"msgInvalidStripe": "Il semble y avoir un problème avec vos coordonnées. Veuillez utiliser le bouton «retour» pour revenir en arrière et vérifier vos coordonnées, ou pour contacter l'assistance.",
 		"terms": "Veuillez prendre le temps de lire les [Conditions d'adhésion] ({{ terms }}) et la [Politique de confidentialité] ({{ privacy }}). En devenant membre de Restaurant Collective, vous confirmez votre acceptation de ces conditions."
 	},
 	"MESSAGES": {
@@ -447,7 +448,6 @@
 		"labelSelectImage": "Sélectionnez une image",
 		"labelSubscription": "abonnement",
 		"labelTel": "Mobile",
-
 		"msgAddRestaurant_m": "L'ajout d'un autre restaurant augmentera votre abonnement de **{{ price }}**.\n\nNous calculerons tous les frais supplémentaires au prorata qui seraient dus au cours de cette période et les imputerons à votre compte, une fois que vous aurez ajouté votre restaurant avec succès.\n\nLe nouveau total de votre abonnement deviendrait alors **{{ total }} par mois**. Souhaitez-vous continuer et ajouter un restaurant?",
 		"msgAddRestaurant_y": "L'ajout d'un autre restaurant augmentera votre abonnement de **{{ price }}** par an.\n\nNous calculerons tout montant supplémentaire au prorata dû pour cette année, en fonction du temps restant, et le facturerons automatiquement sur votre compte.\n\nLe nouveau total de votre abonnement deviendra alors **{{ total }} plus TVA par an**. **Voulez-vous continuer?**",
 		"msgAvatarUpdated": "Image Avater mise à jour",

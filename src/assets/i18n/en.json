@@ -389,6 +389,7 @@
 		"instructions": "Please select your **{{ brand }}** subscription option.\n\nYou will be taken to the checkout stage, where you can review your subscription before paying securely online.\n\nIf you have a **PROMOCODE** then you can apply it during the payment process.",
 		"labelPayMonthly": "Pay monthly",
 		"labelPayYearly": "Pay yearly",
+		"msgInvalidStripe": "There seems to be a problem with your details. Please use the 'back' button to go back and check your details, or to contact support.",
 		"terms": "Please take the time to read the [Terms of Membership]({{ terms }}) and [Privacy Policy]({{ privacy }}). By becoming a member of Restaurant Collective you are confirming your acceptance of these terms."
 	},
 	"MESSAGES": {
@@ -447,10 +448,8 @@
 		"labelSelectImage": "Select an image",
 		"labelSubscription": "Subscription",
 		"labelTel": "Mobile",
-
 		"msgAddRestaurant_m": "Adding another restaurant will increase your membership subscription by **{{ price }}**. \n\nWe'll calculate any additional prorated fees that would be due in this month and charge that to your account automatically – once you've successfully added your restaurant.\n\nAfter that, your subscription charge will be **{{ total }}** every month. Would you like to go ahead and add a restaurant?",
 		"msgAddRestaurant_y": "Adding another restaurant will increase your membership subscription by **{{ price }}** a year.\n\nWe'll calculate any additional prorated amount due for this year, based on the time left, and automatically charge that to your account. \n\nYour new subscription total will then become **{{ total }} plus VAT per year**. **Would you like to continue?**",
-
 		"msgAvatarUpdated": "Avater image updated",
 		"msgChangePlanToMonthly": "You are currently on the **{{ plan }}** which renews every year. If you want to switch to a monthly subscription, then please contact accounts@restaurantcollective.org.uk.\n\nThank you.",
 		"msgChangePlanToYearly": "You are currently subscribed to **{{ plan }}**. If you would prefer to save some money by switching to a yearly plan then please contact accounts@restaurantcollective.org.uk.\n\nMany thanks.",

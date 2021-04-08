@@ -48,8 +48,7 @@
         style="transition: all .2s ease-out"
         *ngSwitchDefault
         #formJoin="ngForm"
-        (ngSubmit)="formJoin.form.valid && preRegistrationCheck(formJoin.value)"
-        novalidate>
+        (ngSubmit)="formJoin.form.valid && preRegistrationCheck(formJoin.value)">
         <input [ngModel]="pendingMember.referral_code" type="hidden" name="referral_code">
 
         <!-- Duplicate Telephone No. -->
@@ -125,10 +124,9 @@
             matInput
             type="email"
             name="email"
-            [placeholder]="'JOIN.placeholderEmail' | translate"
-            email
+            pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
             required>
-          <mat-hint align="end" *ngIf="email.invalid">{{ 'JOIN.hintEmail' | translate }}</mat-hint>
+          <mat-hint align="end" *ngIf="email?.invalid">{{ 'JOIN.hintEmail' | translate }}</mat-hint>
           <mat-error align="end" *ngIf="email?.errors">{{ 'JOIN.invalidEmail' | translate }}</mat-error>
         </mat-form-field>
 
