@@ -8,6 +8,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { MemberService } from '../_services';
 import { CurrencyPipe } from '@angular/common';
 import { LoadService } from '../common';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 export interface Product {
   id: string;
@@ -41,7 +42,7 @@ export class MembershipComponent implements OnInit {
     private translate: TranslateService,
     private memberService: MemberService,
     private currencyPipe: CurrencyPipe,
-    private loader: LoadService
+    private snack: MatSnackBar
   ) {
 
 
@@ -86,7 +87,16 @@ export class MembershipComponent implements OnInit {
 
   // Create Stripe Session
   async createCheckoutSession(options) {
-    return this.http.post(`${this.config.apiUrl}/payments/create-session`, options).toPromise();
+    return this.http.post(`${this.config.apiUrl}/payments/create-session`, options)
+      .toPromise()
+      .catch(reason => {
+        console.log('FAILED', reason);
+        this.snack.open(this.translate.instant('MEMBERSHIP.msgInvalidStripe', { email: this.config.brand.email.support }), 'Ok', {
+          duration: 15000,
+          verticalPosition: 'top'
+        });
+        //this.waiting = false;
+      });
   };
 
   async checkout(product)  {
@@ -111,6 +121,10 @@ export class MembershipComponent implements OnInit {
     );
     if (error) {
       console.log('Error', error);
+      this.snack.open(this.translate.instant('MEMBERSHIP.msgInvalidStripe', { email: this.config.brand.email.support }), 'Ok', {
+        duration: 15000,
+        verticalPosition: 'top'
+      });
     }
   }
 
