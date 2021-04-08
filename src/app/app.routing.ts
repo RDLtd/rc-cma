@@ -48,56 +48,68 @@ const APP_ROUTES: Routes = [
     component: MarketplaceComponent,
     canActivate: [AuthGuard]
   },
+
   { path: 'referral', component: SigninComponent },
-  { path: 'profile', component: SettingsComponent, canActivate: [AuthGuard]},
-  { path: 'restaurants/:id/cms', component: CmsComponent,  canActivate: [AuthGuard], children: [
 
-    { path: 'dashboard',
-      component: CmsDashboardComponent,
-      canActivate: [AuthGuard] },
+  { path: 'profile', redirectTo: 'settings', pathMatch: 'full' },
 
-    { path: 'images',
-      component: CmsImagesComponent,
-      canActivate: [AuthGuard] },
+  { path: 'settings',
+    component: SettingsComponent,
+    canActivate: [AuthGuard]},
 
-    { path: 'opening-times',
-      component: CmsHoursComponent,
-      canActivate: [AuthGuard],
-      canDeactivate: [CanDeactivateGuard] },
+  { path: 'cms/:id',
+    component: CmsComponent,
+    canActivate: [AuthGuard],
+    children: [
 
-    { path: 'location',
-      component: CmsLocationComponent,
-      canActivate: [AuthGuard],
-      canDeactivate: [CanDeactivateGuard] },
+      { path: 'dashboard',
+        component: CmsDashboardComponent,
+        canActivate: [AuthGuard] },
 
-    { path: 'menus',
-      component: CmsMenusComponent,
-      canActivate: [AuthGuard],
-      canDeactivate: [CanDeactivateGuard]
-    },
+      { path: 'images',
+        component: CmsImagesComponent,
+        canActivate: [AuthGuard] },
 
-    { path: 'reservations',
-      component: CmsReservationsComponent,
-      canActivate: [AuthGuard],
-      canDeactivate: [CanDeactivateGuard]},
+      { path: 'opening-times',
+        component: CmsHoursComponent,
+        canActivate: [AuthGuard],
+        canDeactivate: [CanDeactivateGuard] },
 
-    { path: 'features',
-      component: CmsFeaturesComponent,
-      canActivate: [AuthGuard],
-      canDeactivate: [CanDeactivateGuard] },
+      { path: 'location',
+        component: CmsLocationComponent,
+        canActivate: [AuthGuard],
+        canDeactivate: [CanDeactivateGuard] },
 
-    { path: 'preview',
-      component: CmsPreviewComponent,
-      canActivate: [AuthGuard] },
+      { path: 'menus',
+        component: CmsMenusComponent,
+        canActivate: [AuthGuard],
+        canDeactivate: [CanDeactivateGuard]
+      },
 
-    { path: 'affiliates',
-      component: MarketplaceComponent,
-      canActivate: [AuthGuard] },
+      { path: 'reservations',
+        component: CmsReservationsComponent,
+        canActivate: [AuthGuard],
+        canDeactivate: [CanDeactivateGuard]},
 
-    { path: '**', component: CmsDashboardComponent, canActivate: [AuthGuard] }
-  ]},
+      { path: 'features',
+        component: CmsFeaturesComponent,
+        canActivate: [AuthGuard],
+        canDeactivate: [CanDeactivateGuard] },
 
-  { path: '**', redirectTo: '/profile' }
+      { path: 'preview',
+        component: CmsPreviewComponent,
+        canActivate: [AuthGuard] },
+
+      { path: '**',
+        redirectTo: 'dashboard', pathMatch: 'full' }
+    ]},
+
+  // redirect any missed routes
+  { path: 'restaurants/:id/cms',
+    redirectTo: 'cms/:id',
+  },
+
+  { path: '**', redirectTo: '/hub' }
 
 ];
 

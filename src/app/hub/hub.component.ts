@@ -161,7 +161,7 @@ export class HubComponent implements AfterViewInit {
           this.trigger.openMenu();
           // 1 restaurant
         } else {
-          this.router.navigate(['/restaurants', this.restaurants[0].restaurant_id, 'cms', 'dashboard']).then()
+          this.router.navigate(['/cms', this.restaurants[0].restaurant_id]).then()
         }
         break;
       }

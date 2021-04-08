@@ -22,7 +22,7 @@
       <button
         *ngFor="let restaurant of restaurants"
         mat-menu-item
-        [routerLink]="['/restaurants', restaurant.restaurant_id, 'cms', 'dashboard']">
+        [routerLink]="['/cms', restaurant.restaurant_id]">
         <mat-icon>store</mat-icon>
         <span>{{ restaurant.restaurant_name }}</span>
       </button>
