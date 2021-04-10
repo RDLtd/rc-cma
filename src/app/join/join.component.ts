@@ -4,7 +4,7 @@ import { MemberService, AuthenticationService, AppService } from '../_services';
 import { CmsLocalService } from '../cms';
 import { TranslateService } from '@ngx-translate/core';
 import { MatDialog } from '@angular/material/dialog';
-import { LoadService } from '../common';
+import { ConfirmCancelComponent, LoadService } from '../common';
 import { AppConfig } from '../app.config';
 
 export interface PendingMember {
@@ -14,6 +14,7 @@ export interface PendingMember {
   telephone: string;
   email: string;
   referral_code: string;
+  accepts_terms: boolean;
 }
 
 @Component({
@@ -28,7 +29,7 @@ export class JoinComponent implements OnInit {
   duplicateField: string;
   currentApplicant: any;
   pendingMember: PendingMember;
-  brand: any;
+  public brand: any;
   referrer = {
     type: 'self',
     code: null,
@@ -51,7 +52,7 @@ export class JoinComponent implements OnInit {
     private translate: TranslateService,
     private dialog: MatDialog,
     private load: LoadService,
-    private config: AppConfig,
+    public config: AppConfig,
     private appService: AppService,
     private router: Router
   ) {
@@ -77,6 +78,7 @@ export class JoinComponent implements OnInit {
 
     // Set brand
     this.brand = this.config.brand;
+
     // Get array of translated jobs
     this.jobs = this.translate.instant('JOIN.jobRoles');
 
@@ -126,6 +128,18 @@ export class JoinComponent implements OnInit {
 
   // API call to check for duplicate tel/emails
   async preRegistrationCheck(formData) {
+
+    if (!formData.accepts_terms) {
+      this.dialog.open(ConfirmCancelComponent, {
+        data: {
+          body: this.translate.instant('JOIN.invalidTerms', { brand: this.brand.name }),
+          cancel: 'hide',
+          confirm: 'OK'
+        }
+      });
+      return;
+    }
+
     // console.log(formData);
     this.isSubmitting = true;
     this.load.open();

@@ -311,6 +311,7 @@
 		"invalidJobRequired": "Please select your main job or role",
 		"invalidRequired": "Required",
 		"invalidTelRequired": "A valid mobile number is required",
+		"invalidTerms": "To continue, you must tick the box to confirm acceptance of the {{ brand }} **terms** and **privacy policy** and to allow us to contact you, if necessary, regarding Membership. ",
 		"jobRoles": [
 			"Owner/Manager",
 			"Chef/Kitchen",
@@ -320,7 +321,7 @@
 		],
 		"joinSuccess": "# Ok thanks!\n\nA member of our Support & Curation Team will be in contact with you shortly.\n\n**{{ brand }} Curation Team**",
 		"joinUsByReferral": "# Join us{{ referrer }}\n\nYou've been invited by {{ referrer }} to become part of {{ brand }}, an exciting new organisation that has been exclusively created to support both independent and group restaurants, and affect positive change within the industry. To join us:\n\n 1. Provide your name and contact details\n\n 2. Select your subscription option\n\n 3. Pay your subscription online\n\nIf you experience any problems activating your membership then do please [contact our Support Team]({{ email }}).",
-		"joinUsToday": "# Join us!\n\nJust complete the following 3 steps and in no time you’ll be part of the Collective!\n\n 1. Provide your name and contact details\n\n 2. Select either a monthly or yearly subscription\n\n 3. Pay your subscription online\n\nIf you experience any problems throughout this process please email: \n\n{{ email }}",
+		"joinUsToday": "# Join now\n\nJust complete the following steps and in no time you’ll be part of the Collective. \n\n 1. Provide your name and contact details\n\n 2. Choose a subscription option\n\n 3. Pay online\n\nIf you experience any problems throughout this process please email: \n\n{{ email }}",
 		"joinWelcome": "# Welcome\n\nYou've successfully registered yourself as a **Member** and we've sent you login details and along with some further information.\n\nClose this window and check your email.\n\nMany thanks.\n\n**{{ brand }} Curation Team**",
 		"labelBtnSubmit": "NEXT",
 		"labelEmail": "Email address",
@@ -328,6 +329,7 @@
 		"labelJob": "Your Job/Role",
 		"labelLastName": "Last name",
 		"labelTel": "Mobile",
+		"labelTerms": "By ticking this box you agree to the {{ brand }} <a href=\"{{ toc }}\" target=\"_blank\">Terms</a> and <a href=\"{{ privacy }}\" target=\"_blank\">Privacy Policy</a> and for {{ brand }} to contact you, when necessary, using the details that you have provided here.\n",
 		"linkSignIn": "Sign In",
 		"msgCheckEmail": "Check your email for sign in credentials",
 		"placeholderEmail": "Your email address",
@@ -386,7 +388,7 @@
 	"MEMBERSHIP": {
 		"infoMembershipMonthly": "##  MONTHLY SUBSCRIPTION\n\nPay just **{{ fee }}** per month for full access to all the benefits offered by **{{ brand }}** Membership.",
 		"infoMembershipYearly": "## ANNUAL SUBSCRIPTION\n\nPay **{{ fee }}** per year and you'll get a full 12 month membership for the price of only 10. All the same **{{ brand }}** benefits, just a bit cheaper!\n\n**And**, if you sign up for a yearly subscription before the 16 April 2021, then your fees will be frozen, for life!",
-		"instructions": "Please select your **{{ brand }}** subscription option.\n\nYou will be taken to the checkout stage, where you can review your subscription before paying securely online.\n\nIf you have a **PROMOCODE** then you can apply it during the payment process.",
+		"instructions": "# What do I get?\n\n- Power over your online presence with our content management tool and included single page website\n\n- Economies of scale and vetted suppliers in our Deals Marketplace\n\n- Advice and support from fellow indies in our Members Forum\n\n# And soon...\n\n- Mentorship from people who have been where they are now\n\n- Great staff on loan/recommendation via the Restaurant Collective Job Exchange\n\n- Skills training for themselves and their teams in our Knowledge Base\n\n- Inclusion in the UK’s largest directory of independent restaurants ",
 		"labelPayMonthly": "Pay monthly",
 		"labelPayYearly": "Pay yearly",
 		"msgInvalidStripe": "There seems to be a problem with your details. Please use the 'back' button to go back and check your details, or to contact support.",

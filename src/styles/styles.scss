@@ -222,6 +222,10 @@ a.mat-menu-item {text-decoration: none;}
     justify-content: flex-start;
     align-items: center;
     padding: 24px;
+    ul li {
+      list-style: disc;
+    }
+
   }
   .rc-layout-split-left {
     background-color: $rc-theme-primary;
@@ -232,7 +236,7 @@ a.mat-menu-item {text-decoration: none;}
     }
   }
   .rc-layout-split-content {
-    max-width: 420px;
+    max-width: 480px;
     margin: 0;
     .rc-logo {
       display: block;
@@ -279,6 +283,15 @@ a.mat-menu-item {text-decoration: none;}
       background-color: white;
       .mat-form-field {
         width: 100%;
+      }
+      .mat-checkbox-inner-container {
+        height: 20px;
+        width: 20px;
+        margin-top:0;
+      }
+      .mat-checkbox-layout {
+        margin: 16px 0;
+        white-space: normal;
       }
 
     }

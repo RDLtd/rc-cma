@@ -311,6 +311,7 @@
 		"invalidJobRequired": "Veuillez sélectionner votre emploi ou rôle principal",
 		"invalidRequired": "Champs obligatoires",
 		"invalidTelRequired": "Un numéro de téléphone valide est requis",
+		"invalidTerms": "Pour continuer, vous devez cocher la case pour confirmer l'acceptation des {{ brand }} **conditions** et **politique de confidentialité** et pour nous permettre de vous contacter au sujet de l'adhésion.",
 		"jobRoles": [
 			"Propriétaire / Gérant",
 			"Chef / Cuisine",
@@ -328,6 +329,7 @@
 		"labelJob": "Votre travail / rôle",
 		"labelLastName": "Nom de famille",
 		"labelTel": "Mobile",
+		"labelTerms": "En cochant cette case, vous acceptez les {{ brand }} <a href=\"{{ toc }}\" target=\"_blank\">Conditions</a> et la <a href=\"{{ privacy }}\" target=\"_blank\">Politique de confidentialité</a> et {{ brand }} de vous contacter, si nécessaire, en utilisant les informations que vous avez fournies ici.\n",
 		"linkSignIn": "Connectez-vous",
 		"msgCheckEmail": "Accéder à votre email pour les informations d'identification de connexion",
 		"placeholderEmail": "Votre adresse email",

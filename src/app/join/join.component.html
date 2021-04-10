@@ -147,7 +147,14 @@
           <mat-error align="end">{{ 'JOIN.invalidTelRequired' | translate }}</mat-error>
         </mat-form-field>
 
-        <br><br>
+        <mat-checkbox name="accepts_terms" [(ngModel)]="pendingMember.accepts_terms">
+          <div class="rc-txt-small" markdown>
+            {{ 'JOIN.labelTerms' | translate: {
+            brand: this.brand.name,
+            toc: this.brand.downloads.terms,
+            privacy: this.brand.downloads.privacy
+          } }}</div>
+        </mat-checkbox>
 
         <button
           type="submit"
@@ -156,6 +163,8 @@
           color="accent">
           {{ 'JOIN.labelBtnSubmit' | translate }}
         </button>
+
+
       </form>
     </div>
     </div>
