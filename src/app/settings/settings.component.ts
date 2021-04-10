@@ -519,6 +519,16 @@ export class SettingsComponent implements OnInit {
   //     });
   // }
 
+  notificationUpdated(e): void {
+    console.log('Accept', e.source.name, e.checked);
+    // Todo: update notifications api call
+    this.openSnackBar(
+      this.translate.instant('SETTINGS.msgNotificationsUpdated'),
+      null,
+      2000
+    );
+  }
+
   getReferralLink(): string {
     const origin = window.location.origin;
     console.log('Host', origin);

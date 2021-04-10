@@ -6443,6 +6443,23 @@
                         </translations>
                     </concept_node>
                     <concept_node>
+                        <name>infoNotification</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-GB</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
                         <name>infoReferrals</name>
                         <definition_loaded>false</definition_loaded>
                         <description/>
@@ -6579,6 +6596,23 @@
                         </translations>
                     </concept_node>
                     <concept_node>
+                        <name>labelEvents</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-GB</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
                         <name>labelFreeMembership</name>
                         <definition_loaded>false</definition_loaded>
                         <description/>
@@ -6682,6 +6716,40 @@
                     </concept_node>
                     <concept_node>
                         <name>labelName</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-GB</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>labelNewDeals</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-GB</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>labelNewsletter</name>
                         <definition_loaded>false</definition_loaded>
                         <description/>
                         <comment/>
@@ -6920,6 +6988,23 @@
                     </concept_node>
                     <concept_node>
                         <name>msgNewRequestReceived</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-GB</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>msgNotificationsUpdated</name>
                         <definition_loaded>false</definition_loaded>
                         <description/>
                         <comment/>
@@ -7435,6 +7520,23 @@
                     </concept_node>
                     <concept_node>
                         <name>titleMember</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-GB</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>titleNotification</name>
                         <definition_loaded>false</definition_loaded>
                         <description/>
                         <comment/>
