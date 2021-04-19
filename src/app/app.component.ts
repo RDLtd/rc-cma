@@ -17,7 +17,7 @@ import { MatDialog } from '@angular/material/dialog';
 export class AppComponent implements OnInit {
 
   isConnected = true;
-  inSession = false;
+  inSession: boolean;
   language = localStorage.getItem('rd_language'); // Default language
 
   // If we are offline then there is o access to translations
@@ -39,6 +39,8 @@ export class AppComponent implements OnInit {
     private http: HttpClient,
     private config: AppConfig,
     public authService: AuthenticationService) {
+
+
 
       // Check browser connection
       this.connectionService.monitor().subscribe(isConnected => {
