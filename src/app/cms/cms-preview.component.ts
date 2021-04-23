@@ -21,7 +21,7 @@ export class CmsPreviewComponent implements OnInit {
 
     ngOnInit() {
 
-      this.cms.previewSPW(this.data.id, this.data.number, false, false)
+      this.cms.previewSPW(this.data.id, this.data.number, this.data.name, false, false)
         .subscribe(res => {
 
           console.log('PREVIEW:', res);

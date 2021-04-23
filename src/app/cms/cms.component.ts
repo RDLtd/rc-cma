@@ -80,7 +80,8 @@ export class CmsComponent implements OnInit {
       backdropClass: 'rc-preview-backdrop',
       data: {
         id: this.restaurant.restaurant_id,
-        number: this.restaurant.restaurant_number
+        number: this.restaurant.restaurant_number,
+        name: this.restaurant.restaurant_name
       }
     });
     // record event

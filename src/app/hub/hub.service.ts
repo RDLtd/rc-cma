@@ -19,10 +19,11 @@ export class HubService {
     this.app.authToken.subscribe(token => this.authToken = token);
   }
 
-
   getServices(): any {
     return this.http.post(this.config.apiUrl + '/cms/getservices',
       {
+        company: this.config.brand.prefix,
+        language: localStorage.getItem('rd_language'),
         userCode: this.config.userAPICode,
         token: this.authToken
       });

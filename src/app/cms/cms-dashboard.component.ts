@@ -639,7 +639,8 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
         backdropClass: 'rc-preview-backdrop',
         data: {
           id: this.restaurant.restaurant_id,
-          number: this.restaurant.restaurant_number
+          number: this.restaurant.restaurant_number,
+          name: this.restaurant.restaurant_name
         }
       });
       // record event
@@ -652,7 +653,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
   publishSPW(): void {
     // console.log('publishSPW()');
     this.isPreviewing = true;
-    this.cms.previewSPW(this.restaurant.restaurant_id, this.restaurant.restaurant_number, true, false)
+    this.cms.previewSPW(this.restaurant.restaurant_id, this.restaurant.restaurant_number, this.restaurant.restaurant_name, true, false)
       .subscribe(res => {
         console.log('New publish res', res);
           if (res['status'] === 'OK') {
