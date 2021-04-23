@@ -29,20 +29,6 @@ export class HubComponent implements AfterViewInit {
   services: any;
   webContentDefaultRoute: [];
 
-  // Mock up some messages
-  // messages = [
-  //   {
-  //     severity: 1,
-  //     message_subject_en: 'An Important Message',
-  //     message_text_en: 'This a critical message and we want the member to acknowledge reading it.'
-  //   },
-  //   {
-  //     severity: 0,
-  //     message_subject_en: 'A Less Important Message',
-  //     message_text_en: 'This message has less importance and is just for general information..'
-  //   }
-  // ];
-
   constructor(
     private loader: LoadService,
     private header: HeaderService,
@@ -147,11 +133,9 @@ export class HubComponent implements AfterViewInit {
       });
       return false;
     }
-    // Todo: use section labels like 'cms' instead of actual routes for
-    //  internal service
-    switch (service.service_id) {
-      case 1: {
-        console.log(service.service_id);
+    console.log('Service', service.service_route);
+    switch (service.service_route) {
+      case 'cms': {
         const i = this.restaurants.length;
         // No restaurants added yet
         if (i === 0) {
@@ -169,7 +153,7 @@ export class HubComponent implements AfterViewInit {
         if (service.service_external) {
           window.open(service.service_route, '_blank');
         } else {
-          this.router.navigate([service.service_route]).then();
+          this.router.navigate([`/${service.service_route}`]).then();
         }
         break;
       }
