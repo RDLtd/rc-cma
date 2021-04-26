@@ -66,13 +66,6 @@ export class AppConfig {
         curation: `curation@${this.tld.rc}`
       },
       products: {
-        taxId: 'txr_1IVEMZDK2S86a4QisRxE6Rlg',
-        membership_monthly: {
-          priceId: 'price_1IVEJbDK2S86a4QiFbh7Tnk5'
-        },
-        membership_yearly: {
-          priceId: 'price_1IVELjDK2S86a4Qiwle01gdG'
-        },
         success_url: `${ this.appUrl }/signin`,
         cancel_url: `${ this.appUrl }/membership-options`,
       },
@@ -97,13 +90,8 @@ export class AppConfig {
         curation: `curation@${this.tld.ri}`
       },
       products: {
-        taxId: 'txr_1IRfN6Fqzlrb81VHYhn3ye2a',
-        membership_monthly: {
-          priceId: 'price_1HuIiGFqzlrb81VHQsg1MWwz'
-        },
-        membership_yearly: {
-          priceId: 'price_1HuaaeFqzlrb81VHFyBJUwPs'
-        }
+        success_url: `${ this.appUrl }/signin`,
+        cancel_url: `${ this.appUrl }/membership-options`,
       },
       currency: {
         symbol: '€',
