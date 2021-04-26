@@ -107,7 +107,8 @@ export class MembershipComponent implements OnInit {
       taxId: this.products[product].product_tax_id,
       successUrl: this.config.brand.products.success_url,
       cancelUrl: this.config.brand.products.cancel_url,
-      email: newMember.email
+      email: newMember.email,
+      company: this.config.brand.prefix
     })
       .then(data => {
         console.log('MC Session', data)

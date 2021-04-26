@@ -500,7 +500,8 @@ export class MemberService {
         customer_id: customer_id,
         api_url: api_url,
         userCode: this.config.userAPICode,
-        token: this.authToken
+        token: this.authToken,
+        company: this.config.brand.prefix
       });
   }
 
@@ -510,7 +511,8 @@ export class MemberService {
       {
         customer_id: customer_id,
         userCode: this.config.userAPICode,
-        token: this.authToken
+        token: this.authToken,
+        company: this.config.brand.prefix
       });
   }
 
@@ -558,7 +560,8 @@ export class MemberService {
       {
         subscription_id: subscription_id,
         userCode: this.config.userAPICode,
-        token: this.authToken
+        token: this.authToken,
+        company: this.config.brand.prefix
       });
   }
 
@@ -572,7 +575,8 @@ export class MemberService {
         tax_id: tax_id,
         quantity: quantity,
         userCode: this.config.userAPICode,
-        token: this.authToken
+        token: this.authToken,
+        company: this.config.brand.prefix
       });
   }
 
@@ -586,7 +590,8 @@ export class MemberService {
         tax_id: tax_id,
         quantity: quantity,
         userCode: this.config.userAPICode,
-        token: this.authToken
+        token: this.authToken,
+        company: this.config.brand.prefix
       });
   }
 
