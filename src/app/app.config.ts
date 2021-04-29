@@ -48,6 +48,7 @@ export class AppConfig {
   // public readonly mailchimp_listid = '941da1d48e';
   // public readonly mailchimp_listname = 'RC3';
 
+  // Root domains
   tld = {
     rc: 'restaurantcollective.org.uk',
     ri: 'restaurateursindependants.fr'
