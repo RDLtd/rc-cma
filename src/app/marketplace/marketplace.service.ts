@@ -21,6 +21,7 @@ export class MarketplaceService {
   getDeals(): any {
     return this.http.post(this.config.apiUrl + '/cms/getdeals',
       {
+        company: this.config.brand.prefix,
         userCode: this.config.userAPICode,
         token: this.authToken
       });

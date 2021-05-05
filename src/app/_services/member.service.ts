@@ -500,7 +500,8 @@ export class MemberService {
         customer_id: customer_id,
         api_url: api_url,
         userCode: this.config.userAPICode,
-        token: this.authToken
+        token: this.authToken,
+        company: this.config.brand.prefix
       });
   }
 
@@ -510,7 +511,8 @@ export class MemberService {
       {
         customer_id: customer_id,
         userCode: this.config.userAPICode,
-        token: this.authToken
+        token: this.authToken,
+        company: this.config.brand.prefix
       });
   }
 
@@ -538,6 +540,7 @@ export class MemberService {
   getProducts() {
     return this.http.post(this.config.apiUrl + '/members/getproducts',
       {
+        company: this.config.brand.prefix,
         userCode: this.config.userAPICode,
         token: this.authToken
       });
@@ -546,6 +549,7 @@ export class MemberService {
   getProductsMaxRestaurants(max_restaurants: number) {
     return this.http.post(this.config.apiUrl + '/members/getproductsmaxrestaurants',
       {
+        company: this.config.brand.prefix,
         max_restaurants: max_restaurants,
         userCode: this.config.userAPICode,
         token: this.authToken
@@ -558,7 +562,8 @@ export class MemberService {
       {
         subscription_id: subscription_id,
         userCode: this.config.userAPICode,
-        token: this.authToken
+        token: this.authToken,
+        company: this.config.brand.prefix
       });
   }
 
@@ -572,7 +577,8 @@ export class MemberService {
         tax_id: tax_id,
         quantity: quantity,
         userCode: this.config.userAPICode,
-        token: this.authToken
+        token: this.authToken,
+        company: this.config.brand.prefix
       });
   }
 
@@ -586,7 +592,8 @@ export class MemberService {
         tax_id: tax_id,
         quantity: quantity,
         userCode: this.config.userAPICode,
-        token: this.authToken
+        token: this.authToken,
+        company: this.config.brand.prefix
       });
   }
 

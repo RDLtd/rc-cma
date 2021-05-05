@@ -19,12 +19,12 @@ export class AppConfig {
   // Should only need to switch here to change from local to Heroku server
   // public readonly apiUrl = 'http://localhost:4000';
   // public readonly apiUrl = 'https://rc-server-cobb20-n5fxl047dapoj.herokuapp.com'
-  // public readonly apiUrl = 'https://rc-server-staging.herokuapp.com';
+  public readonly apiUrl = 'https://rc-server-staging.herokuapp.com';
   // public readonly apiUrl = 'https://rc-server-prod.herokuapp.com';
 
   // This is Angular's equivalent! See the 'environments' folder
   // Build process should automatically detect the correct variables
-  public readonly apiUrl = environment.API_URL;
+  //public readonly apiUrl = environment.API_URL;
 
   public readonly sql_defaults = {
     where_field: 'restaurant_name',
@@ -48,6 +48,7 @@ export class AppConfig {
   // public readonly mailchimp_listid = '941da1d48e';
   // public readonly mailchimp_listname = 'RC3';
 
+  // Root domains
   tld = {
     rc: 'restaurantcollective.org.uk',
     ri: 'restaurateursindependants.fr'
@@ -66,13 +67,6 @@ export class AppConfig {
         curation: `curation@${this.tld.rc}`
       },
       products: {
-        taxId: 'txr_1IVEMZDK2S86a4QisRxE6Rlg',
-        membership_monthly: {
-          priceId: 'price_1IVEJbDK2S86a4QiFbh7Tnk5'
-        },
-        membership_yearly: {
-          priceId: 'price_1IVELjDK2S86a4Qiwle01gdG'
-        },
         success_url: `${ this.appUrl }/signin`,
         cancel_url: `${ this.appUrl }/membership-options`,
       },
@@ -97,13 +91,8 @@ export class AppConfig {
         curation: `curation@${this.tld.ri}`
       },
       products: {
-        taxId: 'txr_1IRfN6Fqzlrb81VHYhn3ye2a',
-        membership_monthly: {
-          priceId: 'price_1HuIiGFqzlrb81VHQsg1MWwz'
-        },
-        membership_yearly: {
-          priceId: 'price_1HuaaeFqzlrb81VHFyBJUwPs'
-        }
+        success_url: `${ this.appUrl }/signin`,
+        cancel_url: `${ this.appUrl }/membership-options`,
       },
       currency: {
         symbol: '€',
