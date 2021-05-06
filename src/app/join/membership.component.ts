@@ -29,7 +29,7 @@ export class MembershipComponent implements OnInit {
   transParams: any;
   waiting = false;
   stripeSessionId: string;
-  stripePromise = loadStripe(environment.stripe_key);
+  stripePromise: any;
   stringInCode: any;
   products = [];
   mdProdMonthly: string;
@@ -45,7 +45,7 @@ export class MembershipComponent implements OnInit {
     private snack: MatSnackBar
   ) {
 
-
+    this.stripePromise = loadStripe(environment[this.config.brand.prefix + '_stripe_key']);
 
     this.transParams = {
       brand: this.config.brand.name,
