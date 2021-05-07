@@ -298,6 +298,7 @@
 		"tipBtnHub": "Member's Hub"
 	},
 	"HUB": {
+		"msgComingSoon": "Coming soon",
 		"sectionCMS": "Content Management & SPW",
 		"sectionHub": "Member's Hub",
 		"sectionMarket": "Marketplace",
