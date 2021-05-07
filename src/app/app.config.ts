@@ -18,7 +18,7 @@ export class AppConfig {
 
   // Should only need to switch here to change from local to Heroku server
   // public readonly apiUrl = 'http://localhost:4000';
-  // public readonly apiUrl = 'https://rc-server-cobb20-n5fxl047dapoj.herokuapp.com'
+  // public readonly apiUrl = 'https://rc-server-carter-fsjlmesxoioco.herokuapp.com'
   public readonly apiUrl = 'https://rc-server-staging.herokuapp.com';
   // public readonly apiUrl = 'https://rc-server-prod.herokuapp.com';
 
@@ -99,8 +99,8 @@ export class AppConfig {
         code: 'EUR'
       },
       downloads: {
-        terms: `https://${this.tld.ri}/downloads/RI-Terms.pdf`,
-        privacy: `https://${this.tld.ri}/downloads/RI-Privacy.pdf`
+        terms: `https://${this.tld.ri}/terms-conditions/`,
+        privacy: `https://${this.tld.ri}/privacy-policy/`
       }
     }
   };

@@ -268,6 +268,9 @@
 		"msgConfirmCancel": "Les modifications effectuées n'ont pas encore été enregistrées et seront perdues si vous continuez. Voulez-vous continuer?",
 		"titleConfirmCancel": "Veuillez Confirmer"
 	},
+	"EMAIL": {
+		"txt": "Soutien aux restaurateurs indépendants"
+	},
 	"Global": {
 		"DOW-Dimanche": "Dimanche",
 		"DOW-Friday": "Vendredi",
@@ -381,7 +384,7 @@
 		"tipFavourites": "Afficher les favoris",
 		"tipFilterBy": "Filtrer les résultats",
 		"tipLink": "Plus d'information en ligne",
-		"tipNational": "Disponible partout en France",
+		"tipNational": "Disponible au niveau national",
 		"tipRequestContact": "Quelqu'un vous contactera à propos de cette offre",
 		"titleRequest": "Offre exclusive aux membres"
 	},
