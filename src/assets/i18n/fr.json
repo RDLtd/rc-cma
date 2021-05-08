@@ -298,6 +298,7 @@
 		"tipBtnHub": "Hub pour les membres"
 	},
 	"HUB": {
+		"msgComingSoon": "Prochainment",
 		"sectionCMS": "Gestion du contenu et de la Page Internet",
 		"sectionHub": "Hub pour les membres",
 		"sectionMarket": "MarketPlace",
@@ -391,7 +392,7 @@
 	"MEMBERSHIP": {
 		"infoMembershipMonthly": "##  ADHESION MENSUELLE\n\nSeulement **{{ fee }}** par mois pour un accès complet à tous les avantages offerts par l'abonnement **{{ brand }}**.",
 		"infoMembershipYearly": "## ADHESION ANNUELLE\n\n**{{ fee }}** par an pour le prix de seulement 10 mois. Tout les avantages de **{{ brand }}** , un peu moins cher en payant l'année complète maintenant!\n",
-		"instructions": "# Mon adhésion me donne accès à :\n\n- Une présence en ligne optimisée gràce à l'outil de gestion de contenu et la Page Internet inclue\n\n- Des économies d'échelle par des fournisseurs approuvés dans notre MerketPlace d'offres,\n\n- Des conseils et au soutien de collègues indépendants dans notre forum pour les membres\n\n# Et très bientôt...\n\n- Le coaching par des personnes qui ont été là où vous êtes actuellement\n\n- Du personnel recommandé dans la bourse d'emploi de Restaurateurs Indépendants\n\n- Des formations pour vous et votre équipe dans la base de connaissances\n\n- Votre présence dans le plus grand annuaire de restaurants indépendants en France",
+		"instructions": "# Qu'est-ce que je reçois?\n\n- Optimisez votre présence en ligne avec notre outil de gestion de contenu et notre site Web d'une seule page inclus\n\n- Économies d'échelle et fournisseurs approuvés sur notre marché des affaires\n\n- Conseils et soutien de nos collègues indépendants dans notre forum des membres\n\n# Et ainsi de suite...\n\n- Mentorat de personnes qui ont été là où elles sont maintenant\n\n- Excellent personnel en prêt / recommandation via le restaurant Collective Job Exchange\n\n- Formation professionnelle pour eux-mêmes et leurs équipes dans notre base de connaissances\n\n- Inclusion dans le plus grand répertoire de restaurants indépendants du Royaume-Uni",
 		"labelPayMonthly": "Paiement mensuel",
 		"labelPayYearly": "Paiement annuel",
 		"msgInvalidStripe": "Nous rencontrons un problème avec vos coordonnées. Veuillez utiliser le bouton «retour» pour les vérifier ou pour contacter notre équipe.",
@@ -515,7 +516,7 @@
 		"labelBtnSignIn": "SE CONNECTER",
 		"labelEmail": "ADRESSE EMAIL",
 		"labelPassword": "MOT DE PASSE",
-		"msgNewMember": "Dans les prochaines minutes, vous devriez recevoir un ** e-mail de bienvenue ** qui comprend un mot de passe généré par notre système.\n\n- **Copiez le mot de passe** et revenez sur cette page\n- Collez votre mot de passe et **Connectez-vous**\n- Fermez cette fenêtre en cliquant sur 'OK'\n\nVous recevrez également un reçu de paiement pour votre comptabilité.\n",
+		"msgNewMember": "Dans les prochaines minutes, vous devriez recevoir un **e-mail de bienvenue** de notre part qui comprend un mot de passe généré par le système.\n\n- **Copiez le mot de passe** et retournez sur cette page\n- Fermez cette fenêtre de message en cliquant sur 'OK'\n- Collez votre mot de passe dans le formulaire et **Connexion**.\n\nVous recevrez également un reçu de paiement pour vos dossiers.\n",
 		"newPwdSent": "Un nouveau mot de passe a été envoyé à votre adresse email.",
 		"resetPwdHeader": "Réinitialiser le mot de passe",
 		"resetPwdInstructions": "Renseignez votre adresse e-mail enregistrée pour réinitialiser votre mot de passe. Vous devrez peut-être vérifier les indésirables/Spam.",
