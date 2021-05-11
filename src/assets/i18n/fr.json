@@ -36,7 +36,7 @@
 				"msgAnalysing": "Analyse du contenu ...",
 				"msgContentRequired": "Bon travail jusqu'à présent, mais nous avons besoin d'un peu plus d'informations pour générer votre Page Internet. \n\nLe tableau ci-dessous vous indique les sections qui nécessitent davantage de contenu. Une fois que vousaurez ajouté suffisamment de données, les options **APERÇU** et **PUBLIER** seront disponibles. Nous pourrons créer votre Page Internet et distribuer votre contenu.\n\nVous pouvez [voir une version démo]({{link}}) voir à quoi ressemble une Page Internet avec davantage de contenu.",
 				"msgPublished": "Votre **Page Internet** a été publié avec succès et les données ont été synchronisées sur tous les Sites abonnés au contenu de Restaurateuurs Indépendants. Vous pouvez voir votre page ou copier l'URL depuis l'accès ci-dessous au LIENS MARKETING.",
-				"msgUnpublished": "Les dernières modifications n'ont pas encore été publiées.\n\nCliquez sur ** APERÇU ** pour voir et vérifier le contenu de votre Page Internet. Si tout est correct, cliquez sur ** PUBLIER ** pour synchroniser les modifications avec tous les {{ brand }} canaux de distribution.",
+				"msgUnpublished": "Les dernières modifications n'ont pas encore été publiées.\n\nCliquez sur **APERÇU** pour voir et vérifier le contenu de votre Page Internet. Si tout est correct, cliquez sur **PUBLIER** pour synchroniser les modifications avec tous les {{ brand }} canaux de distribution.",
 				"msgVerified": "Vérifié et publié le {{ date }} par {{ name }}.",
 				"msgVerifiedAndPublished": "Données vérifiées et publiées",
 				"tipMarketingLinks": "Liens marketing et codes QR",
@@ -120,9 +120,9 @@
 			"titleRestaurantImages": "Photos du restaurant"
 		},
 		"LINKS": {
-			"infoCustomDomain": "La **Page Internet** peut également être utilisée avec son propre nom de domaine (par exemple www.votre-domaine.fr).\n\nIl peut s'agir d'un nom de domaine existant, ou bien nous pouvons enregistrer un nom de domaine approprié pour vous. Contactez notre [Equipe] (mailto:{{ email }}) pour être renseigné.",
+			"infoCustomDomain": "La **Page Internet** peut également être utilisée avec son propre nom de domaine (par exemple www.votre-domaine.fr).\n\nIl peut s'agir d'un nom de domaine existant, ou bien nous pouvons enregistrer un nom de domaine approprié pour vous. Contactez notre [Equipe](mailto:{{ email }}) pour être renseigné.",
 			"infoQRCodes": "**Les codes QR** sont des images qui contiennent des informations sur l'accès à un Site Web.\n\nLa plupart des smartphones ou tablettes reconnaissent ces images qu'ils scannent depuis l'objectif,  offrant ainsi la possibilité de visiter directement votre Page Internet.",
-			"infoSpwLink": "Le lien au Site Web, appelé URL, ci-dessus est un lien permanent vers la Page Internet automatiquement générée par **Restaurateurs Indépendants**.\n\nCe lien peut être partagé sur tosu les supports numérique.",
+			"infoSpwLink": "Le lien au Site Web, appelé URL, ci-dessus est un lien permanent vers la Page Internet automatiquement générée par **Restaurateurs Indépendants**.\n\nCe lien peut être partagé sur tous les supports numériques.",
 			"infoUsage": "Utilisez ces liens pour permettre à vos clients d'accéder facilement a votre Page Internet ou à vos Menus depuis leur smartphone ou tablette.\n\nVous pouvez copier le code QR en cliquant avec la touche droite de la souris ou en appuyant longuement sur l'image.",
 			"labelMenus": "Télécharger le code des menus de la Page Internet",
 			"labelWebsite": "Télécharger le code de la Page Internet",
@@ -393,6 +393,7 @@
 		"infoMembershipMonthly": "##  ADHESION MENSUELLE\n\nSeulement **{{ fee }}** par mois pour un accès complet à tous les avantages offerts par l'adhésion à  **{{ brand }}**",
 		"infoMembershipYearly": "## ADHESION ANNUELLE\n\n**{{ fee }}** par an pour le prix de seulement 10 mois. Tout les avantages de **{{ brand }}** , un peu moins cher en payant l'année complète maintenant!\n",
 		"instructions": "# Qu'est-ce que je reçois?\n\n- Optimisez votre présence en ligne avec notre outil de gestion de contenu et notre site Web d'une seule page inclus\n\n- Économies d'échelle et fournisseurs approuvés sur notre marché des affaires\n\n- Conseils et soutien de nos collègues indépendants dans notre forum des membres\n\n# Et ainsi de suite...\n\n- Mentorat de personnes qui ont été là où elles sont maintenant\n\n- Excellent personnel en prêt / recommandation via le restaurant Collective Job Exchange\n\n- Formation professionnelle pour eux-mêmes et leurs équipes dans notre base de connaissances\n\n- Inclusion dans le plus grand répertoire de restaurants indépendants du Royaume-Uni",
+		"labelBack": "Retour",
 		"labelPayMonthly": "Paiement mensuel",
 		"labelPayYearly": "Paiement annuel",
 		"msgInvalidStripe": "Nous rencontrons un problème avec vos coordonnées. Veuillez utiliser le bouton «retour» pour les vérifier ou pour contacter notre équipe.",
