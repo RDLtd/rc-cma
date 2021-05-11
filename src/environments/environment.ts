@@ -21,6 +21,7 @@ export const environment = {
   rc_stripe_key: 'pk_live_51HwTj0DK2S86a4Qia8CGKD9o1mmQ474tUk3v3vJXyiIXNRdZF2eFPQYmTas5khh2Y5oIGgCTG4D4gyJJ2FB3HHIK00mTDK1LbI',
 
   // RI keys
+  // ri_stripe_key: 'pk_test_51IiLuvFvEMJjooglWWYi5x9e8qhgAKicxWM99ZMObs6VjHcg8sIsG02bwQ0kqS11P415ykLiLryuGGkQVYt4ELYd009D10tr8L'
   ri_stripe_key:
-  'pk_test_51IiLuvFvEMJjooglWWYi5x9e8qhgAKicxWM99ZMObs6VjHcg8sIsG02bwQ0kqS11P415ykLiLryuGGkQVYt4ELYd009D10tr8L'
+    'pk_live_51IiLuvFvEMJjooglF2wr0sl7S1B0hltom6GweN7Mce5o8qrUG2bibXa2lPzg99oTToe6IkWNhLnXtgJJHQ4WIFFS00lCsNM7eY'
 };

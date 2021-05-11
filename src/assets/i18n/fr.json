@@ -305,9 +305,9 @@
 		"sectionSettings": "Paramètres du membre"
 	},
 	"JOIN": {
-		"duplicateEmail": "Cette ** adresse e-mail ** est déjà enregistrée, veuillez [vous connecter ou récupérer votre mot de passe ici] (/ signin).",
-		"duplicateMobile": "Ce ** numéro de portable ** est déjà enregistré, veuillez [vous connecter ou récupérer votre mot de passe ici] (/ signin).",
-		"duplicateMobileAndEmail": "Ce ** numéro de portable ** et cette ** adresse e-mail ** ont déjà été enregistrés [Connectez-vous ou récupérez votre mot de passe ici] (/signin).",
+		"duplicateEmail": "Cette **adresse e-mail** est déjà enregistrée, veuillez [vous connecter ou récupérer votre mot de passe ici] (/ signin).",
+		"duplicateMobile": "Ce **numéro de portable** est déjà enregistré, veuillez [vous connecter ou récupérer votre mot de passe ici] (/ signin).",
+		"duplicateMobileAndEmail": "Ce **numéro de portable** et cette **adresse e-mail** ont déjà été enregistrés [Connectez-vous ou récupérez votre mot de passe ici] (/signin).",
 		"duplicateRegistration": "Déjà enregistré!",
 		"headerContactDetails": "Détails de vos coordonnées",
 		"hintEmail": "Votre adresse email",
@@ -318,8 +318,8 @@
 		"invalidTerms": "Pour continuer, vous devez accepter les **conditions** et **politique de confidentialité** de {{ brand }} et nous permettre de vous contacter au sujet de l'adhésion.",
 		"jobRoles": [
 			"Propriétaire / Directeur",
-			"Chef / Cuisine",
-			"Marketing / Administration",
+			"Chef/Cuisine",
+			"Marketing/Administration",
 			"Salle",
 			"Autre"
 		],
@@ -390,7 +390,7 @@
 		"titleRequest": "Offre exclusive aux membres"
 	},
 	"MEMBERSHIP": {
-		"infoMembershipMonthly": "##  ADHESION MENSUELLE\n\nSeulement **{{ fee }}** par mois pour un accès complet à tous les avantages offerts par l'abonnement **{{ brand }}**.",
+		"infoMembershipMonthly": "##  ADHESION MENSUELLE\n\nSeulement **{{ fee }}** par mois pour un accès complet à tous les avantages offerts par l'adhésion à  **{{ brand }}**",
 		"infoMembershipYearly": "## ADHESION ANNUELLE\n\n**{{ fee }}** par an pour le prix de seulement 10 mois. Tout les avantages de **{{ brand }}** , un peu moins cher en payant l'année complète maintenant!\n",
 		"instructions": "# Qu'est-ce que je reçois?\n\n- Optimisez votre présence en ligne avec notre outil de gestion de contenu et notre site Web d'une seule page inclus\n\n- Économies d'échelle et fournisseurs approuvés sur notre marché des affaires\n\n- Conseils et soutien de nos collègues indépendants dans notre forum des membres\n\n# Et ainsi de suite...\n\n- Mentorat de personnes qui ont été là où elles sont maintenant\n\n- Excellent personnel en prêt / recommandation via le restaurant Collective Job Exchange\n\n- Formation professionnelle pour eux-mêmes et leurs équipes dans notre base de connaissances\n\n- Inclusion dans le plus grand répertoire de restaurants indépendants du Royaume-Uni",
 		"labelPayMonthly": "Paiement mensuel",
