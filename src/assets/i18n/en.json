@@ -268,9 +268,6 @@
 		"msgConfirmCancel": "The changes you have made have not yet been saved and will be lost if you continue. Do you want to discard changes and continue?",
 		"titleConfirmCancel": "Please Confirm"
 	},
-	"EMAIL": {
-		"txt": "Restaurateurs Indépendants Support"
-	},
 	"Global": {
 		"DOW-Dimanche": "Sunday",
 		"DOW-Friday": "Friday",
@@ -512,7 +509,7 @@
 		"errorEmailUnkown": "This email address is unknown!",
 		"errorUserUnauthorised": "Unauthorised login attempt - please check your details",
 		"forgottenPwd": "Forgotten your password?",
-		"introduction": "# Let's work together\n\nIt’s time someone levelled the playing field for independent operators like you.\n\nWelcome to the Restaurant Collective. We’re a member-owned, non-profit organisation on a mission.\nWe want to empower and champion independent hospitality operators.",
+		"introduction": "# Let's work together\n\nIt’s time someone levelled the playing field for independent operators like you.\n\nWelcome to {{ brand }}. We’re a member-owned, non-profit organisation on a mission.\nWe want to empower and champion independent hospitality operators.",
 		"labelBtnResetPwd": "RESET PASSWORD",
 		"labelBtnSignIn": "SIGN IN",
 		"labelEmail": "USER EMAIL ADDRESS",

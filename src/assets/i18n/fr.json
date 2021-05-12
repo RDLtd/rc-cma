@@ -223,7 +223,7 @@
 			"labelPrivate": "Proposez-vous des options de salle privée (max. {{ max }} caractères)?",
 			"labelProvider": "Fournisseur du service de réservation",
 			"msgEnterProvider": "Veuillez saisir votre {{ id }}",
-			"msgNoOnlineBookings": "Assurez-vous d'avoir bien remplis la partie ** Informations générales **: d'avoir bien expliqué comment vos clients peuvent vous réserver à l'avance, d'avoir bien décrit votre politique de réservations et d'avoir fournis les numéros de téléphone, etc.",
+			"msgNoOnlineBookings": "Assurez-vous d'avoir bien remplis la partie **Informations générales**: d'avoir bien expliqué comment vos clients peuvent vous réserver à l'avance, d'avoir bien décrit votre politique de réservations et d'avoir fournis les numéros de téléphone, etc.",
 			"msgNoTest": "Ce service ne nécessite pas de test - il n'a pas d'URL associée",
 			"msgResInfoUpdated": "Informations sur les réservatuions de {{ name }} mises à jour",
 			"msgUpdateFailed": "Les mises à jour ont échoué",
@@ -268,9 +268,6 @@
 		"msgConfirmCancel": "Les modifications effectuées n'ont pas encore été enregistrées et seront perdues si vous continuez. Voulez-vous continuer?",
 		"titleConfirmCancel": "Veuillez Confirmer"
 	},
-	"EMAIL": {
-		"txt": "Soutien aux restaurateurs indépendants"
-	},
 	"Global": {
 		"DOW-Dimanche": "Dimanche",
 		"DOW-Friday": "Vendredi",
@@ -305,9 +302,9 @@
 		"sectionSettings": "Paramètres du membre"
 	},
 	"JOIN": {
-		"duplicateEmail": "Cette **adresse e-mail** est déjà enregistrée, veuillez [vous connecter ou récupérer votre mot de passe ici] (/ signin).",
-		"duplicateMobile": "Ce **numéro de portable** est déjà enregistré, veuillez [vous connecter ou récupérer votre mot de passe ici] (/ signin).",
-		"duplicateMobileAndEmail": "Ce **numéro de portable** et cette **adresse e-mail** ont déjà été enregistrés [Connectez-vous ou récupérez votre mot de passe ici] (/signin).",
+		"duplicateEmail": "Cette **adresse e-mail** est déjà enregistrée, veuillez [vous connecter ou récupérer votre mot de passe ici](/ signin).",
+		"duplicateMobile": "Ce **numéro de portable** est déjà enregistré, veuillez [vous connecter ou récupérer votre mot de passe ici](/ signin).",
+		"duplicateMobileAndEmail": "Ce **numéro de portable** et cette **adresse e-mail** ont déjà été enregistrés [Connectez-vous ou récupérez votre mot de passe ici](/signin).",
 		"duplicateRegistration": "Déjà enregistré!",
 		"headerContactDetails": "Détails de vos coordonnées",
 		"hintEmail": "Votre adresse email",
@@ -323,7 +320,7 @@
 			"Salle",
 			"Autre"
 		],
-		"joinSuccess": "# OK merci!\n\nUn membre de notre équipe sera en contact avec vous sous peu.\n\n**L'équipe de {{ brand }} **",
+		"joinSuccess": "# OK merci!\n\nUn membre de notre équipe sera en contact avec vous sous peu.\n\n**L'équipe de {{ brand }}**",
 		"joinUsByReferral": "# Nous rejoindre{{ referrer }}\n\nVous avez été invité par {{ referrer }} à rejoindre {{ brand }}, une nouvelle organisation créée exclusivement pour soutenir les restaurateurs, et apporter un changement positif dans notre secteur. Pour nous rejoindre:\n\n 1. Indiquez votre nom et vos coordonnées\n\n 2. Sélectionnez votre option d'abonnement\n\n3. Règlement de votre abonnement en ligne\n\nSi vous rencontrez des problèmes lors de l'activation de votre abonnement, veuillez [contacter notre équipe ] ({{email}}).",
 		"joinUsToday": "# Rejoignez-nous!\n\nSuivez simplement les étapes et vous ferez partie du Collectif!\n\n 1. Indiquez votre nom et vos coordonnées\n\n 2. Sélectionnez votre option d'abonnement\n\n 3. Puis règler votre abonnement en ligne\n\nSi vous rencontrez des problèmes tout au long de ce processus, envoyez un e-mail à:\n\n{{ email }}",
 		"joinWelcome": "# Bienvenue\n\nVous vous êtes inscrit avec succès. **Membre** nous vous avons envoyé des informations de connexion et complémentaires.\n\nFermez cette fenêtre et vérifiez votre messagerie.\n\nMerci beaucoup.\n\n**L'équipe de {{ brand }}**",
@@ -392,19 +389,19 @@
 	"MEMBERSHIP": {
 		"infoMembershipMonthly": "##  ADHESION MENSUELLE\n\nSeulement **{{ fee }}** par mois pour un accès complet à tous les avantages offerts par l'adhésion à  **{{ brand }}**",
 		"infoMembershipYearly": "## ADHESION ANNUELLE\n\n**{{ fee }}** par an pour le prix de seulement 10 mois. Tout les avantages de **{{ brand }}** , un peu moins cher en payant l'année complète maintenant!\n",
-		"instructions": "# Qu'est-ce que je reçois?\n\n- Optimisez votre présence en ligne avec notre outil de gestion de contenu et notre site Web d'une seule page inclus\n\n- Économies d'échelle et fournisseurs approuvés sur notre marché des affaires\n\n- Conseils et soutien de nos collègues indépendants dans notre forum des membres\n\n# Et ainsi de suite...\n\n- Mentorat de personnes qui ont été là où elles sont maintenant\n\n- Excellent personnel en prêt / recommandation via le restaurant Collective Job Exchange\n\n- Formation professionnelle pour eux-mêmes et leurs équipes dans notre base de connaissances\n\n- Inclusion dans le plus grand répertoire de restaurants indépendants du Royaume-Uni",
+		"instructions": "# Mon adhésion me donne accès à :\n\n- Une présence en ligne optimisée gràce à l'outil de gestion de contenu et la Page Internet inclue\n\n- Des économies d'échelle par des fournisseurs approuvés dans notre Marketplace d'offres,\n\n- Des conseils et au soutien de collègues indépendants dans notre forum pour les membres\n\n# Et très bientôt...\n\n- Le coaching par des personnes qui ont été là où vous êtes actuellement\n\n- Du personnel recommandé dans la bourse d'emploi de Restaurateurs Indépendants\n\n- Des formations pour vous et votre équipe dans la base de connaissances\n\n- Votre présence dans le plus grand annuaire de restaurants indépendants en France",
 		"labelBack": "Retour",
 		"labelPayMonthly": "Paiement mensuel",
 		"labelPayYearly": "Paiement annuel",
 		"msgInvalidStripe": "Nous rencontrons un problème avec vos coordonnées. Veuillez utiliser le bouton «retour» pour les vérifier ou pour contacter notre équipe.",
-		"terms": "Veuillez prendre le temps de lire les [Conditions d'adhésion] ({{ terms }}) et la [Politique de confidentialité] ({{ privacy }}). En devenant membre de Restaurateurs Indépendants, vous confirmez votre acceptation."
+		"terms": "Veuillez prendre le temps de lire les [Conditions d'adhésion]({{ terms }}) et la [Politique de confidentialité]({{ privacy }}). En devenant membre de Restaurateurs Indépendants, vous confirmez votre acceptation."
 	},
 	"MESSAGES": {
 		"headerMessages": "Vous avez des messages",
 		"labelBtnLater": "Plus tard",
 		"labelBtnStart": "COMMENCER ICI",
 		"messagesReadOk": "Ok, lu",
-		"welcomeNewMember": "# Vous y êtes!\n\nMerci pour avoir choisi de rejoindre Restaurateurs Indépendants. Nous espérons que vous contribuerez au développement de cette communauté passionnante de professionnels du secteur et de restaurateurs indépendants.\n\n## Ajoutez votre restaurant\n\nAvant de commencer à explorer le Hub, veuillez terminer la configuration de votre compte en associant votre restaurant.\n\nLorsque vous serez prêt, sélectionnez l'option ** COMMENCER ICI ** ci-dessous.\n\nTrouvez votre restaurant et suivez les instructions afin de l'associer à votre abonnement.\n"
+		"welcomeNewMember": "# Vous y êtes!\n\nMerci pour avoir choisi de rejoindre Restaurateurs Indépendants. Nous espérons que vous contribuerez au développement de cette communauté passionnante de professionnels du secteur et de restaurateurs indépendants.\n\n## Ajoutez votre restaurant\n\nAvant de commencer à explorer le Hub, veuillez terminer la configuration de votre compte en associant votre restaurant.\n\nLorsque vous serez prêt, sélectionnez l'option **COMMENCER ICI** ci-dessous.\n\nTrouvez votre restaurant et suivez les instructions afin de l'associer à votre abonnement.\n"
 	},
 	"PLANS": {
 		"infoCurrentPlanMonthly": "Votre abonnement actuel est renouvelé le **{{ renewal }}** chaque mois à **{{ price }}**. Pour modifier votre forfait, choisissez parmis les options ci-dessous et nous calculerons les frais supplémentaires.",
@@ -512,7 +509,7 @@
 		"errorEmailUnkown": "Cette adresse email est inconnue!",
 		"errorUserUnauthorised": "Connexion non autorisée - veuillez vérifier vos informations",
 		"forgottenPwd": "Mot de passe oublié?",
-		"introduction": "# Travaillons ensemble\n\nIl était temps de niveler les règles du jeu pour les indépendants comme vous.\n\nBienvenue à Restaurateues Indépendants. Nous sommes une organisation à but non lucratif appartenant à ses membres et en mission.\nNous soutenons et défendons les restaurateurs indépendants.",
+		"introduction": "# Travaillons ensemble\n\nIl était temps de niveler les règles du jeu pour les indépendants comme vous.\n\nBienvenue à {{ band }}. Nous sommes une organisation à but non lucratif appartenant à ses membres et en mission.\nNous soutenons et défendons les restaurateurs indépendants.",
 		"labelBtnResetPwd": "RÉINITIALISER LE MOT DE PASSE",
 		"labelBtnSignIn": "SE CONNECTER",
 		"labelEmail": "ADRESSE EMAIL",
@@ -529,7 +526,7 @@
 		"infoCode": "Veuillez vérifier l'adresse e-mail pour **{{ name }}** et ajouter votre code de vérification ci-dessous.\n\nSi vous n'avez pas encore de code, assurez-vous que nous avons la bonne adresse e-mail et que vous abvez bien utiliser l'option ** Demander le code **.\n\nCopiez le code depuis votre e-mail et collez-le ici.",
 		"infoEmail": "Veuillez fournir l'adresse e-mail de {{ name }}.\n\nCelle-ci sera utilisée pour confirmer votre adhésion et dans toute correspondance à l'avenir.",
 		"infoEmailAndCode": "Veuillez saisir l'adresse e-mail pour **{{ name }}**, puis ajouter votre ** code de vérification ** ci-dessous :.\n\nSi vous n'avez pas encore reçu de code, une fois l'adresse e-mail ajoutée, utilisez l'option ** Demander le code **.\n\nCopiez le code depuis votre e-mail et collez-le ici.",
-		"infoVerify": "Veuillez vérifier que l'adresse e-mail ci-dessous est correcte pour **{{ name }}**, puis ajoutez et envoyez votre ** code de vérification **.\n\nSi vous n'avez pas encore de code, assurez-vous d'abord que l'e-mail est correct, puis sélectionnez l'option ** Demander le code ** ci-dessous et un code vous sera envoyé.\n\nUne fois le code obtenu, veuillez revenir ici et terminez cette démarche.",
+		"infoVerify": "Veuillez vérifier que l'adresse e-mail ci-dessous est correcte pour **{{ name }}**, puis ajoutez et envoyez votre **code de vérification**.\n\nSi vous n'avez pas encore de code, assurez-vous d'abord que l'e-mail est correct, puis sélectionnez l'option **Demander le code** ci-dessous et un code vous sera envoyé.\n\nUne fois le code obtenu, veuillez revenir ici et terminez cette démarche.",
 		"labelBtnCancel": "Annuler",
 		"labelBtnRequestCode": "Demande de Code",
 		"labelBtnSent": "Code envoyé",
