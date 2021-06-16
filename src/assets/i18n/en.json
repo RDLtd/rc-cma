@@ -228,6 +228,7 @@
 			"msgResInfoUpdated": "{{ name }} reservation information updated",
 			"msgUpdateFailed": "Updates failed",
 			"tipSave": "Save changes",
+			"tipTestLink": "Test your booking link",
 			"tipUndo": "Undo changes",
 			"titleGeneral": "General information",
 			"titleGroupBookings": "GROUP BOOKINGS",
@@ -321,7 +322,7 @@
 			"Other"
 		],
 		"joinSuccess": "# Ok thanks!\n\nA member of our Support & Curation Team will be in contact with you shortly.\n\n**{{ brand }} Curation Team**",
-		"joinUsByReferral": "# Join us{{ referrer }}\n\nYou've been invited by {{ referrer }} to become part of {{ brand }}, an exciting new organisation that has been exclusively created to support both independent and group restaurants, and affect positive change within the industry. To join us:\n\n 1. Provide your name and contact details\n\n 2. Select your subscription option\n\n 3. Pay your subscription online\n\nIf you experience any problems activating your membership then do please [contact our Support Team]({{ email }}).",
+		"joinUsByReferral": "# Welcome\n\nYou've been invited to become a member of **{{ brand }}**, an organisation that has been created to support restaurants, and affect positives change within the industry. \n\nPlease enter your contact details and indicate that you accept our terms.\n\nIf you experience any problems activating your membership then do please [contact our Support Team]({{ email }}).",
 		"joinUsToday": "# Join now\n\nJust complete the following steps and in no time you’ll be part of the Collective. \n\n 1. Provide your name and contact details\n\n 2. Choose a subscription option\n\n 3. Pay online\n\nIf you experience any problems throughout this process please email: \n\n{{ email }}",
 		"joinWelcome": "# Welcome\n\nYou've successfully registered yourself as a **Member** and we've sent you login details and along with some further information.\n\nClose this window and check your email.\n\nMany thanks.\n\n**{{ brand }} Curation Team**",
 		"labelBtnSubmit": "NEXT",

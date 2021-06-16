@@ -1,23 +1,19 @@
 <div class="rc-layout-split-container">
   <div class="rc-layout-split-left">
     <div class="rc-layout-split-content">
-      <div class="rc-join-welcome" [ngSwitch]="referrer.type">
-
+      <div class="rc-join-welcome">
         <rc-logo [height]="'120px'"></rc-logo>
 
         <!-- Self referral -->
-        <div *ngSwitchCase="'self'">
+        <div *ngIf="referrer.type === 'self'">
           <markdown [data]="'JOIN.joinUsToday' | translate: { email: brand.email.support }"></markdown>
         </div>
         <!-- Member referral -->
-        <div *ngSwitchCase="'member'">
+        <div *ngIf="referrer.type === 'member'">
           <markdown [data]="'JOIN.joinUsByReferral' | translate: { email: brand.email.support, referrer:
           referrer?.name, brand: brand.name  }"></markdown>
         </div>
-        <!-- Default -->
-        <div *ngSwitchDefault>
-          <markdown [data]="'JOIN.joinUsToday' | translate: { email: brand.email.support }"></markdown>
-        </div>
+
       </div>
     </div>
   </div>

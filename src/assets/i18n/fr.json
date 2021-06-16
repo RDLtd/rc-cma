@@ -228,6 +228,7 @@
 			"msgResInfoUpdated": "Informations sur les réservatuions de {{ name }} mises à jour",
 			"msgUpdateFailed": "Les mises à jour ont échoué",
 			"tipSave": "Sauvegarder les modifications",
+			"tipTestLink": "Testez votre lien de réservation",
 			"tipUndo": "Annuler les changements",
 			"titleGeneral": "Informations générales",
 			"titleGroupBookings": "RÉSERVATIONS DE GROUPE",
@@ -321,7 +322,7 @@
 			"Autre"
 		],
 		"joinSuccess": "# OK merci!\n\nUn membre de notre équipe sera en contact avec vous sous peu.\n\n**L'équipe de {{ brand }}**",
-		"joinUsByReferral": "# Nous rejoindre{{ referrer }}\n\nVous avez été invité par {{ referrer }} à rejoindre {{ brand }}, une nouvelle organisation créée exclusivement pour soutenir les restaurateurs, et apporter un changement positif dans notre secteur. Pour nous rejoindre:\n\n 1. Indiquez votre nom et vos coordonnées\n\n 2. Sélectionnez votre option d'abonnement\n\n3. Règlement de votre abonnement en ligne\n\nSi vous rencontrez des problèmes lors de l'activation de votre abonnement, veuillez [contacter notre équipe ] ({{email}}).",
+		"joinUsByReferral": "# Bienvenue\n\nVous avez été invité à devenir membre de **{{ brand }}**, une organisation qui a été créée pour soutenir les restaurants et apporter des changements positifs au sein de l'industrie.\n\nVeuillez saisir vos coordonnées et indiquer que vous acceptez nos conditions.\n\nSi vous rencontrez des problèmes pour activer votre adhésion, veuillez [contacter notre équipe d'assistance]({{ email }}).",
 		"joinUsToday": "# Rejoignez-nous!\n\nSuivez simplement les étapes et vous ferez partie du Collectif!\n\n 1. Indiquez votre nom et vos coordonnées\n\n 2. Sélectionnez votre option d'abonnement\n\n 3. Puis règler votre abonnement en ligne\n\nSi vous rencontrez des problèmes tout au long de ce processus, envoyez un e-mail à:\n\n{{ email }}",
 		"joinWelcome": "# Bienvenue\n\nVous vous êtes inscrit avec succès. **Membre** nous vous avons envoyé des informations de connexion et complémentaires.\n\nFermez cette fenêtre et vérifiez votre messagerie.\n\nMerci beaucoup.\n\n**L'équipe de {{ brand }}**",
 		"labelBtnSubmit": "SUIVANT",
