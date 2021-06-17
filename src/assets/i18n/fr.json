@@ -515,12 +515,12 @@
 		"labelBtnSignIn": "SE CONNECTER",
 		"labelEmail": "ADRESSE EMAIL",
 		"labelPassword": "MOT DE PASSE",
-		"msgNewMember": "Dans les prochaines minutes, vous devriez recevoir un **e-mail de bienvenue** de notre part qui comprend un mot de passe généré par le système.\n\n- **Copiez le mot de passe** et retournez sur cette page\n- Fermez cette fenêtre de message en cliquant sur 'OK'\n- Collez votre mot de passe dans le formulaire et **Connexion**.\n\nVous recevrez également un reçu de paiement pour vos dossiers.\n",
+		"msgNewMember": "Nous vous avons envoyé un **e-mail de bienvenue** que vous devriez recevoir dans les prochaines minutes. Si vous ne le recevez pas au début, vérifiez votre courrier électronique \"spam\", juste au cas où.\n\nL'e-mail comprend un mot de passe généré par le système dont vous aurez besoin pour vous connecter pour la première fois :\n\n- **Copiez le mot de passe** & revenez sur cette page\n- Fermez cette fenêtre de message en cliquant sur 'OK'\n- Collez votre mot de passe dans le formulaire et **Connectez-vous**\n  \n\n**Merci de vous joindre a nous.**\n",
 		"newPwdSent": "Un nouveau mot de passe a été envoyé à votre adresse email.",
 		"resetPwdHeader": "Réinitialiser le mot de passe",
 		"resetPwdInstructions": "Renseignez votre adresse e-mail enregistrée pour réinitialiser votre mot de passe. Vous devrez peut-être vérifier les indésirables/Spam.",
 		"signInOrJoin": "# S'identifier\n\nou [rejoindre {{ brand }}]({{ route }})",
-		"titleThanks": "Merci à vous pour nous rejoindre"
+		"titleThanks": "Vérifiez votre email!"
 	},
 	"VERIFY": {
 		"errorInvalidCode": "Code de vérification non valide",

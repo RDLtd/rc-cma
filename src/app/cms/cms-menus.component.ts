@@ -33,13 +33,13 @@ export class CmsMenusComponent implements OnInit {
     private dialog: MatDialog,
     private translate: TranslateService,
     public help: HelpService,
-    private config: AppConfig,
+    public config: AppConfig,
     private loader: LoadService
   ) {  }
 
   ngOnInit() {
     this.loader.open();
-    this.currencySymbol = this.config.brand.currencySymbol;
+    this.currencySymbol = this.config.brand.currency.symbol;
 
     // Subscribe to service
     this.cmsLocalService.getRestaurant()
@@ -212,7 +212,6 @@ export class CmsMenusComponent implements OnInit {
     }
   }
 
-
   // store a reference to the array position
   setDishReference() {
     // console.log('SetDishReference:', this.htmlMenu.dishes[0])
@@ -268,7 +267,6 @@ export class CmsMenusComponent implements OnInit {
     let dialogRef = this.dialog.open(CmsMenuDishComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(formDish => {
-
       // If something has changes,
       // overwrite the dish in the original array
       if (formDish.dirty) {

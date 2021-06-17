@@ -515,12 +515,12 @@
 		"labelBtnSignIn": "SIGN IN",
 		"labelEmail": "USER EMAIL ADDRESS",
 		"labelPassword": "USER PASSWORD",
-		"msgNewMember": "In the next couple of minutes you should receive a **welcome email** from us that includes a system generated password.\n\n- **Copy the password** & return to this page\n- Close this message window by clicking 'OK'\n- Paste your password into the form and **Sign In**.\n\nYou will also receive a payment receipt for your records.\n",
+		"msgNewMember": "We have sent you a **welcome email** that you should receive in the next couple of minutes – if you don't receive it at first, check your email 'spam', just in case. \n\nThe email includes a system generated password which you'll need to login for the first time:\n  \n- **Copy the password** & return to this page\n- Close this message window by clicking 'OK'\n- Paste your password into the form and **Sign In**  \n\n**Thanks for joining us.**\n",
 		"newPwdSent": "A new password has been sent to your email address",
 		"resetPwdHeader": "Reset password",
 		"resetPwdInstructions": "Enter your registered email address to reset your password. You may need to check your spam folder.",
 		"signInOrJoin": "# Sign in\n\nor [Join {{ brand }}]({{ route }})",
-		"titleThanks": "Thanks for joining us"
+		"titleThanks": "Check your email!"
 	},
 	"VERIFY": {
 		"errorInvalidCode": "Invalid verification code",
