@@ -22,13 +22,6 @@
           </div>
         </ng-container>
 
-        <!-- Member referral -->
-        <div *ngIf="referrer.type === 'member' && !referrer.freeMembership">
-          <markdown [data]="'JOIN.joinUsByReferral' | translate: { email: brand.email.support, referrer:
-          referrer?.name, brand: brand.name  }"></markdown>
-        </div>
-
-
       </div>
     </div>
   </div>
