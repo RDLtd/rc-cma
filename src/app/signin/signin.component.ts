@@ -18,7 +18,7 @@ export class SigninComponent implements OnInit {
   dbOffline: boolean = false;
   errorMsg: string;
   pwdReset: boolean = false;
-  brand: string;
+  brandName: string;
   stripeSessionId: any;
   newMemberEmail: string;
   hidePwd = true;
@@ -37,7 +37,7 @@ export class SigninComponent implements OnInit {
 
   ngOnInit() {
 
-    this.brand = this.config.brand.name;
+    this.brandName = this.config.brand.name;
 
     // Check url params
     this.activeRoute.queryParams.subscribe(params => {
