@@ -37,7 +37,7 @@ export class SigninComponent implements OnInit {
 
   ngOnInit() {
 
-    this.brand = this.config.brand;
+    this.brand = this.config.brand.name;
 
     // Check url params
     this.activeRoute.queryParams.subscribe(params => {

@@ -71,8 +71,8 @@ export class JoinComponent implements OnInit {
       .subscribe(params => {
         console.log(params);
         if (params.has('code')) {
-          this.setReferral(params.get('code').toUpperCase());
-          console.log(this.referrer);
+          this.setReferral(params.get('code').toUpperCase())
+            .then(() => console.log(this.referrer));
         } else {
           sessionStorage.setItem('referrer_type', 'self');
         }
@@ -94,21 +94,22 @@ export class JoinComponent implements OnInit {
   async setReferral(code) {
     // Check code
     await this.memberService.getReferral(code)
-      .then((ref) => {
-        if (!!ref) {
-          // Set referrer
+      .then((promoEvents) => {
+        // console.log('promoEvents', promoEvents);
+        // To be valid it should have at least 1 event
+        if (promoEvents.length) {
+          const promo = promoEvents[0];
           this.referrer.code = this.pendingMember.referral_code = code;
           this.referrer.type = 'member';
-          this.referrer.name = `${ref.member_first_name} ${ref.member_last_name}`;
-          this.referrer.id = ref.member_id;
-          this.referrer.promo_status = ref.promo_status;
+          this.referrer.name = `${promo.member_first_name} ${promo.member_last_name}`;
+          this.referrer.id = promo.member_id;
+          this.referrer.promo_status = promo.promo_status;
+          this.memberService.checkFreePromo(code).subscribe((res) => {
+            this.referrer.freeMembership = res['free'];
+          });
         } else {
           this.referrer.type = 'self';
         }
-      }).then(() => {
-        this.memberService.checkFreePromo(code).subscribe((res) => {
-          this.referrer.freeMembership = res['free'];
-        });
       })
       .catch(err => console.log(err));
   }

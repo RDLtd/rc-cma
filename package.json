@@ -49,8 +49,6 @@
     "ng2-file-upload": "~1.4.0",
     "ngx-clipboard": "~14.0.0",
     "ngx-markdown": "^11.1.2",
-    "ngx-page-scroll": "~7.0.4",
-    "ngx-page-scroll-core": "~7.0.4",
     "rxjs": "~6.6.3",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"

@@ -414,7 +414,8 @@ export class MemberService {
         userCode: this.config.userAPICode,
         token: this.authToken
       }).toPromise();
-      return data['promos'][0];
+      // return promo actions
+      return data['promos'];
   }
 
   checkFreePromo(promo_code: string) {

@@ -9,8 +9,13 @@
           <markdown [data]="'JOIN.joinUsToday' | translate: { email: brand.email.support }"></markdown>
         </div>
         <!-- Member referral -->
-        <div *ngIf="referrer.type === 'member'">
+        <div *ngIf="referrer.type === 'member' && !referrer.freeMembership">
           <markdown [data]="'JOIN.joinUsByReferral' | translate: { email: brand.email.support, referrer:
+          referrer?.name, brand: brand.name  }"></markdown>
+        </div>
+        <!-- Free Period -->
+        <div *ngIf="referrer.type === 'member' && referrer.freeMembership">
+          <markdown [data]="'JOIN.joinUsByReferralFree' | translate: { email: brand.email.support, referrer:
           referrer?.name, brand: brand.name  }"></markdown>
         </div>
 
