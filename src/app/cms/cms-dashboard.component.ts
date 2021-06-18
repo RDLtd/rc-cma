@@ -147,6 +147,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
     this.userName = localStorage.getItem('rd_username');
 
     moment.locale(localStorage.getItem('rd_language'));
+
     this.dfImg = 'https://via.placeholder.com/350x200?text='
       + this.translate.instant('CMS.DASHBOARD.core.labelAwaitingImage');
 
@@ -200,38 +201,11 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
   readAndCheckStatus () {
     console.log('Read');
     if (!!this.restaurant) {
-      //this.setMemberStatus();
       this.checkSPW();
       this.checkOpeningTimes();
       this.checkDescriptions();
       this.checkImages();
-      // this.getOffers();
     }
-  }
-
-  setMemberStatus() {
-    // If not FullMember then Ass by default
-    // if (!!this.restaurant) {
-    //   if (this.restaurant.restaurant_rc_member_status === 'Full') {
-    //     console.log('FULL');
-    //     this.memberStatus = 100;
-    //     this.memberType = this.t_data.FullMember;
-    //     this.memberIcon = 'people';
-    //   } else {
-    //     this.memberStatus = 50;
-    //     this.memberType = this.t_data.AssMember;
-    //     this.memberIcon = 'people_outline';
-    //   }
-    // } else {
-    //   this.memberStatus = 50;
-    //   this.memberType = this.t_data.AssMember;
-    //   this.memberIcon = 'people_outline';
-    // }
-    //
-    // if (!!this.last_updated) {
-    //   this.memberJoinDate = new Date(this.last_updated.last_updated_status);
-    // }
-    // this.d_memberJoinDate = this.setDateRes(this.memberJoinDate);
   }
 
   checkSPW() {
@@ -323,22 +297,6 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
   //   }
   // }
 
-  // Core data card
-  setCoreStatus(): void {
-    console.log('SetCoreStatus');
-    // Inserting an extra translate call to catch router calls via the black bar menu
-    // Todo: JB says Not sure if still needed?
-    //  since I updated the translation loading
-    // this.t_data = this.translate.instant('CMS-Dashboard');
-    // //this.translate.get('CMS-Dashboard').subscribe(data => this.t_data = data);
-    // this.core_status = 0;
-    // this.core_date = new Date(this.restaurant.restaurant_last_updated);
-    // this.core_by = this.restaurant.restaurant_verified_by;
-    // this.core_status = 100;
-    // this.core_status_txt = this.t_data.VerifiedBy + this.core_by;
-    // this.d_core_date = this.setDateRes(this.core_date);
-  }
-
   checkOpeningTimes(): void {
     this.hours_count = 0;
     // console.log('IN getHours FOR DASHBOARD COMPONENT ' + this.restaurant.restaurant_id);
@@ -376,7 +334,6 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
       .subscribe(
         data => {
           this.descriptions = data['descriptions'][0];
-          this.setCoreStatus();
           this.checkFeatures();
           this.checkBookingInfo();
           this.checkLocationInfo();
@@ -582,50 +539,6 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
       this.loc_status_text = this.translate.instant('CMS.DASHBOARD.summary.statusSomeData');
     }
   }
-
-  // getOffers() {
-  //
-  //   this.restaurantService.getOffers()
-  //     .subscribe(
-  //       res => {
-  //         this.offerCount = res['offers'].length;
-  //         if (this.offerCount > 0) {
-  //           // now look to see how many offers to show in the offer 'inbox' for this restaurant
-  //           this.restaurantService.getLatestAccess(Number(this.restaurant.restaurant_id), 'Viewed Offers')
-  //             .subscribe(
-  //               data => {
-  //
-  //                 if (data['latestaccess'][0].max) {
-  //                   // Only count offers that are more
-  //                   // recent than the latest view access time
-  //
-  //                   this.offerInBox = 0;
-  //
-  //                   for (let i = 0; i < this.offerCount; i++) {
-  //                     if (res['offers'][i].offer_marketing_date > data['latestaccess'][0].max) {
-  //                       this.offerInBox += 1;
-  //                     }
-  //                   }
-  //                 } else {
-  //                   // this restaurant has not seen any offers yet
-  //                   this.offerInBox = this.offerCount;
-  //                 }
-  //
-  //                 //console.log('Offers:', this.offerInBox);
-  //                 this.cmsLocalService.setOfferCount(this.offerInBox);
-  //               },
-  //               () => {
-  //                 console.log('No access records found for restaurant');
-  //                 // this restaurant has not seen any offers yet
-  //                 this.offerInBox = this.offerCount;
-  //                 this.cmsLocalService.setOfferCount(this.offerInBox);
-  //               });
-  //         }
-  //       },
-  //       () => {
-  //         console.log('No offer records found');
-  //       });
-  // }
 
   navTo(tgt) {
     // console.log('restaurants', this.restaurant.restaurant_id, 'cms', tgt);

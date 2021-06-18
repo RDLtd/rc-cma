@@ -480,7 +480,7 @@ export class SettingsComponent implements OnInit {
   }
 
   getReferralCode(): string {
-    return `${this.appConfig.brand.joinUrl}?referral=${this.member.member_promo_code}`;
+    return `${origin}/join/${this.member.member_promo_code}`;
   }
 
   getDefaultImages(): void {
@@ -529,11 +529,11 @@ export class SettingsComponent implements OnInit {
     );
   }
 
-  getReferralLink(): string {
-    const origin = window.location.origin;
-    console.log('Host', origin);
-    return `${origin}/join/${this.member.member_promo_code}`;
-  }
+  // getReferralLink(): string {
+  //   const origin = window.location.origin;
+  //   console.log('Host', origin);
+  //   return `${origin}/join/${this.member.member_promo_code}`;
+  // }
 
   copied(): void {
     this.openSnackBar(this.translate.instant('SETTINGS.msgLinkCopied'), 'OK');

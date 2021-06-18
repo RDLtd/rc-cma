@@ -3,7 +3,8 @@
     <section class="rc-layout-split-content">
       <!-- Welcome intro -->
       <rc-logo [height]="'120px'"></rc-logo>
-      <markdown ngPreserveWhitespaces [data]="'SIGNIN.introduction' | translate"></markdown>
+      <markdown ngPreserveWhitespaces
+                [data]="'SIGNIN.introduction' | translate: { brand: brand }"></markdown>
     </section>
   </div>
 

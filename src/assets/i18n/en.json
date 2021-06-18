@@ -228,6 +228,7 @@
 			"msgResInfoUpdated": "{{ name }} reservation information updated",
 			"msgUpdateFailed": "Updates failed",
 			"tipSave": "Save changes",
+			"tipTestLink": "Test your booking link",
 			"tipUndo": "Undo changes",
 			"titleGeneral": "General information",
 			"titleGroupBookings": "GROUP BOOKINGS",
@@ -267,9 +268,6 @@
 		"labelDontShow": "Don't show me this again",
 		"msgConfirmCancel": "The changes you have made have not yet been saved and will be lost if you continue. Do you want to discard changes and continue?",
 		"titleConfirmCancel": "Please Confirm"
-	},
-	"EMAIL": {
-		"txt": "Restaurateurs Indépendants Support"
 	},
 	"Global": {
 		"DOW-Dimanche": "Sunday",
@@ -324,7 +322,7 @@
 			"Other"
 		],
 		"joinSuccess": "# Ok thanks!\n\nA member of our Support & Curation Team will be in contact with you shortly.\n\n**{{ brand }} Curation Team**",
-		"joinUsByReferral": "# Join us{{ referrer }}\n\nYou've been invited by {{ referrer }} to become part of {{ brand }}, an exciting new organisation that has been exclusively created to support both independent and group restaurants, and affect positive change within the industry. To join us:\n\n 1. Provide your name and contact details\n\n 2. Select your subscription option\n\n 3. Pay your subscription online\n\nIf you experience any problems activating your membership then do please [contact our Support Team]({{ email }}).",
+		"joinUsByReferral": "# Welcome\n\nYou've been invited to become a member of **{{ brand }}**, an organisation that has been created to support restaurants, and affect positives change within the industry. \n\nPlease enter your contact details and indicate that you accept our terms.\n\nIf you experience any problems activating your membership then do please [contact our Support Team]({{ email }}).",
 		"joinUsToday": "# Join now\n\nJust complete the following steps and in no time you’ll be part of the Collective. \n\n 1. Provide your name and contact details\n\n 2. Choose a subscription option\n\n 3. Pay online\n\nIf you experience any problems throughout this process please email: \n\n{{ email }}",
 		"joinWelcome": "# Welcome\n\nYou've successfully registered yourself as a **Member** and we've sent you login details and along with some further information.\n\nClose this window and check your email.\n\nMany thanks.\n\n**{{ brand }} Curation Team**",
 		"labelBtnSubmit": "NEXT",
@@ -393,6 +391,7 @@
 		"infoMembershipMonthly": "##  MONTHLY SUBSCRIPTION\n\nPay just **{{ fee }}** per month for full access to all the benefits offered by **{{ brand }}** Membership.",
 		"infoMembershipYearly": "## ANNUAL SUBSCRIPTION\n\nPay **{{ fee }}** per year and you'll get a full 12 month membership for the price of only 10. All the same **{{ brand }}** benefits, just a bit cheaper!\n",
 		"instructions": "# What do I get?\n\n- Power over your online presence with our content management tool and included single page website\n\n- Economies of scale and vetted suppliers in our Deals Marketplace\n\n- Advice and support from fellow indies in our Members Forum\n\n# And soon...\n\n- Mentorship from people who have been where they are now\n\n- Great staff on loan/recommendation via the Restaurant Collective Job Exchange\n\n- Skills training for themselves and their teams in our Knowledge Base\n\n- Inclusion in the UK’s largest directory of independent restaurants ",
+		"labelBack": "Back",
 		"labelPayMonthly": "Pay monthly",
 		"labelPayYearly": "Pay yearly",
 		"msgInvalidStripe": "There seems to be a problem with your details. Please use the 'back' button to go back and check your details, or to contact support.",
@@ -511,17 +510,17 @@
 		"errorEmailUnkown": "This email address is unknown!",
 		"errorUserUnauthorised": "Unauthorised login attempt - please check your details",
 		"forgottenPwd": "Forgotten your password?",
-		"introduction": "# Let's work together\n\nIt’s time someone levelled the playing field for independent operators like you.\n\nWelcome to the Restaurant Collective. We’re a member-owned, non-profit organisation on a mission.\nWe want to empower and champion independent hospitality operators.",
+		"introduction": "# Let's work together\n\nIt’s time someone levelled the playing field for independent operators like you.\n\nWelcome to {{ brand }}. We’re a member-owned, non-profit organisation on a mission.\nWe want to empower and champion independent hospitality operators.",
 		"labelBtnResetPwd": "RESET PASSWORD",
 		"labelBtnSignIn": "SIGN IN",
 		"labelEmail": "USER EMAIL ADDRESS",
 		"labelPassword": "USER PASSWORD",
-		"msgNewMember": "In the next couple of minutes you should receive a **welcome email** from us that includes a system generated password.\n\n- **Copy the password** & return to this page\n- Close this message window by clicking 'OK'\n- Paste your password into the form and **Sign In**.\n\nYou will also receive a payment receipt for your records.\n",
+		"msgNewMember": "We have sent you a **welcome email** that you should receive in the next couple of minutes – if you don't receive it at first, check your email 'spam', just in case. \n\nThe email includes a system generated password which you'll need to login for the first time:\n  \n- **Copy the password** & return to this page\n- Close this message window by clicking 'OK'\n- Paste your password into the form and **Sign In**  \n\n**Thanks for joining us.**\n",
 		"newPwdSent": "A new password has been sent to your email address",
 		"resetPwdHeader": "Reset password",
 		"resetPwdInstructions": "Enter your registered email address to reset your password. You may need to check your spam folder.",
 		"signInOrJoin": "# Sign in\n\nor [Join {{ brand }}]({{ route }})",
-		"titleThanks": "Thanks for joining us"
+		"titleThanks": "Check your email!"
 	},
 	"VERIFY": {
 		"errorInvalidCode": "Invalid verification code",

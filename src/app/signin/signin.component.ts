@@ -41,9 +41,12 @@ export class SigninComponent implements OnInit {
 
     // Check url params
     this.activeRoute.queryParams.subscribe(params => {
-      console.log('Url params', params);
+      // console.log('Url params', params);
       if (params['session_id']) {
         this.stripeSessionId = params['session_id'];
+        this.dspNewMemberMessage();
+      }
+      if (params['member']) {
         this.dspNewMemberMessage();
       }
     });

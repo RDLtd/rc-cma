@@ -417,6 +417,15 @@ export class MemberService {
       return data['promos'][0];
   }
 
+  checkFreePromo(promo_code: string) {
+    return this.http.post(this.config.apiUrl + '/members/checkfreepromo',
+      {
+        promo_code: promo_code,
+        userCode: this.config.userAPICode,
+        token: this.authToken
+      });
+  }
+
   getPromo(promo_code: string) {
     return this.http.post(this.config.apiUrl + '/members/getpromo',
       {
@@ -441,6 +450,20 @@ export class MemberService {
         promo_member_id: promo_member_id,
         userCode: this.config.userAPICode,
         token: this.authToken});
+  }
+
+  async createFreeMembership(formData){
+    return this.http.post(`${this.config.apiUrl}/payments/register-free-member`, {
+      pending: formData,
+      launch_number: 0,
+      company: this.config.brand.prefix,
+      userCode: this.config.userAPICode,
+      token: this.authToken
+    })
+      .toPromise()
+      .catch( err => {
+        console.log(err, 'Error creating free membership');
+      });
   }
 
   async preFlight(formData: any) {
@@ -598,4 +621,3 @@ export class MemberService {
   }
 
 }
-
