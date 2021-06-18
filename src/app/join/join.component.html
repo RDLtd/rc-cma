@@ -1,23 +1,33 @@
 <div class="rc-layout-split-container">
   <div class="rc-layout-split-left">
     <div class="rc-layout-split-content">
-      <div class="rc-join-welcome">
+      <div *ngIf="isLoaded" class="rc-join-welcome" @fadeAnimation>
         <rc-logo [height]="'120px'"></rc-logo>
 
-        <!-- Self referral -->
-        <div *ngIf="referrer.type === 'self'">
-          <markdown [data]="'JOIN.joinUsToday' | translate: { email: brand.email.support }"></markdown>
-        </div>
+        <!-- Free Period -->
+        <ng-container *ngIf="referrer.type === 'self'">
+          <div>
+            <markdown [data]="'JOIN.joinUsToday' | translate: { email: brand.email.support }"></markdown>
+          </div>
+        </ng-container>
+
+        <ng-container *ngIf="referrer.type === 'member'">
+          <div *ngIf="referrer.freeMembership">
+            <markdown [data]="'JOIN.joinUsByReferralFree' | translate: { email: brand.email.support, referrer:
+          referrer?.name, brand: brand.name  }"></markdown>
+          </div>
+          <div *ngIf="!referrer.freeMembership">
+            <markdown [data]="'JOIN.joinUsByReferral' | translate: { email: brand.email.support, referrer:
+          referrer?.name, brand: brand.name  }"></markdown>
+          </div>
+        </ng-container>
+
         <!-- Member referral -->
         <div *ngIf="referrer.type === 'member' && !referrer.freeMembership">
           <markdown [data]="'JOIN.joinUsByReferral' | translate: { email: brand.email.support, referrer:
           referrer?.name, brand: brand.name  }"></markdown>
         </div>
-        <!-- Free Period -->
-        <div *ngIf="referrer.type === 'member' && referrer.freeMembership">
-          <markdown [data]="'JOIN.joinUsByReferralFree' | translate: { email: brand.email.support, referrer:
-          referrer?.name, brand: brand.name  }"></markdown>
-        </div>
+
 
       </div>
     </div>

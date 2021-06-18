@@ -6,6 +6,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmCancelComponent, LoadService } from '../common';
 import { AppConfig } from '../app.config';
+import { fadeAnimation } from '../shared/animations';
+
 
 export interface PendingMember {
   first_name: string;
@@ -19,12 +21,14 @@ export interface PendingMember {
 
 @Component({
   selector: 'rc-join',
-  templateUrl: './join.component.html'
+  templateUrl: './join.component.html',
+  animations: [fadeAnimation]
 })
 
 export class JoinComponent implements OnInit {
 
   isSubmitting = false;
+  isLoaded = false;
   newRegResult: string;
   duplicateField: string;
   currentApplicant: any;
@@ -72,10 +76,15 @@ export class JoinComponent implements OnInit {
         console.log(params);
         if (params.has('code')) {
           this.setReferral(params.get('code').toUpperCase())
-            .then(() => console.log(this.referrer));
+            .then(() => {
+              this.isLoaded = true;
+              console.log(this.referrer);
+            });
         } else {
           sessionStorage.setItem('referrer_type', 'self');
+          this.isLoaded = true;
         }
+
       });
 
     // Set brand
