@@ -595,6 +595,18 @@ a.mat-menu-item {text-decoration: none;}
 
 
 }
+.rc-marketplace-sponsor {
+  background: white;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px 0;
+  font-size: 18px;
+  img {
+    max-height: 64px;
+  }
+}
 
 /**
 * RC Cards

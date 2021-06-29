@@ -106,6 +106,7 @@ export class JoinComponent implements OnInit {
       .then((promoEvents) => {
         // console.log('promoEvents', promoEvents);
         // To be valid it should have at least 1 event
+
         if (promoEvents.length) {
           const promo = promoEvents[0];
           this.referrer.code = this.pendingMember.referral_code = code;
@@ -113,9 +114,12 @@ export class JoinComponent implements OnInit {
           this.referrer.name = `${promo.member_first_name} ${promo.member_last_name}`;
           this.referrer.id = promo.member_id;
           this.referrer.promo_status = promo.promo_status;
+
           this.memberService.checkFreePromo(code).subscribe((res) => {
+            console.log('Free?', res);
             this.referrer.freeMembership = res['free'];
           });
+
         } else {
           this.referrer.type = 'self';
         }

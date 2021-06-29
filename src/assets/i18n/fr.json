@@ -527,7 +527,7 @@
 		"errorInvalidCode": "Code de vérification non valide",
 		"infoCode": "Veuillez vérifier l'adresse e-mail pour **{{ name }}** et ajouter votre code de vérification ci-dessous.\n\nSi vous n'avez pas encore de code, assurez-vous que nous avons la bonne adresse e-mail et que vous abvez bien utiliser l'option **Demander le code**.\n\nCopiez le code depuis votre e-mail et collez-le ici.",
 		"infoEmail": "Veuillez fournir l'adresse e-mail de {{ name }}.\n\nCelle-ci sera utilisée pour confirmer votre adhésion et dans toute correspondance à l'avenir.",
-		"infoEmailAndCode": "Veuillez saisir l'adresse e-mail pour **{{ name }}**, puis ajouter votre **code de vérification** ci-dessous :.\n\nSi vous n'avez pas encore reçu de code, une fois l'adresse e-mail ajoutée, utilisez l'option ** Demander le code**.\n\nCopiez le code depuis votre e-mail et collez-le ici.",
+		"infoEmailAndCode": "Veuillez saisir l'adresse e-mail pour **{{ name }}**, puis ajouter votre **code de vérification** ci-dessous :.\n\nSi vous n'avez pas encore reçu de code, une fois l'adresse e-mail ajoutée, utilisez l'option **Demander le code**.\n\nCopiez le code depuis votre e-mail et collez-le ici.",
 		"infoVerify": "Veuillez vérifier que l'adresse e-mail ci-dessous est correcte pour **{{ name }}**, puis ajoutez et envoyez votre **code de vérification**.\n\nSi vous n'avez pas encore de code, assurez-vous d'abord que l'e-mail est correct, puis sélectionnez l'option **Demander le code** ci-dessous et un code vous sera envoyé.\n\nUne fois le code obtenu, veuillez revenir ici et terminez cette démarche.",
 		"labelBtnCancel": "Annuler",
 		"labelBtnRequestCode": "Demande de Code",
