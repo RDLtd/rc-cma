@@ -38,4 +38,5 @@
   member_subscription_id: string;
   member_product_id: string;
   member_customer_id: string;
+  member_free_expiry: string;
 }
