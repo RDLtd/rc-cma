@@ -104,7 +104,7 @@
 			"labelDeactivate": "Retirer",
 			"labelDefault": "Utiliser comme image par défaut",
 			"labelDownload": "Téléchargez cette image",
-			"msgConfirmDelete": "Vous êtes sur le point de supprimer ** image {{ img }}**, êtes-vous sûr de vouloir le faire?",
+			"msgConfirmDelete": "Vous êtes sur le point de supprimer **image {{ img }}**, êtes-vous sûr de vouloir le faire?",
 			"msgDefaultUpdated": "L'image par défaut a été mise à jour avec succès",
 			"msgDeleted": "L'image {{ img }} a maintenant été supprimée",
 			"msgNowActive": "L'image {{ img }} est maintenant en ligne",
@@ -358,7 +358,7 @@
 		"msgAlreadyAdded": "Vous gérez déjà {{ name }}.",
 		"msgAlreadyVerified": "{{ name }} a déjà été vérifié",
 		"msgNoMatch": "Désolé, aucun restaurant ne correspond actuellement à votre recherche. Veuillez ajouter votre restaurant en utilisant l'option ci-dessous.",
-		"msgNotCurated": "**{{ name }}** n'a pas encore été vérifié. Notre équipe est notifiée et la qualification aura lieu dans les 48 heures à venir.\n\nDans cette attente, merci de bien vouloir nous indiquer si l'une des informations actuelles est incorrecte en envoyant une ** demande de modification **. \",",
+		"msgNotCurated": "**{{ name }}** n'a pas encore été vérifié. Notre équipe est notifiée et la qualification aura lieu dans les 48 heures à venir.\n\nDans cette attente, merci de bien vouloir nous indiquer si l'une des informations actuelles est incorrecte en envoyant une **demande de modification**. \",",
 		"msgRestaurantAdded": "{{ name }} a été ajouté à votre compte.",
 		"titleFind": "Recherche d'un établissement",
 		"titleNew": "Nouveau restaurant",
@@ -413,7 +413,7 @@
 		"infoNewPlanYearly": "Si vous choisissez de modifier votre formule d'abonnement en **{{plan}}**, vous serez facvturé **{{ prorate }}**dès maintenant - au prorata pour la période de facturation actuelle - puis à partir du **{{ renewal }}** vos nouveaux frais d'abonnement annuels seront de **{{ price }}**.",
 		"labelAddRestaurant": "Ajoutez votre restaurant ici",
 		"labelCurrentPlan": "Adhésion actuelle",
-		"msgAddRestaurant": "Commencez à gérer votre contenu Web et à publier votre ** Page Internet ** inclus dans votre adhésion.",
+		"msgAddRestaurant": "Commencez à gérer votre contenu Web et à publier votre **Page Internet** inclus dans votre adhésion.",
 		"titlePlans": "Adhésion possibles"
 	},
 	"SETTINGS": {
@@ -525,9 +525,9 @@
 	},
 	"VERIFY": {
 		"errorInvalidCode": "Code de vérification non valide",
-		"infoCode": "Veuillez vérifier l'adresse e-mail pour **{{ name }}** et ajouter votre code de vérification ci-dessous.\n\nSi vous n'avez pas encore de code, assurez-vous que nous avons la bonne adresse e-mail et que vous abvez bien utiliser l'option ** Demander le code **.\n\nCopiez le code depuis votre e-mail et collez-le ici.",
+		"infoCode": "Veuillez vérifier l'adresse e-mail pour **{{ name }}** et ajouter votre code de vérification ci-dessous.\n\nSi vous n'avez pas encore de code, assurez-vous que nous avons la bonne adresse e-mail et que vous abvez bien utiliser l'option **Demander le code**.\n\nCopiez le code depuis votre e-mail et collez-le ici.",
 		"infoEmail": "Veuillez fournir l'adresse e-mail de {{ name }}.\n\nCelle-ci sera utilisée pour confirmer votre adhésion et dans toute correspondance à l'avenir.",
-		"infoEmailAndCode": "Veuillez saisir l'adresse e-mail pour **{{ name }}**, puis ajouter votre ** code de vérification ** ci-dessous :.\n\nSi vous n'avez pas encore reçu de code, une fois l'adresse e-mail ajoutée, utilisez l'option ** Demander le code **.\n\nCopiez le code depuis votre e-mail et collez-le ici.",
+		"infoEmailAndCode": "Veuillez saisir l'adresse e-mail pour **{{ name }}**, puis ajouter votre **code de vérification** ci-dessous :.\n\nSi vous n'avez pas encore reçu de code, une fois l'adresse e-mail ajoutée, utilisez l'option **Demander le code**.\n\nCopiez le code depuis votre e-mail et collez-le ici.",
 		"infoVerify": "Veuillez vérifier que l'adresse e-mail ci-dessous est correcte pour **{{ name }}**, puis ajoutez et envoyez votre **code de vérification**.\n\nSi vous n'avez pas encore de code, assurez-vous d'abord que l'e-mail est correct, puis sélectionnez l'option **Demander le code** ci-dessous et un code vous sera envoyé.\n\nUne fois le code obtenu, veuillez revenir ici et terminez cette démarche.",
 		"labelBtnCancel": "Annuler",
 		"labelBtnRequestCode": "Demande de Code",
