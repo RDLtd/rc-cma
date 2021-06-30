@@ -190,7 +190,7 @@
                 <li><label>{{ 'SETTINGS.labelJoined' | translate }}:</label>{{ d_member_signedup }}</li>
                 <li><label>{{ 'SETTINGS.labelSubscription' | translate }}:</label>
                   <span *ngIf="isFreeMembership">
-                    {{ 'SETTINGS.labelFreeMembership' | translate }}
+                    {{ 'SETTINGS.labelFreeMembership' | translate }} {{ freeMembershipExpiry }}
                   </span>
                   <a
                     *ngIf="!isFreeMembership"
