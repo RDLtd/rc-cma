@@ -4,33 +4,34 @@
 * THEMING
 * ----------------------------------
 **/
+@use '~@angular/material' as mat;
 
 @import '@angular/material/theming';
 
 // Include the base styles for Angular Material core.
-@include mat-core();
+@include mat.core();
 
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue.
-//$rc-app-primary: mat-palette($mat-deep-orange, A400);
-$rc-app-primary: mat-palette($mat-teal, A700);
-//$rc-app-accent:  mat-palette($mat-grey, 900, A700, 900);
-$rc-app-accent:  mat-palette($mat-deep-orange, A400);
+//$rc-app-primary: mat.define-palette(mat.$deep-orange-palette, A400);
+$rc-app-primary: mat.define-palette(mat.$teal-palette, A700);
+//$rc-app-accent:  mat.define-palette(mat.$grey-palette, 900, A700, 900);
+$rc-app-accent:  mat.define-palette(mat.$deep-orange-palette, A400);
 // The warn palette is optional (defaults to red).
-$rc-app-warn:    mat-palette($mat-deep-orange, 900);
+$rc-app-warn:    mat.define-palette(mat.$deep-orange-palette, 900);
 // Create the theme object (a Sass map containing all of the palettes).
-$rc-app-theme: mat-light-theme($rc-app-primary, $rc-app-accent, $rc-app-warn);
+$rc-app-theme: mat.define-light-theme($rc-app-primary, $rc-app-accent, $rc-app-warn);
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
-@include angular-material-theme($rc-app-theme);
+@include mat.all-component-themes($rc-app-theme);
 
 // Set custom typography defaults size/line-height/weight
-$custom-typography: mat-typography-config(
+$custom-typography: mat.define-typography-config(
   $font-family:     'Roboto',
-  $headline:        mat-typography-level(32px, 48px, 500),
-  $body-1:          mat-typography-level(16px, 24px, 300)
+  $headline:        mat.define-typography-level(32px, 48px, 500),
+  $body-1:          mat.define-typography-level(16px, 24px, 300)
 );
 
 // Apply custom defaults to core
-@include mat-core($custom-typography);
+@include mat.core($custom-typography);
