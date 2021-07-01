@@ -7,7 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { MemberService } from '../_services';
 import { CurrencyPipe } from '@angular/common';
-import { LoadService } from '../common';
+//import { LoadService } from '../common';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 export interface Product {
@@ -15,7 +15,7 @@ export interface Product {
   name: string;
   description: string;
   priceId: string;
-  taxId: string;
+  taxId: any;
   active: boolean;
   category: string;
 }
@@ -104,7 +104,8 @@ export class MembershipComponent implements OnInit {
     this.waiting = true;
     await this.createCheckoutSession({
       priceId: this.products[product].product_stripe_price_id,
-      taxId: this.products[product].product_tax_id,
+      // Allow for tax to be optional
+      taxId: !!this.products[product].product_tax_id? [this.products[product].product_tax_id] : [],
       successUrl: this.config.brand.products.success_url,
       cancelUrl: this.config.brand.products.cancel_url,
       email: newMember.email,

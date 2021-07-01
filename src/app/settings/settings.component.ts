@@ -51,6 +51,7 @@ export class SettingsComponent implements OnInit {
   productRenewalDate: Date;
   currentProduct: any;
   isFreeMembership = false;
+  freeMembershipExpiry = '';
 
   constructor(
     private header: HeaderService,
@@ -90,8 +91,13 @@ export class SettingsComponent implements OnInit {
   }
 
   setMember(): void {
+    console.log(this.member);
     // Is it a founder or BJT introduction
     this.isFreeMembership = this.member.member_membership_type === 'Free';
+    if (!!this.member.member_free_expiry) {
+      this.freeMembershipExpiry = `(${moment(this.member.member_free_expiry).format('DD-MM-YYYY')})`;
+    };
+
     // in case of rogue values from the db
     if (this.member.member_image_path === 'null' || this.member.member_image_path === 'undefined') {
       this.member.member_image_path = null;
@@ -480,7 +486,7 @@ export class SettingsComponent implements OnInit {
   }
 
   getReferralCode(): string {
-    return `${this.appConfig.brand.joinUrl}?referral=${this.member.member_promo_code}`;
+    return `${origin}/join/${this.member.member_promo_code}`;
   }
 
   getDefaultImages(): void {
@@ -529,11 +535,11 @@ export class SettingsComponent implements OnInit {
     );
   }
 
-  getReferralLink(): string {
-    const origin = window.location.origin;
-    console.log('Host', origin);
-    return `${origin}/join/${this.member.member_promo_code}`;
-  }
+  // getReferralLink(): string {
+  //   const origin = window.location.origin;
+  //   console.log('Host', origin);
+  //   return `${origin}/join/${this.member.member_promo_code}`;
+  // }
 
   copied(): void {
     this.openSnackBar(this.translate.instant('SETTINGS.msgLinkCopied'), 'OK');

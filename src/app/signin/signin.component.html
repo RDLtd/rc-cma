@@ -3,7 +3,8 @@
     <section class="rc-layout-split-content">
       <!-- Welcome intro -->
       <rc-logo [height]="'120px'"></rc-logo>
-      <markdown ngPreserveWhitespaces [data]="'SIGNIN.introduction' | translate"></markdown>
+      <markdown ngPreserveWhitespaces
+                [data]="'SIGNIN.introduction' | translate: { brand: brandName }"></markdown>
     </section>
   </div>
 
@@ -55,7 +56,7 @@
         novalidate>
         <span class="rc-warn" *ngIf="errorMsg">{{ errorMsg | uppercase }}!</span>
         <markdown ngpreservewhitespaces [data]="'SIGNIN.signInOrJoin' | translate: {route: '/join', brand:
-        brand['name'] }"></markdown><br>
+        brandName }"></markdown><br>
         <mat-form-field class="rc-full-width" hideRequiredMarker>
           <mat-label>{{ 'SIGNIN.labelEmail' | translate }}</mat-label>
           <input

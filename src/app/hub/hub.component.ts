@@ -125,7 +125,7 @@ export class HubComponent implements AfterViewInit {
     if (service.service_disabled) {
       let dialogReg = this.dialog.open(ConfirmCancelComponent, {
         data: {
-          title: 'Coming soon',
+          title: this.translate.instant('HUB.msgComingSoon'),
           body: service.service_disabled_message,
           confirm: 'OK',
           cancel: 'hide'

@@ -29,6 +29,7 @@ export class MarketplaceComponent implements OnInit {
   hasFavourites: boolean = true;
   filter: string;
   displayedDeals = [];
+  sponsored = false;
 
   constructor(
     private snackbar: MatSnackBar,
@@ -47,6 +48,8 @@ export class MarketplaceComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.config.brand);
+    this.sponsored = this.config.brand.name === 'Restaurant Collective';
     this.getDeals();
     this.loader.close();
     this.hasFavourites = this.favourites.length > 0;

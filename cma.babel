@@ -3505,6 +3505,23 @@
                                 </translations>
                             </concept_node>
                             <concept_node>
+                                <name>tipTestLink</name>
+                                <definition_loaded>false</definition_loaded>
+                                <description/>
+                                <comment/>
+                                <default_text/>
+                                <translations>
+                                    <translation>
+                                        <language>en-GB</language>
+                                        <approved>false</approved>
+                                    </translation>
+                                    <translation>
+                                        <language>fr-FR</language>
+                                        <approved>false</approved>
+                                    </translation>
+                                </translations>
+                            </concept_node>
+                            <concept_node>
                                 <name>tipUndo</name>
                                 <definition_loaded>false</definition_loaded>
                                 <description/>
@@ -4455,6 +4472,23 @@
                 <name>HUB</name>
                 <children>
                     <concept_node>
+                        <name>msgComingSoon</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-GB</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
                         <name>sectionCMS</name>
                         <definition_loaded>false</definition_loaded>
                         <description/>
@@ -4823,6 +4857,23 @@
                     </concept_node>
                     <concept_node>
                         <name>joinUsByReferral</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-GB</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>joinUsByReferralFree</name>
                         <definition_loaded>false</definition_loaded>
                         <description/>
                         <comment/>
@@ -5863,6 +5914,23 @@
                     </concept_node>
                     <concept_node>
                         <name>instructions</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-GB</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>labelBack</name>
                         <definition_loaded>false</definition_loaded>
                         <description/>
                         <comment/>

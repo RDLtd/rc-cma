@@ -6,6 +6,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmCancelComponent, LoadService } from '../common';
 import { AppConfig } from '../app.config';
+import { fadeAnimation } from '../shared/animations';
+
 
 export interface PendingMember {
   first_name: string;
@@ -19,26 +21,30 @@ export interface PendingMember {
 
 @Component({
   selector: 'rc-join',
-  templateUrl: './join.component.html'
+  templateUrl: './join.component.html',
+  animations: [fadeAnimation]
 })
 
 export class JoinComponent implements OnInit {
 
   isSubmitting = false;
+  isLoaded = false;
   newRegResult: string;
   duplicateField: string;
   currentApplicant: any;
   pendingMember: PendingMember;
   public brand: any;
+
   referrer = {
     type: 'self',
     code: null,
     name: null,
     id: 0,
     restaurant: null,
-    promo_status: null
+    promo_status: null,
+    freeMembership: false
   };
-
+  // validators
   patternMobile = '^([+\\d]\\d*)?\\d$';
   lang = localStorage.getItem('rd_language');
   stripeSessionId: any;
@@ -56,24 +62,29 @@ export class JoinComponent implements OnInit {
     private appService: AppService,
     private router: Router
   ) {
+    // Check url params for a Stripe Session Id (or anything else)
     this.route.queryParams.subscribe(params => {
       this.stripeSessionId = params['session_id'];
-      console.log('stripeSessionId', this.stripeSessionId);
+      // console.log('stripeSessionId', this.stripeSessionId);
     });
   }
 
   ngOnInit() {
-
-    // Check for a referral code in the url
+    // Referral or promo code?
     this.route.paramMap
       .subscribe(params => {
+        console.log(params);
         if (params.has('code')) {
-          const ref = this.setReferral(params.get('code'));
-          console.log('Url referral', ref);
+          this.setReferral(params.get('code').toUpperCase())
+            .then(() => {
+              this.isLoaded = true;
+              console.log(this.referrer);
+            });
         } else {
-          // No code supplied in url
           sessionStorage.setItem('referrer_type', 'self');
+          this.isLoaded = true;
         }
+
       });
 
     // Set brand
@@ -86,33 +97,34 @@ export class JoinComponent implements OnInit {
     // console.log('Pending Member', this.pendingMember);
     this.pendingMember = JSON.parse(sessionStorage.getItem('rc_member_pending')) || {};
 
-    // Watch for unload event (page refresh etc.)
-    // Keep data in session storage
-    // const that = this;
-    // window.addEventListener("beforeunload", () => {
-    //   that.savePendingMemberData(that.pendingMember);
-    // });
   }
 
-  // Display referrer details
+  // Check referral
   async setReferral(code) {
-    // Force referral code to uppercase
-    const uCode = code.toUpperCase();
     // Check code
-    const ref = await this.memberService.getReferral(uCode);
-    //console.log(ref);
-    // Valid code
-    if (ref) {
-      // Set referrer
-      this.referrer.code = this.pendingMember.referral_code = uCode;
-      this.referrer.type = 'member';
-      this.referrer.name = `${ref.member_first_name} ${ref.member_last_name}`;
-      this.referrer.id = ref.member_id;
-      this.referrer.promo_status = ref.promo_status;
-    } else {
-      // Invalid code
-      this.referrer.type = 'self';
-    }
+    await this.memberService.getReferral(code)
+      .then((promoEvents) => {
+        // console.log('promoEvents', promoEvents);
+        // To be valid it should have at least 1 event
+
+        if (promoEvents.length) {
+          const promo = promoEvents[0];
+          this.referrer.code = this.pendingMember.referral_code = code;
+          this.referrer.type = 'member';
+          this.referrer.name = `${promo.member_first_name} ${promo.member_last_name}`;
+          this.referrer.id = promo.member_id;
+          this.referrer.promo_status = promo.promo_status;
+
+          this.memberService.checkFreePromo(code).subscribe((res) => {
+            console.log('Free?', res);
+            this.referrer.freeMembership = res['free'];
+          });
+
+        } else {
+          this.referrer.type = 'self';
+        }
+      })
+      .catch(err => console.log(err));
   }
 
   // Save pending member details
@@ -128,7 +140,7 @@ export class JoinComponent implements OnInit {
 
   // API call to check for duplicate tel/emails
   async preRegistrationCheck(formData) {
-
+    // Have they agreed to our terms?
     if (!formData.accepts_terms) {
       this.dialog.open(ConfirmCancelComponent, {
         data: {
@@ -140,16 +152,31 @@ export class JoinComponent implements OnInit {
       return;
     }
 
-    // console.log(formData);
     this.isSubmitting = true;
     this.load.open();
-    // API call to check for duplicates
+
+    // Check for duplicates
     await this.memberService.preFlight(formData)
       .then(res => {
-        console.log('preFlight', res);
+
+        // Not a duplicate
         if (res['status'] === 'OK') {
-          this.savePendingMemberData(formData);
-          this.router.navigate(['/membership-options']).then(() => this.load.close())
+          // Create free membership?
+          if (this.referrer.freeMembership) {
+            this.memberService.createFreeMembership(formData)
+              .then((res) => {
+              this.router.navigate(['/signin'], { queryParams: { member: 'new' } })
+                .then(() => {
+                  this.load.close();
+              });
+            })
+              .catch(err => console.log(res));
+          } else {
+            this.savePendingMemberData(formData);
+            this.router.navigate(['/membership-options'])
+              .then(() => this.load.close());
+          }
+
         } else {
           console.log('Preflight Res', res);
           this.dspRegistrationResult('duplicate', res['error']);
