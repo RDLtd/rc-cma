@@ -15,7 +15,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import * as moment from 'moment';
-import { ClipboardService } from 'ngx-clipboard';
 import { AppConfig } from '../app.config';
 import { CmsLocalService } from '../cms';
 import { LoadService, ConfirmCancelComponent, HelpService } from '../common';
@@ -65,7 +64,6 @@ export class SettingsComponent implements OnInit {
     private translate: TranslateService,
     public help: HelpService,
     public appConfig: AppConfig,
-    private _clipboardService: ClipboardService,
     private loadService: LoadService,
     private currencyPipe: CurrencyPipe,
     public dialog: MatDialog) {
@@ -84,7 +82,7 @@ export class SettingsComponent implements OnInit {
     this.header.updateSectionName(this.translate.instant('HUB.sectionSettings'));
     // Add restaurant placeholder
     this.imgRestPlaceholderUrl =
-      `http://via.placeholder.com/360x240?text=${this.translate.instant('SETTINGS.labelAwaitingImage')}`;
+      `https://via.placeholder.com/360x240?text=${this.translate.instant('SETTINGS.labelAwaitingImage')}`;
     this.setMember();
     this.setProducts();
     this.getAssociatedRestaurants(this.member.member_id);
@@ -96,7 +94,7 @@ export class SettingsComponent implements OnInit {
     this.isFreeMembership = this.member.member_membership_type === 'Free';
     if (!!this.member.member_free_expiry) {
       this.freeMembershipExpiry = `(${moment(this.member.member_free_expiry).format('DD-MM-YYYY')})`;
-    };
+    }
 
     // in case of rogue values from the db
     if (this.member.member_image_path === 'null' || this.member.member_image_path === 'undefined') {

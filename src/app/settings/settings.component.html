@@ -142,9 +142,8 @@
                 <button
                   color="accent"
                   mat-icon-button
-                  ngxClipboard
                   (click)="copied()"
-                  [cbContent]="getReferralCode()"
+                  [cdkCopyToClipboard]="getReferralCode()"
                   matTooltip="{{ 'SETTINGS.tipCopyReferral' | translate }}">
                   <mat-icon>link</mat-icon>
                 </button>
