@@ -86,7 +86,7 @@ import {
 import { TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { FileUploadModule } from 'ng2-file-upload';
 import { MarkdownModule } from 'ngx-markdown';
-import { ClipboardModule } from 'ngx-clipboard';
+import { ClipboardModule } from '@angular/cdk/clipboard';
 import { JoinComponent } from './join/join.component';
 import { LoadComponent } from './common/loader/load.component';
 import { CmsSpwLinksComponent } from './cms/cms-spw-links.component';

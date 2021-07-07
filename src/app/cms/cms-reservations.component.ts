@@ -26,7 +26,7 @@ export class CmsReservationsComponent implements OnInit {
   selected_booking_provider;
   selected_booking_provider_index = 0;
   selected_booking_provider_id = null;
-  selectedBookingService: string;
+  selectedBookingService = 'none';
 
   // defaults
   booking_provider_reference = '';

@@ -2,7 +2,6 @@
   "compilerOptions": {
 //    "baseUrl": "tsconfig",
     "declaration": false,
-    "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "lib": ["es6", "dom"],
 //    "mapRoot": "./",
