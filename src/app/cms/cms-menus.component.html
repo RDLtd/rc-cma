@@ -95,7 +95,8 @@
           type="text"
           matInput
           (keyup)="setChanged()">
-        <button mat-button *ngIf="section.label" matSuffix mat-icon-button aria-label="Clear" (click)="section.label=''">
+        <button mat-button *ngIf="section.label" matSuffix mat-icon-button aria-label="Clear"
+                (click)="section.label=''; dataChanged = true;">
           <mat-icon>close</mat-icon>
         </button>
         <mat-hint>{{ 'CMS.MENUS.hintSection' | translate }}</mat-hint>
