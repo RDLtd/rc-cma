@@ -11,7 +11,7 @@
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <script>
     const rd_brand = (function(){
-      console.log('Get browser settings');
+      // console.log('Get browser settings:', navigator);
       const ref = document.URL;
       const nvg = navigator.language || 'en-GB';
       const lang = nvg.substr(0, 2);
@@ -19,6 +19,7 @@
       // If a language has already been established
       // don't override as it may have been
       // selected by the user
+      console.log(localStorage.getItem('rd_language'), lang);
       if (!localStorage.getItem('rd_language')) {
         localStorage.setItem('rd_language', lang);
       }

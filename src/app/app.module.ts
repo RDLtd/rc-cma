@@ -107,11 +107,14 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
 // so that we can rely on 'instant' access everywhere else
 export function appInitializerFactory(translate: TranslateService) {
   // LocalStorage is read/set in index.html
-  const lang = localStorage.getItem('rd_language');
+  const languages = ['en', 'fr'];
+  let lang = localStorage.getItem('rd_language');
   return () => {
-    console.log(`Translation loaded (${lang})`);
-    translate.addLangs(['en', 'fr']);
-    translate.setDefaultLang(lang);
+    // console.log(`Translation loaded (${lang})`, languages.includes(lang));
+    translate.addLangs(languages);
+    // If the user language is not supported, default to en
+    if (!languages.includes(lang)) { lang = 'en'; }
+    translate.setDefaultLang(lang)
     return translate.use(lang).toPromise();
   };
 }
