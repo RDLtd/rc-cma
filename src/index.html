@@ -16,6 +16,7 @@
       const nvg = navigator.language || 'en-GB';
       const lang = nvg.substr(0, 2);
       const loc = nvg.toLowerCase();
+      const path = window.location.pathname;
       // If a language has already been established
       // don't override as it may have been
       // selected by the user
@@ -24,6 +25,9 @@
         localStorage.setItem('rd_language', lang);
       }
       localStorage.setItem('rd_locale', loc);
+      if (path !== '/') {
+        sessionStorage.setItem('rd_route_request', path)
+      }
       // Is this an RI domain
       if (ref.includes('independants')) {
         localStorage.setItem('rd_brand', 'ri');
