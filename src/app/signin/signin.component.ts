@@ -8,16 +8,16 @@ import { ConfirmCancelComponent, HelpService } from '../common';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
-  selector: 'rc-signin',
+  selector: 'app-signin',
   templateUrl: './signin.component.html'
 })
 
 export class SigninComponent implements OnInit {
 
   isSubmitting: boolean;
-  dbOffline: boolean = false;
+  dbOffline = false;
   errorMsg: string;
-  pwdReset: boolean = false;
+  pwdReset = false;
   brandName: string;
   stripeSessionId: any;
   newMemberEmail: string;
@@ -54,9 +54,8 @@ export class SigninComponent implements OnInit {
     // If the user is already signed in
     // redirect to the HUB
     if (this.authService.isAuth()) {
-      this.router.navigate(['/hub']);
+      this.router.navigate(['/hub']).then();
     }
-    //this.trans = this.translate.instant('SIGNIN');
   }
 
   dspNewMemberMessage() {
@@ -64,14 +63,14 @@ export class SigninComponent implements OnInit {
     if (!!newMember) {
       this.newMemberEmail = newMember.email;
     }
-    let dialogRef = this.dialog.open(ConfirmCancelComponent, {
+    this.dialog.open(ConfirmCancelComponent, {
       data: {
         title: this.translate.instant('SIGNIN.titleThanks'),
         body: this.translate.instant('SIGNIN.msgNewMember'),
         confirm: 'OK',
         cancel: 'hide'
       }
-    })
+    });
   }
 
   signIn(formValue) {
