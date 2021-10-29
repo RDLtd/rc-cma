@@ -8,12 +8,12 @@ import { AboutComponent } from './about.component';
 import { HeaderService } from './header.service';
 
 @Component({
-  selector: 'rc-header',
+  selector: 'app-rc-header',
   templateUrl: './header.component.html'
 })
 
 export class HeaderComponent implements OnInit {
-  lblMemberLogin: string = 'User Login';
+  lblMemberLogin = 'User Login';
   displayName: string = this.lblMemberLogin;
   dialogRef: any;
   company_name;
@@ -79,13 +79,13 @@ export class HeaderComponent implements OnInit {
           case 'closed': {
             // User logged out
             this.inSession = false;
-            this.router.navigate(['/']);
+            this.router.navigate(['/']).then();
             break;
           }
           case 'expired': {
             // Session expired, logout
             this.inSession = false;
-            this.router.navigate(['/']);
+            this.router.navigate(['/']).then();
             break;
           }
         }
@@ -96,11 +96,11 @@ export class HeaderComponent implements OnInit {
 
   logout(): void {
     this.authService.logout('closed');
-  };
+  }
 
   login(): void {
-    this.router.navigate(['/']);
-  };
+    this.router.navigate(['/']).then();
+  }
 
   about(): void {
     const dialogRef = this.dialog.open(AboutComponent);

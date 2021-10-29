@@ -1,6 +1,6 @@
-import { AfterViewInit, Component, ViewChild } from "@angular/core";
-import { MatDialog, MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { MessageComponent, Message, LoadService, ConfirmCancelComponent } from "../common";
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MessageComponent, Message, LoadService, ConfirmCancelComponent } from '../common';
 import { Router } from '@angular/router';
 import { HeaderService } from '../common/header.service';
 import { Member, Restaurant } from '../_models';
@@ -12,8 +12,8 @@ import { HubService } from './hub.service';
 import { insertAnimation } from '../shared/animations';
 
 @Component({
-  selector: "rc-hub",
-  templateUrl: "./hub.component.html",
+  selector: 'app-rc-hub',
+  templateUrl: './hub.component.html',
   animations: [insertAnimation]
 })
 
@@ -76,13 +76,13 @@ export class HubComponent implements AfterViewInit {
 
   dspMessages(): void {
 
-    let data = {
+    const data = {
       newMember: !this.member.isAuthenticated,
       member: this.member,
       messages: this.messages
-    }
+    };
     if (data.newMember || this.messages.length)  {
-      let dialogMessages = this.dialog.open(MessageComponent, {
+      const dialogMessages = this.dialog.open(MessageComponent, {
         disableClose: true,
         data: data
       });
@@ -104,7 +104,7 @@ export class HubComponent implements AfterViewInit {
   }
 
   openRestaurantLookup(): void {
-    let dialogLookUp = this.dialog.open(RestaurantLookupComponent, {
+    const dialogLookUp = this.dialog.open(RestaurantLookupComponent, {
       width: '480px',
       position: {'top': '10vh'},
       data: {
@@ -123,7 +123,7 @@ export class HubComponent implements AfterViewInit {
   launchFeature (service: any) {
 
     if (service.service_disabled) {
-      let dialogReg = this.dialog.open(ConfirmCancelComponent, {
+      this.dialog.open(ConfirmCancelComponent, {
         data: {
           title: this.translate.instant('HUB.msgComingSoon'),
           body: service.service_disabled_message,
@@ -145,7 +145,7 @@ export class HubComponent implements AfterViewInit {
           this.trigger.openMenu();
           // 1 restaurant
         } else {
-          this.router.navigate(['/cms', this.restaurants[0].restaurant_id]).then()
+          this.router.navigate(['/cms', this.restaurants[0].restaurant_id]).then();
         }
         break;
       }

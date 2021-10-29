@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'rc-loader',
+  selector: 'app-rc-loader',
   templateUrl: './loader.component.html',
   styleUrls: ['./loader.component.scss']
 })

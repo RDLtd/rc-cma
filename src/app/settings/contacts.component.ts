@@ -1,17 +1,16 @@
-import { Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { Member } from '../_models';
 import { TranslateService } from '@ngx-translate/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
-  selector: 'rc-contacts',
+  selector: 'app-rc-contacts',
   templateUrl: './contacts.component.html'
 })
 export class ContactsComponent implements OnInit {
 
-  //@ViewChild('formProfile', {static: true}) formProfile;
   member: Member;
-  isSubmitting: boolean = false;
+  isSubmitting = false;
   jobRoles: any;
   patternMobile = '^([+\\d]\\d*)?\\d$';
 

@@ -10,7 +10,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { AppConfig } from '../app.config';
 
 @Component({
-  selector: 'rc-cms-menus',
+  selector: 'app-rc-cms-menus',
   templateUrl: './cms-menus.component.html'
 })
 export class CmsMenusComponent implements OnInit {
@@ -19,10 +19,10 @@ export class CmsMenusComponent implements OnInit {
   restaurant: Restaurant;
   menus: any;
   descriptions: any;
-  menuOverviewLength: number = 500;
+  menuOverviewLength = 500;
   currencySymbol: string;
-  showLoader: boolean = false;
-  dataChanged: boolean = false;
+  showLoader = false;
+  dataChanged = false;
   htmlMenu: any = {};
 
   index: any;
@@ -44,7 +44,7 @@ export class CmsMenusComponent implements OnInit {
     // Subscribe to service
     this.cmsLocalService.getRestaurant()
       .subscribe(data => {
-          if(data.restaurant_id) {
+          if (data.restaurant_id) {
             this.restaurant = data;
             const id = Number(this.restaurant.restaurant_id);
             this.getCmsData(id);
@@ -102,8 +102,9 @@ export class CmsMenusComponent implements OnInit {
     this.cms.getSections(Number(id))
       .subscribe(data => {
         console.log('Sections Data:', data);
+        let ds;
         if (data['count'] > 0) {
-          let ds = data['sectionrecord'][0];
+          ds = data['sectionrecord'][0];
           this.htmlMenu.section_id = ds.cms_section_id;
           this.htmlMenu.sections = [
               { id: 1, label: ds.cms_section_desc_1 },
@@ -125,16 +126,16 @@ export class CmsMenusComponent implements OnInit {
 
           // at this point we can assume that there is no section record, so create one now so
           // that the App just has to use update
-          let cmsSection = new CMSSection;
+          const cmsSection = new CMSSection;
           cmsSection.cms_section_restaurant_id = Number(this.restaurant.restaurant_id);
           cmsSection.cms_section_desc_1 = this.translate.instant('CMS.MENUS.defaultContentSection1');
           cmsSection.cms_section_desc_2 = this.translate.instant('CMS.MENUS.defaultContentSection2');
           cmsSection.cms_section_desc_3 = this.translate.instant('CMS.MENUS.defaultContentSection3');
           cmsSection.cms_section_created_by = this.userName;
           this.cms.createSection(cmsSection).subscribe(
-            data => {
-              //console.log('create cms section', data);
-              this.htmlMenu.section_id = data['cms_section_id'];
+            item => {
+              // console.log('create cms section', item);
+              this.htmlMenu.section_id = item['cms_section_id'];
             },
             error => {
               console.log(JSON.stringify(error));
@@ -153,7 +154,7 @@ export class CmsMenusComponent implements OnInit {
   // Edit section name
   updateSectionName() {
 
-    let sect = new CMSSection();
+    const sect = new CMSSection();
 
     sect.cms_section_restaurant_id = Number(this.restaurant.restaurant_id);
     sect.cms_section_id = this.htmlMenu.section_id;
@@ -215,7 +216,8 @@ export class CmsMenusComponent implements OnInit {
   // store a reference to the array position
   setDishReference() {
     // console.log('SetDishReference:', this.htmlMenu.dishes[0])
-    let d = this.htmlMenu.dishes, l = d.length;
+    const d = this.htmlMenu.dishes;
+    const l = d.length;
     for (let i = 0; i < l; i++) {
       d[i].cms_dish_idx = i;
       // console.log(this.htmlMenu.dishes[i].cms_dish_name, this.htmlMenu.dishes[i].cms_dish_id);
@@ -233,7 +235,7 @@ export class CmsMenusComponent implements OnInit {
 
   // Convert number to currency style
   toCurrencyFormat(value, decimals = 2) {
-    return Number(Math.round(Number(value +'e'+ decimals)) +'e-'+ decimals).toFixed(decimals);
+    return Number(Math.round(Number(value + 'e' + decimals)) + 'e-' + decimals).toFixed(decimals);
   }
 
   createNewDish(src) {
@@ -264,7 +266,7 @@ export class CmsMenusComponent implements OnInit {
       sections: this.htmlMenu.sections
     };
 
-    let dialogRef = this.dialog.open(CmsMenuDishComponent, dialogConfig);
+    const dialogRef = this.dialog.open(CmsMenuDishComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(formDish => {
       // If something has changes,
@@ -315,7 +317,7 @@ export class CmsMenusComponent implements OnInit {
       sections: this.htmlMenu.sections
     };
 
-    let dialogRef = this.dialog.open(CmsMenuDishComponent, dialogConfig);
+    const dialogRef = this.dialog.open(CmsMenuDishComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(formDish => {
 
@@ -346,7 +348,7 @@ export class CmsMenusComponent implements OnInit {
 
   deleteDish(dish) {
     console.log(dish);
-    let dialogRef = this.dialog.open(ConfirmCancelComponent, {
+    const dialogRef = this.dialog.open(ConfirmCancelComponent, {
       data: {
         body: this.translate.instant('CMS.MENUS.msgRemoveFromMenu', { item: this.htmlMenu.dishes[dish.cms_dish_idx].cms_dish_name }),
         confirm: this.translate.instant('CMS.MENUS.labelBtnDelete'),
@@ -431,7 +433,7 @@ export class CmsMenusComponent implements OnInit {
 
   // Upload pdf
   addPdfMenu() {
-    let dialogRef = this.dialog.open(CmsFileUploadComponent, {
+    const dialogRef = this.dialog.open(CmsFileUploadComponent, {
       data: {
         type: 'menu',
         tgtObject: this.menus,
@@ -442,7 +444,7 @@ export class CmsMenusComponent implements OnInit {
     dialogRef.afterClosed()
       .subscribe(() => {
         this.cms.updateLastCreatedField(Number(this.restaurant.restaurant_id), 'menus').subscribe(
-          (res) => { console.log(res);},
+          (res) => { console.log(res); },
           () => {
             console.log('error in updatelastupdatedfield for menus');
           });
@@ -455,7 +457,7 @@ export class CmsMenusComponent implements OnInit {
   }
 
   deletePdfMenu(menu): void {
-    let dialogRef = this.dialog.open(ConfirmCancelComponent, {
+    const dialogRef = this.dialog.open(ConfirmCancelComponent, {
       data: {
         body: this.translate.instant(
           'CMS.MENUS.msgConfirmDeleteMenu',
@@ -469,7 +471,8 @@ export class CmsMenusComponent implements OnInit {
         this.cms.deleteElement(menu.cms_element_id)
           .subscribe(res => {
               console.log(res);
-              let arrLength = this.menus.length, obj;
+              const arrLength = this.menus.length;
+              let obj;
               for (let i = 0; i < arrLength; i++) {
                 obj = this.menus[i];
                 if (obj.cms_element_id === menu.cms_element_id) {
@@ -489,7 +492,7 @@ export class CmsMenusComponent implements OnInit {
           );
 
         this.cms.updateLastCreatedField(Number(this.restaurant.restaurant_id), 'menus').subscribe(
-          (res) => { console.log(res)},
+          (res) => { console.log(res); },
           () => {
             console.log('error in updatelastupdatedfield for menus');
           });

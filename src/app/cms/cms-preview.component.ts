@@ -4,13 +4,13 @@ import { CMSService } from '../_services';
 import { HelpService } from '../common';
 
 @Component({
-  selector: 'rc-cms-preview',
+  selector: 'app-rc-cms-preview',
   templateUrl: './cms-preview.component.html'
 })
 export class CmsPreviewComponent implements OnInit {
 
-  spwUrl: string = '';
-  urlLoaded: boolean = false;
+  spwUrl = '';
+  urlLoaded = false;
 
   constructor(
     private cms: CMSService,
@@ -25,9 +25,9 @@ export class CmsPreviewComponent implements OnInit {
         .subscribe(res => {
 
           console.log('PREVIEW:', res);
-          if (res['status'] == 'OK') {
+          if (res['status'] === 'OK') {
 
-            let ts = new Date().getTime();
+            const ts = new Date().getTime();
             this.spwUrl = `${res['url']}?ts=${ts}`;
             this.urlLoaded = true;
 

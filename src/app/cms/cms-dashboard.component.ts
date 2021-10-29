@@ -513,7 +513,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
 
   navTo(tgt) {
     // console.log('restaurants', this.restaurant.restaurant_id, 'cms', tgt);
-    this.router.navigate(['cms', this.restaurant.restaurant_id, tgt]);
+    this.router.navigate(['cms', this.restaurant.restaurant_id, tgt]).then();
   }
 
   previewSPW() {

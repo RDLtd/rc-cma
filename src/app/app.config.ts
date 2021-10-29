@@ -1,5 +1,5 @@
 ﻿import { environment } from '../environments/environment';
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 
 
 declare const require: any;
@@ -52,7 +52,7 @@ export class AppConfig {
   tld = {
     rc: 'restaurantcollective.org.uk',
     ri: 'restaurateursindependants.fr'
-  }
+  };
 
   private brands = {
     rc: {

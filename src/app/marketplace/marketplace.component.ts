@@ -11,7 +11,7 @@ import { insertAnimation } from '../shared/animations';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
-  selector: 'rc-marketplace',
+  selector: 'app-rc-marketplace',
   templateUrl: './marketplace.component.html',
   animations: [insertAnimation]
 })
@@ -26,7 +26,7 @@ export class MarketplaceComponent implements OnInit {
   categories = [];
   deals: Array<any>;
   favourites: Array<string> = [];
-  hasFavourites: boolean = true;
+  hasFavourites = true;
   filter: string;
   displayedDeals = [];
   sponsored = false;
@@ -110,7 +110,7 @@ export class MarketplaceComponent implements OnInit {
       },
       this.favourites
     );
-    this.filter = 'favourites'
+    this.filter = 'favourites';
   }
   // Category filters
   filterByCategory(cat: string): void {
@@ -130,7 +130,7 @@ export class MarketplaceComponent implements OnInit {
   // and confirm to Member
   notifyAffiliate(selectedDeal: any): void {
 
-    let dialogRef = this.dialog.open(ConfirmCancelComponent, {
+    const dialogRef = this.dialog.open(ConfirmCancelComponent, {
       restoreFocus: false,
       data: {
         title: this.translate.instant('MARKETPLACE.titleRequest'),
@@ -157,7 +157,7 @@ export class MarketplaceComponent implements OnInit {
   }
 
   // Send restaurant request to Affiliate
-  sendAffiliateRequestEmail(deal){
+  sendAffiliateRequestEmail(deal) {
     const member = JSON.parse(localStorage.getItem('rd_profile'));
     this.cmsService.sendOfferRequestToAffiliateEmail({
       affiliate_offer: deal.deal_name,

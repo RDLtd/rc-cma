@@ -9,7 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { NgForm } from '@angular/forms';
 
 @Component({
-  selector: 'rc-cms-file-upload',
+  selector: 'app-rc-cms-file-upload',
   templateUrl: './cms-file-upload.component.html'
 })
 export class CmsFileUploadComponent implements OnInit {
@@ -20,8 +20,8 @@ export class CmsFileUploadComponent implements OnInit {
   uploadMessageTxt: string;
   uploadMessage: string;
   maxFileSizeMb = 10;
-  inProgress: boolean = false;
-  filePrimed: boolean = false;
+  inProgress = false;
+  filePrimed = false;
   filePreview: any = '';
   fileUrl: string;
   uploader: FileUploader;
@@ -69,12 +69,12 @@ export class CmsFileUploadComponent implements OnInit {
     // Clear any error messages
     this.uploader.onAfterAddingFile = (fileItem) => {
       this.uploadMessage = '';
-    }
+    };
     // Check for a valid file selection
     this.uploader.onWhenAddingFileFailed = (fileItem) => {
-      console.log("Exceeds max file size", fileItem.size.toFixed(2));
+      console.log('Exceeds max file size', fileItem.size.toFixed(2));
       this.uploadMessage = `${this.uploadMessageTxt} **Max: ${this.maxFileSizeMb} MB**`;
-    }
+    };
 
     this.uploader.onBuildItemForm = (fileItem: any, form: FormData): any => {
       form.append('upload_preset', this.config.upload_preset);
@@ -159,16 +159,13 @@ export class CmsFileUploadComponent implements OnInit {
     // Image upload
     if (this.data.type === 'image') {
       this.uploadLabel = this.translate.instant('CMS.UPLOAD.labelChooseImage');
-      //this.t_data_type = this.t_data.Image;
     } else {
 
     // Non-Image
       if (this.data.type === 'menu') {
         this.uploadLabel = this.translate.instant('CMS.UPLOAD.labelChooseMenu');
-       // this.t_data_type = this.t_data.Menu;
       } else {
-        this.uploadLabel = this.translate.instant('CMS.UPLOAD.labelChooseDirections');;
-        //this.t_data_type = this.t_data.Directions;
+        this.uploadLabel = this.translate.instant('CMS.UPLOAD.labelChooseDirections');
       }
     }
   }
@@ -178,7 +175,7 @@ export class CmsFileUploadComponent implements OnInit {
     const f = this.uploader.queue[this.uploader.queue.length - 1];
 
     this.uploadLabel = f.file.name;
-    this.uploadFileSize = f.file.size/1000/1000;
+    this.uploadFileSize = f.file.size / 1000 / 1000;
     this.filePrimed = true;
 
     // Set image preview
@@ -214,7 +211,7 @@ export class CmsFileUploadComponent implements OnInit {
   addElement() {
 
     const now = new Date().toLocaleString();
-    let elem = new CMSElement();
+    const elem = new CMSElement();
     let isDefaultImage = false;
 
     elem.cms_element_restaurant_id = this.data.restaurant.restaurant_id;
@@ -227,7 +224,7 @@ export class CmsFileUploadComponent implements OnInit {
       // mark it as the default
       if (!this.data.tgtObject.length) { isDefaultImage = true; }
       // console.log('Default image?', isDefaultImage);
-    } else if(this.data.type === 'menu'){
+    } else if (this.data.type === 'menu') {
       elem.cms_element_title = this.menuForm.form.controls.menuClass.value || 'Menu';
       elem.cms_element_caption = this.menuForm.form.controls.menuCaption.value || '';
       elem.cms_element_class = 'Menu';
@@ -238,7 +235,7 @@ export class CmsFileUploadComponent implements OnInit {
     }
 
     // Add Cloudinary public-id to element
-    let clArr = this.fileUrl.split('/');
+    const clArr = this.fileUrl.split('/');
     elem['cms_element_image_ref'] = clArr.slice(clArr.length - 3).join('/');
 
     elem.cms_element_image_path = this.fileUrl;
@@ -253,13 +250,13 @@ export class CmsFileUploadComponent implements OnInit {
 
     console.log(elem);
 
-    if(this.data.type === 'direction' && !!this.data.tgtObject) {
+    if (this.data.type === 'direction' && !!this.data.tgtObject) {
       console.log('elem', elem);
       console.log('obj', this.data.tgtObject.cms_element_id);
       elem['cms_element_id'] = this.data.tgtObject.cms_element_id;
       this.updateDirections(elem);
     } else {
-      this.createElement(elem)
+      this.createElement(elem);
     }
   }
 
@@ -270,7 +267,7 @@ export class CmsFileUploadComponent implements OnInit {
         console.log('e', elem);
         // There is only 1 file for directions
         // not an array
-        if(this.data.type === 'direction') {
+        if (this.data.type === 'direction') {
           this.data.tgtObject = elem;
         } else {
           this.data.tgtObject.push(elem);
@@ -301,10 +298,11 @@ export class CmsFileUploadComponent implements OnInit {
   }
 
   setDefaultImage(img) {
-    let len = this.data.tgtObject.length;
+    const len = this.data.tgtObject.length;
+    let thisImg;
     // find & reset current default
     for (let i = 0; i < len; i++) {
-      let thisImg = this.data.tgtObject[i];
+      thisImg = this.data.tgtObject[i];
       if (thisImg.cms_element_default === true || thisImg.cms_element_default === 1) {
         thisImg.cms_element_default = false;
         this.cms.defaultElement(thisImg.cms_element_id, false)

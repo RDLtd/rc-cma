@@ -6,7 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { HelpService} from '../common';
 
 @Component({
-  selector: 'rc-cms-reservations',
+  selector: 'app-rc-cms-reservations',
   templateUrl: './cms-reservations.component.html'
 })
 export class CmsReservationsComponent implements OnInit {
@@ -81,7 +81,7 @@ export class CmsReservationsComponent implements OnInit {
             data_providers => {
               if (data_providers['count'] > 0) {
                 this.booking_providers = data_providers['booking_providers'];
-                let selectedProvider = this.descriptions.cms_description_booking_provider;
+                const selectedProvider = this.descriptions.cms_description_booking_provider;
                 console.log('SP', selectedProvider);
                 if (selectedProvider) {
                   for (let i = 0; i < this.booking_providers.length; i++) {
@@ -110,7 +110,7 @@ export class CmsReservationsComponent implements OnInit {
 
   changeOption(elem) {
 
-    this.selected_booking_provider_id = this.booking_providers[this.selected_booking_provider_index].booking_provider_id
+    this.selected_booking_provider_id = this.booking_providers[this.selected_booking_provider_index].booking_provider_id;
     this.selected_booking_provider = this.booking_providers[this.selected_booking_provider_index];
     this.booking_provider_rid_label = this.selected_booking_provider.booking_provider_rid_label;
     this.booking_provider_reference = this.selected_booking_provider.booking_provider_reference;
@@ -137,7 +137,7 @@ export class CmsReservationsComponent implements OnInit {
   setChanged(elem): void {
     if (!this.dataChanged) {
       this.dataChanged = true;
-      //console.log('Change', elem);
+      // console.log('Change', elem);
     }
   }
 
