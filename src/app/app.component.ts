@@ -9,7 +9,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
-  selector: 'rc-root',
+  selector: 'app-rc-root',
   templateUrl: './app.component.html',
   encapsulation: ViewEncapsulation.None
 })
@@ -22,16 +22,16 @@ export class AppComponent implements OnInit {
 
   // If we are offline then there is o access to translations
   connectionOffline = {
-    en: "You are currently OFFLINE, please check your internet connection.",
-    fr: "Vous êtes actuellement OFFLINE! Veuillez vérifier votre connexion Internet.",
+    en: 'You are currently OFFLINE, please check your internet connection.',
+    fr: 'Vous êtes actuellement OFFLINE! Veuillez vérifier votre connexion Internet.',
   };
   sessionExpired = {
-    en: "Your session has expired. To continue using the application, please Sign In again.",
-    fr: "Votre session a expiré. Pour continuer à utiliser l’application, veuillez vous connecter à nouveau.",
+    en: 'Your session has expired. To continue using the application, please Sign In again.',
+    fr: 'Votre session a expiré. Pour continuer à utiliser l’application, veuillez vous connecter à nouveau.',
   };
 
   constructor(
-    private connectionService:ConnectionService,
+    private connectionService: ConnectionService,
     private snackBar: MatSnackBar,
     private _dialog: MatDialog,
     private router: Router,
@@ -45,7 +45,7 @@ export class AppComponent implements OnInit {
       // Check browser connection
       this.connectionService.monitor().subscribe(isConnected => {
         this.isConnected = isConnected;
-        if(this.isConnected){
+        if (this.isConnected) {
           snackBar.dismiss();
         } else {
           snackBar.open(this.connectionOffline[this.language], 'OK', {
@@ -77,8 +77,8 @@ export class AppComponent implements OnInit {
     // Observe the session status
     this.authService.memberSessionSubject.subscribe(
       sessionStatus => {
-        //console.log('sessionStatus', sessionStatus);
-        switch(sessionStatus) {
+        // console.log('sessionStatus', sessionStatus);
+        switch (sessionStatus) {
           case 'active': {
             this.inSession = true;
             break;
@@ -109,6 +109,6 @@ export class AppComponent implements OnInit {
   onDeactivate() {
     // console.log('onDeactivate');
     // document.body.scrollTop = 0;
-    window.scrollTo(0, 0)
+    window.scrollTo(0, 0);
   }
 }

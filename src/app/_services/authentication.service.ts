@@ -148,7 +148,7 @@ export class AuthenticationService {
     const timer = setTimeout(() => {
       console.log('Logging out based on timer');
       this.logout('expired');
-      this.router.navigate(['/']);
+      this.router.navigate(['/']).then();
       document.body.removeEventListener('click', reset);
       document.body.removeEventListener('keydown', reset);
     }, 60000);

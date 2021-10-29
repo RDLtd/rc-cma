@@ -105,7 +105,8 @@ const APP_ROUTES: Routes = [
     ]},
 
   // redirect any missed routes
-  { path: 'restaurants/:id/cms',
+  {
+    path: 'restaurants/:id/cms',
     redirectTo: 'cms/:id',
   },
 
