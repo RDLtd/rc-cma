@@ -68,7 +68,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
   d_desc_date: string;
 
   hours_date: Date;
-  //hours_by: string;
+  // hours_by: string;
   hours_status = 0;
   hours_count = 0;
   hours_status_text: string;
@@ -76,14 +76,14 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
 
   img_date: any;
   img_src: string;
-  //img_by: string;
+  // img_by: string;
   img_count = 0;
   img_status = 0;
   img_status_text: string;
   d_img_date: string;
 
   mnu_date: Date;
-  //mnu_by: string;
+  // mnu_by: string;
   mnu_count = 0;
   mnu_dish_count = 0;
   mnu_status = 0;
@@ -91,13 +91,13 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
   d_mnu_date: string;
 
   bkg_date: Date;
-  //bkg_by: string;
+  // bkg_by: string;
   bkg_status = 0;
   bkg_status_text: string;
   d_bkg_date: string;
 
   loc_date: Date;
-  //loc_by: string;
+  // loc_by: string;
   loc_status = 0;
   loc_status_text: string;
   d_loc_date: string;
@@ -167,35 +167,6 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
           }
         },
         error => console.log(error));
-
-    // this.translate.get('CMS-Dashboard').subscribe(data => {
-    //   //this.t_data = data;
-    //   moment.locale(localStorage.getItem('rd_language'));
-    //   this.dfImg = 'https://via.placeholder.com/350x200?text=' + this.t_data.AwaitingImage;
-    //
-    //   // Observe offer count
-    //   // this.cmsLocalService.getOfferCount()
-    //   //   .subscribe( count => {
-    //   //     this.offerInBox = count;
-    //   //   });
-    //
-    //   // this.cmsLocalService.getRestaurant()
-    //   //   .subscribe(rest => {
-    //   //       if (rest.restaurant_id) {
-    //   //         this.restaurant = rest;
-    //   //         console.log(rest);
-    //   //         this.getLastUpdated();
-    //   //       }
-    //   //       // duplicate the loaded restaurant
-    //   //       // so that we can use it to compare changes
-    //   //       for (const key in this.restaurant) {
-    //   //         if (this.restaurant.hasOwnProperty(key)) {
-    //   //           this.dbRestaurant[key] = this.restaurant[key];
-    //   //         }
-    //   //       }
-    //   //     },
-    //   //     error => console.log(error));
-    // });
   }
 
   readAndCheckStatus () {
@@ -329,7 +300,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
   }
 
   checkDescriptions(): void {
-    //console.log('checkDescriptions');
+    // console.log('checkDescriptions');
     this.cms.getDescriptions(this.restaurant.restaurant_id)
       .subscribe(
         data => {
@@ -394,7 +365,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
               imgsrc = this.cmsLocalService.getCloudinaryPublicId(elem.cms_element_image_path);
             }
           }
-          //console.log('Img', imgsrc);
+          // console.log('Img', imgsrc);
           this.img_src = imgsrc || this.dfImg;
 
           // set status bar
@@ -571,8 +542,8 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
         console.log('New publish res', res);
           if (res['status'] === 'OK') {
             // console.log('Publish success:', res);
-            //this.spwProdUrl = res['url'];
-            //this.spwPreviewUrl = this.getSpwUrl();
+            // this.spwProdUrl = res['url'];
+            // this.spwPreviewUrl = this.getSpwUrl();
             this.cmsChanged = false;
             this.d_publishDate = moment(new Date(res['published'])).format('LLLL');
             // this.publishDate = new Date(res['published']);

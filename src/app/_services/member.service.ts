@@ -453,7 +453,7 @@ export class MemberService {
         token: this.authToken});
   }
 
-  async createFreeMembership(formData){
+  async createFreeMembership(formData) {
     return this.http.post(`${this.config.apiUrl}/payments/register-free-member`, {
       pending: formData,
       launch_number: 0,

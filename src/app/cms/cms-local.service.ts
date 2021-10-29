@@ -16,7 +16,7 @@ export class CmsLocalService {
   private restaurantSubject: Subject<Restaurant> = new BehaviorSubject<Restaurant>(this.restaurant);
 
   // Observable offers
-  private offerCount: number = 0;
+  private offerCount = 0;
   private offerSubject = new Subject<any>();
 
   dialogConfig: MatDialogConfig = new MatDialogConfig();
@@ -75,7 +75,7 @@ export class CmsLocalService {
 
   // Extract Cloudinary Public-Id from full url
   getCloudinaryPublicId(url) {
-    let urlArr = url.split('/');
+    const urlArr = url.split('/');
     return urlArr.slice(urlArr.length - 3).join('/');
   }
 }

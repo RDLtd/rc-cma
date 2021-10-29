@@ -513,12 +513,12 @@ export class RestaurantService {
       { restaurant_id: restaurant_id, state: state, userCode: this.config.userAPICode, token: this.authToken });
   }
 
-  setLaunchBatch(launch_number: number, curation_id: number){
+  setLaunchBatch(launch_number: number, curation_id: number) {
     return this.http.post(this.config.apiUrl + '/restaurants/setlaunchbatch',
       { launch_number: launch_number, curation_id: curation_id, userCode: this.config.userAPICode, token: this.authToken });
   }
 
-  fixRestaurantNumbers(country_code: string, curation_id: number){
+  fixRestaurantNumbers(country_code: string, curation_id: number) {
     return this.http.post(this.config.apiUrl + '/restaurants/fixrestaurantnumbers',
       { country_code: country_code, curation_id: curation_id, userCode: this.config.userAPICode, token: this.authToken });
   }

@@ -13,7 +13,7 @@ import { HelpService } from '../common';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
-  selector: 'rc-cms',
+  selector: 'app-rc-cms',
   templateUrl: './cms.component.html',
   providers: [CmsLocalService],
   animations: [fadeAnimation] // register the animation
@@ -49,7 +49,10 @@ export class CmsComponent implements OnInit {
             this.restaurant = data['restaurant'][0];
             this.cmsLocalService.setRestaurant(this.restaurant);
           },
-          error => console.log(error)
+          error => {
+            console.log(error);
+            this.router.navigate(['/hub']).then();
+          }
         );
 
 
@@ -61,7 +64,9 @@ export class CmsComponent implements OnInit {
           this.restaurants = data['restaurants'];
           // console.log('Length', this.restaurants.length);
         },
-        error => console.log(error)
+        error => {
+          console.log(error);
+        }
       );
   }
 
@@ -69,13 +74,13 @@ export class CmsComponent implements OnInit {
     this.route.params.subscribe(params => {
       // PARAMS CHANGED ..
       console.log(`Replace ${params.id} with ${id}`);
-      this.router.navigateByUrl(this.router.url.replace(this.paramId, id));
+      this.router.navigateByUrl(this.router.url.replace(this.paramId, id)).then();
     });
   }
 
   getPreview() {
 
-    const dialogRef = this.dialog.open(CmsPreviewComponent, {
+    this.dialog.open(CmsPreviewComponent, {
       panelClass: 'rc-preview-dialog-container',
       backdropClass: 'rc-preview-backdrop',
       data: {
@@ -92,6 +97,6 @@ export class CmsComponent implements OnInit {
     console.log('onDeactivate');
     // document.body.scrollTop = 0;
     // Alternatively, you can scroll to top by using this other call:
-    window.scrollTo(0, 0)
+    window.scrollTo(0, 0);
   }
 }
