@@ -42,7 +42,7 @@ import {
 } from './cms/restaurant-detail.component';
 import {
   MarketplaceComponent
-} from './marketplace/marketplace.component'
+} from './marketplace/marketplace.component';
 
 import {
   RestaurantLookupComponent,
@@ -114,7 +114,7 @@ export function appInitializerFactory(translate: TranslateService) {
     translate.addLangs(languages);
     // If the user language is not supported, default to en
     if (!languages.includes(lang)) { lang = 'en'; }
-    translate.setDefaultLang(lang)
+    translate.setDefaultLang(lang);
     return translate.use(lang).toPromise();
   };
 }
