@@ -17,10 +17,9 @@ export class AppService {
   constructor(
     private config: AppConfig,
     private http: HttpClient
-  ) { };
+  ) { }
 
   reportCriticalError(info) {
-    let currentToken;
     this.authToken.subscribe( tkn => {
       this.currentAuthToken = tkn;
     });
