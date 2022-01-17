@@ -8,7 +8,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { LoadService, HelpService } from '../common';
 
 @Component({
-  selector: 'rc-cms-features',
+  selector: 'app-rc-cms-features',
   templateUrl: './cms-features.component.html'
 })
 
@@ -25,7 +25,7 @@ export class CmsFeaturesComponent implements OnInit {
   descParagraphTotal = 200;
   descFullTotal = 5000;
   separatorKeysCodes = [ENTER, 188];
-  removable: boolean = true;
+  removable = true;
 
   constructor(
     private cmsLocalService: CmsLocalService,

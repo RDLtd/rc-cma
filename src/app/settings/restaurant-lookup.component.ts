@@ -9,7 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ConfirmCancelComponent, HelpService } from '../common';
 
 @Component({
-  selector: 'rc-restaurant-lookup',
+  selector: 'app-rc-restaurant-lookup',
   templateUrl: './restaurant-lookup.component.html'
 })
 

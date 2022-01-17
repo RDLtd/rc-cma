@@ -23,7 +23,7 @@ import { CurrencyPipe } from '@angular/common';
 
 
 @Component({
-  selector: 'rc-settings',
+  selector: 'app-rc-settings',
   templateUrl: './settings.component.html'
 })
 
@@ -367,7 +367,7 @@ export class SettingsComponent implements OnInit {
   viewMemberPlans(): void {
     const msg = this.currentProduct.product_period === 'm' ?
       'SETTINGS.msgChangePlanToYearly' : 'SETTINGS.msgChangePlanToMonthly';
-    const dialogRef = this.dialog.open(ConfirmCancelComponent, {
+    this.dialog.open(ConfirmCancelComponent, {
       data: {
         title: this.translate.instant('SETTINGS.titleSubscription'),
         body: this.translate.instant( msg, { plan: this.currentProduct.product_name }),
@@ -543,7 +543,7 @@ export class SettingsComponent implements OnInit {
     this.openSnackBar(this.translate.instant('SETTINGS.msgLinkCopied'), 'OK');
   }
 
-  getClPublicId(idx): void {
+  getClPublicId(idx): string {
 
     if (this.defaultImages[idx]) {
       const a = this.defaultImages[idx].split('/');

@@ -9,7 +9,7 @@ import { GoogleMap, MapMarker } from '@angular/google-maps';
 import { ConfirmCancelComponent, HelpService } from '../common';
 
 @Component({
-  selector: 'rc-cms-location',
+  selector: 'app-rc-cms-location',
   templateUrl: './cms-location.component.html'
 })
 export class CmsLocationComponent implements OnInit {
@@ -36,9 +36,9 @@ export class CmsLocationComponent implements OnInit {
     zoom: 15,
     styles: [
       {
-        "featureType": "poi",
-        "stylers": [
-          { "saturation": -100 }
+        'featureType': 'poi',
+        'stylers': [
+          { 'saturation': -100 }
         ]
       }
     ]
@@ -46,7 +46,7 @@ export class CmsLocationComponent implements OnInit {
   markerOptions: google.maps.MarkerOptions  = {
     draggable: true,
     animation: google.maps.Animation.DROP
-  }
+  };
   markerPosition: google.maps.LatLngLiteral;
 
   @ViewChild(GoogleMap, { static: false }) map: GoogleMap;
@@ -81,7 +81,7 @@ export class CmsLocationComponent implements OnInit {
   }
 
   updateRestaurantMarker(): void {
-    //console.log(this.marker.getPosition().lat());
+    // console.log(this.marker.getPosition().lat());
     this.restaurant.restaurant_lat = this.marker.getPosition().lat();
     this.restaurant.restaurant_lng = this.marker.getPosition().lng();
     this.dataChanged = true;
@@ -112,7 +112,7 @@ export class CmsLocationComponent implements OnInit {
   public confirmNavigation() {
     if (this.dataChanged) {
       return this.cmsLocalService.confirmNavigation();
-    }else {
+    } else {
       return true;
     }
   }
@@ -180,7 +180,7 @@ export class CmsLocationComponent implements OnInit {
   uploadDirections() {
 
     console.log('D', this.directions);
-    let dialogRef = this.dialog.open(CmsFileUploadComponent, {
+    const dialogRef = this.dialog.open(CmsFileUploadComponent, {
       data: {
         type: 'direction',
         tgtObject: this.directions,
@@ -201,7 +201,7 @@ export class CmsLocationComponent implements OnInit {
 
   deleteDirections(): void {
     console.log(this.directions);
-    let dialogRef = this.dialog.open(ConfirmCancelComponent, {
+    const dialogRef = this.dialog.open(ConfirmCancelComponent, {
       data: {
         title: 'Are you sure?',
         body: '',
@@ -210,7 +210,7 @@ export class CmsLocationComponent implements OnInit {
     });
     dialogRef.afterClosed()
       .subscribe( confirmed => {
-        if(confirmed) {
+        if (confirmed) {
           this.cms.deleteElement(this.directions.cms_element_id)
             .subscribe(res => {
               this.getDirectionFile();

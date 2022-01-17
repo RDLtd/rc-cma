@@ -2,7 +2,7 @@
   <div class="rc-layout-split-left">
     <div class="rc-layout-split-content">
       <div *ngIf="isLoaded" class="rc-join-welcome" @fadeAnimation>
-        <rc-logo [height]="'120px'"></rc-logo>
+        <app-rc-logo [height]="'120px'"></app-rc-logo>
 
         <!-- Free Period -->
         <ng-container *ngIf="referrer.type === 'self'">

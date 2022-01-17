@@ -7,7 +7,6 @@ import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { MemberService } from '../_services';
 import { CurrencyPipe } from '@angular/common';
-//import { LoadService } from '../common';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 export interface Product {
@@ -21,7 +20,7 @@ export interface Product {
 }
 
 @Component({
-  selector: 'rc-membership',
+  selector: 'app-rc-membership',
   templateUrl: './membership.component.html'
 })
 export class MembershipComponent implements OnInit {
@@ -51,7 +50,7 @@ export class MembershipComponent implements OnInit {
       brand: this.config.brand.name,
       terms: this.config.brand.downloads.terms,
       privacy: this.config.brand.downloads.privacy
-    }
+    };
   }
 
   ngOnInit(): void {
@@ -60,7 +59,7 @@ export class MembershipComponent implements OnInit {
       this.stripeSessionId = params['session_id'];
       // console.log('stripeSessionId', this.stripeSessionId);
     });
-    //this.loader.open();
+    // this.loader.open();
     this.getProducts().then(() => console.log('loaded'));
   }
 
@@ -95,9 +94,9 @@ export class MembershipComponent implements OnInit {
           duration: 15000,
           verticalPosition: 'top'
         });
-        //this.waiting = false;
+        // this.waiting = false;
       });
-  };
+  }
 
   async checkout(product)  {
     const newMember = JSON.parse(sessionStorage.getItem('rc_member_pending'));
@@ -105,14 +104,14 @@ export class MembershipComponent implements OnInit {
     await this.createCheckoutSession({
       priceId: this.products[product].product_stripe_price_id,
       // Allow for tax to be optional
-      taxId: !!this.products[product].product_tax_id? [this.products[product].product_tax_id] : [],
+      taxId: !!this.products[product].product_tax_id ? [this.products[product].product_tax_id] : [],
       successUrl: this.config.brand.products.success_url,
       cancelUrl: this.config.brand.products.cancel_url,
       email: newMember.email,
       company: this.config.brand.prefix
     })
       .then(data => {
-        console.log('MC Session', data)
+        console.log('MC Session', data);
         this.stripeSessionId = data['sessionId'];
       });
     const stripe = await this.stripePromise;

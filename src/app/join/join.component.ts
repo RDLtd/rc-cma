@@ -20,7 +20,7 @@ export interface PendingMember {
 }
 
 @Component({
-  selector: 'rc-join',
+  selector: 'app-rc-join',
   templateUrl: './join.component.html',
   animations: [fadeAnimation]
 })
@@ -164,7 +164,7 @@ export class JoinComponent implements OnInit {
           // Create free membership?
           if (this.referrer.freeMembership) {
             this.memberService.createFreeMembership(formData)
-              .then((res) => {
+              .then(() => {
               this.router.navigate(['/signin'], { queryParams: { member: 'new' } })
                 .then(() => {
                   this.load.close();

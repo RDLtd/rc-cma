@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
-  selector: 'rc-confirm-cancel',
+  selector: 'app-rc-confirm-cancel',
   templateUrl: './confirm-cancel.component.html'
 })
 export class ConfirmCancelComponent implements OnInit  {
