@@ -1,0 +1,156 @@
+<div class="rc-layout-split-container">
+  <div class="rc-layout-split-left">
+    Left
+  </div>
+  <div class="rc-layout-split-right">
+    <div class="rc-layout-split-content">
+      <div class="rc-join-form">
+
+        <h1>About you</h1>
+        <form [formGroup]="formMember" class="rc-form-grid">
+          <mat-form-field hideRequiredMarker>
+            <mat-label>{{ 'JOIN.labelFirstName' | translate }}</mat-label>
+            <input formControlName="firstName" matInput>
+            <mat-error align="end">{{ 'JOIN.invalidRequired' | translate }}</mat-error>
+          </mat-form-field>
+          <mat-form-field hideRequiredMarker>
+            <mat-label>{{ 'JOIN.labelLastName' | translate }}</mat-label>
+            <input formControlName="lastName" matInput>
+            <mat-error align="end">{{ 'JOIN.invalidRequired' | translate }}</mat-error>
+          </mat-form-field>
+
+          <mat-form-field hideRequiredMarker class="col-span-2">
+            <mat-label>{{ 'JOIN.labelJob' | translate }}</mat-label>
+            <mat-select formControlName="role">
+              <mat-option *ngFor="let job of ['job']" [value]="job">
+                {{ job }}
+              </mat-option>
+            </mat-select>
+            <mat-error align="end">{{ 'JOIN.invalidJobRequired' | translate }}</mat-error>
+          </mat-form-field>
+
+          <!-- Telephone -->
+          <mat-form-field hideRequiredMarker >
+            <mat-label>{{ 'JOIN.labelTel' | translate }}</mat-label>
+            <input matInput formControlName="telephone">
+            <mat-error align="end">{{ 'JOIN.invalidTelRequired' | translate }}</mat-error>
+          </mat-form-field>
+
+          <!-- Email -->
+          <mat-form-field hideRequiredMarker>
+            <mat-label>{{ 'JOIN.labelEmail' | translate }}</mat-label>
+            <input formControlName="email" matInput>
+            <mat-error align="end">{{ 'JOIN.invalidEmail' | translate }}</mat-error>
+          </mat-form-field>
+
+          <!-- Company -->
+
+          <mat-form-field hideRequiredMarker class="col-span-2">
+            <mat-label>{{ 'BPI.labelCompany' | translate }}</mat-label>
+            <input formControlName="bpiCompanyName" matInput>
+            <mat-error align="end">{{ 'JOIN.invalidRequired' | translate }}</mat-error>
+          </mat-form-field>
+
+          <mat-form-field hideRequiredMarker>
+            <mat-label>{{ 'BPI.labelDirectorFirstName' | translate }}</mat-label>
+            <input formControlName="bpiDirectorFirstName" matInput>
+            <mat-error align="end">{{ 'JOIN.invalidRequired' | translate }}</mat-error>
+          </mat-form-field>
+
+          <mat-form-field hideRequiredMarker>
+            <mat-label>{{ 'BPI.labelDirectorLastName' | translate }}</mat-label>
+            <input formControlName="bpiDirectorLastName" matInput>
+            <mat-error align="end">{{ 'JOIN.invalidRequired' | translate }}</mat-error>
+          </mat-form-field>
+
+          <!-- Address -->
+          <mat-form-field hideRequiredMarker class="col-span-2">
+            <mat-label>{{ 'BPI.labelStreet' | translate }}</mat-label>
+            <input matInput formControlName="bpiAddressStreet">
+            <mat-error align="end">{{ 'JOIN.invalidRequired' | translate }}</mat-error>
+          </mat-form-field>
+
+          <!-- City -->
+          <mat-form-field hideRequiredMarker >
+            <mat-label>{{ 'BPI.labelTown' | translate }}</mat-label>
+            <input matInput formControlName="bpiAddressCity">
+            <mat-error align="end">{{ 'JOIN.invalidRequired' | translate }}</mat-error>
+          </mat-form-field>
+
+          <!-- Region -->
+          <mat-form-field hideRequiredMarker >
+            <mat-label>{{ 'BPI.labelRegion' | translate }}</mat-label>
+            <input matInput formControlName="bpiAddressRegion">
+            <mat-error align="end">{{ 'JOIN.invalidRequired' | translate }}</mat-error>
+          </mat-form-field>
+
+          <!-- Dept. -->
+          <mat-form-field hideRequiredMarker >
+            <mat-label>{{ 'BPI.labelDepartment' | translate }}</mat-label>
+            <input matInput formControlName="bpiAddressDepartment">
+            <mat-error align="end">{{ 'JOIN.invalidRequired' | translate }}</mat-error>
+          </mat-form-field>
+
+          <!-- Postcode -->
+          <mat-form-field hideRequiredMarker >
+            <mat-label>{{ 'BPI.labelPostcode' | translate }}</mat-label>
+            <input matInput formControlName="bpiAddressPostCode">
+            <mat-error align="end">{{ 'JOIN.invalidRequired' | translate }}</mat-error>
+          </mat-form-field>
+
+          <!-- Siren -->
+          <mat-form-field hideRequiredMarker >
+            <mat-label>{{ 'BPI.labelSiren' | translate }}</mat-label>
+            <input matInput formControlName="bpiSiren">
+            <mat-error align="end">{{ 'JOIN.invalidRequired' | translate }}</mat-error>
+          </mat-form-field>
+
+          <!-- Siret -->
+          <mat-form-field hideRequiredMarker >
+            <mat-label>{{ 'BPI.labelSiret' | translate }}</mat-label>
+            <input matInput formControlName="bpiSiret">
+            <mat-error align="end">{{ 'JOIN.invalidRequired' | translate }}</mat-error>
+          </mat-form-field>
+
+          <mat-form-field hideRequiredMarker>
+            <mat-label>{{ 'BPI.labelTotalEmployees' | translate }}</mat-label>
+            <mat-select formControlName="bpiTotalEmployees">
+              <mat-option *ngFor="let item of bpiTotalEmployeesOptions" [value]="item">
+                {{ item }}
+              </mat-option>
+            </mat-select>
+            <mat-error align="end">{{ 'BPI.invalidSelectionRequired' | translate }}</mat-error>
+          </mat-form-field>
+
+          <mat-form-field hideRequiredMarker>
+            <mat-label>{{ 'BPI.labelBusinessSector' | translate }}</mat-label>
+            <mat-select formControlName="bpiBusinessSector">
+              <mat-option *ngFor="let item of bpiBusinessSectorsOptions" [value]="item">
+                {{ item }}
+              </mat-option>
+            </mat-select>
+            <mat-error align="end">{{ 'BPI.invalidSelectionRequired' | translate }}</mat-error>
+          </mat-form-field>
+
+          <mat-checkbox name="accepts_terms" formControlName="acceptRcTerms"  class="col-span-2">
+            <div class="rc-txt-small" markdown>
+              {{ 'JOIN.labelTerms' | translate: {
+              brand: 'RC',
+              toc: '',
+              privacy: ''
+            } }}</div>
+          </mat-checkbox>
+
+          <button
+            class="col-span-2"
+            type="submit"
+            mat-flat-button
+            color="accent">
+            Add Company Information
+          </button>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

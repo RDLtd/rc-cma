@@ -4,6 +4,22 @@
 		"company": "Cette application est conçue, créée et gérée par [Restaurant Developments Ltd]({{ web }}) &copy; {{ year }}.",
 		"version": "Version"
 	},
+	"BPI": {
+		"invalidSelectionRequired": "Veuillez sélectionner un article",
+		"labelBusinessSector": "Secteur d'activité ",
+		"labelCompany": "Raison sociale",
+		"labelDept": "Département",
+		"labelDirectorEmail": "e-mail du Dirigeant",
+		"labelDirectorFirstName": "Prénom du Dirigeant",
+		"labelDirectorLastName": "Nom du Dirigeant",
+		"labelPostcode": "CP",
+		"labelRegion": "Région",
+		"labelSiren": "SIREN",
+		"labelSiret": "SIRET",
+		"labelStreet": "Adresse postale",
+		"labelTotalEmployees": "Nombre de salariés",
+		"labelTown": "Ville"
+	},
 	"CMS": {
 		"DASHBOARD": {
 			"core": {

@@ -4,6 +4,22 @@
 		"company": "This application is designed, built and maintained by [Restaurant Developments Ltd]({{ web }}) &copy; {{ year }}.",
 		"version": "Version"
 	},
+	"BPI": {
+		"invalidSelectionRequired": "Please select an item",
+		"labelBusinessSector": "Business Sector",
+		"labelCompany": "Company Name",
+		"labelDept": "Department",
+		"labelDirectorEmail": "Director Email",
+		"labelDirectorFirstName": "First name",
+		"labelDirectorLastName": "Director Last Name",
+		"labelPostcode": "Post Code",
+		"labelRegion": "Region",
+		"labelSiren": "SIREN (French business code)",
+		"labelSiret": "SIRET",
+		"labelStreet": "Street Address",
+		"labelTotalEmployees": "Number of Employees",
+		"labelTown": "Town/City"
+	},
 	"CMS": {
 		"DASHBOARD": {
 			"core": {

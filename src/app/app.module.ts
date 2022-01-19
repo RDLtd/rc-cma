@@ -96,6 +96,7 @@ import { MembershipComponent } from './join/membership.component';
 import { HubComponent } from './hub/hub.component';
 import { LogoComponent } from './common/logo/logo.component';
 import { CurrencyPipe } from '@angular/common';
+import { BpiComponent } from './join/bpi.component';
 
 
 // AoT requires an exported function for factories
@@ -156,7 +157,8 @@ export function appInitializerFactory(translate: TranslateService) {
     CmsSpwLinksComponent,
     MembershipComponent,
     HubComponent,
-    LogoComponent
+    LogoComponent,
+    BpiComponent
   ],
   imports: [
     AngularMaterialModule,

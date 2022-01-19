@@ -226,7 +226,6 @@ a.mat-menu-item {text-decoration: none;}
     ul li {
       list-style: disc;
     }
-
   }
   .rc-layout-split-left {
     background-color: $rc-theme-primary;
@@ -335,6 +334,14 @@ a.mat-menu-item {text-decoration: none;}
     color: #fff;
     line-height: $circle;
     text-align: center;
+  }
+}
+form.rc-form-grid {
+  display: grid;
+  gap:8px;
+  grid-template-columns: 1fr 1fr;
+  .col-span-2 {
+    grid-column: span 2;
   }
 }
 @media screen and ( min-width : 768px ){
