@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-rc-bpi',
@@ -7,37 +8,21 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 })
 export class BpiComponent implements OnInit {
   formMember: FormGroup;
-  bpiBusinessSectorsOptions = [
-    'Agriculture',
-    'Artisanat',
-    'Automobile, machines, équipements',
-    'Bâtiment',
-    'Commerce',
-    'Information et communication',
-    'Associations',
-    'Education, formation, recherche',
-    'Energie, environnement',
-    'Etudes, conseil et ingénierie',
-    'Finance, assurance',
-    'Industrie',
-    'Arts, spectacles et activités récréatives',
-    'Santé, Sanitaire et Social',
-    'Télécoms, internet, informatique',
-    'Tourisme, hébergement, restauration',
-    'Transport et logistique',
-    'Services'
-  ];
-  bpiTotalEmployeesOptions = [
-    '0 salariés',
-    '1 à 4 salariés',
-    '5 à 9 salariés',
-    '10 à 49 salariés',
-    '50 à 250 salariés',
-    '> 250 salariés'
-  ];
+  formCompany: FormGroup;
+  formDirector: FormGroup;
+  formTerms: FormGroup;
+  formStage = 'member';
+  formData: any;
+  totalEmployees: [string];
+  roles: [string];
   constructor(
     private fb: FormBuilder,
-  ) { }
+    private translate: TranslateService
+  ) {
+    // Get array of translated jobs
+    this.roles = this.translate.instant('JOIN.jobRoles');
+    this.totalEmployees = this.translate.instant('BPI.listTotalEmployees');
+  }
 
   ngOnInit(): void {
    this.initForm();
@@ -47,23 +32,50 @@ export class BpiComponent implements OnInit {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       role: ['', Validators.required],
-      email: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
       telephone: ['', Validators.required],
-      acceptRcTerms: [false, Validators.requiredTrue],
+    });
+    this.formCompany = this.fb.group({
       bpiCompanyName: ['', Validators.required],
       bpiAddressStreet:  ['', Validators.required],
       bpiAddressCity:  ['', Validators.required],
-      bpiAddressRegion:  ['', Validators.required],
-      bpiAddressDepartment:  ['', Validators.required],
       bpiAddressPostCode:  ['', Validators.required],
-      bpiSiren:  ['', Validators.required],
-      bpiSiret:  ['', Validators.required],
+      bpiSiret:  ['', [Validators.required, Validators.minLength(14), Validators.maxLength(14)]],
+      bpiEmployees: ['', Validators.required]
+    });
+    this.formDirector = this.fb.group({
       bpiDirectorFirstName:  ['', Validators.required],
       bpiDirectorLastName:  ['', Validators.required],
-      bpiDirectorEmail:  ['', Validators.required],
-      bpiTotalEmployees: ['', Validators.required],
-      bpiBusinessSector: ['', Validators.required]
+      bpiDirectorEmail:  ['', [Validators.required, Validators.email]],
     });
+    this.formTerms = this.fb.group({
+      bpiDeclaration: [false, Validators.requiredTrue],
+      bpiAuthorisation: [false, Validators.requiredTrue],
+      bpiTerms: [false, Validators.requiredTrue],
+      riTerms: [false, Validators.requiredTrue]
+    });
+  }
+
+  next(form, tgt): void {
+  console.log(this.formMember.controls.role.value === this.translate.instant('JOIN.jobRoles.0'));
+    if (tgt === 'director' && this.formMember.controls.role.value === this.translate.instant('JOIN.jobRoles.0')) {
+      this.formStage = 'company';
+      return;
+    }
+    this.formStage = tgt;
+    console.log(form.value);
+  }
+  prev(tgt) {
+    this.formStage = tgt;
+  }
+  submit(): void {
+    this.formData = {
+      ...this.formMember.value,
+      ...this.formDirector.value,
+      ...this.formCompany.value,
+      ...this.formTerms.value
+    };
+    console.log(this.formData);
   }
 
 }

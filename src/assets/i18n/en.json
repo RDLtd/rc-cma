@@ -6,19 +6,24 @@
 	},
 	"BPI": {
 		"invalidSelectionRequired": "Please select an item",
-		"labelBusinessSector": "Business Sector",
+		"invalidSiret": "A valid 14 digit code is required",
 		"labelCompany": "Company Name",
-		"labelDept": "Department",
-		"labelDirectorEmail": "Director Email",
-		"labelDirectorFirstName": "First name",
-		"labelDirectorLastName": "Director Last Name",
+		"labelDirectorEmail": "Director's Email Address",
+		"labelDirectorFirstName": "Director's first name",
+		"labelDirectorLastName": "Director surname",
 		"labelPostcode": "Post Code",
-		"labelRegion": "Region",
-		"labelSiren": "SIREN (French business code)",
-		"labelSiret": "SIRET",
+		"labelSiret": "SIRET (business code)",
 		"labelStreet": "Street Address",
 		"labelTotalEmployees": "Number of Employees",
-		"labelTown": "Town/City"
+		"labelTown": "Town/City",
+		"listTotalEmployees": [
+			"0",
+			"1 - 4",
+			"5 - 9",
+			"10 - 49",
+			"50 - 250",
+			"More than 250"
+		]
 	},
 	"CMS": {
 		"DASHBOARD": {
