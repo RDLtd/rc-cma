@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {TranslateService} from '@ngx-translate/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-rc-bpi',
@@ -9,17 +9,17 @@ import {TranslateService} from '@ngx-translate/core';
 export class BpiComponent implements OnInit {
   formMember: FormGroup;
   formCompany: FormGroup;
-  formDirector: FormGroup;
   formTerms: FormGroup;
-  formStage = 'member';
-  formData: any;
+  formStage = 'terms';
+  bpiData: any;
   totalEmployees: [string];
   roles: [string];
+
   constructor(
     private fb: FormBuilder,
     private translate: TranslateService
   ) {
-    // Get array of translated jobs
+    // Get select items
     this.roles = this.translate.instant('JOIN.jobRoles');
     this.totalEmployees = this.translate.instant('BPI.listTotalEmployees');
   }
@@ -27,55 +27,64 @@ export class BpiComponent implements OnInit {
   ngOnInit(): void {
    this.initForm();
   }
+
   initForm(): void {
+    // user details
     this.formMember = this.fb.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      role: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      telephone: ['', Validators.required],
+      bpi_forename: ['', Validators.required],
+      bpi_surname: ['', Validators.required],
+      bpi_role: ['', Validators.required],
+      bpi_email: ['', [Validators.required, Validators.email]],
+    bpi_telephone: ['', Validators.required],
     });
+    // company details
     this.formCompany = this.fb.group({
-      bpiCompanyName: ['', Validators.required],
-      bpiAddressStreet:  ['', Validators.required],
-      bpiAddressCity:  ['', Validators.required],
-      bpiAddressPostCode:  ['', Validators.required],
-      bpiSiret:  ['', [Validators.required, Validators.minLength(14), Validators.maxLength(14)]],
-      bpiEmployees: ['', Validators.required]
+      bpi_company_name: ['', Validators.required],
+      bpi_company_address:  ['', Validators.required],
+      bpi_company_town:  ['', Validators.required],
+      bpi_company_post_code:  ['', Validators.required],
+      bpi_siret:  ['', [Validators.required, Validators.minLength(14), Validators.maxLength(14)]],
+      bpi_company_employees: ['', Validators.required],
+      bpi_director_forename:  ['', Validators.required],
+      bpi_director_surname:  ['', Validators.required],
+      bpi_director_email:  ['', [Validators.required, Validators.email]],
     });
-    this.formDirector = this.fb.group({
-      bpiDirectorFirstName:  ['', Validators.required],
-      bpiDirectorLastName:  ['', Validators.required],
-      bpiDirectorEmail:  ['', [Validators.required, Validators.email]],
-    });
+    // declarations
     this.formTerms = this.fb.group({
-      bpiDeclaration: [false, Validators.requiredTrue],
-      bpiAuthorisation: [false, Validators.requiredTrue],
-      bpiTerms: [false, Validators.requiredTrue],
-      riTerms: [false, Validators.requiredTrue]
+      bpi_company_qualifies: [false, Validators.requiredTrue],
+      bpi_data_correct: [false, Validators.requiredTrue],
+      bpi_terms_accepted: [false, Validators.requiredTrue]
     });
   }
 
+  // Go to next form stage
   next(form, tgt): void {
-  console.log(this.formMember.controls.role.value === this.translate.instant('JOIN.jobRoles.0'));
-    if (tgt === 'director' && this.formMember.controls.role.value === this.translate.instant('JOIN.jobRoles.0')) {
-      this.formStage = 'company';
-      return;
+    // If the user is owner/manager then prefill the director contact details
+    if (tgt === 'company' && this.formMember.controls.bpi_role.value === this.translate.instant('JOIN.jobRoles.0')) {
+      this.formCompany.patchValue({
+        bpi_director_forename:  this.formMember.controls.bpi_forename.value,
+        bpi_director_surname:  this.formMember.controls.bpi_surname.value,
+        bpi_director_email:  this.formMember.controls.bpi_email.value
+      });
     }
+    // Go to next stage
     this.formStage = tgt;
-    console.log(form.value);
   }
+
+  // Go to previous form stage
   prev(tgt) {
     this.formStage = tgt;
   }
+
+  // combine form data and submit
   submit(): void {
-    this.formData = {
+    this.bpiData = {
       ...this.formMember.value,
-      ...this.formDirector.value,
       ...this.formCompany.value,
-      ...this.formTerms.value
+      bpi_declaration: this.formTerms.valid
     };
-    console.log(this.formData);
+    // Make api call
+    console.log(this.bpiData);
   }
 
 }

@@ -12,7 +12,7 @@
 		"labelDirectorFirstName": "Prénom du Dirigeant",
 		"labelDirectorLastName": "Nom du Dirigeant",
 		"labelPostcode": "CP",
-		"labelSiret": "SIRET",
+		"labelSiret": "SIRET (sans espaces)",
 		"labelStreet": "Adresse postale",
 		"labelTotalEmployees": "Nombre de salariés",
 		"labelTown": "Ville",

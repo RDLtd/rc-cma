@@ -12,7 +12,7 @@
 		"labelDirectorFirstName": "Director's first name",
 		"labelDirectorLastName": "Director surname",
 		"labelPostcode": "Post Code",
-		"labelSiret": "SIRET (business code)",
+		"labelSiret": "SIRET (no spaces)",
 		"labelStreet": "Street Address",
 		"labelTotalEmployees": "Number of Employees",
 		"labelTown": "Town/City",

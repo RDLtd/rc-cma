@@ -236,7 +236,7 @@ a.mat-menu-item {text-decoration: none;}
     }
   }
   .rc-layout-split-content {
-    max-width: 480px;
+    max-width: 640px;
     margin: 0;
     .rc-logo {
       display: block;
@@ -318,6 +318,7 @@ a.mat-menu-item {text-decoration: none;}
     padding-left: $circle;
     margin: 24px 0;
     font: $rc-default-font-weight 18px/1.25 $rc-default-font;
+    transition: color .3s ease-out;
   }
   ol li:before {
     content: counter(rc-counter);
@@ -334,6 +335,14 @@ a.mat-menu-item {text-decoration: none;}
     color: #fff;
     line-height: $circle;
     text-align: center;
+    transition: background-color .3s ease-out;
+
+  }
+  li.rc-bolden {
+    color: black;
+  }
+  li.rc-bolden:before {
+    background: rgba(0, 0, 0, 1);
   }
 }
 form.rc-form-grid {
@@ -346,6 +355,7 @@ form.rc-form-grid {
   .rc-btn-prev {
     background-color: #ddd;
   }
+  .mat-checkbox-layout { margin-top: 0 !important;};
 }
 
 @media screen and ( min-width : 768px ){

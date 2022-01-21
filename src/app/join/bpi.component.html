@@ -1,6 +1,13 @@
 <div class="rc-layout-split-container">
   <div class="rc-layout-split-left">
-    Left
+    <rc-logo [height]="'64px'"></rc-logo>
+    <h1>BPI Registration</h1>
+    <p>Please complete the 3-stage registration, all fields are mandatory.</p>
+    <ol>
+      <li [class.rc-bolden]="formStage==='member'">Enter your contact details.</li>
+      <li [class.rc-bolden]="formStage==='company'">Provide us with the company details.</li>
+      <li [class.rc-bolden]="formStage==='terms'">Agree our terms and requirements.</li>
+    </ol>
   </div>
   <div class="rc-layout-split-right">
     <div class="rc-layout-split-content">
@@ -16,19 +23,19 @@
 
             <mat-form-field hideRequiredMarker>
               <mat-label>{{ 'JOIN.labelFirstName' | translate }}</mat-label>
-              <input formControlName="firstName" matInput>
+              <input formControlName="bpi_forename" matInput>
               <mat-error align="end">{{ 'JOIN.invalidRequired' | translate }}</mat-error>
             </mat-form-field>
 
             <mat-form-field hideRequiredMarker>
               <mat-label>{{ 'JOIN.labelLastName' | translate }}</mat-label>
-              <input formControlName="lastName" matInput>
+              <input formControlName="bpi_surname" matInput>
               <mat-error align="end">{{ 'JOIN.invalidRequired' | translate }}</mat-error>
             </mat-form-field>
 
             <mat-form-field hideRequiredMarker class="col-span-2">
               <mat-label>{{ 'JOIN.labelJob' | translate }}</mat-label>
-              <mat-select formControlName="role">
+              <mat-select formControlName="bpi_role">
                 <mat-option *ngFor="let role of roles" [value]="role">
                   {{ role }}
                 </mat-option>
@@ -39,14 +46,14 @@
             <!-- Telephone -->
             <mat-form-field hideRequiredMarker >
               <mat-label>{{ 'JOIN.labelTel' | translate }}</mat-label>
-              <input matInput formControlName="telephone">
+              <input matInput formControlName="bpi_telephone">
               <mat-error align="end">{{ 'JOIN.invalidTelRequired' | translate }}</mat-error>
             </mat-form-field>
 
             <!-- Email -->
             <mat-form-field hideRequiredMarker>
               <mat-label>{{ 'JOIN.labelEmail' | translate }}</mat-label>
-              <input formControlName="email" matInput>
+              <input formControlName="bpi_email" matInput>
               <mat-error align="end">{{ 'JOIN.invalidEmail' | translate }}</mat-error>
             </mat-form-field>
 
@@ -59,48 +66,31 @@
             mat-flat-button
             color="accent"
             [disabled]="!formMember.valid"
-            (click)="next(formMember, 'director')">NEXT</button>
-
-        </form>
-
-        <form class="rc-form-grid" [formGroup]="formDirector" *ngIf="formStage === 'director'">
-
-            <h1 class="col-span-2">Company Owner/Director</h1>
-
-          <!-- Company -->
-
-          <mat-form-field hideRequiredMarker>
-            <mat-label>{{ 'BPI.labelDirectorFirstName' | translate }}</mat-label>
-            <input formControlName="bpiDirectorFirstName" matInput>
-            <mat-error align="end">{{ 'JOIN.invalidRequired' | translate }}</mat-error>
-          </mat-form-field>
-
-          <mat-form-field hideRequiredMarker>
-            <mat-label>{{ 'BPI.labelDirectorLastName' | translate }}</mat-label>
-            <input formControlName="bpiDirectorLastName" matInput>
-            <mat-error align="end">{{ 'JOIN.invalidRequired' | translate }}</mat-error>
-          </mat-form-field>
-
-          <!-- Email -->
-          <mat-form-field hideRequiredMarker class="col-span-2">
-            <mat-label>{{ 'BPI.labelDirectorEmail' | translate }}</mat-label>
-            <input formControlName="bpiDirectorEmail" matInput>
-            <mat-error align="end">{{ 'JOIN.invalidEmail' | translate }}</mat-error>
-          </mat-form-field>
-
-          <button
-            class="rc-btn-prev"
-            mat-flat-button
-            color="primary"
-            (click)="prev('member')">BACK</button>
-
-          <button
-            mat-flat-button
-            color="accent"
-            [disabled]="!formDirector.valid"
             (click)="next(formMember, 'company')">NEXT</button>
 
         </form>
+
+<!--        <form class="rc-form-grid" [formGroup]="formDirector" *ngIf="formStage === 'director'">-->
+
+<!--            <h1 class="col-span-2">Company Owner/Director</h1>-->
+
+<!--          &lt;!&ndash; Company &ndash;&gt;-->
+
+
+
+<!--          <button-->
+<!--            class="rc-btn-prev"-->
+<!--            mat-flat-button-->
+<!--            color="primary"-->
+<!--            (click)="prev('member')">BACK</button>-->
+
+<!--          <button-->
+<!--            mat-flat-button-->
+<!--            color="accent"-->
+<!--            [disabled]="!formDirector.valid"-->
+<!--            (click)="next(formMember, 'company')">NEXT</button>-->
+
+<!--        </form>-->
 
           <form class="rc-form-grid" [formGroup]="formCompany" *ngIf="formStage === 'company'">
 
@@ -108,47 +98,67 @@
 
             <mat-form-field hideRequiredMarker class="col-span-2">
               <mat-label>{{ 'BPI.labelCompany' | translate }}</mat-label>
-              <input formControlName="bpiCompanyName" matInput>
+              <input formControlName="bpi_company_name" matInput>
               <mat-error align="end">{{ 'JOIN.invalidRequired' | translate }}</mat-error>
             </mat-form-field>
 
             <!-- Address -->
             <mat-form-field hideRequiredMarker class="col-span-2">
               <mat-label>{{ 'BPI.labelStreet' | translate }}</mat-label>
-              <input matInput formControlName="bpiAddressStreet">
+              <input matInput formControlName="bpi_company_address">
               <mat-error align="end">{{ 'JOIN.invalidRequired' | translate }}</mat-error>
             </mat-form-field>
 
             <!-- City -->
             <mat-form-field hideRequiredMarker >
               <mat-label>{{ 'BPI.labelTown' | translate }}</mat-label>
-              <input matInput formControlName="bpiAddressCity">
+              <input matInput formControlName="bpi_company_town">
               <mat-error align="end">{{ 'JOIN.invalidRequired' | translate }}</mat-error>
             </mat-form-field>
 
             <!-- Postcode -->
             <mat-form-field hideRequiredMarker >
               <mat-label>{{ 'BPI.labelPostcode' | translate }}</mat-label>
-              <input matInput formControlName="bpiAddressPostCode">
+              <input matInput formControlName="bpi_company_post_code">
               <mat-error align="end">{{ 'JOIN.invalidRequired' | translate }}</mat-error>
             </mat-form-field>
 
             <!-- Siret -->
             <mat-form-field hideRequiredMarker >
               <mat-label>{{ 'BPI.labelSiret' | translate }}</mat-label>
-              <input matInput formControlName="bpiSiret">
+              <input matInput formControlName="bpi_siret">
               <mat-error align="end">{{ 'BPI.invalidSiret' | translate }}</mat-error>
             </mat-form-field>
 
             <mat-form-field hideRequiredMarker>
               <mat-label>{{ 'BPI.labelTotalEmployees' | translate }}</mat-label>
-              <mat-select formControlName="bpiEmployees">
+              <mat-select formControlName="bpi_company_employees">
                 <mat-option *ngFor="let item of totalEmployees" [value]="item">
                   {{ item }}
                 </mat-option>
               </mat-select>
               <mat-error align="end">{{ 'BPI.invalidSelectionRequired' | translate }}</mat-error>
             </mat-form-field>
+
+            <mat-form-field hideRequiredMarker>
+              <mat-label>{{ 'BPI.labelDirectorFirstName' | translate }}</mat-label>
+              <input formControlName="bpi_director_forename" matInput>
+              <mat-error align="end">{{ 'JOIN.invalidRequired' | translate }}</mat-error>
+            </mat-form-field>
+
+            <mat-form-field hideRequiredMarker>
+              <mat-label>{{ 'BPI.labelDirectorLastName' | translate }}</mat-label>
+              <input formControlName="bpi_director_surname" matInput>
+              <mat-error align="end">{{ 'JOIN.invalidRequired' | translate }}</mat-error>
+            </mat-form-field>
+
+            <!-- Email -->
+            <mat-form-field hideRequiredMarker class="col-span-2">
+              <mat-label>{{ 'BPI.labelDirectorEmail' | translate }}</mat-label>
+              <input formControlName="bpi_director_email" matInput>
+              <mat-error align="end">{{ 'JOIN.invalidEmail' | translate }}</mat-error>
+            </mat-form-field>
+
 
             <button
               class="rc-btn-prev"
@@ -171,9 +181,9 @@
 
             <h1 class="col-span-2">Declarations</h1>
 
-          <mat-checkbox formControlName="bpiDeclaration"  class="col-span-2">
+          <mat-checkbox formControlName="bpi_company_qualifies"  class="col-span-2">
             <div class="rc-txt-small" markdown ngPreserveWhitespaces>
-              Je déclare que l'entreprise à laquelle j'appartiens :
+              **Je déclare que** l'entreprise à laquelle j'appartiens:
               - Existe légalement depuis plus de 2 ans en France
               - A un chiffre d'affaires supérieur à 20 000€ (dernier exercice connu)
               - Est à jour de ses obligations fiscales et sociales
@@ -183,35 +193,26 @@
             </div>
           </mat-checkbox>
 
-          <mat-checkbox formControlName="bpiAuthorisation"  class="col-span-2">
+          <mat-checkbox formControlName="bpi_terms_accepted"  class="col-span-2">
             <div class="rc-txt-small" markdown ngPreserveWhitespaces>
-              J'autorise Bpifrance et tout prestataire de Bpifrance à réaliser des contrôles sur la validité des informations listées ci-dessus.
+              **J'autorise Bpifrance** et tout prestataire de Bpifrance à réaliser des contrôles sur la validité des informations listées ci-dessus and I accept the RI Terms of membership'
             </div>
           </mat-checkbox>
 
-          <mat-checkbox formControlName="bpiTerms"  class="col-span-2">
+          <mat-checkbox formControlName="bpi_data_correct"  class="col-span-2">
             <div class="rc-txt-small" markdown ngPreserveWhitespaces>
-              J'atteste avoir connaissance que toute déclaration inexacte quant aux éléments susvisés :
+              **J'atteste avoir connaissance** que toute déclaration inexacte quant aux éléments susvisés :
               - Entraînerait la résiliation automatique avec effet immédiat du présent accord entre la société et l'Accompagnateur ;
               - Serait de nature à engager la responsabilité de la société ;
               - Impliquerait l'obligation pour la société de verser à l'Accompagnateur le montant total de l'accompagnement, et ce, sans sommation ni mise en demeure ou formalité judiciaire préalable, quinze (15) jours après l'envoi d'une lettre recommandée avec accusé de réception.
             </div>
           </mat-checkbox>
 
-          <mat-checkbox formControlName="riTerms"  class="col-span-2">
-            <div class="rc-txt-small" markdown>
-              {{ 'JOIN.labelTerms' | translate: {
-              brand: 'RC',
-              toc: '',
-              privacy: ''
-            } }}</div>
-          </mat-checkbox>
-
             <button
               class="rc-btn-prev"
               mat-flat-button
               color="primary"
-              (click)="prev('member')">BACK</button>
+              (click)="prev('company')">BACK</button>
 
             <button
               mat-flat-button
