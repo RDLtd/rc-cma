@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
+import {BpiService} from '../_services/bpi.service';
 
 @Component({
   selector: 'app-rc-bpi',
@@ -17,7 +18,8 @@ export class BpiComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private bpiService: BpiService
   ) {
     // Get select items
     this.roles = this.translate.instant('JOIN.jobRoles');
@@ -84,7 +86,7 @@ export class BpiComponent implements OnInit {
       bpi_declaration: this.formTerms.valid
     };
     // Make api call
-    console.log(this.bpiData);
+    this.bpiService.createBpiAccount(this.bpiData);
   }
 
 }
