@@ -11,7 +11,7 @@ export class BpiComponent implements OnInit {
   formMember: FormGroup;
   formCompany: FormGroup;
   formTerms: FormGroup;
-  formStage = 'terms';
+  formStage = 'member';
   bpiData: any;
   totalEmployees: [string];
   roles: [string];
