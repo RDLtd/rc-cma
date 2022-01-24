@@ -12,8 +12,7 @@
   <div class="rc-layout-split-right">
     <div class="rc-layout-split-content">
       <div class="rc-join-form">
-
-        <!-- Trainee -->
+        <!-- User -->
         <form
           [formGroup]="formMember"
           class="rc-form-grid"
@@ -24,13 +23,13 @@
             <mat-form-field hideRequiredMarker>
               <mat-label>{{ 'JOIN.labelFirstName' | translate }}</mat-label>
               <input formControlName="bpi_forename" matInput>
-              <mat-error align="end">{{ 'JOIN.invalidRequired' | translate }}</mat-error>
+              <mat-error>{{ 'JOIN.invalidRequired' | translate }}</mat-error>
             </mat-form-field>
 
             <mat-form-field hideRequiredMarker>
               <mat-label>{{ 'JOIN.labelLastName' | translate }}</mat-label>
               <input formControlName="bpi_surname" matInput>
-              <mat-error align="end">{{ 'JOIN.invalidRequired' | translate }}</mat-error>
+              <mat-error>{{ 'JOIN.invalidRequired' | translate }}</mat-error>
             </mat-form-field>
 
             <mat-form-field hideRequiredMarker class="col-span-2">
@@ -40,94 +39,69 @@
                   {{ role }}
                 </mat-option>
               </mat-select>
-              <mat-error align="end">{{ 'JOIN.invalidJobRequired' | translate }}</mat-error>
+              <mat-error>{{ 'JOIN.invalidJobRequired' | translate }}</mat-error>
             </mat-form-field>
 
             <!-- Telephone -->
             <mat-form-field hideRequiredMarker >
               <mat-label>{{ 'JOIN.labelTel' | translate }}</mat-label>
               <input matInput formControlName="bpi_telephone">
-              <mat-error align="end">{{ 'JOIN.invalidTelRequired' | translate }}</mat-error>
+              <mat-error>{{ 'JOIN.invalidTelRequired' | translate }}</mat-error>
             </mat-form-field>
 
             <!-- Email -->
             <mat-form-field hideRequiredMarker>
               <mat-label>{{ 'JOIN.labelEmail' | translate }}</mat-label>
               <input formControlName="bpi_email" matInput>
-              <mat-error align="end">{{ 'JOIN.invalidEmail' | translate }}</mat-error>
+              <mat-error>{{ 'JOIN.invalidEmail' | translate }}</mat-error>
             </mat-form-field>
 
           <button
-            mat-flat-button
             type="button"
-            disabled>BACK</button>
-
-          <button
             mat-flat-button
+            class="col-span-2"
             color="accent"
             [disabled]="!formMember.valid"
             (click)="next(formMember, 'company')">NEXT</button>
 
         </form>
-
-<!--        <form class="rc-form-grid" [formGroup]="formDirector" *ngIf="formStage === 'director'">-->
-
-<!--            <h1 class="col-span-2">Company Owner/Director</h1>-->
-
-<!--          &lt;!&ndash; Company &ndash;&gt;-->
-
-
-
-<!--          <button-->
-<!--            class="rc-btn-prev"-->
-<!--            mat-flat-button-->
-<!--            color="primary"-->
-<!--            (click)="prev('member')">BACK</button>-->
-
-<!--          <button-->
-<!--            mat-flat-button-->
-<!--            color="accent"-->
-<!--            [disabled]="!formDirector.valid"-->
-<!--            (click)="next(formMember, 'company')">NEXT</button>-->
-
-<!--        </form>-->
-
-          <form class="rc-form-grid" [formGroup]="formCompany" *ngIf="formStage === 'company'">
+        <!-- Business -->
+        <form class="rc-form-grid" [formGroup]="formCompany" *ngIf="formStage === 'company'">
 
             <h1 class="col-span-2">Business   Information</h1>
 
             <mat-form-field hideRequiredMarker class="col-span-2">
               <mat-label>{{ 'BPI.labelCompany' | translate }}</mat-label>
               <input formControlName="bpi_company_name" matInput>
-              <mat-error align="end">{{ 'JOIN.invalidRequired' | translate }}</mat-error>
+              <mat-error>{{ 'JOIN.invalidRequired' | translate }}</mat-error>
             </mat-form-field>
 
             <!-- Address -->
             <mat-form-field hideRequiredMarker class="col-span-2">
               <mat-label>{{ 'BPI.labelStreet' | translate }}</mat-label>
               <input matInput formControlName="bpi_company_address">
-              <mat-error align="end">{{ 'JOIN.invalidRequired' | translate }}</mat-error>
+              <mat-error>{{ 'JOIN.invalidRequired' | translate }}</mat-error>
             </mat-form-field>
 
             <!-- City -->
             <mat-form-field hideRequiredMarker >
               <mat-label>{{ 'BPI.labelTown' | translate }}</mat-label>
               <input matInput formControlName="bpi_company_town">
-              <mat-error align="end">{{ 'JOIN.invalidRequired' | translate }}</mat-error>
+              <mat-error>{{ 'JOIN.invalidRequired' | translate }}</mat-error>
             </mat-form-field>
 
             <!-- Postcode -->
             <mat-form-field hideRequiredMarker >
               <mat-label>{{ 'BPI.labelPostcode' | translate }}</mat-label>
               <input matInput formControlName="bpi_company_post_code">
-              <mat-error align="end">{{ 'JOIN.invalidRequired' | translate }}</mat-error>
+              <mat-error>{{ 'JOIN.invalidRequired' | translate }}</mat-error>
             </mat-form-field>
 
             <!-- Siret -->
             <mat-form-field hideRequiredMarker >
               <mat-label>{{ 'BPI.labelSiret' | translate }}</mat-label>
               <input matInput formControlName="bpi_siret">
-              <mat-error align="end">{{ 'BPI.invalidSiret' | translate }}</mat-error>
+              <mat-error>{{ 'BPI.invalidSiret' | translate }}</mat-error>
             </mat-form-field>
 
             <mat-form-field hideRequiredMarker>
@@ -137,30 +111,31 @@
                   {{ item }}
                 </mat-option>
               </mat-select>
-              <mat-error align="end">{{ 'BPI.invalidSelectionRequired' | translate }}</mat-error>
+              <mat-error>{{ 'BPI.invalidSelectionRequired' | translate }}</mat-error>
             </mat-form-field>
 
             <mat-form-field hideRequiredMarker>
               <mat-label>{{ 'BPI.labelDirectorFirstName' | translate }}</mat-label>
               <input formControlName="bpi_director_forename" matInput>
-              <mat-error align="end">{{ 'JOIN.invalidRequired' | translate }}</mat-error>
+              <mat-error>{{ 'JOIN.invalidRequired' | translate }}</mat-error>
             </mat-form-field>
 
             <mat-form-field hideRequiredMarker>
               <mat-label>{{ 'BPI.labelDirectorLastName' | translate }}</mat-label>
               <input formControlName="bpi_director_surname" matInput>
-              <mat-error align="end">{{ 'JOIN.invalidRequired' | translate }}</mat-error>
+              <mat-error>{{ 'JOIN.invalidRequired' | translate }}</mat-error>
             </mat-form-field>
 
             <!-- Email -->
             <mat-form-field hideRequiredMarker class="col-span-2">
               <mat-label>{{ 'BPI.labelDirectorEmail' | translate }}</mat-label>
               <input formControlName="bpi_director_email" matInput>
-              <mat-error align="end">{{ 'JOIN.invalidEmail' | translate }}</mat-error>
+              <mat-error>{{ 'JOIN.invalidEmail' | translate }}</mat-error>
             </mat-form-field>
 
 
             <button
+              type="button"
               class="rc-btn-prev"
               mat-flat-button
               color="primary"
@@ -174,12 +149,10 @@
               (click)="next(formCompany, 'terms')">NEXT</button>
 
           </form>
+        <!-- Declarations -->
+        <form class="rc-form-grid" [formGroup]="formTerms" *ngIf="formStage === 'terms'">
 
-
-
-          <form class="rc-form-grid" [formGroup]="formTerms" *ngIf="formStage === 'terms'">
-
-            <h1 class="col-span-2">Declarations</h1>
+          <h1 class="col-span-2">Declarations</h1>
 
           <mat-checkbox formControlName="bpi_company_qualifies"  class="col-span-2">
             <div class="rc-txt-small" markdown ngPreserveWhitespaces>
@@ -209,20 +182,24 @@
           </mat-checkbox>
 
             <button
+              type="button"
               class="rc-btn-prev"
               mat-flat-button
               color="primary"
+              [disabled]="isSubmitting"
               (click)="prev('company')">BACK</button>
 
             <button
               mat-flat-button
               type="button"
               color="accent"
-              [disabled]="!formTerms.valid"
-              (click)="submit()">SUBMIT</button>
+              [disabled]="!formTerms.valid || isSubmitting"
+              (click)="submit($event)">
+              <span *ngIf="isSubmitting">SENDING...</span>
+              <span *ngIf="!isSubmitting">SUBMIT</span>
+            </button>
 
           </form>
-
       </div>
     </div>
   </div>

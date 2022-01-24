@@ -1,8 +1,13 @@
-
 // The request body is provided in place
 POST http://localhost:4000/bpi/createbpi
 Content-Type: application/json Cookie: key=first-value
 
-{ "bpi" : "", "userCode": "jb",  "token": "Bearer 234242423wdfsdvdsfsdrfg34tdfverge" }
-
 ###
+
+### Send request with dynamic variables in request's body
+POST http://localhost:4000/bpi/createbpi
+Content-Type: application/json
+
+{
+  "testProperty": true
+}

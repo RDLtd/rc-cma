@@ -34,7 +34,8 @@ import {
   RestaurantService,
   CMSService,
   PublicService,
-  AnalyticsService
+  AnalyticsService,
+  BpiService
 } from './_services';
 
 import {
@@ -200,6 +201,7 @@ export function appInitializerFactory(translate: TranslateService) {
     CMSService,
     CmsLocalService,
     HelpService,
+    BpiService,
     AnalyticsService,
     PublicService,
     CmsPreviewComponent,

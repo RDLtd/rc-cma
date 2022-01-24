@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
-import {BpiService} from '../_services/bpi.service';
+import { BpiService } from '../_services';
 
 @Component({
   selector: 'app-rc-bpi',
   templateUrl: './bpi.component.html'
 })
+
 export class BpiComponent implements OnInit {
   formMember: FormGroup;
   formCompany: FormGroup;
@@ -15,6 +16,7 @@ export class BpiComponent implements OnInit {
   bpiData: any;
   totalEmployees: [string];
   roles: [string];
+  isSubmitting = false;
 
   constructor(
     private fb: FormBuilder,
@@ -79,14 +81,19 @@ export class BpiComponent implements OnInit {
   }
 
   // combine form data and submit
-  submit(): void {
+  submit(e): void {
+    e.preventDefault();
+    this.isSubmitting = true;
     this.bpiData = {
       ...this.formMember.value,
       ...this.formCompany.value,
       bpi_declaration: this.formTerms.valid
     };
     // Make api call
-    this.bpiService.createBpiAccount(this.bpiData);
+    this.bpiService.createBpiAccount(this.bpiData)
+      .subscribe((res) => {
+        console.log(res);
+      });
   }
 
 }
