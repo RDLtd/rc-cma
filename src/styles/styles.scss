@@ -176,6 +176,7 @@ and (-webkit-min-device-pixel-ratio: 1) {}
   border-width: 4px;
   border-color: $rc-theme-black;
 }
+.mat-error { text-align: right; }
 .mat-radio-label,
 .mat-form-field-prefix { margin-right: 8px; }
 .mat-form-field { line-height: 1.4; }
