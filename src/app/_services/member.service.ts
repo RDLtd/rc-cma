@@ -499,7 +499,7 @@ export class MemberService {
   // }
 
   createPending(pending: any) {
-    // console.log('MS PENDING', pending);
+    console.log('MS PENDING', pending);
     return this.http.post(this.config.apiUrl + '/members/create_pending',
       {
         pending: pending,

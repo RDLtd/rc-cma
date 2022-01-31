@@ -345,6 +345,9 @@ a.mat-menu-item {text-decoration: none;}
   li.rc-bolden:before {
     background: rgba(0, 0, 0, 1);
   }
+  ul li {
+    margin-bottom: .25rem;
+  }
 }
 form.rc-form-grid {
   display: grid;

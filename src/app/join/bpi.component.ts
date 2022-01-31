@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
-import { BpiService } from '../_services';
+import { BpiService, MemberService } from '../_services';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-rc-bpi',
@@ -9,6 +10,7 @@ import { BpiService } from '../_services';
 })
 
 export class BpiComponent implements OnInit {
+  formPending: FormGroup;
   formMember: FormGroup;
   formCompany: FormGroup;
   formTerms: FormGroup;
@@ -17,29 +19,49 @@ export class BpiComponent implements OnInit {
   totalEmployees: [string];
   roles: [string];
   isSubmitting = false;
+  isRegistered = false;
+  isPreRegistration = false;
+  referrers: [string];
 
   constructor(
     private fb: FormBuilder,
     private translate: TranslateService,
-    private bpiService: BpiService
+    private bpiService: BpiService,
+    private route: ActivatedRoute,
+    private memberService: MemberService
   ) {
     // Get select items
     this.roles = this.translate.instant('JOIN.jobRoles');
+    this.referrers = this.translate.instant('JOIN.referrers');
     this.totalEmployees = this.translate.instant('BPI.listTotalEmployees');
   }
 
   ngOnInit(): void {
-   this.initForm();
+    if (this.route.snapshot.params.code === 'register') {
+      this.isPreRegistration = true;
+    }
+    this.initForm();
   }
 
   initForm(): void {
+    // user details
+    this.formPending = this.fb.group({
+      first_name: ['', Validators.required],
+      last_name: ['', Validators.required],
+      job: [''], // as Restaurant
+      email: ['', [Validators.required, Validators.email]],
+      telephone: ['', Validators.required],
+      gdpr: [false, Validators.requiredTrue],
+      status: [''], // as Referrer
+      city: [''] // as Referrer
+    });
     // user details
     this.formMember = this.fb.group({
       bpi_forename: ['', Validators.required],
       bpi_surname: ['', Validators.required],
       bpi_role: ['', Validators.required],
       bpi_email: ['', [Validators.required, Validators.email]],
-    bpi_telephone: ['', Validators.required],
+      bpi_telephone: ['', Validators.required],
     });
     // company details
     this.formCompany = this.fb.group({
@@ -80,6 +102,18 @@ export class BpiComponent implements OnInit {
     this.formStage = tgt;
   }
 
+  registerInterest(): void {
+    this.formPending.controls.job.patchValue(`${this.formPending.controls.job.value}, ${this.formPending.controls.city.value}` );
+    this.isRegistered = true;
+    console.log(this.formPending.value);
+    this.memberService.createPending(this.formPending.value)
+      .toPromise()
+      .then(res => {
+        this.isRegistered = true;
+        console.log(`Saved Pending = ${res}`);
+      });
+  }
+
   // combine form data and submit
   submit(e): void {
     e.preventDefault();
@@ -93,6 +127,11 @@ export class BpiComponent implements OnInit {
     this.bpiService.createBpiAccount(this.bpiData)
       .subscribe((res) => {
         console.log(res);
+        // log user into training platform?
+        setTimeout(() => {
+          this.isRegistered = true;
+          this.formStage = 'complete';
+        }, 500);
       });
   }
 

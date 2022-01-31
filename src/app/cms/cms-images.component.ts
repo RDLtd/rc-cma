@@ -12,7 +12,7 @@ import { insertAnimation } from '../shared/animations';
 
 
 @Component({
-  selector: 'rc-cms-images',
+  selector: 'app-rc-cms-images',
   templateUrl: './cms-images.component.html',
   animations: [insertAnimation]
 })
@@ -21,7 +21,7 @@ export class CmsImagesComponent implements OnInit {
 
   restaurant: Restaurant;
   cmsImages: any;
-  showLoader: boolean = false;
+  showLoader = false;
 
   constructor(
     private cmsLocalService: CmsLocalService,
@@ -52,7 +52,7 @@ export class CmsImagesComponent implements OnInit {
     e.stopPropagation();
   }
 
-  getImages() {
+  getImages(): any {
     this.cms.getElementClass(this.restaurant.restaurant_id, 'Image', 'N')
       .subscribe(data => {
           this.cmsImages = data['elements'];
@@ -77,7 +77,7 @@ export class CmsImagesComponent implements OnInit {
     let msg: string;
     img.cms_element_active = !img.cms_element_active;
     img.cms_element_active ?
-      msg = this.translate.instant('CMS.IMAGES.msgNowActive', { img: img.cms_element_id }):
+      msg = this.translate.instant('CMS.IMAGES.msgNowActive', { img: img.cms_element_id }) :
       msg = this.translate.instant('CMS.IMAGES.msgNowOffline', { img: img.cms_element_id });
 
     this.cms.updateElement(img).subscribe(
@@ -98,7 +98,7 @@ export class CmsImagesComponent implements OnInit {
   }
 
   viewImage(img): void {
-    let dialogRef = this.dialog.open(CmsImageDialogComponent);
+    const dialogRef = this.dialog.open(CmsImageDialogComponent);
     dialogRef.componentInstance.image = img;
     dialogRef.componentInstance.clImgPath = img.cms_element_image_ref;
     dialogRef.componentInstance.cmsImages = this.cmsImages;
@@ -108,7 +108,7 @@ export class CmsImagesComponent implements OnInit {
 
   addImage() {
 
-    let dialogRef = this.dialog.open(CmsFileUploadComponent, {
+    const dialogRef = this.dialog.open(CmsFileUploadComponent, {
       data: {
         type: 'image',
         tgtObject: this.cmsImages,
@@ -126,7 +126,7 @@ export class CmsImagesComponent implements OnInit {
 
   deleteImage(img) {
 
-    let dialogRef = this.dialog.open(ConfirmCancelComponent, {
+    const dialogRef = this.dialog.open(ConfirmCancelComponent, {
       data: {
         body:
           this.translate.instant('CMS.IMAGES.msgConfirmDelete',
@@ -138,9 +138,9 @@ export class CmsImagesComponent implements OnInit {
 
       if (confirmed) {
         this.cms.deleteElement(img.cms_element_id)
-          .subscribe(res => {
-            // console.log(res);
-              let arrLength = this.cmsImages.length, obj;
+          .subscribe(() => {
+              const arrLength = this.cmsImages.length;
+              let obj;
               for (let i = 0; i < arrLength; i++) {
                 obj = this.cmsImages[i];
                 if (obj.cms_element_id === img.cms_element_id)  {
