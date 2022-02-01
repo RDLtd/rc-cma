@@ -4,7 +4,7 @@ import { CmsLocalService } from './cms-local.service';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
-  selector: 'rc-cms-image-dialog',
+  selector: 'app-rc-cms-image-dialog',
   templateUrl: './cms-image-dialog.component.html',
   providers: [CmsLocalService]
 })
@@ -28,9 +28,9 @@ export class CmsImageDialogComponent implements OnInit {
   toggleImageStatus(img): void {
     let msg;
     img.cms_element_active = !img.cms_element_active;
-    img.cms_element_active ?
-      msg = this.translate.instant('CMS.IMAGES.msgNowActive', { img: img.cms_element_id }):
-      msg = this.translate.instant('CMS.IMAGES.msgNowOffline', { img: img.cms_element_id });
+    img.cms_element_active
+      ? msg = this.translate.instant('CMS.IMAGES.msgNowActive', { img: img.cms_element_id })
+      : msg = this.translate.instant('CMS.IMAGES.msgNowOffline', { img: img.cms_element_id });
 
     this.cms.updateElement(img).subscribe(
       () => {
@@ -49,8 +49,8 @@ export class CmsImageDialogComponent implements OnInit {
 
 
   setDefaultImage(img) {
-    let imgs = this.cmsImages;
-    let len = imgs.length;
+    const imgs = this.cmsImages;
+    const len = imgs.length;
     // reset current default
     for (let i = 0; i < len; i++) {
       if (imgs[i].cms_element_default) {
@@ -66,7 +66,7 @@ export class CmsImageDialogComponent implements OnInit {
       () => {
         img.cms_element_default = 1;
         this.cmsLocalService.dspSnackbar(
-          this.translate.instant('CMS.IMAGES.msgDefaultUpdated'), null, 3)
+          this.translate.instant('CMS.IMAGES.msgDefaultUpdated'), null, 3);
       },
       error => {
         console.log(error);

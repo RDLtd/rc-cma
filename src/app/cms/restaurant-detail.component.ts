@@ -5,7 +5,7 @@ import { RestaurantService } from '../_services';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
-  selector: 'rc-restaurant-detail',
+  selector: 'app-rc-restaurant-detail',
   templateUrl: './restaurant-detail.component.html'
 })
 

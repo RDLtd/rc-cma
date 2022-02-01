@@ -19,7 +19,7 @@ export class HelpService {
     const lang = localStorage.getItem('rd_language');
 
     // Content to display
-    let mdContentPath = `/assets/helpfiles/${lang}/${topic}.md`;
+    const mdContentPath = `/assets/helpfiles/${lang}/${topic}.md`;
     console.log(mdContentPath);
 
     // Support button
@@ -38,9 +38,9 @@ export class HelpService {
       path: mdContentPath,
       btnLabel: btnLabel,
       restaurant: restaurant,
-    }
+    };
 
-    let dialogRef = this.dialog.open(HelpComponent, dialogConfig);
+    const dialogRef = this.dialog.open(HelpComponent, dialogConfig);
 
     // Record GA Event
     this.ga.sendEvent('Help', topic, 'Open Help Dialog');

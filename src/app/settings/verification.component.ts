@@ -5,7 +5,7 @@ import { CmsLocalService } from '../cms';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
-  selector: 'rc-verification',
+  selector: 'app-rc-verification',
   templateUrl: './verification.component.html'
 })
 
@@ -17,7 +17,7 @@ export class VerificationComponent implements OnInit {
   originalEmail: string;
   codeRequested = false;
 
-  isSubmitting: boolean = false;
+  isSubmitting = false;
 
   constructor(
     private cmsService: CMSService,

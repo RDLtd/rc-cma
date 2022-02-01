@@ -2,7 +2,7 @@
 
 <!--  WELCOME NEW MEMBER-->
   <ng-container *ngIf="newMember">
-    <rc-logo [height]="'64px'" [version]="'primary'"></rc-logo>
+    <app-rc-logo [height]="'64px'" [version]="'primary'"></app-rc-logo>
     <mat-dialog-content>
       <div markdown [data]="'MESSAGES.welcomeNewMember' | translate" ngPreserveWhitespaces></div>
     </mat-dialog-content>

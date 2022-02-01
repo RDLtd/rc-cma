@@ -5,14 +5,14 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
-  selector: 'rc-password',
+  selector: 'app-rc-password',
   templateUrl: './password.component.html'
 })
 
 export class PasswordComponent implements OnInit {
 
   @ViewChild('pwdUpdateForm', {static: true}) loginForm: NgForm;
-  isSubmitting: boolean = false;
+  isSubmitting = false;
   member: any;
   dialog: any;
 
