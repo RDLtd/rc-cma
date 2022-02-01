@@ -7,7 +7,7 @@ import { HelpService, LoadService } from '../common';
 import { insertAnimation } from '../shared/animations';
 
 @Component({
-  selector: 'rc-cms-hours',
+  selector: 'app-rc-cms-hours',
   templateUrl: './cms-hours.component.html',
   animations: [insertAnimation]
 })
@@ -16,14 +16,14 @@ export class CmsHoursComponent implements OnInit {
 
   restaurant: Restaurant;
   openingTimes: any = [];
-  openingTimesNotes: string = '';
+  openingTimesNotes = '';
   display_dow: any = [];
   dataChanged = false;
   sessionNull = { open: '00:00', close: '00:00' };
   sessionDefault = { open: '08:00', close: '23:00' };
   lastSession = this.sessionDefault;
   maxSessions = 3;
-  showLoader: boolean = false;
+  showLoader = false;
 
   constructor(
     private cmsLocalService: CmsLocalService,
@@ -99,7 +99,7 @@ export class CmsHoursComponent implements OnInit {
   confirmNavigation() {
     if (this.dataChanged) {
       return this.cmsLocalService.confirmNavigation();
-    }else {
+    } else {
       return true;
     }
   }
@@ -111,7 +111,7 @@ export class CmsHoursComponent implements OnInit {
 
   toggleSession(index): void {
 
-    let t = this.openingTimes[index];
+    const t = this.openingTimes[index];
 
     if (t.closed) {
 
@@ -131,7 +131,7 @@ export class CmsHoursComponent implements OnInit {
 
   addSession(index): void {
 
-    let t = this.openingTimes[index];
+    const t = this.openingTimes[index];
 
     // Open with defaults
     if (t.closed) {
@@ -145,7 +145,7 @@ export class CmsHoursComponent implements OnInit {
     } else {
 
       // Add new session
-      let ls = t.sessions[t.sessions.length - 1];
+      const ls = t.sessions[t.sessions.length - 1];
       t.sessions.push({ open: ls.close, close: ls.close });
 
     }
@@ -162,7 +162,7 @@ export class CmsHoursComponent implements OnInit {
 
   removeSession(index, jndex): void {
 
-    let t = this.openingTimes[index];
+    const t = this.openingTimes[index];
 
     // if this is the last one, then close the session
     if (t.sessions.length === 1) {
@@ -191,7 +191,7 @@ export class CmsHoursComponent implements OnInit {
   }
 
   updateData(): void {
-    //console.log('OT: ', this.openingTimes, this.openingTimesNotes);
+    // console.log('OT: ', this.openingTimes, this.openingTimesNotes);
     this.cms.updateTimes(this.openingTimes, this.openingTimesNotes).subscribe(
       () => {
         this.cmsLocalService.dspSnackbar(this.translate.instant(

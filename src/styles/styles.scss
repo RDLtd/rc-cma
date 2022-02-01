@@ -1106,7 +1106,7 @@ form.rc-form-grid {
   min-height: 200px;
   text-align: center;
   overflow: hidden;
-  rc-loader.loader-container { height: 100%; }
+  app-rc-loader.loader-container { height: 100%; }
 }
 .rc-sub-chart {
   width: 100%;

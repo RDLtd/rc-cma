@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AppConfig } from '../app.config';
 
 @Component({
-  selector: 'rc-about',
+  selector: 'app-rc-about',
   templateUrl: './about.component.html'
 })
 
@@ -18,7 +18,7 @@ export class AboutComponent implements OnInit {
     this.params = {
       web: this.config.brand.url,
       year: new Date().getFullYear()
-    }
+    };
   }
 
   ngOnInit() {

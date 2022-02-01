@@ -7,7 +7,7 @@ import { AppConfig } from '../app.config';
 
 
 @Component({
-  selector: 'rc-profile-image',
+  selector: 'app-rc-profile-image',
   templateUrl: './image.component.html'
 })
 
@@ -18,9 +18,9 @@ export class ImageComponent implements OnInit {
   uploader: FileUploader;
   member: Member;
   dialog: any;
-  inProgress: boolean = false;
-  imgPreviewSrc: string = '';
-  imgPrimed: boolean = false;
+  inProgress = false;
+  imgPreviewSrc = '';
+  imgPrimed = false;
 
   imgURL: string;
 
@@ -58,7 +58,7 @@ export class ImageComponent implements OnInit {
       form.append('file', fileItem);
       fileItem.withCredentials = false;
 
-      let self = this;
+      const self = this;
       const inputValue = (<HTMLInputElement>document.getElementById('imgUpload')).files[0];
       this.toDataURL(inputValue, function (dataUrl) {
         // show the user the image they have selected

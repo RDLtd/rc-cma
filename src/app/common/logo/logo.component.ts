@@ -2,16 +2,16 @@ import { Component, Input } from '@angular/core';
 import { AppConfig } from '../../app.config';
 
 @Component({
-  selector: 'rc-logo',
+  selector: 'app-rc-logo',
   templateUrl: './logo.component.html'
 })
 
 export class LogoComponent {
   // Default height
-  @Input() height: string = '100%';
+  @Input() height = '100%';
   // Added class that provides style
   // e.g. 'primary' or 'accent'
-  @Input() version: string = '';
+  @Input() version = '';
   brand: string;
 
   constructor( private appConfig: AppConfig ) {
