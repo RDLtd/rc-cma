@@ -23,8 +23,8 @@
     <div class="rc-layout-split-content">
 
       <div class="rc-thanks" *ngIf="isRegistered">
-        <h1>Merci</h1>
-        <p>{{ 'JOIN.msgThanks' | translate }}</p>
+        <h1>{{ 'JOIN.msgThanks' | translate }}</h1>
+<!--        <p>{{ 'JOIN.msgThanks' | translate }}</p>-->
       </div>
 
       <div class="rc-join-form" *ngIf="!isRegistered">
@@ -35,18 +35,19 @@
           *ngIf="formStage === 'member' && isPreRegistration">
 
           <div class="bpi-logos col-span-2">
-            <cl-image public-id="v1643713177/ri_assets/Bpifrance.png">
-              <cl-transformation width="140" crop="scale">
-              </cl-transformation>
-            </cl-image>
             <cl-image public-id="v1643713637/ri_assets/BlocGraphique_gouv_Europe_100dpi.gif">
               <cl-transformation width="275" crop="scale">
               </cl-transformation>
             </cl-image>
+            <cl-image public-id="v1643713177/ri_assets/Bpifrance.png">
+              <cl-transformation width="140" crop="scale">
+              </cl-transformation>
+            </cl-image>
+
 
           </div>
 
-          <h1 class="col-span-2">{{ 'JOIN.headerContactDetails' | translate }}</h1>
+<!--          <h1 class="col-span-2">{{ 'JOIN.headerContactDetails' | translate }}</h1>-->
 
           <mat-form-field>
             <mat-label>{{ 'JOIN.labelFirstName' | translate }}</mat-label>
