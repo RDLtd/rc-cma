@@ -77,8 +77,6 @@ export class BpiComponent implements OnInit {
     });
     // declarations
     this.formTerms = this.fb.group({
-      bpi_company_qualifies: [false, Validators.requiredTrue],
-      bpi_data_correct: [false, Validators.requiredTrue],
       bpi_terms_accepted: [false, Validators.requiredTrue]
     });
   }

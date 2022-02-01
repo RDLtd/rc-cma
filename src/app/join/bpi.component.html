@@ -2,15 +2,21 @@
   <div
     *ngIf="isPreRegistration"
     class="rc-layout-split-left">
-        <rc-logo [height]="'64px'"></rc-logo>
-        <h1>Pre-registration</h1>
+    <div class="rc-layout-split-content">
+      <rc-logo [height]="'80px'"></rc-logo>
+      <markdown>
+        {{ 'JOIN.infoPrereg' | translate }}
+      </markdown>
+    </div>
   </div>
+
   <div class="rc-layout-split-left" *ngIf="!isPreRegistration">
+    <rc-logo [height]="'80px'"></rc-logo>
     <ol>
-      <li [class.rc-bolden]="formStage==='member'">Enter your contact details.</li>
-      <li [class.rc-bolden]="formStage==='company'">Provide us with the company details.</li>
-      <li [class.rc-bolden]="formStage==='terms'">Agree our terms and requirements.</li>
-      <li [class.rc-bolden]="formStage==='complete'">Complete.</li>
+      <li [class.rc-bolden]="formStage==='member'">{{ 'JOIN.formStepsBpi.0' | translate }}.</li>
+      <li [class.rc-bolden]="formStage==='company'">{{ 'JOIN.formStepsBpi.1' | translate }}.</li>
+      <li [class.rc-bolden]="formStage==='terms'">{{ 'JOIN.formStepsBpi.2' | translate }}.</li>
+      <li [class.rc-bolden]="formStage==='complete'">{{ 'JOIN.formStepsBpi.3' | translate }}.</li>
     </ol>
   </div>
   <div class="rc-layout-split-right">
@@ -28,7 +34,29 @@
           class="rc-form-grid"
           *ngIf="formStage === 'member' && isPreRegistration">
 
-          <h1 class="col-span-2">Your details</h1>
+          <div class="bpi-logos col-span-2">
+            <cl-image public-id="v1643713177/ri_assets/Bpifrance.png">
+              <cl-transformation width="75" crop="scale">
+              </cl-transformation>
+            </cl-image>
+            <cl-image public-id="v1643713637/ri_assets/BlocGraphique_gouv_Europe_100dpi.gif">
+              <cl-transformation width="220" crop="scale">
+              </cl-transformation>
+            </cl-image>
+            <cl-image public-id="v1643639802/ri_assets/UMIH_header-logo.png_1644223205.png">
+              <cl-transformation width="40" crop="scale">
+              </cl-transformation>
+            </cl-image>
+
+            <cl-image public-id="v1643639800/ri_assets/Logo_AFMR.png">
+              <cl-transformation width="110" crop="scale">
+              </cl-transformation>
+            </cl-image>
+
+
+          </div>
+
+          <h1 class="col-span-2">{{ 'JOIN.headerContactDetails' | translate }}</h1>
 
           <mat-form-field>
             <mat-label>{{ 'JOIN.labelFirstName' | translate }}</mat-label>
@@ -79,7 +107,7 @@
             </mat-form-field>
 
             <mat-checkbox formControlName="gdpr"  class="col-span-2">
-              <div class="rc-txt-small">
+              <div class="rc-txt-small" markdown>
                 {{ 'JOIN.labelGDPR' | translate }}
               </div>
             </mat-checkbox>
@@ -240,7 +268,9 @@
         <!-- Declarations -->
         <form class="rc-form-grid" [formGroup]="formTerms" *ngIf="formStage === 'terms'">
 
-          <h1 class="col-span-2">Declarations</h1>
+          <h1 class="col-span-2">
+            {{ 'JOIN.headerDeclarations' | translate }}
+          </h1>
 
 
           <div class="rc-txt-small col-span-2" markdown ngPreserveWhitespaces>
