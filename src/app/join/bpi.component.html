@@ -3,7 +3,7 @@
     *ngIf="isPreRegistration"
     class="rc-layout-split-left">
     <div class="rc-layout-split-content">
-      <rc-logo [height]="'80px'"></rc-logo>
+      <app-rc-logo [height]="'90px'"></app-rc-logo>
       <markdown>
         {{ 'JOIN.infoPrereg' | translate }}
       </markdown>
@@ -11,7 +11,7 @@
   </div>
 
   <div class="rc-layout-split-left" *ngIf="!isPreRegistration">
-    <rc-logo [height]="'80px'"></rc-logo>
+    <app-rc-logo [height]="'80px'"></app-rc-logo>
     <ol>
       <li [class.rc-bolden]="formStage==='member'">{{ 'JOIN.formStepsBpi.0' | translate }}.</li>
       <li [class.rc-bolden]="formStage==='company'">{{ 'JOIN.formStepsBpi.1' | translate }}.</li>
