@@ -1,4 +1,5 @@
 <div class="rc-layout-split-container">
+
   <div class="rc-layout-split-left">
     <div class="rc-layout-split-content">
       <div *ngIf="isLoaded" class="rc-join-welcome" @fadeAnimation>
@@ -88,9 +89,8 @@
             [placeholder]="'JOIN.placeholderFirstName' | translate"
             required
             autofocus>
-          <mat-error align="end">{{ 'JOIN.invalidRequired' | translate }}</mat-error>
+          <mat-error>{{ 'JOIN.invalidRequired' | translate }}</mat-error>
         </mat-form-field>
-
         <span style="display: inline-block; width: 2%;"></span>
         <mat-form-field hideRequiredMarker style="width: 60%;">
           <mat-label>{{ 'JOIN.labelLastName' | translate }}</mat-label>
@@ -102,7 +102,7 @@
             matInput
             [placeholder]="'JOIN.placeholderLastName' | translate"
             required>
-          <mat-error align="end">{{ 'JOIN.invalidRequired' | translate }}</mat-error>
+          <mat-error>{{ 'JOIN.invalidRequired' | translate }}</mat-error>
         </mat-form-field>
 
         <!-- Role -->
@@ -116,7 +116,7 @@
               {{ job }}
             </mat-option>
           </mat-select>
-          <mat-error align="end">{{ 'JOIN.invalidJobRequired' | translate }}</mat-error>
+          <mat-error>{{ 'JOIN.invalidJobRequired' | translate }}</mat-error>
         </mat-form-field>
 
         <!-- Email -->
@@ -130,8 +130,8 @@
             name="email"
             pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
             required>
-          <mat-hint align="end" *ngIf="email?.invalid">{{ 'JOIN.hintEmail' | translate }}</mat-hint>
-          <mat-error align="end" *ngIf="email?.errors">{{ 'JOIN.invalidEmail' | translate }}</mat-error>
+          <mat-hint *ngIf="email?.invalid">{{ 'JOIN.hintEmail' | translate }}</mat-hint>
+          <mat-error *ngIf="email?.errors">{{ 'JOIN.invalidEmail' | translate }}</mat-error>
         </mat-form-field>
 
         <!-- Telephone -->
@@ -148,7 +148,7 @@
             minlength="9"
             maxlength="14"
             required>
-          <mat-error align="end">{{ 'JOIN.invalidTelRequired' | translate }}</mat-error>
+          <mat-error>{{ 'JOIN.invalidTelRequired' | translate }}</mat-error>
         </mat-form-field>
 
         <mat-checkbox name="accepts_terms" [(ngModel)]="pendingMember.accepts_terms">

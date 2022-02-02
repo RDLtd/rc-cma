@@ -32,11 +32,14 @@ import { MarketplaceComponent } from './marketplace/marketplace.component';
 import { JoinComponent } from './join/join.component';
 import { MembershipComponent } from './join/membership.component';
 import { HubComponent } from './hub/hub.component';
+import { BpiComponent } from './join/bpi.component';
 
 const APP_ROUTES: Routes = [
   { path: '', component: SigninComponent },
   { path: 'join/:code', component: JoinComponent },
   { path: 'join', component: JoinComponent },
+  { path: 'mise-en-place-numerique', component: BpiComponent },
+  { path: 'mise-en-place-numerique/:code', component: BpiComponent },
   { path: 'membership-options', component: MembershipComponent },
   { path: 'login', component: SigninComponent },
   { path: 'signin', component: SigninComponent },

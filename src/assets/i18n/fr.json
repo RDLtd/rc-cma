@@ -4,6 +4,31 @@
 		"company": "Cette application est conçue, créée et gérée par [Restaurant Developments Ltd]({{ web }}) &copy; {{ year }}.",
 		"version": "Version"
 	},
+	"BPI": {
+		"invalidSelectionRequired": "Veuillez sélectionner un article",
+		"invalidSiret": "Un code valide à 14 chiffres est requis",
+		"labelCompany": "Raison sociale",
+		"labelDirectorEmail": "e-mail du Dirigeant",
+		"labelDirectorFirstName": "Prénom du Dirigeant",
+		"labelDirectorLastName": "Nom du Dirigeant",
+		"labelPostcode": "CP",
+		"labelSiret": "SIRET (sans espaces)",
+		"labelStep1": "Entrez vos coordonnées.",
+		"labelStep2": "Fournissez-nous les coordonnées de l'entreprise.",
+		"labelStep3": "Acceptez nos conditions et exigences.",
+		"labelStep4": "Achevée",
+		"labelStreet": "Adresse postale",
+		"labelTotalEmployees": "Nombre de salariés",
+		"labelTown": "Ville",
+		"listTotalEmployees": [
+			"0 salariés",
+			"1 à 4 salariés",
+			"5 à 9 salariés",
+			"10 à 49 salariés",
+			"50 à 250 salariés",
+			"> 250 salariés"
+		]
+	},
 	"CMS": {
 		"DASHBOARD": {
 			"core": {
@@ -307,12 +332,20 @@
 		"duplicateMobile": "Ce **numéro de portable** est déjà enregistré, veuillez [vous connecter ou récupérer votre mot de passe ici](/ signin).",
 		"duplicateMobileAndEmail": "Ce **numéro de portable** et cette **adresse e-mail** ont déjà été enregistrés [Connectez-vous ou récupérez votre mot de passe ici](/signin).",
 		"duplicateRegistration": "Déjà enregistré!",
+		"formStepsBpi": [
+			"Entrez vos coordonnées",
+			"Ajoutez les détails de votre entreprise",
+			"Examiner et confirmer les conditions",
+			"fini"
+		],
 		"headerContactDetails": "Détails de vos coordonnées",
+		"headerDeclarations": "Déclarations",
 		"hintEmail": "Votre adresse email",
+		"infoPrereg": "# Être recontacté\n\nLaissez-nous vos coordonnées pour être recontacté dès que les inscriptions aux accompagnements gratuits financés par **bpifrance** dans le cadre du plan de relance seront ouvertes.",
 		"invalidEmail": "Une adresse email valide est exigée",
 		"invalidJobRequired": "Sélectionnez votre emploi ou rôle principal",
 		"invalidRequired": "Obligatoire",
-		"invalidTelRequired": "Un numéro de portable valide est nécessaire",
+		"invalidTelRequired": "un numéro de téléphone est nécessaire",
 		"invalidTerms": "Pour continuer, vous devez accepter les **conditions** et **politique de confidentialité** de {{ brand }} et nous permettre de vous contacter au sujet de l'adhésion.",
 		"jobRoles": [
 			"Propriétaire / Directeur",
@@ -326,19 +359,33 @@
 		"joinUsByReferralFree": "# Adhésion gratuite!\n\nVous avez été invité à devenir membre gratuit de **{{ brand }}**, une organisation qui a été créée pour soutenir les restaurants et apporter des changements positifs au sein de l'industrie.\n\nVeuillez saisir vos coordonnées et indiquer que vous acceptez nos conditions.\n\nSi vous rencontrez des problèmes pour activer votre adhésion, veuillez [contacter notre équipe d'assistance]({{ email }}).\n\nToujours pas sûr ? [Visitez notre site Web pour plus d'informations] (https://restaurantcollective.org.uk/first-3-months-membership-is-absolutely-free/)",
 		"joinUsToday": "# Rejoignez-nous!\n\nSuivez simplement les étapes et vous ferez partie du Collectif!\n\n 1. Indiquez votre nom et vos coordonnées\n\n 2. Sélectionnez votre option d'abonnement\n\n 3. Puis règler votre abonnement en ligne\n\nSi vous rencontrez des problèmes tout au long de ce processus, envoyez un e-mail à:\n\n{{ email }}",
 		"joinWelcome": "# Bienvenue\n\nVous vous êtes inscrit avec succès. **Membre** nous vous avons envoyé des informations de connexion et complémentaires.\n\nFermez cette fenêtre et vérifiez votre messagerie.\n\nMerci beaucoup.\n\n**L'équipe de {{ brand }}**",
+		"labelBtnRegister": "ENVOYER",
 		"labelBtnSubmit": "SUIVANT",
+		"labelCity": "Ville ",
 		"labelEmail": "Adresse Email",
 		"labelFirstName": "Prénom",
+		"labelGDPR": "Ces données nous permettront de vous informer dès que les inscriptions à Mise en place numérique seront ouvertes. Elles ne seront pas transmises à des tiers dans un but commercial. Vous pouvez vous désinscrire à tout moment en écrivant à info@restaurateursindependants.fr",
 		"labelJob": "Votre emploi / rôle",
-		"labelLastName": "Nom de famille",
-		"labelTel": "Portable",
+		"labelLastName": "Nom",
+		"labelOrganisation": "Nom du restaurant",
+		"labelReferrer": "Comment j’ai connu Mise en place numérique",
+		"labelTel": "Téléphone",
 		"labelTerms": "En cochant cette case, vous acceptez les <a href=\"{{ toc }}\" target=\"_blank\">Conditions</a> et la <a href=\"{{ privacy }}\" target=\"_blank\">Politique de confidentialité</a> de {{ brand }} et de vous contacter, si nécessaire, en utilisant les informations fournies ici.\n",
 		"linkSignIn": "Connectez-vous",
 		"msgCheckEmail": "Vérifier vos emails pour obtenir les informations de connexion",
+		"msgManditory": "Veuillez compléter toutes les informations.",
+		"msgThanks": "Merci de votre confiance, nous allons vous recontacter très prochainement !",
 		"placeholderEmail": "Votre adresse email",
 		"placeholderFirstName": "Votre Prénom",
 		"placeholderLastName": "Votre Nom de famille",
-		"placeholderTel": "Votre numéro de portable"
+		"placeholderTel": "Votre numéro de portable",
+		"referrers": [
+			"presse",
+			"UMIH",
+			"Maîtres Restaurateurs",
+			"Bpifrance",
+			"autre"
+		]
 	},
 	"LOADER": {
 		"msgDefaultLoading": "Chargement",

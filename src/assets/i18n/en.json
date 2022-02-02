@@ -4,6 +4,31 @@
 		"company": "This application is designed, built and maintained by [Restaurant Developments Ltd]({{ web }}) &copy; {{ year }}.",
 		"version": "Version"
 	},
+	"BPI": {
+		"invalidSelectionRequired": "Please select an item",
+		"invalidSiret": "A valid 14 digit code is required",
+		"labelCompany": "Company Name",
+		"labelDirectorEmail": "Director's Email Address",
+		"labelDirectorFirstName": "Director's first name",
+		"labelDirectorLastName": "Director surname",
+		"labelPostcode": "Post Code",
+		"labelSiret": "SIRET (no spaces)",
+		"labelStep1": "Enter your contact details.",
+		"labelStep2": "Provide us with the company details.§",
+		"labelStep3": "Agree our terms and requirements.",
+		"labelStep4": "Complete",
+		"labelStreet": "Street Address",
+		"labelTotalEmployees": "Number of Employees",
+		"labelTown": "Town/City",
+		"listTotalEmployees": [
+			"0",
+			"1 - 4",
+			"5 - 9",
+			"10 - 49",
+			"50 - 250",
+			"More than 250"
+		]
+	},
 	"CMS": {
 		"DASHBOARD": {
 			"core": {
@@ -307,8 +332,16 @@
 		"duplicateMobile": "This **mobile number** is already registered, please [SIGN-IN, or retrieve your password here](/signin).",
 		"duplicateMobileAndEmail": "This **mobile number** and **email address** have already been registered [Sign-in, or retrieve your password here](/signin).",
 		"duplicateRegistration": "Already registered!",
+		"formStepsBpi": [
+			"Enter your constact details",
+			"Add your company details",
+			"Review and confirm terms",
+			"Finished"
+		],
 		"headerContactDetails": "Your Contact Details",
+		"headerDeclarations": "Declarations",
 		"hintEmail": "Your contact email address",
+		"infoPrereg": "# Être recontacté\n\nLaissez-nous vos coordonnées pour être recontacté dès que les inscriptions aux accompagnements gratuits financés par **bpifrance** dans le cadre du plan de relance seront ouvertes.",
 		"invalidEmail": "A valid email address is required",
 		"invalidJobRequired": "Please select your main job or role",
 		"invalidRequired": "Required",
@@ -326,19 +359,33 @@
 		"joinUsByReferralFree": "# Free Membership!\n\nYou've been invited to become a free member of **{{ brand }}**, an organisation that has been created to support restaurants, and affect positives change within the industry. \n\nPlease enter your contact details and indicate that you accept our terms.\n\nIf you experience any problems activating your membership then do please [contact our Support Team]({{ email }}).\n\nStill unsure? [Visit our website for more information](https://restaurantcollective.org.uk/first-3-months-membership-is-absolutely-free/)",
 		"joinUsToday": "# Join now\n\nJust complete the following steps and in no time you’ll be part of the Collective. \n\n 1. Provide your name and contact details\n\n 2. Choose a subscription option\n\n 3. Pay online\n\nIf you experience any problems throughout this process please email: \n\n{{ email }}",
 		"joinWelcome": "# Welcome\n\nYou've successfully registered yourself as a **Member** and we've sent you login details and along with some further information.\n\nClose this window and check your email.\n\nMany thanks.\n\n**{{ brand }} Curation Team**",
+		"labelBtnRegister": "Send",
 		"labelBtnSubmit": "NEXT",
+		"labelCity": "Town or City",
 		"labelEmail": "Email address",
 		"labelFirstName": "First name",
+		"labelGDPR": "Ces données nous permettront de vous informer dès que les inscriptions à Mise en place numérique seront ouvertes. Elles ne seront pas transmises à des tiers dans un but commercial. Vous pouvez vous désinscrire à tout moment en écrivant à info@restaurateursindependants.fr",
 		"labelJob": "Your Job/Role",
 		"labelLastName": "Last name",
+		"labelOrganisation": "Restaurant / Organisation",
+		"labelReferrer": "Comment j’ai connu Mise en place numérique",
 		"labelTel": "Mobile",
 		"labelTerms": "By ticking this box you agree to the {{ brand }} <a href=\"{{ toc }}\" target=\"_blank\">Terms</a> and <a href=\"{{ privacy }}\" target=\"_blank\">Privacy Policy</a> and for {{ brand }} to contact you, when necessary, using the details that you have provided here.\n",
 		"linkSignIn": "Sign In",
 		"msgCheckEmail": "Check your email for sign in credentials",
+		"msgManditory": "Please complete all of the information.",
+		"msgThanks": "Merci de votre confiance, nous allons vous recontacter très prochainement !",
 		"placeholderEmail": "Your email address",
 		"placeholderFirstName": "Your first name",
 		"placeholderLastName": "Your last name",
-		"placeholderTel": "You mobile number"
+		"placeholderTel": "You mobile number",
+		"referrers": [
+			"Press",
+			"UMIH",
+			"Maîtres Restaurateurs",
+			"Bpifrance",
+			"Other"
+		]
 	},
 	"LOADER": {
 		"msgDefaultLoading": "Loading",

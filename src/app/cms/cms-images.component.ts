@@ -52,8 +52,8 @@ export class CmsImagesComponent implements OnInit {
     e.stopPropagation();
   }
 
-  getImages() {
-    return this.cms.getElementClass(this.restaurant.restaurant_id, 'Image', 'N')
+  getImages(): any {
+    this.cms.getElementClass(this.restaurant.restaurant_id, 'Image', 'N')
       .subscribe(data => {
           this.cmsImages = data['elements'];
           this.loader.close();
@@ -76,9 +76,9 @@ export class CmsImagesComponent implements OnInit {
 
     let msg: string;
     img.cms_element_active = !img.cms_element_active;
-    img.cms_element_active
-      ? msg = this.translate.instant('CMS.IMAGES.msgNowActive', { img: img.cms_element_id })
-      : msg = this.translate.instant('CMS.IMAGES.msgNowOffline', { img: img.cms_element_id });
+    img.cms_element_active ?
+      msg = this.translate.instant('CMS.IMAGES.msgNowActive', { img: img.cms_element_id }) :
+      msg = this.translate.instant('CMS.IMAGES.msgNowOffline', { img: img.cms_element_id });
 
     this.cms.updateElement(img).subscribe(
       () => {
@@ -138,8 +138,7 @@ export class CmsImagesComponent implements OnInit {
 
       if (confirmed) {
         this.cms.deleteElement(img.cms_element_id)
-          .subscribe(res => {
-            // console.log(res);
+          .subscribe(() => {
               const arrLength = this.cmsImages.length;
               let obj;
               for (let i = 0; i < arrLength; i++) {

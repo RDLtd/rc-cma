@@ -8,4 +8,5 @@ export * from './authentication.guard';
 export * from './deactivation.guard';
 export * from './analytics.service';
 export * from './app.service';
+export * from './bpi.service';
 
