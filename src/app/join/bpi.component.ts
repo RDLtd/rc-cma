@@ -52,7 +52,7 @@ export class BpiComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       telephone: ['', Validators.required],
       gdpr: [false, Validators.requiredTrue],
-      status: [''], // as Referrer
+      status: ['', Validators.requiredTrue], // as Referrer
       city: [''] // as Referrer
     });
     // user details
@@ -62,6 +62,7 @@ export class BpiComponent implements OnInit {
       bpi_role: ['', Validators.required],
       bpi_email: ['', [Validators.required, Validators.email]],
       bpi_telephone: ['', Validators.required],
+      status: [''], // as Referrer
     });
     // company details
     this.formCompany = this.fb.group({

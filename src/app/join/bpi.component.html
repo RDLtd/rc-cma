@@ -2,8 +2,8 @@
   <div
     *ngIf="isPreRegistration"
     class="rc-layout-split-left">
-    <div class="rc-layout-split-content">
-      <app-rc-logo [height]="'90px'"></app-rc-logo>
+    <div class="rc-layout-split-content" @fadeAnimation>
+      <app-rc-logo [height]="'75px'"></app-rc-logo>
       <markdown>
         {{ 'JOIN.infoPrereg' | translate }}
       </markdown>
@@ -11,20 +11,24 @@
   </div>
 
   <div class="rc-layout-split-left" *ngIf="!isPreRegistration">
-    <app-rc-logo [height]="'80px'"></app-rc-logo>
-    <ol>
+    <div class="rc-layout-split-content" @fadeAnimation>
+    <app-rc-logo [height]="'90px'"></app-rc-logo>
+    <markdown *ngIf="formStage === 'member'">
+      {{ 'JOIN.infoSignUp' | translate }}
+    </markdown>
+    <ol *ngIf="formStage !== 'member'">
       <li [class.rc-bolden]="formStage==='member'">{{ 'JOIN.formStepsBpi.0' | translate }}.</li>
       <li [class.rc-bolden]="formStage==='company'">{{ 'JOIN.formStepsBpi.1' | translate }}.</li>
       <li [class.rc-bolden]="formStage==='terms'">{{ 'JOIN.formStepsBpi.2' | translate }}.</li>
       <li [class.rc-bolden]="formStage==='complete'">{{ 'JOIN.formStepsBpi.3' | translate }}.</li>
     </ol>
+    </div>
   </div>
   <div class="rc-layout-split-right">
     <div class="rc-layout-split-content">
 
       <div class="rc-thanks" *ngIf="isRegistered">
         <h1>{{ 'JOIN.msgThanks' | translate }}</h1>
-<!--        <p>{{ 'JOIN.msgThanks' | translate }}</p>-->
       </div>
 
       <div class="rc-join-form" *ngIf="!isRegistered">
@@ -127,13 +131,14 @@
           </div>
 
         </form>
+
         <!-- User -->
         <form
           [formGroup]="formMember"
           class="rc-form-grid"
           *ngIf="formStage === 'member' && !isPreRegistration">
 
-            <h1 class="col-span-2">Your details</h1>
+            <h1 class="col-span-2">{{ 'JOIN.headerBpiYourDetails' | translate }}</h1>
 
             <mat-form-field hideRequiredMarker>
               <mat-label>{{ 'JOIN.labelFirstName' | translate }}</mat-label>
@@ -171,6 +176,16 @@
               <mat-error>{{ 'JOIN.invalidEmail' | translate }}</mat-error>
             </mat-form-field>
 
+          <mat-form-field class="col-span-2">
+            <mat-label>{{ 'JOIN.labelReferrer' | translate }}</mat-label>
+            <mat-select formControlName="status">
+              <mat-option *ngFor="let ref of referrers" [value]="ref">
+                {{ ref }}
+              </mat-option>
+            </mat-select>
+            <mat-error>{{ 'JOIN.invalidRequired' | translate }}</mat-error>
+          </mat-form-field>
+
           <button
             *ngIf="!isPreRegistration"
             type="button"
@@ -180,15 +195,11 @@
             [disabled]="!formMember.valid"
             (click)="next(formMember, 'company')">NEXT</button>
 
-          <!-- PreRegistration -->
-
-
-
         </form>
         <!-- Business -->
         <form class="rc-form-grid" [formGroup]="formCompany" *ngIf="formStage === 'company'">
 
-            <h1 class="col-span-2">Business   Information</h1>
+            <h1 class="col-span-2">{{ 'JOIN.headerBpiCompanyDetails' | translate }}</h1>
 
             <mat-form-field hideRequiredMarker class="col-span-2">
               <mat-label>{{ 'BPI.labelCompany' | translate }}</mat-label>
@@ -278,11 +289,11 @@
 
 
           <div class="rc-txt-small col-span-2" markdown ngPreserveWhitespaces>
-            #### Je soussigné(e) [{{ formMember.controls.bpi_surname.value }}, {{ formMember.controls.bpi_forename.value }}, {{ formCompany.controls.bpi_company_name.value }}], déclare que l’entreprise à laquelle j’appartiens:
+            #### Je soussigné(e) {{ formMember.controls.bpi_surname.value }}, {{ formMember.controls.bpi_forename.value }}, {{ formCompany.controls.bpi_company_name.value }}, déclare que l’entreprise à laquelle j’appartiens:
             - Existe légalement depuis plus de 2 ans en France
             - A un chiffre d'affaires supérieur à 20 000€ (dernier exercice connu)
             - Est à jour de ses obligations fiscales et sociales
-            - N'a pas déjà perçu pour les deux derniers exercices fiscaux et l'exercice fiscal en cours plus de 200 000 euros d'aides publiques (en dehors des aides Covid-19), conformément au règlement (UE) n°1407/2013 de la Commission européenne du 18 décembre 2013 relatif à l'application des articles 107 et 108 du traité sur le fonctionnement de l'Union européenne aux aides « de minimis », publié au Journal Officiel de l'Union européenne du 26 juin 2014 ou tout texte lui succédant[1]
+            - N'a pas déjà perçu pour les deux derniers exercices fiscaux et l'exercice fiscal en cours plus de 200 000 euros d'aides publiques (en dehors des aides Covid-19), conformément au règlement (UE) n°1407/2013 de la Commission européenne du 18 décembre 2013 relatif à l'application des articles 107 et 108 du traité sur le fonctionnement de l'Union européenne aux aides « de minimis », publié au Journal Officiel de l'Union européenne du 26 juin 2014 ou tout texte lui succédant(1)
             - N'est pas, à ce jour, en liquidation judiciaire
             - N'a pas déjà bénéficié de plus d'un accompagnement dans le cadre de ce programme (limité à 2 thématiques ou 2 personnes de la même entreprise)
             - Autorise Bpifrance et tout prestataire de Bpifrance à réaliser des contrôles sur la validité des informations listées ci-dessus.
@@ -293,14 +304,17 @@
             - Entraînerait la résiliation automatique avec effet immédiat du présent accord entre la société et l'Accompagnateur ;
             - Serait de nature à engager la responsabilité de la société ;
             - Impliquerait l'obligation pour la société de verser à l'Accompagnateur le montant total de l'accompagnement, et ce, sans sommation ni mise en demeure ou formalité judiciaire préalable, quinze (15) jours après l'envoi d'une lettre recommandée avec accusé de réception.
-
-            #### Fait pour servir et valoir ce que de droit.
           </div>
+          <h3 class=" col-span-2">Fait pour servir et valoir ce que de droit.</h3>
+
+
+
+
 
           <mat-checkbox formControlName="bpi_terms_accepted"  class="col-span-2">
             <div class="rc-txt-small" markdown ngPreserveWhitespaces>
               #### En cochant la présente case:
-              - Je reconnais avoir pris connaissance et accepter les Conditions Générales de Vente [disponibles sur le site internet: https://restaurateursindependant.fr/bpi-terms.pdf ], et j’atteste avoir pris connaissance des mentions d’information relatives au traitement des données à caractère personnel collectées et traitées dans le cadre du présent dispositif disponibles au paragraphe « PROTECTION DES DONNEES A CARACTERE PERSONNEL » des Conditions Générales de Vente ;
+              - Je reconnais avoir pris connaissance et accepter [les Conditions Générales de Vente disponibles sur le site internet](https://restaurateursindependant.fr/bpi-terms.pdf), et j’atteste avoir pris connaissance des mentions d’information relatives au traitement des données à caractère personnel collectées et traitées dans le cadre du présent dispositif disponibles au paragraphe « PROTECTION DES DONNEES A CARACTERE PERSONNEL » des Conditions Générales de Vente ;
               - J’atteste sur l’honneur que les informations contenues dans le présent formulaire sont exactes et je confirme mon inscription à la formation accompagnement des TPE/PME à la transformation numérique.
 
             </div>
@@ -327,6 +341,18 @@
             </button>
 
           </form>
+      </div>
+      <div class="bpi-logos col-span-2" *ngIf="!isPreRegistration">
+        <app-rc-logo [height]="'60px'" version="primary"></app-rc-logo>
+
+        <cl-image public-id="v1643713177/ri_assets/Bpifrance.png">
+          <cl-transformation width="140" crop="scale">
+          </cl-transformation>
+        </cl-image>
+        <cl-image public-id="v1643713637/ri_assets/BlocGraphique_gouv_Europe_100dpi.gif">
+          <cl-transformation width="275" crop="scale">
+          </cl-transformation>
+        </cl-image>
       </div>
     </div>
   </div>
