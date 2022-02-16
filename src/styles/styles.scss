@@ -208,6 +208,89 @@ a.mat-menu-item {text-decoration: none;}
   padding-bottom: 0 !important;
 }
 
+// Bpi
+// ++++++++++++++++++++++++++++++++++++++++++++
+.layout-2-panel {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  width: 100vw;
+  @include mq($rc-narrow) {
+    flex-direction: column;
+    height: auto;
+  }
+  .layout-panel-left {
+    height: 100vh;
+    width: 62vw;
+    overflow: auto;
+    overflow-x: hidden;
+    background: $rc-theme-primary;
+    color: white;
+    @include mq($rc-narrow) {
+      width: 100vw;
+      height: auto;
+    }
+  }
+  .layout-panel-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100vh;
+    max-width: 38vw;
+    overflow: auto;
+    overflow-x: hidden;
+    background: white;
+    @include mq($rc-narrow) {
+      justify-content: flex-start;
+      height: auto;
+      max-width: 100vw;
+    }
+  }
+  .layout-panel-inner {
+    min-height: 100vh;
+    padding: 7rem 5rem 2rem;
+    h1 {
+      font-weight: 300;
+      line-height: 1.1;
+    }
+    .mat-form-field {
+      width: 100%;
+    }
+    .mat-checkbox-inner-container {
+      height: 20px;
+      width: 20px;
+      margin-top:0;
+    }
+    .mat-checkbox-layout {
+      margin: 16px 0;
+      white-space: normal;
+    }
+    button {
+      width: 100%;
+      margin: 0 0;
+      line-height: 56px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: $rc-default-font-weight;
+    }
+    .bpi-logos {
+      background: white;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 1rem auto;
+    }
+    @include mq($rc-narrow) {
+      min-height: 0;
+      padding: 2rem;
+    }
+  }
+}
+
 /**
 * RC layouts
 * -------------------------------
@@ -367,13 +450,15 @@ form.rc-form-grid {
   display: grid;
   gap:8px;
   grid-template-columns: 1fr 1fr;
-  .col-span-2 {
-    grid-column: span 2;
+  .col-span-2 { grid-column: span 2; }
+  @include mq($rc-narrow) {
+    grid-template-columns: 1fr;
+    .col-span-2 { grid-column: span 1; }
   }
   .rc-btn-prev {
     background-color: #ddd;
   }
-  .mat-checkbox-layout { margin-top: 0 !important;};
+  .mat-checkbox-layout { margin-top: 0 !important; }
 }
 
 @media screen and ( min-width : 768px ){

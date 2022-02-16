@@ -48,12 +48,12 @@ export class BpiComponent implements OnInit {
     this.formPending = this.fb.group({
       first_name: ['', Validators.required],
       last_name: ['', Validators.required],
-      job: [''], // as Restaurant
-      email: ['', [Validators.required, Validators.email]],
       telephone: ['', Validators.required],
-      gdpr: [false, Validators.requiredTrue],
-      status: ['', Validators.requiredTrue], // as Referrer
-      city: [''] // as Referrer
+      email: ['', [Validators.required, Validators.email]],
+      job: [''], // as Restaurant
+      city: ['', Validators.required], // as Referrer
+      status: ['', Validators.required],
+      gdpr: [false, Validators.requiredTrue]
     });
     // user details
     this.formMember = this.fb.group({
@@ -62,7 +62,7 @@ export class BpiComponent implements OnInit {
       bpi_role: ['', Validators.required],
       bpi_email: ['', [Validators.required, Validators.email]],
       bpi_telephone: ['', Validators.required],
-      status: [''], // as Referrer
+      bpi_status: ['', Validators.required], // as Referrer
     });
     // company details
     this.formCompany = this.fb.group({
