@@ -1,27 +1,33 @@
 <div class="layout-2-panel">
+
   <!-- LEFT -->
   <div class="layout-panel-left">
     <div class="layout-panel-inner">
       <app-rc-logo [height]="'90px'"></app-rc-logo>
+      <!-- pre-reg -->
       <markdown *ngIf="isPreRegistration" @fadeAnimation>
         {{ 'JOIN.infoPrereg' | translate }}
       </markdown>
+      <!-- sign up-->
       <markdown *ngIf="!isPreRegistration">
         {{ 'JOIN.infoSignUp' | translate }}
       </markdown>
     </div>
   </div>
+
   <!-- RIGHT -->
   <div class="layout-panel-right">
     <div class="layout-panel-inner">
 
-      <!-- PREREG -->
+      <!-- registered -->
       <div class="rc-thanks" *ngIf="isRegistered">
         <app-rc-logo [height]="'90px'" version="primary"></app-rc-logo>
         <h1>{{ 'JOIN.msgThanks' | translate }}</h1>
       </div>
+
+      <!-- unregistered -->
       <div class="rc-join-form" *ngIf="!isRegistered">
-        <!-- PreReg -->
+        <!-- prereg -->
         <form
           [formGroup]="formPending"
           class="rc-form-grid"
@@ -118,8 +124,7 @@
           </div>
 
         </form>
-
-        <!-- MEMBER -->
+        <!-- sign-up member -->
         <form
           [formGroup]="formMember"
           class="rc-form-grid"
@@ -127,18 +132,21 @@
 
           <h1 class="col-span-2">{{ 'JOIN.headerBpiYourDetails' | translate }}</h1>
 
+          <!-- firstname -->
           <mat-form-field hideRequiredMarker>
             <mat-label>{{ 'JOIN.labelFirstName' | translate }}</mat-label>
             <input formControlName="bpi_forename" matInput>
             <mat-error>{{ 'JOIN.invalidRequired' | translate }}</mat-error>
           </mat-form-field>
 
+          <!-- lastname -->
           <mat-form-field hideRequiredMarker>
             <mat-label>{{ 'JOIN.labelLastName' | translate }}</mat-label>
             <input formControlName="bpi_surname" matInput>
             <mat-error>{{ 'JOIN.invalidRequired' | translate }}</mat-error>
           </mat-form-field>
 
+          <!-- role -->
           <mat-form-field hideRequiredMarker class="col-span-2">
             <mat-label>{{ 'JOIN.labelJob' | translate }}</mat-label>
             <mat-select formControlName="bpi_role">
@@ -163,6 +171,7 @@
             <mat-error>{{ 'JOIN.invalidEmail' | translate }}</mat-error>
           </mat-form-field>
 
+          <!-- referral -->
           <mat-form-field class="col-span-2">
             <mat-label>{{ 'JOIN.labelReferrer' | translate }}</mat-label>
             <mat-select formControlName="bpi_status">
@@ -184,7 +193,8 @@
           </button>
 
         </form>
-        <!-- COMPANY -->
+
+        <!-- Company -->
         <form class="rc-form-grid" [formGroup]="formCompany" *ngIf="formStage === 'company'">
 
           <h1 class="col-span-2">{{ 'JOIN.headerBpiCompanyDetails' | translate }}</h1>
@@ -270,15 +280,16 @@
           </button>
 
         </form>
-        <!-- TERMS -->
+
+        <!-- Declaration -->
         <form class="rc-form-grid" [formGroup]="formTerms" *ngIf="formStage === 'terms'">
           <h1 class="col-span-2">
             {{ 'JOIN.headerDeclarations' | translate }}
           </h1>
           <div class="rc-txt-small col-span-2" markdown ngPreserveWhitespaces>
-            #### Je soussigné(e) {{ formMember.controls.bpi_surname.value }}
-            , {{ formMember.controls.bpi_forename.value }}, {{ formCompany.controls.bpi_company_name.value }}, déclare
-            que l’entreprise à laquelle j’appartiens:
+            #### Je soussigné(e) {{ formMember.controls.bpi_surname.value }}, {{ formMember.controls.bpi_forename.value }}, {{ formCompany.controls.bpi_company_name.value }}, déclare que l’entreprise à laquelle j’appartiens:
+
+
             - Existe légalement depuis plus de 2 ans en France
             - A un chiffre d'affaires supérieur à 20 000€ (dernier exercice connu)
             - Est à jour de ses obligations fiscales et sociales
@@ -292,6 +303,7 @@
             ou 2 personnes de la même entreprise)
             - Autorise Bpifrance et tout prestataire de Bpifrance à réaliser des contrôles sur la validité des
             informations listées ci-dessus.
+
           </div>
           <div class="rc-txt-small col-span-2" markdown ngPreserveWhitespaces>
             #### J'atteste avoir connaissance que toute déclaration inexacte quant aux éléments susvisés:
@@ -334,9 +346,10 @@
             <span *ngIf="!isSubmitting">SUBMIT</span>
           </button>
         </form>
+
+        <!-- Logos -->
         <div class="bpi-logos col-span-2" *ngIf="!isPreRegistration">
           <app-rc-logo [height]="'60px'" version="primary"></app-rc-logo>
-
           <cl-image public-id="v1643713177/ri_assets/Bpifrance.png">
             <cl-transformation width="140" crop="scale">
             </cl-transformation>
@@ -346,7 +359,9 @@
             </cl-transformation>
           </cl-image>
         </div>
+
       </div>
     </div>
   </div>
+
 </div>

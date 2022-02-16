@@ -459,6 +459,10 @@ form.rc-form-grid {
     background-color: #ddd;
   }
   .mat-checkbox-layout { margin-top: 0 !important; }
+  li {
+    list-style: disc;
+    margin: 0 0 .25rem;
+  }
 }
 
 @media screen and ( min-width : 768px ){
