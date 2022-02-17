@@ -41,10 +41,7 @@
               <cl-transformation width="140" crop="scale">
               </cl-transformation>
             </cl-image>
-
-
           </div>
-          <!--<h1 class="col-span-2">{{ 'JOIN.headerContactDetails' | translate }}</h1>-->
 
           <mat-form-field>
             <mat-label>{{ 'JOIN.labelFirstName' | translate }}</mat-label>
@@ -189,7 +186,8 @@
             class="col-span-2"
             color="accent"
             [disabled]="!formMember.valid"
-            (click)="next(formMember, 'company')">NEXT
+            (click)="next(formMember, 'company')">
+            {{ 'JOIN.labelBtnNext' | translate }}
           </button>
 
         </form>
@@ -268,7 +266,8 @@
             class="rc-btn-prev"
             mat-flat-button
             color="primary"
-            (click)="prev('member')">BACK
+            (click)="prev('member')">
+            {{ 'JOIN.labelBtnBack' | translate }}
           </button>
 
           <button
@@ -276,7 +275,8 @@
             type="button"
             color="accent"
             [disabled]="!formCompany.valid"
-            (click)="next(formCompany, 'terms')">NEXT
+            (click)="next(formCompany, 'terms')">
+            {{ 'JOIN.labelBtnNext' | translate }}
           </button>
 
         </form>
@@ -319,7 +319,7 @@
             <div class="rc-txt-small" markdown ngPreserveWhitespaces>
               #### En cochant la présente case:
               - Je reconnais avoir pris connaissance et accepter [les Conditions Générales de Vente disponibles sur le
-              site internet](https://restaurateursindependant.fr/bpi-terms.pdf), et j’atteste avoir pris connaissance
+              site internet](https://restaurateursindependant.fr/downloads/bpi_terms.pdf), et j’atteste avoir pris connaissance
               des mentions d’information relatives au traitement des données à caractère personnel collectées et
               traitées dans le cadre du présent dispositif disponibles au paragraphe « PROTECTION DES DONNEES A
               CARACTERE PERSONNEL » des Conditions Générales de Vente ;
@@ -328,13 +328,15 @@
 
             </div>
           </mat-checkbox>
+          <p class="col-span-2 rc-txt-small">(1) Texte de référence : <a href="https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=celex%3A32013R1407">https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=celex%3A32013R1407</a></p>
           <button
             type="button"
             class="rc-btn-prev"
             mat-flat-button
             color="primary"
             [disabled]="isSubmitting"
-            (click)="prev('company')">BACK
+            (click)="prev('company')">
+            {{ 'JOIN.labelBtnBack' | translate }}
           </button>
           <button
             mat-flat-button
@@ -343,19 +345,29 @@
             [disabled]="!formTerms.valid || isSubmitting"
             (click)="submit($event)">
             <span *ngIf="isSubmitting">SENDING...</span>
-            <span *ngIf="!isSubmitting">SUBMIT</span>
+            <span *ngIf="!isSubmitting">
+              {{ 'JOIN.labelBtnSubmit' | translate }}
+            </span>
           </button>
         </form>
 
         <!-- Logos -->
         <div class="bpi-logos col-span-2" *ngIf="!isPreRegistration">
-          <app-rc-logo [height]="'60px'" version="primary"></app-rc-logo>
+<!--          <app-rc-logo [height]="'60px'" version="primary"></app-rc-logo>-->
           <cl-image public-id="v1643713177/ri_assets/Bpifrance.png">
-            <cl-transformation width="140" crop="scale">
+            <cl-transformation width="120" crop="scale">
             </cl-transformation>
           </cl-image>
           <cl-image public-id="v1643713637/ri_assets/BlocGraphique_gouv_Europe_100dpi.gif">
-            <cl-transformation width="275" crop="scale">
+            <cl-transformation width="240" crop="scale">
+            </cl-transformation>
+          </cl-image>
+          <cl-image public-id="v1643639800/ri_assets/Logo_AFMR.png">
+            <cl-transformation width="120" crop="scale">
+            </cl-transformation>
+          </cl-image>
+          <cl-image public-id="v1643639802/ri_assets/UMIH_header-logo.png_1644223205.png">
+            <cl-transformation width="80" crop="scale">
             </cl-transformation>
           </cl-image>
         </div>
@@ -365,3 +377,4 @@
   </div>
 
 </div>
+

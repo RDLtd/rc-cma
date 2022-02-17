@@ -221,7 +221,7 @@ a.mat-menu-item {text-decoration: none;}
   }
   .layout-panel-left {
     height: 100vh;
-    width: 62vw;
+    width: 50vw;
     overflow: auto;
     overflow-x: hidden;
     background: $rc-theme-primary;
@@ -233,10 +233,11 @@ a.mat-menu-item {text-decoration: none;}
   }
   .layout-panel-right {
     display: flex;
+    width: 100%;
     flex-direction: column;
     justify-content: center;
     height: 100vh;
-    max-width: 38vw;
+    max-width: 50vw;
     overflow: auto;
     overflow-x: hidden;
     background: white;
