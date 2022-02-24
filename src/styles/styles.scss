@@ -1,4 +1,4 @@
-@use '~@angular/material' as mat;
+@use '@angular/material' as mat;
 
 @import "@material/layout-grid/mdc-layout-grid";
 @import "mat-themes";
@@ -1323,9 +1323,10 @@ ul.rc-lookup-results {
   top: 20px;
   right: 8px;
 }
-.rc-cms-card-core {
-  .mat-card-image {
-    margin: 0 0 16px -8px;
+.rc-card-title-img-wrapper {
+  .mat-card-image img {
+    width: inherit;
+    object-fit: cover;
   }
 }
 .rc-cms-social {
@@ -1790,7 +1791,6 @@ button.rc-member-assc {
     width: calc(100% - 32px);
   }
   .mat-card-image {
-
   }
   .mat-card-title {
     font-size: 36px;
