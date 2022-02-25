@@ -105,7 +105,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient, './assets/i18n/', '.json');
 }
 
-// Make App initialisation dependant on translations
+// Make App initialisation dependent on translations
 // so that we can rely on 'instant' access everywhere else
 export function appInitializerFactory(translate: TranslateService) {
   // LocalStorage is read/set in index.html

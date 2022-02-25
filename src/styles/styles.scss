@@ -1,4 +1,4 @@
-@use '~@angular/material' as mat;
+@use '@angular/material' as mat;
 
 @import "@material/layout-grid/mdc-layout-grid";
 @import "mat-themes";
@@ -215,7 +215,7 @@ a.mat-menu-item {text-decoration: none;}
   flex-direction: row;
   height: 100vh;
   width: 100vw;
-  @include mq($rc-narrow) {
+  @include mq-max(small) {
     flex-direction: column;
     height: auto;
   }
@@ -226,7 +226,7 @@ a.mat-menu-item {text-decoration: none;}
     overflow-x: hidden;
     background: $rc-theme-primary;
     color: white;
-    @include mq($rc-narrow) {
+    @include mq(small) {
       width: 100vw;
       height: auto;
     }
@@ -241,7 +241,7 @@ a.mat-menu-item {text-decoration: none;}
     overflow: auto;
     overflow-x: hidden;
     background: white;
-    @include mq($rc-narrow) {
+    @include mq-max(small) {
       justify-content: flex-start;
       height: auto;
       max-width: 100vw;
@@ -285,7 +285,7 @@ a.mat-menu-item {text-decoration: none;}
       gap: 1rem;
       margin: 1rem auto;
     }
-    @include mq($rc-narrow) {
+    @include mq-max(small) {
       min-height: 0;
       padding: 2rem;
     }
@@ -452,7 +452,7 @@ form.rc-form-grid {
   gap:8px;
   grid-template-columns: 1fr 1fr;
   .col-span-2 { grid-column: span 2; }
-  @include mq($rc-narrow) {
+  @include mq-max(small) {
     grid-template-columns: 1fr;
     .col-span-2 { grid-column: span 1; }
   }
@@ -1323,9 +1323,10 @@ ul.rc-lookup-results {
   top: 20px;
   right: 8px;
 }
-.rc-cms-card-core {
-  .mat-card-image {
-    margin: 0 0 16px -8px;
+.rc-card-title-img-wrapper {
+  .mat-card-image img {
+    width: inherit;
+    object-fit: cover;
   }
 }
 .rc-cms-social {
@@ -1790,7 +1791,6 @@ button.rc-member-assc {
     width: calc(100% - 32px);
   }
   .mat-card-image {
-
   }
   .mat-card-title {
     font-size: 36px;

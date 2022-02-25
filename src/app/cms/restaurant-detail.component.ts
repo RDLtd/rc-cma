@@ -34,7 +34,7 @@ export class RestaurantDetailComponent implements OnInit {
     this.translate.get('Curation.ClearMod').subscribe(value => { this.clear_mod_text = value; });
 
     let my_country_code;
-    if (this.restaurant.restaurant_number.substr(0, 2) === 'FR') {
+    if (this.restaurant.restaurant_number.substring(0, 2) === 'FR') {
       my_country_code = 'FR';
     } else {
       my_country_code = 'UK';
