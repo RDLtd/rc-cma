@@ -411,7 +411,7 @@
 		"msgAlreadyAdded": "Vous gérez déjà {{ name }}.",
 		"msgAlreadyVerified": "{{ name }} a déjà été vérifié",
 		"msgNoMatch": "Désolé, aucun restaurant ne correspond actuellement à votre recherche. Veuillez ajouter votre restaurant en utilisant l'option ci-dessous.",
-		"msgNotCurated": "**{{ name }}** n'a pas encore été vérifié. Notre équipe est notifiée et la qualification aura lieu dans les 48 heures à venir.\n\nDans cette attente, merci de bien vouloir nous indiquer si l'une des informations actuelles est incorrecte en envoyant une **demande de modification**. \",",
+		"msgNotCurated": "**{{ name }}** n'a pas encore été vérifié. Notre équipe est notifiée et la qualification aura lieu dans les 48 heures à venir.\n\nDans cette attente, merci de bien vouloir nous indiquer si l'une des informations actuelles est incorrecte en envoyant une **demande de modification**. ",
 		"msgRestaurantAdded": "{{ name }} a été ajouté à votre compte.",
 		"titleFind": "Recherche d'un établissement",
 		"titleNew": "Nouveau restaurant",

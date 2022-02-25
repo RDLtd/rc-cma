@@ -411,7 +411,7 @@
 		"msgAlreadyAdded": "{{ name }} restaurant is already being managed by you.",
 		"msgAlreadyVerified": "{{ name }} has already been verified",
 		"msgNoMatch": "Sorry, we don't have any restaurants currently  listed that match your search. Please add your restaurant using the option below.",
-		"msgNotCurated": "**{{ name }}** has not yet been curated.  However, the team will be notified and curation will take place within the next 48 hours.\n\nIn the meantime, please tell us if any of the current information is incorrect by sending a **Change Request**.\",",
+		"msgNotCurated": "**{{ name }}** has not yet been curated.  However, the team will be notified and curation will take place within the next 48 hours.\n\nIn the meantime, please tell us if any of the current information is incorrect by sending a **Change Request**.",
 		"msgRestaurantAdded": "{{ name }} has been added to your account.",
 		"titleFind": "Restaurant finder",
 		"titleNew": "New restaurant",
