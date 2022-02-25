@@ -9,7 +9,11 @@ $breakpoints: (
 
 @mixin mq($key) {
   $size: map.get($breakpoints, $key);
-
+  @media (min-width: $size) {
+    @content;
+  }
+}
+@mixin mq-max($size) {
   @media (min-width: $size) {
     @content;
   }

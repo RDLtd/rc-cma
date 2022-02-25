@@ -35,13 +35,3 @@ $rc-media-small:          400px;
 $rc-max-width:            1400px;
 $rc-header-height:        80px;
 $rc-toolbar-height:       48px;
-
-$rc-narrow:               900px;
-
-@mixin mq($size) {
-  @media (max-width: $size) {
-    @content;
-  }
-}
-
-
