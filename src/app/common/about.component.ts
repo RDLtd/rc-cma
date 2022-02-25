@@ -23,6 +23,6 @@ export class AboutComponent implements OnInit {
 
   ngOnInit() {
     // show the OS and browser versions
-    this.os_text = navigator.appVersion;
+    this.os_text = navigator.userAgent;
   }
 }

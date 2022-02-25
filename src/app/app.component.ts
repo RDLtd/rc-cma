@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
   inSession: boolean;
   language = localStorage.getItem('rd_language'); // Default language
 
-  // If we are offline then there is o access to translations
+  // If we are offline then there is no access to translations
   connectionOffline = {
     en: 'You are currently OFFLINE, please check your internet connection.',
     fr: 'Vous êtes actuellement OFFLINE! Veuillez vérifier votre connexion Internet.',

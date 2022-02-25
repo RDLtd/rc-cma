@@ -588,7 +588,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
       return false;
       // Is there any protocol?
     } else  if (url.indexOf('//') < 0) {
-      url = 'http://' + url;
+      url = 'https://' + url;
     }
     window.open(url, '_blank');
   }

@@ -191,7 +191,7 @@ export class SettingsComponent implements OnInit {
       });
 
       dialogRef.afterClosed().subscribe( confirmed => {
-        // Member agrees to charges
+        // Member agrees to the charges
         if (confirmed) {
           this.addRestaurants();
         }
