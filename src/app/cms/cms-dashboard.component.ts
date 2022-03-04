@@ -535,6 +535,35 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
   }
 
   publishSPW(): void {
+    this.cms.publish(this.restaurant.restaurant_id, true, false)
+        .then(res => {
+          if (res['status'] === 'OK') {
+            // console.log('Publish success:', res);
+            // this.spwProdUrl = res['url'];
+            // this.spwPreviewUrl = this.getSpwUrl();
+            this.cmsChanged = false;
+            this.d_publishDate = moment(new Date(res['published'])).format('LLLL');
+            // this.publishDate = new Date(res['published']);
+
+            this.verifyData();
+            this.isPreviewing = false;
+            // record event
+            this.ga.sendEvent('CMS-Dashboard', 'SPW', 'Published');
+            // reset data changed attribute
+            this.cms.resetLastUpdatedField(Number(this.restaurant.restaurant_id)).subscribe(
+                () => {},
+                error => {
+                  console.log('unable to reset data changed attribute', error);
+                });
+          } else {
+            console.log('Publish failed', res);
+            this.isPreviewing = false;
+          }
+        })
+        .catch((res) => console.log('Error', res));
+  }
+
+  publishSPW_bk(): void {
     // console.log('publishSPW()');
     this.isPreviewing = true;
     this.cms.previewSPW(this.restaurant.restaurant_id, this.restaurant.restaurant_number, this.restaurant.restaurant_name, true, false)

@@ -424,16 +424,43 @@ export class CMSService {
       });
   }
 
+  // JB Version
+  async publish(restaurant_id, production: Boolean, check_only: Boolean): Promise<any> {
+      const data = await this.http.post(this.config.apiUrl + '/restaurants/checkassociation',
+          { restaurant_id, userCode: this.config.userAPICode, token: this.authToken })
+          .toPromise();
+      if (data['count']) {
+          return await this.http.post(this.config.apiUrl + '/spw/makespw',
+              {
+                  restaurant_id,
+                  production,
+                  company: this.config.brand.prefix,
+                  userCode: this.config.userAPICode,
+                  token: this.authToken
+              }).toPromise();
+      } else {
+          return await this.http.post(this.config.apiUrl + '/spw/makelspw',
+              {
+                  restaurant_id,
+                  usePlaceholders: true,
+                  company: this.config.brand.prefix,
+                  userCode: this.config.userAPICode,
+                  token: this.authToken
+              }).toPromise();
+      }
+  }
+
   previewSPW(restaurant_id: string, restaurant_number: string, restaurant_name: string,
              production: Boolean, check_only: Boolean): any {
     // update 030322 - use either LSPW or SPW based on whether this restaurant has been associated
-    this.http.post(this.config.apiUrl + '/restaurants/checkassociation',
-      { restaurant_id: restaurant_id, userCode: this.config.userAPICode, token: this.authToken }).subscribe({
+    return this.http.post(this.config.apiUrl + '/restaurants/checkassociation',
+      { restaurant_id: restaurant_id, userCode: this.config.userAPICode, token: this.authToken })
+        .subscribe({
         next: data => {
           if (data['count'] === 0) {
             console.log('using lspw');
             // no associations found, use the lspw
-            return this.http.post(this.config.apiUrl + '/spw/makelspw',
+            this.http.post(this.config.apiUrl + '/spw/makelspw',
               {
                 restaurant_id,
                 usePlaceholders: true,
