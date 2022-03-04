@@ -21,7 +21,7 @@ export class CmsPreviewComponent implements OnInit {
 
     ngOnInit() {
 
-      this.cms.publish(this.data.id, false, false)
+      this.cms.publish(this.data.id, false)
         .then(res => {
           console.log('PREVIEW:', res);
           if (res['status'] === 'OK') {
