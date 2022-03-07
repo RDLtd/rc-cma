@@ -273,6 +273,7 @@
 				"service": "Service",
 				"team": "Team"
 			},
+			"infoImages": "Images must be .jpg or .jpeg files and not exceed 5mb in size. Landscape format (i.e. wider than they are tall) will work best.",
 			"labelBtnCancel": "Cancel",
 			"labelBtnUpload": "Upload",
 			"labelChooseDirections": "Choose directions to upload",

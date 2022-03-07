@@ -273,6 +273,7 @@
 				"service": "Service",
 				"team": "Équipe"
 			},
+			"infoImages": "Les images doivent être des fichiers .jpg ou .jpeg et ne pas dépasser 5 Mo. Le format paysage (c'est-à-dire plus large que haut) fonctionnera mieux.",
 			"labelBtnCancel": "Annuler",
 			"labelBtnUpload": "Télécharger",
 			"labelChooseDirections": "Choisissez l'itinéraire à télécharger",

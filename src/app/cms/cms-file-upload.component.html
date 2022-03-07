@@ -4,6 +4,7 @@
     <h1 mat-dialog-title>
       {{ 'CMS.UPLOAD.titleUploadImage' | translate }}
     </h1>
+    <span>{{ 'CMS.UPLOAD.infoImages' | translate }}</span>
   </div>
   <div *ngIf="data.type === 'menu'">
     <h1 mat-dialog-title>
@@ -35,6 +36,7 @@
         <input
           type="file"
           id="fileUpload"
+          [accept]="fileTypes"
           class="rc-file-input-hide"
           #fileInput
           ng2FileSelect
