@@ -5,6 +5,7 @@
 @import "abstract";
 @import "vars";
 @import "reset";
+@import 'bpi';
 
 // Create a config with the default MAT typography levels.
 $config: mat.define-typography-config();
@@ -450,11 +451,11 @@ a.mat-menu-item {text-decoration: none;}
 form.rc-form-grid {
   display: grid;
   gap:8px;
-  grid-template-columns: 1fr 1fr;
-  .col-span-2 { grid-column: span 2; }
-  @include mq-max(small) {
-    grid-template-columns: 1fr;
-    .col-span-2 { grid-column: span 1; }
+  grid-template-columns: 1fr;
+  .col-span-2 { grid-column: span 1; }
+  @include mq(small) {
+    grid-template-columns: 1fr 1fr;
+    .col-span-2 { grid-column: span 2; }
   }
   .rc-btn-prev {
     background-color: #ddd;

@@ -1,0 +1,63 @@
+<div class="bpi">
+  <div class="bpi-container--content">
+    <h1>RI Membership: {{ referralCode }}</h1>
+  </div>
+  <div class="bpi-container--form">
+    <form
+      [formGroup]="formMember"
+      class="rc-form-grid">
+
+      <h1 class="col-span-2">{{ 'JOIN.headerBpiYourDetails' | translate }}</h1>
+
+      <!-- firstname -->
+      <mat-form-field hideRequiredMarker>
+        <mat-label>{{ 'JOIN.labelFirstName' | translate }}</mat-label>
+        <input formControlName="firstName" matInput>
+        <mat-error>{{ 'JOIN.invalidRequired' | translate }}</mat-error>
+      </mat-form-field>
+
+      <!-- lastname -->
+      <mat-form-field hideRequiredMarker>
+        <mat-label>{{ 'JOIN.labelLastName' | translate }}</mat-label>
+        <input formControlName="lastName" matInput>
+        <mat-error>{{ 'JOIN.invalidRequired' | translate }}</mat-error>
+      </mat-form-field>
+
+      <!-- role -->
+      <mat-form-field hideRequiredMarker class="col-span-2">
+        <mat-label>{{ 'JOIN.labelJob' | translate }}</mat-label>
+        <mat-select formControlName="job">
+          <mat-option *ngFor="let role of roles" [value]="role">
+            {{ role }}
+          </mat-option>
+        </mat-select>
+        <mat-error>{{ 'JOIN.invalidRequired' | translate }}</mat-error>
+      </mat-form-field>
+
+      <!-- Telephone -->
+      <mat-form-field hideRequiredMarker>
+        <mat-label>{{ 'JOIN.labelTel' | translate }}</mat-label>
+        <input matInput formControlName="telephone">
+        <mat-error>{{ 'JOIN.invalidTelRequired' | translate }}</mat-error>
+      </mat-form-field>
+
+      <!-- Email -->
+      <mat-form-field hideRequiredMarker>
+        <mat-label>{{ 'JOIN.labelEmail' | translate }}</mat-label>
+        <input formControlName="email" matInput>
+        <mat-error>{{ 'JOIN.invalidEmail' | translate }}</mat-error>
+      </mat-form-field>
+
+      <!-- referral -->
+      <mat-form-field class="col-span-2">
+        <mat-label>{{ 'JOIN.labelReferrer' | translate }}</mat-label>
+        <mat-select formControlName="status">
+          <mat-option *ngFor="let ref of referrers" [value]="ref">
+            {{ ref }}
+          </mat-option>
+        </mat-select>
+        <mat-error>{{ 'JOIN.invalidRequired' | translate }}</mat-error>
+      </mat-form-field>
+    </form>
+  </div>
+</div>
