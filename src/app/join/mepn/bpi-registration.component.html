@@ -1,37 +1,118 @@
-<div class="bpi">
+<div class="split-panel">
 
-  <div class="bpi-container--content">
-    <div class="bpi-content">
+  <div class="split-panel-left">
+    <div class="panel-content">
       <app-rc-logo [height]="'5rem'"></app-rc-logo>
-      <h1>Bpi Registration: {{ referralCode }}</h1>
+      <div class="header"><h2>Mise en place numérique</h2></div>
+      <ul>
+        <li>You are a Restaurateurs Indépendent member</li>
+        <li>Your company has been in business for more than 2 years.</li>
+        <li>You company turnover exceeds 20,000€ per year.</li>
+        <li>You have the company details, including SIRET number.</li>
+      </ul>
+      <button mat-raised-button (click)="startBpiRegistration()">Start Bpi Registration</button>
     </div>
   </div>
 
-  <!-- BPI Company logos -->
-  <div class="bpi-container--logos">
-    <cl-image public-id="v1643713177/ri_assets/Bpifrance.png">
-      <cl-transformation width="300" crop="scale">
-      </cl-transformation>
-    </cl-image>
-    <cl-image public-id="v1643713637/ri_assets/BlocGraphique_gouv_Europe_100dpi.gif">
-      <cl-transformation width="500" crop="scale">
-      </cl-transformation>
-    </cl-image>
-    <cl-image public-id="v1643639800/ri_assets/Logo_AFMR.png">
-      <cl-transformation width="240" crop="scale">
-      </cl-transformation>
-    </cl-image>
-    <cl-image public-id="v1643639802/ri_assets/UMIH_header-logo.png_1644223205.png">
-      <cl-transformation width="160" crop="scale">
-      </cl-transformation>
-    </cl-image>
-  </div>
+  <div class="split-panel-right flex-center">
 
-  <!-- BPI Form -->
-  <div class="bpi-container--form">
-    <form class="rc-form-grid" [formGroup]="formBpi">
+    <!-- STEP 0 -->
+    <div class="logos" *ngIf="registrationStep === 0">
+      <div class="rc-centre">
+        <div class="header">
+          <h2>Sponsored & supported by</h2>
+        </div>
+      </div>
+      <img
+        src="http://res.cloudinary.com/rdl/image/upload/c_scale,w_300/v1643713177/ri_assets/Bpifrance.png"
+        alt="Bpi Logo">
+      <img
+        src="http://res.cloudinary.com/rdl/image/upload/c_scale,w_400/v1643713637/ri_assets/BlocGraphique_gouv_Europe_100dpi.gif"
+        alt="French Goverment Logo">
+      <div class="flex-center">
+        <img
+          src="http://res.cloudinary.com/rdl/image/upload/c_scale,w_180/v1643639800/ri_assets/Logo_AFMR.png"
+          alt="AFMR Logo">
+        <img
+          src="http://res.cloudinary.com/rdl/image/upload/c_scale,w_100/v1643639802/ri_assets/UMIH_header-logo.png_1644223205.png"
+          alt="UMIH Logo"></div>
+    </div>
 
-      <h1 class="col-span-2">{{ 'JOIN.headerBpiCompanyDetails' | translate }}</h1>
+    <!-- STEP 2 -->
+    <form
+      class="rc-form-grid"
+      [formGroup]="formUserDetails"
+      *ngIf="registrationStep === 1"
+      (ngSubmit)="submit()">
+
+      <div class="header col-span-2">
+        <h2>1. {{ 'JOIN.headerBpiYourDetails' | translate }}</h2>
+      </div>
+    <!-- firstname -->
+    <mat-form-field hideRequiredMarker>
+      <mat-label>{{ 'JOIN.labelFirstName' | translate }}</mat-label>
+      <input formControlName="firstName" matInput>
+      <mat-error>{{ 'JOIN.invalidRequired' | translate }}</mat-error>
+    </mat-form-field>
+
+    <!-- lastname -->
+    <mat-form-field hideRequiredMarker>
+      <mat-label>{{ 'JOIN.labelLastName' | translate }}</mat-label>
+      <input formControlName="lastName" matInput>
+      <mat-error>{{ 'JOIN.invalidRequired' | translate }}</mat-error>
+    </mat-form-field>
+
+    <!-- role -->
+    <mat-form-field hideRequiredMarker class="col-span-2">
+      <mat-label>{{ 'JOIN.labelJob' | translate }}</mat-label>
+      <mat-select formControlName="job">
+        <mat-option *ngFor="let role of roles" [value]="role">
+          {{ role }}
+        </mat-option>
+      </mat-select>
+      <mat-error>{{ 'JOIN.invalidRequired' | translate }}</mat-error>
+    </mat-form-field>
+
+    <!-- Telephone -->
+    <mat-form-field hideRequiredMarker>
+      <mat-label>{{ 'JOIN.labelTel' | translate }}</mat-label>
+      <input matInput formControlName="telephone">
+      <mat-error>{{ 'JOIN.invalidTelRequired' | translate }}</mat-error>
+    </mat-form-field>
+
+    <!-- Email -->
+    <mat-form-field hideRequiredMarker>
+      <mat-label>{{ 'JOIN.labelEmail' | translate }}</mat-label>
+      <input formControlName="email" matInput>
+      <mat-error>{{ 'JOIN.invalidEmail' | translate }}</mat-error>
+    </mat-form-field>
+
+    <!-- referral -->
+    <mat-form-field class="col-span-2">
+      <mat-label>{{ 'JOIN.labelReferrer' | translate }}</mat-label>
+      <mat-select formControlName="status">
+        <mat-option *ngFor="let ref of referrers" [value]="ref">
+          {{ ref }}
+        </mat-option>
+      </mat-select>
+      <mat-error>{{ 'JOIN.invalidRequired' | translate }}</mat-error>
+    </mat-form-field>
+      <div class="col-span-2 form-actions">
+        <button mat-button type="button" (click)="abort()">CANCEL</button>
+        <button mat-flat-button color="primary" type="button" (click)="next()" [disabled]="!formUserDetails.valid">
+          NEXT</button>
+      </div>
+    </form>
+
+    <form
+      class="rc-form-grid"
+      [formGroup]="formCompanyDetails"
+      *ngIf="registrationStep === 2"
+      (ngSubmit)="submit()">
+
+      <div class="header col-span-2">
+        <h2>2. {{ 'JOIN.headerBpiCompanyDetails' | translate }}</h2>
+      </div>
 
       <mat-form-field hideRequiredMarker class="col-span-2">
         <mat-label>{{ 'BPI.labelCompany' | translate }}</mat-label>
@@ -96,9 +177,85 @@
         <mat-error>{{ 'JOIN.invalidEmail' | translate }}</mat-error>
       </mat-form-field>
 
+      <div class="col-span-2 form-actions">
+        <button mat-button type="button" (click)="back()">BACK</button>
+        <button mat-flat-button color="primary" type="button" (click)="next()" [disabled]="!formCompanyDetails.valid">
+          SUBMIT</button>
+      </div>
+
     </form>
 
 
   </div>
 </div>
 
+<div class="bpi-terms" *ngIf="registrationStep === 3">
+  <div class="inner">
+    <div class="header">
+      <h2>3. BpiFrance terms and conditions</h2>
+    </div>
+    <form class="rc-form-grid">
+
+      <span class="form-group-label col-span-2">Je soussigné(e) {{ f1?.lastName?.value }},
+        {{ f1?.firstName?.value }}, {{
+        f2.bpi_company_name.value }}, déclare que l’entreprise à laquelle j’appartiens:</span>
+
+      <ul class="col-span-2">
+        <li>Existe légalement depuis plus de 2 ans en France.</li>
+        <li>A un chiffre d'affaires supérieur à 20 000€ (dernier exercice connu).</li>
+        <li>Est à jour de ses obligations fiscales et sociales</li>
+        <li>N'a pas déjà perçu pour les deux derniers exercices fiscaux et l'exercice fiscal en cours plus de 200 000
+            euros d'aides publiques (en dehors des aides Covid-19), conformément au règlement (UE) n°1407/2013 de la
+            Commission européenne du 18 décembre 2013 relatif à l'application des articles 107 et 108 du traité sur le
+            fonctionnement de l'Union européenne aux aides « de minimis », publié au Journal Officiel de l'Union
+            européenne du 26 juin 2014 ou tout texte lui succédant<a routerLink="./" fragment="ref">(1)</a></li>
+        <li>N'est pas, à ce jour, en liquidation judiciaire</li>
+        <li>N'a pas déjà bénéficié de plus d'un accompagnement dans le cadre de ce programme (limité à 2 thématiques
+            ou 2 personnes de la même entreprise)</li>
+        <li>Autorise Bpifrance et tout prestataire de Bpifrance à réaliser des contrôles sur la validité des
+            informations listées ci-dessus.</li>
+      </ul>
+
+      <span class="form-group-label col-span-2">J'atteste avoir connaissance que toute déclaration inexacte quant aux
+                                                éléments susvisés:</span>
+      <ul class="col-span-2">
+        <li>Entraînerait la résiliation automatique avec effet immédiat du présent accord entre la société et
+            l'Accompagnateur</li>
+        <li>Serait de nature à engager la responsabilité de la société</li>
+        <li>Impliquerait l'obligation pour la société de verser à l'Accompagnateur le montant total de
+            l'accompagnement, et ce, sans sommation ni mise en demeure ou formalité judiciaire préalable, quinze (15)
+            jours après l'envoi d'une lettre recommandée avec accusé de réception.</li>
+      </ul>
+
+      <span class="form-group-label col-span-2">
+        Fait pour servir et valoir ce que de droit
+      </span>
+      <mat-checkbox formControlName="bpi_terms_accepted" class="col-span-2">
+        En cochant la présente case:</mat-checkbox>
+        <ul class="col-span-2">
+          <li>Je reconnais avoir pris connaissance et accepter [les Conditions Générales de Vente disponibles sur le
+              site internet](https://restaurateursindependant.fr/downloads/bpi_terms.pdf), et j’atteste avoir pris
+              connaissance des mentions d’information relatives au traitement des données à caractère personnel collectées et
+              traitées dans le cadre du présent dispositif disponibles au paragraphe PROTECTION DES DONNEES A
+              CARACTERE PERSONNEL des Conditions Générales de Vente</li>
+          <li>J’atteste sur l’honneur que les informations
+              contenues dans le présent formulaire sont exactes et je
+              confirme mon inscription à la formation accompagnement des TPE/PME à la transformation numérique.
+          </li>
+        </ul>
+
+      <div class="form-actions col-span-2">
+        <button mat-button (click)="abort()">CANCEL</button>
+        <button mat-flat-button color="accent" (click)="acceptBpiTerms()">I ACCEPT THE TERMS</button>
+      </div>
+
+      <div id="ref" class="col-span-2 rc-txt-small" style="margin-block: 2em;">
+        (1) Texte de référence : <a href="https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=celex%3A32013R1407">https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=celex%3A32013R1407</a>
+      </div>
+
+    </form>
+
+
+  </div>
+
+</div>

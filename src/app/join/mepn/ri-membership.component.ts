@@ -22,6 +22,7 @@ export class RiMembershipComponent implements OnInit {
     private memberService: MemberService
   ) {
     if (this.route.snapshot.params.code) {
+      console.log('?', this.route.snapshot.params);
       this.referralCode = this.route.snapshot.params.code;
     }
     // Get select items

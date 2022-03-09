@@ -1,8 +1,12 @@
-<div class="bpi">
-  <div class="bpi-container--content">
-    <h1>RI Membership: {{ referralCode }}</h1>
+<div class="split-panel">
+  <div class="split-panel-left">
+    <div class="panel-content">
+      <div class="header"><h2>RI Membership: {{ referralCode }}</h2></div>
+    </div>
+
   </div>
-  <div class="bpi-container--form">
+  <div class="split-panel-right">
+
     <form
       [formGroup]="formMember"
       class="rc-form-grid">
