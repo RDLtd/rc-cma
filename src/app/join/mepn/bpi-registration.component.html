@@ -2,9 +2,25 @@
 
   <div class="split-panel-left">
     <div class="panel-content">
-      <div class="header"><h2>Mise en place numérique</h2></div>
-      <p>Please take a moment to check
-      <button mat-raised-button (click)="startBpiRegistration()">Start Bpi Registration</button>
+
+      <div class="header">
+        <h2>Mise en place numérique</h2>
+      </div>
+
+      <p>Before you start your registration for <strong>FREE</strong> digital training please check that you meet
+         the criteria below.</p>
+
+      <p>The company <strong>HAS</strong> legally existed for more than 2 years in France, got a turnover of more than
+         20,000€ p.a. and met all tax and employee obligations.</p>
+      <p>The company <strong>HAS NOT</strong> received more than 200k euros of public aid in the last 3 fiscal
+         years or already benefited, more than once, under this program and <strong>IS NOT</strong> in compulsory
+         liquidation</p>
+      <p>You should also have to hand, the company's registered address and SIRET number.</p>
+
+      <div class="flex-center">
+        <button mat-raised-button (click)="startBpiRegistration()" class="large">Start Bpi Registration</button>
+      </div>
+
     </div>
   </div>
 
@@ -41,14 +57,15 @@
       (ngSubmit)="submit()">
 
       <div class="header col-span-2">
-        <h2>1. {{ 'JOIN.headerBpiYourDetails' | translate }}</h2>
+        <h2>{{ 'JOIN.headerBpiYourDetails' | translate }}</h2>
       </div>
-    <!-- firstname -->
-    <mat-form-field hideRequiredMarker>
-      <mat-label>{{ 'JOIN.labelFirstName' | translate }}</mat-label>
-      <input formControlName="firstName" matInput>
-      <mat-error>{{ 'JOIN.invalidRequired' | translate }}</mat-error>
-    </mat-form-field>
+
+      <!-- firstname -->
+      <mat-form-field hideRequiredMarker>
+        <mat-label>{{ 'JOIN.labelFirstName' | translate }}</mat-label>
+        <input formControlName="firstName" matInput>
+        <mat-error>{{ 'JOIN.invalidRequired' | translate }}</mat-error>
+      </mat-form-field>
 
     <!-- lastname -->
     <mat-form-field hideRequiredMarker>
@@ -106,7 +123,7 @@
       (ngSubmit)="submit()">
 
       <div class="header col-span-2">
-        <h2>2. {{ 'JOIN.headerBpiCompanyDetails' | translate }}</h2>
+        <h2>{{ 'JOIN.headerBpiCompanyDetails' | translate }}</h2>
       </div>
 
       <mat-form-field hideRequiredMarker class="col-span-2">

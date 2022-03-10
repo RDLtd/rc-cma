@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {TranslateService} from '@ngx-translate/core';
 import {BpiService, MemberService} from '../../_services';
+import {LoadService} from '../../common';
+import {StorageService} from '../../_services/storage.service';
 
 @Component({
   selector: 'app-bpi-registration',
@@ -23,12 +25,17 @@ export class BpiRegistrationComponent implements OnInit {
   roles: [string];
   referrers: [string];
 
+  @ViewChild('fName') fName: Element;
+
   constructor(
     private route: ActivatedRoute,
     private fb: FormBuilder,
     private translate: TranslateService,
     private memberService: MemberService,
-    private bpiService: BpiService
+    private bpiService: BpiService,
+    private loadService: LoadService,
+    private storageService: StorageService,
+    private el: ElementRef
   ) {
     /**
      * Check for referral code in url
@@ -109,6 +116,10 @@ export class BpiRegistrationComponent implements OnInit {
    */
   startBpiRegistration(): void {
     this.registrationStep = 1;
+    setTimeout(() => {
+      const elem = this.el.nativeElement.querySelector('[formcontrolname="firstName"]');
+      elem.focus();
+    }, 0);
   }
 
   /**
@@ -124,6 +135,7 @@ export class BpiRegistrationComponent implements OnInit {
    * Register user
    */
   registerUser(): void {
+    this.loadService.open();
     this.submitting = true;
     const f = this.f1;
     const ff = this.f2;
@@ -157,7 +169,9 @@ export class BpiRegistrationComponent implements OnInit {
           this.registrationStep = 4;
         }, 500);
       },
-        error => alert(error)
+        error => {
+          console.log(error);
+        }
       );
   }
 }

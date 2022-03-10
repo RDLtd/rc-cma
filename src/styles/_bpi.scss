@@ -48,6 +48,8 @@ $pad: 15vh;
   .panel-content {
     width: min(100% - 6rem, 40em);
     margin-inline: auto;
+    display: flex;
+    flex-direction: column;
     ul {
       margin-left: 1rem;
       margin-bottom: 2rem;
@@ -55,6 +57,11 @@ $pad: 15vh;
     li {
       list-style: disc;
       margin-bottom: .5em;
+    }
+    p {
+      font-size: 20px;
+      margin-block: .5em;
+      line-height: 1.4;
     }
   }
 }
@@ -72,7 +79,7 @@ $pad: 15vh;
   }
 }
 .header {
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   h2 {
     line-height: 1.1;
     font-weight: 300;
@@ -102,6 +109,15 @@ $pad: 15vh;
 }
 .ucase {
   text-transform: uppercase;
+}
+.mat-raised-button.large,
+.mat-flat-button.large {
+  margin-top: 2em;
+  text-transform: uppercase;
+  font-size: 14px;
+  line-height: 56px;
+  letter-spacing: 1px;
+  padding-inline: 2em;
 }
 
 
