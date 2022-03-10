@@ -2,19 +2,13 @@
 
   <div class="split-panel-left">
     <div class="panel-content">
-      <app-rc-logo [height]="'5rem'"></app-rc-logo>
       <div class="header"><h2>Mise en place numérique</h2></div>
-      <ul>
-        <li>You are a Restaurateurs Indépendent member</li>
-        <li>Your company has been in business for more than 2 years.</li>
-        <li>You company turnover exceeds 20,000€ per year.</li>
-        <li>You have the company details, including SIRET number.</li>
-      </ul>
+      <p>Please take a moment to check
       <button mat-raised-button (click)="startBpiRegistration()">Start Bpi Registration</button>
     </div>
   </div>
 
-  <div class="split-panel-right flex-center">
+  <div class="split-panel-right">
 
     <!-- STEP 0 -->
     <div class="logos" *ngIf="registrationStep === 0">
@@ -23,8 +17,9 @@
           <h2>Sponsored & supported by</h2>
         </div>
       </div>
+      <app-rc-logo [height]="'4rem'" version="primary"></app-rc-logo>
       <img
-        src="http://res.cloudinary.com/rdl/image/upload/c_scale,w_300/v1643713177/ri_assets/Bpifrance.png"
+        src="http://res.cloudinary.com/rdl/image/upload/c_scale,w_240/v1643713177/ri_assets/Bpifrance.png"
         alt="Bpi Logo">
       <img
         src="http://res.cloudinary.com/rdl/image/upload/c_scale,w_400/v1643713637/ri_assets/BlocGraphique_gouv_Europe_100dpi.gif"
@@ -116,41 +111,41 @@
 
       <mat-form-field hideRequiredMarker class="col-span-2">
         <mat-label>{{ 'BPI.labelCompany' | translate }}</mat-label>
-        <input formControlName="bpi_company_name" matInput>
+        <input formControlName="companyName" matInput>
         <mat-error>{{ 'JOIN.invalidRequired' | translate }}</mat-error>
       </mat-form-field>
 
       <!-- Address -->
       <mat-form-field hideRequiredMarker class="col-span-2">
         <mat-label>{{ 'BPI.labelStreet' | translate }}</mat-label>
-        <input matInput formControlName="bpi_company_address">
+        <input matInput formControlName="companyStreet">
         <mat-error>{{ 'JOIN.invalidRequired' | translate }}</mat-error>
       </mat-form-field>
 
       <!-- City -->
       <mat-form-field hideRequiredMarker>
         <mat-label>{{ 'BPI.labelTown' | translate }}</mat-label>
-        <input matInput formControlName="bpi_company_town">
+        <input matInput formControlName="companyLocale">
         <mat-error>{{ 'JOIN.invalidRequired' | translate }}</mat-error>
       </mat-form-field>
 
       <!-- Postcode -->
       <mat-form-field hideRequiredMarker>
         <mat-label>{{ 'BPI.labelPostcode' | translate }}</mat-label>
-        <input matInput formControlName="bpi_company_post_code">
+        <input matInput formControlName="companyPostcode" class="ucase">
         <mat-error>{{ 'JOIN.invalidRequired' | translate }}</mat-error>
       </mat-form-field>
 
       <!-- Siret -->
       <mat-form-field hideRequiredMarker>
         <mat-label>{{ 'BPI.labelSiret' | translate }}</mat-label>
-        <input matInput formControlName="bpi_siret">
+        <input matInput formControlName="companySiret">
         <mat-error>{{ 'BPI.invalidSiret' | translate }}</mat-error>
       </mat-form-field>
 
       <mat-form-field hideRequiredMarker>
         <mat-label>{{ 'BPI.labelTotalEmployees' | translate }}</mat-label>
-        <mat-select formControlName="bpi_company_employees">
+        <mat-select formControlName="companyEmployees">
           <mat-option *ngFor="let item of totalEmployees" [value]="item">
             {{ item }}
           </mat-option>
@@ -160,27 +155,31 @@
 
       <mat-form-field hideRequiredMarker>
         <mat-label>{{ 'BPI.labelDirectorFirstName' | translate }}</mat-label>
-        <input formControlName="bpi_director_forename" matInput>
+        <input formControlName="directorFirstName" matInput>
         <mat-error>{{ 'JOIN.invalidRequired' | translate }}</mat-error>
       </mat-form-field>
 
       <mat-form-field hideRequiredMarker>
         <mat-label>{{ 'BPI.labelDirectorLastName' | translate }}</mat-label>
-        <input formControlName="bpi_director_surname" matInput>
+        <input formControlName="directorLastName" matInput>
         <mat-error>{{ 'JOIN.invalidRequired' | translate }}</mat-error>
       </mat-form-field>
 
       <!-- Email -->
       <mat-form-field hideRequiredMarker class="col-span-2">
         <mat-label>{{ 'BPI.labelDirectorEmail' | translate }}</mat-label>
-        <input formControlName="bpi_director_email" matInput>
+        <input formControlName="directorEmail" matInput>
         <mat-error>{{ 'JOIN.invalidEmail' | translate }}</mat-error>
       </mat-form-field>
 
       <div class="col-span-2 form-actions">
         <button mat-button type="button" (click)="back()">BACK</button>
-        <button mat-flat-button color="primary" type="button" (click)="next()" [disabled]="!formCompanyDetails.valid">
-          SUBMIT</button>
+        <button mat-flat-button
+                color="primary"
+                type="button"
+                (click)="next()"
+                [disabled]="!formCompanyDetails.valid">
+          NEXT</button>
       </div>
 
     </form>
@@ -196,9 +195,8 @@
     </div>
     <form class="rc-form-grid">
 
-      <span class="form-group-label col-span-2">Je soussigné(e) {{ f1?.lastName?.value }},
-        {{ f1?.firstName?.value }}, {{
-        f2.bpi_company_name.value }}, déclare que l’entreprise à laquelle j’appartiens:</span>
+      <span class="form-group-label col-span-2">Je soussigné(e) {{ f1.lastName.value }},
+        {{ f1.firstName.value }}, {{ f2.companyName.value }}, déclare que l’entreprise à laquelle j’appartiens:</span>
 
       <ul class="col-span-2">
         <li>Existe légalement depuis plus de 2 ans en France.</li>
@@ -230,7 +228,7 @@
       <span class="form-group-label col-span-2">
         Fait pour servir et valoir ce que de droit
       </span>
-      <mat-checkbox formControlName="bpi_terms_accepted" class="col-span-2">
+      <mat-checkbox #checkTerms class="col-span-2">
         En cochant la présente case:</mat-checkbox>
         <ul class="col-span-2">
           <li>Je reconnais avoir pris connaissance et accepter [les Conditions Générales de Vente disponibles sur le
@@ -246,7 +244,7 @@
 
       <div class="form-actions col-span-2">
         <button mat-button (click)="abort()">CANCEL</button>
-        <button mat-flat-button color="accent" (click)="acceptBpiTerms()">I ACCEPT THE TERMS</button>
+        <button mat-flat-button color="accent" (click)="acceptBpiTerms()" [disabled]="!checkTerms.checked">I ACCEPT THE TERMS</button>
       </div>
 
       <div id="ref" class="col-span-2 rc-txt-small" style="margin-block: 2em;">

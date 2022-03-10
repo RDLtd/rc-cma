@@ -1,3 +1,5 @@
+$pad: 15vh;
+
 .split-panel {
   display: flex;
   flex-wrap: wrap;
@@ -9,7 +11,7 @@
     flex-direction: column;
     color: white;
     background: $rc-theme-primary;
-    padding-block: 6em;
+    padding-block: $pad;
     @include mq(medium) {
       min-height: 100vh;
       flex: 1 1 62%;
@@ -17,7 +19,7 @@
   }
   .split-panel-right {
     background: white;
-    padding-block: 6em;
+    padding-top: $pad;
     color: $rc-theme-text;
     @include mq(medium) {
       min-height: 100vh;
@@ -31,8 +33,6 @@
       img {
         object-fit: contain;
       }
-
-
     }
     form {
       width: min(100% - 6em, 30em);
@@ -99,6 +99,9 @@
   margin: 0 0 1em 1rem;
   border-bottom: solid 1px $rc-theme-grey;
   padding-block: 1rem;
+}
+.ucase {
+  text-transform: uppercase;
 }
 
 

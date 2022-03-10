@@ -32,7 +32,6 @@ import { MarketplaceComponent } from './marketplace/marketplace.component';
 import { JoinComponent } from './join/join.component';
 import { MembershipComponent } from './join/membership.component';
 import { HubComponent } from './hub/hub.component';
-import {RiMembershipComponent} from './join/mepn/ri-membership.component';
 import {BpiRegistrationComponent} from './join/mepn/bpi-registration.component';
 import {BpiComponent} from './join/bpi.component';
 
@@ -44,11 +43,8 @@ const APP_ROUTES: Routes = [
   { path: 'mise-en-place-numerique', component: BpiComponent },
   { path: 'mise-en-place-numerique/:code', component: BpiComponent },
 
-  { path: 'mepn/bpi', component: BpiRegistrationComponent },
-  { path: 'mepn/join/:code', component: RiMembershipComponent },
-  { path: 'mepn/join', component: RiMembershipComponent },
-  { path: 'mepn/:code', redirectTo: '/mepn/join/:code' },
-  { path: 'mepn', redirectTo: '/mepn/join' },
+  { path: 'mepn/:code', component: BpiRegistrationComponent },
+  { path: 'mepn', component: BpiRegistrationComponent },
 
   { path: 'membership-options', component: MembershipComponent },
   { path: 'login', component: SigninComponent },

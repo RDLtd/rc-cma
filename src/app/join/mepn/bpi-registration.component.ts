@@ -10,7 +10,8 @@ import {BpiService, MemberService} from '../../_services';
 })
 export class BpiRegistrationComponent implements OnInit {
 
-  registrationStep = 3;
+  registered = false;
+  registrationStep = 0;
   submitting = false;
   bpiTermsAccepted = false;
   referralCode: string;
@@ -63,15 +64,15 @@ export class BpiRegistrationComponent implements OnInit {
      * Bpi registration details
      */
     this.formCompanyDetails = this.fb.group({
-      bpi_company_name: ['', Validators.required],
-      bpi_company_address:  ['', Validators.required],
-      bpi_company_town:  ['', Validators.required],
-      bpi_company_post_code:  ['', Validators.required],
-      bpi_siret:  ['', [Validators.required, Validators.minLength(14), Validators.maxLength(14)]],
-      bpi_company_employees: ['', Validators.required],
-      bpi_director_forename:  ['', Validators.required],
-      bpi_director_surname:  ['', Validators.required],
-      bpi_director_email:  ['', [Validators.required, Validators.email]],
+      companyName: ['', Validators.required],
+      companyStreet:  ['', Validators.required],
+      companyLocale:  ['', Validators.required],
+      companyPostcode:  ['', Validators.required],
+      companySiret:  ['', [Validators.required, Validators.minLength(14), Validators.maxLength(14)]],
+      companyEmployees: ['', Validators.required],
+      directorFirstName:  ['', Validators.required],
+      directorLastName:  ['', Validators.required],
+      directorEmail:  ['', [Validators.required, Validators.email]],
     });
   }
 
@@ -116,5 +117,47 @@ export class BpiRegistrationComponent implements OnInit {
    */
   acceptBpiTerms(): void {
     this.submitting = false;
+    this.registerUser();
+  }
+
+  /**
+   * Register user
+   */
+  registerUser(): void {
+    this.submitting = true;
+    const f = this.f1;
+    const ff = this.f2;
+    // map the controls
+    const bpiData = {
+      bpi_forename: f.firstName.value,
+      bpi_surname: f.lastName.value,
+      bpi_telephone: f.telephone.value,
+      bpi_email: f.email.value,
+      bpi_role: f.job.value,
+      bpi_status: f.status.value,
+      bpi_company_name: ff.companyName.value,
+      bpi_company_address: ff.companyStreet.value,
+      bpi_company_town: ff.companyLocale.value,
+      bpi_company_post_code: ff.companyPostcode.value,
+      bpi_siret: ff.companySiret.value,
+      bpi_company_employees: ff.companyEmployees.value,
+      bpi_director_forename: ff.directorFirstName.value,
+      bpi_director_surname: ff.directorLastName.value,
+      bpi_director_email: ff.directorEmail.value,
+      bpi_terms_accepted: true
+    };
+    // Make api call
+    this.bpiService.createBpiAccount(bpiData)
+      .subscribe((res) => {
+        console.log(res);
+        // log user into training platform?
+        setTimeout(() => {
+          this.submitting = false;
+          this.registered = true;
+          this.registrationStep = 4;
+        }, 500);
+      },
+        error => alert(error)
+      );
   }
 }
