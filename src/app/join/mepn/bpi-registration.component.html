@@ -4,35 +4,64 @@
     <div class="panel-content">
 
       <div class="header">
+        <app-rc-logo [height]="'80px'"></app-rc-logo>
         <h2>Mise en place numérique</h2>
       </div>
 
-      <p>Registration for your <strong>FREE</strong> digital training should only take a few minutes but, before you
-         start, please make sure that your company meets the requirements, as follows:</p>
-      <ol>
-        <li>The company <strong>HAS</strong> legally existed for more than 2 years in France, has a turnover of more
-            than
-           20,000€ p.a. and has met all of its tax and employee obligations.</li>
+      <div [ngSwitch]="registrationStep">
 
-        <li>The company <strong>HAS NOT</strong> received more than 200k euros of public aid in the last 3 fiscal
-           years or already benefited, more than once, under this program and is not in compulsory
-           liquidation</li>
-      </ol>
-
-      <p>You will also need the company's registered address and SIRET number, along with the director's name and
-         email address, to complete the form.</p>
-
-      <div class="flex-center">
-        <button mat-raised-button (click)="startBpiRegistration()" class="large">Begin Registration</button>
+        <div *ngSwitchCase="0">
+          <p>Registration for your <strong>FREE</strong> digital training should only take a few minutes but, before you
+             start, please make sure that your company meets the requirements, as follows:</p>
+          <ol>
+            <li>The company <strong>HAS</strong> legally existed for more than 2 years in France, has a turnover of more
+                than
+                20,000€ p.a. and has met all of its tax and employee obligations.</li>
+            <li>The company <strong>HAS NOT</strong> received more than 200k euros of public aid in the last 3 fiscal
+                years or already benefited, more than once, under this program and is not in compulsory
+                liquidation</li>
+          </ol>
+          <p>You will also need the company's registered address, SIRET code and
+             director's name & email address, before you START you registration.</p>
+          <div class="flex-center">
+            <button mat-raised-button (click)="startBpiRegistration()" class="large">START</button>
+          </div>
+        </div>
+        <!-- Users details -->
+        <div *ngSwitchCase="1">
+          <p>Please enter your personal contact details and let us know how you heard about the BpiFrance offer.</p>
+          <p>This information will be used to create your personalised training program.</p>
+          <p>We will only contact you in relation to the program and your details will not be passed to any other
+             organisations.</p>
+        </div>
+        <!-- Company details -->
+        <div *ngSwitchCase="2">
+          <p>Now we need some information about your company.</p>
+          <p>This information is required as proof that your company is eligible for this government funded scheme.</p>
+          <p>Please ensure that all of this information you provide is accurate.</p>
+        </div>
+        <!-- Confirmation -->
+        <div *ngSwitchCase="5">
+          <p>Congratulations <strong>{{ f1.firstName.value }}</strong>! You have now been successfully registered for the digital
+             training program.</p>
+          <p>A member of our team will contact you shortly to arrange your initial one-to-one session and to
+             explain how it will all work.</p>
+          <p>In the meantime you should have received an email confirmation, with login details and a link to the
+             training platform. Please save this email for future reference.</p>
+        </div>
+        <!-- Error -->
+        <div *ngIf="registrationStep < 0">
+          <pre>{{ result | json }}</pre>
+        </div>
       </div>
-
     </div>
+
   </div>
 
   <div class="split-panel-right">
 
-    <!-- STEP 0 -->
-    <div class="logos" *ngIf="registrationStep === 0">
+    <!-- Intro -->
+    <div class="logos" *ngIf="registrationStep < 1 || registrationStep > 3">
       <div class="rc-centre">
         <div class="header">
           <h2>Sponsored & supported by</h2>
@@ -54,12 +83,12 @@
           alt="UMIH Logo"></div>
     </div>
 
-    <!-- STEP 2 -->
+    <!-- User -->
     <form
       class="rc-form-grid"
       [formGroup]="formUserDetails"
       *ngIf="registrationStep === 1"
-      (ngSubmit)="submit()">
+      (ngSubmit)="next()">
 
       <div class="header col-span-2">
         <h2>{{ 'JOIN.headerBpiYourDetails' | translate }}</h2>
@@ -121,11 +150,12 @@
       </div>
     </form>
 
+    <!-- Company -->
     <form
       class="rc-form-grid"
       [formGroup]="formCompanyDetails"
       *ngIf="registrationStep === 2"
-      (ngSubmit)="submit()">
+      (ngSubmit)="next()">
 
       <div class="header col-span-2">
         <h2>{{ 'JOIN.headerBpiCompanyDetails' | translate }}</h2>
@@ -206,14 +236,14 @@
 
     </form>
 
-
   </div>
 </div>
 
+<!-- BPI Terms and conditions -->
 <div class="bpi-terms" *ngIf="registrationStep === 3">
   <div class="inner">
     <div class="header">
-      <h2>3. BpiFrance terms and conditions</h2>
+      <h2>BpiFrance terms and conditions</h2>
     </div>
     <form class="rc-form-grid">
 
@@ -270,7 +300,7 @@
         <button mat-button (click)="contact()">NOT SURE?</button>
         <button mat-flat-button
                 color="accent"
-                (click)="acceptBpiTerms()"
+                (click)="submit()"
                 [disabled]="!checkTerms.checked">
           I ACCEPT
         </button>
@@ -286,3 +316,5 @@
   </div>
 
 </div>
+
+

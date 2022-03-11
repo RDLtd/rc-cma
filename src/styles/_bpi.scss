@@ -3,6 +3,7 @@ $pad: 15vh;
 .split-panel {
   display: flex;
   flex-wrap: wrap;
+  min-height: 100vh;
   > * {
     flex-basis: 100%;
   }
@@ -11,19 +12,21 @@ $pad: 15vh;
     flex-direction: column;
     color: white;
     background: $rc-theme-primary;
-    padding-block: $pad;
+    padding-block: 2em;
     @include mq(medium) {
       min-height: 100vh;
       flex: 1 1 62%;
+      padding-block: $pad;
     }
   }
   .split-panel-right {
     background: white;
-    padding-top: $pad;
+    padding-block: 2em;
     color: $rc-theme-text;
     @include mq(medium) {
       min-height: 100vh;
       flex: 1 1 38%;
+      padding-block: $pad;
     }
     .logos {
       display: grid;
@@ -50,13 +53,15 @@ $pad: 15vh;
     margin-inline: auto;
     display: flex;
     flex-direction: column;
-    ul {
-      margin-left: 1rem;
-      margin-bottom: 2rem;
+    font-size: 20px;
+    ol {
+      margin-block: 2rem;
     }
     li {
-      list-style: disc;
-      margin-bottom: .5em;
+      list-style: decimal;
+    }
+    li + li {
+      margin-top: 1em;
     }
     p {
       font-size: 20px;

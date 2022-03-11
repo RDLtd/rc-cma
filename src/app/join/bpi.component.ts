@@ -123,7 +123,7 @@ export class BpiComponent implements OnInit {
       bpi_declaration: this.formTerms.valid
     };
     // Make api call
-    this.bpiService.createBpiAccount(this.bpiData)
+    this.bpiService.createBpi(this.bpiData)
       .subscribe((res) => {
         console.log(res);
         // log user into training platform?

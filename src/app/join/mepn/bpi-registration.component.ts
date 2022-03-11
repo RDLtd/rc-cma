@@ -14,10 +14,11 @@ import {MatDialog} from '@angular/material/dialog';
 export class BpiRegistrationComponent implements OnInit {
 
   registered = false;
-  registrationStep = 3;
+  registrationStep = 5;
   submitting = false;
   bpiTermsAccepted = false;
   referralCode: string;
+  result: any;
 
   formCompanyDetails: FormGroup;
   formUserDetails: FormGroup;
@@ -25,6 +26,8 @@ export class BpiRegistrationComponent implements OnInit {
   totalEmployees: [string];
   roles: [string];
   referrers: [string];
+
+  bpiData: any;
 
   @ViewChild('fName') fName: Element;
 
@@ -39,15 +42,13 @@ export class BpiRegistrationComponent implements OnInit {
     private el: ElementRef,
     private dialog: MatDialog
   ) {
-    /**
-     * Check for referral code in url
-     */
+
+    // Check for referral code in url
     if (this.route.snapshot.params.code) {
       this.referralCode = this.route.snapshot.params.code;
     }
-    /**
-     * String arrays for selection options
-     */
+
+    // String arrays for selection options
     this.roles = this.translate.instant('JOIN.jobRoles');
     this.referrers = this.translate.instant('JOIN.referrers');
     this.totalEmployees = this.translate.instant('BPI.listTotalEmployees');
@@ -58,9 +59,8 @@ export class BpiRegistrationComponent implements OnInit {
   }
 
   initForm(): void {
-    /**
-     * User form - equivalent info to RI registration
-     */
+
+    // User form - equivalent info to RI registration
     this.formUserDetails = this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
@@ -69,9 +69,8 @@ export class BpiRegistrationComponent implements OnInit {
       job: [''], // as Restaurant
       status: ['', Validators.required]
     });
-    /**
-     * Bpi registration details
-     */
+
+    // Bpi registration data
     this.formCompanyDetails = this.fb.group({
       companyName: ['', Validators.required],
       companyStreet:  ['', Validators.required],
@@ -86,7 +85,8 @@ export class BpiRegistrationComponent implements OnInit {
   }
 
   /**
-   * Form navigation
+   * Shortcut form references
+   * and form navigation
    */
   get f1(): any {
     return this.formUserDetails.controls;
@@ -100,9 +100,13 @@ export class BpiRegistrationComponent implements OnInit {
   back(): void {
     this.registrationStep -= 1;
   }
-  submit(): void {
-    this.registrationStep = 3;
-  }
+  // submit(): void {
+  //   this.registrationStep = 3;
+  // }
+
+  /**
+   * This is for users that maybe unsure whether they quality
+   */
   contact(): void {
     const dialogRef = this.dialog.open(ConfirmCancelComponent, {
       data: {
@@ -112,11 +116,11 @@ export class BpiRegistrationComponent implements OnInit {
         cancel: 'No thanks'
       }
     });
-
     dialogRef.afterClosed().subscribe(confirmed => {
-
         if (confirmed) {
           console.log('Contact me');
+          this.emailSupport();
+          this.registrationStep = 5;
         }
       },
       error => console.log(error)
@@ -124,16 +128,35 @@ export class BpiRegistrationComponent implements OnInit {
   }
 
   /**
-   * user aborts so clear all form data
+   * If user cancels, warn them that data will be lost
+   * before returning them to the opening screen
+   * and resetting all forms
    */
   abort(): void {
-    this.registrationStep = 0;
-    this.formUserDetails.reset();
-    this.formCompanyDetails.reset();
-
+    const dialogRef = this.dialog.open(ConfirmCancelComponent, {
+      data: {
+        title: 'Are you sure?',
+        body: 'By using this option you will lose any of the information that you have already completed. ' +
+          'Are you sure that you want to cancel?',
+        confirm: 'Yes, cancel',
+        cancel: 'No, go back'
+      }
+    });
+    dialogRef.afterClosed().subscribe(confirmed => {
+        if (confirmed) {
+          this.saveUserToPending();
+          this.registrationStep = 0;
+          this.formUserDetails.reset();
+          this.formCompanyDetails.reset();
+        }
+      },
+      error => console.log(error)
+    );
   }
+
   /**
-   * Retrieve memberId
+   * Begin registration process
+   * and focus the first form field
    */
   startBpiRegistration(): void {
     this.registrationStep = 1;
@@ -144,16 +167,15 @@ export class BpiRegistrationComponent implements OnInit {
   }
 
   /**
-   * Bpi terms and GDPR
-   *
+   * Final submission
    */
-  acceptBpiTerms(): void {
+  submit(): void {
     this.submitting = false;
     this.registerUser();
   }
 
   /**
-   * Register user
+   * Register Bpi user
    */
   registerUser(): void {
     this.loadService.open();
@@ -162,8 +184,8 @@ export class BpiRegistrationComponent implements OnInit {
     const ff = this.f2;
     // map the controls
     const bpiData = {
-      bpi_forename: f.firstName.value,
-      bpi_surname: f.lastName.value,
+      bpi_first_name: f.firstName.value,
+      bpi_last_name: f.lastName.value,
       bpi_telephone: f.telephone.value,
       bpi_email: f.email.value,
       bpi_role: f.job.value,
@@ -177,22 +199,95 @@ export class BpiRegistrationComponent implements OnInit {
       bpi_director_forename: ff.directorFirstName.value,
       bpi_director_surname: ff.directorLastName.value,
       bpi_director_email: ff.directorEmail.value,
-      bpi_terms_accepted: true
+      bpi_terms_accepted: true,
+      bpi_promo_code: this.referralCode
     };
     // Make api call
-    this.bpiService.createBpiAccount(bpiData)
+    const timeCheck = this.getTimer(20);
+    this.bpiService.createBpi(bpiData)
       .subscribe((res) => {
         console.log(res);
-        // log user into training platform?
-        setTimeout(() => {
-          this.submitting = false;
-          this.registered = true;
-          this.registrationStep = 4;
-        }, 500);
+        clearTimeout(timeCheck);
+        this.submitting = false;
+        this.registered = true;
+        this.registrationStep = 4;
+        this.result = res;
       },
+        err => {
+          this.loadService.close();
+          this.registrationStep = -1;
+          this.result = err.error.status;
+          console.log(err);
+          clearTimeout(timeCheck);
+        }
+      );
+  }
+
+  /**
+   * Open a system error timeout alert
+   * @param n - number of seconds before triggering alert
+   */
+  getTimer (n = 30) {
+    return setTimeout(() => {
+        this.dialog.open(ConfirmCancelComponent, {
+          data: {
+            title: 'System Error',
+            body: 'Unfortunately we cannot register you at this time due to technical issues. Please try again later.',
+            confirm: 'OK',
+            cancel: 'hide' // don't show
+          }
+        });
+        this.registrationStep = 0;
+        this.submitting = false;
+        this.loadService.close();
+    },
+      n * 1000);
+  }
+
+  /**
+   * Notify support if users request help/advice
+   */
+  emailSupport(): void {
+    const bodyContent =
+      `# BPI Enquiry\n\n` +
+      `Please contact:\n\n` +
+      ` - **Name**: ${ this.f1.firstName.value } ${ this.f1.lastName.value }\n` +
+      ` - **Telephone**: ${ this.f1.telephone.value }\n` +
+      ` - **Email**: ${ this.f1.email.value }\n` +
+      ` - **Company**: ${ this.f2.companyName.value }\n\n` +
+      `This is a potential participant that has requested help during the BPI registration process.\n\n` +
+      `Thank you`;
+
+    this.memberService.sendEmailRequest(
+      'support',
+      'support',
+      'BPI Enquiry',
+      bodyContent)
+      .subscribe(() => {
+        console.log('Support email sent');
+        },
         error => {
           console.log(error);
         }
       );
+  }
+
+  /**
+   * For users that drop out at point of T&C's
+   */
+  saveUserToPending(): void {
+    const f = this.formUserDetails.value;
+    const userData = {
+      first_name: f.firstName,
+      last_name: f.lastName,
+      email: f.email,
+      telephone: f.telephone,
+      job: f.job,
+      bpi_promo_code : this.referralCode
+    };
+    console.log(userData);
+    this.memberService.createPending(userData)
+      .toPromise()
+      .then((res) => console.log(res));
   }
 }
