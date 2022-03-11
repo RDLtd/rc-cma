@@ -7,18 +7,23 @@
         <h2>Mise en place numérique</h2>
       </div>
 
-      <p>Before you start your registration for <strong>FREE</strong> digital training please check that you meet
-         the criteria below.</p>
+      <p>Registration for your <strong>FREE</strong> digital training should only take a few minutes but, before you
+         start, please make sure that your company meets the requirements, as follows:</p>
+      <ol>
+        <li>The company <strong>HAS</strong> legally existed for more than 2 years in France, has a turnover of more
+            than
+           20,000€ p.a. and has met all of its tax and employee obligations.</li>
 
-      <p>The company <strong>HAS</strong> legally existed for more than 2 years in France, got a turnover of more than
-         20,000€ p.a. and met all tax and employee obligations.</p>
-      <p>The company <strong>HAS NOT</strong> received more than 200k euros of public aid in the last 3 fiscal
-         years or already benefited, more than once, under this program and <strong>IS NOT</strong> in compulsory
-         liquidation</p>
-      <p>You should also have to hand, the company's registered address and SIRET number.</p>
+        <li>The company <strong>HAS NOT</strong> received more than 200k euros of public aid in the last 3 fiscal
+           years or already benefited, more than once, under this program and is not in compulsory
+           liquidation</li>
+      </ol>
+
+      <p>You will also need the company's registered address and SIRET number, along with the director's name and
+         email address, to complete the form.</p>
 
       <div class="flex-center">
-        <button mat-raised-button (click)="startBpiRegistration()" class="large">Start Bpi Registration</button>
+        <button mat-raised-button (click)="startBpiRegistration()" class="large">Begin Registration</button>
       </div>
 
     </div>
@@ -258,10 +263,17 @@
               confirme mon inscription à la formation accompagnement des TPE/PME à la transformation numérique.
           </li>
         </ul>
-
       <div class="form-actions col-span-2">
+        <button mat-button (click)="back()">BACK</button>
         <button mat-button (click)="abort()">CANCEL</button>
-        <button mat-flat-button color="accent" (click)="acceptBpiTerms()" [disabled]="!checkTerms.checked">I ACCEPT THE TERMS</button>
+        <span class="flex-fill"></span>
+        <button mat-button (click)="contact()">NOT SURE?</button>
+        <button mat-flat-button
+                color="accent"
+                (click)="acceptBpiTerms()"
+                [disabled]="!checkTerms.checked">
+          I ACCEPT
+        </button>
       </div>
 
       <div id="ref" class="col-span-2 rc-txt-small" style="margin-block: 2em;">

@@ -1,10 +1,13 @@
 <div class="rc-dialog rc-dialog-alert">
+
   <h2 mat-dialog-title>
     {{ data.title || 'CONFIRM.titleConfirmCancel' | translate }}
   </h2>
+
   <mat-dialog-content markdown>
     {{ data.body || 'CONFIRM.msgConfirmCancel' | translate}}
   </mat-dialog-content>
+
   <mat-dialog-actions align="end">
     <button
       *ngIf="data.cancel !== 'hide'"
@@ -18,4 +21,5 @@
       {{ data.confirm || 'CONFIRM.labelBtnConfirm' | translate | uppercase }}
     </button>
   </mat-dialog-actions>
+
 </div>

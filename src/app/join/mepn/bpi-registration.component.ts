@@ -3,8 +3,9 @@ import {ActivatedRoute} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {TranslateService} from '@ngx-translate/core';
 import {BpiService, MemberService} from '../../_services';
-import {LoadService} from '../../common';
+import {ConfirmCancelComponent, LoadService} from '../../common';
 import {StorageService} from '../../_services/storage.service';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-bpi-registration',
@@ -13,7 +14,7 @@ import {StorageService} from '../../_services/storage.service';
 export class BpiRegistrationComponent implements OnInit {
 
   registered = false;
-  registrationStep = 0;
+  registrationStep = 3;
   submitting = false;
   bpiTermsAccepted = false;
   referralCode: string;
@@ -35,7 +36,8 @@ export class BpiRegistrationComponent implements OnInit {
     private bpiService: BpiService,
     private loadService: LoadService,
     private storageService: StorageService,
-    private el: ElementRef
+    private el: ElementRef,
+    private dialog: MatDialog
   ) {
     /**
      * Check for referral code in url
@@ -100,6 +102,25 @@ export class BpiRegistrationComponent implements OnInit {
   }
   submit(): void {
     this.registrationStep = 3;
+  }
+  contact(): void {
+    const dialogRef = this.dialog.open(ConfirmCancelComponent, {
+      data: {
+        title: 'Not sure?',
+        body: 'Would you like one of our Team to contact you and discuss your ?',
+        confirm: 'Yes, please contact me',
+        cancel: 'No thanks'
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(confirmed => {
+
+        if (confirmed) {
+          console.log('Contact me');
+        }
+      },
+      error => console.log(error)
+    );
   }
 
   /**

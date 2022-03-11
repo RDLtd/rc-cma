@@ -35,7 +35,7 @@ $pad: 15vh;
       }
     }
     form {
-      width: min(100% - 6em, 30em);
+      width: min(100% - 4em, 30em);
       margin-inline: auto;
       .form-actions {
         display: flex;
@@ -46,7 +46,7 @@ $pad: 15vh;
   }
 
   .panel-content {
-    width: min(100% - 6rem, 40em);
+    width: min(100% - 2em, 40em);
     margin-inline: auto;
     display: flex;
     flex-direction: column;
@@ -73,7 +73,7 @@ $pad: 15vh;
   background: white;
   display: flex;
   .inner {
-    width: min(100% - 8em, 50em);
+    width: min(100% - 2em, 50em);
     padding-block: 4em;
     margin-inline: auto;
   }
@@ -87,11 +87,17 @@ $pad: 15vh;
     margin: 0;
   }
 }
+.flex {
+  display: flex;
+}
 .flex-center {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 1em;
+}
+.flex-fill {
+  flex: 1 1 auto;
 }
 .form-group-label {
   font-size: 20px;
@@ -101,6 +107,7 @@ $pad: 15vh;
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  gap: 1rem;
 }
 .rc-form-grid ul {
   margin: 0 0 1em 1rem;
