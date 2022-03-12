@@ -49,7 +49,7 @@ $pad: 15vh;
   }
 
   .panel-content {
-    width: min(100% - 2em, 40em);
+    width: min(100% - 4em, 40em);
     margin-inline: auto;
     display: flex;
     flex-direction: column;
@@ -68,6 +68,7 @@ $pad: 15vh;
       margin-block: .5em;
       line-height: 1.4;
     }
+
   }
 }
 .bpi-terms {
