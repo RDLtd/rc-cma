@@ -42,12 +42,34 @@
         </div>
         <!-- Confirmation -->
         <div *ngSwitchCase="5">
-          <p>Congratulations <strong>{{ f1.firstName.value }}</strong>! You have now been successfully registered for the digital
-             training program.</p>
-          <p>A member of our team will contact you shortly to arrange your initial one-to-one session and to
-             explain how it will all work.</p>
-          <p>In the meantime you should have received an email confirmation, with login details and a link to the
-             training platform. Please save this email for future reference.</p>
+<!--          <p>Congratulations <strong>{{ f1.firstName.value }}</strong>! You have now been successfully registered for the digital-->
+<!--             training program.</p>-->
+<!--          <p>A member of our team will contact you shortly to arrange your initial one-to-one session and to-->
+<!--             explain how it will all work.</p>-->
+<!--          <p>In the meantime you should have received an email confirmation, with login details and a link to the-->
+<!--             training platform. Please save this email for future reference.</p>-->
+
+          <p>Excellente nouvelle : Votre inscription a bien été prise en compte !</p>
+
+          <p>Voici les <b>prochaines étapes</b> :</p>
+
+          <p>Vous allez recevoir un email de bienvenue avec toutes les informations à retenir ;</p>
+
+          <p>Vous y retrouverez  le lien vers la plateforme de formation 360Learning,
+             ainsi que votre identifiant et votre mot de passe :</p>
+
+          <p style="text-align:center;color:#FF5720;font-size: 16px;">
+            <a href="{{ bpiData.bpi_link }}">{{ bpiData.bpi_link }}</a></p>
+          <p style="text-align:center;color:#FF5720;font-size: 16px;">Identifiant : {{ bpiData.bpi_email }}</p>
+          <p style="text-align:center;color:#FF5720;font-size: 16px;">Mot de passe : {{ bpiData.bpi_password }}</p>
+
+
+          <p>Connectez-vous tout de suite à la plateforme 360Learning pour <b>prendre rendez-vous pour
+                                                                              votre entretien individuel</b>. Ce moment est fondamental pour bien démarrer votre parcours.
+             Il suffit de choisir le créneau qui vous convient parmi ceux qui sont mis à disposition!</p>
+          <p>À très bientôt pour votre premier entretien individuel,</p>
+          <p>L’équipe Restaurateurs Indépendants</p>
+
         </div>
         <!-- Error -->
         <div *ngIf="registrationStep < 0">

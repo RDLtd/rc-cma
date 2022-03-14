@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {TranslateService} from '@ngx-translate/core';
@@ -19,6 +19,7 @@ export class BpiRegistrationComponent implements OnInit {
   bpiTermsAccepted = false;
   referralCode: string;
   result: any;
+  bpiData: any;
 
   formCompanyDetails: FormGroup;
   formUserDetails: FormGroup;
@@ -26,10 +27,6 @@ export class BpiRegistrationComponent implements OnInit {
   totalEmployees: [string];
   roles: [string];
   referrers: [string];
-
-  bpiData: any;
-
-  @ViewChild('fName') fName: Element;
 
   constructor(
     private route: ActivatedRoute,
@@ -183,7 +180,7 @@ export class BpiRegistrationComponent implements OnInit {
     const f = this.f1;
     const ff = this.f2;
     // map the controls
-    const bpiData = {
+    this.bpiData = {
       bpi_first_name: f.firstName.value,
       bpi_last_name: f.lastName.value,
       bpi_telephone: f.telephone.value,
@@ -204,14 +201,20 @@ export class BpiRegistrationComponent implements OnInit {
     };
     // Make api call
     const timeCheck = this.getTimer(20);
-    this.bpiService.createBpi(bpiData)
+    this.bpiService.createBpi(this.bpiData)
       .subscribe((res) => {
         console.log(res);
         clearTimeout(timeCheck);
+
+        this.bpiData.bpi_password = res['bpi_password'];
+        this.bpiData.bpi_link = res['bpi_link'];
+
         this.submitting = false;
         this.registered = true;
-        this.registrationStep = 4;
+        this.registrationStep = 5;
         this.result = res;
+        this.loadService.close();
+
       },
         err => {
           this.loadService.close();
