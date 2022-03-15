@@ -55,14 +55,12 @@
           <p>Vous y retrouverez  le lien vers la plateforme de formation 360Learning,
              ainsi que votre identifiant et votre mot de passe :</p>
 
-          <p style="text-align:center;color:#FF5720;font-size: 16px;">
+          <p style="text-align:center; color:#000;">
             <a href="{{ bpiData.bpi_link }}">{{ bpiData.bpi_link }}</a></p>
-          <p style="text-align:center;color:#FF5720;font-size: 16px;">Identifiant : {{ bpiData.bpi_email }}</p>
-          <p style="text-align:center;color:#FF5720;font-size: 16px;">Mot de passe : {{ bpiData.bpi_password }}</p>
+          <p style="text-align:center;color:#000;">Identifiant : {{ bpiData.bpi_email }}</p>
+          <p style="text-align:center;color:#000;">Mot de passe : {{ bpiData.bpi_password }}</p>
 
-
-          <p>Connectez-vous tout de suite à la plateforme 360Learning pour <b>prendre rendez-vous pour
-                                                                              votre entretien individuel</b>. Ce moment est fondamental pour bien démarrer votre parcours.
+          <p>Connectez-vous tout de suite à la plateforme 360Learning pour <b>prendre rendez-vous pour votre entretien individuel</b>. Ce moment est fondamental pour bien démarrer votre parcours.
              Il suffit de choisir le créneau qui vous convient parmi ceux qui sont mis à disposition!</p>
           <p>À très bientôt pour votre premier entretien individuel,</p>
           <p>L’équipe Restaurateurs Indépendants</p>
@@ -166,9 +164,10 @@
       <mat-error>{{ 'JOIN.invalidRequired' | translate }}</mat-error>
     </mat-form-field>
       <div class="col-span-2 form-actions">
-        <button mat-button type="button" (click)="abort()">CANCEL</button>
+        <button mat-button type="button" (click)="abort()">{{ 'JOIN.labelBtnBack' | translate }}
+        </button>
         <button mat-flat-button color="primary" type="button" (click)="next()" [disabled]="!formUserDetails.valid">
-          NEXT</button>
+          {{ 'JOIN.labelBtnNext' | translate }}</button>
       </div>
     </form>
 
@@ -247,13 +246,13 @@
       </mat-form-field>
 
       <div class="col-span-2 form-actions">
-        <button mat-button type="button" (click)="back()">BACK</button>
+        <button mat-button type="button" (click)="back()">{{ 'JOIN.labelBtnBack' | translate }}</button>
         <button mat-flat-button
                 color="primary"
                 type="button"
                 (click)="next()"
                 [disabled]="!formCompanyDetails.valid">
-          NEXT</button>
+          {{ 'JOIN.labelBtnNext' | translate }}</button>
       </div>
 
     </form>
@@ -316,7 +315,7 @@
           </li>
         </ul>
       <div class="form-actions col-span-2">
-        <button mat-button (click)="back()">BACK</button>
+        <button mat-button (click)="back()">{{ 'JOIN.labelBtnBack' | translate }}</button>
         <button mat-button (click)="abort()">CANCEL</button>
         <span class="flex-fill"></span>
         <button mat-button (click)="contact()">NOT SURE?</button>

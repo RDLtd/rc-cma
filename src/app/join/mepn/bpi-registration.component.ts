@@ -97,9 +97,6 @@ export class BpiRegistrationComponent implements OnInit {
   back(): void {
     this.registrationStep -= 1;
   }
-  // submit(): void {
-  //   this.registrationStep = 3;
-  // }
 
   /**
    * This is for users that maybe unsure whether they quality
@@ -107,17 +104,16 @@ export class BpiRegistrationComponent implements OnInit {
   contact(): void {
     const dialogRef = this.dialog.open(ConfirmCancelComponent, {
       data: {
-        title: 'Not sure?',
-        body: 'Would you like one of our Team to contact you and discuss your ?',
-        confirm: 'Yes, please contact me',
-        cancel: 'No thanks'
+        title: this.translate.instant('BPI.titleNeedHelp'),
+        body: this.translate.instant('BPI.msgNeedHelp'),
+        confirm: this.translate.instant('CONFIRM.labelBtnYes'),
+        cancel: this.translate.instant('CONFIRM.labelBtnNoThanks')
       }
     });
     dialogRef.afterClosed().subscribe(confirmed => {
         if (confirmed) {
-          console.log('Contact me');
-          this.emailSupport();
-          this.registrationStep = 5;
+          this.emailSupport('Registration help requested');
+          this.registrationStep = 0;
         }
       },
       error => console.log(error)
@@ -132,11 +128,10 @@ export class BpiRegistrationComponent implements OnInit {
   abort(): void {
     const dialogRef = this.dialog.open(ConfirmCancelComponent, {
       data: {
-        title: 'Are you sure?',
-        body: 'By using this option you will lose any of the information that you have already completed. ' +
-          'Are you sure that you want to cancel?',
-        confirm: 'Yes, cancel',
-        cancel: 'No, go back'
+        title: this.translate.instant('CONFIRM.titleConfirmCancel'),
+        body: this.translate.instant('BPI.msgAbort'),
+        confirm: this.translate.instant('CONFIRM.labelBtnConfirm'),
+        cancel: this.translate.instant('JOIN.labelBtnBack')
       }
     });
     dialogRef.afterClosed().subscribe(confirmed => {
@@ -175,7 +170,7 @@ export class BpiRegistrationComponent implements OnInit {
    * Register Bpi user
    */
   registerUser(): void {
-    this.loadService.open();
+    this.loadService.open(this.translate.instant('BPI.loadingMessage'));
     this.submitting = true;
     const f = this.f1;
     const ff = this.f2;
@@ -200,7 +195,7 @@ export class BpiRegistrationComponent implements OnInit {
       bpi_promo_code: this.referralCode
     };
     // Make api call
-    const timeCheck = this.getTimer(20);
+    const timeCheck = this.getTimer();
     this.bpiService.createBpi(this.bpiData)
       .subscribe((res) => {
         console.log(res);
@@ -216,33 +211,28 @@ export class BpiRegistrationComponent implements OnInit {
       },
         err => {
           console.log('ErrorCode:', err.error.status);
-          this.setErrorMessage(err.error.status);
+          this.handleErrors(err.error.status);
           this.registrationStep = -1;
           this.loadService.close();
           clearTimeout(timeCheck);
         }
       );
   }
-  setErrorMessage(err): void {
-    switch (err) {
-      case 'Duplicate BPI record': {
-        this.errorMessage = this.translate.instant('BPI.errorDuplicate',
-          { email: this.bpiData.email, tel: this.bpiData.telephone });
-        break;
-      }
-      default: {
-        this.errorMessage = this.translate.instant('BPI.errorSystem');
-        break;
-      }
-    }
-  }
 
+  /**
+   * Display user message and notify support
+   * @param err error message returned by API
+   */
+  handleErrors(err: string): void {
+    this.errorMessage = this.translate.instant('BPI.errorGeneric');
+    this.emailSupport(err);
+  }
 
   /**
    * Open a system error timeout alert
    * @param n - number of seconds before triggering alert
    */
-  getTimer (n = 30) {
+  getTimer (n = 60) {
     return setTimeout(() => {
         this.dialog.open(ConfirmCancelComponent, {
           data: {
@@ -262,16 +252,16 @@ export class BpiRegistrationComponent implements OnInit {
   /**
    * Notify support if users request help/advice
    */
-  emailSupport(): void {
+  emailSupport(issue: string): void {
     const bodyContent =
-      `# BPI Enquiry\n\n` +
-      `Please contact:\n\n` +
+      `# BPI REGISTRATION ISSUE\n\n` +
+      `## ISSUE: ${ issue }\n\n` +
+      `CONTACT DETAILS:\n\n` +
       ` - **Name**: ${ this.f1.firstName.value } ${ this.f1.lastName.value }\n` +
       ` - **Telephone**: ${ this.f1.telephone.value }\n` +
       ` - **Email**: ${ this.f1.email.value }\n` +
       ` - **Company**: ${ this.f2.companyName.value }\n\n` +
-      `This is a potential participant that has requested help during the BPI registration process.\n\n` +
-      `Thank you`;
+      `Please contact this user as soon as possible.`;
 
     this.memberService.sendEmailRequest(
       'support',

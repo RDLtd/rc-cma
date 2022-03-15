@@ -5,8 +5,7 @@
 		"version": "Version"
 	},
 	"BPI": {
-		"errorDuplicate": "The email address **{{ email }}** or telephone number **{{ tel }}** has already been used to register for this FREE digital training program.  \n\nIf you think that this is wrong, then please contact our customer service team using the option below.",
-		"errorSystem": "Unfortunately we are unable to register you for the program at this time. We have recorded your contact details and one of the service team will contact you shortly to resolve the issue. Many thanks.",
+		"errorGeneric": "Unfortunately we are unable to register you for the program at this time.  \n\nWe have your contact details and one of our Customer Support Team will contact you shortly to resolve the issue and help with registration.\n\nMany thanks.\n",
 		"invalidSelectionRequired": "Please select an item",
 		"invalidSiret": "A valid 14 digit code is required",
 		"labelCompany": "Company Name",
@@ -15,10 +14,6 @@
 		"labelDirectorLastName": "Director surname",
 		"labelPostcode": "Post Code",
 		"labelSiret": "SIRET (no spaces)",
-		"labelStep1": "Enter your contact details.",
-		"labelStep2": "Provide us with the company details.§",
-		"labelStep3": "Agree our terms and requirements.",
-		"labelStep4": "Complete",
 		"labelStreet": "Street Address",
 		"labelTotalEmployees": "Number of Employees",
 		"labelTown": "Town/City",
@@ -29,7 +24,11 @@
 			"10 - 49",
 			"50 - 250",
 			"More than 250"
-		]
+		],
+		"loadingMessage": "Registration in progress...",
+		"msgAbort": "By using this option you will lose any of the information that you have already completed.  \n\nAre you sure that you want to cancel?",
+		"msgNeedHelp": "Would us to contact you and discuss your eligibility, or any other aspect of registration?",
+		"titleNeedHelp": "We can help"
 	},
 	"CMS": {
 		"DASHBOARD": {
@@ -293,6 +292,8 @@
 	"CONFIRM": {
 		"labelBtnCancel": "NO, CANCEL",
 		"labelBtnConfirm": "YES, CONTINUE",
+		"labelBtnNoThanks": "No thanks",
+		"labelBtnYes": "Yes please",
 		"labelDontShow": "Don't show me this again",
 		"msgConfirmCancel": "The changes you have made have not yet been saved and will be lost if you continue. Do you want to discard changes and continue?",
 		"titleConfirmCancel": "Please Confirm"

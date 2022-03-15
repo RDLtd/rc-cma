@@ -5,8 +5,7 @@
 		"version": "Version"
 	},
 	"BPI": {
-		"errorDuplicate": "L'adresse e-mail **{{ email }}** ou le numéro de téléphone **{{ tel }}** a déjà été utilisé pour s'inscrire à ce programme de formation numérique GRATUIT.\n\nSi vous pensez que c'est faux, veuillez contacter notre service client en utilisant l'option ci-dessous.",
-		"errorSystem": "Malheureusement, nous ne pouvons pas vous inscrire au programme pour le moment. Nous avons enregistré vos coordonnées et l'un des membres de l'équipe de service vous contactera sous peu pour résoudre le problème. Merci beaucoup.",
+		"errorGeneric": "Malheureusement, nous ne pouvons pas vous inscrire au programme pour le moment. Nous avons vos coordonnées et un membre de notre équipe d'assistance vous contactera sous peu pour résoudre le problème.\n\nMerci beaucoup.\n",
 		"invalidSelectionRequired": "Veuillez sélectionner un article",
 		"invalidSiret": "Un code valide à 14 chiffres est requis",
 		"labelCompany": "Raison sociale",
@@ -15,10 +14,6 @@
 		"labelDirectorLastName": "Nom du Dirigeant",
 		"labelPostcode": "CP",
 		"labelSiret": "SIRET (sans espaces)",
-		"labelStep1": "Entrez vos coordonnées.",
-		"labelStep2": "Fournissez-nous les coordonnées de l'entreprise.",
-		"labelStep3": "Acceptez nos conditions et exigences.",
-		"labelStep4": "Achevée",
 		"labelStreet": "Adresse postale",
 		"labelTotalEmployees": "Nombre de salariés",
 		"labelTown": "Ville",
@@ -29,7 +24,11 @@
 			"10 à 49 salariés",
 			"50 à 250 salariés",
 			"> 250 salariés"
-		]
+		],
+		"loadingMessage": "Inscription en cours...",
+		"msgAbort": "En utilisant cette option, vous perdrez toutes les informations que vous avez déjà complétées.\n\nÊtes-vous sûr de vouloir annuler ?",
+		"msgNeedHelp": "Pourrions-nous vous contacter et discuter de votre éligibilité ou de tout autre aspect de l'inscription ?",
+		"titleNeedHelp": "Nous pouvons aider"
 	},
 	"CMS": {
 		"DASHBOARD": {
@@ -293,6 +292,8 @@
 	"CONFIRM": {
 		"labelBtnCancel": "NON, ANNULER",
 		"labelBtnConfirm": "OUI, CONTINUER",
+		"labelBtnNoThanks": "Non merci",
+		"labelBtnYes": "Oui s'il vous plaît",
 		"labelDontShow": "Ne plus me le montrer",
 		"msgConfirmCancel": "Les modifications effectuées n'ont pas encore été enregistrées et seront perdues si vous continuez. Voulez-vous continuer?",
 		"titleConfirmCancel": "Veuillez Confirmer"
