@@ -27,6 +27,7 @@
             <button mat-raised-button (click)="startBpiRegistration()" class="large">START</button>
           </div>
         </div>
+
         <!-- Users details -->
         <div *ngSwitchCase="1">
           <p>Please enter your personal contact details and let us know how you heard about the BpiFrance offer.</p>
@@ -34,20 +35,16 @@
           <p>We will only contact you in relation to the program and your details will not be passed to any other
              organisations.</p>
         </div>
+
         <!-- Company details -->
         <div *ngSwitchCase="2">
           <p>Now we need some information about your company.</p>
           <p>This information is required as proof that your company is eligible for this government funded scheme.</p>
           <p>Please ensure that all of this information you provide is accurate.</p>
         </div>
+
         <!-- Confirmation -->
         <div *ngSwitchCase="5">
-<!--          <p>Congratulations <strong>{{ f1.firstName.value }}</strong>! You have now been successfully registered for the digital-->
-<!--             training program.</p>-->
-<!--          <p>A member of our team will contact you shortly to arrange your initial one-to-one session and to-->
-<!--             explain how it will all work.</p>-->
-<!--          <p>In the meantime you should have received an email confirmation, with login details and a link to the-->
-<!--             training platform. Please save this email for future reference.</p>-->
 
           <p>Excellente nouvelle : Votre inscription a bien été prise en compte !</p>
 
@@ -71,9 +68,12 @@
           <p>L’équipe Restaurateurs Indépendants</p>
 
         </div>
+
         <!-- Error -->
-        <div *ngIf="registrationStep < 0">
-          <pre>{{ result | json }}</pre>
+        <div *ngIf="registrationStep < 0"
+             markdown
+             ngpreservewhitespaces>
+            {{ errorMessage }}
         </div>
       </div>
     </div>
@@ -91,17 +91,17 @@
       </div>
       <app-rc-logo [height]="'4rem'" version="primary"></app-rc-logo>
       <img
-        src="http://res.cloudinary.com/rdl/image/upload/c_scale,w_240/v1643713177/ri_assets/Bpifrance.png"
+        src="https://res.cloudinary.com/rdl/image/upload/c_scale,w_240/v1643713177/ri_assets/Bpifrance.png"
         alt="Bpi Logo">
       <img
-        src="http://res.cloudinary.com/rdl/image/upload/c_scale,w_400/v1643713637/ri_assets/BlocGraphique_gouv_Europe_100dpi.gif"
+        src="https://res.cloudinary.com/rdl/image/upload/c_scale,w_400/v1643713637/ri_assets/BlocGraphique_gouv_Europe_100dpi.gif"
         alt="French Goverment Logo">
       <div class="flex-center">
         <img
-          src="http://res.cloudinary.com/rdl/image/upload/c_scale,w_180/v1643639800/ri_assets/Logo_AFMR.png"
+          src="https://res.cloudinary.com/rdl/image/upload/c_scale,w_180/v1643639800/ri_assets/Logo_AFMR.png"
           alt="AFMR Logo">
         <img
-          src="http://res.cloudinary.com/rdl/image/upload/c_scale,w_100/v1643639802/ri_assets/UMIH_header-logo.png_1644223205.png"
+          src="https://res.cloudinary.com/rdl/image/upload/c_scale,w_100/v1643639802/ri_assets/UMIH_header-logo.png_1644223205.png"
           alt="UMIH Logo"></div>
     </div>
 

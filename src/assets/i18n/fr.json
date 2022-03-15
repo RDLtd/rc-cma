@@ -5,6 +5,8 @@
 		"version": "Version"
 	},
 	"BPI": {
+		"errorDuplicate": "L'adresse e-mail **{{ email }}** ou le numéro de téléphone **{{ tel }}** a déjà été utilisé pour s'inscrire à ce programme de formation numérique GRATUIT.\n\nSi vous pensez que c'est faux, veuillez contacter notre service client en utilisant l'option ci-dessous.",
+		"errorSystem": "Malheureusement, nous ne pouvons pas vous inscrire au programme pour le moment. Nous avons enregistré vos coordonnées et l'un des membres de l'équipe de service vous contactera sous peu pour résoudre le problème. Merci beaucoup.",
 		"invalidSelectionRequired": "Veuillez sélectionner un article",
 		"invalidSiret": "Un code valide à 14 chiffres est requis",
 		"labelCompany": "Raison sociale",

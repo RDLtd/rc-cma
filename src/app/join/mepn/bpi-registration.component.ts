@@ -18,7 +18,7 @@ export class BpiRegistrationComponent implements OnInit {
   submitting = false;
   bpiTermsAccepted = false;
   referralCode: string;
-  result: any;
+  errorMessage: any;
   bpiData: any;
 
   formCompanyDetails: FormGroup;
@@ -205,26 +205,38 @@ export class BpiRegistrationComponent implements OnInit {
       .subscribe((res) => {
         console.log(res);
         clearTimeout(timeCheck);
-
+        // add response to data object
         this.bpiData.bpi_password = res['bpi_password'];
         this.bpiData.bpi_link = res['bpi_link'];
-
+        // reset props
         this.submitting = false;
         this.registered = true;
         this.registrationStep = 5;
-        this.result = res;
         this.loadService.close();
-
       },
         err => {
-          this.loadService.close();
+          console.log('ErrorCode:', err.error.status);
+          this.setErrorMessage(err.error.status);
           this.registrationStep = -1;
-          this.result = err.error.status;
-          console.log(err);
+          this.loadService.close();
           clearTimeout(timeCheck);
         }
       );
   }
+  setErrorMessage(err): void {
+    switch (err) {
+      case 'Duplicate BPI record': {
+        this.errorMessage = this.translate.instant('BPI.errorDuplicate',
+          { email: this.bpiData.email, tel: this.bpiData.telephone });
+        break;
+      }
+      default: {
+        this.errorMessage = this.translate.instant('BPI.errorSystem');
+        break;
+      }
+    }
+  }
+
 
   /**
    * Open a system error timeout alert

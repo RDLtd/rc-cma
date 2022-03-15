@@ -5,6 +5,8 @@
 		"version": "Version"
 	},
 	"BPI": {
+		"errorDuplicate": "The email address **{{ email }}** or telephone number **{{ tel }}** has already been used to register for this FREE digital training program.  \n\nIf you think that this is wrong, then please contact our customer service team using the option below.",
+		"errorSystem": "Unfortunately we are unable to register you for the program at this time. We have recorded your contact details and one of the service team will contact you shortly to resolve the issue. Many thanks.",
 		"invalidSelectionRequired": "Please select an item",
 		"invalidSiret": "A valid 14 digit code is required",
 		"labelCompany": "Company Name",
