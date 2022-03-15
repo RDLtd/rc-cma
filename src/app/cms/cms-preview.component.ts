@@ -21,9 +21,8 @@ export class CmsPreviewComponent implements OnInit {
 
     ngOnInit() {
 
-      this.cms.previewSPW(this.data.id, this.data.number, this.data.name, false, false)
-        .subscribe(res => {
-
+      this.cms.publish(this.data.id, false)
+        .then(res => {
           console.log('PREVIEW:', res);
           if (res['status'] === 'OK') {
 
@@ -38,8 +37,8 @@ export class CmsPreviewComponent implements OnInit {
             this.help.dspHelp('cms-spw-nodata');
 
           }
-        },
-        error => console.log('ERROR', error));
+        })
+          .catch(error => console.log('ERROR', error));
     }
 
 }

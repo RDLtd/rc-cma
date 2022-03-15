@@ -1,0 +1,135 @@
+$pad: 15vh;
+
+.split-panel {
+  display: flex;
+  flex-wrap: wrap;
+  min-height: 100vh;
+  > * {
+    flex-basis: 100%;
+  }
+  .split-panel-left {
+    display: flex;
+    flex-direction: column;
+    color: white;
+    background: $rc-theme-primary;
+    padding-block: 2em;
+    @include mq(medium) {
+      min-height: 100vh;
+      flex: 1 1 62%;
+      padding-block: $pad;
+    }
+  }
+  .split-panel-right {
+    background: white;
+    padding-block: 2em;
+    color: $rc-theme-text;
+    @include mq(medium) {
+      min-height: 100vh;
+      flex: 1 1 38%;
+      padding-block: $pad;
+    }
+    .logos {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1em;
+      place-items: center;
+      img {
+        object-fit: contain;
+      }
+    }
+    form {
+      width: min(100% - 4em, 30em);
+      margin-inline: auto;
+      .form-actions {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+      }
+    }
+  }
+
+  .panel-content {
+    width: min(100% - 4em, 40em);
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    font-size: 20px;
+    ol {
+      margin-block: 2rem;
+    }
+    li {
+      list-style: decimal;
+    }
+    li + li {
+      margin-top: 1em;
+    }
+    p {
+      font-size: 20px;
+      margin-block: .5em;
+      line-height: 1.4;
+    }
+  }
+}
+.bpi-terms {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100vw;
+  min-height: 100vh;
+  background: white;
+  display: flex;
+  .inner {
+    width: min(100% - 2em, 50em);
+    padding-block: 4em;
+    margin-inline: auto;
+  }
+}
+.header {
+  margin-bottom: 1rem;
+  h2 {
+    line-height: 1.1;
+    font-weight: 300;
+    font-size: 32px;
+    margin: 0;
+  }
+}
+.flex {
+  display: flex;
+}
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
+}
+.flex-fill {
+  flex: 1 1 auto;
+}
+.form-group-label {
+  font-size: 20px;
+  font-weight: 500;
+}
+.form-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+.rc-form-grid ul {
+  margin: 0 0 1em 1rem;
+  border-bottom: solid 1px $rc-theme-grey;
+  padding-block: 1rem;
+}
+.ucase {
+  text-transform: uppercase;
+}
+.mat-raised-button.large,
+.mat-flat-button.large {
+  margin-top: 2em;
+  text-transform: uppercase;
+  font-size: 14px;
+  line-height: 56px;
+  letter-spacing: 1px;
+  padding-inline: 2em;
+}
+
+

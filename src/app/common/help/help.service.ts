@@ -4,15 +4,28 @@ import { HelpComponent } from './help.component';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { AnalyticsService } from '../../_services';
 import { AppConfig } from '../../app.config';
+import {TranslateService} from '@ngx-translate/core';
 
 @Injectable()
 export class HelpService {
+  lang: string;
+  title: string;
   constructor(
     private dialog: MatDialog,
     private ga: AnalyticsService,
-    private config: AppConfig
-  ) { }
+    private config: AppConfig,
+    private translate: TranslateService
+  ) {
+    this.lang  = localStorage.getItem('rd_language');
+    this.title = this.translate.instant('HELP.headerDefault');
+  }
 
+  /**
+   * Display a help modal
+   * @param topic a reference to the markdown file
+   * @param restaurant
+   * @param title modal title
+   */
   dspHelp(topic, restaurant = null, title = 'help') {
 
     // console.log(id);

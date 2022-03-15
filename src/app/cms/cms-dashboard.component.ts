@@ -535,11 +535,8 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
   }
 
   publishSPW(): void {
-    // console.log('publishSPW()');
-    this.isPreviewing = true;
-    this.cms.previewSPW(this.restaurant.restaurant_id, this.restaurant.restaurant_number, this.restaurant.restaurant_name, true, false)
-      .subscribe(res => {
-        console.log('New publish res', res);
+    this.cms.publish(this.restaurant.restaurant_id, true)
+        .then(res => {
           if (res['status'] === 'OK') {
             // console.log('Publish success:', res);
             // this.spwProdUrl = res['url'];
@@ -554,20 +551,16 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
             this.ga.sendEvent('CMS-Dashboard', 'SPW', 'Published');
             // reset data changed attribute
             this.cms.resetLastUpdatedField(Number(this.restaurant.restaurant_id)).subscribe(
-              () => {},
-              error => {
-                console.log('unable to reset data changed attribute', error);
-              });
+                () => {},
+                error => {
+                  console.log('unable to reset data changed attribute', error);
+                });
           } else {
             console.log('Publish failed', res);
             this.isPreviewing = false;
           }
-        },
-        error => {
-          console.log('Publish error', error);
-          this.isPreviewing = false;
-        });
-    // }
+        })
+        .catch((res) => console.log('Error', res));
   }
 
   dspSPWLinks(): void {

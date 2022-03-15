@@ -42,18 +42,7 @@ export class AppComponent implements OnInit {
 
 
 
-      // Check browser connection
-      this.connectionService.monitor().subscribe(isConnected => {
-        this.isConnected = isConnected;
-        if (this.isConnected) {
-          snackBar.dismiss();
-        } else {
-          snackBar.open(this.connectionOffline[this.language], 'OK', {
-            verticalPosition: 'top',
-            panelClass: ['rc-mat-snack-info']
-          });
-        }
-      });
+
       // Record navagation analytics
       this.router.events.subscribe(event => {
         if (event instanceof NavigationEnd) {

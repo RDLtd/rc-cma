@@ -1,0 +1,341 @@
+<div class="split-panel">
+
+  <div class="split-panel-left">
+    <div class="panel-content">
+
+      <div class="header">
+        <app-rc-logo [height]="'80px'"></app-rc-logo>
+        <h2>Mise en place numérique</h2>
+      </div>
+
+      <div [ngSwitch]="registrationStep">
+
+        <div *ngSwitchCase="0">
+          <p>Registration for your <strong>FREE</strong> digital training should only take a few minutes but, before you
+             start, please make sure that your company meets the requirements, as follows:</p>
+          <ol>
+            <li>The company <strong>HAS</strong> legally existed for more than 2 years in France, has a turnover of more
+                than
+                20,000€ p.a. and has met all of its tax and employee obligations.</li>
+            <li>The company <strong>HAS NOT</strong> received more than 200k euros of public aid in the last 3 fiscal
+                years or already benefited, more than once, under this program and is not in compulsory
+                liquidation</li>
+          </ol>
+          <p>You will also need the company's registered address, SIRET code and
+             director's name & email address, before you START you registration.</p>
+          <div class="flex-center">
+            <button mat-raised-button (click)="startBpiRegistration()" class="large">START</button>
+          </div>
+        </div>
+
+        <!-- Users details -->
+        <div *ngSwitchCase="1">
+          <p>Please enter your personal contact details and let us know how you heard about the BpiFrance offer.</p>
+          <p>This information will be used to create your personalised training program.</p>
+          <p>We will only contact you in relation to the program and your details will not be passed to any other
+             organisations.</p>
+        </div>
+
+        <!-- Company details -->
+        <div *ngSwitchCase="2">
+          <p>Now we need some information about your company.</p>
+          <p>This information is required as proof that your company is eligible for this government funded scheme.</p>
+          <p>Please ensure that all of this information you provide is accurate.</p>
+        </div>
+
+        <!-- Confirmation -->
+        <div *ngSwitchCase="5">
+
+          <p>Excellente nouvelle : Votre inscription a bien été prise en compte !</p>
+
+          <p>Voici les <b>prochaines étapes</b> :</p>
+
+          <p>Vous allez recevoir un email de bienvenue avec toutes les informations à retenir ;</p>
+
+          <p>Vous y retrouverez  le lien vers la plateforme de formation 360Learning,
+             ainsi que votre identifiant et votre mot de passe :</p>
+
+          <p style="text-align:center; color:#000;">
+            <a href="{{ bpiData.bpi_link }}">{{ bpiData.bpi_link }}</a></p>
+          <p style="text-align:center;color:#000;">Identifiant : {{ bpiData.bpi_email }}</p>
+          <p style="text-align:center;color:#000;">Mot de passe : {{ bpiData.bpi_password }}</p>
+
+          <p>Connectez-vous tout de suite à la plateforme 360Learning pour <b>prendre rendez-vous pour votre entretien individuel</b>. Ce moment est fondamental pour bien démarrer votre parcours.
+             Il suffit de choisir le créneau qui vous convient parmi ceux qui sont mis à disposition!</p>
+          <p>À très bientôt pour votre premier entretien individuel,</p>
+          <p>L’équipe Restaurateurs Indépendants</p>
+
+        </div>
+
+        <!-- Error -->
+        <div *ngIf="registrationStep < 0"
+             markdown
+             ngpreservewhitespaces>
+            {{ errorMessage }}
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="split-panel-right">
+
+    <!-- Intro -->
+    <div class="logos" *ngIf="registrationStep < 1 || registrationStep > 3">
+      <div class="rc-centre">
+        <div class="header">
+          <h2>Sponsored & supported by</h2>
+        </div>
+      </div>
+      <app-rc-logo [height]="'4rem'" version="primary"></app-rc-logo>
+      <img
+        src="https://res.cloudinary.com/rdl/image/upload/c_scale,w_240/v1643713177/ri_assets/Bpifrance.png"
+        alt="Bpi Logo">
+      <img
+        src="https://res.cloudinary.com/rdl/image/upload/c_scale,w_400/v1643713637/ri_assets/BlocGraphique_gouv_Europe_100dpi.gif"
+        alt="French Goverment Logo">
+      <div class="flex-center">
+        <img
+          src="https://res.cloudinary.com/rdl/image/upload/c_scale,w_180/v1643639800/ri_assets/Logo_AFMR.png"
+          alt="AFMR Logo">
+        <img
+          src="https://res.cloudinary.com/rdl/image/upload/c_scale,w_100/v1643639802/ri_assets/UMIH_header-logo.png_1644223205.png"
+          alt="UMIH Logo"></div>
+    </div>
+
+    <!-- User -->
+    <form
+      class="rc-form-grid"
+      [formGroup]="formUserDetails"
+      *ngIf="registrationStep === 1"
+      (ngSubmit)="next()">
+
+      <div class="header col-span-2">
+        <h2>{{ 'JOIN.headerBpiYourDetails' | translate }}</h2>
+      </div>
+
+      <!-- firstname -->
+      <mat-form-field hideRequiredMarker>
+        <mat-label>{{ 'JOIN.labelFirstName' | translate }}</mat-label>
+        <input formControlName="firstName" matInput>
+        <mat-error>{{ 'JOIN.invalidRequired' | translate }}</mat-error>
+      </mat-form-field>
+
+    <!-- lastname -->
+    <mat-form-field hideRequiredMarker>
+      <mat-label>{{ 'JOIN.labelLastName' | translate }}</mat-label>
+      <input formControlName="lastName" matInput>
+      <mat-error>{{ 'JOIN.invalidRequired' | translate }}</mat-error>
+    </mat-form-field>
+
+    <!-- role -->
+    <mat-form-field hideRequiredMarker class="col-span-2">
+      <mat-label>{{ 'JOIN.labelJob' | translate }}</mat-label>
+      <mat-select formControlName="job">
+        <mat-option *ngFor="let role of roles" [value]="role">
+          {{ role }}
+        </mat-option>
+      </mat-select>
+      <mat-error>{{ 'JOIN.invalidRequired' | translate }}</mat-error>
+    </mat-form-field>
+
+    <!-- Telephone -->
+    <mat-form-field hideRequiredMarker>
+      <mat-label>{{ 'JOIN.labelTel' | translate }}</mat-label>
+      <input matInput formControlName="telephone">
+      <mat-error>{{ 'JOIN.invalidTelRequired' | translate }}</mat-error>
+    </mat-form-field>
+
+    <!-- Email -->
+    <mat-form-field hideRequiredMarker>
+      <mat-label>{{ 'JOIN.labelEmail' | translate }}</mat-label>
+      <input formControlName="email" matInput>
+      <mat-error>{{ 'JOIN.invalidEmail' | translate }}</mat-error>
+    </mat-form-field>
+
+    <!-- referral -->
+    <mat-form-field class="col-span-2">
+      <mat-label>{{ 'JOIN.labelReferrer' | translate }}</mat-label>
+      <mat-select formControlName="status">
+        <mat-option *ngFor="let ref of referrers" [value]="ref">
+          {{ ref }}
+        </mat-option>
+      </mat-select>
+      <mat-error>{{ 'JOIN.invalidRequired' | translate }}</mat-error>
+    </mat-form-field>
+      <div class="col-span-2 form-actions">
+        <button mat-button type="button" (click)="abort()">{{ 'JOIN.labelBtnBack' | translate }}
+        </button>
+        <button mat-flat-button color="primary" type="button" (click)="next()" [disabled]="!formUserDetails.valid">
+          {{ 'JOIN.labelBtnNext' | translate }}</button>
+      </div>
+    </form>
+
+    <!-- Company -->
+    <form
+      class="rc-form-grid"
+      [formGroup]="formCompanyDetails"
+      *ngIf="registrationStep === 2"
+      (ngSubmit)="next()">
+
+      <div class="header col-span-2">
+        <h2>{{ 'JOIN.headerBpiCompanyDetails' | translate }}</h2>
+      </div>
+
+      <mat-form-field hideRequiredMarker class="col-span-2">
+        <mat-label>{{ 'BPI.labelCompany' | translate }}</mat-label>
+        <input formControlName="companyName" matInput>
+        <mat-error>{{ 'JOIN.invalidRequired' | translate }}</mat-error>
+      </mat-form-field>
+
+      <!-- Address -->
+      <mat-form-field hideRequiredMarker class="col-span-2">
+        <mat-label>{{ 'BPI.labelStreet' | translate }}</mat-label>
+        <input matInput formControlName="companyStreet">
+        <mat-error>{{ 'JOIN.invalidRequired' | translate }}</mat-error>
+      </mat-form-field>
+
+      <!-- City -->
+      <mat-form-field hideRequiredMarker>
+        <mat-label>{{ 'BPI.labelTown' | translate }}</mat-label>
+        <input matInput formControlName="companyLocale">
+        <mat-error>{{ 'JOIN.invalidRequired' | translate }}</mat-error>
+      </mat-form-field>
+
+      <!-- Postcode -->
+      <mat-form-field hideRequiredMarker>
+        <mat-label>{{ 'BPI.labelPostcode' | translate }}</mat-label>
+        <input matInput formControlName="companyPostcode" class="ucase">
+        <mat-error>{{ 'JOIN.invalidRequired' | translate }}</mat-error>
+      </mat-form-field>
+
+      <!-- Siret -->
+      <mat-form-field hideRequiredMarker>
+        <mat-label>{{ 'BPI.labelSiret' | translate }}</mat-label>
+        <input matInput formControlName="companySiret">
+        <mat-error>{{ 'BPI.invalidSiret' | translate }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field hideRequiredMarker>
+        <mat-label>{{ 'BPI.labelTotalEmployees' | translate }}</mat-label>
+        <mat-select formControlName="companyEmployees">
+          <mat-option *ngFor="let item of totalEmployees" [value]="item">
+            {{ item }}
+          </mat-option>
+        </mat-select>
+        <mat-error>{{ 'BPI.invalidSelectionRequired' | translate }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field hideRequiredMarker>
+        <mat-label>{{ 'BPI.labelDirectorFirstName' | translate }}</mat-label>
+        <input formControlName="directorFirstName" matInput>
+        <mat-error>{{ 'JOIN.invalidRequired' | translate }}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field hideRequiredMarker>
+        <mat-label>{{ 'BPI.labelDirectorLastName' | translate }}</mat-label>
+        <input formControlName="directorLastName" matInput>
+        <mat-error>{{ 'JOIN.invalidRequired' | translate }}</mat-error>
+      </mat-form-field>
+
+      <!-- Email -->
+      <mat-form-field hideRequiredMarker class="col-span-2">
+        <mat-label>{{ 'BPI.labelDirectorEmail' | translate }}</mat-label>
+        <input formControlName="directorEmail" matInput>
+        <mat-error>{{ 'JOIN.invalidEmail' | translate }}</mat-error>
+      </mat-form-field>
+
+      <div class="col-span-2 form-actions">
+        <button mat-button type="button" (click)="back()">{{ 'JOIN.labelBtnBack' | translate }}</button>
+        <button mat-flat-button
+                color="primary"
+                type="button"
+                (click)="next()"
+                [disabled]="!formCompanyDetails.valid">
+          {{ 'JOIN.labelBtnNext' | translate }}</button>
+      </div>
+
+    </form>
+
+  </div>
+</div>
+
+<!-- BPI Terms and conditions -->
+<div class="bpi-terms" *ngIf="registrationStep === 3">
+  <div class="inner">
+    <div class="header">
+      <h2>BpiFrance terms and conditions</h2>
+    </div>
+    <form class="rc-form-grid">
+
+      <span class="form-group-label col-span-2">Je soussigné(e) {{ f1.lastName.value }},
+        {{ f1.firstName.value }}, {{ f2.companyName.value }}, déclare que l’entreprise à laquelle j’appartiens:</span>
+
+      <ul class="col-span-2">
+        <li>Existe légalement depuis plus de 2 ans en France.</li>
+        <li>A un chiffre d'affaires supérieur à 20 000€ (dernier exercice connu).</li>
+        <li>Est à jour de ses obligations fiscales et sociales</li>
+        <li>N'a pas déjà perçu pour les deux derniers exercices fiscaux et l'exercice fiscal en cours plus de 200 000
+            euros d'aides publiques (en dehors des aides Covid-19), conformément au règlement (UE) n°1407/2013 de la
+            Commission européenne du 18 décembre 2013 relatif à l'application des articles 107 et 108 du traité sur le
+            fonctionnement de l'Union européenne aux aides « de minimis », publié au Journal Officiel de l'Union
+            européenne du 26 juin 2014 ou tout texte lui succédant<a routerLink="./" fragment="ref">(1)</a></li>
+        <li>N'est pas, à ce jour, en liquidation judiciaire</li>
+        <li>N'a pas déjà bénéficié de plus d'un accompagnement dans le cadre de ce programme (limité à 2 thématiques
+            ou 2 personnes de la même entreprise)</li>
+        <li>Autorise Bpifrance et tout prestataire de Bpifrance à réaliser des contrôles sur la validité des
+            informations listées ci-dessus.</li>
+      </ul>
+
+      <span class="form-group-label col-span-2">J'atteste avoir connaissance que toute déclaration inexacte quant aux
+                                                éléments susvisés:</span>
+      <ul class="col-span-2">
+        <li>Entraînerait la résiliation automatique avec effet immédiat du présent accord entre la société et
+            l'Accompagnateur</li>
+        <li>Serait de nature à engager la responsabilité de la société</li>
+        <li>Impliquerait l'obligation pour la société de verser à l'Accompagnateur le montant total de
+            l'accompagnement, et ce, sans sommation ni mise en demeure ou formalité judiciaire préalable, quinze (15)
+            jours après l'envoi d'une lettre recommandée avec accusé de réception.</li>
+      </ul>
+
+      <span class="form-group-label col-span-2">
+        Fait pour servir et valoir ce que de droit
+      </span>
+      <mat-checkbox #checkTerms class="col-span-2">
+        En cochant la présente case:</mat-checkbox>
+        <ul class="col-span-2">
+          <li>Je reconnais avoir pris connaissance et accepter [les Conditions Générales de Vente disponibles sur le
+              site internet](https://restaurateursindependant.fr/downloads/bpi_terms.pdf), et j’atteste avoir pris
+              connaissance des mentions d’information relatives au traitement des données à caractère personnel collectées et
+              traitées dans le cadre du présent dispositif disponibles au paragraphe PROTECTION DES DONNEES A
+              CARACTERE PERSONNEL des Conditions Générales de Vente</li>
+          <li>J’atteste sur l’honneur que les informations
+              contenues dans le présent formulaire sont exactes et je
+              confirme mon inscription à la formation accompagnement des TPE/PME à la transformation numérique.
+          </li>
+        </ul>
+      <div class="form-actions col-span-2">
+        <button mat-button (click)="back()">{{ 'JOIN.labelBtnBack' | translate }}</button>
+        <button mat-button (click)="abort()">CANCEL</button>
+        <span class="flex-fill"></span>
+        <button mat-button (click)="contact()">NOT SURE?</button>
+        <button mat-flat-button
+                color="accent"
+                (click)="submit()"
+                [disabled]="!checkTerms.checked">
+          I ACCEPT
+        </button>
+      </div>
+
+      <div id="ref" class="col-span-2 rc-txt-small" style="margin-block: 2em;">
+        (1) Texte de référence : <a href="https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=celex%3A32013R1407">https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=celex%3A32013R1407</a>
+      </div>
+
+    </form>
+
+
+  </div>
+
+</div>
+
+

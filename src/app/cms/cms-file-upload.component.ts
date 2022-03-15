@@ -26,6 +26,7 @@ export class CmsFileUploadComponent implements OnInit {
   fileUrl: string;
   uploader: FileUploader;
   responses: Array<any> = [];
+  fileTypes: string;
 
   @ViewChild('imgUploadForm') imgForm: NgForm;
   @ViewChild('menuUploadForm') menuForm: NgForm;
@@ -48,6 +49,7 @@ export class CmsFileUploadComponent implements OnInit {
     this.setImageClasses();
 
     this.filePreview = '';
+    this.fileTypes = (this.data.type === 'image' ? '.jpg, .jpeg' : '.pdf');
 
     const uploaderOptions: FileUploaderOptions = {
 

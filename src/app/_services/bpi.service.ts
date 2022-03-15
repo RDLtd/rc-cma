@@ -16,7 +16,7 @@ export class BpiService {
     this.appService.authToken.subscribe(token => this.authToken = token);
   }
 
-  createBpiAccount(bpi: Object) {
+  createBpi(bpi: Object) {
     console.log('createBpiAccount', bpi);
     return this.http.post(this.config.apiUrl + '/bpi/createbpi',
       {

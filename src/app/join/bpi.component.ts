@@ -123,10 +123,12 @@ export class BpiComponent implements OnInit {
       bpi_declaration: this.formTerms.valid
     };
     // Make api call
-    this.bpiService.createBpiAccount(this.bpiData)
+    this.bpiService.createBpi(this.bpiData)
       .subscribe((res) => {
         console.log(res);
-        // log user into training platform?
+        this.bpiData.bpi_password = res['bpi_password'];
+        this.bpiData.bpi_link = res['bpi_link'];
+        // log user into training platform? Link is here... this.bpiData.bpi_link
         setTimeout(() => {
           this.isRegistered = true;
           this.formStage = 'complete';
