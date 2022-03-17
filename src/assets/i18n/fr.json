@@ -5,7 +5,7 @@
 		"version": "Version"
 	},
 	"BPI": {
-		"errorGeneric": "Malheureusement, nous ne pouvons pas vous inscrire au programme pour le moment. Nous avons vos coordonnées et un membre de notre équipe d'assistance vous contactera sous peu pour résoudre le problème.\n\nMerci beaucoup.\n",
+		"errorGeneric": "Malheureusement, nous ne pouvons pas donner suite à votre inscription pour le moment. \n\nNotre support vous contactera sous peu aux coordonnées indiquées pour résoudre le problème.\n\nMerci de votre patience.\n\n",
 		"invalidSelectionRequired": "Veuillez sélectionner un article",
 		"invalidSiret": "Un code valide à 14 chiffres est requis",
 		"labelCompany": "Raison sociale",
@@ -14,6 +14,7 @@
 		"labelDirectorLastName": "Nom du Dirigeant",
 		"labelPostcode": "CP",
 		"labelSiret": "SIRET (sans espaces)",
+		"labelStart": "Commencer",
 		"labelStreet": "Adresse postale",
 		"labelTotalEmployees": "Nombre de salariés",
 		"labelTown": "Ville",
@@ -26,9 +27,9 @@
 			"> 250 salariés"
 		],
 		"loadingMessage": "Inscription en cours...",
-		"msgAbort": "En utilisant cette option, vous perdrez toutes les informations que vous avez déjà complétées.\n\nÊtes-vous sûr de vouloir annuler ?",
-		"msgNeedHelp": "Pourrions-nous vous contacter et discuter de votre éligibilité ou de tout autre aspect de l'inscription ?",
-		"titleNeedHelp": "Nous pouvons aider"
+		"msgAbort": "En cliquant sur « oui », toutes les informations que vous avez déjà renseignées seront perdues. \n\nÊtes-vous sûr de vouloir annuler ?\n",
+		"msgNeedHelp": "Pouvons-nous vous contacter et discuter de votre éligibilité ou de tout autre aspect de l'inscription?",
+		"titleNeedHelp": "Nous pouvons vous aider"
 	},
 	"CMS": {
 		"DASHBOARD": {
@@ -291,12 +292,12 @@
 	},
 	"CONFIRM": {
 		"labelBtnCancel": "NON, ANNULER",
-		"labelBtnConfirm": "OUI, CONTINUER",
+		"labelBtnConfirm": "OUI, JE CONFIRME",
 		"labelBtnNoThanks": "Non merci",
 		"labelBtnYes": "Oui s'il vous plaît",
 		"labelDontShow": "Ne plus me le montrer",
 		"msgConfirmCancel": "Les modifications effectuées n'ont pas encore été enregistrées et seront perdues si vous continuez. Voulez-vous continuer?",
-		"titleConfirmCancel": "Veuillez Confirmer"
+		"titleConfirmCancel": "Confirmez votre choix"
 	},
 	"Global": {
 		"DOW-Dimanche": "Dimanche",
@@ -367,7 +368,7 @@
 		"joinUsByReferralFree": "# Adhésion gratuite!\n\nVous avez été invité à devenir membre gratuit de **{{ brand }}**, une organisation qui a été créée pour soutenir les restaurants et apporter des changements positifs au sein de l'industrie.\n\nVeuillez saisir vos coordonnées et indiquer que vous acceptez nos conditions.\n\nSi vous rencontrez des problèmes pour activer votre adhésion, veuillez [contacter notre équipe d'assistance]({{ email }}).\n\nToujours pas sûr ? [Visitez notre site Web pour plus d'informations] (https://restaurantcollective.org.uk/first-3-months-membership-is-absolutely-free/)",
 		"joinUsToday": "# Rejoignez-nous!\n\nSuivez simplement les étapes et vous ferez partie du Collectif!\n\n 1. Indiquez votre nom et vos coordonnées\n\n 2. Sélectionnez votre option d'abonnement\n\n 3. Puis règler votre abonnement en ligne\n\nSi vous rencontrez des problèmes tout au long de ce processus, envoyez un e-mail à:\n\n{{ email }}",
 		"joinWelcome": "# Bienvenue\n\nVous vous êtes inscrit avec succès. **Membre** nous vous avons envoyé des informations de connexion et complémentaires.\n\nFermez cette fenêtre et vérifiez votre messagerie.\n\nMerci beaucoup.\n\n**L'équipe de {{ brand }}**",
-		"labelBtnBack": "PRECEDENT",
+		"labelBtnBack": "PRÉCÉDENT",
 		"labelBtnNext": "Suivant",
 		"labelBtnRegister": "ENVOYER",
 		"labelBtnSubmit": "SUIVANT",
