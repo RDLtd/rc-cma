@@ -3,75 +3,112 @@
   <div class="split-panel-left">
     <div class="panel-content">
 
-      <div class="header">
-        <app-rc-logo [height]="'80px'"></app-rc-logo>
-        <h2>Mise en place numérique</h2>
-      </div>
+
 
       <div [ngSwitch]="registrationStep">
 
+
         <div *ngSwitchCase="0">
-          <p>Registration for your <strong>FREE</strong> digital training should only take a few minutes but, before you
-             start, please make sure that your company meets the requirements, as follows:</p>
+
+          <div class="header">
+            <app-rc-logo [height]="'80px'"></app-rc-logo>
+            <h2>Bienvenue et merci pour l'intérêt que vous portez à Mise en place numérique!</h2>
+          </div>
+          <p>Cet accompagnement est <strong>gratuit</strong> pour vous, car <strong>entièrement financé par Bpifrance</strong> dans le cadre
+             du plan France Relance. Avant de commencer, assurez-vous que votre entreprise répond aux critères d’éligibilité requis par Bpifrance:</p>
           <ol>
-            <li>The company <strong>HAS</strong> legally existed for more than 2 years in France, has a turnover of more
-                than
-                20,000€ p.a. and has met all of its tax and employee obligations.</li>
-            <li>The company <strong>HAS NOT</strong> received more than 200k euros of public aid in the last 3 fiscal
-                years or already benefited, more than once, under this program and is not in compulsory
-                liquidation</li>
+            <li>L'entreprise existe légalement depuis plus de 2 ans en France, a un chiffre d'affaires de plus de 20000
+                euros par an, a rempli toutes ses obligations fiscales et sociales et n’est pas en liquidation.</li>
+            <li>L'entreprise n’a PAS déjà bénéficié de plus d'un accompagnement dans le cadre de ce programme.</li>
           </ol>
-          <p>You will also need the company's registered address, SIRET code and
-             director's name & email address, before you START you registration.</p>
+          <p>Pour procéder à votre inscription, veuillez vous munir des informations suivantes:</p>
+          <ol>
+            <li>l'adresse de votre entreprise</li>
+            <li>son numéro de SIRET</li>
+            <li>le nom et l'adresse électronique de son dirigeant</li>
+          </ol>
           <div class="flex-center">
-            <button mat-raised-button (click)="startBpiRegistration()" class="large">START</button>
+            <button mat-raised-button (click)="startBpiRegistration()"
+                    class="large">{{ 'BPI.labelStart' | translate | uppercase }}</button>
           </div>
         </div>
 
         <!-- Users details -->
         <div *ngSwitchCase="1">
-          <p>Please enter your personal contact details and let us know how you heard about the BpiFrance offer.</p>
-          <p>This information will be used to create your personalised training program.</p>
-          <p>We will only contact you in relation to the program and your details will not be passed to any other
-             organisations.</p>
+
+          <div class="header">
+            <app-rc-logo [height]="'80px'"></app-rc-logo>
+          </div>
+
+          <p>Pour pouvoir bénéficier de cet accompagnement gratuit, Bpifrance nous demande de vérifier que les
+             participants répondent à des <strong>critères d’éligibilité</strong> précis.</p>
+
+          <p>Merci de bien vouloir renseigner les informations demandées (promis, ça ne prend que 2 minutes!) ici à
+             propos du participant puis de l’entreprise afin que Restaurateurs Indépendants puisse les transmettre à
+             Bpifrance pour valider votre inscription.</p>
+
+          <p>Une fois ce formulaire rempli, nous vous invitons à réserver tout de suite votre premier rendez-vous
+             individuel à distance avec l’un de nos conseillers, en fonction de vos disponibilités. Cette étape
+             permettra de faire le point sur vos besoins et vos attentes, et de débuter l’accompagnement dans les
+             meilleures conditions.</p>
+
+          <p>À très bientôt!</p>
+
         </div>
 
         <!-- Company details -->
         <div *ngSwitchCase="2">
-          <p>Now we need some information about your company.</p>
-          <p>This information is required as proof that your company is eligible for this government funded scheme.</p>
-          <p>Please ensure that all of this information you provide is accurate.</p>
+
+          <div class="header">
+            <app-rc-logo [height]="'80px'"></app-rc-logo>
+          </div>
+
+          <p>Merci de fournir ici les informations requises concernant votre entreprise : elles sont nécessaires pour
+             confirmer son éligibilité à l’accompagnement <em>Mise en place numérique</em>, financé par le gouvernement français
+             dans le cadre du programme France Relance.</p>
         </div>
 
         <!-- Confirmation -->
         <div *ngSwitchCase="5">
 
-          <p>Excellente nouvelle : Votre inscription a bien été prise en compte !</p>
+          <div class="header">
+            <app-rc-logo [height]="'80px'"></app-rc-logo>
+          </div>
 
-          <p>Voici les <b>prochaines étapes</b> :</p>
 
-          <p>Vous allez recevoir un email de bienvenue avec toutes les informations à retenir ;</p>
+          <p>Excellente nouvelle: Votre inscription a bien été prise en compte!</p>
+
+          <p>Voici les <b>prochaines étapes</b>:</p>
+
+          <p>Vous allez recevoir un email de bienvenue avec toutes les informations à retenir</p>
 
           <p>Vous y retrouverez  le lien vers la plateforme de formation 360Learning,
-             ainsi que votre identifiant et votre mot de passe :</p>
+             ainsi que votre identifiant et votre mot de passe:</p>
 
-          <p style="text-align:center; color:#000;">
-            <a href="{{ bpiData.bpi_link }}">{{ bpiData.bpi_link }}</a></p>
-          <p style="text-align:center;color:#000;">Identifiant : {{ bpiData.bpi_email }}</p>
-          <p style="text-align:center;color:#000;">Mot de passe : {{ bpiData.bpi_password }}</p>
+          <div style="margin-block: 2rem;">
+            <p><a href="{{ bpiData?.bpi_link }}">{{ bpiData?.bpi_link }}</a></p>
+            <p><strong>Identifiant</strong>: {{ bpiData?.bpi_email }}</p>
+            <p><strong>Mot de passe</strong>: {{ bpiData?.bpi_password }}</p>
+          </div>
 
-          <p>Connectez-vous tout de suite à la plateforme 360Learning pour <b>prendre rendez-vous pour votre entretien individuel</b>. Ce moment est fondamental pour bien démarrer votre parcours.
+
+          <p>Connectez-vous tout de suite à la plateforme 360Learning pour <strong>prendre rendez-vous pour votre entretien individuel</strong>. Ce moment est fondamental pour bien démarrer votre parcours.
              Il suffit de choisir le créneau qui vous convient parmi ceux qui sont mis à disposition!</p>
           <p>À très bientôt pour votre premier entretien individuel,</p>
-          <p>L’équipe Restaurateurs Indépendants</p>
+          <h2>L’équipe Restaurateurs Indépendants</h2>
 
         </div>
 
         <!-- Error -->
-        <div *ngIf="registrationStep < 0"
-             markdown
+        <div *ngIf="registrationStep < 0">
+          <div class="header">
+            <app-rc-logo [height]="'80px'"></app-rc-logo>
+            <h2>:(</h2>
+          </div>
+        <div markdown
              ngpreservewhitespaces>
             {{ errorMessage }}
+        </div>
         </div>
       </div>
     </div>
@@ -83,9 +120,9 @@
     <!-- Intro -->
     <div class="logos" *ngIf="registrationStep < 1 || registrationStep > 3">
       <div class="rc-centre">
-        <div class="header">
-          <h2>Sponsored & supported by</h2>
-        </div>
+<!--        <div class="header">-->
+<!--          <h2>Sponsored & supported by</h2>-->
+<!--        </div>-->
       </div>
       <app-rc-logo [height]="'4rem'" version="primary"></app-rc-logo>
       <img
@@ -264,38 +301,43 @@
 <div class="bpi-terms" *ngIf="registrationStep === 3">
   <div class="inner">
     <div class="header">
-      <h2>BpiFrance terms and conditions</h2>
+      <h2>Déclaration sur l’honneur</h2>
     </div>
     <form class="rc-form-grid">
 
-      <span class="form-group-label col-span-2">Je soussigné(e) {{ f1.lastName.value }},
-        {{ f1.firstName.value }}, {{ f2.companyName.value }}, déclare que l’entreprise à laquelle j’appartiens:</span>
+      <span class="form-group-label col-span-2">Je soussigné(e) {{ f1.firstName.value }} {{ f1.lastName.value }},
+        {{ f2.companyName.value }}, déclare que l’entreprise à laquelle j’appartiens:</span>
 
       <ul class="col-span-2">
-        <li>Existe légalement depuis plus de 2 ans en France.</li>
-        <li>A un chiffre d'affaires supérieur à 20 000€ (dernier exercice connu).</li>
+        <li>Existe légalement depuis plus de 2 ans en France</li>
+        <li>A un chiffre d’affaires supérieur à 20 000 € (dernier exercice connu)</li>
         <li>Est à jour de ses obligations fiscales et sociales</li>
-        <li>N'a pas déjà perçu pour les deux derniers exercices fiscaux et l'exercice fiscal en cours plus de 200 000
-            euros d'aides publiques (en dehors des aides Covid-19), conformément au règlement (UE) n°1407/2013 de la
-            Commission européenne du 18 décembre 2013 relatif à l'application des articles 107 et 108 du traité sur le
-            fonctionnement de l'Union européenne aux aides « de minimis », publié au Journal Officiel de l'Union
-            européenne du 26 juin 2014 ou tout texte lui succédant<a routerLink="./" fragment="ref">(1)</a></li>
-        <li>N'est pas, à ce jour, en liquidation judiciaire</li>
-        <li>N'a pas déjà bénéficié de plus d'un accompagnement dans le cadre de ce programme (limité à 2 thématiques
-            ou 2 personnes de la même entreprise)</li>
+        <li>N’a pas déjà perçu pour les deux derniers exercices fiscaux et l’exercice fiscal en cours plus de 200 000
+            euros d'aides publiques, conformément au règlement (UE) n° 1407/2013 de la Commission européenne du 18
+            décembre 2013 relatif à l'application des articles 107 et 108 du traité sur le fonctionnement de l'Union
+            européenne aux aides « de minimis », publié au Journal officiel de l’Union européenne du 26 juin 2014 ou
+            tout texte lui succédant[1]
+        </li>
+        <li>N’est pas, à ce jour, en liquidation judiciaire</li>
+        <li>N’a pas déjà bénéficié de plus d’un accompagnement dans le cadre de ce programme (limité à 2 thématiques ou
+            2 personnes de la même entreprise)
+        </li>
         <li>Autorise Bpifrance et tout prestataire de Bpifrance à réaliser des contrôles sur la validité des
-            informations listées ci-dessus.</li>
+            informations listées ci-dessus.
+        </li>
       </ul>
 
-      <span class="form-group-label col-span-2">J'atteste avoir connaissance que toute déclaration inexacte quant aux
-                                                éléments susvisés:</span>
+      <span class="form-group-label col-span-2">J’atteste avoir connaissance que toute déclaration inexacte quant aux éléments susvisés:</span>
+
       <ul class="col-span-2">
         <li>Entraînerait la résiliation automatique avec effet immédiat du présent accord entre la société et
-            l'Accompagnateur</li>
+            l’Accompagnateur
+        </li>
         <li>Serait de nature à engager la responsabilité de la société</li>
-        <li>Impliquerait l'obligation pour la société de verser à l'Accompagnateur le montant total de
-            l'accompagnement, et ce, sans sommation ni mise en demeure ou formalité judiciaire préalable, quinze (15)
-            jours après l'envoi d'une lettre recommandée avec accusé de réception.</li>
+        <li>Impliquerait l’obligation pour la société de verser à l’Accompagnateur le montant total de
+            l’accompagnement, et ce, sans sommation ni mise en demeure ou formalité judiciaire préalable, quinze (15)
+            jours après l'envoi d'une lettre recommandée avec accusé de réception.
+        </li>
       </ul>
 
       <span class="form-group-label col-span-2">
@@ -304,26 +346,25 @@
       <mat-checkbox #checkTerms class="col-span-2">
         En cochant la présente case:</mat-checkbox>
         <ul class="col-span-2">
-          <li>Je reconnais avoir pris connaissance et accepter [les Conditions Générales de Vente disponibles sur le
-              site internet](https://restaurateursindependant.fr/downloads/bpi_terms.pdf), et j’atteste avoir pris
-              connaissance des mentions d’information relatives au traitement des données à caractère personnel collectées et
-              traitées dans le cadre du présent dispositif disponibles au paragraphe PROTECTION DES DONNEES A
-              CARACTERE PERSONNEL des Conditions Générales de Vente</li>
-          <li>J’atteste sur l’honneur que les informations
-              contenues dans le présent formulaire sont exactes et je
+          <li>Je reconnais avoir pris connaissance et accepté [les Conditions Générales de Vente disponibles sur le
+              site internet](https://restaurateursindependants.fr/downloads/bpi_terms.pdf), et j’atteste avoir pris
+              connaissance des mentions d’information relatives au traitement des données à caractère personnel
+              collectées et traitées dans le cadre du présent dispositif, disponibles au paragraphe « PROTECTION DES
+              DONNÉES À CARACTÈRE PERSONNEL » des Conditions Générales de Vente</li>
+          <li>J’atteste sur l’honneur que les informations contenues dans le présent formulaire sont exactes et je
               confirme mon inscription à la formation accompagnement des TPE/PME à la transformation numérique.
           </li>
         </ul>
       <div class="form-actions col-span-2">
         <button mat-button (click)="back()">{{ 'JOIN.labelBtnBack' | translate }}</button>
-        <button mat-button (click)="abort()">CANCEL</button>
+        <button mat-button (click)="abort()">ANNULER</button>
         <span class="flex-fill"></span>
-        <button mat-button (click)="contact()">NOT SURE?</button>
+        <button mat-button (click)="contact()">PAS CERTAIN?</button>
         <button mat-flat-button
                 color="accent"
                 (click)="submit()"
                 [disabled]="!checkTerms.checked">
-          I ACCEPT
+          J’ACCEPTE
         </button>
       </div>
 

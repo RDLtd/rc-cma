@@ -7,6 +7,9 @@ $pad: 15vh;
   > * {
     flex-basis: 100%;
   }
+  p {
+    margin-bottom: 1.5rem;
+  }
   .split-panel-left {
     display: flex;
     flex-direction: column;
@@ -53,20 +56,20 @@ $pad: 15vh;
     margin-inline: auto;
     display: flex;
     flex-direction: column;
-    font-size: 20px;
+    font-size: 18px;
     ol {
-      margin-block: 2rem;
+      margin-block: 1rem;
     }
     li {
       list-style: decimal;
     }
     li + li {
-      margin-top: 1em;
+      margin-top: .75em;
     }
     p {
-      font-size: 20px;
-      margin-block: .5em;
-      line-height: 1.4;
+      font-size: 18px;
+      //margin-block: .5em;
+      line-height: 1.5;
     }
   }
 }
