@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="96px" height="96px" viewBox="0 0 96 96" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.6 (67491) - http://www.bohemiancoding.com/sketch -->
+    <title>app-icon-training</title>
+    <desc>Created with Sketch.</desc>
+    <g id="app-icon-training" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="local_offer-24px">
+            <polygon id="Path" points="0 0 96 0 96 96 0 96"></polygon>
+        </g>
+        <g id="Group-2" transform="translate(5.000000, 13.000000)" fill-rule="nonzero">
+            <path d="M23.4545455,36.05 L43,46.6666667 L62.5454545,36.05 L62.5454545,50.5166667 L43,61.1333333 L23.4545455,50.5166667 L23.4545455,36.05 Z M16.34,23.3333333 L43,8.86666667 L69.66,23.3333333 L43,37.8 L16.34,23.3333333 Z" id="Shape" fill="#00A69B" opacity="0.499079241"></path>
+            <path d="M43,0 L0,23.3333333 L15.6363636,31.8111111 L15.6363636,55.1444444 L43,70 L70.3636364,55.1444444 L70.3636364,31.8111111 L78.1818182,27.5722222 L78.1818182,54.4444444 L86,54.4444444 L86,23.3333333 L43,0 Z M62.5454545,50.5166667 L43,61.1333333 L23.4545455,50.5166667 L23.4545455,36.05 L43,46.6666667 L62.5454545,36.05 L62.5454545,50.5166667 Z M43,37.8 L16.34,23.3333333 L43,8.86666667 L69.66,23.3333333 L43,37.8 Z" id="Shape" fill="#575752"></path>
+        </g>
+    </g>
+</svg>
