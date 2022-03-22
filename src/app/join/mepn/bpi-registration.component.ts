@@ -14,7 +14,7 @@ import {MatDialog} from '@angular/material/dialog';
 export class BpiRegistrationComponent implements OnInit {
 
   registered = false;
-  registrationStep = 0;
+  registrationStep = 5;
   submitting = false;
   bpiTermsAccepted = false;
   referralCode: string;
