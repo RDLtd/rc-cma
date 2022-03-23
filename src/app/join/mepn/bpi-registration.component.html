@@ -3,10 +3,7 @@
   <div class="split-panel-left">
     <div class="panel-content">
 
-
-
       <div [ngSwitch]="registrationStep">
-
 
         <div *ngSwitchCase="0">
 
@@ -86,9 +83,10 @@
              ainsi que votre identifiant et votre mot de passe:</p>
 
           <div style="margin-block: 2rem;">
-            <p><a href="{{ bpiData?.bpi_link }}">{{ bpiData?.bpi_link }}</a></p>
-            <p><strong>Identifiant</strong>: {{ bpiData?.bpi_email }}</p>
-            <p><strong>Mot de passe</strong>: {{ bpiData?.bpi_password }}</p>
+            <a [href]="bpiData.bpi_link" mat-raised-button color="accent" class="link-button">
+              Se connecter à 360Learning
+            </a>
+            <p><strong>Identifiant</strong>: {{ bpiData?.bpi_email }}<br><strong>Mot de passe</strong>: {{ bpiData?.bpi_password }}</p>
           </div>
 
 
@@ -346,8 +344,9 @@
       <mat-checkbox #checkTerms class="col-span-2">
         En cochant la présente case:</mat-checkbox>
         <ul class="col-span-2">
-          <li>Je reconnais avoir pris connaissance et accepté [les Conditions Générales de Vente disponibles sur le
-              site internet](https://restaurateursindependants.fr/downloads/bpi_terms.pdf), et j’atteste avoir pris
+          <li>Je reconnais avoir pris connaissance et accepté
+            <a href="https://restaurateursindependants.fr/downloads/bpi_terms.pdf">
+              les Conditions Générales de Vente disponibles sur le site internet</a> et j’atteste avoir pris
               connaissance des mentions d’information relatives au traitement des données à caractère personnel
               collectées et traitées dans le cadre du présent dispositif, disponibles au paragraphe « PROTECTION DES
               DONNÉES À CARACTÈRE PERSONNEL » des Conditions Générales de Vente</li>
