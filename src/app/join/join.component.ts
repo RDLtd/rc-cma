@@ -84,7 +84,6 @@ export class JoinComponent implements OnInit {
           sessionStorage.setItem('referrer_type', 'self');
           this.isLoaded = true;
         }
-
       });
 
     // Set brand
@@ -101,6 +100,7 @@ export class JoinComponent implements OnInit {
 
   // Check referral
   async setReferral(code) {
+    this.referrer.code = code;
     // Check code
     await this.memberService.getReferral(code)
       .then((promoEvents) => {
@@ -158,7 +158,6 @@ export class JoinComponent implements OnInit {
     // Check for duplicates
     await this.memberService.preFlight(formData)
       .then(res => {
-
         // Not a duplicate
         if (res['status'] === 'OK') {
           // Create free membership?

@@ -151,6 +151,20 @@
           <mat-error>{{ 'JOIN.invalidTelRequired' | translate }}</mat-error>
         </mat-form-field>
 
+        <!-- Referral code -->
+        <mat-form-field hideRequiredMarker>
+          <mat-label>{{ 'JOIN.labelCode' | translate }}</mat-label>
+          <input
+                  #referral
+                  [(ngModel)]="referrer.code"
+                  matInput
+                  type="text"
+                  name="referral_code"
+                  [placeholder]="'JOIN.placeholderCode' | translate"
+                  minlength="6"
+                  maxlength="6">
+        </mat-form-field>
+
         <mat-checkbox name="accepts_terms" [(ngModel)]="pendingMember.accepts_terms">
           <div class="rc-txt-small" markdown>
             {{ 'JOIN.labelTerms' | translate: {

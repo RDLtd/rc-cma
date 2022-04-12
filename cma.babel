@@ -5619,6 +5619,23 @@
                         </translations>
                     </concept_node>
                     <concept_node>
+                        <name>labelCode</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-GB</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
                         <name>labelEmail</name>
                         <definition_loaded>false</definition_loaded>
                         <description/>
@@ -5824,6 +5841,23 @@
                     </concept_node>
                     <concept_node>
                         <name>msgThanks</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description/>
+                        <comment/>
+                        <default_text/>
+                        <translations>
+                            <translation>
+                                <language>en-GB</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>fr-FR</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>placeholderCode</name>
                         <definition_loaded>false</definition_loaded>
                         <description/>
                         <comment/>
