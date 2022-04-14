@@ -100,13 +100,12 @@ export class JoinComponent implements OnInit {
 
   // Check referral
   async setReferral(code) {
+    // console.log('CODE', code);
     this.referrer.code = code;
     // Check code
     await this.memberService.getReferral(code)
       .then((promoEvents) => {
-        // console.log('promoEvents', promoEvents);
         // To be valid it should have at least 1 event
-
         if (promoEvents.length) {
           const promo = promoEvents[0];
           this.referrer.code = this.pendingMember.referral_code = code;
@@ -114,12 +113,10 @@ export class JoinComponent implements OnInit {
           this.referrer.name = `${promo.member_first_name} ${promo.member_last_name}`;
           this.referrer.id = promo.member_id;
           this.referrer.promo_status = promo.promo_status;
-
           this.memberService.checkFreePromo(code).subscribe((res) => {
             console.log('Free?', res);
             this.referrer.freeMembership = res['free'];
           });
-
         } else {
           this.referrer.type = 'self';
         }
@@ -155,6 +152,14 @@ export class JoinComponent implements OnInit {
     this.isSubmitting = true;
     this.load.open();
 
+    // Check if a referral code was added manually
+    // i.e. not via url params and originally set to 'self' referral
+    if (sessionStorage.getItem('referrer_type') === 'self' && formData.referral_code.length) {
+      // Check code
+      // console.log('Add code', formData.referral_code);
+      await this.setReferral(formData.referral_code).then(res => console.log(res));
+    }
+
     // Check for duplicates
     await this.memberService.preFlight(formData)
       .then(res => {
@@ -169,8 +174,11 @@ export class JoinComponent implements OnInit {
                   this.load.close();
               });
             })
-              .catch(err => console.log(res));
+              .catch(err => console.log(err));
           } else {
+            // If the referral code is added manually then we need
+            // to setReferral here
+            formData.promo_status = this.referrer.promo_status || null;
             this.savePendingMemberData(formData);
             this.router.navigate(['/membership-options'])
               .then(() => this.load.close());

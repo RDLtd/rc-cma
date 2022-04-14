@@ -46,6 +46,7 @@ $config: mat.define-typography-config();
   display: flex;
   justify-content: space-between;
 }
+.rc-flex-end { justify-content: flex-end; }
 
 .rc-codes {
   display: flex;

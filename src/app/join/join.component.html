@@ -81,7 +81,6 @@
         <mat-form-field hideRequiredMarker style="width: 38%;">
           <mat-label>{{ 'JOIN.labelFirstName' | translate }}</mat-label>
           <input
-            #fname
             type="text"
             name="first_name"
             [(ngModel)]="pendingMember.first_name"
@@ -95,7 +94,6 @@
         <mat-form-field hideRequiredMarker style="width: 60%;">
           <mat-label>{{ 'JOIN.labelLastName' | translate }}</mat-label>
           <input
-            #lname
             type="text"
             name="last_name"
             [(ngModel)]="pendingMember.last_name"
@@ -138,7 +136,6 @@
         <mat-form-field hideRequiredMarker>
           <mat-label>{{ 'JOIN.labelTel' | translate }}</mat-label>
           <input
-            #mobile
             [(ngModel)]="pendingMember.telephone"
             matInput
             type="tel"
@@ -154,15 +151,11 @@
         <!-- Referral code -->
         <mat-form-field hideRequiredMarker>
           <mat-label>{{ 'JOIN.labelCode' | translate }}</mat-label>
-          <input
-                  #referral
-                  [(ngModel)]="referrer.code"
+          <input  [(ngModel)]="referrer.code"
                   matInput
                   type="text"
                   name="referral_code"
-                  [placeholder]="'JOIN.placeholderCode' | translate"
-                  minlength="6"
-                  maxlength="6">
+                  [placeholder]="'JOIN.placeholderCode' | translate">
         </mat-form-field>
 
         <mat-checkbox name="accepts_terms" [(ngModel)]="pendingMember.accepts_terms">
