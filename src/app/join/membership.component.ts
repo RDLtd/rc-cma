@@ -8,6 +8,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { MemberService } from '../_services';
 import { CurrencyPipe } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ConfirmCancelComponent } from '../common';
+import { MatDialog } from '@angular/material/dialog';
 
 export interface Product {
   id: string;
@@ -27,6 +29,7 @@ export class MembershipComponent implements OnInit {
 
   transParams: any;
   waiting = false;
+  pending: any;
   stripeSessionId: string;
   stripePromise: any;
   stringInCode: any;
@@ -41,7 +44,8 @@ export class MembershipComponent implements OnInit {
     private translate: TranslateService,
     private memberService: MemberService,
     private currencyPipe: CurrencyPipe,
-    private snack: MatSnackBar
+    private snack: MatSnackBar,
+    private dialog: MatDialog
   ) {
 
     this.stripePromise = loadStripe(environment[this.config.brand.prefix + '_stripe_key']);
@@ -61,6 +65,21 @@ export class MembershipComponent implements OnInit {
     });
     // this.loader.open();
     this.getProducts().then(() => console.log('loaded'));
+
+    // If this was a sales referral and
+    // there is a promotion message then display it
+    this.pending = JSON.parse(sessionStorage.getItem('rc_member_pending'));
+    console.log(this.pending);
+    if (!!this.pending.promo_status) {
+      this.dialog.open(ConfirmCancelComponent, {
+        data: {
+          title: 'Welcome',
+          body: this.pending.promo_status,
+          cancel: 'hide',
+          confirm: 'OK'
+        }
+      });
+    }
   }
 
   async getProducts() {
@@ -128,5 +147,4 @@ export class MembershipComponent implements OnInit {
       });
     }
   }
-
 }

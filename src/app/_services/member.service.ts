@@ -502,9 +502,10 @@ export class MemberService {
     console.log('MS PENDING', pending);
     return this.http.post(this.config.apiUrl + '/members/create_pending',
       {
-        pending: pending,
-        userCode: this.config.userAPICode,
-        token: this.authToken
+          pending,
+          company: this.config.brand.prefix,
+          userCode: this.config.userAPICode,
+          token: this.authToken
       });
   }
 

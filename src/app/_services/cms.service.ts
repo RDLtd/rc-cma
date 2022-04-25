@@ -424,30 +424,15 @@ export class CMSService {
       });
   }
 
-  // JB Version
   async publish(restaurant_id, production: Boolean): Promise<any> {
-      const data = await this.http.post(this.config.apiUrl + '/restaurants/checkassociation',
-          { restaurant_id, userCode: this.config.userAPICode, token: this.authToken })
-          .toPromise();
-      if (data['count'] > 0) {
-          return await this.http.post(this.config.apiUrl + '/spw/makespw',
-              {
-                  restaurant_id,
-                  production,
-                  company: this.config.brand.prefix,
-                  userCode: this.config.userAPICode,
-                  token: this.authToken
-              }).toPromise();
-      } else {
-          return await this.http.post(this.config.apiUrl + '/spw/makelspw',
-              {
-                  restaurant_id,
-                  usePlaceholders: true,
-                  company: this.config.brand.prefix,
-                  userCode: this.config.userAPICode,
-                  token: this.authToken
-              }).toPromise();
-      }
+      return await this.http.post(this.config.apiUrl + '/spw/makespw',
+          {
+              restaurant_id,
+              production,
+              company: this.config.brand.prefix,
+              userCode: this.config.userAPICode,
+              token: this.authToken
+          }).toPromise();
   }
 
   updateCoordinates(restaurant_id: string, restaurant_lat: number, restaurant_lng: number) {

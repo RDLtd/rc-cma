@@ -8,7 +8,7 @@
     {{ data.body || 'CONFIRM.msgConfirmCancel' | translate}}
   </mat-dialog-content>
 
-  <mat-dialog-actions align="end">
+  <mat-dialog-actions class="rc-flex-end">
     <button
       *ngIf="data.cancel !== 'hide'"
       tabindex="-1"
