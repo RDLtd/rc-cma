@@ -154,7 +154,7 @@ export class JoinComponent implements OnInit {
 
     // Check if a referral code was added manually
     // i.e. not via url params and originally set to 'self' referral
-    if (sessionStorage.getItem('referrer_type') === 'self' && formData.referral_code.length) {
+    if (sessionStorage.getItem('referrer_type') === 'self' && !!formData.referral_code) {
       // Check code
       // console.log('Add code', formData.referral_code);
       await this.setReferral(formData.referral_code).then(res => console.log(res));
