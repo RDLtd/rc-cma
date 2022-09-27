@@ -30,10 +30,12 @@
               "src/apple-touch-icon.png"
             ],
             "styles": [
-              "src/styles/styles.scss"
+              "src/styles/styles.scss",
+              "src/assets/css/mozrest-sdk.min.css"
             ],
             "scripts": [
-              "node_modules/marked/lib/marked.js"
+              "node_modules/marked/lib/marked.js",
+              "src/assets/scripts/mozrest-sdk.min.js"
             ],
             "allowedCommonJsDependencies": [
               "lodash",

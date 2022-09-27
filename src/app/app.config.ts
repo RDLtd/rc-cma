@@ -25,6 +25,8 @@ export class AppConfig {
   // This is Angular's equivalent! See the 'environments' folder
   // Build process should automatically detect the correct variables
   public readonly apiUrl = environment.API_URL;
+  public readonly mozId = environment.MOZ_ID;
+  public readonly mozKey = environment.MOZ_APIKEY;
 
   public readonly sql_defaults = {
     where_field: 'restaurant_name',
