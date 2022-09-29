@@ -3,6 +3,10 @@ import { AppConfig } from '../app.config';
 import { LoadService } from '../common';
 import { HeaderService } from '../common/header.service';
 
+/**
+ * Reference the Mozrest SDK global
+ * object loaded in the external js file
+ */
 declare var mozrest: any;
 
 @Component({
@@ -11,8 +15,6 @@ declare var mozrest: any;
 })
 export class ProfileComponent implements OnInit {
 
-  mozId: string;
-  mozKey: string;
   moz: any;
 
   constructor(
@@ -22,8 +24,6 @@ export class ProfileComponent implements OnInit {
   ) {
     this.loader.open();
     this.headerService.updateSectionName('Profile Management');
-    this.mozId = config.mozId;
-    this.mozKey = config.mozKey;
   }
 
   ngOnInit(): void {
@@ -35,7 +35,7 @@ export class ProfileComponent implements OnInit {
       accessKey: '6332b8947e9f8c135687998a'
     });
 
-    this.moz.showPage('Reviews');
+    this.moz.showPage('Listing');
     this.loader.close();
 
   }
