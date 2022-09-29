@@ -35,7 +35,7 @@ export class ProfileComponent implements OnInit {
       accessKey: '6332b8947e9f8c135687998a'
     });
 
-    this.moz.showPage('Listing');
+    this.moz.showPage('Reviews');
     this.loader.close();
 
   }

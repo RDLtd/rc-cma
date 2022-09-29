@@ -15,7 +15,6 @@ export class AppConfig {
   // App location
   appUrl = window.location.origin;
 
-
   // Should only need to switch here to change from local to Heroku server
   // public readonly apiUrl = 'http://localhost:4000';
   // public readonly apiUrl = 'https://rc-server-carter-mwkg7qc3nv9ak.herokuapp.com'
