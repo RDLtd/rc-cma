@@ -31,13 +31,14 @@ export class ProfileComponent implements OnInit {
     console.log(mozrest);
 
     this.moz = mozrest.init('mz-sdk', {
-      partnerId: '631f357912974fe955677631',
-      accessKey: '6332b8947e9f8c135687998a'
+      partnerId: this.config.mozId,
+      accessKey: '6336a072d8099b544cb83a0f'
     });
 
-    this.moz.showPage('Listing');
+    this.moz.showPage();
     this.loader.close();
 
   }
+
 
 }

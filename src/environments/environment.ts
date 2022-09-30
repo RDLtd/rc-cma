@@ -25,6 +25,6 @@ export const environment = {
   ri_stripe_key:
     'pk_live_51IiLuvFvEMJjooglF2wr0sl7S1B0hltom6GweN7Mce5o8qrUG2bibXa2lPzg99oTToe6IkWNhLnXtgJJHQ4WIFFS00lCsNM7eY',
   // MozRest
-  MOZ_ID: '631f357912974fe955677631',
-  MOZ_APIKEY: '05eabb7db6d9876a73a6ff6e4ba0f65523016c639bff9991481775b2fd3c3db6a2570a42b9da12f3'
+  MOZ_ID: '63369f8510c9314ae7d0bb7b',
+  MOZ_APIKEY: '35193e7566f8901ab14c4e495411202bee55a877db5ac746e36146b5a6ff3887502dfc0548f3bb9d'
 };
