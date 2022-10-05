@@ -54,18 +54,16 @@ const APP_ROUTES: Routes = [
     component: HubComponent,
     canActivate: [AuthGuard]
   },
-  { path: 'profile',
-    component: ProfileComponent,
-    canActivate: [AuthGuard]
-  },
+  // { path: 'profile',
+  //   component: ProfileComponent,
+  //   canActivate: [AuthGuard]
+  // },
   { path: 'marketplace',
     component: MarketplaceComponent,
     canActivate: [AuthGuard]
   },
 
   { path: 'referral', component: SigninComponent },
-
-  { path: 'profile', redirectTo: 'settings', pathMatch: 'full' },
 
   { path: 'settings',
     component: SettingsComponent,

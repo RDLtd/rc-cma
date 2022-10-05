@@ -32,7 +32,7 @@ export class ProfileComponent implements OnInit {
 
     this.moz = mozrest.init('mz-sdk', {
       partnerId: this.config.mozId,
-      accessKey: '6336a072d8099b544cb83a0f'
+      accessKey: '633702cd41992e25ef91157c'
     });
 
     this.moz.showPage();
