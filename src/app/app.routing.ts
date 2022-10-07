@@ -34,6 +34,7 @@ import { MembershipComponent } from './join/membership.component';
 import { HubComponent } from './hub/hub.component';
 import {BpiRegistrationComponent} from './join/mepn/bpi-registration.component';
 import {BpiComponent} from './join/bpi.component';
+import {ProfileComponent} from './profile/profile.component';
 
 const APP_ROUTES: Routes = [
   { path: '', component: SigninComponent },
@@ -53,14 +54,16 @@ const APP_ROUTES: Routes = [
     component: HubComponent,
     canActivate: [AuthGuard]
   },
+  // { path: 'profile',
+  //   component: ProfileComponent,
+  //   canActivate: [AuthGuard]
+  // },
   { path: 'marketplace',
     component: MarketplaceComponent,
     canActivate: [AuthGuard]
   },
 
   { path: 'referral', component: SigninComponent },
-
-  { path: 'profile', redirectTo: 'settings', pathMatch: 'full' },
 
   { path: 'settings',
     component: SettingsComponent,

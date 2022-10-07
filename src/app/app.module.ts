@@ -100,6 +100,7 @@ import { CurrencyPipe } from '@angular/common';
 import { BpiComponent } from './join/bpi.component';
 import { RiMembershipComponent } from './join/mepn/ri-membership.component';
 import { BpiRegistrationComponent } from './join/mepn/bpi-registration.component';
+import { ProfileComponent } from './profile/profile.component';
 
 
 // AoT requires an exported function for factories
@@ -163,7 +164,8 @@ export function appInitializerFactory(translate: TranslateService) {
     LogoComponent,
     BpiComponent,
     RiMembershipComponent,
-    BpiRegistrationComponent
+    BpiRegistrationComponent,
+    ProfileComponent
   ],
   imports: [
     AngularMaterialModule,

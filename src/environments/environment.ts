@@ -8,11 +8,11 @@ import 'zone.js/plugins/zone-error';
 export const environment = {
   production: false,
   // Local
-  API_URL: 'http://localhost:4000',
+  // API_URL: 'http://localhost:4000',
   // Review
   // API_URL: 'https://rc-server-hubbard-zag5yegk8gkh.herokuapp.com',
   // Staging
-  // API_URL: 'https://rc-server-staging.herokuapp.com',
+  API_URL: 'https://rc-server-staging.herokuapp.com',
   // Production
   // API_URL: 'https://rc-server-prod.herokuapp.com',
 
@@ -23,5 +23,9 @@ export const environment = {
   // RI keys
   // ri_stripe_key: 'pk_test_51IiLuvFvEMJjooglWWYi5x9e8qhgAKicxWM99ZMObs6VjHcg8sIsG02bwQ0kqS11P415ykLiLryuGGkQVYt4ELYd009D10tr8L'
   ri_stripe_key:
-    'pk_live_51IiLuvFvEMJjooglF2wr0sl7S1B0hltom6GweN7Mce5o8qrUG2bibXa2lPzg99oTToe6IkWNhLnXtgJJHQ4WIFFS00lCsNM7eY'
+    'pk_live_51IiLuvFvEMJjooglF2wr0sl7S1B0hltom6GweN7Mce5o8qrUG2bibXa2lPzg99oTToe6IkWNhLnXtgJJHQ4WIFFS00lCsNM7eY',
+  // MozRest
+  MOZ_ID: '63369f8510c9314ae7d0bb7b',
+  MOZ_APIKEY: '35193e7566f8901ab14c4e495411202bee55a877db5ac746e36146b5a6ff3887502dfc0548f3bb9d'
 };
+

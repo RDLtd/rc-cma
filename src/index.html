@@ -39,7 +39,6 @@
       }
     }());
   </script>
-
   <script>
     (function (b, o, i, l, e, r) {
       b.GoogleAnalyticsObject = l;
@@ -56,19 +55,29 @@
     ga('create', 'UA-123847853-1');
     // Don't send page views, that will be handled by the routing
   </script>
-
+  <!-- MZR -->
+  <link href="https://mozrest-sdk.s3.eu-west-1.amazonaws.com/latest/sandbox/mozrest-sdk.min.css" rel="stylesheet">
+  <script src="https://mozrest-sdk.s3.eu-west-1.amazonaws.com/latest/sandbox/mozrest-sdk.min.js"></script>
+  <!-- maps API -->
+  <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCji4lOA-nPgICQjFO_4rVyuWKW1jP1Lkc"></script>
   <style>
+    :root {
+      --clr-primary: #00a69b;
+      --font-size-default: 18px;
+      --font-weight-default: 300;
+      --font-family-default: sans-serif;
+    }
     html {
-      font-family: sans-serif;
-      font-weight: 300;
-      font-size: 18px;
+      font-family: var(--font-family-default);
+      font-weight: var(--font-weight-default);
+      font-size: var(--font-size-default);
     }
     .appLoader {
       position: absolute;
       top:0; left:0;
       width: 100vw;
       height: 100vh;
-      background-color: #00a69b;
+      background-color: var(--clr-primary);
       text-align: center;
       opacity:0;
       transition: opacity 300ms ease-out;
@@ -86,7 +95,6 @@
     .loadMsg p {
       text-align: center;
       color: white;
-      font: 300 18px sans-serif;
     }
     .rc-spinner {
       height: 50px;
@@ -116,7 +124,6 @@
       -webkit-animation-delay: -0.8s;
       animation-delay: -0.8s;
     }
-
     @-webkit-keyframes sk-stretchdelay {
       0%, 40%, 100% { -webkit-transform: scaleY(0.4) }
       30% { -webkit-transform: scaleY(1.0) }
@@ -182,5 +189,4 @@
 <script>
   document.getElementById(rd_brand + 'Brand').style.display = 'block';
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCji4lOA-nPgICQjFO_4rVyuWKW1jP1Lkc"></script>
 </html>

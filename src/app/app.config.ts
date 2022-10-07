@@ -15,7 +15,6 @@ export class AppConfig {
   // App location
   appUrl = window.location.origin;
 
-
   // Should only need to switch here to change from local to Heroku server
   // public readonly apiUrl = 'http://localhost:4000';
   // public readonly apiUrl = 'https://rc-server-carter-mwkg7qc3nv9ak.herokuapp.com'
@@ -25,6 +24,8 @@ export class AppConfig {
   // This is Angular's equivalent! See the 'environments' folder
   // Build process should automatically detect the correct variables
   public readonly apiUrl = environment.API_URL;
+  public readonly mozId = environment.MOZ_ID;
+  public readonly mozKey = environment.MOZ_APIKEY;
 
   public readonly sql_defaults = {
     where_field: 'restaurant_name',
