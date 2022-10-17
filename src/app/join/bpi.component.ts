@@ -128,6 +128,8 @@ export class BpiComponent implements OnInit {
         console.log(res);
         this.bpiData.bpi_password = res['bpi_password'];
         this.bpiData.bpi_link = res['bpi_link'];
+        // update 17/10/22 need to add the +mepn for the bpi login email
+        this.bpiData.bpi_email = res['bpi_email'].replace('@', '+mepn@');
         // log user into training platform? Link is here... this.bpiData.bpi_link
         setTimeout(() => {
           this.isRegistered = true;
