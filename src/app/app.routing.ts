@@ -67,8 +67,12 @@ const APP_ROUTES: Routes = [
 
   { path: 'settings',
     component: SettingsComponent,
-    canActivate: [AuthGuard]},
-
+    canActivate: [AuthGuard]
+  },
+  { path: 'profile',
+    component: ProfileComponent,
+    canActivate: [AuthGuard]
+  },
   { path: 'cms/:id',
     component: CmsComponent,
     canActivate: [AuthGuard],
