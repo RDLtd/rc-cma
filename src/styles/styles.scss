@@ -685,6 +685,7 @@ form.rc-form-grid {
     border-radius: 40px;
     overflow: hidden;
     transition: all .1s ease-out;
+    line-height: 1;
     &:hover {
       transform: scale(1.1);
     }
