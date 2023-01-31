@@ -1,9 +1,14 @@
+@import "vars";
 #mz-sdk {
+  font-family: var(--font-family-default);
   .mz-card {
+    font-family: inherit;
     h1 {
       font-size: 1rem;
       margin: 0;
       line-height: 1;
+      text-transform: uppercase;
     }
   }
 }
+

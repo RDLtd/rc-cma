@@ -30,7 +30,7 @@ $rc-display-font-weight:  500;
 $rc-default-font:         'Roboto', sans-serif;
 $rc-default-font-weight:  300;
 
-$rc-theme-text:           #666;
+$rc-theme-text:           var(--primary-color);
 $rc-media-small:          400px;
 $rc-max-width:            1400px;
 $rc-header-height:        80px;
