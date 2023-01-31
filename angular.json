@@ -32,9 +32,6 @@
             "styles": [
               "src/styles/styles.scss"
             ],
-            "scripts": [
-              "node_modules/marked/lib/marked.js"
-            ],
             "allowedCommonJsDependencies": [
               "lodash",
               "zone.js",
