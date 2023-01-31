@@ -1,6 +1,6 @@
 import {Component, ElementRef, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {TranslateService} from '@ngx-translate/core';
 import {BpiService, MemberService} from '../../_services';
 import {ConfirmCancelComponent, LoadService} from '../../common';
@@ -21,8 +21,8 @@ export class BpiRegistrationComponent implements OnInit {
   errorMessage: any;
   bpiData: any;
 
-  formCompanyDetails: FormGroup;
-  formUserDetails: FormGroup;
+  formCompanyDetails: UntypedFormGroup;
+  formUserDetails: UntypedFormGroup;
 
   totalEmployees: [string];
   roles: [string];
@@ -30,7 +30,7 @@ export class BpiRegistrationComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private translate: TranslateService,
     private memberService: MemberService,
     private bpiService: BpiService,

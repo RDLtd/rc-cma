@@ -141,7 +141,6 @@
       }
     }
   },
-  "defaultProject": "rc-app",
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "rc",

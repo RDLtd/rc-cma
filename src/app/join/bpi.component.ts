@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { BpiService, MemberService } from '../_services';
 import { ActivatedRoute } from '@angular/router';
@@ -10,10 +10,10 @@ import { ActivatedRoute } from '@angular/router';
 })
 
 export class BpiComponent implements OnInit {
-  formPending: FormGroup;
-  formMember: FormGroup;
-  formCompany: FormGroup;
-  formTerms: FormGroup;
+  formPending: UntypedFormGroup;
+  formMember: UntypedFormGroup;
+  formCompany: UntypedFormGroup;
+  formTerms: UntypedFormGroup;
   formStage = 'member';
   bpiData: any;
   totalEmployees: [string];
@@ -24,7 +24,7 @@ export class BpiComponent implements OnInit {
   referrers: [string];
 
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private translate: TranslateService,
     private bpiService: BpiService,
     private route: ActivatedRoute,

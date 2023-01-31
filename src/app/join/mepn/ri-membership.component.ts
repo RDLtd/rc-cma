@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {TranslateService} from '@ngx-translate/core';
 import {MemberService} from '../../_services';
 
@@ -13,11 +13,11 @@ export class RiMembershipComponent implements OnInit {
   referralCode: string;
   roles: [string];
   referrers: [string];
-  formMember: FormGroup;
+  formMember: UntypedFormGroup;
 
   constructor(
     private route: ActivatedRoute,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private translate: TranslateService,
     private memberService: MemberService
   ) {
