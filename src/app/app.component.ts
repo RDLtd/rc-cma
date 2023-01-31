@@ -4,7 +4,7 @@ import { AuthenticationService } from './_services';
 import { HttpClient } from '@angular/common/http';
 import { AppConfig } from './app.config';
 import { NavigationEnd, Router } from '@angular/router';
-import { ConnectionService } from 'ng-connection-service';
+//import { ConnectionService } from 'ng-connection-service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 
@@ -31,7 +31,7 @@ export class AppComponent implements OnInit {
   };
 
   constructor(
-    private connectionService: ConnectionService,
+    //private connectionService: ConnectionService,
     private snackBar: MatSnackBar,
     private _dialog: MatDialog,
     private router: Router,

@@ -46,7 +46,7 @@
     "express": "^4.17.3",
     "marked": "^4.2.12",
     "moment": "^2.29.4",
-    "ng-connection-service": "~1.0.4",
+    "ng-connection-service": "^9.0.3",
     "ng2-file-upload": "~1.4.0",
     "ngx-markdown": "^14.0.1",
     "rxjs": "^6.6.7",
