@@ -194,7 +194,7 @@ export function appInitializerFactory(translate: TranslateService) {
     }),
     QRCodeModule,
     GoogleMapsModule,
-    ClipboardModule
+    ClipboardModule,
   ],
   providers: [
     AppConfig,
