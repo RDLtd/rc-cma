@@ -16,8 +16,8 @@
     "lint": "ng lint"
   },
   "engines": {
-    "node": "16.13.0",
-    "npm": "8.1.0"
+    "node": "16.14.2",
+    "npm": "8.19.2"
   },
   "private": true,
   "dependencies": {
@@ -34,7 +34,6 @@
     "@angular/platform-browser-dynamic": "^14.2.12",
     "@angular/platform-server": "^14.2.12",
     "@angular/router": "^14.2.12",
-    "@cloudinary/angular-5.x": "^1.5.3",
     "@cloudinary/ng": "^1.9.0",
     "@cloudinary/url-gen": "^1.9.0",
     "@material/layout-grid": "^14.0.0",
@@ -42,7 +41,6 @@
     "@ngx-translate/http-loader": "~7.0.0",
     "@stripe/stripe-js": "^1.23.0",
     "angularx-qrcode": "^14.0.0",
-    "cloudinary-core": "^2.13.0",
     "compression": "^1.7.4",
     "core-js": "~2.6.12",
     "dotenv": "~10.0.0",

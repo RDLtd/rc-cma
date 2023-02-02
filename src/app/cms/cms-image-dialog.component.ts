@@ -15,7 +15,6 @@ export class CmsImageDialogComponent implements OnInit {
 
   restaurant: any;
   image: any;
-  clImgPath: string;
   cmsImages: any;
   cldImage: CloudinaryImage;
   cldPlugins: any[];

@@ -22,8 +22,6 @@ import { SigninComponent } from './signin/signin.component';
 import { AboutComponent } from './common/about.component';
 import { PwdMatchValidator } from './shared/pwdMatch.validator';
 import { AngularMaterialModule } from './shared/angular-material.module';
-import { CloudinaryModule } from '@cloudinary/angular-5.x';
-import * as  Cloudinary from 'cloudinary-core';
 
 import {
   AuthGuard,
@@ -101,7 +99,8 @@ import { BpiComponent } from './join/bpi.component';
 import { RiMembershipComponent } from './join/mepn/ri-membership.component';
 import { BpiRegistrationComponent } from './join/mepn/bpi-registration.component';
 import { ProfileComponent } from './profile/profile.component';
-import { UtilitiesModule } from './shared/utilities.module';
+import {CloudinaryModule} from '@cloudinary/ng';
+//import { UtilitiesModule } from './shared/utilities.module';
 
 
 // AoT requires an exported function for factories
@@ -188,15 +187,10 @@ export function appInitializerFactory(translate: TranslateService) {
       }
     }),
     MarkdownModule.forRoot(),
-    CloudinaryModule.forRoot(Cloudinary, {
-      cloud_name: 'rdl',
-      api_key: '713165672947878',
-      api_secret: 'EhLM0NhD7HvJDjX5IvF90u6guq8'
-    }),
+    CloudinaryModule,
     QRCodeModule,
     GoogleMapsModule,
     ClipboardModule,
-    UtilitiesModule
   ],
   providers: [
     AppConfig,

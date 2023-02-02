@@ -4,9 +4,6 @@ import { Cloudinary, CloudinaryImage } from '@cloudinary/url-gen';
 import { lazyload, placeholder, responsive } from '@cloudinary/ng';
 
 import { environment as env } from '../../environments/environment';
-import { focusOn } from '@cloudinary/url-gen/qualifiers/gravity';
-import { FocusOn } from '@cloudinary/url-gen/qualifiers/focusOn';
-import { scale } from '@cloudinary/url-gen/actions/resize';
 
 
 @Injectable({
@@ -15,7 +12,8 @@ import { scale } from '@cloudinary/url-gen/actions/resize';
 export class ImageService implements OnInit {
 
   cld: Cloudinary;
-  cldPlugins = [lazyload(), responsive(), placeholder({mode: 'predominant-color'})]
+  cldPlugins = [lazyload(), responsive(), placeholder({mode: 'predominant-color'})];
+  cldUpload: string;
 
   constructor() {
     this.cld = new Cloudinary({
@@ -28,6 +26,7 @@ export class ImageService implements OnInit {
         secure: true
       }
     });
+    this.cldUpload = `https://api.cloudinary.com/v1_1/${env.cloudinary_name}/upload`;
   }
 
   ngOnInit() {
@@ -40,6 +39,9 @@ export class ImageService implements OnInit {
 
   get cldBasePlugins(): any {
     return this.cldPlugins;
+  }
+  get cldUploadPath(): string {
+    return this.cldUpload;
   }
 
   // Extract Cloudinary Public-Id from full url
