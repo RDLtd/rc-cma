@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { CMSService } from '../_services';
 import { CmsLocalService } from './cms-local.service';
 import { TranslateService } from '@ngx-translate/core';
+import { ImageService } from '../_services/image.service';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { CloudinaryImage } from '@cloudinary/url-gen';
 
 @Component({
   selector: 'app-rc-cms-image-dialog',
@@ -14,16 +17,25 @@ export class CmsImageDialogComponent implements OnInit {
   image: any;
   clImgPath: string;
   cmsImages: any;
-  dialog: any;
+  cldImage: CloudinaryImage;
+  cldPlugins: any[];
 
   constructor(
+    private imgService: ImageService,
     private cms: CMSService,
     private translate: TranslateService,
-    private cmsLocalService: CmsLocalService) { }
-
-  ngOnInit() {
-
+    private cmsLocalService: CmsLocalService,
+    public dialog: MatDialogRef<CmsImageDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {
+    this.image = data.image;
+    this.cmsImages = data.cmsImages;
+    this.restaurant = data.restaurant;
+    this.cldImage = this.imgService.getCldImage(data.clImgPath);
+    this.cldPlugins = this.imgService.cldBasePlugins;
   }
+
+  ngOnInit() {}
 
   toggleImageStatus(img): void {
     let msg;
@@ -35,7 +47,6 @@ export class CmsImageDialogComponent implements OnInit {
     this.cms.updateElement(img).subscribe(
       () => {
         this.cmsLocalService.dspSnackbar(msg, null, 3);
-
       },
       () => {
         this.cmsLocalService.dspSnackbar(this.translate.instant('CMA.IMAGES.msgUpdateFailed'), null, 3);

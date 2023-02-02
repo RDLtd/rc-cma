@@ -11,7 +11,7 @@
     </button>
     <button
       mat-icon-button
-      mat-dialog-close>
+      mat-dialog-close="false">
       <mat-icon>close</mat-icon>
     </button>
   </header>
@@ -48,20 +48,12 @@
                 *ngIf="!image.cms_element_active">{{ 'CMS.IMAGES.tagOffline' | translate }}</mat-chip>
     </mat-chip-list>
 
-    <cl-image
-      [public-id]="clImgPath"
-      secure="true"
-      quality="auto"
+    <advanced-image
       height="100%"
-      width="100%">
-      <cl-placeholder type="blur"></cl-placeholder>
-      <cl-transformation
-        height="900"
-        width="1600"
-        crop="fill"
-        gravity="auto">
-      </cl-transformation>
-    </cl-image>
+      width="100%"
+      [cldImg]="cldImage"
+      [plugins]="">
+    </advanced-image>
 
   </mat-dialog-content>
 </div>

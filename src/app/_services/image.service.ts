@@ -34,15 +34,17 @@ export class ImageService implements OnInit {
   }
 
   getCldImage(id): CloudinaryImage {
+    // console.log(id);
     return this.cld.image(id);
-  }
-  getCldGalleryImage(id): CloudinaryImage {
-    const img = this.cld.image(id);
-    img.resize(scale().width(150).height(150));
-    return img;
   }
 
   get cldBasePlugins(): any {
     return this.cldPlugins;
+  }
+
+  // Extract Cloudinary Public-Id from full url
+  getCloudinaryPublicId(url) {
+    const urlArr = url.split('/');
+    return urlArr.slice(urlArr.length - 3).join('/');
   }
 }
