@@ -1,14 +1,13 @@
+import { environment as env } from '../../environments/environment';
 import { Injectable, OnInit } from '@angular/core';
 import { Cloudinary, CloudinaryImage } from '@cloudinary/url-gen';
-// Import plugins
+// Cloudinary plugins
 import { lazyload, placeholder, responsive } from '@cloudinary/ng';
-
-import { environment as env } from '../../environments/environment';
-
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class ImageService implements OnInit {
 
   cld: Cloudinary;
@@ -40,6 +39,7 @@ export class ImageService implements OnInit {
   get cldBasePlugins(): any {
     return this.cldPlugins;
   }
+
   get cldUploadPath(): string {
     return this.cldUpload;
   }
