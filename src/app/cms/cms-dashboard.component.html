@@ -5,20 +5,12 @@
   <mat-card
     class="rc-cms-card-core mdc-layout-grid__cell mdc-layout-grid__cell--span-5 mdc-layout-grid__cell--span-12-tablet">
     <div class="rc-card-title-img-wrapper">
-      <cl-image
-        *ngIf="img_src"
-        [public-id]="img_src"
-        class="mat-card-image"
-        dpr="auto"
-        responsive
-        width="auto"
-        secure="true"
-        height="280"
-        crop="fill">
-        <cl-transformation
-          gravity="auto">
-        </cl-transformation>
-      </cl-image>
+      <advanced-image
+              *ngIf="img_src"
+              class="mat-card-image"
+              [cldImg]="cldImage"
+              [plugins]="cldPlugins">
+      </advanced-image>
     </div>
 
     <mat-card-title>{{ restaurant?.restaurant_name }}</mat-card-title>
@@ -144,7 +136,6 @@
           <button
             mat-button
             (click)="dspSPWLinks()"
-            color="secondary"
             matTooltip="{{ 'CMS.DASHBOARD.spw.tipMarketingLinks' | translate }}"
             [disabled]="isPreviewing">
             {{ 'CMS.DASHBOARD.spw.labelBtnMarketingLinks' | translate | uppercase }}
@@ -205,7 +196,6 @@
           *ngIf="!isPreviewing">
           <button
             mat-button
-            color="secondary"
             [disabled]="isPreviewing"
             (click)="previewSPW()">{{ 'CMS.DASHBOARD.spw.labelBtnPreview' | translate | uppercase }}</button>
           <button

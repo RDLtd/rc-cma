@@ -3,7 +3,7 @@
 @import "@material/layout-grid/mdc-layout-grid";
 @import "mat-themes";
 @import "abstract";
-@import "vars";
+@import "variables";
 @import "reset";
 @import 'bpi';
 @import "mozrest";
@@ -886,8 +886,9 @@ form.rc-form-grid {
   &:hover { @include mat.elevation(6); }
   img {
     width: 100%;
-    height: auto;
+    height: 240px;
     cursor: pointer;
+    object-fit: cover;
   }
 
   .rc-card-actions {

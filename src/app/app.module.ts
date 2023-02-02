@@ -101,6 +101,7 @@ import { BpiComponent } from './join/bpi.component';
 import { RiMembershipComponent } from './join/mepn/ri-membership.component';
 import { BpiRegistrationComponent } from './join/mepn/bpi-registration.component';
 import { ProfileComponent } from './profile/profile.component';
+import { UtilitiesModule } from './shared/utilities.module';
 
 
 // AoT requires an exported function for factories
@@ -195,6 +196,7 @@ export function appInitializerFactory(translate: TranslateService) {
     QRCodeModule,
     GoogleMapsModule,
     ClipboardModule,
+    UtilitiesModule
   ],
   providers: [
     AppConfig,

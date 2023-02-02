@@ -25,6 +25,9 @@ import * as moment from 'moment';
 import { CmsSpwLinksComponent } from './cms-spw-links.component';
 import { AppConfig } from '../app.config';
 
+import { ImageService } from '../_services/image.service';
+import { CloudinaryImage } from '@cloudinary/url-gen';
+
 @Component({
   selector: 'app-cms-dashboard',
   templateUrl: './cms-dashboard.component.html'
@@ -48,19 +51,6 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
   cmsHasSufficientData = false;
   publishDate: Date;
   d_publishDate: string;
-
-  memberStatus = 50;
-  memberType = 'Associate Member';
-  memberIcon = 'people';
-  memberJoinDate: Date;
-  d_memberJoinDate: string;
-
-  core_date: Date;
-  core_by: string;
-  core_status = 0;
-  core_status_txt: string;
-  d_core_date: string;
-
   desc_date: Date;
   desc_by: string;
   desc_status = 0;
@@ -113,7 +103,11 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
   t_data: any;
   locals: any;
 
+  cldPlugins: any[];
+  cldImage: CloudinaryImage;
+
   constructor(
+    private imgService: ImageService,
     private cmsLocalService: CmsLocalService,
     private cms: CMSService,
     private ga: AnalyticsService,
@@ -126,6 +120,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
     public config: AppConfig
   ) {
     this.t_data = this.translate.instant('CMS-Dashboard');
+    this.cldPlugins = this.imgService.cldBasePlugins;
   }
 
   setDateRes(theDate) {
@@ -167,6 +162,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
           }
         },
         error => console.log(error));
+
   }
 
   readAndCheckStatus () {
@@ -362,7 +358,8 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
             if (elem.cms_element_active) { this.img_count += 1; }
             // Store default image path for restaurant card
             if (elem.cms_element_default) {
-              imgsrc = this.cmsLocalService.getCloudinaryPublicId(elem.cms_element_image_path);
+              // Todo: ideally we need to return the Cloudinary publicId instead of the img url
+              this.cldImage = this.imgService.getCldImage(this.cmsLocalService.getCloudinaryPublicId(elem.cms_element_image_path));
             }
           }
           // console.log('Img', imgsrc);

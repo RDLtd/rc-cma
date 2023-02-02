@@ -8,6 +8,8 @@ import { CmsFileUploadComponent } from './cms-file-upload.component';
 import { ConfirmCancelComponent, HelpService, LoadService } from '../common';
 import { TranslateService } from '@ngx-translate/core';
 import { insertAnimation } from '../shared/animations';
+import { ImageService } from '../_services/image.service';
+import { CloudinaryImage } from '@cloudinary/url-gen';
 
 
 
@@ -21,7 +23,10 @@ export class CmsImagesComponent implements OnInit {
 
   restaurant: Restaurant;
   cmsImages: any;
+  cldImages: CloudinaryImage[];
   showLoader = false;
+
+  cldPlugins: any[];
 
   constructor(
     private cmsLocalService: CmsLocalService,
@@ -29,8 +34,11 @@ export class CmsImagesComponent implements OnInit {
     private translate: TranslateService,
     private dialog: MatDialog,
     public help: HelpService,
-    private loader: LoadService
-  ) {}
+    private loader: LoadService,
+    private imgService: ImageService
+  ) {
+    this.cldPlugins = this.imgService.cldBasePlugins;
+  }
 
   ngOnInit() {
 
@@ -56,6 +64,8 @@ export class CmsImagesComponent implements OnInit {
     this.cms.getElementClass(this.restaurant.restaurant_id, 'Image', 'N')
       .subscribe(data => {
           this.cmsImages = data['elements'];
+            this.cmsImages.forEach(element => element['cldImage'] = this.imgService.getCldImage(element.cms_element_image_ref));
+
           this.loader.close();
         },
         error => {

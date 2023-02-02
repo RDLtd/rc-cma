@@ -45,20 +45,16 @@
         </mat-chip>
       </mat-chip-list>
       <div>
-        <cl-image
-          *ngIf="image['cms_element_image_ref']"
-          [public-id]="image['cms_element_image_ref']"
-          secure="true"
-          loading="lazy"
-          height="180"
-          width="320">
-          <cl-transformation
-            height="450"
-            width="800"
-            crop="fill"
-            gravity="auto">
-          </cl-transformation>
-        </cl-image>
+        <advanced-image
+                class="img-gallery"
+                *ngIf="image['cms_element_image_ref']"
+                width="100%"
+                height="100%"
+                loading="lazy"
+                alt="Smiling face"
+                [plugins]="cldPlugins"
+                [cldImg]="image['cldImage']">
+        </advanced-image>
       </div>
 
 

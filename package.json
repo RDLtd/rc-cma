@@ -35,6 +35,8 @@
     "@angular/platform-server": "^14.2.12",
     "@angular/router": "^14.2.12",
     "@cloudinary/angular-5.x": "^1.5.3",
+    "@cloudinary/ng": "^1.9.0",
+    "@cloudinary/url-gen": "^1.9.0",
     "@material/layout-grid": "^14.0.0",
     "@ngx-translate/core": "~14.0.0",
     "@ngx-translate/http-loader": "~7.0.0",
