@@ -100,6 +100,7 @@ import { RiMembershipComponent } from './join/mepn/ri-membership.component';
 import { BpiRegistrationComponent } from './join/mepn/bpi-registration.component';
 import { ProfileComponent } from './profile/profile.component';
 import {CloudinaryModule} from '@cloudinary/ng';
+import { OnlineStatusModule } from 'ngx-online-status';
 //import { UtilitiesModule } from './shared/utilities.module';
 
 
@@ -191,6 +192,7 @@ export function appInitializerFactory(translate: TranslateService) {
     QRCodeModule,
     GoogleMapsModule,
     ClipboardModule,
+    OnlineStatusModule
   ],
   providers: [
     AppConfig,
