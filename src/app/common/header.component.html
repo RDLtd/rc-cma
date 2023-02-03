@@ -37,18 +37,17 @@
       mat-icon-button
       class="rc-avatar"
       [matMenuTriggerFor]="menu">
-      <cl-image
-        [public-id]="avatarUrl">
-        <cl-transformation
-          width="48"
-          height="48"
-          crop="fill"
-          gravity="face">
-        </cl-transformation>
-      </cl-image>
-<!--      <span *ngIf="!avatarUrl" >-->
-<!--        <img [src]="placeholderAvatar" alt="{{ displayName }}">-->
-<!--      </span>-->
+
+      <advanced-image
+        *ngIf="clImage !== null"
+        width="48px"
+        height="48px"
+        [cldImg]="clImage"
+        [plugins]="clPlugins">
+      </advanced-image>
+
+      <img [src]="this.placeholderUrl + this.displayName">
+
     </button>
 
   </ng-template>

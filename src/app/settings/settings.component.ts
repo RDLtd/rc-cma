@@ -20,6 +20,8 @@ import { CmsLocalService } from '../cms';
 import { LoadService, ConfirmCancelComponent, HelpService } from '../common';
 import { HeaderService } from '../common/header.service';
 import { CurrencyPipe } from '@angular/common';
+import {ImageService} from '../_services/image.service';
+import {CloudinaryImage} from '@cloudinary/url-gen';
 
 
 @Component({
@@ -41,7 +43,6 @@ export class SettingsComponent implements OnInit {
   showLoader = false;
   referrer: any;
   showRestaurantFinder = true;
-  clPublicId: string;
   d_member_signedup: string;
   restProd: any;
   cachedRestaurantsLength = null;
@@ -51,6 +52,9 @@ export class SettingsComponent implements OnInit {
   currentProduct: any;
   isFreeMembership = false;
   freeMembershipExpiry = '';
+
+  clImage: CloudinaryImage;
+  clPlugins: any[];
 
   constructor(
     private header: HeaderService,
@@ -66,13 +70,15 @@ export class SettingsComponent implements OnInit {
     public appConfig: AppConfig,
     private loadService: LoadService,
     private currencyPipe: CurrencyPipe,
+    private imgService: ImageService,
     public dialog: MatDialog) {
 
     this.loadService.open();
     this.lang = localStorage.getItem('rd_language');
     this.member = JSON.parse(localStorage.getItem('rd_profile'));
     moment.locale(this.lang);
-    console.log(this.member);
+    //console.log(this.member);
+    this.clPlugins = this.imgService.cldBasePlugins;
 
   }
 
@@ -89,7 +95,8 @@ export class SettingsComponent implements OnInit {
   }
 
   setMember(): void {
-    console.log(this.member);
+    console.log('USER', this.member);
+
     // Is it a founder or BJT introduction
     this.isFreeMembership = this.member.member_membership_type === 'Free';
     if (!!this.member.member_free_expiry) {
@@ -102,7 +109,12 @@ export class SettingsComponent implements OnInit {
     }
     this.d_member_signedup = moment(this.member.member_signedup).format('DD MMMM YYYY');
     // Get Cloudinary img path
-    this.clPublicId = this.getMemberClPublicId(this.member.member_image_path);
+    if(this.member.member_image_path !== null){
+      this.clImage = this.imgService.getCldImage(this.member.member_image_path);
+      console.log(this.clImage);
+    }
+
+
   }
 
   setProducts(): void {
@@ -462,7 +474,7 @@ export class SettingsComponent implements OnInit {
         if (data.str === 'delete') {
 
           this.member.member_image_path = null;
-          this.clPublicId = null;
+          this.clImage = null;
           localStorage.removeItem('rd_avatar');
           this.header.updateAvatar(null);
 
@@ -471,10 +483,10 @@ export class SettingsComponent implements OnInit {
 
           const imgUrl = data.str;
           // Get cloudinary reference
-          this.clPublicId = this.getMemberClPublicId(imgUrl);
+          this.clImage = this.imgService.getCldImage(imgUrl);
           // update member local storage
           this.member.member_image_path = imgUrl;
-          localStorage.setItem('rd_avatar', this.clPublicId);
+          localStorage.setItem('rd_avatar', imgUrl);
           this.header.updateAvatar(data.str);
         }
         localStorage.setItem('rd_profile', JSON.stringify(this.member));
@@ -488,14 +500,17 @@ export class SettingsComponent implements OnInit {
   }
 
   getDefaultImages(): void {
-
+    console.log('getDefaultImages');
     const numberOfRestaurants = this.restaurants.length;
     for (let i = 0; i < numberOfRestaurants; i++) {
       this.cms.getElementClass(this.restaurants[i].restaurant_id, 'Image', 'Y')
         .subscribe(
           data => {
             if (data['count'] > 0) {
-              this.defaultImages[i] = data['elements'][0].cms_element_image_path;
+              this.defaultImages[i] = {
+                url: data['elements'][0].cms_element_image_path,
+                clId: this.imgService.getCldImage(data['elements'][0].cms_element_image_path)
+              };
             } else {
               this.defaultImages[i] = null;
             }
@@ -504,6 +519,7 @@ export class SettingsComponent implements OnInit {
             console.log(error);
           });
     }
+    console.log(this.defaultImages);
   }
 
   // getReferrerInfo() {
@@ -541,29 +557,6 @@ export class SettingsComponent implements OnInit {
 
   copied(): void {
     this.openSnackBar(this.translate.instant('SETTINGS.msgLinkCopied'), 'OK');
-  }
-
-  getClPublicId(idx): string {
-
-    if (this.defaultImages[idx]) {
-      const a = this.defaultImages[idx].split('/');
-      return a.splice(a.length - 3).join('/');
-    } else {
-      return this.imgRestPlaceholderUrl;
-    }
-  }
-
-  getMemberClPublicId(url): string {
-
-    if (!!url && url !== 'null') {
-
-      const arr = url.split('/');
-      return arr.splice(arr.length - 3).join('/');
-
-    } else {
-      return null;
-    }
-
   }
 
   // Switch language

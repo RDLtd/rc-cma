@@ -32,7 +32,9 @@ export class ImageService implements OnInit {
   }
 
   getCldImage(id): CloudinaryImage {
-    // console.log(id);
+    if(id.indexOf('http') > -1) {
+      id = this.getCloudinaryPublicId(id);
+    }
     return this.cld.image(id);
   }
 

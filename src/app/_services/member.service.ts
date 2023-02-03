@@ -294,6 +294,7 @@ export class MemberService {
   // }
 
   updateAvatar(memberid: string, imageURL: string) {
+    console.log('IMAGEURL', imageURL);
     return this.http.post(this.config.apiUrl + '/members/updateavatar',
       {
         member_id: memberid,

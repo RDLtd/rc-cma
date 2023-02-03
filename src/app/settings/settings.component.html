@@ -58,25 +58,17 @@
               </ul>
               <div class="rc-sub-panel">
                 <!-- Avatar -->
-                <cl-image
-                  style="cursor: pointer"
-                  width="120"
-                  height="120"
-                  *ngIf="clPublicId"
+                <advanced-image
+                  *ngIf="clImage"
+                  class="headshot"
                   (click)="updateImage()"
-                  matTooltip="{{ 'SETTINGS.tipAvatar' | translate }}"
-                  matTooltipPosition="below"
-                  [public-id]="clPublicId">
-                  <cl-transformation
-                    width="360"
-                    height="360"
-                    crop="fill"
-                    gravity="face">
-                  </cl-transformation>
-                </cl-image>
-                <!-- Placeholder avatar -->
+                  width="360px"
+                  height="360px"
+                  [cldImg]="clImage"
+                  [plugins]="clPlugins">
+                </advanced-image>
                 <div
-                  *ngIf="!clPublicId"
+                  *ngIf="!clImage"
                   class="rc-avatar-placeholder"
                   (click)="updateImage()">
                   <svg viewBox="0 0 240 240">
@@ -232,20 +224,17 @@
                 <div
                   *ngFor="let restaurant of restaurants; let idx = index"
                   class="rc-managed-restaurant">
-                  <!-- image -->
-                  <cl-image
+
+                  <advanced-image
                     class="rc-managed-restaurant-image"
                     [routerLink]="['/cms', restaurant.restaurant_id]"
-                    [public-id]="getClPublicId(idx)">
-                    <cl-transformation
-                      width="400"
-                      height="600"
-                      dpr="auto"
-                      responsive
-                      crop="fill"
-                      quality="auto">
-                    </cl-transformation>
-                  </cl-image>
+                    width="400px"
+                    height="600px"
+                    [cldImg]="defaultImages[idx]?.clId"
+                    [plugins]="clPlugins"
+                  >
+                  </advanced-image>
+
                   <mat-icon
                     matTooltip="{{ 'SETTINGS.tipRemove' | translate: { name: restaurant.restaurant_name } }}"
                     (click)="removeAssociation(idx)">
