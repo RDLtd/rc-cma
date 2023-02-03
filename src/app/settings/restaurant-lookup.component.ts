@@ -3,8 +3,8 @@ import { Restaurant } from '../_models';
 import { RestaurantService, CMSService } from '../_services';
 import { AppConfig } from '../app.config';
 import { VerificationComponent } from './verification.component';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA, MatLegacyDialog as MatDialog, MatLegacyDialogRef as MatDialogRef } from '@angular/material/legacy-dialog';
+import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
 import { TranslateService } from '@ngx-translate/core';
 import { ConfirmCancelComponent, HelpService } from '../common';
 

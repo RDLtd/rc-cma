@@ -5,7 +5,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Member, Restaurant } from '../_models';
 import { RestaurantService, CMSService, AnalyticsService } from '../_services';
 import { CmsLocalService } from './cms-local.service';
-import { MatDialog } from '@angular/material/dialog';
+import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 import { CmsPreviewComponent } from './cms-preview.component';
 import { fadeAnimation } from '../shared/animations';
 import { HeaderService } from '../common/header.service';

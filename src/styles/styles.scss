@@ -9,7 +9,7 @@
 @import "mozrest";
 
 // Create a config with the default MAT typography levels.
-$config: mat.define-typography-config();
+$config: mat.define-legacy-typography-config();
 
 /**
 * Utility classes

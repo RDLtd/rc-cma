@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MemberService, AuthenticationService, AppService } from '../_services';
 import { CmsLocalService } from '../cms';
 import { TranslateService } from '@ngx-translate/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 import { ConfirmCancelComponent, LoadService } from '../common';
 import { AppConfig } from '../app.config';
 import { fadeAnimation } from '../shared/animations';

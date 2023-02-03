@@ -6,12 +6,12 @@ import {
   CMSService,
   AnalyticsService
 } from '../_services';
-import { MatDialog } from '@angular/material/dialog';
+import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 import { PasswordComponent } from './password.component';
 import { ContactsComponent } from './contacts.component';
 import { ImageComponent } from './image.component';
 import { RestaurantLookupComponent } from './restaurant-lookup.component';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import * as moment from 'moment';

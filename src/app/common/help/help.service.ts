@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 // Don't use shortcut format as it will create a circular ref.
 import { HelpComponent } from './help.component';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatLegacyDialog as MatDialog, MatLegacyDialogConfig as MatDialogConfig } from '@angular/material/legacy-dialog';
 import { AnalyticsService } from '../../_services';
 import { AppConfig } from '../../app.config';
 import {TranslateService} from '@ngx-translate/core';

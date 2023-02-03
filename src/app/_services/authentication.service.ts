@@ -5,7 +5,7 @@ import { AppConfig } from '../app.config';
 import { TranslateService } from '@ngx-translate/core';
 import { Member } from '../_models';
 import { RestaurantService } from './restaurant.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
 import { Router } from '@angular/router';
 import { StorageService } from './storage.service';
 

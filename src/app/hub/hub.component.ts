@@ -1,11 +1,11 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
-import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatLegacyDialog as MatDialog, MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA } from '@angular/material/legacy-dialog';
 import { MessageComponent, Message, LoadService, ConfirmCancelComponent } from '../common';
 import { Router } from '@angular/router';
 import { HeaderService } from '../common/header.service';
 import { Member, Restaurant } from '../_models';
 import { MemberService, RestaurantService } from '../_services';
-import { MatMenuTrigger } from '@angular/material/menu';
+import { MatLegacyMenuTrigger as MatMenuTrigger } from '@angular/material/legacy-menu';
 import { RestaurantLookupComponent } from '../settings';
 import { TranslateService } from '@ngx-translate/core';
 import { HubService } from './hub.service';

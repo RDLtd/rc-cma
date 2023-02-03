@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { LoadComponent } from './load.component';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatLegacyDialog as MatDialog, MatLegacyDialogRef as MatDialogRef } from '@angular/material/legacy-dialog';
 import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({

@@ -1,26 +1,26 @@
 import { NgModule } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
+import { MatLegacyButtonModule as MatButtonModule } from '@angular/material/legacy-button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatBadgeModule } from '@angular/material/badge';
-import { MatChipsModule } from '@angular/material/chips';
+import { MatLegacyChipsModule as MatChipsModule } from '@angular/material/legacy-chips';
 import { MatIconModule } from '@angular/material/icon';
-import { MatCardModule } from '@angular/material/card';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatListModule } from '@angular/material/list';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatRadioModule } from '@angular/material/radio';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatSelectModule } from '@angular/material/select';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { MatTableModule } from '@angular/material/table';
+import { MatLegacyCardModule as MatCardModule } from '@angular/material/legacy-card';
+import { MatLegacyDialogModule as MatDialogModule } from '@angular/material/legacy-dialog';
+import { MatLegacyMenuModule as MatMenuModule } from '@angular/material/legacy-menu';
+import { MatLegacyListModule as MatListModule } from '@angular/material/legacy-list';
+import { MatLegacyFormFieldModule as MatFormFieldModule } from '@angular/material/legacy-form-field';
+import { MatLegacyInputModule as MatInputModule } from '@angular/material/legacy-input';
+import { MatLegacyRadioModule as MatRadioModule } from '@angular/material/legacy-radio';
+import { MatLegacyCheckboxModule as MatCheckboxModule } from '@angular/material/legacy-checkbox';
+import { MatLegacySelectModule as MatSelectModule } from '@angular/material/legacy-select';
+import { MatLegacySnackBarModule as MatSnackBarModule } from '@angular/material/legacy-snack-bar';
+import { MatLegacyTooltipModule as MatTooltipModule } from '@angular/material/legacy-tooltip';
+import { MatLegacyTableModule as MatTableModule } from '@angular/material/legacy-table';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatLegacyProgressBarModule as MatProgressBarModule } from '@angular/material/legacy-progress-bar';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatTabsModule } from '@angular/material/tabs';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatLegacyTabsModule as MatTabsModule } from '@angular/material/legacy-tabs';
+import { MatLegacyProgressSpinnerModule as MatProgressSpinnerModule } from '@angular/material/legacy-progress-spinner';
 
 @NgModule ({
   exports: [

@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService, MemberService } from '../_services';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { AppConfig } from '../app.config';
 import { ConfirmCancelComponent, HelpService } from '../common';
-import { MatDialog } from '@angular/material/dialog';
+import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 
 @Component({
   selector: 'app-signin',

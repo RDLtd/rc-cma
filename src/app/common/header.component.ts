@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../_services';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 import { AppConfig } from '../app.config';
 import { AboutComponent } from './about.component';
 import { HeaderService } from './header.service';
