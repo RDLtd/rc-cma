@@ -8,6 +8,7 @@
       <div
         class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-12-tablet">
         <div class="mdc-layout-grid__inner">
+
           <!-- Contacts -->
           <mat-card
             class="rc-card-rounded mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
@@ -56,7 +57,9 @@
                   </mat-radio-group>
                 </li>
               </ul>
+
               <div class="rc-sub-panel">
+
                 <!-- Avatar -->
                 <advanced-image
                   *ngIf="clImage"
@@ -67,6 +70,7 @@
                   [cldImg]="clImage"
                   [plugins]="clPlugins">
                 </advanced-image>
+
                 <div
                   *ngIf="!clImage"
                   class="rc-avatar-placeholder"
@@ -79,6 +83,7 @@
                     </g>
                   </svg>
                 </div>
+
                 <div>
                   <h3>{{ 'SETTINGS.titleAvatar' | translate }}</h3>
                   <span>{{ 'SETTINGS.infoAvatar' | translate}}</span>

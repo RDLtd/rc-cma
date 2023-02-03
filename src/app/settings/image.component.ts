@@ -4,6 +4,7 @@ import { AnalyticsService, MemberService } from '../_services';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FileUploader, FileUploaderOptions, ParsedResponseHeaders } from 'ng2-file-upload';
 import { AppConfig } from '../app.config';
+import { ImageService } from '../_services/image.service';
 
 
 @Component({
@@ -25,6 +26,7 @@ export class ImageComponent implements OnInit {
   imgURL: string;
 
   constructor(
+    private imgService: ImageService,
     private memberService: MemberService,
     private ga: AnalyticsService,
     private config: AppConfig,
@@ -39,7 +41,7 @@ export class ImageComponent implements OnInit {
     this.imgPreviewSrc = this.data.member.member_image_path;
 
     const uploaderOptions: FileUploaderOptions = {
-      url: `https://api.cloudinary.com/v1_1/${this.config.cloud_name}/upload`,
+      url: this.imgService.cldUploadPath,
       autoUpload: true,
       isHTML5: true,
       removeAfterUpload: true,

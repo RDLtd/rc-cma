@@ -111,7 +111,7 @@ export class SettingsComponent implements OnInit {
     // Get Cloudinary img path
     if(this.member.member_image_path !== null){
       this.clImage = this.imgService.getCldImage(this.member.member_image_path);
-      console.log(this.clImage);
+      // console.log(this.clImage);
     }
 
 
@@ -130,16 +130,14 @@ export class SettingsComponent implements OnInit {
       this.products = obj['products'];
       // Set current product
       // *** If it's an old registration, use product[0] to keep things working
-      console.log('Products loaded', this.products);
+      // console.log('Products loaded', this.products);
       // Find & store the current Member product
       this.currentProduct =
         this.products.find(p => p.product_stripe_id === this.member.member_product_id) || this.products[0];
-      console.log('Current product', this.currentProduct);
     });
   }
 
   getAssociatedRestaurants(id): void {
-    console.log('cachedRestaurantsLength = ', this.cachedRestaurantsLength);
 
     this.restaurantService.getMemberRestaurants(id)
       .subscribe(
@@ -500,7 +498,6 @@ export class SettingsComponent implements OnInit {
   }
 
   getDefaultImages(): void {
-    console.log('getDefaultImages');
     const numberOfRestaurants = this.restaurants.length;
     for (let i = 0; i < numberOfRestaurants; i++) {
       this.cms.getElementClass(this.restaurants[i].restaurant_id, 'Image', 'Y')
@@ -519,7 +516,7 @@ export class SettingsComponent implements OnInit {
             console.log(error);
           });
     }
-    console.log(this.defaultImages);
+    // console.log(this.defaultImages);
   }
 
   // getReferrerInfo() {

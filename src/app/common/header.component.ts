@@ -54,14 +54,14 @@ export class HeaderComponent implements OnInit {
 
     setTimeout(() => {
       // watch for rogue values coming from the db
-        console.log(this.member.member_image_path);
+        // console.log(this.member.member_image_path);
         if (this.member.member_image_path !== null && this.member.member_image_path !== 'null') {
           this.clImage = this.imgService.getCldImage(this.member.member_image_path);
-          console.log(this.member.member_image_path);
+          // console.log(this.member.member_image_path);
         } else {
-          this.avatarUrl = null;
+          this.header.updateAvatar( null);
         }
-      }, 100);
+      }, 0);
 
     // Listen for changes to the section
     this.header.sectionName.subscribe(str => {
@@ -70,9 +70,13 @@ export class HeaderComponent implements OnInit {
 
     // Listen for changes to the avatar
     this.header.currentAvatar.subscribe(url => {
-      this.avatarUrl = this.placeholderUrl + this.displayName;
-      this.clImage = this.imgService.getCldImage(url);
-      console.log('Avatar change', this.clImage, this.avatarUrl);
+      if(url === null) {
+        this.avatarUrl = `${this.placeholderUrl}${this.displayName}`;
+        this.clImage = null;
+      } else {
+        this.clImage = this.imgService.getCldImage(url);
+      }
+      // console.log('Avatar change', url === null, this.clImage, this.avatarUrl);
     });
 
     // Get notified anytime the login status changes
