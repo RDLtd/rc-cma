@@ -65,15 +65,12 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
   d_hours_date: string;
 
   img_date: any;
-  img_src: string;
-  // img_by: string;
   img_count = 0;
   img_status = 0;
   img_status_text: string;
   d_img_date: string;
 
   mnu_date: Date;
-  // mnu_by: string;
   mnu_count = 0;
   mnu_dish_count = 0;
   mnu_status = 0;
@@ -104,7 +101,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
   locals: any;
 
   cldPlugins: any[];
-  cldImage: CloudinaryImage;
+  cldImage: CloudinaryImage = null;
 
   constructor(
     private imgService: ImageService,
@@ -143,11 +140,9 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
 
     moment.locale(localStorage.getItem('rd_language'));
 
-    this.dfImg = 'https://via.placeholder.com/350x200?text='
-      + this.translate.instant('CMS.DASHBOARD.core.labelAwaitingImage');
-
     this.cmsLocalService.getRestaurant()
       .subscribe(rest => {
+          this.cldImage = null;
           if (rest.restaurant_id) {
             this.restaurant = rest;
             // console.log(rest);
@@ -352,18 +347,15 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
           // reset counts
           this.img_status = 0;
           this.img_count = 0;
-          let i = data['elements'].length, elem, imgsrc;
+          let i = data['elements'].length, elem;
           while (i--) {
             elem = data['elements'][i];
             if (elem.cms_element_active) { this.img_count += 1; }
             // Store default image path for restaurant card
             if (elem.cms_element_default) {
-              // Todo: ideally we need to return the Cloudinary publicId instead of the img url
               this.cldImage = this.imgService.getCldImage(this.cmsLocalService.getCloudinaryPublicId(elem.cms_element_image_path));
             }
           }
-          // console.log('Img', imgsrc);
-          this.img_src = imgsrc || this.dfImg;
 
           // set status bar
           this.img_status = this.img_count * 25;

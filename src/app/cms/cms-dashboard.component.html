@@ -6,11 +6,14 @@
     class="rc-cms-card-core mdc-layout-grid__cell mdc-layout-grid__cell--span-5 mdc-layout-grid__cell--span-12-tablet">
     <div class="rc-card-title-img-wrapper">
       <advanced-image
-        *ngIf="img_src"
+        *ngIf="cldImage"
         class="mat-card-image"
         [cldImg]="cldImage"
         [plugins]="cldPlugins">
       </advanced-image>
+<!--      <div *ngIf="cldImage === null" class="placeholder">-->
+<!--        {{'CMS.DASHBOARD.core.labelAwaitingImage' | translate | uppercase}}-->
+<!--      </div>-->
     </div>
 
     <mat-card-title>{{ restaurant?.restaurant_name }}</mat-card-title>

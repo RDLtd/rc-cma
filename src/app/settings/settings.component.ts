@@ -76,9 +76,7 @@ export class SettingsComponent implements OnInit {
     this.lang = localStorage.getItem('rd_language');
     this.member = JSON.parse(localStorage.getItem('rd_profile'));
     moment.locale(this.lang);
-    //console.log(this.member);
     this.clPlugins = this.imgService.cldBasePlugins;
-
   }
 
   ngOnInit() {
