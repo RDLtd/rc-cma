@@ -38,7 +38,6 @@ export class SettingsComponent implements OnInit {
   lang: string;
 
   defaultImages: Array<any> = [];
-  imgRestPlaceholderUrl;
   isDemoMember = false;
   showLoader = false;
   referrer: any;
@@ -86,9 +85,7 @@ export class SettingsComponent implements OnInit {
 
     // Update header label
     this.header.updateSectionName(this.translate.instant('HUB.sectionSettings'));
-    // Add restaurant placeholder
-    this.imgRestPlaceholderUrl =
-      `https://via.placeholder.com/360x240?text=${this.translate.instant('SETTINGS.labelAwaitingImage')}`;
+
     this.setMember();
     this.setProducts();
     this.getAssociatedRestaurants(this.member.member_id);
@@ -498,25 +495,22 @@ export class SettingsComponent implements OnInit {
   }
 
   getDefaultImages(): void {
+    // console.log(this.restaurants);
     const numberOfRestaurants = this.restaurants.length;
     for (let i = 0; i < numberOfRestaurants; i++) {
       this.cms.getElementClass(this.restaurants[i].restaurant_id, 'Image', 'Y')
         .subscribe(
           data => {
-            if (data['count'] > 0) {
-              this.defaultImages[i] = {
-                url: data['elements'][0].cms_element_image_path,
-                clId: this.imgService.getCldImage(data['elements'][0].cms_element_image_path)
-              };
-            } else {
+            if(data['elements'].length === 0) {
               this.defaultImages[i] = null;
+              return;
             }
+            this.defaultImages[i] = this.imgService.getCldImage(data['elements'][0].cms_element_image_path);
           },
           error => {
             console.log(error);
           });
     }
-    // console.log(this.defaultImages);
   }
 
   // getReferrerInfo() {

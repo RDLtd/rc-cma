@@ -95,12 +95,11 @@ a.rc-back {
 .rc-mat-snack-warn,
 .rc-mat-snack-info{
   color: black;
-  background-color: $rc-theme-accent;
+  background-color: $rc-theme-warn;
   .mat-simple-snackbar,
   .mat-simple-snackbar-action {
-    color: black;
-    font-size: 18px;
-    font-weight: bold;
+    color: white;
+    font-size: 16px;
     line-height: 22px;
     button {
       font-size: 16px;
@@ -1459,6 +1458,20 @@ ul.rc-lookup-results {
     height: 160px;
     object-fit: cover;
     display: block;
+    @include mq(small) {
+      height: 120px;
+      width: 180px;
+    }
+  }
+  .placeholder {
+    position: relative;
+    height: 160px;
+    width: 100%;
+    min-width: 180px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $rc-theme-grey;
     @include mq(small) {
       height: 120px;
       width: 180px;

@@ -227,22 +227,29 @@
                 </div>
 
                 <div
-                  *ngFor="let restaurant of restaurants; let idx = index"
-                  class="rc-managed-restaurant">
+                  *ngFor="let restaurant of restaurants; let i = index"
+                  class="rc-managed-restaurant"
+                  [routerLink]="['/cms', restaurant.restaurant_id]">
 
                   <advanced-image
+                    *ngIf="defaultImages[i] !== null"
                     class="rc-managed-restaurant-image"
-                    [routerLink]="['/cms', restaurant.restaurant_id]"
                     width="400px"
                     height="600px"
-                    [cldImg]="defaultImages[idx]?.clId"
-                    [plugins]="clPlugins"
-                  >
+                    [cldImg]="defaultImages[i]"
+                    [plugins]="clPlugins">
                   </advanced-image>
+
+                  <div
+                    *ngIf="defaultImages[i] === null"
+                    class="placeholder">
+                    <span>{{ 'SETTINGS.labelAwaitingImage' | translate | uppercase }}</span>
+                  </div>
+
 
                   <mat-icon
                     matTooltip="{{ 'SETTINGS.tipRemove' | translate: { name: restaurant.restaurant_name } }}"
-                    (click)="removeAssociation(idx)">
+                    (click)="removeAssociation(i)">
                     cancel
                   </mat-icon>
 
