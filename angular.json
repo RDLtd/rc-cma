@@ -18,7 +18,9 @@
             "index": "src/index.html",
             "main": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
-            "polyfills": "src/polyfills.ts",
+            "polyfills": [
+              "zone.js"
+            ],
             "stylePreprocessorOptions": {
               "includePaths": [
                 "node_modules"
@@ -105,9 +107,10 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "src/test.ts",
-            "karmaConfig": "./karma.conf.js",
-            "polyfills": "src/polyfills.ts",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
             "scripts": [
               "node_modules/material-components-web/dist/material-components-web.js",
               "node_modules/marked/lib/marked.js"

@@ -10,9 +10,7 @@
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "target": "es2020",
-    "types": [
-      "hammerjs"
-    ],
+    "types": [],
     "typeRoots": [
       "./node_modules/@types"
     ],
