@@ -6,7 +6,6 @@ import {
   ReactiveFormsModule
 } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   HttpClientModule,
@@ -176,7 +175,6 @@ export function appInitializerFactory(translate: TranslateService) {
     RouterModule,
     ReactiveFormsModule,
     HttpClientModule,
-    FlexLayoutModule,
     routing,
     FileUploadModule,
     ClipboardModule,

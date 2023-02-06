@@ -1686,18 +1686,32 @@ button.rc-member-assc {
 */
 .rc-cms-menus {
   margin: 0 auto;
-  padding: 8px;
+  padding-block: 24px;
   max-width: $rc-max-width;
+  display: grid;
+  gap: 1rem
 }
 .rc-content-panel {
   padding: 16px;
   background-color: white;
 }
+
+.sample-dishes {
+  display: grid;
+  gap: 1rem;
+  @include mq(medium) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
 .rc-cms-menu-info {}
+
 .rc-cms-menu-section {
   padding: 16px 16px 24px;
   background-color: $rc-theme-grey;
-  margin-bottom: 16px;
+  margin-block: 1rem;
+
+
   input.mat-input-element {
     font-size: 20px;
     color: black;
@@ -1738,7 +1752,6 @@ button.rc-member-assc {
 .rc-cms-menu-dish {
   background-color: white;
   cursor: pointer;
-  margin: 0 16px 16px 0;
   padding: 16px !important;
 
   transition: all .3s ease-out;
