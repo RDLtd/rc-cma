@@ -1,6 +1,5 @@
 @use '@angular/material' as mat;
 
-@import "@material/layout-grid/mdc-layout-grid";
 @import "mat-themes";
 @import "abstract";
 @import "variables";
@@ -164,8 +163,6 @@ and (-webkit-min-device-pixel-ratio: 1) {}
 * -------------------------------
 **/
 
-.mdc-layout-grid { max-width: $rc-max-width; }
-
 .rc-grid {
   max-width: $rc-max-width;
   display: grid;
@@ -182,7 +179,6 @@ and (-webkit-min-device-pixel-ratio: 1) {}
   }
 }
 .rc-grid-masonry-2 {
-  //display: column;
   columns: 1;
   margin: 1rem auto;
   gap: 1rem;
@@ -192,6 +188,18 @@ and (-webkit-min-device-pixel-ratio: 1) {}
   }
   @include mq(medium) {
     columns: 2;
+  }
+}
+.rc-form-grid {
+  display: grid;
+  margin: 1rem auto;
+  gap: 1rem;
+
+  @include mq(medium) {
+    grid-template-columns: repeat(2, 1fr);
+    .rc-form-grid-span {
+      grid-column: span 2;
+    }
   }
 }
 
@@ -561,8 +569,6 @@ form.rc-form-grid {
     height: 80px;
     margin: 0 24px;
   }
-
-  .mdc-layout-grid__cell { text-align: center; }
 
   .rc-navlist {
     display: block;

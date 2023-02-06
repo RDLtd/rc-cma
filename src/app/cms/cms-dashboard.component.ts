@@ -607,7 +607,9 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
 
   reqDirectoryDataChange(): void {
 
-    const dialogRef = this.dialog.open(RestaurantDetailComponent, {});
+    const dialogRef = this.dialog.open(RestaurantDetailComponent, {
+      width: '600px'
+    });
 
     // Setup dialog vars
     dialogRef.componentInstance.restaurant = this.restaurant;

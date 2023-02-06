@@ -1,9 +1,8 @@
-<div class="mdc-layout-grid">
-  <div class="mdc-layout-grid__inner">
-
+<div class="rc-content-container rc-full-width">
+  <div class="rc-grid-masonry-2 golden">
   <!-- CORE DATA -->
   <mat-card
-    class="rc-cms-card-core mdc-layout-grid__cell mdc-layout-grid__cell--span-5 mdc-layout-grid__cell--span-12-tablet">
+    class="rc-cms-card-core">
     <div class="rc-card-title-img-wrapper">
       <advanced-image
         *ngIf="cldImage"
@@ -11,11 +10,7 @@
         [cldImg]="cldImage"
         [plugins]="cldPlugins">
       </advanced-image>
-<!--      <div *ngIf="cldImage === null" class="placeholder">-->
-<!--        {{'CMS.DASHBOARD.core.labelAwaitingImage' | translate | uppercase}}-->
-<!--      </div>-->
     </div>
-
     <mat-card-title>{{ restaurant?.restaurant_name }}</mat-card-title>
     <mat-card-subtitle>{{ restaurant?.restaurant_group_name }}</mat-card-subtitle>
     <mat-card-content>
@@ -92,217 +87,209 @@
       </button>
     </mat-card-actions>
   </mat-card>
+  <!-- SPW: loading -->
+  <mat-card
+    *ngIf="isPreviewing"
+    class="rc-cms-dash-info">
+    <mat-card-header>
+      <mat-card-title>{{ 'CMS.DASHBOARD.spw.msgAnalysing' | translate }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <app-rc-loader></app-rc-loader>
+    </mat-card-content>
+    <mat-card-actions></mat-card-actions>
+  </mat-card>
+  <!-- SPW: no changes -->
+  <mat-card
+    *ngIf="!cmsChanged && cmsHasSufficientData && !isPreviewing"
+    class="rc-cms-dash-info">
+    <!-- HEADER -->
+    <!-- Verified by/data -->
+    <mat-card-header *ngIf="!isPreviewing">
+      <mat-card-title
+        ngpreservewhitespaces
+        markdown>
+        {{ 'CMS.DASHBOARD.spw.msgVerified' | translate: { date: d_publishDate, name:
+        restaurant.restaurant_verified_by } }}
+      </mat-card-title>
+      <span class="rc-space-filler"></span>
+      <mat-icon class="rc-success">cloud_done</mat-icon>
+    </mat-card-header>
 
-  <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-7">
-    <div class="mdc-layout-grid__inner">
+    <!-- CONTENT -->
+    <mat-card-content
+      *ngIf="!isPreviewing"
+      markdown
+      ngpreservewhitespaces>
+      {{ 'CMS.DASHBOARD.spw.msgPublished' | translate }}
+    </mat-card-content>
 
-      <!-- SPW: loading -->
-      <mat-card
-        *ngIf="isPreviewing"
-        class="rc-cms-dash-info mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--align-top">
-        <mat-card-header>
-          <mat-card-title>{{ 'CMS.DASHBOARD.spw.msgAnalysing' | translate }}</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <app-rc-loader></app-rc-loader>
-        </mat-card-content>
-        <mat-card-actions></mat-card-actions>
-      </mat-card>
+    <!-- ACTIONS -->
+    <mat-card-actions align="end" *ngIf="!isPreviewing">
+      <button
+        mat-button
+        (click)="dspSPWLinks()"
+        matTooltip="{{ 'CMS.DASHBOARD.spw.tipMarketingLinks' | translate }}"
+        [disabled]="isPreviewing">
+        {{ 'CMS.DASHBOARD.spw.labelBtnMarketingLinks' | translate | uppercase }}
+      </button>
+      <a
+        [disabled]="isPreviewing"
+        [href]="spwProdUrl"
+        target="_blank"
+        matTooltip="{{ 'CMS.DASHBOARD.spw.tipViewPublished' | translate: {
+        restaurant: restaurant.restaurant_name } }}"
+        mat-button color="accent">
+        {{ 'CMS.DASHBOARD.spw.labelBtnViewPublished' | translate | uppercase }}
+      </a>
+    </mat-card-actions>
+  </mat-card>
+  <!-- SPW: has changes -->
+  <mat-card
+    *ngIf="cmsChanged && !isPreviewing"
+    class="rc-cms-dash-info">
 
-      <!-- SPW: no changes -->
-      <mat-card
-        *ngIf="!cmsChanged && cmsHasSufficientData && !isPreviewing"
-        class="rc-cms-dash-info mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--align-top">
-        <!-- HEADER -->
-        <!-- Verified by/data -->
-        <mat-card-header *ngIf="!isPreviewing">
-          <mat-card-title
-            ngpreservewhitespaces
-            markdown>
-            {{ 'CMS.DASHBOARD.spw.msgVerified' | translate: { date: d_publishDate, name:
-            restaurant.restaurant_verified_by } }}
-          </mat-card-title>
-          <span class="rc-space-filler"></span>
-          <mat-icon class="rc-success">cloud_done</mat-icon>
-        </mat-card-header>
+    <!-- HEADER -->
+    <!-- Unpublished changes -->
+    <mat-card-header *ngIf="!isPreviewing && cmsHasSufficientData">
+      <mat-card-title>{{ 'CMS.DASHBOARD.spw.headerUnPublished' | translate | uppercase }}</mat-card-title>
+      <span class="rc-space-filler"></span>
+      <mat-icon class="rc-warn">cloud_off</mat-icon>
+    </mat-card-header>
 
-        <!-- CONTENT -->
-        <mat-card-content
-          *ngIf="!isPreviewing"
-          markdown
-          ngpreservewhitespaces>
-          {{ 'CMS.DASHBOARD.spw.msgPublished' | translate }}
-        </mat-card-content>
+    <!-- More content required -->
+    <mat-card-header *ngIf="!isPreviewing && !cmsHasSufficientData">
+      <mat-card-title>{{ 'CMS.DASHBOARD.spw.headerContentRequired' | translate | uppercase }}</mat-card-title>
+      <span class="rc-space-filler"></span>
+      <mat-icon class="rc-warn">cloud_off</mat-icon>
+    </mat-card-header>
 
-        <!-- ACTIONS -->
-        <mat-card-actions align="end" *ngIf="!isPreviewing">
-          <button
-            mat-button
-            (click)="dspSPWLinks()"
-            matTooltip="{{ 'CMS.DASHBOARD.spw.tipMarketingLinks' | translate }}"
-            [disabled]="isPreviewing">
-            {{ 'CMS.DASHBOARD.spw.labelBtnMarketingLinks' | translate | uppercase }}
-          </button>
-          <a
-            [disabled]="isPreviewing"
-            [href]="spwProdUrl"
-            target="_blank"
-            matTooltip="{{ 'CMS.DASHBOARD.spw.tipViewPublished' | translate: {
-            restaurant: restaurant.restaurant_name } }}"
-            mat-button color="accent">
-            {{ 'CMS.DASHBOARD.spw.labelBtnViewPublished' | translate | uppercase }}
-          </a>
-        </mat-card-actions>
-      </mat-card>
+    <!-- CONTENT -->
+    <!-- Unpublished changes -->
+    <mat-card-content
+      *ngIf="!isPreviewing && cmsHasSufficientData"
+      markdown
+      ngpreservewhitespaces>
+      {{ 'CMS.DASHBOARD.spw.msgUnpublished' | translate: { brand: config.brand.name } }}
+    </mat-card-content>
 
-      <!-- SPW: has changes -->
-      <mat-card
-        *ngIf="cmsChanged && !isPreviewing"
-        class="rc-cms-dash-info mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--align-top">
+    <!-- More content required -->
+    <mat-card-content
+      *ngIf="!isPreviewing && !cmsHasSufficientData"
+      markdown
+      ngpreservewhitespaces>
+      {{ 'CMS.DASHBOARD.spw.msgContentRequired' | translate: { link: config.brand.spwDemoUrl } }}
+    </mat-card-content>
 
-        <!-- HEADER -->
-        <!-- Unpublished changes -->
-        <mat-card-header *ngIf="!isPreviewing && cmsHasSufficientData">
-          <mat-card-title>{{ 'CMS.DASHBOARD.spw.headerUnPublished' | translate | uppercase }}</mat-card-title>
-          <span class="rc-space-filler"></span>
-          <mat-icon class="rc-warn">cloud_off</mat-icon>
-        </mat-card-header>
-
-        <!-- More content required -->
-        <mat-card-header *ngIf="!isPreviewing && !cmsHasSufficientData">
-          <mat-card-title>{{ 'CMS.DASHBOARD.spw.headerContentRequired' | translate | uppercase }}</mat-card-title>
-          <span class="rc-space-filler"></span>
-          <mat-icon class="rc-warn">cloud_off</mat-icon>
-        </mat-card-header>
-
-        <!-- CONTENT -->
-        <!-- Unpublished changes -->
-        <mat-card-content
-          *ngIf="!isPreviewing && cmsHasSufficientData"
-          markdown
-          ngpreservewhitespaces>
-          {{ 'CMS.DASHBOARD.spw.msgUnpublished' | translate: { brand: config.brand.name } }}
-        </mat-card-content>
-
-        <!-- More content required -->
-        <mat-card-content
-          *ngIf="!isPreviewing && !cmsHasSufficientData"
-          markdown
-          ngpreservewhitespaces>
-          {{ 'CMS.DASHBOARD.spw.msgContentRequired' | translate: { link: config.brand.spwDemoUrl } }}
-        </mat-card-content>
-
-        <!-- ACTIONS -->
-        <!-- card actions -->
-        <mat-card-actions
-          align="end"
-          *ngIf="!isPreviewing">
-          <button
-            mat-button
-            [disabled]="isPreviewing"
-            (click)="previewSPW()">{{ 'CMS.DASHBOARD.spw.labelBtnPreview' | translate | uppercase }}</button>
-          <button
-            mat-button
-            color="accent"
-            [disabled]="!cmsHasSufficientData"
-            (click)="publishSPW()">{{ 'CMS.DASHBOARD.spw.labelBtnPublish' | translate | uppercase }}</button>
-        </mat-card-actions>
-      </mat-card>
-
-      <!-- CONTENT Summary -->
-      <mat-card
-        class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 mdc-layout-grid__cell--span-12-tablet">
-        <div class="rc-card-help">
-          <button
-            mat-icon-button
-            (click)="help.dspHelp('cms-dashboard-summary', restaurant)">
-            <mat-icon>help_outline</mat-icon>
-          </button>
-        </div>
-        <mat-card-content class="rc-cms-dash-info">
-          <mat-card-header>
-            <mat-card-title>{{ 'CMS.DASHBOARD.summary.titleSummary' | translate | uppercase}}</mat-card-title>
-          </mat-card-header>
-
-          <mat-list class="rc-content-status">
-
-            <!-- Hours -->
-            <mat-list-item
-              [class.rc-content-status-complete]="hours_status > 99"
-              [class.rc-content-status-partial]="hours_status < 100 && hours_status > 0"
-              (click)="navTo('opening-times')">
-              <mat-icon matListIcon>watch_later</mat-icon>
-              <h3 matLine>{{ 'CMS.DASHBOARD.summary.headerTimes' | translate | uppercase }}</h3>
-              <p matLine>{{ 'CMS.DASHBOARD.summary.msgLastUpdated' | translate: { update: d_hours_date} }}</p>
-              <mat-progress-bar  matLine mode="determinate" value="{{ hours_status }}"></mat-progress-bar>
-              <p matLine><span>{{ hours_status_text }}</span></p>
-            </mat-list-item>
-
-            <!-- Features -->
-            <mat-list-item
-              [class.rc-content-status-complete]="desc_status > 99"
-              [class.rc-content-status-partial]="desc_status < 100 && desc_status > 0"
-              (click)="navTo('features')">
-              <mat-icon matListIcon>check_box</mat-icon>
-              <h3 matLine>{{ 'CMS.DASHBOARD.summary.headerFeatures' | translate | uppercase }}</h3>
-              <p matLine>{{ 'CMS.DASHBOARD.summary.msgLastUpdated' | translate : { update: d_desc_date } }}</p>
-              <mat-progress-bar  matLine mode="determinate" value="{{ desc_status }}"></mat-progress-bar>
-              <p matLine><span>{{ desc_status_text }}</span></p>
-            </mat-list-item>
-
-            <!-- Images -->
-            <mat-list-item
-              [class.rc-content-status-complete]="img_status > 99"
-              [class.rc-content-status-partial]="img_status < 100 && img_status > 0"
-              (click)="navTo('images')">
-              <mat-icon matListIcon>image</mat-icon>
-              <h3 matLine>{{ 'CMS.DASHBOARD.summary.headerImages' | translate | uppercase }}</h3>
-              <p matLine>{{ 'CMS.DASHBOARD.summary.msgLastUpdated' | translate: { update: d_img_date } }}</p>
-              <mat-progress-bar  matLine mode="determinate" value="{{ img_status }}"></mat-progress-bar>
-              <p matLine><span>{{ img_status_text }}</span></p>
-            </mat-list-item>
-
-            <!-- Menus -->
-            <mat-list-item
-              [class.rc-content-status-complete]="mnu_status > 99"
-              [class.rc-content-status-partial]="mnu_status < 100 && mnu_status > 0"
-              (click)="navTo('menus')">
-              <mat-icon matListIcon>restaurant</mat-icon>
-              <h3 matLine>{{ 'CMS.DASHBOARD.summary.headerMenus' | translate | uppercase }}</h3>
-              <p matLine>{{ 'CMS.DASHBOARD.summary.msgLastUpdated' | translate: { update: d_mnu_date } }}</p>
-              <mat-progress-bar  matLine mode="determinate" value="{{ mnu_status }}"></mat-progress-bar>
-              <p matLine><span>{{ mnu_status_text }}</span></p>
-            </mat-list-item>
-
-            <!-- Booking info -->
-            <mat-list-item
-              [class.rc-content-status-complete]="bkg_status > 99"
-              [class.rc-content-status-partial]="bkg_status < 100 && bkg_status > 0"
-              (click)="navTo('reservations')">
-              <mat-icon matListIcon>event</mat-icon>
-              <h3 matLine>{{ 'CMS.DASHBOARD.summary.headerBookings' | translate | uppercase }}</h3>
-              <p matLine>{{ 'CMS.DASHBOARD.summary.msgLastUpdated' | translate: { update: d_bkg_date } }}</p>
-              <mat-progress-bar  matLine mode="determinate" value="{{ bkg_status }}"></mat-progress-bar>
-              <p matLine><span>{{ bkg_status_text }}</span></p>
-            </mat-list-item>
-
-            <!-- Location -->
-            <mat-list-item
-              [class.rc-content-status-complete]="loc_status > 99"
-              [class.rc-content-status-partial]="loc_status < 100 && loc_status > 0"
-              (click)="navTo('location')">
-              <mat-icon matListIcon>place</mat-icon>
-              <h3 matLine>{{ 'CMS.DASHBOARD.summary.headerLocation' | translate | uppercase }}</h3>
-              <p matLine>{{ 'CMS.DASHBOARD.summary.msgLastUpdated' | translate: { update: d_loc_date } }}</p>
-              <mat-progress-bar  matLine mode="determinate" color="primary" value="{{ loc_status }}"></mat-progress-bar>
-              <p matLine><span>{{ loc_status_text }}</span></p>
-            </mat-list-item>
-          </mat-list>
-        </mat-card-content>
-      </mat-card>
-      </div>
+    <!-- ACTIONS -->
+    <!-- card actions -->
+    <mat-card-actions
+      align="end"
+      *ngIf="!isPreviewing">
+      <button
+        mat-button
+        [disabled]="isPreviewing"
+        (click)="previewSPW()">{{ 'CMS.DASHBOARD.spw.labelBtnPreview' | translate | uppercase }}</button>
+      <button
+        mat-button
+        color="accent"
+        [disabled]="!cmsHasSufficientData"
+        (click)="publishSPW()">{{ 'CMS.DASHBOARD.spw.labelBtnPublish' | translate | uppercase }}</button>
+    </mat-card-actions>
+  </mat-card>
+  <!-- CONTENT Summary -->
+  <mat-card
+    class="">
+    <div class="rc-card-help">
+      <button
+        mat-icon-button
+        (click)="help.dspHelp('cms-dashboard-summary', restaurant)">
+        <mat-icon>help_outline</mat-icon>
+      </button>
     </div>
+    <mat-card-content class="rc-cms-dash-info">
+      <mat-card-header>
+        <mat-card-title>{{ 'CMS.DASHBOARD.summary.titleSummary' | translate | uppercase}}</mat-card-title>
+      </mat-card-header>
+
+      <mat-list class="rc-content-status">
+
+        <!-- Hours -->
+        <mat-list-item
+          [class.rc-content-status-complete]="hours_status > 99"
+          [class.rc-content-status-partial]="hours_status < 100 && hours_status > 0"
+          (click)="navTo('opening-times')">
+          <mat-icon matListIcon>watch_later</mat-icon>
+          <h3 matLine>{{ 'CMS.DASHBOARD.summary.headerTimes' | translate | uppercase }}</h3>
+          <p matLine>{{ 'CMS.DASHBOARD.summary.msgLastUpdated' | translate: { update: d_hours_date} }}</p>
+          <mat-progress-bar  matLine mode="determinate" value="{{ hours_status }}"></mat-progress-bar>
+          <p matLine><span>{{ hours_status_text }}</span></p>
+        </mat-list-item>
+
+        <!-- Features -->
+        <mat-list-item
+          [class.rc-content-status-complete]="desc_status > 99"
+          [class.rc-content-status-partial]="desc_status < 100 && desc_status > 0"
+          (click)="navTo('features')">
+          <mat-icon matListIcon>check_box</mat-icon>
+          <h3 matLine>{{ 'CMS.DASHBOARD.summary.headerFeatures' | translate | uppercase }}</h3>
+          <p matLine>{{ 'CMS.DASHBOARD.summary.msgLastUpdated' | translate : { update: d_desc_date } }}</p>
+          <mat-progress-bar  matLine mode="determinate" value="{{ desc_status }}"></mat-progress-bar>
+          <p matLine><span>{{ desc_status_text }}</span></p>
+        </mat-list-item>
+
+        <!-- Images -->
+        <mat-list-item
+          [class.rc-content-status-complete]="img_status > 99"
+          [class.rc-content-status-partial]="img_status < 100 && img_status > 0"
+          (click)="navTo('images')">
+          <mat-icon matListIcon>image</mat-icon>
+          <h3 matLine>{{ 'CMS.DASHBOARD.summary.headerImages' | translate | uppercase }}</h3>
+          <p matLine>{{ 'CMS.DASHBOARD.summary.msgLastUpdated' | translate: { update: d_img_date } }}</p>
+          <mat-progress-bar  matLine mode="determinate" value="{{ img_status }}"></mat-progress-bar>
+          <p matLine><span>{{ img_status_text }}</span></p>
+        </mat-list-item>
+
+        <!-- Menus -->
+        <mat-list-item
+          [class.rc-content-status-complete]="mnu_status > 99"
+          [class.rc-content-status-partial]="mnu_status < 100 && mnu_status > 0"
+          (click)="navTo('menus')">
+          <mat-icon matListIcon>restaurant</mat-icon>
+          <h3 matLine>{{ 'CMS.DASHBOARD.summary.headerMenus' | translate | uppercase }}</h3>
+          <p matLine>{{ 'CMS.DASHBOARD.summary.msgLastUpdated' | translate: { update: d_mnu_date } }}</p>
+          <mat-progress-bar  matLine mode="determinate" value="{{ mnu_status }}"></mat-progress-bar>
+          <p matLine><span>{{ mnu_status_text }}</span></p>
+        </mat-list-item>
+
+        <!-- Booking info -->
+        <mat-list-item
+          [class.rc-content-status-complete]="bkg_status > 99"
+          [class.rc-content-status-partial]="bkg_status < 100 && bkg_status > 0"
+          (click)="navTo('reservations')">
+          <mat-icon matListIcon>event</mat-icon>
+          <h3 matLine>{{ 'CMS.DASHBOARD.summary.headerBookings' | translate | uppercase }}</h3>
+          <p matLine>{{ 'CMS.DASHBOARD.summary.msgLastUpdated' | translate: { update: d_bkg_date } }}</p>
+          <mat-progress-bar  matLine mode="determinate" value="{{ bkg_status }}"></mat-progress-bar>
+          <p matLine><span>{{ bkg_status_text }}</span></p>
+        </mat-list-item>
+
+        <!-- Location -->
+        <mat-list-item
+          [class.rc-content-status-complete]="loc_status > 99"
+          [class.rc-content-status-partial]="loc_status < 100 && loc_status > 0"
+          (click)="navTo('location')">
+          <mat-icon matListIcon>place</mat-icon>
+          <h3 matLine>{{ 'CMS.DASHBOARD.summary.headerLocation' | translate | uppercase }}</h3>
+          <p matLine>{{ 'CMS.DASHBOARD.summary.msgLastUpdated' | translate: { update: d_loc_date } }}</p>
+          <mat-progress-bar  matLine mode="determinate" color="primary" value="{{ loc_status }}"></mat-progress-bar>
+          <p matLine><span>{{ loc_status_text }}</span></p>
+        </mat-list-item>
+      </mat-list>
+    </mat-card-content>
+  </mat-card>
   </div>
 </div>
+
 
 

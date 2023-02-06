@@ -7,173 +7,167 @@
 
     <form (ngSubmit)="restForm.form.valid" #restForm="ngForm">
 
-      <div class="mdc-layout-grid rc-no-grid-gutter">
-        <!-- Col 1 -->
-        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6">
-          <!-- Name -->
-          <mat-form-field hideRequiredMarker class="rc-full-width">
-            <mat-label>{{ 'CMS.DASHBOARD.core.labelRestaurantName' | translate }}</mat-label>
-            <input
-              name="restaurant_name"
-              type="text"
-              matInput
-              [(ngModel)]="restaurant.restaurant_name"
-              required
-              [disabled]="!editMode">
-            <mat-hint align="end" *ngIf="restaurant.restaurant_group_name">Group: {{ restaurant.restaurant_group_name }}</mat-hint>
-          </mat-form-field>
-          <!-- address -->
-          <mat-form-field hideRequiredMarker class="rc-full-width">
-            <mat-label>{{ 'CMS.DASHBOARD.core.labelAddress' | translate }}</mat-label>
-            <input
-              name="restaurant_address_1"
-              type="text"
-              matInput
-              #restaurant_address_1="ngModel"
-              [(ngModel)]="restaurant.restaurant_address_1"
-              required
-              [disabled]="!editMode">
-          </mat-form-field>
-          <mat-form-field  hideRequiredMarker class="rc-full-width">
-            <input
-              name="restaurant_address_2"
-              type="text"
-              matInput
-              #restaurant_address_2="ngModel"
-              [(ngModel)]="restaurant.restaurant_address_2"
-              [disabled]="!editMode">
-          </mat-form-field>
-          <mat-form-field class="rc-full-width">
-            <input
-              name="restaurant_address_3"
-              type="text"
-              matInput
-              #restaurant_address_3="ngModel"
-              [(ngModel)]="restaurant.restaurant_address_3"
-              [disabled]="!editMode">
-          </mat-form-field>
-          <!-- Postcode -->
-          <mat-form-field class="rc-full-width">
-            <mat-label>{{ 'CMS.DASHBOARD.core.labelPostcode' | translate }}</mat-label>
-            <input
-              name="restaurant_post_code"
-              type="text"
-              matInput
-              #restaurant_post_code="ngModel"
-              [(ngModel)]="restaurant.restaurant_post_code"
-              [disabled]="!editMode">
-            <mat-hint align="end">{{ restaurant.restaurant_region }} // {{ restaurant.restaurant_lat }} // {{ restaurant.restaurant_lng }}</mat-hint>
-          </mat-form-field>
-          <!-- Holding group -->
-          <mat-form-field  class="rc-full-width">
-            <mat-label>{{ 'CMS.DASHBOARD.core.labelGroup' | translate }}</mat-label>
-            <input
-              name="restaurant_group_name"
-              type="text"
-              matInput
-              #restaurant_group_name="ngModel"
-              [(ngModel)]="restaurant.restaurant_group_name"
-              [disabled]="!editMode">
-          </mat-form-field>
-          <div class="rc-card-vspacer"></div>
-          <!-- Cuisine -->
-          <mat-form-field class="rc-full-width">
-            <mat-select
-              name="restaurant_cuisine_1"
-              [placeholder]="'CMS.DASHBOARD.core.labelCuisinePrimary' | translate"
-              (selectionChange)="changeCuisine()"
-              [(ngModel)]="restaurant.restaurant_cuisine_1">
-              <mat-option
-                *ngFor= "let cuisine of cuisines"
-                [value] = "cuisine.cuisine_description">
-                {{ cuisine.cuisine_description }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-          <mat-form-field class="rc-full-width">
-            <mat-select
-              name="restaurant_cuisine_2"
-              (selectionChange)="checkModifier()"
-              [placeholder]="'CMS.DASHBOARD.core.labelCuisineSecondary' | translate"
-              [(ngModel)]="restaurant.restaurant_cuisine_2">
-              <mat-option
-                *ngFor= "let cuisine of cuisine_modifiers"
-                [value] = "cuisine.cuisine_description">
-                {{ cuisine.cuisine_description }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-        <!-- Col 2 -->
-        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6">
-          <!-- Telephone -->
-          <mat-form-field class="rc-full-width">
-            <mat-label>{{ 'CMS.DASHBOARD.core.labelTel' | translate }}</mat-label>
-            <input
-              name="restaurant_telephone"
-              type="text"
-              matInput
-              #restaurant_name="ngModel"
-              [(ngModel)]="restaurant.restaurant_telephone"
-              required
-              [disabled]="!editMode">
-          </mat-form-field>
-          <!-- Email -->
-          <mat-form-field hideRequiredMarker class="rc-full-width">
-            <mat-label>Email</mat-label>
-            <input
-              name="restaurant_email"
-              type="text"
-              matInput
-              #restaurant_name="ngModel"
-              [(ngModel)]="restaurant.restaurant_email"
-              required
-              [disabled]="!editMode">
-          </mat-form-field>
-          <!-- Website -->
-          <mat-form-field class="rc-full-width">
-            <mat-label>{{ 'CMS.DASHBOARD.core.labelWeb' | translate }}</mat-label>
-            <input
-              name="restaurant_website"
-              type="text"
-              matInput
-              #restaurant_name="ngModel"
-              [(ngModel)]="restaurant.restaurant_website"
-              [disabled]="!editMode">
-          </mat-form-field>
-          <!-- Social media -->
-          <mat-form-field class="rc-full-width">
-            <mat-label>Facebook</mat-label>
-            <input
-              name="restaurant_facebook"
-              type="text"
-              matInput
-              #restaurant_name="ngModel"
-              [(ngModel)]="restaurant.restaurant_facebook"
-              [disabled]="!editMode">
-          </mat-form-field>
-          <mat-form-field class="rc-full-width">
-            <mat-label>Twitter</mat-label>
-            <input
-              name="restaurant_twitter"
-              type="text"
-              matInput
-              #restaurant_name="ngModel"
-              [(ngModel)]="restaurant.restaurant_twitter"
-              [disabled]="!editMode">
-          </mat-form-field>
-          <mat-form-field class="rc-full-width">
-            <mat-label>Instagram</mat-label>
-            <input
-              name="restaurant_instagram"
-              type="text"
-              matInput
-              #restaurant_name="ngModel"
-              [(ngModel)]="restaurant.restaurant_instagram"
-              [disabled]="!editMode">
-          </mat-form-field>
-          <div class="rc-card-vspacer"></div>
-        </div>
+      <div class="rc-form-grid">
+        <!-- Name -->
+        <mat-form-field hideRequiredMarker class="rc-full-width">
+          <mat-label>{{ 'CMS.DASHBOARD.core.labelRestaurantName' | translate }}</mat-label>
+          <input
+            name="restaurant_name"
+            type="text"
+            matInput
+            [(ngModel)]="restaurant.restaurant_name"
+            required
+            [disabled]="!editMode">
+          <mat-hint align="end" *ngIf="restaurant.restaurant_group_name">Group: {{ restaurant.restaurant_group_name }}</mat-hint>
+        </mat-form-field>
+        <!-- Holding group -->
+        <mat-form-field  class="rc-full-width">
+          <mat-label>{{ 'CMS.DASHBOARD.core.labelGroup' | translate }}</mat-label>
+          <input
+            name="restaurant_group_name"
+            type="text"
+            matInput
+            #restaurant_group_name="ngModel"
+            [(ngModel)]="restaurant.restaurant_group_name"
+            [disabled]="!editMode">
+        </mat-form-field>
+        <!-- address -->
+        <mat-form-field hideRequiredMarker class="rc-full-width">
+          <mat-label>{{ 'CMS.DASHBOARD.core.labelAddress' | translate }}</mat-label>
+          <input
+            name="restaurant_address_1"
+            type="text"
+            matInput
+            #restaurant_address_1="ngModel"
+            [(ngModel)]="restaurant.restaurant_address_1"
+            required
+            [disabled]="!editMode">
+        </mat-form-field>
+        <mat-form-field hideRequiredMarker class="rc-full-width">
+          <mat-label>{{ 'CMS.DASHBOARD.core.labelAddress2' | translate }}</mat-label>
+          <input
+            name="restaurant_address_2"
+            type="text"
+            matInput
+            #restaurant_address_2="ngModel"
+            [(ngModel)]="restaurant.restaurant_address_2"
+            [disabled]="!editMode">
+        </mat-form-field>
+        <mat-form-field class="rc-full-width">
+          <mat-label>{{ 'CMS.DASHBOARD.core.labelAddress2' | translate }}</mat-label>
+          <input
+            name="restaurant_address_3"
+            type="text"
+            matInput
+            #restaurant_address_3="ngModel"
+            [(ngModel)]="restaurant.restaurant_address_3"
+            [disabled]="!editMode">
+        </mat-form-field>
+        <!-- Postcode -->
+        <mat-form-field class="rc-full-width">
+          <mat-label>{{ 'CMS.DASHBOARD.core.labelPostcode' | translate }}</mat-label>
+          <input
+            name="restaurant_post_code"
+            type="text"
+            matInput
+            #restaurant_post_code="ngModel"
+            [(ngModel)]="restaurant.restaurant_post_code"
+            [disabled]="!editMode">
+          <mat-hint align="end">{{ restaurant.restaurant_region }} // {{ restaurant.restaurant_lat }} // {{ restaurant.restaurant_lng }}</mat-hint>
+        </mat-form-field>
+        <!-- Cuisine -->
+        <mat-form-field class="rc-full-width">
+          <mat-select
+            name="restaurant_cuisine_1"
+            [placeholder]="'CMS.DASHBOARD.core.labelCuisinePrimary' | translate"
+            (selectionChange)="changeCuisine()"
+            [(ngModel)]="restaurant.restaurant_cuisine_1">
+            <mat-option
+              *ngFor= "let cuisine of cuisines"
+              [value] = "cuisine.cuisine_description">
+              {{ cuisine.cuisine_description }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="rc-full-width">
+          <mat-select
+            name="restaurant_cuisine_2"
+            (selectionChange)="checkModifier()"
+            [placeholder]="'CMS.DASHBOARD.core.labelCuisineSecondary' | translate"
+            [(ngModel)]="restaurant.restaurant_cuisine_2">
+            <mat-option
+              *ngFor= "let cuisine of cuisine_modifiers"
+              [value] = "cuisine.cuisine_description">
+              {{ cuisine.cuisine_description }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <!-- Telephone -->
+        <mat-form-field class="rc-full-width">
+          <mat-label>{{ 'CMS.DASHBOARD.core.labelTel' | translate }}</mat-label>
+          <input
+            name="restaurant_telephone"
+            type="text"
+            matInput
+            #restaurant_name="ngModel"
+            [(ngModel)]="restaurant.restaurant_telephone"
+            required
+            [disabled]="!editMode">
+        </mat-form-field>
+        <!-- Email -->
+        <mat-form-field hideRequiredMarker class="rc-full-width">
+          <mat-label>Email</mat-label>
+          <input
+            name="restaurant_email"
+            type="text"
+            matInput
+            #restaurant_name="ngModel"
+            [(ngModel)]="restaurant.restaurant_email"
+            required
+            [disabled]="!editMode">
+        </mat-form-field>
+        <!-- Website -->
+        <mat-form-field class="rc-full-width rc-form-grid-span">
+          <mat-label>{{ 'CMS.DASHBOARD.core.labelWeb' | translate }}</mat-label>
+          <input
+            name="restaurant_website"
+            type="text"
+            matInput
+            #restaurant_name="ngModel"
+            [(ngModel)]="restaurant.restaurant_website"
+            [disabled]="!editMode">
+        </mat-form-field>
+        <!-- Social media -->
+        <mat-form-field class="rc-full-width rc-form-grid-span">
+          <mat-label>Facebook</mat-label>
+          <input
+            name="restaurant_facebook"
+            type="text"
+            matInput
+            #restaurant_name="ngModel"
+            [(ngModel)]="restaurant.restaurant_facebook"
+            [disabled]="!editMode">
+        </mat-form-field>
+        <mat-form-field class="rc-full-width rc-form-grid-span">
+          <mat-label>Twitter</mat-label>
+          <input
+            name="restaurant_twitter"
+            type="text"
+            matInput
+            #restaurant_name="ngModel"
+            [(ngModel)]="restaurant.restaurant_twitter"
+            [disabled]="!editMode">
+        </mat-form-field>
+        <mat-form-field class="rc-full-width rc-form-grid-span">
+          <mat-label>Instagram</mat-label>
+          <input
+            name="restaurant_instagram"
+            type="text"
+            matInput
+            #restaurant_name="ngModel"
+            [(ngModel)]="restaurant.restaurant_instagram"
+            [disabled]="!editMode">
+        </mat-form-field>
       </div>
     </form>
 
