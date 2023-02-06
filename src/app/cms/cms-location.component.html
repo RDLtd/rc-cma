@@ -1,47 +1,43 @@
-<div class="mdc-layout-grid">
+<div class="rc-content-container">
 
-  <div class="mdc-layout-grid__inner">
-
-  <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
-    <mat-toolbar class="rc-toolbar rc-toolbar-section">
-      <span>{{ 'CMS.LOCATION.titleLocation' | translate }}</span>
-      <span class="rc-space-filler"></span>
-      <span class="rc-toolbar-actions">
+  <mat-toolbar class="rc-toolbar rc-toolbar-section">
+    <span>{{ 'CMS.LOCATION.titleLocation' | translate }}</span>
+    <span class="rc-space-filler"></span>
+    <span class="rc-toolbar-actions">
 
         <!-- HELP -->
         <button
-          mat-icon-button
-          (click)="help.dspHelp('cms-location-transport', restaurant)">
+                mat-icon-button
+                (click)="help.dspHelp('cms-location-transport', restaurant)">
           <mat-icon>help_outline</mat-icon>
         </button>
 
         <!-- UNDO CHANGES -->
         <button
-          mat-icon-button
-          [disabled]="!dataChanged"
-          (click)="resetData()"
-          [matTooltip]="'CMS.LOCATION.tipUndo' | translate">
+                mat-icon-button
+                [disabled]="!dataChanged"
+                (click)="resetData()"
+                [matTooltip]="'CMS.LOCATION.tipUndo' | translate">
           <mat-icon>undo</mat-icon>
         </button>
 
         <!-- SAVE CHANGES -->
         <button
-          mat-icon-button
-          [disabled]="!dataChanged"
-          (click)="updateTransport()"
-          [matTooltip]="'CMS.LOCATION.tipSave' | translate">
+                mat-icon-button
+                [disabled]="!dataChanged"
+                (click)="updateTransport()"
+                [matTooltip]="'CMS.LOCATION.tipSave' | translate">
           <mat-icon>check</mat-icon>
         </button>
 
       </span>
-    </mat-toolbar>
-      </div>
+  </mat-toolbar>
 
-  <mat-card class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--span-8-tablet">
-
-    <mat-card-title>
+  <div class="rc-grid">
+    <mat-card>
+      <mat-card-title>
       <h2>{{ 'CMS.LOCATION.titleParking' | translate }}</h2></mat-card-title>
-    <mat-card-content>
+      <mat-card-content>
       <mat-form-field
         class="rc-full-width">
         <mat-label>{{ 'CMS.LOCATION.labelParking' | translate: { chars: transportPrivateLength } }}</mat-label>
@@ -59,14 +55,11 @@
         <mat-hint align="end">{{ privateRoom.value.length }}/{{ transportPrivateLength }}</mat-hint>
       </mat-form-field>
     </mat-card-content>
-
-  </mat-card>
-
-  <mat-card class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--span-8-tablet">
-
-    <mat-card-title>
+    </mat-card>
+    <mat-card>
+      <mat-card-title>
       <h2>{{ 'CMS.LOCATION.titlePublicTransport' | translate }}</h2></mat-card-title>
-    <mat-card-content>
+      <mat-card-content>
       <mat-form-field
         class="rc-full-width">
         <mat-label>{{ 'CMS.LOCATION.labelPublicTransport' | translate: { chars: transportPublicLength } }}</mat-label>
@@ -83,48 +76,43 @@
           </textarea>
         <mat-hint align="end">{{ publicTrans.value.length }}/{{ transportPublicLength }}</mat-hint>
       </mat-form-field>
-    </mat-card-content>
+      </mat-card-content>
+    </mat-card>
+    <mat-card>
+      <mat-card-title>
+        <div class="rc-cms-card-nav"></div>
+        <h2>{{ 'CMS.LOCATION.titlePdf' | translate }}</h2></mat-card-title>
+      <mat-card-content>
+        {{ 'CMS.LOCATION.infoDirectionsDownload' | translate }}
+      </mat-card-content>
+      <mat-card-actions align="end">
+        <button
+          *ngIf="fileLoaded"
+          mat-icon-button
+          matTooltip="{{ 'CMS.LOCATION.tipDelete' | translate }}"
+          (click)="deleteDirections()">
+          <mat-icon>delete</mat-icon>
+        </button>
 
-  </mat-card>
+        <button
+          mat-icon-button
+          matTooltip="{{ 'CMS.LOCATION.tipUploadDirections' | translate }}"
+          (click)="uploadDirections()">
+          <mat-icon>cloud_upload</mat-icon>
+        </button>
 
-  <mat-card class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--span-8-tablet">
+        <button
+          mat-icon-button
+          matTooltip="{{ 'CMS.LOCATION.tipViewDirections' | translate }}"
+          [disabled]="!fileLoaded"
+          (click)="viewDirections()">
+          <mat-icon>launch</mat-icon>
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
 
-    <mat-card-title>
-      <div class="rc-cms-card-nav"></div>
-      <h2>{{ 'CMS.LOCATION.titlePdf' | translate }}</h2></mat-card-title>
-    <mat-card-content>
-      {{ 'CMS.LOCATION.infoDirectionsDownload' | translate }}
-    </mat-card-content>
-    <mat-card-actions align="end">
-
-      <button
-        *ngIf="fileLoaded"
-        mat-icon-button
-        matTooltip="{{ 'CMS.LOCATION.tipDelete' | translate }}"
-        (click)="deleteDirections()">
-        <mat-icon>delete</mat-icon>
-      </button>
-
-      <button
-        mat-icon-button
-        matTooltip="{{ 'CMS.LOCATION.tipUploadDirections' | translate }}"
-        (click)="uploadDirections()">
-        <mat-icon>cloud_upload</mat-icon>
-      </button>
-
-      <button
-        mat-icon-button
-        matTooltip="{{ 'CMS.LOCATION.tipViewDirections' | translate }}"
-        [disabled]="!fileLoaded"
-        (click)="viewDirections()">
-        <mat-icon>launch</mat-icon>
-      </button>
-    </mat-card-actions>
-
-  </mat-card>
-
-  <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
-    <mat-toolbar class="rc--toolbar rc-toolbar-section">
+  <mat-toolbar class="rc--toolbar rc-toolbar-section">
       <!--<mat-icon>place</mat-icon>-->
       <span>{{ 'CMS.LOCATION.titleMapPos' | translate }}</span>
       <span class="rc-space-filler"></span>
@@ -154,40 +142,25 @@
       </span>
     </mat-toolbar>
 
-  </div>
-
-  <mat-card class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
-
+  <mat-card>
     <mat-card-content>
       <h3>{{ restaurant?.restaurant_address_1 }}
         {{ restaurant?.restaurant_address_2 }} {{ restaurant?.restaurant_address_3 }}
         {{ restaurant?.restaurant_post_code }}</h3>
-
-
-<!--      <div *ngIf="mapsApiLoaded | async">-->
-        <div>
-        <google-map
-          height="560px"
-          width="100%"
-          [options]="mapOptions">
-          <map-marker
-            (mapDragend)="updateRestaurantMarker()"
-            [options]="markerOptions"
-            [position]="markerPosition">
-          </map-marker>
-        </google-map>
-      </div>
-
+      <div>
+      <google-map
+        height="560px"
+        width="100%"
+        [options]="mapOptions">
+        <map-marker
+          (mapDragend)="updateRestaurantMarker()"
+          [options]="markerOptions"
+          [position]="markerPosition">
+        </map-marker>
+      </google-map>
+    </div>
     </mat-card-content>
-
   </mat-card>
-
-  </div>
-
 </div>
 
-<!--<hr>-->
-<!--<pre>-->
-<!--{{ restaurant | json }}-->
-<!--</pre>-->
 

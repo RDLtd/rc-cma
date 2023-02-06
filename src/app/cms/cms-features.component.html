@@ -1,37 +1,36 @@
-<div class="mdc-layout-grid">
-  <div class="mdc-layout-grid__inner">
-  <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
-    <mat-toolbar class="rc-toolbar rc-toolbar-section">
-      <span>{{ 'CMS.FEATURES.titleDescAndFeatures' | translate }}</span>
-      <span class="rc-space-filler"></span>
-      <span class="rc-toolbar-actions">
+<div class="rc-content-container">
+  <mat-toolbar class="rc-toolbar rc-toolbar-section">
+    <span>{{ 'CMS.FEATURES.titleDescAndFeatures' | translate }}</span>
+    <span class="rc-space-filler"></span>
+    <span class="rc-toolbar-actions">
         <!-- HELP -->
         <button
-          mat-icon-button
-          (click)="help.dspHelp('cms-features', restaurant)">
+                mat-icon-button
+                (click)="help.dspHelp('cms-features', restaurant)">
             <mat-icon>help_outline</mat-icon>
         </button>
         <!-- UNDO CHANGES -->
         <button
-          mat-icon-button
-          [disabled]="!dataChanged"
-          (click)="resetData()"
-          [matTooltip]="'CMS.FEATURES.tipUndo' | translate">
+                mat-icon-button
+                [disabled]="!dataChanged"
+                (click)="resetData()"
+                [matTooltip]="'CMS.FEATURES.tipUndo' | translate">
           <mat-icon>undo</mat-icon>
         </button>
         <!-- SAVE CHANGES -->
         <button
-          mat-icon-button
-          [disabled]="!dataChanged"
-          (click)="updateData()"
-          [matTooltip]="'CMS.FEATURES.tipSave' | translate">
+                mat-icon-button
+                [disabled]="!dataChanged"
+                (click)="updateData()"
+                [matTooltip]="'CMS.FEATURES.tipSave' | translate">
           <mat-icon>check</mat-icon>
         </button>
       </span>
-    </mat-toolbar>
-  </div>
+  </mat-toolbar>
+  <div class="rc-grid two-cols">
 
-    <mat-card class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-12-tablet">
+
+    <mat-card>
 
       <mat-card-title>
         <h2>{{ 'CMS.FEATURES.titleDescriptions' | translate }}</h2>
@@ -115,7 +114,7 @@
       </mat-card-content>
     </mat-card>
 
-    <mat-card class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-12-tablet">
+    <mat-card>
       <mat-card-title>
         <!-- FEATURES -->
         <h2>{{ 'CMS.FEATURES.titleFeatures' | translate }}</h2>

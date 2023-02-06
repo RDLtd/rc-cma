@@ -165,6 +165,42 @@ and (-webkit-min-device-pixel-ratio: 1) {}
 **/
 
 .mdc-layout-grid { max-width: $rc-max-width; }
+
+.rc-grid {
+  max-width: $rc-max-width;
+  display: grid;
+  margin: 1rem auto;
+  gap: 1rem;
+  .rc-grid-col-span {
+    grid-column: span 3;
+  }
+  @include mq(medium) {
+    grid-template-columns: repeat(3, 1fr);
+    &.two-cols {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+}
+.rc-grid-masonry-2 {
+  //display: column;
+  columns: 1;
+  margin: 1rem auto;
+  gap: 1rem;
+  > * {
+    break-inside: avoid;
+    margin-bottom: 1rem;
+  }
+  @include mq(medium) {
+    columns: 2;
+  }
+}
+
+.rc-content-container {
+  max-width: $rc-max-width;
+  margin: 1rem auto;
+}
+
+
 .mat-toolbar,
 .mat-toolbar-row,
 .mat-toolbar-single-row {
@@ -1659,6 +1695,8 @@ button.rc-member-assc {
   }
 }
 .rc-cms-times {
+  max-width: $rc-max-width;
+  margin:1rem auto;
   .mat-checkbox-label {
     font-size: 16px;
     color: $rc-theme-black;

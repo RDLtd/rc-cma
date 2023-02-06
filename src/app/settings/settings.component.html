@@ -1,286 +1,266 @@
 
-<div class="rc-section rc-section-profile rc-section-settings">
-  <!-- page grid -->
-  <div class="mdc-layout-grid">
-    <div class="mdc-layout-grid__inner">
+<div class="rc-content-container">
 
-      <!-- col 1 -->
-      <div
-        class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-12-tablet">
-        <div class="mdc-layout-grid__inner">
-
-          <!-- Contacts -->
-          <mat-card
-            class="rc-card-rounded mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
-            <div class="rc-card-title">
-              <h2>{{ 'SETTINGS.titleMember' | translate }}</h2>
-              <span class="rc-space-filler"></span>
-              <span>
-                <button
-                  color="accent"
-                  mat-icon-button
-                  (click)="updateMemberContacts()"
-                  matTooltip="{{ 'SETTINGS.tipEdit' | translate }}">
-                  <mat-icon>edit</mat-icon>
-                </button>
-              </span>
-            </div>
-            <div class="rc-card-subtitle">
-              {{ 'SETTINGS.infoMember' | translate }}
-            </div>
-            <mat-card-content>
-
-              <ul class="rc-line-items">
-                <li>
-                  <label>{{ 'SETTINGS.labelName' | translate }}:</label>
-                  {{ member.member_first_name | titlecase }} {{ member?.member_last_name | titlecase }}
-                </li>
-                <li>
-                  <label>{{ 'SETTINGS.labelRole' | translate }}:</label>
-                  {{ member?.member_job | titlecase }}
-                </li>
-                <li>
-                  <label>{{ 'SETTINGS.labelEmail' | translate }}:</label>
-                  {{ member?.member_email | lowercase }}
-                </li>
-                <li>
-                  <label>{{ 'SETTINGS.labelTel' | translate }}:</label>
-                  {{ member?.member_telephone }}
-                </li>
-                <li>
-                  <label>{{ 'SETTINGS.labelLang' | translate }}:</label>
-                  <mat-radio-group
-                    (change)="setLanguage(lang)"
-                    [(ngModel)]="lang">
-                    <mat-radio-button [value]="'en'">english</mat-radio-button>
-                    <mat-radio-button [value]="'fr'">français</mat-radio-button>
-                  </mat-radio-group>
-                </li>
-              </ul>
-
-              <div class="rc-sub-panel">
-
-                <!-- Avatar -->
-                <advanced-image
-                  *ngIf="clImage"
-                  class="headshot"
-                  (click)="updateImage()"
-                  width="360px"
-                  height="360px"
-                  [cldImg]="clImage"
-                  [plugins]="clPlugins">
-                </advanced-image>
-
-                <div
-                  *ngIf="!clImage"
-                  class="rc-avatar-placeholder"
-                  (click)="updateImage()">
-                  <svg viewBox="0 0 240 240">
-                    <g>
-                      <g fill="#00A69B">
-                        <path d="M120,0 C53.76,0 0,53.76 0,120 C0,186.24 53.76,240 120,240 C186.24,240 240,186.24 240,120 C240,53.76 186.24,0 120,0 Z M120,36 C139.92,36 156,52.08 156,72 C156,91.92 139.92,108 120,108 C100.08,108 84,91.92 84,72 C84,52.08 100.08,36 120,36 Z M120,206.4 C90,206.4 63.48,191.04 48,167.76 C48.36,143.88 96,130.8 120,130.8 C143.88,130.8 191.64,143.88 192,167.76 C176.52,191.04 150,206.4 120,206.4 Z" id="Shape"></path>
-                      </g>
-                    </g>
-                  </svg>
-                </div>
-
-                <div>
-                  <h3>{{ 'SETTINGS.titleAvatar' | translate }}</h3>
-                  <span>{{ 'SETTINGS.infoAvatar' | translate}}</span>
-                </div>
-              </div>
-            </mat-card-content>
-          </mat-card>
-
-          <!-- Auth -->
-          <mat-card
-            class="rc-card-rounded mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
-            <div class="rc-card-title">
-              <h2>{{ 'SETTINGS.titleAuthentication' | translate }}</h2>
-              <span class="rc-space-filler"></span>
-              <span>
-            <button
-              color="accent"
-              mat-icon-button
-              (click)="updatePassword()"
-              matTooltip="{{ 'SETTINGS.tipEdit' | translate }}">
-              <mat-icon>edit</mat-icon>
-            </button>
-          </span>
-            </div>
-            <div class="rc-card-subtitle">
-              {{ 'SETTINGS.infoAuth' | translate }}
-            </div>
-            <mat-card-content>
-              <ul class="rc-line-items">
-                <li><label>{{ 'SETTINGS.labelEmail' | translate }}:</label>
-                  {{ member?.member_email | lowercase }}
-                </li>
-                <li><label>{{ 'SETTINGS.labelPwd' | translate }}:</label>
-                  ********
-                </li>
-              </ul>
-            </mat-card-content>
-          </mat-card>
-        </div>
-      </div>
-
-      <!-- Col 2 -->
-      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-12-tablet">
-        <div class="mdc-layout-grid__inner">
-
-          <!-- Referrals -->
-          <mat-card
-            class="rc-card-rounded mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
-            <div class="rc-card-title">
-              <h2>{{ 'SETTINGS.titleReferrals' | translate }}</h2>
-              <span class="rc-space-filler"></span>
-              <span>
-                <button
-                  color="accent"
-                  mat-icon-button
-                  (click)="copied()"
-                  [cdkCopyToClipboard]="getReferralCode()"
-                  matTooltip="{{ 'SETTINGS.tipCopyReferral' | translate }}">
-                  <mat-icon>link</mat-icon>
-                </button>
-              </span>
-            </div>
-            <div class="rc-card-subtitle">
-              {{ 'SETTINGS.infoReferrals' | translate }}
-            </div>
-            <mat-card-content>
-              <ul class="rc-line-items">
-                <li><label>{{ 'SETTINGS.labelReferralCode' | translate }}:</label>
-                  <a [href]="getReferralCode()">{{
-                    member?.member_promo_code | uppercase }}</a>
-                </li>
-              </ul>
-            </mat-card-content>
-          </mat-card>
-
-          <!-- Account -->
-          <mat-card
-            class="rc-card-rounded mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
-            <div class="rc-card-title">
-              <h2>{{ 'SETTINGS.titleAccount' | translate }}</h2>
-              <span class="rc-space-filler"></span>
-              <span>
+    <div class="rc-grid-masonry-2">
+      <!-- Account -->
+      <mat-card class="rc-card-rounded">
+        <div class="rc-card-title">
+          <h2>{{ 'SETTINGS.titleAccount' | translate }}</h2>
+          <span class="rc-space-filler"></span>
+          <span>
 
                 <button
-                  mat-button (click)="managePayments()"
-                  color="accent"
-                  [disabled]="isFreeMembership"
-                  matTooltip="{{ 'SETTINGS.tipManagePayments' | translate }}">
+                        mat-button (click)="managePayments()"
+                        color="accent"
+                        [disabled]="isFreeMembership"
+                        matTooltip="{{ 'SETTINGS.tipManagePayments' | translate }}">
                   {{ 'SETTINGS.labelManagePayments' | translate | uppercase }}
                 </button>
 
               </span>
-            </div>
-            <div class="rc-card-subtitle">
-              {{ 'SETTINGS.infoAccounts' | translate }}
-            </div>
-            <mat-card-content>
-              <ul class="rc-line-items">
-                <li><label>{{ 'SETTINGS.labelMemberId' | translate }}:</label>{{ member.member_id }}</li>
-                <li><label>{{ 'SETTINGS.labelJoined' | translate }}:</label>{{ d_member_signedup }}</li>
-                <li><label>{{ 'SETTINGS.labelSubscription' | translate }}:</label>
-                  <span *ngIf="isFreeMembership">
+        </div>
+        <div class="rc-card-subtitle">
+          {{ 'SETTINGS.infoAccounts' | translate }}
+        </div>
+        <mat-card-content>
+          <ul class="rc-line-items">
+            <li><label>{{ 'SETTINGS.labelMemberId' | translate }}:</label>{{ member.member_id }}</li>
+            <li><label>{{ 'SETTINGS.labelJoined' | translate }}:</label>{{ d_member_signedup }}</li>
+            <li><label>{{ 'SETTINGS.labelSubscription' | translate }}:</label>
+              <span *ngIf="isFreeMembership">
                     {{ 'SETTINGS.labelFreeMembership' | translate }} {{ freeMembershipExpiry }}
                   </span>
-                  <a
-                    *ngIf="!isFreeMembership"
-                    (click)="viewMemberPlans()"
-                     matTooltip="{{ 'SETTINGS.tipManagePayments' | translate }}">
-                    {{ currentProduct?.product_name }}
-                  </a>
-                  <span class="rc-space-filler"></span>
-                </li>
-              </ul>
-              <div class="rc-card-title" style="margin: 24px 0 8px 0;">
-                <h2>{{ 'SETTINGS.titleManagedRestaurants' | translate }}</h2>
-                <span class="rc-space-filler"></span>
+              <a
+                      *ngIf="!isFreeMembership"
+                      (click)="viewMemberPlans()"
+                      matTooltip="{{ 'SETTINGS.tipManagePayments' | translate }}">
+                {{ currentProduct?.product_name }}
+              </a>
+              <span class="rc-space-filler"></span>
+            </li>
+          </ul>
+          <div class="rc-card-title" style="margin: 24px 0 8px 0;">
+            <h2>{{ 'SETTINGS.titleManagedRestaurants' | translate }}</h2>
+            <span class="rc-space-filler"></span>
 
-                <span>
+            <span>
                   <button
-                    color="accent"
-                    mat-icon-button (click)="checkAllowance()"
-                    matTooltip="{{ 'SETTINGS.labelAddRestaurant' | translate }}">
+                          color="accent"
+                          mat-icon-button (click)="checkAllowance()"
+                          matTooltip="{{ 'SETTINGS.labelAddRestaurant' | translate }}">
                     <mat-icon>add_circle_outline</mat-icon>
                 </button>
               </span>
+          </div>
+
+
+          <div class="rc-managed-restaurants">
+
+            <div
+                    *ngIf="restaurants?.length === 0"
+                    (click)="addRestaurants()"
+                    class="rc-managed-restaurant-placeholder">
+
+              <div>{{ 'PLANS.labelAddRestaurant' | translate | uppercase }}</div>
+              <div markdown ngpreservewhitespaces>
+                {{ 'PLANS.msgAddRestaurant' | translate }}
               </div>
 
+            </div>
 
-              <div class="rc-managed-restaurants">
-
-                <div
-                  *ngIf="restaurants?.length === 0"
-                  (click)="addRestaurants()"
-                  class="rc-managed-restaurant-placeholder">
-
-                  <div>{{ 'PLANS.labelAddRestaurant' | translate | uppercase }}</div>
-                  <div markdown ngpreservewhitespaces>
-                    {{ 'PLANS.msgAddRestaurant' | translate }}
-                  </div>
-
-                </div>
-
-                <div
-                  *ngFor="let restaurant of restaurants; let i = index"
-                  class="rc-managed-restaurant"
-                  [routerLink]="['/cms', restaurant.restaurant_id]">
-
-                  <advanced-image
-                    *ngIf="defaultImages[i] !== null"
-                    class="rc-managed-restaurant-image"
-                    width="400px"
-                    height="600px"
-                    [cldImg]="defaultImages[i]"
-                    [plugins]="clPlugins">
-                  </advanced-image>
-
-                  <div
-                    *ngIf="defaultImages[i] === null"
-                    class="placeholder">
-                    <span>{{ 'SETTINGS.labelAwaitingImage' | translate | uppercase }}</span>
-                  </div>
-
-
-                  <mat-icon
-                    matTooltip="{{ 'SETTINGS.tipRemove' | translate: { name: restaurant.restaurant_name } }}"
-                    (click)="removeAssociation(i)">
-                    cancel
-                  </mat-icon>
-
-                  <div class="rc-managed-restaurant-info"
+            <div
+                    *ngFor="let restaurant of restaurants; let i = index"
+                    class="rc-managed-restaurant"
                     [routerLink]="['/cms', restaurant.restaurant_id]">
-                    <h3>{{ restaurant.restaurant_name }}</h3>
-                    <p class="rc-txt-small">{{ restaurant?.restaurant_address_1 }}, {{ restaurant?.restaurant_address_2 }}<br>
-                    {{ restaurant?.restaurant_address_2 }}<br>{{ restaurant?.restaurant_post_code }}</p>
-                  </div>
-                </div>
 
+              <advanced-image
+                      *ngIf="defaultImages[i] !== null"
+                      class="rc-managed-restaurant-image"
+                      width="400px"
+                      height="600px"
+                      [cldImg]="defaultImages[i]"
+                      [plugins]="clPlugins">
+              </advanced-image>
+
+              <div
+                      *ngIf="defaultImages[i] === null"
+                      class="placeholder">
+                <span>{{ 'SETTINGS.labelAwaitingImage' | translate | uppercase }}</span>
               </div>
 
-            </mat-card-content>
-          </mat-card>
+
+              <mat-icon
+                      matTooltip="{{ 'SETTINGS.tipRemove' | translate: { name: restaurant.restaurant_name } }}"
+                      (click)="removeAssociation(i)">
+                cancel
+              </mat-icon>
+
+              <div class="rc-managed-restaurant-info"
+                   [routerLink]="['/cms', restaurant.restaurant_id]">
+                <h3>{{ restaurant.restaurant_name }}</h3>
+                <p class="rc-txt-small">{{ restaurant?.restaurant_address_1 }}, {{ restaurant?.restaurant_address_2 }}<br>
+                  {{ restaurant?.restaurant_address_2 }}<br>{{ restaurant?.restaurant_post_code }}</p>
+              </div>
+            </div>
+
+          </div>
+
+        </mat-card-content>
+      </mat-card>
+      <!-- Auth -->
+      <mat-card class="rc-card-rounded">
+        <div class="rc-card-title">
+          <h2>{{ 'SETTINGS.titleAuthentication' | translate }}</h2>
+          <span class="rc-space-filler"></span>
+          <span>
+            <button
+                    color="accent"
+                    mat-icon-button
+                    (click)="updatePassword()"
+                    matTooltip="{{ 'SETTINGS.tipEdit' | translate }}">
+              <mat-icon>edit</mat-icon>
+            </button>
+          </span>
+        </div>
+        <div class="rc-card-subtitle">
+          {{ 'SETTINGS.infoAuth' | translate }}
+        </div>
+        <mat-card-content>
+          <ul class="rc-line-items">
+            <li><label>{{ 'SETTINGS.labelEmail' | translate }}:</label>
+              {{ member?.member_email | lowercase }}
+            </li>
+            <li><label>{{ 'SETTINGS.labelPwd' | translate }}:</label>
+              ********
+            </li>
+          </ul>
+        </mat-card-content>
+      </mat-card>
+      <!-- Contacts -->
+      <mat-card class="rc-card-rounded">
+        <div class="rc-card-title">
+          <h2>{{ 'SETTINGS.titleMember' | translate }}</h2>
+          <span class="rc-space-filler"></span>
+          <span>
+            <button
+              color="accent"
+              mat-icon-button
+              (click)="updateMemberContacts()"
+              matTooltip="{{ 'SETTINGS.tipEdit' | translate }}">
+              <mat-icon>edit</mat-icon>
+            </button>
+          </span>
+        </div>
+        <div class="rc-card-subtitle">
+          {{ 'SETTINGS.infoMember' | translate }}
+        </div>
+        <mat-card-content>
+
+          <ul class="rc-line-items">
+            <li>
+              <label>{{ 'SETTINGS.labelName' | translate }}:</label>
+              {{ member.member_first_name | titlecase }} {{ member?.member_last_name | titlecase }}
+            </li>
+            <li>
+              <label>{{ 'SETTINGS.labelRole' | translate }}:</label>
+              {{ member?.member_job | titlecase }}
+            </li>
+            <li>
+              <label>{{ 'SETTINGS.labelEmail' | translate }}:</label>
+              {{ member?.member_email | lowercase }}
+            </li>
+            <li>
+              <label>{{ 'SETTINGS.labelTel' | translate }}:</label>
+              {{ member?.member_telephone }}
+            </li>
+            <li>
+              <label>{{ 'SETTINGS.labelLang' | translate }}:</label>
+              <mat-radio-group
+                (change)="setLanguage(lang)"
+                [(ngModel)]="lang">
+                <mat-radio-button [value]="'en'">english</mat-radio-button>
+                <mat-radio-button [value]="'fr'">français</mat-radio-button>
+              </mat-radio-group>
+            </li>
+          </ul>
+
+          <div class="rc-sub-panel">
+
+            <!-- Avatar -->
+            <advanced-image
+              *ngIf="clImage"
+              class="headshot"
+              (click)="updateImage()"
+              width="360px"
+              height="360px"
+              [cldImg]="clImage"
+              [plugins]="clPlugins">
+            </advanced-image>
+
+            <div
+              *ngIf="!clImage"
+              class="rc-avatar-placeholder"
+              (click)="updateImage()">
+              <svg viewBox="0 0 240 240">
+                <g>
+                  <g fill="#00A69B">
+                    <path d="M120,0 C53.76,0 0,53.76 0,120 C0,186.24 53.76,240 120,240 C186.24,240 240,186.24 240,120 C240,53.76 186.24,0 120,0 Z M120,36 C139.92,36 156,52.08 156,72 C156,91.92 139.92,108 120,108 C100.08,108 84,91.92 84,72 C84,52.08 100.08,36 120,36 Z M120,206.4 C90,206.4 63.48,191.04 48,167.76 C48.36,143.88 96,130.8 120,130.8 C143.88,130.8 191.64,143.88 192,167.76 C176.52,191.04 150,206.4 120,206.4 Z" id="Shape"></path>
+                  </g>
+                </g>
+              </svg>
+            </div>
+
+            <div>
+              <h3>{{ 'SETTINGS.titleAvatar' | translate }}</h3>
+              <span>{{ 'SETTINGS.infoAvatar' | translate}}</span>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+      <!-- Referrals -->
+      <mat-card class="rc-card-rounded">
+        <div class="rc-card-title">
+          <h2>{{ 'SETTINGS.titleReferrals' | translate }}</h2>
+          <span class="rc-space-filler"></span>
+          <span>
+            <button
+              color="accent"
+              mat-icon-button
+              (click)="copied()"
+              [cdkCopyToClipboard]="getReferralCode()"
+              matTooltip="{{ 'SETTINGS.tipCopyReferral' | translate }}">
+              <mat-icon>link</mat-icon>
+            </button>
+          </span>
+        </div>
+        <div class="rc-card-subtitle">
+          {{ 'SETTINGS.infoReferrals' | translate }}
+        </div>
+        <mat-card-content>
+          <ul class="rc-line-items">
+            <li><label>{{ 'SETTINGS.labelReferralCode' | translate }}:</label>
+              <a [href]="getReferralCode()">{{
+                member?.member_promo_code | uppercase }}</a>
+            </li>
+          </ul>
+        </mat-card-content>
+      </mat-card>
 
 <!--          <mat-card-->
-<!--            class="rc-card-rounded mdc-layout-grid__cell mdc-layout-grid__cell&#45;&#45;span-12">-->
+<!--            class="rc-card-rounded">-->
 <!--            <div class="rc-card-title">-->
 <!--              <h2>{{ 'SETTINGS.titleNotification' | translate }}</h2>-->
 <!--              <span class="rc-space-filler"></span>-->
 <!--              <span>-->
-<!--&lt;!&ndash;                <button&ndash;&gt;-->
-<!--&lt;!&ndash;                  color="accent"&ndash;&gt;-->
-<!--&lt;!&ndash;                  mat-icon-button&ndash;&gt;-->
-<!--&lt;!&ndash;                  ngxClipboard&ndash;&gt;-->
-<!--&lt;!&ndash;                  (click)="copied()"&ndash;&gt;-->
-<!--&lt;!&ndash;                  [cbContent]="getReferralCode()"&ndash;&gt;-->
-<!--&lt;!&ndash;                  matTooltip="{{ 'SETTINGS.tipCopyReferral' | translate }}">&ndash;&gt;-->
-<!--&lt;!&ndash;                  <mat-icon>link</mat-icon>&ndash;&gt;-->
-<!--&lt;!&ndash;                </button>&ndash;&gt;-->
+<!--                <button-->
+<!--                  color="accent"-->
+<!--                  mat-icon-button-->
+<!--                  ngxClipboard-->
+<!--                  (click)="copied()"-->
+<!--                  [cbContent]="getReferralCode()"-->
+<!--                  matTooltip="{{ 'SETTINGS.tipCopyReferral' | translate }}">-->
+<!--                  <mat-icon>link</mat-icon>-->
+<!--                </button>-->
 <!--              </span>-->
 <!--            </div>-->
 <!--            <div class="rc-card-subtitle">-->
@@ -310,7 +290,7 @@
 <!--            </mat-card-content>-->
 <!--          </mat-card>-->
         </div>
-      </div>
+
     </div>
-  </div>
-</div>
+
+

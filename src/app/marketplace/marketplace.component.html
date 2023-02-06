@@ -50,12 +50,10 @@
 <!--  <div *ngIf="sponsored" class="rc-marketplace-sponsor">-->
 <!--    <img src="" alt="P&G Logo">Sponsored by.-->
 <!--  </div>-->
-  <div class="mdc-layout-grid">
-    <div class="mdc-layout-grid__inner" [@insertAnimation]="displayedDeals?.length">
 
-      <div
-        *ngFor="let deal of displayedDeals"
-        class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
+    <div class="rc-grid" [@insertAnimation]="displayedDeals?.length">
+
+      <div *ngFor="let deal of displayedDeals">
         <mat-card class="rc-card-rounded rc-card-market">
           <button
             mat-icon-button
@@ -132,6 +130,6 @@
           </ng-container>
         </mat-menu>
       </div>
-    </div>
+
   </div>
 </div>

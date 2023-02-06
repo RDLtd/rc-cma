@@ -1,39 +1,36 @@
-<div class="mdc-layout-grid">
-  <div class="mdc-layout-grid__inner">
-    <!-- TOOLBAR -->
-    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
-      <mat-toolbar class="rc-toolbar rc-toolbar-section">
-        <span>{{ 'CMS.RESERVATIONS.titleReservationsInfo' | translate }}</span>
-        <span class="rc-space-filler"></span>
-        <span class="rc-toolbar-actions">
+<div class="rc-content-container">
+  <mat-toolbar class="rc-toolbar rc-toolbar-section">
+    <span>{{ 'CMS.RESERVATIONS.titleReservationsInfo' | translate }}</span>
+    <span class="rc-space-filler"></span>
+    <span class="rc-toolbar-actions">
           <button
-            mat-icon-button
-            (click)="help.dspHelp('cms-reservations', restaurant)">
+                  mat-icon-button
+                  (click)="help.dspHelp('cms-reservations', restaurant)">
             <mat-icon>help_outline</mat-icon>
           </button>
-          <!-- UNDO CHANGES -->
+      <!-- UNDO CHANGES -->
           <button
-            mat-icon-button
-            [disabled]="!dataChanged"
-            (click)="resetData()"
-            [matTooltip]="'CMS.RESERVATIONS.tipUndo' | translate">
+                  mat-icon-button
+                  [disabled]="!dataChanged"
+                  (click)="resetData()"
+                  [matTooltip]="'CMS.RESERVATIONS.tipUndo' | translate">
             <mat-icon>undo</mat-icon>
           </button>
-          <!-- SAVE CHANGES -->
+      <!-- SAVE CHANGES -->
           <button
-            mat-icon-button
-            [disabled]="!dataChanged"
-            (click)="updateData()"
-            [matTooltip]="'CMS.RESERVATIONS.tipSave' | translate">
+                  mat-icon-button
+                  [disabled]="!dataChanged"
+                  (click)="updateData()"
+                  [matTooltip]="'CMS.RESERVATIONS.tipSave' | translate">
             <mat-icon>check</mat-icon>
           </button>
         </span>
-      </mat-toolbar>
-        </div>
+  </mat-toolbar>
+  <div class="rc-grid two-cols">
+
 
     <!-- GENERAL -->
-    <mat-card
-      class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-12-tablet rc-cms-res">
+    <mat-card>
       <mat-card-title>
         <h2>{{ 'CMS.RESERVATIONS.titleGeneral' | translate }}</h2>
       </mat-card-title>
@@ -60,8 +57,7 @@
     </mat-card>
 
     <!-- ONLINE BOOKINGS -->
-    <mat-card
-      class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-12-tablet rc-cms-res-online">
+    <mat-card>
       <form #frmBooking="ngForm">
 
         <mat-card-title>
@@ -147,8 +143,7 @@
     </mat-card>
 
     <!-- GROUPS -->
-    <mat-card
-      class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-12-tablet">
+    <mat-card>
       <mat-card-title>
         <h2>{{ 'CMS.RESERVATIONS.titleGroupBookings' | translate }}</h2></mat-card-title>
       <mat-card-content>
@@ -173,8 +168,7 @@
     </mat-card>
 
     <!-- PRIVATE DINING -->
-    <mat-card
-      class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-12-tablet">
+    <mat-card>
       <mat-card-title>
         <h2>{{ 'CMS.RESERVATIONS.titlePrivate' | translate }}</h2></mat-card-title>
       <mat-card-content>
@@ -199,11 +193,3 @@
     </mat-card>
   </div>
 </div>
-
-<!--<hr>-->
-
-<!--<pre>-->
-
-<!--{{ descriptions | json }}-->
-
-<!--</pre>-->

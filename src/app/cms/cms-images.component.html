@@ -1,26 +1,23 @@
-<div class="mdc-layout-grid">
-  <div class="mdc-layout-grid__inner" [@insertAnimation]="cmsImages?.length">
-    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
-      <mat-toolbar class="rc-toolbar-section">
-      <span>{{ 'CMS.IMAGES.titleRestaurantImages' | translate }}</span>
-      <span class="rc-space-filler"></span>
-      <span class="rc-toolbar-actions">
-        <button
-          mat-icon-button
-          (click)="help.dspHelp('cms-images', restaurant)">
-            <mat-icon>help_outline</mat-icon>
-        </button>
+<div class="rc-content-container">
+  <mat-toolbar class="rc-toolbar-section">
+    <span>{{ 'CMS.IMAGES.titleRestaurantImages' | translate }}</span>
+    <span class="rc-space-filler"></span>
+    <span class="rc-toolbar-actions">
+          <button
+                  mat-icon-button
+                  (click)="help.dspHelp('cms-images', restaurant)">
+              <mat-icon>help_outline</mat-icon>
+          </button>
+          <button mat-icon-button (click)="addImage()"
+                  matTooltip="{{ 'CMS.IMAGES.tipAddImage' | translate }}">
+            <mat-icon>add_circle_outline</mat-icon>
+          </button>
+        </span>
+  </mat-toolbar>
+  <div class="rc-grid" [@insertAnimation]="cmsImages?.length">
 
-        <button mat-icon-button (click)="addImage()"
-                matTooltip="{{ 'CMS.IMAGES.tipAddImage' | translate }}">
-          <mat-icon>add_circle_outline</mat-icon>
-        </button>
-      </span>
-    </mat-toolbar>
-    </div>
     <!-- Image cards -->
     <div
-      class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4"
       *ngFor="let image of cmsImages">
       <div
         class="rc-image-card"
@@ -91,7 +88,7 @@
     <!-- Add image option -->
     <div
       *ngIf="!showLoader"
-      class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 rc-add-content"
+      class="rc-add-content"
       (click)="addImage()">
       <mat-icon>add_circle_outline</mat-icon>
       <span class="rc-add-content-label">
