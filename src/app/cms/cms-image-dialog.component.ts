@@ -43,18 +43,22 @@ export class CmsImageDialogComponent implements OnInit {
       ? msg = this.translate.instant('CMS.IMAGES.msgNowActive', { img: img.cms_element_id })
       : msg = this.translate.instant('CMS.IMAGES.msgNowOffline', { img: img.cms_element_id });
 
-    this.cms.updateElement(img).subscribe(
-      () => {
+    this.cms.updateElement(img).subscribe({
+      next: () => {
         this.cmsLocalService.dspSnackbar(msg, null, 3);
       },
-      () => {
+      error: () => {
         this.cmsLocalService.dspSnackbar(this.translate.instant('CMA.IMAGES.msgUpdateFailed'), null, 3);
-      });
+      }
+    });
 
-    this.cms.updateLastCreatedField(Number(this.restaurant.restaurant_id), 'images').subscribe(
-      () => {
-        console.log('error in updatelastupdatedfield for images');
-      });
+    this.cms.updateLastCreatedField(Number(this.restaurant.restaurant_id), 'images')
+        .subscribe({
+          next: () => {
+            console.log('error in updatelastupdatedfield for images');
+          },
+          error: (error) => console.log(error)
+        });
   }
 
 
@@ -65,22 +69,25 @@ export class CmsImageDialogComponent implements OnInit {
     for (let i = 0; i < len; i++) {
       if (imgs[i].cms_element_default) {
         imgs[i].cms_element_default = 0;
-        this.cms.defaultElement(imgs[i].cms_element_id, false).subscribe(
-          data => console.log(data),
-          error => console.log(error)
-        );
+        this.cms.defaultElement(imgs[i].cms_element_id, false)
+          .subscribe({
+            next: data => console.log(data),
+            error: error => console.log(error)
+          });
         break;
       }
     }
-    this.cms.defaultElement(img.cms_element_id, true).subscribe(
-      () => {
-        img.cms_element_default = 1;
-        this.cmsLocalService.dspSnackbar(
-          this.translate.instant('CMS.IMAGES.msgDefaultUpdated'), null, 3);
-      },
-      error => {
-        console.log(error);
-      });
+    this.cms.defaultElement(img.cms_element_id, true)
+        .subscribe({
+          next: () => {
+          img.cms_element_default = 1;
+          this.cmsLocalService.dspSnackbar(
+            this.translate.instant('CMS.IMAGES.msgDefaultUpdated'), null, 3);
+          },
+          error: error => {
+            console.log(error);
+          }
+        });
 
     this.cms.updateLastCreatedField(Number(this.restaurant.restaurant_id), 'images').subscribe(
       () => {
