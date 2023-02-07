@@ -27,8 +27,7 @@
         </button>
       </span>
   </mat-toolbar>
-  <div class="rc-grid two-cols">
-
+  <div class="rd-flex-col-2">
 
     <mat-card>
 
@@ -39,16 +38,13 @@
       <mat-card-content>
         <!-- STRAPLINE -->
         <h4>{{ 'CMS.FEATURES.headerStrapline' | translate }}</h4>
-        <mat-form-field
-          class="rc-full-width"
-          floatLabel="never">
+        <mat-form-field class="rc-full-width">
           <mat-label>{{ 'CMS.FEATURES.labelStrapline' | translate: { chars: descStraplineTotal } }}</mat-label>
           <textarea
             #strapline
             matInput
-            matTextareaAutosize
-            matAutosizeMinRows="1"
-            matAutosizeMaxRows="2"
+            cdkTextareaAutosize
+            cdkAutosizeMinRows="1"
             name="cms_description_strap_line"
             maxlength="{{ descStraplineTotal }}"
             (keyup)="setChanged()"
@@ -59,16 +55,13 @@
         <!-- ONE SENTENCE DESC. -->
         <h4>{{ 'CMS.FEATURES.headerDescSentence' | translate }}</h4>
         <!-- ONE PARAGRAPH DESC. -->
-        <mat-form-field
-          class="rc-full-width"
-          floatLabel="never">
+        <mat-form-field class="rc-full-width">
           <mat-label>{{ 'CMS.FEATURES.labelDescSentence' | translate: { chars: descSentenceTotal } }}</mat-label>
           <textarea
             #sentence
             matInput
-            matTextareaAutosize
-            matAutosizeMinRows="1"
-            matAutosizeMaxRows="2"
+            cdkTextareaAutosize
+            cdkAutosizeMinRows="1"
             name="cms_description_one_sentence"
             maxlength="{{ descSentenceTotal }}"
             (keyup)="setChanged()"
@@ -83,9 +76,8 @@
           <textarea
             #paragraph
             matInput
-            matTextareaAutosize
-            matAutosizeMinRows="1"
-            matAutosizeMaxRows="4"
+            cdkTextareaAutosize
+            cdkAutosizeMinRows="1"
             name="cms_description_one_paragraph"
             maxlength="{{ descParagraphTotal }}"
             (keyup)="setChanged()"
@@ -95,15 +87,14 @@
         </mat-form-field>
         <!-- LONG DESC. -->
         <h4>{{ 'CMS.FEATURES.headerDescFull' | translate }}</h4>
-        <mat-form-field class="rc-full-width" floatLabel="never">
+        <mat-form-field class="rc-full-width">
           <mat-label>{{ 'CMS.FEATURES.labelDescFull' | translate: { chars: descFullTotal } }}</mat-label>
           <textarea
             #full
             matInput
             name="cms_description_long"
-            matTextareaAutosize
-            matAutosizeMinRows="3"
-            matAutosizeMaxRows="10"
+            cdkTextareaAutosize
+            cdkAutosizeMinRows="3"
             maxlength="{{ descFullTotal }}"
             (keydown)="setChanged()"
             [(ngModel)]="descriptions.cms_description_long">

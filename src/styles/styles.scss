@@ -2006,6 +2006,19 @@ button.rc-member-assc {
   grid-template-columns: repeat( auto-fit, minmax(360px, 1fr) );
   gap: 1rem;
 }
+.rd-flex-col-2 {
+  display: block;
+  align-items: flex-start;
+  gap: 1rem;
+  margin: 0;
+  > * {
+    width: 100%;
+  }
+  @include mq(medium) {
+    display: flex;
+    margin: 1rem auto;
+  }
+}
 
 
 

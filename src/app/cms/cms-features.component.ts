@@ -40,7 +40,8 @@ export class CmsFeaturesComponent implements OnInit {
     this.loader.open();
     // Subscribe to service
     this.cmsLocalService.getRestaurant()
-      .subscribe(data => {
+      .subscribe({
+        next: data => {
           if (data.restaurant_id) {
             // console.log('GetFeatures', data);
             this.restaurant = data;
@@ -48,8 +49,8 @@ export class CmsFeaturesComponent implements OnInit {
             this.getDesc();
           }
         },
-        error => console.log(error));
-
+        error: error => console.log(error)
+      });
   }
 
   confirmNavigation() {
@@ -61,32 +62,34 @@ export class CmsFeaturesComponent implements OnInit {
   }
 
   getFeatures(): void {
-    // console.log(this.restaurant.restaurant_id, this.restaurant.restaurant_number.substr(0, 2));
     this.cms.getAttributes(this.restaurant.restaurant_id, this.restaurant.restaurant_number.substr(0, 2))
-      .subscribe(data => {
-        this.features = data['attributes'];
-        // need to check for null before checking length
-        if (data['additional']) {
-          if (data['additional'].length) {
-            this.keywords = data['additional'].split(',');
+      .subscribe({
+        next: data => {
+          this.features = data['attributes'];
+          // need to check for null before checking length
+          if (data['additional']) {
+            if (data['additional'].length) {
+              this.keywords = data['additional'].split(',');
+            }
           }
+          this.loader.close();
+        },
+        error: error => {
+          console.log(JSON.stringify(error));
         }
-        this.loader.close();
-      },
-      error => {
-        console.log(JSON.stringify(error));
       });
   }
 
   getDesc(): void {
     this.cms.getDescriptions(this.restaurant.restaurant_id)
-      .subscribe(
-      data => {
-        this.descriptions = data['descriptions'][0];
-        // console.log('Descriptions loaded:', this.descriptions);
-      },
-      error => {
-        console.log(JSON.stringify(error));
+      .subscribe({
+        next: data => {
+          this.descriptions = data['descriptions'][0];
+          // console.log('Descriptions loaded:', this.descriptions);
+        },
+        error: error => {
+          console.log(JSON.stringify(error))
+        }
       });
   }
 
@@ -104,33 +107,37 @@ export class CmsFeaturesComponent implements OnInit {
   updateData(): void {
 
     this.cms.updateAttributes(this.restaurant.restaurant_id, this.features, this.keywords.join(','))
-      .subscribe(
-      () => {
-        this.cmsLocalService.dspSnackbar(
-          `${this.restaurant.restaurant_name} ${this.translate.instant('CMS.FEATURES.msgFeaturesUpdated')}`,
-          null,
-          5);
-      },
-      error => {
-        console.log('Error', error);
+      .subscribe({
+        next: () => {
+          this.cmsLocalService.dspSnackbar(
+            `${this.restaurant.restaurant_name} ${this.translate.instant('CMS.FEATURES.msgFeaturesUpdated')}`,
+            null,
+            5);
+        },
+        error: error => {
+          console.log('Error', error);
+        }
       });
 
-    this.cms.updateDescription(this.descriptions).subscribe(
-      () => {
-        // console.log('Desc updated', data);
-        this.cmsLocalService.dspSnackbar(
-          `${this.restaurant.restaurant_name} ${this.translate.instant('CMS.FEATURES.msgDescriptionsUpdated')}`,
-          null,
-          5);
-      },
-      error => {
-        console.log('Error', error);
-      });
+    this.cms.updateDescription(this.descriptions)
+        .subscribe({
+          next: () => {
+            // console.log('Desc updated', data);
+            this.cmsLocalService.dspSnackbar(
+              `${this.restaurant.restaurant_name} ${this.translate.instant('CMS.FEATURES.msgDescriptionsUpdated')}`,
+              null,
+              5);
+          },
+          error: error => {
+            console.log('Error', error);
+          }
+        });
 
-    this.cms.updateLastCreatedField(Number(this.restaurant.restaurant_id), 'descriptions').subscribe(() => null,
-      error => {
-        console.log('error in updatelastupdatedfield for descriptions', error);
-      });
+    this.cms.updateLastCreatedField(Number(this.restaurant.restaurant_id), 'descriptions')
+        .subscribe({
+            next: () => null,
+            error: error => console.log('error in updatelastupdatedfield for descriptions', error)
+        });
 
     this.dataChanged = false;
   }
