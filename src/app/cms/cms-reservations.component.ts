@@ -43,15 +43,17 @@ export class CmsReservationsComponent implements OnInit {
   ngOnInit() {
     // Subscribe to service
     this.cmsLocalService.getRestaurant()
-      .subscribe(data => {
+      .subscribe({
+        next: data => {
           if (data.restaurant_id) {
             this.restaurant = data;
             this.getCmsData();
           }
         },
-        error => {
-        console.log(error);
-        });
+        error: error => {
+          console.log(error);
+        }
+      });
     this.dataChanged = false;
   }
 
@@ -63,8 +65,8 @@ export class CmsReservationsComponent implements OnInit {
 
   getCmsData() {
     this.cms.getDescriptions(this.restaurant.restaurant_id)
-      .subscribe(
-        data => {
+      .subscribe({
+        next: data => {
           this.descriptions = data['descriptions'][0];
           // To hide any crap legacy data
           this.cleanStr(this.descriptions, 'cms_description_reservation_info');
@@ -77,8 +79,8 @@ export class CmsReservationsComponent implements OnInit {
           this.dataChanged = false;
 
           // load booking providers and set the selected one... default is email, which is 0
-          this.restaurantService.getBookingProviders(this.restaurant.restaurant_number).subscribe(
-            data_providers => {
+          this.restaurantService.getBookingProviders(this.restaurant.restaurant_number).subscribe({
+            next: data_providers => {
               if (data_providers['count'] > 0) {
                 this.booking_providers = data_providers['booking_providers'];
                 const selectedProvider = this.descriptions.cms_description_booking_provider;
@@ -98,14 +100,15 @@ export class CmsReservationsComponent implements OnInit {
                 console.log('No Booking providers found');
               }
             },
-            error => {
-              console.log(JSON.stringify(error));
-            });
+            error: error => {
+              console.log(JSON.stringify(error))
+            }
+          });
         },
-        error => {
+        error: error => {
           console.log(error);
-        });
-
+        }
+      });
   }
 
   changeOption(elem) {
@@ -137,7 +140,7 @@ export class CmsReservationsComponent implements OnInit {
   setChanged(elem): void {
     if (!this.dataChanged) {
       this.dataChanged = true;
-      // console.log('Change', elem);
+      console.log('Change', elem);
     }
   }
 
@@ -158,8 +161,8 @@ export class CmsReservationsComponent implements OnInit {
     // call API
     this.descriptions.cms_description_booking_provider = this.selected_booking_provider.booking_provider_service;
     this.descriptions.cms_description_booking_rest_id = this.booking_provider_reference;
-    this.cms.updateDescription(this.descriptions).subscribe(
-      () => {
+    this.cms.updateDescription(this.descriptions).subscribe({
+      next: () => {
         this.dataChanged = false;
         this.cmsLocalService.dspSnackbar(
           this.translate.instant(
@@ -167,21 +170,24 @@ export class CmsReservationsComponent implements OnInit {
             { name: this.restaurant.restaurant_name }),
             null, 5);
       },
-      error => {
+      error: error => {
         console.log('Error', error);
         this.cmsLocalService.dspSnackbar(this.translate.instant(
           'CMS.RESERVATIONS.msgUpdateFailed'),
-          null, 3);
-      });
+          null, 3)
+      }
+    });
 
-    this.cms.updateLastCreatedField(Number(this.restaurant.restaurant_id), 'booking').subscribe(
-      () => {},
-      () => {
-        console.log('error in updatelastupdatedfield for booking');
+    this.cms.updateLastCreatedField(Number(this.restaurant.restaurant_id), 'booking')
+      .subscribe({
+        next: () => {},
+        error: () => {
+          console.log('error in updatelastupdatedfield for booking')
+        }
       });
   }
 
-  // Deactivation guard
+  // USED by Deactivation guard
   public confirmNavigation() {
     if (this.dataChanged) {
       return this.cmsLocalService.confirmNavigation();

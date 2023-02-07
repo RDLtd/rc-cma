@@ -35,17 +35,13 @@
         <h2>{{ 'CMS.RESERVATIONS.titleGeneral' | translate }}</h2>
       </mat-card-title>
       <mat-card-content>
-        <mat-form-field
-          class="rc-full-width"
-          floatLabel="never">
-          <mat-placeholder>{{ 'CMS.RESERVATIONS.labelGeneral' | translate: { chars: resGeneralMaxLength } }}
-          </mat-placeholder>
+        <mat-form-field class="rc-full-width" appearance="outline">
             <textarea
               #bkgsGeneral
               matInput
-              matTextareaAutosize
-              matAutosizeMinRows="5"
-              matAutosizeMaxRows="5"
+              placeholder="{{ 'CMS.RESERVATIONS.labelGeneral' | translate: { chars: resGeneralMaxLength } }}"
+              cdkTextareaAutosize
+              cdkAutosizeMinRows="3"
               name="cms_description_reservation_info"
               maxlength="{{ resGeneralMaxLength }}"
               (keyup)="setChanged(bkgsGeneral)"
@@ -58,7 +54,7 @@
 
     <!-- ONLINE BOOKINGS -->
     <mat-card>
-      <form #frmBooking="ngForm">
+      <form>
 
         <mat-card-title>
           <h2>{{ 'CMS.RESERVATIONS.titleOnline' | translate }}</h2>
@@ -77,7 +73,7 @@
               <mat-option
                 *ngFor="let provider of booking_providers; let idx = index"
                 [value]="idx">
-                {{ provider.booking_provider_label }}
+                {{ provider['booking_provider_label'] }}
               </mat-option>
             </mat-select>
           </mat-form-field>
@@ -148,15 +144,13 @@
         <h2>{{ 'CMS.RESERVATIONS.titleGroupBookings' | translate }}</h2></mat-card-title>
       <mat-card-content>
         <mat-form-field
-          class="rc-full-width"
-          floatLabel="never">
-          <mat-label>{{ 'CMS.RESERVATIONS.labelGroupPolicy' | translate: { max: resGroupMaxLength } }}</mat-label>
+          class="rc-full-width" appearance="outline">
             <textarea
               #bkgsGroup
               matInput
-              matTextareaAutosize
-              matAutosizeMinRows="3"
-              matAutosizeMaxRows="5"
+              placeholder="{{ 'CMS.RESERVATIONS.labelGroupPolicy' | translate: { max: resGroupMaxLength } }}"
+              cdkTextareaAutosize
+              cdkAutosizeMinRows="3"
               name="cms_descriptions_group"
               maxlength="{{ resGroupMaxLength }}"
               (keyup)="setChanged(bkgsGroup)"
@@ -172,16 +166,13 @@
       <mat-card-title>
         <h2>{{ 'CMS.RESERVATIONS.titlePrivate' | translate }}</h2></mat-card-title>
       <mat-card-content>
-        <mat-form-field
-          class="rc-full-width"
-          floatLabel="never">
-          <mat-label>{{ 'CMS.RESERVATIONS.labelPrivate' | translate: { max: resPrivateMaxLength } }}</mat-label>
+        <mat-form-field class="rc-full-width" appearance="outline">
           <textarea
             #bkgsPrivate
             matInput
-            matTextareaAutosize
-            matAutosizeMinRows="3"
-            matAutosizeMaxRows="5"
+            placeholder="{{ 'CMS.RESERVATIONS.labelPrivate' | translate: { max: resPrivateMaxLength } }}"
+            cdkTextareaAutosize
+            cdkAutosizeMinRows="3"
             name="cms_descriptions_private"
             maxlength="{{ resPrivateMaxLength }}"
             (keyup)="setChanged(bkgsPrivate)"
