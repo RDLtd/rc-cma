@@ -266,8 +266,8 @@ export class CmsFileUploadComponent implements OnInit {
   }
 
   createElement(elem): void {
-    this.cms.createElement(elem).subscribe(
-      data => {
+    this.cms.createElement(elem).subscribe({
+      next: data => {
         elem.cms_element_id = data['cms_element_id'];
         console.log('e', elem);
         // There is only 1 file for directions
@@ -285,21 +285,23 @@ export class CmsFileUploadComponent implements OnInit {
           }
         }
       },
-      error => {
+      error: error => {
         console.log(error.statusText);
         console.log(error);
-      });
+      }
+    });
   }
 
   updateDirections(elem): void {
-    this.cms.updateElement(elem).subscribe(
-      data => {
+    this.cms.updateElement(elem).subscribe({
+      next: data => {
         elem.cms_element_id = data['cms_element_id'];
         this.data.tgtObject = elem;
       },
-      error => {
+      error: error => {
         console.log(error);
-      });
+      }
+    });
   }
 
   setDefaultImage(img) {
@@ -311,17 +313,18 @@ export class CmsFileUploadComponent implements OnInit {
       if (thisImg.cms_element_default === true || thisImg.cms_element_default === 1) {
         thisImg.cms_element_default = false;
         this.cms.defaultElement(thisImg.cms_element_id, false)
-          .subscribe(
-          data => console.log(data),
-          error => console.log(error)
-          );
+          .subscribe({
+            next: data => console.log(data),
+            error: error => console.log(error)
+          });
       }
     }
 
-    this.cms.defaultElement(img.cms_element_id, true).subscribe(
-      () => img.cms_element_default = true,
-      error => console.log(error)
-    );
+    this.cms.defaultElement(img.cms_element_id, true)
+        .subscribe({
+          next: () => img.cms_element_default = true,
+          error: error => console.log(error)
+        });
   }
 
   toDataURL(url, callback) {

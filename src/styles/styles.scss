@@ -1997,8 +1997,8 @@ button.rc-member-assc {
 
 /**
  * RDL Styles
+ * -----------------------------------------------
  */
-
 
 .rd-grid-auto {
   margin: 1rem;
@@ -2006,6 +2006,7 @@ button.rc-member-assc {
   grid-template-columns: repeat( auto-fit, minmax(360px, 1fr) );
   gap: 1rem;
 }
+
 .rd-flex-col-2 {
   display: block;
   align-items: flex-start;
