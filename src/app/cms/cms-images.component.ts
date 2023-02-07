@@ -9,7 +9,6 @@ import { ConfirmCancelComponent, HelpService, LoadService } from '../common';
 import { TranslateService } from '@ngx-translate/core';
 import { insertAnimation } from '../shared/animations';
 import { ImageService } from '../_services/image.service';
-import { CloudinaryImage } from '@cloudinary/url-gen';
 
 
 
@@ -23,7 +22,6 @@ export class CmsImagesComponent implements OnInit {
 
   restaurant: Restaurant;
   cmsImages: any;
-  cldImages: CloudinaryImage[];
   showLoader = false;
 
   cldPlugins: any[];
@@ -46,13 +44,15 @@ export class CmsImagesComponent implements OnInit {
 
     // Subscribe to service
     this.cmsLocalService.getRestaurant()
-      .subscribe(data => {
+      .subscribe({
+        next: data => {
           if (data.restaurant_id) {
             this.restaurant = data;
             this.cmsImages = this.getImages();
           }
         },
-        error => console.log(error));
+        error: error => console.log(error)
+    });
   }
 
   // Catch child events and stop them bubbling up the DOM
@@ -62,24 +62,27 @@ export class CmsImagesComponent implements OnInit {
 
   getImages(): any {
     this.cms.getElementClass(this.restaurant.restaurant_id, 'Image', 'N')
-      .subscribe(data => {
+      .subscribe({
+        next: data => {
           this.cmsImages = data['elements'];
             this.cmsImages.forEach(element => element['cldImage'] = this.imgService.getCldImage(element.cms_element_image_ref));
 
           this.loader.close();
         },
-        error => {
+        error: error => {
           console.log(error);
           this.loader.close();
-        });
+        }
+      });
   }
 
   updateLastUpdated(contentType) {
-    this.cms.updateLastCreatedField(Number(this.restaurant.restaurant_id), contentType).subscribe(
-      () => {},
-      error => {
+    this.cms.updateLastCreatedField(Number(this.restaurant.restaurant_id), contentType).subscribe({
+      next: () => {},
+      error: error => {
         console.log('error in updatelastupdatedfield for images', error);
-      });
+      }
+    });
   }
 
   updateImageStatus(img): void {
@@ -90,25 +93,26 @@ export class CmsImagesComponent implements OnInit {
       msg = this.translate.instant('CMS.IMAGES.msgNowActive', { img: img.cms_element_id }) :
       msg = this.translate.instant('CMS.IMAGES.msgNowOffline', { img: img.cms_element_id });
 
-    this.cms.updateElement(img).subscribe(
-      () => {
+    this.cms.updateElement(img).subscribe({
+      next: () => {
         this.updateLastUpdated('images');
         this.cmsLocalService.dspSnackbar(
           msg,
           null,
           3);
       },
-      error => {
+      error: error => {
         this.cmsLocalService.dspSnackbar(
-          `${this.translate.instant('CMS.IMAGES.msgUpdateFailed')}!`,
-          null,
-          3);
+            `${this.translate.instant('CMS.IMAGES.msgUpdateFailed')}!`,
+            null,
+            3);
         console.log(error);
-      });
+      }
+    });
   }
 
   viewImage(img): void {
-    const dialogRef = this.dialog.open(CmsImageDialogComponent, {
+    this.dialog.open(CmsImageDialogComponent, {
       data: {
         image: img,
         clImgPath: img.cms_element_image_ref,
@@ -146,39 +150,41 @@ export class CmsImagesComponent implements OnInit {
       }
     });
 
-    dialogRef.afterClosed().subscribe(confirmed => {
+    dialogRef.afterClosed().subscribe({
+      next: confirmed => {
+        if (confirmed) {
+          this.cms.deleteElement(img.cms_element_id)
+              .subscribe({
+                next: () => {
+                  const arrLength = this.cmsImages.length;
+                  let obj;
+                  for (let i = 0; i < arrLength; i++) {
+                    obj = this.cmsImages[i];
+                    if (obj.cms_element_id === img.cms_element_id) {
+                      this.cmsImages.splice(i, 1);
+                    }
+                  }
 
-      if (confirmed) {
-        this.cms.deleteElement(img.cms_element_id)
-          .subscribe(() => {
-              const arrLength = this.cmsImages.length;
-              let obj;
-              for (let i = 0; i < arrLength; i++) {
-                obj = this.cmsImages[i];
-                if (obj.cms_element_id === img.cms_element_id)  {
-                  this.cmsImages.splice(i, 1);
+                  this.updateLastUpdated('images');
+
+                  this.cmsLocalService.dspSnackbar(
+                      this.translate.instant('CMS.IMAGES.msgDeleted', {img: img.cms_element_id}),
+                      null,
+                      3);
+                  dialogRef.close();
+                },
+                error: error => {
+                  console.log(error);
+                  this.cmsLocalService.dspSnackbar(
+                      this.translate.instant('CMS.IMAGES.msgUpdateFailed'),
+                      null,
+                      3);
                 }
-              }
-
-              this.updateLastUpdated('images');
-
-              this.cmsLocalService.dspSnackbar(
-                this.translate.instant('CMS.IMAGES.msgDeleted', { img: img.cms_element_id }),
-                null,
-                3);
-              dialogRef.close();
-          },
-            error => {
-            console.log(error);
-            this.cmsLocalService.dspSnackbar(
-              this.translate.instant('CMS.IMAGES.msgUpdateFailed'),
-              null,
-              3);
-            }
-          );
-      }
-    },
-      error => console.log(error));
+              });
+        }
+      },
+      error: error => console.log(error)
+    });
   }
 
 }
