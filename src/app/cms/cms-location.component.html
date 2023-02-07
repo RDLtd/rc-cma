@@ -38,21 +38,19 @@
       <mat-card-title>
       <h2>{{ 'CMS.LOCATION.titleParking' | translate }}</h2></mat-card-title>
       <mat-card-content>
-      <mat-form-field
-        class="rc-full-width">
-        <mat-label>{{ 'CMS.LOCATION.labelParking' | translate: { chars: transportPrivateLength } }}</mat-label>
+      <mat-form-field class="rc-full-width" appearance="outline">
         <textarea
-          #privateRoom
+          #publicTransport
           matInput
-          matTextareaAutosize
-          matAutosizeMinRows="3"
-          matAutosizeMaxRows="5"
+          placeholder="{{ 'CMS.LOCATION.labelParking' | translate: { chars: transportPrivateLength } }}"
+          cdkTextareaAutosize
+          cdkAutosizeMinRows="3"
           name="cms_description_car_parking"
           maxlength="{{ transportPrivateLength }}"
-          (keyup)="setChanged(privateRoom)"
+          (keyup)="setChanged(publicTransport)"
           [(ngModel)]="descriptions.cms_description_car_parking">
         </textarea>
-        <mat-hint align="end">{{ privateRoom.value.length }}/{{ transportPrivateLength }}</mat-hint>
+        <mat-hint align="end">{{ publicTransport.value.length }}/{{ transportPrivateLength }}</mat-hint>
       </mat-form-field>
     </mat-card-content>
     </mat-card>
@@ -60,15 +58,13 @@
       <mat-card-title>
       <h2>{{ 'CMS.LOCATION.titlePublicTransport' | translate }}</h2></mat-card-title>
       <mat-card-content>
-      <mat-form-field
-        class="rc-full-width">
-        <mat-label>{{ 'CMS.LOCATION.labelPublicTransport' | translate: { chars: transportPublicLength } }}</mat-label>
+      <mat-form-field class="rc-full-width" appearance="outline">
           <textarea
             #publicTrans
+            placeholder="{{ 'CMS.LOCATION.labelPublicTransport' | translate: { chars: transportPublicLength } }}"
             matInput
-            matTextareaAutosize
-            matAutosizeMinRows="3"
-            matAutosizeMaxRows="5"
+            cdkTextareaAutosize
+            cdkAutosizeMinRows="3"
             name="cms_description_public_transport"
             maxlength="{{ transportPublicLength }}"
             (keyup)="setChanged(publicTrans)"

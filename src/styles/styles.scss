@@ -34,9 +34,7 @@ $config: mat.define-legacy-typography-config();
     text-transform: uppercase;
   }
 }
-.rc-dialog-backdrop {
-  background-color: rgba($rc-charcoal, 0.75);
-}
+.rc-dialog-backdrop { background-color: rgba($rc-charcoal, 0.75); }
 .rc-no-grid-gutter { margin: -16px; }
 .rc-hide { display: none; }
 .rc-accent { background-color: $rc-theme-secondary !important;}
@@ -47,6 +45,8 @@ $config: mat.define-legacy-typography-config();
   justify-content: space-between;
 }
 .rc-flex-end { justify-content: flex-end; }
+
+
 
 .rc-codes {
   display: flex;
@@ -68,6 +68,8 @@ $config: mat.define-legacy-typography-config();
   filter: saturate(0%);
   opacity: 0.5;
 }
+
+// membership
 a.rc-back {
   width: 100%;
   display: inline-flex;
@@ -91,6 +93,7 @@ a.rc-back {
   font-size: 14px !important;
   line-height: 1.4;
 }
+
 .rc-mat-snack-warn,
 .rc-mat-snack-info{
   color: black;
@@ -123,20 +126,20 @@ a.rc-back {
 .rc-warn { color: $rc-theme-warn; }
 .rc-media-small-hide { display: none !important; }
 .rc-media-med { display: block !important; }
-.rc-layout-table {
-  border: 0;
-  margin: 0 0 24px;
-  width: 100%;
-  td:first-child {
-    font-weight: bold;
-    padding-right:24px;
-  }
-}
+
+
+// Unused
+// -----------------------------------
+/**
 .agm-map { height: 300px; }
 .rc-loader-white {
   .rc-spinner div { background-color: white !important;
   }
 }
+
+*/
+
+
 .rc-user-menu {
   padding: 16px 18px 8px;
   h3 {
@@ -162,53 +165,6 @@ and (-webkit-min-device-pixel-ratio: 1) {}
 * MAT/MDC Overrides
 * -------------------------------
 **/
-
-.rc-grid {
-  max-width: $rc-max-width;
-  display: grid;
-  margin: 1rem auto;
-  gap: 1rem;
-  .rc-grid-col-span {
-    grid-column: span 3;
-  }
-  @include mq(medium) {
-    grid-template-columns: repeat(3, 1fr);
-    &.two-cols {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-}
-.rc-grid-masonry-2 {
-  columns: 1;
-  margin: 1rem auto;
-  gap: 1rem;
-  > * {
-    break-inside: avoid;
-    margin-bottom: 1rem;
-  }
-  @include mq(medium) {
-    columns: 2;
-  }
-}
-.rc-form-grid {
-  display: grid;
-  margin: 1rem auto;
-  gap: 1rem;
-
-  @include mq(medium) {
-    grid-template-columns: repeat(2, 1fr);
-    .rc-form-grid-span {
-      grid-column: span 2;
-    }
-  }
-}
-
-.rc-content-container {
-  max-width: $rc-max-width;
-  margin: 1rem auto;
-}
-
-
 .mat-toolbar,
 .mat-toolbar-row,
 .mat-toolbar-single-row {
@@ -343,6 +299,52 @@ a.mat-menu-item {text-decoration: none;}
 * RC layouts
 * -------------------------------
 **/
+
+.rc-grid {
+  max-width: $rc-max-width;
+  display: grid;
+  margin: 1rem auto;
+  gap: 1rem;
+  .rc-grid-col-span {
+    grid-column: span 3;
+  }
+  @include mq(medium) {
+    grid-template-columns: repeat(3, 1fr);
+    &.two-cols {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+}
+.rc-grid-masonry-2 {
+  columns: 1;
+  margin: 1rem auto;
+  gap: 1rem;
+  > * {
+    break-inside: avoid;
+    margin-bottom: 1rem;
+  }
+  @include mq(medium) {
+    columns: 2;
+  }
+}
+.rc-form-grid {
+  display: grid;
+  margin: 1rem auto;
+  gap: 1rem;
+
+  @include mq(medium) {
+    grid-template-columns: repeat(2, 1fr);
+    .rc-form-grid-span {
+      grid-column: span 2;
+    }
+  }
+}
+.rc-content-container {
+  max-width: $rc-max-width;
+  margin: 1rem auto;
+}
+
+
 .rc-layout-split-container {
   min-height: 100vh;
   display: flex;
@@ -483,6 +485,22 @@ a.mat-menu-item {text-decoration: none;}
   ul li {
     margin-bottom: .25rem;
   }
+  @media screen and ( min-width : 768px ){
+      flex-direction: row;
+
+      .rc-layout-split-left {
+        width: 50vw;
+        justify-content: center;
+        align-items: flex-end;
+        padding: 5%;
+      }
+      .rc-layout-split-right {
+        width: 50vw;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 5%;
+      }
+  }
 }
 .bpi-logos {
   background: white;
@@ -513,25 +531,7 @@ form.rc-form-grid {
   }
 }
 
-@media screen and ( min-width : 768px ){
-  .rc-layout-split-container {
-    flex-direction: row;
 
-    .rc-layout-split-left {
-      width: 50vw;
-      justify-content: center;
-      align-items: flex-end;
-      padding: 5%;
-    }
-    .rc-layout-split-right {
-      width: 50vw;
-      justify-content: center;
-      align-items: flex-start;
-      padding: 5%;
-    }
-
-  }
-}
 .rc-about {
   display: flex;
   flex-direction: column;
@@ -738,6 +738,7 @@ form.rc-form-grid {
     }
   }
 }
+
 .rc-section-toolbar {
   background-color: $rc-charcoal;
   color: white;
@@ -1993,4 +1994,10 @@ button.rc-member-assc {
     }
   }
 }
+
+/**
+ * RDL Styles
+ */
+
+
 
