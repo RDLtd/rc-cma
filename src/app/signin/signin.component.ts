@@ -4,7 +4,7 @@ import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { AppConfig } from '../app.config';
-import { ConfirmCancelComponent, HelpService } from '../common';
+import { ConfirmCancelComponent } from '../common';
 import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 
 @Component({
@@ -32,7 +32,6 @@ export class SigninComponent implements OnInit {
     private activeRoute: ActivatedRoute,
     private config: AppConfig,
     private router: Router,
-    private help: HelpService
   ) {  }
 
   ngOnInit() {
@@ -78,8 +77,8 @@ export class SigninComponent implements OnInit {
     // console.log('form', formValue);
     this.isSubmitting = true;
     this.authService.login(formValue)
-      .subscribe(
-        authResult => {
+      .subscribe({
+        next: authResult => {
           console.log('auth OK', authResult);
           this.isSubmitting = false;
           if (authResult && authResult['token']) {
@@ -88,12 +87,13 @@ export class SigninComponent implements OnInit {
             console.log('Auth Failed');
           }
         },
-        error => {
+        error: error => {
           console.log(`Auth Error: ${error}`);
           this.isSubmitting = false;
           this.openSnackBar(this.translate.instant('SIGNIN.errorUserUnauthorised'));
 
-        });
+        }
+      });
   }
 
   showPwdReset(boo: boolean) {
@@ -102,20 +102,22 @@ export class SigninComponent implements OnInit {
   }
 
   resetPwd(formValue) {
-    this.memberService.sendrecoveryemail(formValue.email).subscribe(
-      data => {
-        // console.log(data);
-        if (data['status'] === 'OK') {
-          this.openSnackBar(this.translate.instant('SIGNIN.newPwdSent'));
-          this.pwdReset = false;
-        } else {
-          this.openSnackBar(this.translate.instant('SIGNIN.errorEmailUnknown'));
-        }
-      },
-      error => {
-        console.log(JSON.stringify(error));
-        this.openSnackBar(error);
-      });
+    this.memberService.sendrecoveryemail(formValue.email)
+        .subscribe({
+          next: data => {
+            // console.log(data);
+            if (data['status'] === 'OK') {
+              this.openSnackBar(this.translate.instant('SIGNIN.newPwdSent'));
+              this.pwdReset = false;
+            } else {
+              this.openSnackBar(this.translate.instant('SIGNIN.errorEmailUnknown'));
+            }
+          },
+          error: error => {
+            console.log(JSON.stringify(error));
+            this.openSnackBar(error);
+          }
+        });
   }
 
   openSnackBar(message: string) {
