@@ -10,6 +10,7 @@ import { RestaurantLookupComponent } from '../settings';
 import { TranslateService } from '@ngx-translate/core';
 import { HubService } from './hub.service';
 import { insertAnimation } from '../shared/animations';
+import {firstValueFrom, lastValueFrom} from 'rxjs';
 
 @Component({
   selector: 'app-rc-hub',
@@ -65,12 +66,18 @@ export class HubComponent implements AfterViewInit {
   }
 
   async getMessages() {
+
+    // Todo: test this toPromise replacement code
+    const newMessages = await lastValueFrom(this.memberService.messages(this.member.member_id, this.member.member_access_level, this.member.member_messages_seen))
+    console.log('New', newMessages);
+
     await this.memberService
       .messages(this.member.member_id, this.member.member_access_level, this.member.member_messages_seen)
       .toPromise()
       .then(m => {
         this.messages = m['messages'];
         this.dspMessages();
+        console.log('Old', m);
       });
   }
 
@@ -162,13 +169,14 @@ export class HubComponent implements AfterViewInit {
 
   getRestaurants() {
     this.restaurantService.getMemberRestaurants(this.member.member_id)
-      .subscribe(
-        data => {
+      .subscribe({
+        next: data => {
           this.restaurants = data['restaurants'];
           // console.log(this.restaurants);
         },
-        error => {
+        error: error => {
           console.log(error);
-        });
+        }
+      });
   }
 }

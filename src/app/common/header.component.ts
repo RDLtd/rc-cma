@@ -80,8 +80,8 @@ export class HeaderComponent implements OnInit {
     });
 
     // Get notified anytime the login status changes
-    this.authService.memberSessionSubject.subscribe(
-      sessionStatus => {
+    this.authService.memberSessionSubject.subscribe({
+      next: sessionStatus => {
         switch (sessionStatus) {
           case 'active': {
             // Successful login
@@ -102,8 +102,8 @@ export class HeaderComponent implements OnInit {
           }
         }
       },
-      err => console.log(err)
-    );
+      error: err => console.log(err)
+    });
   }
 
   logout(): void {

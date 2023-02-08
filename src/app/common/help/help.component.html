@@ -1,21 +1,10 @@
 <div class="rc-dialog rc-dialog-help">
 
-<!--  <mat-toolbar *ngIf="data.header === 'help'" class="rc-toolbar rc-toolbar-nav">-->
-<!--    <span>{{ data.title }}</span>-->
-<!--    <span class="rc-space-filler"></span>-->
-<!--    <span class="rc-toolbar-actions">-->
-<!--      <button mat-icon-button mat-dialog-close>-->
-<!--        <mat-icon>close</mat-icon>-->
-<!--      </button>-->
-<!--    </span>-->
-<!--  </mat-toolbar>-->
-
   <mat-dialog-content>
     <markdown ngPreserveWhitespaces [src]="data['path']"></markdown>
   </mat-dialog-content>
 
   <mat-dialog-actions  align="end">
-<!--    <button mat-button [mat-dialog-close]="false">Contact Support</button>-->
     <button mat-flat-button [mat-dialog-close]="false" color="accent">OK</button>
   </mat-dialog-actions>
 
