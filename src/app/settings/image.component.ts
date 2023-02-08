@@ -136,31 +136,33 @@ export class ImageComponent implements OnInit {
     this.inProgress = true;
     // update db and local settings
 
-    this.memberService.updateAvatar(this.data.member.member_id, this.imgURL).subscribe(
-      () => {
+    this.memberService.updateAvatar(this.data.member.member_id, this.imgURL)
+        .subscribe({
+          next: () => {
+            this.data.member.member_image_path = this.imgPreviewSrc;
+            this.inProgress = false;
+            this.dialog.close({str: this.imgURL});
 
-        this.data.member.member_image_path = this.imgPreviewSrc;
-        this.inProgress = false;
-        this.dialog.close({str: this.imgURL});
-
-        // record event
-        this.ga.sendEvent('Profile', 'Edit', 'Update Image');
-      },
-      error => {
-        console.log(JSON.stringify(error));
-        this.inProgress = false;
-      });
+            // record event
+            this.ga.sendEvent('Profile', 'Edit', 'Update Image');
+          },
+          error: error => {
+            console.log(JSON.stringify(error));
+            this.inProgress = false;
+          }
+        });
   }
 
   deleteImage() {
 
-    this.memberService.deleteAvatar(this.data.member.member_id).subscribe(
-      () => {
+    this.memberService.deleteAvatar(this.data.member.member_id).subscribe({
+      next: () => {
         this.data.member_image_path = null;
         this.dialog.close({str: 'delete'});
       },
-      error => {
+      error: error => {
         console.log(error);
-      });
+      }
+    });
   }
 }

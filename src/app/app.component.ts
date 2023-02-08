@@ -4,7 +4,6 @@ import { AuthenticationService } from './_services';
 import { HttpClient } from '@angular/common/http';
 import { AppConfig } from './app.config';
 import { NavigationEnd, Router } from '@angular/router';
-//import { ConnectionService } from 'ng-connection-service';
 import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
 import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 import { OnlineStatusService, OnlineStatusType } from 'ngx-online-status';
@@ -40,9 +39,6 @@ export class AppComponent implements OnInit {
     private http: HttpClient,
     private config: AppConfig,
     public authService: AuthenticationService) {
-
-
-
 
       // Record navagation analytics
       this.router.events.subscribe(event => {

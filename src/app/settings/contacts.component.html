@@ -13,7 +13,7 @@
               matInput
               [(ngModel)]="member.member_first_name"
               required>
-            <mat-error align="end">{{ 'SETTINGS.contacts.invalidRequired' | translate }}</mat-error>
+            <mat-error class="rc-flex-end">{{ 'SETTINGS.contacts.invalidRequired' | translate }}</mat-error>
           </mat-form-field>
           <span style="display: inline-block; width: 2%;"></span>
           <mat-form-field hideRequiredMarker style="width: 60%;">
@@ -23,7 +23,7 @@
               matInput
               [(ngModel)]="member.member_last_name"
               required>
-            <mat-error align="end">{{ 'SETTINGS.contacts.invalidRequired' | translate }}</mat-error>
+            <mat-error class="rc-flex-end">{{ 'SETTINGS.contacts.invalidRequired' | translate }}</mat-error>
           </mat-form-field>
 
           <!-- Role -->
@@ -37,7 +37,7 @@
                 {{ job }}
               </mat-option>
             </mat-select>
-            <mat-error align="end">{{ 'JOIN.invalidJobRequired' | translate }}</mat-error>
+            <mat-error class="rc-flex-end">{{ 'JOIN.invalidJobRequired' | translate }}</mat-error>
           </mat-form-field>
 
           <mat-form-field hideRequiredMarker class="rc-full-width">
@@ -48,7 +48,7 @@
               [(ngModel)]="member.member_email"
               required
               email>
-            <mat-error align="end">{{ 'SETTINGS.contacts.invalidEmail' | translate }}</mat-error>
+            <mat-error class="rc-flex-end">{{ 'SETTINGS.contacts.invalidEmail' | translate }}</mat-error>
           </mat-form-field>
 
           <mat-form-field hideRequiredMarker class="rc-full-width">
@@ -61,7 +61,7 @@
               minlength="11"
               [pattern]="patternMobile"
               required>
-            <mat-error align="end">{{ 'SETTINGS.contacts.invalidMobile' | translate }}</mat-error>
+            <mat-error class="rc-flex-end">{{ 'SETTINGS.contacts.invalidMobile' | translate }}</mat-error>
           </mat-form-field>
 
         </div>

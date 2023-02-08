@@ -87,13 +87,15 @@ export class VerificationComponent implements OnInit {
   updateRestaurantEmail(notify: boolean) {
     // Update restaurant record first
     this.restaurantService.updateEmail(this.data.restaurant.restaurant_id, this.data.restaurant.restaurant_email)
-      .subscribe(res => {
+      .subscribe({
+        next: res => {
           console.log('Email updated', res);
           this.notifyCuration();
         },
-        error => {
+        error: error => {
           console.log(error);
-        });
+        }
+      });
   }
 
   validateVerificationCode(profile_verify) {
@@ -125,17 +127,17 @@ export class VerificationComponent implements OnInit {
       r.restaurant_name,
       r.restaurant_number,
       r.restaurant_email,
-      userName)
-      .subscribe(
-      () => {
+      userName).subscribe({
+      next: () => {
         this.cmsLocalService.dspSnackbar(
-          this.translate.instant('VERIFY.msgCodeSent', { email: r.restaurant_email }),
-          'OK',
-          10);
+            this.translate.instant('VERIFY.msgCodeSent', {email: r.restaurant_email}),
+            'OK',
+            10);
       },
-      error => {
+      error: error => {
         console.log(error);
-      });
+      }
+    });
   }
 
   editEmail() {
