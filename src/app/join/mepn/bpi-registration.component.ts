@@ -6,6 +6,7 @@ import {BpiService, MemberService} from '../../_services';
 import {ConfirmCancelComponent, LoadService} from '../../common';
 import {StorageService} from '../../_services/storage.service';
 import {MatLegacyDialog as MatDialog} from '@angular/material/legacy-dialog';
+import { lastValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-bpi-registration',
@@ -16,7 +17,6 @@ export class BpiRegistrationComponent implements OnInit {
   registered = false;
   registrationStep = 0;
   submitting = false;
-  bpiTermsAccepted = false;
   referralCode: string;
   errorMessage: any;
   bpiData: any;
@@ -110,14 +110,15 @@ export class BpiRegistrationComponent implements OnInit {
         cancel: this.translate.instant('CONFIRM.labelBtnNoThanks')
       }
     });
-    dialogRef.afterClosed().subscribe(confirmed => {
+    dialogRef.afterClosed().subscribe({
+      next: confirmed => {
         if (confirmed) {
           this.emailSupport('Registration help requested');
           this.registrationStep = 0;
         }
       },
-      error => console.log(error)
-    );
+      error: error => console.log(error)
+    });
   }
 
   /**
@@ -134,7 +135,8 @@ export class BpiRegistrationComponent implements OnInit {
         cancel: this.translate.instant('JOIN.labelBtnBack')
       }
     });
-    dialogRef.afterClosed().subscribe(confirmed => {
+    dialogRef.afterClosed().subscribe({
+      next: confirmed => {
         if (confirmed) {
           this.saveUserToPending();
           this.registrationStep = 0;
@@ -142,8 +144,8 @@ export class BpiRegistrationComponent implements OnInit {
           this.formCompanyDetails.reset();
         }
       },
-      error => console.log(error)
-    );
+      error: error => console.log(error)
+    });
   }
 
   /**
@@ -197,26 +199,27 @@ export class BpiRegistrationComponent implements OnInit {
     // Make api call
     const timeCheck = this.getTimer();
     this.bpiService.createBpi(this.bpiData)
-      .subscribe((res) => {
-        console.log(res);
-        clearTimeout(timeCheck);
-        // add response to data object
-        this.bpiData.bpi_password = res['bpi_password'];
-        this.bpiData.bpi_link = res['bpi_link'];
-        // reset props
-        this.submitting = false;
-        this.registered = true;
-        this.registrationStep = 5;
-        this.loadService.close();
-      },
-        err => {
+      .subscribe({
+        next: (res) => {
+          console.log(res);
+          clearTimeout(timeCheck);
+          // add response to data object
+          this.bpiData.bpi_password = res['bpi_password'];
+          this.bpiData.bpi_link = res['bpi_link'];
+          // reset props
+          this.submitting = false;
+          this.registered = true;
+          this.registrationStep = 5;
+          this.loadService.close();
+        },
+        error: err => {
           console.log('ErrorCode:', err.error.status);
           this.handleErrors(err.error.status);
           this.registrationStep = -1;
           this.loadService.close();
           clearTimeout(timeCheck);
         }
-      );
+      });
   }
 
   /**
@@ -268,13 +271,12 @@ export class BpiRegistrationComponent implements OnInit {
       'support',
       'BPI Enquiry',
       bodyContent)
-      .subscribe(() => {
-        console.log('Support email sent');
+      .subscribe({
+        next: () => {
+          console.log('Support email sent');
         },
-        error => {
-          console.log(error);
-        }
-      );
+        error: error => console.log(error)
+    });
   }
 
   /**
@@ -291,8 +293,7 @@ export class BpiRegistrationComponent implements OnInit {
       bpi_promo_code : this.referralCode
     };
     console.log(userData);
-    this.memberService.createPending(userData)
-      .toPromise()
-      .then((res) => console.log(res));
+    const pending = lastValueFrom(this.memberService.createPending(userData));
+    console.log(pending);
   }
 }
