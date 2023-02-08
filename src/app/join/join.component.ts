@@ -31,7 +31,6 @@ export class JoinComponent implements OnInit {
   isLoaded = false;
   newRegResult: string;
   duplicateField: string;
-  currentApplicant: any;
   pendingMember: PendingMember;
   public brand: any;
 
