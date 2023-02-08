@@ -141,7 +141,8 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
     moment.locale(localStorage.getItem('rd_language'));
 
     this.cmsLocalService.getRestaurant()
-      .subscribe(rest => {
+      .subscribe({
+        next: rest => {
           this.cldImage = null;
           if (rest.restaurant_id) {
             this.restaurant = rest;
@@ -156,8 +157,8 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
             }
           }
         },
-        error => console.log(error));
-
+        error: error => console.log(error)
+      });
   }
 
   readAndCheckStatus () {
@@ -172,7 +173,8 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
 
   checkSPW() {
     this.cms.checkSPW(this.restaurant.restaurant_id)
-      .subscribe(res => {
+      .subscribe({
+        next: res => {
           // console.log(res);
           this.cmsHasSufficientData = res['data_status_ok'];
           this.cmsChanged = !(res['published_status_ok']);
@@ -191,9 +193,10 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
           this.isPreviewing = false;
           this.d_publishDate = moment(this.publishDate).format('LLLL');
         },
-        error => {
+        error: error => {
           console.log('ERROR', error);
-        });
+        }
+      });
   }
 
   // checkPublishStatus() {
@@ -263,47 +266,50 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
     this.hours_count = 0;
     // console.log('IN getHours FOR DASHBOARD COMPONENT ' + this.restaurant.restaurant_id);
     this.cms.getTimes(this.restaurant.restaurant_id)
-      .subscribe(data => {
-        // console.log('DATA', data);
-        this.hours_count = 0;
-        let i = data['times'].length;
-        while (i--) {
-          if (!data['times'][i].closed) {
-            this.hours_count += 1;
+      .subscribe({
+        next: data => {
+          // console.log('DATA', data);
+          this.hours_count = 0;
+          let i = data['times'].length;
+          while (i--) {
+            if (!data['times'][i].closed) {
+              this.hours_count += 1;
+            }
           }
+          // set status to either 100 or 0
+          if (this.hours_count) {
+            this.hours_status_text = this.translate.instant(
+              'CMS.DASHBOARD.summary.statusTimes',
+              {num: this.hours_count});
+            this.hours_status = 100;
+          } else {
+            this.hours_status_text = this.translate.instant('CMS.DASHBOARD.summary.statusNoData');
+            this.hours_status = 0;
+          }
+          this.hours_date = new Date(this.last_updated.last_updated_hours);
+          this.d_hours_date = this.setDateRes(this.hours_date);
+        },
+        error: error => {
+          console.log('Error fetching times', error);
         }
-        // set status to either 100 or 0
-        if (this.hours_count) {
-          this.hours_status_text = this.translate.instant(
-            'CMS.DASHBOARD.summary.statusTimes',
-            { num: this.hours_count });
-          this.hours_status = 100;
-        } else {
-          this.hours_status_text = this.translate.instant('CMS.DASHBOARD.summary.statusNoData');
-          this.hours_status = 0;
-        }
-        this.hours_date = new Date(this.last_updated.last_updated_hours);
-        this.d_hours_date = this.setDateRes(this.hours_date);
-      },
-      error => {
-        console.log('Error fetching times', error);
       });
   }
 
   checkDescriptions(): void {
     // console.log('checkDescriptions');
     this.cms.getDescriptions(this.restaurant.restaurant_id)
-      .subscribe(
-        data => {
+      .subscribe({
+        next: data => {
           this.descriptions = data['descriptions'][0];
           this.checkFeatures();
           this.checkBookingInfo();
           this.checkLocationInfo();
           this.checkHtmlMenuDishes();
         },
-        error => {
+        error: error => {
           console.log(error);
-        });
+        }
+      });
   }
 
   checkFeatures() {
@@ -343,14 +349,17 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
   checkImages() {
 
     this.cms.getElementClass(this.restaurant.restaurant_id, 'Image', 'N')
-      .subscribe(data => {
+      .subscribe({
+        next: data => {
           // reset counts
           this.img_status = 0;
           this.img_count = 0;
           let i = data['elements'].length, elem;
           while (i--) {
             elem = data['elements'][i];
-            if (elem.cms_element_active) { this.img_count += 1; }
+            if (elem.cms_element_active) {
+              this.img_count += 1;
+            }
             // Store default image path for restaurant card
             if (elem.cms_element_default) {
               this.cldImage = this.imgService.getCldImage(this.cmsLocalService.getCloudinaryPublicId(elem.cms_element_image_path));
@@ -366,7 +375,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
           } else {
             this.img_status_text = this.translate.instant(
               'CMS.DASHBOARD.summary.statusImages',
-              { count: this.img_count });
+              {count: this.img_count});
           }
 
           // if (data['elements'].length) {
@@ -376,62 +385,65 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
           this.img_date = new Date(this.last_updated.last_updated_images);
           this.d_img_date = this.setDateRes(this.img_date);
         },
-        error => console.log(error + ' R ' + this.restaurant.restaurant_id));
+        error: error => console.log(error + ' R ' + this.restaurant.restaurant_id)
+      });
   }
 
   checkHtmlMenuDishes() {
     // reset status
     this.mnu_status = 0;
 
-    this.cms.getDishes(Number(this.restaurant.restaurant_id)).subscribe(
-      data => {
+    this.cms.getDishes(Number(this.restaurant.restaurant_id)).subscribe({
+      next: data => {
         if (data['count'] > 0) {
           this.mnu_status += 33.5;
           this.mnu_dish_count = data['count'];
         }
         this.checkPdfMenus();
       },
-      error => {
+      error: error => {
         console.log(error);
-      });
+      }
+    });
   }
 
   checkPdfMenus(): void {
 
     this.cms.getElementClass(this.restaurant.restaurant_id, 'Menu', 'N')
-      .subscribe(
-      menuData => {
-        // reset status
-        this.mnu_count = 0;
-        let i = menuData['count'];
-        while (i--) {
-          if (menuData['elements'][i].cms_element_active) {
-            this.mnu_count += 1;
+      .subscribe({
+        next: menuData => {
+          // reset status
+          this.mnu_count = 0;
+          let i = menuData['count'];
+          while (i--) {
+            if (menuData['elements'][i].cms_element_active) {
+              this.mnu_count += 1;
+            }
           }
-        }
-        // active menus
-        if (this.mnu_count > 0) {
-          this.mnu_status += 33.3;
-        }
-        if (this.descriptions) {
-          if (this.descriptions.cms_description_menus_overview) {
+          // active menus
+          if (this.mnu_count > 0) {
             this.mnu_status += 33.3;
           }
-        }
-        this.mnu_date = new Date(this.last_updated.last_updated_menus);
-        this.d_mnu_date = this.setDateRes(this.mnu_date);
+          if (this.descriptions) {
+            if (this.descriptions.cms_description_menus_overview) {
+              this.mnu_status += 33.3;
+            }
+          }
+          this.mnu_date = new Date(this.last_updated.last_updated_menus);
+          this.d_mnu_date = this.setDateRes(this.mnu_date);
 
-        // set status text
-        if (this.mnu_status === 0) {
-          this.mnu_status_text = this.translate.instant('CMS.DASHBOARD.summary.statusNoData');
-        } else {
-          this.mnu_status_text = this.translate.instant(
-            'CMS.DASHBOARD.summary.statusMenus',
-            { pdf: this.mnu_count, dish: this.mnu_dish_count });
+          // set status text
+          if (this.mnu_status === 0) {
+            this.mnu_status_text = this.translate.instant('CMS.DASHBOARD.summary.statusNoData');
+          } else {
+            this.mnu_status_text = this.translate.instant(
+              'CMS.DASHBOARD.summary.statusMenus',
+              { pdf: this.mnu_count, dish: this.mnu_dish_count });
+          }
+        },
+        error: error => {
+          console.log(error);
         }
-      },
-      error => {
-        console.log(error);
       });
   }
 
@@ -539,11 +551,14 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
             // record event
             this.ga.sendEvent('CMS-Dashboard', 'SPW', 'Published');
             // reset data changed attribute
-            this.cms.resetLastUpdatedField(Number(this.restaurant.restaurant_id)).subscribe(
-                () => {},
-                error => {
+            this.cms.resetLastUpdatedField(Number(this.restaurant.restaurant_id))
+              .subscribe({
+                next: () => {
+                },
+                error: error => {
                   console.log('unable to reset data changed attribute', error);
-                });
+                }
+              });
           } else {
             console.log('Publish failed', res);
             this.isPreviewing = false;
@@ -580,7 +595,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
     if (url) {
       // if it's missing the protocol
       if (url.indexOf('//') === -1) {
-        url = 'http://' + url;
+        url = 'https://' + url;
       }
       window.open(url, '_blank');
     } else {
@@ -593,16 +608,18 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
   verifyData(): void {
 
     this.restaurantService.verify(this.restaurant.restaurant_id, this.userName )
-      .subscribe(() => {
-        this.cmsLocalService.dspSnackbar(
-          this.translate.instant('CMS.DASHBOARD.spw.msgVerifiedAndPublished'),
-          'OK', 5);
-        this.restaurant.restaurant_verified_by = this.userName;
-        this.restaurant.restaurant_verified_on = Date().toLocaleString();
-        this.dbRestaurant.restaurant_verified_by = this.userName;
-        this.dbRestaurant.restaurant_verified_on = Date().toLocaleString();
-      },
-      error => console.log(error));
+      .subscribe({
+        next: () => {
+          this.cmsLocalService.dspSnackbar(
+            this.translate.instant('CMS.DASHBOARD.spw.msgVerifiedAndPublished'),
+            'OK', 5);
+          this.restaurant.restaurant_verified_by = this.userName;
+          this.restaurant.restaurant_verified_on = Date().toLocaleString();
+          this.dbRestaurant.restaurant_verified_by = this.userName;
+          this.dbRestaurant.restaurant_verified_on = Date().toLocaleString();
+        },
+        error: error => console.log(error)
+      });
   }
 
   reqDirectoryDataChange(): void {
@@ -646,14 +663,16 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
           // send information to the server so that emails can be generated
           this.cms.sendRestaurantChanges(this.user.member_first_name, this.user.member_last_name, this.user.member_email,
             this.restaurant.restaurant_name, changeArray)
-            .subscribe(() => {
+            .subscribe({
+              next: () => {
                 // console.log('Emails generated by server');
                 const msg = this.translate.instant('CMS.DASHBOARD.core.msgDataChange');
                 this.cmsLocalService.dspSnackbar(msg, 'OK', 20, 'info');
                 // record event
                 this.ga.sendEvent('CMS-Dashboard', 'Core Data', 'Change Request');
               },
-              error => console.log(error));
+              error: error => console.log(error)
+            });
 
           // now need to revert the data since this was ONLY A REQUEST
           for (const key in this.restaurant) {
@@ -687,8 +706,11 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
 
     // console.log(this.user.member_id, this.user.member_access_level, this.user.member_messages_seen);
     this.memberService.messages(this.user.member_id, this.user.member_access_level, this.user.member_messages_seen)
-      .subscribe(msgs => {
-        if (msgs['count'] > 0) {
+      .subscribe({
+        next: msgs => {
+          // Guard clause
+          if (msgs['count'] < 1) { return; }
+
           const dialogref = this.dialog.open(MessageComponent, {
             data: {
               user_id: this.user.member_id,
@@ -698,62 +720,70 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
             disableClose: true
           });
 
-          dialogref.afterClosed().subscribe(msgSeen => {
-            if (msgSeen) {
-              console.log('Message Seen');
-              // so set them all to seen...
-              for (let i = 0; i < msgs['messages'].length; i++) {
-                // console.log('SEEN: ', this.user.member_id, msgs.messages[i].message_id);
-                this.memberService.messagesseen(Number(this.user.member_id), msgs['messages'][i].message_id).subscribe(
-                  () => {
-                    // console.log(result);
-                  },
-                  error => {
-                    console.log(error);
-                    console.log('Failed to update messages_seen for member ' + this.user.member_id);
-                  });
+          dialogref.afterClosed().subscribe({
+            next: msgSeen => {
+              if (msgSeen) {
+                console.log('Message Seen');
+                // so set them all to seen...
+                for (let i = 0; i < msgs['messages'].length; i++) {
+                  // console.log('SEEN: ', this.user.member_id, msgs.messages[i].message_id);
+                  this.memberService.messagesseen(Number(this.user.member_id), msgs['messages'][i].message_id)
+                    .subscribe({
+                      next: () => {
+                        // console.log(result);
+                      },
+                      error: error => {
+                        console.log(error);
+                        console.log('Failed to update messages_seen for member ' + this.user.member_id);
+                      }
+                    });
+                }
+              } else {
+                console.log('Message NOT Seen');
               }
-            } else {
-              console.log('Message NOT Seen');
-            }
+            },
+            error: () => console.log()
           });
-
-        } else {
-          console.log('No messages');
         }
       });
 
   }
 
   getLastUpdated() {
-    this.cms.getLastUpdatedRecord(Number(this.restaurant.restaurant_id)).subscribe(
-      data => {
-        if (data['count'] === 0) {
-          // no record found, so this must be the first time - create one...
-          this.cms.createLastUpdatedRecord(Number(this.restaurant.restaurant_id)).subscribe(
-            () => {
-              // now read it back!
-              this.cms.getLastUpdatedRecord(Number(this.restaurant.restaurant_id)).subscribe(
-                reread => {
-                  // console.log('createlastupdatedrecord', reread);
-                  this.last_updated = reread['lastupdated'][0];
-                  this.readAndCheckStatus();
+    this.cms.getLastUpdatedRecord(Number(this.restaurant.restaurant_id))
+      .subscribe({
+        next: data => {
+          if (data['count'] === 0) {
+            // no record found, so this must be the first time - create one...
+            this.cms.createLastUpdatedRecord(Number(this.restaurant.restaurant_id))
+              .subscribe({
+                next: () => {
+                  // now read it back!
+                  this.cms.getLastUpdatedRecord(Number(this.restaurant.restaurant_id))
+                    .subscribe({
+                      next: reread => {
+                        // console.log('createlastupdatedrecord', reread);
+                        this.last_updated = reread['lastupdated'][0];
+                        this.readAndCheckStatus();
+                      },
+                      error: error => {
+                        console.log('getlastupdatedrecord', error);
+                      }
+                    });
                 },
-                error => {
-                  console.log('getlastupdatedrecord', error);
-                });
-            },
-            error => {
-              console.log('createlastupdatedrecord', error);
-            });
-        } else {
-          // console.log(data);
-          this.last_updated = data['lastupdated'][0];
-          this.readAndCheckStatus();
+                error: error => {
+                  console.log('createlastupdatedrecord', error);
+                }
+              });
+          } else {
+            // console.log(data);
+            this.last_updated = data['lastupdated'][0];
+            this.readAndCheckStatus();
+          }
+        },
+        error: error => {
+          console.log('getlastupdatedrecord', error);
         }
-      },
-      error => {
-        console.log('getlastupdatedrecord', error);
       });
   }
 
