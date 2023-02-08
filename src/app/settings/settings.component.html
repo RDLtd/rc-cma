@@ -91,7 +91,7 @@
 
               <mat-icon
                       matTooltip="{{ 'SETTINGS.tipRemove' | translate: { name: restaurant.restaurant_name } }}"
-                      (click)="removeAssociation(i)">
+                      (click)="removeAssociation($event, i)">
                 cancel
               </mat-icon>
 

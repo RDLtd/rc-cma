@@ -318,8 +318,8 @@ export class SettingsComponent implements OnInit {
       );
   }
 
-  removeAssociation(index): void {
-
+  removeAssociation(event, index): void {
+    event.stopPropagation();
     const rest = this.restaurants[index];
     const dialogRef = this.dialog.open(ConfirmCancelComponent, {
       data: {
