@@ -69,7 +69,7 @@
             email
             required
             autofocus>
-          <mat-error *ngIf="!!inputEmail.value" align="end">{{ 'SIGNIN.emailInvalid' | translate }}</mat-error>
+          <mat-error *ngIf="!!inputEmail.value" class="rc-flex-end">{{ 'SIGNIN.emailInvalid' | translate }}</mat-error>
         </mat-form-field>
         <mat-form-field class="rc-full-width" hideRequiredMarker>
           <mat-label>{{ 'SIGNIN.labelPassword' | translate }}</mat-label>

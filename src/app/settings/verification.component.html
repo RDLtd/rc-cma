@@ -56,7 +56,7 @@
           (click)="editEmail()">
           <mat-icon style="padding-bottom: 0.15em;">edit</mat-icon>
         </button>
-        <mat-error align="end">{{ 'VERIFY.errorInvalidEmail' | translate }}</mat-error>
+        <mat-error class="rc-flex-end">{{ 'VERIFY.errorInvalidEmail' | translate }}</mat-error>
       </mat-form-field>
 
       <mat-form-field
@@ -72,7 +72,7 @@
           autocomplete="off"
           minlength="10"
           required>
-        <mat-error align="end">{{ 'VERIFY.errorInvalidCode' | translate }}</mat-error>
+        <mat-error class="rc-flex-end">{{ 'VERIFY.errorInvalidCode' | translate }}</mat-error>
       </mat-form-field>
 
     </mat-dialog-content>
@@ -91,7 +91,7 @@
 
       <button
         type="button"
-        mat-dialog-close
+        [mat-dialog-close]="false"
         mat-button (click)="profileVerifyDialog.close({ confirmed: false })">
         {{ 'VERIFY.labelBtnCancel' | translate | uppercase }}
       </button>

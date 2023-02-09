@@ -32,7 +32,7 @@
 
   <div class="rc-grid" [@insertAnimation]="openingTimes.length">
 
-    <mat-card class="rc-grid-col-span">
+    <mat-card appearance="outlined" class="rc-grid-col-span">
       <mat-card-title>{{ 'CMS.HOURS.titleNotes' | translate }}</mat-card-title>
       <mat-form-field class="rc-full-width">
         <textarea
@@ -49,6 +49,7 @@
     </mat-card>
 
     <mat-card
+      appearance="outlined"
       *ngFor="let time of openingTimes; let i = index">
       <mat-card-title>
         <mat-checkbox

@@ -6,12 +6,12 @@ import {
   CMSService,
   AnalyticsService
 } from '../_services';
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { PasswordComponent } from './password.component';
 import { ContactsComponent } from './contacts.component';
 import { ImageComponent } from './image.component';
 import { RestaurantLookupComponent } from './restaurant-lookup.component';
-import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import * as moment from 'moment';
@@ -38,9 +38,6 @@ export class SettingsComponent implements OnInit {
   lang: string;
 
   defaultImages: Array<any> = [];
-  isDemoMember = false;
-  showLoader = false;
-  referrer: any;
   showRestaurantFinder = true;
   d_member_signedup: string;
   restProd: any;
@@ -135,8 +132,8 @@ export class SettingsComponent implements OnInit {
   getAssociatedRestaurants(id): void {
 
     this.restaurantService.getMemberRestaurants(id)
-      .subscribe(
-        data => {
+      .subscribe({
+        next: data => {
           this.restaurants = data['restaurants'];
           if (this.restaurants.length) {
             this.getDefaultImages();
@@ -157,10 +154,11 @@ export class SettingsComponent implements OnInit {
           }
           this.loadService.close();
         },
-        error => {
+        error: error => {
           console.log(error);
           this.loadService.close();
-        });
+        }
+      });
   }
 
   checkAllowance(): void {
@@ -248,15 +246,16 @@ export class SettingsComponent implements OnInit {
           'support',
           'New Restaurant',
           bodyContent)
-          .subscribe(() => {
+          .subscribe({
+            next: () => {
               this.cmsLocalService.dspSnackbar(this.translate.instant('SETTINGS.msgNewRequestReceived'), 'OK', 20, 'info');
               this.showRestaurantFinder = false;
             },
-            error => {
+            error: error => {
               console.log(error);
               this.showRestaurantFinder = false;
             }
-          );
+          });
       } else {
         // All good
         this.showRestaurantFinder = false;
@@ -271,7 +270,7 @@ export class SettingsComponent implements OnInit {
 
     // If this is the first additional restaurant
     // i.e. it's the 2nd restaurant that's been associated
-    // we need to create the subscription
+    // then we need to create the subscription
     if (this.restaurants.length === 2) {
       this.loadService.open('Create Restaurant Subscription');
       this.memberService.createRestaurantSubscription(
@@ -280,17 +279,19 @@ export class SettingsComponent implements OnInit {
         this.restProd.product_stripe_price_id,
         this.restProd.product_tax_id,
         1
-      ).subscribe(res => {
-        console.log(res);
-        // Now update member's subscription id
-        this.member.member_subscription_id = res['subscription_id'];
-        localStorage.setItem('rd_profile', JSON.stringify(this.member));
-        this.loadService.close();
-      },
-        error => {
+      ).subscribe({
+        next: res => {
+          console.log(res);
+          // Now update member's subscription id
+          this.member.member_subscription_id = res['subscription_id'];
+          localStorage.setItem('rd_profile', JSON.stringify(this.member));
+          this.loadService.close();
+        },
+        error: error => {
           console.log(error);
           this.loadService.close();
-        });
+        }
+      });
     } else {
       // update subscription charge
       this.updateRestaurantSubscription(this.restaurants.length - 1);
@@ -307,15 +308,16 @@ export class SettingsComponent implements OnInit {
       this.restProd.product_tax_id,
       qty
     )
-      .subscribe(res => {
+      .subscribe({
+        next: res => {
           console.log(res);
           this.loadService.close();
         },
-        error => {
+        error: error => {
           console.log(error);
           this.loadService.close();
         }
-      );
+      });
   }
 
   removeAssociation(event, index): void {
@@ -340,17 +342,18 @@ export class SettingsComponent implements OnInit {
         }
 
         this.restaurantService.removeAssociation(rest['association_id'])
-          .subscribe(
-            () => {
+          .subscribe({
+            next: () => {
               this.restaurants.splice(index, 1);
               this.defaultImages.splice(index, 1);
-              this.openSnackBar(this.translate.instant('SETTINGS.msgRestaurantRemoved', { name: rest.restaurant_name }), 'OK');
+              this.openSnackBar(this.translate.instant('SETTINGS.msgRestaurantRemoved', {name: rest.restaurant_name}), 'OK');
               // record event
               this.ga.sendEvent('Profile', 'Edit', 'Remove Association');
             },
-            error => {
+            error: error => {
               console.log(error);
-            });
+            }
+          });
       }
     });
   }
@@ -358,15 +361,16 @@ export class SettingsComponent implements OnInit {
   deleteRestaurantSubscription(): void {
     this.loadService.open('Removing Restaurant');
     this.memberService.deleteRestaurantSubscription( this.member.member_subscription_id)
-      .subscribe(res => {
+      .subscribe({
+        next: res => {
           console.log(res);
           this.loadService.close();
         },
-        error => {
+        error: error => {
           console.log(error);
           this.loadService.close();
         }
-      );
+      });
   }
 
   viewMemberPlans(): void {
@@ -385,25 +389,27 @@ export class SettingsComponent implements OnInit {
   managePayments(): void {
     // First get the stripe customer number for this member from the database
     this.memberService.getStripeCustomerNumber(this.member.member_id)
-      .subscribe( (customer) => {
+      .subscribe({
+        next: (customer) => {
           console.log(customer);
           // need to send stripe back to this window
           // @ts-ignore
           this.memberService.accessCustomerPortal(customer.customer_number, window.location.href)
-            .subscribe( (data) => {
-                // console.log('accessed CustomerPortal OK', data);
-                // @ts-ignore
-                window.open(data.url, '_self');
-              },
-              error => {
-                console.log('accessCustomerPortal error', error);
-              }
-            );
+              .subscribe({
+                next: (data) => {
+                  // console.log('accessed CustomerPortal OK', data);
+                  // @ts-ignore
+                  window.open(data.url, '_self');
+                },
+                error: error => {
+                  console.log('accessCustomerPortal error', error);
+                }
+              });
         },
-        error => {
+        error: error => {
           console.log('getStripeCustomerNumber error', error);
         }
-      );
+      });
   }
 
   updateMemberContacts(): void {
@@ -435,16 +441,17 @@ export class SettingsComponent implements OnInit {
     // console.log('update:', member);
     // update member
     this.memberService.update(member)
-      .subscribe(
-        () => {
+      .subscribe({
+        next: () => {
           localStorage.setItem('rd_profile', JSON.stringify(this.member));
           localStorage.setItem('rd_username', `${this.member.member_first_name} ${this.member.member_last_name}`);
           this.openSnackBar(this.translate.instant('SETTINGS.msgContactsUpdated'));
         },
-        error => {
+        error: error => {
           console.log(error);
           this.openSnackBar(this.translate.instant('SETTINGS.msgUpdateFailed'));
-        });
+        }
+      });
   }
 
   updatePassword (): void {
@@ -497,17 +504,18 @@ export class SettingsComponent implements OnInit {
     const numberOfRestaurants = this.restaurants.length;
     for (let i = 0; i < numberOfRestaurants; i++) {
       this.cms.getElementClass(this.restaurants[i].restaurant_id, 'Image', 'Y')
-        .subscribe(
-          data => {
-            if(data['elements'].length === 0) {
+        .subscribe({
+          next: data => {
+            if (data['elements'].length === 0) {
               this.defaultImages[i] = null;
               return;
             }
             this.defaultImages[i] = this.imgService.getCldImage(data['elements'][0].cms_element_image_path);
           },
-          error => {
+          error: error => {
             console.log(error);
-          });
+          }
+        });
     }
   }
 

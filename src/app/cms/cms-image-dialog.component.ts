@@ -3,7 +3,7 @@ import { CMSService } from '../_services';
 import { CmsLocalService } from './cms-local.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ImageService } from '../_services/image.service';
-import { MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA, MatLegacyDialogRef as MatDialogRef } from '@angular/material/legacy-dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { CloudinaryImage } from '@cloudinary/url-gen';
 
 @Component({

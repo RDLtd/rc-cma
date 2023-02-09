@@ -168,19 +168,19 @@
 
         <div class="rc-card-actions">
           <span>
-            <mat-chip-list>
-              <mat-chip
+            <mat-chip-listbox>
+              <mat-chip-option
                 class="rc-online"
                 selected="true"
                 *ngIf="menu.cms_element_active">
                 {{ 'CMS.MENUS.labelActive' | translate }}
-              </mat-chip>
-              <mat-chip
+              </mat-chip-option>
+              <mat-chip-option
                 selected="false"
                 *ngIf="!menu.cms_element_active">
                 {{ 'CMS.MENUS.labelOffline' | translate }}
-              </mat-chip>
-            </mat-chip-list>
+              </mat-chip-option>
+            </mat-chip-listbox>
           </span>
           <span class="rc-space-filler"></span>
           <span (click)="stopBubbling($event)">

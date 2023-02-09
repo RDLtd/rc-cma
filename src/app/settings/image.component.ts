@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, NgZone, Inject } from '@angular/core';
 import { Member } from '../_models';
 import { AnalyticsService, MemberService } from '../_services';
-import { MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA } from '@angular/material/legacy-dialog';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FileUploader, FileUploaderOptions, ParsedResponseHeaders } from 'ng2-file-upload';
 import { AppConfig } from '../app.config';
 import { ImageService } from '../_services/image.service';
@@ -136,31 +136,33 @@ export class ImageComponent implements OnInit {
     this.inProgress = true;
     // update db and local settings
 
-    this.memberService.updateAvatar(this.data.member.member_id, this.imgURL).subscribe(
-      () => {
+    this.memberService.updateAvatar(this.data.member.member_id, this.imgURL)
+        .subscribe({
+          next: () => {
+            this.data.member.member_image_path = this.imgPreviewSrc;
+            this.inProgress = false;
+            this.dialog.close({str: this.imgURL});
 
-        this.data.member.member_image_path = this.imgPreviewSrc;
-        this.inProgress = false;
-        this.dialog.close({str: this.imgURL});
-
-        // record event
-        this.ga.sendEvent('Profile', 'Edit', 'Update Image');
-      },
-      error => {
-        console.log(JSON.stringify(error));
-        this.inProgress = false;
-      });
+            // record event
+            this.ga.sendEvent('Profile', 'Edit', 'Update Image');
+          },
+          error: error => {
+            console.log(JSON.stringify(error));
+            this.inProgress = false;
+          }
+        });
   }
 
   deleteImage() {
 
-    this.memberService.deleteAvatar(this.data.member.member_id).subscribe(
-      () => {
+    this.memberService.deleteAvatar(this.data.member.member_id).subscribe({
+      next: () => {
         this.data.member_image_path = null;
         this.dialog.close({str: 'delete'});
       },
-      error => {
+      error: error => {
         console.log(error);
-      });
+      }
+    });
   }
 }

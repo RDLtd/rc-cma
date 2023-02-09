@@ -2,6 +2,7 @@
   <div class="rc-grid-masonry-2 golden">
   <!-- CORE DATA -->
   <mat-card
+    appearance="outlined"
     class="rc-cms-card-core">
     <div class="rc-card-title-img-wrapper">
       <advanced-image
@@ -89,6 +90,7 @@
   </mat-card>
   <!-- SPW: loading -->
   <mat-card
+    appearance="outlined"
     *ngIf="isPreviewing"
     class="rc-cms-dash-info">
     <mat-card-header>
@@ -101,6 +103,7 @@
   </mat-card>
   <!-- SPW: no changes -->
   <mat-card
+    appearance="outlined"
     *ngIf="!cmsChanged && cmsHasSufficientData && !isPreviewing"
     class="rc-cms-dash-info">
     <!-- HEADER -->
@@ -146,6 +149,7 @@
   </mat-card>
   <!-- SPW: has changes -->
   <mat-card
+    appearance="outlined"
     *ngIf="cmsChanged && !isPreviewing"
     class="rc-cms-dash-info">
 
@@ -199,6 +203,7 @@
   </mat-card>
   <!-- CONTENT Summary -->
   <mat-card
+    appearance="outlined"
     class="">
     <div class="rc-card-help">
       <button

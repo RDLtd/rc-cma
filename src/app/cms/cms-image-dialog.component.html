@@ -39,14 +39,14 @@
 
   <mat-dialog-content class="image-wrapper">
 
-    <mat-chip-list class="rc-element-tag">
-      <mat-chip selected="true" class="rc-default" *ngIf="image.cms_element_default">{{ 'CMS.IMAGES.tagDefault'
-        | translate }}</mat-chip>
-      <mat-chip selected="true" class="rc-online" *ngIf="image.cms_element_active">{{ 'CMS.IMAGES.tagActive' |
-        translate }}</mat-chip>
-      <mat-chip selected="false"
-                *ngIf="!image.cms_element_active">{{ 'CMS.IMAGES.tagOffline' | translate }}</mat-chip>
-    </mat-chip-list>
+    <mat-chip-listbox class="rc-element-tag">
+      <mat-chip-option class="rc-default" *ngIf="image.cms_element_default">{{ 'CMS.IMAGES.tagDefault'
+        | translate }}</mat-chip-option>
+      <mat-chip-option class="rc-online" *ngIf="image.cms_element_active">{{ 'CMS.IMAGES.tagActive' |
+        translate }}</mat-chip-option>
+      <mat-chip-option
+                *ngIf="!image.cms_element_active">{{ 'CMS.IMAGES.tagOffline' | translate }}</mat-chip-option>
+    </mat-chip-listbox>
 
     <advanced-image
       height="100%"

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CMSService, RestaurantService } from '../_services';
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { ConfirmCancelComponent, HelpService, LoadService } from '../common';
 import { TranslateService } from '@ngx-translate/core';
 import { Restaurant } from '../_models';
@@ -8,7 +8,7 @@ import { AppConfig } from '../app.config';
 import { HeaderService } from '../common/header.service';
 import { MarketplaceService } from './marketplace.service';
 import { insertAnimation } from '../shared/animations';
-import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-rc-marketplace',
@@ -22,7 +22,6 @@ export class MarketplaceComponent implements OnInit {
   expiry: Date = new Date('2022');
 
   restaurant: Restaurant;
-  affiliates: any ;
   categories = [];
   deals: Array<any>;
   favourites: Array<string> = [];
@@ -167,14 +166,15 @@ export class MarketplaceComponent implements OnInit {
       member_email: member.member_email,
       member_first_name: member.member_first_name,
       member_last_name: member.member_last_name
-    }).subscribe(
-      () => {
+    }).subscribe({
+      next: () => {
         console.log('Email sent to ' + deal.affiliate_name);
         this.sendAffiliateConfirmation(deal, member);
       },
-      error => {
+      error: error => {
         console.log('Affiliate email failed', error);
-      });
+      }
+    });
   }
 
   // Send confirmation
@@ -188,13 +188,14 @@ export class MarketplaceComponent implements OnInit {
       restaurant_name: null,
       restaurant_email: member.member_email,
       restaurant_number: member.member_id
-    }).subscribe(
-      () => {
+    }).subscribe({
+      next: () => {
         console.log('Offer confirmation from ' + deal.affiliate_name);
-        this.snackbar.open(this.translate.instant('MARKETPLACE.msgRequestSent'), null, { duration: 3000 });
+        this.snackbar.open(this.translate.instant('MARKETPLACE.msgRequestSent'), null, {duration: 3000});
       },
-      error => {
+      error: error => {
         console.log('Could not send offer confirmation', error);
-      });
+      }
+    });
   }
 }

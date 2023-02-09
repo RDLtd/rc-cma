@@ -3,7 +3,7 @@ import { CMSService } from '../_services';
 import { CmsLocalService } from './cms-local.service';
 import { Restaurant, CMSDescription } from '../_models';
 import { ENTER } from '@angular/cdk/keycodes';
-import { MatLegacyChipInputEvent as MatChipInputEvent } from '@angular/material/legacy-chips';
+import { MatChipInputEvent } from '@angular/material/chips';
 import { TranslateService } from '@ngx-translate/core';
 import { LoadService, HelpService } from '../common';
 

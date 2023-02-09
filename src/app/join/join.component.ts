@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MemberService, AuthenticationService, AppService } from '../_services';
 import { CmsLocalService } from '../cms';
 import { TranslateService } from '@ngx-translate/core';
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { ConfirmCancelComponent, LoadService } from '../common';
 import { AppConfig } from '../app.config';
 import { fadeAnimation } from '../shared/animations';
@@ -31,7 +31,6 @@ export class JoinComponent implements OnInit {
   isLoaded = false;
   newRegResult: string;
   duplicateField: string;
-  currentApplicant: any;
   pendingMember: PendingMember;
   public brand: any;
 

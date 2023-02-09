@@ -95,7 +95,6 @@ import { MembershipComponent } from './join/membership.component';
 import { HubComponent } from './hub/hub.component';
 import { LogoComponent } from './common/logo/logo.component';
 import { CurrencyPipe } from '@angular/common';
-import { BpiComponent } from './join/bpi.component';
 import { RiMembershipComponent } from './join/mepn/ri-membership.component';
 import { BpiRegistrationComponent } from './join/mepn/bpi-registration.component';
 import { ProfileComponent } from './profile/profile.component';
@@ -165,7 +164,6 @@ export function appInitializerFactory(translate: TranslateService) {
     MembershipComponent,
     HubComponent,
     LogoComponent,
-    BpiComponent,
     RiMembershipComponent,
     BpiRegistrationComponent,
     ProfileComponent

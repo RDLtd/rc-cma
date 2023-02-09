@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {AuthenticationService, ErrorService, MemberService} from '../_services';
-import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
+import { AuthenticationService, MemberService } from '../_services';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { AppConfig } from '../app.config';
-import { ConfirmCancelComponent, HelpService } from '../common';
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
+import { ConfirmCancelComponent } from '../common';
+import { MatDialog } from '@angular/material/dialog';
 
 
 import { Notifier } from '@airbrake/browser';
@@ -35,8 +35,6 @@ export class SigninComponent implements OnInit {
     private activeRoute: ActivatedRoute,
     private config: AppConfig,
     private router: Router,
-    private help: HelpService,
-    private error: ErrorService
   ) {  }
 
   ngOnInit() {
@@ -88,8 +86,8 @@ export class SigninComponent implements OnInit {
     // console.log('form', formValue);
     this.isSubmitting = true;
     this.authService.login(formValue)
-      .subscribe(
-        authResult => {
+      .subscribe({
+        next: authResult => {
           console.log('auth OK', authResult);
           this.isSubmitting = false;
           if (authResult && authResult['token']) {
@@ -100,8 +98,8 @@ export class SigninComponent implements OnInit {
             this.error.handleError('failedToSetSession', 'Unable to set authorisation session!');
           }
         },
-        error => {
-          // authorisation fail will return an error status of 401.
+        error: error => {
+          console.log(`Auth Error: ${error}`);
           this.isSubmitting = false;
           if (error.status === 401) {
             console.log('Auth Error', error);
@@ -116,7 +114,8 @@ export class SigninComponent implements OnInit {
             }
           }
 
-        });
+        }
+      });
   }
 
   showPwdReset(boo: boolean) {
@@ -125,24 +124,22 @@ export class SigninComponent implements OnInit {
   }
 
   resetPwd(formValue) {
-    this.memberService.sendrecoveryemail(formValue.email).subscribe(
-      data => {
-        // console.log(data);
-        if (data['status'] === 'OK') {
-          this.openSnackBar(this.translate.instant('SIGNIN.newPwdSent'));
-          this.pwdReset = false;
-        } else {
-          // it seems this could be any error here, not just Email Unknown? So this should probably be:
-          // having said that it probably would make better sense if we sent something with more info from the back end!
-          this.error.handleError('failedToSendRecoveryEmail', data['error']);
-          // this.openSnackBar(this.translate.instant('SIGNIN.errorEmailUnknown'));
-        }
-      },
-      error => {
-        console.log(JSON.stringify(error));
-        // this.openSnackBar(error);
-        this.error.handleError('failedToSendRecoveryEmail', error);
-      });
+    this.memberService.sendrecoveryemail(formValue.email)
+        .subscribe({
+          next: data => {
+            // console.log(data);
+            if (data['status'] === 'OK') {
+              this.openSnackBar(this.translate.instant('SIGNIN.newPwdSent'));
+              this.pwdReset = false;
+            } else {
+              this.openSnackBar(this.translate.instant('SIGNIN.errorEmailUnknown'));
+            }
+          },
+          error: error => {
+            console.log(JSON.stringify(error));
+            this.openSnackBar(error);
+          }
+        });
   }
 
   openSnackBar(message: string) {
