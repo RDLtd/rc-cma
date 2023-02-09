@@ -1,4 +1,4 @@
-<div class="rc-cms-times">
+<div class="rc-content-container">
 
   <mat-toolbar class="rc-toolbar rc-toolbar-section">
       <span>{{ 'CMS.HOURS.titleHours' | translate }}</span>
@@ -30,11 +30,13 @@
       </span>
     </mat-toolbar>
 
-  <div class="rc-grid" [@insertAnimation]="openingTimes.length">
-
+  <div class="rc-grid rc-cms-times" [@insertAnimation]="openingTimes.length">
     <mat-card appearance="outlined" class="rc-grid-col-span">
-      <mat-card-title>{{ 'CMS.HOURS.titleNotes' | translate }}</mat-card-title>
-      <mat-form-field class="rc-full-width">
+      <mat-card-header>
+        <mat-card-title>{{ 'CMS.HOURS.titleNotes' | translate }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+      <mat-form-field class="rc-full-width" appearance="outline">
         <textarea
           matInput
           placeholder="{{ 'CMS.HOURS.labelGeneral' | translate: { chars: '1000'} }}"
@@ -46,11 +48,12 @@
           [(ngModel)]="openingTimesNotes">
         </textarea>
       </mat-form-field>
+      </mat-card-content>
     </mat-card>
 
-    <mat-card
-      appearance="outlined"
+    <mat-card appearance="outlined"
       *ngFor="let time of openingTimes; let i = index">
+      <mat-card-header>
       <mat-card-title>
         <mat-checkbox
           [class.rc-day-closed]="time.closed"
@@ -59,49 +62,52 @@
           {{ display_dow[i] | uppercase }}
         </mat-checkbox>
       </mat-card-title>
+      </mat-card-header>
+
       <mat-card-content>
         <div *ngFor="let session of time['sessions']; let j = index">
-        <h4 *ngIf="!time.closed">{{ 'CMS.HOURS.labelSession' | translate }} {{ j + 1 }}</h4>
-        <h4 *ngIf="time.closed">{{ 'CMS.HOURS.labelClosed' | translate }}</h4>
-        <div class="rc-session">
-          <mat-form-field class="rc-session-time">
-            <mat-label>{{ 'CMS.HOURS.labelStart' | translate | uppercase}}</mat-label>
-            <input
-              matInput
-              type="time"
-              step="900"
-              (change)="setChanged()"
-              [(ngModel)]="session.open"
-              [disabled]="!!time.closed">
-          </mat-form-field>
-          <mat-form-field class="rc-session-time">
-            <mat-label>{{ 'CMS.HOURS.labelEnd' | translate | uppercase}}</mat-label>
-            <input
-              matInput
-              type="time"
-              step="900"
-              (change)="setChanged()"
-              [(ngModel)]="session.close"
-              [disabled]="!!time.closed">
-          </mat-form-field>
-          <a mat-icon-button
-             color="warn"
-             [disabled]="!!time.closed"
-             class="rc-del-session"
-             (click)="removeSession(i,j)">
-            <mat-icon>cancel</mat-icon>
-          </a>
+          <h4 *ngIf="!time.closed">{{ 'CMS.HOURS.labelSession' | translate }} {{ j + 1 }}</h4>
+          <h4 *ngIf="time.closed">{{ 'CMS.HOURS.labelClosed' | translate }}</h4>
+          <div class="rc-session">
+            <mat-form-field class="rc-session-time" floatLabel="always">
+              <mat-label>{{ 'CMS.HOURS.labelStart' | translate | uppercase}}</mat-label>
+              <input
+                matInput
+                type="time"
+                step="900"
+                (change)="setChanged()"
+                [(ngModel)]="session.open"
+                [disabled]="!!time.closed">
+            </mat-form-field>
+            <mat-form-field class="rc-session-time">
+              <mat-label>{{ 'CMS.HOURS.labelEnd' | translate | uppercase}}</mat-label>
+              <input
+                matInput
+                type="time"
+                step="900"
+                (change)="setChanged()"
+                [(ngModel)]="session.close"
+                [disabled]="!!time.closed">
+            </mat-form-field>
+            <a mat-icon-button
+               color="warn"
+               [disabled]="!!time.closed"
+               class="rc-del-session"
+               (click)="removeSession(i,j)">
+              <mat-icon>cancel</mat-icon>
+            </a>
+          </div>
         </div>
-      </div>
       </mat-card-content>
+      <div class="rc-space-filler"></div>
       <mat-card-actions align="end" *ngIf="!time.closed">
-      <button
-        mat-button
-        (click)="addSession(i)"
-        [disabled]="time['sessions'].length >= maxSessions">
-        {{ 'CMS.HOURS.labelBtnAddSession' | translate | uppercase }}
-      </button>
-    </mat-card-actions>
+        <button
+          mat-button
+          (click)="addSession(i)"
+          [disabled]="time['sessions'].length >= maxSessions">
+          {{ 'CMS.HOURS.labelBtnAddSession' | translate | uppercase }}
+        </button>
+      </mat-card-actions>
     </mat-card>
   </div>
 </div>

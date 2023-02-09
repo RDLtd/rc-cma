@@ -1652,6 +1652,7 @@ button.rc-member-assc {
   }
   .mat-mdc-card-content { margin-bottom: 8px; }
 }
+
 .rc-content-status {
   padding-bottom: 24px;
   /* TODO(mdc-migration): The following rule targets internal classes of list that may no longer apply for the MDC version.*/
@@ -1715,28 +1716,10 @@ button.rc-member-assc {
   }
 }
 .rc-cms-times {
-  max-width: $rc-max-width;
-  margin:1rem auto;
-  /* TODO(mdc-migration): The following rule targets internal classes of checkbox that may no longer apply for the MDC version.*/
-  .mat-checkbox-label {
-    font-size: 16px;
-    color: $rc-theme-black;
-  }
-  .rc-day-closed {
-    /* TODO(mdc-migration): The following rule targets internal classes of checkbox that may no longer apply for the MDC version.*/
-    .mat-checkbox-label { color: grey; }
-  }
   .rc-session {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    .rc-session-time {
-      width: 40%;
-    }
-    a.rc-del-session {
-      width: 5%;
-      text-align: right;
-    }
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    gap: 1rem;
   }
 }
 
