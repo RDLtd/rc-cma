@@ -39,12 +39,12 @@ $config: mat.define-typography-config();
 .rc-hide { display: none; }
 .rc-accent { background-color: $rc-theme-secondary !important;}
 .rc-centre { text-align: center; }
-.rc-space-filler { flex: 1 1 auto; }
+.rc-space-filler { flex: 1 1 auto; margin: auto; }
 .rc-flex-spaced {
   display: flex;
   justify-content: space-between;
 }
-.rc-flex-end { justify-content: flex-end; }
+.rc-flex-end { justify-content: flex-end; text-align: right; float: right;}
 
 
 
@@ -725,7 +725,8 @@ form.rc-form-grid {
     }
   }
   .rc-avatar {
-    display: inline-block;
+    cursor: pointer;
+    display: block;
     background-color: #fff;
     margin-left: 8px;
     width: 40px;
@@ -1382,8 +1383,9 @@ ul.rc-lookup-results {
   right: 8px;
 }
 .rc-card-title-img-wrapper {
+
   img {
-    max-height: 320px;
+    height: 320px;
     width: 100%;
     object-fit: cover;
   }
