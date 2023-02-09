@@ -668,13 +668,10 @@ form.rc-form-grid {
     height: $rc-header-height !important;
     padding: 0 18px;
   }
+  .rc-toolbar {}
   .rc-toolbar-actions {
-    .mat-icon {
-      font-size: 28px;
-      width: 29px;
-      height: 29px;
-      line-height: 28px !important;
-    }
+    display: flex;
+    align-items: center;
   }
   &.rc-toolbar-nav-adjust {
     margin-top: $rc-header-height;
@@ -688,6 +685,7 @@ form.rc-form-grid {
     color: black;
     text-transform: uppercase;
     font-size: 12px;
+    padding-block: .25rem;
     @include mq(small) {
       font-size: 16px;
     }
