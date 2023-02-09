@@ -33,7 +33,6 @@ import { JoinComponent } from './join/join.component';
 import { MembershipComponent } from './join/membership.component';
 import { HubComponent } from './hub/hub.component';
 import {BpiRegistrationComponent} from './join/mepn/bpi-registration.component';
-import {BpiComponent} from './join/bpi.component';
 import {ProfileComponent} from './profile/profile.component';
 
 const APP_ROUTES: Routes = [
@@ -41,8 +40,8 @@ const APP_ROUTES: Routes = [
   { path: 'join/:code', component: JoinComponent },
   { path: 'join', component: JoinComponent },
 
-  { path: 'mise-en-place-numerique', component: BpiComponent },
-  { path: 'mise-en-place-numerique/:code', component: BpiComponent },
+  { path: 'mise-en-place-numerique', component: BpiRegistrationComponent },
+  { path: 'mise-en-place-numerique/:code', component: BpiRegistrationComponent },
 
   { path: 'mepn/:code', component: BpiRegistrationComponent },
   { path: 'mepn', component: BpiRegistrationComponent },
