@@ -30,19 +30,20 @@
   <div class="rd-flex-col-2">
 
     <mat-card appearance="outlined">
-
+      <mat-card-header>
       <mat-card-title>
         <h2>{{ 'CMS.FEATURES.titleDescriptions' | translate }}</h2>
       </mat-card-title>
+      </mat-card-header>
 
       <mat-card-content>
-        <!-- STRAPLINE -->
+        <!-- SUBHEADING -->
         <h4>{{ 'CMS.FEATURES.headerStrapline' | translate }}</h4>
-        <mat-form-field class="rc-full-width">
-          <mat-label>{{ 'CMS.FEATURES.labelStrapline' | translate: { chars: descStraplineTotal } }}</mat-label>
+        <mat-form-field class="rc-full-width" appearance="outline">
           <textarea
             #strapline
             matInput
+            placeholder="{{ 'CMS.FEATURES.labelStrapline' | translate: { chars: descStraplineTotal } }}"
             cdkTextareaAutosize
             cdkAutosizeMinRows="1"
             name="cms_description_strap_line"
@@ -55,11 +56,11 @@
         <!-- ONE SENTENCE DESC. -->
         <h4>{{ 'CMS.FEATURES.headerDescSentence' | translate }}</h4>
         <!-- ONE PARAGRAPH DESC. -->
-        <mat-form-field class="rc-full-width">
-          <mat-label>{{ 'CMS.FEATURES.labelDescSentence' | translate: { chars: descSentenceTotal } }}</mat-label>
+        <mat-form-field class="rc-full-width" appearance="outline">
           <textarea
             #sentence
             matInput
+            placeholder="{{ 'CMS.FEATURES.labelDescSentence' | translate: { chars: descSentenceTotal } }}"
             cdkTextareaAutosize
             cdkAutosizeMinRows="1"
             name="cms_description_one_sentence"
@@ -71,11 +72,11 @@
         </mat-form-field>
         <h4>{{ 'CMS.FEATURES.headerDescParagraph' | translate }}</h4>
         <mat-form-field
-          class="rc-full-width" floatLabel="never">
-          <mat-label>{{ 'CMS.FEATURES.labelDescParagraph' | translate: { chars: descParagraphTotal } }}</mat-label>
+          class="rc-full-width" appearance="outline">
           <textarea
             #paragraph
             matInput
+            placeholder="{{ 'CMS.FEATURES.labelDescParagraph' | translate: { chars: descParagraphTotal } }}"
             cdkTextareaAutosize
             cdkAutosizeMinRows="1"
             name="cms_description_one_paragraph"
@@ -87,14 +88,14 @@
         </mat-form-field>
         <!-- LONG DESC. -->
         <h4>{{ 'CMS.FEATURES.headerDescFull' | translate }}</h4>
-        <mat-form-field class="rc-full-width">
-          <mat-label>{{ 'CMS.FEATURES.labelDescFull' | translate: { chars: descFullTotal } }}</mat-label>
+        <mat-form-field class="rc-full-width" appearance="outline">
           <textarea
             #full
             matInput
+            placeholder="{{ 'CMS.FEATURES.labelDescFull' | translate: { chars: descFullTotal } }}"
             name="cms_description_long"
             cdkTextareaAutosize
-            cdkAutosizeMinRows="3"
+            cdkAutosizeMinRows="5"
             maxlength="{{ descFullTotal }}"
             (keydown)="setChanged()"
             [(ngModel)]="descriptions.cms_description_long">
@@ -106,10 +107,12 @@
     </mat-card>
 
     <mat-card appearance="outlined">
+      <mat-card-header>
       <mat-card-title>
         <!-- FEATURES -->
         <h2>{{ 'CMS.FEATURES.titleFeatures' | translate }}</h2>
       </mat-card-title>
+      </mat-card-header>
       <mat-card-content>
         <div *ngFor="let feature of features; let iatt = index">
           <mat-checkbox
@@ -122,9 +125,11 @@
         </div>
       </mat-card-content>
       <!-- ADDITIONAL FEATURES -->
+      <mat-card-header>
       <h2>{{ 'CMS.FEATURES.titleAddFeatures' | translate }}</h2>
+      </mat-card-header>
       <mat-card-content>
-        <mat-form-field class="rc-full-width" floatLabel="always">
+        <mat-form-field class="rc-full-width" appearance="outline">
           <mat-chip-grid #chipList>
             <mat-chip-row
               class="rc-accent"
