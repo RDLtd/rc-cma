@@ -99,7 +99,6 @@ import { BpiRegistrationComponent } from './join/mepn/bpi-registration.component
 import { ProfileComponent } from './profile/profile.component';
 import {CloudinaryModule} from '@cloudinary/ng';
 import { OnlineStatusModule } from 'ngx-online-status';
-//import { UtilitiesModule } from './shared/utilities.module';
 
 
 // AoT requires an exported function for factories
