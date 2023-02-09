@@ -52,10 +52,9 @@
       </div>
 
 
-      <div class="rc-card-actions">
+      <div class="rc-card-actions" (click)="stopBubbling($event)">
         {{ image['cms_element_id'] }}
         <span class="rc-space-filler"></span>
-        <span (click)="stopBubbling($event)">
           <a
             mat-icon-button
             [href]="image['cms_element_image_path']"
@@ -78,7 +77,6 @@
             [disabled]="image['cms_element_default'] == 1"
             color="accent">
           </mat-checkbox>
-        </span>
       </div>
     </div>
     </div>

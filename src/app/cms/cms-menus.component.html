@@ -78,7 +78,7 @@
                   type="text"
                   matInput
                   (keyup)="setChanged()">
-          <button mat-button *ngIf="section.label" matSuffix mat-icon-button aria-label="Clear"
+          <button *ngIf="section.label" matSuffix mat-icon-button aria-label="Clear"
                   (click)="section.label=''; dataChanged = true;">
             <mat-icon>close</mat-icon>
           </button>
@@ -119,6 +119,7 @@
               <span>{{ dish.cms_dish_desc }}</span>
             </div>
           </div>
+          <span class="rc-space-filler"></span>
           <div class="rc-card-actions">
             <button mat-icon-button (click)="deleteDish(dish)">
               <mat-icon>delete</mat-icon>
@@ -163,25 +164,22 @@
           <p class="rc-txt-small" markdown>{{ 'CMS.MENUS.uploadStatus' | translate:
                   { date: menu.cms_element_created_on | date, user: menu.cms_element_created_by } }}</p>
         </div>
-
-        <div class="rc-card-actions">
+        <div class="rc-space-filler"></div>
+        <div class="rc-card-actions" (click)="stopBubbling($event)">
           <span>
             <mat-chip-listbox>
               <mat-chip-option
                 class="rc-online"
-                selected="true"
                 *ngIf="menu.cms_element_active">
                 {{ 'CMS.MENUS.labelActive' | translate }}
               </mat-chip-option>
               <mat-chip-option
-                selected="false"
                 *ngIf="!menu.cms_element_active">
                 {{ 'CMS.MENUS.labelOffline' | translate }}
               </mat-chip-option>
             </mat-chip-listbox>
           </span>
           <span class="rc-space-filler"></span>
-          <span (click)="stopBubbling($event)">
             <button
               mat-icon-button
               matTooltip="{{ 'CMS.MENUS.labelBtnDelete' | translate }}"
@@ -189,14 +187,13 @@
               <mat-icon>delete</mat-icon>
             </button>
             <mat-checkbox
-                    labelPosition="before"
-                    color="accent"
-                    matTooltip="{{ 'CMS.MENUS.tipToggleActive' | translate }}"
-                    [checked]="menu.cms_element_active"
-                    (change)="togglePdfMenuStatus(menu)">
+                matTooltip="{{ 'CMS.MENUS.tipToggleActive' | translate }}"
+                [checked]="menu.cms_element_active"
+                (change)="togglePdfMenuStatus(menu)">
             </mat-checkbox>
-          </span>
+
         </div>
+
       </div>
 
       <div
