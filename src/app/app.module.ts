@@ -1,6 +1,6 @@
 
 import { BrowserModule } from '@angular/platform-browser';
-import { APP_INITIALIZER, NgModule } from '@angular/core';
+import {APP_INITIALIZER, ErrorHandler, NgModule} from '@angular/core';
 import {
   FormsModule,
   ReactiveFormsModule
@@ -32,7 +32,8 @@ import {
   CMSService,
   PublicService,
   AnalyticsService,
-  BpiService
+  BpiService,
+  ErrorService
 } from './_services';
 
 import {
@@ -99,6 +100,9 @@ import { BpiRegistrationComponent } from './join/mepn/bpi-registration.component
 import { ProfileComponent } from './profile/profile.component';
 import {CloudinaryModule} from '@cloudinary/ng';
 import { OnlineStatusModule } from 'ngx-online-status';
+
+import { AirbrakeErrorHandler } from './_services/airbrake-error-handler';
+//import { UtilitiesModule } from './shared/utilities.module';
 
 
 // AoT requires an exported function for factories
@@ -212,7 +216,9 @@ export function appInitializerFactory(translate: TranslateService) {
       useFactory: appInitializerFactory,
       deps: [TranslateService],
       multi: true
-    }
+    },
+    [{provide: ErrorHandler, useClass: AirbrakeErrorHandler}],
+    ErrorService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationService, MemberService } from '../_services';
+import { AuthenticationService, ErrorService, MemberService } from '../_services';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -32,12 +32,12 @@ export class SigninComponent implements OnInit {
     private activeRoute: ActivatedRoute,
     private config: AppConfig,
     private router: Router,
+    private error: ErrorService
   ) {  }
 
   ngOnInit() {
 
     this.brandName = this.config.brand.name;
-
     // Check url params
     this.activeRoute.queryParams.subscribe(params => {
       // console.log('Url params', params);
@@ -84,13 +84,25 @@ export class SigninComponent implements OnInit {
           if (authResult && authResult['token']) {
             this.authService.setAuthSession(authResult['member'], authResult['token'], this.dbOffline);
           } else {
+            // do we need to generate an error here?
             console.log('Auth Failed');
+            this.error.handleError('failedToSetSession', 'Unable to set authorisation session!');
           }
         },
         error: error => {
-          console.log(`Auth Error: ${error}`);
+          console.log('Auth Error', error);
           this.isSubmitting = false;
-          this.openSnackBar(this.translate.instant('SIGNIN.errorUserUnauthorised'));
+          if (error.status === 401) {
+            this.openSnackBar(this.translate.instant('SIGNIN.errorUserUnauthorised'));
+          } else {
+            // if the server does not respond, we'll get an error status of 0
+            if (error.status === 0) {
+              this.error.handleError('noServerResponse', error);
+            } else {
+              // all other errors will be in effect unknown server errors
+              this.error.handleError('invalidServerResponse', error);
+            }
+          }
 
         }
       });
@@ -110,12 +122,16 @@ export class SigninComponent implements OnInit {
               this.openSnackBar(this.translate.instant('SIGNIN.newPwdSent'));
               this.pwdReset = false;
             } else {
-              this.openSnackBar(this.translate.instant('SIGNIN.errorEmailUnknown'));
+              // it seems this could be any error here, not just Email Unknown? So this should probably be:
+              // having said that it probably would make better sense if we sent something with more info from the back end!
+              this.error.handleError('failedToSendRecoveryEmail', data['error']);
+              // this.openSnackBar(this.translate.instant('SIGNIN.errorEmailUnknown'));
             }
           },
           error: error => {
             console.log(JSON.stringify(error));
-            this.openSnackBar(error);
+            // this.openSnackBar(error);
+            this.error.handleError('failedToSendRecoveryEmail', error);
           }
         });
   }
