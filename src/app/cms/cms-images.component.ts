@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Restaurant } from '../_models';
 import { CmsLocalService } from './cms-local.service';
 import { CMSService } from '../_services';
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { CmsImageDialogComponent } from './cms-image-dialog.component';
 import { CmsFileUploadComponent } from './cms-file-upload.component';
 import { ConfirmCancelComponent, HelpService, LoadService } from '../common';

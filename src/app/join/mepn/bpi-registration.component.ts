@@ -5,7 +5,7 @@ import {TranslateService} from '@ngx-translate/core';
 import {BpiService, MemberService} from '../../_services';
 import {ConfirmCancelComponent, LoadService} from '../../common';
 import {StorageService} from '../../_services/storage.service';
-import {MatLegacyDialog as MatDialog} from '@angular/material/legacy-dialog';
+import {MatDialog} from '@angular/material/dialog';
 import { lastValueFrom } from 'rxjs';
 
 @Component({

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CMSService, RestaurantService } from '../_services';
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { ConfirmCancelComponent, HelpService, LoadService } from '../common';
 import { TranslateService } from '@ngx-translate/core';
 import { Restaurant } from '../_models';
@@ -8,7 +8,7 @@ import { AppConfig } from '../app.config';
 import { HeaderService } from '../common/header.service';
 import { MarketplaceService } from './marketplace.service';
 import { insertAnimation } from '../shared/animations';
-import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-rc-marketplace',

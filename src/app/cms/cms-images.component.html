@@ -22,25 +22,22 @@
       <div
         class="rc-image-card"
         (click)="viewImage(image)">
-      <mat-chip-list class="rc-element-tag">
-        <mat-chip
+      <mat-chip-listbox class="rc-element-tag">
+        <mat-chip-option
           class="rc-default"
-          selected="true"
           *ngIf="image['cms_element_default']">
           {{ 'CMS.IMAGES.tagDefault' | translate }}
-        </mat-chip>
-        <mat-chip
+        </mat-chip-option>
+        <mat-chip-option
           class="rc-online"
-          selected="true"
           *ngIf="image['cms_element_active']">
           {{ 'CMS.IMAGES.tagActive' | translate }}
-        </mat-chip>
-        <mat-chip
-          selected="false"
+        </mat-chip-option>
+        <mat-chip-option
           *ngIf="!image['cms_element_active']">
           {{ 'CMS.IMAGES.tagOffline' | translate }}
-        </mat-chip>
-      </mat-chip-list>
+        </mat-chip-option>
+      </mat-chip-listbox>
       <div>
         <advanced-image
                 class="img-gallery"

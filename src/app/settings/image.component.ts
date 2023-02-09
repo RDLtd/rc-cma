@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, NgZone, Inject } from '@angular/core';
 import { Member } from '../_models';
 import { AnalyticsService, MemberService } from '../_services';
-import { MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA } from '@angular/material/legacy-dialog';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FileUploader, FileUploaderOptions, ParsedResponseHeaders } from 'ng2-file-upload';
 import { AppConfig } from '../app.config';
 import { ImageService } from '../_services/image.service';

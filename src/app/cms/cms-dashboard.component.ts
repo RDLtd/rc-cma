@@ -11,7 +11,7 @@ import {
   RestaurantService,
   AnalyticsService
 } from '../_services';
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { CmsPreviewComponent } from './cms-preview.component';
 import { Router } from '@angular/router';
 import { RestaurantDetailComponent } from './restaurant-detail.component';

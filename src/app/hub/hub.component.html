@@ -38,7 +38,7 @@
 
       </div>
 
-      <mat-card class="rc-card-service" (click)="launchFeature(service)">
+      <mat-card appearance="outlined" class="rc-card-service" (click)="launchFeature(service)">
         <img src="assets/images/icons/{{service.service_logo_path}}.svg" alt="App Icon">
         <h2>{{ service.service_name | uppercase }}</h2>
         <p>{{ service.service_description }}</p>

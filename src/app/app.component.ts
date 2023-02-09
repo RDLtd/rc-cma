@@ -4,8 +4,8 @@ import { AuthenticationService } from './_services';
 import { HttpClient } from '@angular/common/http';
 import { AppConfig } from './app.config';
 import { NavigationEnd, Router } from '@angular/router';
-import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
 import { OnlineStatusService, OnlineStatusType } from 'ngx-online-status';
 
 @Component({
