@@ -1382,17 +1382,10 @@ ul.rc-lookup-results {
   right: 8px;
 }
 .rc-card-title-img-wrapper {
-  .mat-mdc-card-image img {
-    height: 240px;
-    width: inherit;
-    object-fit: cover;
-  }
-  .placeholder {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 240px;
+  img {
+    max-height: 320px;
     width: 100%;
+    object-fit: cover;
   }
 }
 .rc-cms-social {
@@ -1654,65 +1647,37 @@ button.rc-member-assc {
 }
 
 .rc-content-status {
-  padding-bottom: 24px;
-  /* TODO(mdc-migration): The following rule targets internal classes of list that may no longer apply for the MDC version.*/
-  /* TODO(mdc-migration): The following rule targets internal classes of list that may no longer apply for the MDC version.*/
-  mat-list-item {
-    cursor: pointer;
-    /* TODO(mdc-migration): The following rule targets internal classes of list that may no longer apply for the MDC version.*/
-    .mat-list-item-content { padding: 4px 0 !important;}
-    h3 { transition: color .3s ease; }
-    &:hover {
-      h3 { color: $rc-theme-primary; }
-    }
+
+  .mat-mdc-list-item {
+    cursor: pointer !important;
+    margin-bottom: 1rem;
+    &:hover { color: $rc-theme-primary; }
   }
-  mat-icon { background-color: $rc-charcoal; }
-  /* TODO(mdc-migration): The following rule targets internal classes of progress-bar that may no longer apply for the MDC version.*/
-  .mat-progress-bar-fill {
-    &:after { background-color:  $rc-theme-tertiary; }
+  .mat-icon {
+    color: $rc-charcoal;
   }
-  /* TODO(mdc-migration): The following rule targets internal classes of progress-bar that may no longer apply for the MDC version.*/
-  .mat-progress-bar-fill {
-    &:after { background-color: $rc-theme-success; }
-  }
+  .mdc-linear-progress__bar-inner { border-color: $rc-theme-success; }
+  .mdc-linear-progress__buffer-bar { background-color: #eee; }
   .rc-content-status-complete {
-    mat-icon { background-color: $rc-theme-success; }
-    /* TODO(mdc-migration): The following rule targets internal classes of progress-bar that may no longer apply for the MDC version.*/
-    .mat-progress-bar-fill {
-      &:after { background-color: $rc-theme-success; }
-    }
+    .mat-icon { color: $rc-theme-success; }
+    .mdc-linear-progress__bar-inner { border-color: $rc-theme-success;}
   }
   .rc-content-status-partial {
-    mat-icon { background-color: $rc-theme-tertiary; }
-    /* TODO(mdc-migration): The following rule targets internal classes of progress-bar that may no longer apply for the MDC version.*/
-    .mat-progress-bar-fill {
-      &:after { background-color:  $rc-theme-tertiary; }
-    }
+    .mat-icon { color: $rc-theme-tertiary; }
+    .mdc-linear-progress__bar-inner { border-color: $rc-theme-tertiary;}
   }
   .rc-content-status-missing {
-    mat-icon { background-color: black; }
-    /* TODO(mdc-migration): The following rule targets internal classes of progress-bar that may no longer apply for the MDC version.*/
-    .mat-progress-bar-fill {
-      &:after { background-color:  $rc-theme-tertiary; }
-    }
+    .mat-icon { color: black; }
+    .mdc-linear-progress__bar-inner { border-color:  $rc-theme-tertiary; }
   }
 
-  mat-icon {
-    padding: 8px !important;
-    color: white;
-    background-color: black;
-  }
   .mat-mdc-progress-bar {
-    height: 6px;
-    margin-top: 6px !important;
+    margin-top: .5rem !important;
   }
-  /* TODO(mdc-migration): The following rule targets internal classes of progress-bar that may no longer apply for the MDC version.*/
-  .mat-progress-bar-buffer { background-color: #ddd; }
-  p[matLine] > span {
-    margin-top: 4px;
+  .matLineStatus {
     font-size: 11px;
     text-transform: uppercase;
-    text-align: right;
+    float: right;
   }
 }
 .rc-cms-times {
