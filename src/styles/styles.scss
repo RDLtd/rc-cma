@@ -346,7 +346,7 @@ a.mat-mdc-menu-item {text-decoration: none;}
 }
 .rc-content-container {
   max-width: $rc-max-width;
-  margin: 1rem auto;
+  margin: 1.5rem auto;
 }
 
 
@@ -1746,7 +1746,7 @@ button.rc-member-assc {
 */
 .rc-cms-menus {
   margin: 0 auto;
-  padding-block: 24px;
+  padding-block: 1.5rem;
   max-width: $rc-max-width;
   display: grid;
   gap: 1rem

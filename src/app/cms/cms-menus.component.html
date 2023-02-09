@@ -18,15 +18,13 @@
       </span>
     </mat-toolbar>
     <div class="rc-content-panel">
-      <mat-form-field
-              class="rc-full-width">
-        <mat-label>{{ 'CMS.MENUS.labelMenuGenInfo' | translate: { max: menuOverviewLength } }}</mat-label>
+      <mat-form-field class="rc-full-width" appearance="outline">
         <textarea
                 #overview
                 matInput
-                matTextareaAutosize
-                matAutosizeMinRows="3"
-                matAutosizeMaxRows="5"
+                placeholder="{{ 'CMS.MENUS.labelMenuGenInfo' | translate: { max: menuOverviewLength } }}"
+                cdkTextareaAutosize
+                cdkAutosizeMinRows="3"
                 name="cms_description_menus_overview"
                 maxlength="{{ menuOverviewLength }}"
                 (keyup)="setChanged()"
