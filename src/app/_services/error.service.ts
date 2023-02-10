@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AppConfig } from '../app.config';
 import { Notifier } from '@airbrake/browser';
-import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({

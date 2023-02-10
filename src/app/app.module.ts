@@ -217,7 +217,6 @@ export function appInitializerFactory(translate: TranslateService) {
       deps: [TranslateService],
       multi: true
     },
-    [{provide: ErrorHandler, useClass: AirbrakeErrorHandler}],
     ErrorService
   ],
   bootstrap: [AppComponent]

@@ -9,9 +9,7 @@
   </div>
 
   <div class="rc-layout-split-right">
-
     <div class="rc-layout-split-content">
-
     <!-- Password Reset -->
     <section class="rc-signin-form" *ngIf="pwdReset">
       <form
@@ -19,16 +17,13 @@
         (ngSubmit)="frmReset.form.valid && resetPwd(frmReset.value)"
         novalidate>
         <span class="rc-warn" *ngIf="errorMsg">{{ errorMsg | uppercase }}!</span>
-
         <h1>{{ 'SIGNIN.resetPwdHeader' | translate }}</h1>
         <span>
           {{ 'SIGNIN._or' | translate }}
-          <a (click)="showPwdReset(false)">
-            {{ 'SIGNIN._signIn' | translate }}</a>
-        </span><br><br>
+          <a (click)="showPwdReset(false)">{{ 'SIGNIN._signIn' | translate }}</a>
+        </span>
+        <br><br>
         <p>{{ 'SIGNIN.resetPwdInstructions' | translate }}</p>
-
-
         <mat-form-field class="rc-full-width" hideRequiredMarker>
           <mat-label>{{ 'SIGNIN.labelEmail' | translate }}</mat-label>
           <input
@@ -58,7 +53,7 @@
         <span class="rc-warn" *ngIf="errorMsg">{{ errorMsg | uppercase }}!</span>
         <markdown ngpreservewhitespaces [data]="'SIGNIN.signInOrJoin' | translate: {route: '/join', brand:
         brandName }"></markdown><br>
-        <mat-form-field class="rc-full-width" hideRequiredMarker>
+        <mat-form-field class="rc-full-width" hideRequiredMarker >
           <mat-label>{{ 'SIGNIN.labelEmail' | translate }}</mat-label>
           <input
             #inputEmail
@@ -71,7 +66,7 @@
             autofocus>
           <mat-error *ngIf="!!inputEmail.value" class="rc-flex-end">{{ 'SIGNIN.emailInvalid' | translate }}</mat-error>
         </mat-form-field>
-        <mat-form-field class="rc-full-width" hideRequiredMarker>
+        <mat-form-field class="rc-full-width" hideRequiredMarker >
           <mat-label>{{ 'SIGNIN.labelPassword' | translate }}</mat-label>
           <input
             matInput
@@ -79,13 +74,12 @@
             ngModel
             [type]="hidePwd ? 'password' : 'text'"
             required>
-            <button type="button" mat-icon-button matSuffix (click)="hidePwd = !hidePwd">
+            <button type="button" mat-icon-button matIconSuffix (click)="hidePwd = !hidePwd">
               <mat-icon>{{ hidePwd ? 'visibility_off' : 'visibility'}}</mat-icon>
           </button>
         </mat-form-field>
         <a (click)="showPwdReset(true)">{{ 'SIGNIN.forgottenPwd' | translate }}</a>
-        <br>
-        <br>
+        <span class="v-space-1"></span>
         <button
           type="submit"
           mat-flat-button

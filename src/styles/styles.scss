@@ -45,6 +45,10 @@ $config: mat.define-typography-config();
   justify-content: space-between;
 }
 .rc-flex-end { justify-content: flex-end; text-align: right; float: right;}
+.v-space-1 {
+  display: block;
+  margin-bottom: 1rem;
+}
 
 
 
@@ -92,6 +96,7 @@ a.rc-back {
 .rc-txt-small {
   font-size: 14px !important;
   line-height: 1.4;
+  margin: 0;
 }
 
 .rc-mat-snack-warn,
