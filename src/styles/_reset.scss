@@ -43,18 +43,12 @@ hr { margin: 3em 0; }
     list-style: none;
   }
 }
+
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
   -webkit-box-shadow: 0 0 0 30px white inset !important;
-}
-
-.inputTransparent:-webkit-autofill,
-.inputTransparent:-webkit-autofill:hover,
-.inputTransparent:-webkit-autofill:focus,
-.inputTransparent:-webkit-autofill:active {
-  -webkit-box-shadow: 0 0 0 30px transparent inset !important;
   -webkit-transition-delay: 99999s;
 }
 

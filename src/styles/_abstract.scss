@@ -18,3 +18,10 @@ $breakpoints: (
     @content;
   }
 }
+// Create an auto repeating grid, the full width available
+// wrapping everytime we hit minimum specified cell width
+@mixin grid-responsive($minCellWidth) {
+  display: grid;
+  grid-template-columns: repeat( auto-fit, minmax($minCellWidth, 1fr));
+  gap: 1em;
+}
