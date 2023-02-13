@@ -40,6 +40,7 @@ export class AppConfig {
   public readonly upload_preset = 'nozxac7z';
   public readonly session_timeout = 60; // minutes
   public readonly session_countdown = 5; // minutes to check activity before timeout
+  public readonly useAirBrake = false;
 
   // public readonly use_ip_location = true;
   // public readonly geocoding_api = 'AIzaSyBN6LkgNpX8E8lpbHdlkJZ6SU5LILVHwMY';
@@ -62,7 +63,8 @@ export class AppConfig {
       spwDemoUrl: `https://example-restaurant.com/`,
       email: {
         support: `support@${this.tld.rc}`,
-        curation: `curation@${this.tld.rc}`
+        curation: `curation@${this.tld.rc}`,
+        tech: 'tech@restaurantdevelopments.ltd'
       },
       products: {
         success_url: `${ this.appUrl }/signin`,
@@ -86,7 +88,8 @@ export class AppConfig {
       spwDemoUrl: `https://example-restaurant.com/`,
       email: {
         support: `support@${this.tld.ri}`,
-        curation: `curation@${this.tld.ri}`
+        curation: `curation@${this.tld.ri}`,
+        tech: 'tech@restaurantdevelopments.ltd'
       },
       products: {
         success_url: `${ this.appUrl }/signin`,

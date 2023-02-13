@@ -114,7 +114,7 @@ export class SigninComponent implements OnInit {
   }
 
   resetPwd(formValue) {
-    this.memberService.sendrecoveryemail(formValue.email)
+    this.memberService.sendrecoveryemail(formValue.email + 'fred')
         .subscribe({
           next: data => {
             // console.log(data);
@@ -129,7 +129,7 @@ export class SigninComponent implements OnInit {
             }
           },
           error: error => {
-            console.log(JSON.stringify(error));
+            // console.log(JSON.stringify(error));
             // this.openSnackBar(error);
             this.error.handleError('failedToSendRecoveryEmail', error);
           }

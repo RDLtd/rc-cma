@@ -16,5 +16,6 @@ export class AirbrakeErrorHandler implements ErrorHandler {
   }
 
   handleError(error: any): void {
+    console.log('Error reported by Airbrake', error);
   }
 }

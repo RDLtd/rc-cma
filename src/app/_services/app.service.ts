@@ -30,6 +30,7 @@ export class AppService {
 
     // Send critical stuff to RC support only
     // regardless of locale
+    // NB this will not work, wrong field names in body...
     return this.http.post(this.config.apiUrl + '/members/sendemail',
       {
         companyName: 'RDL',
