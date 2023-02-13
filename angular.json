@@ -144,7 +144,9 @@
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "rc",
-      "style": "scss"
+      "style": "scss",
+      "inlineStyle": true,
+      "skipTests": true
     },
     "@schematics/angular:directive": {
       "prefix": "rc"
