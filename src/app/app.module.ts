@@ -5,7 +5,7 @@ import {
   FormsModule,
   ReactiveFormsModule
 } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { RouterModule, TitleStrategy } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   HttpClientModule,
@@ -102,6 +102,7 @@ import {CloudinaryModule} from '@cloudinary/ng';
 import { OnlineStatusModule } from 'ngx-online-status';
 
 import { AirbrakeErrorHandler } from './_services/airbrake-error-handler';
+import { AppTitleStrategy } from './app-title-strategy';
 //import { UtilitiesModule } from './shared/utilities.module';
 
 
@@ -211,6 +212,10 @@ export function appInitializerFactory(translate: TranslateService) {
     ConfirmCancelComponent,
     LoadService,
     CurrencyPipe,
+    {
+      provide: TitleStrategy,
+      useClass: AppTitleStrategy
+    },
     {
       provide: APP_INITIALIZER,
       useFactory: appInitializerFactory,

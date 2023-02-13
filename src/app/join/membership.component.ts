@@ -10,6 +10,7 @@ import { CurrencyPipe } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ConfirmCancelComponent } from '../common';
 import { MatDialog } from '@angular/material/dialog';
+import { lastValueFrom } from 'rxjs';
 
 export interface Product {
   id: string;
@@ -83,8 +84,7 @@ export class MembershipComponent implements OnInit {
   }
 
   async getProducts() {
-    await this.memberService.getProductsMaxRestaurants(1)
-      .toPromise()
+    await lastValueFrom(this.memberService.getProductsMaxRestaurants(1))
       .then(res => {
         this.products = res['products'];
         console.log(this.products);

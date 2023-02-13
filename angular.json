@@ -150,6 +150,9 @@
     },
     "@schematics/angular:directive": {
       "prefix": "rc"
+    },
+    "@schematics/angular:service": {
+      "skipTests": true
     }
   }
 }

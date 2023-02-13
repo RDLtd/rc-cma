@@ -36,9 +36,9 @@ import {BpiRegistrationComponent} from './join/mepn/bpi-registration.component';
 import {ProfileComponent} from './profile/profile.component';
 
 const APP_ROUTES: Routes = [
-  { path: '', component: SigninComponent },
-  { path: 'join/:code', component: JoinComponent },
-  { path: 'join', component: JoinComponent },
+  { path: '', component: SigninComponent, title: 'Sign in' },
+  { path: 'join/:code', component: JoinComponent, title: 'Join' },
+  { path: 'join', component: JoinComponent, title: 'Join' },
 
   { path: 'mise-en-place-numerique', component: BpiRegistrationComponent },
   { path: 'mise-en-place-numerique/:code', component: BpiRegistrationComponent },
@@ -47,8 +47,8 @@ const APP_ROUTES: Routes = [
   { path: 'mepn', component: BpiRegistrationComponent },
 
   { path: 'membership-options', component: MembershipComponent },
-  { path: 'login', component: SigninComponent },
-  { path: 'signin', component: SigninComponent },
+  { path: 'login', component: SigninComponent, title: 'Sign in' },
+  { path: 'signin', component: SigninComponent, title: 'Sign in' },
   { path: 'hub',
     component: HubComponent,
     canActivate: [AuthGuard]
@@ -59,6 +59,7 @@ const APP_ROUTES: Routes = [
   // },
   { path: 'marketplace',
     component: MarketplaceComponent,
+    title: 'Marketplace',
     canActivate: [AuthGuard]
   },
 
@@ -66,6 +67,7 @@ const APP_ROUTES: Routes = [
 
   { path: 'settings',
     component: SettingsComponent,
+    title: 'Settings',
     canActivate: [AuthGuard]
   },
   { path: 'profile',
@@ -74,45 +76,54 @@ const APP_ROUTES: Routes = [
   },
   { path: 'cms/:id',
     component: CmsComponent,
+    title: 'CMS',
     canActivate: [AuthGuard],
     children: [
 
       { path: 'dashboard',
         component: CmsDashboardComponent,
+        title: 'CMS Dashboard',
         canActivate: [AuthGuard] },
 
       { path: 'images',
         component: CmsImagesComponent,
+        title: 'Images',
         canActivate: [AuthGuard] },
 
       { path: 'opening-times',
         component: CmsHoursComponent,
         canActivate: [AuthGuard],
+        title: 'Opening Times',
         canDeactivate: [CanDeactivateGuard] },
 
       { path: 'location',
         component: CmsLocationComponent,
+        title: 'Location Map',
         canActivate: [AuthGuard],
         canDeactivate: [CanDeactivateGuard] },
 
       { path: 'menus',
         component: CmsMenusComponent,
+        title: 'Sample Menus',
         canActivate: [AuthGuard],
         canDeactivate: [CanDeactivateGuard]
       },
 
       { path: 'reservations',
         component: CmsReservationsComponent,
+        title: 'Reservations',
         canActivate: [AuthGuard],
         canDeactivate: [CanDeactivateGuard]},
 
       { path: 'features',
         component: CmsFeaturesComponent,
+        title: 'Descriptions & Features',
         canActivate: [AuthGuard],
         canDeactivate: [CanDeactivateGuard] },
 
       { path: 'preview',
         component: CmsPreviewComponent,
+        title: 'SPW Preview',
         canActivate: [AuthGuard] },
 
       { path: '**',
