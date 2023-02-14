@@ -1143,6 +1143,9 @@ form.rc-form-grid {
     }
   }
 }
+.imgBackdrop {
+  background-color: rgba(#000, .9);
+}
 .rc-dialog-help {
   h2 {
     color: $rc-theme-accent;
@@ -1205,6 +1208,7 @@ form.rc-form-grid {
 .rc-dialog-cms-image-upload {
   width: 68vw;
   max-width: 480px;
+  h1 { font-size: 1.5rem;}
   label {
     font-size: 16px;
   }
@@ -1737,6 +1741,7 @@ button.rc-member-assc {
 .rc-content-panel {
   padding: 16px;
   background-color: white;
+  img { display: inline-block; }
 }
 
 .sample-dishes {
@@ -2001,7 +2006,7 @@ button.rc-member-assc {
 }
 
 .rd-grid-auto {
-  margin: 1rem;
+  padding-block: 1rem;
   @include grid-responsive(360px);
 }
 

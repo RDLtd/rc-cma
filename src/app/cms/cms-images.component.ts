@@ -117,8 +117,9 @@ export class CmsImagesComponent implements OnInit {
         image: img,
         clImgPath: img.cms_element_image_ref,
         cmsImages: this.cmsImages,
-        restaurant: this.restaurant
-      }
+        restaurant: this.restaurant,
+      },
+      backdropClass: 'imgBackdrop'
     });
   }
 
