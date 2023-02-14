@@ -1186,11 +1186,14 @@ form.rc-form-grid {
 }
 .rc-dialog-cms-image {
   width: 68vw;
-  header { display: flex; }
-  .image-wrapper {
-    position: relative;
-    padding: 0 16px 0;
+  header {
+    display: flex;
+    align-items: center;
+    h1 {
+      font-size: 1.4rem;
+    }
   }
+  .image-wrapper { position: relative; display: block; border: 1px solid red;}
 }
 .rc-dialog-cms-image-upload {
   width: 68vw;
