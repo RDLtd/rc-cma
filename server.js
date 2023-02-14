@@ -3,8 +3,6 @@ const app = express();
 const path = require('path');
 const compression = require('compression');
 
-console.log('Fred');
-
 // Run the app by serving the static files
 // in the dist directory
 app.use(express.static(__dirname + '/dist'));
