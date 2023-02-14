@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
-import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { MessageComponent, Message, LoadService, ConfirmCancelComponent } from '../common';
 import { Router } from '@angular/router';
 import { HeaderService } from '../common/header.service';
@@ -10,7 +10,7 @@ import { RestaurantLookupComponent } from '../settings';
 import { TranslateService } from '@ngx-translate/core';
 import { HubService } from './hub.service';
 import { insertAnimation } from '../shared/animations';
-import {firstValueFrom, lastValueFrom} from 'rxjs';
+import { lastValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-rc-hub',
@@ -68,17 +68,10 @@ export class HubComponent implements AfterViewInit {
   async getMessages() {
 
     // Todo: test this toPromise replacement code
-    const newMessages = await lastValueFrom(this.memberService.messages(this.member.member_id, this.member.member_access_level, this.member.member_messages_seen))
-    console.log('New', newMessages);
-
-    await this.memberService
-      .messages(this.member.member_id, this.member.member_access_level, this.member.member_messages_seen)
-      .toPromise()
-      .then(m => {
-        this.messages = m['messages'];
-        this.dspMessages();
-        console.log('Old', m);
-      });
+    const newMessages = await lastValueFrom(this.memberService.messages(this.member.member_id, this.member.member_access_level, this.member.member_messages_seen));
+    console.log('New messages', newMessages['messages'].length);
+    this.messages = newMessages['messages'];
+    this.dspMessages();
   }
 
   dspMessages(): void {

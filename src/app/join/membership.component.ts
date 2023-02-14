@@ -117,8 +117,7 @@ export class MembershipComponent implements OnInit {
 
   // Create Stripe Session
   async createCheckoutSession(options) {
-    return this.http.post(`${this.config.apiUrl}/payments/create-session`, options)
-      .toPromise()
+    return lastValueFrom(this.http.post(`${this.config.apiUrl}/payments/create-session`, options))
       .catch(reason => {
         console.log('FAILED', reason);
         // don't show error as this is handled locally

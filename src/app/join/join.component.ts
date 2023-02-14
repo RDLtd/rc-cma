@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ConfirmCancelComponent, LoadService } from '../common';
 import { AppConfig } from '../app.config';
 import { fadeAnimation } from '../shared/animations';
+import { lastValueFrom } from 'rxjs';
 
 
 export interface PendingMember {
@@ -133,14 +134,13 @@ export class JoinComponent implements OnInit {
     if (!!data.first_name) {
       console.log('savePending', data);
       sessionStorage.setItem('rc_member_pending', JSON.stringify(data));
-      this.memberService.createPending(data)
-        .toPromise()
-        .then(res => console.log(`Saved Pending = ${res}`))
+      const pendingRecord = lastValueFrom(this.memberService.createPending(data))
         .catch(err => {
           console.log(err);
           // the user does not need to see this error!
           this.error.handleError('', 'Unable to save pending data! ' + err);
         });
+      console.log(`Saved Pending = ${pendingRecord}`);
     }
   }
 

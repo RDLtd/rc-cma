@@ -1,6 +1,6 @@
 
 import { BrowserModule } from '@angular/platform-browser';
-import {APP_INITIALIZER, ErrorHandler, NgModule} from '@angular/core';
+import {APP_INITIALIZER, NgModule} from '@angular/core';
 import {
   FormsModule,
   ReactiveFormsModule
@@ -100,11 +100,8 @@ import { BpiRegistrationComponent } from './join/mepn/bpi-registration.component
 import { ProfileComponent } from './profile/profile.component';
 import {CloudinaryModule} from '@cloudinary/ng';
 import { OnlineStatusModule } from 'ngx-online-status';
-
-import { AirbrakeErrorHandler } from './_services/airbrake-error-handler';
 import { AppTitleStrategy } from './app-title-strategy';
-//import { UtilitiesModule } from './shared/utilities.module';
-
+import { lastValueFrom } from 'rxjs';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -123,7 +120,7 @@ export function appInitializerFactory(translate: TranslateService) {
     // If the user language is not supported, default to en
     if (!languages.includes(lang)) { lang = 'en'; }
     translate.setDefaultLang(lang);
-    return translate.use(lang).toPromise();
+    return lastValueFrom(translate.use(lang));
   };
 }
 

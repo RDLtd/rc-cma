@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { AppConfig } from '../app.config';
 import { Member } from '../_models';
 import { AppService } from './app.service';
+import { lastValueFrom } from 'rxjs';
 
 @Injectable()
 
@@ -409,12 +410,12 @@ export class MemberService {
   }
 
   async getReferral(referralCode: string) {
-      const data = await this.http.post(this.config.apiUrl + '/members/getpromo',
+      const data = await lastValueFrom(this.http.post(this.config.apiUrl + '/members/getpromo',
       {
         promo_code: referralCode,
         userCode: this.config.userAPICode,
         token: this.authToken
-      }).toPromise();
+      }));
       // return promo actions
       return data['promos'];
   }
@@ -455,14 +456,13 @@ export class MemberService {
   }
 
   async createFreeMembership(formData) {
-    return this.http.post(`${this.config.apiUrl}/payments/register-free-member`, {
+    return lastValueFrom(this.http.post(`${this.config.apiUrl}/payments/register-free-member`, {
       pending: formData,
       launch_number: 0,
       company: this.config.brand.prefix,
       userCode: this.config.userAPICode,
       token: this.authToken
-    })
-      .toPromise()
+    }))
       .catch( err => {
         console.log(err, 'Error creating free membership');
       });
@@ -470,14 +470,14 @@ export class MemberService {
 
   async preFlight(formData: any) {
     // console.log(formData);
-    return await this.http.post(`${this.config.apiUrl}/members/preflight`, {
+    return await lastValueFrom(this.http.post(`${this.config.apiUrl}/members/preflight`, {
       administrator: {
         member_email: formData.email,
         member_telephone: formData.telephone
       },
       userCode: this.config.userAPICode,
       token: this.authToken
-    }).toPromise();
+    }));
   }
 
   getAllPending() {
