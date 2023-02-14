@@ -37,7 +37,7 @@ export class SettingsComponent implements OnInit {
   member: Member;
   lang: string;
 
-  defaultImages: Array<any> = [];
+  defaultImages: Array<CloudinaryImage> = [];
   showRestaurantFinder = true;
   d_member_signedup: string;
   restProd: any;

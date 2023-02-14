@@ -73,7 +73,7 @@
                     [routerLink]="['/cms', restaurant.restaurant_id]">
 
               <advanced-image
-                      *ngIf="defaultImages[i] !== null"
+                      *ngIf="!!defaultImages[i]"
                       class="rc-managed-restaurant-image"
                       width="400px"
                       height="600px"
