@@ -224,4 +224,3 @@ export function appInitializerFactory(translate: TranslateService) {
   bootstrap: [AppComponent]
 })
 export class AppModule { }
-
