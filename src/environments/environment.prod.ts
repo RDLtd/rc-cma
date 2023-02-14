@@ -7,5 +7,9 @@ export const environment = {
     'pk_live_51IiLuvFvEMJjooglF2wr0sl7S1B0hltom6GweN7Mce5o8qrUG2bibXa2lPzg99oTToe6IkWNhLnXtgJJHQ4WIFFS00lCsNM7eY',
   // MozRest
   MOZ_ID: '63369f8510c9314ae7d0bb7b',
-  MOZ_APIKEY: '35193e7566f8901ab14c4e495411202bee55a877db5ac746e36146b5a6ff3887502dfc0548f3bb9d'
+  MOZ_APIKEY: '35193e7566f8901ab14c4e495411202bee55a877db5ac746e36146b5a6ff3887502dfc0548f3bb9d',
+  // Cloudinary
+  cloudinary_name: 'rdl',
+  cloudinary_APIkey: '713165672947878',
+  cloudinary_APISecret: 'EhLM0NhD7HvJDjX5IvF90u6guq8'
 };

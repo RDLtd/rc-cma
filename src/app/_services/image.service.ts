@@ -1,4 +1,4 @@
-import { environment as env } from '../../environments/environment';
+import { environment } from '../../environments/environment';
 import { Injectable, OnInit } from '@angular/core';
 import { Cloudinary, CloudinaryImage } from '@cloudinary/url-gen';
 // Cloudinary plugins
@@ -17,15 +17,15 @@ export class ImageService implements OnInit {
   constructor() {
     this.cld = new Cloudinary({
       cloud: {
-        cloudName: env.cloudinary_name,
-        apiKey: env.cloudinary_APIkey,
-        apiSecret: env.cloudinary_APISecret
+        cloudName: environment.cloudinary_name,
+        apiKey: environment.cloudinary_APIkey,
+        apiSecret: environment.cloudinary_APISecret
       },
       url: {
         secure: true
       }
     });
-    this.cldUpload = `https://api.cloudinary.com/v1_1/${env.cloudinary_name}/upload`;
+    this.cldUpload = `https://api.cloudinary.com/v1_1/${environment.cloudinary_name}/upload`;
   }
 
   ngOnInit() {
