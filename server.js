@@ -3,6 +3,8 @@ const app = express();
 const path = require('path');
 const compression = require('compression');
 
+console.log('Fred');
+
 // Run the app by serving the static files
 // in the dist directory
 app.use(express.static(__dirname + '/dist'));
@@ -15,7 +17,9 @@ app.get('/*', function(req, res) {
 
 // Start the app by listening on the default
 // Heroku port
-app.listen(process.env.PORT || 8080);
+app.listen(process.env.PORT || 3000, function(){
+  console.log("Node app is running at localhost:" + app.get('port'));
+});
 
 // If an incoming request uses
 // a protocol other than HTTPS,
