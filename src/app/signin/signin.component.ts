@@ -103,7 +103,6 @@ export class SigninComponent implements OnInit {
               this.error.handleError('invalidServerResponse', error);
             }
           }
-
         }
       });
   }
@@ -114,7 +113,7 @@ export class SigninComponent implements OnInit {
   }
 
   resetPwd(formValue) {
-    this.memberService.sendrecoveryemail(formValue.email + 'fred')
+    this.memberService.sendrecoveryemail(formValue.email)
         .subscribe({
           next: data => {
             // console.log(data);

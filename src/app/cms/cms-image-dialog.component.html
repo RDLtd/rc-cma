@@ -1,6 +1,6 @@
 
 <div class="rc-dialog rc-dialog-cms-image">
-  <mat-dialog-content>
+
   <header>
     <h1 style="margin: 0;">{{ image.cms_element_title | uppercase }}</h1>
     <span class="rc-space-filler"></span>
@@ -15,7 +15,7 @@
       <mat-icon>close</mat-icon>
     </button>
   </header>
-  </mat-dialog-content>
+
   <mat-menu #menu="matMenu">
 
     <button mat-menu-item (click)="toggleImageStatus(image)" [disabled]="image.cms_element_default == 1">
@@ -37,16 +37,14 @@
 
   </mat-menu>
 
-  <mat-dialog-content>
+
+
     <div class="image-wrapper">
-    <mat-chip-listbox class="rc-element-tag">
-      <mat-chip-option class="rc-default" *ngIf="image.cms_element_default">{{ 'CMS.IMAGES.tagDefault'
-        | translate }}</mat-chip-option>
-      <mat-chip-option class="rc-online" *ngIf="image.cms_element_active">{{ 'CMS.IMAGES.tagActive' |
-        translate }}</mat-chip-option>
-      <mat-chip-option
-                *ngIf="!image.cms_element_active">{{ 'CMS.IMAGES.tagOffline' | translate }}</mat-chip-option>
-    </mat-chip-listbox>
+    <mat-chip-grid class="rc-element-tag">
+      <mat-chip class="rc-default" *ngIf="image.cms_element_default">{{ 'CMS.IMAGES.tagDefault' | translate }}</mat-chip>
+      <mat-chip class="rc-online" *ngIf="image.cms_element_active">{{ 'CMS.IMAGES.tagActive' | translate }}</mat-chip>
+      <mat-chip *ngIf="!image.cms_element_active">{{ 'CMS.IMAGES.tagOffline' | translate }}</mat-chip>
+    </mat-chip-grid>
 
     <advanced-image
       height="100%"
@@ -55,5 +53,6 @@
       [plugins]="">
     </advanced-image>
     </div>
-  </mat-dialog-content>
+
+
 </div>

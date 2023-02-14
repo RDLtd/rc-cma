@@ -1185,15 +1185,22 @@ form.rc-form-grid {
   }
 }
 .rc-dialog-cms-image {
-  width: 68vw;
+  //width: 68vw;
   header {
     display: flex;
     align-items: center;
-    h1 {
-      font-size: 1.4rem;
+    padding: 16px;
+    h1 { font-size: 1.4rem; }
+  }
+  .image-wrapper {
+    position: relative;
+    img {
+      object-fit: cover;
+      // border: 1px solid red;
+      max-height: 68vh;
+      width: 100%;
     }
   }
-  .image-wrapper { position: relative; display: block; border: 1px solid red;}
 }
 .rc-dialog-cms-image-upload {
   width: 68vw;
