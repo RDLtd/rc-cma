@@ -5,7 +5,8 @@
   "angular-cli": {},
   "scripts": {
     "ng": "ng",
-    "start": "npm run cert & ng serve",
+    "start": "ng serve",
+    "ssl": "npm run cert & ng serve",
     "cert": "mkdir -p ./tls & mkcert -cert-file ./tls/localhost-cert.pem -key-file ./tls/localhost-key.pem -ecdsa localhost 127.0.0.1 ::1",
     "test": "ng test",
     "pree2e": "webdriver-manager update --standalone false --gecko false",
