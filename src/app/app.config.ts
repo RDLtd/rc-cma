@@ -42,11 +42,6 @@ export class AppConfig {
   public readonly session_countdown = 5; // minutes to check activity before timeout
   public readonly useAirBrake = false;
 
-  // public readonly use_ip_location = true;
-  // public readonly geocoding_api = 'AIzaSyBN6LkgNpX8E8lpbHdlkJZ6SU5LILVHwMY';
-  // public readonly mailchimp_listid = '941da1d48e';
-  // public readonly mailchimp_listname = 'RC3';
-
   // Root domains
   tld = {
     rc: 'restaurantcollective.org.uk',
