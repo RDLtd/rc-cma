@@ -306,7 +306,9 @@
     "failedToCreateFreeMember": "We were unable to create your free account at this time. Please try again in a few moments. Our support team have been notified.",
     "failedToUpdateRestaurantEmail": "We were unable to update the email for your restaurant at this time. Please try again in a few moments. Our support team have been notified.",
     "failedToSendVerificationEmail": "We were unable send your verification email at this time. Please try again in a few moments. Our support team have been notified.",
-    "failedToLoadAssociatedRestaurants": "We were unable load your associated restaurants at this time. Please try again in a few moments. Our support team have been notified."
+    "failedToLoadAssociatedRestaurants": "We were unable load your associated restaurants at this time. Please try again in a few moments. Our support team have been notified.",
+    "unableToLookupRestaurants": "We are unable look for restaurants at this time. Please try again in a few moments. Our support team have been notified.",
+    "unableToAddAssociation": "We were unable to associate your restaurant at this time. Please try again in a few moments. Our support team have been notified."
   },
 	"Global": {
 		"DOW-Dimanche": "Sunday",

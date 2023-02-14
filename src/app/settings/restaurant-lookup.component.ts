@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { Restaurant } from '../_models';
-import { RestaurantService, CMSService } from '../_services';
+import { RestaurantService, CMSService, ErrorService } from '../_services';
 import { AppConfig } from '../app.config';
 import { VerificationComponent } from './verification.component';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
@@ -31,6 +31,7 @@ export class RestaurantLookupComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private   translate: TranslateService,
     private   snackBar: MatSnackBar,
+    private error: ErrorService,
     public dialogRef: MatDialogRef<RestaurantLookupComponent>
   ) { }
 
@@ -70,6 +71,7 @@ export class RestaurantLookupComponent implements OnInit {
           },
           error: error => {
             console.log(error);
+            this.error.handleError('unableToLookupRestaurants', 'Failed to get restaurant data in restaurant-lookup! ' + error);
           }
         });
     } else {
@@ -178,6 +180,7 @@ export class RestaurantLookupComponent implements OnInit {
           },
           error: error => {
             console.log(error);
+            this.error.handleError('unableToAddAssociation', 'Failed to add association in restaurant-lookup! ' + error);
           }
         });
 
@@ -220,7 +223,10 @@ export class RestaurantLookupComponent implements OnInit {
               next: () => {
                 console.log('Flagged for immediate curation');
               },
-              error: error => console.log(error)
+              error: error => {
+                console.log(error);
+                this.error.handleError('', 'Failed to send curation request! ' + req + ', ' + error);
+              }
             });
           this.dialog.closeAll();
         }
