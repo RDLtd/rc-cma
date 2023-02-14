@@ -40,11 +40,11 @@
 
 
     <div class="image-wrapper">
-    <mat-chip-grid class="rc-element-tag">
+    <mat-chip-listbox class="rc-element-tag">
       <mat-chip class="rc-default" *ngIf="image.cms_element_default">{{ 'CMS.IMAGES.tagDefault' | translate }}</mat-chip>
       <mat-chip class="rc-online" *ngIf="image.cms_element_active">{{ 'CMS.IMAGES.tagActive' | translate }}</mat-chip>
       <mat-chip *ngIf="!image.cms_element_active">{{ 'CMS.IMAGES.tagOffline' | translate }}</mat-chip>
-    </mat-chip-grid>
+    </mat-chip-listbox>
 
     <advanced-image
       height="100%"
