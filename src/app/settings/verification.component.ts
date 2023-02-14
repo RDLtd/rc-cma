@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject, ViewChild, ElementRef } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { CMSService, MemberService, RestaurantService } from '../_services';
+import { CMSService, ErrorService, MemberService, RestaurantService } from '../_services';
 import { CmsLocalService } from '../cms';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -26,6 +26,7 @@ export class VerificationComponent implements OnInit {
     private memberService: MemberService,
     private dialog: MatDialog,
     private translate: TranslateService,
+    private error: ErrorService,
     public profileVerifyDialog: MatDialogRef<VerificationComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
@@ -93,6 +94,7 @@ export class VerificationComponent implements OnInit {
           this.notifyCuration();
         },
         error: error => {
+          this.error.handleError('failedToUpdateRestaurantEmail', 'Unable to update restaurant email! ' + error);
           console.log(error);
         }
       });
@@ -135,6 +137,7 @@ export class VerificationComponent implements OnInit {
             10);
       },
       error: error => {
+        this.error.handleError('failedToSendVerificationEmail', 'Unable to send verification email! ' + error);
         console.log(error);
       }
     });
@@ -165,6 +168,15 @@ export class VerificationComponent implements OnInit {
       ` - **NEW EMAIL**: ${d.restaurant.restaurant_email}\n\n` +
       `## Please review these changes A.S.A.P.`;
 
-    this.memberService.sendEmailRequest( 'curation', 'support', 'Change Review', msg).subscribe(res => console.log(res));
+    this.memberService.sendEmailRequest( 'curation', 'support', 'Change Review', msg).subscribe({
+      next: (res) => {
+        console.log(res);
+      },
+      error: error => {
+        // user does not need to see this one...
+        this.error.handleError('', 'Unable to send curation email! ' + msg + ', ' + error);
+        console.log(error);
+      }
+    });
   }
 }

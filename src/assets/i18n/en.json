@@ -303,7 +303,9 @@
     "invalidServerResponse": "Our server returned an error, so we are unable to log you in at this time. Please try again in a few moments. Our support team have been notified.",
     "failedToSetSession": "We were unable to store some cookies in your browser, so we are unable to log you in at this time. Please try again in a few moments. Our support team have been notified.",
     "failedToSendRecoveryEmail": "We were unable to send your password recovery email. Please contact out support team for further assistance, they have been notified.",
-    "failedToCreateFreeMember": "We were unable to create your free account at this time. Please try again in a few moments. Our support team have been notified."
+    "failedToCreateFreeMember": "We were unable to create your free account at this time. Please try again in a few moments. Our support team have been notified.",
+    "failedToUpdateRestaurantEmail": "We were unable to update the email for your restaurant at this time. Please try again in a few moments. Our support team have been notified.",
+    "failedToSendVerificationEmail": "We were unable send your verification email at this time. Please try again in a few moments. Our support team have been notified."
   },
 	"Global": {
 		"DOW-Dimanche": "Sunday",
