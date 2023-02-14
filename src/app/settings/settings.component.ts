@@ -4,7 +4,7 @@ import {
   RestaurantService,
   MemberService,
   CMSService,
-  AnalyticsService
+  AnalyticsService, ErrorService
 } from '../_services';
 import { MatDialog } from '@angular/material/dialog';
 import { PasswordComponent } from './password.component';
@@ -67,6 +67,7 @@ export class SettingsComponent implements OnInit {
     private loadService: LoadService,
     private currencyPipe: CurrencyPipe,
     private imgService: ImageService,
+    private error: ErrorService,
     public dialog: MatDialog) {
 
     this.loadService.open();
@@ -105,28 +106,40 @@ export class SettingsComponent implements OnInit {
       this.clImage = this.imgService.getCldImage(this.member.member_image_path);
       // console.log(this.clImage);
     }
-
-
   }
 
   setProducts(): void {
     // Any pending invoices
     if (!this.isFreeMembership) {
-      this.memberService.getUpcomingInvoice(this.member.member_customer_id).subscribe(data => {
-        // create renewal date obj.
-        this.productRenewalDate = new Date(data['invoice']['period_end'] * 1000);
-      });
+      this.memberService.getUpcomingInvoice(this.member.member_customer_id)
+        .subscribe({
+          next: data => {
+            // create renewal date obj.
+            this.productRenewalDate = new Date(data['invoice']['period_end'] * 1000);
+          },
+          error: error => {
+            console.log(error);
+            this.error.handleError('', 'Failed to get upcoming invoice in settings component! ' + error);
+          }
+        });
     }
 
-    this.memberService.getProducts().subscribe(obj => {
-      this.products = obj['products'];
-      // Set current product
-      // *** If it's an old registration, use product[0] to keep things working
-      // console.log('Products loaded', this.products);
-      // Find & store the current Member product
-      this.currentProduct =
-        this.products.find(p => p.product_stripe_id === this.member.member_product_id) || this.products[0];
-    });
+    this.memberService.getProducts()
+      .subscribe({
+        next: obj => {
+          this.products = obj['products'];
+          // Set current product
+          // *** If it's an old registration, use product[0] to keep things working
+          // console.log('Products loaded', this.products);
+          // Find & store the current Member product
+          this.currentProduct =
+            this.products.find(p => p.product_stripe_id === this.member.member_product_id) || this.products[0];
+        },
+        error: error => {
+          console.log(error);
+          this.error.handleError('', 'Failed to get products in settings component! ' + error);
+        }
+      });
   }
 
   getAssociatedRestaurants(id): void {
@@ -156,6 +169,7 @@ export class SettingsComponent implements OnInit {
         },
         error: error => {
           console.log(error);
+          this.error.handleError('failedToLoadAssociatedRestaurants', 'Failed to load associated restaurants! ' + error);
           this.loadService.close();
         }
       });
@@ -253,6 +267,8 @@ export class SettingsComponent implements OnInit {
             },
             error: error => {
               console.log(error);
+              // no need to show user
+              this.error.handleError('', 'Failed to send curation request email! ' + bodyContent + ', ' + error);
               this.showRestaurantFinder = false;
             }
           });
@@ -289,6 +305,7 @@ export class SettingsComponent implements OnInit {
         },
         error: error => {
           console.log(error);
+          this.error.handleError('', 'Failed to create restaurant subscription! ' + error);
           this.loadService.close();
         }
       });
@@ -315,6 +332,7 @@ export class SettingsComponent implements OnInit {
         },
         error: error => {
           console.log(error);
+          this.error.handleError('', 'Failed to update restaurant subscription! ' + error);
           this.loadService.close();
         }
       });
@@ -351,6 +369,7 @@ export class SettingsComponent implements OnInit {
               this.ga.sendEvent('Profile', 'Edit', 'Remove Association');
             },
             error: error => {
+              this.error.handleError('', 'Failed to remove restaurant subscription! ' + error);
               console.log(error);
             }
           });
@@ -368,6 +387,7 @@ export class SettingsComponent implements OnInit {
         },
         error: error => {
           console.log(error);
+          this.error.handleError('', 'Failed to remove restaurant! ' + error);
           this.loadService.close();
         }
       });
@@ -403,10 +423,14 @@ export class SettingsComponent implements OnInit {
                 },
                 error: error => {
                   console.log('accessCustomerPortal error', error);
+                  this.error.handleError('', 'Unable to access stripe customer portal for member id ' +
+                    this.member.member_id + '! ' + error);
                 }
               });
         },
         error: error => {
+          this.error.handleError('', 'Failed to get stripe customer number for member id ' +
+            this.member.member_id + '! ' + error);
           console.log('getStripeCustomerNumber error', error);
         }
       });
@@ -449,6 +473,8 @@ export class SettingsComponent implements OnInit {
         },
         error: error => {
           console.log(error);
+          this.error.handleError('', 'Failed to update member settings for member id ' +
+            this.member.member_id + '! ' + error);
           this.openSnackBar(this.translate.instant('SETTINGS.msgUpdateFailed'));
         }
       });
@@ -477,7 +503,6 @@ export class SettingsComponent implements OnInit {
           this.clImage = null;
           localStorage.removeItem('rd_avatar');
           this.header.updateAvatar(null);
-
 
         } else {
 
@@ -514,6 +539,8 @@ export class SettingsComponent implements OnInit {
           },
           error: error => {
             console.log(error);
+            this.error.handleError('', 'Failed to get default images for restaurant id ' +
+              this.restaurants[i].restaurant_id + '! ' + error);
           }
         });
     }
