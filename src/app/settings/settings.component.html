@@ -128,7 +128,7 @@
         <mat-card-content>
           <ul class="rc-line-items">
             <li><label>{{ 'SETTINGS.labelReferralCode' | translate }}:</label>
-              <a [href]="getReferralCode()">{{
+              <a [href]="getReferralCode()" target="_blank">{{
                 member?.member_promo_code | uppercase }}</a>
             </li>
           </ul>
