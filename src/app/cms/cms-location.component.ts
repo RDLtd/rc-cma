@@ -27,9 +27,6 @@ export class CmsLocationComponent implements OnInit {
   transportPublicLength: Number = 500;
   transportPrivateLength: Number = 500;
 
-  // Map
-  mapWidth: '100%';
-  mapHeight: '480px';
   // defaults
   mapOptions: google.maps.MapOptions = {
     scrollwheel: false,
@@ -64,20 +61,22 @@ export class CmsLocationComponent implements OnInit {
 
     // Subscribe to service
     this.cmsLocalService.getRestaurant()
-      .subscribe(data => {
-        if (data.restaurant_id) {
-          this.restaurant = data;
-          this.mapLat = this.latMarker = Number(data.restaurant_lat);
-          this.mapLng = this.lngMarker = Number(data.restaurant_lng);
-          this.mapOptions.center = { lat: this.mapLat, lng: this.mapLng };
-          this.markerPosition = { lat: this.latMarker, lng: this.lngMarker };
-          this.markerOptions.title = this.restaurant.restaurant_name;
-          this.markerOptions.position = this.markerPosition;
-          this.getDirectionFile();
-          this.getCmsData(this.restaurant.restaurant_id);
-        }
+      .subscribe({
+        next: data => {
+          if (data.restaurant_id) {
+            this.restaurant = data;
+            this.mapLat = this.latMarker = Number(data.restaurant_lat);
+            this.mapLng = this.lngMarker = Number(data.restaurant_lng);
+            this.mapOptions.center = {lat: this.mapLat, lng: this.mapLng};
+            this.markerPosition = {lat: this.latMarker, lng: this.lngMarker};
+            this.markerOptions.title = this.restaurant.restaurant_name;
+            this.markerOptions.position = this.markerPosition;
+            this.getDirectionFile();
+            this.getCmsData(this.restaurant.restaurant_id);
+          }
         },
-        error => console.log(error));
+        error: error => console.log(error)
+      });
   }
 
   updateRestaurantMarker(): void {
@@ -90,10 +89,9 @@ export class CmsLocationComponent implements OnInit {
 
   getCmsData(restaurant_id) {
     this.cms.getDescriptions(restaurant_id)
-      .subscribe(
-        data => {
+      .subscribe({
+        next: data => {
           this.directions_copy = this.descriptions = data['descriptions'][0];
-
           // update 041118 - fudge to fix back end returning (or something returning) 'undefined'
           if (this.descriptions.cms_description_car_parking === 'undefined') {
             this.descriptions.cms_description_car_parking = '';
@@ -103,12 +101,13 @@ export class CmsLocationComponent implements OnInit {
           }
           this.dataChanged = false;
         },
-        error => {
+        error: error => {
           console.log(error);
-        });
+        }
+    });
   }
 
-  // called by deactivation.guard
+  // this IS called by deactivation.guard
   public confirmNavigation() {
     if (this.dataChanged) {
       return this.cmsLocalService.confirmNavigation();
@@ -133,43 +132,46 @@ export class CmsLocationComponent implements OnInit {
     this.lngMarker = this.restaurant.restaurant_lng;
 
     this.cms.updateCoordinates(this.restaurant.restaurant_id, this.restaurant.restaurant_lat,
-      this.restaurant.restaurant_lng).subscribe(
-      () => {
-        this.cmsLocalService.dspSnackbar(this.translate.instant(
-          'CMS.LOCATION.msgNewCoords',
-          { lat: this.restaurant.restaurant_lat, lng: this.restaurant.restaurant_lng }),
-          null, 3);
-        this.dataChanged = false;
-      },
-      error => {
-        console.log(JSON.stringify(error));
-        this.cmsLocalService.dspSnackbar(this.translate.instant('CMS.LOCATION.msgUpdateFailed'), null, 3);
-        this.resetMapData();
-        this.dataChanged = false;
-      });
+      this.restaurant.restaurant_lng)
+        .subscribe({
+          next: () => {
+            this.cmsLocalService.dspSnackbar(this.translate.instant(
+                    'CMS.LOCATION.msgNewCoords',
+                    {lat: this.restaurant.restaurant_lat, lng: this.restaurant.restaurant_lng}),
+                null, 3);
+            this.dataChanged = false;
+          },
+          error: error => {
+            console.log(JSON.stringify(error));
+            this.cmsLocalService.dspSnackbar(this.translate.instant('CMS.LOCATION.msgUpdateFailed'), null, 3);
+            this.resetMapData();
+            this.dataChanged = false;
+          }
+        });
 
-    this.cms.updateLastCreatedField(Number(this.restaurant.restaurant_id), 'location').subscribe(
-      () => {},
-      error => {
-        console.log('error in updatelastupdatedfield for location', error);
-      });
+    this.cms.updateLastCreatedField(Number(this.restaurant.restaurant_id), 'location')
+        .subscribe({
+          next: () => {},
+          error: error => console.log('error in updatelastupdatedfield for location', error)
+        });
 
   }
 
   getDirectionFile(): void {
     this.cms.getElementClass(this.restaurant.restaurant_id, 'Directions', 'N')
-      .subscribe(
-      data => {
-        if (data['elements'].length > 0) {
-          this.directions = data['elements'][0];
-          console.log(this.directions);
-          this.fileLoaded = true;
-        } else {
-          this.fileLoaded = false;
+      .subscribe({
+        next: (data: any) => {
+          if (data['elements'].length > 0) {
+            this.directions = data['elements'][0];
+            console.log(this.directions);
+            this.fileLoaded = true;
+          } else {
+            this.fileLoaded = false;
+          }
+        },
+        error: (error: Error) => {
+          console.log(JSON.stringify(error));
         }
-      },
-      error => {
-        console.log(JSON.stringify(error));
       });
   }
 
@@ -190,10 +192,10 @@ export class CmsLocationComponent implements OnInit {
     // Reload directions
     dialogRef.afterClosed().subscribe(() => this.getDirectionFile());
 
-    this.cms.updateLastCreatedField(Number(this.restaurant.restaurant_id), 'location').subscribe(
-      () => {},
-      () => {
-        console.log('error in updatelastupdatedfield for location');
+    this.cms.updateLastCreatedField(Number(this.restaurant.restaurant_id), 'location')
+        .subscribe({
+          next: () => {},
+          error: (error: Error) => { console.log(error)}
       });
 
     dialogRef.componentInstance.dialog = dialogRef;
@@ -208,33 +210,43 @@ export class CmsLocationComponent implements OnInit {
         confirm: 'delete'
       }
     });
+
     dialogRef.afterClosed()
       .subscribe( confirmed => {
         if (confirmed) {
           this.cms.deleteElement(this.directions.cms_element_id)
-            .subscribe(res => {
-              this.getDirectionFile();
-            }, error => console.log(error));
+            .subscribe({
+              next: () => {
+                this.getDirectionFile();
+              },
+              error: error => {
+                console.log(error);
+              }
+            });
         }
       });
   }
 
   updateTransport(): void {
     // call API
-    this.cms.updateDescription(this.descriptions).subscribe(
-      () => {
+    this.cms.updateDescription(this.descriptions).subscribe({
+      next: () => {
         this.dataChanged = false;
         this.cmsLocalService.dspSnackbar(this.translate.instant('CMS.LOCATION.msgTransportUpdated'), null, 5);
       },
-      error => {
+      error: error => {
         console.log('Error', error);
-      });
+      }
+    });
 
-    this.cms.updateLastCreatedField(Number(this.restaurant.restaurant_id), 'location').subscribe(
-      () => {},
-      () => {
-        console.log('error in updatelastupdatedfield for location');
-      });
+    this.cms.updateLastCreatedField(Number(this.restaurant.restaurant_id), 'location')
+        .subscribe({
+          next: () => {
+          },
+          error: () => {
+            console.log('error in updatelastupdatedfield for location');
+          }
+        });
   }
 
   setChanged(elem) {

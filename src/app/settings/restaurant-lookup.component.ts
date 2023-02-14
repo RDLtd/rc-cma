@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { Restaurant } from '../_models';
-import { RestaurantService, CMSService } from '../_services';
+import { RestaurantService, CMSService, ErrorService } from '../_services';
 import { AppConfig } from '../app.config';
 import { VerificationComponent } from './verification.component';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
@@ -31,6 +31,7 @@ export class RestaurantLookupComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private   translate: TranslateService,
     private   snackBar: MatSnackBar,
+    private error: ErrorService,
     public dialogRef: MatDialogRef<RestaurantLookupComponent>
   ) { }
 
@@ -57,8 +58,8 @@ export class RestaurantLookupComponent implements OnInit {
     if (str.trim()) {
 
       this.restaurantService.getSubset(this.sql_parameters)
-        .subscribe(
-          data => {
+        .subscribe({
+          next: data => {
             // console.log({data});
             this.restaurants = data['restaurants'];
             if (!this.restaurants.length) {
@@ -68,9 +69,11 @@ export class RestaurantLookupComponent implements OnInit {
               this.dspNewListingForm = false;
             }
           },
-          error => {
+          error: error => {
             console.log(error);
-          });
+            this.error.handleError('unableToLookupRestaurants', 'Failed to get restaurant data in restaurant-lookup! ' + error);
+          }
+        });
     } else {
       this.restaurants = null;
       this.noSearchResults = false;
@@ -153,30 +156,33 @@ export class RestaurantLookupComponent implements OnInit {
     console.log('New Restaurant:', newRestaurant);
 
     const curationComplete = (newRestaurant.restaurant_data_status === 'Curation Complete');
-    this.restaurantService.addAssociation(this.data.member.member_id, newRestaurant.restaurant_id).subscribe(
-      () => {
-        // Verify email contact details
-        if (!newRestaurant.restaurant_email.trim().length) {
-          console.log(`No Email: ${ newRestaurant.restaurant_email}`);
-        }
-        this.data.associatedRestaurants.push(newRestaurant);
+    this.restaurantService.addAssociation(this.data.member.member_id, newRestaurant.restaurant_id)
+        .subscribe({
+          next: () => {
+            // Verify email contact details
+            if (!newRestaurant.restaurant_email.trim().length) {
+              console.log(`No Email: ${newRestaurant.restaurant_email}`);
+            }
+            this.data.associatedRestaurants.push(newRestaurant);
 
-        // TODO: Is this still required?
-        // If the new restaurant is not already a member
-        // if (newRestaurant.restaurant_rc_member_status !== 'Full'
-        //   && newRestaurant.restaurant_rc_member_status !== 'Associate') {
-        //   this.restaurantService.updateMemberStatus(newRestaurant.restaurant_id, 'Associate').subscribe(
-        //     () => {
-        //       console.log('Member status updated to Associate');
-        //     },
-        //     error => {
-        //       console.log('Member status update failed (' + error + ')');
-        //     });
-        // }
-      },
-      error => {
-        console.log(error);
-      });
+            // TODO: Is this still required?
+            // If the new restaurant is not already a member
+            // if (newRestaurant.restaurant_rc_member_status !== 'Full'
+            //   && newRestaurant.restaurant_rc_member_status !== 'Associate') {
+            //   this.restaurantService.updateMemberStatus(newRestaurant.restaurant_id, 'Associate').subscribe(
+            //     () => {
+            //       console.log('Member status updated to Associate');
+            //     },
+            //     error => {
+            //       console.log('Member status update failed (' + error + ')');
+            //     });
+            // }
+          },
+          error: error => {
+            console.log(error);
+            this.error.handleError('unableToAddAssociation', 'Failed to add association in restaurant-lookup! ' + error);
+          }
+        });
 
     if (curationComplete) {
 
@@ -213,10 +219,15 @@ export class RestaurantLookupComponent implements OnInit {
           console.log(req);
 
           this.cms.sendRestaurantValidation(this.data.member, newRestaurant, req)
-            .subscribe(() => {
-              console.log('Flagged for immediate curation');
+            .subscribe({
+              next: () => {
+                console.log('Flagged for immediate curation');
               },
-              error => console.log(error));
+              error: error => {
+                console.log(error);
+                this.error.handleError('', 'Failed to send curation request! ' + req + ', ' + error);
+              }
+            });
           this.dialog.closeAll();
         }
       });

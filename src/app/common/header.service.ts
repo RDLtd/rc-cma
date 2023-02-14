@@ -13,7 +13,7 @@ export class HeaderService {
   // Add a delay to avoid the 'update after change detection error'
   sectionName = this.sectionNameSubject.asObservable().pipe(delay(0));
 
-  avatarSubject = new BehaviorSubject('');
+  avatarSubject = new BehaviorSubject(null);
   currentAvatar = this.avatarSubject.asObservable();
 
   lang: string;
@@ -26,7 +26,7 @@ export class HeaderService {
     this.sectionNameSubject.next(str);
   }
 
-  updateAvatar(url: string) {
+  updateAvatar(url: any) {
     this.avatarSubject.next(url);
   }
 

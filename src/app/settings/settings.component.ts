@@ -4,7 +4,7 @@ import {
   RestaurantService,
   MemberService,
   CMSService,
-  AnalyticsService
+  AnalyticsService, ErrorService
 } from '../_services';
 import { MatDialog } from '@angular/material/dialog';
 import { PasswordComponent } from './password.component';
@@ -20,6 +20,8 @@ import { CmsLocalService } from '../cms';
 import { LoadService, ConfirmCancelComponent, HelpService } from '../common';
 import { HeaderService } from '../common/header.service';
 import { CurrencyPipe } from '@angular/common';
+import {ImageService} from '../_services/image.service';
+import {CloudinaryImage} from '@cloudinary/url-gen';
 
 
 @Component({
@@ -35,13 +37,8 @@ export class SettingsComponent implements OnInit {
   member: Member;
   lang: string;
 
-  defaultImages: Array<any> = [];
-  imgRestPlaceholderUrl;
-  isDemoMember = false;
-  showLoader = false;
-  referrer: any;
+  defaultImages: Array<CloudinaryImage> = [];
   showRestaurantFinder = true;
-  clPublicId: string;
   d_member_signedup: string;
   restProd: any;
   cachedRestaurantsLength = null;
@@ -51,6 +48,9 @@ export class SettingsComponent implements OnInit {
   currentProduct: any;
   isFreeMembership = false;
   freeMembershipExpiry = '';
+
+  clImage: CloudinaryImage;
+  clPlugins: any[];
 
   constructor(
     private header: HeaderService,
@@ -66,30 +66,30 @@ export class SettingsComponent implements OnInit {
     public appConfig: AppConfig,
     private loadService: LoadService,
     private currencyPipe: CurrencyPipe,
+    private imgService: ImageService,
+    private error: ErrorService,
     public dialog: MatDialog) {
 
     this.loadService.open();
     this.lang = localStorage.getItem('rd_language');
     this.member = JSON.parse(localStorage.getItem('rd_profile'));
     moment.locale(this.lang);
-    console.log(this.member);
-
+    this.clPlugins = this.imgService.cldBasePlugins;
   }
 
   ngOnInit() {
 
     // Update header label
     this.header.updateSectionName(this.translate.instant('HUB.sectionSettings'));
-    // Add restaurant placeholder
-    this.imgRestPlaceholderUrl =
-      `https://via.placeholder.com/360x240?text=${this.translate.instant('SETTINGS.labelAwaitingImage')}`;
+
     this.setMember();
     this.setProducts();
     this.getAssociatedRestaurants(this.member.member_id);
   }
 
   setMember(): void {
-    console.log(this.member);
+    console.log('USER', this.member);
+
     // Is it a founder or BJT introduction
     this.isFreeMembership = this.member.member_membership_type === 'Free';
     if (!!this.member.member_free_expiry) {
@@ -102,36 +102,51 @@ export class SettingsComponent implements OnInit {
     }
     this.d_member_signedup = moment(this.member.member_signedup).format('DD MMMM YYYY');
     // Get Cloudinary img path
-    this.clPublicId = this.getMemberClPublicId(this.member.member_image_path);
+    if(this.member.member_image_path !== null){
+      this.clImage = this.imgService.getCldImage(this.member.member_image_path);
+      // console.log(this.clImage);
+    }
   }
 
   setProducts(): void {
     // Any pending invoices
     if (!this.isFreeMembership) {
-      this.memberService.getUpcomingInvoice(this.member.member_customer_id).subscribe(data => {
-        // create renewal date obj.
-        this.productRenewalDate = new Date(data['invoice']['period_end'] * 1000);
-      });
+      this.memberService.getUpcomingInvoice(this.member.member_customer_id)
+        .subscribe({
+          next: data => {
+            // create renewal date obj.
+            this.productRenewalDate = new Date(data['invoice']['period_end'] * 1000);
+          },
+          error: error => {
+            console.log(error);
+            this.error.handleError('', 'Failed to get upcoming invoice in settings component! ' + error);
+          }
+        });
     }
 
-    this.memberService.getProducts().subscribe(obj => {
-      this.products = obj['products'];
-      // Set current product
-      // *** If it's an old registration, use product[0] to keep things working
-      console.log('Products loaded', this.products);
-      // Find & store the current Member product
-      this.currentProduct =
-        this.products.find(p => p.product_stripe_id === this.member.member_product_id) || this.products[0];
-      console.log('Current product', this.currentProduct);
-    });
+    this.memberService.getProducts()
+      .subscribe({
+        next: obj => {
+          this.products = obj['products'];
+          // Set current product
+          // *** If it's an old registration, use product[0] to keep things working
+          // console.log('Products loaded', this.products);
+          // Find & store the current Member product
+          this.currentProduct =
+            this.products.find(p => p.product_stripe_id === this.member.member_product_id) || this.products[0];
+        },
+        error: error => {
+          console.log(error);
+          this.error.handleError('', 'Failed to get products in settings component! ' + error);
+        }
+      });
   }
 
   getAssociatedRestaurants(id): void {
-    console.log('cachedRestaurantsLength = ', this.cachedRestaurantsLength);
 
     this.restaurantService.getMemberRestaurants(id)
-      .subscribe(
-        data => {
+      .subscribe({
+        next: data => {
           this.restaurants = data['restaurants'];
           if (this.restaurants.length) {
             this.getDefaultImages();
@@ -152,10 +167,12 @@ export class SettingsComponent implements OnInit {
           }
           this.loadService.close();
         },
-        error => {
+        error: error => {
           console.log(error);
+          this.error.handleError('failedToLoadAssociatedRestaurants', 'Failed to load associated restaurants! ' + error);
           this.loadService.close();
-        });
+        }
+      });
   }
 
   checkAllowance(): void {
@@ -243,15 +260,18 @@ export class SettingsComponent implements OnInit {
           'support',
           'New Restaurant',
           bodyContent)
-          .subscribe(() => {
+          .subscribe({
+            next: () => {
               this.cmsLocalService.dspSnackbar(this.translate.instant('SETTINGS.msgNewRequestReceived'), 'OK', 20, 'info');
               this.showRestaurantFinder = false;
             },
-            error => {
+            error: error => {
               console.log(error);
+              // no need to show user
+              this.error.handleError('', 'Failed to send curation request email! ' + bodyContent + ', ' + error);
               this.showRestaurantFinder = false;
             }
-          );
+          });
       } else {
         // All good
         this.showRestaurantFinder = false;
@@ -266,7 +286,7 @@ export class SettingsComponent implements OnInit {
 
     // If this is the first additional restaurant
     // i.e. it's the 2nd restaurant that's been associated
-    // we need to create the subscription
+    // then we need to create the subscription
     if (this.restaurants.length === 2) {
       this.loadService.open('Create Restaurant Subscription');
       this.memberService.createRestaurantSubscription(
@@ -275,17 +295,20 @@ export class SettingsComponent implements OnInit {
         this.restProd.product_stripe_price_id,
         this.restProd.product_tax_id,
         1
-      ).subscribe(res => {
-        console.log(res);
-        // Now update member's subscription id
-        this.member.member_subscription_id = res['subscription_id'];
-        localStorage.setItem('rd_profile', JSON.stringify(this.member));
-        this.loadService.close();
-      },
-        error => {
-          console.log(error);
+      ).subscribe({
+        next: res => {
+          console.log(res);
+          // Now update member's subscription id
+          this.member.member_subscription_id = res['subscription_id'];
+          localStorage.setItem('rd_profile', JSON.stringify(this.member));
           this.loadService.close();
-        });
+        },
+        error: error => {
+          console.log(error);
+          this.error.handleError('', 'Failed to create restaurant subscription! ' + error);
+          this.loadService.close();
+        }
+      });
     } else {
       // update subscription charge
       this.updateRestaurantSubscription(this.restaurants.length - 1);
@@ -302,19 +325,21 @@ export class SettingsComponent implements OnInit {
       this.restProd.product_tax_id,
       qty
     )
-      .subscribe(res => {
+      .subscribe({
+        next: res => {
           console.log(res);
           this.loadService.close();
         },
-        error => {
+        error: error => {
           console.log(error);
+          this.error.handleError('', 'Failed to update restaurant subscription! ' + error);
           this.loadService.close();
         }
-      );
+      });
   }
 
-  removeAssociation(index): void {
-
+  removeAssociation(event, index): void {
+    event.stopPropagation();
     const rest = this.restaurants[index];
     const dialogRef = this.dialog.open(ConfirmCancelComponent, {
       data: {
@@ -335,17 +360,19 @@ export class SettingsComponent implements OnInit {
         }
 
         this.restaurantService.removeAssociation(rest['association_id'])
-          .subscribe(
-            () => {
+          .subscribe({
+            next: () => {
               this.restaurants.splice(index, 1);
               this.defaultImages.splice(index, 1);
-              this.openSnackBar(this.translate.instant('SETTINGS.msgRestaurantRemoved', { name: rest.restaurant_name }), 'OK');
+              this.openSnackBar(this.translate.instant('SETTINGS.msgRestaurantRemoved', {name: rest.restaurant_name}), 'OK');
               // record event
               this.ga.sendEvent('Profile', 'Edit', 'Remove Association');
             },
-            error => {
+            error: error => {
+              this.error.handleError('', 'Failed to remove restaurant subscription! ' + error);
               console.log(error);
-            });
+            }
+          });
       }
     });
   }
@@ -353,15 +380,17 @@ export class SettingsComponent implements OnInit {
   deleteRestaurantSubscription(): void {
     this.loadService.open('Removing Restaurant');
     this.memberService.deleteRestaurantSubscription( this.member.member_subscription_id)
-      .subscribe(res => {
+      .subscribe({
+        next: res => {
           console.log(res);
           this.loadService.close();
         },
-        error => {
+        error: error => {
           console.log(error);
+          this.error.handleError('', 'Failed to remove restaurant! ' + error);
           this.loadService.close();
         }
-      );
+      });
   }
 
   viewMemberPlans(): void {
@@ -380,25 +409,31 @@ export class SettingsComponent implements OnInit {
   managePayments(): void {
     // First get the stripe customer number for this member from the database
     this.memberService.getStripeCustomerNumber(this.member.member_id)
-      .subscribe( (customer) => {
+      .subscribe({
+        next: (customer) => {
           console.log(customer);
           // need to send stripe back to this window
           // @ts-ignore
           this.memberService.accessCustomerPortal(customer.customer_number, window.location.href)
-            .subscribe( (data) => {
-                // console.log('accessed CustomerPortal OK', data);
-                // @ts-ignore
-                window.open(data.url, '_self');
-              },
-              error => {
-                console.log('accessCustomerPortal error', error);
-              }
-            );
+              .subscribe({
+                next: (data) => {
+                  // console.log('accessed CustomerPortal OK', data);
+                  // @ts-ignore
+                  window.open(data.url, '_self');
+                },
+                error: error => {
+                  console.log('accessCustomerPortal error', error);
+                  this.error.handleError('', 'Unable to access stripe customer portal for member id ' +
+                    this.member.member_id + '! ' + error);
+                }
+              });
         },
-        error => {
+        error: error => {
+          this.error.handleError('', 'Failed to get stripe customer number for member id ' +
+            this.member.member_id + '! ' + error);
           console.log('getStripeCustomerNumber error', error);
         }
-      );
+      });
   }
 
   updateMemberContacts(): void {
@@ -430,16 +465,19 @@ export class SettingsComponent implements OnInit {
     // console.log('update:', member);
     // update member
     this.memberService.update(member)
-      .subscribe(
-        () => {
+      .subscribe({
+        next: () => {
           localStorage.setItem('rd_profile', JSON.stringify(this.member));
           localStorage.setItem('rd_username', `${this.member.member_first_name} ${this.member.member_last_name}`);
           this.openSnackBar(this.translate.instant('SETTINGS.msgContactsUpdated'));
         },
-        error => {
+        error: error => {
           console.log(error);
+          this.error.handleError('', 'Failed to update member settings for member id ' +
+            this.member.member_id + '! ' + error);
           this.openSnackBar(this.translate.instant('SETTINGS.msgUpdateFailed'));
-        });
+        }
+      });
   }
 
   updatePassword (): void {
@@ -462,19 +500,18 @@ export class SettingsComponent implements OnInit {
         if (data.str === 'delete') {
 
           this.member.member_image_path = null;
-          this.clPublicId = null;
+          this.clImage = null;
           localStorage.removeItem('rd_avatar');
           this.header.updateAvatar(null);
-
 
         } else {
 
           const imgUrl = data.str;
           // Get cloudinary reference
-          this.clPublicId = this.getMemberClPublicId(imgUrl);
+          this.clImage = this.imgService.getCldImage(imgUrl);
           // update member local storage
           this.member.member_image_path = imgUrl;
-          localStorage.setItem('rd_avatar', this.clPublicId);
+          localStorage.setItem('rd_avatar', imgUrl);
           this.header.updateAvatar(data.str);
         }
         localStorage.setItem('rd_profile', JSON.stringify(this.member));
@@ -488,21 +525,24 @@ export class SettingsComponent implements OnInit {
   }
 
   getDefaultImages(): void {
-
+    // console.log(this.restaurants);
     const numberOfRestaurants = this.restaurants.length;
     for (let i = 0; i < numberOfRestaurants; i++) {
       this.cms.getElementClass(this.restaurants[i].restaurant_id, 'Image', 'Y')
-        .subscribe(
-          data => {
-            if (data['count'] > 0) {
-              this.defaultImages[i] = data['elements'][0].cms_element_image_path;
-            } else {
+        .subscribe({
+          next: data => {
+            if (data['elements'].length === 0) {
               this.defaultImages[i] = null;
+              return;
             }
+            this.defaultImages[i] = this.imgService.getCldImage(data['elements'][0].cms_element_image_path);
           },
-          error => {
+          error: error => {
             console.log(error);
-          });
+            this.error.handleError('', 'Failed to get default images for restaurant id ' +
+              this.restaurants[i].restaurant_id + '! ' + error);
+          }
+        });
     }
   }
 
@@ -541,29 +581,6 @@ export class SettingsComponent implements OnInit {
 
   copied(): void {
     this.openSnackBar(this.translate.instant('SETTINGS.msgLinkCopied'), 'OK');
-  }
-
-  getClPublicId(idx): string {
-
-    if (this.defaultImages[idx]) {
-      const a = this.defaultImages[idx].split('/');
-      return a.splice(a.length - 3).join('/');
-    } else {
-      return this.imgRestPlaceholderUrl;
-    }
-  }
-
-  getMemberClPublicId(url): string {
-
-    if (!!url && url !== 'null') {
-
-      const arr = url.split('/');
-      return arr.splice(arr.length - 3).join('/');
-
-    } else {
-      return null;
-    }
-
   }
 
   // Switch language

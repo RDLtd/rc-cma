@@ -9,10 +9,8 @@
     "moduleResolution": "node",
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
-    "target": "es5",
-    "types": [
-      "hammerjs"
-    ],
+    "target": "es2020",
+    "types": [],
     "typeRoots": [
       "./node_modules/@types"
     ],

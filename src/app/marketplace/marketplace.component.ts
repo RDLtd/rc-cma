@@ -22,7 +22,6 @@ export class MarketplaceComponent implements OnInit {
   expiry: Date = new Date('2022');
 
   restaurant: Restaurant;
-  affiliates: any ;
   categories = [];
   deals: Array<any>;
   favourites: Array<string> = [];
@@ -167,14 +166,15 @@ export class MarketplaceComponent implements OnInit {
       member_email: member.member_email,
       member_first_name: member.member_first_name,
       member_last_name: member.member_last_name
-    }).subscribe(
-      () => {
+    }).subscribe({
+      next: () => {
         console.log('Email sent to ' + deal.affiliate_name);
         this.sendAffiliateConfirmation(deal, member);
       },
-      error => {
+      error: error => {
         console.log('Affiliate email failed', error);
-      });
+      }
+    });
   }
 
   // Send confirmation
@@ -188,13 +188,14 @@ export class MarketplaceComponent implements OnInit {
       restaurant_name: null,
       restaurant_email: member.member_email,
       restaurant_number: member.member_id
-    }).subscribe(
-      () => {
+    }).subscribe({
+      next: () => {
         console.log('Offer confirmation from ' + deal.affiliate_name);
-        this.snackbar.open(this.translate.instant('MARKETPLACE.msgRequestSent'), null, { duration: 3000 });
+        this.snackbar.open(this.translate.instant('MARKETPLACE.msgRequestSent'), null, {duration: 3000});
       },
-      error => {
+      error: error => {
         console.log('Could not send offer confirmation', error);
-      });
+      }
+    });
   }
 }

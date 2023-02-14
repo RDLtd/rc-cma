@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject, ViewChild, ElementRef } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { CMSService, MemberService, RestaurantService } from '../_services';
+import { CMSService, ErrorService, MemberService, RestaurantService } from '../_services';
 import { CmsLocalService } from '../cms';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -26,6 +26,7 @@ export class VerificationComponent implements OnInit {
     private memberService: MemberService,
     private dialog: MatDialog,
     private translate: TranslateService,
+    private error: ErrorService,
     public profileVerifyDialog: MatDialogRef<VerificationComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
@@ -87,13 +88,16 @@ export class VerificationComponent implements OnInit {
   updateRestaurantEmail(notify: boolean) {
     // Update restaurant record first
     this.restaurantService.updateEmail(this.data.restaurant.restaurant_id, this.data.restaurant.restaurant_email)
-      .subscribe(res => {
+      .subscribe({
+        next: res => {
           console.log('Email updated', res);
           this.notifyCuration();
         },
-        error => {
+        error: error => {
+          this.error.handleError('failedToUpdateRestaurantEmail', 'Unable to update restaurant email! ' + error);
           console.log(error);
-        });
+        }
+      });
   }
 
   validateVerificationCode(profile_verify) {
@@ -125,17 +129,18 @@ export class VerificationComponent implements OnInit {
       r.restaurant_name,
       r.restaurant_number,
       r.restaurant_email,
-      userName)
-      .subscribe(
-      () => {
+      userName).subscribe({
+      next: () => {
         this.cmsLocalService.dspSnackbar(
-          this.translate.instant('VERIFY.msgCodeSent', { email: r.restaurant_email }),
-          'OK',
-          10);
+            this.translate.instant('VERIFY.msgCodeSent', {email: r.restaurant_email}),
+            'OK',
+            10);
       },
-      error => {
+      error: error => {
+        this.error.handleError('failedToSendVerificationEmail', 'Unable to send verification email! ' + error);
         console.log(error);
-      });
+      }
+    });
   }
 
   editEmail() {
@@ -163,6 +168,15 @@ export class VerificationComponent implements OnInit {
       ` - **NEW EMAIL**: ${d.restaurant.restaurant_email}\n\n` +
       `## Please review these changes A.S.A.P.`;
 
-    this.memberService.sendEmailRequest( 'curation', 'support', 'Change Review', msg).subscribe(res => console.log(res));
+    this.memberService.sendEmailRequest( 'curation', 'support', 'Change Review', msg).subscribe({
+      next: (res) => {
+        console.log(res);
+      },
+      error: error => {
+        // user does not need to see this one...
+        this.error.handleError('', 'Unable to send curation email! ' + msg + ', ' + error);
+        console.log(error);
+      }
+    });
   }
 }

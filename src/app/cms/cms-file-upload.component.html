@@ -1,25 +1,29 @@
+
 <div class="rc-dialog rc-dialog-cms-image-upload">
 
+  <mat-dialog-content>
   <div *ngIf="data.type === 'image'">
-    <h1 mat-dialog-title>
+    <h1>
       {{ 'CMS.UPLOAD.titleUploadImage' | translate }}
     </h1>
     <span>{{ 'CMS.UPLOAD.infoImages' | translate }}</span>
   </div>
   <div *ngIf="data.type === 'menu'">
-    <h1 mat-dialog-title>
+    <h1>
       {{ 'CMS.UPLOAD.titleUploadMenu' | translate }}
     </h1>
   </div>
+
   <div *ngIf="data.type === 'direction'">
-    <h1 mat-dialog-title>
+    <h1>
       {{ 'CMS.UPLOAD.titleUploadDirections' | translate }}
     </h1>
   </div>
 
   <p class="rc-warn" markdown [data]="uploadMessage | translate"></p>
 
-  <mat-dialog-content>
+
+
       <!-- IMAGE PREVIEW-->
       <div *ngIf="data.type === 'image'" class="rc-file-upload-preview">
         <img *ngIf="filePreview" [src]="filePreview" [alt]="">
@@ -117,7 +121,7 @@
     <!-- Cancel upload -->
     <button
       mat-button
-      mat-dialog-close>
+      mat-dialog-close="false">
       {{ 'CMS.UPLOAD.labelBtnCancel' | translate }}
     </button>
     <!-- Start ulpoad -->
@@ -133,3 +137,4 @@
 
 
 </div>
+

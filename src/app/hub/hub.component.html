@@ -1,53 +1,53 @@
 
 <div class="rc-hub">
-  <div class="mdc-layout-grid">
-    <div class="mdc-layout-grid__inner" [@insertAnimation]="services?.length">
-      <!-- Apps/Services -->
+
+  <div class="rc-grid" [@insertAnimation]="services?.length">
+    <!-- Apps/Services -->
+    <div
+      *ngFor="let service of services"
+      class="">
+
       <div
-        *ngFor="let service of services"
-        class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
+        class="rc-hub-cms"
+        *ngIf="service.service_route === 'cms'"
+        #menuTrigger="matMenuTrigger"
+        [matMenuTriggerFor]="menu">
 
-        <div
-          class="rc-hub-cms"
-          *ngIf="service.service_route === 'cms'"
-          #menuTrigger="matMenuTrigger"
-          [matMenuTriggerFor]="menu">
+        <!-- If multiple restaurants -->
+        <span
+          *ngIf="restaurants?.length"
+          class="rc-hub-cms-icons">
+          <mat-icon
+            [matBadge]="restaurants?.length.toString()"
+            matBadgeSize="medium"
+            matBadgeColor="accent">
+            store
+          </mat-icon>
+        </span>
 
-          <!-- If multiple restaurants -->
-          <span
-            *ngIf="restaurants?.length"
-            class="rc-hub-cms-icons">
-            <mat-icon
-              [matBadge]="restaurants?.length.toString()"
-              matBadgeSize="medium"
-              matBadgeColor="accent">
-              store
-            </mat-icon>
-          </span>
-
-          <!-- multi restaurant selection -->
-          <mat-menu #menu="matMenu">
-            <button
-              *ngFor="let restaurant of restaurants"
-              [routerLink]="['/cms', restaurant.restaurant_id]"
-              mat-menu-item>
-              <mat-icon>store</mat-icon>
-              <span>{{ restaurant.restaurant_name }}</span>
-            </button>
-          </mat-menu>
-
-        </div>
-
-        <mat-card class="rc-card-service" (click)="launchFeature(service)">
-          <img src="assets/images/icons/{{service.service_logo_path}}.svg" alt="App Icon">
-          <h2>{{ service.service_name | uppercase }}</h2>
-          <p>{{ service.service_description }}</p>
-          <span *ngIf="!service.service_disabled">{{ service.service_highlight }}</span>
-        </mat-card>
+        <!-- multi restaurant selection -->
+        <mat-menu #menu="matMenu">
+          <button
+            *ngFor="let restaurant of restaurants"
+            [routerLink]="['/cms', restaurant.restaurant_id]"
+            mat-menu-item>
+            <mat-icon>store</mat-icon>
+            <span>{{ restaurant.restaurant_name }}</span>
+          </button>
+        </mat-menu>
 
       </div>
+
+      <mat-card appearance="outlined" class="rc-card-service" (click)="launchFeature(service)">
+        <img src="assets/images/icons/{{service.service_logo_path}}.svg" alt="App Icon">
+        <h2>{{ service.service_name | uppercase }}</h2>
+        <p>{{ service.service_description }}</p>
+        <span *ngIf="!service.service_disabled">{{ service.service_highlight }}</span>
+      </mat-card>
+
     </div>
   </div>
+
 </div>
 
 

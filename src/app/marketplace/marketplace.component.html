@@ -2,8 +2,8 @@
 <mat-toolbar class="rc-toolbar rc-toolbar-nav rc-toolbar-fixed rc-toolbar-nav-adjust">
 
   <span class="rc-space-filler"></span>
-  <mat-chip-list *ngIf="!!filter" class="rc-filter">
-    <mat-chip
+  <mat-chip-listbox *ngIf="!!filter" class="rc-filter">
+    <mat-chip-option
       style="margin-right: 16px;"
       (removed)="clearAllFilters()"
       [removable]="true">
@@ -13,8 +13,8 @@
         matChipRemove>
         cancel
       </mat-icon>
-    </mat-chip>
-  </mat-chip-list>
+    </mat-chip-option>
+  </mat-chip-listbox>
 
   <span class="rc-section-toolbar-actions">
     <button
@@ -50,13 +50,11 @@
 <!--  <div *ngIf="sponsored" class="rc-marketplace-sponsor">-->
 <!--    <img src="" alt="P&G Logo">Sponsored by.-->
 <!--  </div>-->
-  <div class="mdc-layout-grid">
-    <div class="mdc-layout-grid__inner" [@insertAnimation]="displayedDeals?.length">
 
-      <div
-        *ngFor="let deal of displayedDeals"
-        class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
-        <mat-card class="rc-card-rounded rc-card-market">
+    <div class="rd-grid-auto" [@insertAnimation]="displayedDeals?.length">
+
+      <div *ngFor="let deal of displayedDeals">
+        <mat-card appearance="outlined" class="rc-card-rounded rc-card-market">
           <button
             mat-icon-button
             class="rc-card-menu"
@@ -132,6 +130,6 @@
           </ng-container>
         </mat-menu>
       </div>
-    </div>
+
   </div>
 </div>

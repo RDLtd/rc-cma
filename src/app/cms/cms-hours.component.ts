@@ -23,7 +23,6 @@ export class CmsHoursComponent implements OnInit {
   sessionDefault = { open: '08:00', close: '23:00' };
   lastSession = this.sessionDefault;
   maxSessions = 3;
-  showLoader = false;
 
   constructor(
     private cmsLocalService: CmsLocalService,
@@ -39,22 +38,25 @@ export class CmsHoursComponent implements OnInit {
   ngOnInit() {
     // get the restaurant data
     this.cmsLocalService.getRestaurant()
-      .subscribe(data => {
+      .subscribe({
+        next: data => {
           if (data.restaurant_id) {
             this.restaurant = data;
             this.getOpeningTimes();
           }
         },
-        error => console.log(error));
+        error: error => console.log(error)
+      });
   }
 
   getOpeningTimes(): void {
-    // Todo: JB to speak to KS about this block
+
     // Fetches the opening time data from the api
     // This is just to create a reference in BabelEdit
-    const BabelEdit = this.translate.instant('CMS.HOURS.days.0');
-    this.cms.getTimes(this.restaurant.restaurant_id).subscribe(
-      data => {
+    // const BabelEdit = this.translate.instant('CMS.HOURS.days.0');
+
+    this.cms.getTimes(this.restaurant.restaurant_id).subscribe({
+      next: data => {
         const days = this.translate.instant('CMS.HOURS.days');
         // console.log(data);
         this.openingTimes = data['times'];
@@ -75,24 +77,15 @@ export class CmsHoursComponent implements OnInit {
             this.openingTimes[i].sessions = [this.sessionNull];
           }
           this.display_dow[i] = days[i];
-            // update 041118, need somehow to deal with updates to DOW, but these are loaded from the DB in English!
-          // This is wrong - need to put in a temp variable, not overwrite the data!
-          // Fixed 11/07/19 ks
-          // this.translate.get('Global.DOW-' + this.openingTimes[i].cms_time_day_of_week).
-          //   subscribe(value => { this.openingTimes[i].cms_time_day_of_week = value; });
-          // console.log(days[i]);
-          //
-
           this.translate.instant('Global.DOW-' + this.openingTimes[i].cms_time_day_of_week);
-          // this.translate.get('Global.DOW-' + this.openingTimes[i].cms_time_day_of_week).
-          //   subscribe(value => { this.display_dow[i] = value; });
         }
         this.loadService.close();
         this.dataChanged = false;
       },
-      error => {
+      error: error => {
         console.log('Error fetching times', error);
-      });
+      }
+    });
   }
 
   // Deactivation guard
@@ -192,8 +185,8 @@ export class CmsHoursComponent implements OnInit {
 
   updateData(): void {
     // console.log('OT: ', this.openingTimes, this.openingTimesNotes);
-    this.cms.updateTimes(this.openingTimes, this.openingTimesNotes).subscribe(
-      () => {
+    this.cms.updateTimes(this.openingTimes, this.openingTimesNotes).subscribe({
+      next: () => {
         this.cmsLocalService.dspSnackbar(this.translate.instant(
           'CMS.HOURS.msgTimesUpdated',
           { restaurant: this.restaurant.restaurant_name }),
@@ -202,14 +195,18 @@ export class CmsHoursComponent implements OnInit {
         // record event
         this.ga.sendEvent('CMS-Hours', 'Edit', 'Changes Saved');
       },
-      error => {
-        console.log(error);
+      error: error => {
+        console.log(error)
         this.cmsLocalService.dspSnackbar(this.translate.instant('CMS.HOURS.msgUpdateFailed'), null, 3);
-      });
-    this.cms.updateLastCreatedField(Number(this.restaurant.restaurant_id), 'hours').subscribe(
-      () => {},
-      () => {
-        console.log('error in updatelastupdatedfield for hours');
+      }
+    });
+
+    this.cms.updateLastCreatedField(Number(this.restaurant.restaurant_id), 'hours')
+        .subscribe({
+          next: () => {},
+          error: () => {
+          console.log('error in updatelastupdatedfield for hours');
+        }
       });
   }
 

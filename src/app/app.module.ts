@@ -1,12 +1,11 @@
 
 import { BrowserModule } from '@angular/platform-browser';
-import { APP_INITIALIZER, NgModule } from '@angular/core';
+import {APP_INITIALIZER, NgModule} from '@angular/core';
 import {
   FormsModule,
   ReactiveFormsModule
 } from '@angular/forms';
-import { RouterModule } from '@angular/router';
-import { FlexLayoutModule } from '@angular/flex-layout';
+import { RouterModule, TitleStrategy } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   HttpClientModule,
@@ -22,8 +21,6 @@ import { SigninComponent } from './signin/signin.component';
 import { AboutComponent } from './common/about.component';
 import { PwdMatchValidator } from './shared/pwdMatch.validator';
 import { AngularMaterialModule } from './shared/angular-material.module';
-import { CloudinaryModule } from '@cloudinary/angular-5.x';
-import * as  Cloudinary from 'cloudinary-core';
 
 import {
   AuthGuard,
@@ -35,7 +32,8 @@ import {
   CMSService,
   PublicService,
   AnalyticsService,
-  BpiService
+  BpiService,
+  ErrorService
 } from './_services';
 
 import {
@@ -97,11 +95,13 @@ import { MembershipComponent } from './join/membership.component';
 import { HubComponent } from './hub/hub.component';
 import { LogoComponent } from './common/logo/logo.component';
 import { CurrencyPipe } from '@angular/common';
-import { BpiComponent } from './join/bpi.component';
 import { RiMembershipComponent } from './join/mepn/ri-membership.component';
 import { BpiRegistrationComponent } from './join/mepn/bpi-registration.component';
 import { ProfileComponent } from './profile/profile.component';
-
+import {CloudinaryModule} from '@cloudinary/ng';
+import { OnlineStatusModule } from 'ngx-online-status';
+import { AppTitleStrategy } from './app-title-strategy';
+import { lastValueFrom } from 'rxjs';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -120,7 +120,7 @@ export function appInitializerFactory(translate: TranslateService) {
     // If the user language is not supported, default to en
     if (!languages.includes(lang)) { lang = 'en'; }
     translate.setDefaultLang(lang);
-    return translate.use(lang).toPromise();
+    return lastValueFrom(translate.use(lang));
   };
 }
 
@@ -162,7 +162,6 @@ export function appInitializerFactory(translate: TranslateService) {
     MembershipComponent,
     HubComponent,
     LogoComponent,
-    BpiComponent,
     RiMembershipComponent,
     BpiRegistrationComponent,
     ProfileComponent
@@ -175,7 +174,6 @@ export function appInitializerFactory(translate: TranslateService) {
     RouterModule,
     ReactiveFormsModule,
     HttpClientModule,
-    FlexLayoutModule,
     routing,
     FileUploadModule,
     ClipboardModule,
@@ -187,14 +185,11 @@ export function appInitializerFactory(translate: TranslateService) {
       }
     }),
     MarkdownModule.forRoot(),
-    CloudinaryModule.forRoot(Cloudinary, {
-      cloud_name: 'rdl',
-      api_key: '713165672947878',
-      api_secret: 'EhLM0NhD7HvJDjX5IvF90u6guq8'
-    }),
+    CloudinaryModule,
     QRCodeModule,
     GoogleMapsModule,
-    ClipboardModule
+    ClipboardModule,
+    OnlineStatusModule
   ],
   providers: [
     AppConfig,
@@ -215,11 +210,16 @@ export function appInitializerFactory(translate: TranslateService) {
     LoadService,
     CurrencyPipe,
     {
+      provide: TitleStrategy,
+      useClass: AppTitleStrategy
+    },
+    {
       provide: APP_INITIALIZER,
       useFactory: appInitializerFactory,
       deps: [TranslateService],
       multi: true
-    }
+    },
+    ErrorService
   ],
   bootstrap: [AppComponent]
 })

@@ -20,7 +20,7 @@
               </svg>
             </div>
 
-            <img id="imgPreview" [src]="imgPreviewSrc">
+            <img id="imgPreview" [src]="imgPreviewSrc" alt="Preview image">
           </div>
 
           <div class="image-select-label">
@@ -49,7 +49,7 @@
     <button
       tabindex="-1"
       mat-button
-      mat-dialog-close>
+      mat-dialog-close="false">
       {{ 'SETTINGS.labelBtnCancel' | translate }}
     </button>
     <button

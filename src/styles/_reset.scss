@@ -1,4 +1,4 @@
-@import "vars";
+@import "variables";
 
 /**
 * Set global defaults
@@ -43,13 +43,21 @@ hr { margin: 3em 0; }
     list-style: none;
   }
 }
+
+img {
+  display: block;
+}
+
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
   -webkit-box-shadow: 0 0 0 30px white inset !important;
+  -webkit-transition-delay: 99999s;
 }
+
 ::selection {
   background-color: black;
   color: white;
 }
+

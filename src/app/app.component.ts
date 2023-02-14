@@ -4,9 +4,9 @@ import { AuthenticationService } from './_services';
 import { HttpClient } from '@angular/common/http';
 import { AppConfig } from './app.config';
 import { NavigationEnd, Router } from '@angular/router';
-import { ConnectionService } from 'ng-connection-service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
+import { OnlineStatusService, OnlineStatusType } from 'ngx-online-status';
 
 @Component({
   selector: 'app-rc-root',
@@ -31,7 +31,7 @@ export class AppComponent implements OnInit {
   };
 
   constructor(
-    private connectionService: ConnectionService,
+    private onlineStatusService: OnlineStatusService,
     private snackBar: MatSnackBar,
     private _dialog: MatDialog,
     private router: Router,
@@ -39,9 +39,6 @@ export class AppComponent implements OnInit {
     private http: HttpClient,
     private config: AppConfig,
     public authService: AuthenticationService) {
-
-
-
 
       // Record navagation analytics
       this.router.events.subscribe(event => {
@@ -93,6 +90,21 @@ export class AppComponent implements OnInit {
         }
       }
     );
+
+    this.onlineStatusService.status.subscribe((status: OnlineStatusType) => {
+      // use status
+      this.isConnected = (status === 1);
+      if(!this.isConnected) {
+        this.snackBar.open(this.connectionOffline[this.language], null, {
+          horizontalPosition: 'center',
+          verticalPosition: 'top',
+          panelClass: 'rc-mat-snack-warn'
+        });
+      } else {
+        this.snackBar.dismiss()
+      }
+
+    });
   }
 
   onDeactivate() {

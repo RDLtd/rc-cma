@@ -1,54 +1,49 @@
-<div class="mdc-layout-grid">
-  <div class="mdc-layout-grid__inner">
-    <!-- TOOLBAR -->
-    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
-      <mat-toolbar class="rc-toolbar rc-toolbar-section">
-        <span>{{ 'CMS.RESERVATIONS.titleReservationsInfo' | translate }}</span>
-        <span class="rc-space-filler"></span>
-        <span class="rc-toolbar-actions">
+<div class="rc-content-container">
+  <mat-toolbar class="rc-toolbar rc-toolbar-section">
+    <span>{{ 'CMS.RESERVATIONS.titleReservationsInfo' | translate }}</span>
+    <span class="rc-space-filler"></span>
+    <span class="rc-toolbar-actions">
           <button
-            mat-icon-button
-            (click)="help.dspHelp('cms-reservations', restaurant)">
+                  mat-icon-button
+                  (click)="help.dspHelp('cms-reservations', restaurant)">
             <mat-icon>help_outline</mat-icon>
           </button>
-          <!-- UNDO CHANGES -->
+      <!-- UNDO CHANGES -->
           <button
-            mat-icon-button
-            [disabled]="!dataChanged"
-            (click)="resetData()"
-            [matTooltip]="'CMS.RESERVATIONS.tipUndo' | translate">
+                  mat-icon-button
+                  [disabled]="!dataChanged"
+                  (click)="resetData()"
+                  [matTooltip]="'CMS.RESERVATIONS.tipUndo' | translate">
             <mat-icon>undo</mat-icon>
           </button>
-          <!-- SAVE CHANGES -->
+      <!-- SAVE CHANGES -->
           <button
-            mat-icon-button
-            [disabled]="!dataChanged"
-            (click)="updateData()"
-            [matTooltip]="'CMS.RESERVATIONS.tipSave' | translate">
+                  mat-icon-button
+                  [disabled]="!dataChanged"
+                  (click)="updateData()"
+                  [matTooltip]="'CMS.RESERVATIONS.tipSave' | translate">
             <mat-icon>check</mat-icon>
           </button>
         </span>
-      </mat-toolbar>
-        </div>
+  </mat-toolbar>
+  <div class="rc-grid two-cols">
+
 
     <!-- GENERAL -->
-    <mat-card
-      class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-12-tablet rc-cms-res">
+    <mat-card appearance="outlined">
+      <mat-card-header>
       <mat-card-title>
         <h2>{{ 'CMS.RESERVATIONS.titleGeneral' | translate }}</h2>
       </mat-card-title>
+      </mat-card-header>
       <mat-card-content>
-        <mat-form-field
-          class="rc-full-width"
-          floatLabel="never">
-          <mat-placeholder>{{ 'CMS.RESERVATIONS.labelGeneral' | translate: { chars: resGeneralMaxLength } }}
-          </mat-placeholder>
+        <mat-form-field class="rc-full-width" appearance="outline">
             <textarea
               #bkgsGeneral
               matInput
-              matTextareaAutosize
-              matAutosizeMinRows="5"
-              matAutosizeMaxRows="5"
+              placeholder="{{ 'CMS.RESERVATIONS.labelGeneral' | translate: { chars: resGeneralMaxLength } }}"
+              cdkTextareaAutosize
+              cdkAutosizeMinRows="3"
               name="cms_description_reservation_info"
               maxlength="{{ resGeneralMaxLength }}"
               (keyup)="setChanged(bkgsGeneral)"
@@ -60,13 +55,13 @@
     </mat-card>
 
     <!-- ONLINE BOOKINGS -->
-    <mat-card
-      class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-12-tablet rc-cms-res-online">
-      <form #frmBooking="ngForm">
-
+    <mat-card appearance="outlined">
+      <form>
+        <mat-card-header>
         <mat-card-title>
           <h2>{{ 'CMS.RESERVATIONS.titleOnline' | translate }}</h2>
         </mat-card-title>
+        </mat-card-header>
 
         <mat-card-content>
 
@@ -81,7 +76,7 @@
               <mat-option
                 *ngFor="let provider of booking_providers; let idx = index"
                 [value]="idx">
-                {{ provider.booking_provider_label }}
+                {{ provider['booking_provider_label'] }}
               </mat-option>
             </mat-select>
           </mat-form-field>
@@ -147,21 +142,20 @@
     </mat-card>
 
     <!-- GROUPS -->
-    <mat-card
-      class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-12-tablet">
+    <mat-card appearance="outlined">
+      <mat-card-header>
       <mat-card-title>
         <h2>{{ 'CMS.RESERVATIONS.titleGroupBookings' | translate }}</h2></mat-card-title>
+      </mat-card-header>
       <mat-card-content>
         <mat-form-field
-          class="rc-full-width"
-          floatLabel="never">
-          <mat-label>{{ 'CMS.RESERVATIONS.labelGroupPolicy' | translate: { max: resGroupMaxLength } }}</mat-label>
+          class="rc-full-width" appearance="outline">
             <textarea
               #bkgsGroup
               matInput
-              matTextareaAutosize
-              matAutosizeMinRows="3"
-              matAutosizeMaxRows="5"
+              placeholder="{{ 'CMS.RESERVATIONS.labelGroupPolicy' | translate: { max: resGroupMaxLength } }}"
+              cdkTextareaAutosize
+              cdkAutosizeMinRows="3"
               name="cms_descriptions_group"
               maxlength="{{ resGroupMaxLength }}"
               (keyup)="setChanged(bkgsGroup)"
@@ -173,21 +167,19 @@
     </mat-card>
 
     <!-- PRIVATE DINING -->
-    <mat-card
-      class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-12-tablet">
+    <mat-card appearance="outlined">
+      <mat-card-header>
       <mat-card-title>
         <h2>{{ 'CMS.RESERVATIONS.titlePrivate' | translate }}</h2></mat-card-title>
+      </mat-card-header>
       <mat-card-content>
-        <mat-form-field
-          class="rc-full-width"
-          floatLabel="never">
-          <mat-label>{{ 'CMS.RESERVATIONS.labelPrivate' | translate: { max: resPrivateMaxLength } }}</mat-label>
+        <mat-form-field class="rc-full-width" appearance="outline">
           <textarea
             #bkgsPrivate
             matInput
-            matTextareaAutosize
-            matAutosizeMinRows="3"
-            matAutosizeMaxRows="5"
+            placeholder="{{ 'CMS.RESERVATIONS.labelPrivate' | translate: { max: resPrivateMaxLength } }}"
+            cdkTextareaAutosize
+            cdkAutosizeMinRows="3"
             name="cms_descriptions_private"
             maxlength="{{ resPrivateMaxLength }}"
             (keyup)="setChanged(bkgsPrivate)"
@@ -199,11 +191,3 @@
     </mat-card>
   </div>
 </div>
-
-<!--<hr>-->
-
-<!--<pre>-->
-
-<!--{{ descriptions | json }}-->
-
-<!--</pre>-->

@@ -25,7 +25,6 @@ export class AppConfig {
   // Build process should automatically detect the correct variables
   public readonly apiUrl = environment.API_URL;
   public readonly mozId = environment.MOZ_ID;
-  public readonly mozKey = environment.MOZ_APIKEY;
 
   public readonly sql_defaults = {
     where_field: 'restaurant_name',
@@ -38,11 +37,10 @@ export class AppConfig {
   };
 
   public readonly userAPICode = 'RDL-dev';
-  public readonly cloud_name = 'rdl';
   public readonly upload_preset = 'nozxac7z';
-  public readonly restaurant_verification_days = 30;
   public readonly session_timeout = 60; // minutes
   public readonly session_countdown = 5; // minutes to check activity before timeout
+  public readonly useAirBrake = false;
 
   // public readonly use_ip_location = true;
   // public readonly geocoding_api = 'AIzaSyBN6LkgNpX8E8lpbHdlkJZ6SU5LILVHwMY';
@@ -65,7 +63,8 @@ export class AppConfig {
       spwDemoUrl: `https://example-restaurant.com/`,
       email: {
         support: `support@${this.tld.rc}`,
-        curation: `curation@${this.tld.rc}`
+        curation: `curation@${this.tld.rc}`,
+        tech: 'tech@restaurantdevelopments.ltd'
       },
       products: {
         success_url: `${ this.appUrl }/signin`,
@@ -89,7 +88,8 @@ export class AppConfig {
       spwDemoUrl: `https://example-restaurant.com/`,
       email: {
         support: `support@${this.tld.ri}`,
-        curation: `curation@${this.tld.ri}`
+        curation: `curation@${this.tld.ri}`,
+        tech: 'tech@restaurantdevelopments.ltd'
       },
       products: {
         success_url: `${ this.appUrl }/signin`,

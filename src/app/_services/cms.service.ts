@@ -5,6 +5,7 @@ import { Member } from '../_models';
 import { Restaurant } from '../_models';
 import { HttpClient } from '@angular/common/http';
 import { AppService } from './app.service';
+import { lastValueFrom } from 'rxjs';
 
 @Injectable()
 
@@ -425,14 +426,14 @@ export class CMSService {
   }
 
   async publish(restaurant_id, production: Boolean): Promise<any> {
-      return await this.http.post(this.config.apiUrl + '/spw/makespw',
+      return await lastValueFrom(this.http.post(this.config.apiUrl + '/spw/makespw',
           {
               restaurant_id,
               production,
               company: this.config.brand.prefix,
               userCode: this.config.userAPICode,
               token: this.authToken
-          }).toPromise();
+          }));
   }
 
   updateCoordinates(restaurant_id: string, restaurant_lat: number, restaurant_lng: number) {

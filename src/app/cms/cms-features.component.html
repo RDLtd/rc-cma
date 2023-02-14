@@ -1,55 +1,51 @@
-<div class="mdc-layout-grid">
-  <div class="mdc-layout-grid__inner">
-  <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
-    <mat-toolbar class="rc-toolbar rc-toolbar-section">
-      <span>{{ 'CMS.FEATURES.titleDescAndFeatures' | translate }}</span>
-      <span class="rc-space-filler"></span>
-      <span class="rc-toolbar-actions">
+<div class="rc-content-container">
+  <mat-toolbar class="rc-toolbar rc-toolbar-section">
+    <span>{{ 'CMS.FEATURES.titleDescAndFeatures' | translate }}</span>
+    <span class="rc-space-filler"></span>
+    <span class="rc-toolbar-actions">
         <!-- HELP -->
         <button
-          mat-icon-button
-          (click)="help.dspHelp('cms-features', restaurant)">
+                mat-icon-button
+                (click)="help.dspHelp('cms-features', restaurant)">
             <mat-icon>help_outline</mat-icon>
         </button>
         <!-- UNDO CHANGES -->
         <button
-          mat-icon-button
-          [disabled]="!dataChanged"
-          (click)="resetData()"
-          [matTooltip]="'CMS.FEATURES.tipUndo' | translate">
+                mat-icon-button
+                [disabled]="!dataChanged"
+                (click)="resetData()"
+                [matTooltip]="'CMS.FEATURES.tipUndo' | translate">
           <mat-icon>undo</mat-icon>
         </button>
         <!-- SAVE CHANGES -->
         <button
-          mat-icon-button
-          [disabled]="!dataChanged"
-          (click)="updateData()"
-          [matTooltip]="'CMS.FEATURES.tipSave' | translate">
+                mat-icon-button
+                [disabled]="!dataChanged"
+                (click)="updateData()"
+                [matTooltip]="'CMS.FEATURES.tipSave' | translate">
           <mat-icon>check</mat-icon>
         </button>
       </span>
-    </mat-toolbar>
-  </div>
+  </mat-toolbar>
+  <div class="rd-flex-col-2">
 
-    <mat-card class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-12-tablet">
-
+    <mat-card appearance="outlined">
+      <mat-card-header>
       <mat-card-title>
         <h2>{{ 'CMS.FEATURES.titleDescriptions' | translate }}</h2>
       </mat-card-title>
+      </mat-card-header>
 
       <mat-card-content>
-        <!-- STRAPLINE -->
+        <!-- SUBHEADING -->
         <h4>{{ 'CMS.FEATURES.headerStrapline' | translate }}</h4>
-        <mat-form-field
-          class="rc-full-width"
-          floatLabel="never">
-          <mat-label>{{ 'CMS.FEATURES.labelStrapline' | translate: { chars: descStraplineTotal } }}</mat-label>
+        <mat-form-field class="rc-full-width" appearance="outline">
           <textarea
             #strapline
             matInput
-            matTextareaAutosize
-            matAutosizeMinRows="1"
-            matAutosizeMaxRows="2"
+            placeholder="{{ 'CMS.FEATURES.labelStrapline' | translate: { chars: descStraplineTotal } }}"
+            cdkTextareaAutosize
+            cdkAutosizeMinRows="1"
             name="cms_description_strap_line"
             maxlength="{{ descStraplineTotal }}"
             (keyup)="setChanged()"
@@ -60,16 +56,13 @@
         <!-- ONE SENTENCE DESC. -->
         <h4>{{ 'CMS.FEATURES.headerDescSentence' | translate }}</h4>
         <!-- ONE PARAGRAPH DESC. -->
-        <mat-form-field
-          class="rc-full-width"
-          floatLabel="never">
-          <mat-label>{{ 'CMS.FEATURES.labelDescSentence' | translate: { chars: descSentenceTotal } }}</mat-label>
+        <mat-form-field class="rc-full-width" appearance="outline">
           <textarea
             #sentence
             matInput
-            matTextareaAutosize
-            matAutosizeMinRows="1"
-            matAutosizeMaxRows="2"
+            placeholder="{{ 'CMS.FEATURES.labelDescSentence' | translate: { chars: descSentenceTotal } }}"
+            cdkTextareaAutosize
+            cdkAutosizeMinRows="1"
             name="cms_description_one_sentence"
             maxlength="{{ descSentenceTotal }}"
             (keyup)="setChanged()"
@@ -79,14 +72,13 @@
         </mat-form-field>
         <h4>{{ 'CMS.FEATURES.headerDescParagraph' | translate }}</h4>
         <mat-form-field
-          class="rc-full-width" floatLabel="never">
-          <mat-label>{{ 'CMS.FEATURES.labelDescParagraph' | translate: { chars: descParagraphTotal } }}</mat-label>
+          class="rc-full-width" appearance="outline">
           <textarea
             #paragraph
             matInput
-            matTextareaAutosize
-            matAutosizeMinRows="1"
-            matAutosizeMaxRows="4"
+            placeholder="{{ 'CMS.FEATURES.labelDescParagraph' | translate: { chars: descParagraphTotal } }}"
+            cdkTextareaAutosize
+            cdkAutosizeMinRows="1"
             name="cms_description_one_paragraph"
             maxlength="{{ descParagraphTotal }}"
             (keyup)="setChanged()"
@@ -96,15 +88,14 @@
         </mat-form-field>
         <!-- LONG DESC. -->
         <h4>{{ 'CMS.FEATURES.headerDescFull' | translate }}</h4>
-        <mat-form-field class="rc-full-width" floatLabel="never">
-          <mat-label>{{ 'CMS.FEATURES.labelDescFull' | translate: { chars: descFullTotal } }}</mat-label>
+        <mat-form-field class="rc-full-width" appearance="outline">
           <textarea
             #full
             matInput
+            placeholder="{{ 'CMS.FEATURES.labelDescFull' | translate: { chars: descFullTotal } }}"
             name="cms_description_long"
-            matTextareaAutosize
-            matAutosizeMinRows="3"
-            matAutosizeMaxRows="10"
+            cdkTextareaAutosize
+            cdkAutosizeMinRows="5"
             maxlength="{{ descFullTotal }}"
             (keydown)="setChanged()"
             [(ngModel)]="descriptions.cms_description_long">
@@ -115,11 +106,13 @@
       </mat-card-content>
     </mat-card>
 
-    <mat-card class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-12-tablet">
+    <mat-card appearance="outlined">
+      <mat-card-header>
       <mat-card-title>
         <!-- FEATURES -->
         <h2>{{ 'CMS.FEATURES.titleFeatures' | translate }}</h2>
       </mat-card-title>
+      </mat-card-header>
       <mat-card-content>
         <div *ngFor="let feature of features; let iatt = index">
           <mat-checkbox
@@ -132,24 +125,26 @@
         </div>
       </mat-card-content>
       <!-- ADDITIONAL FEATURES -->
+      <mat-card-header>
       <h2>{{ 'CMS.FEATURES.titleAddFeatures' | translate }}</h2>
+      </mat-card-header>
       <mat-card-content>
-        <mat-form-field class="rc-full-width" floatLabel="always">
-          <mat-chip-list #chipList>
-            <mat-chip
+        <mat-form-field class="rc-full-width" appearance="outline">
+          <mat-chip-grid #chipList>
+            <mat-chip-row
               class="rc-accent"
               *ngFor="let k of keywords"
               removable="true"
               (removed)="remove(k)">
               {{ k | uppercase }}
               <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-            </mat-chip>
+            </mat-chip-row>
             <input [placeholder]="'CMS.FEATURES.tipAddFeatures' | translate"
                    [matChipInputFor]="chipList"
                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                    [matChipInputAddOnBlur]="true"
                    (matChipInputTokenEnd)="add($event)" />
-          </mat-chip-list>
+          </mat-chip-grid>
         </mat-form-field>
       </mat-card-content>
     </mat-card>

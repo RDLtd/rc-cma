@@ -6,6 +6,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { AppConfig } from '../app.config';
 import { AboutComponent } from './about.component';
 import { HeaderService } from './header.service';
+import {ImageService} from '../_services/image.service';
+import {CloudinaryImage} from '@cloudinary/url-gen';
 
 @Component({
   selector: 'app-rc-header',
@@ -23,6 +25,8 @@ export class HeaderComponent implements OnInit {
   placeholderUrl = 'https://eu.ui-avatars.com/api/?format=svg&size=40&background=fff&color=000&name=';
   navLabel: string;
   member: any;
+  clPlugins: any[];
+  clImage: CloudinaryImage;
 
   constructor(
     public authService: AuthenticationService,
@@ -31,8 +35,9 @@ export class HeaderComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private header: HeaderService,
+    private imgService: ImageService,
     private config: AppConfig ) {
-
+      this.clPlugins = this.imgService.cldBasePlugins;
   }
 
   ngOnInit() {
@@ -49,10 +54,12 @@ export class HeaderComponent implements OnInit {
 
     setTimeout(() => {
       // watch for rogue values coming from the db
+        // console.log(this.member.member_image_path);
         if (this.member.member_image_path !== null && this.member.member_image_path !== 'null') {
-          this.avatarUrl = this.member.member_image_path;
+          this.clImage = this.imgService.getCldImage(this.member.member_image_path);
+          // console.log(this.member.member_image_path);
         } else {
-          this.avatarUrl = this.placeholderUrl + this.displayName;
+          this.header.updateAvatar( null);
         }
       }, 0);
 
@@ -63,13 +70,18 @@ export class HeaderComponent implements OnInit {
 
     // Listen for changes to the avatar
     this.header.currentAvatar.subscribe(url => {
-      this.avatarUrl = url || this.placeholderUrl + this.displayName;
-      // console.log('Avatar change', this.avatarUrl);
+      if(url === null) {
+        this.avatarUrl = `${this.placeholderUrl}${this.displayName}`;
+        this.clImage = null;
+      } else {
+        this.clImage = this.imgService.getCldImage(url);
+      }
+      // console.log('Avatar change', url === null, this.clImage, this.avatarUrl);
     });
 
     // Get notified anytime the login status changes
-    this.authService.memberSessionSubject.subscribe(
-      sessionStatus => {
+    this.authService.memberSessionSubject.subscribe({
+      next: sessionStatus => {
         switch (sessionStatus) {
           case 'active': {
             // Successful login
@@ -90,8 +102,8 @@ export class HeaderComponent implements OnInit {
           }
         }
       },
-      err => console.log(err)
-    );
+      error: err => console.log(err)
+    });
   }
 
   logout(): void {

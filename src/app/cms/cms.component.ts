@@ -45,37 +45,30 @@ export class CmsComponent implements OnInit {
     this.route.params
       .pipe(
         switchMap((params: Params) => this.restaurantService.getById(this.paramId = params.id) ))
-        .subscribe( data => {
-            this.restaurant = data['restaurant'][0];
-            this.cmsLocalService.setRestaurant(this.restaurant);
-          },
-          error => {
-            console.log(error);
-            this.router.navigate(['/hub']).then();
-          }
-        );
-
+        .subscribe({
+            next: data => {
+              this.restaurant = data['restaurant'][0];
+              this.cmsLocalService.setRestaurant(this.restaurant);
+            },
+            error: error => {
+              console.log(error);
+              this.router.navigate(['/hub']).then();
+            }
+          });
 
     this.member = JSON.parse(localStorage.getItem('rd_profile'));
 
     this.restaurantService.getMemberRestaurants(this.member.member_id)
-      .subscribe( data => {
+      .subscribe( {
+        next: data => {
           // console.log('CMS.ts get list of assc. restaurants using member_id', this.member.member_id);
           this.restaurants = data['restaurants'];
           // console.log('Length', this.restaurants.length);
         },
-        error => {
+        error: error => {
           console.log(error);
         }
-      );
-  }
-
-  switchRestaurant(id: string): void {
-    this.route.params.subscribe(params => {
-      // PARAMS CHANGED ..
-      console.log(`Replace ${params.id} with ${id}`);
-      this.router.navigateByUrl(this.router.url.replace(this.paramId, id)).then();
-    });
+      });
   }
 
   getPreview() {
@@ -95,8 +88,6 @@ export class CmsComponent implements OnInit {
 
   onDeactivate() {
     console.log('onDeactivate');
-    // document.body.scrollTop = 0;
-    // Alternatively, you can scroll to top by using this other call:
     window.scrollTo(0, 0);
   }
 }
