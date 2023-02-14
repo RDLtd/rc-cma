@@ -305,7 +305,8 @@
     "failedToSendRecoveryEmail": "Nous n'avons pas pu envoyer votre e-mail de récupération du mot de passe. Veuillez contacter notre équipe d'assistance pour obtenir de l'aide.",
     "failedToCreateFreeMember": "Nous n'avons pas pu créer votre compte gratuit pour le moment. Merci de réessayer dans quelques instants. Notre équipe d'assistance a été informée.",
     "failedToUpdateRestaurantEmail": "Nous n'avons pas pu mettre à jour l'adresse e-mail de votre restaurant pour le moment. Merci de réessayer dans quelques instants. Notre équipe d'assistance a été informée.",
-    "failedToSendVerificationEmail": "Nous n'avons pas pu envoyer votre e-mail de vérification pour le moment. Merci de réessayer dans quelques instants. Notre équipe d'assistance a été informée."
+    "failedToSendVerificationEmail": "Nous n'avons pas pu envoyer votre e-mail de vérification pour le moment. Merci de réessayer dans quelques instants. Notre équipe d'assistance a été informée.",
+    "failedToLoadAssociatedRestaurants": "Nous n'avons pas pu charger vos restaurants associés pour le moment. Merci de réessayer dans quelques instants. Notre équipe d'assistance a été informée."
   },
 	"Global": {
 		"DOW-Dimanche": "Dimanche",
