@@ -30,7 +30,11 @@ export class ErrorService {
   ) { }
 
   handleError(code: string, error: any): void {
-    this.dspSnackBar(this.translate.instant('ERRORS.' + code));
+    // only show the user if a code has been supplied (so this can be looked up in the translation database)
+    if (!!code) {
+      this.dspSnackBar(this.translate.instant('ERRORS.' + code));
+    }
+    // but notify for all errors
     if (this.config.useAirBrake) {
       // sometimes there will be no information in the error, so we attach the code as well
       this.airbrake.notify(code + ', ' + JSON.stringify(error)).then();

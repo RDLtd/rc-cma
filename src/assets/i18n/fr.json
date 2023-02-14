@@ -302,7 +302,8 @@
     "noServerResponse": "Notre serveur a cessé de répondre, nous ne pouvons donc pas vous connecter pour le moment. Votre connexion Internet semble stable, veuillez donc réessayer dans quelques instants. Notre équipe d'assistance a été informée.",
     "invalidServerResponse": "Notre serveur a renvoyé une erreur, nous ne pouvons donc pas vous connecter pour le moment. Merci de réessayer dans quelques instants. Notre équipe d'assistance a été informée.",
     "failedToSetSession": "Nous n'avons pas pu stocker certains cookies dans votre navigateur, nous ne pouvons donc pas vous connecter pour le moment. Merci de réessayer dans quelques instants. Notre équipe d'assistance a été informée.",
-    "failedToSendRecoveryEmail": "Nous n'avons pas pu envoyer votre e-mail de récupération du mot de passe. Veuillez contacter notre équipe d'assistance pour obtenir de l'aide."
+    "failedToSendRecoveryEmail": "Nous n'avons pas pu envoyer votre e-mail de récupération du mot de passe. Veuillez contacter notre équipe d'assistance pour obtenir de l'aide.",
+    "failedToCreateFreeMember": "Nous n'avons pas pu créer votre compte gratuit pour le moment. Merci de réessayer dans quelques instants. Notre équipe d'assistance a été informée."
   },
 	"Global": {
 		"DOW-Dimanche": "Dimanche",

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MemberService, AuthenticationService, AppService } from '../_services';
+import { MemberService, AuthenticationService, AppService, ErrorService } from '../_services';
 import { CmsLocalService } from '../cms';
 import { TranslateService } from '@ngx-translate/core';
 import { MatDialog } from '@angular/material/dialog';
@@ -59,7 +59,8 @@ export class JoinComponent implements OnInit {
     private load: LoadService,
     public config: AppConfig,
     private appService: AppService,
-    private router: Router
+    private router: Router,
+    private error: ErrorService
   ) {
     // Check url params for a Stripe Session Id (or anything else)
     this.route.queryParams.subscribe(params => {
@@ -120,7 +121,11 @@ export class JoinComponent implements OnInit {
           this.referrer.type = 'self';
         }
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err);
+        // the user does not need to see this error!
+        this.error.handleError('', 'Unable to get referral code ' + code + '! ' + err);
+      });
   }
 
   // Save pending member details
@@ -130,7 +135,12 @@ export class JoinComponent implements OnInit {
       sessionStorage.setItem('rc_member_pending', JSON.stringify(data));
       this.memberService.createPending(data)
         .toPromise()
-        .then(res => console.log(`Saved Pending = ${res}`));
+        .then(res => console.log(`Saved Pending = ${res}`))
+        .catch(err => {
+          console.log(err);
+          // the user does not need to see this error!
+          this.error.handleError('', 'Unable to save pending data! ' + err);
+        });
     }
   }
 
@@ -173,7 +183,10 @@ export class JoinComponent implements OnInit {
                   this.load.close();
               });
             })
-              .catch(err => console.log(err));
+              .catch(err => {
+                console.log(err);
+                this.error.handleError('failedToCreateFreeMember', 'Unable to create free membership! ' + err);
+              });
           } else {
             // If the referral code is added manually then we need
             // to setReferral here
@@ -189,6 +202,11 @@ export class JoinComponent implements OnInit {
           this.isSubmitting = false;
           this.load.close();
         }
+      })
+      .catch(err => {
+        console.log(err);
+        // the user does not need to see this error!
+        this.error.handleError('', 'Unable to execute preflight check! ' + err);
       });
   }
 
@@ -207,6 +225,7 @@ export class JoinComponent implements OnInit {
         error => {
           // should not really get here, but you never know...
           console.log('Failed to re-read member record', JSON.stringify(error));
+          this.error.handleError('', 'Failed to re-read member record! ' + error);
         });
   }
 
@@ -219,6 +238,7 @@ export class JoinComponent implements OnInit {
         },
         error => {
           console.log(error);
+          this.error.handleError('', 'Failed to add promo action! ' + error);
         });
   }
 
