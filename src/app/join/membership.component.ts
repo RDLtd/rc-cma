@@ -5,7 +5,7 @@ import { loadStripe } from '@stripe/stripe-js/pure';
 import { environment } from '../../environments/environment';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { MemberService } from '../_services';
+import { ErrorService, MemberService } from '../_services';
 import { CurrencyPipe } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ConfirmCancelComponent } from '../common';
@@ -46,7 +46,8 @@ export class MembershipComponent implements OnInit {
     private memberService: MemberService,
     private currencyPipe: CurrencyPipe,
     private snack: MatSnackBar,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private error: ErrorService
   ) {
 
     this.stripePromise = loadStripe(environment[this.config.brand.prefix + '_stripe_key']);
@@ -65,7 +66,13 @@ export class MembershipComponent implements OnInit {
       // console.log('stripeSessionId', this.stripeSessionId);
     });
     // this.loader.open();
-    this.getProducts().then(() => console.log('loaded'));
+    this.getProducts()
+      .then(() => console.log('loaded'))
+      .catch(err => {
+        console.log(err);
+        // the user does not need to see this error!
+        this.error.handleError('', 'Unable to get products in membership component ngOnInit! ' + err);
+      });
 
     // If this was a sales referral and
     // there is a promotion message then display it
@@ -100,6 +107,11 @@ export class MembershipComponent implements OnInit {
             fee: this.currencyPipe.transform(this.products[1].product_price, this.config.brand.currency.code),
             brand: this.transParams.brand
           });
+      })
+      .catch(err => {
+        console.log(err);
+        // the user does not need to see this error!
+        this.error.handleError('', 'Unable to get products in membership component! ' + err);
       });
   }
 
@@ -109,6 +121,8 @@ export class MembershipComponent implements OnInit {
       .toPromise()
       .catch(reason => {
         console.log('FAILED', reason);
+        // don't show error as this is handled locally
+        this.error.handleError('', 'Unable to create stripe session! ' + reason);
         this.snack.open(this.translate.instant('MEMBERSHIP.msgInvalidStripe', { email: this.config.brand.email.support }), 'Ok', {
           duration: 15000,
           verticalPosition: 'top'
@@ -132,6 +146,11 @@ export class MembershipComponent implements OnInit {
       .then(data => {
         console.log('MC Session', data);
         this.stripeSessionId = data['sessionId'];
+      })
+      .catch(err => {
+        console.log(err);
+        // the user does not need to see this error!
+        this.error.handleError('', 'Unable to create checkout session in checkout function! ' + err);
       });
     const stripe = await this.stripePromise;
     const { error } = await stripe.redirectToCheckout(
@@ -141,6 +160,8 @@ export class MembershipComponent implements OnInit {
     );
     if (error) {
       console.log('Error', error);
+      // don't show error as this is handled locally
+      this.error.handleError('', 'Unable to redirect to stripe! ' + error);
       this.snack.open(this.translate.instant('MEMBERSHIP.msgInvalidStripe', { email: this.config.brand.email.support }), 'Ok', {
         duration: 15000,
         verticalPosition: 'top'
