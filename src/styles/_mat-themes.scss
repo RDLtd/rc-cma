@@ -4,52 +4,27 @@
 * THEMING
 * ----------------------------------
 **/
+
 @use '@angular/material' as mat;
 
 @import '@angular/material/theming';
 
-// Include the base styles for Angular Material core.
-// TODO(v15): As of v15 mat.legacy-core no longer includes default typography styles.
-//  The following line adds:
-//    1. Default typography styles for all components
-//    2. Styles for typography hierarchy classes (e.g. .mat-headline-1)
-//  If you specify typography styles for the components you use elsewhere, you should delete this line.
-//  If you don't need the default component typographies but still want the hierarchy styles,
-//  you can delete this line and instead use:
-//    `@include mat.legacy-typography-hierarchy(mat.define-typography-config());`
-@include mat.all-component-typographies();
-@include mat.core();
-
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
-// (imported above). For each palette, you can optionally specify a default, lighter, and darker
-// hue.
-//$rc-app-primary: mat.define-palette(mat.$deep-orange-palette, A400);
+// You can optionally specify a default, lighter, and darker
 $rc-app-primary: mat.define-palette(mat.$teal-palette, A700);
-//$rc-app-accent:  mat.define-palette(mat.$grey-palette, 900, A700, 900);
 $rc-app-accent:  mat.define-palette(mat.$deep-orange-palette, A400);
-// The warn palette is optional (defaults to red).
 $rc-app-warn:    mat.define-palette(mat.$deep-orange-palette, 900);
 // Create the theme object (a Sass map containing all of the palettes).
 $rc-app-theme: mat.define-light-theme($rc-app-primary, $rc-app-accent, $rc-app-warn);
-// Alternatively, you can import and @include the theme mixins for each component
-// that you are using.
+
 @include mat.all-component-themes($rc-app-theme);
 
 // Set custom typography defaults size/line-height/weight
 $custom-typography: mat.define-typography-config(
   $font-family:     'Roboto',
-  $headline-5:        mat.define-typography-level(32px, 48px, 500),
-  $body-2:          mat.define-typography-level(16px, 24px, 300)
+  $headline-5:       mat.define-typography-level(32px, 48px, 500),
+  $body-2:           mat.define-typography-level(16px, 24px, 300)
 );
 
-// Apply custom defaults to core
-// TODO(v15): As of v15 mat.legacy-core no longer includes default typography styles.
-//  The following line adds:
-//    1. Default typography styles for all components
-//    2. Styles for typography hierarchy classes (e.g. .mat-headline-1)
-//  If you specify typography styles for the components you use elsewhere, you should delete this line.
-//  If you don't need the default component typographies but still want the hierarchy styles,
-//  you can delete this line and instead use:
-//    `@include mat.legacy-typography-hierarchy($custom-typography);`
 @include mat.all-component-typographies($custom-typography);
 @include mat.core();

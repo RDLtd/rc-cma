@@ -130,7 +130,7 @@ a.rc-back {
 .rc-highlight { color: $rc-theme-accent }
 .rc-warn { color: $rc-theme-warn; }
 .rc-media-small-hide { display: none !important; }
-.rc-media-med { display: block !important; }
+.rc-media-med { display: flex !important; }
 
 
 // Unused
@@ -156,8 +156,8 @@ a.rc-back {
 }
 
 @media screen and ( min-width : 600px ){
-  .rc-media-small-hide { display: block !important; }
-  .rc-media-med { display: none !important; }
+  .rc-media-small-hide { display: flex !important; }
+  .rc-media-med { display: flex !important; }
   .rc-codes { flex-direction: row;}
 }
 @media only screen
@@ -357,6 +357,9 @@ a.mat-mdc-menu-item {text-decoration: none;}
 .rc-content-container {
   max-width: $rc-max-width;
   margin: 1.5rem auto;
+  &.full-width {
+    max-width: calc(100% - 2rem);
+  }
 }
 
 
@@ -781,11 +784,12 @@ form.rc-form-grid {
   .rc-section-toolbar-actions {
     display: flex;
     flex-direction: row;
+    align-items: center;
   }
 }
 
 .rc-marketplace {
-  padding-top: ($rc-toolbar-height);
+   padding-top: 1.5rem;
   .rc-card-menu {
     position: absolute;
     top: 8px; right: 8px;
@@ -860,6 +864,7 @@ form.rc-form-grid {
 .rc-card-rounded {
   position: relative;
   height: 100%;
+
   border-radius: 16px !important;
   padding: 24px 24px 48px !important;
   box-shadow: 0 9px 68px 0 rgb(0 0 0 / 20%);
