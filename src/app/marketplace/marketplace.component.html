@@ -1,4 +1,4 @@
-
+<div class="rc-content-container full-width">
 <mat-toolbar class="rc-toolbar rc-toolbar-nav rc-toolbar-fixed rc-toolbar-nav-adjust">
 
   <span class="rc-space-filler"></span>
@@ -69,7 +69,7 @@
             <h2>{{ deal.deal_name }}</h2>
             <h3>by <a [href]="deal.affiliate_url" target="_blank">{{ deal.affiliate_name }}</a></h3>
           </div>
-          <div mat-card-content>
+          <div>
             <p markdown ngpreservewhitespaces>{{ deal.deal_description }}</p>
           </div>
           <span
@@ -132,4 +132,5 @@
       </div>
 
   </div>
+</div>
 </div>
