@@ -11,7 +11,7 @@ export class LogoComponent {
   @Input() height = '100%';
   // Added class that provides style
   // e.g. 'primary' or 'accent'
-  @Input() version = '';
+  @Input() version = 'white';
   brand: string;
 
   constructor( private appConfig: AppConfig ) {

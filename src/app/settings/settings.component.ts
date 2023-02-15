@@ -80,7 +80,8 @@ export class SettingsComponent implements OnInit {
   ngOnInit() {
 
     // Update header label
-    this.header.updateSectionName(this.translate.instant('HUB.sectionSettings'));
+    //this.header.updateSectionName(this.translate.instant('HUB.sectionSettings'));
+    this.header.updateSectionName('SITEWINDER');
 
     this.setMember();
     this.setProducts();

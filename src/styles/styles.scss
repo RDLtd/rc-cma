@@ -633,45 +633,19 @@ form.rc-form-grid {
 
 
 // Default logo
-.rc-svg-logo {
+.rdl-svg-logo {
   height: 100%;
   max-width: 360px;
   margin: 0 0 1rem;
-  .rc-logo-group {
-    fill: white;
-    .rc-logo-circles { opacity: .38; }
-    .rc-logo-text {}
-  }
+  .icon { fill: white;}
+  .label { fill: white;}
   &.primary {
-    .rc-logo-group {
-      .rc-logo-circles {
-        fill: $rc-theme-primary;
-        opacity: 1;
-      }
-      .rc-logo-text {
-        fill: $rc-charcoal;
-      }
-    }
+    .icon { fill: $rc-theme-primary; }
+    .label { fill: $rc-theme-primary;}
   }
   &.accent {
-    .rc-logo-group {
-      .rc-logo-circles {
-        fill: $rc-theme-accent;
-        opacity: 1;
-      }
-      .rc-logo-text {
-        fill: $rc-charcoal;
-      }
-    }
-  }
-  &.rc-logo-footer {
-    width: 100px;
-    .rc-logo-group {
-      fill: grey;
-      .rc-logo-circles {
-        opacity: .5;
-      }
-    }
+    .icon { fill: $rc-theme-accent;}
+    .label { fill: white;}
   }
 }
 .mat-toolbar {
@@ -690,8 +664,8 @@ form.rc-form-grid {
     margin-top: $rc-header-height;
   }
   &.rc-toolbar-nav {
-    background-color: $rc-charcoal;
-    .rc-link-active { color: $rc-theme-primary !important; }
+    background-color: $rc-petrol;
+    .rc-link-active { color: white !important; }
   }
   &.rc-toolbar-section {
     background-color: $rc-theme-secondary;
@@ -752,19 +726,19 @@ form.rc-form-grid {
     &:hover {
       transform: scale(1.1);
       @include mat.elevation(3);
-      &:after {
-        content: '';
-        display: block;
-        width: 0;
-        height: 0;
-        border-left: 6px solid transparent;
-        border-right: 6px solid transparent;
-        border-top: 4px solid black;
-        position: absolute;
-        bottom: 6px;
-        left: 50%;
-        transform: translate(-50%, 50%);
-      }
+      //&:after {
+      //  content: '';
+      //  display: block;
+      //  width: 0;
+      //  height: 0;
+      //  border-left: 6px solid transparent;
+      //  border-right: 6px solid transparent;
+      //  border-top: 4px solid black;
+      //  position: absolute;
+      //  bottom: 6px;
+      //  left: 50%;
+      //  transform: translate(-50%, 50%);
+      //}
     }
     img {
       height: 100%;
@@ -785,9 +759,15 @@ form.rc-form-grid {
     display: flex;
     flex-direction: row;
     align-items: center;
+    color: red;
   }
 }
-
+.rc-section-toolbar-actions {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: $rc-theme-primary;
+}
 .rc-marketplace {
    padding-top: 1.5rem;
   .rc-card-menu {

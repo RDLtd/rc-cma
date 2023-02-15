@@ -72,10 +72,12 @@ export class AuthenticationService {
   }
 
   dspHomeScreen(sessionStatus): void {
-    this.inSession = sessionStatus === 'active';
+    this.inSession = (sessionStatus === 'active');
     this.memberSessionSubject.next(sessionStatus);
+
     // check to see if we've stored a deep link request
-    const landingPage = sessionStorage.getItem('rd_route_request') || 'hub';
+    const landingPage = sessionStorage.getItem('rd_route_request') || 'settings';
+
     this.router.navigate([`/${landingPage}`]).then();
   }
 
@@ -101,10 +103,11 @@ export class AuthenticationService {
   }
 
   isAuth(): boolean {
-    // Check expiry mins
+    // Check expiry
     this.sessionExpiresAt = JSON.parse(localStorage.getItem('rd_token_expires_at'));
     this.sessionTimeLeft = (this.sessionExpiresAt - new Date().getTime()) / 60000;
     // console.log(`Time left = ${this.sessionTimeLeft > 0? this.sessionTimeLeft : 'none'}`);
+
     // Does a session still exists?
     if (!!this.sessionExpiresAt && !!this.sessionTimeLeft) {
       // Is there time left?
@@ -126,10 +129,8 @@ export class AuthenticationService {
 
       } else {
         console.log(`In session: ${this.inSession}, Time left: ${this.sessionTimeLeft}`);
-        // If session time ends while app is open
-        // or when the page has been refreshed
-        // or when has navigated away from the page but returns within 5 mins
-        // then show 'page expired' snackbar
+        // If session time ends while app is open or when the page has been refreshed
+        // or when has navigated away from the page but returns within 5 mins show 'page expired' snackbar
         if (this.inSession || this.sessionTimeLeft > -5) {
           this.logout('expired');
         } else {
