@@ -11,7 +11,7 @@
           [cdkCopyToClipboard]="data['spwUrl']">
           <mat-icon>link</mat-icon>
         </button>
-        <button mat-icon-button mat-dialog-close>
+        <button mat-icon-button [mat-dialog-close]="false">
         <mat-icon>close</mat-icon>
       </button>
     </span>
