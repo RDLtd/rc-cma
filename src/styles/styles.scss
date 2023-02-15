@@ -1523,8 +1523,12 @@ ul.rc-lookup-results {
   background-color: #eee;
   margin: 0 0 8px 0;
   cursor: pointer;
+  transition: all .3s ease-in-out;
   @include mq(small) {
     flex-direction: row;
+  }
+  &:hover {
+    @include mat.elevation(8);
   }
   img {
     width: 100%;
@@ -1577,6 +1581,7 @@ ul.rc-lookup-results {
   display: block;
   margin: -20px 0 12px 0;
   font-size: 14px;
+  line-height: 1.6;
 }
 ul.rc-line-items {
   display: block;

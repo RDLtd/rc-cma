@@ -21,7 +21,6 @@
         <div class="rc-card-subtitle">
           {{ 'SETTINGS.infoAccounts' | translate }}
         </div>
-        <mat-card-content>
           <ul class="rc-line-items">
             <li><label>{{ 'SETTINGS.labelMemberId' | translate }}:</label>{{ member.member_id }}</li>
             <li><label>{{ 'SETTINGS.labelJoined' | translate }}:</label>{{ d_member_signedup }}</li>
@@ -104,7 +103,7 @@
 
           </div>
 
-        </mat-card-content>
+
       </mat-card>
       <!-- Referrals -->
       <mat-card appearance="outlined" class="rc-card-rounded">
@@ -125,14 +124,14 @@
         <div class="rc-card-subtitle">
           {{ 'SETTINGS.infoReferrals' | translate }}
         </div>
-        <mat-card-content>
+
           <ul class="rc-line-items">
             <li><label>{{ 'SETTINGS.labelReferralCode' | translate }}:</label>
               <a [href]="getReferralCode()" target="_blank">{{
                 member?.member_promo_code | uppercase }}</a>
             </li>
           </ul>
-        </mat-card-content>
+
       </mat-card>
       <!-- Auth -->
       <mat-card appearance="outlined" class="rc-card-rounded">
@@ -152,7 +151,7 @@
         <div class="rc-card-subtitle">
           {{ 'SETTINGS.infoAuth' | translate }}
         </div>
-        <mat-card-content>
+
           <ul class="rc-line-items">
             <li><label>{{ 'SETTINGS.labelEmail' | translate }}:</label>
               {{ member?.member_email | lowercase }}
@@ -161,7 +160,7 @@
               ********
             </li>
           </ul>
-        </mat-card-content>
+
       </mat-card>
       <!-- Contacts -->
       <mat-card appearance="outlined" class="rc-card-rounded">
@@ -181,7 +180,7 @@
         <div class="rc-card-subtitle">
           {{ 'SETTINGS.infoMember' | translate }}
         </div>
-        <mat-card-content>
+
 
           <ul class="rc-line-items">
             <li>
@@ -242,7 +241,7 @@
               <span>{{ 'SETTINGS.infoAvatar' | translate}}</span>
             </div>
           </div>
-        </mat-card-content>
+
       </mat-card>
 
 <!--          <mat-card-->
