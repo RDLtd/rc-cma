@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, lastValueFrom } from 'rxjs';
 import { AppConfig } from '../app.config';
 import { TranslateService } from '@ngx-translate/core';
 import { Member } from '../_models';
@@ -71,14 +71,35 @@ export class AuthenticationService {
     this.dspHomeScreen('active');
   }
 
-  dspHomeScreen(sessionStatus): void {
+  async dspHomeScreen(sessionStatus): Promise<any> {
+
+    const tgtPath = this.storage.getSession('rd_route_request');
+    const lastCmsPath = this.storage.get('rd_last_restaurant');
+
     this.inSession = (sessionStatus === 'active');
     this.memberSessionSubject.next(sessionStatus);
 
-    // check to see if we've stored a deep link request
-    const landingPage = sessionStorage.getItem('rd_route_request') || 'settings';
+    if(!!tgtPath) {
+      this.storage.removeSession('rd_route_request');
+      this.router.navigate([tgtPath]).then();
+      return;
+    }
 
-    this.router.navigate([`/${landingPage}`]).then();
+    if(!!lastCmsPath) {
+      this.router.navigate([`/cms/${lastCmsPath}`]).then();
+      return;
+    }
+
+    await lastValueFrom(this.restaurantService.getMemberRestaurants(this.member.member_id))
+      .then((data) => {
+        if (data['restaurants'].length > 0) {
+          console.log(data['restaurants']);
+          const id = data['restaurants'][0]['restaurant_id'];
+          console.log(`/cms/${id}`);
+          this.storage.set('rd_last_restaurant', id);
+          this.router.navigate([`/cms/${id}`]).then();
+        }
+    });
   }
 
   logout(reason): void {
