@@ -16,6 +16,7 @@ export class ContactComponent implements OnInit {
 
   member: any;
   email_message: string;
+  dialog: any;
 
   private token = new BehaviorSubject(new HttpParams().set('Authorization', 'Bearer' +
     ' 234242423wdfsdvdsfsdrfg34tdfverge'));
@@ -62,6 +63,7 @@ export class ContactComponent implements OnInit {
           next: () => {
             console.log('Support request email sent');
             this.dspSnackbarMsg(this.translate.instant('CONTACT.emailSent'), null);
+            this.dialog.close();
           },
           error: error => {
             console.log('Failed to send support request email', error);
