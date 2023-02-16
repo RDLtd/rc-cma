@@ -1,0 +1,17 @@
+<div class="rc-dialog rc-dialog-help">
+
+  <h2 mat-dialog-title>
+    {{ 'FAQS.titleFAQs' | translate }}
+  </h2>
+
+  <mat-dialog-content>
+    <ng-container *ngFor="let faq of faqs">
+      <markdown ngPreserveWhitespaces>{{ faq.faq_question }}</markdown>
+    </ng-container>
+  </mat-dialog-content>
+
+  <mat-dialog-actions  align="end">
+    <button mat-flat-button [mat-dialog-close]="false" color="accent">OK</button>
+  </mat-dialog-actions>
+
+</div>

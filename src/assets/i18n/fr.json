@@ -321,6 +321,9 @@
     "unableToAddAssociation": "Nous n'avons pas pu associer votre restaurant pour le moment. Merci de réessayer dans quelques instants. Notre équipe d'assistance a été informée.",
     "failedToSendSupportEmail": "Nous n'avons pas pu envoyer votre e-mail de demande d'assistance pour le moment. Merci de réessayer dans quelques instants. Notre équipe d'assistance a été informée."
   },
+  "FAQS": {
+    "titleFAQs": "Questions fréquemment posées"
+  },
 	"Global": {
 		"DOW-Dimanche": "Dimanche",
 		"DOW-Friday": "Vendredi",

@@ -10,6 +10,7 @@ import {ImageService} from '../_services/image.service';
 import {CloudinaryImage} from '@cloudinary/url-gen';
 import {RestaurantLookupComponent} from "../settings";
 import {ContactComponent} from "./contact/contact.component";
+import {FaqsComponent} from "./faqs/faqs.component";
 
 @Component({
   selector: 'app-rc-header',
@@ -122,7 +123,6 @@ export class HeaderComponent implements OnInit {
   }
 
   contact(): void {
-    console.log('will send contact email');
     const dialogRef = this.dialog.open(ContactComponent, {
       width: '480px',
       position: {'top': '10vh'},
@@ -133,6 +133,12 @@ export class HeaderComponent implements OnInit {
   }
 
   faqs(): void {
-    console.log('will show FAQs');
+    const dialogRef = this.dialog.open(FaqsComponent, {
+      width: '480px',
+      position: {'top': '10vh'},
+      data: {
+        member: this.member
+      }
+    });
   }
 }
