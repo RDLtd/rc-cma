@@ -298,32 +298,32 @@
 		"msgConfirmCancel": "The changes you have made have not yet been saved and will be lost if you continue. Do you want to discard changes and continue?",
 		"titleConfirmCancel": "Please Confirm"
 	},
-  "CONTACT": {
-    "titleContactSupport": "Contact our Support Team",
-    "labelBtnCancel": "Cancel",
-    "labelBtnConfirm": "Send Email",
-    "txtBody1": "If you are experiencing problems or need some help with using our application, please let us know.",
-    "txtBody2": "Enter a brief description in the box below and click **send email** - we'll get back to you as soon as possible.",
-    "labelHint": "Type your message to our support team here...",
-    "noText": "You have not typed a message yet...",
-    "emailSent": "Your email has been sent."
-  },
-  "ERRORS": {
-    "noServerResponse": "Our server has stopped responding, so we are unable to log you in at this time. Your internet connection looks stable, so please try again in a few moments. Our support team have been notified.",
-    "invalidServerResponse": "Our server returned an error, so we are unable to log you in at this time. Please try again in a few moments. Our support team have been notified.",
-    "failedToSetSession": "We were unable to store some cookies in your browser, so we are unable to log you in at this time. Please try again in a few moments. Our support team have been notified.",
-    "failedToSendRecoveryEmail": "We were unable to send your password recovery email. Please contact out support team for further assistance, they have been notified.",
-    "failedToCreateFreeMember": "We were unable to create your free account at this time. Please try again in a few moments. Our support team have been notified.",
-    "failedToUpdateRestaurantEmail": "We were unable to update the email for your restaurant at this time. Please try again in a few moments. Our support team have been notified.",
-    "failedToSendVerificationEmail": "We were unable send your verification email at this time. Please try again in a few moments. Our support team have been notified.",
-    "failedToLoadAssociatedRestaurants": "We were unable load your associated restaurants at this time. Please try again in a few moments. Our support team have been notified.",
-    "unableToLookupRestaurants": "We are unable look for restaurants at this time. Please try again in a few moments. Our support team have been notified.",
-    "unableToAddAssociation": "We were unable to associate your restaurant at this time. Please try again in a few moments. Our support team have been notified.",
-    "failedToSendSupportEmail": "We were unable send your support request email at this time. Please try again in a few moments. Our support team have been notified."
-  },
-  "FAQS": {
-    "titleFAQs": "Frequently Asked Questions"
-  },
+	"CONTACT": {
+		"emailSent": "Your email has been sent.",
+		"labelBtnCancel": "Cancel",
+		"labelBtnConfirm": "Send Email",
+		"labelHint": "Type your message to our support team here...",
+		"noText": "You have not typed a message yet...",
+		"titleContactSupport": "Contact our Support Team",
+		"txtBody1": "If you are experiencing problems or need some help with using our application, please let us know.",
+		"txtBody2": "Enter a brief description in the box below and click **send email** - we'll get back to you as soon as possible."
+	},
+	"ERRORS": {
+		"failedToCreateFreeMember": "We were unable to create your free account at this time. Please try again in a few moments. Our support team have been notified.",
+		"failedToLoadAssociatedRestaurants": "We were unable load your associated restaurants at this time. Please try again in a few moments. Our support team have been notified.",
+		"failedToSendRecoveryEmail": "We were unable to send your password recovery email. Please contact out support team for further assistance, they have been notified.",
+		"failedToSendSupportEmail": "We were unable send your support request email at this time. Please try again in a few moments. Our support team have been notified.",
+		"failedToSendVerificationEmail": "We were unable send your verification email at this time. Please try again in a few moments. Our support team have been notified.",
+		"failedToSetSession": "We were unable to store some cookies in your browser, so we are unable to log you in at this time. Please try again in a few moments. Our support team have been notified.",
+		"failedToUpdateRestaurantEmail": "We were unable to update the email for your restaurant at this time. Please try again in a few moments. Our support team have been notified.",
+		"invalidServerResponse": "Our server returned an error, so we are unable to log you in at this time. Please try again in a few moments. Our support team have been notified.",
+		"noServerResponse": "Our server has stopped responding, so we are unable to log you in at this time. Your internet connection looks stable, so please try again in a few moments. Our support team have been notified.",
+		"unableToAddAssociation": "We were unable to associate your restaurant at this time. Please try again in a few moments. Our support team have been notified.",
+		"unableToLookupRestaurants": "We are unable look for restaurants at this time. Please try again in a few moments. Our support team have been notified."
+	},
+	"FAQS": {
+		"titleFAQs": "Frequently Asked Questions"
+	},
 	"Global": {
 		"DOW-Dimanche": "Sunday",
 		"DOW-Friday": "Friday",
@@ -343,10 +343,10 @@
 	},
 	"HEADER": {
 		"labelAbout": "About this software",
+		"labelContact": "Contact Support",
+		"labelFAQs": "Frequently Asked Questions",
 		"labelHub": "Member's Hub",
 		"labelLogout": "Logout",
-    "labelFAQs": "Frequently Asked Questions",
-    "labelContact": "Contact Support",
 		"labelMarketplace": "Marketplace",
 		"labelSettings": "Account Settings",
 		"signedInAs": "SIGNED IN MEMBER",
@@ -514,14 +514,14 @@
 			"labelJobRole": "Job role",
 			"labelLastName": "Last name",
 			"labelTel": "Mobile number",
-			"titleUpdateContacts": "Member details"
+			"titleUpdateContacts": "User details"
 		},
 		"infoAccounts": "Restaurants that are linked to your account are shown below and you can manage additional restaurants by simply adding them here.\n\nTo view your billing history and payment details, or to download your invoices, select the 'MANAGE PAYMENTS' option above.",
-		"infoAuth": "These are the Membership credentials that you'll need to Sign In to the application. Passwords must be at least 8 characters.",
-		"infoAvatar": "Click the image add/edit and personalise your Membership details.",
-		"infoMember": "All communications regarding your Membership will be sent to this email address.",
+		"infoAuth": "These are the credentials that you'll need to Sign In to the application. Passwords must be at least 8 characters.",
+		"infoAvatar": "Click the image add/edit and personalise your account details.",
+		"infoMember": "All communications regarding your account will be sent to this email address.",
 		"infoNotification": "In addition to essential communications about your {{ brand }}  Membership, you may also choose receive any of the following, by ticking the relevant checkbox:",
-		"infoReferrals": "This is a unique referral code that you can share with any of your colleagues, to encourage them to join Restaurant Collective and be part of this exciting new organisation.",
+		"infoReferrals": "This is a unique referral code that you can share with any of your colleagues, to encourage them to join RDL and be part of this exciting new organisation.",
 		"labelAddRestaurant": "Add a restaurant to this account",
 		"labelAwaitingImage": "AWAITING IMAGE",
 		"labelBtnCancel": "Cancel",
@@ -530,12 +530,12 @@
 		"labelBtnUpload": "Upload",
 		"labelEmail": "Email",
 		"labelEvents": "{{ brand }} Events",
-		"labelFreeMembership": "Free Membership ",
-		"labelJoined": "Join Date",
+		"labelFreeMembership": "Free Account ",
+		"labelJoined": "Registration",
 		"labelLang": "Language",
 		"labelLoadingImage": "Please wait",
 		"labelManagePayments": "Manage payments",
-		"labelMemberId": "Member ID",
+		"labelMemberId": "User ID",
 		"labelName": "Name",
 		"labelNewDeals": "New Marketplace Deals",
 		"labelNewsletter": "{{ brand }} Newsletter (Monthly)",
@@ -555,7 +555,7 @@
 		"msgNewRequestReceived": "New request successfully received. Thank you.",
 		"msgNotificationsUpdated": "Your notification settings have been updated",
 		"msgPlanUpdated": "Your membership plan has been successfully updated to {{ plan }}",
-		"msgRemoveRestaurant": "Are you sure that you want to remove **{{ name }}** from your Membership account – you will no longer have access to manage their web content?",
+		"msgRemoveRestaurant": "Are you sure that you want to remove **{{ name }}** from your account – you will no longer have access to manage their web content?",
 		"msgRestaurantRemoved": "{{ name }} has been removed from your account",
 		"msgUpdateFailed": "Sorry, there was a problem updating your information",
 		"password": {
@@ -585,10 +585,10 @@
 		"titleAvatar": "Avatar / Image",
 		"titleConfirmAddRestaurant": "Add Restaurant Subscription",
 		"titleManagedRestaurants": "Managed restaurants ",
-		"titleMember": "Member details",
+		"titleMember": "User details",
 		"titleNotification": "Email Notifications",
 		"titleReferrals": "Referral code",
-		"titleSubscription": "Membership Subscription",
+		"titleSubscription": "Subscription",
 		"titleUploadAvatar": "Upload image"
 	},
 	"SIGNIN": {
