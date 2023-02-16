@@ -8,7 +8,7 @@ import {AppConfig} from "../../app.config";
 import {ErrorService} from "../../_services";
 
 @Component({
-  selector: 'app-rc-help',
+  selector: 'app-rc-contact',
   templateUrl: './contact.component.html'
 })
 

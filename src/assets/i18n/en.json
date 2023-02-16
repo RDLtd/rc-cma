@@ -321,6 +321,9 @@
     "unableToAddAssociation": "We were unable to associate your restaurant at this time. Please try again in a few moments. Our support team have been notified.",
     "failedToSendSupportEmail": "We were unable send your support request email at this time. Please try again in a few moments. Our support team have been notified."
   },
+  "FAQS": {
+    "titleFAQs": "Frequently Asked Questions"
+  },
 	"Global": {
 		"DOW-Dimanche": "Sunday",
 		"DOW-Friday": "Friday",

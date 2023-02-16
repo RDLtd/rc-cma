@@ -103,6 +103,7 @@ import { OnlineStatusModule } from 'ngx-online-status';
 import { AppTitleStrategy } from './app-title-strategy';
 import { lastValueFrom } from 'rxjs';
 import {ContactComponent} from "./common/contact/contact.component";
+import {FaqsComponent} from "./common/faqs/faqs.component";
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -155,6 +156,7 @@ export function appInitializerFactory(translate: TranslateService) {
     LoaderComponent,
     HelpComponent,
     ContactComponent,
+    FaqsComponent,
     SafePipe,
     SigninComponent,
     MarketplaceComponent,
