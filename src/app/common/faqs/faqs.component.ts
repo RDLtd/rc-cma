@@ -27,17 +27,20 @@ export class FaqsComponent implements OnInit {
     this.faqs.push({
       faq_rating: 3,
       faq_question: "Why can't I associate my restaurant?",
-      faq_response: "If your problem is in the restaurant search, try searching using some of the other criteria, such as **Post Code**"
+      faq_response: "If your problem is in the restaurant search, try searching using some of the other criteria, such as **Post Code**",
+      faq_show: false
     });
     this.faqs.push({
       faq_rating: 2,
       faq_question: "I have taken some pictures on my phone - how do I get them on to my website?",
-      faq_response: "You will first need to transfer them to a file system, or perhaps even your computer."
+      faq_response: "You will first need to transfer them to a file system, or perhaps even your computer.",
+      faq_show: true
     });
     this.faqs.push({
       faq_rating: 1,
       faq_question: "I already have a registered domain, how do I make it show this website?",
-      faq_response: "Our support team will help you with that, just fill in a support request and we'll get back to you."
+      faq_response: "Our support team will help you with that, just fill in a support request and we'll get back to you.",
+      faq_show: false
     });
   }
 
