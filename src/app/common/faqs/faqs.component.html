@@ -1,10 +1,13 @@
 <div class="rc-dialog rc-dialog-help">
 
-  <h2 mat-dialog-title>
-    {{ 'FAQS.titleFAQs' | translate }}
-  </h2>
-
   <mat-dialog-content>
+  <div>
+    <h2>
+      {{ 'FAQS.titleFAQs' | translate }}
+    </h2>
+  </div>
+
+
     <ng-container *ngFor="let faq of faqs">
       <markdown ngPreserveWhitespaces>{{ faq.faq_question }}</markdown>
     </ng-container>
