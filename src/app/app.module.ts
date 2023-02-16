@@ -102,6 +102,7 @@ import {CloudinaryModule} from '@cloudinary/ng';
 import { OnlineStatusModule } from 'ngx-online-status';
 import { AppTitleStrategy } from './app-title-strategy';
 import { lastValueFrom } from 'rxjs';
+import {ContactComponent} from "./common/contact/contact.component";
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -153,6 +154,7 @@ export function appInitializerFactory(translate: TranslateService) {
     AboutComponent,
     LoaderComponent,
     HelpComponent,
+    ContactComponent,
     SafePipe,
     SigninComponent,
     MarketplaceComponent,

@@ -298,6 +298,16 @@
 		"msgConfirmCancel": "The changes you have made have not yet been saved and will be lost if you continue. Do you want to discard changes and continue?",
 		"titleConfirmCancel": "Please Confirm"
 	},
+  "CONTACT": {
+    "titleContactSupport": "Contact our Support Team",
+    "labelBtnCancel": "Cancel",
+    "labelBtnConfirm": "Send Email",
+    "txtBody1": "If you are experiencing problems or need some help with using our application, please let us know.",
+    "txtBody2": "Enter a brief description in the box below and click **send email** - we'll get back to you as soon as possible.",
+    "labelHint": "Type your message to our support team here...",
+    "noText": "You have not typed a message yet...",
+    "emailSent": "Your email has been sent."
+  },
   "ERRORS": {
     "noServerResponse": "Our server has stopped responding, so we are unable to log you in at this time. Your internet connection looks stable, so please try again in a few moments. Our support team have been notified.",
     "invalidServerResponse": "Our server returned an error, so we are unable to log you in at this time. Please try again in a few moments. Our support team have been notified.",
@@ -308,7 +318,8 @@
     "failedToSendVerificationEmail": "We were unable send your verification email at this time. Please try again in a few moments. Our support team have been notified.",
     "failedToLoadAssociatedRestaurants": "We were unable load your associated restaurants at this time. Please try again in a few moments. Our support team have been notified.",
     "unableToLookupRestaurants": "We are unable look for restaurants at this time. Please try again in a few moments. Our support team have been notified.",
-    "unableToAddAssociation": "We were unable to associate your restaurant at this time. Please try again in a few moments. Our support team have been notified."
+    "unableToAddAssociation": "We were unable to associate your restaurant at this time. Please try again in a few moments. Our support team have been notified.",
+    "failedToSendSupportEmail": "We were unable send your support request email at this time. Please try again in a few moments. Our support team have been notified."
   },
 	"Global": {
 		"DOW-Dimanche": "Sunday",
@@ -331,6 +342,8 @@
 		"labelAbout": "About this software",
 		"labelHub": "Member's Hub",
 		"labelLogout": "Logout",
+    "labelFAQs": "Frequently Asked Questions",
+    "labelContact": "Contact Support",
 		"labelMarketplace": "Marketplace",
 		"labelSettings": "Account Settings",
 		"signedInAs": "SIGNED IN MEMBER",
