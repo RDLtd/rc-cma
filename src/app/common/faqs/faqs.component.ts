@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import {Faqs} from "../../_models/faqs";
+import { Faqs } from "../../_models/faqs";
+import { ErrorService, MemberService } from "../../_services";
 
 @Component({
   selector: 'app-rc-faqs',
@@ -10,8 +11,12 @@ import {Faqs} from "../../_models/faqs";
 export class FaqsComponent implements OnInit {
 
   faqs: Faqs[] = [];
+  display_faqs: Faqs[] = [];
+  search_text: string;
 
   constructor(
+    private memberService: MemberService,
+    private error: ErrorService,
     public dialogRef: MatDialogRef<FaqsComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {  }
 
@@ -23,25 +28,26 @@ export class FaqsComponent implements OnInit {
   }
 
   GetFaqDATA(): void {
-    // dummy data for now
-    this.faqs.push({
-      faq_rating: 3,
-      faq_question: "Why can't I associate my restaurant?",
-      faq_response: "If your problem is in the restaurant search, try searching using some of the other criteria, such as **Post Code**",
-      faq_show: false
-    });
-    this.faqs.push({
-      faq_rating: 2,
-      faq_question: "I have taken some pictures on my phone - how do I get them on to my website?",
-      faq_response: "You will first need to transfer them to a file system, or perhaps even your computer.",
-      faq_show: true
-    });
-    this.faqs.push({
-      faq_rating: 1,
-      faq_question: "I already have a registered domain, how do I make it show this website?",
-      faq_response: "Our support team will help you with that, just fill in a support request and we'll get back to you.",
-      faq_show: false
-    });
+    this.memberService.getFAQs(localStorage.getItem('rd_language'))
+      .subscribe({
+        next: obj => {
+          this.faqs = obj['faqs'];
+          this.display_faqs = this.faqs
+        },
+        error: error => {
+          console.log(error);
+          this.error.handleError('', 'Failed to get faqs in faqs component! ' + error);
+        }
+      });
   }
 
+  doSearch() {
+    const self= this;
+    // filter the faq array based on search text in questions
+    this.display_faqs = this.faqs.filter(function (faq)
+      {
+        return faq.faq_question.toUpperCase().includes(self.search_text.toUpperCase())
+      }
+    );
+  }
 }

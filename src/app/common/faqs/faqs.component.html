@@ -8,15 +8,28 @@
   </div>
 
 
-    <ng-container *ngFor="let faq of faqs">
-      <markdown ngPreserveWhitespaces>{{ faq.faq_question }}</markdown>
-      <ng-container *ngIf="faq.faq_show">
-        <markdown ngPreserveWhitespaces>{{ faq.faq_response }}</markdown>
-      </ng-container>
+    <ng-container *ngFor="let faq of display_faqs">
+
+      <mat-expansion-panel hideToggle style="margin-top: 5px">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{ faq.faq_question }}
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <p><markdown ngPreserveWhitespaces>{{ faq.faq_response }}</markdown></p>
+      </mat-expansion-panel>
+
     </ng-container>
   </mat-dialog-content>
 
   <mat-dialog-actions  align="end">
+    <mat-form-field class="rc-full-width" appearance="outline">
+      <input
+        matInput
+        placeholder="Search in Questions..."
+        (keyup)="doSearch()"
+        [(ngModel)]="search_text">
+    </mat-form-field>
     <button mat-flat-button [mat-dialog-close]="false" color="accent">OK</button>
   </mat-dialog-actions>
 
