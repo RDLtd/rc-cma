@@ -81,7 +81,7 @@ export class SettingsComponent implements OnInit {
 
     // Update header label
     //this.header.updateSectionName(this.translate.instant('HUB.sectionSettings'));
-    this.header.updateSectionName('SITEWINDER');
+    this.header.updateSectionName('PRODUCT NAME');
 
     this.setMember();
     this.setProducts();
