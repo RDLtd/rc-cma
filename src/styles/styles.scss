@@ -66,7 +66,7 @@ $config: mat.define-typography-config();
 .rc-invisible { visibility: hidden; }
 .rc-full-width { width: 100%; }
 .rc-half-width { width: calc(50% - 2px);}
-.rc-link-active { color: $rc-theme-accent !important; }
+.rc-link-active { color: $rc-theme-accent !important;}
 .rc-link-like { cursor: pointer; }
 .rc-disable {
   filter: saturate(0%);
