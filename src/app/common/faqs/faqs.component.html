@@ -10,13 +10,13 @@
 
     <ng-container *ngFor="let faq of display_faqs">
 
-      <mat-expansion-panel hideToggle style="margin-top: 5px">
+      <mat-expansion-panel hideToggle>
         <mat-expansion-panel-header>
           <mat-panel-title>
             {{ faq.faq_question }}
           </mat-panel-title>
         </mat-expansion-panel-header>
-        <p><markdown ngPreserveWhitespaces>{{ faq.faq_response }}</markdown></p>
+        <markdown ngPreserveWhitespaces>{{ faq.faq_response }}</markdown>
       </mat-expansion-panel>
 
     </ng-container>

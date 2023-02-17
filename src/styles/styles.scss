@@ -7,9 +7,6 @@
 @import 'bpi';
 @import "mozrest";
 
-// Create a config with the default MAT typography levels.
-$config: mat.define-typography-config();
-
 /**
 * Utility classes
 * ----------------------------------
@@ -49,8 +46,6 @@ $config: mat.define-typography-config();
   display: block;
   margin-bottom: 1rem;
 }
-
-
 
 .rc-codes {
   display: flex;
@@ -131,20 +126,6 @@ a.rc-back {
 .rc-warn { color: $rc-theme-warn; }
 .rc-media-small-hide { display: none !important; }
 .rc-media-med { display: flex !important; }
-
-
-// Unused
-// -----------------------------------
-/**
-.agm-map { height: 300px; }
-.rc-loader-white {
-  .rc-spinner div { background-color: white !important;
-  }
-}
-
-*/
-
-
 .rc-user-menu {
   padding: 16px 18px 8px;
   h3 {
@@ -160,11 +141,7 @@ a.rc-back {
   .rc-media-med { display: flex !important; }
   .rc-codes { flex-direction: row;}
 }
-@media only screen
-and (min-device-width: 768px)
-and (max-device-width: 1024px)
-and (orientation: landscape)
-and (-webkit-min-device-pixel-ratio: 1) {}
+
 
 /**
 * MAT/MDC Overrides
@@ -309,7 +286,16 @@ a.mat-mdc-menu-item {text-decoration: none;}
     }
   }
 }
-
+.bpi-logos {
+  background: white;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 1rem auto;
+}
 /**
 * RC layouts
 * -------------------------------
@@ -355,14 +341,12 @@ a.mat-mdc-menu-item {text-decoration: none;}
   }
 }
 .rc-content-container {
-  max-width: $rc-max-width;
+  max-width: min(calc(100vw - 2rem), #{$rc-max-width});
   margin: 1.5rem auto;
   &.full-width {
     max-width: calc(100% - 2rem);
   }
 }
-
-
 .rc-layout-split-container {
   min-height: 100vh;
   display: flex;
@@ -522,16 +506,7 @@ a.mat-mdc-menu-item {text-decoration: none;}
       }
   }
 }
-.bpi-logos {
-  background: white;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin: 1rem auto;
-}
+
 form.rc-form-grid {
   display: grid;
   gap:8px;
@@ -551,8 +526,6 @@ form.rc-form-grid {
     margin: 0 0 .25rem;
   }
 }
-
-
 .rc-about {
   display: flex;
   flex-direction: column;
@@ -844,10 +817,14 @@ form.rc-form-grid {
 .rc-card-rounded {
   position: relative;
   height: 100%;
-
+  background-color: white;
   border-radius: 16px !important;
   padding: 24px 24px 48px !important;
   box-shadow: 0 9px 68px 0 rgb(0 0 0 / 20%);
+  h2 {
+    margin-top: 0;
+    font-weight: $rc-display-font-weight;
+  }
   .rc-card-menu {
     position: absolute;
     top: 8px
@@ -1928,64 +1905,6 @@ button.rc-member-assc {
   }
 }
 
-/*
-/  Membership plans
-*/
-.rc-member-plans {
-  // this seems a bit excessive, but it's the only way I've managed
-  // to override the default mat classes
-  .mat-mdc-list-base .mat-mdc-list-item .mat-list-item-content-reverse,
-  .mat-list-base .mat-list-option .mat-list-item-content-reverse {
-    padding: 0;
-    margin: 0;
-  }
-  /* TODO(mdc-migration): The following rule targets internal classes of list that may no longer apply for the MDC version.*/
-  .mat-list-single-selected-option,
-  .mat-list-single-selected-option:hover,
-  .mat-list-single-selected-option:focus {
-    border: 1px solid $rc-theme-accent !important;
-    background-color: transparent;
-  }
-  /* TODO(mdc-migration): The following rule targets internal classes of list that may no longer apply for the MDC version.*/
-  .mat-mdc-list-item.mat-list-option {
-    /* TODO(mdc-migration): The following rule targets internal classes of list that may no longer apply for the MDC version.*/
-    .mat-list-text { padding: 0 !important;}
-    height: auto !important;
-    margin: 8px 0;
-    padding: 16px;
-    border-radius: 6px;
-    border: 1px solid $rc-cool-grey;
-
-    div.content {
-      display: flex;
-      justify-content: space-between;
-      div:last-child {
-        width: 20%;
-      }
-    }
-
-    h3 {
-      font-weight: $rc-display-font-weight;
-      line-height: 1;
-      margin: 0 0 4px;
-      font-size: 16px;
-    }
-    p {
-      font-size: 12px;
-      font-weight: $rc-default-font-weight;
-      line-height: 1.3;
-      margin: 0;
-    }
-    span {
-      font-size: 9px;
-      text-transform: uppercase;
-      text-align: right;
-      font-weight: $rc-default-font-weight;
-      display: block;
-    }
-  }
-}
-
 /**
  * RDL Styles
  * -----------------------------------------------
@@ -2015,4 +1934,56 @@ button.rc-member-assc {
 }
 
 
+// Probably no longer required
+// ------------------------------------
+
+//.rc-member-plans {
+//  // this seems a bit excessive, but it's the only way I've managed
+//  // to override the default mat classes
+//  .mat-mdc-list-base .mat-mdc-list-item .mat-list-item-content-reverse,
+//  .mat-list-base .mat-list-option .mat-list-item-content-reverse {
+//    padding: 0;
+//    margin: 0;
+//  }
+//  .mat-list-single-selected-option,
+//  .mat-list-single-selected-option:hover,
+//  .mat-list-single-selected-option:focus {
+//    border: 1px solid $rc-theme-accent !important;
+//    background-color: transparent;
+//  }
+//  .mat-mdc-list-item.mat-list-option {
+//    .mat-list-text { padding: 0 !important;}
+//    height: auto !important;
+//    margin: 8px 0;
+//    padding: 16px;
+//    border-radius: 6px;
+//    border: 1px solid $rc-cool-grey;
+//    div.content {
+//      display: flex;
+//      justify-content: space-between;
+//      div:last-child {
+//        width: 20%;
+//      }
+//    }
+//    h3 {
+//      font-weight: $rc-display-font-weight;
+//      line-height: 1;
+//      margin: 0 0 4px;
+//      font-size: 16px;
+//    }
+//    p {
+//      font-size: 12px;
+//      font-weight: $rc-default-font-weight;
+//      line-height: 1.3;
+//      margin: 0;
+//    }
+//    span {
+//      font-size: 9px;
+//      text-transform: uppercase;
+//      text-align: right;
+//      font-weight: $rc-default-font-weight;
+//      display: block;
+//    }
+//  }
+//}
 

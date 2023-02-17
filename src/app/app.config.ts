@@ -50,7 +50,7 @@ export class AppConfig {
 
   private brands = {
     rc: {
-      name: 'Restaurant Collective',
+      name: 'RDL',
       prefix: 'rc',
       logo: 'rc-logo',
       url: `https://${this.tld.rc}`,
