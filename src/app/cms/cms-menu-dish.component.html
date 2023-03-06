@@ -28,7 +28,7 @@
             <input
                 name="cms_dish_name"
                 matInput
-                maxlength=50
+                maxlength="50"
                 [ngModel]="data['dish']['cms_dish_name']"
                 required>
           </mat-form-field>
@@ -48,6 +48,7 @@
         <mat-label>{{ 'CMS.MENUS.labelDescription' | translate }}</mat-label>
         <textarea
             matInput
+            maxlength="200"
             name="cms_dish_desc"
             [ngModel]="data['dish']['cms_dish_desc']"></textarea>
       </mat-form-field>

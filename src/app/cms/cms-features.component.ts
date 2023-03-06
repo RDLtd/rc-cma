@@ -23,7 +23,7 @@ export class CmsFeaturesComponent implements OnInit {
   descStraplineTotal = 50;
   descSentenceTotal = 100;
   descParagraphTotal = 200;
-  descFullTotal = 5000;
+  descFullTotal = 1000;
   separatorKeysCodes = [ENTER, 188];
   removable = true;
 

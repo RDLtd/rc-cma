@@ -45,6 +45,7 @@
           name="restaurant_email"
           type="email"
           matInput
+          maxlength="150"
           pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$"
           [disabled]="!editable"
           required>
@@ -68,6 +69,7 @@
           #verifyCode
           name="profile_verify"
           matInput
+          maxlength="12"
           ngModel
           autocomplete="off"
           minlength="10"

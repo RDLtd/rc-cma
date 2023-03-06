@@ -11,6 +11,7 @@
             <input
               name="member_first_name"
               matInput
+              maxlength="20"
               [(ngModel)]="member.member_first_name"
               required>
             <mat-error class="rc-flex-end">{{ 'SETTINGS.contacts.invalidRequired' | translate }}</mat-error>
@@ -21,6 +22,7 @@
             <input
               name="member_last_name"
               matInput
+              maxlength="30"
               [(ngModel)]="member.member_last_name"
               required>
             <mat-error class="rc-flex-end">{{ 'SETTINGS.contacts.invalidRequired' | translate }}</mat-error>
@@ -45,6 +47,7 @@
             <input
               name="member_email"
               matInput
+              maxlength="50"
               [(ngModel)]="member.member_email"
               required
               email>
@@ -57,6 +60,7 @@
               name="member_telephone"
               type="text"
               matInput
+              maxlength="20"
               [(ngModel)]="member.member_telephone"
               minlength="11"
               [pattern]="patternMobile"

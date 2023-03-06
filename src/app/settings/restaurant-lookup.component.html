@@ -16,6 +16,7 @@
           name="search"
           type="text"
           matInput
+          maxlength="100"
           (keyup)="findRestaurants(searchInput.value)"
           autocomplete="off"
           autofocus>
@@ -47,6 +48,7 @@
         <input
         id="newRestInput"
         matInput
+        maxlength="100"
         name="newRestaurantName"
         [ngModel]="searchInput.value"
         type="text"
@@ -62,6 +64,7 @@
         <input
           style="text-transform: uppercase"
           matInput
+          maxlength="20"
           name="newRestaurantPostcode"
           ngModel
           type="text"
@@ -79,6 +82,7 @@
           matInput
           name="newRestaurantTel"
           ngModel
+          maxlength="20"
           type="text"
           autocomplete="off"
           pattern="[0-9][0-9]*|0"
