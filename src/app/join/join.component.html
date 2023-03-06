@@ -85,6 +85,7 @@
             name="first_name"
             [(ngModel)]="pendingMember.first_name"
             matInput
+            maxlength="20"
             [placeholder]="'JOIN.placeholderFirstName' | translate"
             required
             autofocus>
@@ -98,6 +99,7 @@
             name="last_name"
             [(ngModel)]="pendingMember.last_name"
             matInput
+            maxlength="30"
             [placeholder]="'JOIN.placeholderLastName' | translate"
             required>
           <mat-error>{{ 'JOIN.invalidRequired' | translate }}</mat-error>
@@ -124,6 +126,7 @@
             #email="ngModel"
             [(ngModel)]="pendingMember.email"
             matInput
+            maxlength="50"
             type="email"
             name="email"
             pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
@@ -153,6 +156,7 @@
           <mat-label>{{ 'JOIN.labelCode' | translate }}</mat-label>
           <input  [(ngModel)]="referrer.code"
                   matInput
+                  maxlength="20"
                   type="text"
                   name="referral_code"
                   [placeholder]="'JOIN.placeholderCode' | translate">

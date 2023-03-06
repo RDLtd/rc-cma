@@ -28,6 +28,7 @@
           <mat-label>{{ 'SIGNIN.labelEmail' | translate }}</mat-label>
           <input
             matInput
+            maxlength="50"
             ngModel
             type="email"
             name="email"
@@ -58,6 +59,7 @@
           <input
             #inputEmail
             matInput
+            maxlength="50"
             [ngModel]="newMemberEmail"
             type="email"
             name="email"
@@ -70,6 +72,7 @@
           <mat-label>{{ 'SIGNIN.labelPassword' | translate }}</mat-label>
           <input
             matInput
+            maxlength="50"
             name="pwd"
             ngModel
             [type]="hidePwd ? 'password' : 'text'"

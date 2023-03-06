@@ -15,6 +15,7 @@
             name="restaurant_name"
             type="text"
             matInput
+            maxlength="100"
             [(ngModel)]="restaurant.restaurant_name"
             required
             [disabled]="!editMode">
@@ -27,6 +28,7 @@
             name="restaurant_group_name"
             type="text"
             matInput
+            maxlength="100"
             #restaurant_group_name="ngModel"
             [(ngModel)]="restaurant.restaurant_group_name"
             [disabled]="!editMode">
@@ -38,6 +40,7 @@
             name="restaurant_address_1"
             type="text"
             matInput
+            maxlength="100"
             #restaurant_address_1="ngModel"
             [(ngModel)]="restaurant.restaurant_address_1"
             required
@@ -49,6 +52,7 @@
             name="restaurant_address_2"
             type="text"
             matInput
+            maxlength="100"
             #restaurant_address_2="ngModel"
             [(ngModel)]="restaurant.restaurant_address_2"
             [disabled]="!editMode">
@@ -59,6 +63,7 @@
             name="restaurant_address_3"
             type="text"
             matInput
+            maxlength="50"
             #restaurant_address_3="ngModel"
             [(ngModel)]="restaurant.restaurant_address_3"
             [disabled]="!editMode">
@@ -70,6 +75,7 @@
             name="restaurant_post_code"
             type="text"
             matInput
+            maxlength="20"
             #restaurant_post_code="ngModel"
             [(ngModel)]="restaurant.restaurant_post_code"
             [disabled]="!editMode">
@@ -109,6 +115,7 @@
             name="restaurant_telephone"
             type="text"
             matInput
+            maxlength="20"
             #restaurant_name="ngModel"
             [(ngModel)]="restaurant.restaurant_telephone"
             required
@@ -121,6 +128,7 @@
             name="restaurant_email"
             type="text"
             matInput
+            maxlength="150"
             #restaurant_name="ngModel"
             [(ngModel)]="restaurant.restaurant_email"
             required
@@ -133,6 +141,7 @@
             name="restaurant_website"
             type="text"
             matInput
+            maxlength="150"
             #restaurant_name="ngModel"
             [(ngModel)]="restaurant.restaurant_website"
             [disabled]="!editMode">
@@ -144,6 +153,7 @@
             name="restaurant_facebook"
             type="text"
             matInput
+            maxlength="200"
             #restaurant_name="ngModel"
             [(ngModel)]="restaurant.restaurant_facebook"
             [disabled]="!editMode">
@@ -154,6 +164,7 @@
             name="restaurant_twitter"
             type="text"
             matInput
+            maxlength="100"
             #restaurant_name="ngModel"
             [(ngModel)]="restaurant.restaurant_twitter"
             [disabled]="!editMode">
@@ -164,6 +175,7 @@
             name="restaurant_instagram"
             type="text"
             matInput
+            maxlength="100"
             #restaurant_name="ngModel"
             [(ngModel)]="restaurant.restaurant_instagram"
             [disabled]="!editMode">
