@@ -535,8 +535,21 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
     }
   }
 
+  checkAssociation(restaurant_id, member_id): boolean {
+    // apptiser update ks 090323
+    // return true if the current restaurant is associated with this member
+    // (here we are looking to return false if this was curated)
+    // TODO
+    console.log('restaurant_id', restaurant_id, 'member_id', member_id);
+    return true;
+  }
+
   publishSPW(): void {
-    this.cms.publish(this.restaurant.restaurant_id, true)
+    // apptiser update ks 090323 - added member type (for apptiser) and association status (for rdl.network)
+    this.cms.publish(this.restaurant.restaurant_id,
+    true,
+    this.user.member_membership_type,
+    this.checkAssociation(this.restaurant.restaurant_id, this.user.member_id))
         .then(res => {
           if (res['status'] === 'OK') {
             // console.log('Publish success:', res);

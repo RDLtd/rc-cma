@@ -425,15 +425,45 @@ export class CMSService {
       });
   }
 
-  async publish(restaurant_id, production: Boolean): Promise<any> {
+  async publish(restaurant_id: string, production: Boolean, membership_type: string, associated: boolean): Promise<any> {
+    // apptiser update ks 090323 need to select endpoint and template based on brand
+    if (this.config.brand.prefix === 'rc' || this.config.brand.prefix === 'ri') {
+      // use the exising 'old' templates for now...
       return await lastValueFrom(this.http.post(this.config.apiUrl + '/spw/makespw',
-          {
-              restaurant_id,
-              production,
-              company: this.config.brand.prefix,
-              userCode: this.config.userAPICode,
-              token: this.authToken
-          }));
+        {
+          restaurant_id,
+          production,
+          company: this.config.brand.prefix,
+          userCode: this.config.userAPICode,
+          token: this.authToken
+        }));
+    } else {
+      // apptiser update ks 090323
+      // call the new endpoint to generate the data.json, etc., etc.
+      // send the brand requirements and also choose the template, and send whether this was an associated restaurant
+      let template;
+      if (this.config.brand.prefix === 'rdl') {
+        template = 'rdl-managed.html';
+      } else {
+        if (membership_type === 'premium') {
+          template ='apptiser-premium.html';
+        } else {
+          template ='apptiser.html';
+        }
+      }
+      console.log('Activate generator', restaurant_id, production, template, associated, this.config.brand.prefix);
+      // return await lastValueFrom(this.http.post(this.config.apiUrl + '/spw/generateAWP',
+      //   {
+      //     restaurant_id,
+      //     production,
+      //     template,
+      //     associated,
+      //     company: this.config.brand.prefix,
+      //     userCode: this.config.userAPICode,
+      //     token: this.authToken
+      //   }));
+    }
+
   }
 
   updateCoordinates(restaurant_id: string, restaurant_lat: number, restaurant_lng: number) {

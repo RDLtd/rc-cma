@@ -21,7 +21,9 @@ export class CmsPreviewComponent implements OnInit {
 
     ngOnInit() {
 
-      this.cms.publish(this.data.id, false)
+      // apptiser update ks 090323
+      // TODO just dummy arguments now for the preview...
+      this.cms.publish(this.data.id, false, 'standard', true)
         .then(res => {
           console.log('PREVIEW:', res);
           if (res['status'] === 'OK') {

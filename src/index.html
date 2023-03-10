@@ -23,7 +23,7 @@
       // If a language has already been established
       // don't override as it may have been
       // selected by the user
-      console.log(localStorage.getItem('rd_language'), lang);
+      console.log(localStorage.getItem('rd_language'), lang, ref);
       if (!localStorage.getItem('rd_language')) {
         localStorage.setItem('rd_language', lang);
       }
@@ -31,14 +31,29 @@
       if (path !== '/') {
         sessionStorage.setItem('rd_route_request', path)
       }
-      // Is this an RI domain
+      // apptiser update ks 090323 - added app and rdl to brands
+      // Choose the correct brand from the domain
       if (ref.includes('independants')) {
         localStorage.setItem('rd_brand', 'ri');
         document.title = 'Restaurateurs Indépendants';
         return 'ri';
       } else {
-        localStorage.setItem('rd_brand', 'rc');
-        return 'rc';
+        if (ref.includes('collective')) {
+          localStorage.setItem('rd_brand', 'rc');
+          document.title = 'Restaurant Collective';
+          return 'rc';
+        } else {
+          if (ref.includes('network')) {
+            localStorage.setItem('rd_brand', 'rdl');
+            document.title = 'Restaurant Developments';
+            return 'rdl';
+          } else {
+            // default is apptiser
+            localStorage.setItem('rd_brand', 'app');
+            document.title = 'apptiser';
+            return 'app';
+          }
+        }
       }
     }());
   </script>
@@ -181,7 +196,10 @@
 
 </body>
 <script>
-  document.getElementById(rd_brand + 'Brand').style.display = 'block';
+  // apptiser update ks 090323
+  // console.log(rd_brand + 'Brand');
+  // this need to be fixed at rcBrand
+  document.getElementById('rcBrand').style.display = 'block';
   initMap = () => console.log('GoogleMaps API loaded');
 </script>
 </html>

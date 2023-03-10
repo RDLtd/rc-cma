@@ -566,7 +566,10 @@ export class MemberService {
   getProducts() {
     return this.http.post(this.config.apiUrl + '/members/getproducts',
       {
-        company: this.config.brand.prefix,
+        // apptiser update ks 090323
+        // TODO just set to rc for now while we are waiting for stripe setup
+        company: 'rc',
+        // company: this.config.brand.prefix,
         userCode: this.config.userAPICode,
         token: this.authToken
       });
