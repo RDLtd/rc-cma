@@ -425,7 +425,7 @@ export class CMSService {
       });
   }
 
-  async publish(restaurant_id: string, production: Boolean, membership_type: string, associated: boolean): Promise<any> {
+  async publish(restaurant_id: string, production: Boolean, membership_type: string): Promise<any> {
     // apptiser update ks 090323 need to select endpoint and template based on brand
     if (this.config.brand.prefix === 'rc' || this.config.brand.prefix === 'ri') {
       // use the exising 'old' templates for now...
@@ -451,13 +451,12 @@ export class CMSService {
           template ='apptiser.html';
         }
       }
-      console.log('Activate generator', restaurant_id, production, template, associated, this.config.brand.prefix);
+      console.log('Activate generator', restaurant_id, production, template, this.config.brand.prefix);
       // return await lastValueFrom(this.http.post(this.config.apiUrl + '/spw/generateAWP',
       //   {
       //     restaurant_id,
       //     production,
       //     template,
-      //     associated,
       //     company: this.config.brand.prefix,
       //     userCode: this.config.userAPICode,
       //     token: this.authToken
