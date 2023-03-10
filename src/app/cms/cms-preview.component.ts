@@ -23,7 +23,7 @@ export class CmsPreviewComponent implements OnInit {
 
       // apptiser update ks 090323
       // TODO just dummy arguments now for the preview...
-      this.cms.publish(this.data.id, false, 'standard', true)
+      this.cms.publish(this.data.id, false, 'standard')
         .then(res => {
           console.log('PREVIEW:', res);
           if (res['status'] === 'OK') {
