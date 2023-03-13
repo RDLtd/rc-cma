@@ -1,9 +1,8 @@
 <div class="rc-content-container rc-full-width">
   <div class="rc-grid-masonry-2 golden">
+
   <!-- CORE DATA -->
-  <mat-card
-    appearance="outlined"
-    class="rc-cms-card-core">
+  <mat-card appearance="outlined">
     <div class="rc-card-title-img-wrapper">
       <advanced-image
         *ngIf="cldImage"
@@ -12,9 +11,9 @@
       </advanced-image>
     </div>
     <mat-card-header>
-    <mat-card-title>{{ restaurant?.restaurant_name }}</mat-card-title>
-    <mat-card-subtitle>{{ restaurant?.restaurant_group_name }}</mat-card-subtitle>
-    </mat-card-header>
+      <mat-card-title>{{ restaurant?.restaurant_name }}</mat-card-title>
+      <mat-card-subtitle>{{ restaurant?.restaurant_group_name }}</mat-card-subtitle>
+      </mat-card-header>
     <mat-card-content>
       <div class="rc-card-help">
         <button
@@ -89,6 +88,7 @@
       </button>
     </mat-card-actions>
   </mat-card>
+
   <!-- SPW: loading -->
   <mat-card
     appearance="outlined"
@@ -102,11 +102,13 @@
     </mat-card-content>
     <mat-card-actions></mat-card-actions>
   </mat-card>
+
   <!-- SPW: no changes -->
   <mat-card
     appearance="outlined"
     *ngIf="!cmsChanged && cmsHasSufficientData && !isPreviewing"
-    class="rc-cms-dash-info">
+    class="rdl-card rc-cms-dash-info">
+
     <!-- HEADER -->
     <!-- Verified by/data -->
     <mat-card-header *ngIf="!isPreviewing">
@@ -148,11 +150,12 @@
       </a>
     </mat-card-actions>
   </mat-card>
+
   <!-- SPW: has changes -->
   <mat-card
     appearance="outlined"
     *ngIf="cmsChanged && !isPreviewing"
-    class="rc-cms-dash-info">
+    class="rdl-card">
 
     <!-- HEADER -->
     <!-- Unpublished changes -->
@@ -204,7 +207,7 @@
   </mat-card>
 
   <!-- CONTENT Summary -->
-  <mat-card appearance="outlined">
+  <mat-card appearance="raised" class="rdl-card">
     <div class="rc-card-help">
       <button
         mat-icon-button
@@ -311,6 +314,7 @@
       </mat-list>
     </mat-card-content>
   </mat-card>
+
   </div>
 </div>
 

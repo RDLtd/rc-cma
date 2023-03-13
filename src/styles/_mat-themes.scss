@@ -35,19 +35,23 @@ $rdl-palette: (
 @include mat.core();
 
 $rdl-typography-config: mat.define-typography-config(
-  $headline-1: mat.define-typography-level(112px, 112px, 300, $letter-spacing: -0.05em),
+  $headline-1: mat.define-typography-level(112px, 112px, 300, $letter-spacing: 0em),
   $headline-2: mat.define-typography-level(56px, 56px, 400, $letter-spacing: -0.02em),
   $headline-3: mat.define-typography-level(45px, 48px, 400, $letter-spacing: -0.005em),
   $headline-4: mat.define-typography-level(34px, 40px, 400),
+
   $headline-5: mat.define-typography-level(1.5rem, 1.1, 500, $letter-spacing: 0rem), // h1
-  $headline-6: mat.define-typography-level(1.25, 1.1, 500, $letter-spacing: 0rem), // h2
-  $subtitle-1: mat.define-typography-level(1rem, 1.1, 500, $letter-spacing: 0.05rem), // h3
+  $headline-6: mat.define-typography-level(1.25rem, 1.1, 500, $letter-spacing: 0rem), // h2
+  $subtitle-1: mat.define-typography-level(1rem, 1.1, 500, $letter-spacing: 0rem), // h3
   $subtitle-2: mat.define-typography-level(1rem, 1.1, 500, $letter-spacing: 0rem), // h4
-  $body-1: mat.define-typography-level(1rem, 1.4, 300, $letter-spacing: auto),
-  $body-2: mat.define-typography-level(1rem, 1.4, 500, $letter-spacing: auto), // body bold
+
+  $body-1: mat.define-typography-level(1rem, 1.5, 300, $letter-spacing: auto),
+  $body-2: mat.define-typography-level(1rem, 1.5, 500, $letter-spacing: auto), // body bold
   $caption: mat.define-typography-level(.75rem, 1.2, 400, $letter-spacing: auto), // small txt
-  $button: mat.define-typography-level(1rem, 1.1, 300, $letter-spacing: 2px),
+  $button: mat.define-typography-level(1rem, 1.1, 500, $letter-spacing: 1px),
 );
+
+
 
 $rdl-primary: mat.define-palette($rdl-palette);
 $rdl-accent: mat.define-palette(mat.$pink-palette);

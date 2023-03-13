@@ -142,14 +142,15 @@ a.rc-back {
   .rc-codes { flex-direction: row;}
 }
 
-
 /**
 * MAT/MDC Overrides
 * -------------------------------
 **/
-// Forms
+// Allow for fixed toolbar
+.mat-toolbar-fixed-adjust { padding-top: $rc-header-height;}
+// Align hints & errors to right of input
 .mat-mdc-form-field-error { text-align: right; }
-// Remove bgd color
+// Remove bgd color from inputs
 .mdc-text-field--filled:not(.mdc-text-field--disabled) { background-color: transparent !important; }
 .mat-mdc-form-field-focus-overlay { opacity: 0 !important; }
 
@@ -159,7 +160,6 @@ a.rc-back {
 //  height: auto;
 //  font: 400 16px/48px $rc-default-font;
 //}
-//.mat-toolbar-fixed-adjust { padding-top: $rc-header-height;}
 //.mat-mdc-tooltip { font: $rc-default-font-weight 12px/16px $rc-default-font; }
 ///* TODO(mdc-migration): The following rule targets internal classes of input that may no longer apply for the MDC version.*/
 //.mat-mdc-form-field-hint,
@@ -205,10 +205,17 @@ a.rc-back {
 
 // Layout classes
 // Card styles
+.rdl-card {
+  background: white;
+  padding: 1rem;
+  border-radius: 1rem;
+  header {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 1fr 40px;
+  }
 
-
-
-
+}
 
 // Bpi
 // ++++++++++++++++++++++++++++++++++++++++++++
@@ -305,6 +312,7 @@ a.rc-back {
   gap: 1rem;
   margin: 1rem auto;
 }
+
 /**
 * RC layouts
 * -------------------------------
@@ -379,10 +387,6 @@ a.rc-back {
       color: black;
       text-decoration: underline;
     }
-    h1 {
-      font-weight: 300;
-      line-height: 1.1;
-    }
   }
   .rc-layout-split-content {
     max-width: 560px;
@@ -392,9 +396,10 @@ a.rc-back {
       margin: 0 0 2em;
       img { height: 120px;}
     }
-    h1 {
+    h1, h2 {
       font-weight: 300;
       line-height: 1.1;
+      font-size: 2rem;
     }
     p {
       // text-align: justify;
@@ -1338,10 +1343,7 @@ ul.rc-lookup-results {
 **/
 .rc-cms {
   padding-top: ($rc-toolbar-height);
-  .rc-cms-base {
-    dd { font-size: 24px; }
-  }
-  .rc-card { padding: 16px; }
+  //.rc-card { padding: 16px; }
   dl { margin: 24px 0 0 0; }
   dt {
     text-transform: uppercase;
@@ -1364,36 +1366,36 @@ ul.rc-lookup-results {
     }
   }
   // span { display: block; }
-  .rc-cms-info {
-    background: rgba($rc-theme-secondary, .25);
-    padding: 16px;
-    transition: all 300ms ease-in-out;
-    max-height: 1000px;
-    header {
-      display: flex;
-      h2 {
-        color: inherit;
-        font-size: 24px;
-        font-weight: $rc-default-font-weight;
-        padding: 0;
-        margin: 0;
-      }
-      .rc-cms-close {}
-    }
-    p {
-      margin:8px 0;
-      color: inherit;
-    }
-  }
-  .rc-cms-info-actions {
-    button { text-transform: uppercase; }
-  }
+  //.rc-cms-info {
+  //  background: rgba($rc-theme-secondary, .25);
+  //  padding: 16px;
+  //  transition: all 300ms ease-in-out;
+  //  max-height: 1000px;
+  //  header {
+  //    display: flex;
+  //    h2 {
+  //      color: inherit;
+  //      font-size: 24px;
+  //      font-weight: $rc-default-font-weight;
+  //      padding: 0;
+  //      margin: 0;
+  //    }
+  //    .rc-cms-close {}
+  //  }
+  //  p {
+  //    margin:8px 0;
+  //    color: inherit;
+  //  }
+  //}
+  //.rc-cms-info-actions {
+  //  button { text-transform: uppercase; }
+  //}
 }
-.rc-cms-card-nav {
-  position: absolute !important;
-  top: 20px;
-  right: 8px;
-}
+//.rc-cms-card-nav {
+//  position: absolute !important;
+//  top: 20px;
+//  right: 8px;
+//}
 .rc-card-title-img-wrapper {
 
   img {
@@ -1658,11 +1660,11 @@ button.rc-member-assc {
 
 .rc-cms-dash-info {
   transition: all .3s ease-out;
-  .mat-mdc-card-title {
-    margin-bottom: 8px;
-    font-size: 16px;
-  }
-  .mat-mdc-card-content { margin-bottom: 8px; }
+  //.mat-mdc-card-title {
+  //  margin-bottom: 8px;
+  //  font-size: 16px;
+  //}
+  //.mat-mdc-card-content { margin-bottom: 8px; }
 }
 
 .rc-content-status {
