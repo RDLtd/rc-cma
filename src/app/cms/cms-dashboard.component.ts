@@ -525,7 +525,8 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
         data: {
           id: this.restaurant.restaurant_id,
           number: this.restaurant.restaurant_number,
-          name: this.restaurant.restaurant_name
+          name: this.restaurant.restaurant_name,
+          membership_type: this.user.member_membership_type
         }
       });
       // record event
