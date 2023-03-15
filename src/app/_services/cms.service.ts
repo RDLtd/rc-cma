@@ -452,15 +452,15 @@ export class CMSService {
         }
       }
       console.log('Activate generator', restaurant_id, production, template, this.config.brand.prefix);
-      // return await lastValueFrom(this.http.post(this.config.apiUrl + '/spw/generateAWP',
-      //   {
-      //     restaurant_id,
-      //     production,
-      //     template,
-      //     company: this.config.brand.prefix,
-      //     userCode: this.config.userAPICode,
-      //     token: this.authToken
-      //   }));
+      return await lastValueFrom(this.http.post(this.config.apiUrl + '/spw/generateAWP',
+        {
+          restaurant_id,
+          production,
+          template,
+          company: this.config.brand.prefix,
+          userCode: this.config.userAPICode,
+          token: this.authToken
+        }));
     }
 
   }

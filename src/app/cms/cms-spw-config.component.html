@@ -30,6 +30,17 @@
         <h2>{{ 'CMS.SETTINGS.titleConfig' | translate }}</h2>
       </div>
     </mat-card>
+
+    <button
+      mat-button color="accent" (click)="publishWebsite(false)">
+      Preview Website
+    </button>
+
+    <button
+      mat-button color="accent" (click)="publishWebsite(true)">
+      Publish Website
+    </button>
+
   </div>
 
 
