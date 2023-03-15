@@ -230,6 +230,7 @@
 			"labelLocation": "Location",
 			"labelMenus": "Menus",
 			"labelReservations": "Reservations",
+			"labelSettings": "Publish Settings",
 			"tipContacts": "Contact & location information",
 			"tipDashboard": "Content dashboard",
 			"tipFeatures": "Descriptions & features",
@@ -238,6 +239,7 @@
 			"tipMenus": "Menus",
 			"tipPreview": "Preview your content",
 			"tipReservations": "Reservations",
+			"tipSettings": "Website settings",
 			"tipYourRestaurants": "Select a restaurant"
 		},
 		"RESERVATIONS": {
@@ -261,6 +263,12 @@
 			"titleOnline": "Online bookings",
 			"titlePrivate": "Private dining",
 			"titleReservationsInfo": "Reservations information"
+		},
+		"SETTINGS": {
+			"titleConfig": "Website Configuration",
+			"titleSettings": "Publish Settings",
+			"titleStatus": "Publish status",
+			"titleTheme": "Website Theme"
 		},
 		"UPLOAD": {
 			"errorExceedsMax": "That file exceeds the maximum size that can be uploaded.",
@@ -354,7 +362,7 @@
 	},
 	"HUB": {
 		"msgComingSoon": "Coming soon",
-		"sectionCMS": "Content Management & SPW",
+		"sectionCMS": "Content Management",
 		"sectionHub": "Member's Hub",
 		"sectionMarket": "Marketplace",
 		"sectionSettings": "Member settings"

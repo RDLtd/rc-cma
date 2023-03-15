@@ -230,6 +230,7 @@
 			"labelLocation": "Emplacement",
 			"labelMenus": "Les menus",
 			"labelReservations": "Réservations",
+			"labelSettings": "Paramètres de publication",
 			"tipContacts": "Informations de contact et de localisation",
 			"tipDashboard": "Tableau de bord du contenu",
 			"tipFeatures": "Descriptions et caractéristiques",
@@ -238,6 +239,7 @@
 			"tipMenus": "Menus",
 			"tipPreview": "Prévisualisez votre contenu",
 			"tipReservations": "Réservations",
+			"tipSettings": "Paramètres du site",
 			"tipYourRestaurants": "Sélectionnez un restaurant"
 		},
 		"RESERVATIONS": {
@@ -261,6 +263,12 @@
 			"titleOnline": "Réservations en ligne",
 			"titlePrivate": "Réception privée",
 			"titleReservationsInfo": "Informations sur les réservations"
+		},
+		"SETTINGS": {
+			"titleConfig": "Configuration du site Web",
+			"titleSettings": "Paramètres de publication",
+			"titleStatus": "Statut de publication",
+			"titleTheme": "Thème du site"
 		},
 		"UPLOAD": {
 			"errorExceedsMax": "Ce fichier dépasse la taille maximale pouvant être téléchargée.",
@@ -354,7 +362,7 @@
 	},
 	"HUB": {
 		"msgComingSoon": "Prochainment",
-		"sectionCMS": "Gestion du contenu et de la Page Internet",
+		"sectionCMS": "Gestion du contenu",
 		"sectionHub": "Hub pour les membres",
 		"sectionMarket": "MarketPlace",
 		"sectionSettings": "Paramètres du membre"

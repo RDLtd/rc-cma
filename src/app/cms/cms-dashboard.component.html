@@ -119,7 +119,9 @@
         restaurant.restaurant_verified_by } }}
       </mat-card-title>
       <span class="rc-space-filler"></span>
-      <mat-icon class="rc-success">cloud_done</mat-icon>
+      <span>
+        <mat-icon class="rc-success">cloud_done</mat-icon>
+      </span>
     </mat-card-header>
 
     <!-- CONTENT -->
@@ -162,14 +164,15 @@
     <mat-card-header *ngIf="!isPreviewing && cmsHasSufficientData">
       <mat-card-title>{{ 'CMS.DASHBOARD.spw.headerUnPublished' | translate | uppercase }}</mat-card-title>
       <span class="rc-space-filler"></span>
-      <mat-icon class="rc-warn">cloud_off</mat-icon>
+      <span>
+      <mat-icon class="rc-warn">cloud_off</mat-icon></span>
     </mat-card-header>
 
     <!-- More content required -->
     <mat-card-header *ngIf="!isPreviewing && !cmsHasSufficientData">
       <mat-card-title>{{ 'CMS.DASHBOARD.spw.headerContentRequired' | translate | uppercase }}</mat-card-title>
       <span class="rc-space-filler"></span>
-      <mat-icon class="rc-warn">cloud_off</mat-icon>
+      <span><mat-icon class="rc-warn">cloud_off</mat-icon></span>
     </mat-card-header>
 
     <!-- CONTENT -->
@@ -207,7 +210,7 @@
   </mat-card>
 
   <!-- CONTENT Summary -->
-  <mat-card appearance="raised" class="rdl-card">
+  <mat-card appearance="raised">
     <div class="rc-card-help">
       <button
         mat-icon-button

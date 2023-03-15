@@ -154,6 +154,13 @@ a.rc-back {
 .mdc-text-field--filled:not(.mdc-text-field--disabled) { background-color: transparent !important; }
 .mat-mdc-form-field-focus-overlay { opacity: 0 !important; }
 
+.mat-mdc-card-title h2 {
+  margin-bottom: 1rem;
+}
+h4 {
+  margin-bottom: .25rem;
+  font-weight: $rc-display-font-weight;
+}
 //.mat-toolbar,
 //.mat-toolbar-row,
 //.mat-toolbar-single-row {
@@ -319,6 +326,7 @@ a.rc-back {
 **/
 
 .rc-grid {
+  width: 100%;
   max-width: $rc-max-width;
   display: grid;
   margin: 1rem auto;
@@ -670,10 +678,14 @@ form.rc-form-grid {
     z-index: 100;
   }
   .rc-brand-wrap {
-    display: block;
     cursor: pointer;
     transition: all .1s ease-out;
     height: $rc-toolbar-height;
+    span {
+      display: block;
+      padding-block: .75rem;
+      height: 100%;
+    }
     &:hover {
     transform: scale(1.05);
     }
@@ -1660,14 +1672,15 @@ button.rc-member-assc {
 
 .rc-cms-dash-info {
   transition: all .3s ease-out;
-  //.mat-mdc-card-title {
-  //  margin-bottom: 8px;
-  //  font-size: 16px;
-  //}
-  //.mat-mdc-card-content { margin-bottom: 8px; }
+}
+.mat-mdc-list .mat-mdc-list-item .mdc-list-item--with-leading-icon {
+  padding-left: 0 !important;
+  padding-right: 8px !important;
 }
 
 .rc-content-status {
+
+
 
   .mat-mdc-list-item {
     cursor: pointer !important;
@@ -1691,7 +1704,6 @@ button.rc-member-assc {
     .mat-icon { color: black; }
     .mdc-linear-progress__bar-inner { border-color:  $rc-theme-tertiary; }
   }
-
   .mat-mdc-progress-bar {
     margin-top: .5rem !important;
   }
@@ -1714,9 +1726,6 @@ button.rc-member-assc {
 ** ---------------------------------
 */
 .rc-cms-menus {
-  margin: 0 auto;
-  padding-block: 1.5rem;
-  max-width: $rc-max-width;
   display: grid;
   gap: 1rem
 }

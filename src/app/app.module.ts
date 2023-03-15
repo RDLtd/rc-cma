@@ -105,6 +105,7 @@ import { lastValueFrom } from 'rxjs';
 import {ContactComponent} from "./common/contact/contact.component";
 import {FaqsComponent} from "./common/faqs/faqs.component";
 import {MatExpansionModule} from "@angular/material/expansion";
+import { CmsSpwConfigComponent } from './cms/cms-spw-config.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -169,7 +170,8 @@ export function appInitializerFactory(translate: TranslateService) {
     LogoComponent,
     RiMembershipComponent,
     BpiRegistrationComponent,
-    ProfileComponent
+    ProfileComponent,
+    CmsSpwConfigComponent
   ],
   imports: [
     AngularMaterialModule,

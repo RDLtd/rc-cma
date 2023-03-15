@@ -32,6 +32,7 @@ import { JoinComponent } from './join/join.component';
 import { MembershipComponent } from './join/membership.component';
 import {BpiRegistrationComponent} from './join/mepn/bpi-registration.component';
 import {ProfileComponent} from './profile/profile.component';
+import { CmsSpwConfigComponent } from './cms/cms-spw-config.component';
 
 const APP_ROUTES: Routes = [
   { path: '', component: SigninComponent, title: 'Sign in' },
@@ -110,6 +111,12 @@ const APP_ROUTES: Routes = [
       { path: 'features',
         component: CmsFeaturesComponent,
         title: 'Descriptions & Features',
+        canActivate: [AuthGuard],
+        canDeactivate: [CanDeactivateGuard] },
+
+      { path: 'settings',
+        component: CmsSpwConfigComponent,
+        title: 'Publish Settings',
         canActivate: [AuthGuard],
         canDeactivate: [CanDeactivateGuard] },
 

@@ -51,7 +51,7 @@
         download="QR-Code-Menu"
         href="{{ base64menu }}">
         <qrcode
-          [qrdata]="data['spwMenus']"
+          [qrdata]="data.spwMenus"
           [elementType]="'img'"
           [width]="256"
           [errorCorrectionLevel]="'M'"
