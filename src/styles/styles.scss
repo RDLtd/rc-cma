@@ -6,6 +6,7 @@
 @import "reset";
 @import 'bpi';
 @import "mozrest";
+@import 'rdl';
 
 /**
 * Utility classes
@@ -161,68 +162,11 @@ h4 {
   margin-bottom: .25rem;
   font-weight: $rc-display-font-weight;
 }
-//.mat-toolbar,
-//.mat-toolbar-row,
-//.mat-toolbar-single-row {
-//  height: auto;
-//  font: 400 16px/48px $rc-default-font;
-//}
-//.mat-mdc-tooltip { font: $rc-default-font-weight 12px/16px $rc-default-font; }
-///* TODO(mdc-migration): The following rule targets internal classes of input that may no longer apply for the MDC version.*/
-//.mat-mdc-form-field-hint,
-//.mat-input-underline {
-//  color: $rc-theme-black;
-//  border-width: 4px;
-//  border-color: $rc-theme-black;
-//}
-//
-///* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version.*/
-//.mat-radio-label,
-//.mat-form-field-prefix { margin-right: 8px; }
-//.mat-mdc-form-field { line-height: 1.4; }
-//.mat-mdc-card-title { font-size: 20px; }
-//.mat-mdc-form-field > .mat-mdc-chip { background-color: $rc-theme-primary; }
-//.mat-mdc-dialog-container { border-radius: 8px !important; }
-//.rc-preview-dialog-container .mat-mdc-dialog-container {
-//  padding: 0;
-//  border-radius: 0;
-//}
-//mat-form-field.mat-focused { color: $rc-theme-accent; }
-//.cdk-overlay-backdrop.cdk-overlay-backdrop-showing.rc-preview-backdrop {
-//  background-color: #000;
-//  opacity: 0.7;
-//}
-///* TODO(mdc-migration): The following rule targets internal classes of card that may no longer apply for the MDC version.*/
-//.mat-card-header-text { margin: 0 !important; }
-//.mat-mdc-card-content h4 {
-//  font-weight: bold;
-//  text-transform: uppercase;
-//  margin: 12px 0 8px;
-//  background-color: $rc-theme-grey;
-//  padding: 4px 8px;
-//  font-size: 12px;
-//}
-//.mat-mdc-snack-bar-action { color: white; }
-//a.mat-mdc-menu-item {text-decoration: none;}
-//.mat-mdc-menu-content:not(:empty) {
-//  padding-top: 0 !important;
-//  padding-bottom: 0 !important;
-//}
 
 
 // Layout classes
 // Card styles
-.rdl-card {
-  background: white;
-  padding: 1rem;
-  border-radius: 1rem;
-  header {
-    display: grid;
-    align-items: center;
-    grid-template-columns: 1fr 40px;
-  }
 
-}
 
 // Bpi
 // ++++++++++++++++++++++++++++++++++++++++++++
@@ -342,6 +286,8 @@ h4 {
   }
 }
 .rc-grid-masonry-2 {
+  width: 100%;
+  max-width: $rc-max-width;
   columns: 1;
   margin: 1rem auto;
   gap: 1rem;
@@ -640,7 +586,7 @@ form.rc-form-grid {
   }
   &.accent {
     .icon { fill: $rc-theme-accent;}
-    .label { fill: white;}
+    .label { fill: #8dda10;}
   }
 }
 .mat-toolbar {
@@ -1595,6 +1541,8 @@ ul.rc-line-items {
     border-bottom: 1px solid $rc-cool-grey;
     padding: 8px 0;
     text-align: left;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     label {
       flex-basis: 38%;
     }

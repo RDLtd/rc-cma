@@ -1,0 +1,63 @@
+
+// Cards
+.rdl-card {
+  .mat-mdc-card-header {
+    margin-bottom: 2rem;
+  }
+}
+.rdl-card-rounded {
+  display: grid;
+  grid: auto / 1fr;
+  gap: 1rem;
+  position: relative;
+  height: 100%;
+  background-color: white;
+  border-radius: 16px !important;
+  padding: 1.6rem;
+  box-shadow: 0 9px 68px 0 rgb(0 0 0 / 20%);
+  h2 {
+    margin-top: 0;
+    font-size: 1.25rem;
+    font-weight: $rc-display-font-weight;
+  }
+  h3 {
+    font-weight: $rc-display-font-weight;
+  }
+  ul.rdl-list {
+    display: block;
+    li {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      grid-template-rows: 1fr;
+      gap: .5rem;
+      border-bottom: 1px solid $rc-cool-grey;
+      padding-block: .5rem;
+      > * {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        min-width: 0;
+        max-width: 100%;
+      }
+    }
+  }
+  .rdl-card-menu {
+    position: absolute;
+    top: 8px
+  }
+  .rdl-card-actions {
+    margin-top: auto;
+    text-align: end;
+    //position: absolute;
+    //bottom: 24px; right: 24px; left: 24px;
+  }
+}
+
+.rdl-form-grid {
+  width: 100%;
+  display: grid;
+  gap: 1rem;
+  label {
+    margin-left: 1rem !important;
+  }
+}

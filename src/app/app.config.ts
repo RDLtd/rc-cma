@@ -123,8 +123,8 @@ export class AppConfig {
         code: 'GBP'
       },
       downloads: {
-        terms: `https://${this.tld.app}/terms-conditions/`,
-        privacy: `https://${this.tld.app}/privacy-policy/`
+        terms: `https://assets.${this.tld.app}/docs/apptiser-terms.pdf`,
+        privacy: `https://assets.${this.tld.app}/docs/apptiser-privacy-policy.pdf`
       }
     },
     rdl: {

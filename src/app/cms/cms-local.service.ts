@@ -45,6 +45,7 @@ export class CmsLocalService {
     this.restaurantSubject.next(this.restaurant);
   }
 
+
   getRestaurant(): Observable<Restaurant> {
     // console.log('cmsLocalService.getRestaurant()', this.subject);
     return this.restaurantSubject.asObservable();

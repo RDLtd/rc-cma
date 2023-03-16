@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CmsLocalService } from './cms-local.service';
 import { HelpService } from '../common';
-import * as moment from "moment/moment";
 import { AnalyticsService, CMSService } from "../_services";
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Restaurant } from '../_models';
 
 @Component({
   selector: 'rc-cms-spw-config',
@@ -10,16 +11,36 @@ import { AnalyticsService, CMSService } from "../_services";
   styles: [
   ]
 })
-export class CmsSpwConfigComponent {
+export class CmsSpwConfigComponent implements OnInit {
 
   dataChanged = false;
+  restaurant: Restaurant;
+  member: any;
+
+  isChecked = true;
+  formGroup = this._formBuilder.group({
+    showImageGallery: [true],
+    showHtmlMenu: [true, Validators.requiredTrue],
+    showDownloadMenus: [true],
+    showReservations: [true],
+    showBookingWidget: [true],
+    showGroupBookings: [false],
+    showPrivateDining: [false],
+    showContacts: [true],
+    showLinks: [true],
+    showParking: [true],
+    showMap: [true],
+    showTransport: [true],
+  });
 
   constructor(
     private cmsLocalService: CmsLocalService,
     public help: HelpService,
     private cms: CMSService,
+    private _formBuilder: FormBuilder,
     private ga: AnalyticsService,
   ) {
+
   }
 
   confirmNavigation() {
@@ -28,6 +49,14 @@ export class CmsSpwConfigComponent {
     } else {
       return true;
     }
+  }
+
+  ngOnInit() {
+    this.cmsLocalService.getRestaurant()
+      .subscribe((data) => {
+        this.restaurant = data;
+        console.log(this.restaurant.restaurant_name);
+      });
   }
 
   publishWebsite(production: boolean): void {
@@ -43,7 +72,7 @@ export class CmsSpwConfigComponent {
     const restaurant_id = '92596';
     const membership_type = 'standard';
 
-    this.cms.publish(restaurant_id, production, membership_type)
+    this.cms.publish(this.restaurant.restaurant_id, production, membership_type)
       .then(res => {
         if (res['status'] === 'OK') {
           console.log('Website success:', res);
@@ -72,4 +101,10 @@ export class CmsSpwConfigComponent {
       })
       .catch((res) => console.log('Publish Endpoint Error', res));
   }
+
+  // Web config
+  alertFormValues(formGroup: FormGroup) {
+    alert(JSON.stringify(formGroup.value, null, 2));
+  }
+
 }

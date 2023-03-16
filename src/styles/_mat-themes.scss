@@ -51,8 +51,6 @@ $rdl-typography-config: mat.define-typography-config(
   $button: mat.define-typography-level(1rem, 1.1, 500, $letter-spacing: 1px),
 );
 
-
-
 $rdl-primary: mat.define-palette($rdl-palette);
 $rdl-accent: mat.define-palette(mat.$pink-palette);
 $rdl-theme: mat.define-light-theme((

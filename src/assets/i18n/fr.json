@@ -265,6 +265,8 @@
 			"titleReservationsInfo": "Informations sur les réservations"
 		},
 		"SETTINGS": {
+			"labelApptiserDomain": "Domaine",
+			"labelCustomDomain": "Domaine personnalisé",
 			"titleConfig": "Configuration du site Web",
 			"titleSettings": "Paramètres de publication",
 			"titleStatus": "Statut de publication",

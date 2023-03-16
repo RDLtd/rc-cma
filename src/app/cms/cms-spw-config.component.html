@@ -1,45 +1,51 @@
 <div class="rc-cms-menus rc-content-container">
 
-<!--  <mat-toolbar class="rc-toolbar rc-toolbar-section">-->
-<!--    <span>{{ 'CMS.SETTINGS.titleSettings' | translate }}</span>-->
-<!--    <span class="rc-space-filler"></span>-->
-<!--    <span class="rc-toolbar-actions">-->
+  <div class="rc-grid-masonry-2">
+    <div class="rdl-card-rounded">
 
-<!--        <button-->
-<!--          mat-icon-button-->
-<!--          (click)="help.dspHelp('cms-settings')">-->
-<!--            <mat-icon>help_outline</mat-icon>-->
-<!--        </button>-->
+      <h2>{{ 'CMS.SETTINGS.titleStatus' | translate }}</h2>
 
-<!--      </span>-->
-<!--  </mat-toolbar>-->
-
-  <div class="rc-grid">
-    <mat-card appearance="outlined" class="rc-card-rounded">
-      <div class="rc-card-title">
-        <h2>{{ 'CMS.SETTINGS.titleStatus' | translate }}</h2>
+      <span>
+        {{ 'SETTINGS.infoAuth' | translate }}
+      </span>
+      <ul class="rdl-list">
+        <li>
+          <label>{{ 'CMS.SETTINGS.labelApptiserDomain' | translate }}:</label>
+          <span>{{ restaurant.restaurant_spw_url }}</span>
+        </li>
+        <li><label>{{ 'CMS.SETTINGS.labelCustomDomain' | translate }}:</label>
+          {{ restaurant.restaurant_website }}
+        </li>
+      </ul>
+      <span class="rc-space-filler"></span>
+      <div class="rdl-card-actions">
+        <button mat-button (click)="publishWebsite(false)">PREVIEW</button>
+        <button mat-button color="accent" (click)="publishWebsite(true)">PUBLISH</button>
       </div>
-    </mat-card>
-    <mat-card appearance="outlined" class="rc-card-rounded">
-      <div class="rc-card-title">
-        <h2>{{ 'CMS.SETTINGS.titleTheme' | translate }}</h2>
-      </div>
-    </mat-card>
-    <mat-card appearance="outlined" class="rc-card-rounded">
-      <div class="rc-card-title">
-        <h2>{{ 'CMS.SETTINGS.titleConfig' | translate }}</h2>
-      </div>
-    </mat-card>
+    </div>
 
-    <button
-      mat-button color="accent" (click)="publishWebsite(false)">
-      Preview Website
-    </button>
-
-    <button
-      mat-button color="accent" (click)="publishWebsite(true)">
-      Publish Website
-    </button>
+    <div class="rdl-card-rounded">
+      <h2>{{ 'CMS.SETTINGS.titleConfig' | translate }}</h2>
+      <span></span>
+      <form class="rdl-form-grid" [formGroup]="formGroup" (ngSubmit)="alertFormValues(formGroup)">
+        <mat-slide-toggle formControlName="showImageGallery">Include Image Gallery</mat-slide-toggle>
+        <mat-slide-toggle formControlName="showHtmlMenu">Include Menu Section</mat-slide-toggle>
+        <mat-slide-toggle formControlName="showDownloadMenus">Include Downloadable Menus</mat-slide-toggle>
+        <mat-slide-toggle formControlName="showReservations">Include Reservations Section</mat-slide-toggle>
+        <mat-slide-toggle formControlName="showBookingWidget">Include online bookings</mat-slide-toggle>
+        <mat-slide-toggle formControlName="showGroupBookings">Include group booking</mat-slide-toggle>
+        <mat-slide-toggle formControlName="showPrivateDining">Include private dining</mat-slide-toggle>
+        <mat-slide-toggle formControlName="showContacts">Include contacts section</mat-slide-toggle>
+        <mat-slide-toggle formControlName="showLinks">Include web/social links</mat-slide-toggle>
+        <mat-slide-toggle formControlName="showTransport">Include public transport</mat-slide-toggle>
+        <mat-slide-toggle formControlName="showParking">Include parking information</mat-slide-toggle>
+        <mat-slide-toggle formControlName="showMap">Include location map</mat-slide-toggle>
+<!--        <p>Form Group Status: {{formGroup.status}}</p>-->
+      </form>
+      <div class="rdl-card-actions">
+        <button mat-button color="accent" (click)="alertFormValues(formGroup)">SAVE CONFIGURATION</button>
+      </div>
+    </div>
 
   </div>
 

@@ -265,9 +265,11 @@
 			"titleReservationsInfo": "Reservations information"
 		},
 		"SETTINGS": {
+			"labelApptiserDomain": "Domain",
+			"labelCustomDomain": "Custom domain",
 			"titleConfig": "Website Configuration",
 			"titleSettings": "Publish Settings",
-			"titleStatus": "Publish status",
+			"titleStatus": "Website Publish status",
 			"titleTheme": "Website Theme"
 		},
 		"UPLOAD": {

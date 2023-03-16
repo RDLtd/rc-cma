@@ -106,6 +106,7 @@ import {ContactComponent} from "./common/contact/contact.component";
 import {FaqsComponent} from "./common/faqs/faqs.component";
 import {MatExpansionModule} from "@angular/material/expansion";
 import { CmsSpwConfigComponent } from './cms/cms-spw-config.component';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -173,32 +174,33 @@ export function appInitializerFactory(translate: TranslateService) {
     ProfileComponent,
     CmsSpwConfigComponent
   ],
-  imports: [
-    AngularMaterialModule,
-    BrowserModule,
-    BrowserAnimationsModule,
-    FormsModule,
-    RouterModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    routing,
-    FileUploadModule,
-    ClipboardModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    }),
-    MarkdownModule.forRoot(),
-    CloudinaryModule,
-    QRCodeModule,
-    GoogleMapsModule,
-    ClipboardModule,
-    OnlineStatusModule,
-    MatExpansionModule
-  ],
+    imports: [
+        AngularMaterialModule,
+        BrowserModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        RouterModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        routing,
+        FileUploadModule,
+        ClipboardModule,
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: HttpLoaderFactory,
+                deps: [HttpClient]
+            }
+        }),
+        MarkdownModule.forRoot(),
+        CloudinaryModule,
+        QRCodeModule,
+        GoogleMapsModule,
+        ClipboardModule,
+        OnlineStatusModule,
+        MatExpansionModule,
+        MatSlideToggleModule
+    ],
   providers: [
     AppConfig,
     AuthenticationService,
