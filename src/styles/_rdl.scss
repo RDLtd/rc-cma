@@ -58,6 +58,7 @@
   display: grid;
   gap: 1rem;
   label {
+    cursor: pointer !important;
     margin-left: 1rem !important;
   }
 }

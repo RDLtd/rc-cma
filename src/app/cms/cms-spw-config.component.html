@@ -28,18 +28,18 @@
       <h2>{{ 'CMS.SETTINGS.titleConfig' | translate }}</h2>
       <span></span>
       <form class="rdl-form-grid" [formGroup]="formGroup" (ngSubmit)="alertFormValues(formGroup)">
-        <mat-slide-toggle formControlName="showImageGallery">Include Image Gallery</mat-slide-toggle>
-        <mat-slide-toggle formControlName="showHtmlMenu">Include Menu Section</mat-slide-toggle>
-        <mat-slide-toggle formControlName="showDownloadMenus">Include Downloadable Menus</mat-slide-toggle>
-        <mat-slide-toggle formControlName="showReservations">Include Reservations Section</mat-slide-toggle>
-        <mat-slide-toggle formControlName="showBookingWidget">Include online bookings</mat-slide-toggle>
-        <mat-slide-toggle formControlName="showGroupBookings">Include group booking</mat-slide-toggle>
-        <mat-slide-toggle formControlName="showPrivateDining">Include private dining</mat-slide-toggle>
-        <mat-slide-toggle formControlName="showContacts">Include contacts section</mat-slide-toggle>
-        <mat-slide-toggle formControlName="showLinks">Include web/social links</mat-slide-toggle>
-        <mat-slide-toggle formControlName="showTransport">Include public transport</mat-slide-toggle>
-        <mat-slide-toggle formControlName="showParking">Include parking information</mat-slide-toggle>
-        <mat-slide-toggle formControlName="showMap">Include location map</mat-slide-toggle>
+        <mat-slide-toggle formControlName="showBookingWidget">Booking widget</mat-slide-toggle>
+        <mat-slide-toggle formControlName="showImageGallery">Image gallery</mat-slide-toggle>
+        <mat-slide-toggle formControlName="showHtmlMenu">Menus - info & sample</mat-slide-toggle>
+        <mat-slide-toggle formControlName="showDownloadMenus">Menus - downloadable PDFs</mat-slide-toggle>
+        <mat-slide-toggle formControlName="showReservations">Reservations information</mat-slide-toggle>
+        <mat-slide-toggle formControlName="showGroupBookings">Group booking information</mat-slide-toggle>
+        <mat-slide-toggle formControlName="showPrivateDining">Private dining information</mat-slide-toggle>
+        <mat-slide-toggle formControlName="showContacts">Contact information</mat-slide-toggle>
+        <mat-slide-toggle formControlName="showLinks">Web & social links</mat-slide-toggle>
+        <mat-slide-toggle formControlName="showTransport">Public transport information</mat-slide-toggle>
+        <mat-slide-toggle formControlName="showParking">Parking information</mat-slide-toggle>
+        <mat-slide-toggle formControlName="showMap">Location map</mat-slide-toggle>
 <!--        <p>Form Group Status: {{formGroup.status}}</p>-->
       </form>
       <div class="rdl-card-actions">
