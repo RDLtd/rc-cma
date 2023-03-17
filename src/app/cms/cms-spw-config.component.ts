@@ -4,6 +4,7 @@ import { HelpService } from '../common';
 import { AnalyticsService, CMSService } from "../_services";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Restaurant } from '../_models';
+import {AppConfig} from "../app.config";
 
 @Component({
   selector: 'rc-cms-spw-config',
@@ -16,6 +17,7 @@ export class CmsSpwConfigComponent implements OnInit {
   dataChanged = false;
   restaurant: Restaurant;
   member: any;
+  brand: any;
 
   isChecked = true;
   formGroup = this._formBuilder.group({
@@ -38,9 +40,10 @@ export class CmsSpwConfigComponent implements OnInit {
     public help: HelpService,
     private cms: CMSService,
     private _formBuilder: FormBuilder,
+    private config: AppConfig,
     private ga: AnalyticsService,
   ) {
-
+      this.brand = config.brand;
   }
 
   confirmNavigation() {
@@ -53,10 +56,12 @@ export class CmsSpwConfigComponent implements OnInit {
 
   ngOnInit() {
     this.cmsLocalService.getRestaurant()
-      .subscribe((data) => {
+      .subscribe({
+      next: data => {
         this.restaurant = data;
-        console.log(this.restaurant.restaurant_name);
-      });
+      },
+      error: error => console.log(error)
+    });
   }
 
   publishWebsite(production: boolean): void {
@@ -84,6 +89,7 @@ export class CmsSpwConfigComponent implements OnInit {
           //
           // this.verifyData();
           // this.isPreviewing = false;
+
           // // record event
           // this.ga.sendEvent('CMS-Dashboard', 'SPW', 'Published');
           // // reset data changed attribute
@@ -103,8 +109,13 @@ export class CmsSpwConfigComponent implements OnInit {
   }
 
   // Web config
-  alertFormValues(formGroup: FormGroup) {
+  alertFormValues(formGroup: FormGroup): void {
     alert(JSON.stringify(formGroup.value, null, 2));
+  }
+
+  // Domains
+  customDomain(): void {
+    alert('Open Typeform wizard');
   }
 
 }

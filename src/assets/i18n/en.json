@@ -265,12 +265,27 @@
 			"titleReservationsInfo": "Reservations information"
 		},
 		"SETTINGS": {
-			"labelApptiserDomain": "Domain",
+			"infoConfig": "You can exclude any of the following sections from your website by using the options below. You will need to republish your website for any changes to take effect.",
+			"infoDomains": "Your website can be published to an existing domain name that you own, or to a newly registered domain. Use the option below to get started.",
+			"infoPublishing": "",
+			"infoUnpublished": "**The latest changes that you have made have not yet been published.**\n**PREVIEW** your website to check any changes you've made then, if everything is correct, **PUBLISH** your website and synchronise content on all **{{ brand }}** distribution channels.",
+			"labelApptiserDomain": "Apptiser url",
 			"labelCustomDomain": "Custom domain",
+			"labelPreview": "Preview",
+			"labelPublish": "Publish",
+			"labelPublished": "Last published on",
+			"labelPublisher": "Published by",
+			"labelSetDomain": "Set Custom Domain",
+			"labelUpdate": "Update",
+			"statusBuilding": "Building website",
+			"statusDeploying": "Deploying website",
+			"statusInProgress": "In progress...",
 			"titleConfig": "Website Configuration",
 			"titleSettings": "Publish Settings",
 			"titleStatus": "Website Publish status",
-			"titleTheme": "Website Theme"
+			"titleTheme": "Website Theme",
+			"titleUnPublishedChanges": "Unpublished changes",
+			"titleWebDomain": "Custom Domain"
 		},
 		"UPLOAD": {
 			"errorExceedsMax": "That file exceeds the maximum size that can be uploaded.",

@@ -1,21 +1,28 @@
 <div class="rc-cms-menus rc-content-container">
 
   <div class="rc-grid-masonry-2">
+    <!-- STATUS -->
     <div class="rdl-card-rounded">
 
-      <h2>{{ 'CMS.SETTINGS.titleStatus' | translate }}</h2>
+      <div class="rdl-card-header">
+        <h2>{{ 'CMS.SETTINGS.titleStatus' | translate }}</h2>
+        <mat-icon color="warn">cloud_off</mat-icon>
+      </div>
 
-      <span>
-        {{ 'SETTINGS.infoAuth' | translate }}
+      <span markdown ngpreservewhitespaces>
+        {{ 'CMS.SETTINGS.infoUnpublished' | translate: { brand: brand.name } }}
       </span>
+
       <ul class="rdl-list">
         <li>
-          <label>{{ 'CMS.SETTINGS.labelApptiserDomain' | translate }}:</label>
-          <span>{{ restaurant.restaurant_spw_url }}</span>
+          <label>{{ 'CMS.SETTINGS.labelPublished' | translate }}:</label>
+          <span>{{ restaurant.restaurant_spw_written | date:'medium' }}</span>
         </li>
-        <li><label>{{ 'CMS.SETTINGS.labelCustomDomain' | translate }}:</label>
-          {{ restaurant.restaurant_website }}
+        <li>
+          <label>{{ 'CMS.SETTINGS.labelPublisher' | translate }}:</label>
+          <span>{{ restaurant.restaurant_verified_by }}</span>
         </li>
+
       </ul>
       <span class="rc-space-filler"></span>
       <div class="rdl-card-actions">
@@ -23,10 +30,44 @@
         <button mat-button color="accent" (click)="publishWebsite(true)">PUBLISH</button>
       </div>
     </div>
-
+    <!-- DOMAIN -->
     <div class="rdl-card-rounded">
-      <h2>{{ 'CMS.SETTINGS.titleConfig' | translate }}</h2>
-      <span></span>
+
+      <div class="rdl-card-header">
+        <h2>{{ 'CMS.SETTINGS.titleWebDomain' | translate }}</h2>
+        <mat-icon>public</mat-icon>
+      </div>
+
+
+      <span markdown ngpreservewhitespaces>
+        {{ 'CMS.SETTINGS.infoDomains' | translate }}
+      </span>
+      <ul class="rdl-list">
+        <li>
+          <label>{{ 'CMS.SETTINGS.labelApptiserDomain' | translate }}:</label>
+          <span>{{ restaurant.restaurant_spw_url }}</span>
+        </li>
+        <li><label>{{ 'CMS.SETTINGS.labelCustomDomain' | translate }}:</label>
+          In progress...
+        </li>
+      </ul>
+      <span class="rc-space-filler"></span>
+      <div class="rdl-card-actions">
+        <button mat-button color="accent" (click)="customDomain()">
+          {{ 'CMS.SETTINGS.labelSetDomain' | translate }}
+        </button>
+      </div>
+    </div>
+    <!-- CONFIG -->
+    <div class="rdl-card-rounded">
+      <div class="rdl-card-header">
+        <h2>{{ 'CMS.SETTINGS.titleConfig' | translate }}</h2>
+        <mat-icon>tune</mat-icon>
+      </div>
+
+      <span markdown ngpreservewhitespaces>
+        {{ 'CMS.SETTINGS.infoConfig' | translate }}
+      </span>
       <form class="rdl-form-grid" [formGroup]="formGroup" (ngSubmit)="alertFormValues(formGroup)">
         <mat-slide-toggle formControlName="showBookingWidget">Booking widget</mat-slide-toggle>
         <mat-slide-toggle formControlName="showImageGallery">Image gallery</mat-slide-toggle>
@@ -48,10 +89,6 @@
     </div>
 
   </div>
-
-
-
-
-
-
 </div>
+
+<pre>{{ restaurant | json }}</pre>

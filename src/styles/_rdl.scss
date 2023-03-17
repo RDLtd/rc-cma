@@ -15,8 +15,18 @@
   border-radius: 16px !important;
   padding: 1.6rem;
   box-shadow: 0 9px 68px 0 rgb(0 0 0 / 20%);
+  p { margin: 0;}
+  strong {
+    font-weight: $rc-display-font-weight;
+    color: black;
+  }
+  .rdl-card-header {
+    display: grid;
+    grid: auto / 1fr 24px;
+    gap: 1rem;
+  }
   h2 {
-    margin-top: 0;
+    margin: 0;
     font-size: 1.25rem;
     font-weight: $rc-display-font-weight;
   }
@@ -48,8 +58,7 @@
   .rdl-card-actions {
     margin-top: auto;
     text-align: end;
-    //position: absolute;
-    //bottom: 24px; right: 24px; left: 24px;
+    button { text-transform: uppercase; }
   }
 }
 

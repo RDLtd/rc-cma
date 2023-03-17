@@ -46,6 +46,7 @@
   restaurant_curation_id: Number;
   restaurant_launch_number: Number;
   restaurant_spw_url: string;
+  restaurant_spw_written: string;
 }
 
 export class Offer {

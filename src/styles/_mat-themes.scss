@@ -5,6 +5,10 @@
 * ----------------------------------
 **/
 
+@use '@angular/material' as mat;
+
+@include mat.core();
+
 $rdl-palette: (
   50: #c8ecf5,
   100: #ACEBF3,
@@ -29,10 +33,6 @@ $rdl-palette: (
     900: white,
   )
 );
-
-@use '@angular/material' as mat;
-
-@include mat.core();
 
 $rdl-typography-config: mat.define-typography-config(
   $headline-1: mat.define-typography-level(112px, 112px, 300, $letter-spacing: 0em),

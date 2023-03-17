@@ -265,12 +265,27 @@
 			"titleReservationsInfo": "Informations sur les réservations"
 		},
 		"SETTINGS": {
+			"infoConfig": "Vous pouvez exclure l'une des sections suivantes de votre site Web en utilisant les options ci-dessous. Vous devrez republier votre site Web pour que les modifications prennent effet.",
+			"infoDomains": "Votre site Web peut être publié sur un nom de domaine existant que vous possédez ou sur un domaine nouvellement enregistré. Utilisez l'option ci-dessous pour commencer.",
+			"infoPublishing": "",
+			"infoUnpublished": "**Les dernières modifications que vous avez apportées n'ont pas encore été publiées.**\n**PREVIEW** votre site Web pour vérifier les modifications que vous avez apportées puis, si tout est correct, **PUBLISH** votre site Web et synchronisez le contenu sur tous les **{{ brand }}** canaux de distribution.",
 			"labelApptiserDomain": "Domaine",
 			"labelCustomDomain": "Domaine personnalisé",
+			"labelPreview": "Aperçu",
+			"labelPublish": "Publier",
+			"labelPublished": "Dernière publication",
+			"labelPublisher": "Publié par",
+			"labelSetDomain": "Définir un domaine personnalisé",
+			"labelUpdate": "Mettre à jour",
+			"statusBuilding": "Construire un site web",
+			"statusDeploying": "Déploiement du site Web",
+			"statusInProgress": "En cours...",
 			"titleConfig": "Configuration du site Web",
 			"titleSettings": "Paramètres de publication",
 			"titleStatus": "Statut de publication",
-			"titleTheme": "Thème du site"
+			"titleTheme": "Thème du site",
+			"titleUnPublishedChanges": "Modifications non publiées",
+			"titleWebDomain": "Domaine personnalisé"
 		},
 		"UPLOAD": {
 			"errorExceedsMax": "Ce fichier dépasse la taille maximale pouvant être téléchargée.",
