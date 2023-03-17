@@ -62,10 +62,31 @@ export class CmsSpwConfigComponent implements OnInit {
       .subscribe({
       next: data => {
         this.restaurant = data;
+        this.getConfig();
       },
       error: error => console.log(error)
     });
   }
+
+  getConfig(): void {
+    // get the website config data for this restaurant
+    this.cms.getWebConfig(Number(this.restaurant.restaurant_id))
+      .subscribe({
+        next: data => {
+          // map data to local
+          this.theme_id = data['website_config'].website_config_theme_id;
+          this.website_options = data['website_config'].website_config_options;
+          console.log(this.theme_id, this.website_options);
+        },
+        error: error => {
+          console.log('getWebConfig', error);
+        }
+      });
+  }
+
+
+
+
 
   publishWebsite(production: boolean): void {
     if (production) {
