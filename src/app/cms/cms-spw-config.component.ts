@@ -84,10 +84,6 @@ export class CmsSpwConfigComponent implements OnInit {
       });
   }
 
-
-
-
-
   publishWebsite(production: boolean): void {
     if (production) {
       console.log('will publish website');
@@ -101,10 +97,13 @@ export class CmsSpwConfigComponent implements OnInit {
     const restaurant_id = '92596';
     const membership_type = 'standard';
 
-    this.cms.publish(this.restaurant.restaurant_id, production, membership_type)
+    // TODO make sure we have the options loaded... Now we have 'theme': 'aaaaaaaa' in website_options.
+
+    this.cms.publish(this.restaurant.restaurant_id, production, membership_type, this.website_options)
       .then(res => {
         if (res['status'] === 'OK') {
           console.log('Website success:', res);
+          // TODO deal with this lot!
           // this.spwProdUrl = res['url'];
           // this.spwPreviewUrl = this.getSpwUrl();
           // this.cmsChanged = false;

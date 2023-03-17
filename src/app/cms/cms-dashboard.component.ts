@@ -537,11 +537,12 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
   }
 
   publishSPW(): void {
+    // TODO presume this is no longer called??????
     // apptiser update ks 090323 - added member type (for apptiser).
     // Note that association check is done at the back end, which check for ANY member having this restaurant associated
     this.cms.publish(this.restaurant.restaurant_id,
     true,
-    this.user.member_membership_type)
+    this.user.member_membership_type, {})
         .then(res => {
           if (res['status'] === 'OK') {
             // console.log('Publish success:', res);
