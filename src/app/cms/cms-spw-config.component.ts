@@ -17,6 +17,9 @@ export class CmsSpwConfigComponent implements OnInit {
   restaurant: Restaurant;
   member: any;
 
+  theme_id: number;
+  website_options: {};
+
   isChecked = true;
   formGroup = this._formBuilder.group({
     showImageGallery: [true],
@@ -56,6 +59,19 @@ export class CmsSpwConfigComponent implements OnInit {
       .subscribe((data) => {
         this.restaurant = data;
         console.log(this.restaurant.restaurant_name);
+        // get the website config data for this restaurant
+        this.cms.getWebConfig(Number(this.restaurant.restaurant_id))
+          .subscribe({
+            next: data => {
+              // map data to local
+              this.theme_id = data['website_config'].website_config_theme_id;
+              this.website_options = data['website_config'].website_config_options;
+              console.log(this.theme_id, this.website_options);
+            },
+            error: error => {
+              console.log('getWebConfig', error);
+            }
+          });
       });
   }
 
