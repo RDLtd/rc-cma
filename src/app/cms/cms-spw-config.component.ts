@@ -19,6 +19,9 @@ export class CmsSpwConfigComponent implements OnInit {
   member: any;
   brand: any;
 
+  theme_id: number;
+  website_options: {};
+
   isChecked = true;
   formGroup = this._formBuilder.group({
     showImageGallery: [true],
@@ -89,7 +92,6 @@ export class CmsSpwConfigComponent implements OnInit {
           //
           // this.verifyData();
           // this.isPreviewing = false;
-
           // // record event
           // this.ga.sendEvent('CMS-Dashboard', 'SPW', 'Published');
           // // reset data changed attribute

@@ -558,5 +558,46 @@ export class CMSService {
       });
   }
 
+  // web config
+  getWebConfig(restaurant_id: number) {
+    return this.http.post(this.config.apiUrl + '/spw/getwebconfig',
+      {
+        restaurant_id,
+        userCode: this.config.userAPICode,
+        token: this.authToken
+      });
+  }
+
+  createWebConfig(restaurant_id: number, theme_id: number, website_json: any) {
+    // stringify the options before sending to the endpoint
+    const website_options = JSON.stringify(website_json);
+    return this.http.post(this.config.apiUrl + '/spw/createwebconfig',
+      {
+        restaurant_id, theme_id, website_options,
+        userCode: this.config.userAPICode,
+        token: this.authToken
+      });
+  }
+
+  updateWeConfig(restaurant_id: number, theme_id: number, website_json: any) {
+    // stringify the options before sending to the endpoint
+    const website_options = JSON.stringify(website_json);
+    return this.http.post(this.config.apiUrl + '/spw/updatewebconfig',
+      {
+        restaurant_id, theme_id, website_options,
+        userCode: this.config.userAPICode,
+        token: this.authToken
+      });
+  }
+
+  deleteWebConfig(restaurant_id: number) {
+    return this.http.post(this.config.apiUrl + '/spw/deletewebconfig',
+      {
+        restaurant_id,
+        userCode: this.config.userAPICode,
+        token: this.authToken
+      });
+  }
+
 }
 
