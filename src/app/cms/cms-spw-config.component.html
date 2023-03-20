@@ -30,6 +30,7 @@
         <button mat-button color="accent" (click)="publishWebsite(true)">PUBLISH</button>
       </div>
     </div>
+
     <!-- DOMAIN -->
     <div class="rdl-card-rounded">
 
@@ -67,38 +68,64 @@
       <span markdown ngpreservewhitespaces>
         {{ 'CMS.SETTINGS.infoConfig' | translate }}
       </span>
-      <form class="rdl-form-grid" [formGroup]="formGroup" (ngSubmit)="alertFormValues(formGroup)">
-        <mat-slide-toggle formControlName="showBookingWidget">Booking widget</mat-slide-toggle>
-        <mat-slide-toggle formControlName="showImageGallery">Image gallery</mat-slide-toggle>
-        <mat-slide-toggle formControlName="showHtmlMenu">Menus - info & sample</mat-slide-toggle>
-        <mat-slide-toggle formControlName="showDownloadMenus">Menus - downloadable PDFs</mat-slide-toggle>
-        <mat-slide-toggle formControlName="showReservations">Reservations information</mat-slide-toggle>
-        <mat-slide-toggle formControlName="showGroupBookings">Group booking information</mat-slide-toggle>
-        <mat-slide-toggle formControlName="showPrivateDining">Private dining information</mat-slide-toggle>
-        <mat-slide-toggle formControlName="showContacts">Contact information</mat-slide-toggle>
-        <mat-slide-toggle formControlName="showLinks">Web & social links</mat-slide-toggle>
-        <mat-slide-toggle formControlName="showTransport">Public transport information</mat-slide-toggle>
-        <mat-slide-toggle formControlName="showParking">Parking information</mat-slide-toggle>
-        <mat-slide-toggle formControlName="showMap">Location map</mat-slide-toggle>
-<!--        <p>Form Group Status: {{formGroup.status}}</p>-->
+      <form class="rdl-form-grid" [formGroup]="configFormGroup" (ngSubmit)="submitFormValues(configFormGroup)">
+        <div class="rdl-form-group">
+          <h3>About</h3>
+          <mat-slide-toggle formControlName="showOpeningNotes">Show Opening Notes</mat-slide-toggle>
+          <mat-slide-toggle formControlName="showImageGallery">Show Image Gallery</mat-slide-toggle>
+        </div>
+        <div class="rdl-form-group">
+          <h3>Menus</h3>
+          <mat-slide-toggle formControlName="showHtmlMenu">Show Menu Information & Sample Menu</mat-slide-toggle>
+          <mat-slide-toggle formControlName="showDownloadMenus">Show Downloadable Menus</mat-slide-toggle>
+        </div>
+        <div class="rdl-form-group">
+          <h3>Reservations</h3>
+          <mat-slide-toggle formControlName="showReservations" (change)="toggleSection('showReservations')">Show
+
+                                                                                           Reservations section</mat-slide-toggle>
+          <mat-slide-toggle formControlName="showBookingWidget">Show Booking Widget</mat-slide-toggle>
+          <mat-slide-toggle formControlName="showReservationsInfo">Show Reservations information</mat-slide-toggle>
+          <mat-slide-toggle formControlName="showGroupBookings">Show Group bookings</mat-slide-toggle>
+          <mat-slide-toggle formControlName="showPrivateDining">Show Private Dining</mat-slide-toggle>
+        </div>
+        <div class="rdl-form-group">
+          <h3>Contacts</h3>
+          <mat-slide-toggle formControlName="showContacts" (change)="toggleSection('showContacts')">Show
+                                                                                                            Contact
+                                                                                         section</mat-slide-toggle>
+          <mat-slide-toggle formControlName="showLinks">Show Web & social links</mat-slide-toggle>
+          <mat-slide-toggle formControlName="showTransport">Show Public Transport Details</mat-slide-toggle>
+          <mat-slide-toggle formControlName="showParking">Show Parking Information</mat-slide-toggle>
+        </div>
+        <div class="rdl-form-group">
+          <h3>Location</h3>
+          <mat-slide-toggle formControlName="showMap">Location map</mat-slide-toggle>
+        </div>
       </form>
       <div class="rdl-card-actions">
-        <button mat-button color="accent" (click)="alertFormValues(formGroup)">SAVE CONFIGURATION</button>
+        <button mat-button color="accent" (click)="submitFormValues(configFormGroup)">SAVE CONFIGURATION</button>
       </div>
     </div>
 
     <div class="rdl-card-rounded">
-      <div *ngFor="let theme of cssThemes">
-        <div>
-          <h2>{{ theme }}</h2>
-          <span style="display: inline-block; width: 64px; height: 64px;" class="swatch-primary-{{theme}}">Primary</span>
-          <span style="display: inline-block; width: 64px; height: 64px;" class="swatch-accent-{{theme}}">Accent</span>
-        </div>
-      </div>
+      <h2>Your theme</h2>
+      <mat-radio-group
+        class="rdl-swatches"
+        [(ngModel)]="selectedTheme">
+
+        <mat-radio-button class="example-radio-button" *ngFor="let theme of cssThemes" [value]="theme">
+          <h2>{{ theme | titlecase }}</h2>
+          <span class="swatch swatch-primary-{{theme}}">Primary</span>
+          <span class="swatch swatch-accent-{{theme}}">Accent</span>
+        </mat-radio-button>
+
+      </mat-radio-group>
+
     </div>
 
   </div>
 </div>
 
 
-<pre>{{ restaurant | json }}</pre>
+<!--<pre>{{ restaurant | json }}</pre>-->
