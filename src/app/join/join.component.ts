@@ -95,7 +95,7 @@ export class JoinComponent implements OnInit {
 
     // Check session storage
     // console.log('Pending Member', this.pendingMember);
-    this.pendingMember = JSON.parse(sessionStorage.getItem('rc_member_pending')) || {};
+    this.pendingMember = JSON.parse(sessionStorage.getItem('app_member_pending')) || {};
 
   }
 
@@ -133,7 +133,7 @@ export class JoinComponent implements OnInit {
   savePendingMemberData(data): void {
     if (!!data.first_name) {
       console.log('savePending', data);
-      sessionStorage.setItem('rc_member_pending', JSON.stringify(data));
+      sessionStorage.setItem('app_member_pending', JSON.stringify(data));
       const pendingRecord = lastValueFrom(this.memberService.createPending(data))
         .catch(err => {
           console.log(err);
