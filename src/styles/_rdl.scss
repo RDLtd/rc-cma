@@ -79,13 +79,17 @@
   display: grid;
   grid: auto / 1fr 1fr;
   gap: 1rem;
+
 }
 .swatch {
   display: inline-block;
-  height: 40px;
+  height: 48px;
   width: 120px;
   color: white;
   padding: 4px 8px;
   cursor: pointer;
   font-size: .75rem;
+  &:last-child {
+    width: 64px;
+  }
 }

@@ -109,15 +109,24 @@
     </div>
 
     <div class="rdl-card-rounded">
-      <h2>Your theme</h2>
+      <div class="rdl-card-header">
+        <h2>Website Theme</h2>
+        <mat-icon>palette</mat-icon>
+      </div>
+
+      <span>
+        You will need to preview, or publish your website to view any theme changes.
+      </span>
+
       <mat-radio-group
         class="rdl-swatches"
         [(ngModel)]="selectedTheme">
 
-        <mat-radio-button class="example-radio-button" *ngFor="let theme of cssThemes" [value]="theme">
-          <h2>{{ theme | titlecase }}</h2>
-          <span class="swatch swatch-primary-{{theme}}">Primary</span>
-          <span class="swatch swatch-accent-{{theme}}">Accent</span>
+        <mat-radio-button class="example-radio-button" *ngFor="let obj of cssThemeObjects"
+                          [value]="obj['website_theme_name']">
+          <h2>{{ obj['website_theme_name'] | titlecase }}</h2>
+          <span class="swatch swatch-primary-{{obj['website_theme_name']}}">Primary</span>
+          <span class="swatch swatch-accent-{{obj['website_theme_name']}}">Accent</span>
         </mat-radio-button>
 
       </mat-radio-group>

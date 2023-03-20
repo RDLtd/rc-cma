@@ -600,5 +600,15 @@ export class CMSService {
       });
   }
 
+  getWebThemes() {
+    return this.http.post(this.config.apiUrl + '/spw/getwebthemes',
+      {
+        userCode: this.config.userAPICode,
+        token: this.authToken,
+      });
+  }
+
+
+
 }
 

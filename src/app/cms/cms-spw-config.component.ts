@@ -19,18 +19,11 @@ export class CmsSpwConfigComponent implements OnInit {
   restaurant: Restaurant;
   member: any;
   brand: any;
-  cssThemes = [
-    'apptiser',
-    'collective',
-    'carshalton',
-    'rdl'
-  ];
-  selectedTheme = 'apptiser'
+  cssThemeObjects: any[];
+  selectedTheme: any;
   user: any;
 
   configFormGroup: FormGroup;
-
-  theme_id: number;
 
   websiteConfig: {};
 
@@ -47,8 +40,10 @@ export class CmsSpwConfigComponent implements OnInit {
     private ga: AnalyticsService,
   ) {
       this.brand = config.brand;
+      this.user = this.storage.get('rd_profile');
   }
 
+  // Auth guard
   confirmNavigation() {
     if (this.dataChanged) {
       return this.cmsLocalService.confirmNavigation();
@@ -58,9 +53,10 @@ export class CmsSpwConfigComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loadThemes();
     this.generateConfigForm();
-    this.user = this.storage.get('rd_profile');
+
+    this.getThemes();
+
     this.cmsLocalService.getRestaurant()
       .subscribe({
       next: data => {
@@ -69,13 +65,6 @@ export class CmsSpwConfigComponent implements OnInit {
       },
       error: error => console.log(error)
     });
-  }
-
-  setConfig(): void {
-    Object.entries(this.websiteConfig).forEach(([key, value]) => {
-      console.log(`${key}: ${value}`);
-      this.configFormGroup.get(key).setValue(value);
-    })
   }
 
   generateConfigForm(): void {
@@ -101,6 +90,63 @@ export class CmsSpwConfigComponent implements OnInit {
     });
   }
 
+  getThemes(): void {
+    this.cms.getWebThemes()
+      .subscribe({
+        next: data => {
+          this.cssThemeObjects = data['website_themes'];
+          this.createThemeLinks(data['website_themes']);
+        },
+        error: error => console.log(error)
+      });
+  }
+
+  createThemeLinks(themesObjArray): void {
+    let link;
+    themesObjArray.forEach(
+      theme => {
+        link = document.createElement('link');
+        link.rel = "stylesheet";
+        link.type = "text/css";
+        link.href = `https://assets.apptiser.io/styles/themes/${theme.website_theme_name}.css`;
+        document.head.appendChild(link);
+      }
+    );
+
+  }
+
+  getConfig(): void {
+    // get the website config data for this restaurant
+    this.cms.getWebConfig(Number(this.restaurant.restaurant_id))
+      .subscribe({
+        next: data => {
+          // map data to local
+          this.websiteConfig = data['website_config'].website_config_options;
+          console.log('Conf.', this.websiteConfig);
+          this.setConfig();
+        },
+        error: error => {
+          console.log('getWebConfig', error);
+        }
+      });
+  }
+
+  setConfig(): void {
+    Object.entries(this.websiteConfig).forEach(([key, value]) => {
+      if (key === 'theme') {
+        this.selectedTheme = value;
+        console.log('loaded theme', value);
+        return;
+      }
+      console.log(`${key}: ${value}`);
+      this.configFormGroup.get(key).setValue(value);
+    })
+  }
+
+  submitFormValues(formGroup: FormGroup): void {
+    console.log(formGroup.value);
+  }
+
   // TODO: JB: I'm sure this would be better done using nested form groups
   //  but I don't have time to investigate
   toggleSection(control): void {
@@ -120,23 +166,6 @@ export class CmsSpwConfigComponent implements OnInit {
     }
   }
 
-  getConfig(): void {
-    // get the website config data for this restaurant
-    this.cms.getWebConfig(Number(this.restaurant.restaurant_id))
-      .subscribe({
-        next: data => {
-          // map data to local
-          this.theme_id = data['website_config'].website_config_theme_id;
-          this.websiteConfig = data['website_config'].website_config_options;
-          this.setConfig();
-          console.log('Config', this.websiteConfig);
-        },
-        error: error => {
-          console.log('getWebConfig', error);
-        }
-      });
-  }
-
   publishWebsite(production: boolean): void {
     if (production) {
       console.log('will publish website');
@@ -146,12 +175,15 @@ export class CmsSpwConfigComponent implements OnInit {
     // apptiser update ks 090323 - added member type (for apptiser).
     // Note that association check is done at the back end, which check for ANY member having this restaurant associated
 
-    // for testing only!
-    const membership_type = 'standard';
+
+    // Add theme to form value
+    const newConfigObj = this.configFormGroup.value;
+    newConfigObj.theme = this.selectedTheme;
+    console.log('Updated config', newConfigObj);
 
     // TODO make sure we have the options loaded... Now we have 'theme': 'aaaaaaaa' in website_options.
 
-    this.cms.publish(this.restaurant.restaurant_id, production, this.user.membership_type, this.websiteConfig)
+    this.cms.publish(this.restaurant.restaurant_id, production, this.user.membership_type, newConfigObj)
       .then(res => {
 
         if (res['status'] !== 'OK') {
@@ -174,7 +206,7 @@ export class CmsSpwConfigComponent implements OnInit {
         // this.isPreviewing = false;
 
         // // record event
-        // this.ga.sendEvent('CMS-Dashboard', 'Apptiser', 'Published');
+        this.ga.sendEvent('CMS-WebConfig', 'Apptiser', 'Published');
 
         // // reset data changed attribute
         // this.cms.resetLastUpdatedField(Number(restaurant_id))
@@ -190,31 +222,11 @@ export class CmsSpwConfigComponent implements OnInit {
       .catch((res) => console.log('Publish Endpoint Error', res));
   }
 
-  // Web config
-  submitFormValues(formGroup: FormGroup): void {
-    console.log(formGroup.value);
-  }
+
 
   // Domains
   customDomain(): void {
     alert('Open Typeform wizard');
   }
 
-
-
-
-  // Themes
-  loadThemes(): void {
-    let link;
-    this.cssThemes.forEach(
-      theme => {
-        link = document.createElement('link');
-        link.rel = "stylesheet";
-        link.type = "text/css";
-        link.href = `https://assets.apptiser.io/styles/themes/${theme}.css`;
-        document.head.appendChild(link);
-      }
-    );
-
-  }
 }
