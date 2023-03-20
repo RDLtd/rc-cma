@@ -87,7 +87,18 @@
       </div>
     </div>
 
+    <div class="rdl-card-rounded">
+      <div *ngFor="let theme of cssThemes">
+        <div>
+          <h2>{{ theme }}</h2>
+          <span style="display: inline-block; width: 64px; height: 64px;" class="swatch-primary-{{theme}}">Primary</span>
+          <span style="display: inline-block; width: 64px; height: 64px;" class="swatch-accent-{{theme}}">Accent</span>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
+
 
 <pre>{{ restaurant | json }}</pre>

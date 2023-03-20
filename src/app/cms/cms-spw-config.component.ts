@@ -18,6 +18,12 @@ export class CmsSpwConfigComponent implements OnInit {
   restaurant: Restaurant;
   member: any;
   brand: any;
+  cssThemes = [
+    'apptiser',
+    'collective',
+    'carshalton',
+    'rdl'
+  ]
 
   theme_id: number;
   website_options: {};
@@ -58,6 +64,8 @@ export class CmsSpwConfigComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.cssThemes);
+    this.loadThemes();
     this.cmsLocalService.getRestaurant()
       .subscribe({
       next: data => {
@@ -101,31 +109,39 @@ export class CmsSpwConfigComponent implements OnInit {
 
     this.cms.publish(this.restaurant.restaurant_id, production, membership_type, this.website_options)
       .then(res => {
-        if (res['status'] === 'OK') {
-          console.log('Website success:', res);
-          // TODO deal with this lot!
-          // this.spwProdUrl = res['url'];
-          // this.spwPreviewUrl = this.getSpwUrl();
-          // this.cmsChanged = false;
-          // this.d_publishDate = moment(new Date(res['published'])).format('LLLL');
-          // // this.publishDate = new Date(res['published']);
-          //
-          // this.verifyData();
-          // this.isPreviewing = false;
-          // // record event
-          // this.ga.sendEvent('CMS-Dashboard', 'SPW', 'Published');
-          // // reset data changed attribute
-          // this.cms.resetLastUpdatedField(Number(restaurant_id))
-          //   .subscribe({
-          //     next: () => {
-          //     },
-          //     error: error => {
-          //       console.log('unable to reset data changed attribute', error);
-          //     }
-          //   });
-        } else {
+
+        if (res['status'] !== 'OK') {
           console.log('Publish failed', res);
+          return;
         }
+
+        console.log('Website success:', res);
+
+        // TODO deal with this lot!
+
+        // this.spwProdUrl = res['url'];
+        // this.spwPreviewUrl = this.getSpwUrl();
+        // this.cmsChanged = false;
+        // this.d_publishDate = moment(new Date(res['published'])).format('LLLL');
+
+        // // this.publishDate = new Date(res['published']);
+        //
+        // this.verifyData();
+        // this.isPreviewing = false;
+
+        // // record event
+        // this.ga.sendEvent('CMS-Dashboard', 'Apptiser', 'Published');
+
+        // // reset data changed attribute
+        // this.cms.resetLastUpdatedField(Number(restaurant_id))
+        //   .subscribe({
+        //     next: () => {
+        //     },
+        //     error: error => {
+        //       console.log('unable to reset data changed attribute', error);
+        //     }
+        //   });
+
       })
       .catch((res) => console.log('Publish Endpoint Error', res));
   }
@@ -140,4 +156,21 @@ export class CmsSpwConfigComponent implements OnInit {
     alert('Open Typeform wizard');
   }
 
+
+
+
+  // Themes
+  loadThemes(): void {
+    let link;
+    this.cssThemes.forEach(
+      theme => {
+        link = document.createElement('link');
+        link.rel = "stylesheet";
+        link.type = "text/css";
+        link.href = `https://assets.apptiser.io/styles/themes/${theme}.css`;
+        document.head.appendChild(link);
+      }
+    );
+
+  }
 }

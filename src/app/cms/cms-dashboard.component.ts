@@ -120,6 +120,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
     this.cldPlugins = this.imgService.cldBasePlugins;
   }
 
+  // Only show the time if content was updated today.
   setDateRes(theDate) {
     if (this.isToday(theDate)) {
       return moment(theDate).format('HH:mm');
@@ -128,15 +129,16 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
     }
   }
 
+  // Display system messages
   ngAfterViewInit(): void {
     this.dspUnreadMessages();
   }
 
   ngOnInit() {
-
     this.lang = localStorage.getItem('rd_language');
     this.user = JSON.parse(localStorage.getItem('rd_profile'));
     this.userName = localStorage.getItem('rd_username');
+
 
     moment.locale(localStorage.getItem('rd_language'));
 
