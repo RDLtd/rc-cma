@@ -4,7 +4,8 @@ import { HelpService } from '../common';
 import { AnalyticsService, CMSService } from "../_services";
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Restaurant } from '../_models';
-import {AppConfig} from "../app.config";
+import { AppConfig } from "../app.config";
+import { StorageService } from '../_services/storage.service';
 
 @Component({
   selector: 'rc-cms-spw-config',
@@ -25,6 +26,7 @@ export class CmsSpwConfigComponent implements OnInit {
     'rdl'
   ];
   selectedTheme = 'apptiser'
+  user: any;
 
   configFormGroup: FormGroup;
 
@@ -41,6 +43,7 @@ export class CmsSpwConfigComponent implements OnInit {
     private cms: CMSService,
     private _formBuilder: FormBuilder,
     private config: AppConfig,
+    private storage: StorageService,
     private ga: AnalyticsService,
   ) {
       this.brand = config.brand;
@@ -55,9 +58,9 @@ export class CmsSpwConfigComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.loadThemes();
     this.generateConfigForm();
+    this.user = this.storage.get('rd_profile');
     this.cmsLocalService.getRestaurant()
       .subscribe({
       next: data => {
@@ -148,7 +151,7 @@ export class CmsSpwConfigComponent implements OnInit {
 
     // TODO make sure we have the options loaded... Now we have 'theme': 'aaaaaaaa' in website_options.
 
-    this.cms.publish(this.restaurant.restaurant_id, production, membership_type, this.websiteConfig)
+    this.cms.publish(this.restaurant.restaurant_id, production, this.user.membership_type, this.websiteConfig)
       .then(res => {
 
         if (res['status'] !== 'OK') {
