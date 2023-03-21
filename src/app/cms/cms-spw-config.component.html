@@ -28,7 +28,7 @@
         </li>
         <li>
           <label>{{ 'CMS.SETTINGS.labelPublisher' | translate }}:</label>
-          <span>{{ restaurant.restaurant_verified_by }}</span>
+          <span>{{ restaurant?.restaurant_verified_by }}</span>
         </li>
       </ul>
       <span class="rc-space-filler"></span>
@@ -37,7 +37,7 @@
         <button mat-button color="accent" (click)="publishWebsite(true)">PUBLISH</button>
       </div>
       <div class="rdl-card-actions" *ngIf="!unPublishedChanges">
-        <button mat-button (click)="publishWebsite(false)">MARKETING LINKS</button>
+        <button mat-button color="accent" (click)="showMarketingLinks()">MARKETING LINKS</button>
       </div>
 
 

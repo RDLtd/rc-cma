@@ -5,7 +5,7 @@ import { Member } from '../_models';
 import { Restaurant } from '../_models';
 import { HttpClient } from '@angular/common/http';
 import { AppService } from './app.service';
-import { lastValueFrom, Observable } from 'rxjs';
+import { lastValueFrom } from 'rxjs';
 
 @Injectable()
 
@@ -416,7 +416,7 @@ export class CMSService {
       });
   }
 
-  checkSPW(restaurant_id: string): Observable<any> {
+  checkSPW(restaurant_id: string) {
     return this.http.post(this.config.apiUrl + '/spw/checkSPW',
       {
         restaurant_id: restaurant_id,

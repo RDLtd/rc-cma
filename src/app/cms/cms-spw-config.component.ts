@@ -9,6 +9,7 @@ import { StorageService } from '../_services/storage.service';
 import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 import {CmsSpwBuilderComponent} from "./cms-spw-builder.component";
 import * as moment from 'moment/moment';
+import { CmsSpwLinksComponent } from './cms-spw-links.component';
 
 @Component({
   selector: 'rc-cms-spw-config',
@@ -18,28 +19,23 @@ import * as moment from 'moment/moment';
 })
 export class CmsSpwConfigComponent implements OnInit {
 
-  dataChanged = false;
-  building = false;
-
-  restaurant: Restaurant;
-  member: any;
   brand: any;
+  restaurant: Restaurant;
+  user: any; // a.k.a member
+
+
   cssThemeObjects: any[];
   selectedTheme: any;
-  user: any;
 
-  configFormGroup: FormGroup;
-
-  // apptiser website
   websiteConfig: {};
+  configFormGroup: FormGroup;
+  dataChanged = false;
+
   publishDate: string;
   publishedUrl: string;
   unPublishedChanges = false;
-
-
   builder: MatDialogRef<CmsSpwBuilderComponent>;
-
-  isChecked = true;
+  building = false;
 
   constructor(
     private cmsLocalService: CmsLocalService,
@@ -56,7 +52,7 @@ export class CmsSpwConfigComponent implements OnInit {
       this.user = this.storage.get('rd_profile');
   }
 
-  // Auth guard
+  //
   confirmNavigation() {
     if (this.dataChanged) {
       return this.cmsLocalService.confirmNavigation();
@@ -73,12 +69,13 @@ export class CmsSpwConfigComponent implements OnInit {
     // Current restaurant data
     this.cmsLocalService.getRestaurant()
       .subscribe({
-      next: data => {
-          this.restaurant = data;
-          this.publishDate = this.restaurant.restaurant_spw_written
-          console.log(this.restaurant.restaurant_id);
-          this.getConfig();
-          this.getContentStatus();
+        next: data => {
+          if(data.restaurant_id) {
+            this.restaurant = data;
+            this.publishDate = this.restaurant.restaurant_spw_written
+            this.getConfig();
+            this.getContentStatus();
+          }
       },
       error: error => console.log(error)
     });
@@ -154,7 +151,7 @@ export class CmsSpwConfigComponent implements OnInit {
         next: data => {
           // map data to local
           this.websiteConfig = data['website_config'].website_config_options;
-          console.log('Conf.', this.websiteConfig);
+          // console.log('Conf.', this.websiteConfig);
           this.setConfig();
         },
         error: error => {
@@ -167,10 +164,10 @@ export class CmsSpwConfigComponent implements OnInit {
     Object.entries(this.websiteConfig).forEach(([key, value]) => {
       if (key === 'theme') {
         this.selectedTheme = value;
-        console.log('loaded theme', value);
+        // console.log('loaded theme', value);
         return;
       }
-      console.log(`${key}: ${value}`);
+      // console.log(`${key}: ${value}`);
       this.configFormGroup.get(key).setValue(value);
     })
   }
@@ -290,6 +287,18 @@ export class CmsSpwConfigComponent implements OnInit {
       return url.replace('s3.eu-west-2.amazonaws.com/', '');
     }
     return url;
+  }
+
+  showMarketingLinks(): void {
+    this.dialog.open(CmsSpwLinksComponent,
+      {
+        data: {
+          spwUrl: this.restaurant.restaurant_spw_url,
+          spwMenus: `${this.restaurant.restaurant_spw_url}#menus`,
+          restaurant: this.restaurant,
+          curation: this.config.brand.email.curation
+        }
+      });
   }
 
 }
