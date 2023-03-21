@@ -16,6 +16,8 @@ import { StorageService } from '../_services/storage.service';
 export class CmsSpwConfigComponent implements OnInit {
 
   dataChanged = false;
+  building = false;
+
   restaurant: Restaurant;
   member: any;
   brand: any;
@@ -61,6 +63,7 @@ export class CmsSpwConfigComponent implements OnInit {
       .subscribe({
       next: data => {
         this.restaurant = data;
+        console.log(this.restaurant.restaurant_id);
         this.getConfig();
       },
       error: error => console.log(error)
@@ -167,11 +170,14 @@ export class CmsSpwConfigComponent implements OnInit {
   }
 
   publishWebsite(production: boolean): void {
+
     if (production) {
       console.log('will publish website');
     } else {
       console.log('will preview website');
     }
+
+
     // apptiser update ks 090323 - added member type (for apptiser).
     // Note that association check is done at the back end, which check for ANY member having this restaurant associated
 
@@ -183,7 +189,7 @@ export class CmsSpwConfigComponent implements OnInit {
 
     // TODO make sure we have the options loaded... Now we have 'theme': 'aaaaaaaa' in website_options.
 
-    this.cms.publish(this.restaurant.restaurant_id, production, this.user.membership_type, newConfigObj)
+    this.cms.publish(this.restaurant.restaurant_id, production, 'standard', newConfigObj)
       .then(res => {
 
         if (res['status'] !== 'OK') {
@@ -192,6 +198,9 @@ export class CmsSpwConfigComponent implements OnInit {
         }
 
         console.log('Website success:', res);
+
+
+
 
         // TODO deal with this lot!
 
@@ -221,8 +230,6 @@ export class CmsSpwConfigComponent implements OnInit {
       })
       .catch((res) => console.log('Publish Endpoint Error', res));
   }
-
-
 
   // Domains
   customDomain(): void {
