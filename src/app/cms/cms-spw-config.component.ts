@@ -118,7 +118,6 @@ export class CmsSpwConfigComponent implements OnInit {
         document.head.appendChild(link);
       }
     );
-
   }
 
   getConfig(): void {
