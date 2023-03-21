@@ -6,7 +6,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Restaurant } from '../_models';
 import { AppConfig } from "../app.config";
 import { StorageService } from '../_services/storage.service';
-import {MatDialog} from "@angular/material/dialog";
+import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 import {CmsSpwBuilderComponent} from "./cms-spw-builder.component";
 
 @Component({
@@ -29,7 +29,11 @@ export class CmsSpwConfigComponent implements OnInit {
 
   configFormGroup: FormGroup;
 
+  // apptiser website
   websiteConfig: {};
+  publishDate: string;
+
+  builder: MatDialogRef<CmsSpwBuilderComponent>;
 
   isChecked = true;
 
@@ -58,14 +62,16 @@ export class CmsSpwConfigComponent implements OnInit {
   }
 
   ngOnInit() {
+    // Build website config form
     this.generateConfigForm();
-
+    // Load available themes from db
     this.getThemes();
-
+    // Current restaurant data
     this.cmsLocalService.getRestaurant()
       .subscribe({
       next: data => {
         this.restaurant = data;
+        this.publishDate = this.restaurant.restaurant_spw_written
         console.log(this.restaurant.restaurant_id);
         this.getConfig();
       },
@@ -107,6 +113,7 @@ export class CmsSpwConfigComponent implements OnInit {
       });
   }
 
+  // Make all theme stylesheets available to build swatches
   createThemeLinks(themesObjArray): void {
     let link;
     themesObjArray.forEach(
@@ -120,8 +127,9 @@ export class CmsSpwConfigComponent implements OnInit {
     );
   }
 
+  // get the website config data for this restaurant
   getConfig(): void {
-    // get the website config data for this restaurant
+
     this.cms.getWebConfig(Number(this.restaurant.restaurant_id))
       .subscribe({
         next: data => {
@@ -191,8 +199,6 @@ export class CmsSpwConfigComponent implements OnInit {
     newConfigObj.theme = this.selectedTheme;
     console.log('Updated config', newConfigObj);
 
-    // TODO make sure we have the options loaded... Now we have 'theme': 'aaaaaaaa' in website_options.
-
     this.cms.publish(this.restaurant.restaurant_id, production, 'standard', newConfigObj)
       .then(res => {
 
@@ -202,6 +208,8 @@ export class CmsSpwConfigComponent implements OnInit {
         }
 
         console.log('Website success:', res);
+
+        this.onBuildSuccess(res);
 
 
 
@@ -242,11 +250,17 @@ export class CmsSpwConfigComponent implements OnInit {
 
   launchBuilder(version): void {
     this.building = true;
-    const dialogRef = this.dialog.open(CmsSpwBuilderComponent, {
+    this.builder = this.dialog.open(CmsSpwBuilderComponent, {
       data: {
         buildVersion: version
-      }
+      },
+      panelClass: 'rdl-build-container'
     });
+  }
+
+  onBuildSuccess(res): void {
+    this.publishDate = res.published;
+    this.builder.close();
   }
 
 }

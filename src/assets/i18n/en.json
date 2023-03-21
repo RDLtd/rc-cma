@@ -503,7 +503,7 @@
 	"MEMBERSHIP": {
 		"infoMembershipMonthly": "##  MONTHLY SUBSCRIPTION\n\nPay just **{{ fee }}** per month for full access to all the benefits offered by **{{ brand }}** Membership.",
 		"infoMembershipYearly": "## ANNUAL SUBSCRIPTION\n\nPay **{{ fee }}** per year and you'll get a full 12 month membership for the price of only 10. All the same **{{ brand }}** benefits, just a bit cheaper!\n",
-		"instructions": "# What do I get?\n\n- Power over your online presence with our content management tool and included single page website\n\n- Economies of scale and vetted suppliers in our Deals Marketplace\n\n- Advice and support from fellow indies in our Members Forum\n\n# And soon...\n\n- Mentorship from people who have been where they are now\n\n- Great staff on loan/recommendation via the Restaurant Collective Job Exchange\n\n- Skills training for themselves and their teams in our Knowledge Base\n\n- Inclusion in the UK’s largest directory of independent restaurants ",
+		"instructions": "# What do I get?\n\n- Modern design that looks great on any device\n- 24/7 Content management\n- High performance\n- Monthly contract, all inclusive fees\n- UK Support\n\n# Coming soon – all the above PLUS:\n\n- Real-time online bookings\n- Content distributed to RDL Network of partners\n- Content synchronised to Google, Facebook and Instagram\n- Online bookings direct from Google, Facebook and Instagram\n",
 		"labelBack": "Back",
 		"labelPayMonthly": "Pay monthly",
 		"labelPayYearly": "Pay yearly",
