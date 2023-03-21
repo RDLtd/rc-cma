@@ -65,10 +65,11 @@
 .rdl-form-grid {
   width: 100%;
   display: grid;
-  gap: 1rem;
+  gap: 2rem;
   .rdl-form-group {
     display: flex;
     flex-direction: column;
+    gap:1rem;
   }
   label {
     cursor: pointer !important;
