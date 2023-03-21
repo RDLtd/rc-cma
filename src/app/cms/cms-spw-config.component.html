@@ -53,7 +53,9 @@
       <ul class="rdl-list">
         <li>
           <label>{{ 'CMS.SETTINGS.labelApptiserDomain' | translate }}:</label>
-          <span>{{ restaurant.restaurant_spw_url }}</span>
+          <span><a [href]="getApptiserDomain(restaurant?.restaurant_spw_url)"
+                   title="View your published apptiser website">
+            {{ getApptiserDomain(restaurant?.restaurant_spw_url) }}</a></span>
         </li>
         <li><label>{{ 'CMS.SETTINGS.labelCustomDomain' | translate }}:</label>
           In progress...
@@ -65,6 +67,30 @@
           {{ 'CMS.SETTINGS.labelSetDomain' | translate }}
         </button>
       </div>
+    </div>
+    <div class="rdl-card-rounded">
+      <div class="rdl-card-header">
+        <h2>Website Theme</h2>
+        <mat-icon>palette</mat-icon>
+      </div>
+
+      <span>
+        You will need to preview, or publish your website to view any theme changes.
+      </span>
+
+      <mat-radio-group
+        class="rdl-swatches"
+        [(ngModel)]="selectedTheme">
+
+        <mat-radio-button class="example-radio-button" *ngFor="let obj of cssThemeObjects"
+                          [value]="obj['website_theme_name']">
+          <h2>{{ obj['website_theme_name'] | titlecase }}</h2>
+          <span class="rdl-swatch swatch-primary-{{obj['website_theme_name']}}">Primary</span>
+          <span class="rdl-swatch swatch-accent-{{obj['website_theme_name']}}">Accent</span>
+        </mat-radio-button>
+
+      </mat-radio-group>
+
     </div>
     <!-- CONFIG -->
     <div class="rdl-card-rounded">
@@ -110,35 +136,12 @@
           <mat-slide-toggle formControlName="showMap">Location map</mat-slide-toggle>
         </div>
       </form>
-      <div class="rdl-card-actions">
-        <button mat-button color="accent" (click)="submitFormValues(configFormGroup)">SAVE CONFIGURATION</button>
-      </div>
+<!--      <div class="rdl-card-actions">-->
+<!--        <button mat-button color="accent" (click)="submitFormValues(configFormGroup)">SAVE CONFIGURATION</button>-->
+<!--      </div>-->
     </div>
 
-    <div class="rdl-card-rounded">
-      <div class="rdl-card-header">
-        <h2>Website Theme</h2>
-        <mat-icon>palette</mat-icon>
-      </div>
 
-      <span>
-        You will need to preview, or publish your website to view any theme changes.
-      </span>
-
-      <mat-radio-group
-        class="rdl-swatches"
-        [(ngModel)]="selectedTheme">
-
-        <mat-radio-button class="example-radio-button" *ngFor="let obj of cssThemeObjects"
-                          [value]="obj['website_theme_name']">
-          <h2>{{ obj['website_theme_name'] | titlecase }}</h2>
-          <span class="rdl-swatch swatch-primary-{{obj['website_theme_name']}}">Primary</span>
-          <span class="rdl-swatch swatch-accent-{{obj['website_theme_name']}}">Accent</span>
-        </mat-radio-button>
-
-      </mat-radio-group>
-
-    </div>
 
   </div>
 </div>

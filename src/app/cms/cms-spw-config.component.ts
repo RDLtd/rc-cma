@@ -32,6 +32,7 @@ export class CmsSpwConfigComponent implements OnInit {
   // apptiser website
   websiteConfig: {};
   publishDate: string;
+  publishedUrl: string;
 
   builder: MatDialogRef<CmsSpwBuilderComponent>;
 
@@ -187,7 +188,7 @@ export class CmsSpwConfigComponent implements OnInit {
 
     this.launchBuilder(buildVersion);
 
-    if(!production) { return; }
+    //if(!production) { return; }
 
 
     // apptiser update ks 090323 - added member type (for apptiser).
@@ -260,7 +261,16 @@ export class CmsSpwConfigComponent implements OnInit {
 
   onBuildSuccess(res): void {
     this.publishDate = res.published;
+    this.publishedUrl = res.url.replace('S3.eu-west-2.amazonaws.com/', '').trim();
     this.builder.close();
+  }
+
+  getApptiserDomain(url): string {
+    if(!url) { return;}
+    if (url.indexOf('s3.eu-west-2.amazonaws.com') > 0) {
+      return url.replace('s3.eu-west-2.amazonaws.com/', '');
+    }
+    return url;
   }
 
 }
