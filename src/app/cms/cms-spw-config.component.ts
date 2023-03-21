@@ -8,6 +8,7 @@ import { AppConfig } from "../app.config";
 import { StorageService } from '../_services/storage.service';
 import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 import {CmsSpwBuilderComponent} from "./cms-spw-builder.component";
+import * as moment from 'moment/moment';
 
 @Component({
   selector: 'rc-cms-spw-config',
@@ -33,6 +34,8 @@ export class CmsSpwConfigComponent implements OnInit {
   websiteConfig: {};
   publishDate: string;
   publishedUrl: string;
+  unPublishedChanges = false;
+
 
   builder: MatDialogRef<CmsSpwBuilderComponent>;
 
@@ -71,13 +74,28 @@ export class CmsSpwConfigComponent implements OnInit {
     this.cmsLocalService.getRestaurant()
       .subscribe({
       next: data => {
-        this.restaurant = data;
-        this.publishDate = this.restaurant.restaurant_spw_written
-        console.log(this.restaurant.restaurant_id);
-        this.getConfig();
+          this.restaurant = data;
+          this.publishDate = this.restaurant.restaurant_spw_written
+          console.log(this.restaurant.restaurant_id);
+          this.getConfig();
+          this.getContentStatus();
       },
       error: error => console.log(error)
     });
+  }
+
+  getContentStatus(): void {
+      this.cms.checkSPW(this.restaurant.restaurant_id)
+        .subscribe({
+          next: res => {
+            console.log(`Check:`, res);
+            this.unPublishedChanges = !res['published_status_ok'];
+          },
+          error: error => {
+            console.log('ERROR', error);
+          }
+        });
+
   }
 
   generateConfigForm(): void {
@@ -260,6 +278,7 @@ export class CmsSpwConfigComponent implements OnInit {
   }
 
   onBuildSuccess(res): void {
+    this.unPublishedChanges = false;
     this.publishDate = res.published;
     this.publishedUrl = res.url.replace('S3.eu-west-2.amazonaws.com/', '').trim();
     this.builder.close();

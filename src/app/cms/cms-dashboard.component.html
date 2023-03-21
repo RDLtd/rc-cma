@@ -162,7 +162,7 @@
     <!-- HEADER -->
     <!-- Unpublished changes -->
     <mat-card-header *ngIf="!isPreviewing && cmsHasSufficientData">
-      <mat-card-title>{{ 'CMS.DASHBOARD.spw.headerUnPublished' | translate | uppercase }}</mat-card-title>
+      <mat-card-title>{{ 'CMS.DASHBOARD.spw.headerUnPublished' | translate }}!</mat-card-title>
       <span class="rc-space-filler"></span>
       <span>
       <mat-icon class="rc-warn">cloud_off</mat-icon></span>
@@ -181,7 +181,9 @@
       *ngIf="!isPreviewing && cmsHasSufficientData"
       markdown
       ngpreservewhitespaces>
-      {{ 'CMS.DASHBOARD.spw.msgUnpublished' | translate: { brand: config.brand.name } }}
+      The latest changes that you have made have not yet been published. Go to your [WEBSITE SETTING](cms/{{ restaurant.restaurant_id }}/settings) to
+      PREVIEW and PUBLISH your latest updates
+<!--      {{ 'CMS.DASHBOARD.spw.msgUnpublished' | translate: { brand: config.brand.name } }}-->
     </mat-card-content>
 
     <!-- More content required -->
@@ -194,19 +196,19 @@
 
     <!-- ACTIONS -->
     <!-- card actions -->
-    <mat-card-actions
-      align="end"
-      *ngIf="!isPreviewing">
-      <button
-        mat-button
-        [disabled]="isPreviewing"
-        (click)="previewSPW()">{{ 'CMS.DASHBOARD.spw.labelBtnPreview' | translate | uppercase }}</button>
-      <button
-        mat-button
-        color="accent"
-        [disabled]="!cmsHasSufficientData"
-        (click)="publishSPW()">{{ 'CMS.DASHBOARD.spw.labelBtnPublish' | translate | uppercase }}</button>
-    </mat-card-actions>
+<!--    <mat-card-actions-->
+<!--      align="end"-->
+<!--      *ngIf="!isPreviewing">-->
+<!--      <button-->
+<!--        mat-button-->
+<!--        [disabled]="isPreviewing"-->
+<!--        (click)="previewSPW()">{{ 'CMS.DASHBOARD.spw.labelBtnPreview' | translate | uppercase }}</button>-->
+<!--      <button-->
+<!--        mat-button-->
+<!--        color="accent"-->
+<!--        [disabled]="!cmsHasSufficientData"-->
+<!--        (click)="publishSPW()">{{ 'CMS.DASHBOARD.spw.labelBtnPublish' | translate | uppercase }}</button>-->
+<!--    </mat-card-actions>-->
   </mat-card>
 
   <!-- CONTENT Summary -->

@@ -2,7 +2,7 @@
 // Cards
 .rdl-card {
   .mat-mdc-card-header {
-    margin-bottom: 2rem;
+    //margin-bottom: 2rem;
   }
 }
 .rdl-card-rounded {
@@ -111,5 +111,8 @@
       line-height: 1.1;
     }
   }
+}
+* [color=success] {
+  color: $rc-theme-success;
 }
 

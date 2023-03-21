@@ -7,12 +7,18 @@
 
       <div class="rdl-card-header">
         <h2>{{ 'CMS.SETTINGS.titleStatus' | translate }}</h2>
-        <mat-icon color="warn">cloud_off</mat-icon>
+        <mat-icon color="warn" *ngIf="unPublishedChanges">cloud_off</mat-icon>
+        <mat-icon color="success" *ngIf="!unPublishedChanges">cloud</mat-icon>
       </div>
 
-      <ng-container>
-      <span markdown ngpreservewhitespaces>
+
+      <span markdown ngpreservewhitespaces *ngIf="unPublishedChanges">
         {{ 'CMS.SETTINGS.infoUnpublished' | translate: { brand: brand.name } }}
+      </span>
+
+      <span markdown ngpreservewhitespaces *ngIf="!unPublishedChanges">
+        All updates have been successfully published and your content has been synchronised across all of your
+        RDL Network distribution channels.
       </span>
 
       <ul class="rdl-list">
@@ -26,11 +32,15 @@
         </li>
       </ul>
       <span class="rc-space-filler"></span>
-      <div class="rdl-card-actions">
+      <div class="rdl-card-actions" *ngIf="unPublishedChanges">
         <button mat-button (click)="publishWebsite(false)">PREVIEW</button>
         <button mat-button color="accent" (click)="publishWebsite(true)">PUBLISH</button>
       </div>
-      </ng-container>
+      <div class="rdl-card-actions" *ngIf="!unPublishedChanges">
+        <button mat-button (click)="publishWebsite(false)">MARKETING LINKS</button>
+      </div>
+
+
       <ng-container *ngIf="building">
         <div>
 

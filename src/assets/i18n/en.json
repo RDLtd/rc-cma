@@ -62,7 +62,7 @@
 				"msgAnalysing": "Analysing content...",
 				"msgContentRequired": "Good work so far but we need a bit more information to generate your Single Page Website (SPW). \n\nThe summary below should indicate which sections still need additional content. Once you've added enough data, the **PREVIEW** and **PUBLISH** options will be enabled and we can create your SPW and distribute your content to our partners.\n\nYou can [view a demo restaurant version]({{ link }}) top see what the SPW will look like with content added.",
 				"msgPublished": "Your **SPW** has been successfully published and has been synchronised with all Restaurant Collective content subscribers. You can view your page or copy the URL using the MARKETING LINK options below.",
-				"msgUnpublished": "The latest changes that you have made have not yet been published. \n\n**PREVIEW** your SPW to check and verify your content. If everything is correct then press **PUBLISH** to synchronise with all {{ brand }} distribution channels.",
+				"msgUnpublished": "The latest changes that you have made have not yet been published. Go to your 'Website Settings' to PREVIEW and PUBLISH your latest updates\n",
 				"msgVerified": "Verified and published on {{ date }} by {{ name }}.",
 				"msgVerifiedAndPublished": "Data verified and published",
 				"tipMarketingLinks": "Marketing links and QR codes",
@@ -282,7 +282,7 @@
 			"statusInProgress": "In progress...",
 			"titleConfig": "Website Configuration",
 			"titleSettings": "Publish Settings",
-			"titleStatus": "Website Publish status",
+			"titleStatus": "Website Status",
 			"titleTheme": "Website Theme",
 			"titleUnPublishedChanges": "Unpublished changes",
 			"titleWebDomain": "Website Domain"

@@ -177,7 +177,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
     this.cms.checkSPW(this.restaurant.restaurant_id)
       .subscribe({
         next: res => {
-          // console.log(res);
+          console.log(res);
           this.cmsHasSufficientData = res['data_status_ok'];
           this.cmsChanged = !(res['published_status_ok']);
           // Enough content?

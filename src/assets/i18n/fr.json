@@ -62,7 +62,7 @@
 				"msgAnalysing": "Analyse du contenu ...",
 				"msgContentRequired": "Bon travail jusqu'à présent, mais nous avons besoin d'un peu plus d'informations pour générer votre Page Internet. \n\nLe tableau ci-dessous vous indique les sections qui nécessitent davantage de contenu. Une fois que vousaurez ajouté suffisamment de données, les options **APERÇU** et **PUBLIER** seront disponibles. Nous pourrons créer votre Page Internet et distribuer votre contenu.\n\nVous pouvez [voir une version démo]({{link}}) voir à quoi ressemble une Page Internet avec davantage de contenu.",
 				"msgPublished": "Votre **Page Internet** a été publié avec succès et les données ont été synchronisées sur tous les Sites abonnés au contenu de Restaurateuurs Indépendants. Vous pouvez voir votre page ou copier l'URL depuis l'accès ci-dessous au LIENS MARKETING.",
-				"msgUnpublished": "Les dernières modifications n'ont pas encore été publiées.\n\nCliquez sur **APERÇU** pour voir et vérifier le contenu de votre Page Internet. Si tout est correct, cliquez sur **PUBLIER** pour synchroniser les modifications avec tous les {{ brand }} canaux de distribution.",
+				"msgUnpublished": "Les dernières modifications que vous avez apportées n'ont pas encore été publiées. Accédez à vos \"Paramètres du site Web\" pour PRÉVISUALISER et PUBLIER vos dernières mises à jour\n",
 				"msgVerified": "Vérifié et publié le {{ date }} par {{ name }}.",
 				"msgVerifiedAndPublished": "Données vérifiées et publiées",
 				"tipMarketingLinks": "Liens marketing et codes QR",
@@ -282,7 +282,7 @@
 			"statusInProgress": "En cours...",
 			"titleConfig": "Configuration du site Web",
 			"titleSettings": "Paramètres de publication",
-			"titleStatus": "Statut de publication",
+			"titleStatus": "État du site Web",
 			"titleTheme": "Thème du site",
 			"titleUnPublishedChanges": "Modifications non publiées",
 			"titleWebDomain": "Domaine du site Web"
