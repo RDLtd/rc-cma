@@ -285,7 +285,7 @@
 			"titleStatus": "Statut de publication",
 			"titleTheme": "Thème du site",
 			"titleUnPublishedChanges": "Modifications non publiées",
-			"titleWebDomain": "Domaine personnalisé"
+			"titleWebDomain": "Domaine du site Web"
 		},
 		"UPLOAD": {
 			"errorExceedsMax": "Ce fichier dépasse la taille maximale pouvant être téléchargée.",

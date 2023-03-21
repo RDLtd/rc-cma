@@ -53,9 +53,12 @@
       <ul class="rdl-list">
         <li>
           <label>{{ 'CMS.SETTINGS.labelApptiserDomain' | translate }}:</label>
-          <span><a [href]="getApptiserDomain(restaurant?.restaurant_spw_url)"
-                   title="View your published apptiser website">
-            {{ getApptiserDomain(restaurant?.restaurant_spw_url) }}</a></span>
+          <span>
+            <a [href]="getApptiserDomain(restaurant?.restaurant_spw_url)"
+               target="_blank"
+               title="View your published apptiser website">
+              {{ getApptiserDomain(restaurant?.restaurant_spw_url) }}</a>
+          </span>
         </li>
         <li><label>{{ 'CMS.SETTINGS.labelCustomDomain' | translate }}:</label>
           In progress...

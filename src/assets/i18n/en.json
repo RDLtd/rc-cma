@@ -285,7 +285,7 @@
 			"titleStatus": "Website Publish status",
 			"titleTheme": "Website Theme",
 			"titleUnPublishedChanges": "Unpublished changes",
-			"titleWebDomain": "Custom Domain"
+			"titleWebDomain": "Website Domain"
 		},
 		"UPLOAD": {
 			"errorExceedsMax": "That file exceeds the maximum size that can be uploaded.",
