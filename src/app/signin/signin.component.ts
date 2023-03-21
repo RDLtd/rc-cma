@@ -58,7 +58,7 @@ export class SigninComponent implements OnInit {
   }
 
   dspNewMemberMessage() {
-    const newMember = JSON.parse(sessionStorage.getItem('rc_member_pending'));
+    const newMember = JSON.parse(sessionStorage.getItem('app_member_pending'));
     if (!!newMember) {
       this.newMemberEmail = newMember.email;
     }

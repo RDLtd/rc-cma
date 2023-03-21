@@ -76,7 +76,7 @@ export class MembershipComponent implements OnInit {
 
     // If this was a sales referral and
     // there is a promotion message then display it
-    this.pending = JSON.parse(sessionStorage.getItem('rc_member_pending'));
+    this.pending = JSON.parse(sessionStorage.getItem('app_member_pending'));
     console.log(this.pending);
     if (!!this.pending.promo_status) {
       this.dialog.open(ConfirmCancelComponent, {
@@ -91,22 +91,24 @@ export class MembershipComponent implements OnInit {
   }
 
   async getProducts() {
-    await lastValueFrom(this.memberService.getProductsMaxRestaurants(1))
+    // ks apptiser update - set max_restaurants to 3 to get the app products
+    // NB for now assume that the products are returned first setup, then monthly fee
+    await lastValueFrom(this.memberService.getProductsMaxRestaurants(3))
       .then(res => {
         this.products = res['products'];
         console.log(this.products);
         this.mdProdMonthly = this.translate.instant(
           'MEMBERSHIP.infoMembershipMonthly',
           {
-            fee: this.currencyPipe.transform(this.products[0].product_price, this.config.brand.currency.code),
-            brand: this.transParams.brand
-          });
-        this.mdProdYearly = this.translate.instant(
-          'MEMBERSHIP.infoMembershipYearly',
-          {
             fee: this.currencyPipe.transform(this.products[1].product_price, this.config.brand.currency.code),
             brand: this.transParams.brand
           });
+        // this.mdProdYearly = this.translate.instant(
+        //   'MEMBERSHIP.infoMembershipYearly',
+        //   {
+        //     fee: this.currencyPipe.transform(this.products[1].product_price, this.config.brand.currency.code),
+        //     brand: this.transParams.brand
+        //   });
       })
       .catch(err => {
         console.log(err);
@@ -117,6 +119,7 @@ export class MembershipComponent implements OnInit {
 
   // Create Stripe Session
   async createCheckoutSession(options) {
+    console.log('Session options', options);
     return lastValueFrom(this.http.post(`${this.config.apiUrl}/payments/create-session`, options))
       .catch(reason => {
         console.log('FAILED', reason);
@@ -131,16 +134,27 @@ export class MembershipComponent implements OnInit {
   }
 
   async checkout(product)  {
-    const newMember = JSON.parse(sessionStorage.getItem('rc_member_pending'));
+    const newMember = JSON.parse(sessionStorage.getItem('app_member_pending'));
     this.waiting = true;
+    // need also to send the setup fee if this is a first time app purchase - if we
+    // got here via the membership component then that is true
+    let priceId = '';
+    let setupPriceId = '';
+    if (this.config.brand.prefix === 'app' ) {
+      priceId = this.products[1].product_stripe_price_id;
+      setupPriceId = this.products[0].product_stripe_price_id;
+    } else {
+      priceId = this.products[product].product_stripe_price_id;
+    }
     await this.createCheckoutSession({
-      priceId: this.products[product].product_stripe_price_id,
+      priceId: priceId,
       // Allow for tax to be optional
       taxId: !!this.products[product].product_tax_id ? [this.products[product].product_tax_id] : [],
       successUrl: this.config.brand.products.success_url,
       cancelUrl: this.config.brand.products.cancel_url,
       email: newMember.email,
-      company: this.config.brand.prefix
+      company: this.config.brand.prefix,
+      setupPriceId: setupPriceId
     })
       .then(data => {
         console.log('MC Session', data);
