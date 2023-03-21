@@ -227,33 +227,18 @@ export class CmsSpwConfigComponent implements OnInit {
 
         this.onBuildSuccess(res);
 
-
-
-
-        // TODO deal with this lot!
-
-        // this.spwProdUrl = res['url'];
-        // this.spwPreviewUrl = this.getSpwUrl();
-        // this.cmsChanged = false;
-        // this.d_publishDate = moment(new Date(res['published'])).format('LLLL');
-
-        // // this.publishDate = new Date(res['published']);
-        //
-        // this.verifyData();
-        // this.isPreviewing = false;
-
         // // record event
         this.ga.sendEvent('CMS-WebConfig', 'Apptiser', 'Published');
 
-        // // reset data changed attribute
-        // this.cms.resetLastUpdatedField(Number(restaurant_id))
-        //   .subscribe({
-        //     next: () => {
-        //     },
-        //     error: error => {
-        //       console.log('unable to reset data changed attribute', error);
-        //     }
-        //   });
+        // reset data changed attribute
+        this.cms.resetLastUpdatedField(Number(this.restaurant.restaurant_id))
+          .subscribe({
+            next: () => {
+            },
+            error: error => {
+              console.log('unable to reset data changed attribute', error);
+            }
+          });
 
       })
       .catch((res) => console.log('Publish Endpoint Error', res));

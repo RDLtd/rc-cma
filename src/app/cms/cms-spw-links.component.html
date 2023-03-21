@@ -1,6 +1,6 @@
 <div class="rc-dialog rc-dialog-med">
 
-  <div mat-dialog-title>
+
     <mat-toolbar class="rc-toolbar rc-toolbar-nav">
       <span>{{ 'CMS.LINKS.titleMarketing' | translate }}</span>
       <span class="rc-space-filler"></span>
@@ -16,7 +16,7 @@
       </button>
     </span>
     </mat-toolbar>
-  </div>
+
 
   <div mat-dialog-content>
 
@@ -40,7 +40,7 @@
         <qrcode
           [qrdata]="data['spwUrl']"
           [elementType]="'img'"
-          [width]="256"
+          [width]="qrCodeWidth"
           [errorCorrectionLevel]="'M'"
           matTooltip="{{ 'CMS.LINKS.tipQRCodeWebsite' | translate:
           { name: data['restaurant']['restaurant_name'] } }}">
@@ -53,7 +53,7 @@
         <qrcode
           [qrdata]="data.spwMenus"
           [elementType]="'img'"
-          [width]="256"
+          [width]="qrCodeWidth"
           [errorCorrectionLevel]="'M'"
           matTooltip="{{ 'CMS.LINKS.tipQRCodeMenu' | translate:
           { name: data['restaurant']['restaurant_name'] } }}"></qrcode>

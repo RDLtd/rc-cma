@@ -1013,6 +1013,10 @@ form.rc-form-grid {
   position: relative;
   padding: 0;
   max-width: 960px;
+  h2 {
+    font-size: 1.125rem;
+    font-weight: $rc-display-font-weight;
+  }
   input {
     text-overflow:ellipsis;
   }
