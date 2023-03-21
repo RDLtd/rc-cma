@@ -13,7 +13,7 @@
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link rel="manifest" href="manifest.json">
   <script>
-    const rd_brand = (function(){
+    const rd_brand = (function() {
       // console.log('Get browser settings:', navigator);
       const ref = document.URL;
       const nvg = navigator.language || 'en-GB';
@@ -48,7 +48,6 @@
           document.title = 'Restaurant Developments';
           return 'rdl';
       }
-      console.log('Got here');
       // default is apptiser
       localStorage.setItem('rd_brand', 'app');
       document.title = 'apptiser';
