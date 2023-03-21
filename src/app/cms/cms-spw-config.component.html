@@ -93,9 +93,10 @@
 
       <mat-radio-group
         class="rdl-swatches"
+        (change)="configChange('theme')"
         [(ngModel)]="selectedTheme">
-
-        <mat-radio-button class="example-radio-button" *ngFor="let obj of cssThemeObjects"
+        <mat-radio-button class="example-radio-button"
+                          *ngFor="let obj of cssThemeObjects"
                           [value]="obj['website_theme_name']">
           <h2>{{ obj['website_theme_name'] | titlecase }}</h2>
           <span class="rdl-swatch swatch-primary-{{obj['website_theme_name']}}">Primary</span>
@@ -114,7 +115,10 @@
       <span markdown ngpreservewhitespaces>
         {{ 'CMS.SETTINGS.infoConfig' | translate }}
       </span>
-      <form class="rdl-form-grid" [formGroup]="configFormGroup" (ngSubmit)="submitFormValues(configFormGroup)">
+      <form class="rdl-form-grid"
+            [formGroup]="configFormGroup"
+
+            (ngSubmit)="submitFormValues(configFormGroup)">
         <div class="rdl-form-group">
           <h3>About</h3>
           <mat-slide-toggle formControlName="showOpeningNotes">Show Opening Notes</mat-slide-toggle>
@@ -149,15 +153,6 @@
           <mat-slide-toggle formControlName="showMap">Location map</mat-slide-toggle>
         </div>
       </form>
-<!--      <div class="rdl-card-actions">-->
-<!--        <button mat-button color="accent" (click)="submitFormValues(configFormGroup)">SAVE CONFIGURATION</button>-->
-<!--      </div>-->
     </div>
-
-
-
   </div>
 </div>
-
-
-<!--<pre>{{ user | json }}</pre>-->

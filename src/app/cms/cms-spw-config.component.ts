@@ -8,7 +8,6 @@ import { AppConfig } from "../app.config";
 import { StorageService } from '../_services/storage.service';
 import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 import {CmsSpwBuilderComponent} from "./cms-spw-builder.component";
-import * as moment from 'moment/moment';
 import { CmsSpwLinksComponent } from './cms-spw-links.component';
 
 @Component({
@@ -70,6 +69,7 @@ export class CmsSpwConfigComponent implements OnInit {
     this.cmsLocalService.getRestaurant()
       .subscribe({
         next: data => {
+          // Make sure the data is available
           if(data.restaurant_id) {
             this.restaurant = data;
             this.publishDate = this.restaurant.restaurant_spw_written
@@ -116,6 +116,7 @@ export class CmsSpwConfigComponent implements OnInit {
       // location
       showMap: [true]
     });
+    this.configFormGroup.valueChanges.subscribe(() => this.configChange('config'));
   }
 
   getThemes(): void {
@@ -172,12 +173,17 @@ export class CmsSpwConfigComponent implements OnInit {
     })
   }
 
+  configChange(item): void {
+    console.log(`Changed: ${item}`);
+    this.dataChanged = true;
+    this.unPublishedChanges = true;
+  }
+
   submitFormValues(formGroup: FormGroup): void {
     console.log(formGroup.value);
   }
 
   // TODO: JB: I'm sure this would be better done using nested form groups
-  //  but I don't have time to investigate
   toggleSection(control): void {
     const disable = !this.configFormGroup.get(control).value;
     let controls: string[];
@@ -203,17 +209,14 @@ export class CmsSpwConfigComponent implements OnInit {
 
     this.launchBuilder(buildVersion);
 
-    //if(!production) { return; }
-
-
     // apptiser update ks 090323 - added member type (for apptiser).
     // Note that association check is done at the back end, which check for ANY member having this restaurant associated
-
 
     // Add theme to form value
     const newConfigObj = this.configFormGroup.value;
     newConfigObj.theme = this.selectedTheme;
-    console.log('Updated config', newConfigObj);
+
+    // console.log('Updated config', newConfigObj);
 
     this.cms.publish(this.restaurant.restaurant_id, production, 'standard', newConfigObj)
       .then(res => {
@@ -223,11 +226,9 @@ export class CmsSpwConfigComponent implements OnInit {
           return;
         }
 
-        console.log('Website success:', res);
-
         this.onBuildSuccess(res);
 
-        // // record event
+        // record event
         this.ga.sendEvent('CMS-WebConfig', 'Apptiser', 'Published');
 
         // reset data changed attribute
@@ -235,9 +236,7 @@ export class CmsSpwConfigComponent implements OnInit {
           .subscribe({
             next: () => {
             },
-            error: error => {
-              console.log('unable to reset data changed attribute', error);
-            }
+            error: error => console.log('unable to reset data changed attribute', error)
           });
 
       })
@@ -263,6 +262,7 @@ export class CmsSpwConfigComponent implements OnInit {
     this.unPublishedChanges = false;
     this.publishDate = res.published;
     this.publishedUrl = res.url.replace('S3.eu-west-2.amazonaws.com/', '').trim();
+    this.dataChanged = false;
     this.builder.close();
   }
 
