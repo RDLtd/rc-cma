@@ -6,6 +6,8 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Restaurant } from '../_models';
 import { AppConfig } from "../app.config";
 import { StorageService } from '../_services/storage.service';
+import {MatDialog} from "@angular/material/dialog";
+import {CmsSpwBuilderComponent} from "./cms-spw-builder.component";
 
 @Component({
   selector: 'rc-cms-spw-config',
@@ -39,6 +41,7 @@ export class CmsSpwConfigComponent implements OnInit {
     private _formBuilder: FormBuilder,
     private config: AppConfig,
     private storage: StorageService,
+    private dialog: MatDialog,
     private ga: AnalyticsService,
   ) {
       this.brand = config.brand;
@@ -171,11 +174,13 @@ export class CmsSpwConfigComponent implements OnInit {
 
   publishWebsite(production: boolean): void {
 
-    if (production) {
-      console.log('will publish website');
-    } else {
-      console.log('will preview website');
-    }
+    const buildVersion = production ? 'Production' : "Preview";
+
+    console.log(`Building ${buildVersion}`);
+
+    this.launchBuilder(buildVersion);
+
+    if(!production) { return; }
 
 
     // apptiser update ks 090323 - added member type (for apptiser).
@@ -234,6 +239,15 @@ export class CmsSpwConfigComponent implements OnInit {
   // Domains
   customDomain(): void {
     alert('Open Typeform wizard');
+  }
+
+  launchBuilder(version): void {
+    this.building = true;
+    const dialogRef = this.dialog.open(CmsSpwBuilderComponent, {
+      data: {
+        buildVersion: version
+      }
+    });
   }
 
 }
