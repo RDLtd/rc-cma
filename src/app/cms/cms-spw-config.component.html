@@ -1,6 +1,7 @@
 <div class="rc-cms-menus rc-content-container">
 
   <div class="rc-grid-masonry-2">
+
     <!-- STATUS -->
     <div class="rdl-card-rounded">
 
@@ -9,6 +10,7 @@
         <mat-icon color="warn">cloud_off</mat-icon>
       </div>
 
+      <ng-container *ngIf="!building">
       <span markdown ngpreservewhitespaces>
         {{ 'CMS.SETTINGS.infoUnpublished' | translate: { brand: brand.name } }}
       </span>
@@ -22,13 +24,19 @@
           <label>{{ 'CMS.SETTINGS.labelPublisher' | translate }}:</label>
           <span>{{ restaurant.restaurant_verified_by }}</span>
         </li>
-
       </ul>
       <span class="rc-space-filler"></span>
       <div class="rdl-card-actions">
         <button mat-button (click)="publishWebsite(false)">PREVIEW</button>
         <button mat-button color="accent" (click)="publishWebsite(true)">PUBLISH</button>
       </div>
+      </ng-container>
+      <ng-container *ngIf="building">
+        <div>
+
+        </div>
+      </ng-container>
+
     </div>
 
     <!-- DOMAIN -->
@@ -38,7 +46,6 @@
         <h2>{{ 'CMS.SETTINGS.titleWebDomain' | translate }}</h2>
         <mat-icon>public</mat-icon>
       </div>
-
 
       <span markdown ngpreservewhitespaces>
         {{ 'CMS.SETTINGS.infoDomains' | translate }}
@@ -137,4 +144,4 @@
 </div>
 
 
-<pre>{{ user | json }}</pre>
+<!--<pre>{{ user | json }}</pre>-->
