@@ -1,8 +1,16 @@
-
-// Cards
-.rdl-card {
-  .mat-mdc-card-header {
-    //margin-bottom: 2rem;
+.rdl-flex-2 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: start;
+  gap: 1rem;
+  > * {
+    flex: 0 1 100%;
+  }
+  @include mq(medium) {
+    > * {
+      flex: 0 1 49%;
+    }
   }
 }
 .rdl-card-rounded {
@@ -14,7 +22,7 @@
   background-color: white;
   border-radius: 16px !important;
   padding: 1.6rem;
-  box-shadow: 0 9px 68px 0 rgb(0 0 0 / 20%);
+  //box-shadow: 0 9px 68px 0 rgb(0 0 0 / 20%);
   p { margin: 0;}
   strong {
     font-weight: $rc-display-font-weight;
@@ -114,5 +122,18 @@
 }
 * [color=success] {
   color: $rc-theme-success;
+}
+
+.rdl-masonry-2 {
+  > * {
+    margin-bottom: 1rem;
+  }
+  @include mq(medium) {
+    columns: 2 auto;
+    > * {
+      break-inside: avoid;
+      margin-bottom: 1rem;
+    }
+  }
 }
 
