@@ -36,6 +36,8 @@ export class CmsSpwConfigComponent implements OnInit {
   builder: MatDialogRef<CmsSpwBuilderComponent>;
   building = false;
 
+  customDomainForm = 'https://ps318108.typeform.com/to/jjUbHwf7?typeform-source=www.google.com';
+
   constructor(
     private cmsLocalService: CmsLocalService,
     private fb: FormBuilder,

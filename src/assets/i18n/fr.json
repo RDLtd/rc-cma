@@ -61,9 +61,9 @@
 				"labelBtnViewPublished": "Voir votre Page Internet Live",
 				"msgAnalysing": "Analyse du contenu ...",
 				"msgContentRequired": "Bon travail jusqu'à présent, mais nous avons besoin d'un peu plus d'informations pour générer votre Page Internet. \n\nLe tableau ci-dessous vous indique les sections qui nécessitent davantage de contenu. Une fois que vousaurez ajouté suffisamment de données, les options **APERÇU** et **PUBLIER** seront disponibles. Nous pourrons créer votre Page Internet et distribuer votre contenu.\n\nVous pouvez [voir une version démo]({{link}}) voir à quoi ressemble une Page Internet avec davantage de contenu.",
-				"msgPublished": "Votre site Web **apptiser** a été publié avec succès et s'est synchronisé avec tous les canaux de distribution du réseau RDL. Vous pouvez afficher votre page ou copier l'URL à l'aide des options de LIEN MARKETING ci-dessous.",
+				"msgPublished": "Votre site Web **apptiser** a été publié avec succès et les dernières mises à jour de contenu ont été synchronisées sur le réseau RDL de canaux de distribution.",
 				"msgUnpublished": "Les dernières modifications que vous avez apportées n'ont pas encore été publiées. Accédez à vos \"Paramètres du site Web\" pour PRÉVISUALISER et PUBLIER vos dernières mises à jour\n",
-				"msgVerified": "Vérifié et publié le {{ date }} par {{ name }}.",
+				"msgVerified": "# Site publié le {{ date }} par {{ name }}.",
 				"msgVerifiedAndPublished": "Données vérifiées et publiées",
 				"tipMarketingLinks": "Liens marketing et codes QR",
 				"tipViewPublished": "Voir le site d'apptiser de {{ restaurant }}"

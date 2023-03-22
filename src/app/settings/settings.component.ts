@@ -220,8 +220,9 @@ export class SettingsComponent implements OnInit {
   getRestaurantProduct(): object {
     // Find the restaurant subscription product by filtering
     // and using the 1st element of the filtered array
+    // apptiser prods need product_max_restaurants set to 3
     return this.products.filter(
-      p => p.product_max_restaurants === 2 && p.product_period === this.currentProduct.product_period)[0];
+      p => p.product_max_restaurants === 3 && p.product_period === this.currentProduct.product_period)[0];
   }
 
   addRestaurants(): void {

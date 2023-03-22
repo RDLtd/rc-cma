@@ -70,14 +70,14 @@
           </span>
         </li>
         <li><label>{{ 'CMS.SETTINGS.labelCustomDomain' | translate }}:</label>
-          In progress...
+          Not set
         </li>
       </ul>
       <span class="rc-space-filler"></span>
       <div class="rdl-card-actions">
-        <button mat-button color="accent" (click)="customDomain()">
-          {{ 'CMS.SETTINGS.labelSetDomain' | translate }}
-        </button>
+        <a mat-button color="accent" [href]="customDomainForm" target="_blank">
+          {{ 'CMS.SETTINGS.labelSetDomain' | translate | uppercase }}
+        </a>
       </div>
     </div>
     <div class="rdl-card-rounded">

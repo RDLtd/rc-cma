@@ -162,6 +162,12 @@ h4 {
   margin-bottom: .25rem;
   font-weight: $rc-display-font-weight;
 }
+address {
+  font-style: normal;
+  span {
+    display: block;
+  }
+}
 
 
 // Layout classes

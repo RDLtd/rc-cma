@@ -136,4 +136,12 @@
     }
   }
 }
+.rdl-lead {
+  > * {
+    font-size: 1.125rem;
+    font-weight: $rc-display-font-weight;
+    line-height: 1.2;
+    margin-bottom: .5rem;
+  }
+}
 

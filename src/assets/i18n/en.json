@@ -61,9 +61,9 @@
 				"labelBtnViewPublished": "View your live SPW",
 				"msgAnalysing": "Analysing content...",
 				"msgContentRequired": "Good work so far but we need a bit more information to generate your Single Page Website (SPW). \n\nThe summary below should indicate which sections still need additional content. Once you've added enough data, the **PREVIEW** and **PUBLISH** options will be enabled and we can create your SPW and distribute your content to our partners.\n\nYou can [view a demo restaurant version]({{ link }}) top see what the SPW will look like with content added.",
-				"msgPublished": "Your **apptiser** website has been successfully published and has synchronised with all RDL Network distribution channels. You can view your page or copy the URL using the MARKETING LINK options below.",
+				"msgPublished": "Your **apptiser** website has been successfully published and the latest content updates synchronised accross the RDL Network of distribution channels.",
 				"msgUnpublished": "The latest changes that you have made have not yet been published. Go to your 'Website Settings' to PREVIEW and PUBLISH your latest updates\n",
-				"msgVerified": "Content last published on {{ date }} by {{ name }}.",
+				"msgVerified": "# Website published on {{ date }} by {{ name }}.",
 				"msgVerifiedAndPublished": "Content verified and published",
 				"tipMarketingLinks": "Marketing links and QR codes",
 				"tipViewPublished": "View the apptiser website of {{ restaurant }}"
