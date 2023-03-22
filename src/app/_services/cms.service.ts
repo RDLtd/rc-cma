@@ -22,6 +22,15 @@ export class CMSService {
     });
   }
 
+  getApptiserUrl(url: string): string {
+    if(!url) { return; }
+    const aws = 's3.eu-west-2.amazonaws.com';
+    if (url.indexOf(aws) > 0) {
+      return url.replace(`${aws}/`, '');
+    }
+    return '';
+  }
+
   // elements
   getElement(restaurant_id: string) {
     return this.http.post(this.config.apiUrl + '/cms/elementget',

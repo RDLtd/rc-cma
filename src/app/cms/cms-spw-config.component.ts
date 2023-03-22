@@ -35,6 +35,7 @@ export class CmsSpwConfigComponent implements OnInit {
   unPublishedChanges = false;
   builder: MatDialogRef<CmsSpwBuilderComponent>;
   building = false;
+  apptiserUrl: string;
 
   customDomainForm = 'https://ps318108.typeform.com/to/jjUbHwf7?typeform-source=www.google.com';
 
@@ -75,6 +76,7 @@ export class CmsSpwConfigComponent implements OnInit {
           if(data.restaurant_id) {
             this.restaurant = data;
             this.publishDate = this.restaurant.restaurant_spw_written
+            this.apptiserUrl = this.cms.getApptiserUrl(this.restaurant.restaurant_spw_url);
             this.getConfig();
             this.getContentStatus();
           }
@@ -245,11 +247,6 @@ export class CmsSpwConfigComponent implements OnInit {
       .catch((res) => console.log('Publish Endpoint Error', res));
   }
 
-  // Domains
-  customDomain(): void {
-    alert('Open Typeform wizard');
-  }
-
   launchBuilder(version): void {
     this.building = true;
     this.builder = this.dialog.open(CmsSpwBuilderComponent, {
@@ -268,20 +265,12 @@ export class CmsSpwConfigComponent implements OnInit {
     this.builder.close();
   }
 
-  getApptiserDomain(url): string {
-    if(!url) { return;}
-    if (url.indexOf('s3.eu-west-2.amazonaws.com') > 0) {
-      return url.replace('s3.eu-west-2.amazonaws.com/', '');
-    }
-    return url;
-  }
-
   showMarketingLinks(): void {
     this.dialog.open(CmsSpwLinksComponent,
       {
         data: {
-          spwUrl: this.restaurant.restaurant_spw_url,
-          spwMenus: `${this.restaurant.restaurant_spw_url}#menus`,
+          spwUrl: this.apptiserUrl,
+          spwMenus: `${this.apptiserUrl}#menus`,
           restaurant: this.restaurant,
           curation: this.config.brand.email.curation
         }

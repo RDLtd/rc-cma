@@ -47,18 +47,19 @@
         </qrcode>
         <span>{{ 'CMS.LINKS.labelWebsite' | translate }}</span>
       </a>
-      <a
-        download="QR-Code-Menu"
-        href="{{ base64menu }}">
-        <qrcode
-          [qrdata]="data.spwMenus"
-          [elementType]="'img'"
-          [width]="qrCodeWidth"
-          [errorCorrectionLevel]="'M'"
-          matTooltip="{{ 'CMS.LINKS.tipQRCodeMenu' | translate:
-          { name: data['restaurant']['restaurant_name'] } }}"></qrcode>
-        <span>{{ 'CMS.LINKS.labelMenus' | translate }}</span>
-      </a>
+<!--      <a-->
+<!--        download="QR-Code-Menu"-->
+<!--        href="{{ base64menu }}">-->
+<!--        <qrcode-->
+<!--          [qrdata]="data['spwMenus']"-->
+<!--          [elementType]="'img'"-->
+<!--          [width]="qrCodeWidth"-->
+<!--          [imageHeight]="qrCodeWidth"-->
+<!--          [errorCorrectionLevel]="'M'"-->
+<!--          matTooltip="{{ 'CMS.LINKS.tipQRCodeMenu' | translate:-->
+<!--          { name: data['restaurant']['restaurant_name'] } }}"></qrcode>-->
+<!--        <span>{{ 'CMS.LINKS.labelMenus' | translate }}</span>-->
+<!--      </a>-->
     </div>
 
     <markdown>{{ 'CMS.LINKS.infoUsage' | translate }}</markdown>

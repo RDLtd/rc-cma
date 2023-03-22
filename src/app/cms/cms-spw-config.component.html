@@ -63,10 +63,10 @@
         <li>
           <label>{{ 'CMS.SETTINGS.labelApptiserDomain' | translate }}:</label>
           <span>
-            <a [href]="getApptiserDomain(restaurant?.restaurant_spw_url)"
+            <a [href]="apptiserUrl"
                target="_blank"
                title="View your published apptiser website">
-              {{ getApptiserDomain(restaurant?.restaurant_spw_url) }}</a>
+              {{ apptiserUrl }}</a>
           </span>
         </li>
         <li><label>{{ 'CMS.SETTINGS.labelCustomDomain' | translate }}:</label>

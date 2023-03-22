@@ -182,8 +182,8 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
           this.cmsChanged = !(res['published_status_ok']);
           // Enough content?
           if (this.cmsHasSufficientData) {
-            this.spwProdUrl = res['spw_url'];
-            this.spwPreviewUrl = res['preview_spw_url'];
+            this.spwProdUrl = this.cms.getApptiserUrl(res['spw_url']);
+            this.spwPreviewUrl = this.cms.getApptiserUrl(res['preview_spw_url']);
             // Has anything changed?
             if (this.cmsChanged) {
               this.publishDate = new Date(res['spw_written']);
@@ -576,6 +576,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
   }
 
   dspSPWLinks(): void {
+
     this.dialog.open(CmsSpwLinksComponent,
       {
         data: {

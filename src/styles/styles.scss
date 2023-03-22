@@ -344,7 +344,7 @@ address {
     background-color: $rc-theme-primary;
     color: white;
     a {
-      color: black;
+      color: $rc-theme-accent;
       text-decoration: underline;
     }
   }
