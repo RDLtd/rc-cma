@@ -116,7 +116,6 @@
       </span>
       <form class="rdl-form-grid"
             [formGroup]="configFormGroup"
-
             (ngSubmit)="submitFormValues(configFormGroup)">
         <div class="rdl-form-group">
           <h3>About</h3>
@@ -130,9 +129,8 @@
         </div>
         <div class="rdl-form-group dependants">
           <h3>Reservations</h3>
-          <mat-slide-toggle formControlName="showReservations" (change)="toggleSection('showReservations')">Show
-
-                                                                                           Reservations section</mat-slide-toggle>
+          <mat-slide-toggle formControlName="showReservations" (change)="toggleSection('showReservations')">
+            Show Reservations section</mat-slide-toggle>
           <mat-slide-toggle formControlName="showBookingWidget">Show Booking Widget</mat-slide-toggle>
           <mat-slide-toggle formControlName="showReservationsInfo">Show Reservations information</mat-slide-toggle>
           <mat-slide-toggle formControlName="showGroupBookings">Show Group bookings</mat-slide-toggle>
@@ -140,9 +138,8 @@
         </div>
         <div class="rdl-form-group dependants">
           <h3>Contacts</h3>
-          <mat-slide-toggle formControlName="showContacts" (change)="toggleSection('showContacts')">Show
-                                                                                                            Contact
-                                                                                         section</mat-slide-toggle>
+          <mat-slide-toggle formControlName="showContacts" (change)="toggleSection('showContacts')">
+            Show Contact section</mat-slide-toggle>
           <mat-slide-toggle formControlName="showLinks">Show Web & social links</mat-slide-toggle>
           <mat-slide-toggle formControlName="showTransport">Show Public Transport Details</mat-slide-toggle>
           <mat-slide-toggle formControlName="showParking">Show Parking Information</mat-slide-toggle>

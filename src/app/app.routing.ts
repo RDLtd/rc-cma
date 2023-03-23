@@ -30,7 +30,6 @@ import {
 
 import { JoinComponent } from './join/join.component';
 import { MembershipComponent } from './join/membership.component';
-import {BpiRegistrationComponent} from './join/mepn/bpi-registration.component';
 import {ProfileComponent} from './profile/profile.component';
 import { CmsSpwConfigComponent } from './cms/cms-spw-config.component';
 
@@ -40,13 +39,6 @@ const APP_ROUTES: Routes = [
   { path: 'join/:code', component: JoinComponent, title: 'Join' },
 
   { path: 'join', component: JoinComponent, title: 'Join' },
-
-  { path: 'mise-en-place-numerique', component: BpiRegistrationComponent },
-
-  { path: 'mise-en-place-numerique/:code', component: BpiRegistrationComponent },
-
-  { path: 'mepn/:code', component: BpiRegistrationComponent },
-  { path: 'mepn', component: BpiRegistrationComponent },
 
   { path: 'membership-options', component: MembershipComponent },
 

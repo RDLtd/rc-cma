@@ -95,8 +95,6 @@ import { MembershipComponent } from './join/membership.component';
 import { HubComponent } from './hub/hub.component';
 import { LogoComponent } from './common/logo/logo.component';
 import { CurrencyPipe } from '@angular/common';
-import { RiMembershipComponent } from './join/mepn/ri-membership.component';
-import { BpiRegistrationComponent } from './join/mepn/bpi-registration.component';
 import { ProfileComponent } from './profile/profile.component';
 import {CloudinaryModule} from '@cloudinary/ng';
 import { OnlineStatusModule } from 'ngx-online-status';
@@ -170,8 +168,6 @@ export function appInitializerFactory(translate: TranslateService) {
     MembershipComponent,
     HubComponent,
     LogoComponent,
-    RiMembershipComponent,
-    BpiRegistrationComponent,
     ProfileComponent,
     CmsSpwConfigComponent,
     CmsSpwBuilderComponent

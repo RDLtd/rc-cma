@@ -101,13 +101,13 @@ export class CmsSpwConfigComponent implements OnInit {
 
   generateConfigForm(): void {
     this.configFormGroup = this.fb.group({
-      showOpeningNotes: true,
-      showImageGallery: [true],
+      showOpeningNotes: false,
+      showImageGallery: true,
       // menus
-      showHtmlMenu: [true],
-      showDownloadMenus: [true],
+      showHtmlMenu: true,
+      showDownloadMenus: true,
       // reservations
-      showReservations: [true],
+      showReservations: true,
       showReservationsInfo: [{value: true, disabled: false}],
       showBookingWidget: [{value: true, disabled: false}],
       showGroupBookings: [{value: false, disabled: false}],
@@ -120,7 +120,11 @@ export class CmsSpwConfigComponent implements OnInit {
       // location
       showMap: [true]
     });
-    this.configFormGroup.valueChanges.subscribe(() => this.configChange('config'));
+    // delay observing changes until defaults are in place
+    setTimeout(() => {
+      this.configFormGroup.valueChanges.subscribe(() => this.configChange('config'));
+    }, 1000);
+
   }
 
   getThemes(): void {
@@ -172,9 +176,22 @@ export class CmsSpwConfigComponent implements OnInit {
         // console.log('loaded theme', value);
         return;
       }
-      // console.log(`${key}: ${value}`);
       this.configFormGroup.get(key).setValue(value);
-    })
+      // Disable all reservations content?
+      if (!this.configFormGroup.get('showReservations').value){
+        this.configFormGroup.get('showReservationsInfo').disable();
+        this.configFormGroup.get('showBookingWidget').disable();
+        this.configFormGroup.get('showGroupBookings').disable();
+        this.configFormGroup.get('showPrivateDining').disable();
+      }
+      // Disable all contacts content?
+      if (!this.configFormGroup.get('showContacts').value){
+        this.configFormGroup.get('showLinks').disable();
+        this.configFormGroup.get('showTransport').disable();
+        this.configFormGroup.get('showParking').disable();
+      }
+    });
+
   }
 
   configChange(item): void {

@@ -131,7 +131,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
 
   // Display system messages
   ngAfterViewInit(): void {
-    this.dspUnreadMessages();
+    // this.dspUnreadMessages();
   }
 
   ngOnInit() {

@@ -51,9 +51,8 @@ export class SigninComponent implements OnInit {
     });
 
     // If the user is already signed in
-    // redirect to the HUB
     if (this.authService.isAuth()) {
-      this.router.navigate(['/hub']).then();
+      this.router.navigate(['/settings']).then();
     }
   }
 
