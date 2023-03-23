@@ -27,12 +27,13 @@
               <span *ngIf="isFreeMembership">
                     {{ 'SETTINGS.labelFreeMembership' | translate }} {{ freeMembershipExpiry }}
                   </span>
-              <a
-                      *ngIf="!isFreeMembership"
-                      (click)="viewMemberPlans()"
-                      matTooltip="{{ 'SETTINGS.tipManagePayments' | translate }}">
-                {{ currentProduct?.product_name }}
-              </a>
+<!--              <a-->
+<!--                      *ngIf="!isFreeMembership"-->
+<!--                      (click)="viewMemberPlans()"-->
+<!--                      matTooltip="{{ 'SETTINGS.tipManagePayments' | translate }}">-->
+<!--                {{ currentProduct?.product_name }}-->
+<!--              </a>-->
+              {{ currentProduct?.product_name }}
               <span class="rc-space-filler"></span>
             </li>
           </ul>

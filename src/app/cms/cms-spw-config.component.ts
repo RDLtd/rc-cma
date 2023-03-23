@@ -30,6 +30,7 @@ export class CmsSpwConfigComponent implements OnInit {
   configFormGroup: FormGroup;
   dataChanged = false;
 
+  publishStatus: string;
   publishDate: string;
   publishedUrl: string;
   unPublishedChanges = false;
@@ -247,7 +248,9 @@ export class CmsSpwConfigComponent implements OnInit {
           return;
         }
 
-        this.onBuildSuccess(res);
+        console.log('Publish result', res);
+
+        this.onBuildSuccess(res, production);
 
         // record event
         this.ga.sendEvent('CMS-WebConfig', 'Apptiser', 'Published');
@@ -274,11 +277,17 @@ export class CmsSpwConfigComponent implements OnInit {
     });
   }
 
-  onBuildSuccess(res): void {
-    this.unPublishedChanges = false;
-    this.publishDate = res.published;
-    this.publishedUrl = res.url.replace('S3.eu-west-2.amazonaws.com/', '').trim();
-    this.dataChanged = false;
+  onBuildSuccess(res, production: boolean): void {
+    if (production) {
+      this.unPublishedChanges = false;
+      this.publishDate = res.published;
+      this.publishedUrl = this.cms.getApptiserUrl(res.url).trim();
+      this.dataChanged = false;
+    } else {
+      this.unPublishedChanges = true;
+      window.open(`${this.cms.getApptiserUrl(res.url).trim()}?cache=${Date.now().toString()}`, '_blank');
+      this.dataChanged = true;
+    }
     this.builder.close();
   }
 

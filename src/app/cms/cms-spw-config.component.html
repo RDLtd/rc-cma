@@ -5,7 +5,7 @@
     <div class="rdl-card-rounded">
 
       <div class="rdl-card-header">
-        <h2>{{ 'CMS.SETTINGS.titleStatus' | translate }}</h2>
+        <h2>{{ 'CMS.SETTINGS.titleStatus' | translate }} {{ publishStatus }}</h2>
         <mat-icon color="warn" *ngIf="unPublishedChanges">cloud_off</mat-icon>
         <mat-icon color="success" *ngIf="!unPublishedChanges">cloud</mat-icon>
       </div>

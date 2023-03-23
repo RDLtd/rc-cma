@@ -224,7 +224,7 @@ export class SettingsComponent implements OnInit {
     console.log('getRestaurantProduct', this.products);
 
     this.products.forEach((product) => {
-      console.log(product.max_restaurants, product.product_period, this.currentProduct.product_period[0]);
+      console.log(product.product_max_restaurants, product.product_period, this.currentProduct.product_period[0]);
     });
 
     return this.products.filter(
@@ -603,5 +603,4 @@ export class SettingsComponent implements OnInit {
       duration: dur
     });
   }
-
 }
