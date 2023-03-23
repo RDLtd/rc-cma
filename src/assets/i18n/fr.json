@@ -337,7 +337,7 @@
 	"ERRORS": {
 		"failedToCreateFreeMember": "Nous n'avons pas pu créer votre compte gratuit pour le moment. Merci de réessayer dans quelques instants. Notre équipe d'assistance a été informée.",
 		"failedToLoadAssociatedRestaurants": "Nous n'avons pas pu charger vos restaurants associés pour le moment. Merci de réessayer dans quelques instants. Notre équipe d'assistance a été informée.",
-		"failedToSendRecoveryEmail": "Nous n'avons pas pu envoyer votre e-mail de récupération du mot de passe. Veuillez contacter notre équipe d'assistance pour obtenir de l'aide.",
+		"failedToSendRecoveryEmail": "Nous n'avons pas pu envoyer votre e-mail de récupération de mot de passe. Veuillez contacter notre équipe d'assistance pour plus d'assistance, ils ont été informés.",
 		"failedToSendSupportEmail": "Nous n'avons pas pu envoyer votre e-mail de demande d'assistance pour le moment. Merci de réessayer dans quelques instants. Notre équipe d'assistance a été informée.",
 		"failedToSendVerificationEmail": "Nous n'avons pas pu envoyer votre e-mail de vérification pour le moment. Merci de réessayer dans quelques instants. Notre équipe d'assistance a été informée.",
 		"failedToSetSession": "Nous n'avons pas pu stocker certains cookies dans votre navigateur, nous ne pouvons donc pas vous connecter pour le moment. Merci de réessayer dans quelques instants. Notre équipe d'assistance a été informée.",
