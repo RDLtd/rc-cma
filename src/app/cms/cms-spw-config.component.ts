@@ -294,4 +294,8 @@ export class CmsSpwConfigComponent implements OnInit {
       });
   }
 
+  viewApptiser(): void {
+    window.open(`${this.apptiserUrl}?cache=${Date.now().toString()}`, '_blank');
+  }
+
 }

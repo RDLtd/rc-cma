@@ -312,7 +312,8 @@
 			"titleUploadDirections": "Télécharger des itinéraires",
 			"titleUploadImage": "Télécharger une photo",
 			"titleUploadMenu": "Télécharger un menu"
-		}
+		},
+		"titleSection": "Gestion de contenu"
 	},
 	"CONFIRM": {
 		"labelBtnCancel": "NON, ANNULER",
@@ -613,6 +614,7 @@
 		"titleMember": "Informations Membre",
 		"titleNotification": "Notifications par email",
 		"titleReferrals": "Code de parrainage",
+		"titleSection": "Paramètres du compte",
 		"titleSubscription": "Adhésion",
 		"titleUploadAvatar": "Télécharger une photo"
 	},

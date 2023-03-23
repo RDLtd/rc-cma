@@ -58,7 +58,7 @@
 				"labelBtnMarketingLinks": "Marketing Links",
 				"labelBtnPreview": "Preview",
 				"labelBtnPublish": "publish",
-				"labelBtnViewPublished": "View your live SPW",
+				"labelBtnViewPublished": "VIEW WEBSITE",
 				"msgAnalysing": "Analysing content...",
 				"msgContentRequired": "Good work so far but we need a bit more information to generate your Single Page Website (SPW). \n\nThe summary below should indicate which sections still need additional content. Once you've added enough data, the **PREVIEW** and **PUBLISH** options will be enabled and we can create your SPW and distribute your content to our partners.\n\nYou can [view a demo restaurant version]({{ link }}) top see what the SPW will look like with content added.",
 				"msgPublished": "Your **apptiser** website has been successfully published and the latest content updates synchronised accross the RDL Network of distribution channels.",
@@ -312,7 +312,8 @@
 			"titleUploadDirections": "Upload directions",
 			"titleUploadImage": "Upload an image",
 			"titleUploadMenu": "Upload a menu"
-		}
+		},
+		"titleSection": "Content Management"
 	},
 	"CONFIRM": {
 		"labelBtnCancel": "NO, CANCEL",
@@ -613,6 +614,7 @@
 		"titleMember": "User details",
 		"titleNotification": "Email Notifications",
 		"titleReferrals": "Referral code",
+		"titleSection": "Account Settings",
 		"titleSubscription": "Subscription",
 		"titleUploadAvatar": "Upload image"
 	},

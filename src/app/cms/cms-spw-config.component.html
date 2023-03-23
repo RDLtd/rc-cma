@@ -63,8 +63,7 @@
         <li>
           <label>{{ 'CMS.SETTINGS.labelApptiserDomain' | translate }}:</label>
           <span>
-            <a [href]="apptiserUrl"
-               target="_blank"
+            <a (click)="viewApptiser()"
                title="View your published apptiser website">
               {{ apptiserUrl }}</a>
           </span>

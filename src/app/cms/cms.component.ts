@@ -39,7 +39,7 @@ export class CmsComponent implements OnInit {
     private translate: TranslateService,
     private storage: StorageService
   ) {
-    this.header.updateSectionName(this.translate.instant('HUB.sectionCMS'));
+    this.header.updateSectionName(this.translate.instant('CMS.titleSection'));
   }
 
   ngOnInit() {
