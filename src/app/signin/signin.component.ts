@@ -52,8 +52,10 @@ export class SigninComponent implements OnInit {
 
     // If the user is already signed in
     if (this.authService.isAuth()) {
+      console.log('Already signed in');
       this.router.navigate(['/settings']).then();
     }
+
   }
 
   dspNewMemberMessage() {

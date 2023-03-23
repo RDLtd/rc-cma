@@ -20,8 +20,8 @@ import { CmsLocalService } from '../cms';
 import { LoadService, ConfirmCancelComponent, HelpService } from '../common';
 import { HeaderService } from '../common/header.service';
 import { CurrencyPipe } from '@angular/common';
-import {ImageService} from '../_services/image.service';
-import {CloudinaryImage} from '@cloudinary/url-gen';
+import { ImageService } from '../_services/image.service';
+import { CloudinaryImage } from '@cloudinary/url-gen';
 
 
 @Component({
@@ -80,8 +80,7 @@ export class SettingsComponent implements OnInit {
   ngOnInit() {
 
     // Update header label
-    //this.header.updateSectionName(this.translate.instant('HUB.sectionSettings'));
-    this.header.updateSectionName('PRODUCT NAME');
+    this.header.updateSectionName(this.translate.instant('SETTINGS.titleSection'));
 
     this.setMember();
     this.setProducts();
@@ -189,6 +188,7 @@ export class SettingsComponent implements OnInit {
       // This is an additional restaurant
 
       this.restProd = this.getRestaurantProduct();
+      console.log('Product', this.restProd);
       // Calculate the new total subscription
       const newTotal = (this.restProd.product_price * this.cachedRestaurantsLength) + Number(this.currentProduct.product_price);
       // Confirm charges
@@ -221,6 +221,12 @@ export class SettingsComponent implements OnInit {
     // Find the restaurant subscription product by filtering
     // and using the 1st element of the filtered array
     // apptiser prods need product_max_restaurants set to 3
+    console.log('getRestaurantProduct', this.products);
+
+    this.products.forEach((product) => {
+      console.log(product.max_restaurants, product.product_period, this.currentProduct.product_period[0]);
+    });
+
     return this.products.filter(
       p => p.product_max_restaurants === 3 && p.product_period === this.currentProduct.product_period)[0];
   }

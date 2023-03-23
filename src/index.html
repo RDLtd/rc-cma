@@ -23,13 +23,17 @@
       // If a language has already been established
       // don't override as it may have been
       // selected by the user
-      console.log(localStorage.getItem('rd_language'), lang, ref);
+
+      console.log(localStorage.getItem('rd_language'), lang, ref, path);
       if (!localStorage.getItem('rd_language')) {
         localStorage.setItem('rd_language', lang);
       }
       localStorage.setItem('rd_locale', loc);
-      if (path !== '/') {
-        sessionStorage.setItem('rd_route_request', path)
+
+      // If it's a deep link to CMS then store the path
+      // for use post signin
+      if (path.includes('cms')) {
+        sessionStorage.setItem('rd_route_request', JSON.stringify(path))
       }
       // apptiser update ks 090323 - added app and rdl to brands
       // Choose the correct brand from the domain

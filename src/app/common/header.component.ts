@@ -133,7 +133,7 @@ export class HeaderComponent implements OnInit {
 
   faqs(): void {
     const dialogRef = this.dialog.open(FaqsComponent, {
-      maxWidth: '800px',
+      width: '640px',
       position: {'top': '10vh'},
       data: {
         member: this.member

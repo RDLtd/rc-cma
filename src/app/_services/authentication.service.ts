@@ -72,33 +72,51 @@ export class AuthenticationService {
   }
 
   async dspHomeScreen(sessionStatus): Promise<any> {
-
-    const tgtPath = this.storage.getSession('rd_route_request');
-    const lastCmsPath = this.storage.get('rd_last_restaurant');
-
+    // A deep link set by curation
+    const deepLink = this.storage.getSession('rd_route_request');
+    // The last viewed restaurant
+    const lastViewedRestaurantId = this.storage.get('rd_last_restaurant');
+    // Activate session
     this.inSession = (sessionStatus === 'active');
     this.memberSessionSubject.next(sessionStatus);
 
-    if(!!tgtPath) {
+    // It's a curator so go straight there, do not pass go.
+    if(!!deepLink) {
+      // clean up & go directly to link
       this.storage.removeSession('rd_route_request');
-      this.router.navigate([tgtPath]).then();
+      this.router.navigate([deepLink]).then();
       return;
     }
 
-    if(!!lastCmsPath) {
-      this.router.navigate([`/cms/${lastCmsPath}`]).then();
-      return;
-    }
-
+    // Otherwise get associated restaurants
     await lastValueFrom(this.restaurantService.getMemberRestaurants(this.member.member_id))
       .then((data) => {
-        if (data['restaurants'].length > 0) {
-          console.log(data['restaurants']);
-          const id = data['restaurants'][0]['restaurant_id'];
-          console.log(`/cms/${id}`);
-          this.storage.set('rd_last_restaurant', id);
-          this.router.navigate([`/cms/${id}`]).then();
+        // If there aren't any then just take the user to settings
+        if (data['restaurants'].length < 1) {
+          console.log("No associated restaurants at Signin, go to Settings");
+          // clean up =, just in case
+          this.storage.removeSession('rd_last_restaurant');
+          // Go
+          this.router.navigate([`/settings`]).then();
+          return;
         }
+
+        // If we have an id in storage
+        // does it match any associated restaurant
+        if(!!lastViewedRestaurantId) {
+          data['restaurants'].forEach(restaurant => {
+            if (restaurant.restaurant_id === lastViewedRestaurantId) {
+              this.router.navigate([`/cms/${lastViewedRestaurantId}`]).then();
+              return;
+            }
+          });
+        }
+        // If there was a locally stored id, then it didn't match
+        // any of the restaurant associated with this account
+        const defaultRestaurantId = data['restaurants'][0]['restaurant_id'];
+        this.storage.set('rd_last_restaurant', defaultRestaurantId);
+        this.router.navigate([`/cms/${defaultRestaurantId}`]).then();
+
     });
   }
 
