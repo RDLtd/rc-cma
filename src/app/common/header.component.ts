@@ -8,7 +8,6 @@ import { AboutComponent } from './about.component';
 import { HeaderService } from './header.service';
 import {ImageService} from '../_services/image.service';
 import {CloudinaryImage} from '@cloudinary/url-gen';
-import {RestaurantLookupComponent} from "../settings";
 import {ContactComponent} from "./contact/contact.component";
 import {FaqsComponent} from "./faqs/faqs.component";
 
@@ -134,7 +133,7 @@ export class HeaderComponent implements OnInit {
 
   faqs(): void {
     const dialogRef = this.dialog.open(FaqsComponent, {
-      width: '480px',
+      maxWidth: '800px',
       position: {'top': '10vh'},
       data: {
         member: this.member

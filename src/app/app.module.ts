@@ -39,9 +39,6 @@ import {
 import {
   RestaurantDetailComponent,
 } from './cms/restaurant-detail.component';
-import {
-  MarketplaceComponent
-} from './marketplace/marketplace.component';
 
 import {
   RestaurantLookupComponent,
@@ -92,7 +89,6 @@ import { CmsSpwLinksComponent } from './cms/cms-spw-links.component';
 import { QRCodeModule } from 'angularx-qrcode';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { MembershipComponent } from './join/membership.component';
-import { HubComponent } from './hub/hub.component';
 import { LogoComponent } from './common/logo/logo.component';
 import { CurrencyPipe } from '@angular/common';
 import { ProfileComponent } from './profile/profile.component';
@@ -161,12 +157,10 @@ export function appInitializerFactory(translate: TranslateService) {
     FaqsComponent,
     SafePipe,
     SigninComponent,
-    MarketplaceComponent,
     JoinComponent,
     LoadComponent,
     CmsSpwLinksComponent,
     MembershipComponent,
-    HubComponent,
     LogoComponent,
     ProfileComponent,
     CmsSpwConfigComponent,

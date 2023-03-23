@@ -145,3 +145,11 @@
   }
 }
 
+.rdl-expansion {
+  box-shadow: none !important;
+  .rdl-expansion-title {
+    font-size: 1.125rem;
+  }
+  p { font-weight: $rc-default-font-weight !important;}
+}
+

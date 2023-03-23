@@ -1,18 +1,26 @@
 <div class="rc-dialog rc-dialog-help">
 
-  <mat-dialog-content>
-  <div>
+  <div mat-dialog-title>
     <h2>
       {{ 'FAQS.titleFAQs' | translate }}
     </h2>
+  <mat-form-field class="rc-full-width">
+    <input
+      matInput
+      placeholder="Search in Questions..."
+      (keyup)="doSearch()"
+      [(ngModel)]="search_text">
+  </mat-form-field>
   </div>
+
+  <mat-dialog-content>
 
 
     <ng-container *ngFor="let faq of display_faqs">
 
-      <mat-expansion-panel hideToggle>
-        <mat-expansion-panel-header>
-          <mat-panel-title>
+      <mat-expansion-panel hideToggle class="rdl-expansion">
+        <mat-expansion-panel-header class="rdl-expansion-header">
+          <mat-panel-title class="rdl-expansion-title">
             {{ faq.faq_question }}
           </mat-panel-title>
         </mat-expansion-panel-header>
@@ -24,13 +32,7 @@
   </mat-dialog-content>
 
   <mat-dialog-actions  align="end">
-    <mat-form-field class="rc-full-width" appearance="outline">
-      <input
-        matInput
-        placeholder="Search in Questions..."
-        (keyup)="doSearch()"
-        [(ngModel)]="search_text">
-    </mat-form-field>
+
     <button mat-flat-button [mat-dialog-close]="false" color="accent">OK</button>
   </mat-dialog-actions>
 
