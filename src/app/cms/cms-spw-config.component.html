@@ -5,11 +5,15 @@
     <div class="rdl-card-rounded">
 
       <div class="rdl-card-header">
-        <h2>{{ 'CMS.SETTINGS.titleStatus' | translate }} {{ publishStatus }}</h2>
+        <h2>{{ 'CMS.SETTINGS.titleStatus' | translate }}
+          <ng-container *ngIf="!building">
+          <span *ngIf="!unPublishedChanges">: Published</span>
+          <span *ngIf="unPublishedChanges">: Unpublished Changes</span>
+          </ng-container>
+        </h2>
         <mat-icon color="warn" *ngIf="unPublishedChanges">cloud_off</mat-icon>
         <mat-icon color="success" *ngIf="!unPublishedChanges">cloud</mat-icon>
       </div>
-
 
       <span markdown ngpreservewhitespaces *ngIf="unPublishedChanges">
         {{ 'CMS.SETTINGS.infoUnpublished' | translate: { brand: brand.name } }}
@@ -32,11 +36,12 @@
       </ul>
       <span class="rc-space-filler"></span>
       <div class="rdl-card-actions" *ngIf="unPublishedChanges">
-        <button mat-button (click)="publishWebsite(false)">PREVIEW</button>
-        <button mat-button color="accent" (click)="publishWebsite(true)">PUBLISH</button>
+        <button mat-button (click)="publishWebsite(false)" [disabled]="building">PREVIEW</button>
+        <button mat-button color="accent" (click)="publishWebsite(true)" [disabled]="building">PUBLISH</button>
       </div>
-      <div class="rdl-card-actions" *ngIf="!unPublishedChanges">
+      <div class="rdl-card-actions" *ngIf="!unPublishedChanges && buildAvailable && !building">
         <button mat-button color="accent" (click)="showMarketingLinks()">MARKETING LINKS</button>
+        <button mat-button color="accent" (click)="viewApptiser()">VIEW WEBSITE</button>
       </div>
 
 
@@ -62,11 +67,12 @@
       <ul class="rdl-list">
         <li>
           <label>{{ 'CMS.SETTINGS.labelApptiserDomain' | translate }}:</label>
-          <span>
+          <span *ngIf="!!apptiserUrl">
             <a (click)="viewApptiser()"
                title="View your published apptiser website">
               {{ apptiserUrl }}</a>
           </span>
+          <span *ngIf="!apptiserUrl">Not yet published.</span>
         </li>
         <li><label>{{ 'CMS.SETTINGS.labelCustomDomain' | translate }}:</label>
           Not set
@@ -151,3 +157,4 @@
     </div>
   </div>
 </div>
+<pre>{{ restaurant | json }}</pre>

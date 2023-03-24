@@ -22,7 +22,7 @@ export class CMSService {
     });
   }
 
-  getApptiserUrl(url: string): string {
+  getApptiserUrl(url: string, version = 'Production'): string {
     if(!url) { return; }
     const aws = 's3.eu-west-2.amazonaws.com';
     if (url.indexOf(aws) > 0) {

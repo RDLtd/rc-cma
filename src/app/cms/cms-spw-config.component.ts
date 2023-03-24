@@ -7,7 +7,7 @@ import { Restaurant } from '../_models';
 import { AppConfig } from "../app.config";
 import { StorageService } from '../_services/storage.service';
 import { MatDialog, MatDialogRef } from "@angular/material/dialog";
-import {CmsSpwBuilderComponent} from "./cms-spw-builder.component";
+import { CmsSpwBuilderComponent} from "./cms-spw-builder.component";
 import { CmsSpwLinksComponent } from './cms-spw-links.component';
 
 @Component({
@@ -22,7 +22,6 @@ export class CmsSpwConfigComponent implements OnInit {
   restaurant: Restaurant;
   user: any; // a.k.a member
 
-
   cssThemeObjects: any[];
   selectedTheme: any;
 
@@ -36,7 +35,11 @@ export class CmsSpwConfigComponent implements OnInit {
   unPublishedChanges = false;
   builder: MatDialogRef<CmsSpwBuilderComponent>;
   building = false;
+  buildVersion: string;
+  buildAvailable = true;
   apptiserUrl: string;
+  apptiserPreviewUrl: string;
+
 
   customDomainForm = 'https://ps318108.typeform.com/to/jjUbHwf7?typeform-source=www.google.com';
 
@@ -198,6 +201,7 @@ export class CmsSpwConfigComponent implements OnInit {
   configChange(item): void {
     console.log(`Changed: ${item}`);
     this.dataChanged = true;
+    this.publishStatus = ': unpublished changes'
     this.unPublishedChanges = true;
   }
 
@@ -269,11 +273,31 @@ export class CmsSpwConfigComponent implements OnInit {
 
   launchBuilder(version): void {
     this.building = true;
+    this.buildAvailable = false;
     this.builder = this.dialog.open(CmsSpwBuilderComponent, {
       data: {
-        buildVersion: version
+        buildVersion: version,
+        buildReady: false,
+        self: this.builder,
+        apptiserPreviewUrl: ''
       },
+      disableClose: true,
       panelClass: 'rdl-build-container'
+    });
+    this.builder.afterClosed().subscribe(ready => {
+      console.log('Ready?', version);
+      if (ready) {
+        if (version === 'Preview') {
+          this.publishStatus = ': unpublished updates';
+        } else {
+          this.publishStatus = ': all updates published';
+          this.buildAvailable = ready;
+        }
+        this.building = false;
+        return;
+      }
+      // not built yet so try again
+      this.launchBuilder(version);
     });
   }
 
@@ -285,10 +309,11 @@ export class CmsSpwConfigComponent implements OnInit {
       this.dataChanged = false;
     } else {
       this.unPublishedChanges = true;
-      window.open(`${this.cms.getApptiserUrl(res.url).trim()}?cache=${Date.now().toString()}`, '_blank');
+      this.apptiserPreviewUrl = this.cms.getApptiserUrl(res.url).trim();
+      this.builder.componentInstance.data.apptiserPreviewUrl = this.apptiserPreviewUrl;
       this.dataChanged = true;
     }
-    this.builder.close();
+    this.builder.componentInstance.data.buildReady = true;
   }
 
   showMarketingLinks(): void {
@@ -304,7 +329,13 @@ export class CmsSpwConfigComponent implements OnInit {
   }
 
   viewApptiser(): void {
-    window.open(`${this.apptiserUrl}?cache=${Date.now().toString()}`, '_blank');
+    // JB: temp fix to remove html file name
+    // as it always returns as 'preview'
+    const arr = this.apptiserUrl.split('/');
+    arr.pop();
+    const tgtUrl = arr.join('/');
+    console.log(tgtUrl);
+    window.open(`${tgtUrl}/?cache=${Date.now().toString()}`, '_blank');
   }
 
 }
