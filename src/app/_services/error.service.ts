@@ -49,7 +49,7 @@ export class ErrorService {
       this.currentAuthToken = tkn;
     });
     // send email to tech
-    const msg = `## The CMA Application has recorded an Error\n\n` +
+    const msg = `## The apptiser CMS Application has recorded an Error\n\n` +
       `${info}\n\n` +
       `Please refer to the transaction log for further information\n`;
 
@@ -67,11 +67,11 @@ export class ErrorService {
   sendEmailRequest(msg) {
     return this.http.post(this.config.apiUrl + '/members/sendemail',
       {
-        company_name: 'RDL',
-        company_prefix: 'rc',
+        company_name: 'apptiser',
+        company_prefix: 'app',
         email_to: this.config.brand.email.tech,
         email_from: this.config.brand.email.support,
-        email_subject: 'CMA Error',
+        email_subject: 'apptiser CMS Error',
         email_body: msg,
         userCode: this.config.userAPICode,
         token: this.currentAuthToken
