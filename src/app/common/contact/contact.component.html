@@ -1,0 +1,45 @@
+<div class="rc-dialog rc-dialog-help">
+
+  <mat-dialog-content>
+
+    <div>
+      <h2>
+      {{ 'CONTACT.titleContactSupport' | translate }}
+      </h2>
+    </div>
+
+    <markdown ngPreserveWhitespaces>{{ 'CONTACT.txtBody1' | translate }}</markdown>
+    <markdown ngPreserveWhitespaces>{{ 'CONTACT.txtBody2' | translate }}</markdown>
+
+    <mat-form-field class="rc-full-width" appearance="outline">
+          <textarea
+            #message
+            matInput
+            placeholder="{{ 'CONTACT.labelHint' | translate }}"
+            name="support_message"
+            cdkTextareaAutosize
+            cdkAutosizeMinRows="5"
+            maxlength="1000"
+            [(ngModel)]="email_message">
+          </textarea>
+      <mat-hint align="end">{{ message.value.length }}/1000</mat-hint>
+    </mat-form-field>
+
+    <p>Email by {{ member.member_first_name }} {{ member.member_last_name }} from {{ member.member_email }}</p>
+
+  </mat-dialog-content>
+
+  <mat-dialog-actions class="rc-flex-end">
+    <button
+      tabindex="-1"
+      mat-button
+      [mat-dialog-close]="false">
+      {{ data.cancel || 'CONTACT.labelBtnCancel' | translate }}
+    </button>
+    <button
+      mat-button color="accent" (click)="sendEmail()">
+      {{ data.confirm || 'CONTACT.labelBtnConfirm' | translate | uppercase }}
+    </button>
+  </mat-dialog-actions>
+
+</div>

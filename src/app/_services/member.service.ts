@@ -623,4 +623,13 @@ export class MemberService {
       });
   }
 
+  getFAQs(language: string) {
+    return this.http.post(this.config.apiUrl + '/members/faqs',
+      {
+        userCode: this.config.userAPICode,
+        token: this.authToken,
+        language
+      });
+  }
+
 }

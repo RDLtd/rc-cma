@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, lastValueFrom } from 'rxjs';
 import { AppConfig } from '../app.config';
 import { TranslateService } from '@ngx-translate/core';
 import { Member } from '../_models';
@@ -71,12 +71,53 @@ export class AuthenticationService {
     this.dspHomeScreen('active');
   }
 
-  dspHomeScreen(sessionStatus): void {
-    this.inSession = sessionStatus === 'active';
+  async dspHomeScreen(sessionStatus): Promise<any> {
+    // A deep link set by curation
+    const deepLink = this.storage.getSession('rd_route_request');
+    // The last viewed restaurant
+    const lastViewedRestaurantId = this.storage.get('rd_last_restaurant');
+    // Activate session
+    this.inSession = (sessionStatus === 'active');
     this.memberSessionSubject.next(sessionStatus);
-    // check to see if we've stored a deep link request
-    const landingPage = sessionStorage.getItem('rd_route_request') || 'hub';
-    this.router.navigate([`/${landingPage}`]).then();
+
+    // It's a curator so go straight there, do not pass go.
+    if(!!deepLink) {
+      // clean up & go directly to link
+      this.storage.removeSession('rd_route_request');
+      this.router.navigate([deepLink]).then();
+      return;
+    }
+
+    // Otherwise get associated restaurants
+    await lastValueFrom(this.restaurantService.getMemberRestaurants(this.member.member_id))
+      .then((data) => {
+        // If there aren't any then just take the user to settings
+        if (data['restaurants'].length < 1) {
+          console.log("No associated restaurants at Signin, go to Settings");
+          // clean up =, just in case
+          this.storage.removeSession('rd_last_restaurant');
+          // Go
+          this.router.navigate([`/settings`]).then();
+          return;
+        }
+
+        // If we have an id in storage
+        // does it match any associated restaurant
+        if(!!lastViewedRestaurantId) {
+          data['restaurants'].forEach(restaurant => {
+            if (restaurant.restaurant_id === lastViewedRestaurantId) {
+              this.router.navigate([`/cms/${lastViewedRestaurantId}`]).then();
+              return;
+            }
+          });
+        }
+        // If there was a locally stored id, then it didn't match
+        // any of the restaurant associated with this account
+        const defaultRestaurantId = data['restaurants'][0]['restaurant_id'];
+        this.storage.set('rd_last_restaurant', defaultRestaurantId);
+        this.router.navigate([`/cms/${defaultRestaurantId}`]).then();
+
+    });
   }
 
   logout(reason): void {
@@ -101,10 +142,11 @@ export class AuthenticationService {
   }
 
   isAuth(): boolean {
-    // Check expiry mins
+    // Check expiry
     this.sessionExpiresAt = JSON.parse(localStorage.getItem('rd_token_expires_at'));
     this.sessionTimeLeft = (this.sessionExpiresAt - new Date().getTime()) / 60000;
     // console.log(`Time left = ${this.sessionTimeLeft > 0? this.sessionTimeLeft : 'none'}`);
+
     // Does a session still exists?
     if (!!this.sessionExpiresAt && !!this.sessionTimeLeft) {
       // Is there time left?
@@ -126,10 +168,8 @@ export class AuthenticationService {
 
       } else {
         console.log(`In session: ${this.inSession}, Time left: ${this.sessionTimeLeft}`);
-        // If session time ends while app is open
-        // or when the page has been refreshed
-        // or when has navigated away from the page but returns within 5 mins
-        // then show 'page expired' snackbar
+        // If session time ends while app is open or when the page has been refreshed
+        // or when has navigated away from the page but returns within 5 mins show 'page expired' snackbar
         if (this.inSession || this.sessionTimeLeft > -5) {
           this.logout('expired');
         } else {

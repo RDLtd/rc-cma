@@ -8,6 +8,8 @@ import { AboutComponent } from './about.component';
 import { HeaderService } from './header.service';
 import {ImageService} from '../_services/image.service';
 import {CloudinaryImage} from '@cloudinary/url-gen';
+import {ContactComponent} from "./contact/contact.component";
+import {FaqsComponent} from "./faqs/faqs.component";
 
 @Component({
   selector: 'app-rc-header',
@@ -117,5 +119,25 @@ export class HeaderComponent implements OnInit {
   about(): void {
     const dialogRef = this.dialog.open(AboutComponent);
     dialogRef.componentInstance.build = this.config.build;
+  }
+
+  contact(): void {
+    const dialogRef = this.dialog.open(ContactComponent, {
+      width: '480px',
+      position: {'top': '10vh'},
+      data: {
+        member: this.member
+      }
+    });
+  }
+
+  faqs(): void {
+    const dialogRef = this.dialog.open(FaqsComponent, {
+      width: '640px',
+      position: {'top': '10vh'},
+      data: {
+        member: this.member
+      }
+    });
   }
 }

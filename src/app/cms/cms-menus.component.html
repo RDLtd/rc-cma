@@ -1,4 +1,4 @@
-<div class="rc-cms-menus">
+<div class="rc-cms-menus rc-content-container">
 
   <section>
     <mat-toolbar class="rc-toolbar rc-toolbar-section">
@@ -77,6 +77,7 @@
                   name="menuSection{{ section.id }}"
                   type="text"
                   matInput
+                  maxlength="50"
                   (keyup)="setChanged()">
           <button *ngIf="section.label" matSuffix mat-icon-button aria-label="Clear"
                   (click)="section.label=''; dataChanged = true;">

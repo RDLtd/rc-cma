@@ -28,8 +28,10 @@
             },
             "assets": [
               "src/assets",
-              "src/favicon.ico",
-              "src/apple-touch-icon.png"
+              "src/favicon.svg",
+              "src/apple-touch-icon.png",
+              "src/google-touch-icon.png",
+              "src/manifest.json"
             ],
             "styles": [
               "src/styles/styles.scss"
@@ -120,7 +122,10 @@
             ],
             "assets": [
               "src/assets",
-              "src/favicon.ico"
+              "src/favicon.svg",
+              "src/apple-touch-icon.png",
+              "src/google-touch-icon.png",
+              "src/manifest.json"
             ]
           }
         }

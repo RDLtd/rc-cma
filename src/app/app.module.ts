@@ -39,9 +39,6 @@ import {
 import {
   RestaurantDetailComponent,
 } from './cms/restaurant-detail.component';
-import {
-  MarketplaceComponent
-} from './marketplace/marketplace.component';
 
 import {
   RestaurantLookupComponent,
@@ -92,16 +89,19 @@ import { CmsSpwLinksComponent } from './cms/cms-spw-links.component';
 import { QRCodeModule } from 'angularx-qrcode';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { MembershipComponent } from './join/membership.component';
-import { HubComponent } from './hub/hub.component';
 import { LogoComponent } from './common/logo/logo.component';
 import { CurrencyPipe } from '@angular/common';
-import { RiMembershipComponent } from './join/mepn/ri-membership.component';
-import { BpiRegistrationComponent } from './join/mepn/bpi-registration.component';
 import { ProfileComponent } from './profile/profile.component';
 import {CloudinaryModule} from '@cloudinary/ng';
 import { OnlineStatusModule } from 'ngx-online-status';
 import { AppTitleStrategy } from './app-title-strategy';
 import { lastValueFrom } from 'rxjs';
+import {ContactComponent} from "./common/contact/contact.component";
+import {FaqsComponent} from "./common/faqs/faqs.component";
+import {MatExpansionModule} from "@angular/material/expansion";
+import { CmsSpwConfigComponent } from './cms/cms-spw-config.component';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { CmsSpwBuilderComponent } from './cms/cms-spw-builder.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -153,44 +153,46 @@ export function appInitializerFactory(translate: TranslateService) {
     AboutComponent,
     LoaderComponent,
     HelpComponent,
+    ContactComponent,
+    FaqsComponent,
     SafePipe,
     SigninComponent,
-    MarketplaceComponent,
     JoinComponent,
     LoadComponent,
     CmsSpwLinksComponent,
     MembershipComponent,
-    HubComponent,
     LogoComponent,
-    RiMembershipComponent,
-    BpiRegistrationComponent,
-    ProfileComponent
+    ProfileComponent,
+    CmsSpwConfigComponent,
+    CmsSpwBuilderComponent
   ],
-  imports: [
-    AngularMaterialModule,
-    BrowserModule,
-    BrowserAnimationsModule,
-    FormsModule,
-    RouterModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    routing,
-    FileUploadModule,
-    ClipboardModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    }),
-    MarkdownModule.forRoot(),
-    CloudinaryModule,
-    QRCodeModule,
-    GoogleMapsModule,
-    ClipboardModule,
-    OnlineStatusModule
-  ],
+    imports: [
+        AngularMaterialModule,
+        BrowserModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        RouterModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        routing,
+        FileUploadModule,
+        ClipboardModule,
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: HttpLoaderFactory,
+                deps: [HttpClient]
+            }
+        }),
+        MarkdownModule.forRoot(),
+        CloudinaryModule,
+        QRCodeModule,
+        GoogleMapsModule,
+        ClipboardModule,
+        OnlineStatusModule,
+        MatExpansionModule,
+        MatSlideToggleModule
+    ],
   providers: [
     AppConfig,
     AuthenticationService,

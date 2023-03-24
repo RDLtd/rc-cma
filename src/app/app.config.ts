@@ -1,7 +1,6 @@
 ﻿import { environment } from '../environments/environment';
 import { Injectable } from '@angular/core';
 
-
 declare const require: any;
 
 @Injectable()
@@ -14,12 +13,6 @@ export class AppConfig {
 
   // App location
   appUrl = window.location.origin;
-
-  // Should only need to switch here to change from local to Heroku server
-  // public readonly apiUrl = 'http://localhost:4000';
-  // public readonly apiUrl = 'https://rc-server-carter-mwkg7qc3nv9ak.herokuapp.com'
-  // public readonly apiUrl = 'https://rc-server-staging.herokuapp.com';
-  // public readonly apiUrl = 'https://rc-server-prod.herokuapp.com';
 
   // This is Angular's equivalent! See the 'environments' folder
   // Build process should automatically detect the correct variables
@@ -43,14 +36,17 @@ export class AppConfig {
   public readonly useAirBrake = false;
 
   // Root domains
+  // apptiser update ks 090323 - added two new domains
   tld = {
     rc: 'restaurantcollective.org.uk',
-    ri: 'restaurateursindependants.fr'
+    ri: 'restaurateursindependants.fr',
+    app: 'apptiser.io',
+    rdl: 'rdl.network'
   };
 
   private brands = {
     rc: {
-      name: 'Restaurant Collective',
+      name: 'RDL',
       prefix: 'rc',
       logo: 'rc-logo',
       url: `https://${this.tld.rc}`,
@@ -62,8 +58,8 @@ export class AppConfig {
         tech: 'tech@restaurantdevelopments.ltd'
       },
       products: {
-        success_url: `${ this.appUrl }/signin`,
-        cancel_url: `${ this.appUrl }/membership-options`,
+        success_url: `${this.appUrl}/signin`,
+        cancel_url: `${this.appUrl}/membership-options`,
       },
       currency: {
         symbol: '£',
@@ -87,8 +83,8 @@ export class AppConfig {
         tech: 'tech@restaurantdevelopments.ltd'
       },
       products: {
-        success_url: `${ this.appUrl }/signin`,
-        cancel_url: `${ this.appUrl }/membership-options`,
+        success_url: `${this.appUrl}/signin`,
+        cancel_url: `${this.appUrl}/membership-options`,
       },
       currency: {
         symbol: '€',
@@ -97,6 +93,56 @@ export class AppConfig {
       downloads: {
         terms: `https://${this.tld.ri}/terms-conditions/`,
         privacy: `https://${this.tld.ri}/privacy-policy/`
+      }
+    },
+    app: {
+      name: 'apptiser',
+      prefix: 'app',
+      logo: 'app-logo',
+      url: `https://${this.tld.app}`,
+      joinUrl: `https://app.${this.tld.app}/join`,
+      spwDemoUrl: `https://example-restaurant.com/`,
+      email: {
+        support: `support@${this.tld.app}`,
+        curation: `curation@${this.tld.app}`,
+        tech: 'tech@restaurantdevelopments.ltd'
+      },
+      products: {
+        success_url: `${this.appUrl}/signin`,
+        cancel_url: `${this.appUrl}/membership-options`,
+      },
+      currency: {
+        symbol: '£',
+        code: 'GBP'
+      },
+      downloads: {
+        terms: `https://assets.${this.tld.app}/docs/apptiser-terms.pdf`,
+        privacy: `https://assets.${this.tld.app}/docs/apptiser-privacy-policy.pdf`
+      }
+    },
+    rdl: {
+      name: 'Restaurant Developments',
+      prefix: 'rdl',
+      logo: 'rdl-logo',
+      url: `https://${this.tld.rdl}`,
+      joinUrl: `https://app.${this.tld.rdl}/join`,
+      spwDemoUrl: `https://example-restaurant.com/`,
+      email: {
+        support: `support@${this.tld.rdl}`,
+        curation: `curation@${this.tld.rdl}`,
+        tech: 'tech@restaurantdevelopments.ltd'
+      },
+      products: {
+        success_url: `${this.appUrl}/signin`,
+        cancel_url: `${this.appUrl}/membership-options`,
+      },
+      currency: {
+        symbol: '£',
+        code: 'GBP'
+      },
+      downloads: {
+        terms: `https://${this.tld.rdl}/terms-conditions/`,
+        privacy: `https://${this.tld.rdl}/privacy-policy/`
       }
     }
   };

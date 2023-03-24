@@ -10,10 +10,10 @@
           </button>
       <!-- UNDO CHANGES -->
           <button
-                  mat-icon-button
-                  [disabled]="!dataChanged"
-                  (click)="resetData()"
-                  [matTooltip]="'CMS.RESERVATIONS.tipUndo' | translate">
+            mat-icon-button
+            [disabled]="!dataChanged"
+            (click)="resetData()"
+            [matTooltip]="'CMS.RESERVATIONS.tipUndo' | translate">
             <mat-icon>undo</mat-icon>
           </button>
       <!-- SAVE CHANGES -->
@@ -90,6 +90,7 @@
               <input
                 #bkgProviderId
                 matInput
+                maxlength="50"
                 name="bkg_provider_reference"
                 (keyup)="setChanged(bkgProviderId)"
                 [(ngModel)]="booking_provider_reference">

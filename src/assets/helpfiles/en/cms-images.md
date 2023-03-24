@@ -30,7 +30,7 @@ An image can be removed by selecting the **TRASH** icon.
 
 ### Download image
 
-If you need to retreive an image from the repository, you ca
+If you need to retrieve an image from the repository, you can
 download it by selecting the **CLOUD** icon.
 
   

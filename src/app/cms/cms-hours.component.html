@@ -42,7 +42,7 @@
           placeholder="{{ 'CMS.HOURS.labelGeneral' | translate: { chars: '1000'} }}"
           cdkTextareaAutosize
           cdkAutosizeMinRows="1"
-          maxlength=1000
+          maxlength="1000"
           (change)="setChanged()"
           (keydown)="setChanged()"
           [(ngModel)]="openingTimesNotes">

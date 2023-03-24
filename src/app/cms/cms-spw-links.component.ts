@@ -9,6 +9,7 @@ export class CmsSpwLinksComponent implements OnInit {
 
   base64main: string;
   base64menu: string;
+  qrCodeWidth: 192;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) {}
 

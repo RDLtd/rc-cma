@@ -22,6 +22,15 @@ export class CMSService {
     });
   }
 
+  getApptiserUrl(url: string, version = 'Production'): string {
+    if(!url) { return; }
+    const aws = 's3.eu-west-2.amazonaws.com';
+    if (url.indexOf(aws) > 0) {
+      return url.replace(`${aws}/`, '');
+    }
+    return '';
+  }
+
   // elements
   getElement(restaurant_id: string) {
     return this.http.post(this.config.apiUrl + '/cms/elementget',
@@ -425,15 +434,45 @@ export class CMSService {
       });
   }
 
-  async publish(restaurant_id, production: Boolean): Promise<any> {
+  async publish(restaurant_id: string, production: Boolean, membership_type: string, website_options: any): Promise<any> {
+    // apptiser update ks 090323 need to select endpoint and template based on brand
+    if (this.config.brand.prefix === 'rc' || this.config.brand.prefix === 'ri') {
+      // use the exising 'old' templates for now...
       return await lastValueFrom(this.http.post(this.config.apiUrl + '/spw/makespw',
-          {
-              restaurant_id,
-              production,
-              company: this.config.brand.prefix,
-              userCode: this.config.userAPICode,
-              token: this.authToken
-          }));
+        {
+          restaurant_id,
+          production,
+          company: this.config.brand.prefix,
+          userCode: this.config.userAPICode,
+          token: this.authToken
+        }));
+    } else {
+      // apptiser update ks 090323
+      // call the new endpoint to generate the data.json, etc., etc.
+      // send the brand requirements and also choose the template, and send whether this was an associated restaurant
+      let template;
+      if (this.config.brand.prefix === 'rdl') {
+        template = 'rdl-managed.html';
+      } else {
+        if (membership_type === 'premium') {
+          template ='apptiser-premium.html';
+        } else {
+          template ='apptiser.html';
+        }
+      }
+      console.log('Activate generator', restaurant_id, production, template, this.config.brand.prefix, website_options);
+      return await lastValueFrom(this.http.post(this.config.apiUrl + '/spw/generateAWP',
+        {
+          restaurant_id,
+          production,
+          website_options,
+          template,
+          company: this.config.brand.prefix,
+          userCode: this.config.userAPICode,
+          token: this.authToken
+        }));
+    }
+
   }
 
   updateCoordinates(restaurant_id: string, restaurant_lat: number, restaurant_lng: number) {
@@ -528,6 +567,57 @@ export class CMSService {
         token: this.authToken
       });
   }
+
+  // web config
+  getWebConfig(restaurant_id: number) {
+    return this.http.post(this.config.apiUrl + '/spw/getwebconfig',
+      {
+        restaurant_id,
+        userCode: this.config.userAPICode,
+        token: this.authToken
+      });
+  }
+
+  createWebConfig(restaurant_id: number, theme_id: number, website_json: any) {
+    // stringify the options before sending to the endpoint
+    const website_options = JSON.stringify(website_json);
+    return this.http.post(this.config.apiUrl + '/spw/createwebconfig',
+      {
+        restaurant_id, theme_id, website_options,
+        userCode: this.config.userAPICode,
+        token: this.authToken
+      });
+  }
+
+  updateWeConfig(restaurant_id: number, theme_id: number, website_json: any) {
+    // stringify the options before sending to the endpoint
+    const website_options = JSON.stringify(website_json);
+    return this.http.post(this.config.apiUrl + '/spw/updatewebconfig',
+      {
+        restaurant_id, theme_id, website_options,
+        userCode: this.config.userAPICode,
+        token: this.authToken
+      });
+  }
+
+  deleteWebConfig(restaurant_id: number) {
+    return this.http.post(this.config.apiUrl + '/spw/deletewebconfig',
+      {
+        restaurant_id,
+        userCode: this.config.userAPICode,
+        token: this.authToken
+      });
+  }
+
+  getWebThemes() {
+    return this.http.post(this.config.apiUrl + '/spw/getwebthemes',
+      {
+        userCode: this.config.userAPICode,
+        token: this.authToken,
+      });
+  }
+
+
 
 }
 

@@ -120,6 +120,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
     this.cldPlugins = this.imgService.cldBasePlugins;
   }
 
+  // Only show the time if content was updated today.
   setDateRes(theDate) {
     if (this.isToday(theDate)) {
       return moment(theDate).format('HH:mm');
@@ -128,15 +129,16 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
     }
   }
 
+  // Display system messages
   ngAfterViewInit(): void {
-    this.dspUnreadMessages();
+    // this.dspUnreadMessages();
   }
 
   ngOnInit() {
-
     this.lang = localStorage.getItem('rd_language');
     this.user = JSON.parse(localStorage.getItem('rd_profile'));
     this.userName = localStorage.getItem('rd_username');
+
 
     moment.locale(localStorage.getItem('rd_language'));
 
@@ -175,13 +177,13 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
     this.cms.checkSPW(this.restaurant.restaurant_id)
       .subscribe({
         next: res => {
-          // console.log(res);
+          console.log(res);
           this.cmsHasSufficientData = res['data_status_ok'];
           this.cmsChanged = !(res['published_status_ok']);
           // Enough content?
           if (this.cmsHasSufficientData) {
-            this.spwProdUrl = res['spw_url'];
-            this.spwPreviewUrl = res['preview_spw_url'];
+            this.spwProdUrl = this.cms.getApptiserUrl(res['spw_url']);
+            this.spwPreviewUrl = this.cms.getApptiserUrl(res['preview_spw_url']);
             // Has anything changed?
             if (this.cmsChanged) {
               this.publishDate = new Date(res['spw_written']);
@@ -525,7 +527,8 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
         data: {
           id: this.restaurant.restaurant_id,
           number: this.restaurant.restaurant_number,
-          name: this.restaurant.restaurant_name
+          name: this.restaurant.restaurant_name,
+          membership_type: this.user.member_membership_type
         }
       });
       // record event
@@ -536,7 +539,12 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
   }
 
   publishSPW(): void {
-    this.cms.publish(this.restaurant.restaurant_id, true)
+    // TODO presume this is no longer called??????
+    // apptiser update ks 090323 - added member type (for apptiser).
+    // Note that association check is done at the back end, which check for ANY member having this restaurant associated
+    this.cms.publish(this.restaurant.restaurant_id,
+    true,
+    this.user.member_membership_type, {})
         .then(res => {
           if (res['status'] === 'OK') {
             // console.log('Publish success:', res);
@@ -568,6 +576,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
   }
 
   dspSPWLinks(): void {
+
     this.dialog.open(CmsSpwLinksComponent,
       {
         data: {

@@ -1,0 +1,13 @@
+{
+    "name"            : "Restaurant Developments Ltd",
+    "short_name"      : "RDL",
+    "icons"           : [
+        {
+            "src"  : "google-touch-icon.png",
+            "sizes": "512x512"
+        }
+    ],
+    "background_color": "#ffffff",
+    "theme_color"     : "#ffffff",
+    "display"         : "fullscreen"
+}

@@ -1,14 +1,15 @@
-$rc-turquoise        : #00a69b;
+$rc-turquoise        : #222F3C;
 $rc-sunset           : #ff5721;
-$rc-pear             : #cddc38;
+$rc-pear             : hsla(65 50% 50% / 100); //#cddc38;
 $rc-glitter          : #e5f2f3;
 $rc-charcoal         : #454540;
 $rc-warm-grey        : #9a9a9a;
 $rc-cool-grey        : #cdcdcd;
 $rc-faint-grey       : #efefef;
+$rc-petrol            :#04A5C2;
 
 $rc-theme-primary:        $rc-turquoise;
-$rc-theme-accent:         $rc-sunset;
+$rc-theme-accent:         $rc-petrol;
 $rc-theme-secondary:      $rc-cool-grey;
 $rc-theme-tertiary:       #ffc213;
 $rc-theme-success:        $rc-pear;
@@ -25,5 +26,5 @@ $rc-default-font-weight:  300;
 $rc-theme-text:           #666;
 $rc-media-small:          400px;
 $rc-max-width:            1400px;
-$rc-header-height:        80px;
+$rc-header-height:        64px;
 $rc-toolbar-height:       48px;

@@ -6,9 +6,7 @@
 @import "reset";
 @import 'bpi';
 @import "mozrest";
-
-// Create a config with the default MAT typography levels.
-$config: mat.define-typography-config();
+@import 'rdl';
 
 /**
 * Utility classes
@@ -50,8 +48,6 @@ $config: mat.define-typography-config();
   margin-bottom: 1rem;
 }
 
-
-
 .rc-codes {
   display: flex;
   flex-direction: column;
@@ -66,7 +62,7 @@ $config: mat.define-typography-config();
 .rc-invisible { visibility: hidden; }
 .rc-full-width { width: 100%; }
 .rc-half-width { width: calc(50% - 2px);}
-.rc-link-active { color: $rc-theme-accent !important; }
+.rc-link-active { color: $rc-theme-accent !important;}
 .rc-link-like { cursor: pointer; }
 .rc-disable {
   filter: saturate(0%);
@@ -131,20 +127,6 @@ a.rc-back {
 .rc-warn { color: $rc-theme-warn; }
 .rc-media-small-hide { display: none !important; }
 .rc-media-med { display: flex !important; }
-
-
-// Unused
-// -----------------------------------
-/**
-.agm-map { height: 300px; }
-.rc-loader-white {
-  .rc-spinner div { background-color: white !important;
-  }
-}
-
-*/
-
-
 .rc-user-menu {
   padding: 16px 18px 8px;
   h3 {
@@ -160,69 +142,37 @@ a.rc-back {
   .rc-media-med { display: flex !important; }
   .rc-codes { flex-direction: row;}
 }
-@media only screen
-and (min-device-width: 768px)
-and (max-device-width: 1024px)
-and (orientation: landscape)
-and (-webkit-min-device-pixel-ratio: 1) {}
 
 /**
 * MAT/MDC Overrides
 * -------------------------------
 **/
-.mat-toolbar,
-.mat-toolbar-row,
-.mat-toolbar-single-row {
-  height: auto;
-  font: 400 16px/48px $rc-default-font;
-}
+// Allow for fixed toolbar
 .mat-toolbar-fixed-adjust { padding-top: $rc-header-height;}
-.mat-mdc-tooltip { font: $rc-default-font-weight 12px/16px $rc-default-font; }
-/* TODO(mdc-migration): The following rule targets internal classes of input that may no longer apply for the MDC version.*/
-.mat-mdc-form-field-hint,
-.mat-input-underline {
-  color: $rc-theme-black;
-  border-width: 4px;
-  border-color: $rc-theme-black;
-}
+// Align hints & errors to right of input
 .mat-mdc-form-field-error { text-align: right; }
-
-// Remove grey bgd
+// Remove bgd color from inputs
 .mdc-text-field--filled:not(.mdc-text-field--disabled) { background-color: transparent !important; }
 .mat-mdc-form-field-focus-overlay { opacity: 0 !important; }
 
-/* TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version.*/
-.mat-radio-label,
-.mat-form-field-prefix { margin-right: 8px; }
-.mat-mdc-form-field { line-height: 1.4; }
-.mat-mdc-card-title { font-size: 20px; }
-.mat-mdc-form-field > .mat-mdc-chip { background-color: $rc-theme-primary; }
-.mat-mdc-dialog-container { border-radius: 8px !important; }
-.rc-preview-dialog-container .mat-mdc-dialog-container {
-  padding: 0;
-  border-radius: 0;
+.mat-mdc-card-title h2 {
+  margin-bottom: 1rem;
 }
-mat-form-field.mat-focused { color: $rc-theme-accent; }
-.cdk-overlay-backdrop.cdk-overlay-backdrop-showing.rc-preview-backdrop {
-  background-color: #000;
-  opacity: 0.7;
+h4 {
+  margin-bottom: .25rem;
+  font-weight: $rc-display-font-weight;
 }
-/* TODO(mdc-migration): The following rule targets internal classes of card that may no longer apply for the MDC version.*/
-.mat-card-header-text { margin: 0 !important; }
-.mat-mdc-card-content h4 {
-  font-weight: bold;
-  text-transform: uppercase;
-  margin: 12px 0 8px;
-  background-color: $rc-theme-grey;
-  padding: 4px 8px;
-  font-size: 12px;
+address {
+  font-style: normal;
+  span {
+    display: block;
+  }
 }
-.mat-mdc-snack-bar-action { color: white; }
-a.mat-mdc-menu-item {text-decoration: none;}
-.mat-mdc-menu-content:not(:empty) {
-  padding-top: 0 !important;
-  padding-bottom: 0 !important;
-}
+
+
+// Layout classes
+// Card styles
+
 
 // Bpi
 // ++++++++++++++++++++++++++++++++++++++++++++
@@ -309,6 +259,16 @@ a.mat-mdc-menu-item {text-decoration: none;}
     }
   }
 }
+.bpi-logos {
+  background: white;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 1rem auto;
+}
 
 /**
 * RC layouts
@@ -316,6 +276,7 @@ a.mat-mdc-menu-item {text-decoration: none;}
 **/
 
 .rc-grid {
+  width: 100%;
   max-width: $rc-max-width;
   display: grid;
   margin: 1rem auto;
@@ -331,6 +292,8 @@ a.mat-mdc-menu-item {text-decoration: none;}
   }
 }
 .rc-grid-masonry-2 {
+  width: 100%;
+  max-width: $rc-max-width;
   columns: 1;
   margin: 1rem auto;
   gap: 1rem;
@@ -355,14 +318,12 @@ a.mat-mdc-menu-item {text-decoration: none;}
   }
 }
 .rc-content-container {
-  max-width: $rc-max-width;
+  max-width: min(calc(100vw - 2rem), #{$rc-max-width});
   margin: 1.5rem auto;
   &.full-width {
     max-width: calc(100% - 2rem);
   }
 }
-
-
 .rc-layout-split-container {
   min-height: 100vh;
   display: flex;
@@ -383,12 +344,8 @@ a.mat-mdc-menu-item {text-decoration: none;}
     background-color: $rc-theme-primary;
     color: white;
     a {
-      color: black;
+      color: $rc-theme-accent;
       text-decoration: underline;
-    }
-    h1 {
-      font-weight: 300;
-      line-height: 1.1;
     }
   }
   .rc-layout-split-content {
@@ -399,9 +356,10 @@ a.mat-mdc-menu-item {text-decoration: none;}
       margin: 0 0 2em;
       img { height: 120px;}
     }
-    h1 {
+    h1, h2 {
       font-weight: 300;
       line-height: 1.1;
+      font-size: 2rem;
     }
     p {
       // text-align: justify;
@@ -522,16 +480,7 @@ a.mat-mdc-menu-item {text-decoration: none;}
       }
   }
 }
-.bpi-logos {
-  background: white;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin: 1rem auto;
-}
+
 form.rc-form-grid {
   display: grid;
   gap:8px;
@@ -551,8 +500,6 @@ form.rc-form-grid {
     margin: 0 0 .25rem;
   }
 }
-
-
 .rc-about {
   display: flex;
   flex-direction: column;
@@ -633,45 +580,19 @@ form.rc-form-grid {
 
 
 // Default logo
-.rc-svg-logo {
+.rdl-svg-logo {
   height: 100%;
   max-width: 360px;
   margin: 0 0 1rem;
-  .rc-logo-group {
-    fill: white;
-    .rc-logo-circles { opacity: .38; }
-    .rc-logo-text {}
-  }
+  .icon { fill: white;}
+  .label { fill: white;}
   &.primary {
-    .rc-logo-group {
-      .rc-logo-circles {
-        fill: $rc-theme-primary;
-        opacity: 1;
-      }
-      .rc-logo-text {
-        fill: $rc-charcoal;
-      }
-    }
+    .icon { fill: $rc-theme-primary; }
+    .label { fill: $rc-theme-primary;}
   }
   &.accent {
-    .rc-logo-group {
-      .rc-logo-circles {
-        fill: $rc-theme-accent;
-        opacity: 1;
-      }
-      .rc-logo-text {
-        fill: $rc-charcoal;
-      }
-    }
-  }
-  &.rc-logo-footer {
-    width: 100px;
-    .rc-logo-group {
-      fill: grey;
-      .rc-logo-circles {
-        opacity: .5;
-      }
-    }
+    .icon { fill: $rc-theme-accent;}
+    .label { fill: #8dda10;}
   }
 }
 .mat-toolbar {
@@ -690,8 +611,8 @@ form.rc-form-grid {
     margin-top: $rc-header-height;
   }
   &.rc-toolbar-nav {
-    background-color: $rc-charcoal;
-    .rc-link-active { color: $rc-theme-primary !important; }
+    background-color: $rc-petrol;
+    .rc-link-active { color: white !important; }
   }
   &.rc-toolbar-section {
     background-color: $rc-theme-secondary;
@@ -709,10 +630,14 @@ form.rc-form-grid {
     z-index: 100;
   }
   .rc-brand-wrap {
-    display: block;
     cursor: pointer;
     transition: all .1s ease-out;
     height: $rc-toolbar-height;
+    span {
+      display: block;
+      padding-block: .75rem;
+      height: 100%;
+    }
     &:hover {
     transform: scale(1.05);
     }
@@ -752,19 +677,19 @@ form.rc-form-grid {
     &:hover {
       transform: scale(1.1);
       @include mat.elevation(3);
-      &:after {
-        content: '';
-        display: block;
-        width: 0;
-        height: 0;
-        border-left: 6px solid transparent;
-        border-right: 6px solid transparent;
-        border-top: 4px solid black;
-        position: absolute;
-        bottom: 6px;
-        left: 50%;
-        transform: translate(-50%, 50%);
-      }
+      //&:after {
+      //  content: '';
+      //  display: block;
+      //  width: 0;
+      //  height: 0;
+      //  border-left: 6px solid transparent;
+      //  border-right: 6px solid transparent;
+      //  border-top: 4px solid black;
+      //  position: absolute;
+      //  bottom: 6px;
+      //  left: 50%;
+      //  transform: translate(-50%, 50%);
+      //}
     }
     img {
       height: 100%;
@@ -785,9 +710,15 @@ form.rc-form-grid {
     display: flex;
     flex-direction: row;
     align-items: center;
+    color: red;
   }
 }
-
+.rc-section-toolbar-actions {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: $rc-theme-primary;
+}
 .rc-marketplace {
    padding-top: 1.5rem;
   .rc-card-menu {
@@ -864,10 +795,17 @@ form.rc-form-grid {
 .rc-card-rounded {
   position: relative;
   height: 100%;
-
+  background-color: white;
   border-radius: 16px !important;
   padding: 24px 24px 48px !important;
   box-shadow: 0 9px 68px 0 rgb(0 0 0 / 20%);
+  h2 {
+    margin-top: 0;
+    font-weight: $rc-display-font-weight;
+  }
+  h3 {
+    font-weight: $rc-display-font-weight;
+  }
   .rc-card-menu {
     position: absolute;
     top: 8px
@@ -1081,6 +1019,10 @@ form.rc-form-grid {
   position: relative;
   padding: 0;
   max-width: 960px;
+  h2 {
+    font-size: 1.125rem;
+    font-weight: $rc-display-font-weight;
+  }
   input {
     text-overflow:ellipsis;
   }
@@ -1369,14 +1311,12 @@ ul.rc-lookup-results {
 **/
 .rc-cms {
   padding-top: ($rc-toolbar-height);
-  .rc-cms-base {
-    dd { font-size: 24px; }
-  }
-  .rc-card { padding: 16px; }
+  //.rc-card { padding: 16px; }
   dl { margin: 24px 0 0 0; }
   dt {
     text-transform: uppercase;
     font-size: 12px;
+    letter-spacing: .1rem;
     color: $rc-theme-accent;
     &:after { content: ":"; }
   }
@@ -1394,36 +1334,36 @@ ul.rc-lookup-results {
     }
   }
   // span { display: block; }
-  .rc-cms-info {
-    background: rgba($rc-theme-secondary, .25);
-    padding: 16px;
-    transition: all 300ms ease-in-out;
-    max-height: 1000px;
-    header {
-      display: flex;
-      h2 {
-        color: inherit;
-        font-size: 24px;
-        font-weight: $rc-default-font-weight;
-        padding: 0;
-        margin: 0;
-      }
-      .rc-cms-close {}
-    }
-    p {
-      margin:8px 0;
-      color: inherit;
-    }
-  }
-  .rc-cms-info-actions {
-    button { text-transform: uppercase; }
-  }
+  //.rc-cms-info {
+  //  background: rgba($rc-theme-secondary, .25);
+  //  padding: 16px;
+  //  transition: all 300ms ease-in-out;
+  //  max-height: 1000px;
+  //  header {
+  //    display: flex;
+  //    h2 {
+  //      color: inherit;
+  //      font-size: 24px;
+  //      font-weight: $rc-default-font-weight;
+  //      padding: 0;
+  //      margin: 0;
+  //    }
+  //    .rc-cms-close {}
+  //  }
+  //  p {
+  //    margin:8px 0;
+  //    color: inherit;
+  //  }
+  //}
+  //.rc-cms-info-actions {
+  //  button { text-transform: uppercase; }
+  //}
 }
-.rc-cms-card-nav {
-  position: absolute !important;
-  top: 20px;
-  right: 8px;
-}
+//.rc-cms-card-nav {
+//  position: absolute !important;
+//  top: 20px;
+//  right: 8px;
+//}
 .rc-card-title-img-wrapper {
 
   img {
@@ -1543,8 +1483,12 @@ ul.rc-lookup-results {
   background-color: #eee;
   margin: 0 0 8px 0;
   cursor: pointer;
+  transition: all .3s ease-in-out;
   @include mq(small) {
     flex-direction: row;
+  }
+  &:hover {
+    @include mat.elevation(8);
   }
   img {
     width: 100%;
@@ -1597,6 +1541,7 @@ ul.rc-lookup-results {
   display: block;
   margin: -20px 0 12px 0;
   font-size: 14px;
+  line-height: 1.6;
 }
 ul.rc-line-items {
   display: block;
@@ -1606,6 +1551,8 @@ ul.rc-line-items {
     border-bottom: 1px solid $rc-cool-grey;
     padding: 8px 0;
     text-align: left;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     label {
       flex-basis: 38%;
     }
@@ -1683,14 +1630,15 @@ button.rc-member-assc {
 
 .rc-cms-dash-info {
   transition: all .3s ease-out;
-  .mat-mdc-card-title {
-    margin-bottom: 8px;
-    font-size: 16px;
-  }
-  .mat-mdc-card-content { margin-bottom: 8px; }
+}
+.mat-mdc-list .mat-mdc-list-item .mdc-list-item--with-leading-icon {
+  padding-left: 0 !important;
+  padding-right: 8px !important;
 }
 
 .rc-content-status {
+
+
 
   .mat-mdc-list-item {
     cursor: pointer !important;
@@ -1714,7 +1662,6 @@ button.rc-member-assc {
     .mat-icon { color: black; }
     .mdc-linear-progress__bar-inner { border-color:  $rc-theme-tertiary; }
   }
-
   .mat-mdc-progress-bar {
     margin-top: .5rem !important;
   }
@@ -1737,9 +1684,6 @@ button.rc-member-assc {
 ** ---------------------------------
 */
 .rc-cms-menus {
-  margin: 0 auto;
-  padding-block: 1.5rem;
-  max-width: $rc-max-width;
   display: grid;
   gap: 1rem
 }
@@ -1943,64 +1887,6 @@ button.rc-member-assc {
   }
 }
 
-/*
-/  Membership plans
-*/
-.rc-member-plans {
-  // this seems a bit excessive, but it's the only way I've managed
-  // to override the default mat classes
-  .mat-mdc-list-base .mat-mdc-list-item .mat-list-item-content-reverse,
-  .mat-list-base .mat-list-option .mat-list-item-content-reverse {
-    padding: 0;
-    margin: 0;
-  }
-  /* TODO(mdc-migration): The following rule targets internal classes of list that may no longer apply for the MDC version.*/
-  .mat-list-single-selected-option,
-  .mat-list-single-selected-option:hover,
-  .mat-list-single-selected-option:focus {
-    border: 1px solid $rc-theme-accent !important;
-    background-color: transparent;
-  }
-  /* TODO(mdc-migration): The following rule targets internal classes of list that may no longer apply for the MDC version.*/
-  .mat-mdc-list-item.mat-list-option {
-    /* TODO(mdc-migration): The following rule targets internal classes of list that may no longer apply for the MDC version.*/
-    .mat-list-text { padding: 0 !important;}
-    height: auto !important;
-    margin: 8px 0;
-    padding: 16px;
-    border-radius: 6px;
-    border: 1px solid $rc-cool-grey;
-
-    div.content {
-      display: flex;
-      justify-content: space-between;
-      div:last-child {
-        width: 20%;
-      }
-    }
-
-    h3 {
-      font-weight: $rc-display-font-weight;
-      line-height: 1;
-      margin: 0 0 4px;
-      font-size: 16px;
-    }
-    p {
-      font-size: 12px;
-      font-weight: $rc-default-font-weight;
-      line-height: 1.3;
-      margin: 0;
-    }
-    span {
-      font-size: 9px;
-      text-transform: uppercase;
-      text-align: right;
-      font-weight: $rc-default-font-weight;
-      display: block;
-    }
-  }
-}
-
 /**
  * RDL Styles
  * -----------------------------------------------
@@ -2030,4 +1916,56 @@ button.rc-member-assc {
 }
 
 
+// Probably no longer required
+// ------------------------------------
+
+//.rc-member-plans {
+//  // this seems a bit excessive, but it's the only way I've managed
+//  // to override the default mat classes
+//  .mat-mdc-list-base .mat-mdc-list-item .mat-list-item-content-reverse,
+//  .mat-list-base .mat-list-option .mat-list-item-content-reverse {
+//    padding: 0;
+//    margin: 0;
+//  }
+//  .mat-list-single-selected-option,
+//  .mat-list-single-selected-option:hover,
+//  .mat-list-single-selected-option:focus {
+//    border: 1px solid $rc-theme-accent !important;
+//    background-color: transparent;
+//  }
+//  .mat-mdc-list-item.mat-list-option {
+//    .mat-list-text { padding: 0 !important;}
+//    height: auto !important;
+//    margin: 8px 0;
+//    padding: 16px;
+//    border-radius: 6px;
+//    border: 1px solid $rc-cool-grey;
+//    div.content {
+//      display: flex;
+//      justify-content: space-between;
+//      div:last-child {
+//        width: 20%;
+//      }
+//    }
+//    h3 {
+//      font-weight: $rc-display-font-weight;
+//      line-height: 1;
+//      margin: 0 0 4px;
+//      font-size: 16px;
+//    }
+//    p {
+//      font-size: 12px;
+//      font-weight: $rc-default-font-weight;
+//      line-height: 1.3;
+//      margin: 0;
+//    }
+//    span {
+//      font-size: 9px;
+//      text-transform: uppercase;
+//      text-align: right;
+//      font-weight: $rc-default-font-weight;
+//      display: block;
+//    }
+//  }
+//}
 

@@ -1,0 +1,160 @@
+<div class="rc-content-container">
+
+  <div class="rdl-masonry-2">
+    <!-- STATUS -->
+    <div class="rdl-card-rounded">
+
+      <div class="rdl-card-header">
+        <h2>{{ 'CMS.SETTINGS.titleStatus' | translate }}
+          <ng-container *ngIf="!building">
+          <span *ngIf="!unPublishedChanges">: Published</span>
+          <span *ngIf="unPublishedChanges">: Unpublished Changes</span>
+          </ng-container>
+        </h2>
+        <mat-icon color="warn" *ngIf="unPublishedChanges">cloud_off</mat-icon>
+        <mat-icon color="success" *ngIf="!unPublishedChanges">cloud</mat-icon>
+      </div>
+
+      <span markdown ngpreservewhitespaces *ngIf="unPublishedChanges">
+        {{ 'CMS.SETTINGS.infoUnpublished' | translate: { brand: brand.name } }}
+      </span>
+
+      <span markdown ngpreservewhitespaces *ngIf="!unPublishedChanges">
+        All updates have been successfully published and your content has been synchronised across all of your
+        RDL Network distribution channels.
+      </span>
+
+      <ul class="rdl-list">
+        <li>
+          <label>{{ 'CMS.SETTINGS.labelPublished' | translate }}:</label>
+          <span>{{ publishDate | date:'medium' }}</span>
+        </li>
+        <li>
+          <label>{{ 'CMS.SETTINGS.labelPublisher' | translate }}:</label>
+          <span>{{ restaurant?.restaurant_verified_by }}</span>
+        </li>
+      </ul>
+      <span class="rc-space-filler"></span>
+      <div class="rdl-card-actions" *ngIf="unPublishedChanges">
+        <button mat-button (click)="publishWebsite(false)" [disabled]="building">PREVIEW</button>
+        <button mat-button color="accent" (click)="publishWebsite(true)" [disabled]="building">PUBLISH</button>
+      </div>
+      <div class="rdl-card-actions" *ngIf="!unPublishedChanges && buildAvailable && !building">
+        <button mat-button color="accent" (click)="showMarketingLinks()">MARKETING LINKS</button>
+        <button mat-button color="accent" (click)="viewApptiser()">VIEW WEBSITE</button>
+      </div>
+
+
+      <ng-container *ngIf="building">
+        <div>
+
+        </div>
+      </ng-container>
+
+    </div>
+
+    <!-- DOMAIN -->
+    <div class="rdl-card-rounded">
+
+      <div class="rdl-card-header">
+        <h2>{{ 'CMS.SETTINGS.titleWebDomain' | translate }}</h2>
+        <mat-icon>public</mat-icon>
+      </div>
+
+      <span markdown ngpreservewhitespaces>
+        {{ 'CMS.SETTINGS.infoDomains' | translate }}
+      </span>
+      <ul class="rdl-list">
+        <li>
+          <label>{{ 'CMS.SETTINGS.labelApptiserDomain' | translate }}:</label>
+          <span *ngIf="!!apptiserUrl">
+            <a (click)="viewApptiser()"
+               title="View your published apptiser website">
+              {{ apptiserUrl }}</a>
+          </span>
+          <span *ngIf="!apptiserUrl">Not yet published.</span>
+        </li>
+        <li><label>{{ 'CMS.SETTINGS.labelCustomDomain' | translate }}:</label>
+          Not set
+        </li>
+      </ul>
+      <span class="rc-space-filler"></span>
+      <div class="rdl-card-actions">
+        <a mat-button color="accent" [href]="customDomainForm" target="_blank">
+          {{ 'CMS.SETTINGS.labelSetDomain' | translate | uppercase }}
+        </a>
+      </div>
+    </div>
+    <div class="rdl-card-rounded">
+      <div class="rdl-card-header">
+        <h2>Website Theme</h2>
+        <mat-icon>palette</mat-icon>
+      </div>
+
+      <span>
+        You will need to preview, or publish your website to view any theme changes.
+      </span>
+
+      <mat-radio-group
+        class="rdl-swatches"
+        (change)="configChange('theme')"
+        [(ngModel)]="selectedTheme">
+        <mat-radio-button class="example-radio-button"
+                          *ngFor="let obj of cssThemeObjects"
+                          [value]="obj['website_theme_name']">
+          <h2>{{ obj['website_theme_name'] | titlecase }}</h2>
+          <span class="rdl-swatch swatch-primary-{{obj['website_theme_name']}}">Primary</span>
+          <span class="rdl-swatch swatch-accent-{{obj['website_theme_name']}}">Accent</span>
+        </mat-radio-button>
+
+      </mat-radio-group>
+
+    </div>
+    <!-- CONFIG -->
+    <div class="rdl-card-rounded">
+      <div class="rdl-card-header">
+        <h2>{{ 'CMS.SETTINGS.titleConfig' | translate }}</h2>
+        <mat-icon>tune</mat-icon>
+      </div>
+      <span markdown ngpreservewhitespaces>
+        {{ 'CMS.SETTINGS.infoConfig' | translate }}
+      </span>
+      <form class="rdl-form-grid"
+            [formGroup]="configFormGroup"
+            (ngSubmit)="submitFormValues(configFormGroup)">
+        <div class="rdl-form-group">
+          <h3>About</h3>
+          <mat-slide-toggle formControlName="showOpeningNotes">Show Opening Notes</mat-slide-toggle>
+          <mat-slide-toggle formControlName="showImageGallery">Show Image Gallery</mat-slide-toggle>
+        </div>
+        <div class="rdl-form-group">
+          <h3>Menus</h3>
+          <mat-slide-toggle formControlName="showHtmlMenu">Show Menu Information & Sample Menu</mat-slide-toggle>
+          <mat-slide-toggle formControlName="showDownloadMenus">Show Downloadable Menus</mat-slide-toggle>
+        </div>
+        <div class="rdl-form-group dependants">
+          <h3>Reservations</h3>
+          <mat-slide-toggle formControlName="showReservations" (change)="toggleSection('showReservations')">
+            Show Reservations section</mat-slide-toggle>
+          <mat-slide-toggle formControlName="showBookingWidget">Show Booking Widget</mat-slide-toggle>
+          <mat-slide-toggle formControlName="showReservationsInfo">Show Reservations information</mat-slide-toggle>
+          <mat-slide-toggle formControlName="showGroupBookings">Show Group bookings</mat-slide-toggle>
+          <mat-slide-toggle formControlName="showPrivateDining">Show Private Dining</mat-slide-toggle>
+        </div>
+        <div class="rdl-form-group dependants">
+          <h3>Contacts</h3>
+          <mat-slide-toggle formControlName="showContacts" (change)="toggleSection('showContacts')">
+            Show Contact section</mat-slide-toggle>
+          <mat-slide-toggle formControlName="showLinks">Show Web & social links</mat-slide-toggle>
+          <mat-slide-toggle formControlName="showTransport">Show Public Transport Details</mat-slide-toggle>
+          <mat-slide-toggle formControlName="showParking">Show Parking Information</mat-slide-toggle>
+        </div>
+        <div class="rdl-form-group">
+          <h3>Location</h3>
+          <mat-slide-toggle formControlName="showMap">Location map</mat-slide-toggle>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!--<pre>{{ restaurant | json }}</pre>-->

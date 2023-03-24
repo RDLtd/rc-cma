@@ -1,9 +1,8 @@
 <div class="rc-content-container rc-full-width">
   <div class="rc-grid-masonry-2 golden">
+
   <!-- CORE DATA -->
-  <mat-card
-    appearance="outlined"
-    class="rc-cms-card-core">
+  <mat-card appearance="outlined">
     <div class="rc-card-title-img-wrapper">
       <advanced-image
         *ngIf="cldImage"
@@ -12,9 +11,9 @@
       </advanced-image>
     </div>
     <mat-card-header>
-    <mat-card-title>{{ restaurant?.restaurant_name }}</mat-card-title>
-    <mat-card-subtitle>{{ restaurant?.restaurant_group_name }}</mat-card-subtitle>
-    </mat-card-header>
+      <mat-card-title>{{ restaurant?.restaurant_name }}</mat-card-title>
+      <mat-card-subtitle>{{ restaurant?.restaurant_group_name }}</mat-card-subtitle>
+      </mat-card-header>
     <mat-card-content>
       <div class="rc-card-help">
         <button
@@ -32,10 +31,12 @@
         </dd>
         <dt>{{ 'CMS.DASHBOARD.core.labelAddress' | translate }}</dt>
         <dd>
+          <address>
           <span>{{ restaurant?.restaurant_address_1 }}</span>
           <span>{{ restaurant?.restaurant_address_2 }}</span>
           <span *ngIf="restaurant?.restaurant_address_3">{{ restaurant?.restaurant_address_3 }}</span>
           <span>{{ restaurant?.restaurant_post_code }}</span>
+          </address>
         </dd>
         <dt>{{ 'CMS.DASHBOARD.core.labelTel' | translate }}</dt>
         <dd>
@@ -88,7 +89,8 @@
         {{ 'CMS.DASHBOARD.core.labelBtnRequestChange' | translate | uppercase }}
       </button>
     </mat-card-actions>
-  </mat-card>
+  </mat-card >
+
   <!-- SPW: loading -->
   <mat-card
     appearance="outlined"
@@ -102,22 +104,26 @@
     </mat-card-content>
     <mat-card-actions></mat-card-actions>
   </mat-card>
+
   <!-- SPW: no changes -->
   <mat-card
     appearance="outlined"
     *ngIf="!cmsChanged && cmsHasSufficientData && !isPreviewing"
-    class="rc-cms-dash-info">
+    class="rdl-card rc-cms-dash-info">
+
     <!-- HEADER -->
     <!-- Verified by/data -->
     <mat-card-header *ngIf="!isPreviewing">
-      <mat-card-title
+      <span class="rdl-lead"
         ngpreservewhitespaces
         markdown>
         {{ 'CMS.DASHBOARD.spw.msgVerified' | translate: { date: d_publishDate, name:
         restaurant.restaurant_verified_by } }}
-      </mat-card-title>
+      </span>
       <span class="rc-space-filler"></span>
-      <mat-icon class="rc-success">cloud_done</mat-icon>
+      <span>
+        <mat-icon class="rc-success">cloud_done</mat-icon>
+      </span>
     </mat-card-header>
 
     <!-- CONTENT -->
@@ -148,25 +154,27 @@
       </a>
     </mat-card-actions>
   </mat-card>
+
   <!-- SPW: has changes -->
   <mat-card
     appearance="outlined"
     *ngIf="cmsChanged && !isPreviewing"
-    class="rc-cms-dash-info">
+    class="rdl-card">
 
     <!-- HEADER -->
     <!-- Unpublished changes -->
     <mat-card-header *ngIf="!isPreviewing && cmsHasSufficientData">
-      <mat-card-title>{{ 'CMS.DASHBOARD.spw.headerUnPublished' | translate | uppercase }}</mat-card-title>
+      <mat-card-title>{{ 'CMS.DASHBOARD.spw.headerUnPublished' | translate }}!</mat-card-title>
       <span class="rc-space-filler"></span>
-      <mat-icon class="rc-warn">cloud_off</mat-icon>
+      <span>
+      <mat-icon class="rc-warn">cloud_off</mat-icon></span>
     </mat-card-header>
 
     <!-- More content required -->
     <mat-card-header *ngIf="!isPreviewing && !cmsHasSufficientData">
       <mat-card-title>{{ 'CMS.DASHBOARD.spw.headerContentRequired' | translate | uppercase }}</mat-card-title>
       <span class="rc-space-filler"></span>
-      <mat-icon class="rc-warn">cloud_off</mat-icon>
+      <span><mat-icon class="rc-warn">cloud_off</mat-icon></span>
     </mat-card-header>
 
     <!-- CONTENT -->
@@ -175,7 +183,9 @@
       *ngIf="!isPreviewing && cmsHasSufficientData"
       markdown
       ngpreservewhitespaces>
-      {{ 'CMS.DASHBOARD.spw.msgUnpublished' | translate: { brand: config.brand.name } }}
+      The latest changes that you have made have not yet been published. Go to your [WEBSITE SETTING](cms/{{ restaurant.restaurant_id }}/settings) to
+      PREVIEW and PUBLISH your latest updates
+<!--      {{ 'CMS.DASHBOARD.spw.msgUnpublished' | translate: { brand: config.brand.name } }}-->
     </mat-card-content>
 
     <!-- More content required -->
@@ -188,23 +198,23 @@
 
     <!-- ACTIONS -->
     <!-- card actions -->
-    <mat-card-actions
-      align="end"
-      *ngIf="!isPreviewing">
-      <button
-        mat-button
-        [disabled]="isPreviewing"
-        (click)="previewSPW()">{{ 'CMS.DASHBOARD.spw.labelBtnPreview' | translate | uppercase }}</button>
-      <button
-        mat-button
-        color="accent"
-        [disabled]="!cmsHasSufficientData"
-        (click)="publishSPW()">{{ 'CMS.DASHBOARD.spw.labelBtnPublish' | translate | uppercase }}</button>
-    </mat-card-actions>
+<!--    <mat-card-actions-->
+<!--      align="end"-->
+<!--      *ngIf="!isPreviewing">-->
+<!--      <button-->
+<!--        mat-button-->
+<!--        [disabled]="isPreviewing"-->
+<!--        (click)="previewSPW()">{{ 'CMS.DASHBOARD.spw.labelBtnPreview' | translate | uppercase }}</button>-->
+<!--      <button-->
+<!--        mat-button-->
+<!--        color="accent"-->
+<!--        [disabled]="!cmsHasSufficientData"-->
+<!--        (click)="publishSPW()">{{ 'CMS.DASHBOARD.spw.labelBtnPublish' | translate | uppercase }}</button>-->
+<!--    </mat-card-actions>-->
   </mat-card>
 
   <!-- CONTENT Summary -->
-  <mat-card appearance="outlined">
+  <mat-card appearance="raised">
     <div class="rc-card-help">
       <button
         mat-icon-button
@@ -311,6 +321,7 @@
       </mat-list>
     </mat-card-content>
   </mat-card>
+
   </div>
 </div>
 

@@ -11,6 +11,7 @@ import { fadeAnimation } from '../shared/animations';
 import { HeaderService } from '../common/header.service';
 import { HelpService } from '../common';
 import { TranslateService } from '@ngx-translate/core';
+import { StorageService } from '../_services/storage.service';
 
 @Component({
   selector: 'app-rc-cms',
@@ -35,9 +36,10 @@ export class CmsComponent implements OnInit {
     private cms: CMSService,
     private dialog: MatDialog,
     public help: HelpService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private storage: StorageService
   ) {
-    this.header.updateSectionName(this.translate.instant('HUB.sectionCMS'));
+    this.header.updateSectionName(this.translate.instant('CMS.titleSection'));
   }
 
   ngOnInit() {
@@ -49,14 +51,16 @@ export class CmsComponent implements OnInit {
             next: data => {
               this.restaurant = data['restaurant'][0];
               this.cmsLocalService.setRestaurant(this.restaurant);
+              this.storage.set('rd_last_restaurant', this.paramId + '');
+              console.log(Number(this.paramId));
             },
             error: error => {
               console.log(error);
-              this.router.navigate(['/hub']).then();
+              this.router.navigate(['/settings']).then();
             }
           });
 
-    this.member = JSON.parse(localStorage.getItem('rd_profile'));
+    this.member = this.storage.get('rd_profile');
 
     this.restaurantService.getMemberRestaurants(this.member.member_id)
       .subscribe( {

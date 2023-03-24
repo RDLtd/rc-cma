@@ -1,0 +1,11 @@
+<div class="rdl-builder">
+  <h1>Building Apptiser {{ buildVersion }}</h1>
+  <p>{{ buildStatus }}</p>
+  <div class="rdl-card-actions">
+    <mat-progress-bar mode="indeterminate" *ngIf="!progressComplete"></mat-progress-bar>
+    <mat-dialog-actions align="end" *ngIf="progressComplete">
+      <button mat-flat-button mat-dialog-close="true">Close</button>
+      <button mat-flat-button color="accent" (click)="launchPreview()">Open Preview</button>
+    </mat-dialog-actions>
+  </div>
+</div>

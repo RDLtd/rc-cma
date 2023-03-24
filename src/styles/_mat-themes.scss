@@ -7,24 +7,59 @@
 
 @use '@angular/material' as mat;
 
-@import '@angular/material/theming';
+@include mat.core();
 
-// Define the palettes for your theme using the Material Design palettes available in palette.scss
-// You can optionally specify a default, lighter, and darker
-$rc-app-primary: mat.define-palette(mat.$teal-palette, A700);
-$rc-app-accent:  mat.define-palette(mat.$deep-orange-palette, A400);
-$rc-app-warn:    mat.define-palette(mat.$deep-orange-palette, 900);
-// Create the theme object (a Sass map containing all of the palettes).
-$rc-app-theme: mat.define-light-theme($rc-app-primary, $rc-app-accent, $rc-app-warn);
-
-@include mat.all-component-themes($rc-app-theme);
-
-// Set custom typography defaults size/line-height/weight
-$custom-typography: mat.define-typography-config(
-  $font-family:     'Roboto',
-  $headline-5:       mat.define-typography-level(32px, 48px, 500),
-  $body-2:           mat.define-typography-level(16px, 24px, 300)
+$rdl-palette: (
+  50: #c8ecf5,
+  100: #ACEBF3,
+  200: #ACEBF3,
+  300: #5ECBDE,
+  400: #5ECBDE,
+  500: #04A5C2,
+  600: #04A5C2,
+  700: #025f72,
+  800: #2e3642,
+  900: #222F3C,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: white,
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+  )
 );
 
-@include mat.all-component-typographies($custom-typography);
-@include mat.core();
+$rdl-typography-config: mat.define-typography-config(
+  $headline-1: mat.define-typography-level(112px, 112px, 300, $letter-spacing: 0em),
+  $headline-2: mat.define-typography-level(56px, 56px, 400, $letter-spacing: -0.02em),
+  $headline-3: mat.define-typography-level(45px, 48px, 400, $letter-spacing: -0.005em),
+  $headline-4: mat.define-typography-level(34px, 40px, 400),
+
+  $headline-5: mat.define-typography-level(1.5rem, 1.1, 500, $letter-spacing: 0rem), // h1
+  $headline-6: mat.define-typography-level(1.25rem, 1.1, 500, $letter-spacing: 0rem), // h2
+  $subtitle-1: mat.define-typography-level(1rem, 1.1, 500, $letter-spacing: 0rem), // h3
+  $subtitle-2: mat.define-typography-level(1rem, 1.1, 500, $letter-spacing: 0rem), // h4
+
+  $body-1: mat.define-typography-level(1rem, 1.5, 300, $letter-spacing: auto),
+  $body-2: mat.define-typography-level(1rem, 1.5, 500, $letter-spacing: auto), // body bold
+  $caption: mat.define-typography-level(.75rem, 1.2, 400, $letter-spacing: auto), // small txt
+  $button: mat.define-typography-level(1rem, 1.1, 500, $letter-spacing: 1px),
+);
+
+$rdl-primary: mat.define-palette($rdl-palette);
+$rdl-accent: mat.define-palette(mat.$pink-palette);
+$rdl-theme: mat.define-light-theme((
+  color: (
+    primary: $rdl-primary,
+    accent: $rdl-accent,
+  ),
+  typography: $rdl-typography-config,
+  density: 0,
+));
+
+@include mat.all-component-themes($rdl-theme);
