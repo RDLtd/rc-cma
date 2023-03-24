@@ -437,7 +437,6 @@ export class SettingsComponent implements OnInit {
     //       console.log(customer);
     //       // need to send stripe back to this window
     //       // @ts-ignore
-    //       // TODO this is an issue - not the right number...
     //       this.memberService.accessCustomerPortal(customer.customer_number, window.location.href)
     //           .subscribe({
     //             next: (data) => {
