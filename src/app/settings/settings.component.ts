@@ -415,33 +415,48 @@ export class SettingsComponent implements OnInit {
   }
 
   managePayments(): void {
-    // First get the stripe customer number for this member from the database
-    this.memberService.getStripeCustomerNumber(this.member.member_id)
+    // We already have the customer id!
+    console.log(this.member);
+    this.memberService.accessCustomerPortal(this.member.member_customer_id, window.location.href)
       .subscribe({
-        next: (customer) => {
-          console.log(customer);
-          // need to send stripe back to this window
+        next: (data) => {
+          // console.log('accessed CustomerPortal OK', data);
           // @ts-ignore
-          this.memberService.accessCustomerPortal(customer.customer_number, window.location.href)
-              .subscribe({
-                next: (data) => {
-                  // console.log('accessed CustomerPortal OK', data);
-                  // @ts-ignore
-                  window.open(data.url, '_self');
-                },
-                error: error => {
-                  console.log('accessCustomerPortal error', error);
-                  this.error.handleError('', 'Unable to access stripe customer portal for member id ' +
-                    this.member.member_id + '! ' + error);
-                }
-              });
+          window.open(data.url, '_self');
         },
         error: error => {
-          this.error.handleError('', 'Failed to get stripe customer number for member id ' +
+          console.log('accessCustomerPortal error', error);
+          this.error.handleError('', 'Unable to access stripe customer portal for member id ' +
             this.member.member_id + '! ' + error);
-          console.log('getStripeCustomerNumber error', error);
         }
       });
+    // this code out of date (ks), but leaving in place...
+    // this.memberService.getStripeCustomerNumber(this.member.member_id)
+    //   .subscribe({
+    //     next: (customer) => {
+    //       console.log(customer);
+    //       // need to send stripe back to this window
+    //       // @ts-ignore
+    //       this.memberService.accessCustomerPortal(customer.customer_number, window.location.href)
+    //           .subscribe({
+    //             next: (data) => {
+    //               // console.log('accessed CustomerPortal OK', data);
+    //               // @ts-ignore
+    //               window.open(data.url, '_self');
+    //             },
+    //             error: error => {
+    //               console.log('accessCustomerPortal error', error);
+    //               this.error.handleError('', 'Unable to access stripe customer portal for member id ' +
+    //                 this.member.member_id + '! ' + error);
+    //             }
+    //           });
+    //     },
+    //     error: error => {
+    //       this.error.handleError('', 'Failed to get stripe customer number for member id ' +
+    //         this.member.member_id + '! ' + error);
+    //       console.log('getStripeCustomerNumber error', error);
+    //     }
+    //   });
   }
 
   updateMemberContacts(): void {
