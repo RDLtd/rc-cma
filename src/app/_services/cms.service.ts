@@ -22,13 +22,22 @@ export class CMSService {
     });
   }
 
-  getApptiserUrl(url: string, version = 'Production'): string {
-    if(!url) { return; }
+  // apptiser domain from S3 bucket string
+  getApptiserUrl(url: string, isProduction = false): string {
+    // AWS S3 bucket domain
     const aws = 's3.eu-west-2.amazonaws.com';
-    if (url.indexOf(aws) > 0) {
-      return url.replace(`${aws}/`, '');
+    // If it's not an AWS ignore it
+    if (url.indexOf(aws) < 0) {
+      console.error(`${url} is not an AWS url`);
+      return url
     }
-    return '';
+    // remove the AWS domain
+    let apptiserUrl = url.replace(`${aws}/`, '').trim();
+    // For production urls we don't need the index.html ref.
+    if (isProduction) {
+      return apptiserUrl.replace(`index.html`, '');
+    }
+    return apptiserUrl;
   }
 
   // elements

@@ -239,7 +239,7 @@
 			"tipMenus": "Menus",
 			"tipPreview": "Prévisualisez votre contenu",
 			"tipReservations": "Réservations",
-			"tipSettings": "Paramètres du site",
+			"tipSettings": "Prévisualiser et publier",
 			"tipYourRestaurants": "Sélectionnez un restaurant"
 		},
 		"RESERVATIONS": {
@@ -265,6 +265,17 @@
 			"titleReservationsInfo": "Informations sur les réservations"
 		},
 		"SETTINGS": {
+			"builder": {
+				"labelClose": "Proche",
+				"labelOpenPreview": "Aperçu ouvert",
+				"statusMessageFinal": "{{ version }} construction terminée !",
+				"statusMessages": [
+					"Collecte de contenu",
+					"Génération de fichiers HTML",
+					"Déploiement sur des serveurs"
+				],
+				"titleBuilder": "Bâtiment apptiser"
+			},
 			"infoConfig": "Vous pouvez exclure l'une des sections suivantes de votre site Web en utilisant les options ci-dessous. Vous devrez republier votre site Web pour que les modifications prennent effet.",
 			"infoDomains": "Votre site Web peut être publié sur un nom de domaine existant que vous possédez ou sur un domaine nouvellement enregistré. Utilisez l'option ci-dessous pour commencer.",
 			"infoPublishing": "",
@@ -277,6 +288,7 @@
 			"labelPublisher": "Publié par",
 			"labelSetDomain": "Définir un domaine personnalisé",
 			"labelUpdate": "Mettre à jour",
+			"linkCustomDomain": "https://ps318108.typeform.com/to/jjUbHwf7?typeform-source=www.google.com",
 			"statusBuilding": "Construire un site web",
 			"statusDeploying": "Déploiement du site Web",
 			"statusInProgress": "En cours...",
@@ -375,7 +387,7 @@
 		"labelLogout": "Se déconnecter",
 		"labelMarketplace": "MarketPlace",
 		"labelSettings": "Paramètres du compte",
-		"signedInAs": "MEMBRE CONNECTE",
+		"signedInAs": "Titulaire du compte",
 		"tipBtnHub": "Hub pour les membres"
 	},
 	"HUB": {
@@ -524,9 +536,9 @@
 		"infoDowngrading": "Si vous décidez de modifier votre formule d'abonnement en **{{ plan }}**, nous créditerons votre compte de la différence des frais d'abonnement pour cette période. A partir du **{{ renewal }}** votre nouveau paiement sera de * *{{ price }}**.",
 		"infoNewPlanMonthly": "Si vous décidez de modifier votre formule d'abonnement en **{{ plan }}**, vous serez facturé  **{{ prorate }}** dès maintenant - au prorata pour la période de facturation actuelle - et à partir du **{{ renewal }}** votre nouvel abonnement mensuel sera de **{{ price }}**.",
 		"infoNewPlanYearly": "Si vous choisissez de modifier votre formule d'abonnement en **{{plan}}**, vous serez facvturé **{{ prorate }}**dès maintenant - au prorata pour la période de facturation actuelle - puis à partir du **{{ renewal }}** vos nouveaux frais d'abonnement annuels seront de **{{ price }}**.",
-		"labelAddRestaurant": "Ajoutez votre restaurant ici",
+		"labelAddRestaurant": "+",
 		"labelCurrentPlan": "Adhésion actuelle",
-		"msgAddRestaurant": "Commencez à gérer votre contenu Web et à publier votre **Page Internet** inclus dans votre adhésion.",
+		"msgAddRestaurant": "Ajoutez votre lieu pour commencer à gérer votre contenu et à créer votre **site Web d’apptisation**.",
 		"titlePlans": "Adhésion possibles"
 	},
 	"SETTINGS": {
@@ -546,8 +558,10 @@
 		"infoAuth": "Voici les informations d'identification dont vous aurez besoin pour vous connecter. Votre mot de passe doit comporter au moins 8 caractères.",
 		"infoAvatar": "Cliquez sur l'image ajouter/modifier pour personnaliser votre adhésion.",
 		"infoMember": "Toutes les communications concernant votre adhésion vous seront envoyées à cette adresse e-mail.",
+		"infoNoRestaurants": "Pour commencer à gérer votre contenu et à créer votre **site Web d’apéritifs**, vous devez lier votre lieu à ce compte.\nAjoutez votre lieu en utilisant l’option + ci-dessus et en suivant les instructions de vérification. Votre lieu apparaîtra ci-dessous.",
 		"infoNotification": "Outre les communications concernant votre abonnement à {{ brand }}, vous pouvez également choisir de recevoir des informations autres en cochant les cases correspondantes:",
 		"infoReferrals": "Il s'agit d'un code de parrainage unique qui vous est attribué et que vous pouvez partager avec vos collègues pour les encourager à rejoindre Restaurateurs Indépendants.",
+		"infoRestaurants": "Les lieux associés à votre compte sont indiqués ci-dessous. Sélectionnez un lieu pour ajouter/modifier le contenu et créer/mettre à jour votre **site Web d’apptisation**.",
 		"labelAddRestaurant": "Ajouter un restaurant à ce compte",
 		"labelAwaitingImage": "EN ATTENTE D'UNE PHOTO",
 		"labelBtnCancel": "Annuler",

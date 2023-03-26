@@ -3817,6 +3817,128 @@
 							<folder_node>
 								<name>SETTINGS</name>
 								<children>
+									<folder_node>
+										<name>builder</name>
+										<children>
+											<concept_node>
+												<name>labelClose</name>
+												<description/>
+												<comment/>
+												<default_text/>
+												<translations>
+													<translation>
+														<language>en-GB</language>
+														<approved>false</approved>
+													</translation>
+													<translation>
+														<language>fr-FR</language>
+														<approved>false</approved>
+													</translation>
+												</translations>
+											</concept_node>
+											<concept_node>
+												<name>labelOpenPreview</name>
+												<description/>
+												<comment/>
+												<default_text/>
+												<translations>
+													<translation>
+														<language>en-GB</language>
+														<approved>false</approved>
+													</translation>
+													<translation>
+														<language>fr-FR</language>
+														<approved>false</approved>
+													</translation>
+												</translations>
+											</concept_node>
+											<concept_node>
+												<name>statusMessageFinal</name>
+												<description/>
+												<comment/>
+												<default_text/>
+												<translations>
+													<translation>
+														<language>en-GB</language>
+														<approved>false</approved>
+													</translation>
+													<translation>
+														<language>fr-FR</language>
+														<approved>false</approved>
+													</translation>
+												</translations>
+											</concept_node>
+											<folder_node>
+												<name>statusMessages</name>
+												<children>
+													<concept_node>
+														<name>0</name>
+														<description/>
+														<comment/>
+														<default_text/>
+														<translations>
+															<translation>
+																<language>en-GB</language>
+																<approved>false</approved>
+															</translation>
+															<translation>
+																<language>fr-FR</language>
+																<approved>false</approved>
+															</translation>
+														</translations>
+													</concept_node>
+													<concept_node>
+														<name>1</name>
+														<description/>
+														<comment/>
+														<default_text/>
+														<translations>
+															<translation>
+																<language>en-GB</language>
+																<approved>false</approved>
+															</translation>
+															<translation>
+																<language>fr-FR</language>
+																<approved>false</approved>
+															</translation>
+														</translations>
+													</concept_node>
+													<concept_node>
+														<name>2</name>
+														<description/>
+														<comment/>
+														<default_text/>
+														<translations>
+															<translation>
+																<language>en-GB</language>
+																<approved>false</approved>
+															</translation>
+															<translation>
+																<language>fr-FR</language>
+																<approved>false</approved>
+															</translation>
+														</translations>
+													</concept_node>
+												</children>
+											</folder_node>
+											<concept_node>
+												<name>titleBuilder</name>
+												<description/>
+												<comment/>
+												<default_text/>
+												<translations>
+													<translation>
+														<language>en-GB</language>
+														<approved>false</approved>
+													</translation>
+													<translation>
+														<language>fr-FR</language>
+														<approved>false</approved>
+													</translation>
+												</translations>
+											</concept_node>
+										</children>
+									</folder_node>
 									<concept_node>
 										<name>infoConfig</name>
 										<description/>
@@ -3995,6 +4117,22 @@
 									</concept_node>
 									<concept_node>
 										<name>labelUpdate</name>
+										<description/>
+										<comment/>
+										<default_text/>
+										<translations>
+											<translation>
+												<language>en-GB</language>
+												<approved>false</approved>
+											</translation>
+											<translation>
+												<language>fr-FR</language>
+												<approved>false</approved>
+											</translation>
+										</translations>
+									</concept_node>
+									<concept_node>
+										<name>linkCustomDomain</name>
 										<description/>
 										<comment/>
 										<default_text/>
@@ -7733,6 +7871,22 @@
 								</translations>
 							</concept_node>
 							<concept_node>
+								<name>infoNoRestaurants</name>
+								<description/>
+								<comment/>
+								<default_text/>
+								<translations>
+									<translation>
+										<language>en-GB</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>fr-FR</language>
+										<approved>false</approved>
+									</translation>
+								</translations>
+							</concept_node>
+							<concept_node>
 								<name>infoNotification</name>
 								<description/>
 								<comment/>
@@ -7750,6 +7904,22 @@
 							</concept_node>
 							<concept_node>
 								<name>infoReferrals</name>
+								<description/>
+								<comment/>
+								<default_text/>
+								<translations>
+									<translation>
+										<language>en-GB</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>fr-FR</language>
+										<approved>false</approved>
+									</translation>
+								</translations>
+							</concept_node>
+							<concept_node>
+								<name>infoRestaurants</name>
 								<description/>
 								<comment/>
 								<default_text/>

@@ -239,7 +239,7 @@
 			"tipMenus": "Menus",
 			"tipPreview": "Preview your content",
 			"tipReservations": "Reservations",
-			"tipSettings": "Website settings",
+			"tipSettings": "Website Preview & Publish",
 			"tipYourRestaurants": "Select a restaurant"
 		},
 		"RESERVATIONS": {
@@ -265,6 +265,17 @@
 			"titleReservationsInfo": "Reservations information"
 		},
 		"SETTINGS": {
+			"builder": {
+				"labelClose": "Close",
+				"labelOpenPreview": "Open Preview",
+				"statusMessageFinal": "{{ version }} build complete!",
+				"statusMessages": [
+					"Gathering content",
+					"Generating HTML files",
+					"Deploying to servers"
+				],
+				"titleBuilder": "Building apptiser"
+			},
 			"infoConfig": "You can exclude any of the following sections from your website by using the options below. You will need to republish your website for any changes to take effect.",
 			"infoDomains": "Your website can be published to an existing domain name that you own, or to a newly registered domain. Use the option below to get started.",
 			"infoPublishing": "",
@@ -277,6 +288,7 @@
 			"labelPublisher": "Published by",
 			"labelSetDomain": "Set Custom Domain",
 			"labelUpdate": "Update",
+			"linkCustomDomain": "https://ps318108.typeform.com/to/jjUbHwf7?typeform-source=www.google.com",
 			"statusBuilding": "Building website",
 			"statusDeploying": "Deploying website",
 			"statusInProgress": "In progress...",
@@ -375,7 +387,7 @@
 		"labelLogout": "Logout",
 		"labelMarketplace": "Marketplace",
 		"labelSettings": "Account Settings",
-		"signedInAs": "SIGNED IN MEMBER",
+		"signedInAs": "ACCOUNT HOLDER",
 		"tipBtnHub": "Member's Hub"
 	},
 	"HUB": {
@@ -524,9 +536,9 @@
 		"infoDowngrading": "If you choose to go ahead and change your membership plan to **{{ plan }}** then we’ll credit your account with the difference in subscription fees for this period and from **{{ renewal }}** your new payment will be **{{ price }}**.",
 		"infoNewPlanMonthly": "If you choose to go ahead and change your membership plan to **{{ plan }}** then we’ll charge you **{{ prorate }}** now – which is prorated for the current billing period – and from **{{ renewal }}** your new monthly subscription will be **{{ price }}**.",
 		"infoNewPlanYearly": "If you choose to change your membership plan to **{{ plan }}** then we’ll charge you **{{ prorate }}** now –  which is prorated for the current billing period – and from **{{ renewal }}** we’ll bill you at the new yearly subscription fee of **{{ price }}**.",
-		"labelAddRestaurant": "Add your restaurant here",
+		"labelAddRestaurant": "+",
 		"labelCurrentPlan": "current plan",
-		"msgAddRestaurant": "Begin managing your web content and publishing your **Single Page Website** that's included with your Membership plan.",
+		"msgAddRestaurant": "Add your venue to begin managing your content and creating your **apptiser website**.",
 		"titlePlans": "Available Membership plans"
 	},
 	"SETTINGS": {
@@ -542,12 +554,14 @@
 			"labelTel": "Mobile number",
 			"titleUpdateContacts": "User details"
 		},
-		"infoAccounts": "Restaurants that are linked to your account are shown below and you can manage additional restaurants by simply adding them here.\n\nTo view your billing history and payment details, or to download your invoices, select the 'MANAGE PAYMENTS' option above.",
+		"infoAccounts": "To view your billing history and payment details, or to download your invoices, select the 'MANAGE PAYMENTS' option above.",
 		"infoAuth": "These are the credentials that you'll need to Sign In to the application. Passwords must be at least 8 characters.",
 		"infoAvatar": "Click the image add/edit and personalise your account details.",
 		"infoMember": "All communications regarding your account will be sent to this email address.",
+		"infoNoRestaurants": "To begin managing your content and creating your **apptiser website** you need to link your venue to this account.\nAdd your venue using the + option above and following the verification instructions. Your venue it will appear below.",
 		"infoNotification": "In addition to essential communications about your {{ brand }}  Membership, you may also choose receive any of the following, by ticking the relevant checkbox:",
 		"infoReferrals": "This is a unique referral code that you can share with any of your colleagues, to encourage them to join RDL and be part of this exciting new organisation.",
+		"infoRestaurants": "Venues associated with your account are shown below. Select a venue to add/edit the content and to create/update your **apptiser website**.",
 		"labelAddRestaurant": "Add a restaurant to this account",
 		"labelAwaitingImage": "AWAITING IMAGE",
 		"labelBtnCancel": "Cancel",

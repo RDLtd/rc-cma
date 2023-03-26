@@ -82,12 +82,12 @@
               [matTooltip]="'CMS.NAV.tipSettings' | translate"
               [routerLink]="['settings']"
               [routerLinkActive]="['rc-link-active']">
-              <mat-icon>settings</mat-icon>
+              <mat-icon>web</mat-icon>
           </button>
 
         </span>
 
-    <span class="rc-section-toolbar-actions rc-media-med">
+    <span class="rc-section-toolbar-actions rc-media-med-hide">
 
       <button mat-icon-button [matMenuTriggerFor]="cmsMenu">
           <mat-icon>more_vert</mat-icon>
@@ -96,6 +96,7 @@
     </span>
 
   </mat-toolbar>
+
   <mat-menu #cmsMenu="matMenu">
 
     <a mat-menu-item [routerLink]="['dashboard']">
