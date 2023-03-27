@@ -110,17 +110,15 @@
   <mat-card
     appearance="outlined"
     *ngIf="!cmsChanged && cmsHasSufficientData && !isPreviewing"
-    class="rdl-card rc-cms-dash-info">
+    class="rdl-card">
 
     <!-- HEADER -->
     <!-- Verified by/data -->
     <mat-card-header *ngIf="!isPreviewing">
-      <span class="rdl-lead"
-        ngpreservewhitespaces
-        markdown>
+      <mat-card-title markdown>
         {{ 'CMS.DASHBOARD.spw.msgVerified' | translate: { date: d_publishDate, name:
         restaurant.restaurant_verified_by } }}
-      </span>
+      </mat-card-title>
       <span class="rc-space-filler"></span>
       <span>
         <mat-icon class="rc-success">cloud_done</mat-icon>
