@@ -638,7 +638,12 @@
 		"_or": " ou ",
 		"_signIn": "Se connecter",
 		"emailInvalid": "Adresse e-mail non valide",
-		"errorEmailUnkown": "Cette adresse email est inconnue!",
+		"errorCompany": "Désolé, nous ne reconnaissons pas vos identifiants.",
+		"errorCredentials": "Désolé, nous ne reconnaissons pas votre e-mail ou votre mot de passe, veuillez vérifier vos coordonnées.",
+		"errorEmailUnkown": "Désolé, nous ne reconnaissons pas votre e-mail ou votre mot de passe, veuillez vérifier vos coordonnées.",
+		"errorInActiveAccount": "Désolé, mais ce compte n'est plus actif.",
+		"errorSystemsOffline": "Désolé, mais nos systèmes sont actuellement hors ligne.",
+		"errorTechnical": "Malheureusement, nous rencontrons des problèmes techniques, veuillez réessayer plus tard.",
 		"errorUserUnauthorised": "Connexion non autorisée - veuillez vérifier vos informations",
 		"forgottenPwd": "Mot de passe oublié?",
 		"introduction": "# Travaillons ensemble\n\nIl est temps que quelqu'un nivelle les règles du jeu pour les opérateurs indépendants comme vous.\n\nBienvenue à **{{ brand }}**. Nous sommes une organisation à but non lucratif appartenant à nos membres en mission.\nNous voulons responsabiliser et défendre les opérateurs hôteliers indépendants.",
@@ -650,7 +655,7 @@
 		"newPwdSent": "Un nouveau mot de passe a été envoyé à votre adresse email.",
 		"resetPwdHeader": "Réinitialiser le mot de passe",
 		"resetPwdInstructions": "Renseignez votre adresse e-mail enregistrée pour réinitialiser votre mot de passe. Vous devrez peut-être vérifier les indésirables/Spam.",
-		"signInOrJoin": "# S'identifier\n\nou [rejoindre {{ brand }}]({{ route }})",
+		"signInOrJoin": "# S'identifier\n\nou [créez votre **{{ brand }}** compte]({{ route }})",
 		"titleThanks": "Vérifiez votre email!"
 	},
 	"VERIFY": {

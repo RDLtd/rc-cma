@@ -9097,7 +9097,87 @@
 								</translations>
 							</concept_node>
 							<concept_node>
+								<name>errorCompany</name>
+								<description/>
+								<comment/>
+								<default_text/>
+								<translations>
+									<translation>
+										<language>en-GB</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>fr-FR</language>
+										<approved>false</approved>
+									</translation>
+								</translations>
+							</concept_node>
+							<concept_node>
+								<name>errorCredentials</name>
+								<description/>
+								<comment/>
+								<default_text/>
+								<translations>
+									<translation>
+										<language>en-GB</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>fr-FR</language>
+										<approved>false</approved>
+									</translation>
+								</translations>
+							</concept_node>
+							<concept_node>
 								<name>errorEmailUnkown</name>
+								<description/>
+								<comment/>
+								<default_text/>
+								<translations>
+									<translation>
+										<language>en-GB</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>fr-FR</language>
+										<approved>false</approved>
+									</translation>
+								</translations>
+							</concept_node>
+							<concept_node>
+								<name>errorInActiveAccount</name>
+								<description/>
+								<comment/>
+								<default_text/>
+								<translations>
+									<translation>
+										<language>en-GB</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>fr-FR</language>
+										<approved>false</approved>
+									</translation>
+								</translations>
+							</concept_node>
+							<concept_node>
+								<name>errorSystemsOffline</name>
+								<description/>
+								<comment/>
+								<default_text/>
+								<translations>
+									<translation>
+										<language>en-GB</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>fr-FR</language>
+										<approved>false</approved>
+									</translation>
+								</translations>
+							</concept_node>
+							<concept_node>
+								<name>errorTechnical</name>
 								<description/>
 								<comment/>
 								<default_text/>

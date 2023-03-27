@@ -86,23 +86,69 @@ export class SigninComponent implements OnInit {
             this.authService.setAuthSession(authResult['member'], authResult['token'], this.dbOffline);
           } else {
             // do we need to generate an error here?
-            console.log('Auth Failed');
+            console.log('failedToSetSession', authResult);
             this.error.handleError('failedToSetSession', 'Unable to set authorisation session!');
           }
         },
         error: error => {
-          console.log('Auth Error', error);
           this.isSubmitting = false;
+          console.log('Auth Error', error.error);
+          // Forbidden
+          if (error.status === 403) {
+            console.log(error.error);
+            return;
+          }
+          // Known errors
           if (error.status === 401) {
-            this.openSnackBar(this.translate.instant('SIGNIN.errorUserUnauthorised'));
-          } else {
-            // if the server does not respond, we'll get an error status of 0
-            if (error.status === 0) {
-              this.error.handleError('noServerResponse', error);
-            } else {
-              // all other errors will be in effect unknown server errors
-              this.error.handleError('invalidServerResponse', error);
+            switch (error.error.errorCode) {
+              // Database not responding
+              case 2: {
+                this.openSnackBar(this.translate.instant('SIGNIN.errorTechnical'));
+                break;
+              }
+              case 3: {
+                // Email
+                this.openSnackBar(this.translate.instant('SIGNIN.errorCredentials'));
+                break
+              }
+              case 4: {
+                // Password
+                this.openSnackBar(this.translate.instant('SIGNIN.errorCredentials'));
+                break
+              }
+              case 5: {
+                // Wrong company
+                this.openSnackBar(this.translate.instant('SIGNIN.errorCompany'));
+                break;
+              }
+              case 6: {
+                // Expired
+                this.openSnackBar(this.translate.instant('SIGNIN.errorInActiveAccount'));
+                break;
+              }
+              case 7: {
+                // Database
+                this.openSnackBar(this.translate.instant('SIGNIN.errorTechnical'));
+                break;
+              }
+              case 8: {
+                // Offline
+                this.openSnackBar(this.translate.instant('SIGNIN.errorSystemsOffline'));
+                break;
+              }
+              default:
+                this.openSnackBar(this.translate.instant('SIGNIN.errorTechnical'));
+                break;
             }
+            return;
+          }
+          // System error
+          this.openSnackBar(this.translate.instant('SIGNIN.errorTechnical'));
+          if (error.status === 0) {
+            this.error.handleError('noServerResponse', error);
+          } else {
+            // all other errors will be in effect unknown server errors
+            this.error.handleError('invalidServerResponse', error);
           }
         }
       });

@@ -8,9 +8,9 @@ import 'zone.js/plugins/zone-error';
 export const environment = {
   production: false,
   // Local
-  // API_URL: 'http://localhost:4000',
+  API_URL: 'http://localhost:4000',
   // Staging
-  API_URL: 'https://rc-server-staging.herokuapp.com',
+  // API_URL: 'https://rc-server-staging.herokuapp.com',
   // Production
   // API_URL: 'https://rc-server-prod.herokuapp.com',
 

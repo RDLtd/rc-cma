@@ -388,13 +388,16 @@ address {
     h1, h2 {
       font-weight: 300;
       line-height: 1.1;
-      font-size: 2rem;
+      font-size: 1.75rem;
+      margin-top: 1rem;
+
     }
     p {
       // text-align: justify;
       font-weight: 300;
       font-size: 18px;
     }
+    ul { margin-top: 1rem;}
     .rc-form-msg {
       margin: 0 0 1rem;
       p { font-size: 16px; }
