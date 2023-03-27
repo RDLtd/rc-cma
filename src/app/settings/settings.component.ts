@@ -263,6 +263,7 @@ export class SettingsComponent implements OnInit {
           `Contact the user directly if any clarification is required.\n\n` +
           `Thank you`;
 
+        // ks 270323 first send email request to curation
         this.memberService.sendEmailRequest(
           'curation',
           'support',
@@ -278,6 +279,24 @@ export class SettingsComponent implements OnInit {
               // no need to show user
               this.error.handleError('', 'Failed to send curation request email! ' + bodyContent + ', ' + error);
               this.showRestaurantFinder = false;
+            }
+          });
+        // ks 270323 and also let the member know we are on it
+        this.memberService.sendAddRestaurantInProgress(
+          this.member.member_first_name,
+          this.member.member_last_name,
+          this.member.member_email,
+          userRequest.newRestaurantName,
+          userRequest.newRestaurantPostcode,
+          userRequest.newRestaurantTel)
+          .subscribe({
+            next: () => {
+              this.showRestaurantFinder = false;
+            },
+            error: error => {
+              console.log(error);
+              // no need to show user
+              this.error.handleError('', 'Failed to send curation request email! ' + bodyContent + ', ' + error);
             }
           });
       } else {
