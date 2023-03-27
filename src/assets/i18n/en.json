@@ -638,7 +638,7 @@
 		"_or": " or ",
 		"_signIn": "Sign in",
 		"emailInvalid": "Invalid email address",
-		"errorCompany": "Sorry, we do not recognise your credentials.",
+		"errorCompany": "Sorry, we do not recognise your APPTISER credentials.",
 		"errorCredentials": "Sorry, we don't recognise your email or password, please check your details.",
 		"errorEmailUnkown": "Sorry, we don't recognise your email or password, please check your details.",
 		"errorInActiveAccount": "Sorry, but this account is no longer active.",
