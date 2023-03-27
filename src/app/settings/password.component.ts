@@ -15,6 +15,7 @@ export class PasswordComponent implements OnInit {
   isSubmitting = false;
   member: any;
   dialog: any;
+  hidePwd = true;
 
   constructor(
     private translate: TranslateService,
