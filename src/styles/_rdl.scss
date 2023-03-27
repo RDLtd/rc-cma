@@ -69,6 +69,18 @@
     button { text-transform: uppercase; }
   }
 }
+.mat-mdc-card-header-text {
+  width: 100%;
+  .rdl-header-with-icon {
+    display: grid !important;
+    grid: auto / 1fr 48px;
+    gap: 1rem;
+    align-items: center;
+    width: 100%;
+    font-size: 1.375rem;
+  }
+}
+
 
 .rdl-form-grid {
   width: 100%;
@@ -147,9 +159,20 @@
 
 .rdl-expansion {
   box-shadow: none !important;
+  + .rdl-expansion {
+    margin-top: 1rem;
+  }
   .rdl-expansion-title {
     font-size: 1.125rem;
+    padding-block: .5rem;
+    //+ .rdl-expansion-title {
+    //  margin-top: 1rem;
+    //}
   }
-  p { font-weight: $rc-default-font-weight !important;}
+  p {
+    font-weight: $rc-default-font-weight !important;
+    margin: 0 !important;
+  }
+
 }
 

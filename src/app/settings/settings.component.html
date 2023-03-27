@@ -1,6 +1,75 @@
 
 <div class="rc-content-container">
     <div class="rdl-masonry-2">
+
+      <!-- restaurants -->
+      <div class="rdl-card-rounded">
+        <div class="rc-card-title">
+          <h2>Content Management</h2>
+          <span class="rc-space-filler"></span>
+          <span>
+              <button
+                      color="accent"
+                      mat-button (click)="checkAllowance()"
+                      matTooltip="{{ 'SETTINGS.labelAddRestaurant' | translate }}">
+                <span>ADD VENUE</span>
+                <mat-icon>add_circle_outline</mat-icon>
+            </button>
+          </span>
+        </div>
+        <div class="rc-card-subtitle">
+          <markdown *ngIf="restaurants?.length > 0">
+            {{ 'SETTINGS.infoRestaurants' | translate }}
+          </markdown>
+          <markdown *ngIf="restaurants?.length === 0">
+            {{ 'SETTINGS.infoNoRestaurants' | translate }}
+          </markdown>
+        </div>
+        <div *ngIf="restaurants?.length === 0"
+             (click)="addRestaurants()"
+             class="rc-managed-restaurant-placeholder">
+          <div><mat-icon>add_circle_outline</mat-icon></div>
+          <div markdown ngpreservewhitespaces>
+            {{ 'PLANS.msgAddRestaurant' | translate }}
+          </div>
+        </div>
+
+        <div
+          *ngFor="let restaurant of restaurants; let i = index"
+          class="rc-managed-restaurant"
+          [routerLink]="['/cms', restaurant.restaurant_id]">
+
+          <advanced-image
+            *ngIf="!!defaultImages[i]"
+            class="rc-managed-restaurant-image"
+            width="400px"
+            height="600px"
+            [cldImg]="defaultImages[i]"
+            [plugins]="clPlugins">
+          </advanced-image>
+
+          <div
+            *ngIf="defaultImages[i] === null"
+            class="placeholder">
+            <span>{{ 'SETTINGS.labelAwaitingImage' | translate | uppercase }}</span>
+          </div>
+
+
+          <mat-icon
+            matTooltip="{{ 'SETTINGS.tipRemove' | translate: { name: restaurant.restaurant_name } }}"
+            (click)="removeAssociation($event, i)">
+            cancel
+          </mat-icon>
+
+          <div class="rc-managed-restaurant-info"
+               [routerLink]="['/cms', restaurant.restaurant_id]">
+            <h3>{{ restaurant.restaurant_name }}</h3>
+            <p class="rc-txt-small">{{ restaurant?.restaurant_address_1 }}, {{ restaurant?.restaurant_address_2 }}<br>
+              {{ restaurant?.restaurant_address_2 }}<br>{{ restaurant?.restaurant_post_code }}</p>
+          </div>
+        </div>
+      </div>
+
       <!-- Account -->
       <div class="rdl-card-rounded">
         <div class="rc-card-title">
@@ -13,6 +82,7 @@
                         [disabled]="isFreeMembership"
                         matTooltip="{{ 'SETTINGS.tipManagePayments' | translate }}">
                   {{ 'SETTINGS.labelManagePayments' | translate | uppercase }}
+                  <mat-icon>receipt</mat-icon>
                 </button>
 
               </span>
@@ -37,74 +107,67 @@
               <span class="rc-space-filler"></span>
             </li>
           </ul>
-          <div class="rc-card-title" style="margin: 24px 0 8px 0;">
-            <h2>{{ 'SETTINGS.titleManagedRestaurants' | translate }}</h2>
-            <span class="rc-space-filler"></span>
+<!--        <div class="rc-card-title" style="margin: 24px 0 8px 0;">-->
+<!--            <h2>{{ 'SETTINGS.titleManagedRestaurants' | translate }}</h2>-->
+<!--            <span class="rc-space-filler"></span>-->
 
-            <span>
-                  <button
-                          color="accent"
-                          mat-icon-button (click)="checkAllowance()"
-                          matTooltip="{{ 'SETTINGS.labelAddRestaurant' | translate }}">
-                    <mat-icon>add_circle_outline</mat-icon>
-                </button>
-              </span>
-          </div>
+<!--            <span>-->
+<!--                  <button-->
+<!--                          color="accent"-->
+<!--                          mat-icon-button (click)="checkAllowance()"-->
+<!--                          matTooltip="{{ 'SETTINGS.labelAddRestaurant' | translate }}">-->
+<!--                    <mat-icon>add_circle_outline</mat-icon>-->
+<!--                </button>-->
+<!--              </span>-->
+<!--          </div>-->
+<!--        <div class="rc-managed-restaurants">-->
+<!--          <div *ngIf="restaurants?.length === 0"-->
+<!--               (click)="addRestaurants()"-->
+<!--               class="rc-managed-restaurant-placeholder">-->
+<!--              <div>{{ 'PLANS.labelAddRestaurant' | translate | uppercase }}</div>-->
+<!--              <div markdown ngpreservewhitespaces>-->
+<!--                {{ 'PLANS.msgAddRestaurant' | translate }}-->
+<!--              </div>-->
+<!--          </div>-->
 
+<!--            <div-->
+<!--                    *ngFor="let restaurant of restaurants; let i = index"-->
+<!--                    class="rc-managed-restaurant"-->
+<!--                    [routerLink]="['/cms', restaurant.restaurant_id]">-->
 
-          <div class="rc-managed-restaurants">
+<!--              <advanced-image-->
+<!--                      *ngIf="!!defaultImages[i]"-->
+<!--                      class="rc-managed-restaurant-image"-->
+<!--                      width="400px"-->
+<!--                      height="600px"-->
+<!--                      [cldImg]="defaultImages[i]"-->
+<!--                      [plugins]="clPlugins">-->
+<!--              </advanced-image>-->
 
-            <div
-                    *ngIf="restaurants?.length === 0"
-                    (click)="addRestaurants()"
-                    class="rc-managed-restaurant-placeholder">
-
-              <div>{{ 'PLANS.labelAddRestaurant' | translate | uppercase }}</div>
-              <div markdown ngpreservewhitespaces>
-                {{ 'PLANS.msgAddRestaurant' | translate }}
-              </div>
-
-            </div>
-
-            <div
-                    *ngFor="let restaurant of restaurants; let i = index"
-                    class="rc-managed-restaurant"
-                    [routerLink]="['/cms', restaurant.restaurant_id]">
-
-              <advanced-image
-                      *ngIf="!!defaultImages[i]"
-                      class="rc-managed-restaurant-image"
-                      width="400px"
-                      height="600px"
-                      [cldImg]="defaultImages[i]"
-                      [plugins]="clPlugins">
-              </advanced-image>
-
-              <div
-                      *ngIf="defaultImages[i] === null"
-                      class="placeholder">
-                <span>{{ 'SETTINGS.labelAwaitingImage' | translate | uppercase }}</span>
-              </div>
+<!--              <div-->
+<!--                      *ngIf="defaultImages[i] === null"-->
+<!--                      class="placeholder">-->
+<!--                <span>{{ 'SETTINGS.labelAwaitingImage' | translate | uppercase }}</span>-->
+<!--              </div>-->
 
 
-              <mat-icon
-                      matTooltip="{{ 'SETTINGS.tipRemove' | translate: { name: restaurant.restaurant_name } }}"
-                      (click)="removeAssociation($event, i)">
-                cancel
-              </mat-icon>
+<!--              <mat-icon-->
+<!--                      matTooltip="{{ 'SETTINGS.tipRemove' | translate: { name: restaurant.restaurant_name } }}"-->
+<!--                      (click)="removeAssociation($event, i)">-->
+<!--                cancel-->
+<!--              </mat-icon>-->
 
-              <div class="rc-managed-restaurant-info"
-                   [routerLink]="['/cms', restaurant.restaurant_id]">
-                <h3>{{ restaurant.restaurant_name }}</h3>
-                <p class="rc-txt-small">{{ restaurant?.restaurant_address_1 }}, {{ restaurant?.restaurant_address_2 }}<br>
-                  {{ restaurant?.restaurant_address_2 }}<br>{{ restaurant?.restaurant_post_code }}</p>
-              </div>
-            </div>
+<!--              <div class="rc-managed-restaurant-info"-->
+<!--                   [routerLink]="['/cms', restaurant.restaurant_id]">-->
+<!--                <h3>{{ restaurant.restaurant_name }}</h3>-->
+<!--                <p class="rc-txt-small">{{ restaurant?.restaurant_address_1 }}, {{ restaurant?.restaurant_address_2 }}<br>-->
+<!--                  {{ restaurant?.restaurant_address_2 }}<br>{{ restaurant?.restaurant_post_code }}</p>-->
+<!--              </div>-->
+<!--            </div>-->
 
-          </div>
-
-
+<!--          </div>-->
       </div>
+
       <!-- Referrals -->
       <div class="rdl-card-rounded">
         <div class="rc-card-title">
@@ -113,11 +176,12 @@
           <span>
             <button
                     color="accent"
-                    mat-icon-button
+                    mat-button
                     (click)="copied()"
                     [cdkCopyToClipboard]="getReferralCode()"
                     matTooltip="{{ 'SETTINGS.tipCopyReferral' | translate }}">
-              <mat-icon>link</mat-icon>
+              <mat-icon>content_copy</mat-icon>
+              <span>COPY LINK</span>
             </button>
           </span>
         </div>
@@ -127,8 +191,7 @@
 
           <ul class="rc-line-items">
             <li><label>{{ 'SETTINGS.labelReferralCode' | translate }}:</label>
-              <a [href]="getReferralCode()" target="_blank">{{
-                member?.member_promo_code | uppercase }}</a>
+              {{ member?.member_promo_code | uppercase }}
             </li>
           </ul>
 
@@ -141,10 +204,11 @@
           <span>
             <button
                     color="accent"
-                    mat-icon-button
+                    mat-button
                     (click)="updatePassword()"
                     matTooltip="{{ 'SETTINGS.tipEdit' | translate }}">
               <mat-icon>edit</mat-icon>
+              <span>EDIT</span>
             </button>
           </span>
         </div>
@@ -170,10 +234,11 @@
           <span>
             <button
               color="accent"
-              mat-icon-button
+              mat-button
               (click)="updateMemberContacts()"
               matTooltip="{{ 'SETTINGS.tipEdit' | translate }}">
               <mat-icon>edit</mat-icon>
+              <span>EDIT</span>
             </button>
           </span>
         </div>

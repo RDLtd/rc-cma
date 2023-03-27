@@ -182,7 +182,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
           this.cmsChanged = !(res['published_status_ok']);
           // Enough content?
           if (this.cmsHasSufficientData) {
-            this.spwProdUrl = this.cms.getApptiserUrl(res['spw_url']);
+            this.spwProdUrl = this.cms.getApptiserUrl(res['spw_url'], true);
             this.spwPreviewUrl = this.cms.getApptiserUrl(res['preview_spw_url']);
             // Has anything changed?
             if (this.cmsChanged) {

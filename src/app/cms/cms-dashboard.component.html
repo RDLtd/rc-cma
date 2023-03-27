@@ -10,18 +10,19 @@
         [plugins]="cldPlugins">
       </advanced-image>
     </div>
+
     <mat-card-header>
-      <mat-card-title>{{ restaurant?.restaurant_name }}</mat-card-title>
-      <mat-card-subtitle>{{ restaurant?.restaurant_group_name }}</mat-card-subtitle>
-      </mat-card-header>
-    <mat-card-content>
-      <div class="rc-card-help">
+      <mat-card-title class="rdl-header-with-icon">
+        <span>{{ restaurant?.restaurant_name }}</span>
         <button
           mat-icon-button
           (click)="help.dspHelp('cms-dashboard-core', restaurant)">
           <mat-icon>help_outline</mat-icon>
         </button>
-      </div>
+      </mat-card-title>
+      <mat-card-subtitle>{{ restaurant?.restaurant_group_name }}</mat-card-subtitle>
+      </mat-card-header>
+    <mat-card-content>
       <dl>
         <dt>{{ 'CMS.DASHBOARD.core.labelFoodStyle' | translate }}</dt>
         <dd>

@@ -612,7 +612,7 @@ export class SettingsComponent implements OnInit {
     window.location.reload();
   }
 
-  openSnackBar(msg: string, act = '', dur = 5000, pos: any = 'top'): void {
+  openSnackBar(msg: string, act = '', dur = 5000, pos: any = 'bottom'): void {
     this.snackBar.open(msg, act, {
       verticalPosition: pos,
       duration: dur

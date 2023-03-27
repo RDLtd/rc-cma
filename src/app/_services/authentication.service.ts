@@ -41,6 +41,7 @@ export class AuthenticationService {
     return this.http.post(this.config.apiUrl + '/members/authenticate',
       {
         email: form.email,
+        company: this.config.brand.prefix,
         password: form.pwd,
         userCode: 'RDL-dev',
         token: this.authToken

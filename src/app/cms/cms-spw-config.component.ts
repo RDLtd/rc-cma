@@ -9,6 +9,7 @@ import { StorageService } from '../_services/storage.service';
 import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 import { CmsSpwBuilderComponent} from "./cms-spw-builder.component";
 import { CmsSpwLinksComponent } from './cms-spw-links.component';
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'rc-cms-spw-config',
@@ -40,8 +41,7 @@ export class CmsSpwConfigComponent implements OnInit {
   apptiserUrl: string;
   apptiserPreviewUrl: string;
 
-
-  customDomainForm = 'https://ps318108.typeform.com/to/jjUbHwf7?typeform-source=www.google.com';
+  customDomainForm: string; // = 'https://ps318108.typeform.com/to/jjUbHwf7?typeform-source=www.google.com';
 
   constructor(
     private cmsLocalService: CmsLocalService,
@@ -52,10 +52,12 @@ export class CmsSpwConfigComponent implements OnInit {
     private config: AppConfig,
     private storage: StorageService,
     private dialog: MatDialog,
-    private ga: AnalyticsService,
+    private translate: TranslateService,
+    private ga: AnalyticsService
   ) {
       this.brand = config.brand;
       this.user = this.storage.get('rd_profile');
+      this.customDomainForm = this.translate.instant('CMS.SETTINGS.linkCustomDomain');
   }
 
   //
@@ -80,7 +82,7 @@ export class CmsSpwConfigComponent implements OnInit {
           if(data.restaurant_id) {
             this.restaurant = data;
             this.publishDate = this.restaurant.restaurant_spw_written
-            this.apptiserUrl = this.cms.getApptiserUrl(this.restaurant.restaurant_spw_url);
+            this.apptiserUrl = this.cms.getApptiserUrl(this.restaurant.restaurant_spw_url, true);
             this.getConfig();
             this.getContentStatus();
           }
@@ -306,11 +308,11 @@ export class CmsSpwConfigComponent implements OnInit {
     if (production) {
       this.unPublishedChanges = false;
       this.publishDate = res.published;
-      this.publishedUrl = this.cms.getApptiserUrl(res.url).trim();
+      this.publishedUrl = this.cms.getApptiserUrl(res.url, true);
       this.dataChanged = false;
     } else {
       this.unPublishedChanges = true;
-      this.apptiserPreviewUrl = this.cms.getApptiserUrl(res.url).trim();
+      this.apptiserPreviewUrl = this.cms.getApptiserUrl(res.url);
       this.builder.componentInstance.data.apptiserPreviewUrl = this.apptiserPreviewUrl;
       this.dataChanged = true;
     }
