@@ -32,7 +32,6 @@ import {
   CMSService,
   PublicService,
   AnalyticsService,
-  BpiService,
   ErrorService
 } from './_services';
 
@@ -204,7 +203,6 @@ export function appInitializerFactory(translate: TranslateService) {
     CMSService,
     CmsLocalService,
     HelpService,
-    BpiService,
     AnalyticsService,
     PublicService,
     CmsPreviewComponent,

@@ -48,10 +48,17 @@
 
     <button
       mat-menu-item
-      [routerLinkActive]="['rc-link-active']"
       [routerLink]="['/settings']">
       <mat-icon>account_circle</mat-icon>
       <span>{{ 'HEADER.labelSettings' | translate }}</span>
+    </button>
+
+    <button
+      *ngIf="!!lastRestaurantId"
+      mat-menu-item
+      [routerLink]="['cms',lastRestaurantId]">
+      <mat-icon>edit_note</mat-icon>
+      <span>{{ 'HEADER.labelContent' | translate }}</span>
     </button>
 
 

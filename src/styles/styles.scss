@@ -1539,7 +1539,7 @@ ul.rc-lookup-results {
     transition: all .3s ease-out;
     position: absolute;
     cursor: pointer;
-    top: 8px; right: 12px;
+    inset: .5rem .5rem auto auto;
   }
   &:last-child {
     margin-bottom: 0;

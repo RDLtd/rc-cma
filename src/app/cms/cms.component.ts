@@ -51,7 +51,7 @@ export class CmsComponent implements OnInit {
             next: data => {
               this.restaurant = data['restaurant'][0];
               this.cmsLocalService.setRestaurant(this.restaurant);
-              this.storage.set('rd_last_restaurant', this.paramId + '');
+              this.storage.set('rd_last_restaurant', +this.paramId);
               console.log(Number(this.paramId));
             },
             error: error => {

@@ -10,8 +10,9 @@
           <span>
               <button
                       color="accent"
-                      mat-icon-button (click)="checkAllowance()"
+                      mat-button (click)="checkAllowance()"
                       matTooltip="{{ 'SETTINGS.labelAddRestaurant' | translate }}">
+                <span>ADD VENUE</span>
                 <mat-icon>add_circle_outline</mat-icon>
             </button>
           </span>
@@ -81,6 +82,7 @@
                         [disabled]="isFreeMembership"
                         matTooltip="{{ 'SETTINGS.tipManagePayments' | translate }}">
                   {{ 'SETTINGS.labelManagePayments' | translate | uppercase }}
+                  <mat-icon>receipt</mat-icon>
                 </button>
 
               </span>
@@ -174,11 +176,12 @@
           <span>
             <button
                     color="accent"
-                    mat-icon-button
+                    mat-button
                     (click)="copied()"
                     [cdkCopyToClipboard]="getReferralCode()"
                     matTooltip="{{ 'SETTINGS.tipCopyReferral' | translate }}">
               <mat-icon>content_copy</mat-icon>
+              <span>COPY LINK</span>
             </button>
           </span>
         </div>
@@ -201,10 +204,11 @@
           <span>
             <button
                     color="accent"
-                    mat-icon-button
+                    mat-button
                     (click)="updatePassword()"
                     matTooltip="{{ 'SETTINGS.tipEdit' | translate }}">
               <mat-icon>edit</mat-icon>
+              <span>EDIT</span>
             </button>
           </span>
         </div>
@@ -230,10 +234,11 @@
           <span>
             <button
               color="accent"
-              mat-icon-button
+              mat-button
               (click)="updateMemberContacts()"
               matTooltip="{{ 'SETTINGS.tipEdit' | translate }}">
               <mat-icon>edit</mat-icon>
+              <span>EDIT</span>
             </button>
           </span>
         </div>
