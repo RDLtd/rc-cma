@@ -126,6 +126,23 @@ export class MemberService {
       });
   }
 
+  sendAddRestaurantInProgress(member_first_name, member_last_name, member_email,
+                              newRestaurantName, newRestaurantPostcode, newRestaurantTel) {
+    return this.http.post(this.config.apiUrl + '/members/send_add_restaurant_in_progress',
+      {
+        company_prefix: this.brand.prefix,
+        member_first_name,
+        member_last_name,
+        member_email,
+        newRestaurantName,
+        newRestaurantPostcode,
+        newRestaurantTel,
+        userCode: this.config.userAPICode,
+        token: this.authToken
+      });
+  }
+
+
   sendwelcomeemail(member_id, restaurant_name, restaurant_number) {
     return this.http.post(this.config.apiUrl + '/members/sendwelcomeemail',
       {
