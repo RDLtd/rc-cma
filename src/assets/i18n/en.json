@@ -266,6 +266,7 @@
 		},
 		"SETTINGS": {
 			"builder": {
+				"infoDiscardChanges": "You've made changes to your **apptiser website** configuration, but have not yet published those changes.\n\nIf you continue without first **publishing**, those changes will be discarded.",
 				"labelClose": "Close",
 				"labelOpenPreview": "Open Preview",
 				"statusMessageFinal": "{{ version }} build complete!",

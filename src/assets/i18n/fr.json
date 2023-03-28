@@ -266,6 +266,7 @@
 		},
 		"SETTINGS": {
 			"builder": {
+				"infoDiscardChanges": "Vous avez apporté des modifications à la configuration de votre **site web apptiser**, mais vous n'avez pas encore publié ces modifications.\n\nSi vous continuez sans **publier** au préalable, ces modifications seront ignorées.",
 				"labelClose": "Proche",
 				"labelOpenPreview": "Aperçu ouvert",
 				"statusMessageFinal": "{{ version }} construction terminée !",

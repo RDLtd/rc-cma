@@ -38,6 +38,7 @@ export class CmsSpwConfigComponent implements OnInit {
   building = false;
   buildVersion: string;
   buildAvailable = true;
+  buildCount = 0;
   apptiserUrl: string;
   apptiserPreviewUrl: string;
 
@@ -63,7 +64,9 @@ export class CmsSpwConfigComponent implements OnInit {
   //
   confirmNavigation() {
     if (this.dataChanged) {
-      return this.cmsLocalService.confirmNavigation();
+      return this.cmsLocalService.confirmNavigation({
+        body: this.translate.instant('CMS.SETTINGS.builder.infoDiscardChanges'),
+      });
     } else {
       return true;
     }
@@ -79,7 +82,7 @@ export class CmsSpwConfigComponent implements OnInit {
       .subscribe({
         next: data => {
           // Make sure the data is available
-          if(data.restaurant_id) {
+          if (data.restaurant_id) {
             this.restaurant = data;
             this.publishDate = this.restaurant.restaurant_spw_written
             this.apptiserUrl = this.cms.getApptiserUrl(this.restaurant.restaurant_spw_url, true);
@@ -275,6 +278,9 @@ export class CmsSpwConfigComponent implements OnInit {
   }
 
   launchBuilder(version): void {
+
+    console.log(this.buildCount += 1);
+
     this.building = true;
     this.buildAvailable = false;
     this.builder = this.dialog.open(CmsSpwBuilderComponent, {
@@ -287,20 +293,31 @@ export class CmsSpwConfigComponent implements OnInit {
       disableClose: true,
       panelClass: 'rdl-build-container'
     });
+
     this.builder.afterClosed().subscribe(ready => {
-      console.log('Ready?', version);
-      if (ready) {
-        if (version === 'Preview') {
-          this.publishStatus = ': unpublished updates';
-        } else {
-          this.publishStatus = ': all updates published';
-          this.buildAvailable = ready;
+
+      console.log(`${version} ready = ${ready}`);
+
+      if (!ready) {
+        // not built yet so try again
+        if (this.buildCount < 3) {
+          this.launchBuilder(version);
+          return;
         }
-        this.building = false;
+        console.error('Unable to build apptiser!');
         return;
       }
-      // not built yet so try again
-      this.launchBuilder(version);
+
+      if (version === 'Preview') {
+        this.publishStatus = ': unpublished updates';
+        return;
+      } else {
+        this.publishStatus = ': all updates published';
+        this.buildAvailable = ready;
+      }
+      this.building = false;
+      this.buildCount = 0;
+      return;
     });
   }
 
