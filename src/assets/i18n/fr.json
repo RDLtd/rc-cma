@@ -4,32 +4,6 @@
 		"company": "Cette application est conçue, créée et gérée par [Restaurant Developments Ltd]({{ web }}) &copy; {{ year }}.",
 		"version": "Version"
 	},
-	"BPI": {
-		"errorGeneric": "Malheureusement, nous ne pouvons pas donner suite à votre inscription pour le moment. \n\nNotre support vous contactera sous peu aux coordonnées indiquées pour résoudre le problème.\n\nMerci de votre patience.\n\n",
-		"invalidSelectionRequired": "Veuillez sélectionner un article",
-		"invalidSiret": "Un code valide à 14 chiffres est requis",
-		"labelCompany": "Raison sociale",
-		"labelDirectorEmail": "e-mail du Dirigeant",
-		"labelDirectorFirstName": "Prénom du Dirigeant",
-		"labelDirectorLastName": "Nom du Dirigeant",
-		"labelPostcode": "CP",
-		"labelSiret": "SIRET (sans espaces)",
-		"labelStart": "Commencer",
-		"labelStreet": "Adresse postale",
-		"labelTotalEmployees": "Nombre de salariés",
-		"labelTown": "Ville",
-		"listTotalEmployees": [
-			"1 à 4 salariés",
-			"5 à 9 salariés",
-			"10 à 49 salariés",
-			"50 à 250 salariés",
-			"> 250 salariés"
-		],
-		"loadingMessage": "Inscription en cours...",
-		"msgAbort": "En cliquant sur « oui », toutes les informations que vous avez déjà renseignées seront perdues. \n\nÊtes-vous sûr de vouloir annuler ?\n",
-		"msgNeedHelp": "Pouvons-nous vous contacter et discuter de votre éligibilité ou de tout autre aspect de l'inscription?",
-		"titleNeedHelp": "Nous pouvons vous aider"
-	},
 	"CMS": {
 		"DASHBOARD": {
 			"core": {
@@ -392,32 +366,14 @@
 		"signedInAs": "Titulaire du compte",
 		"tipBtnHub": "Hub pour les membres"
 	},
-	"HUB": {
-		"msgComingSoon": "Prochainment",
-		"sectionCMS": "Gestion du contenu",
-		"sectionHub": "Hub pour les membres",
-		"sectionMarket": "MarketPlace",
-		"sectionSettings": "Paramètres du membre"
-	},
 	"JOIN": {
 		"duplicateEmail": "Cette **adresse e-mail** est déjà enregistrée, veuillez [vous connecter ou récupérer votre mot de passe ici](/ signin).",
 		"duplicateMobile": "Ce **numéro de portable** est déjà enregistré, veuillez [vous connecter ou récupérer votre mot de passe ici](/ signin).",
 		"duplicateMobileAndEmail": "Ce **numéro de portable** et cette **adresse e-mail** ont déjà été enregistrés [Connectez-vous ou récupérez votre mot de passe ici](/signin).",
 		"duplicateRegistration": "Déjà enregistré!",
-		"formStepsBpi": [
-			"Renseignez vos coordonnées",
-			"Complétez les détails de votre entreprise",
-			"Validez les conditions d’éligibilité",
-			"C’est fini!"
-		],
-		"headerBpiCompanyDetails": "Coordonnées de l’entreprise",
-		"headerBpiDeclarations": "Déclaration sur l’honneur",
-		"headerBpiYourDetails": "Coordonnées de la personne formée",
 		"headerContactDetails": "Détails de vos coordonnées",
 		"headerDeclarations": "Déclaration sur l’honneur",
 		"hintEmail": "Votre adresse email",
-		"infoPrereg": "# Être recontacté\n\nLaissez-nous vos coordonnées pour être recontacté dès que les inscriptions aux accompagnements gratuits financés par **bpifrance** dans le cadre du plan de relance seront ouvertes.",
-		"infoSignUp": "# Bienvenue et merci pour l'intérêt que vous portez à Mise en place numérique !\n\nCet accompagnement est **gratuit** pour vous, car **entièrement financé par Bpifrance** dans le cadre du plan France Relance.\n\nPour pouvoir en bénéficier, Bpifrance nous demande de vérifier que les participants répondent à des **critères d’éligibilité** précis.\n\nMerci de bien vouloir renseigner les informations demandées (promis, ça ne prend que 2 minutes !) afin que Restaurateurs Indépendants puisse les transmettre à Bpifrance pour valider votre inscription.\n\nUne fois ce formulaire rempli, nous vous invitons **à réserver tout de suite votre premier rendez-vous individuel** à distance avec l’un de nos conseillers, en fonction de vos disponibilités. Cette étape permettra de faire le point sur vos besoins et vos attentes, et de débuter l’accompagnement dans les meilleures conditions.\n\nÀ très bientôt !\n",
 		"invalidEmail": "Une adresse email valide est exigée",
 		"invalidJobRequired": "Sélectionnez votre emploi ou rôle principal",
 		"invalidRequired": "Obligatoire",
@@ -434,7 +390,7 @@
 		"joinUsByReferral": "# Bienvenue\n\nVous avez été invité à devenir membre de **{{ brand }}**, une organisation qui a été créée pour soutenir les restaurants et apporter des changements positifs au sein de l'industrie.\n\nVeuillez saisir vos coordonnées et indiquer que vous acceptez nos conditions.\n\nSi vous rencontrez des problèmes pour activer votre adhésion, veuillez [contacter notre équipe d'assistance]({{ email }}).",
 		"joinUsByReferralFree": "# Adhésion gratuite!\n\nVous avez été invité à devenir membre gratuit de **{{ brand }}**, une organisation qui a été créée pour soutenir les restaurants et apporter des changements positifs au sein de l'industrie.\n\nVeuillez saisir vos coordonnées et indiquer que vous acceptez nos conditions.\n\nSi vous rencontrez des problèmes pour activer votre adhésion, veuillez [contacter notre équipe d'assistance]({{ email }}).\n\nToujours pas sûr ? [Visitez notre site Web pour plus d'informations] (https://restaurantcollective.org.uk/first-3-months-membership-is-absolutely-free/)",
 		"joinUsToday": "# Abonnez-vous maintenant\n\nSuivez simplement les étapes suivantes et vous serez inscrit en un rien de temps.\n\n 1. Indiquez votre nom et vos coordonnées\n\n 2. Choisissez une option d'abonnement\n\n 3. Payez en ligne.\n\nSi vous rencontrez des problèmes tout au long de ce processus, veuillez envoyer un e-mail :\n\n{{ email }}",
-		"joinWelcome": "# Bienvenue\n\nVous vous êtes inscrit avec succès. **Membre** nous vous avons envoyé des informations de connexion et complémentaires.\n\nFermez cette fenêtre et vérifiez votre messagerie.\n\nMerci beaucoup.\n\n**L'équipe de {{ brand }}**",
+		"joinWelcome": "# Accueillir\n\nVous vous êtes inscrit avec succès sur **{{ brand }}** et nous vous avons envoyé des informations de connexion ainsi que d'autres informations.\n\nFermez cette fenêtre et vérifiez votre messagerie.\n\nMerci beaucoup.\n\n**{{ brand }} Équipe de sélection**",
 		"labelBtnBack": "PRÉCÉDENT",
 		"labelBtnNext": "Suivant",
 		"labelBtnRegister": "ENVOYER",
@@ -443,29 +399,19 @@
 		"labelCode": "Code de renvoi (facultatif)",
 		"labelEmail": "Adresse Email",
 		"labelFirstName": "Prénom",
-		"labelGDPR": "Ces données nous permettront de vous informer dès que les inscriptions à Mise en place numérique seront ouvertes. Elles ne seront pas transmises à des tiers dans un but commercial. Vous pouvez vous désinscrire à tout moment en écrivant à info@restaurateursindependants.fr",
 		"labelJob": "Votre emploi / rôle",
 		"labelLastName": "Nom",
 		"labelOrganisation": "Nom du restaurant",
-		"labelReferrer": "Comment j’ai connu Mise en place numérique",
 		"labelTel": "Téléphone",
 		"labelTerms": "En cochant cette case, vous acceptez les <a href=\"{{ toc }}\" target=\"_blank\">Conditions</a> et la <a href=\"{{ privacy }}\" target=\"_blank\">Politique de confidentialité</a> de {{ brand }} et de vous contacter, si nécessaire, en utilisant les informations fournies ici.\n",
 		"linkSignIn": "Connectez-vous",
 		"msgCheckEmail": "Vérifier vos emails pour obtenir les informations de connexion",
 		"msgManditory": "Veuillez compléter toutes les informations.",
-		"msgThanks": "Merci de votre confiance, nous allons vous recontacter très prochainement !",
 		"placeholderCode": "Code de parrainage facultatif",
 		"placeholderEmail": "Votre adresse email",
 		"placeholderFirstName": "Votre Prénom",
 		"placeholderLastName": "Votre Nom de famille",
-		"placeholderTel": "Votre numéro de portable",
-		"referrers": [
-			"presse",
-			"UMIH",
-			"Maîtres Restaurateurs",
-			"Bpifrance",
-			"autre"
-		]
+		"placeholderTel": "Votre numéro de portable"
 	},
 	"LOADER": {
 		"msgDefaultLoading": "Chargement",
@@ -560,7 +506,6 @@
 		"infoAuth": "Voici les informations d'identification dont vous aurez besoin pour vous connecter. Votre mot de passe doit comporter au moins 8 caractères.",
 		"infoAvatar": "Cliquez sur l'image ajouter/modifier pour personnaliser votre adhésion.",
 		"infoMember": "Toutes les communications concernant votre adhésion vous seront envoyées à cette adresse e-mail.",
-		"infoNoRestaurants": "Pour commencer à gérer votre contenu et à créer votre **site Web d’apéritifs**, vous devez lier votre lieu à ce compte.\nAjoutez votre lieu en utilisant l’option + ci-dessus et en suivant les instructions de vérification. Votre lieu apparaîtra ci-dessous.",
 		"infoNotification": "Outre les communications concernant votre abonnement à {{ brand }}, vous pouvez également choisir de recevoir des informations autres en cochant les cases correspondantes:",
 		"infoReferrals": "Il s'agit d'un code de parrainage unique qui vous est attribué et que vous pouvez partager avec vos collègues pour les encourager à rejoindre Restaurateurs Indépendants.",
 		"infoRestaurants": "Les lieux associés à votre compte sont indiqués ci-dessous. Sélectionnez un lieu pour ajouter/modifier le contenu et pour créer/mettre à jour votre **site web apptiser**.\n\nUtilisez l'option AJOUTER ci-dessus pour créer des sites Web et gérer le contenu de sites supplémentaires.",

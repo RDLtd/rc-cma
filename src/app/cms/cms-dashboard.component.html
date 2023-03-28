@@ -92,29 +92,15 @@
     </mat-card-actions>
   </mat-card >
 
-  <!-- SPW: loading -->
+  <!-- NO CHANGES -->
   <mat-card
     appearance="outlined"
-    *ngIf="isPreviewing"
-    class="rc-cms-dash-info">
-    <mat-card-header>
-      <mat-card-title>{{ 'CMS.DASHBOARD.spw.msgAnalysing' | translate }}</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <app-rc-loader></app-rc-loader>
-    </mat-card-content>
-    <mat-card-actions></mat-card-actions>
-  </mat-card>
-
-  <!-- SPW: no changes -->
-  <mat-card
-    appearance="outlined"
-    *ngIf="!cmsChanged && cmsHasSufficientData && !isPreviewing"
+    *ngIf="!cmsChanged"
     class="rdl-card">
 
     <!-- HEADER -->
     <!-- Verified by/data -->
-    <mat-card-header *ngIf="!isPreviewing">
+    <mat-card-header>
       <mat-card-title markdown>
         {{ 'CMS.DASHBOARD.spw.msgVerified' | translate: { date: d_publishDate, name:
         restaurant.restaurant_verified_by } }}
@@ -127,23 +113,20 @@
 
     <!-- CONTENT -->
     <mat-card-content
-      *ngIf="!isPreviewing"
       markdown
       ngpreservewhitespaces>
       {{ 'CMS.DASHBOARD.spw.msgPublished' | translate }}
     </mat-card-content>
 
     <!-- ACTIONS -->
-    <mat-card-actions align="end" *ngIf="!isPreviewing">
+    <mat-card-actions align="end">
       <button
         mat-button
         (click)="dspSPWLinks()"
-        matTooltip="{{ 'CMS.DASHBOARD.spw.tipMarketingLinks' | translate }}"
-        [disabled]="isPreviewing">
+        matTooltip="{{ 'CMS.DASHBOARD.spw.tipMarketingLinks' | translate }}">
         {{ 'CMS.DASHBOARD.spw.labelBtnMarketingLinks' | translate | uppercase }}
       </button>
       <a
-        [disabled]="isPreviewing"
         [href]="spwProdUrl"
         target="_blank"
         matTooltip="{{ 'CMS.DASHBOARD.spw.tipViewPublished' | translate: {
@@ -154,62 +137,29 @@
     </mat-card-actions>
   </mat-card>
 
-  <!-- SPW: has changes -->
+  <!-- CHANGES -->
   <mat-card
     appearance="outlined"
-    *ngIf="cmsChanged && !isPreviewing"
+    *ngIf="cmsChanged"
     class="rdl-card">
 
     <!-- HEADER -->
     <!-- Unpublished changes -->
-    <mat-card-header *ngIf="!isPreviewing && cmsHasSufficientData">
+    <mat-card-header>
       <mat-card-title>{{ 'CMS.DASHBOARD.spw.headerUnPublished' | translate }}!</mat-card-title>
       <span class="rc-space-filler"></span>
       <span>
       <mat-icon class="rc-warn">cloud_off</mat-icon></span>
     </mat-card-header>
 
-    <!-- More content required -->
-    <mat-card-header *ngIf="!isPreviewing && !cmsHasSufficientData">
-      <mat-card-title>{{ 'CMS.DASHBOARD.spw.headerContentRequired' | translate | uppercase }}</mat-card-title>
-      <span class="rc-space-filler"></span>
-      <span><mat-icon class="rc-warn">cloud_off</mat-icon></span>
-    </mat-card-header>
-
     <!-- CONTENT -->
     <!-- Unpublished changes -->
     <mat-card-content
-      *ngIf="!isPreviewing && cmsHasSufficientData"
       markdown
       ngpreservewhitespaces>
-      The latest changes that you have made have not yet been published. Go to your [WEBSITE SETTING](cms/{{ restaurant.restaurant_id }}/settings) to
-      PREVIEW and PUBLISH your latest updates
-<!--      {{ 'CMS.DASHBOARD.spw.msgUnpublished' | translate: { brand: config.brand.name } }}-->
+      {{ 'CMS.DASHBOARD.spw.msgUnpublished' | translate: { brand: config.brand.name, id: restaurant.restaurant_id } }}
     </mat-card-content>
 
-    <!-- More content required -->
-    <mat-card-content
-      *ngIf="!isPreviewing && !cmsHasSufficientData"
-      markdown
-      ngpreservewhitespaces>
-      {{ 'CMS.DASHBOARD.spw.msgContentRequired' | translate: { link: config.brand.spwDemoUrl } }}
-    </mat-card-content>
-
-    <!-- ACTIONS -->
-    <!-- card actions -->
-<!--    <mat-card-actions-->
-<!--      align="end"-->
-<!--      *ngIf="!isPreviewing">-->
-<!--      <button-->
-<!--        mat-button-->
-<!--        [disabled]="isPreviewing"-->
-<!--        (click)="previewSPW()">{{ 'CMS.DASHBOARD.spw.labelBtnPreview' | translate | uppercase }}</button>-->
-<!--      <button-->
-<!--        mat-button-->
-<!--        color="accent"-->
-<!--        [disabled]="!cmsHasSufficientData"-->
-<!--        (click)="publishSPW()">{{ 'CMS.DASHBOARD.spw.labelBtnPublish' | translate | uppercase }}</button>-->
-<!--    </mat-card-actions>-->
   </mat-card>
 
   <!-- CONTENT Summary -->

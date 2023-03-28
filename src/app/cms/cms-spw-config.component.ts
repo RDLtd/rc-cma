@@ -42,7 +42,7 @@ export class CmsSpwConfigComponent implements OnInit {
   apptiserUrl: string;
   apptiserPreviewUrl: string;
 
-  customDomainForm: string; // = 'https://ps318108.typeform.com/to/jjUbHwf7?typeform-source=www.google.com';
+  customDomainForm: string;
 
   constructor(
     private cmsLocalService: CmsLocalService,
@@ -61,7 +61,6 @@ export class CmsSpwConfigComponent implements OnInit {
       this.customDomainForm = this.translate.instant('CMS.SETTINGS.linkCustomDomain');
   }
 
-  //
   confirmNavigation() {
     if (this.dataChanged) {
       return this.cmsLocalService.confirmNavigation({
@@ -200,7 +199,6 @@ export class CmsSpwConfigComponent implements OnInit {
         this.configFormGroup.get('showParking').disable();
       }
     });
-
   }
 
   configChange(item): void {
@@ -333,6 +331,7 @@ export class CmsSpwConfigComponent implements OnInit {
       this.builder.componentInstance.data.apptiserPreviewUrl = this.apptiserPreviewUrl;
       this.dataChanged = true;
     }
+    this.building = false;
     this.builder.componentInstance.data.buildReady = true;
   }
 
