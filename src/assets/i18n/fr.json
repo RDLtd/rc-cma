@@ -27,12 +27,14 @@
 				"titleChangeRequest": "Demander la mise à jour des données essentielles"
 			},
 			"spw": {
+				"by": "Par",
 				"headerContentRequired": "Nous avons besoin d'un peu plus de contenu",
 				"headerUnPublished": "Vous avez des modifications non publiées",
 				"labelBtnMarketingLinks": "Liens marketing",
 				"labelBtnPreview": "Aperçu",
 				"labelBtnPublish": "Publier",
 				"labelBtnViewPublished": "Voir votre Page Internet Live",
+				"labelLastPublished": "Dernière publication",
 				"msgAnalysing": "Analyse du contenu ...",
 				"msgContentRequired": "Bon travail jusqu'à présent, mais nous avons besoin d'un peu plus d'informations pour générer votre Page Internet. \n\nLe tableau ci-dessous vous indique les sections qui nécessitent davantage de contenu. Une fois que vousaurez ajouté suffisamment de données, les options **APERÇU** et **PUBLIER** seront disponibles. Nous pourrons créer votre Page Internet et distribuer votre contenu.\n\nVous pouvez [voir une version démo]({{link}}) voir à quoi ressemble une Page Internet avec davantage de contenu.",
 				"msgPublished": "Votre site Web **apptiser** a été publié avec succès et les dernières mises à jour de contenu ont été synchronisées sur le réseau RDL de canaux de distribution.",

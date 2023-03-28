@@ -101,9 +101,10 @@
     <!-- HEADER -->
     <!-- Verified by/data -->
     <mat-card-header>
-      <mat-card-title markdown>
-        {{ 'CMS.DASHBOARD.spw.msgVerified' | translate: { date: d_publishDate, name:
-        restaurant.restaurant_verified_by } }}
+
+      <mat-card-title>
+        <p>{{ 'CMS.DASHBOARD.spw.labelLastPublished' | translate }} {{ 'CMS.DASHBOARD.spw.by' | translate }} {{
+          d_publishDate }} {{ restaurant?.restaurant_verified_by }}</p>
       </mat-card-title>
       <span class="rc-space-filler"></span>
       <span>
@@ -130,7 +131,7 @@
         [href]="spwProdUrl"
         target="_blank"
         matTooltip="{{ 'CMS.DASHBOARD.spw.tipViewPublished' | translate: {
-        restaurant: restaurant.restaurant_name } }}"
+        restaurant: restaurant?.restaurant_name } }}"
         mat-button color="accent">
         {{ 'CMS.DASHBOARD.spw.labelBtnViewPublished' | translate | uppercase }}
       </a>

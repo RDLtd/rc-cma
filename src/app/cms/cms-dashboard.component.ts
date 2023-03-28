@@ -12,7 +12,6 @@ import {
   AnalyticsService
 } from '../_services';
 import { MatDialog } from '@angular/material/dialog';
-import { CmsPreviewComponent } from './cms-preview.component';
 import { Router } from '@angular/router';
 import { RestaurantDetailComponent } from './restaurant-detail.component';
 import { NgForm } from '@angular/forms';
@@ -47,7 +46,6 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
   cmsChanged = false;
   spwProdUrl: string;
   spwPreviewUrl: string;
-  isPreviewing = true;
   cmsHasSufficientData = false;
   publishDate: Date;
   d_publishDate: string;
@@ -148,7 +146,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
           this.cldImage = null;
           if (rest.restaurant_id) {
             this.restaurant = rest;
-            // console.log(rest);
+            console.log(rest);
             this.getLastUpdated();
           }
           // duplicate the loaded restaurant
@@ -192,77 +190,13 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
             // Need more content to preview/publish
             this.publishDate = null;
           }
-          this.isPreviewing = false;
-          this.d_publishDate = moment(this.publishDate).format('LLLL');
+          this.d_publishDate = moment(this.publishDate).format('LL');
         },
         error: error => {
           console.log('ERROR', error);
         }
       });
   }
-
-  // checkPublishStatus() {
-  //
-  //   this.cms.previewSPW(this.restaurant.restaurant_id, this.restaurant.restaurant_number, true, true)
-  //     .subscribe(res => {
-  //       // Set up content info panel
-  //       switch (res['status']) {
-  //         // No preview available
-  //         case 'INSUFFICIENT_DATA': {
-  //           //this.cmsChanged = true;
-  //           //this.cmsHasSufficientData = false;
-  //           //this.publishDate = null;
-  //           break;
-  //         }
-  //
-  //         // Show preview
-  //         case 'OUT_OF_DATE': {
-  //           //this.cmsChanged = true;
-  //           //this.cmsHasSufficientData = true;
-  //           this.publishDate = new Date(res['published']);
-  //           this.spwProdUrl = res['url'];
-  //           this.spwPreviewUrl = this.getSpwUrl();
-  //           break;
-  //         }
-  //
-  //         // Show published version
-  //         default: {
-  //           //this.cmsHasSufficientData = true;
-  //           //this.cmsChanged = false;
-  //           this.publishDate = new Date(res['published']);
-  //           this.spwProdUrl = res['url'];
-  //           this.spwPreviewUrl = this.getSpwUrl();
-  //         }
-  //       }
-  //       this.isPreviewing = false;
-  //       this.d_publishDate = moment(this.publishDate).format('LLLL');
-  //     },
-  //     error => {
-  //       console.log('ERROR', error);
-  //       this.isPreviewing = false;
-  //       this.cmsLocalService.dspSnackbar('!SPW Failed to build, please try again', null, 5);
-  //     });
-  // }
-
-  // getSpwUrl(): string {
-  //
-  //   if (!!this.spwProdUrl) {
-  //     console.log('PROD URL', this.spwProdUrl);
-  //     // This is just in case of any legacy published S3 bucket urls
-  //     // it shouldn't be necessary
-  //     if (this.spwProdUrl.indexOf('amazonaws')) {
-  //       // Extract the bucket name and folder name (2nd and 3rd to last elements)
-  //       // from the returned url and construct a production SPW url
-  //       let arr = this.spwProdUrl.split('/');
-  //       return `https://${arr.splice(arr.length - 3, 2).join('/')}`;
-  //     } else {
-  //       return this.spwProdUrl;
-  //     }
-  //   } else {
-  //     // Nothing been published yet
-  //     return null;
-  //   }
-  // }
 
   checkOpeningTimes(): void {
     this.hours_count = 0;
@@ -519,62 +453,6 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
     this.router.navigate(['cms', this.restaurant.restaurant_id, tgt]).then();
   }
 
-  previewSPW() {
-    if (this.cmsHasSufficientData) {
-      this.dialog.open(CmsPreviewComponent, {
-        panelClass: 'rc-preview-dialog-container',
-        backdropClass: 'rc-preview-backdrop',
-        data: {
-          id: this.restaurant.restaurant_id,
-          number: this.restaurant.restaurant_number,
-          name: this.restaurant.restaurant_name,
-          membership_type: this.user.member_membership_type
-        }
-      });
-      // record event
-      this.ga.sendEvent('CMS-Dashboard', 'SPW', 'Previewed');
-    } else {
-      this.help.dspHelp('cms-spw-nodata');
-    }
-  }
-
-  publishSPW(): void {
-    // TODO presume this is no longer called??????
-    // apptiser update ks 090323 - added member type (for apptiser).
-    // Note that association check is done at the back end, which check for ANY member having this restaurant associated
-    this.cms.publish(this.restaurant.restaurant_id,
-    true,
-    this.user.member_membership_type, {})
-        .then(res => {
-          if (res['status'] === 'OK') {
-            // console.log('Publish success:', res);
-            // this.spwProdUrl = res['url'];
-            // this.spwPreviewUrl = this.getSpwUrl();
-            this.cmsChanged = false;
-            this.d_publishDate = moment(new Date(res['published'])).format('LLLL');
-            // this.publishDate = new Date(res['published']);
-
-            this.verifyData();
-            this.isPreviewing = false;
-            // record event
-            this.ga.sendEvent('CMS-Dashboard', 'SPW', 'Published');
-            // reset data changed attribute
-            this.cms.resetLastUpdatedField(Number(this.restaurant.restaurant_id))
-              .subscribe({
-                next: () => {
-                },
-                error: error => {
-                  console.log('unable to reset data changed attribute', error);
-                }
-              });
-          } else {
-            console.log('Publish failed', res);
-            this.isPreviewing = false;
-          }
-        })
-        .catch((res) => console.log('Error', res));
-  }
-
   dspSPWLinks(): void {
 
     this.dialog.open(CmsSpwLinksComponent,
@@ -764,34 +642,28 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
         next: data => {
           if (data['count'] === 0) {
             // no record found, so this must be the first time - create one...
-            this.cms.createLastUpdatedRecord(Number(this.restaurant.restaurant_id))
-              .subscribe({
-                next: () => {
-                  // now read it back!
-                  this.cms.getLastUpdatedRecord(Number(this.restaurant.restaurant_id))
-                    .subscribe({
-                      next: reread => {
-                        // console.log('createlastupdatedrecord', reread);
-                        this.last_updated = reread['lastupdated'][0];
-                        this.readAndCheckStatus();
-                      },
-                      error: error => {
-                        console.log('getlastupdatedrecord', error);
-                      }
-                    });
-                },
-                error: error => {
-                  console.log('createlastupdatedrecord', error);
-                }
-              });
-          } else {
-            // console.log(data);
-            this.last_updated = data['lastupdated'][0];
-            this.readAndCheckStatus();
+            this.createFirstUpdateRecord();
+            return;
           }
+          // console.log(data);
+          this.last_updated = data['lastupdated'][0];
+          this.readAndCheckStatus();
         },
         error: error => {
           console.log('getlastupdatedrecord', error);
+        }
+      });
+  }
+
+  createFirstUpdateRecord(): void {
+    this.cms.createLastUpdatedRecord(Number(this.restaurant.restaurant_id))
+      .subscribe({
+        next: () => {
+          // Now read it back
+          this.getLastUpdated();
+        },
+        error: error => {
+          console.log('createlastupdatedrecord', error);
         }
       });
   }

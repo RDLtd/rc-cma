@@ -375,6 +375,22 @@
 										<name>spw</name>
 										<children>
 											<concept_node>
+												<name>by</name>
+												<description/>
+												<comment/>
+												<default_text/>
+												<translations>
+													<translation>
+														<language>en-GB</language>
+														<approved>false</approved>
+													</translation>
+													<translation>
+														<language>fr-FR</language>
+														<approved>false</approved>
+													</translation>
+												</translations>
+											</concept_node>
+											<concept_node>
 												<name>headerContentRequired</name>
 												<description/>
 												<comment/>
@@ -456,6 +472,22 @@
 											</concept_node>
 											<concept_node>
 												<name>labelBtnViewPublished</name>
+												<description/>
+												<comment/>
+												<default_text/>
+												<translations>
+													<translation>
+														<language>en-GB</language>
+														<approved>false</approved>
+													</translation>
+													<translation>
+														<language>fr-FR</language>
+														<approved>false</approved>
+													</translation>
+												</translations>
+											</concept_node>
+											<concept_node>
+												<name>labelLastPublished</name>
 												<description/>
 												<comment/>
 												<default_text/>
