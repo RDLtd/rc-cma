@@ -220,6 +220,7 @@ export class MemberService {
       {
         email: memberemail,
         password: memberpassword,
+        company_code: this.config.brand.prefix,
         userCode: this.config.userAPICode,
         token: this.authToken
       });
