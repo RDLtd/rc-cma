@@ -4,6 +4,7 @@ import { CMSService, RestaurantService } from '../_services';
 import { Restaurant, CMSDescription } from '../_models';
 import { TranslateService } from '@ngx-translate/core';
 import { HelpService} from '../common';
+import { lastValueFrom, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-rc-cms-reservations',
@@ -32,6 +33,8 @@ export class CmsReservationsComponent implements OnInit {
   booking_provider_reference = '';
   booking_provider_rid_label = '';
 
+  restaurant$: Promise<Restaurant>;
+
   constructor(
     private cms: CMSService,
     private cmsLocalService: CmsLocalService,
@@ -55,12 +58,6 @@ export class CmsReservationsComponent implements OnInit {
         }
       });
     this.dataChanged = false;
-  }
-
-  cleanStr(obj, str): void {
-    if (obj[str] === 'undefined' || obj[str] === 'null') {
-      obj[str] = '';
-    }
   }
 
   getCmsData() {
@@ -111,8 +108,15 @@ export class CmsReservationsComponent implements OnInit {
       });
   }
 
-  changeOption(elem) {
+  cleanStr(obj, str): void {
+    if (obj[str] === 'undefined' || obj[str] === 'null') {
+      obj[str] = '';
+    }
+  }
 
+
+
+  changeOption(elem) {
     this.selected_booking_provider_id = this.booking_providers[this.selected_booking_provider_index].booking_provider_id;
     this.selected_booking_provider = this.booking_providers[this.selected_booking_provider_index];
     this.booking_provider_rid_label = this.selected_booking_provider.booking_provider_rid_label;
@@ -187,6 +191,11 @@ export class CmsReservationsComponent implements OnInit {
       });
   }
 
+  resetData(): void {
+    // Reload from db
+    this.getCmsData();
+  }
+
   // USED by Deactivation guard
   public confirmNavigation() {
     if (this.dataChanged) {
@@ -196,8 +205,4 @@ export class CmsReservationsComponent implements OnInit {
     }
   }
 
-  resetData(): void {
-    // Reload from db
-    this.getCmsData();
-  }
 }

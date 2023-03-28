@@ -1333,8 +1333,8 @@ ul.rc-lookup-results {
 * -------------------------------
 **/
 .rc-cms {
-  padding-top: ($rc-toolbar-height);
-  //.rc-card { padding: 16px; }
+  padding-top: calc(#{$rc-toolbar-height} + .5rem);
+
   dl { margin: 24px 0 0 0; }
   dt {
     text-transform: uppercase;

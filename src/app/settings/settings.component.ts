@@ -109,6 +109,9 @@ export class SettingsComponent implements OnInit {
   }
 
   setProducts(): void {
+
+    console.log('ID', this.member.member_customer_id);
+
     // Any pending invoices
     if (!this.isFreeMembership) {
       this.memberService.getUpcomingInvoice(this.member.member_customer_id)

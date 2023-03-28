@@ -220,7 +220,7 @@ export class MemberService {
       {
         email: memberemail,
         password: memberpassword,
-        company_code: this.config.brand.prefix,
+        company: this.config.brand.prefix,
         userCode: this.config.userAPICode,
         token: this.authToken
       });
@@ -550,7 +550,7 @@ export class MemberService {
   }
 
   getUpcomingInvoice(customer_id: string) {
-    console.log('getUpcomingInvoice', customer_id);
+    console.log('getUpcomingInvoice', customer_id, this.config.brand.prefix);
     return this.http.post(this.config.apiUrl + '/payments/get-upcoming-invoice',
       {
         customer_id: customer_id,
