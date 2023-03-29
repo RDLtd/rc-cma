@@ -534,7 +534,7 @@
 		"labelSelectImage": "Select an image",
 		"labelSubscription": "Subscription",
 		"labelTel": "Mobile",
-		"msgAddRestaurant_m": "Adding another venue will increase your subscription by **{{ price }}**. \n\nWe'll calculate any additional prorated fees that would be due in this month and charge that to your account automatically – once you've successfully added your venue.\n\nAfter that, your subscription charge will be **{{ total }}** every month. Would you like to go ahead and add a venue?",
+		"msgAddRestaurant_m": "Adding another venue will increase your subscription by **{{ price }}**. \n\nWe'll calculate any additional prorated fees that would be due in this month and charge that to your account automatically – once you've successfully added your venue.\n\nAfter that, your subscription charge will be **{{ total }} + VAT every month**. Would you like to go ahead and add a venue?",
 		"msgAddRestaurant_y": "Adding another venue will increase your subscription by **{{ price }}** a year.\n\nWe'll calculate any additional prorated amount due for this year, based on the time left, and automatically charge that to your account. \n\nYour new subscription total will then become **{{ total }} plus VAT per year**. **Would you like to continue?**",
 		"msgAvatarUpdated": "Avater image updated",
 		"msgChangePlanToMonthly": "You are currently on the **{{ plan }}** which renews every year. If you want to switch to a monthly subscription, then please contact support@apptiser.io.\n\nThank you.",
@@ -545,7 +545,7 @@
 		"msgNotificationsUpdated": "Your notification settings have been updated",
 		"msgPlanUpdated": "Your membership plan has been successfully updated to {{ plan }}",
 		"msgRemoveRestaurant": "Are you sure that you want to remove **{{ name }}** from your account – you will no longer have access to manage their web content?",
-		"msgRestaurantRemoved": "{{ name }} has been removed from your account",
+		"msgRestaurantRemoved": "{{ name }} has been removed from your account. \n\nYou can review your updated subscription by selecting the MANAGE PAYMENTS option on **Account Details**.",
 		"msgUpdateFailed": "Sorry, there was a problem updating your information",
 		"password": {
 			"currentPwd": "Your current password",

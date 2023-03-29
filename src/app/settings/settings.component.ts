@@ -369,6 +369,7 @@ export class SettingsComponent implements OnInit {
       .subscribe({
         next: res => {
           console.log(res);
+          // this.openSnackBar(this.translate.instant('SETTINGS.msgRestaurantRemoved', {name: rest.restaurant_name}), 'OK');
           this.loadService.close();
         },
         error: error => {
@@ -410,7 +411,7 @@ export class SettingsComponent implements OnInit {
             next: () => {
               this.restaurants.splice(index, 1);
               this.defaultImages.splice(index, 1);
-              this.openSnackBar(this.translate.instant('SETTINGS.msgRestaurantRemoved', {name: rest.restaurant_name}), 'OK');
+              // this.openSnackBar(this.translate.instant('SETTINGS.msgRestaurantRemoved', {name: rest.restaurant_name}), 'OK');
               // record event
               this.ga.sendEvent('Profile', 'Edit', 'Remove Association');
             },

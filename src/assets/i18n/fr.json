@@ -534,7 +534,7 @@
 		"labelSelectImage": "Sélectionnez une photo",
 		"labelSubscription": "abonnement",
 		"labelTel": "Portable",
-		"msgAddRestaurant_m": "L'ajout d'un nouveau restaurant va augmenter le coût de votre abonnement de **{{ price }}**.\n\nNous calculerons, une fois que vous aurez ajouté votre restaurant avec succès, les frais supplémentaires au prorata qui seront dus au cours de cette période et les imputerons à votre compte.\n\nLe nouveau montant de votre abonnement sera de **{{ total }} par mois**. Souhaitez-vous continuer et ajouter ce restaurant?",
+		"msgAddRestaurant_m": "L'ajout d'un autre lieu augmentera votre abonnement de **{{ price }}**.\n\nNous calculerons tous les frais supplémentaires au prorata qui seraient dus ce mois-ci et les facturerons automatiquement sur votre compte - une fois que vous aurez ajouté votre lieu avec succès.\n\nAprès cela, vos frais d'abonnement seront de ** {{ total }} + TVA tous les mois**. Souhaitez-vous aller de l'avant et ajouter un lieu ?",
 		"msgAddRestaurant_y": "L'ajout d'un nouveau restaurant va augmenter le coût de votre abonnement de **{{ price }}** par an.\n\nNous calculerons les frais supplémentaires au prorata dû pour cette année, en fonction du temps restant, et le facturerons automatiquement sur votre compte.\n\nLe nouveau montant de votre abonnement sera de **{{ total }} plus TVA par an**. **Souhaitez-vous continuer?**",
 		"msgAvatarUpdated": "Avatar mis à jour",
 		"msgChangePlanToMonthly": "Votre adhésion est actuellement de **{{ plan }}** qui se renouvelle chaque année. Si vous souhaitez passer à un abonnement mensuel, veuillez nous contacter à facturation@restaurateursindependants.fr\n\nMerci.",
@@ -545,7 +545,7 @@
 		"msgNotificationsUpdated": "Vos paramètres de notification ont été mis à jour",
 		"msgPlanUpdated": "Votre abonnement a été mis à jour avec succès pour {{ plan }}",
 		"msgRemoveRestaurant": "Voulez-vous vraiment supprimer **{{ name }}** de votre compte ?",
-		"msgRestaurantRemoved": "{{ name }} a été supprimé de votre compte",
+		"msgRestaurantRemoved": "{{ name }} a été supprimé de votre compte.\n\nVous pouvez consulter votre abonnement mis à jour en sélectionnant l'option GÉRER LES PAIEMENTS sur **Détails du compte**.",
 		"msgUpdateFailed": "Désolé, un problème est survenu lors de la mise à jour de vos informations",
 		"password": {
 			"currentPwd": "Votre mot de passe actuel",
