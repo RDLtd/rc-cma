@@ -1,6 +1,6 @@
 ### Associate Status
 
-This restaurant is currently a **Standard Subscriber**.
+This venue is currently a **Standard Subscriber**.
 
 This means that you can create and make a fuss-free website with apptiser. You can make and request changes to your core data, and
 also add and edit your content data, such as images, menus, descriptions, etc.
