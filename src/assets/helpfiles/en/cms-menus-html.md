@@ -1,7 +1,7 @@
 ## Sample Menu
 
 You can create a sample menu, with up to 3 sections, that will be displayed on 
-your restaurant's web page. 
+your venue's website. 
 
 ### Sections
 
