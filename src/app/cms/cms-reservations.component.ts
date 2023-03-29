@@ -4,7 +4,8 @@ import { CMSService, RestaurantService } from '../_services';
 import { Restaurant, CMSDescription } from '../_models';
 import { TranslateService } from '@ngx-translate/core';
 import { HelpService} from '../common';
-import { lastValueFrom, Observable } from 'rxjs';
+import { ImageService } from '../_services/image.service';
+import { CloudinaryImage } from '@cloudinary/url-gen';
 
 @Component({
   selector: 'app-rc-cms-reservations',
@@ -34,13 +35,16 @@ export class CmsReservationsComponent implements OnInit {
   booking_provider_rid_label = '';
 
   restaurant$: Promise<Restaurant>;
+  bkgWidgetId: CloudinaryImage;
 
   constructor(
     private cms: CMSService,
     private cmsLocalService: CmsLocalService,
     private translate: TranslateService,
     private restaurantService: RestaurantService,
-    public help: HelpService
+    public help: HelpService,
+    private imgService: ImageService
+
   ) {  }
 
   ngOnInit() {
@@ -58,6 +62,7 @@ export class CmsReservationsComponent implements OnInit {
         }
       });
     this.dataChanged = false;
+    this.bkgWidgetId = this.imgService.getCldImage('https://res.cloudinary.com/rdl/image/upload/v1680106759/apptiser/booking-widget-screenshot.png')
   }
 
   getCmsData() {

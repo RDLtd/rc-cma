@@ -26,9 +26,8 @@
           </button>
         </span>
   </mat-toolbar>
-  <div class="rc-grid two-cols">
 
-
+  <div class="rc-grid-masonry-2">
     <!-- GENERAL -->
     <mat-card appearance="outlined">
       <mat-card-header>
@@ -55,92 +54,92 @@
     </mat-card>
 
     <!-- ONLINE BOOKINGS -->
-    <mat-card appearance="outlined">
-      <form>
-        <mat-card-header>
-        <mat-card-title>
-          <h2>{{ 'CMS.RESERVATIONS.titleOnline' | translate }}</h2>
-        </mat-card-title>
-        </mat-card-header>
+<!--    <mat-card appearance="outlined">-->
+<!--      <form>-->
+<!--        <mat-card-header>-->
+<!--        <mat-card-title>-->
+<!--          <h2>{{ 'CMS.RESERVATIONS.titleOnline' | translate }}</h2>-->
+<!--        </mat-card-title>-->
+<!--        </mat-card-header>-->
 
-        <mat-card-content>
+<!--        <mat-card-content>-->
 
-          <!-- PROVIDER -->
-          <mat-form-field class="rc-full-width">
-            <mat-label>{{ 'CMS.RESERVATIONS.labelProvider' | translate }}</mat-label>
-            <mat-select
-              #bkgProvider
-              name="bkg_provider"
-              (selectionChange)="changeOption(bkgProvider)"
-              [(ngModel)]="selected_booking_provider_index">
-              <mat-option
-                *ngFor="let provider of booking_providers; let idx = index"
-                [value]="idx">
-                {{ provider['booking_provider_label'] }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
+<!--          &lt;!&ndash; PROVIDER &ndash;&gt;-->
+<!--          <mat-form-field class="rc-full-width">-->
+<!--            <mat-label>{{ 'CMS.RESERVATIONS.labelProvider' | translate }}</mat-label>-->
+<!--            <mat-select-->
+<!--              #bkgProvider-->
+<!--              name="bkg_provider"-->
+<!--              (selectionChange)="changeOption(bkgProvider)"-->
+<!--              [(ngModel)]="selected_booking_provider_index">-->
+<!--              <mat-option-->
+<!--                *ngFor="let provider of booking_providers; let idx = index"-->
+<!--                [value]="idx">-->
+<!--                {{ provider['booking_provider_label'] }}-->
+<!--              </mat-option>-->
+<!--            </mat-select>-->
+<!--          </mat-form-field>-->
 
-          <!-- PROVIDER ID ( Has online booking provider )-->
-          <div
-            *ngIf='selectedBookingService !== "none"'
-            class="rc-flex-spaced">
-            <mat-form-field class="rc-full-width">
-              <mat-label>{{ booking_provider_rid_label }}</mat-label>
-              <input
-                #bkgProviderId
-                matInput
-                maxlength="50"
-                name="bkg_provider_reference"
-                (keyup)="setChanged(bkgProviderId)"
-                [(ngModel)]="booking_provider_reference">
-              <a
-                *ngIf="booking_provider_reference && selectedBookingService !== 'email'"
-                matSuffix
-                mat-icon-button
-                [matTooltip]="'CMS.RESERVATIONS.tipTestLink' | translate"
-                (click)="testBkgLink()">
-                <mat-icon>arrow_forward</mat-icon>
-              </a>
-              <mat-error><strong>{{ 'CMS.RESERVATIONS.invalidEmail' | translate }}</strong></mat-error>
-            </mat-form-field>
-          </div>
+<!--          &lt;!&ndash; PROVIDER ID ( Has online booking provider )&ndash;&gt;-->
+<!--          <div-->
+<!--            *ngIf='selectedBookingService !== "none"'-->
+<!--            class="rc-flex-spaced">-->
+<!--            <mat-form-field class="rc-full-width">-->
+<!--              <mat-label>{{ booking_provider_rid_label }}</mat-label>-->
+<!--              <input-->
+<!--                #bkgProviderId-->
+<!--                matInput-->
+<!--                maxlength="50"-->
+<!--                name="bkg_provider_reference"-->
+<!--                (keyup)="setChanged(bkgProviderId)"-->
+<!--                [(ngModel)]="booking_provider_reference">-->
+<!--              <a-->
+<!--                *ngIf="booking_provider_reference && selectedBookingService !== 'email'"-->
+<!--                matSuffix-->
+<!--                mat-icon-button-->
+<!--                [matTooltip]="'CMS.RESERVATIONS.tipTestLink' | translate"-->
+<!--                (click)="testBkgLink()">-->
+<!--                <mat-icon>arrow_forward</mat-icon>-->
+<!--              </a>-->
+<!--              <mat-error><strong>{{ 'CMS.RESERVATIONS.invalidEmail' | translate }}</strong></mat-error>-->
+<!--            </mat-form-field>-->
+<!--          </div>-->
 
-          <!-- MIN/MAX COVERS ( Email ) -->
-          <div *ngIf="selectedBookingService === 'email'" class="rc-flex-spaced">
-            <mat-form-field style="width: 48%;">
-              <mat-label>{{ 'CMS.RESERVATIONS.labelMaxCovers' | translate }}</mat-label>
-              <input
-                #bkgMaxCovers
-                matInput
-                type="number"
-                name="bkg_max_covers"
-                min="2" max="12"
-                (ngModelChange)="setChanged(bkgMaxCovers)"
-                [(ngModel)]="descriptions.cms_booking_max_covers">
-            </mat-form-field>
-            <mat-form-field style="width: 48%;">
-              <mat-label>{{ 'CMS.RESERVATIONS.labelMaxDays' | translate }}</mat-label>
-              <input
-                #bkgAdvDays
-                matInput
-                type="number"
-                name="bkg_max_advance_days"
-                min="0"
-                max="90"
-                (ngModelChange)="setChanged(bkgAdvDays)"
-                [(ngModel)]="descriptions.cms_booking_max_advance_days">
-            </mat-form-field>
-          </div>
+<!--          &lt;!&ndash; MIN/MAX COVERS ( Email ) &ndash;&gt;-->
+<!--          <div *ngIf="selectedBookingService === 'email'" class="rc-flex-spaced">-->
+<!--            <mat-form-field style="width: 48%;">-->
+<!--              <mat-label>{{ 'CMS.RESERVATIONS.labelMaxCovers' | translate }}</mat-label>-->
+<!--              <input-->
+<!--                #bkgMaxCovers-->
+<!--                matInput-->
+<!--                type="number"-->
+<!--                name="bkg_max_covers"-->
+<!--                min="2" max="12"-->
+<!--                (ngModelChange)="setChanged(bkgMaxCovers)"-->
+<!--                [(ngModel)]="descriptions.cms_booking_max_covers">-->
+<!--            </mat-form-field>-->
+<!--            <mat-form-field style="width: 48%;">-->
+<!--              <mat-label>{{ 'CMS.RESERVATIONS.labelMaxDays' | translate }}</mat-label>-->
+<!--              <input-->
+<!--                #bkgAdvDays-->
+<!--                matInput-->
+<!--                type="number"-->
+<!--                name="bkg_max_advance_days"-->
+<!--                min="0"-->
+<!--                max="90"-->
+<!--                (ngModelChange)="setChanged(bkgAdvDays)"-->
+<!--                [(ngModel)]="descriptions.cms_booking_max_advance_days">-->
+<!--            </mat-form-field>-->
+<!--          </div>-->
 
-          <!-- NO ONLINE BOOKINGS -->
-          <div *ngIf="selectedBookingService === 'none'" class="rc-flex-spaced" markdown>
-            {{ 'CMS.RESERVATIONS.msgNoOnlineBookings' | translate }}
-          </div>
+<!--          &lt;!&ndash; NO ONLINE BOOKINGS &ndash;&gt;-->
+<!--          <div *ngIf="selectedBookingService === 'none'" class="rc-flex-spaced" markdown>-->
+<!--            {{ 'CMS.RESERVATIONS.msgNoOnlineBookings' | translate }}-->
+<!--          </div>-->
 
-        </mat-card-content>
-      </form>
-    </mat-card>
+<!--        </mat-card-content>-->
+<!--      </form>-->
+<!--    </mat-card>-->
 
     <!-- GROUPS -->
     <mat-card appearance="outlined">
@@ -188,6 +187,30 @@
           </textarea>
           <mat-hint align="end">{{ bkgsPrivate.value.length }}/{{ resPrivateMaxLength }}</mat-hint>
         </mat-form-field>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card appearance="outlined">
+      <mat-card-header>
+        <mat-card-title>
+          <h2>{{ 'CMS.RESERVATIONS.titleOnline' | translate }}</h2></mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <svg xmlns="http://www.w3.org/2000/svg"
+             viewBox="0 0 312 73" width="200">
+          <g fill="none" fill-rule="evenodd">
+            <g fill-rule="nonzero">
+              <path fill="#04A5C2" d="m38.259 52.548-15.836-9.222v10.198l5.384 3.124a3.37 3.37 0 0 0 3.386 0l7.066-4.1ZM16.817 50.27V31.412l-8.969 5.223V43.1c0 1.216.645 2.34 1.693 2.948l7.276 4.222ZM7.848 30.146l16.138-9.398-8.755-5.098-5.69 3.302A3.407 3.407 0 0 0 7.848 21.9v8.246ZM20.815 12.41l15.902 9.26V11.558l-5.524-3.206a3.37 3.37 0 0 0-3.386 0l-6.992 4.058Zm21.508 2.401v18.83l8.829-5.141v-6.6c0-1.216-.645-2.34-1.693-2.948l-7.136-4.141Zm8.829 20.18-15.946 9.287 8.636 5.03 5.617-3.26a3.407 3.407 0 0 0 1.693-2.948v-8.108Zm-28.73-6.844v8.687l7.21 4.198 7.085-4.126v-8.744l-7.16-4.17-7.134 4.155Zm12.705-26.63 18.246 10.591a11.328 11.328 0 0 1 5.627 9.8v21.184c0 4.043-2.145 7.779-5.627 9.8L35.127 63.484a11.201 11.201 0 0 1-11.254 0L5.627 52.892A11.328 11.328 0 0 1 0 43.092V21.908c0-4.043 2.145-7.779 5.627-9.8L23.873 1.516a11.201 11.201 0 0 1 11.254 0Z"/>
+              <path fill="#222F3C" d="M87.218 46.947c-1.338 2.306-4.416 5.02-10.572 5.02C69.821 51.966 64 48.642 64 40.774c0-7.665 6.022-11.124 13.382-11.124 3.613 0 6.424.61 9.1 1.22 0-6.375-1.07-7.596-7.628-7.596-3.345 0-6.089.34-9.1 1.085-1.204.272-1.472-.271-1.806-1.492l-1.07-4.544c-.335-1.154-.202-1.628.802-1.9C68.885 16.085 74.505 15 80.527 15c13.182 0 15.189 5.223 15.189 16.89v17.702c0 1.221-.335 1.628-1.606 1.628h-4.015c-.936 0-1.472-.407-2.007-1.628l-.87-2.645Zm-9.31-11.084c-4.014 0-5.62 1.967-5.62 4.409 0 2.848 2.208 4.07 5.554 4.07 5.487 0 7.56-3.256 7.56-7.258v-.068c-2.274-.678-4.415-1.153-7.493-1.153ZM110 59.623c0 1.288-.334 1.627-1.606 1.627h-6.022c-1.204 0-1.605-.339-1.605-1.628V17.374c0-1.289.401-1.628 1.605-1.628h2.878c1.003 0 1.539.475 2.074 1.628l1.07 3.324C111.071 17.51 115.22 15 121.041 15c9.233 0 15.724 8.072 15.724 18.45 0 10.445-6.49 18.516-15.724 18.516-5.554 0-9.368-3.188-11.04-5.494v13.15Zm8.699-36.444c-5.22 0-8.699 4.409-8.699 9.97 0 5.63 3.48 10.04 8.699 10.04 5.152 0 8.698-4.206 8.698-10.04 0-5.765-3.546-9.97-8.698-9.97Zm31.489 36.443c0 1.29-.335 1.628-1.606 1.628h-6.022c-1.204 0-1.606-.339-1.606-1.628V17.374c0-1.289.402-1.628 1.606-1.628h2.877c1.004 0 1.54.475 2.074 1.628l1.071 3.324C151.26 17.51 155.407 15 161.228 15c9.234 0 15.724 8.072 15.724 18.45 0 10.445-6.49 18.516-15.724 18.516-5.553 0-9.367-3.188-11.04-5.494v13.15Zm8.698-36.443c-5.219 0-8.698 4.409-8.698 9.97 0 5.63 3.48 10.04 8.698 10.04 5.153 0 8.699-4.206 8.699-10.04 0-5.765-3.546-9.97-8.699-9.97Zm23.527-7.582v-5.97c0-1.288.335-1.627 1.606-1.627h5.687c1.272 0 1.606.34 1.606 1.628v5.969h8.766c1.271 0 1.606.407 1.606 1.628v5.155c0 1.288-.335 1.627-1.606 1.627h-8.766V38.59c0 3.595 1.07 4.613 3.614 4.613 1.74 0 2.743-.407 4.282-1.018.803-.339 1.07 0 1.338.679l1.94 4.951c.402 1.085.067 1.492-.802 2.035-2.41 1.424-5.286 1.831-7.428 1.831-7.427 0-12.177-3.934-12.177-13.09V24.006h-2.677c-1.271 0-1.606-.339-1.606-1.627v-5.155c0-1.221.335-1.628 1.606-1.628h3.011Zm23.301-8.035c0-3.052 2.41-5.562 5.42-5.562 3.078 0 5.487 2.51 5.487 5.562 0 3.052-2.409 5.494-5.487 5.494-3.01 0-5.42-2.442-5.42-5.494Zm.761 42.284V16.628c0-1.289.402-1.628 1.673-1.628h5.955c1.271 0 1.606.34 1.606 1.628v33.218c0 1.221-.335 1.628-1.606 1.628h-5.955c-1.271 0-1.673-.407-1.673-1.628Zm28.947-5.612c4.35 0 5.553-1.289 5.553-3.052 0-2.103-2.14-2.985-7.092-3.527-7.16-.747-13.115-2.985-13.115-11.328 0-6.579 5.42-11.327 13.85-11.327 4.016 0 8.833.882 13.316 3.595 1.138.678.937 1.289.402 2.306l-2.141 3.73c-.402.679-.67 1.086-1.205 1.086-.2 0-.535-.136-.937-.34-3.211-1.695-6.089-2.645-9.635-2.645-3.278 0-4.884 1.153-4.884 3.256 0 2.035 1.873 2.849 7.025 3.527 7.093.95 13.249 2.781 13.249 10.92 0 6.783-4.952 11.531-14.654 11.531-4.349 0-9.167-.882-14.252-4.07-1.07-.678-.937-1.22-.334-2.306l2.074-3.73c.401-.678.669-1.085 1.204-1.085.201 0 .536.135.937.339 3.346 1.967 6.49 3.12 10.639 3.12Zm50.626-10.65v1.629c0 1.288-.268 1.763-1.472 1.763h-23.352c1.003 4.613 4.148 6.987 9.033 6.987 3.613 0 5.754-.814 7.962-2.239.468-.271.87-.407 1.204-.407.536 0 .937.34 1.272.814l2.208 3.256c.669.882.669 1.831-.134 2.374-3.613 2.849-7.093 4.205-12.847 4.205-10.639 0-18.133-8.003-18.133-18.517 0-10.445 7.829-18.449 17.732-18.449 10.906 0 16.527 8.41 16.527 18.585Zm-24.958-3.35h15.858c-.268-3.8-2.543-7.665-7.36-7.665-4.283 0-7.561 2.577-8.498 7.664Zm48.284-5.263c-7.227 0-9.903 3.459-9.903 8.817v16.804c0 1.221-.335 1.628-1.606 1.628h-6.022c-1.204 0-1.606-.407-1.606-1.628V17.374c0-1.289.402-1.628 1.606-1.628h2.877c1.004 0 1.54.475 2.074 1.628l1.606 4.341C300.475 18.052 303.42 15 310.511 15c1.472 0 1.54.407 1.472 1.492l-.87 6.986c-.2 1.29-.602 1.493-1.74 1.493Z"/>
+            </g>
+            <path fill="#222F3C" d="M212.766 66.39h-3.894v5.28c0 .242-.066.33-.33.33h-.924c-.242 0-.33-.088-.33-.33V56.93c0-.242.088-.33.33-.33h5.148c2.706 0 5.324 1.298 5.324 4.862s-2.618 4.928-5.324 4.928Zm-3.894-1.518h3.718c3.146 0 3.916-1.716 3.916-3.41 0-1.694-.77-3.344-3.916-3.344h-3.718v6.754Zm18.17-2.86c-2.794 0-4.092 2.2-4.092 4.576v5.082c0 .242-.088.33-.33.33h-.924c-.242 0-.33-.088-.33-.33V60.934c0-.242.088-.33.33-.33h.528c.22 0 .33.066.352.308l.154 2.266c.462-.968 1.452-2.816 4.51-2.816.286 0 .33.088.308.308l-.154 1.056c-.044.242-.11.286-.352.286Zm13.176 4.356v.33c0 .242-.044.33-.308.33h-9.108c.308 2.134 2.002 3.718 4.202 3.718 1.606 0 2.332-.396 3.41-1.166.198-.154.308-.066.418.066l.462.682c.11.176.132.352-.044.484-1.342.968-2.398 1.43-4.246 1.43-3.322 0-5.852-2.662-5.852-5.94 0-3.278 2.574-5.94 5.808-5.94 3.366 0 5.258 2.794 5.258 6.006Zm-9.438-.77h7.898c-.198-2.002-1.452-3.74-3.674-3.74-2.2 0-3.894 1.606-4.224 3.74Zm21.382-2.486c.418-1.122 1.584-2.75 3.872-2.75 2.31 0 3.806 1.474 3.806 4.95v6.358c0 .242-.066.33-.33.33h-.924c-.22 0-.308-.088-.308-.33v-6.094c0-2.64-.858-3.718-2.64-3.718-1.738 0-2.948 1.452-3.212 3.278v6.534c0 .242-.088.33-.33.33h-.924c-.242 0-.308-.088-.308-.33v-6.094c0-2.64-.858-3.718-2.662-3.718-1.958 0-3.19 1.848-3.19 4.004v5.808c0 .242-.088.33-.33.33h-.924c-.242 0-.33-.088-.33-.33V60.934c0-.242.088-.33.33-.33h.528c.22 0 .33.088.352.33l.154 2.134c.396-.99 1.496-2.706 3.806-2.706 1.76 0 3.058.836 3.564 2.75Zm11.438-6.644c0-.638.484-1.166 1.144-1.166.638 0 1.166.528 1.166 1.166 0 .638-.528 1.166-1.166 1.166-.66 0-1.144-.528-1.144-1.166Zm.374 15.202V60.934c0-.242.088-.33.33-.33h.924c.242 0 .33.088.33.33V71.67c0 .242-.088.33-.33.33h-.924c-.242 0-.33-.088-.33-.33Zm13.858-1.958c-.374 1.012-1.65 2.53-3.982 2.53-2.332 0-4.18-1.408-4.18-4.884v-6.424c0-.242.088-.33.33-.33h.924c.242 0 .33.088.33.33v6.16c0 2.662 1.21 3.652 2.992 3.652 1.958 0 3.366-1.848 3.366-4.004v-5.808c0-.242.088-.33.33-.33h.902c.264 0 .33.088.33.33V71.67c0 .242-.066.33-.308.33h-.528c-.22 0-.352-.088-.374-.33l-.132-1.958Zm14.43-6.6c.418-1.122 1.584-2.75 3.872-2.75 2.31 0 3.806 1.474 3.806 4.95v6.358c0 .242-.066.33-.33.33h-.924c-.22 0-.308-.088-.308-.33v-6.094c0-2.64-.858-3.718-2.64-3.718-1.738 0-2.948 1.452-3.212 3.278v6.534c0 .242-.088.33-.33.33h-.924c-.242 0-.308-.088-.308-.33v-6.094c0-2.64-.858-3.718-2.662-3.718-1.958 0-3.19 1.848-3.19 4.004v5.808c0 .242-.088.33-.33.33h-.924c-.242 0-.33-.088-.33-.33V60.934c0-.242.088-.33.33-.33h.528c.22 0 .33.088.352.33l.154 2.134c.396-.99 1.496-2.706 3.806-2.706 1.76 0 3.058.836 3.564 2.75Z"/>
+          </g>
+        </svg>
+        <advanced-image
+          width="50%"
+          [cldImg]="bkgWidgetId"
+          [plugins]="">
+        </advanced-image>
       </mat-card-content>
     </mat-card>
   </div>
