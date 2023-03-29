@@ -464,7 +464,7 @@
 		"titleRequest": "Offre exclusive aux membres"
 	},
 	"MEMBERSHIP": {
-		"infoMembershipMonthly": "##  ADHESION MENSUELLE\n\nSeulement **{{ fee }}** par mois pour un accès complet à tous les avantages offerts par l'adhésion à  **{{ brand }}**",
+		"infoMembershipMonthly": "##  SOUSCRIPTION MENSUELLE\n\nPayez seulement **{{ fee }} + TVA** par mois pour un accès complet à tous les avantages offerts par **{{ brand }}**.\n\nDes frais d'installation uniques de ** {{ setup }} + TVA** vous seront également facturés.",
 		"infoMembershipYearly": "## ADHESION ANNUELLE\n\n**{{ fee }}** par an pour le prix de seulement 10 mois. Tout les avantages de **{{ brand }}** , un peu moins cher en payant l'année complète maintenant!\n",
 		"instructions": "# Mon adhésion me donne accès à :\n\n- Une présence en ligne optimisée gràce à l'outil de gestion de contenu et la Page Internet inclue\n\n- Des économies d'échelle par des fournisseurs approuvés dans notre Marketplace d'offres,\n\n- Des conseils et au soutien de collègues indépendants dans notre forum pour les membres\n\n# Et très bientôt...\n\n- Le coaching par des personnes qui ont été là où vous êtes actuellement\n\n- Du personnel recommandé dans la bourse d'emploi de Restaurateurs Indépendants\n\n- Des formations pour vous et votre équipe dans la base de connaissances\n\n- Votre présence dans le plus grand annuaire de restaurants indépendants en France",
 		"labelBack": "Retour",

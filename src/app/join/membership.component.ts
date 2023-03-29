@@ -101,7 +101,8 @@ export class MembershipComponent implements OnInit {
           'MEMBERSHIP.infoMembershipMonthly',
           {
             fee: this.currencyPipe.transform(this.products[1].product_price, this.config.brand.currency.code),
-            brand: this.transParams.brand
+            brand: this.transParams.brand,
+            setup: this.currencyPipe.transform(this.products[0].product_price, this.config.brand.currency.code)
           });
         // this.mdProdYearly = this.translate.instant(
         //   'MEMBERSHIP.infoMembershipYearly',
