@@ -36,7 +36,7 @@
 				"labelBtnViewPublished": "Voir votre Page Internet Live",
 				"labelLastPublished": "Dernière publication",
 				"msgAnalysing": "Analyse du contenu ...",
-				"msgContentRequired": "Bon travail jusqu'à présent, mais nous avons besoin d'un peu plus d'informations pour générer votre Page Internet. \n\nLe tableau ci-dessous vous indique les sections qui nécessitent davantage de contenu. Une fois que vousaurez ajouté suffisamment de données, les options **APERÇU** et **PUBLIER** seront disponibles. Nous pourrons créer votre Page Internet et distribuer votre contenu.\n\nVous pouvez [voir une version démo]({{link}}) voir à quoi ressemble une Page Internet avec davantage de contenu.",
+				"msgContentRequired": "Bon travail jusqu'à présent, mais nous avons besoin d'un peu plus d'informations pour générer votre site Web.\n\nLe résumé ci-dessous doit indiquer les sections qui nécessitent encore du contenu supplémentaire. Une fois que vous avez ajouté suffisamment de données, les options **PREVIEW** et **PUBLISH** seront activées et nous pourrons créer votre site Web et distribuer votre contenu à nos partenaires.\n\nVous pouvez [afficher une version de démonstration]({{ link }}) en haut pour voir à quoi ressemblera le site Web avec le contenu ajouté.",
 				"msgPublished": "Votre site Web **apptiser** a été publié avec succès et les dernières mises à jour de contenu ont été synchronisées sur le réseau RDL de canaux de distribution.",
 				"msgUnpublished": "Les dernières modifications que vous avez apportées n'ont pas encore été publiées. Accédez à vos \"Paramètres du site Web\" pour PRÉVISUALISER et PUBLIER vos dernières mises à jour\n",
 				"msgVerified": "# Site publié le {{ date }} par {{ name }}.",
@@ -361,12 +361,10 @@
 		"labelContact": "Contactez notre support",
 		"labelContent": "Gérez votre contenu",
 		"labelFAQs": "Questions fréquemment posées",
-		"labelHub": "Hub pour les membres",
 		"labelLogout": "Se déconnecter",
 		"labelMarketplace": "MarketPlace",
 		"labelSettings": "Gérer votre compte",
-		"signedInAs": "Titulaire du compte",
-		"tipBtnHub": "Hub pour les membres"
+		"signedInAs": "Utilisateur connecté"
 	},
 	"JOIN": {
 		"duplicateEmail": "Cette **adresse e-mail** est déjà enregistrée, veuillez [vous connecter ou récupérer votre mot de passe ici](/ signin).",
@@ -380,7 +378,7 @@
 		"invalidJobRequired": "Sélectionnez votre emploi ou rôle principal",
 		"invalidRequired": "Obligatoire",
 		"invalidTelRequired": "un numéro de téléphone est nécessaire",
-		"invalidTerms": "Pour continuer, vous devez accepter les **conditions** et **politique de confidentialité** de {{ brand }} et nous permettre de vous contacter au sujet de l'adhésion.",
+		"invalidTerms": "Pour continuer, vous devez cocher la case pour confirmer l'acceptation des {{ brand }} **conditions** et de la **politique de confidentialité** et pour nous permettre de vous contacter, si nécessaire, concernant votre compte.",
 		"jobRoles": [
 			"Propriétaire / Directeur",
 			"Chef/Cuisine",
@@ -389,7 +387,7 @@
 			"Autre"
 		],
 		"joinSuccess": "# OK merci!\n\nUn membre de notre équipe sera en contact avec vous sous peu.\n\n**L'équipe de {{ brand }}**",
-		"joinUsByReferral": "# Bienvenue\n\nVous avez été invité à devenir membre de **{{ brand }}**, une organisation qui a été créée pour soutenir les restaurants et apporter des changements positifs au sein de l'industrie.\n\nVeuillez saisir vos coordonnées et indiquer que vous acceptez nos conditions.\n\nSi vous rencontrez des problèmes pour activer votre adhésion, veuillez [contacter notre équipe d'assistance]({{ email }}).",
+		"joinUsByReferral": "# Accueillir\n\nVous avez été invité à vous abonner à **{{ brand }}**, une solution de site Web facile à utiliser et simple, créée spécifiquement pour les entreprises hôtelières.\n\nVeuillez entrer vos coordonnées et indiquer que vous acceptez nos conditions.\n\nSi vous rencontrez des problèmes pour activer votre compte, veuillez [contacter notre équipe d'assistance]({{ email }}).",
 		"joinUsByReferralFree": "# Adhésion gratuite!\n\nVous avez été invité à devenir membre gratuit de **{{ brand }}**, une organisation qui a été créée pour soutenir les restaurants et apporter des changements positifs au sein de l'industrie.\n\nVeuillez saisir vos coordonnées et indiquer que vous acceptez nos conditions.\n\nSi vous rencontrez des problèmes pour activer votre adhésion, veuillez [contacter notre équipe d'assistance]({{ email }}).\n\nToujours pas sûr ? [Visitez notre site Web pour plus d'informations] (https://restaurantcollective.org.uk/first-3-months-membership-is-absolutely-free/)",
 		"joinUsToday": "# Abonnez-vous maintenant\n\nSuivez simplement les étapes suivantes et vous serez inscrit en un rien de temps.\n\n 1. Indiquez votre nom et vos coordonnées\n\n 2. Choisissez une option d'abonnement\n\n 3. Payez en ligne.\n\nSi vous rencontrez des problèmes tout au long de ce processus, veuillez envoyer un e-mail :\n\n{{ email }}",
 		"joinWelcome": "# Accueillir\n\nVous vous êtes inscrit avec succès sur **{{ brand }}** et nous vous avons envoyé des informations de connexion ainsi que d'autres informations.\n\nFermez cette fenêtre et vérifiez votre messagerie.\n\nMerci beaucoup.\n\n**{{ brand }} Équipe de sélection**",
@@ -403,7 +401,7 @@
 		"labelFirstName": "Prénom",
 		"labelJob": "Votre emploi / rôle",
 		"labelLastName": "Nom",
-		"labelOrganisation": "Nom du restaurant",
+		"labelOrganisation": "Restaurant / Lieu",
 		"labelTel": "Téléphone",
 		"labelTerms": "En cochant cette case, vous acceptez les <a href=\"{{ toc }}\" target=\"_blank\">Conditions</a> et la <a href=\"{{ privacy }}\" target=\"_blank\">Politique de confidentialité</a> de {{ brand }} et de vous contacter, si nécessaire, en utilisant les informations fournies ici.\n",
 		"linkSignIn": "Connectez-vous",
@@ -424,7 +422,7 @@
 		"errorTel": "Un numéro valide est requis",
 		"labelAdd": "Ajouter",
 		"labelBtnCancel": "annuler",
-		"labelBtnNotListed": "Restaurant non répertorié",
+		"labelBtnNotListed": "Lieu non répertorié",
 		"labelBtnSend": "Envoyer",
 		"labelEnterName": "Entrez le nom du restaurant",
 		"labelName": "Nom du restaurant",
@@ -450,8 +448,6 @@
 		"labelInfo": "Pour plus d'informations",
 		"labelRequest": "Demande d'être contacté",
 		"labelUrl": "Page Internet",
-		"msgEmailAffiiateRequest": "Votre demande à été envoyée.\n\nLes informations ont été envoyés à {{ affiliate }} et un membre de son équipe doit vous contacter dans les deux jours ouvrables.\n",
-		"msgRequest": "Vos coordonnées seront envoyés à **{{ affiliate }}** et un membre de leur équipe devrait vous contacter dans les deux jours ouvrables pour discuter de l'offre **{{ deal }}**.\n\nIl s'agit d'enregistrer votre intérêt, libre à vous de procéder ou pas.",
 		"msgRequestSent": "Merci. Votre demande à été envoyée.",
 		"tipAddToFavourites": "Ajouter / Supprimer des favoris",
 		"tipClearFilters": "Enlever tous les filtres",
@@ -460,8 +456,7 @@
 		"tipFilterBy": "Filtrer les résultats",
 		"tipLink": "Plus d'information en ligne",
 		"tipNational": "Disponible au niveau national",
-		"tipRequestContact": "Quelqu'un vous contactera à propos de cette offre",
-		"titleRequest": "Offre exclusive aux membres"
+		"tipRequestContact": "Quelqu'un vous contactera à propos de cette offre"
 	},
 	"MEMBERSHIP": {
 		"infoMembershipMonthly": "##  SOUSCRIPTION MENSUELLE\n\nPayez seulement **{{ fee }} + TVA** par mois pour un accès complet à tous les avantages offerts par **{{ brand }}**.\n\nDes frais d'installation uniques de ** {{ setup }} + TVA** vous seront également facturés.",
@@ -478,7 +473,7 @@
 		"labelBtnLater": "Plus tard",
 		"labelBtnStart": "COMMENCER ICI",
 		"messagesReadOk": "Ok, lu",
-		"welcomeNewMember": "# Vous y êtes!\n\nMerci pour avoir choisi de rejoindre Restaurateurs Indépendants. Nous espérons que vous contribuerez au développement de cette communauté passionnante de professionnels du secteur et de restaurateurs indépendants.\n\n## Ajoutez votre restaurant\n\nAvant de commencer à explorer le Hub, veuillez terminer la configuration de votre compte en associant votre restaurant.\n\nLorsque vous serez prêt, sélectionnez l'option **COMMENCER ICI** ci-dessous.\n\nTrouvez votre restaurant et suivez les instructions afin de l'associer à votre abonnement.\n"
+		"welcomeNewMember": "# Vous y êtes!\n\nC'est formidable que vous ayez choisi de vous abonner à **apptiser** et nous espérons que vous apprécierez l'utilisation de votre nouveau site Web.\n\n## Ajoutez votre lieu\n\nAvant de commencer à explorer l'application, veuillez terminer la configuration initiale en reliant votre lieu à votre compte.\n\nLorsque vous êtes prêt, sélectionnez l'option **COMMENCER ICI** ci-dessous.\n\nTrouvez votre lieu et suivez les instructions à l'écran pour vérifier les détails et le lier à votre abonnement.\n"
 	},
 	"PLANS": {
 		"infoCurrentPlanMonthly": "Votre abonnement actuel est renouvelé le **{{ renewal }}** chaque mois à **{{ price }}**. Pour modifier votre forfait, choisissez parmis les options ci-dessous et nous calculerons les frais supplémentaires.",
@@ -543,7 +538,7 @@
 		"msgLinkCopied": "Votre lien a été copié dans le presse-papiers",
 		"msgNewRequestReceived": "Nouvelle demande reçue avec succès. Merci.",
 		"msgNotificationsUpdated": "Vos paramètres de notification ont été mis à jour",
-		"msgPlanUpdated": "Votre abonnement a été mis à jour avec succès pour {{ plan }}",
+		"msgPlanUpdated": "Votre plan d'abonnement a été mis à jour avec succès vers {{ plan }}",
 		"msgRemoveRestaurant": "Voulez-vous vraiment supprimer **{{ name }}** de votre compte ?",
 		"msgRestaurantRemoved": "Vos modifications demandées ont été traitées.\n\nVous pouvez consulter vos frais d'abonnement mis à jour en sélectionnant l'option GÉRER LES PAIEMENTS dans Détails du compte.",
 		"msgUpdateFailed": "Désolé, un problème est survenu lors de la mise à jour de vos informations",
@@ -609,7 +604,7 @@
 	"VERIFY": {
 		"errorInvalidCode": "Code de vérification non valide",
 		"infoCode": "Veuillez vérifier l'adresse e-mail pour **{{ name }}** et ajouter votre code de vérification ci-dessous.\n\nSi vous n'avez pas encore de code, assurez-vous que nous avons la bonne adresse e-mail et que vous abvez bien utiliser l'option **Demander le code**.\n\nCopiez le code depuis votre e-mail et collez-le ici.",
-		"infoEmail": "Veuillez fournir l'adresse e-mail de {{ name }}.\n\nCelle-ci sera utilisée pour confirmer votre adhésion et dans toute correspondance à l'avenir.",
+		"infoEmail": "Veuillez fournir l'adresse e-mail principale de {{ name }}.\n\nCelui-ci sera utilisé pour confirmer l'inscription de votre compte et dans toute correspondance future.",
 		"infoEmailAndCode": "Veuillez saisir l'adresse e-mail pour **{{ name }}**, puis ajouter votre **code de vérification** ci-dessous :.\n\nSi vous n'avez pas encore reçu de code, une fois l'adresse e-mail ajoutée, utilisez l'option **Demander le code**.\n\nCopiez le code depuis votre e-mail et collez-le ici.",
 		"infoVerify": "Veuillez vérifier que l'adresse e-mail ci-dessous est correcte pour **{{ name }}**, puis ajoutez et envoyez votre **code de vérification**.\n\nSi vous n'avez pas encore de code, assurez-vous d'abord que l'e-mail est correct, puis sélectionnez l'option **Demander le code** ci-dessous et un code vous sera envoyé.\n\nUne fois le code obtenu, veuillez revenir ici et terminez cette démarche.",
 		"labelBtnCancel": "Annuler",

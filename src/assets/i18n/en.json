@@ -36,7 +36,7 @@
 				"labelBtnViewPublished": "VIEW WEBSITE",
 				"labelLastPublished": "Last published",
 				"msgAnalysing": "Analysing content...",
-				"msgContentRequired": "Good work so far but we need a bit more information to generate your  Website. \n\nThe summary below should indicate which sections still need additional content. Once you've added enough data, the **PREVIEW** and **PUBLISH** options will be enabled and we can create your website and distribute your content to our partners.\n\nYou can [view a demo restaurant version]({{ link }}) top see what the website will look like with content added.",
+				"msgContentRequired": "Good work so far but we need a bit more information to generate your  Website. \n\nThe summary below should indicate which sections still need additional content. Once you've added enough data, the **PREVIEW** and **PUBLISH** options will be enabled and we can create your website and distribute your content to our partners.\n\nYou can [view a demo version]({{ link }}) top see what the website will look like with content added.",
 				"msgPublished": "Your **apptiser** website has been successfully published and the latest content updates synchronised accross the RDL Network of distribution channels.",
 				"msgUnpublished": "The latest changes that you have made have not yet been published. Go to your [WEBSITE SETTING](cms/{{ id }}/settings) to PREVIEW and PUBLISH your latest updates.\n",
 				"msgVerified": "# Website published on {{ date }} by {{ name }}.",
@@ -361,12 +361,10 @@
 		"labelContact": "Contact Support",
 		"labelContent": "Manage your content",
 		"labelFAQs": "Frequently Asked Questions",
-		"labelHub": "Member's Hub",
 		"labelLogout": "Logout",
 		"labelMarketplace": "Marketplace",
 		"labelSettings": "Account Settings",
-		"signedInAs": "SIGNED IN MEMBER",
-		"tipBtnHub": "Member's Hub"
+		"signedInAs": "SIGNED IN USER"
 	},
 	"JOIN": {
 		"duplicateEmail": "This **email address** is already registered, please [SIGN-IN, or retrieve your password here](/signin).",
@@ -380,7 +378,7 @@
 		"invalidJobRequired": "Please select your main job or role",
 		"invalidRequired": "Required",
 		"invalidTelRequired": "A valid mobile number is required",
-		"invalidTerms": "To continue, you must tick the box to confirm acceptance of the {{ brand }} **terms** and **privacy policy** and to allow us to contact you, if necessary, regarding Membership. ",
+		"invalidTerms": "To continue, you must tick the box to confirm acceptance of the {{ brand }} **terms** and **privacy policy** and to allow us to contact you, if necessary, regarding your account. ",
 		"jobRoles": [
 			"Owner/Manager",
 			"Chef/Kitchen",
@@ -389,7 +387,7 @@
 			"Other"
 		],
 		"joinSuccess": "# Ok thanks!\n\nA member of our Support & Curation Team will be in contact with you shortly.\n\n**{{ brand }} Curation Team**",
-		"joinUsByReferral": "# Welcome\n\nYou've been invited to subscribe to **{{ brand }}**, an easy to use, fuss-free website solution created specifically for hospitality businesses. \n\nPlease enter your contact details and indicate that you accept our terms.\n\nIf you experience any problems activating your membership then do please [contact our Support Team]({{ email }}).",
+		"joinUsByReferral": "# Welcome\n\nYou've been invited to subscribe to **{{ brand }}**, an easy to use, fuss-free website solution created specifically for hospitality businesses. \n\nPlease enter your contact details and indicate that you accept our terms.\n\nIf you experience any problems activating your account then do please [contact our Support Team]({{ email }}).",
 		"joinUsByReferralFree": "# Free Subscription!\n\nYou've been invited to become a subscriber of **{{ brand }}**, an easy to use, fuss-free website solution created specifically for hospitality businesses. \n\nPlease enter your contact details and indicate that you accept our terms.\n\nIf you experience any problems activating your membership then do please [contact our Support Team]({{ email }}).\n\nStill unsure? [Visit our website for more information](https://restaurantcollective.org.uk/first-3-months-membership-is-absolutely-free/)",
 		"joinUsToday": "# Subscribe Now\n\nJust complete the following steps and we’ll have you signed up in no time. \n\n 1. Provide your name and contact details\n\n 2. Choose a subscription option\n\n 3. Pay online.\n\nIf you experience any problems throughout this process please email: \n\n{{ email }}",
 		"joinWelcome": "# Welcome\n\nYou've successfully registered for **{{ brand }}** and we've sent you login details and along with some further information.\n\nClose this window and check your email.\n\nMany thanks.\n\n**{{ brand }} Curation Team**",
@@ -403,7 +401,7 @@
 		"labelFirstName": "First name",
 		"labelJob": "Your Job/Role",
 		"labelLastName": "Last name",
-		"labelOrganisation": "Restaurant / Organisation",
+		"labelOrganisation": "Restaurant / Venue",
 		"labelTel": "Mobile",
 		"labelTerms": "By ticking this box you agree to the {{ brand }} <a href=\"{{ toc }}\" target=\"_blank\">Terms</a> and <a href=\"{{ privacy }}\" target=\"_blank\">Privacy Policy</a> and for **{{ brand }}** to contact you, when necessary, using the details that you have provided here.\n",
 		"linkSignIn": "Sign In",
@@ -424,7 +422,7 @@
 		"errorTel": "A valid number is required",
 		"labelAdd": "Add",
 		"labelBtnCancel": "cancel",
-		"labelBtnNotListed": "Restaurant not listed",
+		"labelBtnNotListed": "Venue not listed",
 		"labelBtnSend": "Send",
 		"labelEnterName": "Enter the trading name",
 		"labelName": "Trading name",
@@ -450,8 +448,6 @@
 		"labelInfo": "For more information",
 		"labelRequest": "Request contact",
 		"labelUrl": "Webpage",
-		"msgEmailAffiiateRequest": "Your request has been sent.\n\nYou Membership details have been sent to {{ affiliate }} and someone from their team should contact you within 2 working days. \n",
-		"msgRequest": "Your contact details and Membership ID will be sent to **{{ affiliate }}** and someone from their team should contact you within 2 working days to discuss the **{{ deal }}** deal.\n\nThis is just to register you interest with them and there's no obligation to proceed, unless you should choose to do so.",
 		"msgRequestSent": "Thank you. Your request has been sent.",
 		"tipAddToFavourites": "Add/Remove favourites",
 		"tipClearFilters": "Clear all filters",
@@ -460,8 +456,7 @@
 		"tipFilterBy": "Filter results",
 		"tipLink": "More information online",
 		"tipNational": "Available Nationally",
-		"tipRequestContact": "Someone will contact you about this deal",
-		"titleRequest": "Exclusive Member Deal"
+		"tipRequestContact": "Someone will contact you about this deal"
 	},
 	"MEMBERSHIP": {
 		"infoMembershipMonthly": "##  MONTHLY SUBSCRIPTION\n\nPay just **{{ fee }} + VAT** per month for full access to all the benefits offered by **{{ brand }}**. \n\nYou will also be charged a one-time set-up fee of **{{ setup }} + VAT**.",
@@ -478,7 +473,7 @@
 		"labelBtnLater": "Do it later",
 		"labelBtnStart": "START HERE",
 		"messagesReadOk": "Ok, I've read those",
-		"welcomeNewMember": "# You're in!\n\nIt's great that you've chosen to subscribe to apptiser and we hope you enjoy using your website.\n\n## Add your venue\n\nBefore you start exploring the Member's Hub, please complete the initial set up by linking your venue to your membership account.\n\nWhen you're ready, select the **START HERE** option below.\n\nFind your venue and follow the on-screen instructions to verify the details and link it to your subscription.\n"
+		"welcomeNewMember": "# You're in!\n\nIt's great that you've chosen to subscribe to **apptiser** and we hope you enjoy using your new website.\n\n## Add your venue\n\nBefore you start exploring the application, please complete the initial set up by linking your venue to your account.\n\nWhen you're ready, select the **START HERE** option below.\n\nFind your venue and follow the on-screen instructions to verify the details and link it to your subscription.\n"
 	},
 	"PLANS": {
 		"infoCurrentPlanMonthly": "Your current subscription plan renews on the **{{ renewal }}** of each month at **{{ price }}**. To change your plan, select another option below and we'll calculate any additional charges due.",
@@ -543,7 +538,7 @@
 		"msgLinkCopied": "Your referral link has been copied to the clipboard",
 		"msgNewRequestReceived": "New request successfully received. Thank you.",
 		"msgNotificationsUpdated": "Your notification settings have been updated",
-		"msgPlanUpdated": "Your membership plan has been successfully updated to {{ plan }}",
+		"msgPlanUpdated": "Your subscription plan has been successfully updated to {{ plan }}",
 		"msgRemoveRestaurant": "Are you sure that you want to remove **{{ name }}** from your account – you will no longer have access to manage their web content?",
 		"msgRestaurantRemoved": "Your requested changes have been processed.\n\nYou can review your updated subscription  fees by selecting the MANAGE PAYMENTS option in Account Details.",
 		"msgUpdateFailed": "Sorry, there was a problem updating your information",
@@ -594,7 +589,7 @@
 		"errorTechnical": "Unfortunately we're experiencing technical issues, please try again later.",
 		"errorUserUnauthorised": "Unauthorised login attempt - please check your details",
 		"forgottenPwd": "Forgotten your password?",
-		"introduction": "# Websites Made Simple\n\n **{{ brand }}** offers simplicity, clarity and effective website solution for hospitality businesses.\n\nWelcome to **{{ brand }}**. We know how hard it is to create, maintain and run a website that works hard for you, which is why we created apptiser.\n apptiser takes the uncertainty away from web building. Think of us as the staff member you never knew you needed. Tech guru that works hard for you and who always makes sure to highlight you in the best light possible.",
+		"introduction": "# Websites Made Simple\n\n **{{ brand }}** offers simplicity, clarity and effective website solution for hospitality businesses.\n\nWelcome to **{{ brand }}**. We know how hard it is to create, maintain and run a website that works hard for you, which is why we created **apptiser**.\n**apptiser** takes the uncertainty away from web building. Think of us as the staff member you never knew you needed. Tech guru that works hard for you and who always makes sure to highlight you in the best light possible.",
 		"labelBtnResetPwd": "RESET PASSWORD",
 		"labelBtnSignIn": "SIGN IN",
 		"labelEmail": "USER EMAIL ADDRESS",
@@ -609,7 +604,7 @@
 	"VERIFY": {
 		"errorInvalidCode": "Invalid verification code",
 		"infoCode": "Please check the email address for **{{ name }}** and add your Verification Code below.\n\nIf you don't have a code yet, then make sure we have the correct email and use **Request Code option**.\n\nCopy the code from your email and paste it back here.",
-		"infoEmail": "Please provide the main email address for {{ name }}.\n\nThis will be used to confirm Membership and in all future correspondence.",
+		"infoEmail": "Please provide the main email address for {{ name }}.\n\nThis will be used to confirm your account subscription, and in all future correspondence.",
 		"infoEmailAndCode": "Please enter the main email address for **{{ name }}** and then add your **Verification Code** below:.\n\nIf you don't have a code yet then once you've added the email address, use the **Request Code** option.\n\nCopy the code from your email and paste it back here.",
 		"infoVerify": "Please check that the email address below is correct for **{{ name }}**, then add and submit your **verification code**.\n\nIf you don't have a code yet, first make sure that the email is correct, then select the **Request Code** option below and a code will be sent to you.\n\nOnce you have your code, return here and complete the process.",
 		"labelBtnCancel": "Cancel",
