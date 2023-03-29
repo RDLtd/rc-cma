@@ -320,7 +320,7 @@ export class SettingsComponent implements OnInit {
     //
 
     // ks 280323 NO - I think we need to update, since all apptiser restaurants are the same...
-    if (this.restaurants.length >1 ) {
+    if (this.restaurants.length > 1 ) {
       this.updateRestaurantSubscription(this.restaurants.length);
     }
     // if (this.restaurants.length === 2) {
@@ -369,7 +369,7 @@ export class SettingsComponent implements OnInit {
       .subscribe({
         next: res => {
           console.log(res);
-          // this.openSnackBar(this.translate.instant('SETTINGS.msgRestaurantRemoved', {name: rest.restaurant_name}), 'OK');
+          this.openSnackBar(this.translate.instant('SETTINGS.msgRestaurantRemoved'), 'OK');
           this.loadService.close();
         },
         error: error => {

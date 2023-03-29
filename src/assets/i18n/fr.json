@@ -545,7 +545,7 @@
 		"msgNotificationsUpdated": "Vos paramètres de notification ont été mis à jour",
 		"msgPlanUpdated": "Votre abonnement a été mis à jour avec succès pour {{ plan }}",
 		"msgRemoveRestaurant": "Voulez-vous vraiment supprimer **{{ name }}** de votre compte ?",
-		"msgRestaurantRemoved": "{{ name }} a été supprimé de votre compte.\n\nVous pouvez consulter votre abonnement mis à jour en sélectionnant l'option GÉRER LES PAIEMENTS sur **Détails du compte**.",
+		"msgRestaurantRemoved": "Vos modifications demandées ont été traitées.\n\nVous pouvez consulter vos frais d'abonnement mis à jour en sélectionnant l'option GÉRER LES PAIEMENTS sur **Détails du compte**.",
 		"msgUpdateFailed": "Désolé, un problème est survenu lors de la mise à jour de vos informations",
 		"password": {
 			"currentPwd": "Votre mot de passe actuel",

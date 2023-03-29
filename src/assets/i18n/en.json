@@ -545,7 +545,7 @@
 		"msgNotificationsUpdated": "Your notification settings have been updated",
 		"msgPlanUpdated": "Your membership plan has been successfully updated to {{ plan }}",
 		"msgRemoveRestaurant": "Are you sure that you want to remove **{{ name }}** from your account – you will no longer have access to manage their web content?",
-		"msgRestaurantRemoved": "{{ name }} has been removed from your account. \n\nYou can review your updated subscription by selecting the MANAGE PAYMENTS option on **Account Details**.",
+		"msgRestaurantRemoved": "Your requested changes have been processed.\n\nYou can review your updated subscription  fees by selecting the MANAGE PAYMENTS option on **Account Details**.",
 		"msgUpdateFailed": "Sorry, there was a problem updating your information",
 		"password": {
 			"currentPwd": "Your current password",
