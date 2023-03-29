@@ -1,8 +1,8 @@
 ## CORE DATA
 
-This panel displays the restaurant's core data. 
+This panel displays the venue's core data. 
 
-It is vital that this information is correct as it provides users with all of the essential business information and is the foundation for all other content. 
+It is vital that this information is correct as it provides users with all the essential business information and is the foundation for all other content. 
 
 Whenever an update is made to the content, we will ask for this CORE DATA to be verified to ensure accuracy.
 
