@@ -242,7 +242,7 @@
 		},
 		"SETTINGS": {
 			"builder": {
-				"infoDiscardChanges": "Vous avez apporté des modifications à la configuration de votre **site web apptiser**, mais vous n'avez pas encore publié ces modifications.\n\nSi vous continuez sans **publier** au préalable, ces modifications seront ignorées.",
+				"infoDiscardChanges": "Vous avez apporté des modifications à la configuration de votre **site web apptiser**, mais vous n'avez pas encore publié ces modifications.\n\nSi vous continuez sans **publier** ces modifications, elles seront supprimées.\n\n**Remarque** : les modifications de contenu que vous avez pu apporter au cours de cette session ne seront pas affectées.\n\n",
 				"labelClose": "Proche",
 				"labelOpenPreview": "Aperçu ouvert",
 				"statusMessageFinal": "{{ version }} construction terminée !",
@@ -265,7 +265,7 @@
 			"labelPublisher": "Publié par",
 			"labelSetDomain": "Définir un domaine personnalisé",
 			"labelUpdate": "Mettre à jour",
-			"linkCustomDomain": "",
+			"linkCustomDomain": "https://ps318108.typeform.com/to/jjUbHwf7",
 			"statusBuilding": "Construire un site web",
 			"statusDeploying": "Déploiement du site Web",
 			"statusInProgress": "En cours...",
@@ -510,7 +510,7 @@
 		"infoMember": "Toutes les communications concernant votre adhésion vous seront envoyées à cette adresse e-mail.",
 		"infoNotification": "Outre les communications concernant votre abonnement à {{ brand }}, vous pouvez également choisir de recevoir des informations autres en cochant les cases correspondantes:",
 		"infoReferrals": "Il s'agit d'un code de parrainage unique qui vous est attribué et que vous pouvez partager avec vos collègues pour les encourager à rejoindre Restaurateurs Indépendants.",
-		"infoRestaurants": "Les lieux associés à votre compte sont indiqués ci-dessous. Sélectionnez un lieu pour ajouter/modifier le contenu et pour créer/mettre à jour votre **site web apptiser**.\n\nUtilisez l'option AJOUTER ci-dessus pour créer des sites Web et gérer le contenu de sites supplémentaires.",
+		"infoRestaurants": "Les sites associés à votre compte sont répertoriés ci-dessous. Sélectionnez un emplacement pour ajouter/modifier du contenu et pour créer/mettre à jour votre **site web apptiser**.\n\nUtilisez l'option AJOUTER ci-dessus pour gérer le contenu Web de sites supplémentaires.",
 		"labelAddRestaurant": "Ajouter un autre lieu",
 		"labelAwaitingImage": "EN ATTENTE D'UNE PHOTO",
 		"labelBtnCancel": "Annuler",
