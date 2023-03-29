@@ -1117,18 +1117,28 @@ form.rc-form-grid {
   background-color: rgba(#000, .9);
 }
 .rc-dialog-help {
+
+  .mat-mdc-dialog-content {
+    padding: 0 !important;
+  }
   h2 {
-    color: $rc-theme-accent;
+    color: white;
+    background-color: $rc-theme-accent;
     text-transform: uppercase;
+    padding: 1rem;
+    margin-bottom: 1rem;
   }
   h3 {
+    margin: 1rem;
     font-size: 18px;
     font-weight: 500;
   }
   p {
+    margin: 1rem;
     border-left: 3px solid $rc-cool-grey;
     padding-left: 8px;
   }
+
 }
 .rc-dialog-alert {
   padding-bottom: 8px;
@@ -1333,7 +1343,7 @@ ul.rc-lookup-results {
 * -------------------------------
 **/
 .rc-cms {
-  padding-top: ($rc-toolbar-height);
+  padding-top: ($rc-toolbar-height * 1.2);
   //.rc-card { padding: 16px; }
   dl { margin: 24px 0 0 0; }
   dt {

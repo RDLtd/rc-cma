@@ -242,7 +242,7 @@
 		},
 		"SETTINGS": {
 			"builder": {
-				"infoDiscardChanges": "You've made changes to your **apptiser website** configuration, but have not yet published those changes.\n\nIf you continue without first **publishing**, those changes will be discarded.",
+				"infoDiscardChanges": "You've made changes to your **apptiser website** configuration, but have not yet published those changes.\n\nIf you continue without **publishing** those changes, then they will be discarded.\n\n**Note**: content changes that you may have made in this session will not be affected. \n\n",
 				"labelClose": "Close",
 				"labelOpenPreview": "Open Preview",
 				"statusMessageFinal": "{{ version }} build complete!",
@@ -510,7 +510,7 @@
 		"infoMember": "All communications regarding your account will be sent to this email address.",
 		"infoNotification": "In addition to essential communications about your {{ brand }}  subscription, you may also choose receive any of the following, by ticking the relevant checkbox:",
 		"infoReferrals": "This is a unique referral code that you can share with any of your colleagues, to encourage them to join apptiser and have access to this exciting website solution.",
-		"infoRestaurants": "",
+		"infoRestaurants": "The venues associated with your account are listed below. Select a location to add/edit content and to create/update your **apptiser website**.\n\nUse the ADD option above to manage web content for additional venues.",
 		"labelAddRestaurant": "Add a venue to this account",
 		"labelAwaitingImage": "AWAITING IMAGE",
 		"labelBtnCancel": "Cancel",
