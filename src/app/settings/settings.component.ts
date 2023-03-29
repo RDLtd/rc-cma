@@ -314,37 +314,48 @@ export class SettingsComponent implements OnInit {
     // If this is the first additional restaurant
     // i.e. it's the 2nd restaurant that's been associated
     // then we need to create the subscription
-    if (this.restaurants.length === 2) {
-      this.loadService.open('Create Restaurant Subscription');
-      this.memberService.createRestaurantSubscription(
-        this.member.member_id,
-        this.member.member_customer_id,
-        this.restProd.product_stripe_price_id,
-        this.restProd.product_tax_id,
-        1
-      ).subscribe({
-        next: res => {
-          console.log(res);
-          // Now update member's subscription id
-          this.member.member_subscription_id = res['subscription_id'];
-          localStorage.setItem('rd_profile', JSON.stringify(this.member));
-          this.loadService.close();
-        },
-        error: error => {
-          console.log(error);
-          this.error.handleError('', 'Failed to create restaurant subscription! ' + error);
-          this.loadService.close();
-        }
-      });
-    } else {
-      // update subscription charge
-      this.updateRestaurantSubscription(this.restaurants.length - 1);
+    //
+
+    // ks 280323 NO - I think we need to update, since all apptiser restaurants are the same...
+    if (this.restaurants.length >1 ) {
+      this.updateRestaurantSubscription(this.restaurants.length);
     }
+    // if (this.restaurants.length === 2) {
+    //   this.loadService.open('Create Restaurant Subscription');
+    //   this.memberService.createRestaurantSubscription(
+    //     this.member.member_id,
+    //     this.member.member_customer_id,
+    //     this.restProd.product_stripe_price_id,
+    //     this.restProd.product_tax_id,
+    //     1
+    //   ).subscribe({
+    //     next: res => {
+    //       console.log(res);
+    //       // Now update member's subscription id
+    //       this.member.member_subscription_id = res['subscription_id'];
+    //       localStorage.setItem('rd_profile', JSON.stringify(this.member));
+    //       this.loadService.close();
+    //     },
+    //     error: error => {
+    //       console.log(error);
+    //       this.error.handleError('', 'Failed to create restaurant subscription! ' + error);
+    //       this.loadService.close();
+    //     }
+    //   });
+    // } else {
+    //   // update subscription charge
+    //   this.updateRestaurantSubscription(this.restaurants.length - 1);
+    // }
   }
 
   updateRestaurantSubscription(qty: number): void {
+    console.log('Update count to ', qty);
     this.loadService.open('Update Subscription');
     this.restProd = this.getRestaurantProduct();
+    // ks 280323 in fact we do not need all of this since we now use a different methods
+    // at the back end - we just update the quantity in subscriptionItems
+    //
+    // Leaving the call as is for now...
     this.memberService.addRestaurantSubscription(
       this.member.member_id,
       this.member.member_subscription_id,
@@ -378,12 +389,17 @@ export class SettingsComponent implements OnInit {
     dialogRef.afterClosed().subscribe(confirmed => {
 
       if (confirmed) {
-        const addedRestaurantCount = this.restaurants.length - 1;
+        // ks 280328 for apptiser don't subtract 1!
+        const addedRestaurantCount = this.restaurants.length;
         // do we need to update the restaurant subscription?
 
         if (addedRestaurantCount && !this.isFreeMembership) {
-          addedRestaurantCount === 1 ?
-            this.deleteRestaurantSubscription() : this.updateRestaurantSubscription(addedRestaurantCount - 1);
+          // ks 290323 do NOT delete the subscription for apptiser
+          if (addedRestaurantCount > 1) {
+            this.updateRestaurantSubscription(addedRestaurantCount - 1)
+          }
+          // addedRestaurantCount === 1 ?
+          //   this.deleteRestaurantSubscription() : this.updateRestaurantSubscription(addedRestaurantCount - 1);
         }
 
         this.restaurantService.removeAssociation(rest['association_id'])
