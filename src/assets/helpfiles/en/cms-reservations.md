@@ -1,7 +1,6 @@
 ## Reservations
 
-If you have your menus available in PDF format, then you can upload them here and they will be available to your 
-customers to download.
+In this section you should add your reservation method and any preferences to help customers to understand the process. If you don’t take bookings there is no need to fill in any details.
 
 ### General
 
