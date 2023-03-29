@@ -1,12 +1,16 @@
-<div class="rc-dialog rc-dialog-help">
+<div class="rc-dialog">
+
+  <mat-toolbar class="rc-toolbar rc-toolbar-nav">
+  <span>{{ 'CONTACT.titleContactSupport' | translate }}</span>
+  <span class="rc-space-filler"></span>
+  <span class="rc-toolbar-actions">
+    <button mat-icon-button [mat-dialog-close]="false" tabindex="-1">
+      <mat-icon>close</mat-icon>
+    </button>
+  </span>
+</mat-toolbar>
 
   <mat-dialog-content>
-
-    <div>
-      <h2>
-      {{ 'CONTACT.titleContactSupport' | translate }}
-      </h2>
-    </div>
 
     <markdown ngPreserveWhitespaces>{{ 'CONTACT.txtBody1' | translate }}</markdown>
     <markdown ngPreserveWhitespaces>{{ 'CONTACT.txtBody2' | translate }}</markdown>
