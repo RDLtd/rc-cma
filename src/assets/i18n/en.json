@@ -38,7 +38,7 @@
 				"msgAnalysing": "Analysing content...",
 				"msgContentRequired": "Good work so far but we need a bit more information to generate your  Website. \n\nThe summary below should indicate which sections still need additional content. Once you've added enough data, the **PREVIEW** and **PUBLISH** options will be enabled and we can create your website and distribute your content to our partners.\n\nYou can [view a demo version]({{ link }}) top see what the website will look like with content added.",
 				"msgPublished": "Your **apptiser** website has been successfully published and the latest content updates synchronised accross the RDL Network of distribution channels.",
-				"msgUnpublished": "The latest changes that you have made have not yet been published. Go to your [WEBSITE SETTING](cms/{{ id }}/settings) to PREVIEW and PUBLISH your latest updates.\n",
+				"msgUnpublished": "The latest changes that you have made have not yet been published. Go to your [WEBSITE SETTING](/cms/{{ id }}/settings) to PREVIEW and PUBLISH your latest updates.\n",
 				"msgVerified": "# Website published on {{ date }} by {{ name }}.",
 				"msgVerifiedAndPublished": "Content verified and published",
 				"tipMarketingLinks": "Marketing links and QR codes",

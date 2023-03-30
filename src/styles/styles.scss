@@ -644,6 +644,7 @@ form.rc-form-grid {
   }
   &.rc-toolbar-nav {
     background-color: $rc-petrol;
+    height: auto !important;
     .rc-link-active { color: white !important; }
   }
   &.rc-toolbar-section {
@@ -1343,7 +1344,7 @@ ul.rc-lookup-results {
 * -------------------------------
 **/
 .rc-cms {
-  padding-top: ($rc-toolbar-height * 1.2);
+  padding-top: ($rc-toolbar-height);
   //.rc-card { padding: 16px; }
   dl { margin: 24px 0 0 0; }
   dt {
