@@ -63,8 +63,8 @@
 		},
 		"FEATURES": {
 			"headerDescFull": "Full Description",
-			"headerDescParagraph": "One paragraph description",
-			"headerDescSentence": "One sentence description",
+			"headerDescParagraph": "One Paragraph Description",
+			"headerDescSentence": "One Sentence Description",
 			"headerStrapline": "Subheading / Strapline",
 			"labelDescFull": "A full description up to {{ chars }} characters max.",
 			"labelDescParagraph": "A one paragraph description, 200 characters max.",
@@ -75,7 +75,7 @@
 			"tipAddFeatures": "Add extra features here, separated by commas",
 			"tipSave": "Save changes",
 			"tipUndo": "Undo changes",
-			"titleAddFeatures": "Additional features",
+			"titleAddFeatures": "Additional Features",
 			"titleDescAndFeatures": "Descriptions & Features",
 			"titleDescriptions": "Descriptions",
 			"titleFeatures": "Features"
@@ -149,11 +149,11 @@
 			"tipUndo": "Undo changes",
 			"tipUploadDirections": "Upload new directions",
 			"tipViewDirections": "View current directions",
-			"titleLocation": "Location information",
+			"titleLocation": "Location Information",
 			"titleMapPos": "Map LOCATION",
-			"titleParking": "Car parking",
-			"titlePdf": "Directions download",
-			"titlePublicTransport": "Public transport"
+			"titleParking": "Car Parking",
+			"titlePdf": "Directions Download",
+			"titlePublicTransport": "Public Transport"
 		},
 		"MENUS": {
 			"defaultContentSection1": "Starters",
@@ -198,7 +198,7 @@
 			"uploadStatus": "Uploaded by **{{ user }}** on **{{ date }}**."
 		},
 		"NAV": {
-			"labelAddRestaurant": "Add a venue",
+			"labelAddRestaurant": "Add a Venue",
 			"labelDashboard": "Dashboard",
 			"labelFeatures": "Features",
 			"labelHours": "Opening Times",
@@ -207,16 +207,16 @@
 			"labelMenus": "Menus",
 			"labelReservations": "Reservations",
 			"labelSettings": "Publish Settings",
-			"tipContacts": "Contact & location information",
-			"tipDashboard": "Content dashboard",
-			"tipFeatures": "Descriptions & features",
-			"tipHours": "Opening times",
+			"tipContacts": "Contact & Location Information",
+			"tipDashboard": "Content Dashboard",
+			"tipFeatures": "Descriptions & Features",
+			"tipHours": "Opening Times",
 			"tipImages": "Images",
 			"tipMenus": "Menus",
-			"tipPreview": "Preview your content",
+			"tipPreview": "Preview Your Content",
 			"tipReservations": "Reservations",
-			"tipSettings": "Website settings",
-			"tipYourRestaurants": "Select a venue"
+			"tipSettings": "Website Settings",
+			"tipYourRestaurants": "Select a Venue"
 		},
 		"RESERVATIONS": {
 			"infoOnlineBookings": "Our integrated booking widget will be available with the release of **apptiser premium**. \nThis will allow you to offer real-time reservation from your own website and receive them directly into your reservations system*.",
@@ -236,11 +236,11 @@
 			"tipSave": "Save changes",
 			"tipTestLink": "Test your booking link",
 			"tipUndo": "Undo changes",
-			"titleGeneral": "General information",
+			"titleGeneral": "General Information",
 			"titleGroupBookings": "Group Bookings",
-			"titleOnline": "Online bookings",
-			"titlePrivate": "Events and Private dining",
-			"titleReservationsInfo": "Reservations information"
+			"titleOnline": "Online Bookings",
+			"titlePrivate": "Events and Private Dining",
+			"titleReservationsInfo": "Reservations Information"
 		},
 		"SETTINGS": {
 			"builder": {
