@@ -493,6 +493,7 @@ export class MemberService {
         member_email: formData.email,
         member_telephone: formData.telephone
       },
+      company: this.config.brand.prefix,
       userCode: this.config.userAPICode,
       token: this.authToken
     }));
