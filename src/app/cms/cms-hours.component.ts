@@ -108,19 +108,22 @@ export class CmsHoursComponent implements OnInit {
 
     if (t.closed) {
 
-      t.sessions = [this.lastSession];
+      // ks fixing bug. Not...
+      if (t.sessions.length === 0) {
+        t.sessions = [this.lastSession];
+      }
       t.closed = 0;
 
     } else {
 
       // close with default values
-      t.sessions = [this.sessionNull];
+      // t.sessions = [this.sessionNull];
       t.closed = 1;
       t.cms_time_tag = null;
     }
 
     this.dataChanged = true;
-}
+  }
 
   addSession(index): void {
 
@@ -129,7 +132,11 @@ export class CmsHoursComponent implements OnInit {
     // Open with defaults
     if (t.closed) {
 
-      t.sessions = [this.lastSession];
+      // ks fixing bug. Not...
+      // TODO Where is lastSession updated????
+      if (t.sessions.length === 0) {
+        t.sessions = [this.lastSession];
+      }
       t.closed = 0;
       t.checked = 1;
       // Clear any notes
@@ -159,7 +166,8 @@ export class CmsHoursComponent implements OnInit {
 
     // if this is the last one, then close the session
     if (t.sessions.length === 1) {
-      t.sessions = [this.sessionNull];
+      // ks fixing bug. Not...
+      // t.sessions = [this.sessionNull];
       t.closed = 1;
       t.checked = 0;
       t.cms_time_tag = null;
