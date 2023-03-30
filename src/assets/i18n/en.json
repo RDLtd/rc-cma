@@ -219,6 +219,8 @@
 			"tipYourRestaurants": "Select a venue"
 		},
 		"RESERVATIONS": {
+			"infoOnlineBookings": "Our integrated booking widget will be available with the release of **apptiser premium**. \nThis will allow you to offer real-time reservation from your own website and receive them directly into your reservations system*.",
+			"infoOnlineBookings2": "In addition, you will be able to take direct bookings from major platforms including **Google** (maps and local business listings), **Facebook** and **Instagram**.",
 			"invalidEmail": "Invalid email",
 			"labelGeneral": "General information about reservations ({{ chars }} characters max.)",
 			"labelGroupPolicy": "What is your policy regarding group bookings (max. {{ max }} characters)?",

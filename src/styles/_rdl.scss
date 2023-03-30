@@ -176,3 +176,39 @@
 
 }
 
+.rdl-panel-ad {
+
+
+    margin-top: 1rem;
+  p {
+    margin: 1rem 0 0 0;
+  }
+
+  .rdl-panel-ad-content {
+      columns: 2 auto;
+      > * {
+        break-inside: avoid;
+        margin-bottom: 1rem;
+      }
+
+  }
+
+  .logos {
+    margin: 1rem auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    img {
+      max-height: 48px;
+    }
+  }
+
+  .rdl-partner-logo {
+    display: inline-block;
+    width: auto;
+    height: 32px;
+    object-fit: contain;
+  }
+}
+

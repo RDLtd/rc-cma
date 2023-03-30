@@ -219,6 +219,8 @@
 			"tipYourRestaurants": "Sélectionnez un restaurant"
 		},
 		"RESERVATIONS": {
+			"infoOnlineBookings": "Notre widget de réservation intégré sera disponible avec la sortie de **apptiser premium**.\nCela vous permettra de proposer des réservations en temps réel depuis votre propre site Web et de les recevoir directement dans votre système de réservation*.",
+			"infoOnlineBookings2": "De plus, vous pourrez prendre des réservations directes à partir des principales plateformes, notamment **Google** (cartes et listes d'entreprises locales), **Facebook** et **Instagram**.",
 			"invalidEmail": "Email non valable",
 			"labelGeneral": "Informations générales sur les réservations ({{caractères max.)",
 			"labelGroupPolicy": "Quelle est votre politique pour les réservations de groupe (max. {{ max }} caractères)?",
