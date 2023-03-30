@@ -244,10 +244,11 @@
 		},
 		"SETTINGS": {
 			"builder": {
+				"infoCaching": "Cela peut prendre quelques minutes avant que votre ** version{{ version }} ** n'affiche les modifications que vous avez apportées.",
 				"infoDiscardChanges": "Vous avez apporté des modifications à la configuration de votre **site web apptiser**, mais vous n'avez pas encore publié ces modifications.\n\nSi vous continuez sans **publier** ces modifications, elles seront supprimées.\n\n**Remarque** : les modifications de contenu que vous avez pu apporter au cours de cette session ne seront pas affectées.\n\n",
 				"labelClose": "Proche",
 				"labelOpenPreview": "Aperçu ouvert",
-				"statusMessageFinal": "{{ version }} construction terminée !",
+				"statusMessageFinal": "{{ version }} construction terminée !\n\nVEUILLEZ NOTER : Il peut s'écouler quelques minutes avant que votre site Web {{ version }} n'affiche les modifications que vous avez apportées.",
 				"statusMessages": [
 					"Collecte de contenu",
 					"Génération de fichiers HTML",

@@ -35,11 +35,13 @@ export class CmsSpwBuilderComponent implements OnInit {
         this.buildDialog.close(false);
         return;
       }
-      // For production, we just close the builder
-      if (this.buildVersion === 'Production') {
-        this.buildDialog.close(true);
-        return;
-      }
+      // // For production
+      // if (this.buildVersion === 'Production') {
+      //   this.translate.instant(
+      //     'CMS.SETTINGS.builder.statusMessageFinal',
+      //     { version: this.buildVersion });
+      //   return;
+      // }
       // For previews, we give the user the option to open it
       // If we open it programmatically then we'll fall foul
       // of the pop-up blockers

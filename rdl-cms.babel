@@ -3523,6 +3523,22 @@
 										<name>builder</name>
 										<children>
 											<concept_node>
+												<name>infoCaching</name>
+												<description/>
+												<comment/>
+												<default_text/>
+												<translations>
+													<translation>
+														<language>en-GB</language>
+														<approved>false</approved>
+													</translation>
+													<translation>
+														<language>fr-FR</language>
+														<approved>false</approved>
+													</translation>
+												</translations>
+											</concept_node>
+											<concept_node>
 												<name>infoDiscardChanges</name>
 												<description/>
 												<comment/>

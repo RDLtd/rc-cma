@@ -1,11 +1,23 @@
 <div class="rdl-builder">
   <h1>{{ 'CMS.SETTINGS.builder.titleBuilder' | translate }}</h1>
-  <p>{{ buildStatus }}</p>
+
+  <span>{{ buildStatus }}</span>
+  <markdown *ngIf="progressComplete">
+    {{ 'CMS.SETTINGS.builder.infoCaching' | translate: { version: this.buildVersion } }}
+  </markdown>
+
   <div class="rdl-card-actions">
+
     <mat-progress-bar mode="indeterminate" *ngIf="!progressComplete"></mat-progress-bar>
-    <mat-dialog-actions align="end" *ngIf="progressComplete">
-      <button mat-button mat-dialog-close="true">{{ 'CMS.SETTINGS.builder.labelClose' | translate | uppercase }}</button>
-      <button mat-button color="accent" (click)="launchPreview()">{{ 'CMS.SETTINGS.builder.labelOpenPreview' | translate | uppercase }}</button>
+
+    <mat-dialog-actions align="end" *ngIf="progressComplete && buildVersion === 'Preview'">
+      <button mat-flat-button mat-dialog-close="true">{{ 'CMS.SETTINGS.builder.labelClose' | translate | uppercase }}</button>
+      <button mat-flat-button color="accent" (click)="launchPreview()">{{ 'CMS.SETTINGS.builder.labelOpenPreview' |
+        translate | uppercase }}</button>
+    </mat-dialog-actions>
+
+    <mat-dialog-actions align="end" *ngIf="progressComplete && buildVersion === 'Production'">
+      <button mat-flat-button color="accent" mat-dialog-close="true">OK</button>
     </mat-dialog-actions>
   </div>
 </div>

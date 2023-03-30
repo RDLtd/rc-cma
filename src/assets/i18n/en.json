@@ -244,6 +244,7 @@
 		},
 		"SETTINGS": {
 			"builder": {
+				"infoCaching": "It may take a few minutes before your **{{ version }} version** is showing the changes that you have made.",
 				"infoDiscardChanges": "You've made changes to your **apptiser website** configuration, but have not yet published those changes.\n\nIf you continue without **publishing** those changes, then they will be discarded.\n\n**Note**: content changes that you may have made in this session will not be affected. \n\n",
 				"labelClose": "Close",
 				"labelOpenPreview": "Open Preview",
