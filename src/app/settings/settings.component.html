@@ -95,17 +95,26 @@
             <li><label>{{ 'SETTINGS.labelJoined' | translate }}:</label>{{ d_member_signedup }}</li>
             <li><label>{{ 'SETTINGS.labelSubscription' | translate }}:</label>
               <span *ngIf="isFreeMembership">
-                    {{ 'SETTINGS.labelFreeMembership' | translate }} {{ freeMembershipExpiry }}
-                  </span>
+                {{ 'SETTINGS.labelFreeMembership' | translate }} {{ freeMembershipExpiry }}
+              </span>
 <!--              <a-->
 <!--                      *ngIf="!isFreeMembership"-->
 <!--                      (click)="viewMemberPlans()"-->
 <!--                      matTooltip="{{ 'SETTINGS.tipManagePayments' | translate }}">-->
 <!--                {{ currentProduct?.product_name }}-->
 <!--              </a>-->
-              {{ currentProduct?.product_name }}
-              <span class="rc-space-filler"></span>
+<!--              {{ currentProduct?.product_name }}-->
+<!--              <span class="rc-space-filler"></span>-->
             </li>
+            <li>
+              <label>{{ 'SETTINGS.labelTerms' | translate }}:</label>
+              <a [href]="appConfig?.brand.downloads.terms" target="_blank" download>Download the Terms of business</a>
+            </li>
+            <li>
+              <label>{{ 'SETTINGS.labelPrivacyPolicy' | translate }}:</label>
+              <a [href]="appConfig?.brand.downloads.privacy" target="_blank" download>Download the Privacy Policy</a>
+            </li>
+
           </ul>
 <!--        <div class="rc-card-title" style="margin: 24px 0 8px 0;">-->
 <!--            <h2>{{ 'SETTINGS.titleManagedRestaurants' | translate }}</h2>-->
@@ -168,34 +177,6 @@
 <!--          </div>-->
       </div>
 
-      <!-- Referrals -->
-      <div class="rdl-card-rounded">
-        <div class="rc-card-title">
-          <h2>{{ 'SETTINGS.titleReferrals' | translate }}</h2>
-          <span class="rc-space-filler"></span>
-          <span>
-            <button
-                    color="accent"
-                    mat-button
-                    (click)="copied()"
-                    [cdkCopyToClipboard]="getReferralCode()"
-                    matTooltip="{{ 'SETTINGS.tipCopyReferral' | translate }}">
-              <mat-icon>content_copy</mat-icon>
-              <span>COPY LINK</span>
-            </button>
-          </span>
-        </div>
-        <div class="rc-card-subtitle">
-          {{ 'SETTINGS.infoReferrals' | translate }}
-        </div>
-
-          <ul class="rc-line-items">
-            <li><label>{{ 'SETTINGS.labelReferralCode' | translate }}:</label>
-              {{ member?.member_promo_code | uppercase }}
-            </li>
-          </ul>
-
-      </div>
       <!-- Auth -->
       <div class="rdl-card-rounded">
         <div class="rc-card-title">
@@ -306,6 +287,35 @@
               <span>{{ 'SETTINGS.infoAvatar' | translate}}</span>
             </div>
           </div>
+
+      </div>
+
+      <!-- Referrals -->
+      <div class="rdl-card-rounded">
+        <div class="rc-card-title">
+          <h2>{{ 'SETTINGS.titleReferrals' | translate }}</h2>
+          <span class="rc-space-filler"></span>
+          <span>
+            <button
+              color="accent"
+              mat-button
+              (click)="copied()"
+              [cdkCopyToClipboard]="getReferralCode()"
+              matTooltip="{{ 'SETTINGS.tipCopyReferral' | translate }}">
+              <mat-icon>content_copy</mat-icon>
+              <span>COPY LINK</span>
+            </button>
+          </span>
+        </div>
+        <div class="rc-card-subtitle">
+          {{ 'SETTINGS.infoReferrals' | translate }}
+        </div>
+
+        <ul class="rc-line-items">
+          <li><label>{{ 'SETTINGS.labelReferralCode' | translate }}:</label>
+            {{ member?.member_promo_code | uppercase }}
+          </li>
+        </ul>
 
       </div>
 
