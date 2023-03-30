@@ -76,6 +76,7 @@
 
         <div *ngIf="!duplicateField">
           <h1>{{ 'JOIN.headerContactDetails' | translate }}</h1>
+          <p><a [routerLink]="['/signin']">or Sign In here</a></p>
         </div>
 
         <mat-form-field hideRequiredMarker style="width: 38%;">

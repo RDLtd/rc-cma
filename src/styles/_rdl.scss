@@ -120,10 +120,8 @@
   }
 }
 .rdl-build-container {
-  //width: min(100%, 600px);
-
+  width: min(90%, 400px);
   .rdl-builder {
-    max-width: 360px;
     display: grid;
     grid: auto / 1fr;
     gap: 1rem;

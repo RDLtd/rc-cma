@@ -26,6 +26,8 @@ export class CmsSpwBuilderComponent implements OnInit {
   ngOnInit() {
     this.buildVersion = this.data.buildVersion;
     this.buildStatus = this.data.buildStatus;
+    this.progressComplete = false;
+    console.log(this.progressComplete);
     // loop through the status messages
     // and THEN check if our website has been built
     this.displayProgress().then(() => {
@@ -35,17 +37,7 @@ export class CmsSpwBuilderComponent implements OnInit {
         this.buildDialog.close(false);
         return;
       }
-      // // For production
-      // if (this.buildVersion === 'Production') {
-      //   this.translate.instant(
-      //     'CMS.SETTINGS.builder.statusMessageFinal',
-      //     { version: this.buildVersion });
-      //   return;
-      // }
-      // For previews, we give the user the option to open it
-      // If we open it programmatically then we'll fall foul
-      // of the pop-up blockers
-      //this.buildStatus = `${this.buildVersion} build complete!`
+      // done
       this.buildStatus = this.translate.instant(
         'CMS.SETTINGS.builder.statusMessageFinal',
         { version: this.buildVersion }

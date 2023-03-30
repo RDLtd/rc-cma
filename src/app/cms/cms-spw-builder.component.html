@@ -1,10 +1,16 @@
 <div class="rdl-builder">
+
   <h1>{{ 'CMS.SETTINGS.builder.titleBuilder' | translate }}</h1>
 
   <span>{{ buildStatus }}</span>
-  <markdown *ngIf="progressComplete">
-    {{ 'CMS.SETTINGS.builder.infoCaching' | translate: { version: this.buildVersion } }}
-  </markdown>
+
+  <markdown ngPreserveWhitespaces
+            *ngIf="progressComplete"
+            [data]="'CMS.SETTINGS.builder.infoCaching' | translate: { version: this.buildVersion }"></markdown>
+
+<!--  <markdown *ngIf="progressComplete">-->
+<!--    {{ 'CMS.SETTINGS.builder.infoCaching' | translate: { version: this.buildVersion } }}-->
+<!--  </markdown>-->
 
   <div class="rdl-card-actions">
 

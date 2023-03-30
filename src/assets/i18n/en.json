@@ -374,7 +374,7 @@
 		"duplicateMobile": "This **mobile number** is already registered, please [SIGN-IN, or retrieve your password here](/signin).",
 		"duplicateMobileAndEmail": "This **mobile number** and **email address** have already been registered [Sign-in, or retrieve your password here](/signin).",
 		"duplicateRegistration": "Already registered!",
-		"headerContactDetails": "Your Contact Details",
+		"headerContactDetails": "Register Your Details",
 		"headerDeclarations": "Declarations",
 		"hintEmail": "Your contact email address",
 		"invalidEmail": "A valid email address is required",
