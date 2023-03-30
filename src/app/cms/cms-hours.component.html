@@ -75,7 +75,7 @@
                 matInput
                 type="time"
                 step="900"
-                (change)="setChanged()"
+                (change)="updateTime(i)"
                 [(ngModel)]="session.open"
                 [disabled]="!!time.closed">
             </mat-form-field>
@@ -85,7 +85,7 @@
                 matInput
                 type="time"
                 step="900"
-                (change)="setChanged()"
+                (change)="updateTime(i)"
                 [(ngModel)]="session.close"
                 [disabled]="!!time.closed">
             </mat-form-field>
@@ -93,7 +93,7 @@
                color="warn"
                [disabled]="!!time.closed"
                class="rc-del-session"
-               (click)="removeSession(i,j)">
+               (click)="removeSession(i, j)">
               <mat-icon>cancel</mat-icon>
             </a>
           </div>

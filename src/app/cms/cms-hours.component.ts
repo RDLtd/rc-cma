@@ -19,8 +19,8 @@ export class CmsHoursComponent implements OnInit {
   openingTimesNotes = '';
   display_dow: any = [];
   dataChanged = false;
-  sessionNull = { open: '00:00', close: '00:00' };
-  sessionDefault = { open: '08:00', close: '23:00' };
+  sessionNull = {open: '00:00', close: '00:00'};
+  sessionDefault = {open: '12:00', close: '23:00'};
   lastSession = this.sessionDefault;
   maxSessions = 3;
 
@@ -88,65 +88,49 @@ export class CmsHoursComponent implements OnInit {
     });
   }
 
-  // Deactivation guard
-  confirmNavigation() {
-    if (this.dataChanged) {
-      return this.cmsLocalService.confirmNavigation();
-    } else {
-      return true;
-    }
-  }
-
   setChanged(): void {
     // this is activated by user changing a time field
     this.dataChanged = true;
   }
 
+  updateTime(dayIndex): void {
+    const sessions = this.openingTimes[dayIndex].sessions;
+    // always use the first session to update times
+    const session = sessions[0];
+    this.lastSession = {open: session.open, close: session.close};
+    this.dataChanged = true;
+  }
+
   toggleSession(index): void {
-
-    const t = this.openingTimes[index];
-
-    if (t.closed) {
-
-      // ks fixing bug. Not...
-      if (t.sessions.length === 0) {
-        t.sessions = [this.lastSession];
-      }
-      t.closed = 0;
-
+    // selected day
+    const day = this.openingTimes[index];
+    if (day.closed) {
+      // assign the values from the previous day's first session
+      day.sessions = [{open: this.lastSession.open, close: this.lastSession.close}];
+      day.closed = 0;
     } else {
-
-      // close with default values
-      // t.sessions = [this.sessionNull];
-      t.closed = 1;
-      t.cms_time_tag = null;
+      day.sessions = [this.sessionNull];
+      day.closed = 1;
+      day.cms_time_tag = null;
     }
-
     this.dataChanged = true;
   }
 
   addSession(index): void {
-
-    const t = this.openingTimes[index];
-
+    // selected day
+    const day = this.openingTimes[index];
     // Open with defaults
-    if (t.closed) {
-
-      // ks fixing bug. Not...
-      // TODO Where is lastSession updated????
-      if (t.sessions.length === 0) {
-        t.sessions = [this.lastSession];
-      }
-      t.closed = 0;
-      t.checked = 1;
+    if (day.closed) {
+      // use the closing time of the previous session as a start point
+      day.sessions = [{open: this.lastSession.open, close: this.lastSession.close}];
+      day.closed = 0;
+      day.checked = 1;
       // Clear any notes
-      t.cms_time_tag = null;
-
+      day.cms_time_tag = null;
     } else {
-
       // Add new session
-      const ls = t.sessions[t.sessions.length - 1];
-      t.sessions.push({ open: ls.close, close: ls.close });
+      const prevSession = day.sessions[day.sessions.length - 1];
+      day.sessions.push({open: prevSession.close, close: prevSession.close});
 
     }
     this.cms.updateLastCreatedField(Number(this.restaurant.restaurant_id), 'hours').subscribe(
@@ -166,8 +150,7 @@ export class CmsHoursComponent implements OnInit {
 
     // if this is the last one, then close the session
     if (t.sessions.length === 1) {
-      // ks fixing bug. Not...
-      // t.sessions = [this.sessionNull];
+      t.sessions = [this.sessionNull];
       t.closed = 1;
       t.checked = 0;
       t.cms_time_tag = null;
@@ -196,8 +179,8 @@ export class CmsHoursComponent implements OnInit {
     this.cms.updateTimes(this.openingTimes, this.openingTimesNotes).subscribe({
       next: () => {
         this.cmsLocalService.dspSnackbar(this.translate.instant(
-          'CMS.HOURS.msgTimesUpdated',
-          { restaurant: this.restaurant.restaurant_name }),
+            'CMS.HOURS.msgTimesUpdated',
+            {restaurant: this.restaurant.restaurant_name}),
           null, 3);
         this.dataChanged = false;
         // record event
@@ -210,12 +193,21 @@ export class CmsHoursComponent implements OnInit {
     });
 
     this.cms.updateLastCreatedField(Number(this.restaurant.restaurant_id), 'hours')
-        .subscribe({
-          next: () => {},
-          error: () => {
+      .subscribe({
+        next: () => {
+        },
+        error: () => {
           console.log('error in updatelastupdatedfield for hours');
         }
       });
   }
 
+  // Deactivation guard
+  confirmNavigation() {
+    if (this.dataChanged) {
+      return this.cmsLocalService.confirmNavigation();
+    } else {
+      return true;
+    }
+  }
 }

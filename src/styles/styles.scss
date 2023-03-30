@@ -1344,7 +1344,8 @@ ul.rc-lookup-results {
 * -------------------------------
 **/
 .rc-cms {
-  padding-top: ($rc-toolbar-height);
+  padding: ($rc-toolbar-height) 0 1rem 0;
+
   //.rc-card { padding: 16px; }
   dl { margin: 24px 0 0 0; }
   dt {
