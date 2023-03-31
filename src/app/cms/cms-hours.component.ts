@@ -110,14 +110,23 @@ export class CmsHoursComponent implements OnInit {
   }
 
   toggleSession(index): void {
+
     // selected day
     const day = this.openingTimes[index];
+    const prevDay = this.openingTimes[index - 1];
+
     if (day.closed) {
-      // assign the values from the previous day's first session
-      day.sessions = [{
-        open: this.sessionDefault.open,
-        close: this.sessionDefault.close
-      }];
+      // clone previous day if there is one and it's open
+      if(index > 0 && !prevDay.closed) {
+        day.sessions = this.deepCopy(prevDay.sessions);
+        console.log(day.sessions);
+      } else {
+        day.sessions = [{
+          open: this.sessionDefault.open,
+          close: this.sessionDefault.close
+        }];
+      }
+
       day.closed = 0;
     } else {
       day.sessions = [this.sessionNull];
@@ -217,6 +226,25 @@ export class CmsHoursComponent implements OnInit {
           console.log('error in updatelastupdatedfield for hours');
         }
       });
+  }
+
+  deepCopy = (inObject) => {
+    let outObject, value, key;
+
+    // Return the value if inObject is not an object
+    if (typeof inObject !== "object" || inObject === null) {
+      return inObject
+    }
+
+    // Create an array or object to hold the values
+    outObject = Array.isArray(inObject) ? [] : {};
+
+    for (key in inObject) {
+      value = inObject[key];
+      // Recursively (deep) copy for nested objects, including arrays
+      outObject[key] = this.deepCopy(value);
+    }
+    return outObject;
   }
 
   // Deactivation guard
