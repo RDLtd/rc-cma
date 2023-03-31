@@ -486,7 +486,7 @@
 		"infoNewPlanYearly": "Si vous choisissez de modifier votre formule d'abonnement en **{{plan}}**, vous serez facvturé **{{ prorate }}**dès maintenant - au prorata pour la période de facturation actuelle - puis à partir du **{{ renewal }}** vos nouveaux frais d'abonnement annuels seront de **{{ price }}**.",
 		"labelAddRestaurant": "+",
 		"labelCurrentPlan": "Adhésion actuelle",
-		"msgAddRestaurant": "Ajoutez votre lieu pour commencer à gérer votre contenu et à créer votre **site Web d’apptisation**.",
+		"msgAddRestaurant": "Ajoutez votre lieu, gérez votre contenu et publiez votre **site Web** et profitez de toutes les fonctionnalités incluses dans votre plan d'abonnement.",
 		"titlePlans": "Adhésion possibles"
 	},
 	"SETTINGS": {
@@ -502,10 +502,11 @@
 			"labelTel": "Numéro de portable",
 			"titleUpdateContacts": "Coordonnées du membre"
 		},
-		"infoAccounts": "Les restaurants liés à votre compte sont affichés ci-dessous. Vous pouvez gérer des restaurants supplémentaires en les ajoutant ici.\n\nPour afficher l'historique de votre facturation et vos paiements, ou pour télécharger vos factures, sélectionnez l'option «GÉRER MES PAIEMENTS» ci-dessus.",
+		"infoAccounts": "Pour afficher votre historique de facturation et vos détails de paiement, ou pour télécharger vos factures, sélectionnez l'option \"GÉRER LES PAIEMENTS\" ci-dessus.",
 		"infoAuth": "Voici les informations d'identification dont vous aurez besoin pour vous connecter. Votre mot de passe doit comporter au moins 8 caractères.",
 		"infoAvatar": "Cliquez sur l'image ajouter/modifier pour personnaliser votre adhésion.",
 		"infoMember": "Toutes les communications concernant votre adhésion vous seront envoyées à cette adresse e-mail.",
+		"infoNoRestaurants": "Utilisez l'option AJOUTER UN LIEU ci-dessus pour commencer à gérer votre contenu et à créer votre **site Web apptiser**.",
 		"infoNotification": "Outre les communications concernant votre abonnement à {{ brand }}, vous pouvez également choisir de recevoir des informations autres en cochant les cases correspondantes:",
 		"infoReferrals": "Il s'agit d'un code de parrainage unique qui vous est attribué et que vous pouvez partager avec vos collègues pour les encourager à rejoindre Restaurateurs Indépendants.",
 		"infoRestaurants": "Les sites associés à votre compte sont répertoriés ci-dessous. Sélectionnez un emplacement pour ajouter/modifier du contenu et pour créer/mettre à jour votre **site web apptiser**.\n\nUtilisez l'option AJOUTER ci-dessus pour gérer le contenu Web de sites supplémentaires.",

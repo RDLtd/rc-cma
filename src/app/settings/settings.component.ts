@@ -22,6 +22,7 @@ import { HeaderService } from '../common/header.service';
 import { CurrencyPipe } from '@angular/common';
 import { ImageService } from '../_services/image.service';
 import { CloudinaryImage } from '@cloudinary/url-gen';
+import { StorageService } from '../_services/storage.service';
 
 
 @Component({
@@ -59,6 +60,7 @@ export class SettingsComponent implements OnInit {
     private memberService: MemberService,
     private ga: AnalyticsService,
     private cms: CMSService,
+    private storage: StorageService,
     public snackBar: MatSnackBar,
     private router: Router,
     private translate: TranslateService,
@@ -393,10 +395,11 @@ export class SettingsComponent implements OnInit {
     dialogRef.afterClosed().subscribe(confirmed => {
 
       if (confirmed) {
+
         // ks 280328 for apptiser don't subtract 1!
         const addedRestaurantCount = this.restaurants.length;
-        // do we need to update the restaurant subscription?
 
+        // do we need to update the restaurant subscription?
         if (addedRestaurantCount && !this.isFreeMembership) {
           // ks 290323 do NOT delete the subscription for apptiser
           if (addedRestaurantCount > 1) {
@@ -409,12 +412,18 @@ export class SettingsComponent implements OnInit {
         this.restaurantService.removeAssociation(rest['association_id'])
           .subscribe({
             next: () => {
+
+              // remove restaurant & image from array
               this.restaurants.splice(index, 1);
               this.defaultImages.splice(index, 1);
-              // this.openSnackBar(this.translate.instant('SETTINGS.msgRestaurantRemoved', {name: rest.restaurant_name}), 'OK');
+
+              // delete last restaurant local storage ref.
+              if (this.restaurants.length === 0) { this.storage.remove('rd_last_restaurant'); }
+
               // record event
               this.ga.sendEvent('Profile', 'Edit', 'Remove Association');
             },
+
             error: error => {
               this.error.handleError('', 'Failed to remove restaurant subscription! ' + error);
               console.log(error);
