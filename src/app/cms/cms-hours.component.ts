@@ -19,9 +19,14 @@ export class CmsHoursComponent implements OnInit {
   openingTimesNotes = '';
   display_dow: any = [];
   dataChanged = false;
-  sessionNull = {open: '00:00', close: '00:00'};
-  sessionDefault = {open: '12:00', close: '23:00'};
-  lastSession = this.sessionDefault;
+  sessionNull = {
+    open: '00:00',
+    close: '00:00'
+  };
+  sessionDefault = {
+    open: '12:00',
+    close: '23:00'
+  };
   maxSessions = 3;
 
   constructor(
@@ -93,11 +98,14 @@ export class CmsHoursComponent implements OnInit {
     this.dataChanged = true;
   }
 
-  updateTime(dayIndex): void {
-    const sessions = this.openingTimes[dayIndex].sessions;
-    // always use the first session to update times
-    const session = sessions[0];
-    this.lastSession = {open: session.open, close: session.close};
+  updateLastSession(dayIndex): void {
+    // use the first session to copy values
+    const session1 = this.openingTimes[dayIndex].sessions[0];
+    // update last session
+    this.sessionDefault = {
+      open: session1.open,
+      close: session1.close
+    };
     this.dataChanged = true;
   }
 
@@ -106,7 +114,10 @@ export class CmsHoursComponent implements OnInit {
     const day = this.openingTimes[index];
     if (day.closed) {
       // assign the values from the previous day's first session
-      day.sessions = [{open: this.lastSession.open, close: this.lastSession.close}];
+      day.sessions = [{
+        open: this.sessionDefault.open,
+        close: this.sessionDefault.close
+      }];
       day.closed = 0;
     } else {
       day.sessions = [this.sessionNull];
@@ -121,17 +132,22 @@ export class CmsHoursComponent implements OnInit {
     const day = this.openingTimes[index];
     // Open with defaults
     if (day.closed) {
-      // use the closing time of the previous session as a start point
-      day.sessions = [{open: this.lastSession.open, close: this.lastSession.close}];
+      day.sessions = [{
+        open: this.sessionDefault.open,
+        close: this.sessionDefault.close
+      }];
       day.closed = 0;
       day.checked = 1;
       // Clear any notes
       day.cms_time_tag = null;
     } else {
-      // Add new session
+      // Add new session by using the end time of the
+      // previous session
       const prevSession = day.sessions[day.sessions.length - 1];
-      day.sessions.push({open: prevSession.close, close: prevSession.close});
-
+      day.sessions.push({
+        open: prevSession.close,
+        close: prevSession.close
+      });
     }
     this.cms.updateLastCreatedField(Number(this.restaurant.restaurant_id), 'hours').subscribe(
       () => {
@@ -144,21 +160,22 @@ export class CmsHoursComponent implements OnInit {
 
   }
 
-  removeSession(index, jndex): void {
+  removeSession(dayIndex, sessionIndex): void {
 
-    const t = this.openingTimes[index];
+    const day = this.openingTimes[dayIndex];
 
     // if this is the last one, then close the session
-    if (t.sessions.length === 1) {
-      t.sessions = [this.sessionNull];
-      t.closed = 1;
-      t.checked = 0;
-      t.cms_time_tag = null;
+    if (day.sessions.length === 1) {
+      day.sessions = [this.sessionNull];
+      day.closed = 1;
+      day.checked = 0;
+      day.cms_time_tag = null;
     } else {
-      // otherwise remove the session indexed
-      t.sessions.splice(jndex, 1);
+      // otherwise, remove the session
+      day.sessions.splice(sessionIndex, 1);
     }
-    this.cms.updateLastCreatedField(Number(this.restaurant.restaurant_id), 'hours').subscribe(
+    this.cms.updateLastCreatedField(Number(this.restaurant.restaurant_id), 'hours')
+      .subscribe(
       error => {
         console.log('error in updatelastupdatedfield for hours', error);
       });

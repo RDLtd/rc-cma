@@ -75,7 +75,8 @@
                 matInput
                 type="time"
                 step="900"
-                (change)="updateTime(i)"
+                (change)="setChanged()"
+                (blur)="updateLastSession(i)"
                 [(ngModel)]="session.open"
                 [disabled]="!!time.closed">
             </mat-form-field>
@@ -85,7 +86,8 @@
                 matInput
                 type="time"
                 step="900"
-                (change)="updateTime(i)"
+                (change)="setChanged()"
+                (blur)="updateLastSession(i)"
                 [(ngModel)]="session.close"
                 [disabled]="!!time.closed">
             </mat-form-field>
