@@ -25,7 +25,7 @@ features.
 
 Check only those features that are relevant to the venue.
 
-### Additional keywords
+### Additional features
 
 If there are any other important features that you would like to list, make sure you add them here, separated by commas.
 
