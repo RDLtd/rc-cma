@@ -19,18 +19,23 @@ export class CmsHoursComponent implements OnInit {
   openingTimesNotes = '';
   display_dow: any = [];
   dataChanged = false;
-  sessionNull = { open: '00:00', close: '00:00' };
-  sessionDefault = { open: '08:00', close: '23:00' };
-  lastSession = this.sessionDefault;
+  sessionNull = {
+    open: '00:00',
+    close: '00:00'
+  };
+  sessionDefault = {
+    open: '12:00',
+    close: '23:00'
+  };
   maxSessions = 3;
 
   constructor(
-    private cmsLocalService: CmsLocalService,
-    private cms: CMSService,
-    private ga: AnalyticsService,
-    private translate: TranslateService,
-    public help: HelpService,
-    private loadService: LoadService
+      private cmsLocalService: CmsLocalService,
+      private cms: CMSService,
+      private ga: AnalyticsService,
+      private translate: TranslateService,
+      public help: HelpService,
+      private loadService: LoadService
   ) {
     this.loadService.open();
   }
@@ -38,15 +43,15 @@ export class CmsHoursComponent implements OnInit {
   ngOnInit() {
     // get the restaurant data
     this.cmsLocalService.getRestaurant()
-      .subscribe({
-        next: data => {
-          if (data.restaurant_id) {
-            this.restaurant = data;
-            this.getOpeningTimes();
-          }
-        },
-        error: error => console.log(error)
-      });
+        .subscribe({
+          next: data => {
+            if (data.restaurant_id) {
+              this.restaurant = data;
+              this.getOpeningTimes();
+            }
+          },
+          error: error => console.log(error)
+        });
   }
 
   getOpeningTimes(): void {
@@ -88,64 +93,75 @@ export class CmsHoursComponent implements OnInit {
     });
   }
 
-  // Deactivation guard
-  confirmNavigation() {
-    if (this.dataChanged) {
-      return this.cmsLocalService.confirmNavigation();
-    } else {
-      return true;
-    }
-  }
-
   setChanged(): void {
     // this is activated by user changing a time field
     this.dataChanged = true;
   }
 
+  updateLastSession(dayIndex): void {
+    // use the first session to copy values
+    const session1 = this.openingTimes[dayIndex].sessions[0];
+    // update last session
+    this.sessionDefault = {
+      open: session1.open,
+      close: session1.close
+    };
+    this.dataChanged = true;
+  }
+
   toggleSession(index): void {
 
-    const t = this.openingTimes[index];
+    // selected day
+    const day = this.openingTimes[index];
+    const prevDay = this.openingTimes[index - 1];
 
-    if (t.closed) {
+    if (day.closed) {
+      // clone previous day if there is one and it's open
+      if(index > 0 && !prevDay.closed) {
+        day.sessions = this.deepCopy(prevDay.sessions);
+        console.log(day.sessions);
+      } else {
+        day.sessions = [{
+          open: this.sessionDefault.open,
+          close: this.sessionDefault.close
+        }];
+      }
 
-      t.sessions = [this.lastSession];
-      t.closed = 0;
-
+      day.closed = 0;
     } else {
-
-      // close with default values
-      t.sessions = [this.sessionNull];
-      t.closed = 1;
-      t.cms_time_tag = null;
+      day.sessions = [this.sessionNull];
+      day.closed = 1;
+      day.cms_time_tag = null;
     }
-
     this.dataChanged = true;
-}
+  }
 
   addSession(index): void {
-
-    const t = this.openingTimes[index];
-
+    // selected day
+    const day = this.openingTimes[index];
     // Open with defaults
-    if (t.closed) {
-
-      t.sessions = [this.lastSession];
-      t.closed = 0;
-      t.checked = 1;
+    if (day.closed) {
+      day.sessions = [{
+        open: this.sessionDefault.open,
+        close: this.sessionDefault.close
+      }];
+      day.closed = 0;
+      day.checked = 1;
       // Clear any notes
-      t.cms_time_tag = null;
-
+      day.cms_time_tag = null;
     } else {
-
-      // Add new session
-      const ls = t.sessions[t.sessions.length - 1];
-      t.sessions.push({ open: ls.close, close: ls.close });
-
+      // Add new session by using the end time of the
+      // previous session
+      const prevSession = day.sessions[day.sessions.length - 1];
+      day.sessions.push({
+        open: prevSession.close,
+        close: prevSession.close
+      });
     }
     this.cms.updateLastCreatedField(Number(this.restaurant.restaurant_id), 'hours').subscribe(
-      () => {
-        console.log('error in updatelastupdatedfield for hours');
-      });
+        () => {
+          console.log('error in updatelastupdatedfield for hours');
+        });
     this.dataChanged = true;
 
     // record event
@@ -153,24 +169,25 @@ export class CmsHoursComponent implements OnInit {
 
   }
 
-  removeSession(index, jndex): void {
+  removeSession(dayIndex, sessionIndex): void {
 
-    const t = this.openingTimes[index];
+    const day = this.openingTimes[dayIndex];
 
     // if this is the last one, then close the session
-    if (t.sessions.length === 1) {
-      t.sessions = [this.sessionNull];
-      t.closed = 1;
-      t.checked = 0;
-      t.cms_time_tag = null;
+    if (day.sessions.length === 1) {
+      day.sessions = [this.sessionNull];
+      day.closed = 1;
+      day.checked = 0;
+      day.cms_time_tag = null;
     } else {
-      // otherwise remove the session indexed
-      t.sessions.splice(jndex, 1);
+      // otherwise, remove the session
+      day.sessions.splice(sessionIndex, 1);
     }
-    this.cms.updateLastCreatedField(Number(this.restaurant.restaurant_id), 'hours').subscribe(
-      error => {
-        console.log('error in updatelastupdatedfield for hours', error);
-      });
+    this.cms.updateLastCreatedField(Number(this.restaurant.restaurant_id), 'hours')
+        .subscribe(
+            error => {
+              console.log('error in updatelastupdatedfield for hours', error);
+            });
     this.dataChanged = true;
     // record event
     this.ga.sendEvent('CMS-Hours', 'Edit', 'Session Removed');
@@ -188,9 +205,9 @@ export class CmsHoursComponent implements OnInit {
     this.cms.updateTimes(this.openingTimes, this.openingTimesNotes).subscribe({
       next: () => {
         this.cmsLocalService.dspSnackbar(this.translate.instant(
-          'CMS.HOURS.msgTimesUpdated',
-          { restaurant: this.restaurant.restaurant_name }),
-          null, 3);
+                'CMS.HOURS.msgTimesUpdated',
+                {restaurant: this.restaurant.restaurant_name}),
+            null, 3);
         this.dataChanged = false;
         // record event
         this.ga.sendEvent('CMS-Hours', 'Edit', 'Changes Saved');
@@ -203,11 +220,39 @@ export class CmsHoursComponent implements OnInit {
 
     this.cms.updateLastCreatedField(Number(this.restaurant.restaurant_id), 'hours')
         .subscribe({
-          next: () => {},
+          next: () => {
+          },
           error: () => {
-          console.log('error in updatelastupdatedfield for hours');
-        }
-      });
+            console.log('error in updatelastupdatedfield for hours');
+          }
+        });
   }
 
+  deepCopy = (inObject) => {
+    let outObject, value, key;
+
+    // Return the value if inObject is not an object
+    if (typeof inObject !== "object" || inObject === null) {
+      return inObject
+    }
+
+    // Create an array or object to hold the values
+    outObject = Array.isArray(inObject) ? [] : {};
+
+    for (key in inObject) {
+      value = inObject[key];
+      // Recursively (deep) copy for nested objects, including arrays
+      outObject[key] = this.deepCopy(value);
+    }
+    return outObject;
+  }
+
+  // Deactivation guard
+  confirmNavigation() {
+    if (this.dataChanged) {
+      return this.cmsLocalService.confirmNavigation();
+    } else {
+      return true;
+    }
+  }
 }
