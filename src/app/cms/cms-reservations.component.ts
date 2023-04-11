@@ -81,24 +81,29 @@ export class CmsReservationsComponent implements OnInit {
           // load booking providers and set the selected one... default is email, which is 0
           this.restaurantService.getBookingProviders(this.restaurant.restaurant_number).subscribe({
             next: data_providers => {
-              if (data_providers['count'] > 0) {
-                this.booking_providers = data_providers['booking_providers'];
-                const selectedProvider = this.descriptions.cms_description_booking_provider;
-                console.log('SP', selectedProvider);
-                if (selectedProvider) {
-                  for (let i = 0; i < this.booking_providers.length; i++) {
-                    if (selectedProvider === this.booking_providers[i].booking_provider_service) {
-                      console.log('SP2', selectedProvider);
-                      this.selectedBookingService = selectedProvider;
-                      this.selected_booking_provider_index = i;
-                    }
-                  }
-                }
-                this.selected_booking_provider = this.booking_providers[this.selected_booking_provider_index];
-                this.booking_provider_rid_label = this.selected_booking_provider.booking_provider_rid_label;
-              } else {
+              if (data_providers['count'] < 1) {
                 console.log('No Booking providers found');
+                return;
               }
+
+              this.booking_providers = data_providers['booking_providers'];
+              const selectedProvider = this.descriptions.cms_description_booking_provider;
+              if (!!selectedProvider) {
+                for (let i = 0; i < this.booking_providers.length; i++) {
+                  if (selectedProvider === this.booking_providers[i].booking_provider_service) {
+                    console.log('SP2', selectedProvider);
+                    this.selectedBookingService = selectedProvider;
+                    this.selected_booking_provider_index = i;
+                    console.log(i);
+                    break;
+                  }
+                  console.log(i);
+                }
+              }
+              console.log('return here');
+              this.selected_booking_provider = this.booking_providers[this.selected_booking_provider_index];
+              this.booking_provider_rid_label = this.selected_booking_provider.booking_provider_rid_label;
+
             },
             error: error => {
               console.log(JSON.stringify(error))
