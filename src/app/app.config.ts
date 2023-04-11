@@ -45,7 +45,8 @@ export class AppConfig {
   // Root domains
   tld = {
     rc: 'restaurantcollective.org.uk',
-    ri: 'restaurateursindependants.fr'
+    ri: 'restaurateursindependants.fr',
+    rdl: 'rdl.network'
   };
 
   private brands = {
@@ -98,7 +99,32 @@ export class AppConfig {
         terms: `https://${this.tld.ri}/terms-conditions/`,
         privacy: `https://${this.tld.ri}/privacy-policy/`
       }
-    }
+    },
+    rdl: {
+      name: 'RDL',
+      prefix: 'rdl',
+      logo: 'rdl-logo',
+      url: `https://${this.tld.rc}`,
+      joinUrl: `https://app.${this.tld.rc}/join`,
+      spwDemoUrl: `https://example-restaurant.com/`,
+      email: {
+        support: `support@${this.tld.rc}`,
+        curation: `curation@${this.tld.rc}`,
+        tech: 'tech@restaurantdevelopments.ltd'
+      },
+      products: {
+        success_url: `${ this.appUrl }/signin`,
+        cancel_url: `${ this.appUrl }/membership-options`,
+      },
+      currency: {
+        symbol: '£',
+        code: 'GBP'
+      },
+      downloads: {
+        terms: `https://${this.tld.rc}/terms-conditions/`,
+        privacy: `https://${this.tld.rc}/privacy-policy/`
+      }
+    },
   };
   public readonly brand = this.brands[localStorage.getItem('rd_brand')];
 }
