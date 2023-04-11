@@ -62,6 +62,7 @@
           <mat-label>{{ 'CMS.UPLOAD.labelMenuName' | translate }}</mat-label>
           <input
             matInput
+            maxlength="50"
             ngModel
             name="menuClass"
             required>
@@ -70,6 +71,7 @@
         <mat-form-field class="rc-full-width">
           <mat-label>{{ 'CMS.UPLOAD.labelMenuCaption' | translate }}</mat-label>
           <input matInput
+                 maxlength="200"
                  ngModel
                  name="menuCaption">
         </mat-form-field>
