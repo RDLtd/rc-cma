@@ -67,8 +67,8 @@ export class ErrorService {
   sendEmailRequest(msg) {
     return this.http.post(this.config.apiUrl + '/members/sendemail',
       {
-        company_name: 'RDL',
-        company_prefix: 'rc',
+        company_name: this.config.brand.name,
+        company_prefix: this.config.brand.prefix,
         email_to: this.config.brand.email.tech,
         email_from: this.config.brand.email.support,
         email_subject: 'CMA Error',

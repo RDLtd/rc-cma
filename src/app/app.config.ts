@@ -15,12 +15,6 @@ export class AppConfig {
   // App location
   appUrl = window.location.origin;
 
-  // Should only need to switch here to change from local to Heroku server
-  // public readonly apiUrl = 'http://localhost:4000';
-  // public readonly apiUrl = 'https://rc-server-carter-mwkg7qc3nv9ak.herokuapp.com'
-  // public readonly apiUrl = 'https://rc-server-staging.herokuapp.com';
-  // public readonly apiUrl = 'https://rc-server-prod.herokuapp.com';
-
   // This is Angular's equivalent! See the 'environments' folder
   // Build process should automatically detect the correct variables
   public readonly apiUrl = environment.API_URL;
@@ -98,31 +92,6 @@ export class AppConfig {
       downloads: {
         terms: `https://${this.tld.ri}/terms-conditions/`,
         privacy: `https://${this.tld.ri}/privacy-policy/`
-      }
-    },
-    rdl: {
-      name: 'RDL',
-      prefix: 'rdl',
-      logo: 'rdl-logo',
-      url: `https://${this.tld.rc}`,
-      joinUrl: `https://app.${this.tld.rc}/join`,
-      spwDemoUrl: `https://example-restaurant.com/`,
-      email: {
-        support: `support@${this.tld.rc}`,
-        curation: `curation@${this.tld.rc}`,
-        tech: 'tech@restaurantdevelopments.ltd'
-      },
-      products: {
-        success_url: `${ this.appUrl }/signin`,
-        cancel_url: `${ this.appUrl }/membership-options`,
-      },
-      currency: {
-        symbol: '£',
-        code: 'GBP'
-      },
-      downloads: {
-        terms: `https://${this.tld.rc}/terms-conditions/`,
-        privacy: `https://${this.tld.rc}/privacy-policy/`
       }
     },
   };

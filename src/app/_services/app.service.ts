@@ -33,8 +33,8 @@ export class AppService {
     // NB this will not work, wrong field names in body...
     return this.http.post(this.config.apiUrl + '/members/sendemail',
       {
-        companyName: 'RDL',
-        companyPrefix: 'rc',
+        companyName: this.config.brand.name,
+        companyPrefix: this.config.brand.prefix,
         emailTo: this.config.brand.email.support,
         emailFrom: this.config.brand.email.support,
         emailSubject: 'Critical Error',
