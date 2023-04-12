@@ -180,8 +180,8 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
           this.cmsChanged = !(res['published_status_ok']);
           // Enough content?
           if (this.cmsHasSufficientData) {
-            this.spwProdUrl = res['spw_url'];
-            this.spwPreviewUrl = res['preview_spw_url'];
+            this.spwProdUrl = this.cms.getPublishedUrl(res['spw_url'], true);
+            this.spwPreviewUrl = this.cms.getPublishedUrl(res['preview_spw_url']);
             // Has anything changed?
             if (this.cmsChanged) {
               this.publishDate = new Date(res['spw_written']);
@@ -540,8 +540,8 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
         .then(res => {
           if (res['status'] === 'OK') {
             // console.log('Publish success:', res);
-            // this.spwProdUrl = res['url'];
-            // this.spwPreviewUrl = this.getSpwUrl();
+            this.spwProdUrl = this.cms.getPublishedUrl(res['url'], true);
+            //this.spwPreviewUrl = this.getSpwUrl();
             this.cmsChanged = false;
             this.d_publishDate = moment(new Date(res['published'])).format('LLLL');
             // this.publishDate = new Date(res['published']);
@@ -572,7 +572,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
       {
         data: {
           spwUrl: this.spwProdUrl,
-          spwMenus: `${this.spwPreviewUrl}#menus`,
+          spwMenus: `${this.spwProdUrl}#menus`,
           restaurant: this.restaurant,
           curation: this.config.brand.email.curation
         }

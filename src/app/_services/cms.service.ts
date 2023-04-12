@@ -529,5 +529,22 @@ export class CMSService {
       });
   }
 
+    getPublishedUrl(url: string, isProduction = false): string {
+        // AWS S3 bucket domain
+        const aws = 's3.eu-west-2.amazonaws.com';
+        // If it's not an AWS ignore it
+        if (url.indexOf(aws) < 0) {
+            console.error(`${url} is not an AWS url`);
+            return url
+        }
+        // remove the AWS domain
+        let publishedUrl = url.replace(`${aws}/`, '').trim();
+        // For production urls we don't need the index.html ref.
+        if (isProduction) {
+            return publishedUrl.replace(`index.html`, '');
+        }
+        return publishedUrl;
+    }
+
 }
 
