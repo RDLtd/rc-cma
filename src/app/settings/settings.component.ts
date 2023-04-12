@@ -493,30 +493,42 @@ export class SettingsComponent implements OnInit {
       }
     });
     dialogRef.componentInstance.dialog = dialogRef;
+
     dialogRef.afterClosed().subscribe(data => {
       console.log('Close dialog', data);
-      if (!!data) {
-        console.log('!!', data);
-        if (data.str === 'delete') {
 
-          this.member.member_image_path = null;
-          this.clImage = null;
-          localStorage.removeItem('rd_avatar');
-          this.header.updateAvatar(null);
-
-        } else {
-
-          const imgUrl = data.str;
-          // Get cloudinary reference
-          this.clImage = this.imgService.getCldImage(imgUrl);
-          // update member local storage
-          this.member.member_image_path = imgUrl;
-          localStorage.setItem('rd_avatar', imgUrl);
-          this.header.updateAvatar(data.str);
-        }
-        localStorage.setItem('rd_profile', JSON.stringify(this.member));
-        this.openSnackBar(this.translate.instant('SETTINGS.msgAvatarUpdated'), 'OK');
+      // Cancel
+      if (data === 'false') {
+        console.log('Cancel');
+        return;
       }
+
+      // Delete
+      if (data.str === 'delete') {
+        console.log('Delete avatar');
+        this.member.member_image_path = null;
+        this.clImage = null;
+        localStorage.removeItem('rd_avatar');
+        this.header.updateAvatar(null);
+        return;
+      }
+
+      console.log(`Update avatar ${data.str}`);
+
+      // Update
+      const imgUrl = this.imgService.forceHttps(data.str);
+
+      // Get cloudinary reference
+      this.clImage = this.imgService.getCldImage(imgUrl);
+
+      // update member local storage
+      this.member.member_image_path = imgUrl;
+      localStorage.setItem('rd_avatar', imgUrl);
+      this.header.updateAvatar(data.str);
+
+      localStorage.setItem('rd_profile', JSON.stringify(this.member));
+      this.openSnackBar(this.translate.instant('SETTINGS.msgAvatarUpdated'), 'OK');
+
     });
   }
 

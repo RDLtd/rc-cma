@@ -32,6 +32,7 @@ export class ImageService implements OnInit {
   }
 
   getCldImage(id): CloudinaryImage {
+
     if(id.indexOf('http') > -1) {
       id = this.getCloudinaryPublicId(id);
     }
@@ -50,5 +51,12 @@ export class ImageService implements OnInit {
   getCloudinaryPublicId(url) {
     const urlArr = url.split('/');
     return urlArr.slice(urlArr.length - 3).join('/');
+  }
+
+  forceHttps(url): string {
+    if (url.includes('https')) {
+      return url;
+    }
+    return url.replace('http', 'https');
   }
 }

@@ -4,30 +4,26 @@
     <span>{{ 'CMS.HOURS.titleHours' | translate }}</span>
     <span class="rc-space-filler"></span>
     <span class="rc-toolbar-actions">
-
-        <button
-            mat-icon-button
-            (click)="help.dspHelp('cms-hours', restaurant)">
-            <mat-icon>help_outline</mat-icon>
-        </button>
-
-        <button
-            mat-icon-button
-            [disabled]="!dataChanged"
-            (click)="resetData()"
-            [matTooltip]="'CMS-Hours.UndoChanges' | translate">
-          <mat-icon>undo</mat-icon>
-        </button>
-
-        <button
-            mat-icon-button
-            [disabled]="!dataChanged"
-            (click)="updateData()"
-            [matTooltip]="'CMS-Hours.SaveChanges' | translate"
-            color="accent">
-          <mat-icon>check</mat-icon>
-        </button>
-      </span>
+      <button
+          mat-icon-button
+          (click)="help.dspHelp('cms-hours', restaurant)">
+          <mat-icon>help_outline</mat-icon>
+      </button>
+      <button
+          mat-icon-button
+          [disabled]="!dataChanged"
+          (click)="resetData()"
+          [matTooltip]="'CMS-Hours.UndoChanges' | translate">
+        <mat-icon>undo</mat-icon>
+      </button>
+      <button
+          mat-icon-button
+          [disabled]="!dataChanged"
+          (click)="updateData()"
+          [matTooltip]="'CMS-Hours.SaveChanges' | translate">
+        <mat-icon>check</mat-icon>
+      </button>
+    </span>
   </mat-toolbar>
 
   <div class="rc-grid rc-cms-times" [@insertAnimation]="openingTimes.length">
