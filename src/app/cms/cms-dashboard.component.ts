@@ -103,6 +103,8 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
   cldPlugins: any[];
   cldImage: CloudinaryImage = null;
 
+  publishedText: string;
+
   constructor(
     private imgService: ImageService,
     private cmsLocalService: CmsLocalService,
@@ -115,6 +117,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
     private restaurantService: RestaurantService,
     private memberService: MemberService,
     public config: AppConfig
+
   ) {
     this.t_data = this.translate.instant('CMS-Dashboard');
     this.cldPlugins = this.imgService.cldBasePlugins;
@@ -146,16 +149,17 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
           this.cldImage = null;
           if (rest.restaurant_id) {
             this.restaurant = rest;
-            // console.log(rest);
+            this.updatePublishText(moment(this.restaurant.restaurant_verified_on).format('LLLL'), this.restaurant.restaurant_verified_by);
             this.getLastUpdated();
           }
           // duplicate the loaded restaurant
           // so that we can use it to compare changes
-          for (const key in this.restaurant) {
-            if (this.restaurant.hasOwnProperty(key)) {
-              this.dbRestaurant[key] = this.restaurant[key];
-            }
-          }
+          this.dbRestaurant = {...this.restaurant};
+          // for (const key in this.restaurant) {
+          //   if (this.restaurant.hasOwnProperty(key)) {
+          //     this.dbRestaurant[key] = this.restaurant[key];
+          //   }
+          // }
         },
         error: error => console.log(error)
       });
@@ -538,12 +542,13 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
   publishSPW(): void {
     this.cms.publish(this.restaurant.restaurant_id, true)
         .then(res => {
+          console.log('pub', res);
           if (res['status'] === 'OK') {
             // console.log('Publish success:', res);
             this.spwProdUrl = this.cms.getPublishedUrl(res['url'], true);
             //this.spwPreviewUrl = this.getSpwUrl();
             this.cmsChanged = false;
-            this.d_publishDate = moment(new Date(res['published'])).format('LLLL');
+            this.d_publishDate = moment(new Date(res['published'])).format('LLL');
             // this.publishDate = new Date(res['published']);
 
             this.verifyData();
@@ -613,13 +618,20 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
           this.cmsLocalService.dspSnackbar(
             this.translate.instant('CMS.DASHBOARD.spw.msgVerifiedAndPublished'),
             'OK', 5);
+
           this.restaurant.restaurant_verified_by = this.userName;
           this.restaurant.restaurant_verified_on = Date().toLocaleString();
           this.dbRestaurant.restaurant_verified_by = this.userName;
           this.dbRestaurant.restaurant_verified_on = Date().toLocaleString();
+          this.updatePublishText(this.d_publishDate, this.userName);
         },
         error: error => console.log(error)
       });
+  }
+  updatePublishText(dateTime, user): void {
+    console.log(`updatePublishText: ${dateTime}, ${user}`);
+    this.publishedText = this.translate.instant('CMS.DASHBOARD.spw.msgVerified', { date: dateTime, name:
+      user });
   }
 
   reqDirectoryDataChange(): void {

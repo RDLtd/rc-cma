@@ -52,6 +52,7 @@ export class SettingsComponent implements OnInit {
   clImage: CloudinaryImage;
   clPlugins: any[];
 
+
   constructor(
     private header: HeaderService,
     private cmsLocalService: CmsLocalService,

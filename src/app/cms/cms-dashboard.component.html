@@ -110,11 +110,8 @@
     <!-- HEADER -->
     <!-- Verified by/data -->
     <mat-card-header *ngIf="!isPreviewing">
-      <mat-card-title
-        ngpreservewhitespaces
-        markdown>
-        {{ 'CMS.DASHBOARD.spw.msgVerified' | translate: { date: d_publishDate, name:
-        restaurant.restaurant_verified_by } }}
+      <mat-card-title>
+        <markdown [data]="publishedText" [inline]="true"></markdown>
       </mat-card-title>
       <span class="rc-space-filler"></span>
       <mat-icon class="rc-success">cloud_done</mat-icon>
