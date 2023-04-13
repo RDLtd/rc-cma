@@ -110,9 +110,7 @@
     <!-- HEADER -->
     <!-- Verified by/data -->
     <mat-card-header *ngIf="!isPreviewing">
-      <mat-card-title>
-        <markdown [data]="publishedText" [inline]="true"></markdown>
-      </mat-card-title>
+      <h3><markdown [data]="publishedText" [inline]="true"></markdown></h3>
       <span class="rc-space-filler"></span>
       <mat-icon class="rc-success">cloud_done</mat-icon>
     </mat-card-header>
