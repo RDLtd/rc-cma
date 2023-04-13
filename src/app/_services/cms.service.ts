@@ -484,6 +484,16 @@ export class CMSService {
 
   }
 
+  verify(id: string, user: string) {
+    return this.http.post(this.config.apiUrl + '/restaurants/verify',
+      {
+        restaurant_id: id,
+        verified_by: user,
+        userCode: this.config.userAPICode,
+        token: this.authToken
+      });
+  }
+
   updateCoordinates(restaurant_id: string, restaurant_lat: number, restaurant_lng: number) {
     return this.http.post(this.config.apiUrl + '/cms/coordinatesupdate',
       {

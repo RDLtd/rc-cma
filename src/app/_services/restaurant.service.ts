@@ -160,15 +160,15 @@ export class RestaurantService {
       });
   }
 
-  verify(restaurant_id: string, verified_by: string) {
-    return this.http.post(this.config.apiUrl + '/restaurants/verify',
-      {
-        restaurant_id: restaurant_id,
-        verified_by: verified_by,
-        userCode: this.config.userAPICode,
-        token: this.authToken
-      });
-  }
+  // verify(restaurant_id: string, verified_by: string) {
+  //   return this.http.post(this.config.apiUrl + '/restaurants/verify',
+  //     {
+  //       restaurant_id: restaurant_id,
+  //       verified_by: verified_by,
+  //       userCode: this.config.userAPICode,
+  //       token: this.authToken
+  //     });
+  // }
 
   getCuisines(country_code, restaurant_region: string) {
     if (country_code === 'FR') {

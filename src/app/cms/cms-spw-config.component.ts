@@ -9,7 +9,8 @@ import { StorageService } from '../_services/storage.service';
 import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 import { CmsSpwBuilderComponent} from "./cms-spw-builder.component";
 import { CmsSpwLinksComponent } from './cms-spw-links.component';
-import {TranslateService} from "@ngx-translate/core";
+import { TranslateService } from "@ngx-translate/core";
+import { logMessages } from '@angular-devkit/build-angular/src/builders/browser-esbuild/esbuild';
 
 @Component({
   selector: 'rc-cms-spw-config',
@@ -32,6 +33,7 @@ export class CmsSpwConfigComponent implements OnInit {
 
   publishStatus: string;
   publishDate: string;
+  publishedBy: string;
   publishedUrl: string;
   unPublishedChanges = false;
   builder: MatDialogRef<CmsSpwBuilderComponent>;
@@ -83,7 +85,8 @@ export class CmsSpwConfigComponent implements OnInit {
           // Make sure the data is available
           if (data.restaurant_id) {
             this.restaurant = data;
-            this.publishDate = this.restaurant.restaurant_spw_written
+            this.publishDate = this.restaurant.restaurant_spw_written;
+            this.publishedBy = this.restaurant.restaurant_verified_by;
             this.apptiserUrl = this.cms.getApptiserUrl(this.restaurant.restaurant_spw_url, true);
             this.getConfig();
             this.getContentStatus();
@@ -320,16 +323,31 @@ export class CmsSpwConfigComponent implements OnInit {
   }
 
   onBuildSuccess(res, production: boolean): void {
+
     if (production) {
+
+      const user = `${this.user.member_first_name} ${this.user.member_last_name}`;
+      console.log(user);
       this.unPublishedChanges = false;
-      this.publishDate = res.published;
-      this.publishedUrl = this.cms.getApptiserUrl(res.url, true);
-      this.dataChanged = false;
+
+      this.cms.verify(this.restaurant.restaurant_id, user)
+        .subscribe({
+          next: () => {
+            this.publishDate = res.published;
+            this.publishedBy = user;
+            this.publishedUrl = this.cms.getApptiserUrl(res.url, true);
+            this.dataChanged = false;
+          },
+          error: error => console.log(error)
+        });
+
     } else {
+
       this.unPublishedChanges = true;
       this.apptiserPreviewUrl = this.cms.getApptiserUrl(res.url);
       this.builder.componentInstance.data.apptiserPreviewUrl = this.apptiserPreviewUrl;
       this.dataChanged = true;
+
     }
     this.building = false;
     this.builder.componentInstance.data.buildReady = true;

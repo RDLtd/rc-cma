@@ -492,22 +492,22 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
     }
   }
 
-  verifyData(): void {
-
-    this.restaurantService.verify(this.restaurant.restaurant_id, this.userName )
-      .subscribe({
-        next: () => {
-          this.cmsLocalService.dspSnackbar(
-            this.translate.instant('CMS.DASHBOARD.spw.msgVerifiedAndPublished'),
-            'OK', 5);
-          this.restaurant.restaurant_verified_by = this.userName;
-          this.restaurant.restaurant_verified_on = Date().toLocaleString();
-          this.dbRestaurant.restaurant_verified_by = this.userName;
-          this.dbRestaurant.restaurant_verified_on = Date().toLocaleString();
-        },
-        error: error => console.log(error)
-      });
-  }
+  // verifyData(): void {
+  //
+  //   this.restaurantService.verify(this.restaurant.restaurant_id, this.userName )
+  //     .subscribe({
+  //       next: () => {
+  //         this.cmsLocalService.dspSnackbar(
+  //           this.translate.instant('CMS.DASHBOARD.spw.msgVerifiedAndPublished'),
+  //           'OK', 5);
+  //         this.restaurant.restaurant_verified_by = this.userName;
+  //         this.restaurant.restaurant_verified_on = Date().toLocaleString();
+  //         this.dbRestaurant.restaurant_verified_by = this.userName;
+  //         this.dbRestaurant.restaurant_verified_on = Date().toLocaleString();
+  //       },
+  //       error: error => console.log(error)
+  //     });
+  // }
 
   reqDirectoryDataChange(): void {
 
