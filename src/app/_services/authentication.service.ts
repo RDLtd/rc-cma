@@ -40,6 +40,7 @@ export class AuthenticationService {
     // console.log('LOGIN', this.authToken);
     return this.http.post(this.config.apiUrl + '/members/authenticate',
       {
+        company: this.config.brand.prefix,
         email: form.email,
         password: form.pwd,
         userCode: 'RDL-dev',

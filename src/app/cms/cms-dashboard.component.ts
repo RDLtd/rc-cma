@@ -549,7 +549,6 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
             //this.spwPreviewUrl = this.getSpwUrl();
             this.cmsChanged = false;
             this.d_publishDate = moment(new Date(res['published'])).format('LLL');
-            // this.publishDate = new Date(res['published']);
 
             this.verifyData();
             this.isPreviewing = false;
