@@ -18,6 +18,7 @@ export class AppComponent implements OnInit {
 
   isConnected = true;
   inSession: boolean;
+  isSecure:boolean;
   language = localStorage.getItem('rd_language'); // Default language
 
   // If we are offline then there is no access to translations
@@ -40,7 +41,9 @@ export class AppComponent implements OnInit {
     private config: AppConfig,
     public authService: AuthenticationService) {
 
-      // Record navagation analytics
+      this.checkProtocol();
+
+      // Record navigation analytics
       this.router.events.subscribe(event => {
         if (event instanceof NavigationEnd) {
           (<any>window).ga('set', 'page', event.urlAfterRedirects);
@@ -48,6 +51,14 @@ export class AppComponent implements OnInit {
         }
       });
 
+  }
+
+  checkProtocol(): void {
+    const ssl = window.location.protocol.includes('https');
+    if (!ssl) {
+      console.log('Redirecting to HTTPS');
+      window.location.href = window.location.toString().replace('http', 'https');
+    }
   }
 
   ngOnInit() {
