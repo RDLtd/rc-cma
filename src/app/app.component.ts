@@ -54,11 +54,12 @@ export class AppComponent implements OnInit {
   }
 
   checkProtocol(): void {
-    const ssl = window.location.protocol.includes('https');
-    if (!ssl) {
-      console.log('Redirecting to HTTPS');
-      window.location.href = window.location.toString().replace('http', 'https');
+    if (window.location.protocol.includes('https')) {
+      return;
     }
+    // Redirect to https
+    console.log('Redirecting to HTTPS');
+    window.location.href = window.location.toString().replace('http', 'https');
   }
 
   ngOnInit() {
