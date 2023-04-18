@@ -54,7 +54,10 @@ export class MembershipComponent implements OnInit {
       .then((data) => {
         console.log(data);
       })
-      .catch(err => (console.log(err)));
+      .catch(err => {
+        console.log('Stripe catch error');
+        console.log(err);
+      });
 
 
     this.transParams = {
