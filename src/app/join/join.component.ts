@@ -49,6 +49,7 @@ export class JoinComponent implements OnInit {
   lang = localStorage.getItem('rd_language');
   stripeSessionId: any;
   jobs: any;
+  ssl = window.location.origin.includes('https');
 
   constructor(
     private route: ActivatedRoute,
@@ -68,6 +69,7 @@ export class JoinComponent implements OnInit {
       this.stripeSessionId = params['session_id'];
       // console.log('stripeSessionId', this.stripeSessionId);
     });
+    console.log(`SSL = ${this.ssl}`);
   }
 
   ngOnInit() {

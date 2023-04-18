@@ -50,7 +50,12 @@ export class MembershipComponent implements OnInit {
     private error: ErrorService
   ) {
 
-    this.stripePromise = loadStripe(environment[this.config.brand.prefix + '_stripe_key']);
+    this.stripePromise = loadStripe(environment[this.config.brand.prefix + '_stripe_key'])
+      .then((data) => {
+        console.log(data);
+      })
+      .catch(err => (console.log(err)));
+
 
     this.transParams = {
       brand: this.config.brand.name,
