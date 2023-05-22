@@ -149,7 +149,8 @@ export class MembershipComponent implements OnInit {
     let setupPriceId = '';
     if (this.config.brand.prefix === 'app' ) {
       priceId = this.products[1].product_stripe_price_id;
-      setupPriceId = this.products[0].product_stripe_price_id;
+      // update ks 220523 - no setup fee
+      // setupPriceId = this.products[0].product_stripe_price_id;
     } else {
       priceId = this.products[product].product_stripe_price_id;
     }
