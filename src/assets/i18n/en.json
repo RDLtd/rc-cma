@@ -185,11 +185,11 @@
 			"msgIsOffline": "{{ item }} is now offline",
 			"msgItemDeleted": "{{ item }} has been deleted",
 			"msgOverviewUpdated": "overview updated",
-			"msgRemoveFromMenu": "You are about to delete **{{ item }}** from the menu, is that what you want to do?",
 			"msgRemovedFromMenu": "{{ item }} has been deleted from the menu ",
+			"msgRemoveFromMenu": "You are about to delete **{{ item }}** from the menu, is that what you want to do?",
 			"msgSectionUpdated": "Section label updated!",
-			"msgUpdateFailed": "Updates failed!",
 			"msgUpdated": "{{ item }} updated!",
+			"msgUpdateFailed": "Updates failed!",
 			"tipAddDish": "Add a new dish",
 			"tipDelete": "Delete",
 			"tipToggleActive": "Online / Offline",
@@ -279,6 +279,7 @@
 			"titleUnPublishedChanges": "Unpublished changes",
 			"titleWebDomain": "Website Domain"
 		},
+		"titleSection": "Content Management",
 		"UPLOAD": {
 			"errorExceedsMax": "That file exceeds the maximum size that can be uploaded.",
 			"imgClass": {
@@ -304,8 +305,7 @@
 			"titleUploadDirections": "Upload directions",
 			"titleUploadImage": "Upload an image",
 			"titleUploadMenu": "Upload a menu"
-		},
-		"titleSection": "Content Management"
+		}
 	},
 	"CONFIRM": {
 		"labelBtnCancel": "NO, CANCEL",
@@ -462,7 +462,7 @@
 		"tipRequestContact": "Someone will contact you about this deal"
 	},
 	"MEMBERSHIP": {
-		"infoMembershipMonthly": "##  MONTHLY SUBSCRIPTION\n\nPay just **{{ fee }} + VAT** per month for full access to all the benefits offered by **{{ brand }}**.",
+		"infoMembershipMonthly": "##  MONTHLY SUBSCRIPTION\n\nPay just **{{ fee }} + VAT** per month for full access to all the benefits offered by **{{ brand }}**. ",
 		"infoMembershipYearly": "## ANNUAL SUBSCRIPTION\n\nPay **{{ fee }}** per year and you'll get a full 12 month membership for the price of only 10. All the same **{{ brand }}** benefits, just a bit cheaper!\n",
 		"instructions": "# What do I get?\n\n- Modern design that looks great on any device\n- 24/7 Content management\n- High performance\n- Monthly contract, all inclusive fees\n- UK Support\n\n# Coming soon – all the above PLUS:\n\n- Real-time online bookings\n- Content distributed to RDL Network of partners\n- Content synchronised to Google, Facebook and Instagram\n- Online bookings direct from Google, Facebook and Instagram\n",
 		"labelBack": "Back",

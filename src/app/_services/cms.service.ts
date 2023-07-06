@@ -466,7 +466,7 @@ export class CMSService {
         if (membership_type === 'premium') {
           template ='apptiser-premium.html';
         } else {
-          template ='apptiser.html';
+          template ='apptiser-standard-2.0.4.html';
         }
       }
       console.log('Activate generator', restaurant_id, production, template, this.config.brand.prefix, website_options);

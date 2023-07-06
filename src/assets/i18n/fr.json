@@ -185,11 +185,11 @@
 			"msgIsOffline": "{{ item }} est maintenant retiré(e)",
 			"msgItemDeleted": "{{ item }} a été supprimé(e)",
 			"msgOverviewUpdated": "Aperçu mis à jour",
-			"msgRemoveFromMenu": "Vous êtes sur le point de supprimer **{{ item }}** du menu, êtes-vous sûr de vouloir continuer?",
 			"msgRemovedFromMenu": "{{ item }} a été supprimé(e) du menu",
+			"msgRemoveFromMenu": "Vous êtes sur le point de supprimer **{{ item }}** du menu, êtes-vous sûr de vouloir continuer?",
 			"msgSectionUpdated": "Le libellé de la catégorie est mis à jour!",
-			"msgUpdateFailed": "Les mises à jour ont échoué!",
 			"msgUpdated": "{{ item }} mis à jour!",
+			"msgUpdateFailed": "Les mises à jour ont échoué!",
 			"tipAddDish": "Ajouter un nouveau plat",
 			"tipDelete": "Supprimer",
 			"tipToggleActive": "En Ligne / Retiré",
@@ -222,7 +222,7 @@
 			"infoOnlineBookings": "Notre widget de réservation intégré sera disponible avec la sortie de **apptiser premium**.\nCela vous permettra de proposer des réservations en temps réel depuis votre propre site Web et de les recevoir directement dans votre système de réservation*.",
 			"infoOnlineBookings2": "De plus, vous pourrez prendre des réservations directes à partir des principales plateformes, notamment **Google** (cartes et listes d'entreprises locales), **Facebook** et **Instagram**.",
 			"invalidEmail": "Email non valable",
-			"labelGeneral": "Informations générales sur les réservations ({{caractères max.)",
+			"labelGeneral": "Informations générales sur les réservations (max. {{ chars }} caractères)",
 			"labelGroupPolicy": "Quelle est votre politique pour les réservations de groupe (max. {{ max }} caractères)?",
 			"labelMaxCovers": "Maximum de couverts",
 			"labelMaxDays": "Maximum de jours à l'avance",
@@ -279,6 +279,7 @@
 			"titleUnPublishedChanges": "Modifications non publiées",
 			"titleWebDomain": "Domaine du site Web"
 		},
+		"titleSection": "Gestion de contenu",
 		"UPLOAD": {
 			"errorExceedsMax": "Ce fichier dépasse la taille maximale pouvant être téléchargée.",
 			"imgClass": {
@@ -304,8 +305,7 @@
 			"titleUploadDirections": "Télécharger des itinéraires",
 			"titleUploadImage": "Télécharger une photo",
 			"titleUploadMenu": "Télécharger un menu"
-		},
-		"titleSection": "Gestion de contenu"
+		}
 	},
 	"CONFIRM": {
 		"labelBtnCancel": "NON, ANNULER",
@@ -462,7 +462,7 @@
 		"tipRequestContact": "Quelqu'un vous contactera à propos de cette offre"
 	},
 	"MEMBERSHIP": {
-		"infoMembershipMonthly": "##  SOUSCRIPTION MENSUELLE\n\nPayez seulement **{{ fee }} + TVA** par mois pour un accès complet à tous les avantages offerts par **{{ brand }}**.\n\nDes frais d'installation uniques de ** {{ setup }} + TVA** vous seront également facturés.",
+		"infoMembershipMonthly": "##  SOUSCRIPTION MENSUELLE\n\nPayez seulement **{{ fee }} + TVA** par mois pour un accès complet à tous les avantages offerts par **{{ brand }}**.",
 		"infoMembershipYearly": "## ADHESION ANNUELLE\n\n**{{ fee }}** par an pour le prix de seulement 10 mois. Tout les avantages de **{{ brand }}** , un peu moins cher en payant l'année complète maintenant!\n",
 		"instructions": "# Mon adhésion me donne accès à :\n\n- Une présence en ligne optimisée gràce à l'outil de gestion de contenu et la Page Internet inclue\n\n- Des économies d'échelle par des fournisseurs approuvés dans notre Marketplace d'offres,\n\n- Des conseils et au soutien de collègues indépendants dans notre forum pour les membres\n\n# Et très bientôt...\n\n- Le coaching par des personnes qui ont été là où vous êtes actuellement\n\n- Du personnel recommandé dans la bourse d'emploi de Restaurateurs Indépendants\n\n- Des formations pour vous et votre équipe dans la base de connaissances\n\n- Votre présence dans le plus grand annuaire de restaurants indépendants en France",
 		"labelBack": "Retour",

@@ -50,6 +50,7 @@ export class MembershipComponent implements OnInit {
     private error: ErrorService
   ) {
 
+
     try {
       this.stripePromise = loadStripe(environment[this.config.brand.prefix + '_stripe_key']);
       console.log(this.stripePromise);
