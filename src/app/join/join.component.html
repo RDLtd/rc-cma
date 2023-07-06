@@ -153,15 +153,15 @@
         </mat-form-field>
 
         <!-- Referral code -->
-        <mat-form-field hideRequiredMarker>
-          <mat-label>{{ 'JOIN.labelCode' | translate }}</mat-label>
-          <input  [(ngModel)]="referrer.code"
-                  matInput
-                  maxlength="20"
-                  type="text"
-                  name="referral_code"
-                  [placeholder]="'JOIN.placeholderCode' | translate">
-        </mat-form-field>
+<!--        <mat-form-field hideRequiredMarker>-->
+<!--          <mat-label>{{ 'JOIN.labelCode' | translate }}</mat-label>-->
+<!--          <input  [(ngModel)]="referrer.code"-->
+<!--                  matInput-->
+<!--                  maxlength="20"-->
+<!--                  type="text"-->
+<!--                  name="referral_code"-->
+<!--                  [placeholder]="'JOIN.placeholderCode' | translate">-->
+<!--        </mat-form-field>-->
 
         <mat-checkbox name="accepts_terms" [(ngModel)]="pendingMember.accepts_terms">
           <div class="rc-txt-small" markdown>
