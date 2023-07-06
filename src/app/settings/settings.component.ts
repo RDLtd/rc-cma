@@ -263,7 +263,7 @@ export class SettingsComponent implements OnInit {
           ` - **Code**: ${userRequest.newRestaurantPostcode}\n` +
           ` - **Telephone**: ${userRequest.newRestaurantTel}\n` +
           ` - **Member name**: ${this.member.member_first_name} ${this.member.member_last_name}\n` +
-          ` - **Member ID: ${this.member.member_id}\n` +
+          ` - **Member ID**: ${this.member.member_id}\n` +
           ` - **Member Email**: ${this.member.member_email}\n\n` +
           `Contact the user directly if any clarification is required.\n\n` +
           `Thank you`;
