@@ -23,7 +23,7 @@ export class CmsPreviewComponent implements OnInit {
 
       // apptiser update ks 090323
       // TODO presume this is no longer called??????
-      this.cms.publish(this.data.id, false, this.data.membership_type, {})
+      this.cms.publish(this.data.id, this.data.member_id, false, this.data.membership_type, {})
         .then(res => {
           console.log('PREVIEW:', res);
           if (res['status'] === 'OK') {

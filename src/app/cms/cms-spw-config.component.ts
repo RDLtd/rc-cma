@@ -251,7 +251,7 @@ export class CmsSpwConfigComponent implements OnInit {
     // console.log('Updated config', newConfigObj);
 
     console.log(`Production: ${production}`);
-    this.cms.publish(this.restaurant.restaurant_id, production, 'standard', newConfigObj)
+    this.cms.publish(this.restaurant.restaurant_id, this.user.member_id, production, 'standard', newConfigObj)
       .then(res => {
 
         if (res['status'] !== 'OK') {
