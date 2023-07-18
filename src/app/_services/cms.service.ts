@@ -425,10 +425,11 @@ export class CMSService {
       });
   }
 
-  async publish(restaurant_id, production: Boolean): Promise<any> {
+  async publish(restaurant_id, member_id, production: Boolean): Promise<any> {
       return await lastValueFrom(this.http.post(this.config.apiUrl + '/spw/makespw',
           {
               restaurant_id,
+              member_id,
               production,
               company: this.config.brand.prefix,
               userCode: this.config.userAPICode,

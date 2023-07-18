@@ -78,6 +78,7 @@ export class CmsComponent implements OnInit {
       backdropClass: 'rc-preview-backdrop',
       data: {
         id: this.restaurant.restaurant_id,
+        member_id: this.member.member_id,
         number: this.restaurant.restaurant_number,
         name: this.restaurant.restaurant_name
       }

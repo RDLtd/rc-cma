@@ -540,7 +540,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
   }
 
   publishSPW(): void {
-    this.cms.publish(this.restaurant.restaurant_id, true)
+    this.cms.publish(this.restaurant.restaurant_id, this.user.member_id,true)
         .then(res => {
           console.log('pub', res);
           if (res['status'] === 'OK') {
