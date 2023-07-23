@@ -198,7 +198,8 @@ export class BpiRegistrationComponent implements OnInit {
     };
     // Make api call
     const timeCheck = this.getTimer();
-    this.bpiService.createBpi(this.bpiData)
+    // add version - from the cma version will always be 1
+    this.bpiService.createBpi(this.bpiData, 1)
       .subscribe({
         next: (res) => {
           console.log(res);
