@@ -104,19 +104,6 @@ export class MembershipComponent implements OnInit {
       .then(res => {
         this.products = res['products'];
         console.log(this.products);
-        this.mdProdMonthly = this.translate.instant(
-          'MEMBERSHIP.infoMembershipMonthly',
-          {
-            fee: this.currencyPipe.transform(this.products[1].product_price, this.config.brand.currency.code),
-            brand: this.transParams.brand,
-            setup: this.currencyPipe.transform(this.products[0].product_price, this.config.brand.currency.code)
-          });
-        // this.mdProdYearly = this.translate.instant(
-        //   'MEMBERSHIP.infoMembershipYearly',
-        //   {
-        //     fee: this.currencyPipe.transform(this.products[1].product_price, this.config.brand.currency.code),
-        //     brand: this.transParams.brand
-        //   });
       })
       .catch(err => {
         console.log(err);
@@ -142,28 +129,17 @@ export class MembershipComponent implements OnInit {
   }
 
   async checkout(product)  {
+    console.log(product);
     const newMember = JSON.parse(sessionStorage.getItem('app_member_pending'));
     this.waiting = true;
-    // need also to send the setup fee if this is a first time app purchase - if we
-    // got here via the membership component then that is true
-    let priceId = '';
-    let setupPriceId = '';
-    if (this.config.brand.prefix === 'app' ) {
-      priceId = this.products[1].product_stripe_price_id;
-      // update ks 220523 - no setup fee
-      // setupPriceId = this.products[0].product_stripe_price_id;
-    } else {
-      priceId = this.products[product].product_stripe_price_id;
-    }
     await this.createCheckoutSession({
-      priceId: priceId,
+      priceId: product.product_stripe_price_id,
       // Allow for tax to be optional
-      taxId: !!this.products[product].product_tax_id ? [this.products[product].product_tax_id] : [],
+      taxId: [product.product_tax_id],
       successUrl: this.config.brand.products.success_url,
       cancelUrl: this.config.brand.products.cancel_url,
       email: newMember.email,
-      company: this.config.brand.prefix,
-      setupPriceId: setupPriceId
+      company: this.config.brand.prefix
     })
       .then(data => {
         console.log('MC Session', data);

@@ -13,41 +13,24 @@
   <div class="rc-layout-split-right">
     <div class="rc-layout-split-content">
 
-      <!-- MONTHLY -->
-      <div class="rc-subscription">
+      <div class="rc-subscription" *ngFor="let product of products">
 
-        <markdown ngpreservewhitespaces [data]="mdProdMonthly"></markdown>
+        <h2>{{ product.product_name | uppercase }}</h2>
+        <p>{{ product.product_description }}</p>
 
         <button
           mat-flat-button
+          aria-label="Subscribe to {{ product.product_name }}"
           color="accent"
-          (click)="checkout(0)"
+          (click)="checkout(product)"
           [disabled]="waiting">
-          {{ 'MEMBERSHIP.labelPayMonthly' | translate | uppercase }}
+          {{ product.product_price  | currency: 'GBP' }} per month + vat
         </button>
 
       </div>
 
-<!--      &lt;!&ndash; YEARLY &ndash;&gt;-->
-<!--      <div class="rc-subscription">-->
-
-<!--        <markdown ngpreservewhitespaces [data]="mdProdYearly"></markdown>-->
-
-<!--        <button-->
-<!--          mat-flat-button-->
-<!--          color="accent"-->
-<!--          (click)="checkout(1)"-->
-<!--          [disabled]="waiting">-->
-<!--          {{ 'MEMBERSHIP.labelPayYearly' | translate | uppercase }}-->
-<!--        </button>-->
-<!--      </div>-->
-
-      <!-- TERMS -->
-<!--      <markdown class="rc-txt-small"-->
-<!--                [data]="'MEMBERSHIP.terms' | translate: transParams"></markdown>-->
-
     </div>
   </div>
 </div>
-<!--<hr><pre>sessionId: {{ stripeSessionId | json }}</pre><hr>-->
+<hr><pre>sessionId: {{ stripeSessionId | json }}</pre><hr>
 
