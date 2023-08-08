@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { BehaviorSubject, lastValueFrom } from 'rxjs';
+import { BehaviorSubject, lastValueFrom, Observable } from 'rxjs';
 import { AppConfig } from '../app.config';
 import { TranslateService } from '@ngx-translate/core';
 import { Member } from '../_models';
@@ -53,6 +53,18 @@ export class AuthenticationService {
     this.member = member;
   }
 
+  // Get member product category
+  getMemberCategory(product_id: string): Observable<any> {
+    console.log('getMemberCategory', product_id);
+    return this.http.post(this.config.apiUrl + '/members/get_category',
+      {
+        product_id,
+        company: this.config.brand.prefix,
+        userCode: this.config.userAPICode,
+        token: this.authToken
+      });
+  }
+
   public setAuthSession(member, token, offline): void {
 
     this.dbOffline = offline;
@@ -67,9 +79,18 @@ export class AuthenticationService {
     localStorage.setItem('rd_token', token);
     localStorage.setItem('rd_session', 'active');
 
+    this.getMemberCategory(member.member_product_id).subscribe((data: any) => {
+      if(data === null || data.count < 1) {
+        console.error('No product category returned');
+        return;
+      }
+      console.log(data.category);
+      this.storage.setSession('rd_product_category', data.category);
+    });
+
     this.translate.use(localStorage.getItem('rd_language'));
     this.setNewSessionExpiry();
-    this.dspHomeScreen('active');
+    this.dspHomeScreen('active').then();
   }
 
   async dspHomeScreen(sessionStatus): Promise<any> {

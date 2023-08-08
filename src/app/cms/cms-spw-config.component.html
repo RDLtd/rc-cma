@@ -51,7 +51,7 @@
     </div>
 
     <!-- DOMAIN -->
-    <div class="rdl-card-rounded">
+    <div class="rdl-card-rounded" *ngIf="!hidden('domain')">
 
       <div class="rdl-card-header">
         <h2>{{ 'CMS.SETTINGS.titleWebDomain' | translate }}</h2>
@@ -82,7 +82,9 @@
         </a>
       </div>
     </div>
-    <div class="rdl-card-rounded">
+
+    <!-- THEMES -->
+    <div class="rdl-card-rounded" *ngIf="!hidden('themes')">
       <div class="rdl-card-header">
         <h2>Website Theme</h2>
         <mat-icon>palette</mat-icon>
@@ -107,6 +109,7 @@
       </mat-radio-group>
 
     </div>
+
     <!-- CONFIG -->
     <div class="rdl-card-rounded">
       <div class="rdl-card-header">
@@ -121,30 +124,31 @@
             (ngSubmit)="submitFormValues(configFormGroup)">
         <div class="rdl-form-group">
           <h3>About</h3>
-          <mat-slide-toggle formControlName="showOpeningNotes">Show Opening Notes</mat-slide-toggle>
-          <mat-slide-toggle formControlName="showImageGallery">Show Image Gallery</mat-slide-toggle>
+          <mat-slide-toggle formControlName="showOpeningNotes">Opening Notes</mat-slide-toggle>
+          <mat-slide-toggle formControlName="showImageGallery">Image Gallery</mat-slide-toggle>
         </div>
         <div class="rdl-form-group">
           <h3>Menus</h3>
-          <mat-slide-toggle formControlName="showHtmlMenu">Show Menu Information & Sample Menu</mat-slide-toggle>
-          <mat-slide-toggle formControlName="showDownloadMenus">Show Downloadable Menus</mat-slide-toggle>
+          <mat-slide-toggle formControlName="showHtmlMenu">Menu Information & Sample Menu</mat-slide-toggle>
+          <mat-slide-toggle formControlName="showDownloadMenus">Downloadable Menus</mat-slide-toggle>
         </div>
         <div class="rdl-form-group dependants">
           <h3>Reservations</h3>
           <mat-slide-toggle formControlName="showReservations" (change)="toggleSection('showReservations')">
             Show Reservations section</mat-slide-toggle>
-          <mat-slide-toggle formControlName="showBookingWidget">Show Booking Widget</mat-slide-toggle>
-          <mat-slide-toggle formControlName="showReservationsInfo">Show Reservations information</mat-slide-toggle>
-          <mat-slide-toggle formControlName="showGroupBookings">Show Group bookings</mat-slide-toggle>
-          <mat-slide-toggle formControlName="showPrivateDining">Show Private Dining</mat-slide-toggle>
+          <mat-slide-toggle formControlName="showBookingWidget">Real-time Booking Widget</mat-slide-toggle>
+          <mat-slide-toggle formControlName="showEmailBookingWidget">Email Booking Requests</mat-slide-toggle>
+          <mat-slide-toggle formControlName="showReservationsInfo">Reservations information</mat-slide-toggle>
+          <mat-slide-toggle formControlName="showGroupBookings">Group bookings</mat-slide-toggle>
+          <mat-slide-toggle formControlName="showPrivateDining">Private Dining</mat-slide-toggle>
         </div>
         <div class="rdl-form-group dependants">
           <h3>Contacts</h3>
           <mat-slide-toggle formControlName="showContacts" (change)="toggleSection('showContacts')">
             Show Contact section</mat-slide-toggle>
-          <mat-slide-toggle formControlName="showLinks">Show Web & social links</mat-slide-toggle>
-          <mat-slide-toggle formControlName="showTransport">Show Public Transport Details</mat-slide-toggle>
-          <mat-slide-toggle formControlName="showParking">Show Parking Information</mat-slide-toggle>
+          <mat-slide-toggle formControlName="showLinks">Email & Social links</mat-slide-toggle>
+          <mat-slide-toggle formControlName="showTransport">Public Transport Details</mat-slide-toggle>
+          <mat-slide-toggle formControlName="showParking">Parking Information</mat-slide-toggle>
         </div>
         <div class="rdl-form-group">
           <h3>Location</h3>
@@ -152,6 +156,7 @@
         </div>
       </form>
     </div>
+
   </div>
 </div>
 <!--<pre>{{ restaurant | json }}</pre>-->

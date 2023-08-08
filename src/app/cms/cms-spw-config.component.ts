@@ -10,7 +10,6 @@ import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 import { CmsSpwBuilderComponent} from "./cms-spw-builder.component";
 import { CmsSpwLinksComponent } from './cms-spw-links.component';
 import { TranslateService } from "@ngx-translate/core";
-import { logMessages } from '@angular-devkit/build-angular/src/builders/browser-esbuild/esbuild';
 
 @Component({
   selector: 'rc-cms-spw-config',
@@ -23,6 +22,7 @@ export class CmsSpwConfigComponent implements OnInit {
   brand: any;
   restaurant: Restaurant;
   user: any; // a.k.a member
+  prodCategory: string;
 
   cssThemeObjects: any[];
   selectedTheme: any;
@@ -74,6 +74,8 @@ export class CmsSpwConfigComponent implements OnInit {
   }
 
   ngOnInit() {
+    // Set category
+    this.prodCategory = this.storage.getSession('rd_product_category');
     // Build website config form
     this.generateConfigForm();
     // Load available themes from db
@@ -96,6 +98,20 @@ export class CmsSpwConfigComponent implements OnInit {
     });
   }
 
+  /**
+   * Hides UI elements based on product categories
+   * @param uiElement string id of ui element
+   *
+   */
+  hidden(uiElement: string) {
+    const cat = {
+      network: ['domain', 'themes'],
+      standard: [''],
+      premium: ['']
+    }
+    return cat[this.prodCategory].includes(uiElement);
+  }
+
   getContentStatus(): void {
       this.cms.checkSPW(this.restaurant.restaurant_id)
         .subscribe({
@@ -111,18 +127,23 @@ export class CmsSpwConfigComponent implements OnInit {
   }
 
   generateConfigForm(): void {
+
     this.configFormGroup = this.fb.group({
       showOpeningNotes: false,
       showImageGallery: true,
+
       // menus
       showHtmlMenu: true,
       showDownloadMenus: true,
+
       // reservations
       showReservations: true,
       showReservationsInfo: [{value: true, disabled: false}],
-      showBookingWidget: [{value: true, disabled: false}],
+      showBookingWidget: [{value: true, disabled: true}],
+      showEmailBookingWidget: [{value: true, disabled: false}],
       showGroupBookings: [{value: false, disabled: false}],
       showPrivateDining: [{value: false, disabled: false}],
+
       // contacts
       showContacts: [true],
       showLinks: [{value: true, disabled: false}],
@@ -131,6 +152,7 @@ export class CmsSpwConfigComponent implements OnInit {
       // location
       showMap: [true]
     });
+
     // delay observing changes until defaults are in place
     setTimeout(() => {
       this.configFormGroup.valueChanges.subscribe(() => this.configChange('config'));
@@ -220,7 +242,7 @@ export class CmsSpwConfigComponent implements OnInit {
     const disable = !this.configFormGroup.get(control).value;
     let controls: string[];
     if (control === 'showReservations') {
-      controls = ['showReservationsInfo', 'showBookingWidget', 'showGroupBookings', 'showPrivateDining'];
+      controls = ['showReservationsInfo', 'showEmailBookingWidget', 'showGroupBookings', 'showPrivateDining'];
       controls.forEach( c => {
         disable ? this.configFormGroup.get(c).disable() : this.configFormGroup.get(c).enable();
       })
