@@ -644,8 +644,12 @@ form.rc-form-grid {
   }
   &.rc-toolbar-nav {
     background-color: $rc-petrol;
-    height: auto !important;
     .rc-link-active { color: white !important; }
+  }
+  &.rc-toolbar-subnav {
+    background-color: $rc-petrol;
+    .rc-link-active { color: white !important; }
+    height: auto !important;
   }
   &.rc-toolbar-section {
     background-color: $rc-theme-secondary;

@@ -55,7 +55,6 @@ export class MembershipComponent implements OnInit {
       this.stripePromise = loadStripe(environment[this.config.brand.prefix + '_stripe_key']);
       console.log(this.stripePromise);
     } catch (err) {
-      console.log('Stripe catch error');
       console.log(err);
     }
 

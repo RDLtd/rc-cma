@@ -139,8 +139,7 @@ export class CmsSpwConfigComponent implements OnInit {
       // reservations
       showReservations: true,
       showReservationsInfo: [{value: true, disabled: false}],
-      showBookingWidget: [{value: true, disabled: true}],
-      showEmailBookingWidget: [{value: true, disabled: false}],
+      showBookingWidget: [{value: true, disabled: false}],
       showGroupBookings: [{value: false, disabled: false}],
       showPrivateDining: [{value: false, disabled: false}],
 
