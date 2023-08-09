@@ -6,6 +6,7 @@ import { Restaurant } from '../_models';
 import { HttpClient } from '@angular/common/http';
 import { AppService } from './app.service';
 import { lastValueFrom } from 'rxjs';
+import { StorageService } from './storage.service';
 
 @Injectable()
 
@@ -16,6 +17,7 @@ export class CMSService {
   constructor(
     private http: HttpClient,
     private appService: AppService,
+    private storage: StorageService,
     private config: AppConfig) {
     this.appService.authToken.subscribe(token => {
       this.authToken = token;
@@ -444,7 +446,9 @@ export class CMSService {
   }
 
   async publish(restaurant_id: string, member_id: number, production: Boolean, membership_type: string, website_options: any): Promise<any> {
-    // apptiser update ks 090323 need to select endpoint and template based on brand
+
+
+    // Use legacy code/templates for RC & RI
     if (this.config.brand.prefix === 'rc' || this.config.brand.prefix === 'ri') {
       // use the exising 'old' templates for now...
       return await lastValueFrom(this.http.post(this.config.apiUrl + '/spw/makespw',
@@ -456,35 +460,38 @@ export class CMSService {
           userCode: this.config.userAPICode,
           token: this.authToken
         }));
-    } else {
-      // apptiser update ks 090323
-      // call the new endpoint to generate the data.json, etc., etc.
-      // send the brand requirements and also choose the template, and send whether this was an associated restaurant
-      let template;
-      if (this.config.brand.prefix === 'rdl') {
-        template = 'rdl-managed.html';
-      } else {
-        if (membership_type === 'premium') {
-          template ='apptiser-premium.html';
-        } else {
-          template ='apptiser-standard-2.0.4.html';
-        }
-      }
-      console.log('Activate generator', restaurant_id, member_id, production, template, this.config.brand.prefix, website_options);
-      return await lastValueFrom(this.http.post(this.config.apiUrl + '/spw/generateAWP',
-        {
-          restaurant_id,
-          production,
-          member_id,
-          website_options,
-          template,
-          company: this.config.brand.prefix,
-          userCode: this.config.userAPICode,
-          token: this.authToken
-        }));
     }
 
+    // Activate generator
+    const prod = this.storage.getSession('rd_product_category');
+    const template = this.config.brand.template[prod] ?? this.config.brand.template.default;
+
+
+    // if (this.config.brand.prefix === 'rdl') {
+    //   template = 'rdl-managed.html';
+    // } else {
+    //   if (membership_type === 'premium') {
+    //     template ='apptiser-premium.html';
+    //   } else {
+    //     template ='apptiser-standard-2.0.4.html';
+    //   }
+    // }
+
+    console.log('Activate generator', restaurant_id, member_id, production, template, this.config.brand.prefix, website_options);
+    return await lastValueFrom(this.http.post(this.config.apiUrl + '/spw/generateAWP',
+      {
+        restaurant_id,
+        production,
+        member_id,
+        website_options,
+        template,
+        company: this.config.brand.prefix,
+        userCode: this.config.userAPICode,
+        token: this.authToken
+      }));
   }
+
+
 
   verify(id: string, user: string) {
     return this.http.post(this.config.apiUrl + '/restaurants/verify',

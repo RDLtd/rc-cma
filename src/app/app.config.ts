@@ -14,7 +14,7 @@ export class AppConfig {
   // App location
   appUrl = window.location.origin;
 
-  // This is Angular's equivalent! See the 'environments' folder
+  // This is Angular equivalent! See the 'environments' folder
   // Build process should automatically detect the correct variables
   public readonly apiUrl = environment.API_URL;
   public readonly mozId = environment.MOZ_ID;
@@ -68,6 +68,9 @@ export class AppConfig {
       downloads: {
         terms: `https://${this.tld.rc}/terms-conditions/`,
         privacy: `https://${this.tld.rc}/privacy-policy/`
+      },
+      template: {
+        default: ""
       }
     },
     ri: {
@@ -93,6 +96,9 @@ export class AppConfig {
       downloads: {
         terms: `https://${this.tld.ri}/terms-conditions/`,
         privacy: `https://${this.tld.ri}/privacy-policy/`
+      },
+      template: {
+        default: "rdl-managed.html"
       }
     },
     app: {
@@ -118,6 +124,13 @@ export class AppConfig {
       downloads: {
         terms: `https://assets.apptiser.io/docs/apptiser-terms.pdf`,
         privacy: `https://assets.apptiser.io/docs/apptiser-privacy-policy.pdf`
+      },
+      template: {
+        default: "apptiser-curated-2.1.2.html",
+        curated: "apptiser-curated-2.1.2.html",
+        network: "apptiser-standard-2.1.2.html",
+        standard: "apptiser-standard-2.1.2.html",
+        premium: null
       }
     },
     rdl: {
@@ -143,6 +156,9 @@ export class AppConfig {
       downloads: {
         terms: `https://${this.tld.rdl}/terms-conditions/`,
         privacy: `https://${this.tld.rdl}/privacy-policy/`
+      },
+      template: {
+        default: "rdl-managed.html"
       }
     }
   };
