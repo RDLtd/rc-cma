@@ -7,6 +7,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ConfirmCancelComponent } from '../common';
 import { TranslateService } from '@ngx-translate/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { RestaurantService } from '../_services';
 
 @Injectable()
 
@@ -26,7 +27,8 @@ export class CmsLocalService {
     private translate: TranslateService,
     private router: Router,
     private route: ActivatedRoute,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private restService: RestaurantService,
   ) { }
 
   // Update & send
@@ -37,6 +39,19 @@ export class CmsLocalService {
   // Subscribe & get initial value
   getOfferCount(): Observable<number> {
     return this.offerSubject.asObservable();
+  }
+
+  loadRestaurant(): void {
+    this.restService.getById(this.restaurant.restaurant_id)
+  .subscribe({
+      next: data => {
+        this.setRestaurant(data['restaurant'][0]);
+      },
+      error: error => {
+        console.log(error);
+        this.router.navigate(['/settings']).then();
+      }
+    });
   }
 
   setRestaurant(restaurant: Restaurant): void {

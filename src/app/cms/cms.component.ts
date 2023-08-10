@@ -75,6 +75,7 @@ export class CmsComponent implements OnInit {
       });
   }
 
+
   getPreview() {
 
     this.dialog.open(CmsPreviewComponent, {
