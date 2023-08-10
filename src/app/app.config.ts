@@ -125,13 +125,24 @@ export class AppConfig {
         terms: `https://assets.apptiser.io/docs/apptiser-terms.pdf`,
         privacy: `https://assets.apptiser.io/docs/apptiser-privacy-policy.pdf`
       },
-      template: {
-        default: "apptiser-curated-2.1.3.html",
-        curated: "apptiser-curated-2.1.3.html",
-        network: "apptiser-standard-2.1.3.html",
-        standard: "apptiser-standard-2.1.3.html",
-        premium: null
-      }
+      templates: [
+        {
+          name: 'Default',
+          version: 'apptiser-curated-2.1.3.html'
+        },
+        {
+          name: 'Curated',
+          version: 'apptiser-curated-2.1.3.html'
+        },
+        {
+          name: 'Network',
+          version: 'apptiser-standard-2.1.3.html'
+        },
+        {
+          name: 'Standard',
+          version: 'apptiser-standard-2.1.3.html'
+        }
+      ],
     },
     rdl: {
       name: 'Restaurant Developments',

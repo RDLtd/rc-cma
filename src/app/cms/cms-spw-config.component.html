@@ -34,7 +34,35 @@
           <label>{{ 'CMS.SETTINGS.labelPublisher' | translate }}:</label>
           <span>{{ publishedBy }}</span>
         </li>
+        <li>
+          <label>Published URL:</label>
+            <a (click)="viewApptiser()"
+               *ngIf="!!apptiserUrl"
+               title="View your published apptiser website">
+              {{ apptiserUrl }}</a>
+          </li>
+        <li>
+          <label>Template:</label>
+          <span
+             *ngIf="!!restaurant?.restaurant_spw_template">
+            {{ restaurant?.restaurant_spw_template }}</span>
+        </li>
       </ul>
+
+      <div class="rdl-panel" *ngIf="user.member_access_level > 3">
+        <h3>Publishing template</h3>
+        <mat-form-field appearance="fill" style="width: 100%;">
+          <mat-select [(value)]="selectedTemplate">
+            <mat-option *ngFor="let t of availableTemplates" [value]="t.version">{{ t.name }}
+              ({{ t.version }})</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+      </div>
+
+
+
+
 
       <span class="rc-space-filler"></span>
 
@@ -42,6 +70,8 @@
         <button mat-button (click)="publishWebsite(false)" [disabled]="building">PREVIEW</button>
         <button mat-button color="accent" (click)="publishWebsite(true)" [disabled]="building">PUBLISH</button>
       </div>
+
+
 
       <div class="rdl-card-actions" *ngIf="!unPublishedChanges && buildAvailable && !building">
         <button mat-button color="accent" (click)="showMarketingLinks()">MARKETING LINKS</button>

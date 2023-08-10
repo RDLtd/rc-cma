@@ -23,6 +23,10 @@ export class CmsSpwConfigComponent implements OnInit {
   restaurant: Restaurant;
   user: any; // a.k.a member
   prodCategory: string;
+  availableTemplates: any;
+  selectedTemplate: any;
+
+
 
   cssThemeObjects: any[];
   selectedTheme: any;
@@ -45,6 +49,11 @@ export class CmsSpwConfigComponent implements OnInit {
   apptiserPreviewUrl: string;
 
   customDomainForm: string;
+  hideControls = {
+    network: ['domain', 'themes'],
+    standard: ['domain'],
+    premium: ['']
+  }
 
   constructor(
     private cmsLocalService: CmsLocalService,
@@ -74,12 +83,20 @@ export class CmsSpwConfigComponent implements OnInit {
   }
 
   ngOnInit() {
+
     // Set category
-    this.prodCategory = this.storage.getSession('rd_product_category');
+    this.prodCategory = this.storage.getSession('rd_product_category') ?? 'default';
+
     // Build website config form
     this.generateConfigForm();
     // Load available themes from db
     this.getThemes();
+
+    this.loadRestaurantData().then();
+
+  }
+
+  async loadRestaurantData() {
     // Current restaurant data
     this.cmsLocalService.getRestaurant()
       .subscribe({
@@ -92,10 +109,55 @@ export class CmsSpwConfigComponent implements OnInit {
             this.apptiserUrl = this.cms.getApptiserUrl(this.restaurant.restaurant_spw_url, true);
             this.getConfig();
             this.getContentStatus();
+            this.setTemplates();
+            console.log(this.selectedTemplate);
           }
-      },
-      error: error => console.log(error)
-    });
+        },
+        error: error => console.log(error)
+      });
+  }
+  setTemplates(): void {
+
+
+    // Otherwise, if there is a product category to set the default
+    this.availableTemplates = this.brand.templates;
+
+    // If the restaurant already has a published page, then set the current template to match
+    if (!!this.restaurant.restaurant_spw_template) {
+      const temp = this.restaurant.restaurant_spw_template;
+      for (const t of this.availableTemplates) {
+        console.log(`${temp} === ${t.version}`)
+        if (t.version === temp) {
+          console.log(`Matches template name: ${t.name} so use ${temp}`)
+          this.selectedTemplate = t.version;
+          return;
+        }
+      }
+      return;
+    }
+    // This is the first time publishing, so use the
+    // product_category to select a template
+    for (const t of this.availableTemplates) {
+      console.log(`Template name: ${t.name.toLowerCase()} vs Product category: ${this.prodCategory}`)
+      if (t.name.toLowerCase() === this.prodCategory) {
+        this.selectedTemplate = t.version;
+        return;
+      }
+    }
+
+
+
+
+
+    // this.availableTemplates.forEach((t: any) => {
+    //   console.log(`${currentTemplate} includes ${t.name.toLowerCase()}`)
+    //   if (currentTemplate.includes(t.name.toLowerCase())) {
+    //     this.selectedTemplate = t.version;
+    //     return;
+    //   }
+    // });
+
+
   }
 
   /**
@@ -103,13 +165,10 @@ export class CmsSpwConfigComponent implements OnInit {
    * @param uiElement string id of ui element
    *
    */
-  hidden(uiElement: string) {
-    const cat = {
-      network: ['domain', 'themes'],
-      standard: [''],
-      premium: ['']
+  hidden(uiElement: string): boolean {
+    if (!!this.hideControls[this.prodCategory] && this.hideControls[this.prodCategory].includes(uiElement)) {
+      return true;
     }
-    return cat[this.prodCategory].includes(uiElement);
   }
 
   getContentStatus(): void {
@@ -272,7 +331,7 @@ export class CmsSpwConfigComponent implements OnInit {
     // console.log('Updated config', newConfigObj);
 
     console.log(`Production: ${production}`);
-    this.cms.publish(this.restaurant.restaurant_id, this.user.member_id, production, 'standard', newConfigObj)
+    this.cms.publish(this.restaurant.restaurant_id, this.user.member_id, production, 'standard', newConfigObj, this.selectedTemplate)
       .then(res => {
 
         if (res['status'] !== 'OK') {
@@ -282,7 +341,12 @@ export class CmsSpwConfigComponent implements OnInit {
 
         console.log('Publish result', res);
 
+
+        this.cmsLocalService.loadRestaurant();
         this.onBuildSuccess(res, production);
+
+
+
 
         // record event
         this.ga.sendEvent('CMS-WebConfig', 'Apptiser', 'Published');
@@ -344,6 +408,8 @@ export class CmsSpwConfigComponent implements OnInit {
   }
 
   onBuildSuccess(res, production: boolean): void {
+
+    this.cms.getApptiserUrl(this.restaurant.restaurant_spw_url, true);
 
     if (production) {
 
