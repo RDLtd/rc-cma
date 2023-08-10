@@ -126,10 +126,10 @@ export class AppConfig {
         privacy: `https://assets.apptiser.io/docs/apptiser-privacy-policy.pdf`
       },
       template: {
-        default: "apptiser-curated-2.1.2.html",
-        curated: "apptiser-curated-2.1.2.html",
-        network: "apptiser-standard-2.1.2.html",
-        standard: "apptiser-standard-2.1.2.html",
+        default: "apptiser-curated-2.1.3.html",
+        curated: "apptiser-curated-2.1.3.html",
+        network: "apptiser-standard-2.1.3.html",
+        standard: "apptiser-standard-2.1.3.html",
         premium: null
       }
     },
