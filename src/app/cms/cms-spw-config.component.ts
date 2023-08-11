@@ -116,48 +116,45 @@ export class CmsSpwConfigComponent implements OnInit {
         error: error => console.log(error)
       });
   }
+
+  /**
+   * Set template options
+   */
   setTemplates(): void {
 
-
-    // Otherwise, if there is a product category to set the default
+    // Brand templates available
     this.availableTemplates = this.brand.templates;
 
-    // If the restaurant already has a published page, then set the current template to match
+    // If the restaurant already has a published page,
+    // then set the current template to match
     if (!!this.restaurant.restaurant_spw_template) {
-      const temp = this.restaurant.restaurant_spw_template;
+
+      const publishedTemplate = this.restaurant.restaurant_spw_template;
+
       for (const t of this.availableTemplates) {
-        console.log(`${temp} === ${t.version}`)
-        if (t.version === temp) {
-          console.log(`Matches template name: ${t.name} so use ${temp}`)
+        console.log(`Compare ${publishedTemplate} to ${t.version}`)
+        // If there's a match
+        if (t.version === publishedTemplate) {
+          console.log(`Matched: ${t.name}`)
           this.selectedTemplate = t.version;
           return;
         }
       }
-      return;
+      console.log("No match for currently published template");
     }
-    // This is the first time publishing, so use the
-    // product_category to select a template
+
+    // No matching published template so
+    // now check Product Category, with fallback
+    const cat = this.prodCategory ?? 'default';
+
     for (const t of this.availableTemplates) {
-      console.log(`Template name: ${t.name.toLowerCase()} vs Product category: ${this.prodCategory}`)
-      if (t.name.toLowerCase() === this.prodCategory) {
+      console.log(`Looking for matching product category: ${cat}`);
+      if (t.name.toLowerCase() === cat) {
+        console.log(`Product category match ${t.name.toLowerCase()} (${t.version})`);
         this.selectedTemplate = t.version;
         return;
       }
     }
-
-
-
-
-
-    // this.availableTemplates.forEach((t: any) => {
-    //   console.log(`${currentTemplate} includes ${t.name.toLowerCase()}`)
-    //   if (currentTemplate.includes(t.name.toLowerCase())) {
-    //     this.selectedTemplate = t.version;
-    //     return;
-    //   }
-    // });
-
-
   }
 
   /**
