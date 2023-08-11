@@ -86,14 +86,11 @@ export class CmsSpwConfigComponent implements OnInit {
 
     // Set category
     this.prodCategory = this.storage.getSession('rd_product_category') ?? 'default';
-
     // Build website config form
     this.generateConfigForm();
     // Load available themes from db
     this.getThemes();
-
     this.loadRestaurantData().then();
-
   }
 
   async loadRestaurantData() {
@@ -110,7 +107,6 @@ export class CmsSpwConfigComponent implements OnInit {
             this.getConfig();
             this.getContentStatus();
             this.setTemplates();
-            console.log(this.selectedTemplate);
           }
         },
         error: error => console.log(error)
@@ -118,22 +114,21 @@ export class CmsSpwConfigComponent implements OnInit {
   }
 
   /**
-   * Set template options
+   * Set current/selected template
    */
   setTemplates(): void {
 
-    // Brand templates available
     this.availableTemplates = this.brand.templates;
 
-    // If the restaurant already has a published page,
-    // then set the current template to match
+    // Already has a published apptiser/spw
     if (!!this.restaurant.restaurant_spw_template) {
 
       const publishedTemplate = this.restaurant.restaurant_spw_template;
 
+      // Does it match any currently available templates?
       for (const t of this.availableTemplates) {
         console.log(`Compare ${publishedTemplate} to ${t.version}`)
-        // If there's a match
+        // If there's a match, assign it
         if (t.version === publishedTemplate) {
           console.log(`Matched: ${t.name}`)
           this.selectedTemplate = t.version;
