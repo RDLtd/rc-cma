@@ -8,11 +8,11 @@ import 'zone.js/plugins/zone-error';
 export const environment = {
   production: false,
   // Local
-  API_URL: 'http://localhost:4000',
+  // API_URL: 'http://localhost:4000',
   // Staging
   // API_URL: 'https://rc-server-staging.herokuapp.com',
   // Production
-  // API_URL: 'https://rc-server-prod.herokuapp.com',
+  API_URL: 'https://rc-server-prod.herokuapp.com',
 
   // RC Keys
   // rc_stripe_key: 'pk_test_51HwTj0DK2S86a4QiDZ7hvjuiwLjWSZU3Yy5LFYnBrEDHNsCF1nbwrXOzCOPPDV0cxHvZIC5m5TZsbWoAztS4ZCnE00nKRGn4jh',
@@ -35,4 +35,3 @@ export const environment = {
   cloudinary_APIkey: '713165672947878',
   cloudinary_APISecret: 'EhLM0NhD7HvJDjX5IvF90u6guq8'
 };
-

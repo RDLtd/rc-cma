@@ -136,11 +136,15 @@ export class AppConfig {
         },
         {
           name: 'Network',
-          version: 'apptiser-standard-2.1.3.html'
+          version: 'apptiser-standard-2.1.4.html'
         },
         {
           name: 'Standard',
-          version: 'apptiser-standard-2.1.3.html'
+          version: 'apptiser-standard-2.1.4.html'
+        },
+        {
+          name: 'Fullers',
+          version: 'fullers-2.1.4.html'
         }
       ],
     },
