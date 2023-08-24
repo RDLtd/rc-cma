@@ -144,7 +144,11 @@ export class AppConfig {
         },
         {
           name: 'Fullers',
-          version: 'fullers-2.1.4.html'
+          version: 'fullers-tenant-2.1.7.html'
+        },
+        {
+          name: 'Fullers',
+          version: 'fullers-tenant-2.1.8.html'
         }
       ],
     },

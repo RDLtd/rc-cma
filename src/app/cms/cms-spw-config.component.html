@@ -52,7 +52,7 @@
       <div class="rdl-panel" *ngIf="user.member_access_level > 3">
         <h3>Publishing template</h3>
         <mat-form-field appearance="fill" style="width: 100%;">
-          <mat-select [(value)]="selectedTemplate">
+          <mat-select [(value)]="selectedTemplate" (selectionChange)="configChange('template')">
             <mat-option *ngFor="let t of availableTemplates" [value]="t.version">{{ t.name }}
               ({{ t.version }})</mat-option>
           </mat-select>
