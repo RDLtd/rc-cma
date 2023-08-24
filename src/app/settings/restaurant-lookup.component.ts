@@ -93,7 +93,7 @@ export class RestaurantLookupComponent implements OnInit {
       const associatedRestaurant = this.data.associatedRestaurants[i];
       if (associatedRestaurant.restaurant_name === selected.restaurant_name &&
         associatedRestaurant.restaurant_address_1 === selected.restaurant_address_1) {
-        // console.log('Restaurant already associated');
+        // console.log('Restaurant already associated for this user');
         this.dspSnackBar(
           this.translate.instant('LOOKUP.msgAlreadyAdded', { name: selected.restaurant_name})
         );
@@ -108,6 +108,15 @@ export class RestaurantLookupComponent implements OnInit {
 
       // Has it already been verified by owner?
       // i.e. is there already an admin user
+
+      //
+      // ks 200723 not sure this is the correct strategy. Plus also not sure that we ever set data_status!
+      //
+      // Here we need to look in ALL associations for this venue - if it is already associated
+      // then we need to inhibit...
+      //
+      // BUT, if it has been only associated by level 4 users, then we should be able to proceed!
+      //
       if (selected.restaurant_data_status === 'Verified By Owner') {
         this.dspSnackBar(
           this.translate.instant('LOOKUP.msgAlreadyVerified', { name: selected.restaurant_name })
