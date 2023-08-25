@@ -13,7 +13,7 @@
           </ng-container>
         </h2>
         <mat-icon color="warn" *ngIf="unPublishedChanges">cloud_off</mat-icon>
-        <mat-icon color="success" *ngIf="!unPublishedChanges">cloud</mat-icon>
+        <mat-icon color="primary" *ngIf="!unPublishedChanges">cloud</mat-icon>
       </div>
 
       <span markdown ngpreservewhitespaces *ngIf="unPublishedChanges">
@@ -49,11 +49,12 @@
         </li>
       </ul>
 
+      <!-- Template selection -->
       <div class="rdl-panel" *ngIf="user.member_access_level > 3">
         <h3>Publishing template</h3>
         <mat-form-field appearance="fill" style="width: 100%;">
-          <mat-select [(value)]="selectedTemplate" (selectionChange)="configChange('template')">
-            <mat-option *ngFor="let t of availableTemplates" [value]="t.version">{{ t.name }}
+          <mat-select [(value)]="selectedTemplate" (selectionChange)="setTemplate()">
+            <mat-option *ngFor="let t of availableTemplates" [value]="t">{{ t.name }}
               ({{ t.version }})</mat-option>
           </mat-select>
         </mat-form-field>

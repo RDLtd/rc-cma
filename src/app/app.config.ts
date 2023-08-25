@@ -127,12 +127,28 @@ export class AppConfig {
       },
       templates: [
         {
-          name: 'Default',
-          version: 'apptiser-curated-2.1.3.html'
-        },
-        {
           name: 'Curated',
-          version: 'apptiser-curated-2.1.3.html'
+          version: 'apptiser-curated-2.1.3.html',
+          config: {
+            showOpeningNotes: [{value: false, disabled: false}],
+            showImageGallery: [{value: true, disabled: false}],
+            // menus
+            showHtmlMenu: [{value: false, disabled: true}],
+            showDownloadMenus: [{value: false, disabled: true}],
+            // reservations
+            showReservations: [{value: false, disabled: true}],
+            showReservationsInfo: [{value: false, disabled: true}],
+            showBookingWidget: [{value: false, disabled: true}],
+            showGroupBookings: [{value: false, disabled: true}],
+            showPrivateDining: [{value: false, disabled: true}],
+            // contacts
+            showContacts: [{value: false, disabled: true}],
+            showLinks: [{value: false, disabled: true}],
+            showParking: [{value: false, disabled: true}],
+            showTransport: [{value: false, disabled: true}],
+            // location
+            showMap: [{value: true, disabled: false}],
+          }
         },
         {
           name: 'Network',
@@ -144,7 +160,27 @@ export class AppConfig {
         },
         {
           name: 'Fullers',
-          version: 'fullers-tenant-2.1.8.html'
+          version: 'fullers-tenant-2.1.8.html',
+          config: {
+            showOpeningNotes: [{value: true, disabled: false}],
+            showImageGallery: [{value: true, disabled: false}],
+            // menus
+            showHtmlMenu: [{value: true, disabled: false}],
+            showDownloadMenus: [{value: true, disabled: false}],
+            // reservations
+            showReservations: [{value: false, disabled: false}],
+            showReservationsInfo: [{value: true, disabled: false}],
+            showBookingWidget: [{value: true, disabled: false}],
+            showGroupBookings: [{value: false, disabled: true}],
+            showPrivateDining: [{value: false, disabled: true}],
+            // contacts
+            showContacts: [{value: false, disabled: true}],
+            showLinks: [{value: false, disabled: true}],
+            showParking: [{value: false, disabled: true}],
+            showTransport: [{value: false, disabled: true}],
+            // location
+            showMap: [true]
+          }
         }
       ],
     },

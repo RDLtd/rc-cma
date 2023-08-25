@@ -54,6 +54,29 @@ export class CmsSpwConfigComponent implements OnInit {
     standard: ['domain'],
     premium: ['']
   }
+  defaultTemplateConfig = {
+    showOpeningNotes: false,
+    showImageGallery: true,
+
+    // menus
+    showHtmlMenu: true,
+    showDownloadMenus: true,
+
+    // reservations
+    showReservations: true,
+    showReservationsInfo: [{value: true, disabled: false}],
+    showBookingWidget: [{value: true, disabled: false}],
+    showGroupBookings: [{value: false, disabled: false}],
+    showPrivateDining: [{value: false, disabled: false}],
+
+    // contacts
+    showContacts: [true],
+    showLinks: [{value: true, disabled: false}],
+    showParking: [{value: true, disabled: false}],
+    showTransport: [{value: true, disabled: false}],
+    // location
+    showMap: [true]
+  }
 
   constructor(
     private cmsLocalService: CmsLocalService,
@@ -127,11 +150,11 @@ export class CmsSpwConfigComponent implements OnInit {
 
       // Does it match any currently available templates?
       for (const t of this.availableTemplates) {
-        console.log(`Compare ${publishedTemplate} to ${t.version}`)
+        // console.log(`Compare ${publishedTemplate} to ${t.version}`)
         // If there's a match, assign it
         if (t.version === publishedTemplate) {
-          console.log(`Matched: ${t.name}`)
-          this.selectedTemplate = t.version;
+          console.log(`Matched template: ${t.name}`)
+          this.selectedTemplate = t;
           return;
         }
       }
@@ -146,10 +169,21 @@ export class CmsSpwConfigComponent implements OnInit {
       console.log(`Looking for matching product category: ${cat}`);
       if (t.name.toLowerCase() === cat) {
         console.log(`Product category match ${t.name.toLowerCase()} (${t.version})`);
-        this.selectedTemplate = t.version;
+        this.selectedTemplate = t;
         return;
       }
     }
+  }
+
+  setTemplate(): void {
+    // Enable/disable web config controls
+    if (!!this.selectedTemplate.config) {
+      this.configFormGroup = this.fb.group(this.selectedTemplate.config);
+    } else {
+      this.configFormGroup = this.fb.group(this.defaultTemplateConfig);
+    }
+    this.configChange(`template`);
+    console.log(`Template: ${this.selectedTemplate.version} selected`);
   }
 
   /**
@@ -179,29 +213,7 @@ export class CmsSpwConfigComponent implements OnInit {
 
   generateConfigForm(): void {
 
-    this.configFormGroup = this.fb.group({
-      showOpeningNotes: false,
-      showImageGallery: true,
-
-      // menus
-      showHtmlMenu: true,
-      showDownloadMenus: true,
-
-      // reservations
-      showReservations: true,
-      showReservationsInfo: [{value: true, disabled: false}],
-      showBookingWidget: [{value: true, disabled: false}],
-      showGroupBookings: [{value: false, disabled: false}],
-      showPrivateDining: [{value: false, disabled: false}],
-
-      // contacts
-      showContacts: [true],
-      showLinks: [{value: true, disabled: false}],
-      showParking: [{value: true, disabled: false}],
-      showTransport: [{value: true, disabled: false}],
-      // location
-      showMap: [true]
-    });
+    this.configFormGroup = this.fb.group(this.defaultTemplateConfig);
 
     // delay observing changes until defaults are in place
     setTimeout(() => {
@@ -287,14 +299,13 @@ export class CmsSpwConfigComponent implements OnInit {
     console.log(formGroup.value);
   }
 
-  // TODO: JB: I'm sure this would be better done using nested form groups
   toggleSection(control): void {
     const disable = !this.configFormGroup.get(control).value;
     let controls: string[];
     if (control === 'showReservations') {
-      controls = ['showReservationsInfo', 'showEmailBookingWidget', 'showGroupBookings', 'showPrivateDining'];
+      controls = ['showReservationsInfo', 'showBookingWidget', 'showGroupBookings', 'showPrivateDining'];
       controls.forEach( c => {
-        disable ? this.configFormGroup.get(c).disable() : this.configFormGroup.get(c).enable();
+          disable ? this.configFormGroup.get(c).disable() : this.configFormGroup.get(c).enable();
       })
     }
     if (control === 'showContacts') {
@@ -323,7 +334,7 @@ export class CmsSpwConfigComponent implements OnInit {
     // console.log('Updated config', newConfigObj);
 
     console.log(`Production: ${production}`);
-    this.cms.publish(this.restaurant.restaurant_id, this.user.member_id, production, 'standard', newConfigObj, this.selectedTemplate)
+    this.cms.publish(this.restaurant.restaurant_id, this.user.member_id, production, 'standard', newConfigObj, this.selectedTemplate.version)
       .then(res => {
 
         if (res['status'] !== 'OK') {
