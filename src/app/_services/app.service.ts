@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, lastValueFrom, Observable } from 'rxjs';
 import { HttpParams, HttpClient } from '@angular/common/http';
 import { AppConfig } from '../app.config';
+import { StorageService } from './storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,11 +14,24 @@ export class AppService {
   public authToken = this.token.asObservable();
   private currentAuthToken;
 
+  brands: any;
+
 
   constructor(
     private config: AppConfig,
-    private http: HttpClient
-  ) { }
+    private http: HttpClient,
+    private storage: StorageService
+  ) {
+    this.getBrandNames().subscribe({
+      next: data => {
+        this.brands = data.brands;
+        console.log(data.brands);
+      },
+      error: (err) => {
+        console.error(err)
+      }
+    });
+  }
 
   reportCriticalError(info) {
     this.authToken.subscribe( tkn => {
@@ -43,5 +57,25 @@ export class AppService {
         token: this.currentAuthToken
       });
   }
+
+  getBrandNames(): Observable<any>  {
+    return this.http.post(this.config.apiUrl + '/brand/getbrandnames',
+      {
+        userCode: this.config.userAPICode,
+        token: this.token,
+      });
+  }
+
+  get brand(): object {
+    const prefix = localStorage.getItem('rd_brand');
+    this.brands.forEach( item => {
+      if (prefix === item.prefix) {
+        return item;
+      }
+    });
+    return null;
+  }
+
+
 
 }

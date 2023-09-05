@@ -160,7 +160,7 @@ export class AppConfig {
         },
         {
           name: 'Fullers',
-          version: 'fullers-tenant-2.1.8.html',
+          version: 'fullers-tenant-2.1.11.html',
           config: {
             showOpeningNotes: [{value: true, disabled: false}],
             showImageGallery: [{value: true, disabled: false}],
@@ -174,8 +174,8 @@ export class AppConfig {
             showGroupBookings: [{value: false, disabled: true}],
             showPrivateDining: [{value: false, disabled: true}],
             // contacts
-            showContacts: [{value: false, disabled: true}],
-            showLinks: [{value: false, disabled: true}],
+            showContacts: [{value: true, disabled: false}],
+            showLinks: [{value: true, disabled: false}],
             showParking: [{value: false, disabled: true}],
             showTransport: [{value: false, disabled: true}],
             // location
@@ -213,5 +213,8 @@ export class AppConfig {
       }
     }
   };
+
+
   public readonly brand = this.brands[localStorage.getItem('rd_brand')];
+
 }

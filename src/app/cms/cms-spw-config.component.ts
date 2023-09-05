@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CmsLocalService } from './cms-local.service';
 import { HelpService } from '../common';
-import { AnalyticsService, CMSService } from "../_services";
+import { AnalyticsService, AppService, CMSService } from "../_services";
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Restaurant } from '../_models';
 import { AppConfig } from "../app.config";
@@ -25,8 +25,6 @@ export class CmsSpwConfigComponent implements OnInit {
   prodCategory: string;
   availableTemplates: any;
   selectedTemplate: any;
-
-
 
   cssThemeObjects: any[];
   selectedTheme: any;
@@ -88,9 +86,11 @@ export class CmsSpwConfigComponent implements OnInit {
     private storage: StorageService,
     private dialog: MatDialog,
     private translate: TranslateService,
-    private ga: AnalyticsService
+    private ga: AnalyticsService,
+    private appService: AppService
   ) {
       this.brand = config.brand;
+      console.log(appService.brand);
       this.user = this.storage.get('rd_profile');
       this.customDomainForm = this.translate.instant('CMS.SETTINGS.linkCustomDomain');
   }
