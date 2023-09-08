@@ -101,6 +101,7 @@ import {MatExpansionModule} from "@angular/material/expansion";
 import { CmsSpwConfigComponent } from './cms/cms-spw-config.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { CmsSpwBuilderComponent } from './cms/cms-spw-builder.component';
+import { InitModule } from './init/init.module';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -190,7 +191,8 @@ export function appInitializerFactory(translate: TranslateService) {
         ClipboardModule,
         OnlineStatusModule,
         MatExpansionModule,
-        MatSlideToggleModule
+        MatSlideToggleModule,
+        InitModule
     ],
   providers: [
     AppConfig,

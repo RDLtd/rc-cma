@@ -71,6 +71,7 @@ export class HeaderComponent implements OnInit {
 
     // Listen for changes to the section
     this.header.sectionName.subscribe(str => {
+      console.log('STR', str);
       this.navLabel = str;
       this.lastRestaurantId = this.storage.get('rd_last_restaurant');
     });

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CmsLocalService } from './cms-local.service';
 import { HelpService } from '../common';
-import { AnalyticsService, AppService, CMSService } from "../_services";
+import { AnalyticsService, AppConfigService, CMSService } from "../_services";
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Restaurant } from '../_models';
 import { AppConfig } from "../app.config";
@@ -87,10 +87,9 @@ export class CmsSpwConfigComponent implements OnInit {
     private dialog: MatDialog,
     private translate: TranslateService,
     private ga: AnalyticsService,
-    private appService: AppService
+    private configService: AppConfigService
   ) {
-      this.brand = config.brand;
-      console.log(appService.brand);
+      this.brand = configService.brand;
       this.user = this.storage.get('rd_profile');
       this.customDomainForm = this.translate.instant('CMS.SETTINGS.linkCustomDomain');
   }
@@ -127,7 +126,7 @@ export class CmsSpwConfigComponent implements OnInit {
             this.publishDate = this.restaurant.restaurant_spw_written;
             this.publishedBy = this.restaurant.restaurant_verified_by;
             this.apptiserUrl = this.cms.getApptiserUrl(this.restaurant.restaurant_spw_url, true);
-            this.getConfig();
+            //this.getConfig();
             this.getContentStatus();
             this.setTemplates();
           }
@@ -255,7 +254,7 @@ export class CmsSpwConfigComponent implements OnInit {
         next: data => {
           // map data to local
           this.websiteConfig = data['website_config'].website_config_options;
-          // console.log('Conf.', this.websiteConfig);
+          console.log('Conf.', this.websiteConfig);
           this.setConfig();
         },
         error: error => {

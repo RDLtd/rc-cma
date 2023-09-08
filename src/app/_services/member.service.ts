@@ -2,7 +2,7 @@
 import { HttpClient } from '@angular/common/http';
 import { AppConfig } from '../app.config';
 import { Member } from '../_models';
-import { AppService } from './app.service';
+import { AppConfigService } from '../app-config.service';
 import { lastValueFrom } from 'rxjs';
 
 @Injectable()
@@ -15,7 +15,7 @@ export class MemberService {
   constructor(
     private http: HttpClient,
     private config: AppConfig,
-    private appService: AppService
+    private appService: AppConfigService
   ) {
     this.appService.authToken.subscribe(token => {
       this.authToken = token;

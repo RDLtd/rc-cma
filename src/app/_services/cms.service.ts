@@ -4,7 +4,7 @@ import { CMSElement, CMSTime, CMSAttribute, CMSMeal, CMSDescription, CMSDish, CM
 import { Member } from '../_models';
 import { Restaurant } from '../_models';
 import { HttpClient } from '@angular/common/http';
-import { AppService } from './app.service';
+import { AppConfigService } from '../app-config.service';
 import { lastValueFrom } from 'rxjs';
 import { StorageService } from './storage.service';
 
@@ -16,7 +16,7 @@ export class CMSService {
 
   constructor(
     private http: HttpClient,
-    private appService: AppService,
+    private appService: AppConfigService,
     private storage: StorageService,
     private config: AppConfig) {
     this.appService.authToken.subscribe(token => {

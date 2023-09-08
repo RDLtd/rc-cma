@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationService, ErrorService, MemberService } from '../_services';
+import { AppConfigService, AuthenticationService, ErrorService, MemberService } from '../_services';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -18,6 +18,7 @@ export class SigninComponent implements OnInit {
   dbOffline = false;
   errorMsg: string;
   pwdReset = false;
+  brand: object;
   brandName: string;
   stripeSessionId: any;
   newMemberEmail: string;
@@ -31,13 +32,15 @@ export class SigninComponent implements OnInit {
     private translate: TranslateService,
     private activeRoute: ActivatedRoute,
     private config: AppConfig,
+    private configService: AppConfigService,
     private router: Router,
     private error: ErrorService
   ) {  }
 
   ngOnInit() {
+    console.log('loaded');
+    this.brandName = this.configService.brandName;
 
-    this.brandName = this.config.brand.name;
     // Check url params
     this.activeRoute.queryParams.subscribe(params => {
       // console.log('Url params', params);

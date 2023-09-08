@@ -2,7 +2,7 @@
 import { AppConfig } from '../app.config';
 import { User } from '../_models';
 import { HttpClient } from '@angular/common/http';
-import { AppService } from './app.service';
+import { AppConfigService } from '../app-config.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,7 @@ export class UserService {
 
   constructor(
     private http: HttpClient,
-    private appService: AppService,
+    private appService: AppConfigService,
     private config: AppConfig) {
     this.appService.authToken.subscribe(token => this.authToken = token);
   }

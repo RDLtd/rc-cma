@@ -2,7 +2,7 @@
 import { AppConfig } from '../app.config';
 import { Offer, Restaurant, SQLParameters, LaunchParameters } from '../_models/';
 import { HttpClient } from '@angular/common/http';
-import { AppService } from './app.service';
+import { AppConfigService } from '../app-config.service';
 
 @Injectable()
 
@@ -12,7 +12,7 @@ export class RestaurantService {
 
   constructor(
     private http: HttpClient,
-    private appService: AppService,
+    private appService: AppConfigService,
     private config: AppConfig) {
     this.appService.authToken.subscribe(token => this.authToken = token);
   }
