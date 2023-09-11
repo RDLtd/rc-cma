@@ -107,22 +107,6 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient, './assets/i18n/', '.json');
 }
 
-// Make App initialisation dependent on translations
-// so that we can rely on 'instant' access everywhere else
-// export function appInitializerFactory(translate: TranslateService) {
-//   // LocalStorage is read/set in index.html
-//   const languages = ['en', 'fr'];
-//   let lang = localStorage.getItem('rd_language');
-//   return () => {
-//     // console.log(`Translation loaded (${lang})`, languages.includes(lang));
-//     translate.addLangs(languages);
-//     // If the user language is not supported, default to en
-//     if (!languages.includes(lang)) { lang = 'en'; }
-//     translate.setDefaultLang(lang);
-//     return lastValueFrom(translate.use(lang));
-//   };
-// }
-
 @NgModule({
   declarations: [
     AppComponent,
