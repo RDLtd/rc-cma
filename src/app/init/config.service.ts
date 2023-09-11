@@ -3,6 +3,9 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { BehaviorSubject, filter } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
+import { map } from 'rxjs/operators';
+
+declare const require: any;
 
 @Injectable({
   providedIn: 'root'
@@ -11,40 +14,66 @@ import { TranslateService } from '@ngx-translate/core';
 export class ConfigService {
 
   // App values
-  public readonly apiUrl = environment.API_URL;
-  public readonly appUrl = window.location.origin;
-  public readonly userAPICode = 'RDL-dev';
+  readonly API_URL = environment.API_URL;
+  readonly mozId = environment.MOZ_ID;
+  readonly appUrl = window.location.origin;
+  readonly userAPICode = 'RDL-dev';
+  readonly upload_preset = 'nozxac7z';
+  // session limits
+  readonly timeout = 60; // minutes
+  readonly countdown = 5; // minutes to check activity before timeout
+  readonly airBrake = false;
+  readonly buildObj = {
+    version: require('../../../package.json').version,
+    name: require('../../../package.json').name
+  };
 
   // Auth token
-  private token = new BehaviorSubject(new HttpParams().set('Authorization', 'Bearer' +
+  private tokenSubject = new BehaviorSubject(new HttpParams().set('Authorization', 'Bearer' +
     ' 234242423wdfsdvdsfsdrfg34tdfverge'));
-  public authToken = this.token.asObservable();
+  readonly authToken = this.tokenSubject.asObservable();
 
   // Brand Observable
   private brandConfig = new BehaviorSubject<any>(null);
-  public readonly brand$ = this.brandConfig.asObservable().pipe(
+  readonly brand$ = this.brandConfig.asObservable().pipe(
     // Ignore null
-    filter (brandConfig => !!brandConfig)
+    filter (brandConfig => !!brandConfig),
+    map(brandConfig => brandConfig?.brand)
   )
 
   public readonly languages = ['en', 'fr'];
+
+  public readonly sql_defaults = {
+    where_field: 'restaurant_name',
+    where_string: '',
+    where_any_position: 'N',
+    sort_field: 'restaurant_id',
+    sort_direction: 'ASC',
+    limit_number: '30',
+    limit_index: '0'
+  };
 
   constructor(
     private http: HttpClient,
     private translate: TranslateService
   ) { }
 
-  getBrandConfig() {
+  getBrandConfig(): any {
+    // load brand from backend
     this.http.post(this.apiUrl + '/brand/getbrand',
       {
         userCode: this.userAPICode,
-        token: this.token,
+        token: this.authToken,
         brand_prefix: localStorage.getItem('rd_brand') ?? 'app',
         window_location_origin: this.appUrl,
         substitutions: true
       })
       .subscribe({
-        next: (brand) => this.brandConfig.next(brand),
+        next: (brand) => {
+          // notify subscribers
+          this.brandConfig.next(brand);
+          return brand;
+        },
         error: () => console.log('Error loading brand')
       })
   }
@@ -57,9 +86,44 @@ export class ConfigService {
     if (!this.languages.includes(lang)) { lang = this.languages[0]; }
     this.translate.setDefaultLang(lang);
     return this.translate.use(lang)
-      .subscribe({
-        next: ((res) => console.log(res)),
-        error: () => console.log('setLanguage error')
+      .subscribe();
+  }
+
+  displayConfig(): void {
+    this.brand$.subscribe((brand) => {
+      console.log(`Brand: ${brand.name}`);
     });
+    console.log(`API: ${this.apiUrl}`);
+    console.log(`Language: ${this.languages}`);
+    console.log(`Locale: ${localStorage.getItem('rd_locale')}`);
+    // console.log(`Session length: ${this.timeout} mins`);
+    // console.log(`Session countdown from : ${this.countdown} min.`);
+  }
+
+  get brand() {
+    return this.brand$;
+  }
+
+  get token() {
+    return this.authToken;
+  }
+
+  get build() {
+    return this.buildObj;
+  }
+
+  get session_timeout() {
+    return this.timeout;
+  }
+  get session_countdown() {
+    return this.countdown;
+  }
+
+  get useAirBrake() {
+    return this.airBrake;
+  }
+
+  get apiUrl() {
+    return this.API_URL
   }
 }

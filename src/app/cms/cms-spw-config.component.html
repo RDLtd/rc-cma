@@ -17,7 +17,7 @@
       </div>
 
       <span markdown ngpreservewhitespaces *ngIf="unPublishedChanges">
-        {{ 'CMS.SETTINGS.infoUnpublished' | translate: { brand: brand.name } }}
+        {{ 'CMS.SETTINGS.infoUnpublished' | translate: { brand: (brand$ | async).name } }}
       </span>
 
       <span markdown ngpreservewhitespaces *ngIf="!unPublishedChanges">
@@ -54,7 +54,7 @@
         <h3>Publishing template</h3>
         <mat-form-field appearance="fill" style="width: 100%;">
           <mat-select [(value)]="selectedTemplate" (selectionChange)="setTemplate()">
-            <mat-option *ngFor="let t of availableTemplates" [value]="t">{{ t.name }}
+            <mat-option *ngFor="let t of (brand$ | async).templates" [value]="t">{{ t.name }}
               ({{ t.version }})</mat-option>
           </mat-select>
         </mat-form-field>

@@ -2,11 +2,11 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthenticationService } from './_services';
 import { HttpClient } from '@angular/common/http';
-import { AppConfig } from './app.config';
 import { NavigationEnd, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { OnlineStatusService, OnlineStatusType } from 'ngx-online-status';
+import { ConfigService } from './init/config.service';
 
 @Component({
   selector: 'app-rc-root',
@@ -38,7 +38,7 @@ export class AppComponent implements OnInit {
     private router: Router,
     private translate: TranslateService,
     private http: HttpClient,
-    private config: AppConfig,
+    private config: ConfigService,
     public authService: AuthenticationService) {
 
       this.checkProtocol();
@@ -64,13 +64,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
 
-    // Output Settings
-    console.log(`API: ${this.config.apiUrl}`);
-    console.log(`Brand: ${this.config.brand.name}`);
-    console.log(`Language: ${this.language}`);
-    console.log(`Locale: ${localStorage.getItem('rd_locale')}`);
-    console.log(`Session length: ${this.config.session_timeout} mins`);
-    console.log(`Session countdown from : ${this.config.session_countdown} min.`);
+    this.config.displayConfig();
 
     // Observe the session status
     this.authService.memberSessionSubject.subscribe(

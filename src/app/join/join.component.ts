@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MemberService, AuthenticationService, AppConfigService, ErrorService } from '../_services';
+import { MemberService, AuthenticationService, ErrorService } from '../_services';
 import { CmsLocalService } from '../cms';
 import { TranslateService } from '@ngx-translate/core';
 import { MatDialog } from '@angular/material/dialog';
@@ -60,7 +60,6 @@ export class JoinComponent implements OnInit {
     private dialog: MatDialog,
     private load: LoadService,
     public config: AppConfig,
-    private appService: AppConfigService,
     private router: Router,
     private error: ErrorService
   ) {

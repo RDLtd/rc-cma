@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CmsLocalService } from './cms-local.service';
 import { HelpService } from '../common';
-import { AnalyticsService, AppConfigService, CMSService } from "../_services";
+import { AnalyticsService, CMSService } from "../_services";
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Restaurant } from '../_models';
 import { AppConfig } from "../app.config";
@@ -10,6 +10,7 @@ import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 import { CmsSpwBuilderComponent} from "./cms-spw-builder.component";
 import { CmsSpwLinksComponent } from './cms-spw-links.component';
 import { TranslateService } from "@ngx-translate/core";
+import { ConfigService } from '../init/config.service';
 
 @Component({
   selector: 'rc-cms-spw-config',
@@ -19,7 +20,7 @@ import { TranslateService } from "@ngx-translate/core";
 })
 export class CmsSpwConfigComponent implements OnInit {
 
-  brand: any;
+  brand$: any;
   restaurant: Restaurant;
   user: any; // a.k.a member
   prodCategory: string;
@@ -87,9 +88,10 @@ export class CmsSpwConfigComponent implements OnInit {
     private dialog: MatDialog,
     private translate: TranslateService,
     private ga: AnalyticsService,
-    private configService: AppConfigService
+    private configService: ConfigService
   ) {
-      this.brand = configService.brand;
+
+
       this.user = this.storage.get('rd_profile');
       this.customDomainForm = this.translate.instant('CMS.SETTINGS.linkCustomDomain');
   }
@@ -105,6 +107,13 @@ export class CmsSpwConfigComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.brand$ = this.configService.brand;
+    this.brand$.subscribe( (obj) => {
+      this.availableTemplates = obj.templates;
+      console.log(obj.templates);
+    });
+
 
     // Set category
     this.prodCategory = this.storage.getSession('rd_product_category') ?? 'default';
@@ -140,7 +149,9 @@ export class CmsSpwConfigComponent implements OnInit {
    */
   setTemplates(): void {
 
-    this.availableTemplates = this.brand.templates;
+    //this.availableTemplates = this.brand$.templates;
+
+    console.log(this.availableTemplates);
 
     // Already has a published apptiser/spw
     if (!!this.restaurant.restaurant_spw_template) {
@@ -449,7 +460,7 @@ export class CmsSpwConfigComponent implements OnInit {
           spwUrl: this.apptiserUrl,
           spwMenus: `${this.apptiserUrl}#menus`,
           restaurant: this.restaurant,
-          curation: this.config.brand.email.curation
+          curation: this.brand$.email.curation
         }
       });
   }

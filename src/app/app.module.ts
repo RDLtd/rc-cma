@@ -1,6 +1,6 @@
 
 import { BrowserModule } from '@angular/platform-browser';
-import {APP_INITIALIZER, NgModule} from '@angular/core';
+import { NgModule} from '@angular/core';
 import {
   FormsModule,
   ReactiveFormsModule
@@ -76,7 +76,7 @@ import {
 // 3rd party packages
 import {
   TranslateModule,
-  TranslateLoader, TranslateService
+  TranslateLoader,
 } from '@ngx-translate/core';
 import { TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { FileUploadModule } from 'ng2-file-upload';
@@ -94,7 +94,6 @@ import { ProfileComponent } from './profile/profile.component';
 import {CloudinaryModule} from '@cloudinary/ng';
 import { OnlineStatusModule } from 'ngx-online-status';
 import { AppTitleStrategy } from './app-title-strategy';
-import { lastValueFrom } from 'rxjs';
 import {ContactComponent} from "./common/contact/contact.component";
 import {FaqsComponent} from "./common/faqs/faqs.component";
 import {MatExpansionModule} from "@angular/material/expansion";
@@ -110,19 +109,19 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
 
 // Make App initialisation dependent on translations
 // so that we can rely on 'instant' access everywhere else
-export function appInitializerFactory(translate: TranslateService) {
-  // LocalStorage is read/set in index.html
-  const languages = ['en', 'fr'];
-  let lang = localStorage.getItem('rd_language');
-  return () => {
-    // console.log(`Translation loaded (${lang})`, languages.includes(lang));
-    translate.addLangs(languages);
-    // If the user language is not supported, default to en
-    if (!languages.includes(lang)) { lang = 'en'; }
-    translate.setDefaultLang(lang);
-    return lastValueFrom(translate.use(lang));
-  };
-}
+// export function appInitializerFactory(translate: TranslateService) {
+//   // LocalStorage is read/set in index.html
+//   const languages = ['en', 'fr'];
+//   let lang = localStorage.getItem('rd_language');
+//   return () => {
+//     // console.log(`Translation loaded (${lang})`, languages.includes(lang));
+//     translate.addLangs(languages);
+//     // If the user language is not supported, default to en
+//     if (!languages.includes(lang)) { lang = 'en'; }
+//     translate.setDefaultLang(lang);
+//     return lastValueFrom(translate.use(lang));
+//   };
+// }
 
 @NgModule({
   declarations: [
@@ -214,12 +213,6 @@ export function appInitializerFactory(translate: TranslateService) {
     {
       provide: TitleStrategy,
       useClass: AppTitleStrategy
-    },
-    {
-      provide: APP_INITIALIZER,
-      useFactory: appInitializerFactory,
-      deps: [TranslateService],
-      multi: true
     },
     ErrorService
   ],

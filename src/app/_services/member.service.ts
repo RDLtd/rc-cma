@@ -1,9 +1,8 @@
 ﻿import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { AppConfig } from '../app.config';
 import { Member } from '../_models';
-import { AppConfigService } from '../app-config.service';
 import { lastValueFrom } from 'rxjs';
+import { ConfigService } from '../init/config.service';
 
 @Injectable()
 
@@ -14,12 +13,9 @@ export class MemberService {
 
   constructor(
     private http: HttpClient,
-    private config: AppConfig,
-    private appService: AppConfigService
+    private config: ConfigService
   ) {
-    this.appService.authToken.subscribe(token => {
-      this.authToken = token;
-    });
+    this.authToken = config.token;
     this.brand = this.config.brand;
   }
 
@@ -220,7 +216,7 @@ export class MemberService {
       {
         email: memberemail,
         password: memberpassword,
-        company: this.config.brand.prefix,
+        company: this.brand.prefix,
         userCode: this.config.userAPICode,
         token: this.authToken
       });
@@ -258,7 +254,7 @@ export class MemberService {
   messages(memberid: string, memberaccesslevel: string, membermessageseen: string) {
     return this.http.post(this.config.apiUrl + '/members/messages',
       {
-        company_code: this.config.brand.prefix,
+        company_code: this.brand.prefix,
         member_id: memberid,
         member_access_level: memberaccesslevel,
         member_messages_seen: membermessageseen,
@@ -477,7 +473,7 @@ export class MemberService {
     return lastValueFrom(this.http.post(`${this.config.apiUrl}/payments/register-free-member`, {
       pending: formData,
       launch_number: 0,
-      company: this.config.brand.prefix,
+      company: this.brand.prefix,
       userCode: this.config.userAPICode,
       token: this.authToken
     }))
@@ -493,7 +489,7 @@ export class MemberService {
         member_email: formData.email,
         member_telephone: formData.telephone
       },
-      company: this.config.brand.prefix,
+      company: this.brand.prefix,
       userCode: this.config.userAPICode,
       token: this.authToken
     }));
@@ -523,7 +519,7 @@ export class MemberService {
     return this.http.post(this.config.apiUrl + '/members/create_pending',
       {
           pending,
-          company: this.config.brand.prefix,
+          company: this.brand.prefix,
           userCode: this.config.userAPICode,
           token: this.authToken
       });
@@ -546,18 +542,18 @@ export class MemberService {
         api_url: api_url,
         userCode: this.config.userAPICode,
         token: this.authToken,
-        company: this.config.brand.prefix
+        company: this.brand.prefix
       });
   }
 
   getUpcomingInvoice(customer_id: string) {
-    console.log('getUpcomingInvoice', customer_id, this.config.brand.prefix);
+    console.log('getUpcomingInvoice', customer_id, this.brand.prefix);
     return this.http.post(this.config.apiUrl + '/payments/get-upcoming-invoice',
       {
         customer_id: customer_id,
         userCode: this.config.userAPICode,
         token: this.authToken,
-        company: this.config.brand.prefix
+        company: this.brand.prefix
       });
   }
 
@@ -585,7 +581,7 @@ export class MemberService {
   getProducts() {
     return this.http.post(this.config.apiUrl + '/members/getproducts',
       {
-        company: this.config.brand.prefix,
+        company: this.brand.prefix,
         userCode: this.config.userAPICode,
         token: this.authToken
       });
@@ -594,7 +590,7 @@ export class MemberService {
   getProductsMaxRestaurants(max_restaurants: number) {
     return this.http.post(this.config.apiUrl + '/members/getproductsmaxrestaurants',
       {
-        company: this.config.brand.prefix,
+        company: this.brand.prefix,
         max_restaurants: max_restaurants,
         userCode: this.config.userAPICode,
         token: this.authToken
@@ -608,7 +604,7 @@ export class MemberService {
         subscription_id: subscription_id,
         userCode: this.config.userAPICode,
         token: this.authToken,
-        company: this.config.brand.prefix
+        company: this.brand.prefix
       });
   }
 
@@ -623,7 +619,7 @@ export class MemberService {
         quantity: quantity,
         userCode: this.config.userAPICode,
         token: this.authToken,
-        company: this.config.brand.prefix
+        company: this.brand.prefix
       });
   }
 
@@ -638,7 +634,7 @@ export class MemberService {
         quantity: quantity,
         userCode: this.config.userAPICode,
         token: this.authToken,
-        company: this.config.brand.prefix
+        company: this.brand.prefix
       });
   }
 

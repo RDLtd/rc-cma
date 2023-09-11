@@ -1,27 +1,25 @@
 ﻿import { Injectable } from '@angular/core';
-import { AppConfig } from '../app.config';
 import { CMSElement, CMSTime, CMSAttribute, CMSMeal, CMSDescription, CMSDish, CMSSection } from '../_models';
 import { Member } from '../_models';
 import { Restaurant } from '../_models';
 import { HttpClient } from '@angular/common/http';
-import { AppConfigService } from '../app-config.service';
 import { lastValueFrom } from 'rxjs';
 import { StorageService } from './storage.service';
+import { ConfigService } from '../init/config.service';
 
 @Injectable()
 
 export class CMSService {
 
   authToken;
+  brand;
 
   constructor(
     private http: HttpClient,
-    private appService: AppConfigService,
     private storage: StorageService,
-    private config: AppConfig) {
-    this.appService.authToken.subscribe(token => {
-      this.authToken = token;
-    });
+    private config: ConfigService) {
+      this.authToken = config.token;
+      this.brand = this.config.brand$;
   }
 
   // apptiser domain from S3 bucket string
@@ -402,7 +400,7 @@ export class CMSService {
                         restaurant_name: string, changes: any) {
     return this.http.post(this.config.apiUrl + '/cms/sendrestaurantchanges',
       {
-        company_prefix: this.config.brand.prefix,
+        company_prefix: this.brand.prefix,
         member_first_name: member_first_name,
         member_last_name: member_last_name,
         member_email: member_email,
@@ -416,7 +414,7 @@ export class CMSService {
   sendRestaurantValidation(member: Member, restaurant: Restaurant, changes: any) {
     return this.http.post(this.config.apiUrl + '/cms/sendrestaurantvalidation',
       {
-        company_prefix: this.config.brand.prefix,
+        company_prefix: this.brand.prefix,
         member_first_name: member.member_first_name,
         member_last_name: member.member_last_name,
         restaurant_name: restaurant.restaurant_name,
@@ -451,33 +449,33 @@ export class CMSService {
     production: Boolean,
     membership_type: string,
     website_options: any,
-    template: string = this.config.brand.templates[0].version
+    template: string = this.brand.templates[0].version
     ): Promise<any> {
 
     // Use legacy code/templates for RC & RI
-    if (this.config.brand.prefix === 'rc' || this.config.brand.prefix === 'ri') {
+    if (this.brand.prefix === 'rc' || this.brand.prefix === 'ri') {
       // use the exising 'old' templates for now...
       return await lastValueFrom(this.http.post(this.config.apiUrl + '/spw/makespw',
         {
           restaurant_id,
           production,
           member_id,
-          company: this.config.brand.prefix,
+          company: this.brand.prefix,
           userCode: this.config.userAPICode,
           token: this.authToken
         }));
     }
 
     // Activate generator
-    console.log('Activate generator', restaurant_id, member_id, production, template, this.config.brand.prefix, website_options);
+    console.log('Activate generator', restaurant_id, member_id, production, template, this.brand.prefix, website_options);
     return await lastValueFrom(this.http.post(this.config.apiUrl + '/spw/generateAWP',
       {
         restaurant_id,
         production,
         member_id,
         website_options,
-        template: template ?? this.config.brand.templates[0],
-        company: this.config.brand.prefix,
+        template: template ?? this.brand.templates[0],
+        company: this.brand.prefix,
         userCode: this.config.userAPICode,
         token: this.authToken
       }));
@@ -509,7 +507,7 @@ export class CMSService {
   sendVerificationEmail(restaurantname: string, restaurantcode: string, restaurantemail: string, memberfullname: string) {
     return this.http.post(this.config.apiUrl + '/cms/sendverificationemail',
       {
-        company_prefix: this.config.brand.prefix,
+        company_prefix: this.brand.prefix,
         restaurant_name: restaurantname,
         restaurant_number: restaurantcode,
         restaurant_email: restaurantemail,
@@ -529,7 +527,7 @@ export class CMSService {
         member_last_name: obj.member_last_name,
         member_email: obj.member_email,
         // admin_fullname: localStorage.getItem('rd_username'),
-        company_prefix: this.config.brand.prefix,
+        company_prefix: this.brand.prefix,
         email_language: localStorage.getItem('rd_language'),
         userCode: this.config.userAPICode,
         token: this.authToken
@@ -544,7 +542,7 @@ export class CMSService {
         restaurant_name: obj.restaurant_name,
         restaurant_email: obj.restaurant_email,
         restaurant_number: obj.restaurant_number,
-        company_prefix: this.config.brand.prefix,
+        company_prefix: this.brand.prefix,
         email_language: localStorage.getItem('rd_language'),
         userCode: this.config.userAPICode,
         token: this.authToken

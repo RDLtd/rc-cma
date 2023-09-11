@@ -1,8 +1,7 @@
 ﻿import { Injectable } from '@angular/core';
-import { AppConfig } from '../app.config';
 import { User } from '../_models';
 import { HttpClient } from '@angular/common/http';
-import { AppConfigService } from '../app-config.service';
+import { ConfigService } from '../init/config.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,9 +13,8 @@ export class UserService {
 
   constructor(
     private http: HttpClient,
-    private appService: AppConfigService,
-    private config: AppConfig) {
-    this.appService.authToken.subscribe(token => this.authToken = token);
+    private config: ConfigService) {
+    this.authToken = config.token;
   }
 
   getAll() {

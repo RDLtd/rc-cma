@@ -1,20 +1,20 @@
 ﻿import { Injectable } from '@angular/core';
-import { AppConfig } from '../app.config';
 import { Offer, Restaurant, SQLParameters, LaunchParameters } from '../_models/';
 import { HttpClient } from '@angular/common/http';
-import { AppConfigService } from '../app-config.service';
+import { ConfigService } from '../init/config.service';
 
 @Injectable()
 
 export class RestaurantService {
 
-  private authToken;
+  private readonly authToken;
+  private brand;
 
   constructor(
     private http: HttpClient,
-    private appService: AppConfigService,
-    private config: AppConfig) {
-    this.appService.authToken.subscribe(token => this.authToken = token);
+    private config: ConfigService) {
+    this.authToken = config.token;
+    this.brand = config.brand$
   }
 
   getAll() {
@@ -423,7 +423,7 @@ export class RestaurantService {
   getOffers() {
     return this.http.post(this.config.apiUrl + '/restaurants/offers',
       {
-        country_code: this.config.brand.prefix,
+        country_code: this.brand.prefix,
         userCode: this.config.userAPICode,
         token: this.authToken
       });
@@ -480,7 +480,7 @@ export class RestaurantService {
               payment_currency: string, payment_description: string, payment_token: any) {
     return this.http.post(this.config.apiUrl + '/restaurants/sendinvoice',
       {
-        company_prefix: this.config.brand.prefix,
+        company_prefix: this.brand.prefix,
         restaurant_id: restaurant_id,
         restaurant_member_id: restaurant_member_id,
         invoice_number: invoice_number,
@@ -596,7 +596,7 @@ export class RestaurantService {
                    booking_date: string, booking_name: string, booking_email: string, email_language: string,
                    company_name: string) {
     return this.http.post(this.config.apiUrl + '/restaurants/sendbookingemail',
-      { company_prefix: this.config.brand.prefix,
+      { company_prefix: this.brand.prefix,
         restaurant_name: restaurant_name,
         restaurant_email: restaurant_email,
         booking_covers: booking_covers,

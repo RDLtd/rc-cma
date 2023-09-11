@@ -55,7 +55,7 @@
         novalidate>
         <span class="rc-warn" *ngIf="errorMsg">{{ errorMsg | uppercase }}!</span>
         <markdown ngpreservewhitespaces [data]="'SIGNIN.signInOrJoin' | translate: {route: '/join', brand:
-        brandName }"></markdown>
+        (brand$ | async).name }"></markdown>
 
         <br>
 

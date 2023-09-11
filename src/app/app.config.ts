@@ -1,15 +1,9 @@
 ﻿import { environment } from '../environments/environment';
 import { Injectable } from '@angular/core';
 
-declare const require: any;
 
 @Injectable()
 export class AppConfig {
-
-  public readonly build = {
-    version: require('../../package.json').version,
-    name: require('../../package.json').name
-  };
 
   // App location
   appUrl = window.location.origin;
@@ -31,9 +25,9 @@ export class AppConfig {
 
   public readonly userAPICode = 'RDL-dev';
   public readonly upload_preset = 'nozxac7z';
-  public readonly session_timeout = 60; // minutes
-  public readonly session_countdown = 5; // minutes to check activity before timeout
-  public readonly useAirBrake = false;
+  // public readonly session_timeout = 60; // minutes
+  // public readonly session_countdown = 5; // minutes to check activity before timeout
+  // public readonly useAirBrake = false;
 
   // Root domains
   // apptiser update ks 090323 - added two new domains
