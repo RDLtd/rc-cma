@@ -116,7 +116,7 @@
             </span>
 
               </h3>
-              <span>{{ dish.cms_dish_price | currency: config.brand.currency.code }}</span>
+              <span>{{ dish.cms_dish_price | currency: (cms.brand$ | async).currency.code }}</span>
               <span>{{ dish.cms_dish_desc }}</span>
             </div>
           </div>

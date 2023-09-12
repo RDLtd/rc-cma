@@ -7,7 +7,6 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ConfirmCancelComponent, HelpService, LoadService } from '../common';
 import { CmsMenuDishComponent } from './cms-menu-dish.component';
 import { TranslateService } from '@ngx-translate/core';
-import { AppConfig } from '../app.config';
 
 @Component({
   selector: 'app-rc-cms-menus',
@@ -29,17 +28,16 @@ export class CmsMenusComponent implements OnInit {
 
   constructor(
     private cmsLocalService: CmsLocalService,
-    private cms: CMSService,
+    readonly cms: CMSService,
     private dialog: MatDialog,
     private translate: TranslateService,
     public help: HelpService,
-    public config: AppConfig,
     private loader: LoadService
   ) {  }
 
   ngOnInit() {
     this.loader.open();
-    this.currencySymbol = this.config.brand.currency.symbol;
+    this.currencySymbol = this.cms.brand.currency.symbol;
 
     // Subscribe to service
     this.cmsLocalService.getRestaurant()

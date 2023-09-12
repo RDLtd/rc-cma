@@ -22,7 +22,6 @@ import {
 } from '../common';
 import * as moment from 'moment';
 import { CmsSpwLinksComponent } from './cms-spw-links.component';
-import { AppConfig } from '../app.config';
 
 import { ImageService } from '../_services/image.service';
 import { CloudinaryImage } from '@cloudinary/url-gen';
@@ -112,7 +111,6 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
     private router: Router,
     private restaurantService: RestaurantService,
     private memberService: MemberService,
-    public config: AppConfig
   ) {
     this.t_data = this.translate.instant('CMS-Dashboard');
     this.cldPlugins = this.imgService.cldBasePlugins;
@@ -461,7 +459,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
           spwUrl: this.spwProdUrl,
           spwMenus: `${this.spwPreviewUrl}#menus`,
           restaurant: this.restaurant,
-          curation: this.config.brand.email.curation
+          curation: this.cms.brand.email.curation
         }
       });
   }

@@ -13,14 +13,17 @@ export class CMSService {
 
   authToken;
   brand;
+  brand$;
 
   constructor(
     private http: HttpClient,
     private storage: StorageService,
     private config: ConfigService) {
-      this.authToken = config.token;
-      this.brand = this.config.brand$;
+    this.authToken = config.token;
+    this.config.brand.subscribe(obj => this.brand = obj);
+    this.brand$ = this.config.brand;
   }
+
 
   // apptiser domain from S3 bucket string
   getApptiserUrl(url: string, isProduction = false): string {

@@ -85,23 +85,30 @@ export class ConfigService {
     // If the user language is not supported, default to en
     if (!this.languages.includes(lang)) { lang = this.languages[0]; }
     this.translate.setDefaultLang(lang);
-    return this.translate.use(lang)
-      .subscribe();
+    return this.translate.use(lang).subscribe();
   }
 
   displayConfig(): void {
     this.brand$.subscribe((brand) => {
       console.log(`Brand: ${brand.name}`);
+      console.log(brand);
     });
     console.log(`API: ${this.apiUrl}`);
     console.log(`Language: ${this.languages}`);
     console.log(`Locale: ${localStorage.getItem('rd_locale')}`);
+
     // console.log(`Session length: ${this.timeout} mins`);
     // console.log(`Session countdown from : ${this.countdown} min.`);
   }
 
   get brand() {
     return this.brand$;
+  }
+
+  get brandObj() {
+    return this.brand$.subscribe((obj) => {
+      return obj;
+    })
   }
 
   get token() {
