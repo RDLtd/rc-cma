@@ -4,7 +4,6 @@ import { HelpService } from '../common';
 import { AnalyticsService, CMSService } from "../_services";
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Restaurant } from '../_models';
-import { AppConfig } from "../app.config";
 import { StorageService } from '../_services/storage.service';
 import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 import { CmsSpwBuilderComponent} from "./cms-spw-builder.component";
@@ -83,14 +82,13 @@ export class CmsSpwConfigComponent implements OnInit {
     public help: HelpService,
     private cms: CMSService,
     private _formBuilder: FormBuilder,
-    private config: AppConfig,
+    //private config: AppConfig,
     private storage: StorageService,
     private dialog: MatDialog,
     private translate: TranslateService,
     private ga: AnalyticsService,
-    private configService: ConfigService
+    private config: ConfigService
   ) {
-
 
       this.user = this.storage.get('rd_profile');
       this.customDomainForm = this.translate.instant('CMS.SETTINGS.linkCustomDomain');
@@ -108,7 +106,7 @@ export class CmsSpwConfigComponent implements OnInit {
 
   ngOnInit() {
 
-    this.brand$ = this.configService.brand;
+    this.brand$ = this.config.brand;
     this.brand$.subscribe( (obj) => {
       this.availableTemplates = obj.templates;
       console.log(obj.templates);

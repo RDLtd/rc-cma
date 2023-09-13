@@ -1,11 +1,52 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { BehaviorSubject, filter } from 'rxjs';
+import { BehaviorSubject, filter, Observable } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { map } from 'rxjs/operators';
 
 declare const require: any;
+
+export interface Brand {
+  id: number;
+  aws: {
+    bucket: string;
+    region: string;
+  };
+  name: string;
+  prefix: string;
+  language: string;
+  logo: string;
+  root_domain: string;
+  emails: {
+    accounts: string;
+    curation: string;
+    info:string;
+    noreply: string;
+    support: string;
+    tech: string;
+  };
+  urls: {};
+  products: {
+    cancel_url: string;
+    stripe_live_key: string;
+    stripe_test_key: string;
+    success_url: string;
+  }
+  templates: [{
+    name: string;
+    version: string;
+    website_defaults: any;
+  }];
+  currency: {
+    symbol: string;
+      code: string;
+  },
+  downloads: {
+    terms: string;
+    privacy: string;
+  };
+}
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +59,7 @@ export class ConfigService {
   readonly mozId = environment.MOZ_ID;
   readonly appUrl = window.location.origin;
   readonly userAPICode = 'RDL-dev';
-  readonly upload_preset = 'nozxac7z';
+  readonly uploadPreset = 'nozxac7z';
   // session limits
   readonly timeout = 60; // minutes
   readonly countdown = 5; // minutes to check activity before timeout
@@ -31,7 +72,7 @@ export class ConfigService {
   // Auth token
   private tokenSubject = new BehaviorSubject(new HttpParams().set('Authorization', 'Bearer' +
     ' 234242423wdfsdvdsfsdrfg34tdfverge'));
-  readonly authToken = this.tokenSubject.asObservable();
+  readonly token$ = this.tokenSubject.asObservable();
 
   // Brand Observable
   private brandConfig = new BehaviorSubject<any>(null);
@@ -63,7 +104,7 @@ export class ConfigService {
     this.http.post(this.apiUrl + '/brand/getbrand',
       {
         userCode: this.userAPICode,
-        token: this.authToken,
+        token: this.token$,
         brand_prefix: localStorage.getItem('rd_brand') ?? 'app',
         window_location_origin: this.appUrl,
         substitutions: true
@@ -101,35 +142,27 @@ export class ConfigService {
     // console.log(`Session countdown from : ${this.countdown} min.`);
   }
 
-  get brand() {
+  get brand(): Observable<Brand> {
     return this.brand$;
   }
-
-  get brandObj() {
-    return this.brand$.subscribe((obj) => {
-      return obj;
-    })
-  }
-
   get token() {
-    return this.authToken;
+    return this.token$;
   }
-
+  get preset() {
+    return this.uploadPreset
+  }
   get build() {
     return this.buildObj;
   }
-
   get session_timeout() {
     return this.timeout;
   }
   get session_countdown() {
     return this.countdown;
   }
-
   get useAirBrake() {
     return this.airBrake;
   }
-
   get apiUrl() {
     return this.API_URL
   }

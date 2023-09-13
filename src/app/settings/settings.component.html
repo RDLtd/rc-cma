@@ -108,11 +108,11 @@
             </li>
             <li>
               <label>{{ 'SETTINGS.labelTerms' | translate }}:</label>
-              <a [href]="appConfig?.brand.downloads.terms" target="_blank" download>Download the Terms of business</a>
+              <a [href]="(brand$ | async).downloads.terms" target="_blank" download>Download the Terms of business</a>
             </li>
             <li>
               <label>{{ 'SETTINGS.labelPrivacyPolicy' | translate }}:</label>
-              <a [href]="appConfig?.brand.downloads.privacy" target="_blank" download>Download the Privacy Policy</a>
+              <a [href]="(brand$ | async).downloads.privacy" target="_blank" download>Download the Privacy Policy</a>
             </li>
 
           </ul>

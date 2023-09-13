@@ -15,7 +15,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import * as moment from 'moment';
-import { AppConfig } from '../app.config';
 import { CmsLocalService } from '../cms';
 import { LoadService, ConfirmCancelComponent, HelpService } from '../common';
 import { HeaderService } from '../common/header.service';
@@ -23,6 +22,7 @@ import { CurrencyPipe } from '@angular/common';
 import { ImageService } from '../_services/image.service';
 import { CloudinaryImage } from '@cloudinary/url-gen';
 import { StorageService } from '../_services/storage.service';
+import { ConfigService } from '../init/config.service';
 
 
 @Component({
@@ -52,6 +52,8 @@ export class SettingsComponent implements OnInit {
 
   clImage: CloudinaryImage;
   clPlugins: any[];
+  brand: any;
+  brand$: any;
 
   constructor(
     private header: HeaderService,
@@ -65,7 +67,7 @@ export class SettingsComponent implements OnInit {
     private router: Router,
     private translate: TranslateService,
     public help: HelpService,
-    public appConfig: AppConfig,
+    public config: ConfigService,
     private loadService: LoadService,
     private currencyPipe: CurrencyPipe,
     private imgService: ImageService,
@@ -87,6 +89,13 @@ export class SettingsComponent implements OnInit {
     this.setMember();
     this.setProducts();
     this.getAssociatedRestaurants(this.member.member_id);
+    this.config.brand.subscribe(obj => {
+      this.brand = obj;
+    });
+    this.brand$ = this.config.brand;
+    this.brand$.subscribe(obj => {
+      this.brand = obj;
+    });
   }
 
   setMember(): void {
@@ -112,6 +121,8 @@ export class SettingsComponent implements OnInit {
 
   setProducts(): void {
 
+    if (this.isFreeMembership) { return; }
+
     console.log('ID', this.member.member_customer_id);
 
     // Any pending invoices
@@ -135,7 +146,7 @@ export class SettingsComponent implements OnInit {
           this.products = obj['products'];
           // Set current product
           // *** If it's an old registration, use product[0] to keep things working
-          // console.log('Products loaded', this.products);
+          console.log('Products loaded', this.products);
           // Find & store the current Member product
           this.currentProduct =
             this.products.find(p => p.product_stripe_id === this.member.member_product_id) || this.products[0];
@@ -205,9 +216,9 @@ export class SettingsComponent implements OnInit {
             {
               price: this.currencyPipe.transform(
                 this.restProd.product_price,
-                this.appConfig.brand.currency.code),
-              total: this.currencyPipe.transform(newTotal,
-                this.appConfig.brand.currency.code)
+                this.brand.currency.code),
+                total: this.currencyPipe.transform(newTotal,
+                this.brand.currency.code)
             }),
           confirm: 'Continue'
         }

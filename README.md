@@ -29,12 +29,12 @@ You will see a whole series that show progress, hopefully ending in a successful
 
 ## To production build the app on Heroku
 
-- Make sure that the `app.config.ts` file is referencing the Heroku server.
+- Make sure that the `init/config.ts` file is referencing the Heroku server.
 - Commit all changes.
 - Test locally with `ng build --prod --aot` which will build a production version to your `dist` 
 folder
 - If all is well, then increment the `package.json` version number by running `npm version <major | minor | patch>` as appropriate
 - To build for production and push to both Github & Heroku run `npm run deploy` then go and make tea.
-- Remember to reset the `app.config.ts` back to your `localhost`
+- Remember to reset the `init/config.ts` back to your `localhost`
 
 

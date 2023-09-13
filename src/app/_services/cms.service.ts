@@ -5,14 +5,14 @@ import { Restaurant } from '../_models';
 import { HttpClient } from '@angular/common/http';
 import { lastValueFrom } from 'rxjs';
 import { StorageService } from './storage.service';
-import { ConfigService } from '../init/config.service';
+import { Brand, ConfigService } from '../init/config.service';
 
 @Injectable()
 
 export class CMSService {
 
   authToken;
-  brand;
+  brand: Brand;
   brand$;
 
   constructor(

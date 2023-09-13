@@ -8,17 +8,17 @@
         <!-- Free Period -->
         <ng-container *ngIf="referrer.type === 'self'">
           <div>
-            <markdown [data]="'JOIN.joinUsToday' | translate: { email: brand.email.support }"></markdown>
+            <markdown [data]="'JOIN.joinUsToday' | translate: { email: brand.emails.support }"></markdown>
           </div>
         </ng-container>
 
         <ng-container *ngIf="referrer.type === 'member'">
           <div *ngIf="referrer.freeMembership">
-            <markdown [data]="'JOIN.joinUsByReferralFree' | translate: { email: brand.email.support, referrer:
+            <markdown [data]="'JOIN.joinUsByReferralFree' | translate: { email: brand.emails.support, referrer:
           referrer?.name, brand: brand.name  }"></markdown>
           </div>
           <div *ngIf="!referrer.freeMembership">
-            <markdown [data]="'JOIN.joinUsByReferral' | translate: { email: brand.email.support, referrer:
+            <markdown [data]="'JOIN.joinUsByReferral' | translate: { email: brand.emails.support, referrer:
           referrer?.name, brand: brand.name  }"></markdown>
           </div>
         </ng-container>

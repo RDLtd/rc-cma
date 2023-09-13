@@ -14,7 +14,7 @@ import {
 
 import { AppComponent } from './app.component';
 import { routing } from './app.routing';
-import { AppConfig } from './app.config';
+//import { AppConfig } from './app.config';
 import { SafePipe } from './shared/app.safe';
 import { HeaderComponent } from './common/header.component';
 import { SigninComponent } from './signin/signin.component';
@@ -30,7 +30,6 @@ import {
   MemberService,
   RestaurantService,
   CMSService,
-  PublicService,
   AnalyticsService,
   ErrorService
 } from './_services';
@@ -178,7 +177,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
         InitModule
     ],
   providers: [
-    AppConfig,
+    //AppConfig,
     AuthenticationService,
     UserService,
     MemberService,
@@ -189,7 +188,6 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     CmsLocalService,
     HelpService,
     AnalyticsService,
-    PublicService,
     CmsPreviewComponent,
     ConfirmCancelComponent,
     LoadService,

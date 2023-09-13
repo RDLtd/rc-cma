@@ -2,12 +2,12 @@ import { Component, Inject, NgZone, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FileUploader, FileUploaderOptions, ParsedResponseHeaders } from 'ng2-file-upload';
-import { AppConfig } from '../app.config';
 import { CMSElement } from '../_models';
 import { CMSService } from '../_services';
 import { TranslateService } from '@ngx-translate/core';
 import { NgForm } from '@angular/forms';
 import { ImageService } from '../_services/image.service';
+import { ConfigService } from '../init/config.service';
 
 @Component({
   selector: 'app-rc-cms-file-upload',
@@ -36,12 +36,12 @@ export class CmsFileUploadComponent implements OnInit {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private config: AppConfig,
     private zone: NgZone,
     private http: HttpClient,
     private translate: TranslateService,
     private cms: CMSService,
-    private imgService: ImageService
+    private imgService: ImageService,
+    private config: ConfigService
   ) {
 
   }
@@ -81,7 +81,7 @@ export class CmsFileUploadComponent implements OnInit {
     };
 
     this.uploader.onBuildItemForm = (fileItem: any, form: FormData): any => {
-      form.append('upload_preset', this.config.upload_preset);
+      form.append('upload_preset', this.config.preset);
       form.append('folder', `restaurants/${this.data.restaurant.restaurant_number}`);
       form.append('file', fileItem);
       fileItem.withCredentials = false;

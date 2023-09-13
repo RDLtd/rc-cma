@@ -3,10 +3,9 @@ import { AuthenticationService, ErrorService, MemberService } from '../_services
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { AppConfig } from '../app.config';
 import { ConfirmCancelComponent } from '../common';
 import { MatDialog } from '@angular/material/dialog';
-import { ConfigService } from '../init/config.service';
+import { Brand, ConfigService } from '../init/config.service';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -20,7 +19,7 @@ export class SigninComponent implements OnInit {
   dbOffline = false;
   errorMsg: string;
   pwdReset = false;
-  brand$: Observable<any>;
+  brand$: Observable<Brand>;
   brandName: string;
   stripeSessionId: any;
   newMemberEmail: string;
@@ -33,16 +32,14 @@ export class SigninComponent implements OnInit {
     public snackBar: MatSnackBar,
     private translate: TranslateService,
     private activeRoute: ActivatedRoute,
-    private config: AppConfig,
     private configService: ConfigService,
     private router: Router,
     private error: ErrorService
   ) {  }
 
   ngOnInit() {
-
+    //
     this.brand$ = this.configService.brand;
-
     // Check url params
     this.activeRoute.queryParams.subscribe(params => {
       // console.log('Url params', params);

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { AppConfig } from '../app.config';
 import { loadStripe } from '@stripe/stripe-js/pure';
 import { environment } from '../../environments/environment';
 import { ActivatedRoute } from '@angular/router';
@@ -10,7 +9,8 @@ import { CurrencyPipe } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ConfirmCancelComponent } from '../common';
 import { MatDialog } from '@angular/material/dialog';
-import { lastValueFrom } from 'rxjs';
+import { lastValueFrom, Observable } from 'rxjs';
+import { Brand, ConfigService } from '../init/config.service';
 
 export interface Product {
   id: string;
@@ -20,6 +20,7 @@ export interface Product {
   taxId: any;
   active: boolean;
   category: string;
+  brand$: Observable<Brand>;
 }
 
 @Component({
@@ -28,6 +29,7 @@ export interface Product {
 })
 export class MembershipComponent implements OnInit {
 
+  brand: Brand;
   transParams: any;
   waiting = false;
   pending: any;
@@ -39,7 +41,7 @@ export class MembershipComponent implements OnInit {
   mdProdYearly: string;
 
   constructor(
-    private config: AppConfig,
+    private config: ConfigService,
     private http: HttpClient,
     private route: ActivatedRoute,
     private translate: TranslateService,
@@ -50,18 +52,18 @@ export class MembershipComponent implements OnInit {
     private error: ErrorService
   ) {
 
-
+    config.brand.subscribe(obj => this.brand = obj);
     try {
-      this.stripePromise = loadStripe(environment[this.config.brand.prefix + '_stripe_key']);
+      this.stripePromise = loadStripe(environment[this.brand.prefix + '_stripe_key']);
       console.log(this.stripePromise);
     } catch (err) {
       console.log(err);
     }
 
     this.transParams = {
-      brand: this.config.brand.name,
-      terms: this.config.brand.downloads.terms,
-      privacy: this.config.brand.downloads.privacy
+      brand: this.brand.name,
+      terms: this.brand.downloads.terms,
+      privacy: this.brand.downloads.privacy
     };
   }
 
@@ -119,7 +121,7 @@ export class MembershipComponent implements OnInit {
         console.log('FAILED', reason);
         // don't show error as this is handled locally
         this.error.handleError('', 'Unable to create stripe session! ' + reason);
-        this.snack.open(this.translate.instant('MEMBERSHIP.msgInvalidStripe', { email: this.config.brand.email.support }), 'Ok', {
+        this.snack.open(this.translate.instant('MEMBERSHIP.msgInvalidStripe', { email: this.brand.emails.support }), 'Ok', {
           duration: 15000,
           verticalPosition: 'top'
         });
@@ -135,10 +137,10 @@ export class MembershipComponent implements OnInit {
       priceId: product.product_stripe_price_id,
       // Allow for tax to be optional
       taxId: [product.product_tax_id],
-      successUrl: this.config.brand.products.success_url,
-      cancelUrl: this.config.brand.products.cancel_url,
+      successUrl: this.brand.products.success_url,
+      cancelUrl: this.brand.products.cancel_url,
       email: newMember.email,
-      company: this.config.brand.prefix
+      company: this.brand.prefix
     })
       .then(data => {
         console.log('MC Session', data);
@@ -159,7 +161,7 @@ export class MembershipComponent implements OnInit {
       console.log('Error', error);
       // don't show error as this is handled locally
       this.error.handleError('', 'Unable to redirect to stripe! ' + error);
-      this.snack.open(this.translate.instant('MEMBERSHIP.msgInvalidStripe', { email: this.config.brand.email.support }), 'Ok', {
+      this.snack.open(this.translate.instant('MEMBERSHIP.msgInvalidStripe', { email: this.brand.emails.support }), 'Ok', {
         duration: 15000,
         verticalPosition: 'top'
       });

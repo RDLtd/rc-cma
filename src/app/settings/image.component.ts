@@ -3,8 +3,8 @@ import { Member } from '../_models';
 import { AnalyticsService, MemberService } from '../_services';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FileUploader, FileUploaderOptions, ParsedResponseHeaders } from 'ng2-file-upload';
-import { AppConfig } from '../app.config';
 import { ImageService } from '../_services/image.service';
+import { ConfigService } from '../init/config.service';
 
 
 @Component({
@@ -29,7 +29,7 @@ export class ImageComponent implements OnInit {
     private imgService: ImageService,
     private memberService: MemberService,
     private ga: AnalyticsService,
-    private config: AppConfig,
+    private config: ConfigService,
     private zone: NgZone,
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) {
@@ -55,7 +55,7 @@ export class ImageComponent implements OnInit {
     this.uploader = new FileUploader(uploaderOptions);
 
     this.uploader.onBuildItemForm = (fileItem: any, form: FormData): any => {
-      form.append('upload_preset', this.config.upload_preset);
+      form.append('upload_preset', this.config.preset);
       form.append('folder', 'avatars');
       form.append('file', fileItem);
       fileItem.withCredentials = false;

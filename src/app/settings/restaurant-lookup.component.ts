@@ -1,12 +1,12 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { Restaurant } from '../_models';
 import { RestaurantService, CMSService, ErrorService } from '../_services';
-import { AppConfig } from '../app.config';
 import { VerificationComponent } from './verification.component';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TranslateService } from '@ngx-translate/core';
 import { ConfirmCancelComponent, HelpService } from '../common';
+import { ConfigService } from '../init/config.service';
 
 @Component({
   selector: 'app-rc-restaurant-lookup',
@@ -25,7 +25,7 @@ export class RestaurantLookupComponent implements OnInit {
   constructor(
     private   restaurantService: RestaurantService,
     private   cms: CMSService,
-    private   config: AppConfig,
+    private   config: ConfigService,
     public    dialog: MatDialog,
     public    help: HelpService,
     @Inject(MAT_DIALOG_DATA) public data: any,

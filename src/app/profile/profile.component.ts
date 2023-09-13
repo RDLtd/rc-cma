@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AppConfig } from '../app.config';
 import { LoadService } from '../common';
 import { HeaderService } from '../common/header.service';
+import { ConfigService } from '../init/config.service';
 
 /**
  * Reference the Mozrest SDK global
@@ -19,7 +19,7 @@ export class ProfileComponent implements OnInit {
 
   constructor(
       private loader: LoadService,
-      private config: AppConfig,
+      private config: ConfigService,
       private headerService: HeaderService
   ) {
     this.loader.open();
