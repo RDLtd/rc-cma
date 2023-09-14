@@ -11,6 +11,23 @@ import { CmsSpwLinksComponent } from './cms-spw-links.component';
 import { TranslateService } from "@ngx-translate/core";
 import { ConfigService } from '../init/config.service';
 
+export interface TemplateOptions {
+  showBookingWidget: { disabled: boolean; on: boolean };
+  showContacts: { disabled: boolean; on: boolean };
+  showDownloadMenus: { disabled: boolean; on: boolean };
+  showGroupBookings: { disabled: boolean; on: boolean };
+  showHtmlMenu: { disabled: boolean; on: boolean };
+  showImageGallery: { disabled: boolean; on: boolean };
+  showLinks: { disabled: boolean; on: boolean };
+  showMap: { disabled: boolean; on: boolean };
+  showOpeningNotes: { disabled: boolean; on: boolean };
+  showParking: { disabled: boolean; on: boolean };
+  showPrivateDining: { disabled: boolean; on: boolean };
+  showReservations: { disabled: boolean; on: boolean };
+  showReservationsInfo: { disabled: boolean; on: boolean };
+  showTransport: { disabled: boolean; on: boolean };
+}
+
 @Component({
   selector: 'rc-cms-spw-config',
   templateUrl: './cms-spw-config.component.html',
@@ -52,7 +69,7 @@ export class CmsSpwConfigComponent implements OnInit {
     standard: ['domain'],
     premium: ['']
   }
-  defaultTemplateConfig = {
+  /* defaultTemplateConfig = {
     showOpeningNotes: false,
     showImageGallery: true,
 
@@ -74,7 +91,24 @@ export class CmsSpwConfigComponent implements OnInit {
     showTransport: [{value: true, disabled: false}],
     // location
     showMap: [true]
+  }*/
+  defaultTemplateConfig: TemplateOptions = {
+    showBookingWidget: { disabled: true, on: false },
+    showContacts: { disabled: false, on: true },
+    showDownloadMenus: { disabled: true, on: false },
+    showGroupBookings: { disabled: true, on: false },
+    showHtmlMenu: { disabled: true, on: false },
+    showImageGallery: { disabled: false, on: true },
+    showLinks: { disabled: false, on: true },
+    showMap: { disabled: false, on: true },
+    showOpeningNotes: { disabled: false, on: true },
+    showParking: { disabled: false, on: true },
+    showPrivateDining: { disabled: true, on: false },
+    showReservations: { disabled: true, on: false },
+    showReservationsInfo: { disabled: true, on: false },
+    showTransport: { disabled: false, on: true }
   }
+
 
   constructor(
     private cmsLocalService: CmsLocalService,
@@ -89,11 +123,11 @@ export class CmsSpwConfigComponent implements OnInit {
     private ga: AnalyticsService,
     private config: ConfigService
   ) {
-
       this.user = this.storage.get('rd_profile');
       this.customDomainForm = this.translate.instant('CMS.SETTINGS.linkCustomDomain');
   }
 
+  // For authGuard
   confirmNavigation() {
     if (this.dataChanged) {
       return this.cmsLocalService.confirmNavigation({
@@ -107,11 +141,7 @@ export class CmsSpwConfigComponent implements OnInit {
   ngOnInit() {
 
     this.brand$ = this.config.brand;
-    this.brand$.subscribe( (obj) => {
-      this.availableTemplates = obj.templates;
-      console.log(obj.templates);
-    });
-
+    this.brand$.subscribe( (obj) => this.availableTemplates = obj.templates );
 
     // Set category
     this.prodCategory = this.storage.getSession('rd_product_category') ?? 'default';
@@ -147,10 +177,6 @@ export class CmsSpwConfigComponent implements OnInit {
    */
   setTemplates(): void {
 
-    //this.availableTemplates = this.brand$.templates;
-
-    console.log(this.availableTemplates);
-
     // Already has a published apptiser/spw
     if (!!this.restaurant.restaurant_spw_template) {
 
@@ -185,8 +211,9 @@ export class CmsSpwConfigComponent implements OnInit {
 
   setTemplate(): void {
     // Enable/disable web config controls
-    if (!!this.selectedTemplate.config) {
-      this.configFormGroup = this.fb.group(this.selectedTemplate.config);
+    console.log('?',this.selectedTemplate);
+    if (!!this.selectedTemplate.website_defaults) {
+      this.configFormGroup = this.fb.group(this.selectedTemplate.website_defaults);
     } else {
       this.configFormGroup = this.fb.group(this.defaultTemplateConfig);
     }
@@ -223,9 +250,12 @@ export class CmsSpwConfigComponent implements OnInit {
 
     this.configFormGroup = this.fb.group(this.defaultTemplateConfig);
 
+    console.log(this.configFormGroup);
     // delay observing changes until defaults are in place
     setTimeout(() => {
-      this.configFormGroup.valueChanges.subscribe(() => this.configChange('config'));
+      this.configFormGroup.valueChanges.subscribe(() => {
+        this.configChange('config');
+      });
     }, 1000);
 
   }
@@ -273,13 +303,16 @@ export class CmsSpwConfigComponent implements OnInit {
   }
 
   setConfig(): void {
+
     Object.entries(this.websiteConfig).forEach(([key, value]) => {
+      console.log(key);
       if (key === 'theme') {
         this.selectedTheme = value;
         // console.log('loaded theme', value);
         return;
       }
       this.configFormGroup.get(key).setValue(value);
+
       // Disable all reservations content?
       if (!this.configFormGroup.get('showReservations').value){
         this.configFormGroup.get('showReservationsInfo').disable();

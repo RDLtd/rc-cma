@@ -103,7 +103,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
   constructor(
     private imgService: ImageService,
     private cmsLocalService: CmsLocalService,
-    private cms: CMSService,
+    readonly cms: CMSService,
     private ga: AnalyticsService,
     private dialog: MatDialog,
     public help: HelpService,

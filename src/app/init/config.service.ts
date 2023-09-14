@@ -4,6 +4,7 @@ import { environment } from '../../environments/environment';
 import { BehaviorSubject, filter, Observable } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { map } from 'rxjs/operators';
+import { TemplateOptions } from '../cms/cms-spw-config.component';
 
 declare const require: any;
 
@@ -36,7 +37,7 @@ export interface Brand {
   templates: [{
     name: string;
     version: string;
-    website_defaults: any;
+    website_defaults: TemplateOptions;
   }];
   currency: {
     symbol: string;
@@ -100,6 +101,7 @@ export class ConfigService {
   ) { }
 
   getBrandConfig(): any {
+    console.log('LOAD');
     // load brand from backend
     this.http.post(this.apiUrl + '/brand/getbrand',
       {
