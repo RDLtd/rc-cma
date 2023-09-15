@@ -4,7 +4,8 @@ import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-rc-logo',
-  templateUrl: './logo.component.html'
+  templateUrl: './logo.component.html',
+  styles: ['img { height: 100%; width: auto; max-width: 300px;}']
 })
 
 export class LogoComponent {

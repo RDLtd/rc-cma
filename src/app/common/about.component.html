@@ -8,9 +8,10 @@
   </button>
   <mat-dialog-content>
   <div>
-    <app-rc-logo [height]="'48px'" [version]="'primary'"></app-rc-logo>
+    <app-rc-logo [height]="'auto'" [version]="'primary'"></app-rc-logo>
   </div>
-  <div class="rc-txt-small" markdown [data]="'ABOUT.company' | translate: { web: (config.brand | async).root_domain }"></div>
+  <div class="rc-txt-small" markdown
+       [data]="'ABOUT.company' | translate: { web: (config.brand | async).root_domain }" style="margin-top: 1rem"></div>
   <p class="rc-txt-small"><strong>{{ 'ABOUT.version' | translate }}</strong>: {{ build.version }}</p>
   <p class="rc-txt-small"><strong>{{ 'ABOUT.browser' | translate }}</strong>: {{ os_text }}</p>
   </mat-dialog-content>

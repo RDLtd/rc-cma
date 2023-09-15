@@ -47,6 +47,15 @@ export interface Brand {
     terms: string;
     privacy: string;
   };
+  themes: {
+    logo: string;
+    colours: {
+      primary: { bg: string; fg: string; }
+      secondary: { bg: string; fg: string; }
+      accent: string;
+      link: string;
+    }
+  }
 }
 
 @Injectable({
