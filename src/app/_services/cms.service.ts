@@ -27,6 +27,9 @@ export class CMSService {
 
   // apptiser domain from S3 bucket string
   getApptiserUrl(url: string, isProduction = false): string {
+    if (url === undefined || url === null) {
+      return '';
+    }
     // AWS S3 bucket domain
     const aws = 's3.eu-west-2.amazonaws.com';
     // If it's not an AWS ignore it

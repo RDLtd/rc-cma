@@ -46,7 +46,7 @@ export class CmsSpwConfigComponent implements OnInit {
   cssThemeObjects: any[];
   selectedTheme: any;
 
-  websiteConfig: {};
+  websiteConfig: TemplateOptions;
   configFormGroup: FormGroup;
   dataChanged = false;
 
@@ -69,44 +69,28 @@ export class CmsSpwConfigComponent implements OnInit {
     standard: ['domain'],
     premium: ['']
   }
-  /* defaultTemplateConfig = {
-    showOpeningNotes: false,
-    showImageGallery: true,
 
-    // menus
-    showHtmlMenu: true,
-    showDownloadMenus: true,
-
-    // reservations
-    showReservations: true,
-    showReservationsInfo: [{value: true, disabled: false}],
-    showBookingWidget: [{value: true, disabled: false}],
-    showGroupBookings: [{value: false, disabled: false}],
-    showPrivateDining: [{value: false, disabled: false}],
-
-    // contacts
-    showContacts: [true],
-    showLinks: [{value: true, disabled: false}],
-    showParking: [{value: true, disabled: false}],
-    showTransport: [{value: true, disabled: false}],
-    // location
-    showMap: [true]
-  }*/
   defaultTemplateConfig: TemplateOptions = {
-    showBookingWidget: { disabled: true, on: false },
-    showContacts: { disabled: false, on: true },
-    showDownloadMenus: { disabled: true, on: false },
-    showGroupBookings: { disabled: true, on: false },
-    showHtmlMenu: { disabled: true, on: false },
+    // About
+    showOpeningNotes: { disabled: true, on: false },
     showImageGallery: { disabled: false, on: true },
+    // Menus
+    showHtmlMenu: { disabled: false, on: false },
+    showDownloadMenus: { disabled: false, on: false },
+    // Reservations
+    showReservations: { disabled: false, on: false },
+    showReservationsInfo: { disabled: false, on: true },
+    showBookingWidget: { disabled: false, on: false },
+    showGroupBookings: { disabled: false, on: false },
+    showPrivateDining: { disabled: false, on: false },
+
+    // Contacts
+    showContacts: { disabled: false, on: true },
     showLinks: { disabled: false, on: true },
-    showMap: { disabled: false, on: true },
-    showOpeningNotes: { disabled: false, on: true },
+    showTransport: { disabled: false, on: true },
     showParking: { disabled: false, on: true },
-    showPrivateDining: { disabled: true, on: false },
-    showReservations: { disabled: true, on: false },
-    showReservationsInfo: { disabled: true, on: false },
-    showTransport: { disabled: false, on: true }
+    // Location
+    showMap: { disabled: false, on: true }
   }
 
 
@@ -140,15 +124,21 @@ export class CmsSpwConfigComponent implements OnInit {
 
   ngOnInit() {
 
+    // Subscribe to Brand config
     this.brand$ = this.config.brand;
     this.brand$.subscribe( (obj) => this.availableTemplates = obj.templates );
 
     // Set category
     this.prodCategory = this.storage.getSession('rd_product_category') ?? 'default';
     // Build website config form
+
+    // Build the config options
     this.generateConfigForm();
+
     // Load available themes from db
     this.getThemes();
+
+    // Now load the restaurant
     this.loadRestaurantData().then();
   }
 
@@ -163,7 +153,7 @@ export class CmsSpwConfigComponent implements OnInit {
             this.publishDate = this.restaurant.restaurant_spw_written;
             this.publishedBy = this.restaurant.restaurant_verified_by;
             this.apptiserUrl = this.cms.getApptiserUrl(this.restaurant.restaurant_spw_url, true);
-            //this.getConfig();
+            this.getConfig();
             this.getContentStatus();
             this.setTemplates();
           }
@@ -211,11 +201,14 @@ export class CmsSpwConfigComponent implements OnInit {
 
   setTemplate(): void {
     // Enable/disable web config controls
-    console.log('?',this.selectedTemplate);
+    console.log('Compare',this.selectedTemplate.website_defaults, this.defaultTemplateConfig);
     if (!!this.selectedTemplate.website_defaults) {
-      this.configFormGroup = this.fb.group(this.selectedTemplate.website_defaults);
+      console.log('update');
+      //this.configFormGroup = this.fb.group(this.selectedTemplate.website_defaults);
+      this.setConfig(this.selectedTemplate.website_defaults)
     } else {
-      this.configFormGroup = this.fb.group(this.defaultTemplateConfig);
+      this.setConfig(this.defaultTemplateConfig);
+      //this.configFormGroup = this.fb.group(this.defaultTemplateConfig);
     }
     this.configChange(`template`);
     console.log(`Template: ${this.selectedTemplate.version} selected`);
@@ -249,8 +242,7 @@ export class CmsSpwConfigComponent implements OnInit {
   generateConfigForm(): void {
 
     this.configFormGroup = this.fb.group(this.defaultTemplateConfig);
-
-    console.log(this.configFormGroup);
+    console.log('Default Template:', this.defaultTemplateConfig);
     // delay observing changes until defaults are in place
     setTimeout(() => {
       this.configFormGroup.valueChanges.subscribe(() => {
@@ -292,8 +284,9 @@ export class CmsSpwConfigComponent implements OnInit {
       .subscribe({
         next: data => {
           // map data to local
-          this.websiteConfig = data['website_config'].website_config_options;
-          console.log('Conf.', this.websiteConfig);
+          //this.websiteConfig = data['website_config'].website_config_options;
+          this.websiteConfig = this.defaultTemplateConfig;
+          console.log('Current config', this.websiteConfig);
           this.setConfig();
         },
         error: error => {
@@ -302,34 +295,49 @@ export class CmsSpwConfigComponent implements OnInit {
       });
   }
 
-  setConfig(): void {
+  setConfig(templateOptions: TemplateOptions = this.websiteConfig): void {
 
-    Object.entries(this.websiteConfig).forEach(([key, value]) => {
-      console.log(key);
+    console.log('setConfig', templateOptions);
+
+    Object.entries(templateOptions).forEach(([key, value]) => {
+      console.log(`${key}: { disabled: ${value['disabled']}, on: ${value['on']} }`);
+      //console.log(value);
+      let formControl = this.configFormGroup.get(key);
+      let on = value['on'];
+      let isDisabled = value['disabled']
+
       if (key === 'theme') {
         this.selectedTheme = value;
-        // console.log('loaded theme', value);
+        console.log('loaded theme', value);
         return;
       }
-      this.configFormGroup.get(key).setValue(value);
+      // console.log(formControl, on);
+      if(formControl === null) { return; }
+
+      formControl.setValue(on);
+      isDisabled ? formControl.disable() : formControl.enable();
 
       // Disable all reservations content?
-      if (!this.configFormGroup.get('showReservations').value){
-        this.configFormGroup.get('showReservationsInfo').disable();
-        this.configFormGroup.get('showBookingWidget').disable();
-        this.configFormGroup.get('showGroupBookings').disable();
-        this.configFormGroup.get('showPrivateDining').disable();
-      }
-      // Disable all contacts content?
-      if (!this.configFormGroup.get('showContacts').value){
-        this.configFormGroup.get('showLinks').disable();
-        this.configFormGroup.get('showTransport').disable();
-        this.configFormGroup.get('showParking').disable();
-      }
+      // if (!this.configFormGroup.get('showReservations').value['on']){
+      //   this.configFormGroup.get('showReservationsInfo').disable();
+      //   this.configFormGroup.get('showBookingWidget').disable();
+      //   this.configFormGroup.get('showGroupBookings').disable();
+      //   this.configFormGroup.get('showPrivateDining').disable();
+      // }
+      // // Disable all contacts content?
+      // if (!this.configFormGroup.get('showContacts').value['on']){
+      //   this.configFormGroup.get('showLinks').disable();
+      //   this.configFormGroup.get('showTransport').disable();
+      //   this.configFormGroup.get('showParking').disable();
+      // }
     });
   }
 
   configChange(item): void {
+    // if it's already been marked, abort
+    if(this.unPublishedChanges) {
+      return;
+    }
     console.log(`Changed: ${item}`);
     this.dataChanged = true;
     this.publishStatus = ': unpublished changes'
@@ -372,9 +380,10 @@ export class CmsSpwConfigComponent implements OnInit {
     const newConfigObj = this.configFormGroup.value;
     newConfigObj.theme = this.selectedTheme;
 
-    // console.log('Updated config', newConfigObj);
+    console.log('Updated config', newConfigObj);
 
     console.log(`Production: ${production}`);
+
     this.cms.publish(this.restaurant.restaurant_id, this.user.member_id, production, 'standard', newConfigObj, this.selectedTemplate.version)
       .then(res => {
 
