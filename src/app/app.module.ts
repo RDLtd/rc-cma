@@ -100,6 +100,7 @@ import { CmsSpwConfigComponent } from './cms/cms-spw-config.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { CmsSpwBuilderComponent } from './cms/cms-spw-builder.component';
 import { InitModule } from './init/init.module';
+import { CmsEventsComponent } from './cms/cms-events.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -146,7 +147,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     LogoComponent,
     ProfileComponent,
     CmsSpwConfigComponent,
-    CmsSpwBuilderComponent
+    CmsSpwBuilderComponent,
+    CmsEventsComponent
   ],
     imports: [
         AngularMaterialModule,

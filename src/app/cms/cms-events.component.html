@@ -1,0 +1,103 @@
+<div class="rc-content-container full-width">
+  <mat-toolbar class="rc-toolbar-section">
+    <span>{{ 'CMS.EVENTS.titleEvents' | translate }}</span>
+    <span class="rc-space-filler"></span>
+    <span class="rc-toolbar-actions">
+          <button
+            mat-icon-button>
+              <mat-icon>help_outline</mat-icon>
+          </button>
+      <button mat-icon-button
+              matTooltip="{{ 'CMS.EVENTS.tipFilter' | translate }}">
+            <mat-icon>filter_list</mat-icon>
+          </button>
+          <button mat-icon-button
+                  matTooltip="{{ 'CMS.EVENTS.tipAddEvent' | translate }}">
+            <mat-icon>add_circle_outline</mat-icon>
+          </button>
+        </span>
+  </mat-toolbar>
+  <div class="rd-grid-auto-events">
+    <div class="rd-card">
+      <div class="rd-card-image">
+        <img src="https://ichef.bbci.co.uk/news/976/cpsprodpb/D0F5/production/_130939435_rwccup.jpg.webp" alt="">
+      </div>
+      <div class="rd-card-content">
+        <h2>Event title</h2>
+        <h3>Event tag</h3>
+        <markdown>
+          Event *description*
+        </markdown>
+        <a href="#">Event link</a>
+      </div>
+      <div class="rd-card-actions">
+
+        <span class="rc-space-filler"></span>
+        <a
+          mat-icon-button
+          [href]="'#'"
+          target="_blank"
+          title="{{ 'CMS.IMAGES.tipDownload' | translate }}">
+          <mat-icon>cloud_download</mat-icon>
+        </a>
+        <button
+          mat-icon-button
+          title="{{ 'CMS.IMAGES.tipDelete' | translate }}"
+          [disabled]="false">
+          <mat-icon>delete</mat-icon>
+        </button>
+        <mat-checkbox
+          labelPosition="before"
+          title="{{ 'CMS.IMAGES.tipChangeStatus' | translate }}"
+          [checked]="true"
+          [disabled]="false"
+          color="accent">
+        </mat-checkbox>
+      </div>
+
+
+
+    </div>
+    <div class="rd-card">
+      <div class="rd-card-image">
+        <img src="https://ichef.bbci.co.uk/news/976/cpsprodpb/D0F5/production/_130939435_rwccup.jpg.webp" alt="">
+      </div>
+      <div class="rd-card-content">
+        <h2>Event title</h2>
+        <h3>Event tag</h3>
+        <markdown>
+          Event *description*
+        </markdown>
+        <a href="#">Event link</a>
+      </div>
+      <div class="rd-card-actions">
+
+        <span class="rc-space-filler"></span>
+        <a
+          mat-icon-button
+          [href]="'#'"
+          target="_blank"
+          title="{{ 'CMS.IMAGES.tipDownload' | translate }}">
+          <mat-icon>cloud_download</mat-icon>
+        </a>
+        <button
+          mat-icon-button
+          title="{{ 'CMS.IMAGES.tipDelete' | translate }}"
+          [disabled]="false">
+          <mat-icon>delete</mat-icon>
+        </button>
+        <mat-checkbox
+          labelPosition="before"
+          title="{{ 'CMS.IMAGES.tipChangeStatus' | translate }}"
+          [checked]="true"
+          [disabled]="false"
+          color="accent">
+        </mat-checkbox>
+      </div>
+
+
+
+    </div>
+
+  </div>
+</div>

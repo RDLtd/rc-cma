@@ -61,6 +61,10 @@
 				"titleSummary": "content status summary"
 			}
 		},
+		"EVENTS": {
+			"tipAddEvent": "Add a new event",
+			"titleEvents": "Events"
+		},
 		"FEATURES": {
 			"headerDescFull": "Full Description",
 			"headerDescParagraph": "One Paragraph Description",
@@ -209,6 +213,7 @@
 			"labelSettings": "Publish Settings",
 			"tipContacts": "Contact & Location Information",
 			"tipDashboard": "Content Dashboard",
+			"tipEvents": "Events",
 			"tipFeatures": "Descriptions & Features",
 			"tipHours": "Opening Times",
 			"tipImages": "Images",

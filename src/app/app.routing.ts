@@ -32,6 +32,7 @@ import { JoinComponent } from './join/join.component';
 import { MembershipComponent } from './join/membership.component';
 import {ProfileComponent} from './profile/profile.component';
 import { CmsSpwConfigComponent } from './cms/cms-spw-config.component';
+import { CmsEventsComponent } from './cms/cms-events.component';
 
 const APP_ROUTES: Routes = [
   { path: '', component: SigninComponent, title: 'Sign in' },
@@ -105,6 +106,11 @@ const APP_ROUTES: Routes = [
         title: 'Descriptions & Features',
         canActivate: [AuthGuard],
         canDeactivate: [CanDeactivateGuard] },
+
+      { path: 'events',
+        component: CmsEventsComponent,
+        title: 'Events',
+        canActivate: [AuthGuard] },
 
       { path: 'settings',
         component: CmsSpwConfigComponent,

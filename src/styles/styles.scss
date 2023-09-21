@@ -4,7 +4,7 @@
 @import "abstract";
 @import "variables";
 @import "reset";
-@import 'bpi';
+//@import 'bpi';
 @import "mozrest";
 @import 'rdl';
 
@@ -1951,6 +1951,27 @@ button.rc-member-assc {
   @include mq(medium) {
     display: flex;
     margin: 1rem auto;
+  }
+}
+.rd-grid-auto-events {
+  display: grid;
+  padding-block: 1rem;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 33%));
+}
+.rd-card {
+  background-color: white;
+  //width: 400px;
+  &-image {
+    img {
+      width: 100%;
+      max-height: 200px;
+      aspect-ratio: 62/38;
+      object-fit: cover;
+    }
+  }
+  &-content {
+    padding: 1rem;
   }
 }
 

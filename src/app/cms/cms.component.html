@@ -69,8 +69,16 @@
              [matTooltip]="'CMS.NAV.tipReservations' | translate"
              [routerLink]="['reservations']"
              [routerLinkActive]="['rc-link-active']">
-            <mat-icon>event</mat-icon>
+            <mat-icon>events</mat-icon>
           </button>
+
+          <button mat-icon-button
+              [matTooltip]="'CMS.NAV.tipEvents' | translate"
+              [routerLink]="['events']"
+              [routerLinkActive]="['rc-link-active']">
+            <mat-icon>cell_tower</mat-icon>
+          </button>
+
           <button mat-icon-button
              [matTooltip]="'CMS.NAV.tipContacts' | translate"
              [routerLink]="['location']"
