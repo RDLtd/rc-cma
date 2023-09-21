@@ -27,7 +27,7 @@ export class CMSService {
 
   // apptiser domain from S3 bucket string
   getApptiserUrl(url: string, isProduction = false): string {
-    if (url === undefined || url === null) {
+    if (url === undefined || url === null || url === 'undefined' || url === 'null') {
       return '';
     }
     // AWS S3 bucket domain
