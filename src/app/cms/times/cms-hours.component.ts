@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { CmsLocalService } from './cms-local.service';
-import { Restaurant } from '../_models';
-import { AnalyticsService, CMSService } from '../_services';
+import { CmsLocalService } from '../cms-local.service';
+import { Restaurant } from '../../_models';
+import { AnalyticsService, CMSService } from '../../_services';
 import { TranslateService } from '@ngx-translate/core';
-import { HelpService, LoadService } from '../common';
-import { insertAnimation } from '../shared/animations';
+import { HelpService, LoadService } from '../../common';
+import { insertAnimation } from '../../shared/animations';
 
 @Component({
   selector: 'app-rc-cms-hours',

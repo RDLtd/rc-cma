@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { CmsLocalService } from './cms-local.service';
-import { HelpService } from '../common';
-import { AnalyticsService, CMSService } from "../_services";
+import { CmsLocalService } from '../cms-local.service';
+import { HelpService } from '../../common';
+import { AnalyticsService, CMSService } from "../../_services";
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Restaurant } from '../_models';
-import { StorageService } from '../_services/storage.service';
+import { Restaurant } from '../../_models';
+import { StorageService } from '../../_services/storage.service';
 import { MatDialog, MatDialogRef } from "@angular/material/dialog";
 import { CmsSpwBuilderComponent} from "./cms-spw-builder.component";
 import { CmsSpwLinksComponent } from './cms-spw-links.component';
 import { TranslateService } from "@ngx-translate/core";
-import { ConfigService } from '../init/config.service';
+import { ConfigService } from '../../init/config.service';
 
 export interface TemplateOptions {
   showBookingWidget: { disabled: boolean; on: boolean };

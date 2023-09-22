@@ -1,16 +1,16 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { CmsLocalService } from './cms-local.service';
+import { CmsLocalService } from '../cms-local.service';
 import {
   Restaurant,
   CMSDescription,
   Member
-} from '../_models';
+} from '../../_models';
 import {
   CMSService,
   MemberService,
   RestaurantService,
   AnalyticsService
-} from '../_services';
+} from '../../_services';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { RestaurantDetailComponent } from './restaurant-detail.component';
@@ -19,11 +19,11 @@ import { TranslateService } from '@ngx-translate/core';
 import {
   MessageComponent,
   HelpService
-} from '../common';
+} from '../../common';
 import * as moment from 'moment';
-import { CmsSpwLinksComponent } from './cms-spw-links.component';
+import { CmsSpwLinksComponent } from '../web/cms-spw-links.component';
 
-import { ImageService } from '../_services/image.service';
+import { ImageService } from '../../_services/image.service';
 import { CloudinaryImage } from '@cloudinary/url-gen';
 
 @Component({

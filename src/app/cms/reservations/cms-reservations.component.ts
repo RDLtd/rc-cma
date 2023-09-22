@@ -1,10 +1,10 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { CmsLocalService } from './cms-local.service';
-import { CMSService, RestaurantService } from '../_services';
-import { Restaurant, CMSDescription } from '../_models';
+import { CmsLocalService } from '../cms-local.service';
+import { CMSService, RestaurantService } from '../../_services';
+import { Restaurant, CMSDescription } from '../../_models';
 import { TranslateService } from '@ngx-translate/core';
-import { HelpService} from '../common';
-import { ImageService } from '../_services/image.service';
+import { HelpService} from '../../common';
+import { ImageService } from '../../_services/image.service';
 import { CloudinaryImage } from '@cloudinary/url-gen';
 
 @Component({

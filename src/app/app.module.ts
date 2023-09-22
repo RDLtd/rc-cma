@@ -1,6 +1,5 @@
-
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule} from '@angular/core';
+import { NgModule } from '@angular/core';
 import {
   FormsModule,
   ReactiveFormsModule
@@ -14,7 +13,6 @@ import {
 
 import { AppComponent } from './app.component';
 import { routing } from './app.routing';
-//import { AppConfig } from './app.config';
 import { SafePipe } from './shared/app.safe';
 import { HeaderComponent } from './common/header.component';
 import { SigninComponent } from './signin/signin.component';
@@ -35,10 +33,6 @@ import {
 } from './_services';
 
 import {
-  RestaurantDetailComponent,
-} from './cms/restaurant-detail.component';
-
-import {
   RestaurantLookupComponent,
   SettingsComponent,
   VerificationComponent,
@@ -56,11 +50,15 @@ import {
   CmsLocationComponent,
   CmsImageDialogComponent,
   CmsFileUploadComponent,
-  CmsPreviewComponent,
   CmsLocalService,
   CmsMenuDishComponent,
   CmsReservationsComponent,
   CmsDashboardComponent,
+  CmsSpwConfigComponent,
+  CmsSpwLinksComponent,
+  CmsSpwBuilderComponent,
+  RestaurantDetailComponent,
+  CmsEventsComponent
 } from './cms';
 
 import {
@@ -77,30 +75,27 @@ import {
   TranslateModule,
   TranslateLoader,
 } from '@ngx-translate/core';
-import { TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { FileUploadModule } from 'ng2-file-upload';
 import { MarkdownModule } from 'ngx-markdown';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { JoinComponent } from './join/join.component';
 import { LoadComponent } from './common/loader/load.component';
-import { CmsSpwLinksComponent } from './cms/cms-spw-links.component';
 import { QRCodeModule } from 'angularx-qrcode';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { MembershipComponent } from './join/membership.component';
 import { LogoComponent } from './common/logo/logo.component';
 import { CurrencyPipe } from '@angular/common';
 import { ProfileComponent } from './profile/profile.component';
-import {CloudinaryModule} from '@cloudinary/ng';
+import { CloudinaryModule } from '@cloudinary/ng';
 import { OnlineStatusModule } from 'ngx-online-status';
 import { AppTitleStrategy } from './app-title-strategy';
-import {ContactComponent} from "./common/contact/contact.component";
-import {FaqsComponent} from "./common/faqs/faqs.component";
-import {MatExpansionModule} from "@angular/material/expansion";
-import { CmsSpwConfigComponent } from './cms/cms-spw-config.component';
+import { ContactComponent } from "./common/contact/contact.component";
+import { FaqsComponent } from "./common/faqs/faqs.component";
+import { MatExpansionModule } from "@angular/material/expansion";
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { CmsSpwBuilderComponent } from './cms/cms-spw-builder.component';
 import { InitModule } from './init/init.module';
-import { CmsEventsComponent } from './cms/cms-events.component';
+import { EventFormComponent } from './cms/events/event-form.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -127,7 +122,6 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     CmsHoursComponent,
     CmsFeaturesComponent,
     CmsLocationComponent,
-    CmsPreviewComponent,
     CmsImageDialogComponent,
     CmsFileUploadComponent,
     CmsMenuDishComponent,
@@ -148,36 +142,37 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     ProfileComponent,
     CmsSpwConfigComponent,
     CmsSpwBuilderComponent,
-    CmsEventsComponent
+    CmsEventsComponent,
+    EventFormComponent
   ],
-    imports: [
-        AngularMaterialModule,
-        BrowserModule,
-        BrowserAnimationsModule,
-        FormsModule,
-        RouterModule,
-        ReactiveFormsModule,
-        HttpClientModule,
-        routing,
-        FileUploadModule,
-        ClipboardModule,
-        TranslateModule.forRoot({
-            loader: {
-                provide: TranslateLoader,
-                useFactory: HttpLoaderFactory,
-                deps: [HttpClient]
-            }
-        }),
-        MarkdownModule.forRoot(),
-        CloudinaryModule,
-        QRCodeModule,
-        GoogleMapsModule,
-        ClipboardModule,
-        OnlineStatusModule,
-        MatExpansionModule,
-        MatSlideToggleModule,
-        InitModule
-    ],
+  imports: [
+    AngularMaterialModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    RouterModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    routing,
+    FileUploadModule,
+    ClipboardModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    }),
+    MarkdownModule.forRoot(),
+    CloudinaryModule,
+    QRCodeModule,
+    GoogleMapsModule,
+    ClipboardModule,
+    OnlineStatusModule,
+    MatExpansionModule,
+    MatSlideToggleModule,
+    InitModule
+  ],
   providers: [
     //AppConfig,
     AuthenticationService,
@@ -190,7 +185,6 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     CmsLocalService,
     HelpService,
     AnalyticsService,
-    CmsPreviewComponent,
     ConfirmCancelComponent,
     LoadService,
     CurrencyPipe,
@@ -202,4 +196,5 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

@@ -6,7 +6,6 @@ import { Member, Restaurant } from '../_models';
 import { RestaurantService, CMSService, AnalyticsService } from '../_services';
 import { CmsLocalService } from './cms-local.service';
 import { MatDialog } from '@angular/material/dialog';
-import { CmsPreviewComponent } from './cms-preview.component';
 import { fadeAnimation } from '../shared/animations';
 import { HeaderService } from '../common/header.service';
 import { HelpService } from '../common';
@@ -73,23 +72,6 @@ export class CmsComponent implements OnInit {
           console.log(error);
         }
       });
-  }
-
-
-  getPreview() {
-
-    this.dialog.open(CmsPreviewComponent, {
-      panelClass: 'rc-preview-dialog-container',
-      backdropClass: 'rc-preview-backdrop',
-      data: {
-        id: this.restaurant.restaurant_id,
-        member_id: this.member.member_id,
-        number: this.restaurant.restaurant_number,
-        name: this.restaurant.restaurant_name
-      }
-    });
-    // record event
-    this.ga.sendEvent('CMS', 'SPW', 'Previewed');
   }
 
   onDeactivate() {

@@ -1,0 +1,53 @@
+<div class="rc-content-container full-width">
+  <mat-toolbar class="rc-toolbar-section">
+    <span>{{ 'CMS.EVENTS.titleEvents' | translate }}</span>
+    <span class="rc-space-filler"></span>
+    <span class="rc-toolbar-actions">
+          <button
+            mat-icon-button>
+              <mat-icon>help_outline</mat-icon>
+          </button>
+      <button mat-icon-button
+              matTooltip="{{ 'CMS.EVENTS.tipFilter' | translate }}">
+            <mat-icon>filter_list</mat-icon>
+          </button>
+          <button mat-icon-button
+                  matTooltip="{{ 'CMS.EVENTS.tipAddEvent' | translate }}">
+            <mat-icon>add_circle_outline</mat-icon>
+          </button>
+        </span>
+  </mat-toolbar>
+  <div class="rd-grid-auto-events">
+    <ng-container *ngFor="let event of events$ | async">
+    <div class="rd-card">
+      <div class="rd-card-image">
+        <img src="https://ichef.bbci.co.uk/news/976/cpsprodpb/D0F5/production/_130939435_rwccup.jpg.webp" alt="">
+      </div>
+      <div class="rd-card-content">
+        <h2>{{ event.title }}</h2>
+        <h3>{{ event.subTitle }}</h3>
+        <markdown>
+          {{ event.description }}
+        </markdown>
+        <a [href]="event.link">More information</a>
+      </div>
+      <div class="rd-card-actions">
+<!--        <mat-checkbox-->
+<!--          labelPosition="before"-->
+<!--          title="{{ 'CMS.IMAGES.tipChangeStatus' | translate }}"-->
+<!--          [checked]="event.active"-->
+<!--          color="accent">-->
+<!--        </mat-checkbox>-->
+        <span style="flex: 1 auto;"></span>
+        <button
+          mat-icon-button
+          title="{{ 'CMS.IMAGES.tipDelete' | translate }}"
+          (click)="editEvent(event)">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </div>
+    </div>
+    </ng-container>
+
+  </div>
+</div>

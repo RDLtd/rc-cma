@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Restaurant, CMSDish, CMSSection } from '../_models';
-import { CmsLocalService } from './cms-local.service';
-import { CMSService } from '../_services';
-import { CmsFileUploadComponent } from './cms-file-upload.component';
+import { Restaurant, CMSDish, CMSSection } from '../../_models';
+import { CmsLocalService } from '../cms-local.service';
+import { CMSService } from '../../_services';
+import { CmsFileUploadComponent } from '../cms-file-upload.component';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { ConfirmCancelComponent, HelpService, LoadService } from '../common';
+import { ConfirmCancelComponent, HelpService, LoadService } from '../../common';
 import { CmsMenuDishComponent } from './cms-menu-dish.component';
 import { TranslateService } from '@ngx-translate/core';
 

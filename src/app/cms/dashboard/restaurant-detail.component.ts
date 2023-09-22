@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { RestaurantService } from '../_services';
+import { RestaurantService } from '../../_services';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({

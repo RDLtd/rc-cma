@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { Restaurant } from '../_models';
-import { CmsLocalService } from './cms-local.service';
-import { CMSService } from '../_services';
+import { Restaurant } from '../../_models';
+import { CmsLocalService } from '../cms-local.service';
+import { CMSService } from '../../_services';
 import { MatDialog } from '@angular/material/dialog';
 import { CmsImageDialogComponent } from './cms-image-dialog.component';
-import { CmsFileUploadComponent } from './cms-file-upload.component';
-import { ConfirmCancelComponent, HelpService, LoadService } from '../common';
+import { CmsFileUploadComponent } from '../cms-file-upload.component';
+import { ConfirmCancelComponent, HelpService, LoadService } from '../../common';
 import { TranslateService } from '@ngx-translate/core';
-import { insertAnimation } from '../shared/animations';
-import { ImageService } from '../_services/image.service';
+import { insertAnimation } from '../../shared/animations';
+import { ImageService } from '../../_services/image.service';
 
 
 

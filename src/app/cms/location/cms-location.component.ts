@@ -1,12 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { CmsLocalService } from './cms-local.service';
-import { CMSService } from '../_services';
-import { CmsFileUploadComponent } from './cms-file-upload.component';
+import { CmsLocalService } from '../cms-local.service';
+import { CMSService } from '../../_services';
+import { CmsFileUploadComponent } from '../cms-file-upload.component';
 import { MatDialog } from '@angular/material/dialog';
-import { CMSDescription } from '../_models';
+import { CMSDescription } from '../../_models';
 import { TranslateService } from '@ngx-translate/core';
 import { GoogleMap, MapMarker } from '@angular/google-maps';
-import { ConfirmCancelComponent, HelpService } from '../common';
+import { ConfirmCancelComponent, HelpService } from '../../common';
 
 @Component({
   selector: 'app-rc-cms-location',

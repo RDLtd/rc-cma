@@ -4,7 +4,7 @@ import { environment } from '../../environments/environment';
 import { BehaviorSubject, filter, Observable } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { map } from 'rxjs/operators';
-import { TemplateOptions } from '../cms/cms-spw-config.component';
+import { TemplateOptions } from '../cms';
 
 declare const require: any;
 
