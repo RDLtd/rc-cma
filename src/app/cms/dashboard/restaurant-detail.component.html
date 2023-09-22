@@ -190,14 +190,14 @@
     <button
       tabindex="-1"
       mat-button
-      mat-dialog-close
+      mat-dialog-close="true"
       (click)="setCancel(true)">
       {{ 'CMS.DASHBOARD.core.labelBtnCancel' | translate | uppercase }}
     </button>
 
     <button
       mat-button
-      mat-dialog-close
+      mat-dialog-close="true"
       [disabled]="!restForm.dirty"
       (click)="setCancel(false)"
       color="accent">

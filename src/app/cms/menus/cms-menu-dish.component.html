@@ -33,7 +33,7 @@
                 required>
           </mat-form-field>
           <mat-form-field style="width: 30%; flex: 1;" floatLabel="always">
-            <span matTextPrefix>{{ data['currencySymbol'] }}&nbsp;</span>
+            <span matTextPrefix="">{{ data['currencySymbol'] }}&nbsp;</span>
             <mat-label>{{ 'CMS.MENUS.labelPrice' | translate }}</mat-label>
             <input
                 name="cms_dish_price"
@@ -76,7 +76,7 @@
         <button
             type="button"
             mat-button
-            mat-dialog-close>{{ 'CMS.MENUS.labelBtnCancel' | translate | uppercase }}</button>
+            mat-dialog-close="true">{{ 'CMS.MENUS.labelBtnCancel' | translate | uppercase }}</button>
         <button
             type="button"
             mat-flat-button
@@ -89,7 +89,7 @@
         <button
             type="button"
             mat-button
-            mat-dialog-close>{{ 'CMS.MENUS.labelBtnCancel' | translate | uppercase }}</button>
+            mat-dialog-close="true">{{ 'CMS.MENUS.labelBtnCancel' | translate | uppercase }}</button>
         <button
             type="button"
             mat-flat-button
