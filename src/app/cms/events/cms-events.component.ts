@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Observable, of } from 'rxjs';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { EventFormComponent } from './event-form.component';
 
 export interface Event {
   category: {
@@ -39,8 +41,9 @@ export class CmsEventsComponent {
     },
     title: 'Rugby World Cup 2023',
     subTitle: 'Starts on the 8th September',
-    description: 'Catch all the action from this year\'s **Rugby World Cup** across various dates from 8th September to ' +
-      '28th October. Games will be shown in the garden if good weather',
+    description: 'Are you a rugby enthusiast? Do you love cheering for your favorite teams with a great crowd? Look no ' +
+      'further! **Fullers** is your ultimate destination to witness all the thrilling moments of the **2023 Rugby World Cup**!' +
+      'Watch Every Game LIVE in our bar area',
     imgPath: '',
     icon: '',
     link: '#external-link',
@@ -57,12 +60,21 @@ export class CmsEventsComponent {
 
   events$: Observable<Event[]>;
 
-  constructor() {
+  constructor(
+    private dialog: MatDialog,
+  ) {
     this.events = [this.testEvent];
     this.events$ = of(this.events);
   }
 
   editEvent(event: Event) {
-    console.log(event);
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = {
+      event
+    }
+    const dialogRef = this.dialog.open(EventFormComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe((obj) => {
+    console.log(obj);
+    });
   }
 }

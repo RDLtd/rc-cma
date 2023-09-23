@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'rc-event-form',
@@ -6,6 +7,23 @@ import { Component } from '@angular/core';
   styles: [
   ]
 })
-export class EventFormComponent {
+export class EventFormComponent implements OnInit {
+
+  eventFormGroup: FormGroup;
+
+  constructor(
+    private fb: FormBuilder
+  ) {
+  }
+
+  ngOnInit() {
+    this.initEventForm();
+  }
+
+  initEventForm(): void {
+    this.eventFormGroup = this.fb.group({
+      title: 'This is the title'
+    });
+  }
 
 }

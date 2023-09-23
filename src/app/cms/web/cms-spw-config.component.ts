@@ -300,36 +300,22 @@ export class CmsSpwConfigComponent implements OnInit {
     console.log('setConfig', templateOptions);
 
     Object.entries(templateOptions).forEach(([key, value]) => {
-      console.log(`${key}: { disabled: ${value['disabled']}, on: ${value['on']} }`);
-      //console.log(value);
+
+      //console.log(`${key}: { disabled: ${value['disabled']}, on: ${value['on']} }`);
+
       let formControl = this.configFormGroup.get(key);
-      let on = value['on'];
-      let isDisabled = value['disabled']
 
       if (key === 'theme') {
         this.selectedTheme = value;
         console.log('loaded theme', value);
         return;
       }
-      // console.log(formControl, on);
+
       if(formControl === null) { return; }
 
-      formControl.setValue(on);
-      isDisabled ? formControl.disable() : formControl.enable();
+      formControl.setValue(value.on);
+      value.disabled ? formControl.disable() : formControl.enable();
 
-      // Disable all reservations content?
-      // if (!this.configFormGroup.get('showReservations').value['on']){
-      //   this.configFormGroup.get('showReservationsInfo').disable();
-      //   this.configFormGroup.get('showBookingWidget').disable();
-      //   this.configFormGroup.get('showGroupBookings').disable();
-      //   this.configFormGroup.get('showPrivateDining').disable();
-      // }
-      // // Disable all contacts content?
-      // if (!this.configFormGroup.get('showContacts').value['on']){
-      //   this.configFormGroup.get('showLinks').disable();
-      //   this.configFormGroup.get('showTransport').disable();
-      //   this.configFormGroup.get('showParking').disable();
-      // }
     });
   }
 
