@@ -20,7 +20,10 @@ export class CMSService {
     filter (cat => !!cat),
     map(categories => categories?.offer_categories)
   );
-  eventCategories$: Observable<any>
+  eventsSub = new BehaviorSubject<any>([]);
+  events$ = this.eventsSub.asObservable().pipe(
+    map( events => events?.offers)
+  );
 
   constructor(
     private http: HttpClient,
@@ -30,6 +33,7 @@ export class CMSService {
     this.config.brand.subscribe(obj => this.brand = obj);
     this.brand$ = this.config.brand;
     this.getEventCategories();
+    this.getEvents();
   }
 
 
@@ -50,6 +54,25 @@ export class CMSService {
 
   get eventCategories(): Observable<any> {
     return this.eventCat$;
+  }
+
+  getEvents(): void {
+    this.http.post(this.config.apiUrl + '/offers/getoffers',
+      {
+        company: this.brand.prefix,
+        userCode: this.config.userAPICode,
+        token: this.config.token
+      }).subscribe({
+
+      next: (events) => {
+        console.log(events);
+        this.eventsSub.next(events);
+      }
+    });
+  }
+
+  get events(): Observable<any> {
+    return this.events$
   }
 
   // apptiser domain from S3 bucket string

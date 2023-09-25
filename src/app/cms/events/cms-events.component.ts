@@ -58,8 +58,9 @@ export class CmsEventsComponent implements OnInit {
     active: true
   }
 
-  events$: Observable<Event[]>;
+  events$: Observable<any>;
   eventCategories: Observable<any>;
+
 
   constructor(
     private dialog: MatDialog,
@@ -73,12 +74,15 @@ export class CmsEventsComponent implements OnInit {
     this.events$ = of(this.events);
     this.eventCategories = this.cms.eventCategories;
     console.log(this.eventCategories);
+    this.events$ = this.cms.events;
+    console.log(this.events$);
   }
 
   addEvent(): void {
     let dialogConfig;
     dialogConfig = {
       data: {
+        formLabel: 'NEW EVENT',
         event: {},
         categories: this.eventCategories
       }
@@ -89,12 +93,13 @@ export class CmsEventsComponent implements OnInit {
     });
   }
 
-  editEvent(event: Event) {
+  editEvent(event: any) {
     let dialogConfig;
     dialogConfig = {
       disableClose: true,
       data: {
-        event,
+        formLabel: 'EDITING EVENT',
+        event: event,
         categories: this.eventCategories
       }
     }

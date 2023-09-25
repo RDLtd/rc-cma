@@ -14,8 +14,10 @@ import { Observable } from 'rxjs';
 export class EventFormComponent implements OnInit {
 
   eventFormGroup: FormGroup;
-  event: Event;
+  event: any;
   categories$: Observable<any>
+
+  formLabel: string;
 
   constructor(
     public dialogRef: MatDialogRef<EventFormComponent>,
@@ -25,6 +27,7 @@ export class EventFormComponent implements OnInit {
     console.log(this.data);
     this.event = this.data.event;
     this.categories$ = this.data.categories;
+    this.formLabel = this.data.formLabel;
 
   }
 
@@ -34,14 +37,16 @@ export class EventFormComponent implements OnInit {
 
   initEventForm(): void {
     this.eventFormGroup = this.fb.group({
-      category: this.event.category,
+      category: this.event.offer_category,
       imgPath: this.event.imgPath,
-      title: this.event.title,
-      subtitle: this.event.subTitle,
-      description: this.event.description,
-      link: this.event.link,
-      eventStart: this.event.dateRange.start,
-      eventEnd: this.event.dateRange.end
+      title: this.event.offer_tag,
+      subtitle: this.event.offer_strapline,
+      description: this.event.offer_text,
+      link: this.event.offer_link,
+      eventStart: this.event.offer_from,
+      eventEnd: this.event.offer_to,
+      marketingStart: this.event.offer_marketed_from,
+      marketingEnd: this.event.offer_marketed_to
     });
   }
 

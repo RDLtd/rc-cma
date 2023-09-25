@@ -1966,8 +1966,9 @@ button.rc-member-assc {
   }
 }
 .rd-card {
+  cursor: pointer;
   background-color: white;
-  //max-width: 400px;
+  transition: all .3s ease-out;
   h2 {
     font-size: 1.5rem;
   }
@@ -1989,6 +1990,9 @@ button.rc-member-assc {
     display: flex;
     align-items: center;
     justify-content: flex-end;
+  }
+  &:hover, &:focus-visible {
+    @include mat.elevation(5);
   }
 }
 

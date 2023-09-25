@@ -20,32 +20,17 @@
   </mat-toolbar>
   <div class="rd-grid-auto-events">
     <ng-container *ngFor="let event of events$ | async">
-    <div class="rd-card">
+    <div class="rd-card" (click)="editEvent(event)">
       <div class="rd-card-image">
         <img src="https://ichef.bbci.co.uk/news/976/cpsprodpb/D0F5/production/_130939435_rwccup.jpg.webp" alt="">
       </div>
       <div class="rd-card-content">
-        <h2>{{ event.title }}</h2>
-        <h3>{{ event.subTitle }}</h3>
+        <h2>{{ event.offer_tag }}</h2>
+        <h3>{{ event.offer_strapline }}</h3>
         <markdown>
-          {{ event.description }}
+          {{ event.offer_text }}
         </markdown>
-        <a [href]="event.link">More information</a>
-      </div>
-      <div class="rd-card-actions">
-<!--        <mat-checkbox-->
-<!--          labelPosition="before"-->
-<!--          title="{{ 'CMS.IMAGES.tipChangeStatus' | translate }}"-->
-<!--          [checked]="event.active"-->
-<!--          color="accent">-->
-<!--        </mat-checkbox>-->
-        <span style="flex: 1 auto;"></span>
-        <button
-          mat-icon-button
-          title="{{ 'CMS.IMAGES.tipDelete' | translate }}"
-          (click)="editEvent(event)">
-          <mat-icon>edit</mat-icon>
-        </button>
+        <a [href]="event.offer_link">More information</a>
       </div>
     </div>
     </ng-container>
