@@ -178,7 +178,6 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
         MatNativeDateModule
     ],
   providers: [
-    //AppConfig,
     AuthenticationService,
     UserService,
     MemberService,
