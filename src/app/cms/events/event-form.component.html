@@ -3,8 +3,8 @@
   <div mat-dialog-title>
     <div class="rd-dialog-header">
       <span class="title">EVENT</span>
-      <button mat-icon-button mat-dialog-close tabindex="-1"><mat-icon>delete</mat-icon></button>
-      <button mat-icon-button mat-dialog-close tabindex="-1"><mat-icon>close</mat-icon></button>
+      <button mat-icon-button mat-dialog-close="false" tabindex="-1"><mat-icon>delete</mat-icon></button>
+      <button mat-icon-button mat-dialog-close="false" tabindex="-1"><mat-icon>close</mat-icon></button>
     </div>
   </div>
 
@@ -39,11 +39,11 @@
         <mat-label>Event date range</mat-label>
         <mat-date-range-input [rangePicker]="eventRange">
           <input matStartDate
-                 placeholder="Event start date"
+                 placeholder="Start date"
                  formControlName="eventStart"
                  (dateChange)="addEventDate('eventStart', $event)">
           <input matEndDate
-                 placeholder="Event end date"
+                 placeholder="End date"
                  formControlName="eventEnd"
                  (dateChange)="addEventDate('eventEnd',$event)">
         </mat-date-range-input>
@@ -60,7 +60,7 @@
 
   </mat-dialog-content>
   <mat-dialog-actions class="rc-flex-end">
-    <button mat-button>CANCEL</button>
+    <button mat-button mat-dialog-close="false">CANCEL</button>
     <button mat-button>SAVE</button>
   </mat-dialog-actions>
 </div>

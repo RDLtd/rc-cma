@@ -97,6 +97,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { InitModule } from './init/init.module';
 import { EventFormComponent } from './cms/events/event-form.component';
 import { MatDatepickerModule } from "@angular/material/datepicker";
+import { MatNativeDateModule } from '@angular/material/core';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -173,7 +174,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
         MatExpansionModule,
         MatSlideToggleModule,
         InitModule,
-        MatDatepickerModule
+        MatDatepickerModule,
+        MatNativeDateModule
     ],
   providers: [
     //AppConfig,

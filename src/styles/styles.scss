@@ -1993,7 +1993,7 @@ button.rc-member-assc {
 }
 
 .rd-grid-form {
-  width: min(100vw, 600px);
+  //width: min(100%, 600px);
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   grid-column-gap: 8px;
@@ -2002,11 +2002,15 @@ button.rc-member-assc {
   .span-cols {
     grid-column: 1 / -1;
   }
+}
+.mdc-dialog {
 
 }
-
 .rd-dialog {
-
+  width: min(600px, 80vw);
+  input {
+    max-width: 100%;
+  }
   &-header {
     display: flex;
     flex-direction: row;
@@ -2015,5 +2019,4 @@ button.rc-member-assc {
       flex: 1 auto;
     }
   }
-
 }
