@@ -1,10 +1,66 @@
 <div class="rd-dialog">
+
+  <div mat-dialog-title>
+    <div class="rd-dialog-header">
+      <span class="title">EVENT</span>
+      <button mat-icon-button mat-dialog-close tabindex="-1"><mat-icon>delete</mat-icon></button>
+      <button mat-icon-button mat-dialog-close tabindex="-1"><mat-icon>close</mat-icon></button>
+    </div>
+  </div>
+
   <mat-dialog-content>
-  <form [formGroup]="eventFormGroup" class="dialog-section">
-    <mat-form-field>
-      <mat-label>Event Title</mat-label>
-      <input matInput formControlName="title" />
-    </mat-form-field>
-  </form>
+    <form [formGroup]="eventFormGroup" class="rd-grid-form">
+      <mat-form-field>
+        <mat-label>Event category</mat-label>
+        <mat-select formControlName="category" placeholder="Select a category">
+  <!--        <mat-option *ngFor="let category of (channels$ | async)?.channels" [value]="channel['channel_id']">-->
+  <!--          {{ channel['channel_name'] }} ({{ channel['channel_id'] }})-->
+  <!--        </mat-option>-->
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="span-cols">
+        <mat-label>Title</mat-label>
+        <input matInput formControlName="title" />
+      </mat-form-field>
+      <mat-form-field class="span-cols">
+        <mat-label>Subtitle</mat-label>
+        <input matInput formControlName="subtitle" />
+      </mat-form-field>
+      <mat-form-field class="span-cols">
+        <mat-label>Description</mat-label>
+        <textarea matInput formControlName="description"></textarea>
+      </mat-form-field>
+      <mat-form-field class="span-cols">
+        <mat-label>Link</mat-label>
+        <input matInput formControlName="link" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Event date range</mat-label>
+        <mat-date-range-input [rangePicker]="eventRange">
+          <input matStartDate
+                 placeholder="Event start date"
+                 formControlName="eventStart"
+                 (dateChange)="addEventDate('eventStart', $event)">
+          <input matEndDate
+                 placeholder="Event end date"
+                 formControlName="eventEnd"
+                 (dateChange)="addEventDate('eventEnd',$event)">
+        </mat-date-range-input>
+        <mat-datepicker-toggle matIconSuffix [for]="eventRange"></mat-datepicker-toggle>
+        <mat-date-range-picker #eventRange>
+          <mat-date-range-picker-actions>
+            <button mat-button matDateRangePickerCancel>Cancel</button>
+            <button mat-raised-button color="primary" matDateRangePickerApply>Apply</button>
+          </mat-date-range-picker-actions>
+        </mat-date-range-picker>
+      </mat-form-field>
+
+    </form>
+
   </mat-dialog-content>
+  <mat-dialog-actions class="rc-flex-end">
+    <button mat-button>CANCEL</button>
+    <button mat-button>SAVE</button>
+  </mat-dialog-actions>
 </div>

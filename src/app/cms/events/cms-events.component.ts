@@ -14,16 +14,15 @@ export interface Event {
   link?: string;
   imgPath: string;
   icon: string;
-  datesActive: {
+  dateRange: {
     start: string;
     end: string;
   }
-  datesMarketed: {
+  marketingRange: {
     start: string;
     end: string
   }
   active: boolean;
-
 }
 
 @Component({
@@ -47,11 +46,11 @@ export class CmsEventsComponent {
     imgPath: '',
     icon: '',
     link: '#external-link',
-    datesActive: {
+    dateRange: {
       start: '',
       end: ''
     },
-    datesMarketed: {
+    marketingRange: {
       start: '',
       end: '',
     },
@@ -67,6 +66,17 @@ export class CmsEventsComponent {
     this.events$ = of(this.events);
   }
 
+  addEvent(): void {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = {
+      event: {}
+    };
+    const dialogRef = this.dialog.open(EventFormComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe((obj) => {
+      console.log(obj);
+    });
+  }
+
   editEvent(event: Event) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.data = {
@@ -74,7 +84,10 @@ export class CmsEventsComponent {
     }
     const dialogRef = this.dialog.open(EventFormComponent, dialogConfig);
     dialogRef.afterClosed().subscribe((obj) => {
-    console.log(obj);
+      console.log(obj);
     });
+  }
+  deleteEvent(): void {
+
   }
 }

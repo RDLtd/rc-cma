@@ -16,5 +16,3 @@ export * from './location/cms-location.component';
 export * from './web/cms-spw-config.component';
 export * from './web/cms-spw-builder.component';
 export * from './web/cms-spw-links.component';
-
-

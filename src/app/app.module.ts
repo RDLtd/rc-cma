@@ -96,6 +96,7 @@ import { MatExpansionModule } from "@angular/material/expansion";
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { InitModule } from './init/init.module';
 import { EventFormComponent } from './cms/events/event-form.component';
+import { MatDatepickerModule } from "@angular/material/datepicker";
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -145,34 +146,35 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     CmsEventsComponent,
     EventFormComponent
   ],
-  imports: [
-    AngularMaterialModule,
-    BrowserModule,
-    BrowserAnimationsModule,
-    FormsModule,
-    RouterModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    routing,
-    FileUploadModule,
-    ClipboardModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    }),
-    MarkdownModule.forRoot(),
-    CloudinaryModule,
-    QRCodeModule,
-    GoogleMapsModule,
-    ClipboardModule,
-    OnlineStatusModule,
-    MatExpansionModule,
-    MatSlideToggleModule,
-    InitModule
-  ],
+    imports: [
+        AngularMaterialModule,
+        BrowserModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        RouterModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        routing,
+        FileUploadModule,
+        ClipboardModule,
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: HttpLoaderFactory,
+                deps: [HttpClient]
+            }
+        }),
+        MarkdownModule.forRoot(),
+        CloudinaryModule,
+        QRCodeModule,
+        GoogleMapsModule,
+        ClipboardModule,
+        OnlineStatusModule,
+        MatExpansionModule,
+        MatSlideToggleModule,
+        InitModule,
+        MatDatepickerModule
+    ],
   providers: [
     //AppConfig,
     AuthenticationService,

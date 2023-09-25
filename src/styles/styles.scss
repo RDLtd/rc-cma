@@ -1991,3 +1991,29 @@ button.rc-member-assc {
     justify-content: flex-end;
   }
 }
+
+.rd-grid-form {
+  width: min(100vw, 600px);
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-column-gap: 8px;
+  grid-row-gap: 0;
+  input { text-overflow: ellipsis !important;}
+  .span-cols {
+    grid-column: 1 / -1;
+  }
+
+}
+
+.rd-dialog {
+
+  &-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    .title {
+      flex: 1 auto;
+    }
+  }
+
+}
