@@ -25,6 +25,8 @@ export class ImageComponent implements OnInit {
 
   imgURL: string;
 
+  imageType: string;
+
   constructor(
     private imgService: ImageService,
     private memberService: MemberService,
@@ -37,6 +39,9 @@ export class ImageComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.imageType = this.data.imageType;
+
     // Current avatar
     this.imgPreviewSrc = this.data.member.member_image_path;
 

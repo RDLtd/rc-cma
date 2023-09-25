@@ -1,9 +1,10 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from "@angular/material/dialog";
 import { Event } from "./cms-events.component";
 import { MatDatepickerInputEvent } from "@angular/material/datepicker";
 import { Observable } from 'rxjs';
+import { ImageComponent } from '../../settings';
 
 @Component({
   selector: 'rc-event-form',
@@ -20,6 +21,7 @@ export class EventFormComponent implements OnInit {
   formLabel: string;
 
   constructor(
+    private dialog: MatDialog,
     public dialogRef: MatDialogRef<EventFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private fb: FormBuilder
@@ -53,4 +55,14 @@ export class EventFormComponent implements OnInit {
   addEventDate(control: string, event: MatDatepickerInputEvent<Date>): void {
     console.log(control, event);
   }
+
+  uploadNewImage(): void {
+    let dialogConfig = {
+      data: {
+        imageType: 'event'
+      }
+    }
+    const imageUpload = this.dialog.open(ImageComponent, dialogConfig);
+  }
+
 }
