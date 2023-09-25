@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { EventFormComponent } from './event-form.component';
+import { CMSService } from '../../_services';
 
 export interface Event {
   category: {
@@ -31,7 +32,7 @@ export interface Event {
 })
 
 
-export class CmsEventsComponent {
+export class CmsEventsComponent implements OnInit {
   events: [Event];
   testEvent = {
     category: {
@@ -58,18 +59,29 @@ export class CmsEventsComponent {
   }
 
   events$: Observable<Event[]>;
+  eventCategories: Observable<any>;
 
   constructor(
     private dialog: MatDialog,
+    private cms: CMSService
   ) {
+
+  }
+
+  ngOnInit() {
     this.events = [this.testEvent];
     this.events$ = of(this.events);
+    this.eventCategories = this.cms.eventCategories;
+    console.log(this.eventCategories);
   }
 
   addEvent(): void {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.data = {
-      event: {}
+    let dialogConfig;
+    dialogConfig = {
+      data: {
+        event: {},
+        categories: this.eventCategories
+      }
     };
     const dialogRef = this.dialog.open(EventFormComponent, dialogConfig);
     dialogRef.afterClosed().subscribe((obj) => {
@@ -78,9 +90,13 @@ export class CmsEventsComponent {
   }
 
   editEvent(event: Event) {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.data = {
-      event
+    let dialogConfig;
+    dialogConfig = {
+      disableClose: true,
+      data: {
+        event,
+        categories: this.eventCategories
+      }
     }
     const dialogRef = this.dialog.open(EventFormComponent, dialogConfig);
     dialogRef.afterClosed().subscribe((obj) => {

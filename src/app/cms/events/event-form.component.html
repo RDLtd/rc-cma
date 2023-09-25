@@ -13,9 +13,9 @@
       <mat-form-field>
         <mat-label>Event category</mat-label>
         <mat-select formControlName="category" placeholder="Select a category">
-  <!--        <mat-option *ngFor="let category of (channels$ | async)?.channels" [value]="channel['channel_id']">-->
-  <!--          {{ channel['channel_name'] }} ({{ channel['channel_id'] }})-->
-  <!--        </mat-option>-->
+          <mat-option *ngFor="let category of categories$ | async" [value]="category.id">
+            {{ category.data.text }}
+          </mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field class="span-cols">

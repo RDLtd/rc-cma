@@ -1,11 +1,12 @@
 ﻿import { Injectable } from '@angular/core';
-import { CMSElement, CMSTime, CMSAttribute, CMSMeal, CMSDescription, CMSDish, CMSSection } from '../_models';
+import { CMSElement, CMSTime, CMSDescription, CMSDish, CMSSection } from '../_models';
 import { Member } from '../_models';
 import { Restaurant } from '../_models';
 import { HttpClient } from '@angular/common/http';
-import { lastValueFrom } from 'rxjs';
+import { BehaviorSubject, filter, lastValueFrom, Observable } from 'rxjs';
 import { StorageService } from './storage.service';
 import { Brand, ConfigService } from '../init/config.service';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 
@@ -14,6 +15,12 @@ export class CMSService {
   authToken;
   brand: Brand;
   brand$;
+  eventCatSub = new BehaviorSubject<any>(null);
+  eventCat$ = this.eventCatSub.asObservable().pipe(
+    filter (cat => !!cat),
+    map(categories => categories?.offer_categories)
+  );
+  eventCategories$: Observable<any>
 
   constructor(
     private http: HttpClient,
@@ -22,8 +29,28 @@ export class CMSService {
     this.authToken = config.token;
     this.config.brand.subscribe(obj => this.brand = obj);
     this.brand$ = this.config.brand;
+    this.getEventCategories();
   }
 
+
+
+  getEventCategories(): void {
+    this.http.post(this.config.apiUrl + '/offers/getoffercategories',
+      {
+        userCode: this.config.userAPICode,
+        token: this.config.token,
+        brand: this.brand.prefix
+      }).subscribe({
+      next: (categories) => {
+        console.log(categories);
+        this.eventCatSub.next(categories);
+      }
+    });
+  }
+
+  get eventCategories(): Observable<any> {
+    return this.eventCat$;
+  }
 
   // apptiser domain from S3 bucket string
   getApptiserUrl(url: string, isProduction = false): string {
@@ -46,31 +73,12 @@ export class CMSService {
     return apptiserUrl;
   }
 
-  // elements
-  getElement(restaurant_id: string) {
-    return this.http.post(this.config.apiUrl + '/cms/elementget',
-      {
-        restaurant_id: restaurant_id,
-        userCode: this.config.userAPICode,
-        token: this.authToken
-      });
-  }
-
   getElementClass(restaurant_id: string, cms_element_class: string, get_default: string) {
     return this.http.post(this.config.apiUrl + '/cms/elementgetclass',
       {
         restaurant_id: restaurant_id,
         cms_element_class: cms_element_class,
         get_default: get_default,
-        userCode: this.config.userAPICode,
-        token: this.authToken
-      });
-  }
-
-  getElementByID(cms_element_id: string) {
-    return this.http.post(this.config.apiUrl + '/cms/elementgetbyid',
-      {
-        cms_element_id: cms_element_id,
         userCode: this.config.userAPICode,
         token: this.authToken
       });
@@ -124,50 +132,6 @@ export class CMSService {
       });
   }
 
-  getTimeChecking() {
-    return this.http.post(this.config.apiUrl + '/cms/timegetchecking',
-      {
-        userCode: this.config.userAPICode,
-        token: this.authToken
-      });
-  }
-
-  createTime(cms_time: CMSTime) {
-    return this.http.post(this.config.apiUrl + '/cms/timecreate',
-      {
-        cms_time: cms_time,
-        userCode: this.config.userAPICode,
-        token: this.authToken
-      });
-  }
-
-  createTimes(cms_times: [CMSTime]) {
-    return this.http.post(this.config.apiUrl + '/cms/timescreate',
-      {
-        cms_times: cms_times,
-        userCode: this.config.userAPICode,
-        token: this.authToken
-      });
-  }
-
-  createNewTimes(cms_times: [CMSTime]) {
-    return this.http.post(this.config.apiUrl + '/cms/timescreatenew',
-      {
-        cms_times: cms_times,
-        userCode: this.config.userAPICode,
-        token: this.authToken
-      });
-  }
-
-  updateTime(cms_time: CMSTime) {
-    return this.http.post(this.config.apiUrl + '/cms/timeupdate',
-      {
-        cms_time: cms_time,
-        userCode: this.config.userAPICode,
-        token: this.authToken
-      });
-  }
-
   updateTimes(cms_times: [CMSTime], cms_notes: string) {
     return this.http.post(this.config.apiUrl + '/cms/timesupdate',
       {
@@ -178,49 +142,11 @@ export class CMSService {
       });
   }
 
-  deleteTime(cms_time_id: string) {
-    return this.http.post(this.config.apiUrl + '/cms/timedelete',
-      {
-        cms_time_id: cms_time_id,
-        userCode: this.config.userAPICode,
-        token: this.authToken
-      });
-  }
-
-  // attributes - different for french
-  getAttributeTexts(country_code) {
-    if (country_code === 'FR') {
-      return this.http.post(this.config.apiUrl + '/cms/frenchattributetexts',
-        { userCode: this.config.userAPICode, token: this.authToken });
-    } else {
-      return this.http.post(this.config.apiUrl + '/cms/attributetexts',
-        {userCode: this.config.userAPICode, token: this.authToken});
-    }
-  }
-
   getAttributes(restaurant_id: string, country_code: string) {
     return this.http.post(this.config.apiUrl + '/cms/attributeget',
       {
         restaurant_id: restaurant_id,
         country_code: country_code,
-        userCode: this.config.userAPICode,
-        token: this.authToken
-      });
-  }
-
-  createAttribute(cms_attribute: CMSAttribute) {
-    return this.http.post(this.config.apiUrl + '/cms/attributecreate',
-      {
-        cms_attribute: cms_attribute,
-        userCode: this.config.userAPICode,
-        token: this.authToken
-      });
-  }
-
-  updateAttribute(cms_attribute: any) {
-    return this.http.post(this.config.apiUrl + '/cms/attributeupdate',
-      {
-        cms_attribute: cms_attribute,
         userCode: this.config.userAPICode,
         token: this.authToken
       });
@@ -237,52 +163,6 @@ export class CMSService {
       });
   }
 
-  deleteAttribute(cms_attribute_id: string) {
-    return this.http.post(this.config.apiUrl + '/cms/attributedelete',
-      {
-        cms_attribute_id: cms_attribute_id,
-        userCode: this.config.userAPICode,
-        token: this.authToken
-      });
-  }
-
-  // meals
-  getMeals(restaurant_id: string) {
-    return this.http.post(this.config.apiUrl + '/cms/mealget',
-      {
-        restaurant_id: restaurant_id,
-        userCode: this.config.userAPICode,
-        token: this.authToken
-      });
-  }
-
-  createMeal(cms_meal: CMSMeal) {
-    return this.http.post(this.config.apiUrl + '/cms/mealcreate',
-      {
-        cms_meal: cms_meal,
-        userCode: this.config.userAPICode,
-        token: this.authToken
-      });
-  }
-
-  updateMeal(cms_meal: CMSMeal) {
-    return this.http.post(this.config.apiUrl + '/cms/mealupdate',
-      {
-        cms_meal: cms_meal,
-        userCode: this.config.userAPICode,
-        token: this.authToken
-      });
-  }
-
-  deleteMeal(cms_meal_id: string) {
-    return this.http.post(this.config.apiUrl + '/cms/mealdelete',
-      {
-        cms_meal_id: cms_meal_id,
-        userCode: this.config.userAPICode,
-        token: this.authToken
-      });
-  }
-
   // descriptions
   getDescriptions(restaurant_id: string) {
     return this.http.post(this.config.apiUrl + '/cms/descriptionget',
@@ -293,28 +173,10 @@ export class CMSService {
       });
   }
 
-  createDescription(cms_description: CMSDescription) {
-    return this.http.post(this.config.apiUrl + '/cms/descriptioncreate',
-      {
-        cms_description: cms_description,
-        userCode: this.config.userAPICode,
-        token: this.authToken
-      });
-  }
-
   updateDescription(cms_description: CMSDescription) {
     return this.http.post(this.config.apiUrl + '/cms/descriptionupdate',
       {
         cms_description: cms_description,
-        userCode: this.config.userAPICode,
-        token: this.authToken
-      });
-  }
-
-  deleteDescription(cms_description_id: string) {
-    return this.http.post(this.config.apiUrl + '/cms/descriptiondelete',
-      {
-        cms_description_id: cms_description_id,
         userCode: this.config.userAPICode,
         token: this.authToken
       });
@@ -384,24 +246,6 @@ export class CMSService {
       });
   }
 
-  deleteSection(cms_section_id: number) {
-    return this.http.post(this.config.apiUrl + '/cms/sectiondelete',
-      {
-        cms_section_id: cms_section_id,
-        userCode: this.config.userAPICode,
-        token: this.authToken
-      });
-  }
-
-  getHelp(cms_help_keyword: string) {
-    return this.http.post(this.config.apiUrl + '/cms/gethelp',
-      {
-        cms_help_keyword: cms_help_keyword,
-        userCode: this.config.userAPICode,
-        token: this.authToken
-      });
-  }
-
   sendRestaurantChanges(member_first_name: string, member_last_name: string, member_email: string,
                         restaurant_name: string, changes: any) {
     return this.http.post(this.config.apiUrl + '/cms/sendrestaurantchanges',
@@ -425,16 +269,6 @@ export class CMSService {
         member_last_name: member.member_last_name,
         restaurant_name: restaurant.restaurant_name,
         changes: changes,
-        userCode: this.config.userAPICode,
-        token: this.authToken
-      });
-  }
-
-  getSPWTemplate(restaurant_id: string) {
-    console.log('ID', restaurant_id);
-    return this.http.post(this.config.apiUrl + '/cms/setspwtemplate',
-      {
-        restaurant_id: restaurant_id,
         userCode: this.config.userAPICode,
         token: this.authToken
       });
@@ -522,39 +356,6 @@ export class CMSService {
         token: this.authToken });
   }
 
-  sendOfferRequestToAffiliateEmail(obj: any) {
-    return this.http.post(this.config.apiUrl + '/cms/sendofferrequesttoaffiliate',
-      {
-        affiliate_offer: obj.affiliate_offer,
-        affiliate_email: obj.affiliate_email,
-        affiliate_name: obj.affiliate_name,
-        member_id: obj.member_id,
-        member_first_name: obj.member_first_name,
-        member_last_name: obj.member_last_name,
-        member_email: obj.member_email,
-        // admin_fullname: localStorage.getItem('rd_username'),
-        company_prefix: this.brand.prefix,
-        email_language: localStorage.getItem('rd_language'),
-        userCode: this.config.userAPICode,
-        token: this.authToken
-      });
-  }
-
-  sendOfferConfirmation(obj: any) {
-    return this.http.post(this.config.apiUrl + '/cms/sendofferconfirmation',
-      {
-        affiliate_name: obj.affiliate_name,
-        affiliate_contact_message: obj.affiliate_contact_message,
-        restaurant_name: obj.restaurant_name,
-        restaurant_email: obj.restaurant_email,
-        restaurant_number: obj.restaurant_number,
-        company_prefix: this.brand.prefix,
-        email_language: localStorage.getItem('rd_language'),
-        userCode: this.config.userAPICode,
-        token: this.authToken
-      });
-  }
-
   getLastUpdatedRecord(restaurant_id: number) {
     return this.http.post(this.config.apiUrl + '/cms/getlastupdatedrecord',
       {
@@ -602,37 +403,6 @@ export class CMSService {
       });
   }
 
-  createWebConfig(restaurant_id: number, theme_id: number, website_json: any) {
-    // stringify the options before sending to the endpoint
-    const website_options = JSON.stringify(website_json);
-    return this.http.post(this.config.apiUrl + '/spw/createwebconfig',
-      {
-        restaurant_id, theme_id, website_options,
-        userCode: this.config.userAPICode,
-        token: this.authToken
-      });
-  }
-
-  updateWeConfig(restaurant_id: number, theme_id: number, website_json: any) {
-    // stringify the options before sending to the endpoint
-    const website_options = JSON.stringify(website_json);
-    return this.http.post(this.config.apiUrl + '/spw/updatewebconfig',
-      {
-        restaurant_id, theme_id, website_options,
-        userCode: this.config.userAPICode,
-        token: this.authToken
-      });
-  }
-
-  deleteWebConfig(restaurant_id: number) {
-    return this.http.post(this.config.apiUrl + '/spw/deletewebconfig',
-      {
-        restaurant_id,
-        userCode: this.config.userAPICode,
-        token: this.authToken
-      });
-  }
-
   getWebThemes() {
     return this.http.post(this.config.apiUrl + '/spw/getwebthemes',
       {
@@ -641,7 +411,234 @@ export class CMSService {
       });
   }
 
-
-
+  // Unused
+  // deleteWebConfig(restaurant_id: number) {
+  //   return this.http.post(this.config.apiUrl + '/spw/deletewebconfig',
+  //     {
+  //       restaurant_id,
+  //       userCode: this.config.userAPICode,
+  //       token: this.authToken
+  //     });
+  // }
+  // createWebConfig(restaurant_id: number, theme_id: number, website_json: any) {
+  //   // stringify the options before sending to the endpoint
+  //   const website_options = JSON.stringify(website_json);
+  //   return this.http.post(this.config.apiUrl + '/spw/createwebconfig',
+  //     {
+  //       restaurant_id, theme_id, website_options,
+  //       userCode: this.config.userAPICode,
+  //       token: this.authToken
+  //     });
+  // }
+  // updateWeConfig(restaurant_id: number, theme_id: number, website_json: any) {
+  //   // stringify the options before sending to the endpoint
+  //   const website_options = JSON.stringify(website_json);
+  //   return this.http.post(this.config.apiUrl + '/spw/updatewebconfig',
+  //     {
+  //       restaurant_id, theme_id, website_options,
+  //       userCode: this.config.userAPICode,
+  //       token: this.authToken
+  //     });
+  // }
+  // sendOfferRequestToAffiliateEmail(obj: any) {
+  //   return this.http.post(this.config.apiUrl + '/cms/sendofferrequesttoaffiliate',
+  //     {
+  //       affiliate_offer: obj.affiliate_offer,
+  //       affiliate_email: obj.affiliate_email,
+  //       affiliate_name: obj.affiliate_name,
+  //       member_id: obj.member_id,
+  //       member_first_name: obj.member_first_name,
+  //       member_last_name: obj.member_last_name,
+  //       member_email: obj.member_email,
+  //       // admin_fullname: localStorage.getItem('rd_username'),
+  //       company_prefix: this.brand.prefix,
+  //       email_language: localStorage.getItem('rd_language'),
+  //       userCode: this.config.userAPICode,
+  //       token: this.authToken
+  //     });
+  // }
+  // sendOfferConfirmation(obj: any) {
+  //   return this.http.post(this.config.apiUrl + '/cms/sendofferconfirmation',
+  //     {
+  //       affiliate_name: obj.affiliate_name,
+  //       affiliate_contact_message: obj.affiliate_contact_message,
+  //       restaurant_name: obj.restaurant_name,
+  //       restaurant_email: obj.restaurant_email,
+  //       restaurant_number: obj.restaurant_number,
+  //       company_prefix: this.brand.prefix,
+  //       email_language: localStorage.getItem('rd_language'),
+  //       userCode: this.config.userAPICode,
+  //       token: this.authToken
+  //     });
+  // }
+  // getTimeChecking() {
+  //   return this.http.post(this.config.apiUrl + '/cms/timegetchecking',
+  //     {
+  //       userCode: this.config.userAPICode,
+  //       token: this.authToken
+  //     });
+  // }
+  // createTime(cms_time: CMSTime) {
+  //   return this.http.post(this.config.apiUrl + '/cms/timecreate',
+  //     {
+  //       cms_time: cms_time,
+  //       userCode: this.config.userAPICode,
+  //       token: this.authToken
+  //     });
+  // }
+  // createTimes(cms_times: [CMSTime]) {
+  //   return this.http.post(this.config.apiUrl + '/cms/timescreate',
+  //     {
+  //       cms_times: cms_times,
+  //       userCode: this.config.userAPICode,
+  //       token: this.authToken
+  //     });
+  // }
+  // createNewTimes(cms_times: [CMSTime]) {
+  //   return this.http.post(this.config.apiUrl + '/cms/timescreatenew',
+  //     {
+  //       cms_times: cms_times,
+  //       userCode: this.config.userAPICode,
+  //       token: this.authToken
+  //     });
+  // }
+  // updateTime(cms_time: CMSTime) {
+  //   return this.http.post(this.config.apiUrl + '/cms/timeupdate',
+  //     {
+  //       cms_time: cms_time,
+  //       userCode: this.config.userAPICode,
+  //       token: this.authToken
+  //     });
+  // }
+  // deleteTime(cms_time_id: string) {
+  //   return this.http.post(this.config.apiUrl + '/cms/timedelete',
+  //     {
+  //       cms_time_id: cms_time_id,
+  //       userCode: this.config.userAPICode,
+  //       token: this.authToken
+  //     });
+  // }
+  // getAttributeTexts(country_code) {
+  //   if (country_code === 'FR') {
+  //     return this.http.post(this.config.apiUrl + '/cms/frenchattributetexts',
+  //       { userCode: this.config.userAPICode, token: this.authToken });
+  //   } else {
+  //     return this.http.post(this.config.apiUrl + '/cms/attributetexts',
+  //       {userCode: this.config.userAPICode, token: this.authToken});
+  //   }
+  // }
+  // getElement(restaurant_id: string) {
+  //   return this.http.post(this.config.apiUrl + '/cms/elementget',
+  //     {
+  //       restaurant_id: restaurant_id,
+  //       userCode: this.config.userAPICode,
+  //       token: this.authToken
+  //     });
+  // }
+  // createAttribute(cms_attribute: CMSAttribute) {
+  //   return this.http.post(this.config.apiUrl + '/cms/attributecreate',
+  //     {
+  //       cms_attribute: cms_attribute,
+  //       userCode: this.config.userAPICode,
+  //       token: this.authToken
+  //     });
+  // }
+  // updateAttribute(cms_attribute: any) {
+  //   return this.http.post(this.config.apiUrl + '/cms/attributeupdate',
+  //     {
+  //       cms_attribute: cms_attribute,
+  //       userCode: this.config.userAPICode,
+  //       token: this.authToken
+  //     });
+  // }
+  // deleteAttribute(cms_attribute_id: string) {
+  //   return this.http.post(this.config.apiUrl + '/cms/attributedelete',
+  //     {
+  //       cms_attribute_id: cms_attribute_id,
+  //       userCode: this.config.userAPICode,
+  //       token: this.authToken
+  //     });
+  // }
+  // getMeals(restaurant_id: string) {
+  //   return this.http.post(this.config.apiUrl + '/cms/mealget',
+  //     {
+  //       restaurant_id: restaurant_id,
+  //       userCode: this.config.userAPICode,
+  //       token: this.authToken
+  //     });
+  // }
+  // createMeal(cms_meal: CMSMeal) {
+  //   return this.http.post(this.config.apiUrl + '/cms/mealcreate',
+  //     {
+  //       cms_meal: cms_meal,
+  //       userCode: this.config.userAPICode,
+  //       token: this.authToken
+  //     });
+  // }
+  // updateMeal(cms_meal: CMSMeal) {
+  //   return this.http.post(this.config.apiUrl + '/cms/mealupdate',
+  //     {
+  //       cms_meal: cms_meal,
+  //       userCode: this.config.userAPICode,
+  //       token: this.authToken
+  //     });
+  // }
+  // deleteMeal(cms_meal_id: string) {
+  //   return this.http.post(this.config.apiUrl + '/cms/mealdelete',
+  //     {
+  //       cms_meal_id: cms_meal_id,
+  //       userCode: this.config.userAPICode,
+  //       token: this.authToken
+  //     });
+  // }
+  // deleteSection(cms_section_id: number) {
+  //   return this.http.post(this.config.apiUrl + '/cms/sectiondelete',
+  //     {
+  //       cms_section_id: cms_section_id,
+  //       userCode: this.config.userAPICode,
+  //       token: this.authToken
+  //     });
+  // }
+  // getHelp(cms_help_keyword: string) {
+  //   return this.http.post(this.config.apiUrl + '/cms/gethelp',
+  //     {
+  //       cms_help_keyword: cms_help_keyword,
+  //       userCode: this.config.userAPICode,
+  //       token: this.authToken
+  //     });
+  // }
+  // getElementByID(cms_element_id: string) {
+  //   return this.http.post(this.config.apiUrl + '/cms/elementgetbyid',
+  //     {
+  //       cms_element_id: cms_element_id,
+  //       userCode: this.config.userAPICode,
+  //       token: this.authToken
+  //     });
+  // }
+  // createDescription(cms_description: CMSDescription) {
+  //   return this.http.post(this.config.apiUrl + '/cms/descriptioncreate',
+  //     {
+  //       cms_description: cms_description,
+  //       userCode: this.config.userAPICode,
+  //       token: this.authToken
+  //     });
+  // }
+  // getSPWTemplate(restaurant_id: string) {
+  //   console.log('ID', restaurant_id);
+  //   return this.http.post(this.config.apiUrl + '/cms/setspwtemplate',
+  //     {
+  //       restaurant_id: restaurant_id,
+  //       userCode: this.config.userAPICode,
+  //       token: this.authToken
+  //     });
+  // }
+  // deleteDescription(cms_description_id: string) {
+  //   return this.http.post(this.config.apiUrl + '/cms/descriptiondelete',
+  //     {
+  //       cms_description_id: cms_description_id,
+  //       userCode: this.config.userAPICode,
+  //       token: this.authToken
+  //     });
+  // }
 }
 

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { Event } from "./cms-events.component";
 import { MatDatepickerInputEvent } from "@angular/material/datepicker";
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'rc-event-form',
@@ -14,6 +15,7 @@ export class EventFormComponent implements OnInit {
 
   eventFormGroup: FormGroup;
   event: Event;
+  categories$: Observable<any>
 
   constructor(
     public dialogRef: MatDialogRef<EventFormComponent>,
@@ -22,6 +24,8 @@ export class EventFormComponent implements OnInit {
   ) {
     console.log(this.data);
     this.event = this.data.event;
+    this.categories$ = this.data.categories;
+
   }
 
   ngOnInit() {
