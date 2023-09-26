@@ -15,7 +15,6 @@ export class CMSService {
   brand: Brand;
   brand$;
 
-
   constructor(
     private http: HttpClient,
     private storage: StorageService,

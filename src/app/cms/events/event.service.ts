@@ -3,6 +3,8 @@ import { Brand, ConfigService } from '../../init/config.service';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, filter, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { CMSService, RestaurantService } from '../../_services';
+import { CmsLocalService } from '../cms-local.service';
 
 @Injectable({
   providedIn: 'root'
@@ -22,21 +24,26 @@ export class EventService {
   brand: Brand;
   constructor(
     private config: ConfigService,
-    private http: HttpClient
+    private http: HttpClient,
+    private cms: CmsLocalService
   ) {
+    // Load brand configuration
     this.config.brand$.subscribe({
       next: (brand) => this.brand = brand
     });
+    // Load events and event categories
     this.getEventCategories();
     this.getEvents();
   }
 
   getEventCategories(): void {
+    console.log(this.cms.restaurantNumber);
     this.http.post(this.config.apiUrl + '/offers/getoffercategories',
       {
         userCode: this.config.userAPICode,
         token: this.config.token,
-        brand: this.brand.prefix
+        brand: this.brand.prefix,
+        restaurant_number: this.cms.restaurantNumber
       }).subscribe({
       next: (categories) => {
         console.log(categories);
@@ -49,7 +56,7 @@ export class EventService {
   }
 
   getEvents(): void {
-    this.http.post(this.config.apiUrl + '/offers/getoffers',
+    this.http.post(this.config.apiUrl + '/offers/getoffersbyrestaurant',
       {
         company: this.brand.prefix,
         userCode: this.config.userAPICode,
