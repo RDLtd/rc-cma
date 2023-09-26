@@ -3,6 +3,8 @@ import { Observable, of } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { EventFormComponent } from './event-form.component';
 import { CMSService } from '../../_services';
+import { CmsLocalService } from '../cms-local.service';
+import { Restaurant } from '../../_models';
 
 export interface Event {
   category: {
@@ -34,48 +36,25 @@ export interface Event {
 
 export class CmsEventsComponent implements OnInit {
   events: [Event];
-  testEvent = {
-    category: {
-      key: 'event',
-      name: 'Event'
-    },
-    title: 'Rugby World Cup 2023',
-    subTitle: 'Starts on the 8th September',
-    description: 'Are you a rugby enthusiast? Do you love cheering for your favorite teams with a great crowd? Look no ' +
-      'further! **Fullers** is your ultimate destination to witness all the thrilling moments of the **2023 Rugby World Cup**!' +
-      'Watch Every Game LIVE in our bar area',
-    imgPath: '',
-    icon: '',
-    link: '#external-link',
-    dateRange: {
-      start: '',
-      end: ''
-    },
-    marketingRange: {
-      start: '',
-      end: '',
-    },
-    active: true
-  }
-
   events$: Observable<any>;
   eventCategories: Observable<any>;
+  restaurant: Restaurant
 
 
   constructor(
     private dialog: MatDialog,
-    private cms: CMSService
+    private cms: CMSService,
+    private cmsLocal: CmsLocalService
   ) {
 
   }
 
   ngOnInit() {
-    this.events = [this.testEvent];
     this.events$ = of(this.events);
     this.eventCategories = this.cms.eventCategories;
     console.log(this.eventCategories);
     this.events$ = this.cms.events;
-    console.log(this.events$);
+    this.cmsLocal.rest$.subscribe({next: (res) => this.restaurant = res});
   }
 
   addEvent(): void {
@@ -100,7 +79,8 @@ export class CmsEventsComponent implements OnInit {
       data: {
         formLabel: 'EDITING EVENT',
         event: event,
-        categories: this.eventCategories
+        categories: this.eventCategories,
+        restaurant: this.restaurant
       }
     }
     const dialogRef = this.dialog.open(EventFormComponent, dialogConfig);

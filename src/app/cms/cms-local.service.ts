@@ -1,7 +1,7 @@
 import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Restaurant } from '../_models';
-import { Observable, Subject, BehaviorSubject } from 'rxjs';
+import { Observable, Subject, BehaviorSubject, filter } from 'rxjs';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ConfirmCancelComponent } from '../common';
@@ -14,7 +14,11 @@ import { RestaurantService } from '../_services';
 export class CmsLocalService {
 
   private restaurant: Restaurant = new Restaurant();
-  private restaurantSubject: Subject<Restaurant> = new BehaviorSubject<Restaurant>(this.restaurant);
+  private restaurantSubject: Subject<Restaurant> = new BehaviorSubject<Restaurant>(null);
+
+  private restaurant$ = this.restaurantSubject.asObservable().pipe(
+    filter(rest => !!rest)
+  );
 
   // Observable offers
   private offerCount = 0;
@@ -64,6 +68,9 @@ export class CmsLocalService {
   getRestaurant(): Observable<Restaurant> {
     // console.log('cmsLocalService.getRestaurant()', this.subject);
     return this.restaurantSubject.asObservable();
+  }
+  get rest$(): Observable<any> {
+    return this.restaurant$;
   }
 
   dspSnackbar(msg: string, actn: string = '', d: number = 3, style: any = 'info'): void {

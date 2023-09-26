@@ -28,8 +28,9 @@
 
   <mat-dialog-content>
     <div class="rd-card-img">
-      <img [src]="imgUrl" id="eventImage">
-      <rc-image-upload (onImgUploaded)="imageUploadHandler($event)"></rc-image-upload>
+      <img [src]="imgUrl" id="eventImage" alt="Event image">
+      <rc-image-upload (onImgUploaded)="imageUploadHandler($event)"
+                       [restaurant]="restaurant"></rc-image-upload>
     </div>
 
     <form [formGroup]="eventFormGroup" class="rd-grid-form">
@@ -105,6 +106,6 @@
   </mat-dialog-content>
   <mat-dialog-actions class="rc-flex-end">
     <button mat-button mat-dialog-close="false">CANCEL</button>
-    <button mat-button>SAVE</button>
+    <button mat-button (click)="updateEvent()">SAVE</button>
   </mat-dialog-actions>
 </div>
