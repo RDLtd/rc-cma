@@ -98,6 +98,7 @@ import { InitModule } from './init/init.module';
 import { EventFormComponent } from './cms/events/event-form.component';
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
+import { ImageUploadComponent } from './common/images/image-upload.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
@@ -145,7 +146,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     CmsSpwConfigComponent,
     CmsSpwBuilderComponent,
     CmsEventsComponent,
-    EventFormComponent
+    EventFormComponent,
+    ImageUploadComponent
   ],
     imports: [
         AngularMaterialModule,
