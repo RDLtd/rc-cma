@@ -10,10 +10,6 @@
 
   <mat-menu #menu="matMenu">
 
-    <button mat-menu-item (click)="uploadNewImage()">
-      <mat-icon>image</mat-icon>
-      <span>Upload custom image</span>
-    </button>
     <button mat-menu-item>
       <mat-icon>public_off</mat-icon>
       <span>Deactivate this event</span>
@@ -32,7 +28,8 @@
 
   <mat-dialog-content>
     <div class="rd-card-img">
-      <img src="https://ichef.bbci.co.uk/news/976/cpsprodpb/D0F5/production/_130939435_rwccup.jpg.webp">
+      <img [src]="imgUrl" id="eventImage">
+      <rc-image-upload (onImgUploaded)="imageUploadHandler($event)"></rc-image-upload>
     </div>
 
     <form [formGroup]="eventFormGroup" class="rd-grid-form">

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { environment } from '../../../environments/environment';
 
 //declare var cloudinary: any;
 
@@ -7,8 +8,9 @@ import { Component } from '@angular/core';
   templateUrl: './image-upload.component.html'
 })
 export class ImageUploadComponent {
-  cloudName = "hzxyensd5"; // replace with your own cloud name
-  uploadPreset = "aoh4fpwm"; // replace with your own upload preset
+  @Output() onImgUploaded = new EventEmitter<any>();
+  cloudName = environment.cloudinary_name; // replace with your own cloud name
+  uploadPreset = "nozxac7z"; // replace with your own upload preset
   myWidget: any;
 
   // Remove the comments from the code below to add
@@ -24,23 +26,49 @@ export class ImageUploadComponent {
       {
         cloudName: this.cloudName,
         uploadPreset: this.uploadPreset,
-        // cropping: true, //add a cropping step
+        cropping: true, //add a cropping step
         // showAdvancedOptions: true,  //add advanced options (public_id and tag)
-        // sources: [ "local", "url"], // restrict the upload sources to URL and local files
-        // multiple: false,  //restrict upload to a single file
-        // folder: "user_images", //upload files to the specified folder
+        sources: [ "local", "url", "google_drive", "dropbox", "camera"], // restrict the upload sources to URL and local files
+        multiple: false,  //restrict upload to a single file
+        folder: "event_images", //upload files to the specified folder
         // tags: ["users", "profile"], //add the given tags to the uploaded files
         // context: {alt: "user_uploaded"}, //add the given context data to the uploaded files
         // clientAllowedFormats: ["images"], //restrict uploading to image files only
         // maxImageFileSize: 2000000,  //restrict file size to less than 2MB
         // maxImageWidth: 2000, //Scales the image down to a width of 2000 pixels before uploading
-         theme: "red", //change to a purple theme
+        theme: "Custom", //change to a purple theme
+        styles: {
+          palette: {
+            window: "#FFFFFF",
+            sourceBg: "#FFFFFF",
+            windowBorder: "#222F3C",
+            tabIcon: "#04A5C2",
+            inactiveTabIcon: "#222F3C",
+            menuIcons: "#04A5C2",
+            link: "#04A5C2",
+            action: "#5333FF",
+            inProgress: "#04A5C2",
+            complete: "#33ff00",
+            error: "#cc3333",
+            textDark: "#222F3C",
+            textLight: "#ffffff"
+          },
+          fonts: {
+            default: 'Roboto',
+            "sans-serif": {
+              url: null,
+              active: true
+            }
+          }
+        },
+
       },
       (error, result) => {
         if (!error && result && result.event === "success") {
           console.log("Done! Here is the image info: ", result.info);
+          this.onImgUploaded.emit(result.info.secure_url);
           document
-            .getElementById("uploadedimage")
+            .getElementById("eventImage")
             .setAttribute("src", result.info.secure_url);
         }
       }

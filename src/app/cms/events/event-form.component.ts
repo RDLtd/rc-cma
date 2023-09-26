@@ -4,7 +4,6 @@ import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from "@angular/material/dial
 import { Event } from "./cms-events.component";
 import { MatDatepickerInputEvent } from "@angular/material/datepicker";
 import { Observable } from 'rxjs';
-import { ImageComponent } from '../../settings';
 
 @Component({
   selector: 'rc-event-form',
@@ -17,6 +16,7 @@ export class EventFormComponent implements OnInit {
   eventFormGroup: FormGroup;
   event: any;
   categories$: Observable<any>
+  imgUrl = "https://ichef.bbci.co.uk/news/976/cpsprodpb/D0F5/production/_130939435_rwccup.jpg.webp";
 
   formLabel: string;
 
@@ -56,13 +56,9 @@ export class EventFormComponent implements OnInit {
     console.log(control, event);
   }
 
-  uploadNewImage(): void {
-    let dialogConfig = {
-      data: {
-        imageType: 'event'
-      }
-    }
-    const imageUpload = this.dialog.open(ImageComponent, dialogConfig);
+  imageUploadHandler(url: string): void {
+    console.log('Update image to:', url);
+    this.imgUrl = url;
   }
 
 }
