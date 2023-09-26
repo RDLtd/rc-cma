@@ -31,7 +31,6 @@ export class EventFormComponent implements OnInit {
     this.categories$ = this.data.categories;
     this.formLabel = this.data.formLabel;
     this.restaurant = this.data.restaurant;
-
   }
 
   ngOnInit() {
@@ -41,7 +40,7 @@ export class EventFormComponent implements OnInit {
   initEventForm(): void {
     this.eventFormGroup = this.fb.group({
       category: this.event.offer_category,
-      imgPath: this.event.imgPath,
+      image: this.event.image,
       title: this.event.offer_tag,
       subtitle: this.event.offer_strapline,
       description: this.event.offer_text,
@@ -49,7 +48,9 @@ export class EventFormComponent implements OnInit {
       eventStart: this.event.offer_from,
       eventEnd: this.event.offer_to,
       marketingStart: this.event.offer_marketed_from,
-      marketingEnd: this.event.offer_marketed_to
+      marketingEnd: this.event.offer_marketed_to,
+      channel: this.event.offer_channel_id,
+      id: this.event.offer_id
     });
   }
 
@@ -59,12 +60,32 @@ export class EventFormComponent implements OnInit {
 
   imageUploadHandler(url: string): void {
     console.log('Update image to:', url);
-    this.eventFormGroup.patchValue({imgPath: url})
+    this.eventFormGroup.patchValue({image: url});
     this.imgUrl = url;
   }
 
   updateEvent(): void {
-    console.log(this.eventFormGroup.value);
+    const event = this.mapEventOffer();
+    this.dialogRef.close(event);
+    //console.log(this.eventFormGroup.value);
+  }
+
+  mapEventOffer(): Object {
+    let c = this.eventFormGroup.controls;
+    return {
+      offer_id: c.id.value,
+      offer_channel_id: c.channel.value,
+      offer_updated: '',
+      offer_category: c.category.value,
+      offer_tag: c.title.value,
+      offer_strapline: c.subtitle.value,
+      offer_text: c.description.value,
+      offer_link: c.link.value,
+      offer_from: c.eventStart.value,
+      offer_to: c.eventEnd.value,
+      offer_marketed_from: c.marketingStart.value,
+      offer_marketed_to: c.marketingEnd.value,
+    };
   }
 
 }

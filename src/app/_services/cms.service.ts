@@ -3,10 +3,9 @@ import { CMSElement, CMSTime, CMSDescription, CMSDish, CMSSection } from '../_mo
 import { Member } from '../_models';
 import { Restaurant } from '../_models';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, filter, lastValueFrom, Observable } from 'rxjs';
+import { lastValueFrom } from 'rxjs';
 import { StorageService } from './storage.service';
 import { Brand, ConfigService } from '../init/config.service';
-import { map } from 'rxjs/operators';
 
 @Injectable()
 
@@ -15,15 +14,7 @@ export class CMSService {
   authToken;
   brand: Brand;
   brand$;
-  eventCatSub = new BehaviorSubject<any>(null);
-  eventCat$ = this.eventCatSub.asObservable().pipe(
-    filter (cat => !!cat),
-    map(categories => categories?.offer_categories)
-  );
-  eventsSub = new BehaviorSubject<any>([]);
-  events$ = this.eventsSub.asObservable().pipe(
-    map( events => events?.offers)
-  );
+
 
   constructor(
     private http: HttpClient,
@@ -32,49 +23,8 @@ export class CMSService {
     this.authToken = config.token;
     this.config.brand.subscribe(obj => this.brand = obj);
     this.brand$ = this.config.brand;
-    this.getEventCategories();
-    this.getEvents();
+
   }
-
-
-
-  getEventCategories(): void {
-    this.http.post(this.config.apiUrl + '/offers/getoffercategories',
-      {
-        userCode: this.config.userAPICode,
-        token: this.config.token,
-        brand: this.brand.prefix
-      }).subscribe({
-      next: (categories) => {
-        console.log(categories);
-        this.eventCatSub.next(categories);
-      }
-    });
-  }
-
-  get eventCategories(): Observable<any> {
-    return this.eventCat$;
-  }
-
-  getEvents(): void {
-    this.http.post(this.config.apiUrl + '/offers/getoffers',
-      {
-        company: this.brand.prefix,
-        userCode: this.config.userAPICode,
-        token: this.config.token
-      }).subscribe({
-
-      next: (events) => {
-        console.log(events);
-        this.eventsSub.next(events);
-      }
-    });
-  }
-
-  get events(): Observable<any> {
-    return this.events$
-  }
-
   // apptiser domain from S3 bucket string
   getApptiserUrl(url: string, isProduction = false): string {
     if (url === undefined || url === null || url === 'undefined' || url === 'null') {

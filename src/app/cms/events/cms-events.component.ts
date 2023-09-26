@@ -5,6 +5,7 @@ import { EventFormComponent } from './event-form.component';
 import { CMSService } from '../../_services';
 import { CmsLocalService } from '../cms-local.service';
 import { Restaurant } from '../../_models';
+import { EventService } from './event.service';
 
 export interface Event {
   category: {
@@ -44,16 +45,18 @@ export class CmsEventsComponent implements OnInit {
   constructor(
     private dialog: MatDialog,
     private cms: CMSService,
-    private cmsLocal: CmsLocalService
+    private cmsLocal: CmsLocalService,
+    private eventService: EventService
   ) {
 
   }
 
   ngOnInit() {
+
     this.events$ = of(this.events);
-    this.eventCategories = this.cms.eventCategories;
+    this.eventCategories = this.eventService.eventCategories;
     console.log(this.eventCategories);
-    this.events$ = this.cms.events;
+    this.events$ = this.eventService.events;
     this.cmsLocal.rest$.subscribe({next: (res) => this.restaurant = res});
   }
 
@@ -67,8 +70,8 @@ export class CmsEventsComponent implements OnInit {
       }
     };
     const dialogRef = this.dialog.open(EventFormComponent, dialogConfig);
-    dialogRef.afterClosed().subscribe((obj) => {
-      console.log(obj);
+    dialogRef.afterClosed().subscribe((event) => {
+      console.log(event);
     });
   }
 
@@ -84,11 +87,19 @@ export class CmsEventsComponent implements OnInit {
       }
     }
     const dialogRef = this.dialog.open(EventFormComponent, dialogConfig);
-    dialogRef.afterClosed().subscribe((obj) => {
-      console.log(obj);
+    dialogRef.afterClosed().subscribe((event) => {
+      if (!event) { return false; }
+      this.eventService.updateEvent(event).subscribe({
+        next: (res) => {
+          console.log(res);
+          this.eventService.getEvents();
+        }
+      });
+      console.log(event);
     });
   }
   deleteEvent(): void {
 
   }
+
 }
