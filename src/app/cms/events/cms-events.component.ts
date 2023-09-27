@@ -9,8 +9,11 @@ import { EventService } from './event.service';
 
 export interface Event {
   category: {
-    key: string,
-    name: string
+    data: {
+      image: string;
+      icon: string;
+      text: string;
+    }
   };
   title: string;
   subTitle: string;
@@ -69,10 +72,14 @@ export class CmsEventsComponent implements OnInit {
     dialogConfig = {
       disableClose: true,
       data: {
-        formLabel: 'CREATE NEW EVENT',
-        event: {},
         categories: this.eventCategories,
-        restaurant: this.restaurant
+        formLabel: 'CREATE NEW EVENT',
+        restaurant: this.restaurant,
+        event: {
+          offer_category: {
+            data: null
+          }
+        }
       }
     };
     const dialogRef = this.dialog.open(EventFormComponent, dialogConfig);

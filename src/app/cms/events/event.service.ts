@@ -3,7 +3,6 @@ import { Brand, ConfigService } from '../../init/config.service';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, filter, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { CMSService, RestaurantService } from '../../_services';
 import { CmsLocalService } from '../cms-local.service';
 
 @Injectable({
@@ -55,20 +54,6 @@ export class EventService {
     return this.eventCat$;
   }
 
-  getEvents(): void {
-    this.http.post(this.config.apiUrl + '/offers/getoffersbyrestaurant',
-      {
-        company: this.brand.prefix,
-        userCode: this.config.userAPICode,
-        token: this.config.token
-      }).subscribe({
-
-      next: (events) => {
-        console.log(events);
-        this.eventsSub.next(events);
-      }
-    });
-  }
   fetchRestaurantEvents(restNumber: string): void {
       this.http.post(this.config.apiUrl + '/offers/getoffersbyrestaurant',
           {

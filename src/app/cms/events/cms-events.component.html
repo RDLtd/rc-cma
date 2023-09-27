@@ -22,7 +22,7 @@
     <ng-container *ngFor="let event of events$ | async">
     <div class="rd-card" (click)="editEvent(event)">
       <div class="rd-card-image">
-        <img src="https://ichef.bbci.co.uk/news/976/cpsprodpb/D0F5/production/_130939435_rwccup.jpg.webp" alt="">
+        <img [src]="event.offer_image" alt="">
       </div>
       <div class="rd-card-content">
         <h2>{{ event.offer_tag }}</h2>

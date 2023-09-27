@@ -17,7 +17,8 @@ export class EventFormComponent implements OnInit {
   event: any;
   categories$: Observable<any>;
   restaurant: any;
-  imgUrl = "https://ichef.bbci.co.uk/news/976/cpsprodpb/D0F5/production/_130939435_rwccup.jpg.webp";
+  imgUrl = null;
+  selectedCategory = null;
 
   formLabel: string;
 
@@ -39,9 +40,10 @@ export class EventFormComponent implements OnInit {
   }
 
   initEventForm(): void {
+    console.log('here');
     this.eventFormGroup = this.fb.group({
-      category: [this.event.offer_category, [Validators.required]],
-      image: this.event.image,
+      category: [this.event.offer_category.data, [Validators.required]],
+      image: [this.event.offer_image],
       title: [this.event.offer_tag, [Validators.required]],
       subtitle: this.event.offer_strapline,
       description: [this.event.offer_text, [Validators.required]],
@@ -53,6 +55,14 @@ export class EventFormComponent implements OnInit {
       channel: this.event.offer_channel_id,
       id: this.event.offer_id
     });
+    // If no event category has been selected, or this is a new event
+    // set a default category
+    if (this.event.offer_category.data === undefined) {
+      this.categories$.subscribe((cat) => {
+        this.eventFormGroup.patchValue({category: cat[0].data});
+        this.imgUrl = cat[0].data.image;
+      });
+    }
   }
 
   addEventDate(control: string, event: MatDatepickerInputEvent<Date>): void {
@@ -63,6 +73,23 @@ export class EventFormComponent implements OnInit {
     console.log('Update image to:', url);
     this.eventFormGroup.patchValue({image: url});
     this.imgUrl = url;
+  }
+
+  updateEventImage(): void {
+    this.selectedCategory = this.eventFormGroup.controls.category.value;
+    console.log(this.selectedCategory['image']);
+    console.log(this.eventFormGroup.controls.image.value);
+
+
+
+    this.imgUrl = this.selectedCategory['image'];
+
+    //const currentImage = this.eventFormGroup.controls.image;
+
+
+    //this.eventFormGroup.controls.image.setValue(this.imgUrl);
+
+
   }
 
   updateEvent(): void {
@@ -90,6 +117,7 @@ export class EventFormComponent implements OnInit {
       offer_channel_id: c.channel.value,
       offer_updated: '',
       offer_category: c.category.value,
+      offer_image: c.image.value,
       offer_tag: c.title.value,
       offer_strapline: c.subtitle.value,
       offer_text: c.description.value,

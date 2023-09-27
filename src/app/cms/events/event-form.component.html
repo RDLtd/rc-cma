@@ -27,7 +27,7 @@
 
 
   <mat-dialog-content>
-    <div class="rd-card-img">
+    <div class="rd-card-img" *ngIf="!!imgUrl">
       <img [src]="imgUrl" id="eventImage" alt="Event image">
       <rc-image-upload (onImgUploaded)="imageUploadHandler($event)"
                        [restaurant]="restaurant"></rc-image-upload>
@@ -36,8 +36,10 @@
     <form [formGroup]="eventFormGroup" class="rd-grid-form">
       <mat-form-field>
         <mat-label>Event category</mat-label>
-        <mat-select formControlName="category" placeholder="Select a category">
-          <mat-option *ngFor="let category of categories$ | async" [value]="category">
+        <mat-select formControlName="category"
+                    placeholder="Select a category"
+                    (selectionChange)="updateEventImage()">
+          <mat-option *ngFor="let category of categories$ | async" [value]="category.data" >
             {{ category.data.text }}
           </mat-option>
         </mat-select>
