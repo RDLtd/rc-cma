@@ -102,6 +102,7 @@ export class CmsEventsComponent implements OnInit {
     const dialogRef = this.dialog.open(EventFormComponent, dialogConfig);
     dialogRef.afterClosed().subscribe((event) => {
       if (!event) { return false; }
+      console.log(event);
       this.eventService.updateEvent(event).subscribe({
         next: (res) => {
           console.log(res);

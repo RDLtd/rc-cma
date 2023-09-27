@@ -28,7 +28,6 @@ export class EventFormComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private fb: FormBuilder
   ) {
-    console.log(this.data);
     this.event = this.data.event;
     this.categories$ = this.data.categories;
     this.formLabel = this.data.formLabel;
@@ -36,11 +35,13 @@ export class EventFormComponent implements OnInit {
   }
 
   ngOnInit() {
+
     this.initEventForm();
   }
 
   initEventForm(): void {
-    console.log('here');
+    console.log('initEventForm', this.event);
+    //this.imgUrl = this.event.offer_image;
     this.eventFormGroup = this.fb.group({
       category: [this.event.offer_category.data, [Validators.required]],
       image: [this.event.offer_image],
@@ -57,11 +58,14 @@ export class EventFormComponent implements OnInit {
     });
     // If no event category has been selected, or this is a new event
     // set a default category
-    if (this.event.offer_category.data === undefined) {
+    if (this.event.offer_image === undefined) {
+      console.log('Undefined category', this.event.offer_category.data);
       this.categories$.subscribe((cat) => {
         this.eventFormGroup.patchValue({category: cat[0].data});
         this.imgUrl = cat[0].data.image;
       });
+    } else {
+      this.imgUrl = this.event.offer_image;
     }
   }
 
@@ -83,13 +87,7 @@ export class EventFormComponent implements OnInit {
 
 
     this.imgUrl = this.selectedCategory['image'];
-
-    //const currentImage = this.eventFormGroup.controls.image;
-
-
-    //this.eventFormGroup.controls.image.setValue(this.imgUrl);
-
-
+    this.eventFormGroup.patchValue({image: this.imgUrl});
   }
 
   updateEvent(): void {

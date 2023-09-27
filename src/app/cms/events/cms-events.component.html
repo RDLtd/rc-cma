@@ -22,7 +22,7 @@
     <ng-container *ngFor="let event of events$ | async">
     <div class="rd-card" (click)="editEvent(event)">
       <div class="rd-card-image">
-        <img [src]="event.offer_image" alt="">
+        <img [src]="event.offer_image" [alt]="event.offer_tag">
       </div>
       <div class="rd-card-content">
         <h2>{{ event.offer_tag }}</h2>
@@ -30,7 +30,7 @@
         <markdown>
           {{ event.offer_text }}
         </markdown>
-        <a [href]="event.offer_link" target="_blank">More information</a>
+        <a *ngIf="!!event.offer_link" [href]="event.offer_link" target="_blank">More information</a>
       </div>
     </div>
     </ng-container>
