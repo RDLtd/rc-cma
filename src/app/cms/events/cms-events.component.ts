@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { EventFormComponent } from './event-form.component';
 import { CMSService } from '../../_services';
@@ -52,12 +52,16 @@ export class CmsEventsComponent implements OnInit {
   }
 
   ngOnInit() {
-
-    this.events$ = of(this.events);
     this.eventCategories = this.eventService.eventCategories;
     console.log(this.eventCategories);
     this.events$ = this.eventService.events;
-    this.cmsLocal.rest$.subscribe({next: (res) => this.restaurant = res});
+    this.cmsLocal.rest$.subscribe({
+        next: (res) => {
+          this.restaurant = res;
+          this.eventService.fetchRestaurantEvents(this.restaurant.restaurant_number);
+        },
+        error: (err) => console.log(err)
+    });
   }
 
   addEvent(): void {

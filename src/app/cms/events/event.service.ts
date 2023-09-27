@@ -28,7 +28,7 @@ export class EventService {
       next: (brand) => this.brand = brand
     });
     this.getEventCategories();
-    this.getEvents();
+
   }
 
   getEventCategories(): void {
@@ -62,6 +62,21 @@ export class EventService {
       }
     });
   }
+  fetchRestaurantEvents(restNumber: string): void {
+      this.http.post(this.config.apiUrl + '/offers/getoffersbyrestaurant',
+          {
+              company: this.brand.prefix,
+              userCode: this.config.userAPICode,
+              token: this.config.token,
+              restaurant_number: restNumber
+          }).subscribe({
+            next: (events) => {
+                console.log(events);
+                this.eventsSub.next(events);
+            }
+          });
+  }
+
 
   get events(): Observable<any> {
     return this.events$

@@ -7,8 +7,9 @@ import { ConfigService } from '../init/config.service';
 
 export class RestaurantService {
 
-  private readonly authToken;
-  private brand;
+  private readonly authToken: any;
+  private brand: any;
+
 
   constructor(
     private http: HttpClient,

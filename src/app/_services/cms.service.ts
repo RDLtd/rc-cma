@@ -2,8 +2,8 @@
 import { CMSElement, CMSTime, CMSDescription, CMSDish, CMSSection } from '../_models';
 import { Member } from '../_models';
 import { Restaurant } from '../_models';
-import { HttpClient } from '@angular/common/http';
-import { lastValueFrom } from 'rxjs';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { lastValueFrom, Observable } from 'rxjs';
 import { StorageService } from './storage.service';
 import { Brand, ConfigService } from '../init/config.service';
 
@@ -11,9 +11,9 @@ import { Brand, ConfigService } from '../init/config.service';
 
 export class CMSService {
 
-  authToken;
-  brand: Brand;
-  brand$;
+    authToken: Observable<HttpParams>;
+    brand: Brand;
+    brand$: Observable<Brand>;
 
 
   constructor(
