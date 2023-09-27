@@ -1,8 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from "@angular/material/dialog";
 import { MatDatepickerInputEvent } from "@angular/material/datepicker";
 import { Observable } from 'rxjs';
+import { ConfirmCancelComponent } from '../../common';
 
 @Component({
   selector: 'rc-event-form',
@@ -39,16 +40,16 @@ export class EventFormComponent implements OnInit {
 
   initEventForm(): void {
     this.eventFormGroup = this.fb.group({
-      category: this.event.offer_category,
+      category: [this.event.offer_category, [Validators.required]],
       image: this.event.image,
-      title: this.event.offer_tag,
+      title: [this.event.offer_tag, [Validators.required]],
       subtitle: this.event.offer_strapline,
-      description: this.event.offer_text,
+      description: [this.event.offer_text, [Validators.required]],
       link: this.event.offer_link,
-      eventStart: this.event.offer_from,
-      eventEnd: this.event.offer_to,
-      marketingStart: this.event.offer_marketed_from,
-      marketingEnd: this.event.offer_marketed_to,
+      eventStart: [this.event.offer_from, [Validators.required]],
+      eventEnd: [this.event.offer_to, [Validators.required]],
+      marketingStart: [this.event.offer_marketed_from, [Validators.required]],
+      marketingEnd: [this.event.offer_marketed_to, [Validators.required]],
       channel: this.event.offer_channel_id,
       id: this.event.offer_id
     });
@@ -67,7 +68,19 @@ export class EventFormComponent implements OnInit {
   updateEvent(): void {
     const event = this.mapEventOffer();
     this.dialogRef.close(event);
-    //console.log(this.eventFormGroup.value);
+    console.log(this.eventFormGroup.valid);
+  }
+
+  deleteEvent(): void {
+    const dialogRef = this.dialog.open(ConfirmCancelComponent, {
+      data: {
+        body:
+          "You are about to permanently DELETE this event, are you sure you want to continue?"
+      }
+    });
+    dialogRef.afterClosed().subscribe(confirmed => {
+      console.log(`Delete: ${confirmed}`);
+    });
   }
 
   mapEventOffer(): Object {

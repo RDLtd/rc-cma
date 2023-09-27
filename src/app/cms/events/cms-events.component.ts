@@ -67,10 +67,12 @@ export class CmsEventsComponent implements OnInit {
   addEvent(): void {
     let dialogConfig;
     dialogConfig = {
+      disableClose: true,
       data: {
-        formLabel: 'NEW EVENT',
+        formLabel: 'CREATE NEW EVENT',
         event: {},
-        categories: this.eventCategories
+        categories: this.eventCategories,
+        restaurant: this.restaurant
       }
     };
     const dialogRef = this.dialog.open(EventFormComponent, dialogConfig);
@@ -96,7 +98,7 @@ export class CmsEventsComponent implements OnInit {
       this.eventService.updateEvent(event).subscribe({
         next: (res) => {
           console.log(res);
-          this.eventService.getEvents();
+          this.eventService.fetchRestaurantEvents(this.restaurant.restaurant_number);
         }
       });
       console.log(event);

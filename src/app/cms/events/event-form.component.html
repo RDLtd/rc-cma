@@ -18,7 +18,7 @@
       <mat-icon>control_point_duplicate</mat-icon>
       <span>Clone this event</span>
     </button>
-    <button mat-menu-item>
+    <button mat-menu-item (click)="deleteEvent()">
       <mat-icon>delete</mat-icon>
       <span>Delete this event</span>
     </button>
@@ -106,6 +106,6 @@
   </mat-dialog-content>
   <mat-dialog-actions class="rc-flex-end">
     <button mat-button [mat-dialog-close]="null">CANCEL</button>
-    <button mat-button (click)="updateEvent()">SAVE</button>
+    <button mat-button (click)="updateEvent()" [disabled]="!eventFormGroup.valid">SAVE</button>
   </mat-dialog-actions>
 </div>
