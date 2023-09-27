@@ -92,7 +92,7 @@ export class EventFormComponent implements OnInit {
 
   updateEvent(): void {
     const event = this.mapEventOffer();
-    this.dialogRef.close(event);
+    this.dialogRef.close({ action: 'update', data: event });
     console.log(this.eventFormGroup.valid);
   }
 
@@ -105,6 +105,8 @@ export class EventFormComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(confirmed => {
       console.log(`Delete: ${confirmed}`);
+      if(!confirmed) { return; }
+      this.dialogRef.close({ action: 'delete', data: this.event.offer_id });
     });
   }
 

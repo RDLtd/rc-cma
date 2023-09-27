@@ -100,19 +100,32 @@ export class CmsEventsComponent implements OnInit {
       }
     }
     const dialogRef = this.dialog.open(EventFormComponent, dialogConfig);
-    dialogRef.afterClosed().subscribe((event) => {
-      if (!event) { return false; }
-      console.log(event);
-      this.eventService.updateEvent(event).subscribe({
-        next: (res) => {
-          console.log(res);
-          this.eventService.fetchRestaurantEvents(this.restaurant.restaurant_number);
+    dialogRef.afterClosed().subscribe((obj) => {
+      if (!obj) { return false; }
+      console.log(obj);
+      switch (obj.action) {
+        case 'update': {
+          this.eventService.updateEvent(obj.data).subscribe({
+            next: (res) => {
+              console.log(res);
+              this.eventService.fetchRestaurantEvents(this.restaurant.restaurant_number);
+            },
+            error: (e) => console.log(e)
+          });
+          break;
         }
-      });
+        case 'delete': {
+          console.log(`Delete offer ${obj.data} from restaurant ${this.restaurant.restaurant_number}`)
+          //this.eventService.deleteEvent(obj.data, this.restaurant.restaurant_number);
+          this.eventService.fetchRestaurantEvents(this.restaurant.restaurant_number);
+          break;
+        }
+      }
+
       console.log(event);
     });
   }
-  deleteEvent(): void {
+  deleteEvent(id: number): void {
 
   }
 

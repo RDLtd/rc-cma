@@ -36,7 +36,7 @@ export class EventService {
   }
 
   getEventCategories(): void {
-    console.log(this.cms.restaurantNumber);
+
     this.http.post(this.config.apiUrl + '/offers/getoffercategories',
       {
         userCode: this.config.userAPICode,
@@ -87,12 +87,32 @@ export class EventService {
       });
   }
 
-  deleteEvent(): void {
-
+  deleteEvent(offer_id: number, restNumber: string): void {
+    this.http.post(this.config.apiUrl + '/offers/deleteoffer',
+      {
+        offer_id,
+        userCode: this.config.userAPICode,
+        token: this.config.token
+      }).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.fetchRestaurantEvents(restNumber);
+      }
+    });
   }
 
-  createEvent(): void {
-
+  createEvent(offer): void {
+    this.http.post(this.config.apiUrl + '/offers/getoffersbyrestaurant',
+      {
+        company: this.brand.prefix,
+        userCode: this.config.userAPICode,
+        token: this.config.token
+      }).subscribe({
+      next: (events) => {
+        console.log(events);
+        this.eventsSub.next(events);
+      }
+    });
   }
 
 

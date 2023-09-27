@@ -215,4 +215,14 @@
   background-color: #eee;
   padding: 1rem;
 }
+.rd-dialog-events {
+  .mdc-dialog__title::before {
+    height: 0 !important;
+  }
+  .mdc-dialog__content {
+      padding-top: 0 !important;
+    }
+
+}
+
 
