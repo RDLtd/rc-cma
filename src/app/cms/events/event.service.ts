@@ -13,7 +13,7 @@ export class EventService {
   eventCatSub = new BehaviorSubject<any>(null);
   eventCat$ = this.eventCatSub.asObservable().pipe(
     filter (cat => !!cat),
-    map(categories => categories?.offer_categories)
+    //map(categories => categories?.offer_categories)
   );
   eventsSub = new BehaviorSubject<any>([]);
   events$ = this.eventsSub.asObservable().pipe(
@@ -45,22 +45,37 @@ export class EventService {
         restaurant_number: this.cms.restaurantNumber
       }).subscribe({
       next: (categories) => {
-        console.log(categories);
-        this.eventCatSub.next(categories);
+        const cats = this.catsRestructured(categories['offer_categories']);
+        this.eventCatSub.next(cats);
       }
     });
   }
+
+  catsRestructured(categories): any[] {
+    const cats = [];
+    categories.forEach((cat) => {
+      let obj = {
+        id: cat.key,
+        label: cat.data.text,
+        image: cat.data.image,
+        icon: cat.data.icon
+      }
+      cats.push(obj);
+    });
+    return cats;
+  }
+
   get eventCategories(): Observable<any> {
     return this.eventCat$;
   }
 
-  fetchRestaurantEvents(restNumber: string): void {
+  fetchRestaurantEvents(restaurant_number: string): void {
       this.http.post(this.config.apiUrl + '/offers/getoffersbyrestaurant',
           {
               company: this.brand.prefix,
               userCode: this.config.userAPICode,
               token: this.config.token,
-              restaurant_number: restNumber
+              restaurant_number
           }).subscribe({
             next: (events) => {
                 console.log(events);
@@ -77,6 +92,8 @@ export class EventService {
   // set event(event) {
   //   this.eventCatSub.next(event);
   // }
+
+
 
   updateEvent(offer): Observable<any> {
     return this.http.post(this.config.apiUrl + '/offers/updateoffer',

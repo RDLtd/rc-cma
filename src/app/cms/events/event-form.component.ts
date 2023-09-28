@@ -18,7 +18,7 @@ export class EventFormComponent implements OnInit {
   categories$: Observable<any>;
   restaurant: any;
   imgUrl = null;
-  selectedCategory = null;
+  offerCategory = null;
 
   formLabel: string;
 
@@ -37,13 +37,18 @@ export class EventFormComponent implements OnInit {
   ngOnInit() {
 
     this.initEventForm();
+
   }
 
   initEventForm(): void {
     console.log('initEventForm', this.event);
     //this.imgUrl = this.event.offer_image;
+
+    this.offerCategory = this.event.offer_category;
+
     this.eventFormGroup = this.fb.group({
-      category: [this.event.offer_category.data, [Validators.required]],
+      category: [this.event.offer_category, [Validators.required]],
+      catKey: [this.event.offer_key],
       image: [this.event.offer_image],
       title: [this.event.offer_tag, [Validators.required]],
       subtitle: this.event.offer_strapline,
@@ -59,10 +64,10 @@ export class EventFormComponent implements OnInit {
     // If no event category has been selected, or this is a new event
     // set a default category
     if (this.event.offer_image === undefined) {
-      console.log('Undefined category', this.event.offer_category.data);
+      console.log('Undefined category', this.event.offer_category);
       this.categories$.subscribe((cat) => {
-        this.eventFormGroup.patchValue({category: cat[0].data});
-        this.imgUrl = cat[0].data.image;
+        this.eventFormGroup.patchValue({category: cat[0]});
+        this.imgUrl = cat[0].image;
       });
     } else {
       this.imgUrl = this.event.offer_image;
@@ -73,27 +78,66 @@ export class EventFormComponent implements OnInit {
     console.log(control, event);
   }
 
+  deleteCustomImage(): void {
+    console.log('Revert to default image');
+    const catId = this.event.offer_key;
+    this.categories$.subscribe({
+      next: (cats) => {
+        let defaultCategory = cats.find(elem => elem.id === catId);
+        console.log(catId, defaultCategory);
+        this.eventFormGroup.patchValue({ category: defaultCategory });
+        this.eventFormGroup.patchValue({ image: defaultCategory.image });
+        this.imgUrl = defaultCategory.image;
+      }
+    });
+  }
+
   imageUploadHandler(url: string): void {
     console.log('Update image to:', url);
+    let obj = Object.assign(this.eventFormGroup.controls.category.value, {image: 'custom'});
+    console.log(obj);
+    this.eventFormGroup.patchValue({category: obj});
     this.eventFormGroup.patchValue({image: url});
     this.imgUrl = url;
   }
 
-  updateEventImage(): void {
-    this.selectedCategory = this.eventFormGroup.controls.category.value;
-    console.log(this.selectedCategory['image']);
-    console.log(this.eventFormGroup.controls.image.value);
-
-
-
-    this.imgUrl = this.selectedCategory['image'];
+  updateEventCategory(): void {
+    console.log('loaded', this.offerCategory);
+    console.log('now',this.eventFormGroup.controls.category.value);
+    // If this event has had a custom image loaded
+    // don't replace it.
+    if(this.offerCategory.image === 'custom'){
+      return;
+    }
+    this.imgUrl = this.eventFormGroup.controls.category.value.image;
     this.eventFormGroup.patchValue({image: this.imgUrl});
+    this.eventFormGroup.patchValue({ catKey: this.eventFormGroup.controls.category.value.id})
   }
 
   updateEvent(): void {
     const event = this.mapEventOffer();
     this.dialogRef.close({ action: 'update', data: event });
     console.log(this.eventFormGroup.valid);
+  }
+
+  // Automatically set the marketing end date to now
+  // and update the event.
+  deactivateEvent(): void {
+    const dialogRef = this.dialog.open(ConfirmCancelComponent, {
+      data: {
+        title: "Are you sure?",
+        body:
+          "Once you deactivate this event it will no longer be visible on" +
+          "your website, or via the Apptiser Network." +
+          "You can reactivate at anytime by editing your Marketing Dates."
+      }
+    });
+    dialogRef.afterClosed().subscribe(confirmed => {
+      console.log(`Deactivate: ${confirmed}`);
+      if(!confirmed) { return; }
+      this.eventFormGroup.patchValue({ marketingEnd: new Date().toUTCString()});
+      this.updateEvent();
+    });
   }
 
   deleteEvent(): void {
@@ -115,6 +159,7 @@ export class EventFormComponent implements OnInit {
     return {
       offer_id: c.id.value,
       offer_channel_id: c.channel.value,
+      offer_key: c.catKey.value,
       offer_updated: '',
       offer_category: c.category.value,
       offer_image: c.image.value,

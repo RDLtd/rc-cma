@@ -10,14 +10,16 @@
 
   <mat-menu #menu="matMenu">
 
-    <button mat-menu-item>
+    <button mat-menu-item (click)="deleteCustomImage()">
+      <mat-icon>image</mat-icon>
+      <span>Revert to default image</span>
+    </button>
+
+    <button mat-menu-item (click)="deactivateEvent()">
       <mat-icon>public_off</mat-icon>
       <span>Deactivate this event</span>
     </button>
-    <button mat-menu-item>
-      <mat-icon>control_point_duplicate</mat-icon>
-      <span>Clone this event</span>
-    </button>
+
     <button mat-menu-item (click)="deleteEvent()">
       <mat-icon>delete</mat-icon>
       <span>Delete this event</span>
@@ -38,12 +40,13 @@
         <mat-label>Event category</mat-label>
         <mat-select formControlName="category"
                     placeholder="Select a category"
-                    (selectionChange)="updateEventImage()">
-          <mat-option *ngFor="let category of categories$ | async" [value]="category.data" >
-            {{ category.data.text }}
+                    (selectionChange)="updateEventCategory()">
+          <mat-option *ngFor="let category of categories$ | async" [value]="category" >
+            {{ category.label }}
           </mat-option>
         </mat-select>
       </mat-form-field>
+
       <mat-form-field class="span-cols">
         <mat-label>Title</mat-label>
         <input matInput formControlName="title" />
