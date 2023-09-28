@@ -4,6 +4,8 @@ import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from "@angular/material/dial
 import { MatDatepickerInputEvent } from "@angular/material/datepicker";
 import { Observable } from 'rxjs';
 import { ConfirmCancelComponent } from '../../common';
+import { EventService } from './event.service';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'rc-event-form',
@@ -15,39 +17,71 @@ export class EventFormComponent implements OnInit {
 
   eventFormGroup: FormGroup;
   event: any;
+  isNewEvent: boolean | null;
   categories$: Observable<any>;
   restaurant: any;
   imgUrl = null;
   offerCategory = null;
-
   formLabel: string;
+  arrCategories: any[];
+
 
   constructor(
     private dialog: MatDialog,
     public dialogRef: MatDialogRef<EventFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private eventService: EventService
   ) {
     this.event = this.data.event;
     this.categories$ = this.data.categories;
     this.formLabel = this.data.formLabel;
     this.restaurant = this.data.restaurant;
+    this.isNewEvent = this.data.new ?? false;
   }
 
   ngOnInit() {
 
+    console.log('New Event', this.isNewEvent);
+
+    this.arrCategories = this.eventService.getEventsArr();
+
+    if (this.isNewEvent) {
+      const dfCat = this.arrCategories[0];
+      this.event = Object.assign(this.event, {
+        offer_category: dfCat,
+        offer_key: dfCat.id,
+        offer_image: dfCat.image
+      });
+      // this.categories$.subscribe((catsObj) => {
+      //   console.log(catsObj[0]);
+      //   const dfCat = catsObj[0];
+      //   this.event = Object.assign(this.event, {
+      //     offer_category: dfCat,
+      //     offer_key: dfCat.id,
+      //     offer_image: dfCat.image
+      //   });
+      // });
+    }
+    // console.log(this.event);
     this.initEventForm();
 
   }
 
   initEventForm(): void {
+
     console.log('initEventForm', this.event);
-    //this.imgUrl = this.event.offer_image;
 
     this.offerCategory = this.event.offer_category;
 
+    this.offerCategory = this.arrCategories.find( cat => {
+      return cat.id === this.event.offer_key;
+    });
+
+    console.log('?', this.offerCategory);
+
     this.eventFormGroup = this.fb.group({
-      category: [this.event.offer_category, [Validators.required]],
+      category: [this.event.offer_category.id, [Validators.required]],
       catKey: [this.event.offer_key],
       image: [this.event.offer_image],
       title: [this.event.offer_tag, [Validators.required]],
@@ -75,7 +109,11 @@ export class EventFormComponent implements OnInit {
   }
 
   addEventDate(control: string, event: MatDatepickerInputEvent<Date>): void {
-    console.log(control, event);
+    //console.log(control, event);
+    // console.log(event.targetElement);
+    const inDate = event.value || 0;
+    this.eventFormGroup.controls[control]
+      .patchValue(formatDate(inDate, 'yyyy-MM-dd', 'en-GB'));
   }
 
   deleteCustomImage(): void {
@@ -101,14 +139,28 @@ export class EventFormComponent implements OnInit {
     this.imgUrl = url;
   }
 
-  updateEventCategory(): void {
+  updateEventCategory(e): void {
+
+    const id = e.value;
+    const selectedCategory = this.arrCategories.find(elem => elem.id === id);
+    this.eventFormGroup.patchValue({ catKey: id });
+    // Image
+
+
+
+    console.log('CAT', selectedCategory);
+
+    this.eventFormGroup.patchValue({ catKey: this.eventFormGroup.controls.category.value});
     console.log('loaded', this.offerCategory);
+
     console.log('now',this.eventFormGroup.controls.category.value);
+
     // If this event has had a custom image loaded
     // don't replace it.
-    if(this.offerCategory.image === 'custom'){
-      return;
-    }
+    if (this.offerCategory.image === 'custom') { return; }
+
+
+
     this.imgUrl = this.eventFormGroup.controls.category.value.image;
     this.eventFormGroup.patchValue({image: this.imgUrl});
     this.eventFormGroup.patchValue({ catKey: this.eventFormGroup.controls.category.value.id})
@@ -154,11 +206,36 @@ export class EventFormComponent implements OnInit {
     });
   }
 
+  createEvent() {
+    const event = this.mapEventOffer();
+    console.log('CREATE', event);
+    this.eventService.createEvent(event).subscribe({
+      next: (obj) => {
+        console.log(obj.offer_id);
+        this.addRestaurantToEvent(obj.offer_id);
+      },
+      error: (err) => console.log('Failed to create offer', err)
+    })
+  }
+
+  addRestaurantToEvent(offer_id: string): void {
+    const restNum = this.restaurant.restaurant_number;
+    console.log('SUBSCRIBE', offer_id, restNum);
+    this.eventService.subscribeToEvent(offer_id, restNum).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.eventService.fetchRestaurantEvents(restNum);
+        this.dialogRef.close({ action: 'create', data: offer_id });
+      },
+      error: (err) => console.log('Failed add restaurant to offer', err)
+    });
+  }
+
   mapEventOffer(): Object {
     let c = this.eventFormGroup.controls;
     return {
       offer_id: c.id.value,
-      offer_channel_id: c.channel.value,
+      offer_channel_id: 0,
       offer_key: c.catKey.value,
       offer_updated: '',
       offer_category: c.category.value,
@@ -173,5 +250,6 @@ export class EventFormComponent implements OnInit {
       offer_marketed_to: c.marketingEnd.value,
     };
   }
+
 
 }

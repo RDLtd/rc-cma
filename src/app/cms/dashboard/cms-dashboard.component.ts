@@ -142,7 +142,7 @@ export class CmsDashboardComponent implements OnInit, AfterViewInit {
       .subscribe({
         next: rest => {
           this.cldImage = null;
-          if (rest.restaurant_id) {
+          if (!!rest) {
             this.restaurant = rest;
             console.log(rest);
             this.getLastUpdated();

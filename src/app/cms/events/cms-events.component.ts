@@ -72,14 +72,11 @@ export class CmsEventsComponent implements OnInit {
     dialogConfig = {
       disableClose: true,
       data: {
+        new: true,
         categories: this.eventCategories,
         formLabel: 'CREATE NEW EVENT',
         restaurant: this.restaurant,
-        event: {
-          offer_category: {
-            data: null
-          }
-        }
+        event: {}
       }
     };
     const dialogRef = this.dialog.open(EventFormComponent, dialogConfig);
@@ -116,7 +113,7 @@ export class CmsEventsComponent implements OnInit {
         }
         case 'delete': {
           console.log(`Delete offer ${obj.data} from restaurant ${this.restaurant.restaurant_number}`)
-          //this.eventService.deleteEvent(obj.data, this.restaurant.restaurant_number);
+          this.eventService.deleteEvent(obj.data, this.restaurant.restaurant_number);
           this.eventService.fetchRestaurantEvents(this.restaurant.restaurant_number);
           break;
         }
@@ -125,8 +122,4 @@ export class CmsEventsComponent implements OnInit {
       console.log(event);
     });
   }
-  deleteEvent(id: number): void {
-
-  }
-
 }

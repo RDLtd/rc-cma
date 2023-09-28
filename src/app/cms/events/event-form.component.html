@@ -40,8 +40,8 @@
         <mat-label>Event category</mat-label>
         <mat-select formControlName="category"
                     placeholder="Select a category"
-                    (selectionChange)="updateEventCategory()">
-          <mat-option *ngFor="let category of categories$ | async" [value]="category" >
+                    (selectionChange)="updateEventCategory($event)">
+          <mat-option *ngFor="let category of arrCategories" [value]="category.id" >
             {{ category.label }}
           </mat-option>
         </mat-select>
@@ -111,6 +111,7 @@
   </mat-dialog-content>
   <mat-dialog-actions class="rc-flex-end">
     <button mat-button [mat-dialog-close]="null">CANCEL</button>
-    <button mat-button (click)="updateEvent()" [disabled]="!eventFormGroup.valid">SAVE</button>
+    <button *ngIf="!isNewEvent" mat-button (click)="updateEvent()" [disabled]="!eventFormGroup.valid">UPDATE</button>
+    <button *ngIf="isNewEvent" mat-button (click)="createEvent()" [disabled]="!eventFormGroup.valid">CREATE</button>
   </mat-dialog-actions>
 </div>

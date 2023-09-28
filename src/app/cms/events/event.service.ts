@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, filter, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { CmsLocalService } from '../cms-local.service';
+import { StorageService } from '../../_services/storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,12 +20,14 @@ export class EventService {
   events$ = this.eventsSub.asObservable().pipe(
     map( events => events?.offers)
   );
-
+  arrCategories: any[];
   brand: Brand;
+  user: any;
   constructor(
     private config: ConfigService,
     private http: HttpClient,
-    private cms: CmsLocalService
+    private cms: CmsLocalService,
+    private storage: StorageService
   ) {
     // Load brand configuration
     this.config.brand$.subscribe({
@@ -32,7 +35,7 @@ export class EventService {
     });
     // Load events and event categories
     this.getEventCategories();
-
+    this.user = storage.get('rd_profile');
   }
 
   getEventCategories(): void {
@@ -46,9 +49,14 @@ export class EventService {
       }).subscribe({
       next: (categories) => {
         const cats = this.catsRestructured(categories['offer_categories']);
+        this.arrCategories = cats;
         this.eventCatSub.next(cats);
       }
     });
+  }
+
+  getEventsArr(): any {
+    return this.arrCategories;
   }
 
   catsRestructured(categories): any[] {
@@ -118,18 +126,29 @@ export class EventService {
     });
   }
 
-  createEvent(offer): void {
-    this.http.post(this.config.apiUrl + '/offers/getoffersbyrestaurant',
+  createEvent(offer): Observable<any> {
+    console.log(offer);
+    return this.http.post(this.config.apiUrl + '/offers/addoffer',
       {
-        company: this.brand.prefix,
+        offer,
         userCode: this.config.userAPICode,
         token: this.config.token
-      }).subscribe({
-      next: (events) => {
-        console.log(events);
-        this.eventsSub.next(events);
-      }
-    });
+      });
+  }
+
+  subscribeToEvent(offer_id, restNum: string): Observable<any> {
+
+    console.log(offer_id, restNum, this.user.member_id);
+
+    return this.http.post(this.config.apiUrl + '/offers/addrestauranttooffer',
+      {
+        offer_id,
+        restaurant_number: restNum,
+        member_id: this.user.member_id,
+        userCode: this.config.userAPICode,
+        token: this.config.token
+      });
+
   }
 
 
