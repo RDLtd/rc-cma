@@ -10,17 +10,19 @@
 
   <mat-menu #menu="matMenu">
 
-    <button mat-menu-item (click)="deleteCustomImage()">
+    <button mat-menu-item
+            [disabled]="event.offer_category.image !== 'custom'"
+            (click)="deleteCustomImage()">
       <mat-icon>image</mat-icon>
       <span>Revert to default image</span>
     </button>
 
-    <button mat-menu-item (click)="deactivateEvent()">
+    <button [disabled]="isNewEvent" mat-menu-item (click)="deactivateEvent()">
       <mat-icon>public_off</mat-icon>
       <span>Deactivate this event</span>
     </button>
 
-    <button mat-menu-item (click)="deleteEvent()">
+    <button [disabled]="isNewEvent" mat-menu-item (click)="deleteEvent()">
       <mat-icon>delete</mat-icon>
       <span>Delete this event</span>
     </button>

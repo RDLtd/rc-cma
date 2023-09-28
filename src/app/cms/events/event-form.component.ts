@@ -21,7 +21,6 @@ export class EventFormComponent implements OnInit {
   categories$: Observable<any>;
   restaurant: any;
   imgUrl = null;
-  offerCategory = null;
   formLabel: string;
   arrCategories: any[];
 
@@ -41,11 +40,8 @@ export class EventFormComponent implements OnInit {
   }
 
   ngOnInit() {
-
     console.log('New Event', this.isNewEvent);
-
     this.arrCategories = this.eventService.getEventsArr();
-
     if (this.isNewEvent) {
       const dfCat = this.arrCategories[0];
       this.event = Object.assign(this.event, {
@@ -53,15 +49,6 @@ export class EventFormComponent implements OnInit {
         offer_key: dfCat.id,
         offer_image: dfCat.image
       });
-      // this.categories$.subscribe((catsObj) => {
-      //   console.log(catsObj[0]);
-      //   const dfCat = catsObj[0];
-      //   this.event = Object.assign(this.event, {
-      //     offer_category: dfCat,
-      //     offer_key: dfCat.id,
-      //     offer_image: dfCat.image
-      //   });
-      // });
     }
     // console.log(this.event);
     this.initEventForm();
@@ -70,15 +57,9 @@ export class EventFormComponent implements OnInit {
 
   initEventForm(): void {
 
-    console.log('initEventForm', this.event);
+    //console.log('initEventForm', this.event);
 
-    this.offerCategory = this.event.offer_category;
-
-    this.offerCategory = this.arrCategories.find( cat => {
-      return cat.id === this.event.offer_key;
-    });
-
-    console.log('?', this.offerCategory);
+    console.log('?', this.event.offer_category);
 
     this.eventFormGroup = this.fb.group({
       category: [this.event.offer_category.id, [Validators.required]],
@@ -99,18 +80,14 @@ export class EventFormComponent implements OnInit {
     // set a default category
     if (this.event.offer_image === undefined) {
       console.log('Undefined category', this.event.offer_category);
-      this.categories$.subscribe((cat) => {
-        this.eventFormGroup.patchValue({category: cat[0]});
-        this.imgUrl = cat[0].image;
-      });
+      this.imgUrl = this.event.offer_category.image;
+      this.eventFormGroup.patchValue({ category: this.imgUrl });
     } else {
       this.imgUrl = this.event.offer_image;
     }
   }
 
   addEventDate(control: string, event: MatDatepickerInputEvent<Date>): void {
-    //console.log(control, event);
-    // console.log(event.targetElement);
     const inDate = event.value || 0;
     this.eventFormGroup.controls[control]
       .patchValue(formatDate(inDate, 'yyyy-MM-dd', 'en-GB'));
@@ -118,52 +95,38 @@ export class EventFormComponent implements OnInit {
 
   deleteCustomImage(): void {
     console.log('Revert to default image');
-    const catId = this.event.offer_key;
-    this.categories$.subscribe({
-      next: (cats) => {
-        let defaultCategory = cats.find(elem => elem.id === catId);
-        console.log(catId, defaultCategory);
-        this.eventFormGroup.patchValue({ category: defaultCategory });
-        this.eventFormGroup.patchValue({ image: defaultCategory.image });
-        this.imgUrl = defaultCategory.image;
-      }
-    });
+    const catId = this.eventFormGroup.controls.catKey.value;
+    const cat = this.arrCategories.find(elem => elem.id === catId);
+    this.imgUrl = cat.image;
+    this.event.offer_category.image = cat.image;
+    this.eventFormGroup.patchValue({ image: cat.image });
   }
 
   imageUploadHandler(url: string): void {
     console.log('Update image to:', url);
-    let obj = Object.assign(this.eventFormGroup.controls.category.value, {image: 'custom'});
-    console.log(obj);
-    this.eventFormGroup.patchValue({category: obj});
+    this.event.offer_category.image = 'custom';
+    // let obj = Object.assign(this.eventFormGroup.controls.category.value, {image: 'custom'});
+    // console.log(obj);
+    // this.eventFormGroup.patchValue({category: obj});
     this.eventFormGroup.patchValue({image: url});
     this.imgUrl = url;
   }
 
   updateEventCategory(e): void {
-
-    const id = e.value;
-    const selectedCategory = this.arrCategories.find(elem => elem.id === id);
-    this.eventFormGroup.patchValue({ catKey: id });
-    // Image
-
-
-
-    console.log('CAT', selectedCategory);
-
-    this.eventFormGroup.patchValue({ catKey: this.eventFormGroup.controls.category.value});
-    console.log('loaded', this.offerCategory);
-
-    console.log('now',this.eventFormGroup.controls.category.value);
-
-    // If this event has had a custom image loaded
-    // don't replace it.
-    if (this.offerCategory.image === 'custom') { return; }
-
-
-
-    this.imgUrl = this.eventFormGroup.controls.category.value.image;
-    this.eventFormGroup.patchValue({image: this.imgUrl});
-    this.eventFormGroup.patchValue({ catKey: this.eventFormGroup.controls.category.value.id})
+    const id = e.value
+    const newCategory = this.arrCategories.find(elem => elem.id === id);
+    // If this event has previously had a custom image loaded
+    // then don't replace it if the event is changed.
+    if (this.event.offer_category.image === 'custom') {
+      console.log('Custom Image');
+      newCategory.image = 'custom'
+      this.imgUrl = this.eventFormGroup.controls.image.value;
+    } else {
+      console.log(newCategory);
+      this.imgUrl = newCategory.image;
+    }
+    this.event.offer_category = newCategory;
+    this.eventFormGroup.patchValue({ image: this.imgUrl});
   }
 
   updateEvent(): void {
@@ -195,10 +158,13 @@ export class EventFormComponent implements OnInit {
   deleteEvent(): void {
     const dialogRef = this.dialog.open(ConfirmCancelComponent, {
       data: {
+        title: 'Please confirm',
         body:
-          "You are about to permanently DELETE this event, are you sure you want to continue?"
+          `You are about to permanently delete **${ this.event.offer_tag }**.\n` +
+          `Are you sure you want to continue?`
       }
     });
+
     dialogRef.afterClosed().subscribe(confirmed => {
       console.log(`Delete: ${confirmed}`);
       if(!confirmed) { return; }
@@ -238,7 +204,7 @@ export class EventFormComponent implements OnInit {
       offer_channel_id: 0,
       offer_key: c.catKey.value,
       offer_updated: '',
-      offer_category: c.category.value,
+      offer_category: this.event.offer_category,
       offer_image: c.image.value,
       offer_tag: c.title.value,
       offer_strapline: c.subtitle.value,
