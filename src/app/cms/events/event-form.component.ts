@@ -191,8 +191,11 @@ export class EventFormComponent implements OnInit {
     dialogRef.afterClosed().subscribe(confirmed => {
       // console.log(`Deactivate: ${confirmed}`);
       if(!confirmed) { return; }
-      // set new marketing end date & save.
-      this.eventFormGroup.patchValue({ marketingEnd: new Date().toUTCString()});
+
+      // set new marketing end date & save
+      const yesterday = new Date();
+      yesterday.setDate(yesterday.getDate() - 1)
+      this.eventFormGroup.patchValue({ marketingEnd: yesterday.toUTCString() });
       this.updateEvent();
     });
   }

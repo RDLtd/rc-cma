@@ -656,7 +656,11 @@ form.rc-form-grid {
     color: black;
     text-transform: uppercase;
     font-size: 12px;
-    padding-block: .25rem;
+    padding-block: .1rem;
+    position: sticky;
+    z-index: 99;
+    top: 112px;
+    height: 50px;
     @include mq(small) {
       font-size: 16px;
     }
@@ -1981,6 +1985,8 @@ button.rc-member-assc {
   }
 }
 .rd-card {
+  display: flex;
+  flex-direction: column;
   cursor: pointer;
   background-color: white;
   transition: all .3s ease-out;
@@ -1996,8 +2002,12 @@ button.rc-member-assc {
     margin-bottom: .5rem;
   }
   &-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
     padding: 1rem;
     p {
+
       margin-top: 1rem;
     }
   }
@@ -2013,6 +2023,7 @@ button.rc-member-assc {
     align-items: center;
     text-transform: uppercase;
     font-size: .75rem;
+    margin-top: 1rem;
   }
   &:hover, &:focus-visible {
     @include mat.elevation(5);
