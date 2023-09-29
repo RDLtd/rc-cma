@@ -2,52 +2,23 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { EventFormComponent } from './event-form.component';
-import { CMSService } from '../../_services';
 import { CmsLocalService } from '../cms-local.service';
 import { Restaurant } from '../../_models';
 import { EventService } from './event.service';
-
-export interface Event {
-  category: {
-    data: {
-      image: string;
-      icon: string;
-      text: string;
-    }
-  };
-  title: string;
-  subTitle: string;
-  description: string;
-  link?: string;
-  imgPath: string;
-  icon: string;
-  dateRange: {
-    start: string;
-    end: string;
-  }
-  marketingRange: {
-    start: string;
-    end: string
-  }
-  active: boolean;
-}
 
 @Component({
   selector: 'rc-cms-events',
   templateUrl: './cms-events.component.html'
 })
 
-
 export class CmsEventsComponent implements OnInit {
-  events: [Event];
+
   events$: Observable<any>;
   eventCategories: Observable<any>;
-  restaurant: Restaurant
-
+  restaurant: Restaurant;
 
   constructor(
     private dialog: MatDialog,
-    private cms: CMSService,
     private cmsLocal: CmsLocalService,
     private eventService: EventService
   ) {
@@ -55,21 +26,24 @@ export class CmsEventsComponent implements OnInit {
   }
 
   ngOnInit() {
+    // load available brand categories
     this.eventCategories = this.eventService.eventCategories;
-    console.log(this.eventCategories);
+    // console.log(this.eventCategories);
+    // Subscribe to current Events (a.k.a. offers in our db)
     this.events$ = this.eventService.events;
+    // Subscribe to currently selected restaurant
     this.cmsLocal.rest$.subscribe({
-        next: (res) => {
-          this.restaurant = res;
-          this.eventService.fetchRestaurantEvents(this.restaurant.restaurant_number);
-        },
-        error: (err) => console.log(err)
+      next: (res) => {
+        this.restaurant = res;
+        this.eventService.fetchRestaurantEvents(this.restaurant.restaurant_number);
+      },
+      error: (err) => console.log(err)
     });
   }
 
+  // Open event form with an empty Event object
   addEvent(): void {
-    let dialogConfig;
-    dialogConfig = {
+    const dialogConfig = {
       disableClose: true,
       data: {
         new: true,
@@ -85,9 +59,9 @@ export class CmsEventsComponent implements OnInit {
     });
   }
 
+
   editEvent(event: any) {
-    let dialogConfig;
-    dialogConfig = {
+    const dialogConfig = {
       disableClose: true,
       data: {
         formLabel: 'EDITING EVENT',
@@ -96,29 +70,30 @@ export class CmsEventsComponent implements OnInit {
         restaurant: this.restaurant
       }
     }
-    const dialogRef = this.dialog.open(EventFormComponent, dialogConfig);
+    const dialogRef= this.dialog.open(EventFormComponent, dialogConfig);
     dialogRef.afterClosed().subscribe((obj) => {
+      // abort if nothing changed
       if (!obj) { return false; }
-      console.log(obj);
+
+      // handle returned data
       switch (obj.action) {
         case 'update': {
           this.eventService.updateEvent(obj.data).subscribe({
             next: (res) => {
-              console.log(res);
+              // console.log(res);
               this.eventService.fetchRestaurantEvents(this.restaurant.restaurant_number);
             },
-            error: (e) => console.log(e)
+            error: (err) => console.error('Event update failed!', err)
           });
           break;
         }
         case 'delete': {
-          console.log(`Delete offer ${obj.data} from restaurant ${this.restaurant.restaurant_number}`)
+          // console.log(`Delete offer ${obj.data} from restaurant ${this.restaurant.restaurant_number}`)
           this.eventService.deleteEvent(obj.data, this.restaurant.restaurant_number);
           this.eventService.fetchRestaurantEvents(this.restaurant.restaurant_number);
           break;
         }
       }
-
       console.log(event);
     });
   }
