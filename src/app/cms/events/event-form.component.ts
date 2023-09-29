@@ -60,8 +60,7 @@ export class EventFormComponent implements OnInit {
 
   initEventForm(): void {
 
-    // console.log('initEventForm', this.event);
-    // console.log('?', this.event.offer_category);
+    // console.log('initEventForm', this.event.offer_category ,this.event);
 
     this.eventFormGroup = this.fb.group({
       category: [this.event.offer_category.id, [Validators.required]],
@@ -78,6 +77,7 @@ export class EventFormComponent implements OnInit {
       channel: this.event.offer_channel_id,
       id: this.event.offer_id
     });
+
     // If no event category has been selected, or this is a new event
     // set a default category
     if (this.event.offer_image === undefined) {
@@ -86,6 +86,7 @@ export class EventFormComponent implements OnInit {
       this.eventFormGroup.patchValue({ category: this.imgUrl });
       return;
     }
+
     // set image
     this.imgUrl = this.event.offer_image;
   }

@@ -32,7 +32,19 @@
           {{ event.offer_text }}
         </markdown>
         <a *ngIf="!!event.offer_link" [href]="event.offer_link" target="_blank">More information</a>
-        <div class="rd-card-credit">{{ event.offer_restaurant_member_id }}</div>
+        <div class="rd-card-credit">
+          <span>{{ event.offer_restaurant_member_id }}</span>
+          <span class="rc-space-filler"></span>
+
+          <ng-template [ngIf]="active(event)" [ngIfElse]="inActive">
+            <mat-icon class="rc-success" matTooltip="Online">public</mat-icon>
+          </ng-template>
+
+          <ng-template #inActive>
+            <mat-icon matTooltip="Offline">public_off</mat-icon>
+          </ng-template>
+
+        </div>
       </div>
     </div>
     </ng-container>

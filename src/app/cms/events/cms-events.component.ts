@@ -5,7 +5,7 @@ import { EventFormComponent } from './event-form.component';
 import { CmsLocalService } from '../cms-local.service';
 import { Restaurant } from '../../_models';
 import { EventService } from './event.service';
-import { MemberService } from '../../_services';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'rc-cms-events',
@@ -22,7 +22,6 @@ export class CmsEventsComponent implements OnInit {
     private dialog: MatDialog,
     private cmsLocal: CmsLocalService,
     private eventService: EventService,
-    private memberService: MemberService
   ) {
 
   }
@@ -104,6 +103,17 @@ export class CmsEventsComponent implements OnInit {
       }
       console.log(event);
     });
+  }
+
+  active(event): boolean {
+    // console.log(event);
+    const now = formatDate(new Date(), 'yyy-MM-dd', 'en-GB');
+    // console.log(now);
+    if (now > event.offer_marketed_to) {
+      return false;
+    }
+    return now >= event.offer_marketed_from;
+
   }
 
 

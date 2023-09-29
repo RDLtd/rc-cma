@@ -2023,6 +2023,7 @@ button.rc-member-assc {
   margin-bottom: 1rem;
   &:hover, &:focus-visible {
     .image-upload-option {
+
       opacity: 1;
     }
   }
@@ -2034,8 +2035,11 @@ button.rc-member-assc {
 
   }
   .image-upload-option {
-    cursor: pointer;
-    transition: opacity .3s ease-out;
+    background-color: hsl(0, 0%, 0%, .4);
+    //cursor: pointer;
+    transition: background-color, opacity;
+    transition-duration: .3s;
+    transition-timing-function: ease-out;
     opacity: 0;
     position: absolute;
     inset: 0;
