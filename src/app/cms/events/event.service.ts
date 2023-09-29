@@ -126,12 +126,30 @@ export class EventService {
         token: this.config.token
       }).subscribe({
       next: (res) => {
-        console.log(res);
-        this.fetchRestaurantEvents(restNumber);
+        console.log('Delete', offer_id, );
+        this.unSubscribeFromEvent(offer_id, restNumber);
       },
       error: err => console.error(`Failed to delete offer ${offer_id}`, err)
     });
   }
+
+  unSubscribeFromEvent(offer_id, restaurant_number): void {
+    this.http.post(this.config.apiUrl + '/offers/removerestaurantfromoffer',
+      {
+        offer_id,
+        restaurant_number,
+        userCode: this.config.userAPICode,
+        token: this.config.token
+      }).subscribe({
+      next: (res) => {
+        console.log('Unsubscribe', offer_id, );
+        this.fetchRestaurantEvents(restaurant_number);
+      },
+      error: err => console.error(`Failed to delete unsubscribe form offer ${offer_id}`, err)
+    });
+  }
+
+
 
   createEvent(offer: Object): Observable<any> {
     // console.log(offer);

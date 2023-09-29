@@ -41,7 +41,10 @@ export class CmsEventsComponent implements OnInit {
     });
   }
 
-  // Open event form with an empty Event object
+  /**
+   * initialise the Event form with an
+   * empty object
+   */
   addEvent(): void {
     const dialogConfig = {
       disableClose: true,
@@ -59,7 +62,10 @@ export class CmsEventsComponent implements OnInit {
     });
   }
 
-
+  /**
+   * Edit existing Event/offer
+   * @param event our session Event
+   */
   editEvent(event: any) {
     const dialogConfig = {
       disableClose: true,
