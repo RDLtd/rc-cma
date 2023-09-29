@@ -5,6 +5,7 @@ import { EventFormComponent } from './event-form.component';
 import { CmsLocalService } from '../cms-local.service';
 import { Restaurant } from '../../_models';
 import { EventService } from './event.service';
+import { MemberService } from '../../_services';
 
 @Component({
   selector: 'rc-cms-events',
@@ -20,7 +21,8 @@ export class CmsEventsComponent implements OnInit {
   constructor(
     private dialog: MatDialog,
     private cmsLocal: CmsLocalService,
-    private eventService: EventService
+    private eventService: EventService,
+    private memberService: MemberService
   ) {
 
   }
@@ -103,4 +105,6 @@ export class CmsEventsComponent implements OnInit {
       console.log(event);
     });
   }
+
+
 }

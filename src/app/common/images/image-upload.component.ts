@@ -8,6 +8,7 @@ import { environment } from '../../../environments/environment';
 export class ImageUploadComponent {
   @Output() onImgUploaded = new EventEmitter<any>();
   @Input() restaurant: any;
+  @Input() btnLabel = 'UPLOAD IMAGE';
   cloudName = environment.cloudinary_name; // replace with your own cloud name
   uploadPreset = "nozxac7z"; // replace with your own upload preset
   myWidget: any;

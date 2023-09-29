@@ -1993,6 +1993,7 @@ button.rc-member-assc {
       aspect-ratio: 16/9;
       object-fit: cover;
     }
+    margin-bottom: .5rem;
   }
   &-content {
     padding: 1rem;
@@ -2006,12 +2007,20 @@ button.rc-member-assc {
     align-items: center;
     justify-content: flex-end;
   }
+  &-credit {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    text-transform: uppercase;
+    font-size: .75rem;
+  }
   &:hover, &:focus-visible {
     @include mat.elevation(5);
   }
 }
 .rd-card-img {
   position: relative;
+  margin-bottom: 1rem;
   &:hover, &:focus-visible {
     .image-upload-option {
       opacity: 1;
@@ -2049,9 +2058,7 @@ button.rc-member-assc {
     grid-column: 1 / -1;
   }
 }
-.mdc-dialog {
 
-}
 .rd-dialog {
   width: min(600px, 80vw);
   input {
