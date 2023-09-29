@@ -9,8 +9,8 @@ import { StorageService } from '../../_services/storage.service';
 @Injectable({
   providedIn: 'root'
 })
-export class EventService {
 
+export class EventService {
   eventCatSub = new BehaviorSubject<any>(null);
   eventCat$ = this.eventCatSub.asObservable().pipe(
     filter (cat => !!cat),
@@ -23,6 +23,7 @@ export class EventService {
   arrCategories: any[];
   brand: Brand;
   user: any;
+
   constructor(
     private config: ConfigService,
     private http: HttpClient,
@@ -35,8 +36,9 @@ export class EventService {
     });
     // Load events and event categories
     this.getEventCategories();
-    this.user = storage.get('rd_profile');
+    this.user = this.storage.get('rd_profile');
   }
+
 
   getEventCategories(): void {
 
@@ -51,7 +53,8 @@ export class EventService {
         const cats = this.catsRestructured(categories['offer_categories']);
         this.arrCategories = cats;
         this.eventCatSub.next(cats);
-      }
+      },
+      error: err => console.error('getoffercategories Failed', err)
     });
   }
 
@@ -59,7 +62,12 @@ export class EventService {
     return this.arrCategories;
   }
 
-  catsRestructured(categories): any[] {
+  /**
+   * Remodel the event categories structure
+   * for ease of manipulation on the front-end
+   * @param categories the db structured offer_categories
+   */
+  catsRestructured(categories: any[]): any[]  {
     const cats = [];
     categories.forEach((cat) => {
       let obj = {
@@ -77,6 +85,10 @@ export class EventService {
     return this.eventCat$;
   }
 
+  /**
+   * Load all events available to the current restaurant
+   * @param restaurant_number
+   */
   fetchRestaurantEvents(restaurant_number: string): void {
       this.http.post(this.config.apiUrl + '/offers/getoffersbyrestaurant',
           {
@@ -97,13 +109,7 @@ export class EventService {
     return this.events$
   }
 
-  // set event(event) {
-  //   this.eventCatSub.next(event);
-  // }
-
-
-
-  updateEvent(offer): Observable<any> {
+  updateEvent(offer: any): Observable<any> {
     return this.http.post(this.config.apiUrl + '/offers/updateoffer',
       {
         offer,
@@ -122,12 +128,13 @@ export class EventService {
       next: (res) => {
         console.log(res);
         this.fetchRestaurantEvents(restNumber);
-      }
+      },
+      error: err => console.error(`Failed to delete offer ${offer_id}`, err)
     });
   }
 
-  createEvent(offer): Observable<any> {
-    console.log(offer);
+  createEvent(offer: Object): Observable<any> {
+    // console.log(offer);
     return this.http.post(this.config.apiUrl + '/offers/addoffer',
       {
         offer,
@@ -136,9 +143,9 @@ export class EventService {
       });
   }
 
-  subscribeToEvent(offer_id, restNum: string): Observable<any> {
+  subscribeToEvent(offer_id: string, restNum: string): Observable<any> {
 
-    console.log(offer_id, restNum, this.user.member_id);
+    // console.log(offer_id, restNum, this.user.member_id);
 
     return this.http.post(this.config.apiUrl + '/offers/addrestauranttooffer',
       {
@@ -150,6 +157,4 @@ export class EventService {
       });
 
   }
-
-
 }
