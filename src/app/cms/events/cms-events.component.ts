@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { EventFormComponent } from './event-form.component';
 import { CmsLocalService } from '../cms-local.service';
 import { Restaurant } from '../../_models';
 import { EventService } from './event.service';
 import { formatDate } from '@angular/common';
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
   selector: 'rc-cms-events',
@@ -17,11 +18,15 @@ export class CmsEventsComponent implements OnInit {
   events$: Observable<any>;
   eventCategories: Observable<any>;
   restaurant: Restaurant;
+  filteredEvents: any[];
+  filter: string | null;
+  eventsArray: any[];
 
   constructor(
     private dialog: MatDialog,
     private cmsLocal: CmsLocalService,
     private eventService: EventService,
+    private translate: TranslateService
   ) {
 
   }
@@ -39,6 +44,10 @@ export class CmsEventsComponent implements OnInit {
         this.eventService.fetchRestaurantEvents(this.restaurant.restaurant_number);
       },
       error: (err) => console.log(err)
+    });
+    this.events$.subscribe(arr => {
+      this.eventsArray = arr;
+      console.log('FilteredArray:', arr);
     });
   }
 
@@ -60,6 +69,7 @@ export class CmsEventsComponent implements OnInit {
     const dialogRef = this.dialog.open(EventFormComponent, dialogConfig);
     dialogRef.afterClosed().subscribe((event) => {
       console.log(event);
+      this.dspMessage('New Event created!')
     });
   }
 
@@ -89,6 +99,7 @@ export class CmsEventsComponent implements OnInit {
             next: (res) => {
               // console.log(res);
               this.eventService.fetchRestaurantEvents(this.restaurant.restaurant_number);
+              this.dspMessage('Event successfully updated!');
             },
             error: (err) => console.error('Event update failed!', err)
           });
@@ -98,6 +109,7 @@ export class CmsEventsComponent implements OnInit {
           // console.log(`Delete offer ${obj.data} from restaurant ${this.restaurant.restaurant_number}`)
           this.eventService.deleteEvent(obj.data, this.restaurant.restaurant_number);
           this.eventService.fetchRestaurantEvents(this.restaurant.restaurant_number);
+          this.dspMessage('Event deleted!')
           break;
         }
       }
@@ -116,5 +128,52 @@ export class CmsEventsComponent implements OnInit {
 
   }
 
+  dspMessage(msg: string): void {
+    // this.translate.instant('CMS.IMAGES.msgDeleted', {img: img.cms_element_id})
+    this.cmsLocal.dspSnackbar(
+      msg, null, 3);
+  }
+
+  filterBy(type: any): void {
+    this.clearFilters();
+    switch(type) {
+      case 'active': {
+        this.filteredEvents = this.eventsArray.filter((item) => {
+          return this.active(item);
+        });
+        this.filter = type;
+        this.events$ = of(this.filteredEvents);
+        break;
+      }
+      case 'inactive': {
+        this.filteredEvents = this.eventsArray.filter((item) => {
+          return !this.active(item);
+        });
+        this.filter = type;
+        this.events$ = of(this.filteredEvents);
+        break;
+      }
+      case 'category': {
+        break;
+      }
+      default: {
+        this.clearFilters();
+        break;
+      }
+
+    }
+
+    // this.filteredEvents = this.eventsArr.filter(
+    //   (obj) => {
+    //     return this.indexOf(obj.deal_id) >= 0;
+    //   },
+    //   this.favourites
+    // );
+    // this.filter = 'favourites';
+  }
+  clearFilters(): void {
+    this.filter = null;
+    this.events$ = of(this.eventsArray);
+  }
 
 }
