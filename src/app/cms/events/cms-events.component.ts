@@ -69,6 +69,7 @@ export class CmsEventsComponent implements OnInit {
     const dialogRef = this.dialog.open(EventFormComponent, dialogConfig);
     dialogRef.afterClosed().subscribe((event) => {
       console.log(event);
+      if(!event) { return }
       this.dspMessage('New Event created!')
     });
   }
@@ -160,16 +161,7 @@ export class CmsEventsComponent implements OnInit {
         this.clearFilters();
         break;
       }
-
     }
-
-    // this.filteredEvents = this.eventsArr.filter(
-    //   (obj) => {
-    //     return this.indexOf(obj.deal_id) >= 0;
-    //   },
-    //   this.favourites
-    // );
-    // this.filter = 'favourites';
   }
   clearFilters(): void {
     this.filter = null;

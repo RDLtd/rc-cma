@@ -1,7 +1,11 @@
 <div class="rc-content-container full-width">
   <mat-toolbar class="rc-toolbar-section">
     <span>{{ 'CMS.EVENTS.titleEvents' | translate }}</span>
-    <span *ngIf="!!filter">: {{ filter | uppercase }}</span>
+    <mat-chip style="margin-left: 1rem" *ngIf="!!filter">Filtered by {{ filter | titlecase }}
+      <button matChipRemove [attr.aria-label]="'clear filters'" (click)="clearFilters()">
+        <mat-icon>cancel</mat-icon>
+      </button>
+    </mat-chip>
     <span class="rc-space-filler"></span>
     <span class="rc-toolbar-actions">
 

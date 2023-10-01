@@ -77,7 +77,7 @@ export class EventService {
         icon: cat.data.icon
       }
       cats.push(obj);
-    });
+    }); 
     return cats;
   }
 
