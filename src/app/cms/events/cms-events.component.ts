@@ -7,10 +7,12 @@ import { Restaurant } from '../../_models';
 import { EventService } from './event.service';
 import { formatDate } from '@angular/common';
 import { TranslateService } from "@ngx-translate/core";
+import { insertAnimation } from "../../shared/animations";
 
 @Component({
   selector: 'rc-cms-events',
-  templateUrl: './cms-events.component.html'
+  templateUrl: './cms-events.component.html',
+  animations: [insertAnimation]
 })
 
 export class CmsEventsComponent implements OnInit {

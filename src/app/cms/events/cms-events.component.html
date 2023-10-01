@@ -43,7 +43,7 @@
     </button>
   </mat-menu>
 
-  <div class="rd-grid-auto-events">
+  <div class="rd-grid-auto-events" [@insertAnimation]="events$ | async">
     <ng-container *ngFor="let event of events$ | async">
     <div class="rd-card" (click)="editEvent(event)">
       <div class="rd-card-image">
