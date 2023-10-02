@@ -1,12 +1,13 @@
 <div class="rc-content-container full-width">
   <mat-toolbar class="rc-toolbar-section">
     <span>{{ 'CMS.EVENTS.titleEvents' | translate }}</span>
+
+    <span class="rc-space-filler"></span>
     <mat-chip style="margin-left: 1rem" *ngIf="!!filter">Filtered by {{ filter | titlecase }}
       <button matChipRemove [attr.aria-label]="'clear filters'" (click)="clearFilters()">
         <mat-icon>cancel</mat-icon>
       </button>
     </mat-chip>
-    <span class="rc-space-filler"></span>
     <span class="rc-toolbar-actions">
 
 <!--          <button-->
@@ -52,11 +53,13 @@
       <div class="rd-card-content">
         <h2>{{ event.offer_tag }}</h2>
         <h3>{{ event.offer_strapline }}</h3>
-        <p>{{ event.offer_from | date }}</p>
         <markdown>
           {{ event.offer_text }}
         </markdown>
         <a *ngIf="!!event.offer_link" [href]="event.offer_link" target="_blank">More information</a>
+        <p class="rc-txt-small">Active from {{ event.offer_marketed_from | date : 'mediumDate' }} to {{ event.offer_marketed_to
+          | date :
+          'mediumDate' }}</p>
         <span style="margin:auto"></span>
         <div class="rd-card-credit">
           <span>{{ event.offer_restaurant_member_id }}</span>
