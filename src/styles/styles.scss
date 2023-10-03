@@ -693,6 +693,7 @@ form.rc-form-grid {
     margin:2px 0 0 16px;
     border-left: 1px solid white;
     font-size: 14px;
+    font-weight: $rc-default-font-weight;
   }
   .rc-toolbar-btn-lg {
     width: 40px;
@@ -2006,10 +2007,8 @@ button.rc-member-assc {
     display: flex;
     flex-direction: column;
     padding: 1rem;
-    p {
-
-      margin-top: 1rem;
-    }
+    p { margin-top: 1rem;}
+    a { display: inline; }
   }
   &-actions {
     padding: 1rem;

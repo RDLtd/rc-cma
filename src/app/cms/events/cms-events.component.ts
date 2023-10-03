@@ -28,7 +28,7 @@ export class CmsEventsComponent implements OnInit {
     private dialog: MatDialog,
     private cmsLocal: CmsLocalService,
     private eventService: EventService,
-    private translate: TranslateService
+    private translate: TranslateService,
   ) {
 
   }
@@ -63,7 +63,7 @@ export class CmsEventsComponent implements OnInit {
       data: {
         new: true,
         categories: this.eventCategories,
-        formLabel: 'CREATE NEW EVENT',
+        formLabel: this.translate.instant('CMS.EVENTS.titleCreateNew'),
         restaurant: this.restaurant,
         event: {}
       }
@@ -84,7 +84,7 @@ export class CmsEventsComponent implements OnInit {
     const dialogConfig = {
       disableClose: true,
       data: {
-        formLabel: 'EDITING EVENT',
+        formLabel: this.translate.instant('CMS.EVENTS.titleEditEvent'),
         event: event,
         categories: this.eventCategories,
         restaurant: this.restaurant
@@ -99,8 +99,7 @@ export class CmsEventsComponent implements OnInit {
       switch (obj.action) {
         case 'update': {
           this.eventService.updateEvent(obj.data).subscribe({
-            next: (res) => {
-              // console.log(res);
+            next: () => {
               this.eventService.fetchRestaurantEvents(this.restaurant.restaurant_number);
               this.dspMessage('Event successfully updated!');
             },
@@ -128,7 +127,6 @@ export class CmsEventsComponent implements OnInit {
       return false;
     }
     return now >= event.offer_marketed_from;
-
   }
 
   dspMessage(msg: string): void {
