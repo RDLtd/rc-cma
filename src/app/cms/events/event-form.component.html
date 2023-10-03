@@ -37,6 +37,8 @@
                        [restaurant]="restaurant"></rc-image-upload>
     </div>
 
+
+
     <form [formGroup]="eventFormGroup" class="rd-grid-form">
       <mat-form-field>
         <mat-label>Event category</mat-label>
@@ -59,46 +61,78 @@
       </mat-form-field>
 
       <mat-form-field>
-        <mat-label>Event dates</mat-label>
-        <mat-date-range-input [rangePicker]="eventRange">
-          <input matStartDate
-                 placeholder="Start date"
-                 formControlName="eventStart"
-                 (dateChange)="addEventDate('eventStart', $event)">
-          <input matEndDate
-                 placeholder="End date"
-                 formControlName="eventEnd"
-                 (dateChange)="addEventDate('eventEnd',$event)">
+        <mat-label>Event Date</mat-label>
+        <mat-date-range-input
+          #evtRange
+          formGroupName="eventRangeGroup"
+          [rangePicker]="eventRangePicker">
+          <input matStartDate placeholder="Start date" formControlName="start">
+          <input matEndDate placeholder="End date" formControlName="end">
         </mat-date-range-input>
-        <mat-datepicker-toggle matIconSuffix [for]="eventRange"></mat-datepicker-toggle>
-        <mat-date-range-picker #eventRange>
-          <mat-date-range-picker-actions>
-            <button mat-button matDateRangePickerCancel>Cancel</button>
-            <button mat-raised-button color="primary" matDateRangePickerApply>Apply</button>
-          </mat-date-range-picker-actions>
-        </mat-date-range-picker>
+        <mat-hint class="rd-txt-micro">DD/MM/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="eventRangePicker"></mat-datepicker-toggle>
+        <mat-date-range-picker #eventRangePicker></mat-date-range-picker>
       </mat-form-field>
 
-      <mat-form-field>
-        <mat-label>Marketing Dates</mat-label>
-        <mat-date-range-input [rangePicker]="marketingRange">
-          <input matStartDate
-                 placeholder="Start date"
-                 formControlName="marketingStart"
-                 (dateChange)="addEventDate('marketingStart', $event)">
-          <input matEndDate
-                 placeholder="End date"
-                 formControlName="marketingEnd"
-                 (dateChange)="addEventDate('marketingEnd',$event)">
+      <mat-form-field class="example-form-field">
+        <mat-label>Marketing Window</mat-label>
+        <mat-date-range-input
+          formGroupName="marketingRangeGroup"
+          [rangePicker]="marketingRangePicker"
+          [comparisonStart]="evtRange.value.start"
+          [comparisonEnd]="evtRange.value.end">
+          <input matStartDate placeholder="Start date" formControlName="start">
+          <input matEndDate placeholder="End date" formControlName="end">
         </mat-date-range-input>
-        <mat-datepicker-toggle matIconSuffix [for]="marketingRange"></mat-datepicker-toggle>
-        <mat-date-range-picker #marketingRange>
-          <mat-date-range-picker-actions>
-            <button mat-button matDateRangePickerCancel>Cancel</button>
-            <button mat-raised-button color="primary" matDateRangePickerApply>Apply</button>
-          </mat-date-range-picker-actions>
-        </mat-date-range-picker>
+        <mat-datepicker-toggle matIconSuffix [for]="marketingRangePicker"></mat-datepicker-toggle>
+        <mat-hint class="rd-txt-micro">DD/MM/YYYY</mat-hint>
+        <mat-date-range-picker #marketingRangePicker></mat-date-range-picker>
       </mat-form-field>
+
+
+
+
+<!--      <mat-form-field>-->
+<!--        <mat-label>Event dates</mat-label>-->
+<!--        <mat-date-range-input [rangePicker]="eventRange">-->
+<!--          <input matStartDate-->
+<!--                 placeholder="Start date"-->
+<!--                 formControlName="eventStart"-->
+<!--                 (dateChange)="addEventDate('eventStart', $event)">-->
+<!--          <input matEndDate-->
+<!--                 placeholder="End date"-->
+<!--                 formControlName="eventEnd"-->
+<!--                 (dateChange)="addEventDate('eventEnd',$event)">-->
+<!--        </mat-date-range-input>-->
+<!--        <mat-datepicker-toggle matIconSuffix [for]="eventRange"></mat-datepicker-toggle>-->
+<!--        <mat-date-range-picker #eventRange>-->
+<!--          <mat-date-range-picker-actions>-->
+<!--            <button mat-button matDateRangePickerCancel>Cancel</button>-->
+<!--            <button mat-raised-button color="primary" matDateRangePickerApply>Apply</button>-->
+<!--          </mat-date-range-picker-actions>-->
+<!--        </mat-date-range-picker>-->
+<!--      </mat-form-field>-->
+
+<!--      <mat-form-field>-->
+<!--        <mat-label>Marketing Dates</mat-label>-->
+<!--        <mat-date-range-input [rangePicker]="marketingRange">-->
+<!--          <input matStartDate-->
+<!--                 placeholder="Start date"-->
+<!--                 formControlName="marketingStart"-->
+<!--                 (dateChange)="addEventDate('marketingStart', $event)">-->
+<!--          <input matEndDate-->
+<!--                 placeholder="End date"-->
+<!--                 formControlName="marketingEnd"-->
+<!--                 (dateChange)="addEventDate('marketingEnd',$event)">-->
+<!--        </mat-date-range-input>-->
+<!--        <mat-datepicker-toggle matIconSuffix [for]="marketingRange"></mat-datepicker-toggle>-->
+<!--        <mat-date-range-picker #marketingRange>-->
+<!--          <mat-date-range-picker-actions>-->
+<!--            <button mat-button matDateRangePickerCancel>Cancel</button>-->
+<!--            <button mat-raised-button color="primary" matDateRangePickerApply>Apply</button>-->
+<!--          </mat-date-range-picker-actions>-->
+<!--        </mat-date-range-picker>-->
+<!--      </mat-form-field>-->
 
       <mat-form-field class="span-cols">
         <mat-label>Description</mat-label>

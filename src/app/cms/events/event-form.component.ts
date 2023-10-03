@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from "@angular/material/dialog";
 import { MatDatepickerInputEvent } from "@angular/material/datepicker";
@@ -6,12 +6,24 @@ import { Observable } from 'rxjs';
 import { ConfirmCancelComponent } from '../../common';
 import { EventService } from './event.service';
 import { formatDate } from '@angular/common';
+import { MAT_DATE_FORMATS, MAT_NATIVE_DATE_FORMATS, MatDateFormats } from '@angular/material/core';
+
+export const GRI_DATE_FORMATS: MatDateFormats = {
+  ...MAT_NATIVE_DATE_FORMATS,
+  display: {
+    ...MAT_NATIVE_DATE_FORMATS.display,
+    dateInput: {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+    } as Intl.DateTimeFormatOptions,
+  }
+};
 
 @Component({
   selector: 'rc-event-form',
   templateUrl: './event-form.component.html',
-  styles: [
-  ]
+  providers: [ { provide: MAT_DATE_FORMATS, useValue: GRI_DATE_FORMATS }]
 })
 
 export class EventFormComponent implements OnInit {
@@ -31,7 +43,8 @@ export class EventFormComponent implements OnInit {
     public dialogRef: MatDialogRef<EventFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private fb: FormBuilder,
-    private eventService: EventService
+    private eventService: EventService,
+    private cd: ChangeDetectorRef
   ) {
     this.event = this.data.event;
     this.categories$ = this.data.categories;
@@ -56,6 +69,9 @@ export class EventFormComponent implements OnInit {
     }
     // build the form
     this.initEventForm();
+    // Mitigate the 'ExpressionChangedAfterItHasBeenCheckedError'
+    // by running change detection
+    this.cd.detectChanges();
   }
 
   initEventForm(): void {
@@ -75,7 +91,15 @@ export class EventFormComponent implements OnInit {
       marketingStart: [this.event.offer_marketed_from, [Validators.required]],
       marketingEnd: [this.event.offer_marketed_to, [Validators.required]],
       channel: this.event.offer_channel_id,
-      id: this.event.offer_id
+      id: this.event.offer_id,
+      eventRangeGroup: this.fb.group({
+        start: [this.event.offer_from, [Validators.required]],
+        end: [this.event.offer_to, [Validators.required]]
+      }),
+      marketingRangeGroup: this.fb.group({
+        start: [this.event.offer_marketed_from, [Validators.required]],
+        end: [this.event.offer_marketed_to, [Validators.required]]
+      })
     });
 
     // If no event category has been selected, or this is a new event
