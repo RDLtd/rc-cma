@@ -29,6 +29,8 @@ export const GRI_DATE_FORMATS: MatDateFormats = {
 export class EventFormComponent implements OnInit {
 
   eventFormGroup: FormGroup;
+  eventRangeGroup: FormGroup;
+  marketingRangeGroup: FormGroup;
   event: any;
   isNewEvent: boolean | null;
   categories$: Observable<any>;
@@ -192,6 +194,7 @@ export class EventFormComponent implements OnInit {
     // before sending back our new Event object
     // we need to do some remodelling of the data
     const event = this.mapEventOffer();
+    console.log('E', event);
     // now complete it
     this.dialogRef.close({ action: 'update', data: event });
     console.log(this.eventFormGroup.valid);
@@ -264,7 +267,7 @@ export class EventFormComponent implements OnInit {
     const restNum = this.restaurant.restaurant_number;
     // console.log('SUBSCRIBE', offer_id, restNum);
     this.eventService.subscribeToEvent(offer_id, restNum).subscribe({
-      next: (res) => {
+      next: () => {
         // console.log(res);
         // reload Events & close the dialog
         this.eventService.fetchRestaurantEvents(restNum);
@@ -279,7 +282,8 @@ export class EventFormComponent implements OnInit {
    * the original db Event
    */
   mapEventOffer(): Object {
-    let c = this.eventFormGroup.controls;
+    const c = this.eventFormGroup.controls;
+    const g = this.eventFormGroup;
     return {
       offer_id: c.id.value,
       offer_channel_id: 0,
@@ -291,10 +295,10 @@ export class EventFormComponent implements OnInit {
       offer_strapline: c.subtitle.value,
       offer_text: c.description.value,
       offer_link: c.link.value,
-      offer_from: c.eventStart.value,
-      offer_to: c.eventEnd.value,
-      offer_marketed_from: c.marketingStart.value,
-      offer_marketed_to: c.marketingEnd.value,
+      offer_from: g.get('eventRangeGroup.start').value,
+      offer_to: g.get('eventRangeGroup.end').value,
+      offer_marketed_from: g.get('marketingRangeGroup.start').value,
+      offer_marketed_to: g.get('marketingRangeGroup.end').value
     };
   }
 }
