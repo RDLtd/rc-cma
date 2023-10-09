@@ -82,16 +82,11 @@ export class EventFormComponent implements OnInit {
 
     this.eventFormGroup = this.fb.group({
       category: [this.event.offer_category.id, [Validators.required]],
-      catKey: [this.event.offer_key],
       image: [this.event.offer_image],
       title: [this.event.offer_tag, [Validators.required]],
       subtitle: this.event.offer_strapline,
       description: [this.event.offer_text, [Validators.required]],
       link: this.event.offer_link,
-      eventStart: [this.event.offer_from, [Validators.required]],
-      eventEnd: [this.event.offer_to, [Validators.required]],
-      marketingStart: [this.event.offer_marketed_from, [Validators.required]],
-      marketingEnd: [this.event.offer_marketed_to, [Validators.required]],
       channel: this.event.offer_channel_id,
       id: this.event.offer_id,
       eventRangeGroup: this.fb.group({
@@ -135,9 +130,9 @@ export class EventFormComponent implements OnInit {
    * Note: this will only be permanent if UPDATED by the user
    */
   deleteCustomImage(): void {
-    console.log('Reverting to default image');
+    console.log('Reverting to default image', this.eventFormGroup.controls.category.value);
     // get the current Event key/id
-    const catId = this.eventFormGroup.controls.catKey.value;
+    const catId = this.eventFormGroup.controls.category.value;
     // Use it to find the relevant category
     const cat = this.arrCategories.find(elem => elem.id === catId);
     // update the displayed image
