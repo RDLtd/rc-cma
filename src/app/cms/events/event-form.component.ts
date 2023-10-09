@@ -107,7 +107,6 @@ export class EventFormComponent implements OnInit {
       this.eventFormGroup.patchValue({ category: this.imgUrl });
       return;
     }
-
     // set image
     this.imgUrl = this.event.offer_image;
   }

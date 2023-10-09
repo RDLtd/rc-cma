@@ -30,7 +30,6 @@ export class CmsEventsComponent implements OnInit {
     private eventService: EventService,
     private translate: TranslateService,
   ) {
-
   }
 
   ngOnInit() {
