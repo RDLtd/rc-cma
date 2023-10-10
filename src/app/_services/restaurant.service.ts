@@ -53,7 +53,6 @@ export class RestaurantService {
   }
 
   getSubset(sql_parameters: SQLParameters) {
-
     return this.http.post(this.config.apiUrl + '/restaurants/subset',
       {
         sql_parameters: sql_parameters,
@@ -68,7 +67,7 @@ export class RestaurantService {
       where_field: searchType,
       where_string: term,
       where_any_position: 'Y',
-      sort_field: searchType,
+      sort_field: 'restaurant_name',
       sort_direction: 'ASC',
       limit_number: 100,
       limit_index: '0',

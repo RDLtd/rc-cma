@@ -1,4 +1,4 @@
-import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
 import { Restaurant } from '../_models';
 import { RestaurantService, CMSService, ErrorService } from '../_services';
 import { VerificationComponent } from './verification.component';
@@ -15,7 +15,7 @@ import { map } from 'rxjs/operators';
   templateUrl: './restaurant-lookup.component.html'
 })
 
-export class RestaurantLookupComponent implements OnInit {
+export class RestaurantLookupComponent implements OnInit, AfterViewInit {
   noSearchResults = false;
   dspNewListingForm = false;
   verificationCodeRequired = true;
@@ -52,31 +52,36 @@ export class RestaurantLookupComponent implements OnInit {
 
   ngOnInit() {
     this.sql_param_country = localStorage.getItem('rd_brand') === 'ri' ? 'FR' : 'UK';
+  }
+
+  ngAfterViewInit() {
     this.initSearch();
   }
 
   initSearch() {
+    console.log(this.searchInput);
     const search$ = fromEvent(this.searchInput.nativeElement, 'keyup').pipe(
       map((event: any) => event.target.value),
-      debounceTime(500),
+      debounceTime(100),
       distinctUntilChanged(),
       tap(() => this.isSearching = true),
-      switchMap((term) => term ? this.getRestaurants(term) : of<any>(this.restaurants)),
+      switchMap((term) => term ? this.restaurantService.getRestaurantSubset(term, this.searchType, this.sql_param_country) : of<any>(this.restaurants)),
       tap(() => {
-        this.isSearching = false,
-          this.showSearchResults = true;
+        this.isSearching = false;
+        this.showSearchResults = true;
       }));
+
       search$.subscribe(data => {
         this.isSearching = false;
-        console.log(data);
+        this.restaurants = data.restaurants;
       });
   }
 
-  getRestaurants(term){
+  getRestaurants(term: string): any{
 
-    if (term.length < this.minSearchChars) { return null; }
+    console.log(term);
 
-    const type = this.searchType;
+    //if (term.length < this.minSearchChars) { return null; }
 
     this.restaurantService.getRestaurantSubset(term, this.searchType, this.sql_param_country)
       .subscribe({

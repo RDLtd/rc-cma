@@ -9,9 +9,9 @@
 
     <section>
 
-      <mat-radio-group aria-label="Select an option" name="searchType" [(ngModel)]="searchType">
-        <mat-radio-button value="name">Search by name</mat-radio-button>
-        <mat-radio-button value="postcode">Search by postcode</mat-radio-button>
+      <mat-radio-group aria-label="Select an option" name="searchType" [(ngModel)]="searchType" tabindex="-1">
+        <mat-radio-button value="name" tabIndex="-1">Search by name</mat-radio-button>
+        <mat-radio-button value="postcode" tabIndex="-1">Search by postcode</mat-radio-button>
       </mat-radio-group>
 
       <mat-form-field
@@ -20,10 +20,9 @@
         <mat-label>Search by {{ searchType | uppercase }}</mat-label>
         <input
           #searchInput
-          name="search"
+          name="searchInput"
           type="text"
           matInput
-          (keyup)="findRestaurants(searchInput.value)"
           autocomplete="off"
           autofocus>
         <mat-icon matSuffix>search</mat-icon>
