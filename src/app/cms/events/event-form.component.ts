@@ -65,7 +65,6 @@ export class EventFormComponent implements OnInit {
       const dfCat = this.arrCategories[0];
       this.event = Object.assign(this.event, {
         offer_category: dfCat,
-        offer_key: dfCat.id,
         offer_image: dfCat.image
       });
     }
@@ -216,7 +215,11 @@ export class EventFormComponent implements OnInit {
       // set new marketing end date & save
       const yesterday = new Date();
       yesterday.setDate(yesterday.getDate() - 1)
-      this.eventFormGroup.patchValue({ marketingEnd: yesterday.toUTCString() });
+      this.eventFormGroup.patchValue({
+        marketingRangeGroup: {
+        end: yesterday.toUTCString()
+        }
+      });
       this.updateEvent();
     });
   }
@@ -281,7 +284,6 @@ export class EventFormComponent implements OnInit {
     return {
       offer_id: c.id.value,
       offer_channel_id: 0,
-      offer_key: c.catKey.value,
       offer_updated: '',
       offer_category: this.event.offer_category,
       offer_image: c.image.value,
