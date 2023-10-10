@@ -1,16 +1,23 @@
 <form #restListing="ngForm">
 
   <h1 mat-dialog-title>
-    {{ 'LOOKUP.titleFind' | translate }}
+<!--    {{ 'LOOKUP.titleFind' | translate }}-->
+    FIND VENUE
   </h1>
 
   <mat-dialog-content>
 
     <section>
+
+      <mat-radio-group aria-label="Select an option" name="searchType" [(ngModel)]="searchType">
+        <mat-radio-button value="name">Search by name</mat-radio-button>
+        <mat-radio-button value="postcode">Search by postcode</mat-radio-button>
+      </mat-radio-group>
+
       <mat-form-field
         floatLabel="always"
         class="rc-full-width">
-        <mat-label>{{ 'LOOKUP.labelEnterName' | translate | uppercase }}</mat-label>
+        <mat-label>Search by {{ searchType | uppercase }}</mat-label>
         <input
           #searchInput
           name="search"

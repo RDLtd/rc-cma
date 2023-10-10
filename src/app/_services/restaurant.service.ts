@@ -53,6 +53,27 @@ export class RestaurantService {
   }
 
   getSubset(sql_parameters: SQLParameters) {
+
+    return this.http.post(this.config.apiUrl + '/restaurants/subset',
+      {
+        sql_parameters: sql_parameters,
+        userCode: this.config.userAPICode,
+        token: this.authToken
+      });
+  }
+
+  getRestaurantSubset(term: string, type: string = 'name', country: string) {
+    const searchType = type === 'name' ? 'restaurant_name' : 'restaurant_post_code';
+    const sql_parameters = {
+      where_field: searchType,
+      where_string: term,
+      where_any_position: 'Y',
+      sort_field: searchType,
+      sort_direction: 'ASC',
+      limit_number: 100,
+      limit_index: '0',
+      country: country
+    };
     return this.http.post(this.config.apiUrl + '/restaurants/subset',
       {
         sql_parameters: sql_parameters,

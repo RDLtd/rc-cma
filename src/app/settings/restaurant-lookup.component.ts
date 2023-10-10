@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
 import { Restaurant } from '../_models';
 import { RestaurantService, CMSService, ErrorService } from '../_services';
 import { VerificationComponent } from './verification.component';
@@ -7,6 +7,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { TranslateService } from '@ngx-translate/core';
 import { ConfirmCancelComponent, HelpService } from '../common';
 import { ConfigService } from '../init/config.service';
+import { debounceTime, distinctUntilChanged, fromEvent, of, switchMap, tap } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-rc-restaurant-lookup',
@@ -21,6 +23,19 @@ export class RestaurantLookupComponent implements OnInit {
   restaurants: Restaurant[] = [];
   sql_parameters: any = this.config.sql_defaults;
   sql_param_country: string;
+
+  // Search settings
+
+  @ViewChild('searchInput') searchInput: ElementRef;
+  searchType = "name";
+  searchResults = [];
+  isSearching = false;
+  showSearchResults = false;
+  minSearchChars = 3;
+
+
+
+
 
   constructor(
     private   restaurantService: RestaurantService,
@@ -37,6 +52,49 @@ export class RestaurantLookupComponent implements OnInit {
 
   ngOnInit() {
     this.sql_param_country = localStorage.getItem('rd_brand') === 'ri' ? 'FR' : 'UK';
+    this.initSearch();
+  }
+
+  initSearch() {
+    const search$ = fromEvent(this.searchInput.nativeElement, 'keyup').pipe(
+      map((event: any) => event.target.value),
+      debounceTime(500),
+      distinctUntilChanged(),
+      tap(() => this.isSearching = true),
+      switchMap((term) => term ? this.getRestaurants(term) : of<any>(this.restaurants)),
+      tap(() => {
+        this.isSearching = false,
+          this.showSearchResults = true;
+      }));
+      search$.subscribe(data => {
+        this.isSearching = false;
+        console.log(data);
+      });
+  }
+
+  getRestaurants(term){
+
+    if (term.length < this.minSearchChars) { return null; }
+
+    const type = this.searchType;
+
+    this.restaurantService.getRestaurantSubset(term, this.searchType, this.sql_param_country)
+      .subscribe({
+        next: data => {
+          // console.log({data});
+          this.restaurants = data['restaurants'];
+          if (!this.restaurants.length) {
+            this.noSearchResults = true;
+          } else {
+            this.noSearchResults = false;
+            this.dspNewListingForm = false;
+          }
+        },
+        error: error => {
+          console.log(error);
+          this.error.handleError('unableToLookupRestaurants', 'Failed to get restaurant data in restaurant-lookup! ' + error);
+        }
+      });
   }
 
   findRestaurants(str) {
