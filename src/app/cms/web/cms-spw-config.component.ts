@@ -148,15 +148,16 @@ export class CmsSpwConfigComponent implements OnInit {
       .subscribe({
         next: data => {
           // Make sure the data is available
-          if (data.restaurant_id) {
-            this.restaurant = data;
-            this.publishDate = this.restaurant.restaurant_spw_written;
-            this.publishedBy = this.restaurant.restaurant_verified_by;
-            this.apptiserUrl = this.cms.getApptiserUrl(this.restaurant.restaurant_spw_url, true);
-            this.getConfig();
-            this.getContentStatus();
-            this.setTemplates();
-          }
+          if(data === null) { return; }
+
+          this.restaurant = data;
+          this.publishDate = this.restaurant.restaurant_spw_written;
+          this.publishedBy = this.restaurant.restaurant_verified_by;
+          this.apptiserUrl = this.cms.getApptiserUrl(this.restaurant.restaurant_spw_url, true);
+          this.getConfig();
+          this.getContentStatus();
+          this.setTemplates();
+
         },
         error: error => console.log(error)
       });

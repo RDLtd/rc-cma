@@ -61,6 +61,7 @@ export class CmsEventsComponent implements OnInit {
       disableClose: true,
       data: {
         new: true,
+        brand: this.eventService.brandPrefix,
         categories: this.eventCategories,
         formLabel: this.translate.instant('CMS.EVENTS.titleCreateNew'),
         restaurant: this.restaurant,
@@ -69,7 +70,7 @@ export class CmsEventsComponent implements OnInit {
     };
     const dialogRef = this.dialog.open(EventFormComponent, dialogConfig);
     dialogRef.afterClosed().subscribe((event) => {
-      console.log(event);
+      console.log('AddEvent', event);
       if(!event) { return }
       this.dspMessage('New Event created!')
     });

@@ -966,6 +966,21 @@
 										</translations>
 									</concept_node>
 									<concept_node>
+										<name>labelEndDate</name>
+										<description/>
+										<comment/>
+										<translations>
+											<translation>
+												<language>en-GB</language>
+												<approved>false</approved>
+											</translation>
+											<translation>
+												<language>fr-FR</language>
+												<approved>false</approved>
+											</translation>
+										</translations>
+									</concept_node>
+									<concept_node>
 										<name>labelEventCategory</name>
 										<description/>
 										<comment/>
@@ -1072,6 +1087,21 @@
 									</concept_node>
 									<concept_node>
 										<name>labelRevertToDefault</name>
+										<description/>
+										<comment/>
+										<translations>
+											<translation>
+												<language>en-GB</language>
+												<approved>false</approved>
+											</translation>
+											<translation>
+												<language>fr-FR</language>
+												<approved>false</approved>
+											</translation>
+										</translations>
+									</concept_node>
+									<concept_node>
+										<name>labelStartDate</name>
 										<description/>
 										<comment/>
 										<translations>

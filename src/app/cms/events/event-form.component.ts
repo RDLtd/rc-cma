@@ -77,7 +77,7 @@ export class EventFormComponent implements OnInit {
 
   initEventForm(): void {
 
-    // console.log('initEventForm', this.event.offer_category ,this.event);
+    console.log('initEventForm', this.event, this.event.offer_id);
 
     this.eventFormGroup = this.fb.group({
       category: [this.event.offer_category.id, [Validators.required]],
@@ -279,9 +279,12 @@ export class EventFormComponent implements OnInit {
    * the original db Event
    */
   mapEventOffer(): Object {
+
     const c = this.eventFormGroup.controls;
     const g = this.eventFormGroup;
+    // console.log('id', c.id.value);
     return {
+      offer_brand: this.data.brand,
       offer_id: c.id.value,
       offer_channel_id: 0,
       offer_updated: '',

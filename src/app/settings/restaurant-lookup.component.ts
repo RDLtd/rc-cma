@@ -43,10 +43,10 @@ export class RestaurantLookupComponent implements OnInit {
 
     // upgrade 10/7/18 to add optional parameter to filter by restaurant_status
     this.sql_parameters = {
-      where_field: 'restaurant_name',
+      where_field: 'restaurant_post_code',
       where_string: str,
       where_any_position: 'Y',
-      sort_field: 'restaurant_name',
+      sort_field: 'restaurant_post_code',
       sort_direction: 'ASC',
       limit_number: 100,
       limit_index: '0',

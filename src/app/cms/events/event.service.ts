@@ -77,8 +77,12 @@ export class EventService {
         icon: cat.data.icon
       }
       cats.push(obj);
-    }); 
+    });
     return cats;
+  }
+
+  get brandPrefix(): string {
+    return this.brand.prefix
   }
 
   get eventCategories(): Observable<any> {
