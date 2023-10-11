@@ -72,15 +72,15 @@ export class CmsSpwConfigComponent implements OnInit {
 
   defaultTemplateConfig: TemplateOptions = {
     // About
-    showOpeningNotes: { disabled: true, on: false },
+    showOpeningNotes: { disabled: false, on: false },
     showImageGallery: { disabled: false, on: true },
     // Menus
     showHtmlMenu: { disabled: false, on: false },
-    showDownloadMenus: { disabled: false, on: false },
+    showDownloadMenus: { disabled: false, on: true },
     // Reservations
-    showReservations: { disabled: false, on: false },
+    showReservations: { disabled: false, on: true },
     showReservationsInfo: { disabled: false, on: true },
-    showBookingWidget: { disabled: false, on: false },
+    showBookingWidget: { disabled: false, on: true },
     showGroupBookings: { disabled: false, on: false },
     showPrivateDining: { disabled: false, on: false },
 
@@ -201,8 +201,10 @@ export class CmsSpwConfigComponent implements OnInit {
   }
 
   setTemplate(): void {
+
     // Enable/disable web config controls
     console.log('Compare',this.selectedTemplate.website_defaults, this.defaultTemplateConfig);
+
     if (!!this.selectedTemplate.website_defaults) {
       console.log('update');
       //this.configFormGroup = this.fb.group(this.selectedTemplate.website_defaults);
@@ -288,7 +290,7 @@ export class CmsSpwConfigComponent implements OnInit {
           //this.websiteConfig = data['website_config'].website_config_options;
           this.websiteConfig = this.defaultTemplateConfig;
           console.log('Current config', this.websiteConfig);
-          this.setConfig();
+          this.setConfig(this.websiteConfig);
         },
         error: error => {
           console.log('getWebConfig', error);
@@ -296,7 +298,7 @@ export class CmsSpwConfigComponent implements OnInit {
       });
   }
 
-  setConfig(templateOptions: TemplateOptions = this.websiteConfig): void {
+  setConfig(templateOptions: TemplateOptions): void {
 
     console.log('setConfig', templateOptions);
 
