@@ -1323,12 +1323,15 @@ ul.rc-lookup-results {
       transition: all .3s ease-out;
       color: $rc-theme-black;
       text-decoration: none;
+      .name {
+        margin-right: auto;
+      }
       &:hover {
         color: $rc-theme-primary;
         background-color: #eee;
-        span:last-child { opacity: 1; }
+        //span:last-child { opacity: 1; }
       }
-      span:last-child { opacity: 0; }
+      //span:last-child { opacity: 0; }
     }
   }
 }
@@ -1353,7 +1356,11 @@ ul.rc-lookup-results {
   margin: 1rem 0 0;
   padding: 16px;
   background-color: #eee;
-  h2 { margin: 0 0 1rem; }
+  h2 {
+    font-weight: 500;
+    font-size: 1.25rem;
+    margin: 0 0 .75rem;
+  }
 }
 .rc-lookup-actions {
   margin-top: 1rem;

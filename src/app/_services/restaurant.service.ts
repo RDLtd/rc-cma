@@ -2,6 +2,7 @@
 import { Offer, Restaurant, SQLParameters, LaunchParameters } from '../_models/';
 import { HttpClient } from '@angular/common/http';
 import { ConfigService } from '../init/config.service';
+import { of } from "rxjs";
 
 @Injectable()
 
@@ -62,14 +63,15 @@ export class RestaurantService {
   }
 
   getRestaurantSubset(term: string, type: string = 'name', country: string) {
+      if (term.length < 3) { return of([]) }
     const searchType = type === 'name' ? 'restaurant_name' : 'restaurant_post_code';
     const sql_parameters = {
       where_field: searchType,
       where_string: term,
       where_any_position: 'Y',
-      sort_field: 'restaurant_name',
+      sort_field: searchType,
       sort_direction: 'ASC',
-      limit_number: 100,
+      limit_number: 50,
       limit_index: '0',
       country: country
     };

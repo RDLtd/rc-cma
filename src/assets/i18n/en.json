@@ -461,14 +461,17 @@
 		"labelEnterName": "Enter the trading name",
 		"labelName": "Trading name",
 		"labelPostCode": "Postcode",
+		"labelSearchName": "Search by name",
+		"labelSearchPostcode": "Searchby postcode",
 		"labelTel": "Telephone",
 		"msgAlreadyAdded": "{{ name }} venue is already being managed by you.",
 		"msgAlreadyVerified": "{{ name }} has already been verified",
 		"msgNoMatch": "Sorry, we don't have any venues currently  listed that match your search. Please add your venue using the option below.",
 		"msgNotCurated": "**{{ name }}** has not yet been curated.  However, the team will be notified and curation will take place within the next 48 hours.\n\nIn the meantime, please tell us if any of the current information is incorrect by sending a **Change Request**.",
 		"msgRestaurantAdded": "{{ name }} has been added to your account.",
+		"phSearchType": "Enter a {{ type }}",
 		"titleFind": "Venue finder",
-		"titleNew": "New venue",
+		"titleNew": "Add new venue",
 		"titlePleaseNote": "Please note"
 	},
 	"MARKETPLACE": {
