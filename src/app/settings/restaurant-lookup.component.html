@@ -28,12 +28,13 @@
         <button *ngIf="searchInput.value" matSuffix mat-icon-button aria-label="Clear" (click)="resetSearchInput()">
           <mat-icon>close</mat-icon>
         </button>
+        <mat-hint *ngIf="searchType === 'postcode'">Include the space e.g. BR1 7NR</mat-hint>
       </mat-form-field>
     </section>
 
 
     <section>
-      <span [hidden]="!noSearchResults">{{ 'LOOKUP.msgNoMatch' | translate }}</span>
+
       <ul class="rc-lookup-results">
         <li *ngFor="let restaurant of restaurants">
           <a (click)="associateRestaurant(restaurant)">
@@ -44,8 +45,16 @@
       </ul>
     </section>
 
+    <ng-container *ngIf="noSearchResults">
+
+      <span class="rd-message" markdown
+            *ngIf="searchType === 'name'">{{ 'LOOKUP.msgNoMatchName' | translate }}</span>
+
+      <span class="rd-message" markdown
+            *ngIf="searchType === 'postcode'">{{ 'LOOKUP.msgNoMatchPostcode' | translate }}</span>
+
     <section
-      *ngIf="(noSearchResults || dspNewListingForm)"
+      *ngIf="searchType === 'name'"
       class="rc-lookup-request">
       <h2>{{ 'LOOKUP.titleNew' | translate }}</h2>
       <mat-form-field
@@ -110,9 +119,13 @@
 
     </section>
 
+    </ng-container>
+
   </mat-dialog-content>
 
-  <mat-dialog-actions align="end" *ngIf="!dspNewListingForm && !noSearchResults">
+  <mat-dialog-actions
+    align="end"
+    *ngIf="noSearchResults && searchType === 'postcode'">
     <button
       mat-button
       mat-dialog-close="">{{ 'LOOKUP.labelBtnCancel' | translate | uppercase}}
