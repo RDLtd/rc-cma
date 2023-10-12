@@ -33,11 +33,15 @@ export class AuthenticationService {
     private translate: TranslateService,
     private storage: StorageService,
     private config: ConfigService) {
-    this.brand = this.config.brand$;
+
+    this.config.brand$.subscribe(brand => {
+      this.brand = brand;
+    });
+
   }
 
   public login(form) {
-    // console.log('LOGIN', this.authToken);
+    console.log('LOGIN', this.brand.prefix);
     return this.http.post(this.config.apiUrl + '/members/authenticate',
       {
         email: form.email,

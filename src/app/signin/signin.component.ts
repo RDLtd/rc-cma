@@ -77,7 +77,7 @@ export class SigninComponent implements OnInit {
 
   signIn(formValue) {
 
-    // console.log('form', formValue);
+    console.log('form', formValue);
     this.isSubmitting = true;
     this.authService.login(formValue)
       .subscribe({

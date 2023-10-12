@@ -122,7 +122,8 @@ export class ConfigService {
       })
       .subscribe({
         next: (brand) => {
-          // notify subscribers
+          // notify subscriber
+          console.log(brand);
           this.brandConfig.next(brand);
           return brand;
         },

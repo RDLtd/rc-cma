@@ -68,7 +68,7 @@ export class RestaurantService {
     const sql_parameters = {
       where_field: searchType,
       where_string: term,
-      where_any_position: 'Y',
+      where_any_position: 'N',
       sort_field: searchType,
       sort_direction: 'ASC',
       limit_number: 50,
