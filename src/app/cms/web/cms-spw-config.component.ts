@@ -287,9 +287,10 @@ export class CmsSpwConfigComponent implements OnInit {
       .subscribe({
         next: data => {
           // map data to local
-          //this.websiteConfig = data['website_config'].website_config_options;
-          this.websiteConfig = this.defaultTemplateConfig;
-          console.log('Current config', this.websiteConfig);
+          this.websiteConfig = data['website_config'].website_config_options;
+          if(!this.websiteConfig) {
+            this.websiteConfig = this.defaultTemplateConfig;
+          }
           this.setConfig(this.websiteConfig);
         },
         error: error => {
@@ -354,6 +355,20 @@ export class CmsSpwConfigComponent implements OnInit {
     }
   }
 
+  // Put the form data into the correct shape
+  getNewTemplateConfig(): object {
+    let config = {};
+    // loop through each key in the FormGroup
+    Object.keys(this.configFormGroup.controls).forEach((key: string) => {
+      // Get a reference to the control
+      const abstractControl = this.configFormGroup.get(key);
+      // console.log(`${key}: ${abstractControl.value}, disabled: ${abstractControl.disabled}`);
+      config[key] = { disabled: abstractControl.disabled, on: abstractControl.value };
+    });
+    config['theme'] = this.selectedTheme;
+    return config;
+  }
+
   publishWebsite(production: boolean): void {
 
     const buildVersion = production ? 'Production' : "Preview";
@@ -365,9 +380,7 @@ export class CmsSpwConfigComponent implements OnInit {
     // apptiser update ks 090323 - added member type (for apptiser).
     // Note that association check is done at the back end, which check for ANY member having this restaurant associated
 
-    // Add theme to form value
-    const newConfigObj = this.configFormGroup.value;
-    newConfigObj.theme = this.selectedTheme;
+    const newConfigObj = this.getNewTemplateConfig();
 
     console.log('Updated config', newConfigObj);
 
