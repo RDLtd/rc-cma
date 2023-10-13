@@ -53,7 +53,7 @@
       <div class="rdl-panel" *ngIf="user.member_access_level > 3">
         <h3>Publishing template</h3>
         <mat-form-field appearance="fill" style="width: 100%;">
-          <mat-select [(value)]="selectedTemplate" (selectionChange)="setTemplate()">
+          <mat-select [(value)]="selectedTemplate" (selectionChange)="selectTemplate()">
             <mat-option *ngFor="let t of (brand$ | async).templates" [value]="t">
               {{ t.name }} ({{ t.version }})
             </mat-option>
