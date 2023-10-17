@@ -47,13 +47,6 @@
     <mat-divider></mat-divider>
 
     <button
-      mat-menu-item
-      [routerLink]="['/settings']">
-      <mat-icon>account_circle</mat-icon>
-      <span>{{ 'HEADER.labelSettings' | translate }}</span>
-    </button>
-
-    <button
       *ngIf="!!lastRestaurantId"
       mat-menu-item
       [routerLink]="['cms',lastRestaurantId]">
@@ -61,6 +54,12 @@
       <span>{{ 'HEADER.labelContent' | translate }}</span>
     </button>
 
+    <button
+      mat-menu-item
+      [routerLink]="['/settings']">
+      <mat-icon>account_circle</mat-icon>
+      <span>{{ 'HEADER.labelSettings' | translate }}</span>
+    </button>
 
     <button
       mat-menu-item
@@ -68,7 +67,6 @@
       <mat-icon>logout</mat-icon>
       <span>{{ 'HEADER.labelLogout' | translate }}</span>
     </button>
-
 
     <button
       mat-menu-item
@@ -84,7 +82,6 @@
       <mat-icon>contact_mail</mat-icon>
       <span>{{ 'HEADER.labelContact' | translate }}</span>
     </button>
-
 
     <button
       mat-menu-item
