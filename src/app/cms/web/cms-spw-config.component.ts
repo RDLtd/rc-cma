@@ -30,19 +30,16 @@ export interface TemplateOptions {
 
 @Component({
   selector: 'rc-cms-spw-config',
-  templateUrl: './cms-spw-config.component.html',
-  styles: [
-  ]
+  templateUrl: './cms-spw-config.component.html'
 })
-export class CmsSpwConfigComponent implements OnInit {
 
+export class CmsSpwConfigComponent implements OnInit {
   brand$: any;
   restaurant: Restaurant;
   user: any; // a.k.a member
   prodCategory: string;
   availableTemplates: any;
   selectedTemplate: any;
-
   cssThemeObjects: any[];
   selectedTheme: any;
 
@@ -64,6 +61,7 @@ export class CmsSpwConfigComponent implements OnInit {
   apptiserPreviewUrl: string;
 
   customDomainForm: string;
+  // hide controls based on template category
   hideControls = {
     network: ['domain', 'themes'],
     standard: ['domain'],
@@ -74,9 +72,11 @@ export class CmsSpwConfigComponent implements OnInit {
     // About
     showOpeningNotes: { disabled: false, on: false },
     showImageGallery: { disabled: false, on: true },
+
     // Menus
     showHtmlMenu: { disabled: false, on: false },
     showDownloadMenus: { disabled: false, on: true },
+
     // Reservations
     showReservations: { disabled: false, on: true },
     showReservationsInfo: { disabled: false, on: true },
@@ -89,10 +89,10 @@ export class CmsSpwConfigComponent implements OnInit {
     showLinks: { disabled: false, on: true },
     showTransport: { disabled: false, on: true },
     showParking: { disabled: false, on: true },
+
     // Location
     showMap: { disabled: false, on: true }
   }
-
 
   constructor(
     private cmsLocalService: CmsLocalService,
@@ -100,7 +100,6 @@ export class CmsSpwConfigComponent implements OnInit {
     public help: HelpService,
     private cms: CMSService,
     private _formBuilder: FormBuilder,
-    //private config: AppConfig,
     private storage: StorageService,
     private dialog: MatDialog,
     private translate: TranslateService,
@@ -126,20 +125,19 @@ export class CmsSpwConfigComponent implements OnInit {
 
     // Subscribe to Brand config
     this.brand$ = this.config.brand;
-    this.brand$.subscribe( (obj) => this.availableTemplates = obj.templates );
+    this.brand$.subscribe( (obj: any) => this.availableTemplates = obj.templates );
 
     // Set category
     this.prodCategory = this.storage.getSession('rd_product_category') ?? 'default';
-    // Build website config form
 
-    // Build the config options
-    this.generateConfigForm();
+    // Init the web config UI
+    this.initConfigForm();
 
     // Load available themes from db
     this.getThemes();
 
-    // Now load the restaurant
-    this.loadRestaurantData().then();
+    // load the restaurant
+    this.loadRestaurantData().then(() => console.log('Restaurant config loaded'));
   }
 
   async loadRestaurantData() {
@@ -148,19 +146,36 @@ export class CmsSpwConfigComponent implements OnInit {
       .subscribe({
         next: data => {
           // Make sure the data is available
-          if(data === null) { return; }
-
+          if (data === null) { return; }
           this.restaurant = data;
           this.publishDate = this.restaurant.restaurant_spw_written;
           this.publishedBy = this.restaurant.restaurant_verified_by;
           this.apptiserUrl = this.cms.getApptiserUrl(this.restaurant.restaurant_spw_url, true);
-          this.getConfig();
+          this.getTemplateConfig();
           this.getContentStatus();
           this.setTemplates();
-
         },
         error: error => console.log(error)
       });
+  }
+
+  // Get the restaurant's last published web config
+  getTemplateConfig(): void {
+
+    this.cms.getWebConfig(Number(this.restaurant.restaurant_id))
+        .subscribe({
+          next: data => {
+            // map data to local
+            this.websiteConfig = data['website_config'].website_config_options;
+            if (!this.websiteConfig) {
+              this.websiteConfig = this.defaultTemplateConfig;
+            }
+            this.setConfig(this.websiteConfig);
+          },
+          error: error => {
+            console.log('getWebConfig', error);
+          }
+        });
   }
 
   /**
@@ -168,9 +183,10 @@ export class CmsSpwConfigComponent implements OnInit {
    */
   setTemplates(): void {
 
-    // Already has a published apptiser/spw
+    // Has previously published a web page/spw
     if (!!this.restaurant.restaurant_spw_template) {
 
+      // the template last used by this restaurant
       const publishedTemplate = this.restaurant.restaurant_spw_template;
 
       // Does it match any currently available templates?
@@ -186,8 +202,8 @@ export class CmsSpwConfigComponent implements OnInit {
       console.log("No match for currently published template");
     }
 
-    // No matching published template so
-    // now check Product Category, with fallback
+    // There's no matching-published template so
+    // check Product Category, with fallback
     const cat = this.prodCategory ?? 'default';
 
     for (const t of this.availableTemplates) {
@@ -200,21 +216,20 @@ export class CmsSpwConfigComponent implements OnInit {
     }
   }
 
-  setTemplate(): void {
+  selectTemplate(): void {
 
     // Enable/disable web config controls
-    console.log('Compare',this.selectedTemplate.website_defaults, this.defaultTemplateConfig);
+    // console.log('Compare',this.selectedTemplate.website_defaults, this.defaultTemplateConfig);
 
     if (!!this.selectedTemplate.website_defaults) {
-      console.log('update');
-      //this.configFormGroup = this.fb.group(this.selectedTemplate.website_defaults);
+      // console.log('update');
       this.setConfig(this.selectedTemplate.website_defaults)
     } else {
       this.setConfig(this.defaultTemplateConfig);
       //this.configFormGroup = this.fb.group(this.defaultTemplateConfig);
     }
     this.configChange(`template`);
-    console.log(`Template: ${this.selectedTemplate.version} selected`);
+    //console.log(`Template: ${this.selectedTemplate.version} selected`);
   }
 
   /**
@@ -232,7 +247,7 @@ export class CmsSpwConfigComponent implements OnInit {
       this.cms.checkSPW(this.restaurant.restaurant_id)
         .subscribe({
           next: res => {
-            console.log(`Check:`, res);
+            // console.log(`Check:`, res);
             this.unPublishedChanges = !res['published_status_ok'];
           },
           error: error => {
@@ -242,10 +257,13 @@ export class CmsSpwConfigComponent implements OnInit {
 
   }
 
-  generateConfigForm(): void {
-
+  initConfigForm(): void {
+    // initialise the UI with a generic default web config
+    // this will be immediately updated if the restaurant has
+    // a previously published template
     this.configFormGroup = this.fb.group(this.defaultTemplateConfig);
-    console.log('Default Template:', this.defaultTemplateConfig);
+    // console.log('Default Template:', this.defaultTemplateConfig);
+
     // delay observing changes until defaults are in place
     setTimeout(() => {
       this.configFormGroup.valueChanges.subscribe(() => {
@@ -267,55 +285,34 @@ export class CmsSpwConfigComponent implements OnInit {
   }
 
   // Make all theme stylesheets available to build swatches
-  createThemeLinks(themesObjArray): void {
-    let link;
+  createThemeLinks(themesObjArray: any[]): void {
+    let link: HTMLLinkElement;
     themesObjArray.forEach(
       theme => {
+        // create DOM element
         link = document.createElement('link');
         link.rel = "stylesheet";
         link.type = "text/css";
-        link.href = `https://assets.apptiser.io/styles/themes/${theme.website_theme_name}.css`;
+        link.href = `https://assets.apptiser.io/styles/themes/${theme["website_theme_name"]}.css`;
+        // add to DOM
         document.head.appendChild(link);
       }
     );
   }
 
-  // get the website config data for this restaurant
-  getConfig(): void {
-
-    this.cms.getWebConfig(Number(this.restaurant.restaurant_id))
-      .subscribe({
-        next: data => {
-          // map data to local
-          this.websiteConfig = data['website_config'].website_config_options;
-          if(!this.websiteConfig) {
-            this.websiteConfig = this.defaultTemplateConfig;
-          }
-          this.setConfig(this.websiteConfig);
-        },
-        error: error => {
-          console.log('getWebConfig', error);
-        }
-      });
-  }
-
   setConfig(templateOptions: TemplateOptions): void {
 
-    console.log('setConfig', templateOptions);
+    // console.log('setConfig', templateOptions);
 
     Object.entries(templateOptions).forEach(([key, value]) => {
-
-      //console.log(`${key}: { disabled: ${value['disabled']}, on: ${value['on']} }`);
-
       let formControl = this.configFormGroup.get(key);
 
       if (key === 'theme') {
         this.selectedTheme = value;
-        console.log('loaded theme', value);
         return;
       }
 
-      if(formControl === null) { return; }
+      if (formControl === null) { return; }
 
       formControl.setValue(value.on);
       value.disabled ? formControl.disable() : formControl.enable();
@@ -323,12 +320,13 @@ export class CmsSpwConfigComponent implements OnInit {
     });
   }
 
-  configChange(item): void {
+  configChange(item: string): void {
+
     // if it's already been marked, abort
-    if(this.unPublishedChanges) {
-      return;
-    }
-    console.log(`Changed: ${item}`);
+    if(this.unPublishedChanges) { return; }
+
+    console.log(`configChange: ${item}`);
+
     this.dataChanged = true;
     this.publishStatus = ': unpublished changes'
     this.unPublishedChanges = true;
@@ -338,7 +336,7 @@ export class CmsSpwConfigComponent implements OnInit {
     console.log(formGroup.value);
   }
 
-  toggleSection(control): void {
+  toggleSection(control: string): void {
     const disable = !this.configFormGroup.get(control).value;
     let controls: string[];
     if (control === 'showReservations') {
