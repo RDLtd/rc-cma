@@ -265,18 +265,18 @@ export class CMSService {
     ): Promise<any> {
 
     // Use legacy code/templates for RC & RI
-    if (this.brand.prefix === 'rc' || this.brand.prefix === 'ri') {
-      // use the exising 'old' templates for now...
-      return await lastValueFrom(this.http.post(this.config.apiUrl + '/spw/makespw',
-        {
-          restaurant_id,
-          production,
-          member_id,
-          company: this.brand.prefix,
-          userCode: this.config.userAPICode,
-          token: this.authToken
-        }));
-    }
+    // if (this.brand.prefix === 'rc' || this.brand.prefix === 'ri') {
+    //   // use the exising 'old' templates for now...
+    //   return await lastValueFrom(this.http.post(this.config.apiUrl + '/spw/makespw',
+    //     {
+    //       restaurant_id,
+    //       production,
+    //       member_id,
+    //       company: this.brand.prefix,
+    //       userCode: this.config.userAPICode,
+    //       token: this.authToken
+    //     }));
+    // }
 
     // Activate generator
     console.log('Activate generator', restaurant_id, member_id, production, template, this.brand.prefix, website_options);
