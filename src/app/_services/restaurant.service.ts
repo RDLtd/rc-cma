@@ -1,20 +1,22 @@
 ﻿import { Injectable } from '@angular/core';
-import { AppConfig } from '../app.config';
 import { Offer, Restaurant, SQLParameters, LaunchParameters } from '../_models/';
 import { HttpClient } from '@angular/common/http';
-import { AppService } from './app.service';
+import { ConfigService } from '../init/config.service';
+import { of } from "rxjs";
 
 @Injectable()
 
 export class RestaurantService {
 
-  private authToken;
+  private readonly authToken: any;
+  private brand: any;
+
 
   constructor(
     private http: HttpClient,
-    private appService: AppService,
-    private config: AppConfig) {
-    this.appService.authToken.subscribe(token => this.authToken = token);
+    private config: ConfigService) {
+    this.authToken = config.token;
+    this.brand = config.brand$
   }
 
   getAll() {
@@ -52,6 +54,27 @@ export class RestaurantService {
   }
 
   getSubset(sql_parameters: SQLParameters) {
+    return this.http.post(this.config.apiUrl + '/restaurants/subset',
+      {
+        sql_parameters: sql_parameters,
+        userCode: this.config.userAPICode,
+        token: this.authToken
+      });
+  }
+
+  getRestaurantSubset(term: string, type: string = 'name', country: string) {
+      if (term.length < 3) { return of([]) }
+    const searchType = type === 'name' ? 'restaurant_name' : 'restaurant_post_code';
+    const sql_parameters = {
+      where_field: searchType,
+      where_string: term,
+      where_any_position: 'N',
+      sort_field: searchType,
+      sort_direction: 'ASC',
+      limit_number: 50,
+      limit_index: '0',
+      country: country
+    };
     return this.http.post(this.config.apiUrl + '/restaurants/subset',
       {
         sql_parameters: sql_parameters,
@@ -160,15 +183,15 @@ export class RestaurantService {
       });
   }
 
-  verify(restaurant_id: string, verified_by: string) {
-    return this.http.post(this.config.apiUrl + '/restaurants/verify',
-      {
-        restaurant_id: restaurant_id,
-        verified_by: verified_by,
-        userCode: this.config.userAPICode,
-        token: this.authToken
-      });
-  }
+  // verify(restaurant_id: string, verified_by: string) {
+  //   return this.http.post(this.config.apiUrl + '/restaurants/verify',
+  //     {
+  //       restaurant_id: restaurant_id,
+  //       verified_by: verified_by,
+  //       userCode: this.config.userAPICode,
+  //       token: this.authToken
+  //     });
+  // }
 
   getCuisines(country_code, restaurant_region: string) {
     if (country_code === 'FR') {
@@ -423,7 +446,7 @@ export class RestaurantService {
   getOffers() {
     return this.http.post(this.config.apiUrl + '/restaurants/offers',
       {
-        country_code: this.config.brand.prefix,
+        country_code: this.brand.prefix,
         userCode: this.config.userAPICode,
         token: this.authToken
       });
@@ -480,7 +503,7 @@ export class RestaurantService {
               payment_currency: string, payment_description: string, payment_token: any) {
     return this.http.post(this.config.apiUrl + '/restaurants/sendinvoice',
       {
-        company_prefix: this.config.brand.prefix,
+        company_prefix: this.brand.prefix,
         restaurant_id: restaurant_id,
         restaurant_member_id: restaurant_member_id,
         invoice_number: invoice_number,
@@ -596,7 +619,7 @@ export class RestaurantService {
                    booking_date: string, booking_name: string, booking_email: string, email_language: string,
                    company_name: string) {
     return this.http.post(this.config.apiUrl + '/restaurants/sendbookingemail',
-      { company_prefix: this.config.brand.prefix,
+      { company_prefix: this.brand.prefix,
         restaurant_name: restaurant_name,
         restaurant_email: restaurant_email,
         booking_covers: booking_covers,

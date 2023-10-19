@@ -1,14 +1,8 @@
-## Restaurant Collective Membership
+## apptiser subscription
 
-A restaurant can be a member of the Restaurant Collective at three different levels:
+A venue can subscribe to **apptiser** at two different levels:
 
-**Affiliate** - This is the most basic form of membership. You can view the information associated
-with the restaurant, and request cahnges to the core data, but you cannot modify or add to the CMS data.
+**Standard** - This is our most popular form of subscription with a monthly fee of £29.99 + VAT plus a one time £50 + VAT set up fee for configuring the domain.  This means that you can create and make a fuss-free website with **apptiser**. You can make and request changes to your core data, and
+also add and edit your content data in real-time, with images, downloadable menus (pdfs), descriptions, social media links, location maps, opening hours and contact details. This also includes web hosting, domain transfer and setup.
 
-**Full** - A restaurant can upgrade to FULL membership  by paying an annual fee of £40.
-This allows you to modify and add to your CMS data. You can also preview and edit  the simgle page website
-that is automatically generated from your information.
-
-**Premium** - Restaurant Developments Limited offer a range of additional services that
-can extend the use of your data. For example, you can request that your data are distributed 
-to a number of third-party websites. You can read more about the services offered [here](https://www.restaurantcollective.co.uk).
+**Premium** - Upgrade to premium with a monthly fee of £59.99 + VAT plus a one time £50 + VAT set up fee for configuring the domain. **apptiser** premium includes all of the standard subscription plus a range of additional features including reservations. Premium subscribers have access to our real-time booking widget, Google business integration, and social media bookings. If you'd like to read more, please visit the [apptiser website](https://www.apptiser.io/).

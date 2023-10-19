@@ -1,7 +1,7 @@
 <header>
   <mat-toolbar
     color="accent"
-    class="rc-toolbar rc-toolbar-nav rc-toolbar-fixed rc-toolbar-nav-adjust">
+    class="rc-toolbar rc-toolbar-subnav rc-toolbar-fixed rc-toolbar-nav-adjust">
 
     <button
       *ngIf="restaurants?.length > 1"
@@ -69,8 +69,16 @@
              [matTooltip]="'CMS.NAV.tipReservations' | translate"
              [routerLink]="['reservations']"
              [routerLinkActive]="['rc-link-active']">
-            <mat-icon>event</mat-icon>
+            <mat-icon>menu_books</mat-icon>
           </button>
+
+          <button mat-icon-button
+              [matTooltip]="'CMS.NAV.tipEvents' | translate"
+              [routerLink]="['events']"
+              [routerLinkActive]="['rc-link-active']">
+            <mat-icon>events</mat-icon>
+          </button>
+
           <button mat-icon-button
              [matTooltip]="'CMS.NAV.tipContacts' | translate"
              [routerLink]="['location']"
@@ -82,12 +90,12 @@
               [matTooltip]="'CMS.NAV.tipSettings' | translate"
               [routerLink]="['settings']"
               [routerLinkActive]="['rc-link-active']">
-              <mat-icon>settings</mat-icon>
+              <mat-icon>public</mat-icon>
           </button>
 
         </span>
 
-    <span class="rc-section-toolbar-actions rc-media-med">
+    <span class="rc-section-toolbar-actions rc-media-med-hide">
 
       <button mat-icon-button [matMenuTriggerFor]="cmsMenu">
           <mat-icon>more_vert</mat-icon>
@@ -96,6 +104,7 @@
     </span>
 
   </mat-toolbar>
+
   <mat-menu #cmsMenu="matMenu">
 
     <a mat-menu-item [routerLink]="['dashboard']">
@@ -127,7 +136,7 @@
       <span>{{ 'CMS.NAV.labelLocation' | translate }}</span>
     </a>
     <a mat-menu-item [routerLink]="['settings']">
-      <mat-icon>settings</mat-icon>
+      <mat-icon>web</mat-icon>
       <span>{{ 'CMS.NAV.labelSettings' | translate }}</span>
     </a>
   </mat-menu>

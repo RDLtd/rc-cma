@@ -4,7 +4,7 @@
 @import "abstract";
 @import "variables";
 @import "reset";
-@import 'bpi';
+//@import 'bpi';
 @import "mozrest";
 @import 'rdl';
 
@@ -127,6 +127,11 @@ a.rc-back {
 .rc-warn { color: $rc-theme-warn; }
 .rc-media-small-hide { display: none !important; }
 .rc-media-med { display: flex !important; }
+.rc-media-med-hide {
+  @include mq(small) {
+    display: none !important;
+  }
+}
 .rc-user-menu {
   padding: 16px 18px 8px;
   h3 {
@@ -135,6 +140,19 @@ a.rc-back {
     line-height: 1;
   }
   span { font-size: 11px; }
+}
+.rdl-main-menu {
+  display: flex;
+  align-items: center;
+  transition: all .3s ease-out;
+  cursor: pointer;
+  &:hover {
+    transform: scale(1.05);
+    @include mat.elevation(3);
+  }
+}
+span > p {
+  margin-top: 0;
 }
 
 @media screen and ( min-width : 600px ){
@@ -157,6 +175,17 @@ a.rc-back {
 
 .mat-mdc-card-title h2 {
   margin-bottom: 1rem;
+}
+.mat-mdc-menu-content {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  .mat-mdc-menu-item {
+    font-size: 1.6rem;
+    ~ .mat-mdc-menu-item {
+      border-top: 1px solid #ddd;
+      //.material-icons { font-size: 2rem;}
+    }
+  }
 }
 h4 {
   margin-bottom: .25rem;
@@ -359,13 +388,16 @@ address {
     h1, h2 {
       font-weight: 300;
       line-height: 1.1;
-      font-size: 2rem;
+      font-size: 1.75rem;
+      margin-top: 1rem;
+
     }
     p {
       // text-align: justify;
       font-weight: 300;
       font-size: 18px;
     }
+    ul { margin-top: 1rem;}
     .rc-form-msg {
       margin: 0 0 1rem;
       p { font-size: 16px; }
@@ -614,12 +646,21 @@ form.rc-form-grid {
     background-color: $rc-petrol;
     .rc-link-active { color: white !important; }
   }
+  &.rc-toolbar-subnav {
+    background-color: $rc-petrol;
+    .rc-link-active { color: white !important; }
+    height: auto !important;
+  }
   &.rc-toolbar-section {
     background-color: $rc-theme-secondary;
     color: black;
     text-transform: uppercase;
     font-size: 12px;
-    padding-block: .25rem;
+    padding-block: .1rem;
+    position: sticky;
+    z-index: 99;
+    top: 112px;
+    height: 50px;
     @include mq(small) {
       font-size: 16px;
     }
@@ -652,6 +693,7 @@ form.rc-form-grid {
     margin:2px 0 0 16px;
     border-left: 1px solid white;
     font-size: 14px;
+    font-weight: $rc-default-font-weight;
   }
   .rc-toolbar-btn-lg {
     width: 40px;
@@ -674,28 +716,24 @@ form.rc-form-grid {
     overflow: hidden;
     transition: all .2s ease-out;
     line-height: 1;
-    &:hover {
-      transform: scale(1.1);
-      @include mat.elevation(3);
-      //&:after {
-      //  content: '';
-      //  display: block;
-      //  width: 0;
-      //  height: 0;
-      //  border-left: 6px solid transparent;
-      //  border-right: 6px solid transparent;
-      //  border-top: 4px solid black;
-      //  position: absolute;
-      //  bottom: 6px;
-      //  left: 50%;
-      //  transform: translate(-50%, 50%);
-      //}
-    }
+
     img {
       height: 100%;
       width: 100%;
       object-fit: cover;
     }
+    //&::before {
+    //  content: '';
+    //  display: block;
+    //  width: 0;
+    //  height: 0;
+    //  border-left: 6px solid transparent;
+    //  border-right: 6px solid transparent;
+    //  border-top: 4px solid white;
+    //  position: absolute;
+    //  left: -100%; top:50%;
+    //  transform: translate(-50%, 50%);
+    //}
 
   }
 }
@@ -849,11 +887,6 @@ form.rc-form-grid {
   padding: 0;
   display: flex;
   cursor: pointer;
-
-
-
-
-
   div:first-child {
     background-color: #ddd;
     display: flex;
@@ -1084,9 +1117,23 @@ form.rc-form-grid {
     height: 270px;
     img {
       width: 100%;
-      height: 100%;
+      aspect-ratio: 1/1;
       text-align: center;
       object-fit: cover;
+    }
+    &-event {
+      position: relative;
+      margin: 0 auto;
+      overflow: hidden;
+      background: #eee;
+      width: 360px;
+      height: 200px;
+      img {
+        width: 100%;
+        aspect-ratio: 16/9;
+        text-align: center;
+        object-fit: cover;
+      }
     }
   }
 }
@@ -1094,18 +1141,28 @@ form.rc-form-grid {
   background-color: rgba(#000, .9);
 }
 .rc-dialog-help {
+
+  .mat-mdc-dialog-content {
+    padding: 0 !important;
+  }
   h2 {
-    color: $rc-theme-accent;
+    color: white;
+    background-color: $rc-theme-accent;
     text-transform: uppercase;
+    padding: 1rem;
+    margin-bottom: 1rem;
   }
   h3 {
+    margin: 1rem;
     font-size: 18px;
     font-weight: 500;
   }
   p {
+    margin: 1rem;
     border-left: 3px solid $rc-cool-grey;
     padding-left: 8px;
   }
+
 }
 .rc-dialog-alert {
   padding-bottom: 8px;
@@ -1266,12 +1323,15 @@ ul.rc-lookup-results {
       transition: all .3s ease-out;
       color: $rc-theme-black;
       text-decoration: none;
+      .name {
+        margin-right: auto;
+      }
       &:hover {
         color: $rc-theme-primary;
         background-color: #eee;
-        span:last-child { opacity: 1; }
+        //span:last-child { opacity: 1; }
       }
-      span:last-child { opacity: 0; }
+      //span:last-child { opacity: 0; }
     }
   }
 }
@@ -1296,7 +1356,11 @@ ul.rc-lookup-results {
   margin: 1rem 0 0;
   padding: 16px;
   background-color: #eee;
-  h2 { margin: 0 0 1rem; }
+  h2 {
+    font-weight: 500;
+    font-size: 1.25rem;
+    margin: 0 0 .75rem;
+  }
 }
 .rc-lookup-actions {
   margin-top: 1rem;
@@ -1310,7 +1374,8 @@ ul.rc-lookup-results {
 * -------------------------------
 **/
 .rc-cms {
-  padding-top: ($rc-toolbar-height);
+  padding: ($rc-toolbar-height) 0 1rem 0;
+
   //.rc-card { padding: 16px; }
   dl { margin: 24px 0 0 0; }
   dt {
@@ -1464,7 +1529,7 @@ ul.rc-lookup-results {
 .rc-card-title {
   display: flex;
   align-items: center;
-  margin-bottom: 24px;
+  margin-bottom: .5rem;
   > .mat-icon {
     $size: 32px;
     font-size: $size;
@@ -1519,7 +1584,7 @@ ul.rc-lookup-results {
     transition: all .3s ease-out;
     position: absolute;
     cursor: pointer;
-    top: 8px; right: 8px;
+    inset: .5rem .5rem auto auto;
   }
   &:last-child {
     margin-bottom: 0;
@@ -1914,58 +1979,129 @@ button.rc-member-assc {
     margin: 1rem auto;
   }
 }
+.rd-grid-auto-events {
+  width: 100%;
+  display: grid;
+  padding-block: 1rem;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  @include mq(medium) {
+    grid-template-columns: repeat(3, minmax(280px, 1fr));
+  }
+  @include mq(large) {
+    grid-template-columns: repeat(5, minmax(280px, 1fr));
+  }
+}
+.rd-card {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  background-color: white;
+  transition: all .3s ease-out;
+  h2 {
+    font-size: 1.5rem;
+  }
+  &-image {
+    img {
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+    }
+    margin-bottom: .5rem;
+  }
+  &-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    p { margin-top: 1rem;}
+    a { display: inline; }
+  }
+  &-actions {
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  &-credit {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    text-transform: uppercase;
+    font-size: .75rem;
+    margin-top: 1rem;
+  }
+  &:hover, &:focus-visible {
+    @include mat.elevation(5);
+  }
+}
+.rd-card-img {
+  position: relative;
+  margin-bottom: 1rem;
+  &:hover, &:focus-visible {
+    .image-upload-option {
 
+      opacity: 1;
+    }
+  }
+  img {
 
-// Probably no longer required
-// ------------------------------------
+    width: 100%;
+    aspect-ratio: 16/7;
+    object-fit: cover;
 
-//.rc-member-plans {
-//  // this seems a bit excessive, but it's the only way I've managed
-//  // to override the default mat classes
-//  .mat-mdc-list-base .mat-mdc-list-item .mat-list-item-content-reverse,
-//  .mat-list-base .mat-list-option .mat-list-item-content-reverse {
-//    padding: 0;
-//    margin: 0;
-//  }
-//  .mat-list-single-selected-option,
-//  .mat-list-single-selected-option:hover,
-//  .mat-list-single-selected-option:focus {
-//    border: 1px solid $rc-theme-accent !important;
-//    background-color: transparent;
-//  }
-//  .mat-mdc-list-item.mat-list-option {
-//    .mat-list-text { padding: 0 !important;}
-//    height: auto !important;
-//    margin: 8px 0;
-//    padding: 16px;
-//    border-radius: 6px;
-//    border: 1px solid $rc-cool-grey;
-//    div.content {
-//      display: flex;
-//      justify-content: space-between;
-//      div:last-child {
-//        width: 20%;
-//      }
-//    }
-//    h3 {
-//      font-weight: $rc-display-font-weight;
-//      line-height: 1;
-//      margin: 0 0 4px;
-//      font-size: 16px;
-//    }
-//    p {
-//      font-size: 12px;
-//      font-weight: $rc-default-font-weight;
-//      line-height: 1.3;
-//      margin: 0;
-//    }
-//    span {
-//      font-size: 9px;
-//      text-transform: uppercase;
-//      text-align: right;
-//      font-weight: $rc-default-font-weight;
-//      display: block;
-//    }
-//  }
-//}
+  }
+  .image-upload-option {
+    background-color: hsl(0, 0%, 0%, .4);
+    //cursor: pointer;
+    transition: background-color, opacity;
+    transition-duration: .3s;
+    transition-timing-function: ease-out;
+    opacity: 0;
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.rd-grid-form {
+  //width: min(100%, 600px);
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-column-gap: 8px;
+  grid-row-gap: 0;
+  input { text-overflow: ellipsis !important;}
+  .span-cols {
+    grid-column: 1 / -1;
+  }
+}
+
+.rd-dialog {
+  width: min(600px, 80vw);
+  input {
+    max-width: 100%;
+  }
+  &-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    .title {
+      flex: 1 auto;
+    }
+  }
+}
+img[data-test] {
+  display: none;
+}
+.rd-txt-micro {
+  font-size: 11px;
+}
+.rd-message {
+  display: block;
+  margin-top: 1rem;
+}
 

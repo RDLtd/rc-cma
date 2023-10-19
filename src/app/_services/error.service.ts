@@ -1,20 +1,14 @@
 import { Injectable } from '@angular/core';
-import { AppConfig } from '../app.config';
 import { Notifier } from '@airbrake/browser';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TranslateService } from '@ngx-translate/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { BehaviorSubject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { ConfigService } from '../init/config.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ErrorService {
-
-  private token = new BehaviorSubject(new HttpParams().set('Authorization', 'Bearer' +
-    ' 234242423wdfsdvdsfsdrfg34tdfverge'));
-  public authToken = this.token.asObservable();
-  private currentAuthToken;
 
   private airbrake = new Notifier({
     projectId: 480741,
@@ -22,12 +16,17 @@ export class ErrorService {
     environment: 'production',
   });
 
+  private brand;
+
+
   constructor(
-    private config: AppConfig,
+    private config: ConfigService,
     private translate: TranslateService,
     private snackBar: MatSnackBar,
     private http: HttpClient
-  ) { }
+  ) {
+    this.brand = this.config.brand$;
+  }
 
   handleError(code: string, error: any): void {
     // only show the user if a code has been supplied (so this can be looked up in the translation database)
@@ -45,11 +44,9 @@ export class ErrorService {
   }
 
   reportError(info) {
-    this.authToken.subscribe( tkn => {
-      this.currentAuthToken = tkn;
-    });
+
     // send email to tech
-    const msg = `## The CMA Application has recorded an Error\n\n` +
+    const msg = `## The apptiser CMS Application has recorded an Error\n\n` +
       `${info}\n\n` +
       `Please refer to the transaction log for further information\n`;
 
@@ -65,16 +62,17 @@ export class ErrorService {
   }
 
   sendEmailRequest(msg) {
+
     return this.http.post(this.config.apiUrl + '/members/sendemail',
       {
-        company_name: 'RDL',
-        company_prefix: 'rc',
-        email_to: this.config.brand.email.tech,
-        email_from: this.config.brand.email.support,
-        email_subject: 'CMA Error',
+        company_name: 'apptiser',
+        company_prefix: 'app',
+        email_to: this.brand.emails.tech,
+        email_from: this.brand.emails.support,
+        email_subject: 'apptiser CMS Error',
         email_body: msg,
         userCode: this.config.userAPICode,
-        token: this.currentAuthToken
+        token: this.config.token
       });
   }
 

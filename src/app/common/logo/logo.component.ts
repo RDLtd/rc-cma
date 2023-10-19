@@ -1,9 +1,11 @@
 import { Component, Input } from '@angular/core';
-import { AppConfig } from '../../app.config';
+import { Brand, ConfigService } from '../../init/config.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-rc-logo',
-  templateUrl: './logo.component.html'
+  templateUrl: './logo.component.html',
+  styles: ['img { height: 100%; width: auto; max-width: 300px;}']
 })
 
 export class LogoComponent {
@@ -12,10 +14,10 @@ export class LogoComponent {
   // Added class that provides style
   // e.g. 'primary' or 'accent'
   @Input() version = 'white';
-  brand: string;
+  brand$: Observable<Brand>;
 
-  constructor( private appConfig: AppConfig ) {
-    this.brand = this.appConfig.brand.prefix;
+  constructor( private config: ConfigService ) {
+    this.brand$ = this.config.brand;
   }
 
 }

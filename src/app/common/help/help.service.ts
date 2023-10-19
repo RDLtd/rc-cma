@@ -3,21 +3,23 @@ import { Injectable } from '@angular/core';
 import { HelpComponent } from './help.component';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { AnalyticsService } from '../../_services';
-import { AppConfig } from '../../app.config';
-import {TranslateService} from '@ngx-translate/core';
+import { TranslateService } from '@ngx-translate/core';
+import { ConfigService } from '../../init/config.service';
 
 @Injectable()
 export class HelpService {
   lang: string;
   title: string;
+  brand: any;
   constructor(
     private dialog: MatDialog,
     private ga: AnalyticsService,
-    private config: AppConfig,
+    private config: ConfigService,
     private translate: TranslateService
   ) {
     this.lang  = localStorage.getItem('rd_language');
     this.title = this.translate.instant('HELP.headerDefault');
+    config.brand.subscribe(obj => this.brand = obj);
   }
 
   /**
@@ -66,7 +68,7 @@ export class HelpService {
         if (restaurant) {
           sbj = `Re: ${restaurant.restaurant_name} [${restaurant.restaurant_number}]`;
         }
-        window.open(`mailto:${this.config.brand.email.support}?subject=${sbj}`, '_blank');
+        window.open(`mailto:${this.brand.emails.support}?subject=${sbj}`, '_blank');
       }
       this.dialog.closeAll();
     });

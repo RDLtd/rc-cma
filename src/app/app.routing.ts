@@ -19,7 +19,6 @@ import {
   CmsHoursComponent,
   CmsFeaturesComponent,
   CmsLocationComponent,
-  CmsPreviewComponent,
   CmsReservationsComponent,
   CmsDashboardComponent
 } from './cms';
@@ -31,7 +30,8 @@ import {
 import { JoinComponent } from './join/join.component';
 import { MembershipComponent } from './join/membership.component';
 import {ProfileComponent} from './profile/profile.component';
-import { CmsSpwConfigComponent } from './cms/cms-spw-config.component';
+import { CmsSpwConfigComponent } from './cms';
+import { CmsEventsComponent } from './cms';
 
 const APP_ROUTES: Routes = [
   { path: '', component: SigninComponent, title: 'Sign in' },
@@ -106,16 +106,16 @@ const APP_ROUTES: Routes = [
         canActivate: [AuthGuard],
         canDeactivate: [CanDeactivateGuard] },
 
+      { path: 'events',
+        component: CmsEventsComponent,
+        title: 'Events',
+        canActivate: [AuthGuard] },
+
       { path: 'settings',
         component: CmsSpwConfigComponent,
         title: 'Publish Settings',
         canActivate: [AuthGuard],
         canDeactivate: [CanDeactivateGuard] },
-
-      { path: 'preview',
-        component: CmsPreviewComponent,
-        title: 'SPW Preview',
-        canActivate: [AuthGuard] },
 
       { path: '**',
         redirectTo: 'dashboard', pathMatch: 'full' }

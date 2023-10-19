@@ -15,13 +15,14 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import * as moment from 'moment';
-import { AppConfig } from '../app.config';
 import { CmsLocalService } from '../cms';
 import { LoadService, ConfirmCancelComponent, HelpService } from '../common';
 import { HeaderService } from '../common/header.service';
 import { CurrencyPipe } from '@angular/common';
 import { ImageService } from '../_services/image.service';
 import { CloudinaryImage } from '@cloudinary/url-gen';
+import { StorageService } from '../_services/storage.service';
+import { ConfigService } from '../init/config.service';
 
 
 @Component({
@@ -51,6 +52,8 @@ export class SettingsComponent implements OnInit {
 
   clImage: CloudinaryImage;
   clPlugins: any[];
+  brand: any;
+  brand$: any;
 
   constructor(
     private header: HeaderService,
@@ -59,11 +62,12 @@ export class SettingsComponent implements OnInit {
     private memberService: MemberService,
     private ga: AnalyticsService,
     private cms: CMSService,
+    private storage: StorageService,
     public snackBar: MatSnackBar,
     private router: Router,
     private translate: TranslateService,
     public help: HelpService,
-    public appConfig: AppConfig,
+    public config: ConfigService,
     private loadService: LoadService,
     private currencyPipe: CurrencyPipe,
     private imgService: ImageService,
@@ -85,6 +89,13 @@ export class SettingsComponent implements OnInit {
     this.setMember();
     this.setProducts();
     this.getAssociatedRestaurants(this.member.member_id);
+    this.config.brand.subscribe(obj => {
+      this.brand = obj;
+    });
+    this.brand$ = this.config.brand;
+    this.brand$.subscribe(obj => {
+      this.brand = obj;
+    });
   }
 
   setMember(): void {
@@ -109,6 +120,11 @@ export class SettingsComponent implements OnInit {
   }
 
   setProducts(): void {
+
+    if (this.isFreeMembership) { return; }
+
+    console.log('ID', this.member.member_customer_id);
+
     // Any pending invoices
     if (!this.isFreeMembership) {
       this.memberService.getUpcomingInvoice(this.member.member_customer_id)
@@ -130,7 +146,7 @@ export class SettingsComponent implements OnInit {
           this.products = obj['products'];
           // Set current product
           // *** If it's an old registration, use product[0] to keep things working
-          // console.log('Products loaded', this.products);
+          console.log('Products loaded', this.products);
           // Find & store the current Member product
           this.currentProduct =
             this.products.find(p => p.product_stripe_id === this.member.member_product_id) || this.products[0];
@@ -200,9 +216,9 @@ export class SettingsComponent implements OnInit {
             {
               price: this.currencyPipe.transform(
                 this.restProd.product_price,
-                this.appConfig.brand.currency.code),
-              total: this.currencyPipe.transform(newTotal,
-                this.appConfig.brand.currency.code)
+                this.brand.currency.code),
+                total: this.currencyPipe.transform(newTotal,
+                this.brand.currency.code)
             }),
           confirm: 'Continue'
         }
@@ -258,11 +274,12 @@ export class SettingsComponent implements OnInit {
           ` - **Code**: ${userRequest.newRestaurantPostcode}\n` +
           ` - **Telephone**: ${userRequest.newRestaurantTel}\n` +
           ` - **Member name**: ${this.member.member_first_name} ${this.member.member_last_name}\n` +
-          ` - **Member ID: ${this.member.member_id}\n` +
+          ` - **Member ID**: ${this.member.member_id}\n` +
           ` - **Member Email**: ${this.member.member_email}\n\n` +
           `Contact the user directly if any clarification is required.\n\n` +
           `Thank you`;
 
+        // ks 270323 first send email request to curation
         this.memberService.sendEmailRequest(
           'curation',
           'support',
@@ -280,6 +297,24 @@ export class SettingsComponent implements OnInit {
               this.showRestaurantFinder = false;
             }
           });
+        // ks 270323 and also let the member know we are on it
+        this.memberService.sendAddRestaurantInProgress(
+          this.member.member_first_name,
+          this.member.member_last_name,
+          this.member.member_email,
+          userRequest.newRestaurantName,
+          userRequest.newRestaurantPostcode,
+          userRequest.newRestaurantTel)
+          .subscribe({
+            next: () => {
+              this.showRestaurantFinder = false;
+            },
+            error: error => {
+              console.log(error);
+              // no need to show user
+              this.error.handleError('', 'Failed to send curation request email! ' + bodyContent + ', ' + error);
+            }
+          });
       } else {
         // All good
         this.showRestaurantFinder = false;
@@ -295,37 +330,48 @@ export class SettingsComponent implements OnInit {
     // If this is the first additional restaurant
     // i.e. it's the 2nd restaurant that's been associated
     // then we need to create the subscription
-    if (this.restaurants.length === 2) {
-      this.loadService.open('Create Restaurant Subscription');
-      this.memberService.createRestaurantSubscription(
-        this.member.member_id,
-        this.member.member_customer_id,
-        this.restProd.product_stripe_price_id,
-        this.restProd.product_tax_id,
-        1
-      ).subscribe({
-        next: res => {
-          console.log(res);
-          // Now update member's subscription id
-          this.member.member_subscription_id = res['subscription_id'];
-          localStorage.setItem('rd_profile', JSON.stringify(this.member));
-          this.loadService.close();
-        },
-        error: error => {
-          console.log(error);
-          this.error.handleError('', 'Failed to create restaurant subscription! ' + error);
-          this.loadService.close();
-        }
-      });
-    } else {
-      // update subscription charge
-      this.updateRestaurantSubscription(this.restaurants.length - 1);
+    //
+
+    // ks 280323 NO - I think we need to update, since all apptiser restaurants are the same...
+    if (this.restaurants.length > 1 ) {
+      this.updateRestaurantSubscription(this.restaurants.length);
     }
+    // if (this.restaurants.length === 2) {
+    //   this.loadService.open('Create Restaurant Subscription');
+    //   this.memberService.createRestaurantSubscription(
+    //     this.member.member_id,
+    //     this.member.member_customer_id,
+    //     this.restProd.product_stripe_price_id,
+    //     this.restProd.product_tax_id,
+    //     1
+    //   ).subscribe({
+    //     next: res => {
+    //       console.log(res);
+    //       // Now update member's subscription id
+    //       this.member.member_subscription_id = res['subscription_id'];
+    //       localStorage.setItem('rd_profile', JSON.stringify(this.member));
+    //       this.loadService.close();
+    //     },
+    //     error: error => {
+    //       console.log(error);
+    //       this.error.handleError('', 'Failed to create restaurant subscription! ' + error);
+    //       this.loadService.close();
+    //     }
+    //   });
+    // } else {
+    //   // update subscription charge
+    //   this.updateRestaurantSubscription(this.restaurants.length - 1);
+    // }
   }
 
   updateRestaurantSubscription(qty: number): void {
+    console.log('Update count to ', qty);
     this.loadService.open('Update Subscription');
     this.restProd = this.getRestaurantProduct();
+    // ks 280323 in fact we do not need all of this since we now use a different methods
+    // at the back end - we just update the quantity in subscriptionItems
+    //
+    // Leaving the call as is for now...
     this.memberService.addRestaurantSubscription(
       this.member.member_id,
       this.member.member_subscription_id,
@@ -336,6 +382,7 @@ export class SettingsComponent implements OnInit {
       .subscribe({
         next: res => {
           console.log(res);
+          this.openSnackBar(this.translate.instant('SETTINGS.msgRestaurantRemoved'), 'OK');
           this.loadService.close();
         },
         error: error => {
@@ -359,23 +406,35 @@ export class SettingsComponent implements OnInit {
     dialogRef.afterClosed().subscribe(confirmed => {
 
       if (confirmed) {
-        const addedRestaurantCount = this.restaurants.length - 1;
-        // do we need to update the restaurant subscription?
 
+        // ks 280328 for apptiser don't subtract 1!
+        const addedRestaurantCount = this.restaurants.length;
+
+        // do we need to update the restaurant subscription?
         if (addedRestaurantCount && !this.isFreeMembership) {
-          addedRestaurantCount === 1 ?
-            this.deleteRestaurantSubscription() : this.updateRestaurantSubscription(addedRestaurantCount - 1);
+          // ks 290323 do NOT delete the subscription for apptiser
+          if (addedRestaurantCount > 1) {
+            this.updateRestaurantSubscription(addedRestaurantCount - 1)
+          }
+          // addedRestaurantCount === 1 ?
+          //   this.deleteRestaurantSubscription() : this.updateRestaurantSubscription(addedRestaurantCount - 1);
         }
 
         this.restaurantService.removeAssociation(rest['association_id'])
           .subscribe({
             next: () => {
+
+              // remove restaurant & image from array
               this.restaurants.splice(index, 1);
               this.defaultImages.splice(index, 1);
-              this.openSnackBar(this.translate.instant('SETTINGS.msgRestaurantRemoved', {name: rest.restaurant_name}), 'OK');
+
+              // delete last restaurant local storage ref.
+              if (this.restaurants.length === 0) { this.storage.remove('rd_last_restaurant'); }
+
               // record event
               this.ga.sendEvent('Profile', 'Edit', 'Remove Association');
             },
+
             error: error => {
               this.error.handleError('', 'Failed to remove restaurant subscription! ' + error);
               console.log(error);
@@ -415,33 +474,48 @@ export class SettingsComponent implements OnInit {
   }
 
   managePayments(): void {
-    // First get the stripe customer number for this member from the database
-    this.memberService.getStripeCustomerNumber(this.member.member_id)
+    // We already have the customer id!
+    console.log(this.member);
+    this.memberService.accessCustomerPortal(this.member.member_customer_id, window.location.href)
       .subscribe({
-        next: (customer) => {
-          console.log(customer);
-          // need to send stripe back to this window
+        next: (data) => {
+          // console.log('accessed CustomerPortal OK', data);
           // @ts-ignore
-          this.memberService.accessCustomerPortal(customer.customer_number, window.location.href)
-              .subscribe({
-                next: (data) => {
-                  // console.log('accessed CustomerPortal OK', data);
-                  // @ts-ignore
-                  window.open(data.url, '_self');
-                },
-                error: error => {
-                  console.log('accessCustomerPortal error', error);
-                  this.error.handleError('', 'Unable to access stripe customer portal for member id ' +
-                    this.member.member_id + '! ' + error);
-                }
-              });
+          window.open(data.url, '_self');
         },
         error: error => {
-          this.error.handleError('', 'Failed to get stripe customer number for member id ' +
+          console.log('accessCustomerPortal error', error);
+          this.error.handleError('', 'Unable to access stripe customer portal for member id ' +
             this.member.member_id + '! ' + error);
-          console.log('getStripeCustomerNumber error', error);
         }
       });
+    // this code out of date (ks), but leaving in place...
+    // this.memberService.getStripeCustomerNumber(this.member.member_id)
+    //   .subscribe({
+    //     next: (customer) => {
+    //       console.log(customer);
+    //       // need to send stripe back to this window
+    //       // @ts-ignore
+    //       this.memberService.accessCustomerPortal(customer.customer_number, window.location.href)
+    //           .subscribe({
+    //             next: (data) => {
+    //               // console.log('accessed CustomerPortal OK', data);
+    //               // @ts-ignore
+    //               window.open(data.url, '_self');
+    //             },
+    //             error: error => {
+    //               console.log('accessCustomerPortal error', error);
+    //               this.error.handleError('', 'Unable to access stripe customer portal for member id ' +
+    //                 this.member.member_id + '! ' + error);
+    //             }
+    //           });
+    //     },
+    //     error: error => {
+    //       this.error.handleError('', 'Failed to get stripe customer number for member id ' +
+    //         this.member.member_id + '! ' + error);
+    //       console.log('getStripeCustomerNumber error', error);
+    //     }
+    //   });
   }
 
   updateMemberContacts(): void {
@@ -597,7 +671,7 @@ export class SettingsComponent implements OnInit {
     window.location.reload();
   }
 
-  openSnackBar(msg: string, act = '', dur = 5000, pos: any = 'top'): void {
+  openSnackBar(msg: string, act = '', dur = 5000, pos: any = 'bottom'): void {
     this.snackBar.open(msg, act, {
       verticalPosition: pos,
       duration: dur

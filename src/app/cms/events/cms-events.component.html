@@ -1,0 +1,83 @@
+<div class="rc-content-container full-width">
+  <mat-toolbar class="rc-toolbar-section">
+    <span>{{ 'CMS.EVENTS.titleEvents' | translate }}</span>
+
+    <span class="rc-space-filler"></span>
+    <mat-chip style="margin-left: 1rem" *ngIf="!!filter">{{ 'CMS.EVENTS.labelFilterBy' | translate }} {{ filter |
+      titlecase }}
+      <button matChipRemove [attr.aria-label]="'clear filters'" (click)="clearFilters()">
+        <mat-icon>cancel</mat-icon>
+      </button>
+    </mat-chip>
+    <span class="rc-toolbar-actions">
+<!--          <button-->
+<!--            mat-icon-button>-->
+<!--              <mat-icon>help_outline</mat-icon>-->
+<!--          </button>-->
+      <button mat-icon-button
+              [matMenuTriggerFor]="filters"
+              matTooltip="{{ 'CMS.EVENTS.tipFilterEvents' | translate }}">
+            <mat-icon>filter_list</mat-icon>
+          </button>
+          <button mat-icon-button
+                  (click)="addEvent()"
+                  matTooltip="{{ 'CMS.EVENTS.tipAddEvent' | translate }}">
+            <mat-icon>add_circle_outline</mat-icon>
+          </button>
+        </span>
+  </mat-toolbar>
+  <mat-menu #filters="matMenu">
+    <button mat-menu-item
+            (click)="filterBy('active')">
+      <mat-icon class="rc-success">public</mat-icon>
+      <span>{{ 'CMS.EVENTS.labelActive' | translate }}</span>
+    </button>
+    <button mat-menu-item
+            (click)="filterBy('inactive')">
+      <mat-icon>public_off</mat-icon>
+      <span>{{ 'CMS.EVENTS.labelInactive' | translate }}</span>
+    </button>
+    <button mat-menu-item
+            (click)="filterBy('all')">
+      <mat-icon>clear</mat-icon>
+      <span>{{ 'CMS.EVENTS.labelAll' | translate }}</span>
+    </button>
+  </mat-menu>
+
+  <div class="rd-grid-auto-events" [@insertAnimation]="events$ | async">
+    <ng-container *ngFor="let event of events$ | async">
+      <div class="rd-card" (click)="editEvent(event)">
+        <div class="rd-card-image">
+          <img [src]="event.offer_image" [alt]="event.offer_tag">
+        </div>
+        <div class="rd-card-content">
+          <h2>{{ event.offer_tag }}</h2>
+          <h3>{{ event.offer_strapline }}</h3>
+          <markdown>
+            {{ event.offer_text }}
+          </markdown>
+          <span><a *ngIf="!!event.offer_link" [href]="event.offer_link" target="_blank">More information</a></span>
+          <p class="rc-txt-small">{{ 'CMS.EVENTS.infoMktgDates' | translate: {
+            startDate: event.offer_marketed_from | date : 'mediumDate',
+            endDate: event.offer_marketed_to | date : 'mediumDate'
+          } }}</p>
+          <span style="margin:auto"></span>
+          <div class="rd-card-credit">
+            <span>{{ event.offer_restaurant_member_id }}</span>
+            <span class="rc-space-filler"></span>
+
+            <ng-template [ngIf]="active(event)" [ngIfElse]="inActive">
+              <mat-icon class="rc-success" [matTooltip]="'CMS.EVENTS.tipActive' | translate">public</mat-icon>
+            </ng-template>
+
+            <ng-template #inActive>
+              <mat-icon [matTooltip]="'CMS.EVENTS.tipInactive' | translate">public_off</mat-icon>
+            </ng-template>
+
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+  </div>
+</div>

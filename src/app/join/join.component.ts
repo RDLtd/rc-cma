@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MemberService, AuthenticationService, AppService, ErrorService } from '../_services';
+import { MemberService, AuthenticationService, ErrorService } from '../_services';
 import { CmsLocalService } from '../cms';
 import { TranslateService } from '@ngx-translate/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmCancelComponent, LoadService } from '../common';
-import { AppConfig } from '../app.config';
 import { fadeAnimation } from '../shared/animations';
 import { lastValueFrom } from 'rxjs';
+import { Brand, ConfigService } from '../init/config.service';
 
 
 export interface PendingMember {
@@ -33,7 +33,7 @@ export class JoinComponent implements OnInit {
   newRegResult: string;
   duplicateField: string;
   pendingMember: PendingMember;
-  public brand: any;
+  public brand$: any;
 
   referrer = {
     type: 'self',
@@ -49,6 +49,8 @@ export class JoinComponent implements OnInit {
   lang = localStorage.getItem('rd_language');
   stripeSessionId: any;
   jobs: any;
+  ssl = window.location.origin.includes('https');
+  brand: Brand;
 
   constructor(
     private route: ActivatedRoute,
@@ -58,8 +60,7 @@ export class JoinComponent implements OnInit {
     private translate: TranslateService,
     private dialog: MatDialog,
     private load: LoadService,
-    public config: AppConfig,
-    private appService: AppService,
+    public config: ConfigService,
     private router: Router,
     private error: ErrorService
   ) {
@@ -68,9 +69,11 @@ export class JoinComponent implements OnInit {
       this.stripeSessionId = params['session_id'];
       // console.log('stripeSessionId', this.stripeSessionId);
     });
+    console.log(`SSL = ${this.ssl}`);
   }
 
   ngOnInit() {
+    this.config.brand.subscribe(obj => this.brand = obj);
     // Referral or promo code?
     this.route.paramMap
       .subscribe(params => {
@@ -88,7 +91,7 @@ export class JoinComponent implements OnInit {
       });
 
     // Set brand
-    this.brand = this.config.brand;
+    this.brand$ = this.config.brand;
 
     // Get array of translated jobs
     this.jobs = this.translate.instant('JOIN.jobRoles');
@@ -150,7 +153,7 @@ export class JoinComponent implements OnInit {
     if (!formData.accepts_terms) {
       this.dialog.open(ConfirmCancelComponent, {
         data: {
-          body: this.translate.instant('JOIN.invalidTerms', { brand: this.brand.name }),
+          body: this.translate.instant('JOIN.invalidTerms', { brand: this.brand$.name }),
           cancel: 'hide',
           confirm: 'OK'
         }

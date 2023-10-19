@@ -1,31 +1,36 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Inject, ViewChild } from '@angular/core';
 import { Restaurant } from '../_models';
 import { RestaurantService, CMSService, ErrorService } from '../_services';
-import { AppConfig } from '../app.config';
 import { VerificationComponent } from './verification.component';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TranslateService } from '@ngx-translate/core';
 import { ConfirmCancelComponent, HelpService } from '../common';
+import { debounceTime, distinctUntilChanged, fromEvent, of, switchMap, tap } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-rc-restaurant-lookup',
   templateUrl: './restaurant-lookup.component.html'
 })
 
-export class RestaurantLookupComponent implements OnInit {
+export class RestaurantLookupComponent implements AfterViewInit {
+
+  @ViewChild('searchInput') searchInput: ElementRef;
+  countryCode: string;
+  restaurants: Restaurant[] = [];
+  searchType = "name";
+  isSearching = false;
+  showSearchResults = false;
   noSearchResults = false;
+  // for associations
   dspNewListingForm = false;
   verificationCodeRequired = true;
   contactEmailRequired = false;
-  restaurants: Restaurant[] = [];
-  sql_parameters: any = this.config.sql_defaults;
-  sql_param_country: string;
 
   constructor(
     private   restaurantService: RestaurantService,
     private   cms: CMSService,
-    private   config: AppConfig,
     public    dialog: MatDialog,
     public    help: HelpService,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -35,51 +40,46 @@ export class RestaurantLookupComponent implements OnInit {
     public dialogRef: MatDialogRef<RestaurantLookupComponent>
   ) { }
 
-  ngOnInit() {
-    this.sql_param_country = localStorage.getItem('rd_brand') === 'ri' ? 'FR' : 'UK';
+  ngAfterViewInit() {
+    this.countryCode = localStorage.getItem('rd_brand') === 'ri' ? 'FR' : 'UK';
+    this.initSearch();
   }
 
-  findRestaurants(str) {
-
-    // upgrade 10/7/18 to add optional parameter to filter by restaurant_status
-    this.sql_parameters = {
-      where_field: 'restaurant_name',
-      where_string: str,
-      where_any_position: 'Y',
-      sort_field: 'restaurant_name',
-      sort_direction: 'ASC',
-      limit_number: 100,
-      limit_index: '0',
-      // restaurant_status: 'Curation Complete',
-      country: this.sql_param_country
-    };
-
-    // If user has input something
-    if (str.trim()) {
-
-      this.restaurantService.getSubset(this.sql_parameters)
-        .subscribe({
-          next: data => {
-            // console.log({data});
-            this.restaurants = data['restaurants'];
-            if (!this.restaurants.length) {
-              this.noSearchResults = true;
-            } else {
-              this.noSearchResults = false;
-              this.dspNewListingForm = false;
-            }
-          },
-          error: error => {
-            console.log(error);
-            this.error.handleError('unableToLookupRestaurants', 'Failed to get restaurant data in restaurant-lookup! ' + error);
-          }
-        });
-    } else {
-      this.restaurants = null;
-      this.noSearchResults = false;
-    }
+  /**
+   * Initialise search on our input field and listen for key events
+   */
+  initSearch() {
+    console.log(this.searchInput);
+    fromEvent(this.searchInput.nativeElement, 'keyup').pipe(
+      map((event: any) => event.target.value),
+      debounceTime(250),
+      distinctUntilChanged(),
+      tap(() => this.isSearching = true),
+      switchMap((term) => term ? this.restaurantService.getRestaurantSubset(term, this.searchType, this.countryCode) : of<any>(this.restaurants)),
+      tap(() => {
+        this.isSearching = false;
+        this.showSearchResults = true;
+      })
+    ).subscribe({
+      next: (data) => {
+        if (!data) { return }
+        this.isSearching = false;
+        this.restaurants = data.restaurants;
+        this.noSearchResults = !!this.restaurants && this.restaurants.length < 1;
+      },
+      error: err => console.log(err)
+    });
   }
 
+  focusSearchInput(): void {
+    this.searchInput.nativeElement.select();
+  }
+  resetSearchInput(): void {
+    this.searchInput.nativeElement.value = '';
+    this.restaurants = [];
+    this.dspNewListingForm = false;
+    this.noSearchResults = false;
+  }
   associateRestaurant(selected) {
 
     // TODO so here is the problem, via the join form we don't have this data set
@@ -93,7 +93,7 @@ export class RestaurantLookupComponent implements OnInit {
       const associatedRestaurant = this.data.associatedRestaurants[i];
       if (associatedRestaurant.restaurant_name === selected.restaurant_name &&
         associatedRestaurant.restaurant_address_1 === selected.restaurant_address_1) {
-        // console.log('Restaurant already associated');
+        // console.log('Restaurant already associated for this user');
         this.dspSnackBar(
           this.translate.instant('LOOKUP.msgAlreadyAdded', { name: selected.restaurant_name})
         );
@@ -108,6 +108,15 @@ export class RestaurantLookupComponent implements OnInit {
 
       // Has it already been verified by owner?
       // i.e. is there already an admin user
+
+      //
+      // ks 200723 not sure this is the correct strategy. Plus also not sure that we ever set data_status!
+      //
+      // Here we need to look in ALL associations for this venue - if it is already associated
+      // then we need to inhibit...
+      //
+      // BUT, if it has been only associated by level 4 users, then we should be able to proceed!
+      //
       if (selected.restaurant_data_status === 'Verified By Owner') {
         this.dspSnackBar(
           this.translate.instant('LOOKUP.msgAlreadyVerified', { name: selected.restaurant_name })

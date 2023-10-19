@@ -1,0 +1,120 @@
+<div class="rd-dialog rd-dialog-events">
+
+  <div mat-dialog-title>
+    <div class="rd-dialog-header">
+      <span class="title">{{ formLabel | uppercase }}</span>
+      <button mat-icon-button tabindex="-1" [matMenuTriggerFor]="menu"><mat-icon>more_vertical
+      </mat-icon></button>
+    </div>
+  </div>
+
+  <mat-menu #menu="matMenu">
+
+    <button mat-menu-item
+            [disabled]="event.offer_category.image !== 'custom'"
+            (click)="deleteCustomImage()">
+      <mat-icon>image</mat-icon>
+      <span>{{ 'CMS.EVENTS.labelRevertToDefault' | translate }}</span>
+    </button>
+
+    <button [disabled]="isNewEvent" mat-menu-item (click)="deactivateEvent()">
+      <mat-icon>public_off</mat-icon>
+      <span>{{ 'CMS.EVENTS.labelDeactivateEvent' | translate }}</span>
+    </button>
+
+    <button [disabled]="isNewEvent" mat-menu-item (click)="deleteEvent()">
+      <mat-icon>delete</mat-icon>
+      <span>{{ 'CMS.EVENTS.labelDeleteEvent' | translate }}</span>
+    </button>
+
+  </mat-menu>
+
+
+  <mat-dialog-content>
+
+    <div class="rd-card-img" *ngIf="!!imgUrl">
+      <img [src]="imgUrl" id="eventImage" alt="{{ 'CMS.EVENTS.altEventImage' | translate }}">
+      <rc-image-upload (onImgUploaded)="imageUploadHandler($event)"
+                       [restaurant]="restaurant"></rc-image-upload>
+    </div>
+
+    <form [formGroup]="eventFormGroup" class="rd-grid-form">
+      <mat-form-field>
+        <mat-label>{{ 'CMS.EVENTS.labelEventCategory' | translate }}</mat-label>
+        <mat-select formControlName="category"
+                    placeholder="{{ 'CMS.EVENTS.labelSelectCategory' | translate }}"
+                    (selectionChange)="updateEventCategory($event)">
+          <mat-option *ngFor="let category of arrCategories" [value]="category.id" >
+            {{ category.label }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+
+
+      <mat-form-field class="span-cols">
+        <mat-label>{{ 'CMS.EVENTS.labelEventTitle' | translate }}</mat-label>
+        <input matInput formControlName="title" />
+      </mat-form-field>
+
+      <mat-form-field class="span-cols">
+        <mat-label>{{ 'CMS.EVENTS.labelEventSubtitle' | translate }}</mat-label>
+        <input matInput formControlName="subtitle" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>{{ 'CMS.EVENTS.labelDates' | translate }}</mat-label>
+        <mat-date-range-input
+          #evtRange
+          formGroupName="eventRangeGroup"
+          [rangePicker]="eventRangePicker">
+          <input matStartDate placeholder="{{ 'CMS.EVENTS.labelStartDate' | translate }}" formControlName="start">
+          <input matEndDate placeholder="{{ 'CMS.EVENTS.labelEndDate' | translate }}" formControlName="end">
+        </mat-date-range-input>
+        <mat-hint class="rd-txt-micro">DD/MM/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="eventRangePicker"></mat-datepicker-toggle>
+        <mat-date-range-picker #eventRangePicker></mat-date-range-picker>
+      </mat-form-field>
+
+      <mat-form-field class="example-form-field">
+        <mat-label>{{ 'CMS.EVENTS.labelMarketing' | translate }}</mat-label>
+        <mat-date-range-input
+          formGroupName="marketingRangeGroup"
+          [rangePicker]="marketingRangePicker"
+          [comparisonStart]="evtRange.value.start"
+          [comparisonEnd]="evtRange.value.end">
+          <input matStartDate placeholder="{{ 'CMS.EVENTS.labelStartDate' | translate }}" formControlName="start">
+          <input matEndDate placeholder="{{ 'CMS.EVENTS.labelStartDate' | translate }}" formControlName="end">
+        </mat-date-range-input>
+        <mat-datepicker-toggle matIconSuffix [for]="marketingRangePicker"></mat-datepicker-toggle>
+        <mat-hint class="rd-txt-micro">DD/MM/YYYY</mat-hint>
+        <mat-date-range-picker #marketingRangePicker></mat-date-range-picker>
+      </mat-form-field>
+
+      <mat-form-field class="span-cols">
+        <mat-label>{{ 'CMS.EVENTS.labelDescription' | translate }}</mat-label>
+        <textarea matInput formControlName="description"></textarea>
+      </mat-form-field>
+
+      <mat-form-field class="span-cols">
+        <mat-label>{{ 'CMS.EVENTS.labelMoreInfo' | translate }}</mat-label>
+        <input matInput formControlName="link" />
+        <a *ngIf="!!eventFormGroup.controls.link.value"
+          matSuffix
+          mat-icon-button
+          matTooltip="Test your event link"
+          [href]="eventFormGroup.controls.link.value">
+          <mat-icon color="accent">arrow_forward</mat-icon>
+        </a>
+      </mat-form-field>
+    </form>
+
+  </mat-dialog-content>
+  <mat-dialog-actions class="rc-flex-end">
+    <button mat-button [mat-dialog-close]="null">{{ 'CMS.EVENTS.labelCancel' | translate | uppercase }}</button>
+    <button *ngIf="!isNewEvent" mat-button (click)="updateEvent()" [disabled]="!eventFormGroup.valid"
+            color="accent">{{ 'CMS.EVENTS.labelUpdate' | translate | uppercase }}</button>
+    <button *ngIf="isNewEvent" mat-button (click)="createEvent()" [disabled]="!eventFormGroup.valid"
+            color="accent">{{ 'CMS.EVENTS.labelCreate' | translate | uppercase }}</button>
+  </mat-dialog-actions>
+</div>

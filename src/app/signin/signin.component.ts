@@ -3,9 +3,10 @@ import { AuthenticationService, ErrorService, MemberService } from '../_services
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { AppConfig } from '../app.config';
 import { ConfirmCancelComponent } from '../common';
 import { MatDialog } from '@angular/material/dialog';
+import { Brand, ConfigService } from '../init/config.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-signin',
@@ -18,6 +19,7 @@ export class SigninComponent implements OnInit {
   dbOffline = false;
   errorMsg: string;
   pwdReset = false;
+  brand$: Observable<Brand>;
   brandName: string;
   stripeSessionId: any;
   newMemberEmail: string;
@@ -30,14 +32,14 @@ export class SigninComponent implements OnInit {
     public snackBar: MatSnackBar,
     private translate: TranslateService,
     private activeRoute: ActivatedRoute,
-    private config: AppConfig,
+    private configService: ConfigService,
     private router: Router,
     private error: ErrorService
   ) {  }
 
   ngOnInit() {
-
-    this.brandName = this.config.brand.name;
+    //
+    this.brand$ = this.configService.brand;
     // Check url params
     this.activeRoute.queryParams.subscribe(params => {
       // console.log('Url params', params);
@@ -75,7 +77,7 @@ export class SigninComponent implements OnInit {
 
   signIn(formValue) {
 
-    // console.log('form', formValue);
+    console.log('form', formValue);
     this.isSubmitting = true;
     this.authService.login(formValue)
       .subscribe({
@@ -86,23 +88,69 @@ export class SigninComponent implements OnInit {
             this.authService.setAuthSession(authResult['member'], authResult['token'], this.dbOffline);
           } else {
             // do we need to generate an error here?
-            console.log('Auth Failed');
+            console.log('failedToSetSession', authResult);
             this.error.handleError('failedToSetSession', 'Unable to set authorisation session!');
           }
         },
         error: error => {
-          console.log('Auth Error', error);
           this.isSubmitting = false;
+          console.log('Auth Error', error.error);
+          // Forbidden
+          if (error.status === 403) {
+            console.log(error.error);
+            return;
+          }
+          // Known errors
           if (error.status === 401) {
-            this.openSnackBar(this.translate.instant('SIGNIN.errorUserUnauthorised'));
-          } else {
-            // if the server does not respond, we'll get an error status of 0
-            if (error.status === 0) {
-              this.error.handleError('noServerResponse', error);
-            } else {
-              // all other errors will be in effect unknown server errors
-              this.error.handleError('invalidServerResponse', error);
+            switch (error.error.errorCode) {
+              // Database not responding
+              case 2: {
+                this.openSnackBar(this.translate.instant('SIGNIN.errorTechnical'));
+                break;
+              }
+              case 3: {
+                // Email
+                this.openSnackBar(this.translate.instant('SIGNIN.errorCredentials'));
+                break
+              }
+              case 4: {
+                // Password
+                this.openSnackBar(this.translate.instant('SIGNIN.errorCredentials'));
+                break
+              }
+              case 5: {
+                // Wrong company
+                this.openSnackBar(this.translate.instant('SIGNIN.errorCompany'));
+                break;
+              }
+              case 6: {
+                // Expired
+                this.openSnackBar(this.translate.instant('SIGNIN.errorInActiveAccount'));
+                break;
+              }
+              case 7: {
+                // Database
+                this.openSnackBar(this.translate.instant('SIGNIN.errorTechnical'));
+                break;
+              }
+              case 8: {
+                // Offline
+                this.openSnackBar(this.translate.instant('SIGNIN.errorSystemsOffline'));
+                break;
+              }
+              default:
+                this.openSnackBar(this.translate.instant('SIGNIN.errorTechnical'));
+                break;
             }
+            return;
+          }
+          // System error
+          this.openSnackBar(this.translate.instant('SIGNIN.errorTechnical'));
+          if (error.status === 0) {
+            this.error.handleError('noServerResponse', error);
+          } else {
+            // all other errors will be in effect unknown server errors
+            this.error.handleError('invalidServerResponse', error);
           }
         }
       });

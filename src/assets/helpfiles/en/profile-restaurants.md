@@ -1,13 +1,13 @@
-## Associated Restaurants
+## Associated Venues
 
-In this section you should add all restaurants that you are managing the content for.
+In this section you should add all venues that you are managing the content for.
 
-### To add a restaurant
+### To add a venue
 
-Select the **ADD** icon (+) on the navigation bar. Start typing the name of the restaurant into the search box. As 
-you type, you should see a list of matching restaurants. Select the restaurant and repeat the process for any 
-additional restaurants. 
+Select the **ADD** icon (+) on the navigation bar. Start typing the name of the venue into the search box. As 
+you type, you should see a list of matching venues. Select the venue and repeat the process for any 
+additional venues. 
 
 ### Managing content
 
-Select a restaurant from your list of associated restaurants by clicking/tapping on the image.
+Select a venue from your list of associated venues by clicking/tapping on the image.

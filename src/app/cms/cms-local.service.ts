@@ -1,19 +1,24 @@
 import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Restaurant } from '../_models';
-import { Observable, Subject, BehaviorSubject } from 'rxjs';
+import { Observable, Subject, BehaviorSubject, filter } from 'rxjs';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ConfirmCancelComponent } from '../common';
 import { TranslateService } from '@ngx-translate/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { RestaurantService } from '../_services';
 
 @Injectable()
 
 export class CmsLocalService {
 
   private restaurant: Restaurant = new Restaurant();
-  private restaurantSubject: Subject<Restaurant> = new BehaviorSubject<Restaurant>(this.restaurant);
+  private restaurantSubject: Subject<Restaurant> = new BehaviorSubject<Restaurant>(null);
+
+  private restaurant$ = this.restaurantSubject.asObservable().pipe(
+    filter(rest => !!rest)
+  );
 
   // Observable offers
   private offerCount = 0;
@@ -26,7 +31,8 @@ export class CmsLocalService {
     private translate: TranslateService,
     private router: Router,
     private route: ActivatedRoute,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private restService: RestaurantService,
   ) { }
 
   // Update & send
@@ -39,16 +45,36 @@ export class CmsLocalService {
     return this.offerSubject.asObservable();
   }
 
+  loadRestaurant(): void {
+    this.restService.getById(this.restaurant.restaurant_id)
+  .subscribe({
+      next: data => {
+        this.setRestaurant(data['restaurant'][0]);
+      },
+      error: error => {
+        console.log(error);
+        this.router.navigate(['/settings']).then();
+      }
+    });
+  }
+
   setRestaurant(restaurant: Restaurant): void {
     // console.log('cmsLocalService.setRestaurant()', restaurant);
     this.restaurant = restaurant;
     this.restaurantSubject.next(this.restaurant);
   }
 
+  get restaurantNumber(): string {
+    return this.restaurant.restaurant_number
+  }
+
 
   getRestaurant(): Observable<Restaurant> {
     // console.log('cmsLocalService.getRestaurant()', this.subject);
     return this.restaurantSubject.asObservable();
+  }
+  get rest$(): Observable<any> {
+    return this.restaurant$;
   }
 
   dspSnackbar(msg: string, actn: string = '', d: number = 3, style: any = 'info'): void {

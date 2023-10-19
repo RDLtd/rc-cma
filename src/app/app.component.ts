@@ -2,11 +2,11 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthenticationService } from './_services';
 import { HttpClient } from '@angular/common/http';
-import { AppConfig } from './app.config';
 import { NavigationEnd, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { OnlineStatusService, OnlineStatusType } from 'ngx-online-status';
+import { ConfigService } from './init/config.service';
 
 @Component({
   selector: 'app-rc-root',
@@ -18,6 +18,7 @@ export class AppComponent implements OnInit {
 
   isConnected = true;
   inSession: boolean;
+  isSecure:boolean;
   language = localStorage.getItem('rd_language'); // Default language
 
   // If we are offline then there is no access to translations
@@ -37,10 +38,12 @@ export class AppComponent implements OnInit {
     private router: Router,
     private translate: TranslateService,
     private http: HttpClient,
-    private config: AppConfig,
+    private config: ConfigService,
     public authService: AuthenticationService) {
 
-      // Record navagation analytics
+      this.checkProtocol();
+
+      // Record navigation analytics
       this.router.events.subscribe(event => {
         if (event instanceof NavigationEnd) {
           (<any>window).ga('set', 'page', event.urlAfterRedirects);
@@ -50,15 +53,18 @@ export class AppComponent implements OnInit {
 
   }
 
+  checkProtocol(): void {
+    if (window.location.protocol.includes('https')) {
+      return;
+    }
+    // Redirect to https
+    console.log('Redirecting to HTTPS');
+    window.location.href = window.location.toString().replace('http', 'https');
+  }
+
   ngOnInit() {
 
-    // Output Settings
-    console.log(`API: ${this.config.apiUrl}`);
-    console.log(`Brand: ${this.config.brand.name}`);
-    console.log(`Language: ${this.language}`);
-    console.log(`Locale: ${localStorage.getItem('rd_locale')}`);
-    console.log(`Session length: ${this.config.session_timeout} mins`);
-    console.log(`Session countdown from : ${this.config.session_countdown} min.`);
+    this.config.displayConfig();
 
     // Observe the session status
     this.authService.memberSessionSubject.subscribe(

@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from '../_services';
+import {AuthenticationService } from '../_services';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { MatDialog } from '@angular/material/dialog';
-import { AppConfig } from '../app.config';
 import { AboutComponent } from './about.component';
 import { HeaderService } from './header.service';
-import {ImageService} from '../_services/image.service';
-import {CloudinaryImage} from '@cloudinary/url-gen';
-import {ContactComponent} from "./contact/contact.component";
-import {FaqsComponent} from "./faqs/faqs.component";
+import { ImageService } from '../_services/image.service';
+import { CloudinaryImage } from '@cloudinary/url-gen';
+import { ContactComponent } from "./contact/contact.component";
+import { FaqsComponent } from "./faqs/faqs.component";
+import { StorageService } from "../_services/storage.service";
+import { ConfigService } from '../init/config.service';
 
 @Component({
   selector: 'app-rc-header',
@@ -29,16 +30,19 @@ export class HeaderComponent implements OnInit {
   member: any;
   clPlugins: any[];
   clImage: CloudinaryImage;
+  lastRestaurantId: string;
+  brand$: any;
 
   constructor(
     public authService: AuthenticationService,
     private translate: TranslateService,
+    private storage: StorageService,
     private dialog: MatDialog,
     private router: Router,
     private route: ActivatedRoute,
     private header: HeaderService,
     private imgService: ImageService,
-    private config: AppConfig ) {
+    private config: ConfigService ) {
       this.clPlugins = this.imgService.cldBasePlugins;
   }
 
@@ -46,10 +50,13 @@ export class HeaderComponent implements OnInit {
 
     // console.log('Init header');
 
-    this.company_name = this.config.brand.name;
-    this.brandPrefix = this.config.brand.prefix;
+    this.brand$ = this.config.brand;
+
+    this.company_name = this.brand$.name;
+    this.brandPrefix = this.brand$.prefix;
     this.displayName = localStorage.getItem('rd_username');
-    this.member = JSON.parse(localStorage.getItem('rd_profile'));
+    this.member = this.storage.get('rd_profile');
+
 
     // Set default avatar/placeholder
     // Force different thread to ensure member is set
@@ -68,6 +75,7 @@ export class HeaderComponent implements OnInit {
     // Listen for changes to the section
     this.header.sectionName.subscribe(str => {
       this.navLabel = str;
+      this.lastRestaurantId = this.storage.get('rd_last_restaurant');
     });
 
     // Listen for changes to the avatar

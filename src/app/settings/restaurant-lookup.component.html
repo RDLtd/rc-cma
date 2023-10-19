@@ -1,45 +1,62 @@
 <form #restListing="ngForm">
 
   <h1 mat-dialog-title>
-    {{ 'LOOKUP.titleFind' | translate }}
+<!--    {{ 'LOOKUP.titleFind' | translate }}-->
+    FIND VENUE
   </h1>
 
   <mat-dialog-content>
 
     <section>
+
+      <mat-radio-group name="searchType" [(ngModel)]="searchType" tabindex="-1" (ngModelChange)="focusSearchInput()">
+        <mat-radio-button value="name" tabIndex="-1">{{ 'LOOKUP.labelSearchName' | translate }}</mat-radio-button>
+        <mat-radio-button value="postcode" tabIndex="-1">{{ 'LOOKUP.labelSearchPostcode' | translate }}</mat-radio-button>
+      </mat-radio-group>
+
       <mat-form-field
         floatLabel="always"
         class="rc-full-width">
-        <mat-label>{{ 'LOOKUP.labelEnterName' | translate | uppercase }}</mat-label>
         <input
           #searchInput
-          name="search"
+          name="searchInput"
           type="text"
           matInput
-          (keyup)="findRestaurants(searchInput.value)"
           autocomplete="off"
+          placeholder="{{ 'LOOKUP.phSearchType' | translate: { type: searchType } }}"
           autofocus>
-        <mat-icon matSuffix>search</mat-icon>
+        <button *ngIf="searchInput.value" matSuffix mat-icon-button aria-label="Clear" (click)="resetSearchInput()">
+          <mat-icon>close</mat-icon>
+        </button>
+        <mat-hint *ngIf="searchType === 'postcode'">Include the space e.g. BR1 7NR</mat-hint>
       </mat-form-field>
     </section>
 
+
     <section>
-      <span [hidden]="!noSearchResults">{{ 'LOOKUP.msgNoMatch' | translate }}</span>
+
       <ul class="rc-lookup-results">
         <li *ngFor="let restaurant of restaurants">
           <a (click)="associateRestaurant(restaurant)">
-            <span>{{ restaurant.restaurant_name }} – {{ restaurant.restaurant_post_code }}</span>
-            <span class="rc-space-filler"></span>
-            <span>{{ 'LOOKUP.labelAdd' | translate }}</span>
+            <span class="name">{{ restaurant.restaurant_name }}</span>
+            <span>{{ restaurant.restaurant_post_code }}</span>
           </a>
         </li>
       </ul>
     </section>
 
+    <ng-container *ngIf="noSearchResults">
+
+      <span class="rd-message" markdown
+            *ngIf="searchType === 'name'">{{ 'LOOKUP.msgNoMatchName' | translate }}</span>
+
+      <span class="rd-message" markdown
+            *ngIf="searchType === 'postcode'">{{ 'LOOKUP.msgNoMatchPostcode' | translate }}</span>
+
     <section
-      *ngIf="noSearchResults || dspNewListingForm"
+      *ngIf="searchType === 'name'"
       class="rc-lookup-request">
-      <h2 mat-dialog-title>{{ 'LOOKUP.titleNew' | translate }}</h2>
+      <h2>{{ 'LOOKUP.titleNew' | translate }}</h2>
       <mat-form-field
         hideRequiredMarker
         class="rc-full-width">
@@ -48,7 +65,7 @@
         id="newRestInput"
         matInput
         name="newRestaurantName"
-        [ngModel]="searchInput.value"
+        [ngModel]="searchInput.value | titlecase"
         type="text"
         required
         autofocus
@@ -102,9 +119,13 @@
 
     </section>
 
+    </ng-container>
+
   </mat-dialog-content>
 
-  <mat-dialog-actions align="end" *ngIf="!dspNewListingForm && !noSearchResults">
+  <mat-dialog-actions
+    align="end"
+    *ngIf="noSearchResults && searchType === 'postcode'">
     <button
       mat-button
       mat-dialog-close="">{{ 'LOOKUP.labelBtnCancel' | translate | uppercase}}

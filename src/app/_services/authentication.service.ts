@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { BehaviorSubject, lastValueFrom } from 'rxjs';
-import { AppConfig } from '../app.config';
+import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject, lastValueFrom, Observable } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { Member } from '../_models';
 import { RestaurantService } from './restaurant.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { StorageService } from './storage.service';
+import { ConfigService } from '../init/config.service';
 
 @Injectable({
   providedIn: 'root'
@@ -23,8 +23,7 @@ export class AuthenticationService {
   private sessionTimeLeft: any;
   private checkingActivity = false;
 
-  private authToken = new BehaviorSubject(new HttpParams().set('Authorization', 'Bearer' +
-    '234242423wdfsdvdsfsdrfg34tdfverge'));
+  private brand;
 
   constructor(
     private restaurantService: RestaurantService,
@@ -33,23 +32,41 @@ export class AuthenticationService {
     private http: HttpClient,
     private translate: TranslateService,
     private storage: StorageService,
-    private config: AppConfig) {
+    private config: ConfigService) {
+
+    this.config.brand$.subscribe(brand => {
+      this.brand = brand;
+    });
+
   }
 
   public login(form) {
-    // console.log('LOGIN', this.authToken);
+    console.log('LOGIN', this.brand.prefix);
     return this.http.post(this.config.apiUrl + '/members/authenticate',
       {
         email: form.email,
+        company: this.brand.prefix,
         password: form.pwd,
         userCode: 'RDL-dev',
-        token: this.authToken
+        token: this.config.token
       });
   }
 
   public setMember(member: Member) {
     console.log('setMember', member);
     this.member = member;
+  }
+
+  // Get member product category
+  getMemberCategory(product_id: string): Observable<any> {
+    console.log('getMemberCategory', product_id);
+    return this.http.post(this.config.apiUrl + '/members/get_category',
+      {
+        product_id,
+        company: this.brand.prefix,
+        userCode: this.config.userAPICode,
+        token: this.config.token
+      });
   }
 
   public setAuthSession(member, token, offline): void {
@@ -66,9 +83,18 @@ export class AuthenticationService {
     localStorage.setItem('rd_token', token);
     localStorage.setItem('rd_session', 'active');
 
+    this.getMemberCategory(member.member_product_id).subscribe((data: any) => {
+      if(data === null || data.count < 1) {
+        console.error('No product category returned');
+        return;
+      }
+      console.log(data.category);
+      this.storage.setSession('rd_product_category', data.category);
+    });
+
     this.translate.use(localStorage.getItem('rd_language'));
     this.setNewSessionExpiry();
-    this.dspHomeScreen('active');
+    this.dspHomeScreen('active').then();
   }
 
   async dspHomeScreen(sessionStatus): Promise<any> {

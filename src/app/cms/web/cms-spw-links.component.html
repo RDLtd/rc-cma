@@ -1,0 +1,72 @@
+<div class="rc-dialog rc-dialog-med">
+    <mat-toolbar class="rc-toolbar rc-toolbar-nav">
+      <span>{{ 'CMS.LINKS.titleMarketing' | translate }}</span>
+      <span class="rc-space-filler"></span>
+      <span class="rc-toolbar-actions">
+        <button
+          mat-icon-button
+          matTooltip="{{ 'CMS.LINKS.tipCopyLink' | translate }}"
+          [cdkCopyToClipboard]="data['spwUrl']">
+          <mat-icon>link</mat-icon>
+        </button>
+        <button mat-icon-button [mat-dialog-close]="false">
+        <mat-icon>close</mat-icon>
+      </button>
+    </span>
+    </mat-toolbar>
+
+
+  <div mat-dialog-content>
+
+    <h2>{{ 'CMS.LINKS.titleWebLinks' | translate }}</h2>
+    <p>
+      <a
+        [href]="data['spwUrl']"
+        target="_blank"
+        matTooltip="{{ 'CMS.LINKS.tipOpenSpw' | translate }}">
+        {{ data['spwUrl'] }}</a>
+    </p>
+    <markdown ngpreservewhitespaces>{{ 'CMS.LINKS.infoSpwLink' | translate}}</markdown>
+
+    <h2>{{ 'CMS.LINKS.titleQRCodes' | translate }}</h2>
+    <markdown ngpreservewhitespaces>{{ 'CMS.LINKS.infoQRCodes' | translate }}</markdown>
+
+    <div class="rc-codes">
+      <a
+        download="QR-Code-Website"
+        href="{{ base64main }}">
+        <qrcode
+          [qrdata]="data['spwUrl']"
+          [elementType]="'img'"
+          [width]="qrCodeWidth"
+          [errorCorrectionLevel]="'M'"
+          matTooltip="{{ 'CMS.LINKS.tipQRCodeWebsite' | translate:
+          { name: data['restaurant']['restaurant_name'] } }}">
+        </qrcode>
+        <span>{{ 'CMS.LINKS.labelWebsite' | translate }}</span>
+      </a>
+<!--      <a-->
+<!--        download="QR-Code-Menu"-->
+<!--        href="{{ base64menu }}">-->
+<!--        <qrcode-->
+<!--          [qrdata]="data['spwMenus']"-->
+<!--          [elementType]="'img'"-->
+<!--          [width]="qrCodeWidth"-->
+<!--          [imageHeight]="qrCodeWidth"-->
+<!--          [errorCorrectionLevel]="'M'"-->
+<!--          matTooltip="{{ 'CMS.LINKS.tipQRCodeMenu' | translate:-->
+<!--          { name: data['restaurant']['restaurant_name'] } }}"></qrcode>-->
+<!--        <span>{{ 'CMS.LINKS.labelMenus' | translate }}</span>-->
+<!--      </a>-->
+    </div>
+
+    <markdown>{{ 'CMS.LINKS.infoUsage' | translate }}</markdown>
+
+    <h2>{{ 'CMS.LINKS.titleCustomDomain' | translate }}</h2>
+
+    <markdown>{{ 'CMS.LINKS.infoCustomDomain' | translate: { email: data.curation } }}</markdown>
+
+  </div>
+
+</div>
+

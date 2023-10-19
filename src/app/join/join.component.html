@@ -3,22 +3,22 @@
   <div class="rc-layout-split-left">
     <div class="rc-layout-split-content">
       <div *ngIf="isLoaded" class="rc-join-welcome" @fadeAnimation>
-        <app-rc-logo [height]="'120px'" [version]="'accent'"></app-rc-logo>
+        <app-rc-logo></app-rc-logo>
 
         <!-- Free Period -->
         <ng-container *ngIf="referrer.type === 'self'">
           <div>
-            <markdown [data]="'JOIN.joinUsToday' | translate: { email: brand.email.support }"></markdown>
+            <markdown [data]="'JOIN.joinUsToday' | translate: { email: brand.emails.support }"></markdown>
           </div>
         </ng-container>
 
         <ng-container *ngIf="referrer.type === 'member'">
           <div *ngIf="referrer.freeMembership">
-            <markdown [data]="'JOIN.joinUsByReferralFree' | translate: { email: brand.email.support, referrer:
+            <markdown [data]="'JOIN.joinUsByReferralFree' | translate: { email: brand.emails.support, referrer:
           referrer?.name, brand: brand.name  }"></markdown>
           </div>
           <div *ngIf="!referrer.freeMembership">
-            <markdown [data]="'JOIN.joinUsByReferral' | translate: { email: brand.email.support, referrer:
+            <markdown [data]="'JOIN.joinUsByReferral' | translate: { email: brand.emails.support, referrer:
           referrer?.name, brand: brand.name  }"></markdown>
           </div>
         </ng-container>
@@ -76,6 +76,7 @@
 
         <div *ngIf="!duplicateField">
           <h1>{{ 'JOIN.headerContactDetails' | translate }}</h1>
+          <p><a [routerLink]="['/signin']">or Sign In here</a></p>
         </div>
 
         <mat-form-field hideRequiredMarker style="width: 38%;">
@@ -152,15 +153,15 @@
         </mat-form-field>
 
         <!-- Referral code -->
-        <mat-form-field hideRequiredMarker>
-          <mat-label>{{ 'JOIN.labelCode' | translate }}</mat-label>
-          <input  [(ngModel)]="referrer.code"
-                  matInput
-                  maxlength="20"
-                  type="text"
-                  name="referral_code"
-                  [placeholder]="'JOIN.placeholderCode' | translate">
-        </mat-form-field>
+<!--        <mat-form-field hideRequiredMarker>-->
+<!--          <mat-label>{{ 'JOIN.labelCode' | translate }}</mat-label>-->
+<!--          <input  [(ngModel)]="referrer.code"-->
+<!--                  matInput-->
+<!--                  maxlength="20"-->
+<!--                  type="text"-->
+<!--                  name="referral_code"-->
+<!--                  [placeholder]="'JOIN.placeholderCode' | translate">-->
+<!--        </mat-form-field>-->
 
         <mat-checkbox name="accepts_terms" [(ngModel)]="pendingMember.accepts_terms">
           <div class="rc-txt-small" markdown>

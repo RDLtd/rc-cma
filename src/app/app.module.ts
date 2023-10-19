@@ -1,6 +1,5 @@
-
 import { BrowserModule } from '@angular/platform-browser';
-import {APP_INITIALIZER, NgModule} from '@angular/core';
+import { NgModule } from '@angular/core';
 import {
   FormsModule,
   ReactiveFormsModule
@@ -14,7 +13,6 @@ import {
 
 import { AppComponent } from './app.component';
 import { routing } from './app.routing';
-import { AppConfig } from './app.config';
 import { SafePipe } from './shared/app.safe';
 import { HeaderComponent } from './common/header.component';
 import { SigninComponent } from './signin/signin.component';
@@ -30,15 +28,9 @@ import {
   MemberService,
   RestaurantService,
   CMSService,
-  PublicService,
   AnalyticsService,
-  BpiService,
   ErrorService
 } from './_services';
-
-import {
-  RestaurantDetailComponent,
-} from './cms/restaurant-detail.component';
 
 import {
   RestaurantLookupComponent,
@@ -58,11 +50,15 @@ import {
   CmsLocationComponent,
   CmsImageDialogComponent,
   CmsFileUploadComponent,
-  CmsPreviewComponent,
   CmsLocalService,
   CmsMenuDishComponent,
   CmsReservationsComponent,
   CmsDashboardComponent,
+  CmsSpwConfigComponent,
+  CmsSpwLinksComponent,
+  CmsSpwBuilderComponent,
+  RestaurantDetailComponent,
+  CmsEventsComponent
 } from './cms';
 
 import {
@@ -77,51 +73,36 @@ import {
 // 3rd party packages
 import {
   TranslateModule,
-  TranslateLoader, TranslateService
+  TranslateLoader,
 } from '@ngx-translate/core';
-import { TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { FileUploadModule } from 'ng2-file-upload';
 import { MarkdownModule } from 'ngx-markdown';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { JoinComponent } from './join/join.component';
 import { LoadComponent } from './common/loader/load.component';
-import { CmsSpwLinksComponent } from './cms/cms-spw-links.component';
 import { QRCodeModule } from 'angularx-qrcode';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { MembershipComponent } from './join/membership.component';
 import { LogoComponent } from './common/logo/logo.component';
 import { CurrencyPipe } from '@angular/common';
 import { ProfileComponent } from './profile/profile.component';
-import {CloudinaryModule} from '@cloudinary/ng';
+import { CloudinaryModule } from '@cloudinary/ng';
 import { OnlineStatusModule } from 'ngx-online-status';
 import { AppTitleStrategy } from './app-title-strategy';
-import { lastValueFrom } from 'rxjs';
-import {ContactComponent} from "./common/contact/contact.component";
-import {FaqsComponent} from "./common/faqs/faqs.component";
-import {MatExpansionModule} from "@angular/material/expansion";
-import { CmsSpwConfigComponent } from './cms/cms-spw-config.component';
+import { ContactComponent } from "./common/contact/contact.component";
+import { FaqsComponent } from "./common/faqs/faqs.component";
+import { MatExpansionModule } from "@angular/material/expansion";
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { CmsSpwBuilderComponent } from './cms/cms-spw-builder.component';
+import { InitModule } from './init/init.module';
+import { EventFormComponent } from './cms/events/event-form.component';
+import { MatDatepickerModule } from "@angular/material/datepicker";
+import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
+import { ImageUploadComponent } from './common/images/image-upload.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient, './assets/i18n/', '.json');
-}
-
-// Make App initialisation dependent on translations
-// so that we can rely on 'instant' access everywhere else
-export function appInitializerFactory(translate: TranslateService) {
-  // LocalStorage is read/set in index.html
-  const languages = ['en', 'fr'];
-  let lang = localStorage.getItem('rd_language');
-  return () => {
-    // console.log(`Translation loaded (${lang})`, languages.includes(lang));
-    translate.addLangs(languages);
-    // If the user language is not supported, default to en
-    if (!languages.includes(lang)) { lang = 'en'; }
-    translate.setDefaultLang(lang);
-    return lastValueFrom(translate.use(lang));
-  };
 }
 
 @NgModule({
@@ -144,7 +125,6 @@ export function appInitializerFactory(translate: TranslateService) {
     CmsHoursComponent,
     CmsFeaturesComponent,
     CmsLocationComponent,
-    CmsPreviewComponent,
     CmsImageDialogComponent,
     CmsFileUploadComponent,
     CmsMenuDishComponent,
@@ -164,7 +144,10 @@ export function appInitializerFactory(translate: TranslateService) {
     LogoComponent,
     ProfileComponent,
     CmsSpwConfigComponent,
-    CmsSpwBuilderComponent
+    CmsSpwBuilderComponent,
+    CmsEventsComponent,
+    EventFormComponent,
+    ImageUploadComponent
   ],
     imports: [
         AngularMaterialModule,
@@ -191,10 +174,12 @@ export function appInitializerFactory(translate: TranslateService) {
         ClipboardModule,
         OnlineStatusModule,
         MatExpansionModule,
-        MatSlideToggleModule
+        MatSlideToggleModule,
+        InitModule,
+        MatDatepickerModule,
+        MatNativeDateModule
     ],
   providers: [
-    AppConfig,
     AuthenticationService,
     UserService,
     MemberService,
@@ -204,10 +189,7 @@ export function appInitializerFactory(translate: TranslateService) {
     CMSService,
     CmsLocalService,
     HelpService,
-    BpiService,
     AnalyticsService,
-    PublicService,
-    CmsPreviewComponent,
     ConfirmCancelComponent,
     LoadService,
     CurrencyPipe,
@@ -215,14 +197,10 @@ export function appInitializerFactory(translate: TranslateService) {
       provide: TitleStrategy,
       useClass: AppTitleStrategy
     },
-    {
-      provide: APP_INITIALIZER,
-      useFactory: appInitializerFactory,
-      deps: [TranslateService],
-      multi: true
-    },
-    ErrorService
+    ErrorService,
+    { provide: MAT_DATE_LOCALE, useValue: 'en-GB' },
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

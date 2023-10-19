@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AppConfig } from '../app.config';
+import {ConfigService} from "../init/config.service";
 
 @Component({
   selector: 'app-rc-about',
@@ -13,10 +13,10 @@ export class AboutComponent implements OnInit {
   params: any;
 
   constructor(
-    private config: AppConfig
+    readonly config: ConfigService
   ) {
     this.params = {
-      web: this.config.brand.url,
+      web: this.config.brand,
       year: new Date().getFullYear()
     };
   }

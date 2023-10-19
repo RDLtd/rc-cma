@@ -1,6 +1,6 @@
 ## Content Summary
 
-This panel provides a summarised overview of the restaurant's content with each sections colour-coded according to 
+This panel provides a summarised overview of the venue's content with each sections colour-coded according to 
 the status. 
 
 ### Green
@@ -11,5 +11,5 @@ Sections displaying an orange logo and progress bar are missing some data, altho
 
 ### Black
 If the section logo is black then that section does not yet have any data in it. If any of the sections are empty 
-then the **Single Page Website** (SPW) cannot be created.
+then the **apptiser Website** cannot be created.
 
