@@ -201,6 +201,7 @@ export class MemberService {
   login(memberemail: string, memberpassword: string) {
     return this.http.post(this.config.apiUrl + '/members/authenticate',
       {
+        company: this.config.brand.prefix,
         email: memberemail,
         password: memberpassword,
         userCode: this.config.userAPICode,
